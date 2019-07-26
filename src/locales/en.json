@@ -1,0 +1,17 @@
+{
+  "menu": {
+    "home": "Home",
+    "report": "Loot Report",
+    "stats": "Statistics",
+    "planner": "Planner",
+    "changelog": "Change Log",
+    "logo": "Penguin Statistics"
+  },
+  "meta": {
+    "loading": "Fetching application data...",
+    "footer": {
+      "copyright": "Loot data collected by Penguin Delivery, licensed under a Creative Commons Attribution 4.0 International License.",
+      "credit": "Penguin Delivery | {date}"
+    }
+  }
+}

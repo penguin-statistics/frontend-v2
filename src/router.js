@@ -2,8 +2,7 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import Home from './views/Home'
 import Report from './views/Report'
-import StatsByChapter from './views/StatsByChapter'
-import StatsByItem from './views/StatsByItem'
+import Stats from './views/Stats'
 import ChangeLog from './views/ChangeLog'
 
 Vue.use(Router)
@@ -34,21 +33,12 @@ export default new Router({
       }
     },
     {
-      path: '/stats/chapter',
-      name: 'StatsByChapter',
-      component: StatsByChapter,
+      path: '/stats',
+      name: 'Stats',
+      component: Stats,
       meta: {
         icon: 'mdi-chart-pie',
-        i18n: 'menu.stats.stage'
-      }
-    },
-    {
-      path: '/stats/item',
-      name: 'StatsByItem',
-      component: StatsByItem,
-      meta: {
-        icon: 'mdi-chart-pie',
-        i18n: 'menu.stats.item'
+        i18n: 'menu.stats'
       }
     },
     {
@@ -59,7 +49,8 @@ export default new Router({
       },
       meta: {
         icon: 'mdi-floor-plan',
-        i18n: 'menu.planner'
+        i18n: 'menu.planner',
+        externalRedirect: true
       }
     },
     {

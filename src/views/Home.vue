@@ -1,6 +1,8 @@
 <template>
   <v-layout>
-    Home
+    <v-flex>
+
+    </v-flex>
   </v-layout>
 </template>
 

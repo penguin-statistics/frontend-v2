@@ -1,5 +1,25 @@
 <template>
-  <v-app>
+  <v-app :dark="dark" id="__app_root">
+    <RandomBackground :interval="30" />
+    <v-dialog
+        v-model="$store.state.ajaxLoading"
+        persistent
+        width="300"
+    >
+      <v-card
+          color="primary"
+          dark
+      >
+        <v-card-text>
+          {{ $t('meta.loading') }}
+          <v-progress-linear
+              indeterminate
+              color="white"
+              class="mb-0"
+          ></v-progress-linear>
+        </v-card-text>
+      </v-card>
+    </v-dialog>
     <v-navigation-drawer
         v-model="drawer"
         app
@@ -7,7 +27,7 @@
       <div class="drawer-logo blue darken-4">
         <v-img :src="require('@/assets/logo.png')" aspect-ratio="1" height="192px" contain></v-img>
         <div class="white--text description">
-          企鹅物流数据统计
+          {{ $t('menu.logo') }}
         </div>
       </div>
       <v-list>
@@ -16,7 +36,7 @@
             <v-icon>{{ route.meta.icon }}</v-icon>
           </v-list-tile-action>
           <v-list-tile-content>
-            <v-list-tile-title>{{ $t(route.meta.i18n) }}</v-list-tile-title>
+            <v-list-tile-title>{{ $t(route.meta.i18n) }} &nbsp; <v-icon small v-if="!route.component">mdi-open-in-new</v-icon></v-list-tile-title>
           </v-list-tile-content>
         </v-list-tile>
       </v-list>
@@ -28,8 +48,21 @@
         app
     >
       <v-toolbar-side-icon @click.stop="drawer = !drawer"></v-toolbar-side-icon>
-      <v-toolbar-title>{{ $t($router.currentRoute.meta.i18n) }}</v-toolbar-title>
+      <v-toolbar-title>
+        <transition name="fade" mode="out-in">
+          <v-avatar :size="32" class="mr-3">
+            <v-img :src="randomizedLogo" class="randomizedLogo" />
+          </v-avatar>
+        </transition>{{ $t($router.currentRoute.meta.i18n) }}
+      </v-toolbar-title>
       <v-spacer></v-spacer>
+      <v-btn
+          dark
+          icon
+          @click="dark = !dark"
+      >
+        <v-icon>mdi-invert-colors</v-icon>
+      </v-btn>
       <v-menu bottom left>
         <template v-slot:activator="{ on }">
           <v-btn
@@ -53,21 +86,40 @@
       </v-menu>
     </v-toolbar>
     <v-content>
-      <router-view />
+      <v-slide-x-transition mode="out-in">
+        <router-view />
+      </v-slide-x-transition>
     </v-content>
     <v-footer color="blue darken-3" class="white--text px-3" app>
+      <v-tooltip top>
+        <template v-slot:activator="{ on }">
+          <span v-on="on">
+            <v-avatar size="32">
+              <svg version="1" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="5.5 -3.5 64 64"><circle fill="#FFF" cx="37.78" cy="28.5" r="28.84"/><path d="M37.44-3.5c8.95 0 16.57 3.13 22.86 9.37 3 3.01 5.3 6.45 6.86 10.32A32.58 32.58 0 0 1 69.5 28.5c0 4.38-.77 8.49-2.32 12.31a29.38 29.38 0 0 1-6.82 10.15 32.89 32.89 0 0 1-10.63 7.08 31.86 31.86 0 0 1-24.43.03 32.19 32.19 0 0 1-10.4-7.03A31.39 31.39 0 0 1 5.5 28.5c0-4.23.8-8.3 2.43-12.2 1.62-3.9 3.97-7.4 7.06-10.49C21.07-.39 28.56-3.5 37.44-3.5zm.12 5.77c-7.32 0-13.47 2.56-18.46 7.66a27.51 27.51 0 0 0-5.8 8.6 25.2 25.2 0 0 0-2.03 9.97c0 3.43.68 6.73 2.03 9.91a26.5 26.5 0 0 0 5.8 8.52c2.51 2.5 5.35 4.4 8.51 5.71a25.83 25.83 0 0 0 19.92-.03 27.64 27.64 0 0 0 8.71-5.76c5-4.88 7.49-11 7.49-18.35 0-3.54-.65-6.9-1.95-10.06A25.59 25.59 0 0 0 56.13 10a25.32 25.32 0 0 0-18.57-7.72zm-.4 20.92l-4.3 2.23a4.4 4.4 0 0 0-1.68-2 3.8 3.8 0 0 0-1.85-.58c-2.86 0-4.29 1.89-4.29 5.66 0 1.72.36 3.09 1.08 4.11a3.66 3.66 0 0 0 3.2 1.55c1.87 0 3.19-.92 3.95-2.74l3.94 2a9.4 9.4 0 0 1-8.4 5.02c-2.85 0-5.16-.87-6.91-2.62-1.75-1.76-2.63-4.2-2.63-7.32 0-3.05.89-5.46 2.66-7.25a9.05 9.05 0 0 1 6.71-2.69c3.96 0 6.8 1.54 8.52 4.63zm18.45 0l-4.23 2.23a4.4 4.4 0 0 0-1.68-2 3.89 3.89 0 0 0-1.92-.58c-2.85 0-4.28 1.89-4.28 5.66 0 1.72.36 3.09 1.08 4.11a3.66 3.66 0 0 0 3.2 1.55c1.87 0 3.18-.92 3.94-2.74l4 2a9.82 9.82 0 0 1-3.54 3.68 9.23 9.23 0 0 1-4.85 1.34c-2.9 0-5.21-.87-6.94-2.62-1.74-1.76-2.6-4.2-2.6-7.32 0-3.05.88-5.46 2.65-7.25a9.05 9.05 0 0 1 6.72-2.69c3.96 0 6.78 1.54 8.45 4.63z"/></svg>
+            </v-avatar>
+            <v-avatar size="32">
+              <svg version="1" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="5.5 -3.5 64 64"><circle fill="#FFF" cx="37.6" cy="28.8" r="28.3"/><path d="M37.4-3.5c9 0 16.6 3 22.8 9.3a31 31 0 0 1 9.3 22.7c0 9-3 16.5-9.1 22.5a31.6 31.6 0 0 1-23 9.5A31 31 0 0 1 15 51.1a30.8 30.8 0 0 1-9.4-22.6c0-8.8 3.1-16.3 9.4-22.7a30.6 30.6 0 0 1 22.5-9.3zm.2 5.8A25 25 0 0 0 19 9.9a25.7 25.7 0 0 0 0 37 25.3 25.3 0 0 0 18.5 7.8c7 0 13.3-2.6 18.6-7.9 5-4.8 7.5-11 7.5-18.3 0-7.3-2.5-13.5-7.6-18.6a25.2 25.2 0 0 0-18.5-7.6zM46 20.6v13h-3.6v15.6h-10V33.6H29v-13c0-.6.2-1.1.6-1.5a2 2 0 0 1 1.4-.6h13.2c.5 0 1 .2 1.4.6.4.4.6.9.6 1.5zm-13-8.3c0-3 1.4-4.5 4.4-4.5S42 9.3 42 12.3s-1.5 4.5-4.5 4.5-4.5-1.5-4.5-4.5z"/></svg>
+            </v-avatar>
+          </span>
+        </template>
+        <span v-html="$t('meta.footer.copyright')"></span>
+      </v-tooltip>
       <v-spacer></v-spacer>
-      <span>Penguin Statistics &copy; {{ new Date().getFullYear() }}</span>
+      <span>{{ $t('meta.footer.credit', {date: new Date().getFullYear()}) }}</span>
     </v-footer>
   </v-app>
 </template>
 
 <script>
+  import service from '@/utils/service'
+  import axios from 'axios'
+  import RandomBackground from '@/components/RandomBackground'
 export default {
   name: 'App',
   data () {
     return {
       routes: [],
+      randomizedLogo: "",
       localizations: [{
         id: 'zh_CN',
         name: '简体中文'
@@ -78,13 +130,51 @@ export default {
         id: 'en',
         name: 'English'
       }],
-      drawer: true
+      drawer: true,
+      dark: true
     }
+  },
+  components: {
+    RandomBackground
   },
   beforeMount() {
     this.routes = this.$router.options.routes
   },
+  watch: {
+    '$route': ['randomizeLogo']
+  },
+  mounted () {
+    this.randomizeLogo();
+    this.fetchData()
+  },
   methods: {
+    randomizeLogo () {
+      let random = Math.random();
+      this.randomizedLogo = random < .25 ? "https://penguin-stats.s3-ap-southeast-1.amazonaws.com/penguin_stats_logo_exia.png"
+        : random < .5 ? "https://penguin-stats.s3-ap-southeast-1.amazonaws.com/penguin_stats_logo_texas.png"
+          : random < .75 ? "https://penguin-stats.s3-ap-southeast-1.amazonaws.com/penguin_stats_logo_sora.png"
+            : "https://penguin-stats.s3-ap-southeast-1.amazonaws.com/penguin_stats_logo_croissant.png"
+    },
+    fetchData () {
+      axios.all([
+        service.get("/formula"),
+        service.get("/items"),
+        service.get("/limitations"),
+        service.get("/result/matrix"),
+        service.get("/stages"),
+        service.get("/zones")
+      ])
+        .then(([formulas, items, limitations, resultMatrix, stages, zones]) => {
+          this.$store.commit("store", {
+            formulas: formulas.data,
+            items: items.data,
+            limitations: limitations.data,
+            resultMatrix: resultMatrix.data,
+            stages: stages.data,
+            zones: zones.data
+          })
+        })
+    },
     changeLocale (localeId) {
       this.$i18n.locale = localeId
     }
@@ -93,6 +183,10 @@ export default {
 </script>
 
 <style>
+  .theme--dark, .theme--light {
+    transition: all .3s cubic-bezier(.25,.8,.5,1) !important;
+  }
+
   .drawer-logo {
     height: 256px;
     padding: 32px;
@@ -116,5 +210,17 @@ export default {
 
   .drawer-logo:hover > .description {
     opacity: 1;
+  }
+
+  .randomizedLogo > .v-image__image {
+    transition: background .5s cubic-bezier(0.19, 1, 0.22, 1);
+  }
+
+  .theme--light .bkop-light {
+    background: rgba(255, 255, 255, .65) !important;
+  }
+
+  .theme--dark .bkop-light {
+    background: rgba(66, 66, 66, .75) !important;
   }
 </style>
