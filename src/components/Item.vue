@@ -1,13 +1,30 @@
 <template>
-  <figure class="item-icon--sprite" ref="icon"></figure>
+  <v-tooltip bottom content-class="elevation-0 transparent" lazy :open-delay="200">
+    <template v-slot:activator="{ on }">
+      <v-icon v-show="item.itemId === 'furni'" class="light-blue" style="border-radius: 50%;">mdi-lamp</v-icon>
+      <figure class="item-icon--sprite" ref="icon" v-on="on" v-show="item.itemId !== 'furni'"></figure>
+    </template>
+    <v-card>
+      <v-card-title>
+        <h1 class="mr-2">{{ item.name }}</h1>
+
+        <v-chip :color="chip.color" text-color="black">
+          <v-avatar>
+            <v-icon>{{ chip.icon }}</v-icon>
+          </v-avatar>
+          {{ chip.name }}
+        </v-chip>
+      </v-card-title>
+    </v-card>
+  </v-tooltip>
 </template>
 
 <script>
   export default {
-    name: "ItemIcon",
+    name: "Item",
     props: {
-      coordinate: {
-        type: Array,
+      item: {
+        type: Object,
         required: true
       },
       ratio: {
@@ -27,21 +44,21 @@
       }
     },
     watch: {
-      coordinate: function(newCoordinates) {
-        this.updatePosition(newCoordinates)
+      item: function(newItem) {
+        if (this.item.itemId !== "furni") this.updatePosition(newItem.spriteCoord)
       },
       ratio: function(newRatio) {
-        this.updateScale(newRatio)
-        this.updatePosition(this.coordinate)
+        this.updateScale(newRatio);
+        if (this.item.itemId !== "furni") this.updatePosition(this.item.spriteCoord)
       }
     },
     mounted() {
-      this.updatePosition(this.coordinate);
+      if (this.item.itemId !== "furni") this.updatePosition(this.item.spriteCoord);
       this.updateScale(this.ratio)
     },
     methods: {
-      updatePosition (coord) {
-        this.$refs.icon.style.backgroundPosition = this.transformCoordinate(coord);
+      updatePosition (coordinate) {
+        this.$refs.icon.style.backgroundPosition = this.transformCoordinate(coordinate);
       },
       updateScale (ratio) {
         this.$refs.icon.style.height = `${ratio * this.originalIconSize}px`;
@@ -51,6 +68,29 @@
       transformCoordinate (coordinate) {
         const FACTOR = this.ratio * this.originalIconSize
         return `-${coordinate[0] * FACTOR}px -${coordinate[1] * FACTOR}px`
+      }
+    },
+    computed: {
+      chip () {
+        const ITEM_CHIP_MAP = {
+          CARD_EXP: {
+            name: "作战记录",
+            icon: "mdi-card-bulleted",
+            color: "light-blue"
+          },
+          MATERIAL: {
+            name: "材料",
+            icon: "mdi-cube-outline",
+            color: "lime"
+          },
+          FURN: {
+            name: "家具",
+            icon: "mdi-lamp",
+            color: "blue-grey"
+          }
+        };
+
+        return ITEM_CHIP_MAP[this.item.itemType]
       }
     }
   }
@@ -65,5 +105,9 @@
     display: inline-block;
     overflow: hidden;
     background-size: 360px 480px;
+  }
+
+  .item-card {
+    position: absolute;
   }
 </style>

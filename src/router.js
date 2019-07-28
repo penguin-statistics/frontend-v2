@@ -2,7 +2,9 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import Home from './views/Home'
 import Report from './views/Report'
-import Stats from './views/Stats'
+import StatsByStage from './views/Stats/Stage'
+import StatsByItem from './views/Stats/Item'
+import StatsLayout from './layouts/StatsLayout'
 import ChangeLog from './views/ChangeLog'
 
 Vue.use(Router)
@@ -33,19 +35,31 @@ export default new Router({
       }
     },
     {
-      path: '/stats',
+      path: '/results',
       name: 'Stats',
-      component: Stats,
+      component: StatsLayout,
       meta: {
         icon: 'mdi-chart-pie',
         i18n: 'menu.stats'
-      }
+      },
+      children: [
+        {
+          path: 'stage',
+          name: 'StatsByStage',
+          component: StatsByStage
+        },
+        {
+          path: 'item',
+          name: 'StatsByItem',
+          component: StatsByItem
+        }
+      ]
     },
     {
       path: '/planner',
       name: 'Planner',
       beforeEnter () {
-        window.location = "https://planner.penguin-stats.io"
+        window.location.replace("https://planner.penguin-stats.io")
       },
       meta: {
         icon: 'mdi-floor-plan',
