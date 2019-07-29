@@ -47,8 +47,29 @@ export default new Router({
           path: 'stage',
           name: 'StatsByStage',
           component: StatsByStage,
+          props: true,
           meta: {
             icon: 'mdi-cube',
+            i18n: 'menu.stats.stage'
+          },
+        },
+        {
+          path: 'stage/:zoneId',
+          name: 'StatsByStage_SelectedZone',
+          component: StatsByStage,
+          props: true,
+          meta: {
+            hide: true,
+            i18n: 'menu.stats.stage'
+          },
+        },
+        {
+          path: 'stage/:zoneId/:stageId',
+          name: 'StatsByStage_SelectedBoth',
+          component: StatsByStage,
+          props: true,
+          meta: {
+            hide: true,
             i18n: 'menu.stats.stage'
           },
         },
@@ -56,8 +77,19 @@ export default new Router({
           path: 'item',
           name: 'StatsByItem',
           component: StatsByItem,
+          props: true,
           meta: {
             icon: 'mdi-treasure-chest',
+            i18n: 'menu.stats.item'
+          },
+        },
+        {
+          path: 'item/:itemId',
+          name: 'StatsByItem_SelectedItem',
+          component: StatsByItem,
+          props: true,
+          meta: {
+            hide: true,
             i18n: 'menu.stats.item'
           },
         }

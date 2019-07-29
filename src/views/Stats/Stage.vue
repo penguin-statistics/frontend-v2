@@ -225,6 +225,37 @@
         descending: true
       }
     }),
+    watch: {
+      step: function(newValue, oldValue) {
+        console.log("step changed from", oldValue, "to", newValue)
+        switch (newValue) {
+          case 1:
+            console.log("- [router go] index")
+            this.$router.replace({name: "StatsByStage"});
+            break;
+          case 2:
+            console.log("- [router go] zone", this.selected.zone)
+            this.$router.replace({name: "StatsByStage_SelectedZone", params: {zoneId: this.selected.zone}});
+            break;
+          case 3:
+            console.log("- [router go] stage", this.selected);
+            this.$router.replace({
+              name: "StatsByStage_SelectedBoth",
+              params: {
+                zoneId: this.selected.zone,
+                stageId: this.selected.stage
+              }
+            });
+            break;
+          default:
+            console.error("unexpected step number", getArgsFrom, "with [newStep, oldStep]", [newValue, oldValue])
+        }
+      }
+    },
+    beforeMount() {
+      (this.$route.params.zoneId) && (this.selected.zone = this.$route.params.zoneId) && (this.step += 1);
+      (this.$route.params.stageId) && (this.selected.stage = this.$route.params.stageId) && (this.step += 1);
+    },
     methods: {
       getImage(id) {
         try {
