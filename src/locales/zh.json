@@ -2,7 +2,11 @@
   "menu": {
     "home": "首页",
     "report": "掉落汇报",
-    "stats": "统计结果",
+    "stats": {
+      "_name": "统计结果",
+      "stage": "按作战",
+      "item": "按素材"
+    },
     "planner": "刷图规划器",
     "changelog": "更新日志",
     "logo": "企鹅物流数据统计"

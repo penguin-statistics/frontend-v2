@@ -6,7 +6,11 @@ Vue.use(Vuex)
 export default new Vuex.Store({
   state: {
     ajaxLoading: false,
-    data: {}
+    data: {},
+    settings: {
+      dark: true,
+      locale: 'zh'
+    }
   },
   mutations: {
     store: (state, d) => {
@@ -14,6 +18,12 @@ export default new Vuex.Store({
     },
     changeAjaxState (state, newState) {
       state.ajaxLoading = newState
+    },
+    switchDark (state, newState) {
+      state.settings.dark = newState
+    },
+    changeLocale (state, newLocale) {
+      state.settings.locale = newLocale
     }
   },
   actions: {

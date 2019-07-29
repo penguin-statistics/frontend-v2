@@ -2,7 +2,11 @@
   "menu": {
     "home": "Home",
     "report": "Loot Report",
-    "stats": "Statistics",
+    "stats": {
+      "_name": "Statistics",
+      "stage": "by stage",
+      "item": "by item"
+    },
     "planner": "Planner",
     "changelog": "Change Log",
     "logo": "Penguin Statistics"

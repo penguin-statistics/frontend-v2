@@ -22,6 +22,7 @@
     </v-dialog>
     <v-navigation-drawer
         v-model="drawer"
+        stateless
         app
     >
       <div class="drawer-logo blue darken-4">
@@ -31,14 +32,44 @@
         </div>
       </div>
       <v-list>
-        <v-list-tile v-for="route in routes" :key="route.name" :to="{ 'name': route.name }">
-          <v-list-tile-action>
-            <v-icon>{{ route.meta.icon }}</v-icon>
-          </v-list-tile-action>
-          <v-list-tile-content>
-            <v-list-tile-title>{{ $t(route.meta.i18n) }} &nbsp; <v-icon small v-if="!route.component">mdi-open-in-new</v-icon></v-list-tile-title>
-          </v-list-tile-content>
-        </v-list-tile>
+        <div v-for="route in routes" :key="route.meta.i18n">
+          <v-list-tile v-if="!route.children" :key="route.name" :to="{ 'name': route.name }">
+            <v-list-tile-action>
+              <v-icon>{{ route.meta.icon }}</v-icon>
+            </v-list-tile-action>
+            <v-list-tile-content>
+              <v-list-tile-title>{{ $t(route.meta.i18n) }} &nbsp; <v-icon small v-if="!route.component">mdi-open-in-new</v-icon></v-list-tile-title>
+            </v-list-tile-content>
+          </v-list-tile>
+          <v-list-group
+              v-else
+              v-model="route.meta.active"
+              :prepend-icon="route.meta.icon"
+              no-action
+          >
+            <template v-slot:activator>
+              <v-list-tile>
+                <v-list-tile-content>
+                  <v-list-tile-title>{{ $t(route.meta.i18n) }}</v-list-tile-title>
+                </v-list-tile-content>
+              </v-list-tile>
+            </template>
+
+            <v-list-tile
+                v-for="child in route.children"
+                :key="child.meta.i18n"
+                :to="{ 'name': child.name }"
+            >
+              <v-list-tile-content>
+                <v-list-tile-title>{{ $t(child.meta.i18n) }}</v-list-tile-title>
+              </v-list-tile-content>
+
+              <v-list-tile-action>
+                <v-icon>{{ child.meta.icon }}</v-icon>
+              </v-list-tile-action>
+            </v-list-tile>
+          </v-list-group>
+        </div>
       </v-list>
     </v-navigation-drawer>
     <v-toolbar
@@ -151,7 +182,10 @@ export default {
     this.routes = this.$router.options.routes
   },
   watch: {
-    '$route': ['randomizeLogo']
+    '$route': ['randomizeLogo'],
+    dark: (newValue) => {
+      this.$store.commit('switchDark', newValue)
+    }
   },
   mounted () {
     this.randomizeLogo();

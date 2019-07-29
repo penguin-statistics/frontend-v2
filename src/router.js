@@ -40,18 +40,26 @@ export default new Router({
       component: StatsLayout,
       meta: {
         icon: 'mdi-chart-pie',
-        i18n: 'menu.stats'
+        i18n: 'menu.stats._name'
       },
       children: [
         {
           path: 'stage',
           name: 'StatsByStage',
-          component: StatsByStage
+          component: StatsByStage,
+          meta: {
+            icon: 'mdi-cube',
+            i18n: 'menu.stats.stage'
+          },
         },
         {
           path: 'item',
           name: 'StatsByItem',
-          component: StatsByItem
+          component: StatsByItem,
+          meta: {
+            icon: 'mdi-treasure-chest',
+            i18n: 'menu.stats.item'
+          },
         }
       ]
     },
