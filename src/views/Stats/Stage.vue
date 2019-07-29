@@ -26,7 +26,7 @@
           "times": "样本数",
           "quantity": "掉落数",
           "percentage": "百分比",
-          "apPPR": "单个掉落期望消耗理智"
+          "apPPR": "单件估算理智"
         }
       }
     },
@@ -227,14 +227,14 @@
     }),
     watch: {
       step: function(newValue, oldValue) {
-        console.log("step changed from", oldValue, "to", newValue)
+        console.log("step changed from", oldValue, "to", newValue);
         switch (newValue) {
           case 1:
-            console.log("- [router go] index")
+            console.log("- [router go] index");
             this.$router.replace({name: "StatsByStage"});
             break;
           case 2:
-            console.log("- [router go] zone", this.selected.zone)
+            console.log("- [router go] zone", this.selected.zone);
             this.$router.replace({name: "StatsByStage_SelectedZone", params: {zoneId: this.selected.zone}});
             break;
           case 3:
@@ -287,10 +287,10 @@
           };
           object.icon = ICON_MAP[object.type];
 
-          object.isActivity = object.type === "ACTIVITY"
+          object.isActivity = object.type === "ACTIVITY";
           if (object.isActivity) {
             let dates = formatter.dates([object.openTime, object.closeTime]);
-            object.activityActiveTimeText = `${this.$t('opensAt')}${dates[0]} - ${dates[1]}`
+            object.activityActiveTimeText = `${this.$t('opensAt')}${dates[0]} - ${dates[1]}`;
 
             object.isOutdated = formatter.isOutdated(object.closeTime)
           }
@@ -314,7 +314,7 @@
         return result
       },
       selectedZone() {
-        if (!this.selected.zone) return {zoneName: ''}
+        if (!this.selected.zone) return {zoneName: ''};
         return get.zones.byZoneId(this.selected.zone)
       },
       selectedStage () {
@@ -324,7 +324,7 @@
         return get.stages.byParentZoneId(this.selected.zone)
       },
       stageStats() {
-        if (!this.selected.stage) return []
+        if (!this.selected.stage) return [];
         return get.statistics.byStageId(this.selected.stage)
       },
       tableHeaders () {
@@ -334,28 +334,28 @@
             value: "icon",
             align: "center",
             sortable: false,
-            width: 200
+            width: 300
           },
           {
             text: this.$t('stats.headers.times'),
             value: "times",
             align: "center",
             sortable: true,
-            width: 50,
+            width: 40,
           },
           {
             text: this.$t('stats.headers.quantity'),
             value: "quantity",
             align: "center",
             sortable: true,
-            width: 50,
+            width: 40,
           },
           {
             text: this.$t('stats.headers.percentage'),
             value: "percentage",
             align: "center",
             sortable: true,
-            width: 80
+            width: 65
           },
           {
             text: this.$t('stats.headers.apPPR'),
@@ -371,16 +371,6 @@
 </script>
 
 <style scoped>
-  .zoneTitle {
-    position: absolute;
-    top: -15px;
-    left: 2em;
-    background: #000000;
-    padding: 4px 2em;
-    font-size: 16px;
-    box-shadow: 0 3px 5px rgba(0, 0, 0, .75)
-  }
-
   .theme--light .zoneTitle {
     color: #fff;
   }
