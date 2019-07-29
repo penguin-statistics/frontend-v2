@@ -2,6 +2,33 @@
   <v-app :dark="dark" id="__app_root">
     <RandomBackground :interval="30" />
     <v-dialog
+        :value="nowBuildNotice && nowBuildNoticeNotClosed"
+        max-width="600"
+        persistent
+    >
+      <v-card class="white--text pa-4" style="background: repeating-linear-gradient(-45deg, rgba(168, 128, 36, .6), rgba(168, 128, 36, .6) 45px, rgba(0, 0, 0, .8) 45px, rgba(0, 0, 0, .8) 90px)">
+        <v-card-title class="headline font-weight-black"><v-icon left>mdi-hammer</v-icon> {{$t('builds.development.title')}}</v-card-title>
+
+        <v-card-text>
+          <p class="subheading font-weight-bold">
+            {{$t('builds.development.description')}}
+          </p>
+        </v-card-text>
+
+        <v-card-actions>
+
+          <v-spacer></v-spacer>
+
+          <v-btn
+              color="green darken-1"
+              @click="nowBuildNoticeNotClosed = false"
+          >
+            {{$t('builds.development.ok')}}
+          </v-btn>
+        </v-card-actions>
+      </v-card>
+    </v-dialog>
+    <v-dialog
         v-model="$store.state.ajaxLoading"
         persistent
         width="300"
@@ -32,7 +59,7 @@
         </div>
       </div>
       <v-list>
-        <div v-for="route in routes" :key="route.meta.i18n">
+        <div v-for="route in routes" :key="route.name">
           <v-list-tile v-if="!route.children" :key="route.name" :to="{ 'name': route.name }">
             <v-list-tile-action>
               <v-icon>{{ route.meta.icon }}</v-icon>
@@ -56,8 +83,8 @@
             </template>
 
             <v-list-tile
-                v-for="child in route.children"
-                :key="child.meta.i18n"
+                v-for="child in route.children.filter(el => !(el.meta.hide))"
+                :key="child.name"
                 :to="{ 'name': child.name }"
             >
               <v-list-tile-content>
@@ -172,7 +199,8 @@ export default {
         name: 'English'
       }],
       drawer: true,
-      dark: true
+      dark: true,
+      nowBuildNoticeNotClosed: true
     }
   },
   components: {
@@ -224,6 +252,11 @@ export default {
     },
     changeLocale (localeId) {
       this.$i18n.locale = localeId
+    }
+  },
+  computed: {
+    nowBuildNotice () {
+      return process.env.NOW_GITHUB_DEPLOYMENT
     }
   }
 }

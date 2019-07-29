@@ -17,5 +17,12 @@
       "copyright": "(Click to view license) Data was collected by Penguin Delivery, licensed under a Creative Commons Attribution-NonCommercial 4.0 International License. In case of redistribution and transformation towards the material, you must give appropriate credit, provide a link to the license, indicate if changes were made, and may not use the material for commercial purposes.",
       "credit": "Penguin Delivery | {date}"
     }
+  },
+  "builds": {
+    "development": {
+      "title": "Preview Build",
+      "description": "You are currently browsing the development build",
+      "ok": "OH YEAH!"
+    }
   }
 }
