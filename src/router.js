@@ -35,7 +35,7 @@ export default new Router({
       }
     },
     {
-      path: '/results',
+      path: '/result',
       name: 'Stats',
       component: StatsLayout,
       meta: {
