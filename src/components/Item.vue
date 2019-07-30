@@ -1,22 +1,30 @@
 <template>
-  <v-tooltip bottom content-class="elevation-0 transparent" lazy :open-delay="200">
-    <template v-slot:activator="{ on }">
-      <v-icon v-show="item.itemId === 'furni'" class="light-blue" style="border-radius: 50%;">mdi-lamp</v-icon>
-      <figure class="item-icon--sprite" ref="icon" v-on="on" v-show="item.itemId !== 'furni'"></figure>
-    </template>
-    <v-card>
-      <v-card-title>
-        <h1 class="mr-2">{{ item.name }}</h1>
+  <span @click="redirectItemPage" :class="{ 'cursor-pointer': !this.disableLink }" >
+    <v-tooltip bottom content-class="elevation-0 transparent" lazy :open-delay="200" v-if="!disableTooltip">
+      <template v-slot:activator="{ on }">
+        <span v-on="on">
+          <v-icon v-if="item.itemId === 'furni'" class="deep-orange" :class="furniturePadding" style="border-radius: 50%" :style="furnitureWidth">mdi-lamp</v-icon>
+          <figure class="item-icon--sprite" ref="icon" v-else></figure>
+        </span>
+      </template>
+      <v-card>
+        <v-card-title>
+          <h1 class="mr-2">{{ item.name }}</h1>
 
-        <v-chip :color="chip.color" text-color="black">
-          <v-avatar>
-            <v-icon>{{ chip.icon }}</v-icon>
-          </v-avatar>
-          {{ chip.name }}
-        </v-chip>
-      </v-card-title>
-    </v-card>
-  </v-tooltip>
+          <v-chip :color="item.meta.color" text-color="black">
+            <v-avatar>
+              <v-icon>{{ item.meta.icon }}</v-icon>
+            </v-avatar>
+            {{ item.meta.name }}
+          </v-chip>
+        </v-card-title>
+      </v-card>
+    </v-tooltip>
+    <span v-else>
+      <v-icon v-if="item.itemId === 'furni'" class="deep-orange" :class="furniturePadding" style="border-radius: 50%;" :style="furnitureWidth">mdi-lamp</v-icon>
+      <figure class="item-icon--sprite" ref="icon" v-else></figure>
+    </span>
+  </span>
 </template>
 
 <script>
@@ -31,6 +39,18 @@
         type: Number,
         default () {
           return 1
+        }
+      },
+      disableTooltip: {
+        type: Boolean,
+        default () {
+          return false
+        }
+      },
+      disableLink: {
+        type: Boolean,
+        default () {
+          return false
         }
       }
     },
@@ -53,8 +73,10 @@
       }
     },
     mounted() {
-      if (this.item.itemId !== "furni") this.updatePosition(this.item.spriteCoord);
-      this.updateScale(this.ratio)
+      if (this.item.itemId !== "furni") {
+        this.updatePosition(this.item.spriteCoord);
+        this.updateScale(this.ratio)
+      }
     },
     methods: {
       updatePosition (coordinate) {
@@ -68,29 +90,36 @@
       transformCoordinate (coordinate) {
         const FACTOR = this.ratio * this.originalIconSize
         return `-${coordinate[0] * FACTOR}px -${coordinate[1] * FACTOR}px`
+      },
+      redirectItemPage () {
+        if (!this.disableLink) {
+          this.$router.push({
+            name: "StatsByItem_SelectedItem",
+            params: {
+              itemId: this.item.itemId
+            }
+          })
+        }
       }
     },
     computed: {
-      chip () {
-        const ITEM_CHIP_MAP = {
-          CARD_EXP: {
-            name: "作战记录",
-            icon: "mdi-card-bulleted",
-            color: "light-blue"
-          },
-          MATERIAL: {
-            name: "材料",
-            icon: "mdi-cube-outline",
-            color: "lime"
-          },
-          FURN: {
-            name: "家具",
-            icon: "mdi-lamp",
-            color: "blue-grey"
-          }
-        };
-
-        return ITEM_CHIP_MAP[this.item.itemType]
+      furniturePadding () {
+        if (this.ratio <= 0.25) {
+          return ['pa-0']
+        } else if (this.ratio <= 0.5) {
+          return ['pa-1']
+        } else if (this.ratio <= 0.75) {
+          return ['pa-2']
+        } else if (this.ratio <= 1) {
+          return ['pa-3']
+        } else {
+          return ['pa-4']
+        }
+      },
+      furnitureWidth () {
+        return {
+          fontSize: 36 * this.ratio
+        }
       }
     }
   }
