@@ -20,7 +20,7 @@
         }
       },
       "stats": {
-        "name": "结果",
+        "name": "统计结果",
         "headers": {
           "item": "物品",
           "times": "样本数",
@@ -50,7 +50,7 @@
         }
       },
       "stats": {
-        "name": "Results",
+        "name": "Statistics",
         "headers": {
           "item": "Item",
           "times": "Samples",
@@ -74,7 +74,7 @@
 
       <v-divider></v-divider>
 
-      <v-stepper-step :step="3">{{ $t('stats.name') }}</v-stepper-step>
+      <v-stepper-step :complete="step === 3" :step="3">{{ $t('stats.name') }}</v-stepper-step>
     </v-stepper-header>
 
     <v-stepper-items>
@@ -114,12 +114,6 @@
       </v-stepper-content>
 
       <v-stepper-content :step="2" v-if="this.selected.zone">
-        <v-fade-transition>
-          <div class="zoneNameHighlight" v-if="selectedZone">
-            {{ this.selectedZone.zoneName || '' }}
-          </div>
-        </v-fade-transition>
-
         <v-container fluid grid-list-lg class="py-0">
           <v-list subheader :three-line="$vuetify.breakpoint.smAndUp" class="transparent">
             <v-subheader inset v-if="selectedZone">{{ selectedZone.zoneName || '' }}</v-subheader>
@@ -132,13 +126,13 @@
                 v-ripple
             >
               <v-list-tile-avatar>
-                <v-icon>{{ stage.icon }}</v-icon>
+                <v-icon>mdi-cube-outline</v-icon>
               </v-list-tile-avatar>
 
               <v-list-tile-content>
                 <v-list-tile-title>{{ stage.code }}</v-list-tile-title>
                 <v-list-tile-sub-title>
-                  <v-layout align-center justify-start row wrap d-inline-flex class="overflow-hidden">
+                  <v-layout align-center justify-start row wrap d-inline-flex>
                     <v-flex :class="{ 'yellow--text font-weight-bold': true, 'amber--text text--darken-4': !$vuetify.dark }">
                       {{ $t('stage.apCost', {apCost: stage.apCost}) }}
                     </v-flex>
@@ -147,21 +141,21 @@
 
                     <v-flex v-if="stage.normalDrop.length > 0" class="hidden-xs-only">
                       <div>{{ $t('stage.loots.normal') }}</div>
-                      <Item v-for="item in stage.normalDrop" :key="item" :item="getItem(item)" :ratio="0.5" />
+                      <Item v-for="item in stage.normalDrop" :key="item" :item="getItem(item)" :ratio="0.5" disable-link />
                     </v-flex>
 
                     <v-divider vertical v-if="stage.extraDrop.length > 0" class="hidden-sm-and-down mx-1" />
 
                     <v-flex v-if="stage.extraDrop.length > 0" class="hidden-sm-and-down">
                       <div>{{ $t('stage.loots.extra') }}</div>
-                      <Item v-for="item in stage.extraDrop" :key="item*10" :item="getItem(item)" :ratio="0.5" />
+                      <Item v-for="item in stage.extraDrop" :key="item*10" :item="getItem(item)" :ratio="0.5" disable-link />
                     </v-flex>
 
                     <v-divider vertical v-if="stage.specialDrop.length > 0" class="hidden-sm-and-down mx-1" />
 
                     <v-flex v-if="stage.specialDrop.length > 0" class="hidden-sm-and-down">
                       <div>{{ $t('stage.loots.special') }}</div>
-                      <Item v-for="item in stage.specialDrop" :key="item*100" :item="getItem(item)" :ratio="0.5" />
+                      <Item v-for="item in stage.specialDrop" :key="item*100" :item="getItem(item)" :ratio="0.5" disable-link />
                     </v-flex>
                   </v-layout>
                 </v-list-tile-sub-title>
@@ -188,7 +182,7 @@
           <template v-slot:items="props">
             <td>
               <v-avatar :size="30" class="mr-1">
-                <Item :item="props.item.item" :ratio="0.5" />
+                <Item :item="props.item.item" :ratio="0.5" disable-tooltip />
               </v-avatar>
               {{ props.item.item.name }}
             </td>
@@ -211,7 +205,7 @@
   import Item from "@/components/Item";
 
   export default {
-    name: "StatsByItem",
+    name: "StatsByStage",
     components: {Item},
     data: () => ({
       step: 1,
@@ -231,15 +225,15 @@
         switch (newValue) {
           case 1:
             console.log("- [router go] index");
-            this.$router.replace({name: "StatsByStage"});
+            this.$router.push({name: "StatsByStage"});
             break;
           case 2:
             console.log("- [router go] zone", this.selected.zone);
-            this.$router.replace({name: "StatsByStage_SelectedZone", params: {zoneId: this.selected.zone}});
+            this.$router.push({name: "StatsByStage_SelectedZone", params: {zoneId: this.selected.zone}});
             break;
           case 3:
             console.log("- [router go] stage", this.selected);
-            this.$router.replace({
+            this.$router.push({
               name: "StatsByStage_SelectedBoth",
               params: {
                 zoneId: this.selected.zone,
@@ -248,7 +242,7 @@
             });
             break;
           default:
-            console.error("unexpected step number", getArgsFrom, "with [newStep, oldStep]", [newValue, oldValue])
+            console.error("unexpected step number", newValue, "with [newStep, oldStep]", [newValue, oldValue])
         }
       }
     },
@@ -257,13 +251,6 @@
       (this.$route.params.stageId) && (this.selected.stage = this.$route.params.stageId) && (this.step += 1);
     },
     methods: {
-      getImage(id) {
-        try {
-          return require(`../../assets/zonePageBackgrounds/${id}.png`)
-        } catch {
-          return 'http://unsplash.it/512/512?image=' + id
-        }
-      },
       storeZoneSelection(zoneId) {
         this.step += 1;
         this.selected.zone = zoneId
@@ -373,15 +360,6 @@
 <style scoped>
   .theme--light .zoneTitle {
     color: #fff;
-  }
-
-  .zoneNameHighlight {
-    position: absolute;
-    right: .5em;
-    top: -1.5em;
-    font-size: 32px;
-    color: rgba(100, 100, 100, 0.9);
-    user-select: none;
   }
 
   .v-table {
