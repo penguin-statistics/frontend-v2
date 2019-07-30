@@ -1,4 +1,5 @@
 import store from '@/store'
+import formatter from '@/utils/timeFormatter'
 
 let Getters = {};
 
@@ -61,6 +62,7 @@ Getters.statistics = {
       let stage = Getters.stages.byStageId(el.stageId);
 
       el.stage = stage;
+      el.zone = Getters.zones.byZoneId(el.stage.zoneId);
 
       el.percentage = (el.quantity / el.times);
       el.percentageText = `${(el.percentage * 100).toFixed(2)}%`;
@@ -97,18 +99,39 @@ Getters.stages = {
   }
 },
 Getters.zones = {
+  getIcon (zoneType) {
+    const ICON_MAP = {
+      "MAINLINE": "mdi-checkerboard",
+      "WEEKLY": "mdi-treasure-chest",
+      "ACTIVITY": "mdi-sack"
+    };
+    return ICON_MAP[zoneType]
+  },
   byZoneId (zoneId) {
-    return store.state.data.zones.find(el => {
+    return this.all().find(el => {
       return el.zoneId === zoneId
     })
   },
   byType (type) {
-    return store.state.data.zones.find(el => {
+    return this.all().filter(el => {
       return el.type === type
-    })
+    });
   },
   all () {
-    return store.state.data.zones
+    let zones = store.state.data.zones;
+    if (!zones) return [];
+
+    zones.forEach((object) => {
+      object.icon = this.getIcon(object.type);
+
+      object.isActivity = object.type === "ACTIVITY";
+      if (object.isActivity) {
+        object.activityActiveTime = formatter.dates([object.openTime, object.closeTime]);
+
+        object.isOutdated = formatter.isOutdated(object.closeTime)
+      }
+    });
+    return zones
   }
 }
 

@@ -18,6 +18,17 @@
       "credit": "Penguin Delivery | {date}"
     }
   },
+  "stats": {
+    "headers": {
+      "stage": "Stage",
+      "apCost": "Costs AP",
+      "item": "Item",
+      "times": "Samples",
+      "quantity": "Loots",
+      "percentage": "Percentage",
+      "apPPR": "Expected AP required every 1 item"
+    }
+  },
   "builds": {
     "development": {
       "title": "Preview Build",

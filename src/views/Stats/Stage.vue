@@ -1,7 +1,7 @@
 <i18n>
   {
     "zh": {
-      "opensAt": "开放时间：",
+      "opensAt": "开放时间：{0} ~ {1}",
       "zone": {
         "name": "章节",
         "types": {
@@ -20,18 +20,11 @@
         }
       },
       "stats": {
-        "name": "统计结果",
-        "headers": {
-          "item": "物品",
-          "times": "样本数",
-          "quantity": "掉落数",
-          "percentage": "百分比",
-          "apPPR": "单件估算理智"
-        }
+        "name": "统计结果"
       }
     },
     "en": {
-      "opensAt": "Opens At: ",
+      "opensAt": "Opens At: {0} ~ {1}",
       "zone": {
         "name": "Zone",
         "types": {
@@ -50,14 +43,7 @@
         }
       },
       "stats": {
-        "name": "Statistics",
-        "headers": {
-          "item": "Item",
-          "times": "Samples",
-          "quantity": "Loots",
-          "percentage": "Percentage",
-          "apPPR": "Expected AP required every 1 item"
-        }
+        "name": "Statistics"
       }
     }
   }
@@ -100,7 +86,7 @@
                 <v-list-tile-sub-title v-if="zone.isActivity">
                     <span
                         :class="{ 'text--darken-1 font-weight-bold': true, 'red--text': zone.isOutdated, 'green--text': !zone.isOutdated }">{{ zone.isOutdated ? "已结束" : "正在进行" }}</span>
-                  {{ zone.activityActiveTimeText }}
+                  {{ $t('opensAt', zone.activityActiveTime) }}
                 </v-list-tile-sub-title>
               </v-list-tile-content>
 
@@ -259,43 +245,18 @@
         this.step += 1;
         this.selected.stage = stageId
       },
-      getZones(type) {
-        let zones = get.zones.all();
-        if (!zones) return [];
-        zones = zones.filter(el => {
-          return el.type === type
-        });
-
-        zones.forEach((object) => {
-          const ICON_MAP = {
-            "MAINLINE": "mdi-checkerboard",
-            "WEEKLY": "mdi-treasure-chest",
-            "ACTIVITY": "mdi-sack"
-          };
-          object.icon = ICON_MAP[object.type];
-
-          object.isActivity = object.type === "ACTIVITY";
-          if (object.isActivity) {
-            let dates = formatter.dates([object.openTime, object.closeTime]);
-            object.activityActiveTimeText = `${this.$t('opensAt')}${dates[0]} - ${dates[1]}`;
-
-            object.isOutdated = formatter.isOutdated(object.closeTime)
-          }
-        });
-        return zones
-      },
       getItem(itemId) {
         return get.item.byItemId(itemId)
       }
     },
     computed: {
       categorizedZones() {
-        const CATEGORIES = ["MAINLINE", "WEEKLY", "ACTIVITY"];
+        const categories = ["MAINLINE", "WEEKLY", "ACTIVITY"];
         let result = [];
-        for (let category of CATEGORIES) {
+        for (let category of categories) {
           result.push({
             id: category,
-            zones: this.getZones(category)
+            zones: get.zones.byType(category)
           })
         }
         return result
@@ -303,9 +264,6 @@
       selectedZone() {
         if (!this.selected.zone) return {zoneName: ''};
         return get.zones.byZoneId(this.selected.zone)
-      },
-      selectedStage () {
-        return get.stages.byStageId(this.selected.stage)
       },
       stages() {
         return get.stages.byParentZoneId(this.selected.zone)

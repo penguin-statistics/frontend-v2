@@ -18,6 +18,17 @@
       "credit": "企鹅物流 | {date}"
     }
   },
+  "stats": {
+    "headers": {
+      "stage": "关卡",
+      "apCost": "理智消耗",
+      "item": "物品",
+      "times": "样本数",
+      "quantity": "掉落数",
+      "percentage": "百分比",
+      "apPPR": "单件估算理智"
+    }
+  },
   "builds": {
     "development": {
       "title": "预览版",

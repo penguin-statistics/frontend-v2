@@ -49,7 +49,6 @@
     </v-dialog>
     <v-navigation-drawer
         v-model="drawer"
-        stateless
         app
     >
       <div class="drawer-logo blue darken-4">
