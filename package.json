@@ -10,8 +10,8 @@
   },
   "dependencies": {
     "core-js": "^2.6.5",
+    "dayjs": "^1.8.15",
     "idb": "^4.0.4",
-    "moment": "^2.24.0",
     "vue": "^2.6.10",
     "vue-analytics": "^5.17.0",
     "vue-i18n": "^8.0.0",
