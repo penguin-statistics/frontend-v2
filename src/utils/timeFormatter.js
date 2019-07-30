@@ -1,4 +1,4 @@
-import moment from 'moment'
+import dayjs from 'dayjs'
 
 const FORMATS = {
   MD: "M.D",
@@ -18,13 +18,13 @@ function needYear(moments) {
 }
 
 export default {
-  moment,
+  dayjs,
   isOutdated(rangeEnd) {
-    return moment().isAfter(rangeEnd)
+    return dayjs().isAfter(rangeEnd)
   },
   dates (times) {
     times = times.map(ts => {
-      return moment(ts)
+      return dayjs(ts)
     });
     let needsYear = needYear(times);
     times = times.map(time => {
