@@ -1,17 +1,39 @@
 <template>
-  <span @click="redirectItemPage" :class="{ 'cursor-pointer': !this.disableLink }" >
-    <v-tooltip bottom content-class="elevation-0 transparent" lazy :open-delay="200" v-if="!disableTooltip">
+  <span
+    :class="{ 'cursor-pointer': !disableLink }"
+    @click="redirectItemPage"
+  >
+    <v-tooltip
+      v-if="!disableTooltip"
+      bottom
+      content-class="elevation-0 transparent"
+      lazy
+      :open-delay="200"
+    >
       <template v-slot:activator="{ on }">
         <span v-on="on">
-          <v-icon v-if="item.itemId === 'furni'" class="deep-orange" :class="furniturePadding" style="border-radius: 50%" :style="furnitureWidth">mdi-lamp</v-icon>
-          <figure class="item-icon--sprite" ref="icon" v-show="item.itemId !== 'furni'"></figure>
+          <v-icon
+            v-if="item.itemId === 'furni'"
+            class="deep-orange"
+            :class="furniturePadding"
+            style="border-radius: 50%"
+            :style="furnitureWidth"
+          >mdi-lamp</v-icon>
+          <figure
+            v-show="item.itemId !== 'furni'"
+            ref="icon"
+            class="item-icon--sprite"
+          />
         </span>
       </template>
       <v-card>
         <v-card-title>
           <h1 class="mr-2">{{ item.name }}</h1>
 
-          <v-chip :color="item.meta.color" text-color="black">
+          <v-chip
+            :color="item.meta.color"
+            text-color="black"
+          >
             <v-avatar>
               <v-icon>{{ item.meta.icon }}</v-icon>
             </v-avatar>
@@ -21,8 +43,18 @@
       </v-card>
     </v-tooltip>
     <span v-else>
-      <v-icon v-if="item.itemId === 'furni'" class="deep-orange" :class="furniturePadding" style="border-radius: 50%;" :style="furnitureWidth">mdi-lamp</v-icon>
-      <figure class="item-icon--sprite" ref="icon" v-show="item.itemId !== 'furni'"></figure>
+      <v-icon
+        v-if="item.itemId === 'furni'"
+        class="deep-orange"
+        :class="furniturePadding"
+        style="border-radius: 50%;"
+        :style="furnitureWidth"
+      >mdi-lamp</v-icon>
+      <figure
+        v-show="item.itemId !== 'furni'"
+        ref="icon"
+        class="item-icon--sprite"
+      />
     </span>
   </span>
 </template>
@@ -63,13 +95,33 @@
         }
       }
     },
+    computed: {
+      furniturePadding () {
+        if (this.ratio <= 0.25) {
+          return ['pa-0']
+        } else if (this.ratio <= 0.5) {
+          return ['pa-1']
+        } else if (this.ratio <= 0.75) {
+          return ['pa-2']
+        } else if (this.ratio <= 1) {
+          return ['pa-3']
+        } else {
+          return ['pa-4']
+        }
+      },
+      furnitureWidth () {
+        return {
+          fontSize: 36 * this.ratio
+        }
+      }
+    },
     watch: {
       item: function(newItem) {
         if (newItem.itemId !== "furni") this.updatePosition(newItem.spriteCoord);
         this.updateScale(this.ratio);
         this.updateHoverEffect()
       },
-      ratio: function(newRatio, oldRatio) {
+      ratio: function(newRatio) {
         this.updateScale(newRatio);
         if (this.item.itemId !== "furni") this.updatePosition(this.item.spriteCoord);
         this.updateHoverEffect()
@@ -110,26 +162,6 @@
               itemId: this.item.itemId
             }
           })
-        }
-      }
-    },
-    computed: {
-      furniturePadding () {
-        if (this.ratio <= 0.25) {
-          return ['pa-0']
-        } else if (this.ratio <= 0.5) {
-          return ['pa-1']
-        } else if (this.ratio <= 0.75) {
-          return ['pa-2']
-        } else if (this.ratio <= 1) {
-          return ['pa-3']
-        } else {
-          return ['pa-4']
-        }
-      },
-      furnitureWidth () {
-        return {
-          fontSize: 36 * this.ratio
         }
       }
     }

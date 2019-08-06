@@ -1,8 +1,14 @@
 <template>
-  <v-container fluid fill-height>
+  <v-container
+    fluid
+    fill-height
+  >
     <v-layout align-center>
       <v-flex>
-        <transition name="slide-fade" mode="out-in">
+        <transition
+          name="slide-fade"
+          mode="out-in"
+        >
           <router-view />
         </transition>
       </v-flex>

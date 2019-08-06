@@ -50,32 +50,62 @@
 </i18n>
 
 <template>
-  <v-stepper v-model="step" class="bkop-light transparent">
+  <v-stepper
+    v-model="step"
+    class="bkop-light transparent"
+  >
     <v-stepper-header>
-      <v-stepper-step :complete="step > 1" :editable="step > 1" :step="1">{{ $t('zone.name') }}</v-stepper-step>
+      <v-stepper-step
+        :complete="step > 1"
+        :editable="step > 1"
+        :step="1"
+      >
+        {{ $t('zone.name') }}
+      </v-stepper-step>
 
-      <v-divider></v-divider>
+      <v-divider />
 
-      <v-stepper-step :complete="step > 2" :editable="step > 2" :step="2">{{ $t('stage.name') }}</v-stepper-step>
+      <v-stepper-step
+        :complete="step > 2"
+        :editable="step > 2"
+        :step="2"
+      >
+        {{ $t('stage.name') }}
+      </v-stepper-step>
 
-      <v-divider></v-divider>
+      <v-divider />
 
-      <v-stepper-step :complete="step === 3" :step="3">{{ $t('stats.name') }}</v-stepper-step>
+      <v-stepper-step
+        :complete="step === 3"
+        :step="3"
+      >
+        {{ $t('stats.name') }}
+      </v-stepper-step>
     </v-stepper-header>
 
     <v-stepper-items>
       <v-stepper-content :step="1">
-
-        <v-container fluid grid-list-lg class="py-0">
-          <v-list subheader v-for="zoneCategory in categorizedZones" :key="zoneCategory.id" class="transparent">
-            <v-subheader inset>{{ $t(['zone.types', zoneCategory.id].join('.')) }}</v-subheader>
+        <v-container
+          fluid
+          grid-list-lg
+          class="py-0"
+        >
+          <v-list
+            v-for="zoneCategory in categorizedZones"
+            :key="zoneCategory.id"
+            subheader
+            class="transparent"
+          >
+            <v-subheader inset>
+              {{ $t(['zone.types', zoneCategory.id].join('.')) }}
+            </v-subheader>
 
             <v-list-tile
-                v-for="zone in zoneCategory.zones"
-                :key="zone.zoneId"
-                avatar
-                @click="storeZoneSelection(zone.zoneId)"
-                v-ripple
+              v-for="zone in zoneCategory.zones"
+              :key="zone.zoneId"
+              v-ripple
+              avatar
+              @click="storeZoneSelection(zone.zoneId)"
             >
               <v-list-tile-avatar>
                 <v-icon>{{ zone.icon }}</v-icon>
@@ -84,32 +114,50 @@
               <v-list-tile-content>
                 <v-list-tile-title>{{ zone.zoneName }}</v-list-tile-title>
                 <v-list-tile-sub-title v-if="zone.isActivity">
-                    <span
-                        :class="{ 'text--darken-1 font-weight-bold': true, 'red--text': zone.isOutdated, 'green--text': !zone.isOutdated }">{{ zone.isOutdated ? "已结束" : "正在进行" }}</span>
+                  <span
+                    :class="{ 'text--darken-1 font-weight-bold': true, 'red--text': zone.isOutdated, 'green--text': !zone.isOutdated }"
+                  >{{ zone.isOutdated ? "已结束" : "正在进行" }}</span>
                   {{ $t('opensAt', zone.activityActiveTime) }}
                 </v-list-tile-sub-title>
               </v-list-tile-content>
 
               <v-list-tile-action>
-                <v-icon color="grey lighten-1">mdi-chevron-right</v-icon>
+                <v-icon color="grey lighten-1">
+                  mdi-chevron-right
+                </v-icon>
               </v-list-tile-action>
             </v-list-tile>
           </v-list>
         </v-container>
-
       </v-stepper-content>
 
-      <v-stepper-content :step="2" v-if="this.selected.zone">
-        <v-container fluid grid-list-lg class="py-0">
-          <v-list subheader :three-line="$vuetify.breakpoint.smAndUp" class="transparent">
-            <v-subheader inset v-if="selectedZone">{{ selectedZone.zoneName || '' }}</v-subheader>
+      <v-stepper-content
+        v-if="this.selected.zone"
+        :step="2"
+      >
+        <v-container
+          fluid
+          grid-list-lg
+          class="py-0"
+        >
+          <v-list
+            subheader
+            :three-line="$vuetify.breakpoint.smAndUp"
+            class="transparent"
+          >
+            <v-subheader
+              v-if="selectedZone"
+              inset
+            >
+              {{ selectedZone.zoneName || '' }}
+            </v-subheader>
 
             <v-list-tile
-                v-for="stage in stages"
-                :key="stage.stageId"
-                avatar
-                @click="storeStageSelection(stage.stageId)"
-                v-ripple
+              v-for="stage in stages"
+              :key="stage.stageId"
+              v-ripple
+              avatar
+              @click="storeStageSelection(stage.stageId)"
             >
               <v-list-tile-avatar>
                 <v-icon>mdi-cube-outline</v-icon>
@@ -118,37 +166,84 @@
               <v-list-tile-content>
                 <v-list-tile-title>{{ stage.code }}</v-list-tile-title>
                 <v-list-tile-sub-title>
-                  <v-layout align-center justify-start row wrap d-inline-flex>
+                  <v-layout
+                    align-center
+                    justify-start
+                    row
+                    wrap
+                    d-inline-flex
+                  >
                     <v-flex :class="{ 'yellow--text font-weight-bold': true, 'amber--text text--darken-4': !$vuetify.dark }">
                       {{ $t('stage.apCost', {apCost: stage.apCost}) }}
                     </v-flex>
 
-                    <v-divider vertical v-if="stage.normalDrop.length > 0" class="hidden-xs-only mx-1" />
+                    <v-divider
+                      v-if="stage.normalDrop.length > 0"
+                      vertical
+                      class="hidden-xs-only mx-1"
+                    />
 
-                    <v-flex v-if="stage.normalDrop.length > 0" class="hidden-xs-only">
+                    <v-flex
+                      v-if="stage.normalDrop.length > 0"
+                      class="hidden-xs-only"
+                    >
                       <div>{{ $t('stage.loots.normal') }}</div>
-                      <Item v-for="item in stage.normalDrop" :key="item" :item="getItem(item)" :ratio="0.5" disable-link />
+                      <Item
+                        v-for="item in stage.normalDrop"
+                        :key="item"
+                        :item="getItem(item)"
+                        :ratio="0.5"
+                        disable-link
+                      />
                     </v-flex>
 
-                    <v-divider vertical v-if="stage.extraDrop.length > 0" class="hidden-sm-and-down mx-1" />
+                    <v-divider
+                      v-if="stage.extraDrop.length > 0"
+                      vertical
+                      class="hidden-sm-and-down mx-1"
+                    />
 
-                    <v-flex v-if="stage.extraDrop.length > 0" class="hidden-sm-and-down">
+                    <v-flex
+                      v-if="stage.extraDrop.length > 0"
+                      class="hidden-sm-and-down"
+                    >
                       <div>{{ $t('stage.loots.extra') }}</div>
-                      <Item v-for="item in stage.extraDrop" :key="item*10" :item="getItem(item)" :ratio="0.5" disable-link />
+                      <Item
+                        v-for="item in stage.extraDrop"
+                        :key="item*10"
+                        :item="getItem(item)"
+                        :ratio="0.5"
+                        disable-link
+                      />
                     </v-flex>
 
-                    <v-divider vertical v-if="stage.specialDrop.length > 0" class="hidden-sm-and-down mx-1" />
+                    <v-divider
+                      v-if="stage.specialDrop.length > 0"
+                      vertical
+                      class="hidden-sm-and-down mx-1"
+                    />
 
-                    <v-flex v-if="stage.specialDrop.length > 0" class="hidden-sm-and-down">
+                    <v-flex
+                      v-if="stage.specialDrop.length > 0"
+                      class="hidden-sm-and-down"
+                    >
                       <div>{{ $t('stage.loots.special') }}</div>
-                      <Item v-for="item in stage.specialDrop" :key="item*100" :item="getItem(item)" :ratio="0.5" disable-link />
+                      <Item
+                        v-for="item in stage.specialDrop"
+                        :key="item*100"
+                        :item="getItem(item)"
+                        :ratio="0.5"
+                        disable-link
+                      />
                     </v-flex>
                   </v-layout>
                 </v-list-tile-sub-title>
               </v-list-tile-content>
 
               <v-list-tile-action>
-                <v-icon color="grey lighten-1">mdi-chevron-right</v-icon>
+                <v-icon color="grey lighten-1">
+                  mdi-chevron-right
+                </v-icon>
               </v-list-tile-action>
             </v-list-tile>
           </v-list>
@@ -157,37 +252,49 @@
 
       <v-stepper-content :step="3">
         <v-data-table
-            :headers="tableHeaders"
-            :items="stageStats"
-            :pagination.sync="tablePagination"
+          :headers="tableHeaders"
+          :items="stageStats"
+          :pagination.sync="tablePagination"
 
-            must-sort
-            hide-actions
-            class="elevation-0 transparentTable"
+          must-sort
+          hide-actions
+          class="elevation-0 transparentTable"
         >
           <template v-slot:items="props">
             <td>
-              <v-avatar :size="30" class="mr-1">
-                <Item :item="props.item.item" :ratio="0.5" disable-tooltip />
+              <v-avatar
+                :size="30"
+                class="mr-1"
+              >
+                <Item
+                  :item="props.item.item"
+                  :ratio="0.5"
+                  disable-tooltip
+                />
               </v-avatar>
               {{ props.item.item.name }}
             </td>
-            <td class="text-xs-right">{{ props.item.times }}</td>
-            <td class="text-xs-right">{{ props.item.quantity }}</td>
-            <td class="text-xs-right">{{ props.item.percentageText }}</td>
-            <td class="text-xs-right">{{ props.item.apPPR }}</td>
+            <td class="text-xs-right">
+              {{ props.item.times }}
+            </td>
+            <td class="text-xs-right">
+              {{ props.item.quantity }}
+            </td>
+            <td class="text-xs-right">
+              {{ props.item.percentageText }}
+            </td>
+            <td class="text-xs-right">
+              {{ props.item.apPPR }}
+            </td>
           </template>
         </v-data-table>
       </v-stepper-content>
     </v-stepper-items>
-
   </v-stepper>
-
 </template>
 
 <script>
   import get from '@/utils/getters'
-  import formatter from '@/utils/timeFormatter'
   import Item from "@/components/Item";
 
   export default {
@@ -205,50 +312,6 @@
         descending: true
       }
     }),
-    watch: {
-      step: function(newValue, oldValue) {
-        console.log("step changed from", oldValue, "to", newValue);
-        switch (newValue) {
-          case 1:
-            console.log("- [router go] index");
-            this.$router.push({name: "StatsByStage"});
-            break;
-          case 2:
-            console.log("- [router go] zone", this.selected.zone);
-            this.$router.push({name: "StatsByStage_SelectedZone", params: {zoneId: this.selected.zone}});
-            break;
-          case 3:
-            console.log("- [router go] stage", this.selected);
-            this.$router.push({
-              name: "StatsByStage_SelectedBoth",
-              params: {
-                zoneId: this.selected.zone,
-                stageId: this.selected.stage
-              }
-            });
-            break;
-          default:
-            console.error("unexpected step number", newValue, "with [newStep, oldStep]", [newValue, oldValue])
-        }
-      }
-    },
-    beforeMount() {
-      (this.$route.params.zoneId) && (this.selected.zone = this.$route.params.zoneId) && (this.step += 1);
-      (this.$route.params.stageId) && (this.selected.stage = this.$route.params.stageId) && (this.step += 1);
-    },
-    methods: {
-      storeZoneSelection(zoneId) {
-        this.step += 1;
-        this.selected.zone = zoneId
-      },
-      storeStageSelection(stageId) {
-        this.step += 1;
-        this.selected.stage = stageId
-      },
-      getItem(itemId) {
-        return get.item.byItemId(itemId)
-      }
-    },
     computed: {
       categorizedZones() {
         const categories = ["MAINLINE", "WEEKLY", "ACTIVITY"];
@@ -310,6 +373,50 @@
             width: 80
           }
         ]
+      }
+    },
+    watch: {
+      step: function(newValue, oldValue) {
+        console.log("step changed from", oldValue, "to", newValue);
+        switch (newValue) {
+          case 1:
+            console.log("- [router go] index");
+            this.$router.push({name: "StatsByStage"});
+            break;
+          case 2:
+            console.log("- [router go] zone", this.selected.zone);
+            this.$router.push({name: "StatsByStage_SelectedZone", params: {zoneId: this.selected.zone}});
+            break;
+          case 3:
+            console.log("- [router go] stage", this.selected);
+            this.$router.push({
+              name: "StatsByStage_SelectedBoth",
+              params: {
+                zoneId: this.selected.zone,
+                stageId: this.selected.stage
+              }
+            });
+            break;
+          default:
+            console.error("unexpected step number", newValue, "with [newStep, oldStep]", [newValue, oldValue])
+        }
+      }
+    },
+    beforeMount() {
+      (this.$route.params.zoneId) && (this.selected.zone = this.$route.params.zoneId) && (this.step += 1);
+      (this.$route.params.stageId) && (this.selected.stage = this.$route.params.stageId) && (this.step += 1);
+    },
+    methods: {
+      storeZoneSelection(zoneId) {
+        this.step += 1;
+        this.selected.zone = zoneId
+      },
+      storeStageSelection(stageId) {
+        this.step += 1;
+        this.selected.stage = stageId
+      },
+      getItem(itemId) {
+        return get.item.byItemId(itemId)
       }
     }
   }

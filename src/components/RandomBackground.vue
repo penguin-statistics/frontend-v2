@@ -1,10 +1,17 @@
 <template>
-  <div class="random-background" ref="background" />
+  <div
+    ref="background"
+    class="random-background"
+  />
 </template>
 
 <script>
   export default {
     name: "RandomBackground",
+    props: {
+      interval: Number,
+      required: true
+    },
     data () {
       return {
         lastLoading: false,
@@ -12,9 +19,6 @@
         lastUrl: "",
         timer: null
       }
-    },
-    props: {
-      interval: Number
     },
     mounted () {
       this.updateBackground();

@@ -87,13 +87,20 @@ Getters.statistics = {
   }
 },
 Getters.stages = {
+  all () {
+    let all = store.state.data.stages;
+    all.forEach(el => {
+      el.dropsSet = [...el.normalDrop, ...el.extraDrop, ...el.specialDrop]
+    });
+    return all
+  },
   byStageId (stageId) {
-    return store.state.data.stages.find(el => {
+    return this.all().find(el => {
       return el.stageId === stageId
     })
   },
   byParentZoneId (zoneId) {
-    return store.state.data.stages.filter(el => {
+    return this.all().filter(el => {
       return el.zoneId === zoneId
     })
   }
