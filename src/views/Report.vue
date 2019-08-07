@@ -115,8 +115,8 @@
                   <v-list-tile
                     v-for="zone in zoneCategory.zones"
                     :key="zone.zoneId"
-                    :disabled="zone.isOutdated"
                     v-ripple
+                    :disabled="zone.isOutdated"
                     avatar
                     @click="storeZoneSelection(zone.zoneId)"
                   >
@@ -265,38 +265,51 @@
 
             <v-stepper-content :step="3">
               <v-container
+                v-for="stage in stageItems"
                 fluid
                 grid-list-sm
-                class="py-0"
 
-                v-for="stage in stageItems"
+                class="py-0"
               >
                 <v-subheader>
                   {{ $t('stage.loots.' + stage.id) }}
                 </v-subheader>
-                <v-flex class="py-1 px-2 d-inline-block" xs12 sm6 md4 lg3 xl2 v-for="item in stage.drops">
-<!--                  <h5 class="title mb-3">-->
-<!--                    {{ item.name }}-->
-<!--                  </h5>-->
+                <v-flex
+                  v-for="item in stage.drops"
+                  class="py-1 px-2 d-inline-block"
+                  xs12
+                  sm6
+                  md4
+                  lg3
+                  xl2
+                >
+                  <!--                  <h5 class="title mb-3">-->
+                  <!--                    {{ item.name }}-->
+                  <!--                  </h5>-->
                   <v-text-field
-                      label="数量"
-                      type="number"
+                    label="数量"
+                    type="number"
 
-                      outline
-                      :rules="[validationRules.isPositiveInteger]"
+                    outline
+                    :rules="[validationRules.isPositiveInteger]"
 
-                      :value="0"
+                    :value="0"
 
-                      append-icon="mdi-minus"
-                      @click:append-outer="alert('-- ' + item.id)"
+                    append-icon="mdi-minus"
+                    prepend-inner-icon="mdi-plus"
 
-                      prepend-inner-icon="mdi-plus"
-                      @click:prepend="alert('++ ' + item.id)"
+                    style="display: inline-flex"
+                    @click:append-outer="alert('-- ' + item.id)"
 
-                      style="display: inline-flex"
+                    @click:prepend="alert('++ ' + item.id)"
                   >
                     <template v-slot:prepend>
-                      <Item :item="item" :ratio="0.75" disable-link style="margin-top: -7.5px" />
+                      <Item
+                        :item="item"
+                        :ratio="0.75"
+                        disable-link
+                        style="margin-top: -7.5px"
+                      />
                     </template>
                   </v-text-field>
                 </v-flex>
