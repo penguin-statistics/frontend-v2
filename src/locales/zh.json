@@ -7,6 +7,15 @@
       "stage": "按作战",
       "item": "按素材"
     },
+    "about": {
+      "_name": "关于企鹅物流",
+      "members": "团队成员",
+      "contribute": "参与开发",
+      "changelog": "更新日志",
+      "contact": "联系我们",
+      "donate": "捐助",
+      "links": "友情链接"
+    },
     "planner": "刷图规划器",
     "changelog": "更新日志",
     "logo": "企鹅物流数据统计"
