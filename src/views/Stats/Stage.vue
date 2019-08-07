@@ -132,7 +132,7 @@
       </v-stepper-content>
 
       <v-stepper-content
-        v-if="this.selected.zone"
+        v-if="selected.zone"
         :step="2"
       >
         <v-container
@@ -376,6 +376,18 @@
       }
     },
     watch: {
+      '$route': function (to, from) {
+        console.log("step route changed from", from.path, "to", to.path);
+        if (to.name === 'StatsByStage') {
+          this.step = 1;
+        }
+        if (to.name === 'StatsByStage_SelectedZone') {
+          this.step = 2;
+        }
+        if (to.name === 'StatsByStage_SelectedBoth') {
+          this.step = 3;
+        }
+      },
       step: function(newValue, oldValue) {
         console.log("step changed from", oldValue, "to", newValue);
         switch (newValue) {
