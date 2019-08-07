@@ -9,8 +9,13 @@
 </i18n>
 
 <template>
-  <v-flex class="itemStepper pa-3 ma-2" style="display: inline-block">
-    <h5 class="title mb-3">{{ demoItem.name }}</h5>
+  <v-flex
+    class="itemStepper pa-3 ma-2"
+    style="display: inline-block"
+  >
+    <h5 class="title mb-3">
+      {{ demoItem.name }}
+    </h5>
     <v-text-field
       label="数量"
       type="number"
@@ -21,15 +26,20 @@
       :value="0"
 
       append-icon="mdi-minus"
-      @click:append-outer="reduction"
-
       prepend-inner-icon="mdi-plus"
-      @click:prepend="increment"
 
       style="display: inline-flex"
+      @click:append-outer="reduction"
+
+      @click:prepend="increment"
     >
       <template v-slot:prepend>
-        <Item :item="demoItem" :ratio="0.5" disable-link disable-tooltip />
+        <Item
+          :item="demoItem"
+          :ratio="0.5"
+          disable-link
+          disable-tooltip
+        />
       </template>
     </v-text-field>
   </v-flex>
