@@ -7,6 +7,15 @@
       "stage": "by stage",
       "item": "by item"
     },
+    "about": {
+      "_name": "About Penguin Statistics",
+      "members": "Team Members",
+      "contribute": "Contribute",
+      "changelog": "Change Log",
+      "contact": "Contact us",
+      "donate": "Donate",
+      "links": "Links"
+    },
     "planner": "Planner",
     "changelog": "Change Log",
     "logo": "Penguin Statistics"

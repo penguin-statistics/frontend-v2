@@ -2,12 +2,21 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import Home from './views/Home'
 import Report from './views/Report'
+
+import StatsLayout from './layouts/StatsLayout'
 import StatsByStage from './views/Stats/Stage'
 import StatsByItem from './views/Stats/Item'
-import StatsLayout from './layouts/StatsLayout'
-import ChangeLog from './views/ChangeLog'
 
-Vue.use(Router)
+import AboutLayout from './layouts/AboutLayout'
+
+import AboutMembers from './views/About/Members'
+import AboutContribute from './views/About/Contribute'
+import AboutChangelog from './views/About/Changelog'
+import AboutContact from './views/About/Contact'
+import AboutDonate from './views/About/Donate'
+import AboutLinks from './views/About/Links'
+
+Vue.use(Router);
 
 export default new Router({
   mode: 'history',
@@ -108,13 +117,75 @@ export default new Router({
       }
     },
     {
-      path: '/changelog',
-      name: 'ChangeLog',
-      component: ChangeLog,
+      path: '/about',
+      name: 'About',
+      component: AboutLayout,
       meta: {
-        icon: 'mdi-clipboard-text',
-        i18n: 'menu.changelog'
-      }
+        icon: 'mdi-account-group',
+        i18n: 'menu.about._name'
+      },
+      children: [
+        {
+          path: 'members',
+          name: 'AboutMembers',
+          component: AboutMembers,
+          props: true,
+          meta: {
+            icon: 'mdi-account-multiple',
+            i18n: 'menu.about.members'
+          },
+        },
+        {
+          path: 'contribute',
+          name: 'AboutContribute',
+          component: AboutContribute,
+          props: true,
+          meta: {
+            icon: 'mdi-hammer',
+            i18n: 'menu.about.contribute'
+          },
+        },
+        {
+          path: 'changelog',
+          name: 'AboutChangelog',
+          component: AboutChangelog,
+          props: true,
+          meta: {
+            icon: 'mdi-timeline',
+            i18n: 'menu.about.changelog'
+          },
+        },
+        {
+          path: 'contact',
+          name: 'AboutContact',
+          component: AboutContact,
+          props: true,
+          meta: {
+            icon: 'mdi-account-card-details',
+            i18n: 'menu.about.contact'
+          },
+        },
+        {
+          path: 'donate',
+          name: 'AboutDonate',
+          component: AboutDonate,
+          props: true,
+          meta: {
+            icon: 'mdi-gift',
+            i18n: 'menu.about.donate'
+          },
+        },
+        {
+          path: 'links',
+          name: 'AboutLinks',
+          component: AboutLinks,
+          props: true,
+          meta: {
+            icon: 'mdi-link-variant',
+            i18n: 'menu.about.links'
+          },
+        },
+      ]
     }
   ]
 })

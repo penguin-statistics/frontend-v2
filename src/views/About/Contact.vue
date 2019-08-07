@@ -1,11 +1,11 @@
 <template>
   <v-layout>
-    ChangeLog
+    Contact
   </v-layout>
 </template>
 
 <script>
   export default {
-    name: 'ChangeLog'
+    name: 'Contact'
   }
 </script>
