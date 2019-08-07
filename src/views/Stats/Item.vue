@@ -95,10 +95,10 @@
         <h1 class="title ma-3">
           <v-layout align-center>
             <Item
-                :item="selected.item"
-                :ratio="0.75"
-                disable-tooltip
-                disable-link
+              :item="selected.item"
+              :ratio="0.75"
+              disable-tooltip
+              disable-link
             />
             <v-flex class="ml-2">
               {{ $t('result.title', {item: selectedItemName}) }}

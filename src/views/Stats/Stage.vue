@@ -256,7 +256,9 @@
       </v-stepper-content>
 
       <v-stepper-content :step="3">
-        <h1 class="title ma-3">{{ $t('stats.title', {stage: selectedStage.code}) }}</h1>
+        <h1 class="title ma-3">
+          {{ $t('stats.title', {stage: selectedStage.code}) }}
+        </h1>
         <v-data-table
           :headers="tableHeaders"
           :items="stageStats"
@@ -267,31 +269,43 @@
           class="elevation-0 transparentTable"
         >
           <template v-slot:items="props">
-            <td>
-              <v-avatar
-                :size="30"
-                class="mr-1"
+            <v-hover>
+              <tr
+                slot-scope="{ hover }"
+                class="cursor-pointer"
+                @click="redirectItem(props.item.item.itemId)"
               >
-                <Item
-                  :item="props.item.item"
-                  :ratio="0.5"
-                  disable-tooltip
-                />
-              </v-avatar>
-              {{ props.item.item.name }}
-            </td>
-            <td class="text-xs-right">
-              {{ props.item.times }}
-            </td>
-            <td class="text-xs-right">
-              {{ props.item.quantity }}
-            </td>
-            <td class="text-xs-right">
-              {{ props.item.percentageText }}
-            </td>
-            <td class="text-xs-right">
-              {{ props.item.apPPR }}
-            </td>
+                <td
+                  class="hovering"
+                  :class="{ 'hovering--hovered': hover }"
+                >
+                  <v-avatar
+                    :size="30"
+                    class="mr-1"
+                  >
+                    <Item
+                      :item="props.item.item"
+                      :ratio="0.5"
+                      disable-tooltip
+                      disable-link
+                    />
+                  </v-avatar>
+                  {{ props.item.item.name }}
+                </td>
+                <td class="text-xs-right">
+                  {{ props.item.times }}
+                </td>
+                <td class="text-xs-right">
+                  {{ props.item.quantity }}
+                </td>
+                <td class="text-xs-right">
+                  {{ props.item.percentageText }}
+                </td>
+                <td class="text-xs-right">
+                  {{ props.item.apPPR }}
+                </td>
+              </tr>
+            </v-hover>
           </template>
         </v-data-table>
       </v-stepper-content>
@@ -429,6 +443,14 @@
       (this.$route.params.stageId) && (this.selected.stage = this.$route.params.stageId) && (this.step += 1);
     },
     methods: {
+      redirectItem(itemId) {
+        this.$router.push({
+          name: "StatsByItem_SelectedItem",
+          params: {
+            itemId
+          }
+        })
+      },
       storeZoneSelection(zoneId) {
         this.step += 1;
         this.selected.zone = zoneId
