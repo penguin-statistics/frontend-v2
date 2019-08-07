@@ -5,7 +5,8 @@
         "name": "选择物品"
       },
       "result": {
-        "name": "统计结果"
+        "name": "统计结果",
+        "title": "{item} 统计结果"
       }
     },
     "en": {
@@ -13,7 +14,8 @@
         "name": "Choose Item"
       },
       "result": {
-        "name": "Statistics"
+        "name": "Statistics",
+        "title": "Statistics of {item}"
       }
     }
   }
@@ -21,8 +23,9 @@
 
 <template>
   <v-stepper
-      v-model="step"
-      class="bkop-light transparent"
+    v-model="step"
+    class="bkop-light transparent"
+    alt-labels
   >
     <v-stepper-header>
       <v-stepper-step
@@ -31,6 +34,7 @@
           :step="1"
       >
         {{ $t('choose.name') }}
+        <small v-if="step > 1">{{ selectedItemName }}</small>
       </v-stepper-step>
 
       <v-divider/>
@@ -88,6 +92,19 @@
       </v-stepper-content>
 
       <v-stepper-content :step="2">
+        <h1 class="title ma-3">
+          <v-layout align-center>
+            <Item
+                :item="selected.item"
+                :ratio="0.75"
+                disable-tooltip
+                disable-link
+            />
+            <v-flex class="ml-2">
+              {{ $t('result.title', {item: selectedItemName}) }}
+            </v-flex>
+          </v-layout>
+        </h1>
         <v-data-table
             :headers="tableHeaders"
             :items="itemStagesStats"
@@ -213,6 +230,10 @@
       itemStagesStats() {
         if (!this.selected.item) return [];
         return get.statistics.byItemId(this.selected.item.itemId);
+      },
+      selectedItemName () {
+        if (!this.selected.item) return '';
+        return this.selected.item.name
       }
     },
     watch: {

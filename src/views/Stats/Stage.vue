@@ -20,7 +20,8 @@
         }
       },
       "stats": {
-        "name": "统计结果"
+        "name": "统计结果",
+        "title": "{stage} 统计结果"
       }
     },
     "en": {
@@ -43,7 +44,8 @@
         }
       },
       "stats": {
-        "name": "Statistics"
+        "name": "Statistics",
+        "title": "Statistics of {stage}"
       }
     }
   }
@@ -53,6 +55,7 @@
   <v-stepper
     v-model="step"
     class="bkop-light transparent"
+    alt-labels
   >
     <v-stepper-header>
       <v-stepper-step
@@ -61,6 +64,7 @@
         :step="1"
       >
         {{ $t('zone.name') }}
+        <small v-if="step > 1">{{ selectedZone.zoneName }}</small>
       </v-stepper-step>
 
       <v-divider />
@@ -71,6 +75,7 @@
         :step="2"
       >
         {{ $t('stage.name') }}
+        <small v-if="step > 2">{{ selectedStage.code }}</small>
       </v-stepper-step>
 
       <v-divider />
@@ -251,6 +256,7 @@
       </v-stepper-content>
 
       <v-stepper-content :step="3">
+        <h1 class="title ma-3">{{ $t('stats.title', {stage: selectedStage.code}) }}</h1>
         <v-data-table
           :headers="tableHeaders"
           :items="stageStats"
@@ -332,6 +338,10 @@
       selectedZone() {
         if (!this.selected.zone) return {zoneName: ''};
         return get.zones.byZoneId(this.selected.zone)
+      },
+      selectedStage() {
+        if (!this.selected.stage) return {};
+        return get.stages.byStageId(this.selected.stage)
       },
       stages() {
         return get.stages.byParentZoneId(this.selected.zone)
