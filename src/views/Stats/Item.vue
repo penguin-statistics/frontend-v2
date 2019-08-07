@@ -29,19 +29,19 @@
   >
     <v-stepper-header>
       <v-stepper-step
-        :complete="step > 1"
-        :editable="step > 1"
-        :step="1"
+          :complete="step > 1"
+          :editable="step > 1"
+          :step="1"
       >
         {{ $t('choose.name') }}
         <small v-if="step > 1">{{ selectedItemName }}</small>
       </v-stepper-step>
 
-      <v-divider />
+      <v-divider/>
 
       <v-stepper-step
-        :complete="step === 2"
-        :step="2"
+          :complete="step === 2"
+          :step="2"
       >
         {{ $t('result.name') }}
       </v-stepper-step>
@@ -50,30 +50,30 @@
     <v-stepper-items>
       <v-stepper-content :step="1">
         <v-list
-          v-for="category in categorizedItems"
-          v-if="categorizedItems.length > 0"
-          :key="category.id"
-          subheader
-          class="transparent"
+            v-for="category in categorizedItems"
+            v-if="categorizedItems.length > 0"
+            :key="category.id"
+            subheader
+            class="transparent"
         >
           <v-subheader inset>
             {{ category.items[0].meta.name }}
           </v-subheader>
 
           <v-list-tile
-            v-for="item in category.items"
-            :key="item.itemId"
-            v-ripple
-            avatar
-            @click="storeItemSelection(item.itemId)"
+              v-for="item in category.items"
+              :key="item.itemId"
+              v-ripple
+              avatar
+              @click="storeItemSelection(item.itemId)"
           >
             <v-list-tile-avatar>
               <v-avatar>
                 <Item
-                  :item="item"
-                  :ratio="0.75"
-                  disable-link
-                  disable-tooltip
+                    :item="item"
+                    :ratio="0.75"
+                    disable-link
+                    disable-tooltip
                 />
               </v-avatar>
             </v-list-tile-avatar>
@@ -106,54 +106,43 @@
           </v-layout>
         </h1>
         <v-data-table
-          :headers="tableHeaders"
-          :items="itemStagesStats"
-          :pagination.sync="tablePagination"
+            :headers="tableHeaders"
+            :items="itemStagesStats"
+            :pagination.sync="tablePagination"
 
-          must-sort
-          hide-actions
-          class="elevation-0 transparentTable"
+            must-sort
+            hide-actions
+            class="elevation-0 transparentTable"
         >
           <template v-slot:items="props">
-            <td>
-              <span
-                class="cursor-pointer"
-                @click="redirectStage(props.item)"
-              >
-                <v-hover>
-                  <span slot-scope="{ hover }">
-                    <v-avatar
+            <v-hover>
+              <tr class="cursor-pointer" @click="redirectStage(props.item)" slot-scope="{ hover }">
+                <td class="hovering" :class="{ 'hovering--hovered': hover }">
+                  <v-avatar
                       :size="30"
                       class="mr-1"
-                    >
-                      <v-icon>{{ props.item.zone.icon }}</v-icon>
-                    </v-avatar>
-                    {{ props.item.stage.code }}
-                    <v-slide-x-transition>
-                      <v-icon
-                        v-if="hover || $vuetify.breakpoint.smAndDown"
-                        small
-                      >mdi-chevron-right</v-icon>
-                    </v-slide-x-transition>
-                  </span>
-                </v-hover>
-              </span>
-            </td>
-            <td class="text-xs-right">
-              {{ props.item.stage.apCost }}
-            </td>
-            <td class="text-xs-right">
-              {{ props.item.times }}
-            </td>
-            <td class="text-xs-right">
-              {{ props.item.quantity }}
-            </td>
-            <td class="text-xs-right">
-              {{ props.item.percentageText }}
-            </td>
-            <td class="text-xs-right">
-              {{ props.item.apPPR }}
-            </td>
+                  >
+                    <v-icon>{{ props.item.zone.icon }}</v-icon>
+                  </v-avatar>
+                  {{ props.item.stage.code }}
+                </td>
+                <td class="text-xs-right">
+                  {{ props.item.stage.apCost }}
+                </td>
+                <td class="text-xs-right">
+                  {{ props.item.times }}
+                </td>
+                <td class="text-xs-right">
+                  {{ props.item.quantity }}
+                </td>
+                <td class="text-xs-right">
+                  {{ props.item.percentageText }}
+                </td>
+                <td class="text-xs-right">
+                  {{ props.item.apPPR }}
+                </td>
+              </tr>
+            </v-hover>
           </template>
         </v-data-table>
       </v-stepper-content>
@@ -180,7 +169,7 @@
       }
     }),
     computed: {
-      tableHeaders () {
+      tableHeaders() {
         return [
           {
             text: this.$t('stats.headers.stage'),
@@ -226,7 +215,7 @@
           }
         ]
       },
-      categorizedItems () {
+      categorizedItems() {
         let all = get.item.all();
         const categories = ["MATERIAL", "CARD_EXP", "FURN"];
         let results = [];
@@ -248,7 +237,7 @@
       }
     },
     watch: {
-      step: function(newValue, oldValue) {
+      step: function (newValue, oldValue) {
         console.log("step changed from", oldValue, "to", newValue);
         switch (newValue) {
           case 1:
@@ -272,7 +261,7 @@
         this.selected.item = get.item.byItemId(itemId);
         this.step += 1
       },
-      redirectStage ({zone, stage}) {
+      redirectStage({zone, stage}) {
         this.$router.push({
           name: 'StatsByStage_SelectedBoth',
           params: {
