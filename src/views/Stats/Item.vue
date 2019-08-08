@@ -95,13 +95,13 @@
         <h1 class="title ma-3">
           <v-layout align-center>
             <Item
-                :item="selected.item"
+                :item="selectedItem"
                 :ratio="0.75"
                 disable-tooltip
                 disable-link
             />
             <v-flex class="ml-2">
-              {{ $t('result.title', {item: selectedItemName}) }}
+              {{ $t('result.title', {item: selectedItem.name}) }}
             </v-flex>
           </v-layout>
         </h1>
@@ -231,9 +231,9 @@
         if (!this.selected.item) return [];
         return get.statistics.byItemId(this.selected.item.itemId);
       },
-      selectedItemName () {
-        if (!this.selected.item) return '';
-        return this.selected.item.name
+      selectedItem () {
+        if (!this.selected.item) return {};
+        return this.selected.item
       }
     },
     watch: {
