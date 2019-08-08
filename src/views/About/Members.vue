@@ -30,12 +30,13 @@
       <v-list
           two-line
           v-for="[key, value] in Object.entries(profiles)"
+          class="bkop-light"
       >
         <v-subheader :key="key">
           {{$t('categories.' + key)}}
         </v-subheader>
 
-        <v-list-tile avatar class="grow px-3" v-for="(profile, index) in value">
+        <v-list-tile avatar class="grow px-3 highlight" v-for="(profile, index) in value">
           <v-list-tile-avatar>
             <v-img
                 :src="'https://penguin-stats.s3-ap-southeast-1.amazonaws.com/avatar/' + profile.avatar"
@@ -61,7 +62,8 @@
                   <v-btn
                       class="mx-1"
                       icon
-                      @click="openTab(url)"
+                      :href="url"
+                      target="_blank"
                       v-on="on"
                   >
                     <v-icon>
@@ -99,7 +101,7 @@
           contributors: [
             {
               name: "🦀",
-              responsibility: "ArkPlanner作者",
+              responsibility: "ArkPlanner 作者",
               avatar: "xie.jpeg",
               socials: {
                 github: "https://github.com/ycremar"
@@ -147,7 +149,7 @@
             },
             {
               name: "侠",
-              responsibility: "logo画师",
+              responsibility: "Logo 画师",
               avatar: "xia.png",
               socials: {
                 weibo: "https://www.weibo.com/u/2290638732"
@@ -220,9 +222,6 @@
       }
     },
     methods: {
-      openTab (url) {
-        window.open(url)
-      },
       getSocial (id) {
         return this.socials.find(v => v.id === id)
       }
@@ -233,5 +232,13 @@
 <style scoped>
   .cursor-default {
     cursor: default;
+  }
+
+  .theme--dark .highlight:hover {
+    background: rgba(255, 255, 255, .2) !important;
+  }
+
+  .theme--light .highlight:hover {
+    background: rgba(66, 66, 66, .2) !important;
   }
 </style>
