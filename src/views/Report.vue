@@ -20,7 +20,11 @@
         }
       },
       "report": {
-        "name": "上报结果"
+        "name": "上报结果",
+        "furniture": "家具掉落：{state}",
+        "submit": "提交",
+        "success": "上传成功",
+        "undo": "撤销"
       },
       "rules": {
         "isPositiveInteger": "需为正整数"
@@ -46,7 +50,11 @@
         }
       },
       "report": {
-        "name": "Report"
+        "name": "Report",
+        "furniture": "Furniture: {state}",
+        "submit": "Submit",
+        "success": "Successfully submitted",
+        "undo": "Undo"
       },
       "rules": {
         "isPositiveInteger": "Requires Natural Number"
@@ -60,11 +68,26 @@
     fluid
     fill-height
   >
+    <v-snackbar
+      v-model="snackbar"
+      color="success"
+      :timeout="15000"
+    >
+      {{ $t('report.success') }}
+      <v-btn
+        :loading="undoing"
+        flat
+        @click="undo"
+      >
+        {{ $t('report.undo') }}
+      </v-btn>
+    </v-snackbar>
     <v-layout align-center>
       <v-flex>
         <v-stepper
           v-model="step"
           class="bkop-light transparent"
+          alt-labels
         >
           <v-stepper-header>
             <v-stepper-step
@@ -73,6 +96,7 @@
               :step="1"
             >
               {{ $t('zone.name') }}
+              <small v-if="step > 1">{{ selectedZone.zoneName }}</small>
             </v-stepper-step>
 
             <v-divider />
@@ -83,6 +107,7 @@
               :step="2"
             >
               {{ $t('stage.name') }}
+              <small v-if="step > 2">{{ selectedStage.code }}</small>
             </v-stepper-step>
 
             <v-divider />
@@ -264,8 +289,23 @@
             </v-stepper-content>
 
             <v-stepper-content :step="3">
+              <v-alert
+                :value="true"
+                type="warning"
+                class="mb-3"
+              >
+                <ol>
+                  <li>这是<strong>单次</strong>提交，请注意核对数目；</li>
+                  <li>若无素材掉落，请直接点击提交；</li>
+                  <li><strong>不要</strong>只汇报比较“欧”的掉落；</li>
+                  <li>请保证通关评价是<strong>3星</strong>；</li>
+                  <li><strong>不要</strong>汇报首次通关奖励，谢谢！</li>
+                </ol>
+              </v-alert>
+
               <v-container
                 v-for="stage in stageItems"
+                :key="stage.id"
                 fluid
                 grid-list-sm
 
@@ -276,6 +316,7 @@
                 </v-subheader>
                 <v-flex
                   v-for="item in stage.drops"
+                  :key="item.itemId"
                   class="py-1 px-2 d-inline-block"
                   xs12
                   sm6
@@ -286,34 +327,35 @@
                   <!--                  <h5 class="title mb-3">-->
                   <!--                    {{ item.name }}-->
                   <!--                  </h5>-->
-                  <v-text-field
-                    label="数量"
-                    type="number"
+                  <ItemStepper
+                    :item="item"
+                    :stage="selected.stage"
+                    :bus="eventBus"
 
-                    outline
-                    :rules="[validationRules.isPositiveInteger]"
-
-                    :value="0"
-
-                    append-icon="mdi-minus"
-                    prepend-inner-icon="mdi-plus"
-
-                    style="display: inline-flex"
-                    @click:append-outer="alert('-- ' + item.id)"
-
-                    @click:prepend="alert('++ ' + item.id)"
-                  >
-                    <template v-slot:prepend>
-                      <Item
-                        :item="item"
-                        :ratio="0.75"
-                        disable-link
-                        style="margin-top: -7.5px"
-                      />
-                    </template>
-                  </v-text-field>
+                    @change="handleChange"
+                    @change:valid="validChange"
+                  />
                 </v-flex>
               </v-container>
+
+              <v-flex class="ma-3">
+                <v-switch
+                  v-model="furniture"
+                  :label="$t('report.furniture', {state: $t(`boolean.${furniture}`)})"
+                />
+
+                <v-btn
+                  large
+                  round
+                  color="primary"
+
+                  :loading="submitting"
+
+                  @click="submit"
+                >
+                  {{ $t('report.submit') }}
+                </v-btn>
+              </v-flex>
             </v-stepper-content>
           </v-stepper-items>
         </v-stepper>
@@ -324,8 +366,10 @@
 
 <script>
   import get from '@/utils/getters'
+  import report from '@/apis/report'
   import Item from "@/components/Item";
   import ItemStepper from "@/components/ItemStepper";
+  import Vue from "vue";
 
   export default {
     name: "Report",
@@ -336,23 +380,13 @@
         zone: null,
         stage: null
       },
-      demoItem: {
-        "itemId": "2001",
-        "name": "基础作战记录",
-        "sortId": 15,
-        "rarity": 1,
-        "itemType": "CARD_EXP",
-        "addTimePoint": 1,
-        "spriteCoord": [
-          0,
-          0
-        ],
-        "meta": {
-          "name": "基础作战记录",
-          "color": "green",
-          "icon": "mdi-plus"
-        }
-      }
+      snackbar: false,
+      submitting: false,
+      undoing: false,
+      results: [],
+      furniture: false,
+      invalidCount: 0,
+      eventBus: new Vue()
     }),
     computed: {
       categorizedZones() {
@@ -369,6 +403,10 @@
       selectedZone() {
         if (!this.selected.zone) return {zoneName: ''};
         return get.zones.byZoneId(this.selected.zone)
+      },
+      selectedStage() {
+        if (!this.selected.stage) return {};
+        return get.stages.byStageId(this.selected.stage)
       },
       stages() {
         return get.stages.byParentZoneId(this.selected.zone)
@@ -390,7 +428,10 @@
 
         for (let category of categories) {
           let dropIds = stages[category.value];
+
+          // skip the category where it is not having any drop
           if (dropIds.length === 0) continue;
+
           let drops = [];
           for (let drop of dropIds) {
             drops.push(get.item.byItemId(drop))
@@ -403,19 +444,16 @@
         }
         return items
       },
-      validationRules () {
-        let rules = []
-        const isNaturalNumber = value => {
-          value = value.toString();
-          let n1 = Math.abs(value);
-          let n2 = parseInt(value, 10);
-          return (!isNaN(n1) && n2 === n1 && n1.toString() === value) || this.$t('rules.isPositiveInteger');
-        };
-        rules.push(isNaturalNumber);
-        if (!this.selected.stage) return rules;
-
-        let limitations = get.limitations.byStageId(this.selected.stage);
-
+      valid () {
+        return this.invalidCount === 0
+      },
+      typeLimitation () {
+        return get.limitations.byStageId(this.selected.stage).itemTypeBounds
+      }
+    },
+    watch: {
+      results: function (value) {
+        this.eventBus.$emit("fulfilled", this.typeLimitationFulfilled(value.length))
       }
     },
     methods: {
@@ -429,6 +467,54 @@
       },
       getItem(itemId) {
         return get.item.byItemId(itemId)
+      },
+      handleChange ([itemId, quantity]) {
+        let item = this.getOrCreateItem(itemId);
+        item.quantity = quantity;
+        item.quantity <= 0 && (this.results = this.results.filter(v => v.itemId !== item.itemId))
+      },
+      validChange (newState) {
+        if (newState) {
+          this.invalidCount -= 1
+        } else {
+          this.invalidCount += 1
+        }
+      },
+      getOrCreateItem (itemId) {
+        let item = this.results.find(v => v.itemId === itemId);
+        if (item === undefined) {
+          this.results.push({
+            itemId,
+            quantity: 0
+          });
+          return this.results.find(v => v.itemId === itemId)
+        }
+        return item
+      },
+      typeLimitationFulfilled (types) {
+        let limit = this.typeLimitation
+        return types > limit.lower && types < limit.upper && limit.exceptions.indexOf(types) === -1
+      },
+      async submit () {
+        this.submitting = true;
+        await report.submitReport({
+          stageId: this.selected.stage,
+          drops: this.results,
+          furnitureNum: this.furniture ? 1 : 0
+        });
+        this.submitting = false
+        this.snackbar = true
+      },
+      undo () {
+        this.undoing = true;
+        // TODO: replace with real api
+        setTimeout(() => {
+          this.undoing = false
+          this.snackbar = false
+          setTimeout(() => {
+            this.snackbar = true
+          }, 500)
+        }, 3000)
       }
     }
   }

@@ -11,7 +11,6 @@ export default new Vuex.Store({
     })
   ],
   state: {
-    ajaxLoading: false,
     data: {},
     settings: {
       dark: true,
@@ -22,22 +21,11 @@ export default new Vuex.Store({
     store: (state, d) => {
       state.data = {...d}
     },
-    changeAjaxState (state, newState) {
-      state.ajaxLoading = newState
-    },
     switchDark (state, newState) {
       state.settings.dark = newState
     },
     changeLocale (state, newLocale) {
       state.settings.locale = newLocale
-    }
-  },
-  actions: {
-    ajax_began ({commit}) {
-      commit('changeAjaxState', true)
-    },
-    ajax_finished ({commit}) {
-      commit('changeAjaxState', false)
     }
   }
 })

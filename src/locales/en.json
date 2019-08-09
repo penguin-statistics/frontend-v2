@@ -44,5 +44,9 @@
       "description": "You are currently browsing the development build",
       "ok": "OH YEAH!"
     }
+  },
+  "boolean": {
+    "true": "Yes",
+    "false": "No"
   }
 }

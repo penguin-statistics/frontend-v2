@@ -44,5 +44,9 @@
       "description": "现浏览网页属自动构建的开发用预览版本",
       "ok": "OH YEAH!"
     }
+  },
+  "boolean": {
+    "true": "是",
+    "false": "否"
   }
 }
