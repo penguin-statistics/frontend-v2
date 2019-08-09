@@ -256,7 +256,9 @@
       </v-stepper-content>
 
       <v-stepper-content :step="3">
-        <h1 class="title ma-3">{{ $t('stats.title', {stage: selectedStage.code}) }}</h1>
+        <h1 class="title ma-3">
+          {{ $t('stats.title', {stage: selectedStage.code}) }}
+        </h1>
         <v-data-table
           :headers="tableHeaders"
           :items="stageStats"
@@ -268,17 +270,24 @@
         >
           <template v-slot:items="props">
             <v-hover>
-              <tr class="cursor-pointer" @click="redirectItem(props.item.item.itemId)" slot-scope="{ hover }">
-                <td class="hovering" :class="{ 'hovering--hovered': hover }">
+              <tr
+                slot-scope="{ hover }"
+                class="cursor-pointer"
+                @click="redirectItem(props.item.item.itemId)"
+              >
+                <td
+                  class="hovering"
+                  :class="{ 'hovering--hovered': hover }"
+                >
                   <v-avatar
-                      :size="30"
-                      class="mr-1"
+                    :size="30"
+                    class="mr-1"
                   >
                     <Item
-                        :item="props.item.item"
-                        :ratio="0.5"
-                        disable-tooltip
-                        disable-link
+                      :item="props.item.item"
+                      :ratio="0.5"
+                      disable-tooltip
+                      disable-link
                     />
                   </v-avatar>
                   {{ props.item.item.name }}

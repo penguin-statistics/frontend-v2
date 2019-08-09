@@ -25,21 +25,34 @@
 </i18n>
 
 <template>
-  <v-layout align-center justify-center>
-    <v-flex xs12 sm10 md8 lg7 xl6>
+  <v-layout
+    align-center
+    justify-center
+  >
+    <v-flex
+      xs12
+      sm10
+      md8
+      lg7
+      xl6
+    >
       <v-list
-          two-line
-          v-for="[key, value] in Object.entries(profiles)"
-          class="bkop-light"
+        v-for="[key, value] in Object.entries(profiles)"
+        two-line
+        class="bkop-light"
       >
         <v-subheader :key="key">
-          {{$t('categories.' + key)}}
+          {{ $t('categories.' + key) }}
         </v-subheader>
 
-        <v-list-tile avatar class="grow px-3 highlight" v-for="(profile, index) in value">
+        <v-list-tile
+          v-for="(profile, index) in value"
+          avatar
+          class="grow px-3 highlight"
+        >
           <v-list-tile-avatar>
             <v-img
-                :src="'https://penguin-stats.s3-ap-southeast-1.amazonaws.com/avatar/' + profile.avatar"
+              :src="'https://penguin-stats.s3-ap-southeast-1.amazonaws.com/avatar/' + profile.avatar"
             />
           </v-list-tile-avatar>
 
@@ -54,17 +67,20 @@
           </v-list-tile-content>
           <v-list-tile-action>
             <v-layout
-                align-center
-                justify-end
+              align-center
+              justify-end
             >
-              <v-tooltip bottom v-for="[id, url] in Object.entries(profile.socials)">
+              <v-tooltip
+                v-for="[id, url] in Object.entries(profile.socials)"
+                bottom
+              >
                 <template v-slot:activator="{ on }">
                   <v-btn
-                      class="mx-1"
-                      icon
-                      :href="url"
-                      target="_blank"
-                      v-on="on"
+                    class="mx-1"
+                    icon
+                    :href="url"
+                    target="_blank"
+                    v-on="on"
                   >
                     <v-icon>
                       {{ getSocial(id).icon }}

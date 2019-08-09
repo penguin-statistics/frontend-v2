@@ -38,7 +38,7 @@
       </v-card>
     </v-dialog>
     <v-dialog
-      v-model="$store.state.ajaxLoading"
+      v-model="prefetchingResources"
       persistent
       width="300"
     >
@@ -286,12 +286,13 @@ export default {
         id: 'zh_CN',
         name: '简体中文'
       }, {
-        id: 'zh_TW',
-        name: '繁体中文'
-      }, {
         id: 'en',
         name: 'English'
+      }, {
+        id: 'jp',
+        name: '日本語'
       }],
+      prefetchingResources: false,
       drawer: true,
       dark: true,
       nowBuildNoticeNotClosed: true
@@ -324,7 +325,8 @@ export default {
             : "https://penguin-stats.s3-ap-southeast-1.amazonaws.com/penguin_stats_logo_croissant.png"
     },
     fetchData () {
-      let startAjaxAt = new Date().getTime()
+      this.prefetchingResources = true;
+      let startAjaxAt = new Date().getTime();
       axios.all([
         service.get("/items"),
         service.get("/limitations"),
@@ -344,6 +346,9 @@ export default {
         })
         .catch((err) => {
           console.log(err)
+        })
+        .finally(() => {
+          this.prefetchingResources = false
         })
     },
     changeLocale (localeId) {

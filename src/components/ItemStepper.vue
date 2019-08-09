@@ -2,51 +2,61 @@
   {
     "zh": {
       "rules": {
-        "required": ""
+        "gte": "“{item}” 应多于或等于 {quantity}",
+        "lte": "“{item}” 应少于或等于 {quantity}",
+        "not": "“{item}” 的数量应不等于 {quantity}",
+        "natural": "数量值应为自然数"
+      }
+    },
+    "en": {
+      "rules": {
+        "gte": "Quantity of \"{item}\" should ≥ {quantity}",
+        "lte": "Quantity of \"{item}\" should ≤ {quantity}",
+        "not": "Quantity of \"{item}\" should ≠ {quantity}",
+        "natural": "Value of quantity should be a natural number"
       }
     }
   }
 </i18n>
 
 <template>
-  <v-flex
-    class="itemStepper pa-3 ma-2"
-    style="display: inline-block"
+  <v-text-field
+    ref="quantityInput"
+    v-model="quantity"
+
+    label="数量"
+    type="number"
+
+    outline
+
+    :rules="validationRules"
+    append-icon="mdi-minus"
+    :disabled="disable.actual"
+
+    prepend-inner-icon="mdi-plus"
+    style="display: inline-flex"
+
+    @click:append="reduction(item.itemId)"
+
+    @click:prepend-inner="increment(item.itemId)"
+
+    @update:error="status => error = status"
   >
-    <h5 class="title mb-3">
-      {{ demoItem.name }}
-    </h5>
-    <v-text-field
-      label="数量"
-      type="number"
-
-      outline
-      :rules="[rules.required, rules.number]"
-
-      :value="0"
-
-      append-icon="mdi-minus"
-      prepend-inner-icon="mdi-plus"
-
-      style="display: inline-flex"
-      @click:append-outer="reduction"
-
-      @click:prepend="increment"
-    >
-      <template v-slot:prepend>
-        <Item
-          :item="demoItem"
-          :ratio="0.5"
-          disable-link
-          disable-tooltip
-        />
-      </template>
-    </v-text-field>
-  </v-flex>
+    <template v-slot:prepend>
+      <Item
+        :item="item"
+        :ratio="0.75"
+        disable-link
+        style="margin-top: -7.5px"
+      />
+    </template>
+  </v-text-field>
 </template>
 
 <script>
+  import get from '@/utils/getters'
   import Item from '@/components/Item'
+
   export default {
     name: "ItemStepper",
     components: {
@@ -57,63 +67,109 @@
         type: Object,
         required: true
       },
-      min: {
-        type: Number,
-        required: true,
-        validator: value => {
-          return value >= 0
-        }
+      stage: {
+        type: String,
+        required: true
       },
-      max: {
-        type: Number,
-        required: true,
-        validator: value => {
-          return value >= 0
-        }
+      bus: {
+        type: Object,
+        required: true
       }
     },
     data () {
       return {
-        value: 0,
-        rules: {
-          required: value => !!value || 'Required.',
-          number: value => isNaN(value) || ''
+        rawQuantity: 0,
+        disable: {
+          actual: false, // the actual disable state of the component
+          should: false // indicates the types have already been fulfilled, but the component should not been disabled due to errors in the input
         },
-        demoItem: {
-          "itemId": "2001",
-          "name": "基础作战记录",
-          "sortId": 15,
-          "rarity": 1,
-          "itemType": "CARD_EXP",
-          "addTimePoint": 1,
-          "spriteCoord": [
-            0,
-            0
-          ],
-          "meta": {
-            "name": "基础作战记录",
-            "color": "green",
-            "icon": "mdi-plus"
-          }
-        }
+        error: false
       }
+    },
+    computed: {
+      quantity: {
+        get () {
+          return this.rawQuantity
+        },
+        set (v) {
+          this.rawQuantity = parseInt(v)
+        }
+      },
+      limitations () {
+        return get.limitations.byStageId(this.stage);
+      },
+      validationRules () {
+        let limitation = this.limitations.itemQuantityBounds.find(v => v.itemId === this.item.itemId);
+        const gte = (value) => {
+          return (compare) => {
+            return compare >= value ? true : this.$t('rules.gte', {item: this.item.name, quantity: value})
+          }
+        };
+
+        const lte = (value) => {
+          return (compare) => {
+            return compare <= value ? true : this.$t('rules.lte', {item: this.item.name, quantity: value})
+          }
+        };
+
+        const notIncludes = (values) => {
+          return (compare) => {
+            return values.indexOf(compare) === -1 ? true : this.$t('rules.not', {item: this.item.name, quantity: values.join(", ")})
+          }
+        };
+
+        const isNatural = (compare) => {
+          return ((compare >= 0.0) && (Math.floor(compare) === compare) && compare !== Infinity && !isNaN(compare)) ? true : this.$t('rules.natural');
+        };
+
+        return [
+          gte(limitation.bounds.lower),
+          lte(limitation.bounds.upper),
+          notIncludes(limitation.bounds.exceptions),
+          isNatural
+        ]
+      },
+      valid () {
+        for (let rule of this.validationRules) {
+          if (rule(this.quantity) !== true) return false
+        }
+        return true
+      }
+    },
+    watch: {
+      quantity: function (value) {
+        if (!this.valid) return;
+        this.$emit("change", [this.item.itemId, value])
+      },
+      valid: function (value) {
+        // the component should be disabled and it's now ready to do it
+        if (this.valid && this.quantity === 0 && this.disable.should && !this.disable.actual) this.disable.actual = true;
+        this.$emit("change:valid", value)
+      }
+    },
+    mounted () {
+      this.bus.$on("fulfilled", this.changeDisable)
     },
     methods: {
       increment () {
-        if (this.value + 1 <= this.max) {
-          this.value += 1
-        }
+        this.quantity = parseInt(this.quantity) + 1
       },
       reduction () {
-        if (this.value - 1 >= this.min) {
-          this.value -= 1
+        this.quantity = parseInt(this.quantity);
+        this.quantity > 0 && (this.quantity -= 1);
+        this.quantity <= 0 && (this.quantity = 0)
+      },
+      changeDisable (fulfilled) {
+        if (fulfilled) {
+          this.disable.should = true;
+          if (this.quantity === 0 && this.valid) {
+            this.disable.actual = true
+          }
+        } else {
+          this.disable.should = false;
+          this.disable.actual = false
         }
-      }
+      },
     }
   }
 </script>
-
-<style scoped>
-.itemStepper {
-}
-</style>
