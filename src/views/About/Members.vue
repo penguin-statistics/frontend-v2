@@ -38,6 +38,7 @@
     >
       <v-list
         v-for="[key, value] in Object.entries(profiles)"
+        :key="key"
         two-line
         class="bkop-light"
       >
@@ -47,6 +48,7 @@
 
         <v-list-tile
           v-for="(profile, index) in value"
+          :key="index"
           avatar
           class="grow px-3 highlight"
         >
@@ -72,6 +74,7 @@
             >
               <v-tooltip
                 v-for="[id, url] in Object.entries(profile.socials)"
+                :key="id"
                 bottom
               >
                 <template v-slot:activator="{ on }">
