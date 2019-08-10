@@ -38,6 +38,7 @@
     >
       <v-list
         v-for="[key, value] in Object.entries(profiles)"
+        :key="key"
         two-line
       >
         <v-subheader :key="key">
@@ -45,7 +46,8 @@
         </v-subheader>
 
         <v-list-tile
-          v-for="(profile, index) in value"
+          v-for="profile in value"
+          :key="profile.name"
           avatar
           class="grow px-3"
         >
@@ -71,6 +73,7 @@
             >
               <v-tooltip
                 v-for="[id, url] in Object.entries(profile.socials)"
+                :key="`${profile.name}-${id}`"
                 bottom
               >
                 <template v-slot:activator="{ on }">

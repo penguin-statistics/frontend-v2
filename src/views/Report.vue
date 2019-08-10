@@ -25,9 +25,6 @@
         "submit": "提交",
         "success": "上传成功",
         "undo": "撤销"
-      },
-      "rules": {
-        "isPositiveInteger": "需为正整数"
       }
     },
     "en": {
@@ -55,9 +52,6 @@
         "submit": "Submit",
         "success": "Successfully submitted",
         "undo": "Undo"
-      },
-      "rules": {
-        "isPositiveInteger": "Requires Natural Number"
       }
     }
   }
@@ -338,7 +332,7 @@
                 </v-flex>
               </v-container>
 
-              <v-flex class="ma-3">
+              <v-flex class="pa-4">
                 <v-switch
                   v-model="furniture"
                   :label="$t('report.furniture', {state: $t(`boolean.${furniture}`)})"
@@ -463,7 +457,8 @@
       },
       storeStageSelection(stageId) {
         this.step += 1;
-        this.selected.stage = stageId
+        this.selected.stage = stageId;
+        this.reset();
       },
       getItem(itemId) {
         return get.item.byItemId(itemId)
@@ -495,6 +490,10 @@
         let limit = this.typeLimitation
         return types > limit.lower && types < limit.upper && limit.exceptions.indexOf(types) === -1
       },
+      reset () {
+        this.eventBus.$emit("reset");
+        this.furniture = false
+      },
       async submit () {
         this.submitting = true;
         await report.submitReport({
@@ -502,7 +501,8 @@
           drops: this.results,
           furnitureNum: this.furniture ? 1 : 0
         });
-        this.submitting = false
+        this.submitting = false;
+        this.reset();
         this.snackbar = true
       },
       undo () {

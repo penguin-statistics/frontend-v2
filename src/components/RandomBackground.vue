@@ -9,8 +9,10 @@
   export default {
     name: "RandomBackground",
     props: {
-      interval: Number,
-      required: true
+      interval: {
+        type: Number,
+        required: true
+      }
     },
     data () {
       return {

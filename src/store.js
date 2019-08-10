@@ -15,6 +15,9 @@ export default new Vuex.Store({
     settings: {
       dark: true,
       locale: 'zh'
+    },
+    auth: {
+      username: null
     }
   },
   mutations: {
@@ -26,6 +29,20 @@ export default new Vuex.Store({
     },
     changeLocale (state, newLocale) {
       state.settings.locale = newLocale
+    },
+    auth_login (state, username) {
+      state.auth.username = username
+    },
+    auth_logout (state) {
+      state.auth.username = null
+    }
+  },
+  getters: {
+    authed (state) {
+      return !!state.auth.username
+    },
+    authUsername (state) {
+      return state.auth.username || ''
     }
   }
 })
