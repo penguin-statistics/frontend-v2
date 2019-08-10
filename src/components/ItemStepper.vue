@@ -20,37 +20,76 @@
 </i18n>
 
 <template>
-  <v-text-field
-    ref="quantityInput"
-    v-model="quantity"
-
-    label="数量"
-    type="number"
-
-    outline
-
-    :rules="validationRules"
-    append-icon="mdi-minus"
-    :disabled="disable.actual"
-
-    prepend-inner-icon="mdi-plus"
-    style="display: inline-flex"
-
-    @click:append="reduction(item.itemId)"
-
-    @click:prepend-inner="increment(item.itemId)"
-
-    @update:error="status => error = status"
+  <v-layout
+    row
+    wrap
+    align-center
+    justify-start
   >
-    <template v-slot:prepend>
+    <v-flex>
       <Item
         :item="item"
         :ratio="0.75"
         disable-link
-        style="margin-top: -7.5px"
       />
-    </template>
-  </v-text-field>
+    </v-flex>
+
+    <v-flex>
+      <v-btn
+        flat
+        icon
+        :disabled="disable.actual || exceed.max"
+
+        @click="increment"
+      >
+        <v-icon>mdi-plus</v-icon>
+      </v-btn>
+    </v-flex>
+
+    <v-flex>
+      <span
+        class="quantity title"
+        :class="{ 'grey--text disabled': disable.actual }"
+      >
+        {{ quantity }}
+      </span>
+    </v-flex>
+
+    <v-flex>
+      <v-btn
+        flat
+        icon
+        :disabled="disable.actual || exceed.min"
+
+        @click="reduction"
+      >
+        <v-icon>mdi-minus</v-icon>
+      </v-btn>
+    </v-flex>
+    <!--    <v-text-field-->
+    <!--      ref="quantityInput"-->
+    <!--      v-model="quantity"-->
+
+    <!--      label="数量"-->
+    <!--      type="number"-->
+
+    <!--      outline-->
+
+    <!--      :rules="validationRules"-->
+    <!--      append-icon="mdi-minus"-->
+    <!--      :disabled="disable.actual"-->
+
+    <!--      prepend-inner-icon="mdi-plus"-->
+
+    <!--      @click:append="reduction(item.itemId)"-->
+
+    <!--      @click:prepend-inner="increment(item.itemId)"-->
+
+    <!--      @update:error="status => error = status"-->
+    <!--    >-->
+    <!--      <template v-slot:prepend />-->
+    <!--    </v-text-field>-->
+  </v-layout>
 </template>
 
 <script>
@@ -82,6 +121,10 @@
         disable: {
           actual: false, // the actual disable state of the component
           should: false // indicates the types have already been fulfilled, but the component should not been disabled due to errors in the input
+        },
+        exceed: {
+          min: false,
+          max: false
         },
         error: false
       }
@@ -130,10 +173,7 @@
         ]
       },
       valid () {
-        for (let rule of this.validationRules) {
-          if (rule(this.quantity) !== true) return false
-        }
-        return true
+        return this.validForm(this.quantity)
       }
     },
     watch: {
@@ -148,16 +188,25 @@
       }
     },
     mounted () {
-      this.bus.$on("fulfilled", this.changeDisable)
+      this.updateExceed();
+      this.bus.$on("fulfilled", this.changeDisable);
+      this.bus.$on("reset", this.reset)
     },
     methods: {
+      updateExceed () {
+        this.exceed.max = !this.validForm(this.quantity + 1);
+        this.exceed.min = !this.validForm(this.quantity - 1);
+        // console.log("quantity", this.quantity, "max", this.exceed.max, "min", this.exceed.min, "min1", !this.validForm(this.quantity - 1), "min2", this.quantity - 1 === 0)
+      },
       increment () {
-        this.quantity = parseInt(this.quantity) + 1
+        this.validForm(this.quantity + 1) && (this.quantity += 1);
+        this.updateExceed();
       },
       reduction () {
         this.quantity = parseInt(this.quantity);
         this.quantity > 0 && (this.quantity -= 1);
-        this.quantity <= 0 && (this.quantity = 0)
+        this.quantity <= 0 && (this.quantity = 0);
+        this.updateExceed()
       },
       changeDisable (fulfilled) {
         if (fulfilled) {
@@ -170,6 +219,27 @@
           this.disable.actual = false
         }
       },
+      reset () {
+        this.quantity = 0;
+        this.updateExceed()
+      },
+      validForm (quantity) {
+        for (let rule of this.validationRules) {
+          if (rule(quantity) !== true) return false
+        }
+        return true
+      }
     }
   }
 </script>
+
+<style scoped>
+  .quantity {
+    font-family: Consolas, Courier New, Courier, monospace;
+    font-weight: 700;
+  }
+
+  .disabled {
+    user-select: none;
+  }
+</style>

@@ -48,10 +48,12 @@
     </v-stepper-header>
 
     <v-stepper-items>
-      <v-stepper-content :step="1">
+      <v-stepper-content
+        v-if="categorizedItems.length > 0"
+        :step="1"
+      >
         <v-list
           v-for="category in categorizedItems"
-          v-if="categorizedItems.length > 0"
           :key="category.id"
           subheader
           class="transparent"
@@ -92,7 +94,7 @@
       </v-stepper-content>
 
       <v-stepper-content :step="2">
-        <h1 class="title ma-3">
+        <h1 class="title mx-3 my-1">
           <v-layout align-center>
             <Item
               :item="selectedItem"

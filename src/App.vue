@@ -151,6 +151,44 @@
         </transition>{{ $t($router.currentRoute.meta.i18n) }}
       </v-toolbar-title>
       <v-spacer />
+
+      <!-- TODO: User (Login + Logout) -->
+
+      <span
+        v-if="$store.getters.authed"
+        @mouseover="auth.buttonHovered = true"
+        @mouseleave="auth.buttonHovered = false"
+      >
+        <transition
+          name="slide-x-reverse-transition"
+          mode="out-in"
+          duration="30"
+        >
+          <v-btn
+            v-if="auth.buttonHovered"
+            style="overflow: hidden"
+            round
+            @click="$store.dispatch('auth_logout')"
+          >
+            <v-icon left>mdi-logout</v-icon>
+            退出登录
+          </v-btn>
+          <v-chip
+            v-else
+            class="mr-2"
+            style="box-shadow: 0 0 0 4px rgba(0, 0, 0, .3)"
+          >
+            {{ $store.getters.authUsername }}
+          </v-chip>
+        </transition>
+      </span>
+      <span v-else>
+        <v-btn
+          round
+          @click="redirectLogin"
+        ><v-icon left>mdi-exit-to-app</v-icon> 登录</v-btn>
+      </span>
+      
       <v-btn
         dark
         icon
@@ -295,7 +333,10 @@ export default {
       prefetchingResources: false,
       drawer: true,
       dark: true,
-      nowBuildNoticeNotClosed: true
+      nowBuildNoticeNotClosed: true,
+      auth: {
+        buttonHovered: false
+      }
     }
   },
   computed: {
