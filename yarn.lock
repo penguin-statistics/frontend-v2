@@ -6192,6 +6192,11 @@ pkg-up@^2.0.0:
   dependencies:
     find-up "^2.1.0"
 
+plotly.js-dist@^1.49.1:
+  version "1.49.1"
+  resolved "https://registry.npm.taobao.org/plotly.js-dist/download/plotly.js-dist-1.49.1.tgz#432c41bfc1c7257b2f666e1ebc12fccb74ef4536"
+  integrity sha1-QyxBv8HHJXsvZm4evBL8y3TvRTY=
+
 pluralize@^7.0.0:
   version "7.0.0"
   resolved "https://registry.yarnpkg.com/pluralize/-/pluralize-7.0.0.tgz#298b89df8b93b0221dbf421ad2b1b1ea23fc6777"
