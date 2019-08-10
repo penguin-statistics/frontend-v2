@@ -298,8 +298,13 @@
                 <td class="text-xs-right">
                   {{ props.item.quantity }}
                 </td>
-                <td class="text-xs-right">
-                  {{ props.item.percentageText }}
+                <td class="text-xs-right charts-data-wrapper">
+                  <Charts
+                    v-model="expanded[props.item.item.itemId]"
+                    :charts-id="props.item.item.itemId"
+                  >
+                    {{ props.item.percentageText }}
+                  </Charts>
                 </td>
                 <td class="text-xs-right">
                   {{ props.item.apPPR }}
@@ -316,11 +321,13 @@
 <script>
   import get from '@/utils/getters'
   import Item from "@/components/Item";
+  import Charts from "@/components/Charts";
 
   export default {
     name: "StatsByStage",
-    components: {Item},
+    components: {Item, Charts},
     data: () => ({
+      expanded: {},
       step: 1,
       selected: {
         zone: null,
@@ -473,5 +480,11 @@
 
   .v-table {
     background: transparent !important;
+  }
+
+  .charts-data-wrapper {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
   }
 </style>
