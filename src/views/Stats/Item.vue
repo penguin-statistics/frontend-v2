@@ -49,46 +49,51 @@
 
     <v-stepper-items>
       <v-stepper-content :step="1">
-        <v-list
-          v-for="category in categorizedItems"
+        <div
           v-if="categorizedItems.length > 0"
-          :key="category.id"
-          subheader
-          class="transparent"
+          class="list-wrapper"
         >
-          <v-subheader inset>
-            {{ category.items[0].meta.name }}
-          </v-subheader>
-
-          <v-list-tile
-            v-for="item in category.items"
-            :key="item.itemId"
-            v-ripple
-            avatar
-            @click="storeItemSelection(item.itemId)"
+          <v-list
+            v-for="category in categorizedItems"
+         
+            :key="category.id"
+            subheader
+            class="transparent"
           >
-            <v-list-tile-avatar>
-              <v-avatar>
-                <Item
-                  :item="item"
-                  :ratio="0.75"
-                  disable-link
-                  disable-tooltip
-                />
-              </v-avatar>
-            </v-list-tile-avatar>
+            <v-subheader inset>
+              {{ category.items[0].meta.name }}
+            </v-subheader>
 
-            <v-list-tile-content>
-              <v-list-tile-title>{{ item.name }}</v-list-tile-title>
-            </v-list-tile-content>
+            <v-list-tile
+              v-for="item in category.items"
+              :key="item.itemId"
+              v-ripple
+              avatar
+              @click="storeItemSelection(item.itemId)"
+            >
+              <v-list-tile-avatar>
+                <v-avatar>
+                  <Item
+                    :item="item"
+                    :ratio="0.75"
+                    disable-link
+                    disable-tooltip
+                  />
+                </v-avatar>
+              </v-list-tile-avatar>
 
-            <v-list-tile-action>
-              <v-icon color="grey lighten-1">
-                mdi-chevron-right
-              </v-icon>
-            </v-list-tile-action>
-          </v-list-tile>
-        </v-list>
+              <v-list-tile-content>
+                <v-list-tile-title>{{ item.name }}</v-list-tile-title>
+              </v-list-tile-content>
+
+              <v-list-tile-action>
+                <v-icon color="grey lighten-1">
+                  mdi-chevron-right
+                </v-icon>
+              </v-list-tile-action>
+            </v-list-tile>
+          </v-list>          
+        </div>
       </v-stepper-content>
 
       <v-stepper-content :step="2">
