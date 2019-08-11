@@ -30,18 +30,18 @@ export default new Vuex.Store({
     changeLocale (state, newLocale) {
       state.settings.locale = newLocale
     },
-    auth_login (state, username) {
+    authLogin (state, username) {
       state.auth.username = username
     },
-    auth_logout (state) {
+    authLogout (state) {
       state.auth.username = null
     }
   },
   getters: {
-    authed (state) {
+    authed: state => {
       return !!state.auth.username
     },
-    authUsername (state) {
+    authUsername: state => {
       return state.auth.username || ''
     }
   }

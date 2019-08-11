@@ -7,6 +7,9 @@ module.exports = {
       enableInSFC: true
     }
   },
+  devServer: {
+    proxy: 'http://localhost:8081/PenguinStats/api'
+  },
   integrity: true,
   runtimeCompiler: true,
 };

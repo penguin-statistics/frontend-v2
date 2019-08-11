@@ -4,6 +4,13 @@
     :dark="dark"
   >
     <RandomBackground :interval="30" />
+    <v-snackbar
+      v-model="snackbar.enabled"
+      :color="snackbar.color"
+      :timeout="5000"
+    >
+      {{ snackbar.text }}
+    </v-snackbar>
     <v-dialog
       :value="nowBuildNotice && nowBuildNoticeNotClosed"
       max-width="600"
@@ -54,6 +61,40 @@
             class="mb-0"
           />
         </v-card-text>
+      </v-card>
+    </v-dialog>
+    <v-dialog
+      v-model="auth.dialog"
+      max-width="300px"
+    >
+      <v-card class="pa-2">
+        <v-card-title>
+          <span class="headline">
+            {{ $t('menu.auth.login') }}
+          </span>
+        </v-card-title>
+        <v-card-text>
+          <v-text-field
+            v-model="auth.username"
+            :label="`${$t('menu.auth.userId')}*`"
+            required
+
+            hide-details
+            class="pb-2"
+
+            outline
+          />
+        </v-card-text>
+        <v-card-actions class="mx-2 pb-3">
+          <v-btn
+            color="primary"
+            block
+            :loading="auth.loading"
+            @click="login"
+          >
+            {{ $t('dialog.confirm') }}
+          </v-btn>
+        </v-card-actions>
       </v-card>
     </v-dialog>
     <v-navigation-drawer
@@ -152,8 +193,6 @@
       </v-toolbar-title>
       <v-spacer />
 
-      <!-- TODO: User (Login + Logout) -->
-
       <span
         v-if="$store.getters.authed"
         @mouseover="auth.buttonHovered = true"
@@ -168,10 +207,10 @@
             v-if="auth.buttonHovered"
             style="overflow: hidden"
             round
-            @click="$store.dispatch('auth_logout')"
+            @click="logout"
           >
             <v-icon left>mdi-logout</v-icon>
-            退出登录
+            {{ $t('auth.logout') }}
           </v-btn>
           <v-chip
             v-else
@@ -185,8 +224,8 @@
       <span v-else>
         <v-btn
           round
-          @click="redirectLogin"
-        ><v-icon left>mdi-exit-to-app</v-icon> 登录</v-btn>
+          @click="auth.dialog = true"
+        ><v-icon left>mdi-exit-to-app</v-icon> {{ $t('auth.login') }}</v-btn>
       </span>
       
       <v-btn
@@ -311,6 +350,7 @@
   import service from '@/utils/service'
   import axios from 'axios'
   import RandomBackground from '@/components/RandomBackground'
+  import Cookies from 'js-cookie'
 export default {
   name: 'App',
   components: {
@@ -320,35 +360,49 @@ export default {
     return {
       routes: [],
       randomizedLogo: "",
-      localizations: [{
-        id: 'zh_CN',
-        name: '简体中文'
-      }, {
-        id: 'en',
-        name: 'English'
-      }, {
-        id: 'jp',
-        name: '日本語'
-      }],
+      localizations: [
+        {
+          id: 'zh_CN',
+          name: '简体中文'
+        }, {
+          id: 'en',
+          name: 'English'
+        }, {
+          id: 'jp',
+          name: '日本語'
+        }
+      ],
       prefetchingResources: false,
       drawer: true,
-      dark: true,
       nowBuildNoticeNotClosed: true,
       auth: {
-        buttonHovered: false
+        buttonHovered: false,
+        dialog: false,
+        username: '',
+        loading: false
+      },
+      snackbar: {
+        enabled: false,
+        text: "",
+        color: ""
       }
     }
   },
   computed: {
     nowBuildNotice () {
       return process.env.NOW_GITHUB_DEPLOYMENT
+    },
+    dark: {
+      get () {
+        return this.$store.state.settings.dark
+      },
+      set (value) {
+        this.$store.commit('switchDark', value)
+      }
     }
   },
   watch: {
-    '$route': ['randomizeLogo'],
-    dark: (newValue) => {
-      this.$store.commit('switchDark', newValue)
-    }
+    '$route': ['randomizeLogo']
   },
   beforeMount() {
     this.routes = this.$router.options.routes
@@ -394,6 +448,35 @@ export default {
     },
     changeLocale (localeId) {
       this.$i18n.locale = localeId
+    },
+    login () {
+      this.auth.loading = true;
+      service.post("/users", this.auth.username, {headers: {'Content-Type': 'text/plain'}})
+        .then(() => {
+          this.$store.commit("authLogin", this.auth.username);
+          Cookies.set("userID", this.auth.username, {expires: 7, path: "/"});
+          console.log(Cookies);
+          this.snackbar = {
+            enabled: true,
+            color: "success",
+            text: this.$t('auth.success')
+          };
+          this.auth.dialog = false
+        })
+        .catch((err) => {
+          this.snackbar = {
+            enabled: true,
+            color: "error",
+            text: this.$t('auth.failed', {message: err.errorMessage})
+          }
+        })
+        .finally (() => {
+          this.auth.loading = false
+        })
+    },
+    logout () {
+      Cookies.remove("userID");
+      this.$store.commit("authLogout")
     }
   }
 }

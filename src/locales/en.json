@@ -18,7 +18,11 @@
     },
     "planner": "Planner",
     "changelog": "Change Log",
-    "logo": "Penguin Statistics"
+    "logo": "Penguin Statistics",
+    "auth": {
+      "login": "Login",
+      "userId": "User ID"
+    }
   },
   "meta": {
     "loading": "Fetching application data...",
@@ -38,6 +42,12 @@
       "apPPR": "Expected AP required every 1 item"
     }
   },
+  "auth": {
+    "success": "Successfully logged in",
+    "failed": "Failed to log in: {message}",
+    "login": "Login",
+    "logout": "Logout"
+  },
   "builds": {
     "development": {
       "title": "Preview Build",
@@ -48,5 +58,11 @@
   "boolean": {
     "true": "Yes",
     "false": "No"
+  },
+  "dialog": {
+    "cancel": "Cancel",
+    "confirm": "Confirm",
+    "submit": "Submit",
+    "close": "Close"
   }
 }

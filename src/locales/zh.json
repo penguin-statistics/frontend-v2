@@ -18,7 +18,11 @@
     },
     "planner": "刷图规划器",
     "changelog": "更新日志",
-    "logo": "企鹅物流数据统计"
+    "logo": "企鹅物流数据统计",
+    "auth": {
+      "login": "登录",
+      "userId": "用户 ID"
+    }
   },
   "meta": {
     "loading": "正在加载...",
@@ -45,8 +49,20 @@
       "ok": "OH YEAH!"
     }
   },
+  "auth": {
+    "success": "登录成功",
+    "failed": "登录失败：{message}",
+    "login": "登录",
+    "logout": "注销登录"
+  },
   "boolean": {
     "true": "是",
     "false": "否"
+  },
+  "dialog": {
+    "cancel": "取消",
+    "confirm": "确认",
+    "submit": "提交",
+    "close": "关闭"
   }
 }

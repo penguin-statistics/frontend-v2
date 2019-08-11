@@ -38,7 +38,7 @@
       <v-btn
         flat
         icon
-        :disabled="disable.actual || exceed.max"
+        :disabled="disable.actual || exceedMax"
 
         @click="increment"
       >
@@ -59,7 +59,7 @@
       <v-btn
         flat
         icon
-        :disabled="disable.actual || exceed.min"
+        :disabled="disable.actual || exceedMin"
 
         @click="reduction"
       >
@@ -122,10 +122,6 @@
           actual: false, // the actual disable state of the component
           should: false // indicates the types have already been fulfilled, but the component should not been disabled due to errors in the input
         },
-        exceed: {
-          min: false,
-          max: false
-        },
         error: false
       }
     },
@@ -174,12 +170,18 @@
       },
       valid () {
         return this.validForm(this.quantity)
+      },
+      exceedMax () {
+        return !this.validForm(this.quantity + 1);
+      },
+      exceedMin () {
+        return !this.validForm(this.quantity - 1);
       }
     },
     watch: {
       quantity: function (value) {
-        if (!this.valid) return;
-        this.$emit("change", [this.item.itemId, value])
+        // this form have no errors
+        this.valid && (this.$emit("change", [this.item.itemId, value]))
       },
       valid: function (value) {
         // the component should be disabled and it's now ready to do it
@@ -188,25 +190,17 @@
       }
     },
     mounted () {
-      this.updateExceed();
       this.bus.$on("fulfilled", this.changeDisable);
       this.bus.$on("reset", this.reset)
     },
     methods: {
-      updateExceed () {
-        this.exceed.max = !this.validForm(this.quantity + 1);
-        this.exceed.min = !this.validForm(this.quantity - 1);
-        // console.log("quantity", this.quantity, "max", this.exceed.max, "min", this.exceed.min, "min1", !this.validForm(this.quantity - 1), "min2", this.quantity - 1 === 0)
-      },
       increment () {
         this.validForm(this.quantity + 1) && (this.quantity += 1);
-        this.updateExceed();
       },
       reduction () {
         this.quantity = parseInt(this.quantity);
         this.quantity > 0 && (this.quantity -= 1);
         this.quantity <= 0 && (this.quantity = 0);
-        this.updateExceed()
       },
       changeDisable (fulfilled) {
         if (fulfilled) {
@@ -220,8 +214,7 @@
         }
       },
       reset () {
-        this.quantity = 0;
-        this.updateExceed()
+        this.quantity = 0
       },
       validForm (quantity) {
         for (let rule of this.validationRules) {

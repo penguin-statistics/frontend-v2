@@ -48,7 +48,7 @@
       },
       "report": {
         "name": "Report",
-        "furniture": "Furniture: {state}",
+        "furniture": "Furniture Drop: {state}",
         "submit": "Submit",
         "success": "Successfully submitted",
         "undo": "Undo"
