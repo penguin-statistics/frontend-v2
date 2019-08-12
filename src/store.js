@@ -22,27 +22,32 @@ export default new Vuex.Store({
   },
   mutations: {
     store: (state, d) => {
-      state.data = {...d}
+      state.data = {...d }
     },
-    switchDark (state, newState) {
+    switchDark(state, newState) {
       state.settings.dark = newState
     },
-    changeLocale (state, newLocale) {
+    changeLocale(state, newLocale) {
       state.settings.locale = newLocale
     },
-    authLogin (state, username) {
+    authLogin(state, username) {
       state.auth.username = username
     },
-    authLogout (state) {
+    authLogout(state) {
       state.auth.username = null
     }
   },
+  actions: {},
   getters: {
     authed: state => {
       return !!state.auth.username
     },
     authUsername: state => {
       return state.auth.username || ''
+    },
+    // TODO: use vuex module refactor code
+    trends: state => {
+      return state.data && state.data.trends && state.data.trends.results
     }
   }
 })

@@ -426,14 +426,16 @@ export default {
         service.get("/items"),
         service.get("/limitations"),
         service.get("/result/matrix"),
+        service.get("/result/trends"),
         service.get("/stages"),
         service.get("/zones")
       ])
-        .then(([items, limitations, resultMatrix, stages, zones]) => {
+        .then(([items, limitations, resultMatrix, resultTrends, stages, zones]) => {
           this.$ga.time('all data', 'fetched', new Date().getTime() - startAjaxAt);
           this.$store.commit("store", {
             items: items.data,
             limitations: limitations.data,
+            trends: resultTrends.data,
             resultMatrix: resultMatrix.data,
             stages: stages.data,
             zones: zones.data
