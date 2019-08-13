@@ -4,7 +4,8 @@
 [![Last Commit](https://img.shields.io/github/last-commit/penguin-statistics/frontend-v2/dev?label=last%20commit%20%28branch%20dev%29)](/penguin-statistics/frontend-v2/commits/dev)
 [![Docs](https://img.shields.io/badge/docs-GitBook-blue)](https://developer.penguin-stats.io)
 
-我们是来自企鹅物流的数据统计团队，请多多指教！
+## Thanks for the support from
+* [![BrowserStack](https://raw.githubusercontent.com/penguin-statistics/frontend-v2/dev/docs/images/browserstack-logo.svg)](https://browserstack.com)
 
 ## To start development...
 1. Clone the project by using `git clone https://github.com/GalvinGao/penguin-stats-frontend.git`
