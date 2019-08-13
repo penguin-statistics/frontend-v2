@@ -12,6 +12,10 @@ export default new Vuex.Store({
   ],
   state: {
     data: {},
+    ajax: {
+      success: true,
+      error: null
+    },
     settings: {
       dark: true,
       locale: 'zh'
@@ -35,6 +39,10 @@ export default new Vuex.Store({
     },
     authLogout(state) {
       state.auth.username = null
+    },
+    ajaxFailed (state, errorMessage) {
+      state.ajax.success = false;
+      state.ajax.error = errorMessage
     }
   },
   actions: {},
@@ -48,6 +56,10 @@ export default new Vuex.Store({
     // TODO: use vuex module refactor code
     trends: state => {
       return state.data && state.data.trends && state.data.trends.results
+    },
+    ajax: state => {
+      return state.ajax
     }
+
   }
 })
