@@ -1,4 +1,9 @@
 # Penguin Statistics!
+[![License](https://img.shields.io/github/license/penguin-statistics/frontend-v2)](/penguin-statistics/frontend-v2/blob/master/LICENSE)
+[![Build Status](https://img.shields.io/travis/com/penguin-statistics/frontend-v2/dev?logo=travis)](https://travis-ci.org/penguin-statistics/frontend-v2)
+[![Last Commit](https://img.shields.io/github/last-commit/penguin-statistics/frontend-v2/dev?label=last%20commit%20%28branch%20dev%29)](/penguin-statistics/frontend-v2/commits/dev)
+[![Docs](https://img.shields.io/badge/docs-GitBook-blue)](https://developer.penguin-stats.io)
+
 我们是来自企鹅物流的数据统计团队，请多多指教！
 
 ## To start development...
