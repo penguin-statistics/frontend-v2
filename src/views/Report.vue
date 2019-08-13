@@ -24,7 +24,13 @@
         "furniture": "家具掉落：{state}",
         "submit": "提交",
         "success": "上传成功",
-        "undo": "撤销"
+        "undo": "撤销",
+        "unable": "无法提交：",
+        "rules": {
+          "gte": "应至少有 {quantity} 种物品",
+          "lte": "应至多有 {quantity} 种物品",
+          "not": "物品种类应不为 {quantity}"
+        }
       }
     },
     "en": {
@@ -51,7 +57,13 @@
         "furniture": "Furniture Drop: {state}",
         "submit": "Submit",
         "success": "Successfully submitted",
-        "undo": "Undo"
+        "undo": "Undo",
+        "unable": "Unable to submit: ",
+        "rules": {
+          "gte": "There should have at least {quantity} types of item in this stage",
+          "lte": "There should have at least {quantity} types of item in this stage",
+          "not": "There should not occur {quantity} types of item in this stage"
+        }
       }
     }
   }
@@ -338,12 +350,20 @@
                   :label="$t('report.furniture', {state: $t(`boolean.${furniture}`)})"
                 />
 
+                <v-alert
+                  :value="!typeLimitationComplied.complied"
+                  type="error"
+                >
+                  {{ $t('report.unable') }}{{ typeLimitationComplied.message }}
+                </v-alert>
+
                 <v-btn
                   large
                   round
                   color="primary"
 
                   :loading="submitting"
+                  :disabled="!typeLimitationComplied.complied"
 
                   @click="submit"
                 >
@@ -442,7 +462,18 @@
         return this.invalidCount === 0
       },
       typeLimitation () {
+        if (!this.selected.stage) return {};
         return get.limitations.byStageId(this.selected.stage).itemTypeBounds
+      },
+      typeLimitationComplied () {
+        const complied = {complied: true, message: null}
+        if (!this.selected.stage) return complied;
+        let limitation = this.typeLimitation;
+        let amount = this.results.length
+        if (amount < limitation.lower) return {complied: false, message: this.$t('report.rules.gte', {quantity: limitation.lower})};
+        if (amount > limitation.upper) return {complied: false, message: this.$t('report.rules.lte', {quantity: limitation.upper})};
+        if (limitation.exceptions.indexOf(amount) !== -1) return {complied: false, message: this.$t('report.rules.not', {quantity: limitation.exceptions.join(", ")})}
+        return complied
       }
     },
     watch: {
@@ -487,7 +518,7 @@
         return item
       },
       typeLimitationFulfilled (types) {
-        let limit = this.typeLimitation
+        let limit = this.typeLimitation;
         return types > limit.lower && types < limit.upper && limit.exceptions.indexOf(types) === -1
       },
       reset () {

@@ -2,9 +2,9 @@
   {
     "zh": {
       "rules": {
-        "gte": "“{item}” 应多于或等于 {quantity}",
-        "lte": "“{item}” 应少于或等于 {quantity}",
-        "not": "“{item}” 的数量应不等于 {quantity}",
+        "gte": "“{item}” 应至少有 {quantity} 个",
+        "lte": "“{item}” 应至多有 {quantity} 个",
+        "not": "“{item}” 不应有 {quantity} 个",
         "natural": "数量值应为自然数"
       }
     },
@@ -38,8 +38,9 @@
       <v-btn
         flat
         icon
-        :disabled="disable.actual || exceedMax"
+        class="stepper-button"
 
+        :disabled="disable.actual || exceedMax"
         @click="increment"
       >
         <v-icon>mdi-plus</v-icon>
@@ -59,8 +60,9 @@
       <v-btn
         flat
         icon
-        :disabled="disable.actual || exceedMin"
+        class="stepper-button"
 
+        :disabled="disable.actual || exceedMin"
         @click="reduction"
       >
         <v-icon>mdi-minus</v-icon>
@@ -234,5 +236,9 @@
 
   .disabled {
     user-select: none;
+  }
+
+  .stepper-button {
+    transition: all 150ms cubic-bezier(.25,.8,.5,1) !important
   }
 </style>
