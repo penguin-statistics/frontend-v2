@@ -1,6 +1,6 @@
 <template>
   <v-dialog
-    v-model="value"
+    v-model="showDialog"
     fullscreen
     hide-overlay
     transition="dialog-bottom-transition"
@@ -8,10 +8,11 @@
     <template v-slot:activator="{ on }">
       <slot />
       <div
-        class="skyline"
+        class="sparkline"
         v-on="on"
       >
         <v-sparkline
+          v-if="sparklineValue"
           :value="sparkline.value"
           :gradient="sparkline.gradient"
           :smooth="sparkline.radius || false"
@@ -31,7 +32,7 @@
 
         <v-btn
           icon
-          @click="value = !value"
+          @click="showDialog = false"
         >
           <v-icon>mdi-close</v-icon>
         </v-btn>
@@ -46,12 +47,41 @@
 
 <script>
 import Plotly from "plotly.js-dist";
+import formatter from "@/utils/timeFormatter";
 export default {
   name: "Charts",
   props: {
+    xStart: {
+      type: Number,
+      default: 1
+    },
+    interval: {
+      type: Number,
+      default: 1
+    },
     value: {
       type: Boolean,
       default: false
+    },
+    data: {
+      type: Object,
+      default: () => {
+        return [10, 15, 13, 17];
+      }
+    },
+    dataKeys: {
+      type: Array,
+      default: () => {
+        return [];
+      }
+    },
+    sparklineKey: {
+      type: String,
+      required: true
+    },
+    sparklineSubKey: {
+      type: String,
+      required: true
     },
     chartsId: {
       type: String,
@@ -64,58 +94,128 @@ export default {
     width: {
       type: Number,
       default: window.innerWidth
-    },
-    gradient: {
-      type: Array,
-      default: () => {
-        return ["white"];
-      }
     }
   },
   data() {
     return {
-      initDate: new Date()
+      initDate: new Date(),
+      showDialog: this.value
     };
   },
   computed: {
+    gradient() {
+      return this.$store.state.settings.dark ? ["white"] : ["black"];
+    },
     sparkline() {
       return {
         width: 10,
-        radius: 10,
-        padding: 8,
+        radius: 25,
+        padding: 0,
         lineCap: "round",
         gradient: this.gradient,
-        value: [0, 2, 5, 9, 5, 10, 3, 5, 0, 0, 1, 8, 2, 9, 0],
+        value: this.sparklineValue,
         gradientDirection: "top"
       };
     },
     computedChartsId() {
       return `${this.initDate.getTime().toString()}_${this.chartsId}`;
+    },
+    xAxis() {
+      let array = this.data[this.sparklineKey].map((item, index) => {
+        return new Date(this.xStart + index * this.interval);
+      });
+      return formatter.dates(array);
+    },
+    yAxis() {
+      let yAxis = Object.keys(this.data)
+        .map(yAxisKey => {
+          if (this.dataKeys.indexOf(yAxisKey) > -1) {
+            return this.data[yAxisKey];
+          }
+        })
+        .filter(data => data != null);
+      return yAxis;
+    },
+    sparklineData() {
+      if (
+        this.sparklineKey &&
+        this.sparklineSubKey &&
+        this.data[this.sparklineKey].length &&
+        this.data[this.sparklineSubKey].length
+      ) {
+        let array = [];
+        for (
+          let index = 0;
+          index < this.data[this.sparklineKey].length;
+          index++
+        ) {
+          if (this.data[this.sparklineSubKey][index]) {
+            let temp =
+              this.data[this.sparklineKey][index] /
+              this.data[this.sparklineSubKey][index];
+            temp *= 100;
+            array.push(temp);
+          }
+        }
+        return array;
+      }
+      return [];
+    },
+    sparklineValue() {
+      if (
+        this.sparklineKey &&
+        this.sparklineSubKey &&
+        this.sparklineData.length
+      ) {
+        let tempArray = this.sparklineData
+          .filter(data => data !== null)
+          .filter((item, index) => this.sparklineData.length - index < 15);
+        return tempArray;
+      } else {
+        return [1, 1];
+      }
     }
   },
-  watch: {},
-  mounted() {
-    var trace1 = {
-      x: [1, 2, 3, 4],
-      y: [10, 15, 13, 17],
-      type: "scatter"
-    };
+  watch: {
+    showDialog(value) {
+      if (value) {
+        const traceArray = Object.keys(this.yAxis).map(yAxisKey => {
+          return {
+            x: this.xAxis,
+            y: this.yAxis[yAxisKey],
+            opacity: 0.3,
+            type: "bar",
+            name: yAxisKey,
+            connectgaps: true
+          };
+        });
+        traceArray.push({
+          x: this.xAxis,
+          y: this.sparklineData,
+          yaxis: "y2",
+          opacity: 1,
+          line: { shape: "spline", smoothing: 0.8 },
+          connectgaps: true,
+          name: "rate"
+        });
+        let layout = {
+          width: this.width,
+          height: this.height,
+          yaxis: { title: "Samples" },
+          yaxis2: {
+            title: "Rate",
+            titlefont: { color: "rgb(148, 103, 189)" },
+            tickfont: { color: "rgb(148, 103, 189)" },
+            overlaying: "y",
+            side: "right"
+          }
+        };
 
-    var trace2 = {
-      x: [1, 2, 3, 4],
-      y: [16, 5, 11, 9],
-      type: "scatter"
-    };
+        let data = traceArray;
 
-    var layout = {
-      width: this.width,
-      height: this.height,
-      showlegend: false
-    };
-
-    var data = [trace1, trace2];
-
-    Plotly.newPlot(this.computedChartsId, data, layout);
+        Plotly.newPlot(this.computedChartsId, data, layout);
+      }
+    }
   },
   methods: {}
 };
@@ -131,7 +231,7 @@ export default {
   background: #fff;
   flex-direction: column;
 }
-.skyline {
+.sparkline {
   width: 40px;
   margin-left: 5px;
 }

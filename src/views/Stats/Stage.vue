@@ -299,12 +299,18 @@
                   {{ props.item.quantity }}
                 </td>
                 <td class="text-xs-right charts-data-wrapper">
+                  {{ props.item.percentageText }}
                   <Charts
-                    v-model="expanded[props.item.item.itemId]"
+                    v-if="currentTrends"
+                    :interval="currentTrends && currentTrends.interval"
+                    :x-start="currentTrends && currentTrends.startTime"
+                    :show-dialog="expanded[props.item.item.itemId]"
+                    :data-keys="['quantity']"
+                    sparkline-key="quantity"
+                    sparkline-sub-key="times"
+                    :data="currentTrendsData && currentTrendsData[props.item.item.itemId]"
                     :charts-id="props.item.item.itemId"
-                  >
-                    {{ props.item.percentageText }}
-                  </Charts>
+                  />
                 </td>
                 <td class="text-xs-right">
                   {{ props.item.apPPR }}
@@ -340,6 +346,15 @@
       }
     }),
     computed: {
+      trends () {
+        return this.$store.getters.trends
+      },
+      currentTrends () {
+        return this.trends[this.$route.params.stageId]
+      },
+      currentTrendsData () {
+        return this.currentTrends && this.currentTrends.results
+      },
       categorizedZones() {
         const categories = ["MAINLINE", "WEEKLY", "ACTIVITY"];
         let result = [];
