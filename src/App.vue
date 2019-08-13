@@ -389,8 +389,8 @@ export default {
     }
   },
   computed: {
-    nowBuildNotice () {
-      return process.env.NOW_GITHUB_DEPLOYMENT
+    buildNotice () {
+      return process.env.NOW_GITHUB_DEPLOYMENT || process.env.CI_BUILD === "TRAVIS-CI"
     },
     dark: {
       get () {
