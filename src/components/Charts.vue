@@ -109,7 +109,7 @@ export default {
     sparkline() {
       return {
         width: 10,
-        radius: 25,
+        radius: 100,
         padding: 0,
         lineCap: "round",
         gradient: this.gradient,
@@ -155,11 +155,16 @@ export default {
               this.data[this.sparklineSubKey][index];
             temp *= 100;
             array.push(temp);
+          } else {
+            array.push(null);
           }
         }
         return array;
       }
       return [];
+    },
+    filterSparklineData () {
+      return this.sparklineData.filter(data => data !== null)
     },
     sparklineValue() {
       if (
@@ -167,10 +172,18 @@ export default {
         this.sparklineSubKey &&
         this.sparklineData.length
       ) {
-        let tempArray = this.sparklineData
-          .filter(data => data !== null)
-          .filter((item, index) => this.sparklineData.length - index < 15);
-        return tempArray;
+        let noZeroArray = this.filterSparklineData.filter(data => data !== 0);
+        let tempArray = [];
+        if (noZeroArray.length > 15) {
+          tempArray = noZeroArray.slice(-15);
+        } else {
+          tempArray = this.filterSparklineData;
+        }
+        if (tempArray.length > 1) {
+          return tempArray;
+        } else {
+          return [0, 0];
+        }
       } else {
         return [1, 1];
       }
@@ -193,6 +206,10 @@ export default {
           x: this.xAxis,
           y: this.sparklineData,
           yaxis: "y2",
+          error_y: {
+            type: 'percent',
+            value: 10
+          },
           opacity: 1,
           line: { shape: "spline", smoothing: 0.8 },
           connectgaps: true,
