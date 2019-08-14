@@ -7,6 +7,11 @@
       "result": {
         "name": "统计结果",
         "title": "{item} 统计结果"
+      },
+      "categories": {
+        "CARD_EXP": "作战记录",
+        "MATERIAL": "材料",
+        "FURN": "家具"
       }
     },
     "en": {
@@ -16,6 +21,11 @@
       "result": {
         "name": "Statistics",
         "title": "Statistics of {item}"
+      },
+      "categories": {
+        "CARD_EXP": "Experience Card",
+        "MATERIAL": "Material",
+        "FURN": "Furniture"
       }
     }
   }
@@ -49,54 +59,47 @@
 
     <v-stepper-items>
       <v-stepper-content
-        v-if="categorizedItems.length > 0"
+        v-if="categorizedItems"
         :step="1"
       >
-        <v-list
-          v-for="category in categorizedItems"
-          :key="category.id"
-          subheader
-          class="transparent"
-        >
-          <v-subheader inset>
-            {{ category.items[0].meta.name }}
-          </v-subheader>
-
-          <v-list-tile
-            v-for="item in category.items"
-            :key="item.itemId"
-            v-ripple
-            avatar
-            @click="storeItemSelection(item.itemId)"
+        <v-container>
+          <div
+            v-for="(items, name) in categorizedItems"
+            :key="name"
+            class="item-list-wrapper"
           >
-            <v-list-tile-avatar>
-              <v-avatar>
-                <Item
-                  :item="item"
-                  :ratio="0.75"
-                  disable-link
-                  disable-tooltip
-                />
-              </v-avatar>
-            </v-list-tile-avatar>
-
-            <v-list-tile-content>
-              <v-list-tile-title>{{ item.name }}</v-list-tile-title>
-            </v-list-tile-content>
-
-            <v-list-tile-action>
-              <v-icon color="grey lighten-1">
-                mdi-chevron-right
-              </v-icon>
-            </v-list-tile-action>
-          </v-list-tile>
-        </v-list>
+            <v-subheader inset>
+              {{ $t(`categories.${name}`) }}
+            </v-subheader>
+            <div class="item-list">
+              <div
+                v-for="item in items"
+                :key="item.itemId"
+                class="item-list-item-wrapper"
+              >
+                <v-avatar
+                  class="item-list-item-avatar"
+                  @click="storeItemSelection(item.itemId)"
+                >
+                  <Item
+                    :item="item"
+                    :ratio="0.75"
+                    disable-link
+                    disable-tooltip
+                  />
+                </v-avatar>
+                <span class="item-list-item-name">{{ item.name }}</span>
+              </div>
+            </div>
+          </div>
+        </v-container>
       </v-stepper-content>
 
       <v-stepper-content :step="2">
         <h1 class="title mx-3 my-1">
           <v-layout align-center>
             <Item
+              v-if="selected.item"
               :item="selected.item"
               :ratio="0.75"
               disable-tooltip
@@ -261,12 +264,9 @@
       categorizedItems () {
         let all = get.item.all();
         const categories = ["MATERIAL", "CARD_EXP", "FURN"];
-        let results = [];
+        let results = {};
         for (let category of categories) {
-          results.push({
-            id: category,
-            items: all.filter(el => el.itemType === category)
-          })
+          results[category] = all.filter(el => el.itemType === category)
         }
         return results
       },
@@ -280,6 +280,15 @@
       }
     },
     watch: {
+      '$route': function (to, from) {
+        console.log("step route changed from", from.path, "to", to.path);
+        if (to.name === 'StatsByItem') {
+          this.step = 1;
+        }
+        if (to.name === 'StatsByItem_SelectedItem') {
+          this.step = 2;
+        }
+      },
       step: function(newValue, oldValue) {
         console.log("step changed from", oldValue, "to", newValue);
         switch (newValue) {
@@ -340,5 +349,22 @@
     display: flex;
     justify-content: flex-end;
     align-items: center;
+  }
+  .item-list-wrapper {
+    display: flex;
+    flex-direction: column;
+  }
+  .item-list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+  }
+  .item-list-item-wrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-width: 85px;
+    margin: 4px 0;
   }
 </style>
