@@ -150,8 +150,19 @@
             <td class="text-xs-right">
               {{ props.item.quantity }}
             </td>
-            <td class="text-xs-right">
+            <td class="text-xs-right charts-data-wrapper">
               {{ props.item.percentageText }}
+              <Charts
+                v-if="getStageItemTrend(props.item.stage.stageId)"
+                :interval="getStageItemTrendInterval(props.item.stage.stageId)"
+                :x-start="getStageItemTrendStartTime(props.item.stage.stageId)"
+                :show-dialog="expanded[props.item.stage.stageId]"
+                :data-keys="['quantity']"
+                sparkline-key="quantity"
+                sparkline-sub-key="times"
+                :data="getStageItemTrendResults(props.item.stage.stageId)"
+                :charts-id="props.item.stage.stageId"
+              />
             </td>
             <td class="text-xs-right">
               {{ props.item.apPPR }}
@@ -166,11 +177,13 @@
 <script>
   import get from '@/utils/getters'
   import Item from "@/components/Item";
+  import Charts from "@/components/Charts";
 
   export default {
     name: "StatsByItem",
-    components: {Item},
+    components: {Item, Charts},
     data: () => ({
+      expanded: {},
       step: 1,
       selected: {
         item: null
@@ -182,6 +195,23 @@
       }
     }),
     computed: {
+      trends () {
+        return this.$store.getters.trends
+      },
+      currentItemTrends () {
+        let temp = {}
+        if (this.trends) {
+          Object.keys(this.trends).map((key) => {
+            if (this.trends[key] && this.trends[key]['results'] && this.trends[key]['results'][this.$route.params.itemId]) {
+              temp[key] = {};
+              temp[key]['results'] = this.trends[key]['results'][this.$route.params.itemId];
+              temp[key]['interval'] = this.trends[key]['interval'];
+              temp[key]['startTime'] = this.trends[key]['startTime'];
+            }
+          });
+        }
+        return temp;
+      },
       tableHeaders () {
         return [
           {
@@ -270,6 +300,21 @@
       (this.$route.params.itemId) && (this.selected.item = get.item.byItemId(this.$route.params.itemId)) && (this.step += 1);
     },
     methods: {
+      getStageItemTrendInterval (stageId) {
+        let trend = this.getStageItemTrend(stageId)
+        return trend && trend.interval
+      },
+      getStageItemTrendStartTime (stageId) {
+        let trend = this.getStageItemTrend(stageId)
+        return trend && trend.startTime
+      },
+      getStageItemTrendResults (stageId) {
+        let trend = this.getStageItemTrend(stageId)
+        return trend && trend.results
+      },
+      getStageItemTrend (stageId) {
+        return this.currentItemTrends && this.currentItemTrends[stageId]
+      },
       storeItemSelection(itemId) {
         this.selected.item = get.item.byItemId(itemId);
         this.step += 1
@@ -290,5 +335,10 @@
 <style scoped>
   .v-table {
     background: transparent !important;
+  }
+  .charts-data-wrapper {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
   }
 </style>
