@@ -4,15 +4,8 @@
     :dark="dark"
   >
     <RandomBackground :interval="30" />
-    <v-snackbar
-      v-model="snackbar.enabled"
-      :color="snackbar.color"
-      :timeout="5000"
-    >
-      {{ snackbar.text }}
-    </v-snackbar>
     <v-dialog
-      :value="nowBuildNotice && nowBuildNoticeNotClosed"
+      :value="buildNotice && buildNoticeNotClosed"
       max-width="600"
       persistent
     >
@@ -63,40 +56,6 @@
         </v-card-text>
       </v-card>
     </v-dialog>
-    <v-dialog
-      v-model="auth.dialog"
-      max-width="300px"
-    >
-      <v-card class="pa-2">
-        <v-card-title>
-          <span class="headline">
-            {{ $t('menu.auth.login') }}
-          </span>
-        </v-card-title>
-        <v-card-text>
-          <v-text-field
-            v-model="auth.username"
-            :label="`${$t('menu.auth.userId')}*`"
-            required
-
-            hide-details
-            class="pb-2"
-
-            outline
-          />
-        </v-card-text>
-        <v-card-actions class="mx-2 pb-3">
-          <v-btn
-            color="primary"
-            block
-            :loading="auth.loading"
-            @click="login"
-          >
-            {{ $t('dialog.confirm') }}
-          </v-btn>
-        </v-card-actions>
-      </v-card>
-    </v-dialog>
     <v-navigation-drawer
       v-model="drawer"
       app
@@ -120,7 +79,7 @@
           <v-list-tile
             v-if="!route.children"
             :key="route.name"
-            :to="{ 'name': route.name }"
+            :to="route.path"
           >
             <v-list-tile-action>
               <v-icon>{{ route.meta.icon }}</v-icon>
@@ -166,6 +125,44 @@
             </v-list-tile>
           </v-list-group>
         </div>
+
+        <v-divider class="my-2" />
+
+        <v-layout
+          justify-end
+          row
+          wrap
+        >
+          <v-btn
+            icon
+            @click="dark = !dark"
+          >
+            <v-icon>mdi-invert-colors</v-icon>
+          </v-btn>
+          <v-menu
+            bottom
+            left
+          >
+            <template v-slot:activator="{ on }">
+              <v-btn
+                icon
+                v-on="on"
+              >
+                <v-icon>mdi-translate</v-icon>
+              </v-btn>
+            </template>
+
+            <v-list>
+              <v-list-tile
+                v-for="(locale, i) in localizations"
+                :key="i"
+                @click="changeLocale(locale.id)"
+              >
+                <v-list-tile-title>{{ locale.name }}</v-list-tile-title>
+              </v-list-tile>
+            </v-list>
+          </v-menu>
+        </v-layout>
       </v-list>
     </v-navigation-drawer>
     <v-toolbar
@@ -193,72 +190,7 @@
       </v-toolbar-title>
       <v-spacer />
 
-      <span
-        v-if="$store.getters.authed"
-        @mouseover="auth.buttonHovered = true"
-        @mouseleave="auth.buttonHovered = false"
-      >
-        <transition
-          name="slide-x-reverse-transition"
-          mode="out-in"
-          duration="30"
-        >
-          <v-btn
-            v-if="auth.buttonHovered"
-            style="overflow: hidden"
-            round
-            @click="logout"
-          >
-            <v-icon left>mdi-logout</v-icon>
-            {{ $t('auth.logout') }}
-          </v-btn>
-          <v-chip
-            v-else
-            class="mr-2"
-            style="box-shadow: 0 0 0 4px rgba(0, 0, 0, .3)"
-          >
-            {{ $store.getters.authUsername }}
-          </v-chip>
-        </transition>
-      </span>
-      <span v-else>
-        <v-btn
-          round
-          @click="auth.dialog = true"
-        ><v-icon left>mdi-exit-to-app</v-icon> {{ $t('auth.login') }}</v-btn>
-      </span>
-      
-      <v-btn
-        dark
-        icon
-        @click="dark = !dark"
-      >
-        <v-icon>mdi-invert-colors</v-icon>
-      </v-btn>
-      <v-menu
-        bottom
-        left
-      >
-        <template v-slot:activator="{ on }">
-          <v-btn
-            dark
-            icon
-            v-on="on"
-          >
-            <v-icon>mdi-translate</v-icon>
-          </v-btn>
-        </template>
-
-        <v-list>
-          <v-list-tile
-            v-for="(locale, i) in localizations"
-            :key="i"
-            @click="changeLocale(locale.id)"
-          >
-            <v-list-tile-title>{{ locale.name }}</v-list-tile-title>
-          </v-list-tile>
-        </v-list>
-      </v-menu>
+      <AccountManager />
     </v-toolbar>
     <v-content>
       <transition
@@ -284,6 +216,20 @@
         >
           <template v-slot:activator="{ on }">
             <span v-on="on">
+              <v-avatar size="32">
+                <svg
+                  version="1"
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="24"
+                  height="24"
+                  viewBox="5.5 -3.5 64 64"
+                ><circle
+                  fill="#FFF"
+                  cx="37.78"
+                  cy="28.5"
+                  r="28.84"
+                /><path d="M37.44-3.5c8.95 0 16.57 3.13 22.86 9.37 3 3.01 5.3 6.45 6.86 10.32A32.58 32.58 0 0 1 69.5 28.5c0 4.38-.77 8.49-2.32 12.31a29.38 29.38 0 0 1-6.82 10.15 32.89 32.89 0 0 1-10.63 7.08 31.86 31.86 0 0 1-24.43.03 32.19 32.19 0 0 1-10.4-7.03A31.39 31.39 0 0 1 5.5 28.5c0-4.23.8-8.3 2.43-12.2 1.62-3.9 3.97-7.4 7.06-10.49C21.07-.39 28.56-3.5 37.44-3.5zm.12 5.77c-7.32 0-13.47 2.56-18.46 7.66a27.51 27.51 0 0 0-5.8 8.6 25.2 25.2 0 0 0-2.03 9.97c0 3.43.68 6.73 2.03 9.91a26.5 26.5 0 0 0 5.8 8.52c2.51 2.5 5.35 4.4 8.51 5.71a25.83 25.83 0 0 0 19.92-.03 27.64 27.64 0 0 0 8.71-5.76c5-4.88 7.49-11 7.49-18.35 0-3.54-.65-6.9-1.95-10.06A25.59 25.59 0 0 0 56.13 10a25.32 25.32 0 0 0-18.57-7.72zm-.4 20.92l-4.3 2.23a4.4 4.4 0 0 0-1.68-2 3.8 3.8 0 0 0-1.85-.58c-2.86 0-4.29 1.89-4.29 5.66 0 1.72.36 3.09 1.08 4.11a3.66 3.66 0 0 0 3.2 1.55c1.87 0 3.19-.92 3.95-2.74l3.94 2a9.4 9.4 0 0 1-8.4 5.02c-2.85 0-5.16-.87-6.91-2.62-1.75-1.76-2.63-4.2-2.63-7.32 0-3.05.89-5.46 2.66-7.25a9.05 9.05 0 0 1 6.71-2.69c3.96 0 6.8 1.54 8.52 4.63zm18.45 0l-4.23 2.23a4.4 4.4 0 0 0-1.68-2 3.89 3.89 0 0 0-1.92-.58c-2.85 0-4.28 1.89-4.28 5.66 0 1.72.36 3.09 1.08 4.11a3.66 3.66 0 0 0 3.2 1.55c1.87 0 3.18-.92 3.94-2.74l4 2a9.82 9.82 0 0 1-3.54 3.68 9.23 9.23 0 0 1-4.85 1.34c-2.9 0-5.21-.87-6.94-2.62-1.74-1.76-2.6-4.2-2.6-7.32 0-3.05.88-5.46 2.65-7.25a9.05 9.05 0 0 1 6.72-2.69c3.96 0 6.78 1.54 8.45 4.63z" /></svg>
+              </v-avatar>
               <v-avatar size="32">
                 <svg
                   version="1"
@@ -327,21 +273,6 @@
         </v-tooltip>
       </a>
       <v-spacer />
-      <v-avatar size="32">
-        <svg
-          version="1"
-          xmlns="http://www.w3.org/2000/svg"
-          width="24"
-          height="24"
-          viewBox="5.5 -3.5 64 64"
-        ><circle
-          fill="#FFF"
-          cx="37.78"
-          cy="28.5"
-          r="28.84"
-        /><path d="M37.44-3.5c8.95 0 16.57 3.13 22.86 9.37 3 3.01 5.3 6.45 6.86 10.32A32.58 32.58 0 0 1 69.5 28.5c0 4.38-.77 8.49-2.32 12.31a29.38 29.38 0 0 1-6.82 10.15 32.89 32.89 0 0 1-10.63 7.08 31.86 31.86 0 0 1-24.43.03 32.19 32.19 0 0 1-10.4-7.03A31.39 31.39 0 0 1 5.5 28.5c0-4.23.8-8.3 2.43-12.2 1.62-3.9 3.97-7.4 7.06-10.49C21.07-.39 28.56-3.5 37.44-3.5zm.12 5.77c-7.32 0-13.47 2.56-18.46 7.66a27.51 27.51 0 0 0-5.8 8.6 25.2 25.2 0 0 0-2.03 9.97c0 3.43.68 6.73 2.03 9.91a26.5 26.5 0 0 0 5.8 8.52c2.51 2.5 5.35 4.4 8.51 5.71a25.83 25.83 0 0 0 19.92-.03 27.64 27.64 0 0 0 8.71-5.76c5-4.88 7.49-11 7.49-18.35 0-3.54-.65-6.9-1.95-10.06A25.59 25.59 0 0 0 56.13 10a25.32 25.32 0 0 0-18.57-7.72zm-.4 20.92l-4.3 2.23a4.4 4.4 0 0 0-1.68-2 3.8 3.8 0 0 0-1.85-.58c-2.86 0-4.29 1.89-4.29 5.66 0 1.72.36 3.09 1.08 4.11a3.66 3.66 0 0 0 3.2 1.55c1.87 0 3.19-.92 3.95-2.74l3.94 2a9.4 9.4 0 0 1-8.4 5.02c-2.85 0-5.16-.87-6.91-2.62-1.75-1.76-2.63-4.2-2.63-7.32 0-3.05.89-5.46 2.66-7.25a9.05 9.05 0 0 1 6.71-2.69c3.96 0 6.8 1.54 8.52 4.63zm18.45 0l-4.23 2.23a4.4 4.4 0 0 0-1.68-2 3.89 3.89 0 0 0-1.92-.58c-2.85 0-4.28 1.89-4.28 5.66 0 1.72.36 3.09 1.08 4.11a3.66 3.66 0 0 0 3.2 1.55c1.87 0 3.18-.92 3.94-2.74l4 2a9.82 9.82 0 0 1-3.54 3.68 9.23 9.23 0 0 1-4.85 1.34c-2.9 0-5.21-.87-6.94-2.62-1.74-1.76-2.6-4.2-2.6-7.32 0-3.05.88-5.46 2.65-7.25a9.05 9.05 0 0 1 6.72-2.69c3.96 0 6.78 1.54 8.45 4.63z" /></svg>
-      </v-avatar>
-      <span>{{ $t('meta.footer.credit', {date: new Date().getFullYear()}) }}</span>
     </v-footer>
   </v-app>
 </template>
@@ -350,11 +281,13 @@
   import service from '@/utils/service'
   import axios from 'axios'
   import RandomBackground from '@/components/RandomBackground'
-  import Cookies from 'js-cookie'
+  import AccountManager from '@/components/AccountManager'
+
 export default {
   name: 'App',
   components: {
-    RandomBackground
+    RandomBackground,
+    AccountManager
   },
   data () {
     return {
@@ -374,18 +307,7 @@ export default {
       ],
       prefetchingResources: false,
       drawer: true,
-      nowBuildNoticeNotClosed: true,
-      auth: {
-        buttonHovered: false,
-        dialog: false,
-        username: '',
-        loading: false
-      },
-      snackbar: {
-        enabled: false,
-        text: "",
-        color: ""
-      }
+      buildNoticeNotClosed: true
     }
   },
   computed: {
@@ -450,35 +372,6 @@ export default {
     },
     changeLocale (localeId) {
       this.$i18n.locale = localeId
-    },
-    login () {
-      this.auth.loading = true;
-      service.post("/users", this.auth.username, {headers: {'Content-Type': 'text/plain'}})
-        .then(() => {
-          this.$store.commit("authLogin", this.auth.username);
-          Cookies.set("userID", this.auth.username, {expires: 7, path: "/"});
-          console.log(Cookies);
-          this.snackbar = {
-            enabled: true,
-            color: "success",
-            text: this.$t('auth.success')
-          };
-          this.auth.dialog = false
-        })
-        .catch((err) => {
-          this.snackbar = {
-            enabled: true,
-            color: "error",
-            text: this.$t('auth.failed', {message: err.errorMessage})
-          }
-        })
-        .finally (() => {
-          this.auth.loading = false
-        })
-    },
-    logout () {
-      Cookies.remove("userID");
-      this.$store.commit("authLogout")
     }
   }
 }
