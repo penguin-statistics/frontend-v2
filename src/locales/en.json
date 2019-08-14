@@ -18,11 +18,7 @@
     },
     "planner": "Planner",
     "changelog": "Change Log",
-    "logo": "Penguin Statistics",
-    "auth": {
-      "login": "Login",
-      "userId": "User ID"
-    }
+    "logo": "Penguin Statistics"
   },
   "meta": {
     "loading": "Fetching application data...",
@@ -41,12 +37,6 @@
       "percentage": "Percentage",
       "apPPR": "Expected AP required every 1 item"
     }
-  },
-  "auth": {
-    "success": "Successfully logged in",
-    "failed": "Failed to log in: {message}",
-    "login": "Login",
-    "logout": "Logout"
   },
   "builds": {
     "development": {
