@@ -298,19 +298,21 @@
                 <td class="text-xs-right">
                   {{ props.item.quantity }}
                 </td>
-                <td class="text-xs-right charts-data-wrapper">
-                  {{ props.item.percentageText }}
-                  <Charts
-                    v-if="currentTrends"
-                    :interval="currentTrends && currentTrends.interval"
-                    :x-start="currentTrends && currentTrends.startTime"
-                    :show-dialog="expanded[props.item.item.itemId]"
-                    :data-keys="['quantity']"
-                    sparkline-key="quantity"
-                    sparkline-sub-key="times"
-                    :data="currentTrendsData && currentTrendsData[props.item.item.itemId]"
-                    :charts-id="props.item.item.itemId"
-                  />
+                <td class="text-xs-right">
+                  <div class="charts-data-wrapper">
+                    {{ props.item.percentageText }}
+                    <Charts
+                      v-if="currentTrends"
+                      :interval="currentTrends && currentTrends.interval"
+                      :x-start="currentTrends && currentTrends.startTime"
+                      :show-dialog="expanded[props.item.item.itemId]"
+                      :data-keys="['quantity']"
+                      sparkline-key="quantity"
+                      sparkline-sub-key="times"
+                      :data="currentTrendsData && currentTrendsData[props.item.item.itemId]"
+                      :charts-id="props.item.item.itemId"
+                    />
+                  </div>
                 </td>
                 <td class="text-xs-right">
                   {{ props.item.apPPR }}
