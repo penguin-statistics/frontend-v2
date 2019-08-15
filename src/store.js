@@ -2,7 +2,7 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 import createPersistedState from 'vuex-persistedstate'
 
-Vue.use(Vuex)
+Vue.use(Vuex);
 
 export default new Vuex.Store({
   plugins: [
@@ -12,6 +12,11 @@ export default new Vuex.Store({
   ],
   state: {
     data: {},
+    ajax: {
+      pending: false,
+      success: true,
+      error: null
+    },
     settings: {
       dark: true,
       locale: 'zh'
@@ -22,7 +27,7 @@ export default new Vuex.Store({
   },
   mutations: {
     store: (state, d) => {
-      state.data = {...d }
+      state.data = {...d}
     },
     switchDark(state, newState) {
       state.settings.dark = newState
@@ -35,6 +40,19 @@ export default new Vuex.Store({
     },
     authLogout(state) {
       state.auth.username = null
+    },
+    ajaxFired (state) {
+      state.ajax.pending = true;
+    },
+    ajaxSucceeded (state) {
+      state.ajax.pending = false;
+      state.ajax.success = true;
+      state.ajax.error = null
+    },
+    ajaxFailed (state, errorMessage) {
+      state.ajax.pending = false;
+      state.ajax.success = false;
+      state.ajax.error = errorMessage
     }
   },
   actions: {},
@@ -48,6 +66,12 @@ export default new Vuex.Store({
     // TODO: use vuex module refactor code
     trends: state => {
       return state.data && state.data.trends && state.data.trends.results
+    },
+    ajax: state => {
+      return state.ajax
+    },
+    dataByKey: (state) => (id) => {
+      return state.data[id]
     }
   }
 })
