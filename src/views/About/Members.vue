@@ -57,7 +57,7 @@
             />
           </v-list-tile-avatar>
 
-          <v-list-tile-content>
+          <v-list-tile-content class="collaborator-profile">
             <v-list-tile-title>
               {{ profile.name }}
             </v-list-tile-title>
@@ -70,6 +70,8 @@
             <v-layout
               align-center
               justify-end
+              wrap
+              fill-height
             >
               <v-tooltip
                 v-for="[id, url] in Object.entries(profile.socials)"
@@ -252,5 +254,9 @@
 <style scoped>
   .cursor-default {
     cursor: default;
+  }
+
+  .collaborator-profile {
+    min-width: 45%;
   }
 </style>
