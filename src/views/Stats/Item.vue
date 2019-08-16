@@ -35,7 +35,7 @@
   <v-stepper
     v-model="step"
     class="bkop-light transparent"
-    alt-labels
+    :alt-labels="!$vuetify.breakpoint.xsOnly"
   >
     <v-stepper-header>
       <v-stepper-step
