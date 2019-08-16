@@ -269,38 +269,55 @@
           class="elevation-0 transparentTable"
         >
           <template v-slot:items="props">
-            <v-hover>
-              <tr
-                slot-scope="{ hover }"
-                class="cursor-pointer"
-                @click="redirectItem(props.item.item.itemId)"
+            <tr>
+              <td
+                class="hovering"
+                :class="{ 'hovering--hovered': hover }"
               >
-                <td
-                  class="hovering"
-                  :class="{ 'hovering--hovered': hover }"
+                <span
+                  class="cursor-pointer"
+                  @click="redirectItem(props.item.item.itemId)"
                 >
-                  <v-avatar
-                    :size="30"
-                    class="mr-1"
+                  <v-hover>
+                    <span slot-scope="{ hover }">
+                      <v-avatar
+                        :size="30"
+                        class="mr-1"
+                      >
+                        <Item
+                          :item="props.item.item"
+                          :ratio="0.5"
+                          disable-tooltip
+                          disable-link
+                        />
+                      </v-avatar>
+                      {{ props.item.item.name }}
+                      <v-slide-x-transition>
+                        <v-icon
+                          v-if="hover || $vuetify.breakpoint.smAndDown"
+                          small
+                        >mdi-chevron-right</v-icon>
+                      </v-slide-x-transition>
+                    </span>
+                  </v-hover>
+                </span>
+              </td>
+              <td class="text-xs-right">
+                {{ props.item.times }}
+              </td>
+              <td class="text-xs-right">
+                {{ props.item.quantity }}
+              </td>
+              <td class="text-xs-right">
+                <div 
+                  class="charts-data-wrapper"
+                  fill-height
+                >
+                  {{ props.item.percentageText }}
+                  <div
+                    class="charts-wrapper cursor-pointer"
+                    fill-height
                   >
-                    <Item
-                      :item="props.item.item"
-                      :ratio="0.5"
-                      disable-tooltip
-                      disable-link
-                    />
-                  </v-avatar>
-                  {{ props.item.item.name }}
-                </td>
-                <td class="text-xs-right">
-                  {{ props.item.times }}
-                </td>
-                <td class="text-xs-right">
-                  {{ props.item.quantity }}
-                </td>
-                <td class="text-xs-right">
-                  <div class="charts-data-wrapper">
-                    {{ props.item.percentageText }}
                     <Charts
                       v-if="currentTrends"
                       :interval="currentTrends && currentTrends.interval"
@@ -313,12 +330,12 @@
                       :charts-id="props.item.item.itemId"
                     />
                   </div>
-                </td>
-                <td class="text-xs-right">
-                  {{ props.item.apPPR }}
-                </td>
-              </tr>
-            </v-hover>
+                </div>
+              </td>
+              <td class="text-xs-right">
+                {{ props.item.apPPR }}
+              </td>
+            </tr>
           </template>
         </v-data-table>
       </v-stepper-content>
@@ -502,6 +519,11 @@
   .charts-data-wrapper {
     display: flex;
     justify-content: flex-end;
+    align-items: center;
+  }
+
+  .charts-wrapper {
+    display: flex;
     align-items: center;
   }
 </style>

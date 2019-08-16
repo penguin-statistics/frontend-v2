@@ -155,17 +155,22 @@
             <td class="text-xs-right">
               <div class="charts-data-wrapper">
                 {{ props.item.percentageText }}
-                <Charts
-                  v-if="getStageItemTrend(props.item.stage.stageId)"
-                  :interval="getStageItemTrendInterval(props.item.stage.stageId)"
-                  :x-start="getStageItemTrendStartTime(props.item.stage.stageId)"
-                  :show-dialog="expanded[props.item.stage.stageId]"
-                  :data-keys="['quantity']"
-                  sparkline-key="quantity"
-                  sparkline-sub-key="times"
-                  :data="getStageItemTrendResults(props.item.stage.stageId)"
-                  :charts-id="props.item.stage.stageId"
-                />
+                <div
+                  class="charts-wrapper cursor-pointer"
+                  fill-height
+                >
+                  <Charts
+                    v-if="getStageItemTrend(props.item.stage.stageId)"
+                    :interval="getStageItemTrendInterval(props.item.stage.stageId)"
+                    :x-start="getStageItemTrendStartTime(props.item.stage.stageId)"
+                    :show-dialog="expanded[props.item.stage.stageId]"
+                    :data-keys="['quantity']"
+                    sparkline-key="quantity"
+                    sparkline-sub-key="times"
+                    :data="getStageItemTrendResults(props.item.stage.stageId)"
+                    :charts-id="props.item.stage.stageId"
+                  />
+                </div>
               </div>
             </td>
             <td class="text-xs-right">
@@ -355,6 +360,10 @@
   .charts-data-wrapper {
     display: flex;
     justify-content: flex-end;
+    align-items: center;
+  }
+  .charts-wrapper {
+    display: flex;
     align-items: center;
   }
   .item-list-wrapper {
