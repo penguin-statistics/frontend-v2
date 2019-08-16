@@ -68,9 +68,9 @@
             :key="name"
             class="item-list-wrapper"
           >
-            <v-subheader inset>
+            <div class="ml-2 my-2">
               {{ $t(`categories.${name}`) }}
-            </v-subheader>
+            </div>
             <div class="item-list">
               <div
                 v-for="item in items"
@@ -88,7 +88,6 @@
                     disable-tooltip
                   />
                 </v-avatar>
-                <span class="item-list-item-name">{{ item.name }}</span>
               </div>
             </div>
           </div>
@@ -274,6 +273,12 @@
         let results = {};
         for (let category of categories) {
           results[category] = all.filter(el => el.itemType === category)
+          // move 3003 to the last member
+          results[category].sort((a, b) => {
+            if (a.itemId === '3003') return 1;
+            if (b.itemId === '3003') return -1;
+            return a.sortId - b.sortId;
+          });
         }
         return results
       },
@@ -375,7 +380,7 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    min-width: 85px;
+    min-width: 62px;
     margin: 4px 0;
   }
 </style>
