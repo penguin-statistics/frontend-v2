@@ -10,8 +10,8 @@ export default {
         () => {
           store.commit("ajaxSucceeded")
         },
-        ({err}) => {
-          store.commit("ajaxFailed", err.errorMessage)
+        ({errorMessage}) => {
+          store.commit("ajaxFailed", errorMessage)
         }
       )
     }
