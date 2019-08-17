@@ -49,7 +49,8 @@ export default new Router({
       component: StatsLayout,
       meta: {
         icon: 'mdi-chart-pie',
-        i18n: 'menu.stats._name'
+        i18n: 'menu.stats._name',
+        active: true
       },
       children: [
         {
