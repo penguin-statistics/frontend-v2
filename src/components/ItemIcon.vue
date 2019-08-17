@@ -172,8 +172,6 @@ export default {
   display: inline-block;
   overflow: hidden;
   background-size: 360px 480px;
-
-  transition: all 225ms cubic-bezier(0.165, 0.84, 0.44, 1);
 }
 
 .item-icon--sprite:hover {
