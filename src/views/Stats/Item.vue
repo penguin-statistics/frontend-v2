@@ -7,6 +7,11 @@
       "result": {
         "name": "统计结果",
         "title": "{item} 统计结果"
+      },
+      "categories": {
+        "CARD_EXP": "作战记录",
+        "MATERIAL": "材料",
+        "FURN": "家具"
       }
     },
     "en": {
@@ -16,6 +21,11 @@
       "result": {
         "name": "Statistics",
         "title": "Statistics of {item}"
+      },
+      "categories": {
+        "CARD_EXP": "Experience Card",
+        "MATERIAL": "Material",
+        "FURN": "Furniture"
       }
     }
   }
@@ -25,7 +35,7 @@
   <v-stepper
     v-model="step"
     class="bkop-light transparent"
-    alt-labels
+    :alt-labels="!$vuetify.breakpoint.xsOnly"
   >
     <v-stepper-header>
       <v-stepper-step
@@ -49,54 +59,46 @@
 
     <v-stepper-items>
       <v-stepper-content
-        v-if="categorizedItems.length > 0"
+        v-if="categorizedItems"
         :step="1"
       >
-        <v-list
-          v-for="category in categorizedItems"
-          :key="category.id"
-          subheader
-          class="transparent"
-        >
-          <v-subheader inset>
-            {{ category.items[0].meta.name }}
-          </v-subheader>
-
-          <v-list-tile
-            v-for="item in category.items"
-            :key="item.itemId"
-            v-ripple
-            avatar
-            @click="storeItemSelection(item.itemId)"
+        <v-container>
+          <div
+            v-for="(items, name) in categorizedItems"
+            :key="name"
+            class="item-list-wrapper"
           >
-            <v-list-tile-avatar>
-              <v-avatar>
-                <Item
-                  :item="item"
-                  :ratio="0.75"
-                  disable-link
-                  disable-tooltip
-                />
-              </v-avatar>
-            </v-list-tile-avatar>
-
-            <v-list-tile-content>
-              <v-list-tile-title>{{ item.name }}</v-list-tile-title>
-            </v-list-tile-content>
-
-            <v-list-tile-action>
-              <v-icon color="grey lighten-1">
-                mdi-chevron-right
-              </v-icon>
-            </v-list-tile-action>
-          </v-list-tile>
-        </v-list>
+            <div class="ml-2 my-2">
+              {{ $t(`categories.${name}`) }}
+            </div>
+            <div class="item-list">
+              <div
+                v-for="item in items"
+                :key="item.itemId"
+                class="item-list-item-wrapper"
+              >
+                <v-avatar
+                  class="item-list-item-avatar"
+                  @click="storeItemSelection(item.itemId)"
+                >
+                  <Item
+                    :item="item"
+                    :ratio="0.75"
+                    disable-link
+                    disable-tooltip
+                  />
+                </v-avatar>
+              </div>
+            </div>
+          </div>
+        </v-container>
       </v-stepper-content>
 
       <v-stepper-content :step="2">
         <h1 class="title mx-3 my-1">
           <v-layout align-center>
             <Item
+              v-if="selected.item"
               :item="selected.item"
               :ratio="0.75"
               disable-tooltip
@@ -114,10 +116,16 @@
 
           must-sort
           hide-actions
-          class="elevation-0 transparentTable"
+          class="elevation-0 transparentTable stat-table"
+          :calculate-widths="true"
         >
           <template v-slot:items="props">
-            <td>
+            <td
+              :class="{
+                'px-3': $vuetify.breakpoint.xsOnly,
+                'stage-code-td-xs': $vuetify.breakpoint.xsOnly
+              }"
+            >
               <span
                 class="cursor-pointer"
                 @click="redirectStage(props.item)"
@@ -141,19 +149,52 @@
                 </v-hover>
               </span>
             </td>
-            <td class="text-xs-right">
+            <td
+              class="text-xs-center"
+              :class="{'px-3': $vuetify.breakpoint.xsOnly}"
+            >
               {{ props.item.stage.apCost }}
             </td>
-            <td class="text-xs-right">
+            <td
+              class="text-xs-center"
+              :class="{'px-3': $vuetify.breakpoint.xsOnly}"
+            >
               {{ props.item.times }}
             </td>
-            <td class="text-xs-right">
+            <td
+              class="text-xs-center"
+              :class="{'px-3': $vuetify.breakpoint.xsOnly}"
+            >
               {{ props.item.quantity }}
             </td>
-            <td class="text-xs-right">
-              {{ props.item.percentageText }}
+            <td
+              class="text-xs-center"
+              :class="{'px-3': $vuetify.breakpoint.xsOnly}"
+            >
+              <div class="charts-data-wrapper">
+                {{ props.item.percentageText }}
+                <div
+                  class="charts-wrapper cursor-pointer"
+                  fill-height
+                >
+                  <Charts
+                    v-if="getStageItemTrend(props.item.stage.stageId)"
+                    :interval="getStageItemTrendInterval(props.item.stage.stageId)"
+                    :x-start="getStageItemTrendStartTime(props.item.stage.stageId)"
+                    :show-dialog="expanded[props.item.stage.stageId]"
+                    :data-keys="['quantity']"
+                    sparkline-key="quantity"
+                    sparkline-sub-key="times"
+                    :data="getStageItemTrendResults(props.item.stage.stageId)"
+                    :charts-id="props.item.stage.stageId"
+                  />
+                </div>
+              </div>
             </td>
-            <td class="text-xs-right">
+            <td
+              class="text-xs-center"
+              :class="{'px-3': $vuetify.breakpoint.xsOnly}"
+            >
               {{ props.item.apPPR }}
             </td>
           </template>
@@ -166,11 +207,13 @@
 <script>
   import get from '@/utils/getters'
   import Item from "@/components/Item";
+  import Charts from "@/components/Charts";
 
   export default {
     name: "StatsByItem",
-    components: {Item},
+    components: {Item, Charts},
     data: () => ({
+      expanded: {},
       step: 1,
       selected: {
         item: null
@@ -182,6 +225,23 @@
       }
     }),
     computed: {
+      trends () {
+        return this.$store.getters.trends
+      },
+      currentItemTrends () {
+        let temp = {}
+        if (this.trends) {
+          Object.keys(this.trends).map((key) => {
+            if (this.trends[key] && this.trends[key]['results'] && this.trends[key]['results'][this.$route.params.itemId]) {
+              temp[key] = {};
+              temp[key]['results'] = this.trends[key]['results'][this.$route.params.itemId];
+              temp[key]['interval'] = this.trends[key]['interval'];
+              temp[key]['startTime'] = this.trends[key]['startTime'];
+            }
+          });
+        }
+        return temp;
+      },
       tableHeaders () {
         return [
           {
@@ -189,54 +249,52 @@
             value: "icon",
             align: "center",
             sortable: false,
-            width: "200"
+            width: "250px"
           },
           {
             text: this.$t('stats.headers.apCost'),
             value: "stage.apCost",
             align: "center",
             sortable: true,
-            width: "30",
           },
           {
             text: this.$t('stats.headers.times'),
             value: "times",
             align: "center",
-            sortable: true,
-            width: "30",
+            sortable: true
           },
           {
             text: this.$t('stats.headers.quantity'),
             value: "quantity",
             align: "center",
-            sortable: true,
-            width: "30",
+            sortable: true
           },
           {
             text: this.$t('stats.headers.percentage'),
             value: "percentage",
             align: "center",
-            sortable: true,
-            width: "1"
+            sortable: true
           },
           {
             text: this.$t('stats.headers.apPPR'),
             value: "apPPR",
             align: "center",
-            sortable: true,
-            width: "1"
+            sortable: true
           }
         ]
       },
       categorizedItems () {
         let all = get.item.all();
         const categories = ["MATERIAL", "CARD_EXP", "FURN"];
-        let results = [];
+        let results = {};
         for (let category of categories) {
-          results.push({
-            id: category,
-            items: all.filter(el => el.itemType === category)
-          })
+          results[category] = all.filter(el => el.itemType === category)
+          // move 3003 to the last member
+          results[category].sort((a, b) => {
+            if (a.itemId === '3003') return 1;
+            if (b.itemId === '3003') return -1;
+            return a.sortId - b.sortId;
+          });
         }
         return results
       },
@@ -250,6 +308,15 @@
       }
     },
     watch: {
+      '$route': function (to, from) {
+        console.log("step route changed from", from.path, "to", to.path);
+        if (to.name === 'StatsByItem') {
+          this.step = 1;
+        }
+        if (to.name === 'StatsByItem_SelectedItem') {
+          this.step = 2;
+        }
+      },
       step: function(newValue, oldValue) {
         console.log("step changed from", oldValue, "to", newValue);
         switch (newValue) {
@@ -270,6 +337,21 @@
       (this.$route.params.itemId) && (this.selected.item = get.item.byItemId(this.$route.params.itemId)) && (this.step += 1);
     },
     methods: {
+      getStageItemTrendInterval (stageId) {
+        let trend = this.getStageItemTrend(stageId)
+        return trend && trend.interval
+      },
+      getStageItemTrendStartTime (stageId) {
+        let trend = this.getStageItemTrend(stageId)
+        return trend && trend.startTime
+      },
+      getStageItemTrendResults (stageId) {
+        let trend = this.getStageItemTrend(stageId)
+        return trend && trend.results
+      },
+      getStageItemTrend (stageId) {
+        return this.currentItemTrends && this.currentItemTrends[stageId]
+      },
       storeItemSelection(itemId) {
         this.selected.item = get.item.byItemId(itemId);
         this.step += 1
@@ -290,5 +372,41 @@
 <style scoped>
   .v-table {
     background: transparent !important;
+  }
+  .charts-data-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .charts-wrapper {
+    display: flex;
+    align-items: center;
+  }
+  .item-list-wrapper {
+    display: flex;
+    flex-direction: column;
+  }
+  .item-list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+  }
+  .item-list-item-wrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-width: 62px;
+    margin: 4px 0;
+  }
+  >>>.stat-table th {
+    padding-left: 8px !important;
+    padding-right: 8px !important;
+  }
+  >>>.stat-table th i {
+    margin-left: -16px;
+  }
+  .stage-code-td-xs {
+    min-width: 122px;
   }
 </style>
