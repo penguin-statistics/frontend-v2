@@ -314,7 +314,6 @@
                 :key="stage.id"
                 fluid
                 grid-list-sm
-
                 class="py-0"
               >
                 <v-subheader>
@@ -337,7 +336,6 @@
                     :item="item"
                     :stage="selected.stage"
                     :bus="eventBus"
-
                     @change="handleChange"
                     @change:valid="validChange"
                   />
@@ -361,10 +359,8 @@
                   large
                   round
                   color="primary"
-
                   :loading="submitting"
                   :disabled="!typeLimitationComplied.complied"
-
                   @click="submit"
                 >
                   {{ $t('report.submit') }}
@@ -390,10 +386,6 @@
     components: {ItemStepper, Item},
     data: () => ({
       step: 1,
-      selected: {
-        zone: null,
-        stage: null
-      },
       snackbar: false,
       submitting: false,
       undoing: false,
@@ -403,6 +395,12 @@
       eventBus: new Vue()
     }),
     computed: {
+      selected() {
+        return {
+          zone: this.$route.params.zoneId,
+          stage: this.$route.params.stageId
+        };
+      },
       categorizedZones() {
         const categories = ["MAINLINE", "WEEKLY", "ACTIVITY"];
         let result = [];
@@ -477,19 +475,82 @@
       }
     },
     watch: {
-      results: function (value) {
-        this.eventBus.$emit("fulfilled", this.typeLimitationFulfilled(value.length))
+      results: function(value) {
+        this.eventBus.$emit(
+          "fulfilled",
+          this.typeLimitationFulfilled(value.length)
+        );
+      },
+      $route: function(to, from) {
+        console.log("step route changed from", from.path, "to", to.path);
+        if (to.name === "ReportByZone") {
+          this.step = 1;
+        }
+        if (to.name === "ReportByZone_SelectedZone") {
+          this.step = 2;
+        }
+        if (to.name === "ReportByZone_SelectedStage") {
+          this.step = 3;
+        }
+      },
+      step: function(newValue, oldValue) {
+        console.log("step changed from", oldValue, "to", newValue);
+        switch (newValue) {
+          case 1:
+            console.log("- [router go] index");
+            this.$router.push({ name: "ReportByZone" });
+            break;
+          case 2:
+            console.log("- [router go] zone", this.selected.zone);
+            this.$router.push({
+              name: "ReportByZone_SelectedZone",
+              params: { zoneId: this.selected.zone }
+            });
+            break;
+          case 3:
+            console.log("- [router go] stage", this.selected);
+            this.$router.push({
+              name: "ReportByZone_SelectedStage",
+              params: {
+                zoneId: this.selected.zone,
+                stageId: this.selected.stage
+              }
+            });
+            break;
+          default:
+            console.error(
+              "unexpected step number",
+              newValue,
+              "with [newStep, oldStep]",
+              [newValue, oldValue]
+            );
+        }
       }
+    },
+    beforeMount() {
+      this.$route.params.zoneId &&
+        (this.selected.zone = this.$route.params.zoneId) &&
+        (this.step += 1);
+      this.$route.params.stageId &&
+        (this.selected.stage = this.$route.params.stageId) &&
+        (this.step += 1);
     },
     methods: {
       storeZoneSelection(zoneId) {
-        this.step += 1;
-        this.selected.zone = zoneId
+        this.$router.push({
+          name: "ReportByZone_SelectedZone",
+          params: { zoneId: zoneId }
+        });
       },
       storeStageSelection(stageId) {
-        this.step += 1;
-        this.selected.stage = stageId;
         this.reset();
+        this.$router.push({
+          name: "ReportByZone_SelectedStage",
+          params: {
+            zoneId: this.selected.zone,
+            stageId: stageId
+          }
+        });
       },
       getItem(itemId) {
         return get.item.byItemId(itemId)
@@ -552,11 +613,11 @@
 </script>
 
 <style scoped>
-  .theme--light .zoneTitle {
-    color: #fff;
-  }
+.theme--light .zoneTitle {
+  color: #fff;
+}
 
-  .v-table {
-    background: transparent !important;
-  }
+.v-table {
+  background: transparent !important;
+}
 </style>
