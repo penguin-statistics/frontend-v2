@@ -20,8 +20,7 @@ Vue.use(Router);
 
 export default new Router({
   mode: 'history',
-  routes: [
-    {
+  routes: [{
       path: '/',
       name: 'home',
       component: Home,
@@ -41,7 +40,38 @@ export default new Router({
       meta: {
         icon: 'mdi-upload',
         i18n: 'menu.report'
-      }
+      },
+      children: [{
+          path: 'zone',
+          name: 'ReportByZone',
+          component: Report,
+          props: true,
+          meta: {
+            icon: 'mdi-cube',
+            i18n: 'menu.report'
+          },
+        },
+        {
+          path: 'zone/:zoneId',
+          name: 'ReportByZone_SelectedZone',
+          component: Report,
+          props: true,
+          meta: {
+            hide: true,
+            i18n: 'menu.report'
+          },
+        },
+        {
+          path: 'zone/:zoneId/:stageId',
+          name: 'ReportByZone_SelectedStage',
+          component: Report,
+          props: true,
+          meta: {
+            hide: true,
+            i18n: 'menu.report'
+          },
+        }
+      ]
     },
     {
       path: '/result',
@@ -51,8 +81,7 @@ export default new Router({
         icon: 'mdi-chart-pie',
         i18n: 'menu.stats._name'
       },
-      children: [
-        {
+      children: [{
           path: 'stage',
           name: 'StatsByStage',
           component: StatsByStage,
@@ -107,7 +136,7 @@ export default new Router({
     {
       path: '/planner',
       name: 'Planner',
-      beforeEnter () {
+      beforeEnter() {
         window.location.replace("https://planner.penguin-stats.io")
       },
       meta: {
@@ -124,8 +153,7 @@ export default new Router({
         icon: 'mdi-account-group',
         i18n: 'menu.about._name'
       },
-      children: [
-        {
+      children: [{
           path: 'members',
           name: 'AboutMembers',
           component: AboutMembers,
