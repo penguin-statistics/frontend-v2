@@ -41,6 +41,7 @@
       <v-list
         v-for="[key, value] in Object.entries(profiles)"
         :key="key"
+        class="bkop-light"
         two-line
       >
         <v-subheader :key="key">
