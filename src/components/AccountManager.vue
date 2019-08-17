@@ -64,10 +64,11 @@
             v-model="auth.username"
             :label="`${$t('userId')} *`"
             required
-
             hide-details
 
             outline
+
+            @keyup.enter.native="login"
           />
         </v-card-text>
         <v-card-actions class="mx-2 mb-3">
