@@ -266,13 +266,19 @@
 
           must-sort
           hide-actions
-          class="elevation-0 transparentTable"
+          class="elevation-0 transparentTable stat-table"
+          :calculate-widths="true"
         >
           <template v-slot:items="props">
             <tr>
               <td
                 class="hovering"
-                :class="{ 'hovering--hovered': hover }"
+                :class="{ 
+                  'hovering--hovered': hover, 
+                  'px-3': $vuetify.breakpoint.smAndDown,
+                  'item-name-td-xs': $vuetify.breakpoint.xsOnly,
+                  'item-name-td-sm': $vuetify.breakpoint.smOnly
+                }"
               >
                 <span
                   class="cursor-pointer"
@@ -291,10 +297,15 @@
                           disable-link
                         />
                       </v-avatar>
-                      {{ props.item.item.name }}
+                      <span
+                        v-if="!$vuetify.breakpoint.xsOnly"
+                        class="ml-2"
+                      >
+                        {{ props.item.item.name }}
+                      </span>
                       <v-slide-x-transition>
                         <v-icon
-                          v-if="hover || $vuetify.breakpoint.smAndDown"
+                          v-if="hover || $vuetify.breakpoint.smOnly"
                           small
                         >mdi-chevron-right</v-icon>
                       </v-slide-x-transition>
@@ -302,13 +313,22 @@
                   </v-hover>
                 </span>
               </td>
-              <td class="text-xs-right">
+              <td
+                class="text-xs-center"
+                :class="{'px-3': $vuetify.breakpoint.xsOnly}"
+              >
                 {{ props.item.times }}
               </td>
-              <td class="text-xs-right">
+              <td
+                class="text-xs-center"
+                :class="{'px-3': $vuetify.breakpoint.xsOnly}"
+              >
                 {{ props.item.quantity }}
               </td>
-              <td class="text-xs-right">
+              <td
+                class="text-xs-center"
+                :class="{'px-3': $vuetify.breakpoint.xsOnly}"
+              >
                 <div 
                   class="charts-data-wrapper"
                   fill-height
@@ -332,7 +352,10 @@
                   </div>
                 </div>
               </td>
-              <td class="text-xs-right">
+              <td
+                class="text-xs-center"
+                :class="{'px-3': $vuetify.breakpoint.xsOnly}"
+              >
                 {{ props.item.apPPR }}
               </td>
             </tr>
@@ -407,35 +430,31 @@
             value: "icon",
             align: "center",
             sortable: false,
-            width: 300
+            width: "250px"
           },
           {
             text: this.$t('stats.headers.times'),
             value: "times",
             align: "center",
-            sortable: true,
-            width: 40,
+            sortable: true
           },
           {
             text: this.$t('stats.headers.quantity'),
             value: "quantity",
             align: "center",
-            sortable: true,
-            width: 40,
+            sortable: true
           },
           {
             text: this.$t('stats.headers.percentage'),
             value: "percentage",
             align: "center",
-            sortable: true,
-            width: 65
+            sortable: true
           },
           {
             text: this.$t('stats.headers.apPPR'),
             value: "apPPR",
             align: "center",
-            sortable: true,
-            width: 80
+            sortable: true
           }
         ]
       }
@@ -518,12 +537,29 @@
 
   .charts-data-wrapper {
     display: flex;
-    justify-content: flex-end;
+    justify-content: center;
     align-items: center;
   }
 
   .charts-wrapper {
     display: flex;
     align-items: center;
+  }
+
+  >>>.stat-table th {
+    padding-left: 8px !important;
+    padding-right: 8px !important;
+  }
+
+  .item-name-td-xs {
+    min-width: 100px;
+  }
+
+  .item-name-td-sm {
+    min-width: 160px;
+  }
+
+  >>>.stat-table th i {
+    margin-left: -16px;
   }
 </style>

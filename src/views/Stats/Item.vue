@@ -116,10 +116,16 @@
 
           must-sort
           hide-actions
-          class="elevation-0 transparentTable"
+          class="elevation-0 transparentTable stat-table"
+          :calculate-widths="true"
         >
           <template v-slot:items="props">
-            <td>
+            <td
+              :class="{
+                'px-3': $vuetify.breakpoint.xsOnly,
+                'stage-code-td-xs': $vuetify.breakpoint.xsOnly
+              }"
+            >
               <span
                 class="cursor-pointer"
                 @click="redirectStage(props.item)"
@@ -143,16 +149,28 @@
                 </v-hover>
               </span>
             </td>
-            <td class="text-xs-right">
+            <td
+              class="text-xs-center"
+              :class="{'px-3': $vuetify.breakpoint.xsOnly}"
+            >
               {{ props.item.stage.apCost }}
             </td>
-            <td class="text-xs-right">
+            <td
+              class="text-xs-center"
+              :class="{'px-3': $vuetify.breakpoint.xsOnly}"
+            >
               {{ props.item.times }}
             </td>
-            <td class="text-xs-right">
+            <td
+              class="text-xs-center"
+              :class="{'px-3': $vuetify.breakpoint.xsOnly}"
+            >
               {{ props.item.quantity }}
             </td>
-            <td class="text-xs-right">
+            <td
+              class="text-xs-center"
+              :class="{'px-3': $vuetify.breakpoint.xsOnly}"
+            >
               <div class="charts-data-wrapper">
                 {{ props.item.percentageText }}
                 <div
@@ -173,7 +191,10 @@
                 </div>
               </div>
             </td>
-            <td class="text-xs-right">
+            <td
+              class="text-xs-center"
+              :class="{'px-3': $vuetify.breakpoint.xsOnly}"
+            >
               {{ props.item.apPPR }}
             </td>
           </template>
@@ -228,42 +249,37 @@
             value: "icon",
             align: "center",
             sortable: false,
-            width: "200"
+            width: "250px"
           },
           {
             text: this.$t('stats.headers.apCost'),
             value: "stage.apCost",
             align: "center",
             sortable: true,
-            width: "30",
           },
           {
             text: this.$t('stats.headers.times'),
             value: "times",
             align: "center",
-            sortable: true,
-            width: "30",
+            sortable: true
           },
           {
             text: this.$t('stats.headers.quantity'),
             value: "quantity",
             align: "center",
-            sortable: true,
-            width: "30",
+            sortable: true
           },
           {
             text: this.$t('stats.headers.percentage'),
             value: "percentage",
             align: "center",
-            sortable: true,
-            width: "1"
+            sortable: true
           },
           {
             text: this.$t('stats.headers.apPPR'),
             value: "apPPR",
             align: "center",
-            sortable: true,
-            width: "1"
+            sortable: true
           }
         ]
       },
@@ -359,7 +375,7 @@
   }
   .charts-data-wrapper {
     display: flex;
-    justify-content: flex-end;
+    justify-content: center;
     align-items: center;
   }
   .charts-wrapper {
@@ -382,5 +398,15 @@
     align-items: center;
     min-width: 62px;
     margin: 4px 0;
+  }
+  >>>.stat-table th {
+    padding-left: 8px !important;
+    padding-right: 8px !important;
+  }
+  >>>.stat-table th i {
+    margin-left: -16px;
+  }
+  .stage-code-td-xs {
+    min-width: 122px;
   }
 </style>
