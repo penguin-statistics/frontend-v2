@@ -120,8 +120,13 @@
                 <v-list-tile-title>{{ zone.zoneName }}</v-list-tile-title>
                 <v-list-tile-sub-title v-if="zone.isActivity">
                   <span
-                    :class="{ 'text--darken-1 font-weight-bold': true, 'red--text': zone.isOutdated, 'green--text': !zone.isOutdated }"
-                  >{{ zone.isOutdated ? "已结束" : "正在进行" }}</span>
+                    :class="{
+                      'text--darken-1 font-weight-bold': true,
+                      'red--text': zone.isOutdated,
+                      'green--text': !zone.isOutdated }"
+                  >
+                    {{ zone.isOutdated ? "已结束" : "正在进行" }}
+                  </span>
                   {{ $t('opensAt', zone.activityActiveTime) }}
                 </v-list-tile-sub-title>
               </v-list-tile-content>
@@ -263,7 +268,6 @@
           :headers="tableHeaders"
           :items="stageStats"
           :pagination.sync="tablePagination"
-
           must-sort
           hide-actions
           class="elevation-0 transparentTable stat-table"
@@ -274,7 +278,6 @@
               <td
                 class="hovering"
                 :class="{ 
-                  'hovering--hovered': hover, 
                   'px-3': $vuetify.breakpoint.smAndDown,
                   'item-name-td-xs': $vuetify.breakpoint.xsOnly,
                   'item-name-td-sm': $vuetify.breakpoint.smOnly
@@ -285,7 +288,12 @@
                   @click="redirectItem(props.item.item.itemId)"
                 >
                   <v-hover>
-                    <span slot-scope="{ hover }">
+                    <span
+                      slot-scope="{ hover }"
+                      :class="{
+                        'hovering--hovered': hover
+                      }"
+                    >
                       <v-avatar
                         :size="30"
                         class="mr-1"
@@ -329,7 +337,7 @@
                 class="text-xs-center"
                 :class="{'px-3': $vuetify.breakpoint.xsOnly}"
               >
-                <div 
+                <div
                   class="charts-data-wrapper"
                   fill-height
                 >
@@ -367,199 +375,221 @@
 </template>
 
 <script>
-  import get from '@/utils/getters'
-  import Item from "@/components/Item";
-  import Charts from "@/components/Charts";
+import get from "@/utils/getters";
+import Item from "@/components/Item";
+import Charts from "@/components/Charts";
 
-  export default {
-    name: "StatsByStage",
-    components: {Item, Charts},
-    data: () => ({
-      expanded: {},
-      step: 1,
-      selected: {
-        zone: null,
-        stage: null
-      },
-      tablePagination: {
-        rowsPerPage: -1,
-        sortBy: "percentage",
-        descending: true
-      }
-    }),
-    computed: {
-      trends () {
-        return this.$store.getters.trends
-      },
-      currentTrends () {
-        return this.trends[this.$route.params.stageId]
-      },
-      currentTrendsData () {
-        return this.currentTrends && this.currentTrends.results
-      },
-      categorizedZones() {
-        const categories = ["MAINLINE", "WEEKLY", "ACTIVITY"];
-        let result = [];
-        for (let category of categories) {
-          result.push({
-            id: category,
-            zones: get.zones.byType(category)
-          })
-        }
-        return result
-      },
-      selectedZone() {
-        if (!this.selected.zone) return {zoneName: ''};
-        return get.zones.byZoneId(this.selected.zone)
-      },
-      selectedStage() {
-        if (!this.selected.stage) return {};
-        return get.stages.byStageId(this.selected.stage)
-      },
-      stages() {
-        return get.stages.byParentZoneId(this.selected.zone)
-      },
-      stageStats() {
-        if (!this.selected.stage) return [];
-        return get.statistics.byStageId(this.selected.stage)
-      },
-      tableHeaders () {
-        return [
-          {
-            text: this.$t('stats.headers.item'),
-            value: "icon",
-            align: "center",
-            sortable: false,
-            width: "250px"
-          },
-          {
-            text: this.$t('stats.headers.times'),
-            value: "times",
-            align: "center",
-            sortable: true
-          },
-          {
-            text: this.$t('stats.headers.quantity'),
-            value: "quantity",
-            align: "center",
-            sortable: true
-          },
-          {
-            text: this.$t('stats.headers.percentage'),
-            value: "percentage",
-            align: "center",
-            sortable: true
-          },
-          {
-            text: this.$t('stats.headers.apPPR'),
-            value: "apPPR",
-            align: "center",
-            sortable: true
-          }
-        ]
-      }
+export default {
+  name: "StatsByStage",
+  components: { Item, Charts },
+  data: () => ({
+    expanded: {},
+    step: 1,
+    tablePagination: {
+      rowsPerPage: -1,
+      sortBy: "percentage",
+      descending: true
+    }
+  }),
+  computed: {
+    selected() {
+      return {
+        zone: this.$route.params.zoneId,
+        stage: this.$route.params.stageId
+      };
     },
-    watch: {
-      '$route': function (to, from) {
-        console.log("step route changed from", from.path, "to", to.path);
-        if (to.name === 'StatsByStage') {
-          this.step = 1;
+    // TODO: trends should use objectManager
+    trends() {
+      return this.$store.getters.trends;
+    },
+    currentTrends() {
+      return this.trends[this.$route.params.stageId];
+    },
+    currentTrendsData() {
+      return this.currentTrends && this.currentTrends.results;
+    },
+    categorizedZones() {
+      const categories = ["MAINLINE", "WEEKLY", "ACTIVITY"];
+      let result = [];
+      for (let category of categories) {
+        result.push({
+          id: category,
+          zones: get.zones.byType(category)
+        });
+      }
+      return result;
+    },
+    selectedZone() {
+      if (!this.selected.zone) return { zoneName: "" };
+      return get.zones.byZoneId(this.selected.zone);
+    },
+    selectedStage() {
+      if (!this.selected.stage) return {};
+      return get.stages.byStageId(this.selected.stage);
+    },
+    stages() {
+      return get.stages.byParentZoneId(this.selected.zone);
+    },
+    stageStats() {
+      if (!this.selected.stage) return [];
+      return get.statistics.byStageId(this.selected.stage);
+    },
+    tableHeaders() {
+      return [
+        {
+          text: this.$t("stats.headers.item"),
+          value: "icon",
+          align: "center",
+          sortable: false,
+          width: "250px"
+        },
+        {
+          text: this.$t("stats.headers.times"),
+          value: "times",
+          align: "center",
+          sortable: true
+        },
+        {
+          text: this.$t("stats.headers.quantity"),
+          value: "quantity",
+          align: "center",
+          sortable: true
+        },
+        {
+          text: this.$t("stats.headers.percentage"),
+          value: "percentage",
+          align: "center",
+          sortable: true
+        },
+        {
+          text: this.$t("stats.headers.apPPR"),
+          value: "apPPR",
+          align: "center",
+          sortable: true
         }
-        if (to.name === 'StatsByStage_SelectedZone') {
-          this.step = 2;
-        }
-        if (to.name === 'StatsByStage_SelectedBoth') {
-          this.step = 3;
-        }
-      },
-      step: function(newValue, oldValue) {
-        console.log("step changed from", oldValue, "to", newValue);
-        switch (newValue) {
-          case 1:
-            console.log("- [router go] index");
-            this.$router.push({name: "StatsByStage"});
-            break;
-          case 2:
-            console.log("- [router go] zone", this.selected.zone);
-            this.$router.push({name: "StatsByStage_SelectedZone", params: {zoneId: this.selected.zone}});
-            break;
-          case 3:
-            console.log("- [router go] stage", this.selected);
-            this.$router.push({
-              name: "StatsByStage_SelectedBoth",
-              params: {
-                zoneId: this.selected.zone,
-                stageId: this.selected.stage
-              }
-            });
-            break;
-          default:
-            console.error("unexpected step number", newValue, "with [newStep, oldStep]", [newValue, oldValue])
-        }
+      ];
+    }
+  },
+  watch: {
+    $route: function(to, from) {
+      console.log("step route changed from", from.path, "to", to.path);
+      if (to.name === "StatsByStage") {
+        this.step = 1;
+      }
+      if (to.name === "StatsByStage_SelectedZone") {
+        this.step = 2;
+      }
+      if (to.name === "StatsByStage_SelectedBoth") {
+        this.step = 3;
       }
     },
-    beforeMount() {
-      (this.$route.params.zoneId) && (this.selected.zone = this.$route.params.zoneId) && (this.step += 1);
-      (this.$route.params.stageId) && (this.selected.stage = this.$route.params.stageId) && (this.step += 1);
-    },
-    methods: {
-      redirectItem(itemId) {
-        this.$router.push({
-          name: "StatsByItem_SelectedItem",
-          params: {
-            itemId
-          }
-        })
-      },
-      storeZoneSelection(zoneId) {
-        this.step += 1;
-        this.selected.zone = zoneId
-      },
-      storeStageSelection(stageId) {
-        this.step += 1;
-        this.selected.stage = stageId
-      },
-      getItem(itemId) {
-        return get.item.byItemId(itemId)
+    step: function(newValue, oldValue) {
+      console.log("step changed from", oldValue, "to", newValue);
+      switch (newValue) {
+        case 1:
+          console.log("- [router go] index");
+          this.$router.push({ name: "StatsByStage" });
+          break;
+        case 2:
+          console.log("- [router go] zone", this.selected.zone);
+          this.$router.push({
+            name: "StatsByStage_SelectedZone",
+            params: { zoneId: this.selected.zone }
+          });
+          break;
+        case 3:
+          console.log("- [router go] stage", this.selected);
+          this.$router.push({
+            name: "StatsByStage_SelectedBoth",
+            params: {
+              zoneId: this.selected.zone,
+              stageId: this.selected.stage
+            }
+          });
+          break;
+        default:
+          console.error(
+            "unexpected step number",
+            newValue,
+            "with [newStep, oldStep]",
+            [newValue, oldValue]
+          );
       }
     }
+  },
+  beforeMount() {
+    this.$route.params.zoneId &&
+      (this.selected.zone = this.$route.params.zoneId) &&
+      (this.step += 1);
+    this.$route.params.stageId &&
+      (this.selected.stage = this.$route.params.stageId) &&
+      (this.step += 1);
+  },
+  methods: {
+    redirectItem(itemId) {
+      this.$router.push({
+        name: "StatsByItem_SelectedItem",
+        params: {
+          itemId
+        }
+      });
+    },
+    storeZoneSelection(zoneId) {
+      this.$router.push({
+        name: "StatsByStage_SelectedZone",
+        params: { zoneId: zoneId }
+      });
+    },
+    storeStageSelection(stageId) {
+      this.$router.push({
+        name: "StatsByStage_SelectedBoth",
+        params: {
+          zoneId: this.selected.zone,
+          stageId: stageId
+        }
+      });
+    },
+    getItem(itemId) {
+      return get.item.byItemId(itemId);
+    }
   }
+};
 </script>
 
 <style scoped>
-  .theme--light .zoneTitle {
-    color: #fff;
-  }
+.theme--light .zoneTitle {
+  color: #fff;
+}
 
-  .v-table {
-    background: transparent !important;
-  }
+.v-table {
+  background: transparent !important;
+}
 
-  .charts-data-wrapper {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
+.charts-data-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 
-  .charts-wrapper {
-    display: flex;
-    align-items: center;
-  }
+.charts-wrapper {
+  display: flex;
+  align-items: center;
+}
 
-  >>>.stat-table th {
-    padding-left: 8px !important;
-    padding-right: 8px !important;
-  }
+>>> .stat-table th {
+  padding-left: 8px !important;
+  padding-right: 8px !important;
+}
 
-  .item-name-td-xs {
-    min-width: 100px;
-  }
+.item-name-td-xs {
+  min-width: 100px;
+}
 
-  .item-name-td-sm {
-    min-width: 160px;
-  }
+.item-name-td-sm {
+  min-width: 160px;
+}
 
-  >>>.stat-table th i {
-    margin-left: -16px;
-  }
+>>> .stat-table th i {
+  margin-left: -16px;
+}
 </style>
