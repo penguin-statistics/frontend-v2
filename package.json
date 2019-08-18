@@ -13,7 +13,7 @@
     "dayjs": "^1.8.15",
     "idb": "^4.0.4",
     "js-cookie": "^2.2.1",
-    "plotly.js-dist": "^1.49.1",
+    "plotly.js": "^1.49.2",
     "vue": "^2.6.10",
     "vue-analytics": "^5.17.0",
     "vue-i18n": "^8.0.0",

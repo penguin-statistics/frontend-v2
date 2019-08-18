@@ -46,7 +46,7 @@
 </template>
 
 <script>
-import Plotly from "plotly.js-dist";
+import Plotly from "@/vendors/plotly";
 import formatter from "@/utils/timeFormatter";
 export default {
   name: "Charts",
