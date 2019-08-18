@@ -297,7 +297,7 @@
             <v-stepper-content :step="3">
               <v-alert
                 :value="true"
-                type="warning"
+                color="warning"
                 class="mb-3"
               >
                 <ol>
@@ -308,6 +308,10 @@
                   <li><strong>不要</strong>汇报首次通关奖励，谢谢！</li>
                 </ol>
               </v-alert>
+
+              <v-container v-if="!$vuetify.breakpoint.smAndDown">
+                左键增加，右键减少
+              </v-container>
 
               <v-container
                 v-for="stage in stageItems"
@@ -355,16 +359,37 @@
                   {{ $t('report.unable') }}{{ typeLimitationComplied.message }}
                 </v-alert>
 
-                <v-btn
-                  large
-                  round
-                  color="primary"
-                  :loading="submitting"
-                  :disabled="!typeLimitationComplied.complied"
-                  @click="submit"
+                <v-flex
+                  xs12
+                  sm8
                 >
-                  {{ $t('report.submit') }}
-                </v-btn>
+                  <v-layout
+                    row
+                    wrap
+                    justify-space-around
+                  >
+                    <v-btn
+                      large
+                      round
+                      color="error"
+                      :disabled="!typeLimitationComplied.complied"
+                      @click="reset"
+                    >
+                      清空
+                    </v-btn>
+
+                    <v-btn
+                      large
+                      round
+                      color="primary"
+                      :loading="submitting"
+                      :disabled="!typeLimitationComplied.complied"
+                      @click="submit"
+                    >
+                      {{ $t('report.submit') }}
+                    </v-btn>
+                  </v-layout>
+                </v-flex>
               </v-flex>
             </v-stepper-content>
           </v-stepper-items>

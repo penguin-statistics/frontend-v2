@@ -25,98 +25,48 @@
     wrap
     align-center
     justify-start
+    class="px-1 pb-1"
   >
     <v-flex>
+      <!-- <v-badge
+        color="red"
+        :value="quantity > 0"
+        class="cursor-pointer reduction-badge"
+      >
+        <template v-slot:badge>
+          <span @click="reduction">
+            <v-icon>mdi-minus</v-icon>
+          </span>
+        </template> -->
       <v-badge
         right
         bottom
         color="secondary"
         overlap
         :value="quantity > 0"
-
         transition="scale-transition"
         origin="top left"
+        class="cursor-pointer"
       >
         <template v-slot:badge>
-          <span>
+          <span class="disabled">
             {{ quantity }}
           </span>
         </template>
-        <Item
-          :item="item"
-          :ratio="1"
-          disable-link
-        />
-      </v-badge>
-    </v-flex>
-
-    <v-flex>
-      <v-layout
-        column
-        wrap
-        align-start
-        justify-center
-      >
-        <v-flex xs8>
-          <v-btn
-            icon
-            color="success"
-            class="stepper-button black--text"
-            large
-
-            :disabled="disable.actual || exceedMax"
-            @click="increment"
-          >
-            <v-icon>mdi-plus</v-icon>
-          </v-btn>
-        </v-flex>
-
-        <v-slide-y-transition
-          mode="in-out"
-          hide-on-leave
+        <div
+          @click.left="increment"
+          @click.right.prevent="reduction"
         >
-          <v-flex
-            v-if="quantity > 0"
-            xs4
-          >
-            <v-btn
-              icon
-              color="error"
-              class="stepper-button black--text"
-              small
-
-              :disabled="disable.actual || exceedMin"
-              @click="reduction"
-            >
-              <v-icon>mdi-minus</v-icon>
-            </v-btn>
-          </v-flex>
-        </v-slide-y-transition>
-      </v-layout>
+          <Item
+            :item="item"
+            :ratio="1"
+            disable-link
+            :disable-tooltip="true"
+          />
+        </div>
+      </v-badge>
+      <!-- </v-badge> -->
     </v-flex>
-    <!--    <v-text-field-->
-    <!--      ref="quantityInput"-->
-    <!--      v-model="quantity"-->
-
-    <!--      label="数量"-->
-    <!--      type="number"-->
-
-    <!--      outline-->
-
-    <!--      :rules="validationRules"-->
-    <!--      append-icon="mdi-minus"-->
-    <!--      :disabled="disable.actual"-->
-
-    <!--      prepend-inner-icon="mdi-plus"-->
-
-    <!--      @click:append="reduction(item.itemId)"-->
-
-    <!--      @click:prepend-inner="increment(item.itemId)"-->
-
-    <!--      @update:error="status => error = status"-->
-    <!--    >-->
-    <!--      <template v-slot:prepend />-->
-    <!--    </v-text-field>-->
   </v-layout>
 </template>
 
@@ -143,7 +93,7 @@
         required: true
       }
     },
-    data () {
+    data() {
       return {
         rawQuantity: 0,
         disable: {
@@ -155,33 +105,33 @@
     },
     computed: {
       quantity: {
-        get () {
+        get() {
           return this.rawQuantity
         },
-        set (v) {
+        set(v) {
           this.rawQuantity = parseInt(v)
         }
       },
-      limitations () {
+      limitations() {
         return get.limitations.byStageId(this.stage);
       },
-      validationRules () {
+      validationRules() {
         let limitation = this.limitations.itemQuantityBounds.find(v => v.itemId === this.item.itemId);
         const gte = (value) => {
           return (compare) => {
-            return compare >= value ? true : this.$t('rules.gte', {item: this.item.name, quantity: value})
+            return compare >= value ? true : this.$t('rules.gte', { item: this.item.name, quantity: value })
           }
         };
 
         const lte = (value) => {
           return (compare) => {
-            return compare <= value ? true : this.$t('rules.lte', {item: this.item.name, quantity: value})
+            return compare <= value ? true : this.$t('rules.lte', { item: this.item.name, quantity: value })
           }
         };
 
         const notIncludes = (values) => {
           return (compare) => {
-            return values.indexOf(compare) === -1 ? true : this.$t('rules.not', {item: this.item.name, quantity: values.join(", ")})
+            return values.indexOf(compare) === -1 ? true : this.$t('rules.not', { item: this.item.name, quantity: values.join(", ") })
           }
         };
 
@@ -196,13 +146,13 @@
           isNatural
         ]
       },
-      valid () {
+      valid() {
         return this.validForm(this.quantity)
       },
-      exceedMax () {
+      exceedMax() {
         return !this.validForm(this.quantity + 1);
       },
-      exceedMin () {
+      exceedMin() {
         return !this.validForm(this.quantity - 1);
       }
     },
@@ -217,20 +167,20 @@
         this.$emit("change:valid", value)
       }
     },
-    mounted () {
+    mounted() {
       this.bus.$on("fulfilled", this.changeDisable);
       this.bus.$on("reset", this.reset)
     },
     methods: {
-      increment () {
+      increment() {
         this.validForm(this.quantity + 1) && (this.quantity += 1);
       },
-      reduction () {
+      reduction() {
         this.quantity = parseInt(this.quantity);
         this.quantity > 0 && (this.quantity -= 1);
         this.quantity <= 0 && (this.quantity = 0);
       },
-      changeDisable (fulfilled) {
+      changeDisable(fulfilled) {
         if (fulfilled) {
           this.disable.should = true;
           if (this.quantity === 0 && this.valid) {
@@ -241,10 +191,10 @@
           this.disable.actual = false
         }
       },
-      reset () {
+      reset() {
         this.quantity = 0
       },
-      validForm (quantity) {
+      validForm(quantity) {
         for (let rule of this.validationRules) {
           if (rule(quantity) !== true) return false
         }
@@ -269,4 +219,13 @@
     color: black !important;
     transition: background-color 150ms cubic-bezier(.25,.8,.5,1) !important;
   }
+
+  .cursor-pointer {
+    cursor: pointer;
+  }
+
+  /* ::v-deep .reduction-badge span.v-badge__badge.red {
+    top: -5px;
+    right: -5px;
+  } */
 </style>
