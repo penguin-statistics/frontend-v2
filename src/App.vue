@@ -174,7 +174,7 @@
       <v-toolbar-side-icon @click.stop="drawer = !drawer" />
       <v-toolbar-title>
         <transition
-          name="fade"
+          name="fade-transition"
           mode="out-in"
         >
           <v-avatar
