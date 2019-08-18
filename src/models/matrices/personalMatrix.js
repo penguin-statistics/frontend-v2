@@ -13,7 +13,7 @@ class PersonalMatrixObjectManager extends MatrixObjectManager {
    * @param {string} stageId the ID of the stage
    * @returns {Object.<number, number>} corresponding drop matrix item
    */
-  _getOrCreateDrop (itemId, stageId) {
+  _getOrCreateDrop(itemId, stageId) {
     let item = this.cache.data.find(v => v.itemId === itemId && v.stageId === stageId);
     if (item === undefined) {
       this.cache.data.push({
@@ -32,7 +32,7 @@ class PersonalMatrixObjectManager extends MatrixObjectManager {
    * @param {Object.<number, number>[]} drops
    * @param {string} stageId
    */
-  add ({drops, stageId}) {
+  add({ drops, stageId }) {
     let context = this;
     for (let drop of drops) {
       let item = context._getOrCreateDrop(drop.itemId, stageId);
@@ -43,8 +43,8 @@ class PersonalMatrixObjectManager extends MatrixObjectManager {
 }
 
 const personalMatrix = new PersonalMatrixObjectManager({
+  name: 'personalMatrix',
   api: '/result/matrix?is_personal=true',
-  transform: object => object,
   ttl: 1000 * 60 * 60 * 24, // 24 hours
   ajaxHooks: commons.defaultAjaxHooks
 });

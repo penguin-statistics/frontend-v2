@@ -226,29 +226,8 @@ export default {
         item: get.item.byItemId(this.$route.params.itemId)
       };
     },
-    // TODO: trends should use objectManager
-    trends() {
-      return this.$store.getters.trends;
-    },
     currentItemTrends() {
-      let temp = {};
-      if (this.trends) {
-        Object.keys(this.trends).map(key => {
-          if (
-            this.trends[key] &&
-            this.trends[key]["results"] &&
-            this.trends[key]["results"][this.$route.params.itemId]
-          ) {
-            temp[key] = {};
-            temp[key]["results"] = this.trends[key]["results"][
-              this.$route.params.itemId
-            ];
-            temp[key]["interval"] = this.trends[key]["interval"];
-            temp[key]["startTime"] = this.trends[key]["startTime"];
-          }
-        });
-      }
-      return temp;
+      return get.trends.byItemId(this.$route.params.itemId)
     },
     tableHeaders() {
       return [

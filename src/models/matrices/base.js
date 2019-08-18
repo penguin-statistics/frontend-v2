@@ -5,8 +5,9 @@ import zones from '@/models/zones'
 
 class MatrixObjectManager extends ObjectManager {
   /** Creates a matrix object manager */
-  constructor({api, transform, ttl, ajaxHooks}) {
+  constructor({ name, api, transform, ttl, ajaxHooks }) {
     super({
+      name,
       api,
       transform: [
         (object) => {

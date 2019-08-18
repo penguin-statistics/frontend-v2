@@ -398,12 +398,8 @@ export default {
         stage: this.$route.params.stageId
       };
     },
-    // TODO: trends should use objectManager
-    trends() {
-      return this.$store.getters.trends;
-    },
     currentTrends() {
-      return this.trends[this.$route.params.stageId];
+      return get.trends.byStageId(this.$route.params.stageId);
     },
     currentTrendsData() {
       return this.currentTrends && this.currentTrends.results;

@@ -2,6 +2,13 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 import createPersistedState from 'vuex-persistedstate'
 
+import itemsManager from '@/models/items'
+import limitationsManager from '@/models/limitations'
+import stagesManager from '@/models/stages'
+import zonesManager from '@/models/zones'
+import trendsManager from '@/models/trends'
+import globalMatrixManager from '@/models/matrices/globalMatrix'
+
 Vue.use(Vuex);
 
 export default new Vuex.Store({
@@ -23,11 +30,15 @@ export default new Vuex.Store({
     },
     auth: {
       username: null
-    }
+    },
+    cacheUpdateAt: {}
   },
   mutations: {
     store: (state, d) => {
-      state.data = {...d}
+      state.data = Object.assign(state.data, d);
+    },
+    storeCacheUpdateAt: (state, d) => {
+      state.cacheUpdateAt = Object.assign(state.cacheUpdateAt, d);
     },
     switchDark(state, newState) {
       state.settings.dark = newState
@@ -41,21 +52,30 @@ export default new Vuex.Store({
     authLogout(state) {
       state.auth.username = null
     },
-    ajaxFired (state) {
+    ajaxFired(state) {
       state.ajax.pending = true;
     },
-    ajaxSucceeded (state) {
+    ajaxSucceeded(state) {
       state.ajax.pending = false;
       state.ajax.success = true;
       state.ajax.error = null
     },
-    ajaxFailed (state, errorMessage) {
+    ajaxFailed(state, errorMessage) {
       state.ajax.pending = false;
       state.ajax.success = false;
       state.ajax.error = errorMessage
     }
   },
-  actions: {},
+  actions: {
+    async fetchData() {
+      await itemsManager.get()
+      await limitationsManager.get()
+      await stagesManager.get()
+      await zonesManager.get()
+      await trendsManager.get()
+      await globalMatrixManager.get()
+    }
+  },
   getters: {
     authed: state => {
       return !!state.auth.username
@@ -63,15 +83,14 @@ export default new Vuex.Store({
     authUsername: state => {
       return state.auth.username || ''
     },
-    // TODO: use vuex module refactor code
-    trends: state => {
-      return state.data && state.data.trends && state.data.trends.results
-    },
     ajax: state => {
       return state.ajax
     },
     dataByKey: (state) => (id) => {
       return state.data[id]
+    },
+    cacheUpdateAt: (state) => (name) => {
+      return state.cacheUpdateAt[name]
     }
   }
 })
