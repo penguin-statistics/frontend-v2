@@ -27,46 +27,72 @@
     justify-start
   >
     <v-flex>
-      <Item
-        :item="item"
-        :ratio="0.75"
-        disable-link
-      />
+      <v-badge
+        right
+        bottom
+        color="secondary"
+        overlap
+        :value="quantity > 0"
+
+        transition="scale-transition"
+        origin="top left"
+      >
+        <template v-slot:badge>
+          <span>
+            {{ quantity }}
+          </span>
+        </template>
+        <Item
+          :item="item"
+          :ratio="1"
+          disable-link
+        />
+      </v-badge>
     </v-flex>
 
     <v-flex>
-      <v-btn
-        flat
-        icon
-        class="stepper-button"
-
-        :disabled="disable.actual || exceedMax"
-        @click="increment"
+      <v-layout
+        column
+        wrap
+        align-start
+        justify-center
       >
-        <v-icon>mdi-plus</v-icon>
-      </v-btn>
-    </v-flex>
+        <v-flex xs8>
+          <v-btn
+            icon
+            color="success"
+            class="stepper-button black--text"
+            large
 
-    <v-flex>
-      <span
-        class="quantity title"
-        :class="{ 'grey--text disabled': disable.actual }"
-      >
-        {{ quantity }}
-      </span>
-    </v-flex>
+            :disabled="disable.actual || exceedMax"
+            @click="increment"
+          >
+            <v-icon>mdi-plus</v-icon>
+          </v-btn>
+        </v-flex>
 
-    <v-flex>
-      <v-btn
-        flat
-        icon
-        class="stepper-button"
+        <v-slide-y-transition
+          mode="in-out"
+          hide-on-leave
+        >
+          <v-flex
+            v-if="quantity > 0"
+            xs4
+          >
+            <v-btn
+              icon
+              color="error"
+              class="stepper-button black--text"
+              small
 
-        :disabled="disable.actual || exceedMin"
-        @click="reduction"
-      >
-        <v-icon>mdi-minus</v-icon>
-      </v-btn>
+              :disabled="disable.actual || exceedMin"
+              @click="reduction"
+            >
+              <v-icon>mdi-minus</v-icon>
+            </v-btn>
+          </v-flex>
+        </v-slide-y-transition>
+      </v-layout>
     </v-flex>
     <!--    <v-text-field-->
     <!--      ref="quantityInput"-->
@@ -239,6 +265,8 @@
   }
 
   .stepper-button {
-    transition: all 150ms cubic-bezier(.25,.8,.5,1) !important
+    padding: 0;
+    color: black !important;
+    transition: background-color 150ms cubic-bezier(.25,.8,.5,1) !important;
   }
 </style>
