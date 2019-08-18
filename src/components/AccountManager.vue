@@ -232,6 +232,7 @@
           color: "success",
           text: this.$t('loggedOut')
         };
+        this.auth.logoutPrompt = false;
       }
     },
   }

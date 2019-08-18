@@ -113,14 +113,13 @@
           :headers="tableHeaders"
           :items="itemStagesStats"
           :pagination.sync="tablePagination"
-
           must-sort
           hide-actions
           class="elevation-0 transparentTable stat-table"
           :calculate-widths="true"
         >
           <template v-slot:items="props">
-            <td
+            <td 
               :class="{
                 'px-3': $vuetify.breakpoint.xsOnly,
                 'stage-code-td-xs': $vuetify.breakpoint.xsOnly
@@ -205,208 +204,229 @@
 </template>
 
 <script>
-  import get from '@/utils/getters'
-  import Item from "@/components/Item";
-  import Charts from "@/components/Charts";
+import get from "@/utils/getters";
+import Item from "@/components/Item";
+import Charts from "@/components/Charts";
 
-  export default {
-    name: "StatsByItem",
-    components: {Item, Charts},
-    data: () => ({
-      expanded: {},
-      step: 1,
-      selected: {
-        item: null
-      },
-      tablePagination: {
-        rowsPerPage: -1,
-        sortBy: "percentage",
-        descending: true
-      }
-    }),
-    computed: {
-      trends () {
-        return this.$store.getters.trends
-      },
-      currentItemTrends () {
-        let temp = {}
-        if (this.trends) {
-          Object.keys(this.trends).map((key) => {
-            if (this.trends[key] && this.trends[key]['results'] && this.trends[key]['results'][this.$route.params.itemId]) {
-              temp[key] = {};
-              temp[key]['results'] = this.trends[key]['results'][this.$route.params.itemId];
-              temp[key]['interval'] = this.trends[key]['interval'];
-              temp[key]['startTime'] = this.trends[key]['startTime'];
-            }
-          });
-        }
-        return temp;
-      },
-      tableHeaders () {
-        return [
-          {
-            text: this.$t('stats.headers.stage'),
-            value: "icon",
-            align: "center",
-            sortable: false,
-            width: "250px"
-          },
-          {
-            text: this.$t('stats.headers.apCost'),
-            value: "stage.apCost",
-            align: "center",
-            sortable: true,
-          },
-          {
-            text: this.$t('stats.headers.times'),
-            value: "times",
-            align: "center",
-            sortable: true
-          },
-          {
-            text: this.$t('stats.headers.quantity'),
-            value: "quantity",
-            align: "center",
-            sortable: true
-          },
-          {
-            text: this.$t('stats.headers.percentage'),
-            value: "percentage",
-            align: "center",
-            sortable: true
-          },
-          {
-            text: this.$t('stats.headers.apPPR'),
-            value: "apPPR",
-            align: "center",
-            sortable: true
+export default {
+  name: "StatsByItem",
+  components: { Item, Charts },
+  data: () => ({
+    expanded: {},
+    step: 1,
+    tablePagination: {
+      rowsPerPage: -1,
+      sortBy: "percentage",
+      descending: true
+    }
+  }),
+  computed: {
+    selected() {
+      return {
+        item: get.item.byItemId(this.$route.params.itemId)
+      };
+    },
+    // TODO: trends should use objectManager
+    trends() {
+      return this.$store.getters.trends;
+    },
+    currentItemTrends() {
+      let temp = {};
+      if (this.trends) {
+        Object.keys(this.trends).map(key => {
+          if (
+            this.trends[key] &&
+            this.trends[key]["results"] &&
+            this.trends[key]["results"][this.$route.params.itemId]
+          ) {
+            temp[key] = {};
+            temp[key]["results"] = this.trends[key]["results"][
+              this.$route.params.itemId
+            ];
+            temp[key]["interval"] = this.trends[key]["interval"];
+            temp[key]["startTime"] = this.trends[key]["startTime"];
           }
-        ]
-      },
-      categorizedItems () {
-        let all = get.item.all();
-        const categories = ["MATERIAL", "CARD_EXP", "FURN"];
-        let results = {};
-        for (let category of categories) {
-          results[category] = all.filter(el => el.itemType === category)
-          // move 3003 to the last member
-          results[category].sort((a, b) => {
-            if (a.itemId === '3003') return 1;
-            if (b.itemId === '3003') return -1;
-            return a.sortId - b.sortId;
+        });
+      }
+      return temp;
+    },
+    tableHeaders() {
+      return [
+        {
+          text: this.$t("stats.headers.stage"),
+          value: "icon",
+          align: "center",
+          sortable: false,
+          width: "250px"
+        },
+        {
+          text: this.$t("stats.headers.apCost"),
+          value: "stage.apCost",
+          align: "center",
+          sortable: true
+        },
+        {
+          text: this.$t("stats.headers.times"),
+          value: "times",
+          align: "center",
+          sortable: true
+        },
+        {
+          text: this.$t("stats.headers.quantity"),
+          value: "quantity",
+          align: "center",
+          sortable: true
+        },
+        {
+          text: this.$t("stats.headers.percentage"),
+          value: "percentage",
+          align: "center",
+          sortable: true
+        },
+        {
+          text: this.$t("stats.headers.apPPR"),
+          value: "apPPR",
+          align: "center",
+          sortable: true
+        }
+      ];
+    },
+    categorizedItems() {
+      let all = get.item.all();
+      const categories = ["MATERIAL", "CARD_EXP", "FURN"];
+      let results = {};
+      for (let category of categories) {
+        results[category] = all.filter(el => el.itemType === category);
+        // move 3003 to the last member
+        results[category].sort((a, b) => {
+          if (a.itemId === "3003") return 1;
+          if (b.itemId === "3003") return -1;
+          return a.sortId - b.sortId;
+        });
+      }
+      return results;
+    },
+    itemStagesStats() {
+      if (!this.selected.item) return [];
+      return get.statistics.byItemId(this.selected.item.itemId);
+    },
+    selectedItemName() {
+      if (!this.selected.item) return "";
+      return this.selected.item.name;
+    }
+  },
+  watch: {
+    $route: function(to, from) {
+      console.log("step route changed from", from.path, "to", to.path);
+      if (to.name === "StatsByItem") {
+        this.step = 1;
+      }
+      if (to.name === "StatsByItem_SelectedItem") {
+        this.step = 2;
+      }
+    },
+    step: function(newValue, oldValue) {
+      console.log("step changed from", oldValue, "to", newValue);
+      switch (newValue) {
+        case 1:
+          console.log("- [router go] index");
+          this.$router.push({ name: "StatsByItem" });
+          break;
+        case 2:
+          console.log("- [router go] item", this.selected.item.itemId);
+          this.$router.push({
+            name: "StatsByItem_SelectedItem",
+            params: { itemId: this.selected.item.itemId }
           });
-        }
-        return results
-      },
-      itemStagesStats() {
-        if (!this.selected.item) return [];
-        return get.statistics.byItemId(this.selected.item.itemId);
-      },
-      selectedItemName () {
-        if (!this.selected.item) return '';
-        return this.selected.item.name
-      }
-    },
-    watch: {
-      '$route': function (to, from) {
-        console.log("step route changed from", from.path, "to", to.path);
-        if (to.name === 'StatsByItem') {
-          this.step = 1;
-        }
-        if (to.name === 'StatsByItem_SelectedItem') {
-          this.step = 2;
-        }
-      },
-      step: function(newValue, oldValue) {
-        console.log("step changed from", oldValue, "to", newValue);
-        switch (newValue) {
-          case 1:
-            console.log("- [router go] index");
-            this.$router.push({name: "StatsByItem"});
-            break;
-          case 2:
-            console.log("- [router go] item", this.selected.item.itemId);
-            this.$router.push({name: "StatsByItem_SelectedItem", params: {itemId: this.selected.item.itemId}});
-            break;
-          default:
-            console.error("unexpected step number", newValue, "with [newStep, oldStep]", [newValue, oldValue])
-        }
-      }
-    },
-    beforeMount() {
-      (this.$route.params.itemId) && (this.selected.item = get.item.byItemId(this.$route.params.itemId)) && (this.step += 1);
-    },
-    methods: {
-      getStageItemTrendInterval (stageId) {
-        let trend = this.getStageItemTrend(stageId)
-        return trend && trend.interval
-      },
-      getStageItemTrendStartTime (stageId) {
-        let trend = this.getStageItemTrend(stageId)
-        return trend && trend.startTime
-      },
-      getStageItemTrendResults (stageId) {
-        let trend = this.getStageItemTrend(stageId)
-        return trend && trend.results
-      },
-      getStageItemTrend (stageId) {
-        return this.currentItemTrends && this.currentItemTrends[stageId]
-      },
-      storeItemSelection(itemId) {
-        this.selected.item = get.item.byItemId(itemId);
-        this.step += 1
-      },
-      redirectStage ({zone, stage}) {
-        this.$router.push({
-          name: 'StatsByStage_SelectedBoth',
-          params: {
-            zoneId: zone.zoneId,
-            stageId: stage.stageId
-          }
-        })
+          break;
+        default:
+          console.error(
+            "unexpected step number",
+            newValue,
+            "with [newStep, oldStep]",
+            [newValue, oldValue]
+          );
       }
     }
+  },
+  beforeMount() {
+    this.$route.params.itemId &&
+      (this.selected.item = get.item.byItemId(this.$route.params.itemId)) &&
+      (this.step += 1);
+  },
+  methods: {
+    getStageItemTrendInterval(stageId) {
+      let trend = this.getStageItemTrend(stageId);
+      return trend && trend.interval;
+    },
+    getStageItemTrendStartTime(stageId) {
+      let trend = this.getStageItemTrend(stageId);
+      return trend && trend.startTime;
+    },
+    getStageItemTrendResults(stageId) {
+      let trend = this.getStageItemTrend(stageId);
+      return trend && trend.results;
+    },
+    getStageItemTrend(stageId) {
+      return this.currentItemTrends && this.currentItemTrends[stageId];
+    },
+    storeItemSelection(itemId) {
+      this.$router.push({
+        name: "StatsByItem_SelectedItem",
+        params: { itemId: itemId }
+      });
+    },
+    redirectStage({ zone, stage }) {
+      this.$router.push({
+        name: "StatsByStage_SelectedBoth",
+        params: {
+          zoneId: zone.zoneId,
+          stageId: stage.stageId
+        }
+      });
+    }
   }
+};
 </script>
 
 <style scoped>
-  .v-table {
-    background: transparent !important;
-  }
-  .charts-data-wrapper {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-  .charts-wrapper {
-    display: flex;
-    align-items: center;
-  }
-  .item-list-wrapper {
-    display: flex;
-    flex-direction: column;
-  }
-  .item-list {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: flex-start;
-  }
-  .item-list-item-wrapper {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    min-width: 62px;
-    margin: 4px 0;
-  }
-  >>>.stat-table th {
-    padding-left: 8px !important;
-    padding-right: 8px !important;
-  }
-  >>>.stat-table th i {
-    margin-left: -16px;
-  }
-  .stage-code-td-xs {
-    min-width: 122px;
-  }
+.v-table {
+  background: transparent !important;
+}
+.charts-data-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.charts-wrapper {
+  display: flex;
+  align-items: center;
+}
+.item-list-wrapper {
+  display: flex;
+  flex-direction: column;
+}
+.item-list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+}
+.item-list-item-wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-width: 62px;
+  margin: 4px 0;
+}
+>>> .stat-table th {
+  padding-left: 8px !important;
+  padding-right: 8px !important;
+}
+>>> .stat-table th i {
+  margin-left: -16px;
+}
+.stage-code-td-xs {
+  min-width: 122px;
+}
 </style>
