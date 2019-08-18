@@ -8,21 +8,30 @@
       :key="index"
       d-flex
       sm6
-      md6
+      md4
     >
       <v-card
         class="bkop-light"
+        data-aos="fade"
       >
-        <v-card-title primary-title>
+        <v-card-title
+          v-if="link.title"
+          primary-title
+          class="px-3 pt-3 pb-2"
+        >
           <div>
             <div>
               {{ link.title }}
             </div>
-            <span>by {{ link.author }}</span>
+            <span v-if="link.author">by {{ link.author }}</span>
           </div>
         </v-card-title>
-        
-        <v-card-title primary-title>
+
+        <v-card-title
+          v-if="link.features"
+          primary-title
+          class="px-3 py-1"
+        >
           <v-chip
             v-for="(feature, featIndex) in link.features"
             :key="featIndex"
@@ -34,7 +43,10 @@
             {{ feature.name }}
           </v-chip>
         </v-card-title>
-        <v-card-title primary-title>
+        <div
+          v-if="link.url"
+          class="px-3 pt-2 pb-3"
+        >
           <v-layout
             align-center
             justify-center
@@ -53,7 +65,26 @@
               </v-icon>
             </v-chip>
           </v-layout>
-        </v-card-title>
+        </div>
+        <v-layout
+          align-center
+          justify-center
+          fill-height
+        >
+          <div
+            v-if="link.text"
+            class="pa-3"
+          >
+            <v-layout
+              align-center
+              justify-center
+              row
+              fill-height
+            >
+              {{ link.text }}
+            </v-layout>
+          </div>
+        </v-layout>
       </v-card>
     </v-flex>
   </v-layout>
@@ -64,7 +95,6 @@ export default {
   name: "Links",
   data() {
     return {
-      lorem: 'sadsasddsadasdsa',
       links: [
         {
           title: "明日方舟工具箱",
@@ -80,15 +110,15 @@ export default {
             },
             {
               name: "材料需求计算",
-              color: "blue"
+              color: "indigo"
             },
             {
               name: "刷图规划",
-              color: "blue"
+              color: "indigo"
             },
             {
               name: "库存管理",
-              color: "grey"
+              color: "purple"
             }
           ],
           url: "https://aktools.graueneko.xyz/"
@@ -99,7 +129,7 @@ export default {
           features: [
             {
               name: "角色查看",
-              color: "yellow"
+              color: "orange"
             },
             {
               name: "整合图鉴",
@@ -107,11 +137,11 @@ export default {
             },
             {
               name: "材料需求计算",
-              color: "blue"
+              color: "indigo"
             },
             {
               name: "刷图规划",
-              color: "blue"
+              color: "indigo"
             }
           ],
           url: "https://gachasalt.github.io/ArkToolDemo/#/"
@@ -122,19 +152,19 @@ export default {
           features: [
             {
               name: "角色查看",
-              color: "yellow"
+              color: "orange"
             },
             {
               name: "材料需求计算",
-              color: "blue"
+              color: "indigo"
             },
             {
               name: "刷图规划",
-              color: "blue"
+              color: "indigo"
             },
             {
               name: "库存管理",
-              color: "grey"
+              color: "purple"
             }
           ],
           url: "https://ark-nights.com"
@@ -157,11 +187,34 @@ export default {
             }
           ],
           url: "https://dwz.cn/AkhN4Va6"
+        },
+        {
+          title: "酒馆攻略组",
+          author: "麻辣花蛤",
+          features: [
+            {
+              name: "通关攻略",
+              color: "brown"
+            },
+            {
+              name: "经验分享",
+              color: "brown"
+            }
+          ],
+          url: "https://www.pigeonpub.com"
         }
       ]
     };
   },
+  mounted() {
+    if (!this.$vuetify.breakpoint.xsOnly && this.links && this.links.length % 2 !== 0) {
+      this.links.push({
+        text: "陆续添加中..."
+      });
+    }
+  },
   methods: {
+
     goToHref(href) {
       window.open(href);
     }

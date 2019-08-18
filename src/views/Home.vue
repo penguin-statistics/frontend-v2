@@ -11,52 +11,160 @@
         xs12
         sm6
       >
-        <Contact />
+        <Intro
+          class="home-card"
+          data-aos="fade"
+        />
       </v-flex>
       <v-flex
         xs12
         sm6
       >
-        <Contribute />
+        <Contact
+          class="home-card"
+          data-aos="fade"
+        />
       </v-flex>
       <v-flex
         xs12
         sm6
       >
-        <Donate />
-      </v-flex>
-      <v-flex
-        sm12
-        md6
-      >
-        <Links />
+        <Contribute
+          class="home-card"
+          data-aos="fade"
+        />
       </v-flex>
       <v-flex
         xs12
-        md12
+        sm6
       >
-        <Members />
+        <Donate
+          class="home-card"
+          data-aos="fade"
+        />
       </v-flex>
+
       <v-flex
-        xs12
-        md12
+        xs4
+        md4
       >
-        <Changelog />
+        <v-card
+          class="mx-auto bkop-light"
+          data-aos="fade"
+        >
+          <v-card-title>
+            <v-layout
+              align-center
+              justify-center
+              row
+              fill-height
+            >
+              <span class="cursor-pointer">
+                <v-chip
+                  class="ma-2"
+                  color="primary"
+                  text-color="white"
+                  @click="goToPage('AboutMembers')"
+                >
+                  团队成员
+                  <v-icon right>
+                    mdi-share
+                  </v-icon>
+                </v-chip>
+              </span>
+            </v-layout>
+          </v-card-title>
+        </v-card>
+      </v-flex>
+
+      <v-flex
+        xs4
+        md4
+      >
+        <v-card
+          class="mx-auto bkop-light"
+          data-aos="fade"
+        >
+          <v-card-title>
+            <v-layout
+              align-center
+              justify-center
+              row
+              fill-height
+            >
+              <span class="cursor-pointer">
+                <v-chip
+                  class="ma-2"
+                  color="primary"
+                  text-color="white"
+                  @click="goToPage('AboutChangelog')"
+                >
+                  更新日志
+                  <v-icon right>
+                    mdi-share
+                  </v-icon>
+                </v-chip>
+              </span>
+            </v-layout>
+          </v-card-title>
+        </v-card>
+      </v-flex>
+
+      <v-flex
+        xs4
+        md4
+      >
+        <v-card
+          class="mx-auto bkop-light"
+          data-aos="fade"
+        >
+          <v-card-title>
+            <v-layout
+              align-center
+              justify-center
+              row
+              fill-height
+            >
+              <span class="cursor-pointer">
+                <v-chip
+                  class="ma-2"
+                  color="primary"
+                  text-color="white"
+                  @click="goToPage('AboutLinks')"
+                >
+                  友情链接
+                  <v-icon right>
+                    mdi-share
+                  </v-icon>
+                </v-chip>
+              </span>
+            </v-layout>
+          </v-card-title>
+        </v-card>
       </v-flex>
     </v-layout>
   </v-container>
 </template>
 
 <script>
-import Changelog from "@/views/About/Changelog";
-import Members from "@/views/About/Members";
 import Contact from "@/views/About/Contact";
 import Contribute from "@/views/About/Contribute";
 import Donate from "@/views/About/Donate";
-import Links from "@/views/About/Links";
+import Intro from "@/views/About/Intro";
 export default {
   name: "Home",
-  components: { Changelog, Contact, Contribute, Members, Donate, Links },
-  data: () => ({})
+  components: { Contact, Contribute, Donate, Intro },
+  data: () => ({}),
+  methods: {
+    goToPage(name) {
+      this.$router.push({ name: name })
+    }
+  }
 };
 </script>
+
+<style scoped>
+.home-card {
+  height: 100%;
+}
+</style>

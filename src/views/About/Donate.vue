@@ -7,9 +7,7 @@
     <v-card-title>
       <div>
         随着访问量的增加，目前的小水管服务器已经有些不堪重负了。如果各位刀客塔能捐助一些
-        <v-tooltip
-          top
-        >
+        <v-tooltip top>
           <template v-slot:activator="{ on }">
             <span
               style="border-bottom:1px dashed #ccc;"
@@ -21,56 +19,59 @@
         ，我们将不胜感激!
       </div>
     </v-card-title>
-    <v-layout
-      row
-      wrap
-    >
-      <v-flex
-        xs6
-        md6
+
+    <v-card-title>
+      <v-layout
+        row
+        wrap
       >
-        <v-card class="transparent">
-          <v-img
-            src="https://penguin-stats.s3-ap-southeast-1.amazonaws.com/alipay.png"
-            alt="支付宝二维码"
-          />
+        <v-flex
+          xs6
+          md6
+        >
+          <v-card class="transparent pa-4">
+            <v-img
+              src="https://penguin-stats.s3-ap-southeast-1.amazonaws.com/alipay.png"
+              alt="支付宝二维码"
+            />
 
-          <v-card-title primary-title>
-            <v-layout
-              align-center
-              justify-center
-              row
-              fill-height
-            >
-              支付宝二维码
-            </v-layout>
-          </v-card-title>
-        </v-card>
-      </v-flex>
+            <v-card-title primary-title>
+              <v-layout
+                align-center
+                justify-center
+                row
+                fill-height
+              >
+                支付宝
+              </v-layout>
+            </v-card-title>
+          </v-card>
+        </v-flex>
 
-      <v-flex
-        xs6
-        md6
-      >
-        <v-card class="transparent">
-          <v-img
-            src="https://penguin-stats.s3-ap-southeast-1.amazonaws.com/wechat.png"
-            alt="微信支付二维码"
-          />
+        <v-flex
+          xs6
+          md6
+        >
+          <v-card class="transparent pa-4">
+            <v-img
+              src="https://penguin-stats.s3-ap-southeast-1.amazonaws.com/wechat.png"
+              alt="微信支付二维码"
+            />
 
-          <v-card-title primary-title>
-            <v-layout
-              align-center
-              justify-center
-              row
-              fill-height
-            >
-              微信支付二维码
-            </v-layout>
-          </v-card-title>
-        </v-card>
-      </v-flex>
-    </v-layout>
+            <v-card-title primary-title>
+              <v-layout
+                align-center
+                justify-center
+                row
+                fill-height
+              >
+                微信支付
+              </v-layout>
+            </v-card-title>
+          </v-card>
+        </v-flex>
+      </v-layout>
+    </v-card-title>
   </v-card>
 </template>
 

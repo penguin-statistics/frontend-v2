@@ -1,7 +1,5 @@
 <template>
-  <v-card
-    class="mx-auto bkop-light"
-  >
+  <v-card class="mx-auto bkop-light">
     <v-card-title>
       <span>
         项目仓库：
@@ -58,24 +56,24 @@
 </template>
 
 <script>
-  export default {
-    name: 'Contribute',
-    data() {
-      return {
-        skills: {
-          'frontend': '网站前端开发 Angular (正在用Vue.js重写)',
-          'backend': '网站后端开发 Java Spring Boot、MongoDB',
-          'maintenance': '网站运维',
-          'design': 'UI/UX设计',
-          'analysis': '数据统计分析',
-          'others': '...'
-        }
-      }
-    },
-    methods: {
-      goToHref (href) {
-        window.open(href)
+export default {
+  name: 'Contribute',
+  data() {
+    return {
+      skills: {
+        'frontend': '网站前端开发 Vue.js',
+        'backend': '网站后端开发 Java Spring Boot、MongoDB',
+        'maintenance': '网站运维',
+        'design': 'UI/UX设计',
+        'analysis': '数据统计分析',
+        'others': '...'
       }
     }
+  },
+  methods: {
+    goToHref(href) {
+      window.open(href)
+    }
   }
+}
 </script>
