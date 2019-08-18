@@ -95,20 +95,26 @@
       </v-stepper-content>
 
       <v-stepper-content :step="2">
-        <h1 class="title mx-3 my-1">
-          <v-layout align-center>
-            <Item
-              v-if="selected.item"
-              :item="selected.item"
-              :ratio="0.75"
-              disable-tooltip
-              disable-link
-            />
-            <v-flex class="ml-2">
-              {{ $t('result.title', {item: selectedItemName}) }}
-            </v-flex>
-          </v-layout>
-        </h1>
+        <v-layout
+          align-center
+          justify-space-between
+        >
+          <h1 class="title mx-3 my-1">
+            <v-layout align-center>
+              <Item
+                v-if="selected.item"
+                :item="selected.item"
+                :ratio="0.75"
+                disable-tooltip
+                disable-link
+              />
+              <v-flex class="ml-2">
+                {{ $t('result.title', {item: selectedItemName}) }}
+              </v-flex>
+            </v-layout>
+          </h1>
+          <DataSourceToggle />
+        </v-layout>
         <v-data-table
           :headers="tableHeaders"
           :items="itemStagesStats"
@@ -207,10 +213,11 @@
 import get from "@/utils/getters";
 import Item from "@/components/Item";
 import Charts from "@/components/Charts";
+import DataSourceToggle from "@/components/DataSourceToggle";
 
 export default {
   name: "StatsByItem",
-  components: { Item, Charts },
+  components: { Item, Charts, DataSourceToggle },
   data: () => ({
     expanded: {},
     step: 1,
@@ -227,7 +234,7 @@ export default {
       };
     },
     currentItemTrends() {
-      return get.trends.byItemId(this.$route.params.itemId)
+      return get.trends.byItemId(this.$route.params.itemId);
     },
     tableHeaders() {
       return [

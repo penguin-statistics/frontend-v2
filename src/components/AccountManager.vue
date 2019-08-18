@@ -211,6 +211,8 @@
               color: "success",
               text: this.$t('success')
             };
+            this.$store.dispatch("refreshPersonalMatrixData");
+            this.$emit('afterLogin');
             this.auth.dialog = false
           })
           .catch((err) => {
@@ -233,6 +235,7 @@
           text: this.$t('loggedOut')
         };
         this.auth.logoutPrompt = false;
+        this.$store.commit("switchDataSource", "global");
       }
     },
   }

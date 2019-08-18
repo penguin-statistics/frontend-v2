@@ -54,7 +54,7 @@ Getters.limitations = {
 }
 Getters.statistics = {
   byItemId(itemId) {
-    let result = store.state.data.globalMatrix.matrix.filter(el => {
+    let result = store.state.data[`${store.state.dataSource}Matrix`].matrix.filter(el => {
       return el.itemId === itemId
     });
 
@@ -72,7 +72,7 @@ Getters.statistics = {
     return result
   },
   byStageId(stageId) {
-    let result = store.state.data.globalMatrix.matrix.filter(el => {
+    let result = store.state.data[`${store.state.dataSource}Matrix`].matrix.filter(el => {
       return el.stageId === stageId
     });
     let stage = Getters.stages.byStageId(stageId);
@@ -164,9 +164,12 @@ Getters.trends = {
     return temp;
   },
   byStageId(stageId) {
-    return this.all()[stageId]
+    return this.all() && this.all()[stageId];
   },
   all() {
+    if (store.state.dataSource !== 'global') {
+      return null;
+    }
     return store.state.data && store.state.data.trends && store.state.data.trends.results
   }
 }

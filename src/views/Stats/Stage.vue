@@ -261,9 +261,15 @@
       </v-stepper-content>
 
       <v-stepper-content :step="3">
-        <h1 class="title ma-3">
-          {{ $t('stats.title', {stage: selectedStage.code}) }}
-        </h1>
+        <v-layout
+          align-center
+          justify-space-between
+        >
+          <h1 class="title ma-3">
+            {{ $t('stats.title', {stage: selectedStage.code}) }}
+          </h1>
+          <DataSourceToggle />
+        </v-layout>
         <v-data-table
           :headers="tableHeaders"
           :items="stageStats"
@@ -277,7 +283,7 @@
             <tr>
               <td
                 class="hovering"
-                :class="{ 
+                :class="{
                   'px-3': $vuetify.breakpoint.smAndDown,
                   'item-name-td-xs': $vuetify.breakpoint.xsOnly,
                   'item-name-td-sm': $vuetify.breakpoint.smOnly
@@ -378,10 +384,11 @@
 import get from "@/utils/getters";
 import Item from "@/components/Item";
 import Charts from "@/components/Charts";
+import DataSourceToggle from "@/components/DataSourceToggle";
 
 export default {
   name: "StatsByStage",
-  components: { Item, Charts },
+  components: { Item, Charts, DataSourceToggle },
   data: () => ({
     expanded: {},
     step: 1,

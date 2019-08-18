@@ -8,6 +8,7 @@ import stagesManager from '@/models/stages'
 import zonesManager from '@/models/zones'
 import trendsManager from '@/models/trends'
 import globalMatrixManager from '@/models/matrices/globalMatrix'
+import personalMatrixManager from '@/models/matrices/personalMatrix'
 
 Vue.use(Vuex);
 
@@ -31,7 +32,8 @@ export default new Vuex.Store({
     auth: {
       username: null
     },
-    cacheUpdateAt: {}
+    cacheUpdateAt: {},
+    dataSource: 'global'
   },
   mutations: {
     store: (state, d) => {
@@ -39,6 +41,9 @@ export default new Vuex.Store({
     },
     storeCacheUpdateAt: (state, d) => {
       state.cacheUpdateAt = Object.assign(state.cacheUpdateAt, d);
+    },
+    switchDataSource: (state, value) => {
+      state.dataSource = value;
     },
     switchDark(state, newState) {
       state.settings.dark = newState
@@ -74,6 +79,10 @@ export default new Vuex.Store({
       await zonesManager.get()
       await trendsManager.get()
       await globalMatrixManager.get()
+      await personalMatrixManager.get()
+    },
+    async refreshPersonalMatrixData() {
+      await personalMatrixManager.get(true)
     }
   },
   getters: {

@@ -46,9 +46,9 @@ class ObjectManager {
    * @async
    * @returns {Promise} the promise that contains the data
    */
-  async get() {
+  async get(refresh = false) {
     let context = this;
-    if (context.cacheValid) {
+    if (!refresh && context.cacheValid) {
       // valid cache
       return Promise.resolve(context.cache.data)
     } else {
@@ -62,6 +62,7 @@ class ObjectManager {
           temp[context.name] = context.cache.data;
           let cacheUpdateAtTemp = {};
           cacheUpdateAtTemp[context.name] = context.cache.updatedAt;
+          console.log(`fetch new ${context.name} data${temp} at ${context.cache.updatedAt}`)
           store.commit("store", temp);
           store.commit("storeCacheUpdateAt", cacheUpdateAtTemp);
           return context.cache.data
