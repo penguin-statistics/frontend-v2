@@ -306,7 +306,7 @@ export default {
         }
       ],
       prefetchingResources: false,
-      drawer: true,
+      drawer: !this.$vuetify.breakpoint.xsOnly,
       buildNoticeNotClosed: true
     }
   },
