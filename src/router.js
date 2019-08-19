@@ -37,7 +37,7 @@ const router = new Router({
     },
     {
       path: '/report',
-      name: 'Report',
+      name: 'ReportByZone',
       // route level code-splitting
       // this generates a separate chunk (about.[hash].js) for this route
       // which is lazy-loaded when the route is visited.
@@ -45,35 +45,25 @@ const router = new Router({
       component: Report,
       meta: {
         icon: 'mdi-upload',
-        i18n: 'menu.report'
+        i18n: 'menu.report',
+        forceSingle: true
       },
-      children: [{
-          path: 'zone',
-          name: 'ReportByZone',
-          component: Report,
-          props: true,
-          meta: {
-            icon: 'mdi-cube',
-            i18n: 'menu.report'
-          },
-        },
+      children: [
         {
-          path: 'zone/:zoneId',
+          path: ':zoneId',
           name: 'ReportByZone_SelectedZone',
           component: Report,
           props: true,
           meta: {
-            hide: true,
             i18n: 'menu.report'
           },
         },
         {
-          path: 'zone/:zoneId/:stageId',
+          path: ':zoneId/:stageId',
           name: 'ReportByZone_SelectedStage',
           component: Report,
           props: true,
           meta: {
-            hide: true,
             i18n: 'menu.report'
           },
         }
