@@ -36,28 +36,35 @@
         </v-card-actions>
       </v-card>
     </v-dialog>
-    <v-btn-toggle
-      v-model="dataSource"
-      mandatory
-    >
-      <v-btn
+    <div class="v-item-group theme--dark v-btn-toggle v-btn-toggle--only-child v-btn-toggle--selected">
+      <button
+        type="button"
         value="global"
-        text
+        class="v-btn theme--dark"
+        :class="{'v-btn--active': dataSource === 'global'}"
+        @click="dataSource = 'global'"
       >
-        全平台
-      </v-btn>
-      <v-btn
+        <div class="v-btn__content">
+          全平台
+        </div>
+      </button>
+      <button
+        type="button"
         value="personal"
-        text
+        class="v-btn theme--dark"
+        :class="{'v-btn--active': dataSource === 'personal'}"
+        @click="dataSource = 'personal'"
       >
-        个人
-      </v-btn>
-    </v-btn-toggle>
+        <div class="v-btn__content">
+          个人
+        </div>
+      </button>
+    </div>
   </span>
 </template>
 
 <script>
-import AccountManager from '@/components/AccountManager'
+import AccountManager from "@/components/AccountManager";
 export default {
   name: "DataSourceToggle",
   components: {
@@ -95,7 +102,7 @@ export default {
     }
   },
   methods: {
-    afterLogin () {
+    afterLogin() {
       this.dialog = false;
       this.dataSource = "personal";
     }
