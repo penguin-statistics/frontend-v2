@@ -10,7 +10,7 @@
     >
       <template v-slot:activator="{ on }">
         <v-icon
-          v-if="item.itemId === 'furni'"
+          v-show="item.itemId === 'furni'"
           class="deep-orange"
           :class="furniturePadding"
           style="border-radius: 50%;"
@@ -28,7 +28,7 @@
     </v-tooltip>
     <span v-if="disableTooltip">
       <v-icon
-        v-if="item.itemId === 'furni'"
+        v-show="item.itemId === 'furni'"
         class="deep-orange"
         :class="furniturePadding"
         style="border-radius: 50%;"
