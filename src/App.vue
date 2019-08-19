@@ -77,7 +77,7 @@
           :key="route.name"
         >
           <v-list-tile
-            v-if="!route.children"
+            v-if="!route.children || route.meta.forceSingle"
             :key="route.name"
             :to="route.path"
           >
@@ -87,7 +87,7 @@
             <v-list-tile-content>
               <v-list-tile-title>
                 {{ $t(route.meta.i18n) }} &nbsp; <v-icon
-                  v-if="!route.component"
+                  v-if="!route.component && !route.meta.forceSingle"
                   small
                 >
                   mdi-open-in-new
@@ -346,12 +346,15 @@ export default {
 </script>
 
 <style>
-  .slide-fade-enter-active, .slide-fade-leave-active {
-    transition: all .3s cubic-bezier(0.165, 0.84, 0.44, 1);
+  .slide-fade-enter-active {
+    transition: all .325s cubic-bezier(0.165, 0.84, 0.44, 1);
+  }
+  .slide-fade-leave-active {
+    transition: all .175s cubic-bezier(0.165, 0.84, 0.44, 1);
   }
   .slide-fade-enter, .slide-fade-leave-to
     /* .slide-fade-leave-active for below version 2.1.8 */ {
-    transform: translateX(5px);
+    transform: translateY(2vh);
     opacity: 0;
   }
 
