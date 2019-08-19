@@ -7,5 +7,8 @@ export default {
   },
   cdn: {
     global: "https://penguin-stats.s3-ap-southeast-1.amazonaws.com"
+  },
+  app: {
+    name: "企鹅物流数据统计"
   }
 }
