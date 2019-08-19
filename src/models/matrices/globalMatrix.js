@@ -9,8 +9,8 @@ class GlobalMatrixObjectManager extends MatrixObjectManager {
 }
 
 const globalMatrix = new GlobalMatrixObjectManager({
+  name: 'globalMatrix',
   api: '/result/matrix',
-  transform: object => object,
   ttl: 1000 * 60 * 60 * 24, // 24 hours
   ajaxHooks: commons.defaultAjaxHooks
 });

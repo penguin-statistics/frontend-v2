@@ -9,6 +9,11 @@ import VueAnalytics from "vue-analytics";
 import AOS from 'aos'
 import 'aos/dist/aos.css'
 
+router.beforeEach(async(to, from, next) => {
+  await store.dispatch("fetchData");
+  next();
+})
+
 Vue.use(VueAnalytics, {
   id: 'UA-XXX-X',
   // customResourceURL: "https://www.google-analytics.com/analytics.js",

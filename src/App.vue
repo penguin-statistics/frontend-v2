@@ -278,8 +278,6 @@
 </template>
 
 <script>
-  import service from '@/utils/service'
-  import axios from 'axios'
   import RandomBackground from '@/components/RandomBackground'
   import AccountManager from '@/components/AccountManager'
 
@@ -331,7 +329,6 @@ export default {
   },
   mounted () {
     this.randomizeLogo();
-    this.fetchData()
   },
   methods: {
     randomizeLogo () {
@@ -340,35 +337,6 @@ export default {
         : random < .5 ? "https://penguin-stats.s3-ap-southeast-1.amazonaws.com/penguin_stats_logo_texas.png"
           : random < .75 ? "https://penguin-stats.s3-ap-southeast-1.amazonaws.com/penguin_stats_logo_sora.png"
             : "https://penguin-stats.s3-ap-southeast-1.amazonaws.com/penguin_stats_logo_croissant.png"
-    },
-    fetchData () {
-      this.prefetchingResources = true;
-      let startAjaxAt = new Date().getTime();
-      axios.all([
-        service.get("/items"),
-        service.get("/limitations"),
-        service.get("/result/matrix"),
-        service.get("/result/trends"),
-        service.get("/stages"),
-        service.get("/zones")
-      ])
-        .then(([items, limitations, resultMatrix, resultTrends, stages, zones]) => {
-          this.$ga.time('all data', 'fetched', new Date().getTime() - startAjaxAt);
-          this.$store.commit("store", {
-            items: items.data,
-            limitations: limitations.data,
-            trends: resultTrends.data,
-            resultMatrix: resultMatrix.data,
-            stages: stages.data,
-            zones: zones.data
-          })
-        })
-        .catch((err) => {
-          console.log(err)
-        })
-        .finally(() => {
-          this.prefetchingResources = false
-        })
     },
     changeLocale (localeId) {
       this.$i18n.locale = localeId
