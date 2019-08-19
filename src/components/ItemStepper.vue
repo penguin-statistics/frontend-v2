@@ -173,7 +173,7 @@
     },
     methods: {
       increment() {
-        this.validForm(this.quantity + 1) && (this.quantity += 1);
+        this.quantity += 1;
       },
       reduction() {
         this.quantity = parseInt(this.quantity);

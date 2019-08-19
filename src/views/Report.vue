@@ -30,6 +30,15 @@
           "gte": "应至少有 {quantity} 种物品",
           "lte": "应至多有 {quantity} 种物品",
           "not": "物品种类应不为 {quantity}"
+        },
+        "alertMsg": {
+          "limitation": "您的本次汇报与现有数据差距较大，继续提交可能导致此次汇报被判定为异常，无法进入全部统计数据中。",
+          "preContact": "如果您认为这是误判，欢迎",
+          "contact": "联系作者",
+          "sufContact": "（最好附上掉落截图），确认后会尽快修正。",
+          "noDrop": "您尚未选择任何掉落物品，您确定此次上传数据正确么？",
+          "finalAlert": "您真的确定要继续吗？",
+          "continue": "确定要继续吗？"
         }
       }
     },
@@ -63,6 +72,15 @@
           "gte": "There should have at least {quantity} types of item in this stage",
           "lte": "There should have at least {quantity} types of item in this stage",
           "not": "There should not occur {quantity} types of item in this stage"
+        },
+        "alertMsg": {
+          "limitation": "There is a big gap between your current report and the existing data. If you continue to submit, the report may be judged to be abnormal and cannot enter all the statistics.",
+          "preContact": "If you think this is a misjudgment, ",
+          "contact": "please contact the author ",
+          "sufContact": "(preferably drop the screenshot) and correct it as soon as possible after confirmation.",
+          "noDrop": "You have not selected any dropped items. Are you sure that the upload data is correct?",
+          "finalAlert": "Are you sure you want to continue?",
+          "continue": "Are you sure you want to continue?"
         }
       }
     }
@@ -352,13 +370,6 @@
                   :label="$t('report.furniture', {state: $t(`boolean.${furniture}`)})"
                 />
 
-                <v-alert
-                  :value="!typeLimitationComplied.complied"
-                  type="error"
-                >
-                  {{ $t('report.unable') }}{{ typeLimitationComplied.message }}
-                </v-alert>
-
                 <v-flex
                   xs12
                   sm8
@@ -372,7 +383,6 @@
                       large
                       round
                       color="error"
-                      :disabled="!typeLimitationComplied.complied"
                       @click="reset"
                     >
                       清空
@@ -383,7 +393,6 @@
                       round
                       color="primary"
                       :loading="submitting"
-                      :disabled="!typeLimitationComplied.complied"
                       @click="submit"
                     >
                       {{ $t('report.submit') }}
@@ -396,6 +405,98 @@
         </v-stepper>
       </v-flex>
     </v-layout>
+    <!-- TODO: refactor dialog code -->
+    <v-dialog
+      v-model="showLimitationAlert"
+      width="500"
+    >
+      <v-card>
+        <v-card-title
+          class="headline indigo"
+          primary-title
+        >
+          <v-icon>mdi-alert</v-icon>警告
+        </v-card-title>
+
+        <v-card-text>
+          {{ results.length ? $t('report.alertMsg.limitation') : $t('report.alertMsg.noDrop') }}
+        </v-card-text>
+
+        <v-card-text v-if="results.length">
+          {{ $t('report.alertMsg.preContact') }}
+
+          <span
+            class="font-weight-black cursor-pointer"
+            @click="goToPage('AboutContact')"
+          >
+            {{ $t('report.alertMsg.contact') }}
+          </span>
+
+          {{ $t('report.alertMsg.sufContact') }}
+        </v-card-text>
+
+        <v-card-text>
+          {{ $t('report.alertMsg.continue') }}
+        </v-card-text>
+
+        <v-divider />
+
+        <v-card-actions>
+          <v-btn
+            color="primary"
+            flat
+            @click="showLimitationAlert = false"
+          >
+            {{ $t('dialog.cancel') }}
+          </v-btn>
+          <v-spacer />
+          <v-btn
+            color="error"
+            flat
+            @click="confirmSubmit"
+          >
+            {{ $t('dialog.confirm') }}
+          </v-btn>
+        </v-card-actions>
+      </v-card>
+    </v-dialog>
+    <v-dialog
+      v-model="showLimitationRepeatAlert"
+      width="500"
+    >
+      <v-card>
+        <v-card-title
+          class="headline red"
+          primary-title
+        >
+          <v-icon>mdi-alert</v-icon>警告
+        </v-card-title>
+
+        <v-card-text>
+          {{ $t('report.alertMsg.finalAlert') }}
+        </v-card-text>
+
+        <v-divider />
+
+        <v-card-actions>
+          <v-btn
+            color="primary"
+            flat
+            @click="showLimitationRepeatAlert = false"
+          >
+            {{ $t('dialog.cancel') }}
+          </v-btn>
+          <v-spacer />
+          <v-btn
+            color="error"
+            flat
+            @click="confirmFinalSubmit"
+          >
+            {{ $t('dialog.confirm') }}
+          </v-btn>
+        </v-card-actions>
+      </v-card>
+    </v-dialog>
   </v-container>
 </template>
 
@@ -417,7 +518,9 @@
       results: [],
       furniture: false,
       invalidCount: 0,
-      eventBus: new Vue()
+      eventBus: new Vue(),
+      showLimitationAlert: false,
+      showLimitationRepeatAlert: false
     }),
     computed: {
       selected() {
@@ -487,16 +590,6 @@
       typeLimitation () {
         if (!this.selected.stage) return {};
         return get.limitations.byStageId(this.selected.stage).itemTypeBounds
-      },
-      typeLimitationComplied () {
-        const complied = {complied: true, message: null}
-        if (!this.selected.stage) return complied;
-        let limitation = this.typeLimitation;
-        let amount = this.results.length
-        if (amount < limitation.lower) return {complied: false, message: this.$t('report.rules.gte', {quantity: limitation.lower})};
-        if (amount > limitation.upper) return {complied: false, message: this.$t('report.rules.lte', {quantity: limitation.upper})};
-        if (limitation.exceptions.indexOf(amount) !== -1) return {complied: false, message: this.$t('report.rules.not', {quantity: limitation.exceptions.join(", ")})}
-        return complied
       }
     },
     watch: {
@@ -561,6 +654,9 @@
         (this.step += 1);
     },
     methods: {
+      goToPage(name) {
+        this.$router.push({ name: name })
+      },
       storeZoneSelection(zoneId) {
         this.$router.push({
           name: "ReportByZone_SelectedZone",
@@ -611,7 +707,14 @@
         this.eventBus.$emit("reset");
         this.furniture = false
       },
-      async submit () {
+      submit () {
+        if (this.invalidCount || this.results.length === 0) {
+          this.showLimitationAlert = true;
+        } else {
+          this.doSubmit()
+        }
+      },
+      async doSubmit () {
         this.submitting = true;
         await report.submitReport({
           stageId: this.selected.stage,
@@ -621,6 +724,18 @@
         this.submitting = false;
         this.reset();
         this.snackbar = true
+      },
+      confirmSubmit () {
+        this.showLimitationAlert = false
+        if (this.results.length === 0) {
+          this.doSubmit()
+        } else {
+          this.showLimitationRepeatAlert = true
+        }
+      },
+      confirmFinalSubmit () {
+        this.showLimitationRepeatAlert = false
+        this.doSubmit()
       },
       undo () {
         this.undoing = true;
