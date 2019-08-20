@@ -10,7 +10,7 @@ class GlobalMatrixObjectManager extends MatrixObjectManager {
 
 const globalMatrix = new GlobalMatrixObjectManager({
   name: 'globalMatrix',
-  api: '/result/matrix',
+  api: '/result/matrix?show_closed_zones=true',
   ttl: 1000 * 60 * 60 * 24, // 24 hours
   ajaxHooks: commons.defaultAjaxHooks
 });
