@@ -1,6 +1,8 @@
 {
   "app": {
-    "name": "Penguin Statistics"
+    "name": "Penguin Statistics",
+    "name_line1": "Penguin Statistics",
+    "name_line2": ""
   },
   "menu": {
     "home": "Home",

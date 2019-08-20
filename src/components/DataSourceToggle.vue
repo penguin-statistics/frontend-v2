@@ -1,3 +1,29 @@
+<i18n>
+  {
+    "zh": {
+      "dataSourceToggle": {
+        "loginNotice": "查看个人掉落数据前，请先登录",
+        "all": "全平台",
+        "personal": "个人"
+      }
+    },
+    "en": {
+      "dataSourceToggle": {
+        "loginNotice": "Please log in before viewing personal drop data.",
+        "all": "All",
+        "personal": "Personal"
+      }
+    },
+    "ja": {
+      "dataSourceToggle": {
+        "loginNotice": "個人のドロップデータを表示する前にログインしてください。",
+        "all": "全体",
+        "personal": "個人"
+      }
+    }
+  }
+</i18n>
+
 <template>
   <span>
     <v-dialog
@@ -25,7 +51,7 @@
     >
       <v-card>
         <v-card-text>
-          查看个人掉落数据前，请先登录
+          {{ $t('dataSourceToggle.loginNotice') }}
         </v-card-text>
 
         <v-divider />
@@ -45,7 +71,7 @@
         @click="dataSource = 'global'"
       >
         <div class="v-btn__content">
-          全平台
+          {{ $t('dataSourceToggle.all') }}
         </div>
       </button>
       <button
@@ -56,7 +82,7 @@
         @click="dataSource = 'personal'"
       >
         <div class="v-btn__content">
-          个人
+          {{ $t('dataSourceToggle.personal') }}
         </div>
       </button>
     </div>
