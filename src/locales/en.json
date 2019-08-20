@@ -1,4 +1,7 @@
 {
+  "app": {
+    "name": "Penguin Statistics"
+  },
   "menu": {
     "home": "Home",
     "report": "Loot Report",
@@ -17,8 +20,7 @@
       "links": "Links"
     },
     "planner": "Planner",
-    "changelog": "Change Log",
-    "logo": "Penguin Statistics"
+    "changelog": "Change Log"
   },
   "meta": {
     "loading": "Fetching application data...",

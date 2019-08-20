@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import Router from 'vue-router'
+
 import Home from './views/Home'
 import Report from './views/Report'
 
@@ -18,7 +19,7 @@ import AboutLinks from './views/About/Links'
 
 Vue.use(Router);
 
-export default new Router({
+const router = new Router({
   mode: 'history',
   scrollBehavior() { // params: (to, from, savedPosition)
     return { x: 0, y: 0 }
@@ -210,4 +211,6 @@ export default new Router({
       ]
     }
   ]
-})
+});
+
+export default router

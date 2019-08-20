@@ -5,12 +5,14 @@ import App from './App.vue'
 import router from './router'
 import store from './store'
 import i18n from './i18n'
-import VueAnalytics from "vue-analytics";
+import VueAnalytics from "vue-analytics"
 import AOS from 'aos'
 import 'aos/dist/aos.css'
+import I18n from "@/i18n"
 
 router.beforeEach(async(to, from, next) => {
   await store.dispatch("fetchData");
+  document.title = `${I18n.t(to.meta.i18n)} | ${I18n.t('app.name')}`;
   next();
 })
 
