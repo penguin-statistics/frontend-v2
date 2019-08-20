@@ -57,8 +57,16 @@
         :editable="step > 1"
         :step="1"
       >
-        {{ $t('choose.name') }}
-        <small v-if="step > 1">{{ selectedItemName }}</small>
+        <v-layout
+          column
+          align-center
+          justify-center
+          wrap
+          class="text-xs-center"
+        >
+          {{ $t('choose.name') }}
+          <small v-if="step > 1">{{ selectedItemName }}</small>
+        </v-layout>
       </v-stepper-step>
 
       <v-divider />
@@ -67,7 +75,15 @@
         :complete="step === 2"
         :step="2"
       >
-        {{ $t('result.name') }}
+        <v-layout
+          column
+          align-center
+          justify-center
+          wrap
+          class="text-xs-center"
+        >
+          {{ $t('result.name') }}
+        </v-layout>
       </v-stepper-step>
     </v-stepper-header>
 
