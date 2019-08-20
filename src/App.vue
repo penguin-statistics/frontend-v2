@@ -68,7 +68,15 @@
           contain
         />
         <div class="white--text description">
-          {{ $t('app.name') }}
+          <v-layout
+            column
+            align-center
+            justify-end
+            wrap
+          >
+            <span>{{ $t('app.name_line1') }}</span>
+            <span>{{ $t('app.name_line2') }}</span>
+          </v-layout>
         </div>
       </div>
       <v-list>
