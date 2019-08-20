@@ -152,20 +152,29 @@
                 <v-icon>{{ zone.icon }}</v-icon>
               </v-list-tile-avatar>
 
-              <v-list-tile-content>
-                <v-list-tile-title>{{ zone.zoneName }}</v-list-tile-title>
-                <v-list-tile-sub-title v-if="zone.isActivity">
-                  <span
-                    :class="{
-                      'text--darken-1 font-weight-bold': true,
-                      'red--text': zone.isOutdated,
-                      'green--text': !zone.isOutdated }"
+              <v-tooltip
+                :disabled="!zone.isActivity"
+                left
+              >
+                <template v-slot:activator="{ on }">
+                  <v-list-tile-content
+                    v-on="on"
                   >
-                    {{ zone.isOutdated ? $t('zone.status.closed') : $t('zone.status.open') }}
-                  </span>
-                  {{ $t('opensAt', zone.activityActiveTime) }}
-                </v-list-tile-sub-title>
-              </v-list-tile-content>
+                    <v-list-tile-title>{{ zone.zoneName }}</v-list-tile-title>
+                    <v-list-tile-sub-title v-if="zone.isActivity">
+                      <span
+                        :class="{
+                          'text--darken-1 font-weight-bold': true,
+                          'red--text': zone.isOutdated,
+                          'green--text': !zone.isOutdated }"
+                      >
+                        {{ zone.isOutdated ? $t('zone.status.closed') : $t('zone.status.open') }}
+                      </span>
+                    </v-list-tile-sub-title>
+                  </v-list-tile-content>
+                </template>
+                {{ $t('opensAt', zone.activityActiveTime) }}
+              </v-tooltip>
 
               <v-list-tile-action>
                 <v-icon color="grey lighten-1">
