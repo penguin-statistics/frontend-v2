@@ -188,8 +188,16 @@
               :editable="step > 1"
               :step="1"
             >
-              {{ $t('zone.name') }}
-              <small v-if="step > 1">{{ selectedZone.zoneName }}</small>
+              <v-layout
+                column
+                align-center
+                justify-center
+                wrap
+                class="text-xs-center"
+              >
+                {{ $t('zone.name') }}
+                <small v-if="step > 1">{{ selectedZone.zoneName }}</small>
+              </v-layout>
             </v-stepper-step>
 
             <v-divider />
@@ -199,8 +207,16 @@
               :editable="step > 2"
               :step="2"
             >
-              {{ $t('stage.name') }}
-              <small v-if="step > 2">{{ selectedStage.code }}</small>
+              <v-layout
+                column
+                align-center
+                justify-center
+                wrap
+                class="text-xs-center"
+              >
+                {{ $t('stage.name') }}
+                <small v-if="step > 2">{{ selectedStage.code }}</small>
+              </v-layout>
             </v-stepper-step>
 
             <v-divider />
@@ -209,7 +225,15 @@
               :complete="step === 3"
               :step="3"
             >
-              {{ $t('report.name') }}
+              <v-layout
+                column
+                align-center
+                justify-center
+                wrap
+                class="text-xs-center"
+              >
+                {{ $t('report.name') }}
+              </v-layout>
             </v-stepper-step>
           </v-stepper-header>
 
