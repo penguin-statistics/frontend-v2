@@ -71,7 +71,7 @@
           <v-layout
             column
             align-center
-            justify-end
+            justify-center
             wrap
           >
             <span>{{ $t('app.name_line1') }}</span>
