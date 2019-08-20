@@ -681,8 +681,8 @@
       },
       valid () {
         return this.invalidCount === 0 &&
-          this.results.length > this.typeLimitation.lower &&
-          this.results.length < this.typeLimitation.upper
+          this.results.length >= this.typeLimitation.lower &&
+          this.results.length <= this.typeLimitation.upper
       },
       typeLimitation () {
         if (!this.selected.stage) return {};
