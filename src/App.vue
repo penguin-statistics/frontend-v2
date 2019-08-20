@@ -68,7 +68,7 @@
           contain
         />
         <div class="white--text description">
-          {{ $t('menu.logo') }}
+          {{ $t('app.name') }}
         </div>
       </div>
       <v-list>

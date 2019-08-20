@@ -1,4 +1,7 @@
 {
+  "app": {
+    "name": "企鹅物流数据统计"
+  },
   "menu": {
     "home": "首页",
     "report": "掉落汇报",
@@ -17,8 +20,7 @@
       "links": "友情链接"
     },
     "planner": "刷图规划器",
-    "changelog": "更新日志",
-    "logo": "企鹅物流数据统计"
+    "changelog": "更新日志"
   },
   "meta": {
     "loading": "正在加载...",

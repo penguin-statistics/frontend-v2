@@ -1,7 +1,5 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import I18n from './i18n'
-import config from '@/config'
 
 import Home from './views/Home'
 import Report from './views/Report'
@@ -213,11 +211,6 @@ const router = new Router({
       ]
     }
   ]
-});
-
-router.beforeEach((to, from, next) => {
-  document.title = `${I18n.t(to.meta.i18n)} | ${config.app.name}`
-  next()
 });
 
 export default router
