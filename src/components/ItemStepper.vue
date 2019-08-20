@@ -167,7 +167,7 @@
     watch: {
       quantity: function (value) {
         // this form have no errors
-        this.valid && (this.$emit("change", [this.item.itemId, value]))
+        this.$emit("change", [this.item.itemId, value])
       },
       valid: function (value) {
         // the component should be disabled and it's now ready to do it
