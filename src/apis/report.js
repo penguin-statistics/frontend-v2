@@ -9,5 +9,8 @@ export default {
       stageId,
       ...config.api.submitParams
     })
+  },
+  async recallReport (submissionId) {
+    return service.post(`/report/recall?item_drop_hash_id=${submissionId}`)
   }
 }

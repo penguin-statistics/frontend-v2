@@ -29,6 +29,7 @@
         "submit": "提交",
         "success": "上传成功",
         "undo": "撤销",
+        "undoSuccess": "撤销成功",
         "unable": "无法提交：",
         "clear": "清空",
         "alertMsg": {
@@ -79,7 +80,8 @@
         "furniture": "Furniture Drop: {state}",
         "submit": "Submit",
         "success": "Successfully submitted",
-        "undo": "Undo",
+        "undo": "Recall",
+        "undoSuccess": "Successfully recalled submission",
         "clear": "Reset",
         "unable": "Failed to submit: ",
         "alertMsg": {
@@ -130,7 +132,8 @@
         "furniture": "家具ドロップ：{state}",
         "submit": "送信",
         "success": "送信成功",
-        "undo": "Undo",
+        "undo": "Recall",
+        "undoSuccess": "送信をリコールしました",
         "unable": "送信失敗：",
         "clear": "リセット",
         "alertMsg": {
@@ -162,7 +165,7 @@
     fill-height
   >
     <v-snackbar
-      v-model="snackbar"
+      v-model="submitted"
       color="success"
       :timeout="15000"
     >
@@ -173,6 +176,20 @@
         @click="undo"
       >
         {{ $t('report.undo') }}
+      </v-btn>
+    </v-snackbar>
+
+    <v-snackbar
+      v-model="undoed"
+      color="success"
+      :timeout="15000"
+    >
+      {{ $t('report.undoSuccess') }}
+      <v-btn
+        flat
+        @click="undoed = false"
+      >
+        {{ $t('dialog.close') }}
       </v-btn>
     </v-snackbar>
     <v-layout align-center>
@@ -586,6 +603,8 @@
       snackbar: false,
       submitting: false,
       undoing: false,
+      lastSubmissionId: null,
+      undoed: false,
       results: [],
       furniture: false,
       invalidCount: 0,
@@ -787,14 +806,15 @@
       },
       async doSubmit () {
         this.submitting = true;
-        await report.submitReport({
+        let {data} = await report.submitReport({
           stageId: this.selected.stage,
           drops: this.results,
           furnitureNum: this.furniture ? 1 : 0
         });
+        this.lastSubmissionId = data;
         this.submitting = false;
         this.reset();
-        this.snackbar = true
+        this.submitted = true
       },
       confirmSubmit () {
         this.showLimitationAlert = false
@@ -808,16 +828,13 @@
         this.showLimitationRepeatAlert = false
         this.doSubmit()
       },
-      undo () {
+      async undo () {
         this.undoing = true;
         // TODO: replace with real api
-        setTimeout(() => {
-          this.undoing = false
-          this.snackbar = false
-          setTimeout(() => {
-            this.snackbar = true
-          }, 500)
-        }, 3000)
+        await report.recallReport(this.lastSubmissionId);
+        this.submitted = false;
+        this.undoing = false;
+        this.undoed = true
       }
     }
   }
