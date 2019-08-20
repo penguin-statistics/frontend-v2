@@ -19,6 +19,16 @@
       "logoutPrompt": "Are you sure?",
       "loggedOut": "Logged out",
       "userId": "User ID"
+    },
+    "ja": {
+      "notice": "ユーザーIDはアップロードの際にのみ使用します。このIDを使用し各機器を登録することでデータを1つのアカウントに統合することが可能となり、アップロードの管理や個人のドロップデータを調べることが可能となります。",
+      "success": "ログイン成功",
+      "failed": "ログイン失敗：{message}",
+      "login": "ログイン",
+      "logout": "ログアウト",
+      "logoutPrompt": "本当にログアウトしますか？",
+      "loggedOut": "ログアウトしました",
+      "userId": "ユーザーID"
     }
   }
 </i18n>

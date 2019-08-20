@@ -202,6 +202,12 @@ export default {
             }
           ],
           url: "https://www.pigeonpub.com"
+        },
+        {
+          title: "ゲームの果て",
+          author: "方舟航海図",
+          features: [],
+          url: "https://smartgamecap.net"
         }
       ]
     };

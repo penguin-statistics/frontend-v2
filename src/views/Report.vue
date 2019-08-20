@@ -8,6 +8,10 @@
           "MAINLINE": "主线",
           "WEEKLY": "物资筹备",
           "ACTIVITY": "限时活动"
+        },
+        "status": {
+          "closed": "已结束",
+          "open": "开放中"
         }
       },
       "stage": {
@@ -16,7 +20,7 @@
         "loots": {
           "normal": "常规掉落",
           "extra": "额外物资",
-          "special": "幸运掉落"
+          "special": "特殊掉落"
         }
       },
       "report": {
@@ -26,12 +30,9 @@
         "success": "上传成功",
         "undo": "撤销",
         "unable": "无法提交：",
-        "rules": {
-          "gte": "应至少有 {quantity} 种物品",
-          "lte": "应至多有 {quantity} 种物品",
-          "not": "物品种类应不为 {quantity}"
-        },
+        "clear": "清空",
         "alertMsg": {
+          "alert": "警告",
           "limitation": "您的本次汇报与现有数据差距较大，继续提交可能导致此次汇报被判定为异常，无法进入全部统计数据中。",
           "preContact": "如果您认为这是误判，欢迎",
           "contact": "联系作者",
@@ -40,7 +41,15 @@
           "finalAlert": "您真的确定要继续吗？",
           "continue": "确定要继续吗？"
         }
-      }
+      },
+      "rules": {
+        "rule_1": "这是单次作战的提交，请注意核对数目；",
+        "rule_2": "若无素材掉落，请直接点击提交；",
+        "rule_3": "请不要只汇报比较“欧”的掉落；",
+        "rule_4": "请保证通关评价是3星；",
+        "rule_5": "不要汇报首次通关奖励，谢谢！"
+      },
+      "usage": "左键增加，右键减少"
     },
     "en": {
       "opensAt": "Opens At: {0} ~ {1}",
@@ -50,11 +59,15 @@
           "MAINLINE": "Mainline",
           "WEEKLY": "Weekly",
           "ACTIVITY": "Activity"
+        },
+        "status": {
+          "closed": "Closed",
+          "open": "Opening"
         }
       },
       "stage": {
         "name": "Stage",
-        "apCost": "{apCost} points of AP required",
+        "apCost": "{apCost} AP required",
         "loots": {
           "normal": "Normal",
           "extra": "Extra",
@@ -67,22 +80,78 @@
         "submit": "Submit",
         "success": "Successfully submitted",
         "undo": "Undo",
-        "unable": "Unable to submit: ",
-        "rules": {
-          "gte": "There should have at least {quantity} types of item in this stage",
-          "lte": "There should have at least {quantity} types of item in this stage",
-          "not": "There should not occur {quantity} types of item in this stage"
-        },
+        "clear": "Reset",
+        "unable": "Failed to submit: ",
         "alertMsg": {
-          "limitation": "There is a big gap between your current report and the existing data. If you continue to submit, the report may be judged to be abnormal and cannot enter all the statistics.",
+          "alert": "Warning",
+          "limitation": "There is a big gap between your current report and the existing data. If you continue to submit, the report may be judged to be abnormal and cannot be counted into all statistics.",
           "preContact": "If you think this is a misjudgment, ",
-          "contact": "please contact the author ",
-          "sufContact": "(preferably drop the screenshot) and correct it as soon as possible after confirmation.",
+          "contact": "please contact the site owner or team members ",
+          "sufContact": "(attach the screenshot if possible). We will correct it as soon as possible after confirmation.",
           "noDrop": "You have not selected any dropped items. Are you sure that the upload data is correct?",
           "finalAlert": "Are you sure you want to continue?",
           "continue": "Are you sure you want to continue?"
         }
-      }
+      },
+      "rules": {
+        "rule_1": "这是单次作战的提交，请注意核对数目；",
+        "rule_2": "若无素材掉落，请直接点击提交；",
+        "rule_3": "请不要只汇报比较“欧”的掉落；",
+        "rule_4": "请保证通关评价是3星；",
+        "rule_5": "不要汇报首次通关奖励，谢谢！"
+      },
+      "usage": "Increase by left click, decrease by right click"
+    },
+    "ja": {
+      "opensAt": "限定期間：{0} ~ {1}",
+      "zone": {
+        "name": "章",
+        "types": {
+          "MAINLINE": "メインストーリー",
+          "WEEKLY": "曜日クエスト",
+          "ACTIVITY": "イベント"
+        },
+        "status": {
+          "closed": "終了",
+          "open": "開催中"
+        }
+      },
+      "stage": {
+        "name": "作戦",
+        "apCost": "{apCost} AP required",
+        "loots": {
+          "normal": "通常ドロップ",
+          "extra": "エクストラドロップ",
+          "special": "スペシャルドロップ"
+        }
+      },
+      "report": {
+        "name": "報告",
+        "furniture": "家具ドロップ：{state}",
+        "submit": "送信",
+        "success": "送信成功",
+        "undo": "Undo",
+        "unable": "送信失敗：",
+        "clear": "リセット",
+        "alertMsg": {
+          "alert": "警告",
+          "limitation": "今回報告しようとしている内容は既存のデータとの差が大きくなっており、このまま報告するのであれば今回の報告は異常と判定され、全て統計データに反映されることはありません。",
+          "preContact": "誤った情報であると判断した場合は",
+          "contact": "管理人に連絡を行ってください",
+          "sufContact": "（その際はスクリーンショットの添付をお願いいたします）。確認次第速やかに修正を行わせて頂きます。",
+          "noDrop": "ドロップされたアイテムは選択されていません。 アップロードデータが正しいことを確認しますか？",
+          "finalAlert": "本当にいいですか？",
+          "continue": "続行しますか？"
+        }
+      },
+      "rules": {
+        "rule_1": "ここに追加する内容は1回でドロップした内容です。",
+        "rule_2": "素材がドロップしなかった場合は直接送信をクリックしてください。",
+        "rule_3": "ドロップ結果が極端に良かったものだけを報告するのはご遠慮ください。",
+        "rule_4": "クリア時の評価が☆3である場合のみ報告してください。",
+        "rule_5": "初クリア時の報酬は報告しないでください。ご協力ありがとうございます。"
+      },
+      "usage": "左クリックで個数増加、右クリックで個数減少"
     }
   }
 </i18n>
@@ -178,7 +247,7 @@
                       <v-list-tile-sub-title v-if="zone.isActivity">
                         <span
                           :class="{ 'text--darken-1 font-weight-bold': true, 'red--text': zone.isOutdated, 'green--text': !zone.isOutdated }"
-                        >{{ zone.isOutdated ? "已结束" : "正在进行" }}</span>
+                        >{{ zone.isOutdated ? $t('zone.status.closed') : $t('zone.status.open') }}</span>
                         {{ $t('opensAt', zone.activityActiveTime) }}
                       </v-list-tile-sub-title>
                     </v-list-tile-content>
@@ -254,7 +323,7 @@
                               v-for="item in stage.normalDrop"
                               :key="item"
                               :item="getItem(item)"
-                              :ratio="0.5"
+                              :ratio="0.6"
                               disable-link
                             />
                           </v-flex>
@@ -274,7 +343,7 @@
                               v-for="item in stage.extraDrop"
                               :key="item*10"
                               :item="getItem(item)"
-                              :ratio="0.5"
+                              :ratio="0.6"
                               disable-link
                             />
                           </v-flex>
@@ -294,7 +363,7 @@
                               v-for="item in stage.specialDrop"
                               :key="item*100"
                               :item="getItem(item)"
-                              :ratio="0.5"
+                              :ratio="0.6"
                               disable-link
                             />
                           </v-flex>
@@ -319,16 +388,16 @@
                 class="mb-3"
               >
                 <ol>
-                  <li>这是<strong>单次</strong>提交，请注意核对数目；</li>
-                  <li>若无素材掉落，请直接点击提交；</li>
-                  <li><strong>不要</strong>只汇报比较“欧”的掉落；</li>
-                  <li>请保证通关评价是<strong>3星</strong>；</li>
-                  <li><strong>不要</strong>汇报首次通关奖励，谢谢！</li>
+                  <li>{{ $t('rules.rule_1') }}</li>
+                  <li>{{ $t('rules.rule_2') }}</li>
+                  <li>{{ $t('rules.rule_3') }}</li>
+                  <li>{{ $t('rules.rule_4') }}</li>
+                  <li>{{ $t('rules.rule_5') }}</li>
                 </ol>
               </v-alert>
 
               <v-container v-if="!$vuetify.breakpoint.smAndDown">
-                左键增加，右键减少
+                {{ $t('usage') }}
               </v-container>
 
               <v-container
@@ -367,7 +436,7 @@
               <v-flex class="pa-4">
                 <v-switch
                   v-model="furniture"
-                  :label="$t('report.furniture', {state: $t(`boolean.${furniture}`)})"
+                  :label="$t('report.furniture', {state: $t(`hasNorNot.${furniture}`)})"
                 />
 
                 <v-flex
@@ -385,7 +454,7 @@
                       color="error"
                       @click="reset"
                     >
-                      清空
+                      {{ $t('report.clear') }}
                     </v-btn>
 
                     <v-btn
@@ -415,7 +484,8 @@
           class="headline indigo"
           primary-title
         >
-          <v-icon>mdi-alert</v-icon>警告
+          <v-icon>mdi-alert</v-icon>
+          <span class="ml-2">{{ $t('report.alertMsg.alert') }}</span>
         </v-card-title>
 
         <v-card-text>
@@ -469,7 +539,8 @@
           class="headline red"
           primary-title
         >
-          <v-icon>mdi-alert</v-icon>警告
+          <v-icon>mdi-alert</v-icon>
+          <span class="ml-2">{{ $t('report.alertMsg.alert') }}</span>
         </v-card-title>
 
         <v-card-text>

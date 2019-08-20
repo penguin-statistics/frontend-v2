@@ -11,7 +11,7 @@
         <span v-on="on">
           <ItemIcon
             :item="item"
-            :ratio="0.75"
+            :ratio="ratio"
             :disable-link="disableLink"
             :disable-tooltip="true"
           />
@@ -36,7 +36,7 @@
     <ItemIcon
       v-if="disableTooltip"
       :item="item"
-      :ratio="0.75"
+      :ratio="ratio"
       :disable-link="disableLink"
       :disable-tooltip="false"
     />

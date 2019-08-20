@@ -15,6 +15,14 @@
         "not": "Quantity of \"{item}\" should ≠ {quantity}",
         "natural": "Value of quantity should be a natural number"
       }
+    },
+    "ja": {
+      "rules": {
+        "gte": "Quantity of \"{item}\" should ≥ {quantity}",
+        "lte": "Quantity of \"{item}\" should ≤ {quantity}",
+        "not": "Quantity of \"{item}\" should ≠ {quantity}",
+        "natural": "Value of quantity should be a natural number"
+      }
     }
   }
 </i18n>
@@ -59,7 +67,7 @@
         >
           <Item
             :item="item"
-            :ratio="1"
+            :ratio="0.8"
             disable-link
             :disable-tooltip="true"
           />

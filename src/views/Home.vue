@@ -66,7 +66,7 @@
                   text-color="white"
                   @click="goToPage('AboutMembers')"
                 >
-                  团队成员
+                  {{ $t('menu.about.members') }}
                   <v-icon right>
                     mdi-share
                   </v-icon>
@@ -99,7 +99,7 @@
                   text-color="white"
                   @click="goToPage('AboutChangelog')"
                 >
-                  更新日志
+                  {{ $t('menu.about.changelog') }}
                   <v-icon right>
                     mdi-share
                   </v-icon>
@@ -132,7 +132,7 @@
                   text-color="white"
                   @click="goToPage('AboutLinks')"
                 >
-                  友情链接
+                  {{ $t('menu.about.links') }}
                   <v-icon right>
                     mdi-share
                   </v-icon>
