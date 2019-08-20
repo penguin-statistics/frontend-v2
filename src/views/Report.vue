@@ -618,6 +618,7 @@
   import Item from "@/components/Item";
   import ItemStepper from "@/components/ItemStepper";
   import Vue from "vue";
+  import Cookies from 'js-cookie';
 
   export default {
     name: "Report",
@@ -634,7 +635,8 @@
       invalidCount: 0,
       eventBus: new Vue(),
       showLimitationAlert: false,
-      showLimitationRepeatAlert: false
+      showLimitationRepeatAlert: false,
+      submitted: false
     }),
     computed: {
       selected() {
@@ -832,11 +834,16 @@
       },
       async doSubmit () {
         this.submitting = true;
+        let userId = Cookies.get('userID');
         let {data} = await report.submitReport({
           stageId: this.selected.stage,
           drops: this.results,
           furnitureNum: this.furniture ? 1 : 0
         });
+        let reportedUserId = Cookies.get('userID');
+        if (!userId && reportedUserId) {
+          this.$store.commit("authLogin", reportedUserId);
+        }
         this.lastSubmissionId = data;
         this.submitting = false;
         this.reset();
