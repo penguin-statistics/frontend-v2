@@ -20,7 +20,23 @@
         "others": "Others"
       },
       "socials": {
-        "weibo": "Weibo"
+        "weibo": "Weibo",
+        "github": "GitHub",
+        "twitter": "Twitter",
+        "qq": "QQ"
+      }
+    },
+    "ja": {
+      "categories": {
+        "owner": "管理人",
+        "developers": "開発者",
+        "others": "その他"
+      },
+      "socials": {
+        "weibo": "Weibo",
+        "github": "GitHub",
+        "twitter": "Twitter",
+        "qq": "QQ"
       }
     }
   }

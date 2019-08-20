@@ -299,7 +299,7 @@ export default {
           id: 'en',
           name: 'English'
         }, {
-          id: 'jp',
+          id: 'ja',
           name: '日本語'
         }
       ],
@@ -377,7 +377,7 @@ export default {
   .drawer-logo > .description {
     margin-top: 16px;
     text-align: center;
-    line-height: 48px;
+    line-height: 36px;
     font-size: 24px;
     opacity: 0;
     transition: all .5s cubic-bezier(0.19, 1, 0.22, 1);

@@ -8,6 +8,10 @@
           "MAINLINE": "主线",
           "WEEKLY": "物资筹备",
           "ACTIVITY": "限时活动"
+        },
+        "status": {
+          "closed": "已结束",
+          "open": "开放中"
         }
       },
       "stage": {
@@ -16,7 +20,7 @@
         "loots": {
           "normal": "常规掉落",
           "extra": "额外物资",
-          "special": "幸运掉落"
+          "special": "特殊掉落"
         }
       },
       "stats": {
@@ -32,11 +36,15 @@
           "MAINLINE": "Mainline",
           "WEEKLY": "Weekly",
           "ACTIVITY": "Activity"
+        },
+        "status": {
+          "closed": "Closed",
+          "open": "Opening"
         }
       },
       "stage": {
         "name": "Stage",
-        "apCost": "{apCost} points of AP required",
+        "apCost": "{apCost} AP required",
         "loots": {
           "normal": "Normal",
           "extra": "Extra",
@@ -46,6 +54,34 @@
       "stats": {
         "name": "Statistics",
         "title": "Statistics of {stage}"
+      }
+    },
+    "ja": {
+      "opensAt": "限定期間：{0} ~ {1}",
+      "zone": {
+        "name": "章",
+        "types": {
+          "MAINLINE": "メインストーリー",
+          "WEEKLY": "曜日クエスト",
+          "ACTIVITY": "イベント"
+        },
+        "status": {
+          "closed": "終了",
+          "open": "開催中"
+        }
+      },
+      "stage": {
+        "name": "作戦",
+        "apCost": "{apCost} AP required",
+        "loots": {
+          "normal": "通常ドロップ",
+          "extra": "エクストラドロップ",
+          "special": "スペシャルドロップ"
+        }
+      },
+      "stats": {
+        "name": "統計結果",
+        "title": "{stage} 統計結果"
       }
     }
   }
@@ -125,7 +161,7 @@
                       'red--text': zone.isOutdated,
                       'green--text': !zone.isOutdated }"
                   >
-                    {{ zone.isOutdated ? "已结束" : "正在进行" }}
+                    {{ zone.isOutdated ? $t('zone.status.closed') : $t('zone.status.open') }}
                   </span>
                   {{ $t('opensAt', zone.activityActiveTime) }}
                 </v-list-tile-sub-title>
@@ -202,7 +238,7 @@
                         v-for="item in stage.normalDrop"
                         :key="item"
                         :item="getItem(item)"
-                        :ratio="0.5"
+                        :ratio="0.6"
                         disable-link
                       />
                     </v-flex>
@@ -222,7 +258,7 @@
                         v-for="item in stage.extraDrop"
                         :key="item*10"
                         :item="getItem(item)"
-                        :ratio="0.5"
+                        :ratio="0.6"
                         disable-link
                       />
                     </v-flex>
@@ -242,7 +278,7 @@
                         v-for="item in stage.specialDrop"
                         :key="item*100"
                         :item="getItem(item)"
-                        :ratio="0.5"
+                        :ratio="0.6"
                         disable-link
                       />
                     </v-flex>
@@ -306,7 +342,7 @@
                       >
                         <Item
                           :item="props.item.item"
-                          :ratio="0.5"
+                          :ratio="0.65"
                           disable-tooltip
                           disable-link
                         />
@@ -579,7 +615,7 @@ export default {
   align-items: center;
 }
 
->>> .stat-table th {
+::v-deep .stat-table th {
   padding-left: 8px !important;
   padding-right: 8px !important;
 }
@@ -592,7 +628,7 @@ export default {
   min-width: 160px;
 }
 
->>> .stat-table th i {
+::v-deep .stat-table th i {
   margin-left: -16px;
 }
 </style>

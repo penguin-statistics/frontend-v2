@@ -23,9 +23,23 @@
         "title": "Statistics of {item}"
       },
       "categories": {
-        "CARD_EXP": "Experience Card",
-        "MATERIAL": "Material",
-        "FURN": "Furniture"
+        "CARD_EXP": "作战记录",
+        "MATERIAL": "材料",
+        "FURN": "家具"
+      }
+    },
+    "ja": {
+      "choose": {
+        "name": "アイテムを選ぶ"
+      },
+      "result": {
+        "name": "統計結果",
+        "title": "{item} 統計結果"
+      },
+      "categories": {
+        "CARD_EXP": "作战记录",
+        "MATERIAL": "材料",
+        "FURN": "家具"
       }
     }
   }
@@ -405,11 +419,11 @@ export default {
   min-width: 62px;
   margin: 4px 0;
 }
->>> .stat-table th {
+::v-deep .stat-table th {
   padding-left: 8px !important;
   padding-right: 8px !important;
 }
->>> .stat-table th i {
+::v-deep .stat-table th i {
   margin-left: -16px;
 }
 .stage-code-td-xs {

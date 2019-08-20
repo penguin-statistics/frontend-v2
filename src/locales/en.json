@@ -4,7 +4,7 @@
   },
   "menu": {
     "home": "Home",
-    "report": "Loot Report",
+    "report": "Drop Report",
     "stats": {
       "_name": "Statistics",
       "stage": "by stage",
@@ -19,7 +19,7 @@
       "donate": "Donate",
       "links": "Links"
     },
-    "planner": "Planner",
+    "planner": "ArkPlanner",
     "changelog": "Change Log"
   },
   "meta": {
@@ -48,6 +48,10 @@
     }
   },
   "boolean": {
+    "true": "Yes",
+    "false": "No"
+  },
+  "hasNorNot": {
     "true": "Yes",
     "false": "No"
   },

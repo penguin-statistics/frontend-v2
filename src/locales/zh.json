@@ -51,6 +51,10 @@
     "true": "是",
     "false": "否"
   },
+  "hasNorNot": {
+    "true": "有",
+    "false": "无"
+  },
   "dialog": {
     "cancel": "取消",
     "confirm": "确认",
