@@ -72,7 +72,8 @@ export default new Vuex.Store({
     }
   },
   actions: {
-    async fetchData(refresh = false) {
+    // eslint-disable-next-line
+    async fetchData({}, refresh = false) {
       await itemsManager.get(refresh)
       await limitationsManager.get(refresh)
       await stagesManager.get(refresh)
