@@ -48,8 +48,8 @@
 <template>
   <v-stepper
     v-model="step"
-    class="bkop-light transparent"
     :alt-labels="!$vuetify.breakpoint.xsOnly"
+    class="bkop-light transparent"
   >
     <v-stepper-header>
       <v-stepper-step
@@ -149,10 +149,10 @@
           :headers="tableHeaders"
           :items="itemStagesStats"
           :pagination.sync="tablePagination"
+          :calculate-widths="true"
           must-sort
           hide-actions
           class="elevation-0 transparentTable stat-table"
-          :calculate-widths="true"
         >
           <template v-slot:items="props">
             <td 
@@ -185,26 +185,26 @@
               </span>
             </td>
             <td
-              class="text-xs-center"
               :class="{'px-3': $vuetify.breakpoint.xsOnly}"
+              class="text-xs-center"
             >
               {{ props.item.stage.apCost }}
             </td>
             <td
-              class="text-xs-center"
               :class="{'px-3': $vuetify.breakpoint.xsOnly}"
+              class="text-xs-center"
             >
               {{ props.item.times }}
             </td>
             <td
-              class="text-xs-center"
               :class="{'px-3': $vuetify.breakpoint.xsOnly}"
+              class="text-xs-center"
             >
               {{ props.item.quantity }}
             </td>
             <td
-              class="text-xs-center"
               :class="{'px-3': $vuetify.breakpoint.xsOnly}"
+              class="text-xs-center"
             >
               <div class="charts-data-wrapper">
                 {{ props.item.percentageText }}
@@ -218,17 +218,17 @@
                     :x-start="getStageItemTrendStartTime(props.item.stage.stageId)"
                     :show-dialog="expanded[props.item.stage.stageId]"
                     :data-keys="['quantity']"
-                    sparkline-key="quantity"
-                    sparkline-sub-key="times"
                     :data="getStageItemTrendResults(props.item.stage.stageId)"
                     :charts-id="props.item.stage.stageId"
+                    sparkline-key="quantity"
+                    sparkline-sub-key="times"
                   />
                 </div>
               </div>
             </td>
             <td
-              class="text-xs-center"
               :class="{'px-3': $vuetify.breakpoint.xsOnly}"
+              class="text-xs-center"
             >
               {{ props.item.apPPR }}
             </td>

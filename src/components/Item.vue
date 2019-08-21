@@ -2,10 +2,10 @@
   <span>
     <v-tooltip
       v-if="!disableTooltip"
+      :open-delay="200"
       bottom
       content-class="elevation-0 transparent"
       lazy
-      :open-delay="200"
     >
       <template v-slot:activator="{ on }">
         <span v-on="on">

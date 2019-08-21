@@ -25,32 +25,41 @@
 </i18n>
 
 <template>
-  <v-card class="mx-auto bkop-light">
-    <div class="pt-2">
-      <v-img
-        v-if="$vuetify.breakpoint.mdAndDown"
-        :src="require('@/assets/logo.png')"
-        aspect-ratio="1"
-        max-height="192px"
-        contain
-      />
-    </div>
-    <v-card-title>
-      <h2>
+  <v-layout
+    align-center
+    justify-center
+    row
+    wrap
+    class="ma-5"
+
+    data-aos="fade-right"
+  >
+    <v-img
+      :src="require('@/assets/logo.png')"
+      aspect-ratio="1"
+      max-height="128px"
+      min-width="128px"
+      contain
+      class="my-4"
+    />
+    <v-flex
+      xs12
+      sm10
+    >
+      <h1
+        class="display-2 font-weight-bold mb-3"
+      >
         {{ $t('intro.intro_0') }}
-      </h2>
-    </v-card-title>
-    <v-card-title>
-      <div>
-        <p>
-          {{ $t('intro.intro_1') }}
-        </p>
-        <p>
-          {{ $t('intro.intro_2') }}
-        </p>
-      </div>
-    </v-card-title>
-  </v-card>
+      </h1>
+      <p
+        class="subheading line-height-wide"
+      >
+        {{ $t('intro.intro_1') }}
+        <br>
+        {{ $t('intro.intro_2') }}
+      </p>
+    </v-flex>
+  </v-layout>
 </template>
 
 <script>
@@ -63,3 +72,9 @@ export default {
   }
 }
 </script>
+
+<style scoped>
+  .line-height-wide {
+    line-height: 1.8
+  }
+</style>

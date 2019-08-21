@@ -163,8 +163,8 @@
   >
     <v-snackbar
       v-model="snackbar"
-      color="success"
       :timeout="15000"
+      color="success"
     >
       {{ $t('report.success') }}
       <v-btn
@@ -179,8 +179,8 @@
       <v-flex>
         <v-stepper
           v-model="step"
-          class="bkop-light transparent"
           :alt-labels="!$vuetify.breakpoint.xsOnly"
+          class="bkop-light transparent"
         >
           <v-stepper-header>
             <v-stepper-step
@@ -296,8 +296,8 @@
                 class="py-0"
               >
                 <v-list
-                  subheader
                   :three-line="$vuetify.breakpoint.smAndUp"
+                  subheader
                   class="transparent"
                 >
                   <v-subheader
@@ -482,10 +482,10 @@
                     </v-btn>
 
                     <v-btn
+                      :loading="submitting"
                       large
                       round
                       color="primary"
-                      :loading="submitting"
                       @click="submit"
                     >
                       {{ $t('report.submit') }}

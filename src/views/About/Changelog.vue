@@ -1,7 +1,7 @@
 <template>
   <v-timeline
-    align-top
     :dense="$vuetify.breakpoint.smAndDown"
+    align-top
   >
     <v-timeline-item
       v-for="(log, dateKey) in logs"

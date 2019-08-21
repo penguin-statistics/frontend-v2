@@ -83,10 +83,10 @@
         </v-card-text>
         <v-card-actions class="mx-2 mb-3">
           <v-btn
-            color="primary"
-            block
             :loading="auth.loading"
             :disabled="auth.username === ''"
+            color="primary"
+            block
             large
             @click="login"
           >

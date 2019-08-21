@@ -47,11 +47,11 @@
           </span>
         </template> -->
       <v-badge
+        :value="quantity > 0"
         right
         bottom
         color="secondary"
         overlap
-        :value="quantity > 0"
         transition="scale-transition"
         origin="top left"
         class="cursor-pointer"
@@ -68,8 +68,8 @@
           <Item
             :item="item"
             :ratio="0.8"
-            disable-link
             :disable-tooltip="true"
+            disable-link
           />
         </div>
       </v-badge>

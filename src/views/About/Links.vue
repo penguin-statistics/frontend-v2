@@ -35,8 +35,8 @@
           <v-chip
             v-for="(feature, featIndex) in link.features"
             :key="featIndex"
-            class="ma-1"
             :color="feature.color"
+            class="ma-1"
             label
             text-color="white"
           >

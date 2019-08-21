@@ -1,7 +1,6 @@
 <template>
   <v-container
-    fluid
-    grid-list-sm
+    grid-list-lg
   >
     <v-layout
       row
@@ -9,25 +8,20 @@
     >
       <v-flex
         xs12
-        sm6
       >
-        <Intro
-          class="home-card"
-          data-aos="fade"
-        />
+        <Intro />
       </v-flex>
+      <!--      <v-flex-->
+      <!--        xs12-->
+      <!--        sm6-->
+      <!--      >-->
+      <!--        <Contact-->
+      <!--          data-aos="fade"-->
+      <!--        />-->
+      <!--      </v-flex>-->
       <v-flex
         xs12
-        sm6
-      >
-        <Contact
-          class="home-card"
-          data-aos="fade"
-        />
-      </v-flex>
-      <v-flex
-        xs12
-        sm6
+        md6
       >
         <Contribute
           class="home-card"
@@ -36,7 +30,7 @@
       </v-flex>
       <v-flex
         xs12
-        sm6
+        md6
       >
         <Donate
           class="home-card"
@@ -50,7 +44,6 @@
       >
         <v-card
           class="mx-auto bkop-light"
-          data-aos="fade"
         >
           <v-card-title>
             <v-layout
@@ -83,7 +76,6 @@
       >
         <v-card
           class="mx-auto bkop-light"
-          data-aos="fade"
         >
           <v-card-title>
             <v-layout
@@ -116,7 +108,6 @@
       >
         <v-card
           class="mx-auto bkop-light"
-          data-aos="fade"
         >
           <v-card-title>
             <v-layout
@@ -147,13 +138,12 @@
 </template>
 
 <script>
-import Contact from "@/views/About/Contact";
 import Contribute from "@/views/About/Contribute";
 import Donate from "@/views/About/Donate";
 import Intro from "@/views/About/Intro";
 export default {
   name: "Home",
-  components: { Contact, Contribute, Donate, Intro },
+  components: { Contribute, Donate, Intro },
   data: () => ({}),
   methods: {
     goToPage(name) {
