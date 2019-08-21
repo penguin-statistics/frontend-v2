@@ -143,6 +143,12 @@
         >
           <v-btn
             icon
+            @click="refreshData"
+          >
+            <v-icon>mdi-database-refresh</v-icon>
+          </v-btn>
+          <v-btn
+            icon
             @click="dark = !dark"
           >
             <v-icon>mdi-invert-colors</v-icon>
@@ -321,6 +327,9 @@ export default {
     this.randomizeLogo();
   },
   methods: {
+    async refreshData () {
+      await this.$store.dispatch("fetchData", true);
+    },
     randomizeLogo () {
       let random = Math.random();
       this.randomizedLogo = random < .25 ? "https://penguin-stats.s3-ap-southeast-1.amazonaws.com/penguin_stats_logo_exia.png"
