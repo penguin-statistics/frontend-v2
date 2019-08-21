@@ -45,7 +45,7 @@ class PersonalMatrixObjectManager extends MatrixObjectManager {
 const personalMatrix = new PersonalMatrixObjectManager({
   name: 'personalMatrix',
   api: '/result/matrix?show_closed_zones=true&is_personal=true',
-  ttl: 1000 * 60 * 60 * 24, // 24 hours
+  ttl: 1000 * 60 * 60 * 1, // 1 hours
   ajaxHooks: commons.defaultAjaxHooks
 });
 
