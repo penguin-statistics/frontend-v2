@@ -62,5 +62,20 @@
     "confirm": "はい",
     "submit": "送信",
     "close": "閉じる"
+  },
+  "contribute": {
+    "repo": "プロジェクトリポジトリ：",
+    "frontend": "フロントエンド",
+    "backend": "バックエンド",
+    "contribute_0": "以下のような開発の経験があるのであれば、Penguin Statisticsに自身の力を使ってみませんか？右記のQQグループを追加してください：747099627",
+    "contribute_1": "本プロジェクトは無償のオープンソースプロジェクトです",
+    "skills": {
+      "frontend": "フロントエンド開発 Vue.js",
+      "backend": "バックエンド開発 Java Spring Boot、MongoDB",
+      "maintenance": "DevOps",
+      "design": "UI/UXデザイン",
+      "analysis": "データ統計解析",
+      "others": "..."
+    }
   }
 }

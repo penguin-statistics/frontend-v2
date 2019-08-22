@@ -35,7 +35,12 @@ class ObjectManager {
    */
   get cacheValid() {
     let cacheUpdateAt = this.cache.updatedAt || store.getters.cacheUpdateAt(this.name)
-    console.debug("cache valid:", cacheUpdateAt + this.ttl > Date.now(), "|", cacheUpdateAt, this.ttl, Date.now());
+    console.debug("[debug]: ",
+      this.name,
+      "objectManager cache valid:",
+      cacheUpdateAt + this.ttl > Date.now(),
+      "|",
+      cacheUpdateAt, this.ttl, Date.now());
     return cacheUpdateAt + this.ttl > Date.now()
   }
 
@@ -45,14 +50,14 @@ class ObjectManager {
    * [refresh] equals true can skip tll check
    *
    * @async
-   * @params {boolean} refresh equals true can skip tll check
+   * @param {boolean} refresh equals true can skip tll check
    * @returns {Promise} the promise that contains the data
    */
   async get(refresh = false) {
     let context = this;
     if (!refresh && context.cacheValid) {
       // valid cache
-      return Promise.resolve(context.cache.data)
+      return Promise.resolve(context.cache.data);
     } else {
       // outdated cache, fetch api
       context.ajaxHooks.request();
@@ -70,7 +75,7 @@ class ObjectManager {
           return context.cache.data
         });
       context.ajaxHooks.response(response);
-      return response
+      return Promise.resolve(context.cache.data);
     }
   }
 
