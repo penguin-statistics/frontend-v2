@@ -167,15 +167,22 @@
     <v-snackbar
       v-model="submitted"
       color="success"
-      :timeout="15000"
+      :timeout="0"
     >
       {{ $t('report.success') }}
       <v-btn
         :loading="undoing"
-        flat
         @click="undo"
       >
         {{ $t('report.undo') }}
+      </v-btn>
+      <v-btn
+        dark
+        flat
+        icon
+        @click="submitted = false"
+      >
+        <v-icon>mdi-close</v-icon>
       </v-btn>
     </v-snackbar>
 
@@ -863,7 +870,6 @@
       },
       async undo () {
         this.undoing = true;
-        // TODO: replace with real api
         await report.recallReport(this.lastSubmissionId);
         this.submitted = false;
         this.undoing = false;
