@@ -29,6 +29,7 @@
         "submit": "提交",
         "success": "上传成功",
         "undo": "撤销",
+        "undoSuccess": "撤销成功",
         "unable": "无法提交：",
         "clear": "清空",
         "alertMsg": {
@@ -79,7 +80,8 @@
         "furniture": "Furniture Drop: {state}",
         "submit": "Submit",
         "success": "Successfully submitted",
-        "undo": "Undo",
+        "undo": "Recall",
+        "undoSuccess": "Successfully recalled submission",
         "clear": "Reset",
         "unable": "Failed to submit: ",
         "alertMsg": {
@@ -130,7 +132,8 @@
         "furniture": "家具ドロップ：{state}",
         "submit": "送信",
         "success": "送信成功",
-        "undo": "Undo",
+        "undo": "Recall",
+        "undoSuccess": "送信をリコールしました",
         "unable": "送信失敗：",
         "clear": "リセット",
         "alertMsg": {
@@ -162,9 +165,9 @@
     fill-height
   >
     <v-snackbar
-      v-model="snackbar"
-      :timeout="15000"
+      v-model="submitted"
       color="success"
+      :timeout="15000"
     >
       {{ $t('report.success') }}
       <v-btn
@@ -175,12 +178,26 @@
         {{ $t('report.undo') }}
       </v-btn>
     </v-snackbar>
+
+    <v-snackbar
+      v-model="undoed"
+      color="success"
+      :timeout="15000"
+    >
+      {{ $t('report.undoSuccess') }}
+      <v-btn
+        flat
+        @click="undoed = false"
+      >
+        {{ $t('dialog.close') }}
+      </v-btn>
+    </v-snackbar>
     <v-layout align-center>
       <v-flex>
         <v-stepper
           v-model="step"
-          :alt-labels="!$vuetify.breakpoint.xsOnly"
           class="bkop-light transparent"
+          :alt-labels="!$vuetify.breakpoint.xsOnly"
         >
           <v-stepper-header>
             <v-stepper-step
@@ -296,8 +313,8 @@
                 class="py-0"
               >
                 <v-list
-                  :three-line="$vuetify.breakpoint.smAndUp"
                   subheader
+                  :three-line="$vuetify.breakpoint.smAndUp"
                   class="transparent"
                 >
                   <v-subheader
@@ -482,10 +499,10 @@
                     </v-btn>
 
                     <v-btn
-                      :loading="submitting"
                       large
                       round
                       color="primary"
+                      :loading="submitting"
                       @click="submit"
                     >
                       {{ $t('report.submit') }}
@@ -601,6 +618,7 @@
   import Item from "@/components/Item";
   import ItemStepper from "@/components/ItemStepper";
   import Vue from "vue";
+  import Cookies from 'js-cookie';
 
   export default {
     name: "Report",
@@ -610,12 +628,15 @@
       snackbar: false,
       submitting: false,
       undoing: false,
+      lastSubmissionId: null,
+      undoed: false,
       results: [],
       furniture: false,
       invalidCount: 0,
       eventBus: new Vue(),
       showLimitationAlert: false,
-      showLimitationRepeatAlert: false
+      showLimitationRepeatAlert: false,
+      submitted: false
     }),
     computed: {
       selected() {
@@ -813,14 +834,20 @@
       },
       async doSubmit () {
         this.submitting = true;
-        await report.submitReport({
+        let userId = Cookies.get('userID');
+        let {data} = await report.submitReport({
           stageId: this.selected.stage,
           drops: this.results,
           furnitureNum: this.furniture ? 1 : 0
         });
+        let reportedUserId = Cookies.get('userID');
+        if (!userId && reportedUserId) {
+          this.$store.commit("authLogin", reportedUserId);
+        }
+        this.lastSubmissionId = data;
         this.submitting = false;
         this.reset();
-        this.snackbar = true
+        this.submitted = true
       },
       confirmSubmit () {
         this.showLimitationAlert = false
@@ -834,16 +861,13 @@
         this.showLimitationRepeatAlert = false
         this.doSubmit()
       },
-      undo () {
+      async undo () {
         this.undoing = true;
         // TODO: replace with real api
-        setTimeout(() => {
-          this.undoing = false
-          this.snackbar = false
-          setTimeout(() => {
-            this.snackbar = true
-          }, 500)
-        }, 3000)
+        await report.recallReport(this.lastSubmissionId);
+        this.submitted = false;
+        this.undoing = false;
+        this.undoed = true
       }
     }
   }

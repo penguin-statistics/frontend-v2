@@ -72,14 +72,15 @@ export default new Vuex.Store({
     }
   },
   actions: {
-    async fetchData() {
-      await itemsManager.get()
-      await limitationsManager.get()
-      await stagesManager.get()
-      await zonesManager.get()
-      await trendsManager.get()
-      await globalMatrixManager.get()
-      await personalMatrixManager.get()
+    // eslint-disable-next-line
+    async fetchData({}, refresh = false) {
+      await itemsManager.get(refresh)
+      await limitationsManager.get(refresh)
+      await stagesManager.get(refresh)
+      await zonesManager.get(refresh)
+      await trendsManager.get(refresh)
+      await globalMatrixManager.get(refresh)
+      await personalMatrixManager.get(refresh)
     },
     async refreshPersonalMatrixData() {
       await personalMatrixManager.get(true)

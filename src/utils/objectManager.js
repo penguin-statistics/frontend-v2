@@ -42,8 +42,10 @@ class ObjectManager {
   /**
    * returns local cache if ttl has been fulfilled, and fetches external api when
    * the ttl of local cache is outdated or the local cache is not available
+   * [refresh] equals true can skip tll check
    *
    * @async
+   * @params {boolean} refresh equals true can skip tll check
    * @returns {Promise} the promise that contains the data
    */
   async get(refresh = false) {
