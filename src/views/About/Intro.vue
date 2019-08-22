@@ -31,8 +31,6 @@
     row
     wrap
     class="ma-5"
-
-    data-aos="fade-right"
   >
     <v-img
       :src="require('@/assets/logo.png')"

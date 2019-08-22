@@ -66,7 +66,9 @@
     >
       <v-list-tile>
         <v-list-tile-content>
-          {{ $t('contribute.repo') }}
+          <span class="subheading">
+            {{ $t('contribute.repo') }}
+          </span>
         </v-list-tile-content>
         <v-list-tile-action>
           <v-layout
@@ -79,6 +81,7 @@
               href="https://github.com/penguin-statistics/frontend-v2"
               target="_blank"
               class="mx-2"
+              flat
             >
               {{ $t('contribute.frontend') }}
               <v-icon right>
@@ -86,10 +89,13 @@
               </v-icon>
             </v-btn>
 
+            <v-divider vertical />
+
             <v-btn
               href="https://github.com/penguin-statistics/backend"
               target="_blank"
               class="mx-2"
+              flat
             >
               {{ $t('contribute.backend') }}
               <v-icon right>

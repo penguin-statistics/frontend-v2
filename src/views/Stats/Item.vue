@@ -108,7 +108,7 @@
                 class="item-list-item-wrapper"
               >
                 <v-avatar
-                  class="item-list-item-avatar"
+                  class="item-list-item-avatar cursor-pointer"
                   @click="storeItemSelection(item.itemId)"
                 >
                   <Item
