@@ -16,7 +16,7 @@
     },
     "ja": {
       "dataSourceToggle": {
-        "loginNotice": "個人のドロップデータを表示する前にログインしてください。",
+        "loginNotice": "個人のドロップデータを表示するにはログインが必要となります。",
         "all": "全体",
         "personal": "個人"
       }

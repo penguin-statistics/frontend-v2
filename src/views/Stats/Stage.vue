@@ -57,7 +57,7 @@
       }
     },
     "ja": {
-      "opensAt": "限定期間：{0} ~ {1}",
+      "opensAt": "開催期間：{0} ~ {1}",
       "zone": {
         "name": "章",
         "types": {
@@ -72,7 +72,7 @@
       },
       "stage": {
         "name": "作戦",
-        "apCost": "{apCost} AP required",
+        "apCost": "消費理智：{apCost}",
         "loots": {
           "normal": "通常ドロップ",
           "extra": "エクストラドロップ",
