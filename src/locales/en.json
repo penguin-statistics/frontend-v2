@@ -62,5 +62,20 @@
     "confirm": "Confirm",
     "submit": "Submit",
     "close": "Close"
+  },
+  "contribute": {
+    "repo": "Project repositories: ",
+    "frontend": "Front End",
+    "backend": "Back End",
+    "contribute_0": "If you have experience with any of the following skills, and want to contribute to Penguin Statistics, please add QQ group: 747099627.",
+    "contribute_1": "This is a nonprofit and open source project",
+    "skills": {
+      "frontend": "Front End Development (Vue.js)",
+      "backend": "Back End Development (Java Spring Boot, MongoDB)",
+      "maintenance": "DevOps",
+      "design": "UI/UX Design",
+      "analysis": "Data Analysis",
+      "others": "..."
+    }
   }
 }
