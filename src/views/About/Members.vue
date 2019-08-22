@@ -221,7 +221,7 @@
             },
             {
               name: "侠",
-              responsibility: "logo画师",
+              responsibility: "Logo画师",
               avatar: "xia.png",
               socials: {
                 weibo: "https://www.weibo.com/u/2290638732"
