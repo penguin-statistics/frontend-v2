@@ -2,7 +2,6 @@
   {
     "zh": {
       "contribute": {
-        "repo": "项目仓库",
         "frontend": "前端",
         "backend": "后端",
         "contribute_0": "如果您有以下一项或多项经验，愿意为企鹅数据贡献自己的一份力量，请加QQ群：747099627",
@@ -18,7 +17,6 @@
     },
     "en": {
       "contribute": {
-        "repo": "Project Repositories",
         "frontend": "Front End",
         "backend": "Back End",
         "contribute_0": "If you have experience with any of the following skills, and want to contribute to Penguin Statistics, please add QQ group: 747099627.",
@@ -34,7 +32,6 @@
     },
     "ja": {
       "contribute": {
-        "repo": "プロジェクトリポジトリ",
         "frontend": "フロントエンド",
         "backend": "バックエンド",
         "contribute_0": "以下のような開発の経験があるのであれば、Penguin Statisticsに自身の力を使ってみませんか？右記のQQグループを追加してください：747099627",
@@ -55,61 +52,69 @@
   <v-card class="bkop-light pa-4">
     <h1 class="headline">
       {{ $t('menu.about.contribute') }}
-      <span class="caption">
-        * {{ $t('contribute.contribute_1') }}
-      </span>
     </h1>
+    <div class="caption my-2">
+      * {{ $t('contribute.contribute_1') }}
+    </div>
 
     <v-list
       dense
       class="mt-2 transparent outline"
     >
       <v-list-tile>
-        <v-list-tile-content>
-          <span class="subheading">
-            {{ $t('contribute.repo') }}
-          </span>
-        </v-list-tile-content>
-        <v-list-tile-action>
-          <v-layout
-            align-center
-            justify-end
-            wrap
-            fill-height
-          >
-            <v-btn
-              href="https://github.com/penguin-statistics/frontend-v2"
-              target="_blank"
-              class="mx-2"
-              flat
+        <v-layout
+          align-center
+          justify-center
+          wrap
+          fill-height
+        >
+          <v-list-tile-action>
+            <v-layout
+              align-center
+              justify-center
+              wrap
+              fill-height
             >
-              {{ $t('contribute.frontend') }}
-              <v-icon right>
-                mdi-github-circle
-              </v-icon>
-            </v-btn>
+              <v-btn
+                href="https://github.com/penguin-statistics/frontend-v2"
+                target="_blank"
+                :class="{
+                  'mx-2': $vuetify.breakpoint.smAndUp,
+                  'mx-1': $vuetify.breakpoint.xsOnly
+                }"
+                flat
+              >
+                {{ $t('contribute.frontend') }}
+                <v-icon right>
+                  mdi-github-circle
+                </v-icon>
+              </v-btn>
 
-            <v-divider vertical />
+              <v-divider vertical />
 
-            <v-btn
-              href="https://github.com/penguin-statistics/backend"
-              target="_blank"
-              class="mx-2"
-              flat
-            >
-              {{ $t('contribute.backend') }}
-              <v-icon right>
-                mdi-github-circle
-              </v-icon>
-            </v-btn>
-          </v-layout>
-        </v-list-tile-action>
+              <v-btn
+                href="https://github.com/penguin-statistics/backend"
+                target="_blank"
+                :class="{
+                  'mx-2': $vuetify.breakpoint.smAndUp,
+                  'mx-1': $vuetify.breakpoint.xsOnly
+                }"
+                flat
+              >
+                {{ $t('contribute.backend') }}
+                <v-icon right>
+                  mdi-github-circle
+                </v-icon>
+              </v-btn>
+            </v-layout>
+          </v-list-tile-action>
+        </v-layout>
       </v-list-tile>
     </v-list>
 
     <v-divider class="my-3" />
 
-    <blockquote class="blockquote">
+    <blockquote class="blockquote pl-0">
       {{ $t('contribute.contribute_0') }}
     </blockquote>
 
