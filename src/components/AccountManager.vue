@@ -73,20 +73,21 @@
           <v-text-field
             v-model="auth.username"
             :label="`${$t('userId')} *`"
+            :error-messages="error"
             required
-            hide-details
 
             outline
 
             @keyup.enter.native="login"
+            @input="emitError"
           />
         </v-card-text>
         <v-card-actions class="mx-2 mb-3">
           <v-btn
-            color="primary"
-            block
             :loading="auth.loading"
             :disabled="auth.username === ''"
+            color="primary"
+            block
             large
             @click="login"
           >
@@ -200,7 +201,8 @@
         },
         cookies: {
           key: "userID"
-        }
+        },
+        error: ""
       }
     },
     computed: {
@@ -230,7 +232,8 @@
               enabled: true,
               color: "error",
               text: this.$t('failed', {message: err.errorMessage})
-            }
+            };
+            this.error = this.$t('failed', {message: err.errorMessage})
           })
           .finally(() => {
             this.auth.loading = false
@@ -246,6 +249,9 @@
         };
         this.auth.logoutPrompt = false;
         this.$store.commit("switchDataSource", "global");
+      },
+      emitError () {
+        this.error = ''
       }
     },
   }

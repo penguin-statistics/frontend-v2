@@ -90,8 +90,8 @@
 <template>
   <v-stepper
     v-model="step"
-    class="bkop-light transparent"
     :alt-labels="!$vuetify.breakpoint.xsOnly"
+    class="bkop-light transparent"
   >
     <v-stepper-header>
       <v-stepper-step
@@ -220,8 +220,8 @@
           class="py-0"
         >
           <v-list
-            subheader
             :three-line="$vuetify.breakpoint.smAndUp"
+            subheader
             class="transparent"
           >
             <v-subheader
@@ -343,20 +343,20 @@
           :headers="tableHeaders"
           :items="stageStats"
           :pagination.sync="tablePagination"
+          :calculate-widths="true"
           must-sort
           hide-actions
           class="elevation-0 transparentTable stat-table"
-          :calculate-widths="true"
         >
           <template v-slot:items="props">
             <tr>
               <td
-                class="hovering"
                 :class="{
                   'px-3': $vuetify.breakpoint.smAndDown,
                   'item-name-td-xs': $vuetify.breakpoint.xsOnly,
                   'item-name-td-sm': $vuetify.breakpoint.smOnly
                 }"
+                class="hovering"
               >
                 <span
                   class="cursor-pointer"
@@ -397,20 +397,20 @@
                 </span>
               </td>
               <td
-                class="text-xs-center"
                 :class="{'px-3': $vuetify.breakpoint.xsOnly}"
+                class="text-xs-center"
               >
                 {{ props.item.times }}
               </td>
               <td
-                class="text-xs-center"
                 :class="{'px-3': $vuetify.breakpoint.xsOnly}"
+                class="text-xs-center"
               >
                 {{ props.item.quantity }}
               </td>
               <td
-                class="text-xs-center"
                 :class="{'px-3': $vuetify.breakpoint.xsOnly}"
+                class="text-xs-center"
               >
                 <div
                   class="charts-data-wrapper"
@@ -427,17 +427,17 @@
                       :x-start="currentTrends && currentTrends.startTime"
                       :show-dialog="expanded[props.item.item.itemId]"
                       :data-keys="['quantity']"
-                      sparkline-key="quantity"
-                      sparkline-sub-key="times"
                       :data="currentTrendsData && currentTrendsData[props.item.item.itemId]"
                       :charts-id="props.item.item.itemId"
+                      sparkline-key="quantity"
+                      sparkline-sub-key="times"
                     />
                   </div>
                 </div>
               </td>
               <td
-                class="text-xs-center"
                 :class="{'px-3': $vuetify.breakpoint.xsOnly}"
+                class="text-xs-center"
               >
                 {{ props.item.apPPR }}
               </td>

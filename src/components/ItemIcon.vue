@@ -11,10 +11,10 @@
       <template v-slot:activator="{ on }">
         <v-icon
           v-show="item.itemId === 'furni'"
-          class="deep-orange"
           :class="furniturePadding"
-          style="border-radius: 50%;"
           :style="furnitureWidth"
+          class="deep-orange"
+          style="border-radius: 50%;"
           v-on="on"
         >mdi-lamp</v-icon>
         <figure
@@ -29,10 +29,10 @@
     <span v-if="disableTooltip">
       <v-icon
         v-show="item.itemId === 'furni'"
-        class="deep-orange"
         :class="furniturePadding"
-        style="border-radius: 50%;"
         :style="furnitureWidth"
+        class="deep-orange"
+        style="border-radius: 50%;"
       >mdi-lamp</v-icon>
       <figure
         v-show="item.itemId !== 'furni'"

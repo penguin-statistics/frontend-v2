@@ -64,10 +64,10 @@
     </v-dialog>
     <div class="v-item-group theme--dark v-btn-toggle v-btn-toggle--only-child v-btn-toggle--selected">
       <button
+        :class="{'v-btn--active': dataSource === 'global'}"
         type="button"
         value="global"
         class="v-btn theme--dark"
-        :class="{'v-btn--active': dataSource === 'global'}"
         @click="dataSource = 'global'"
       >
         <div class="v-btn__content">
@@ -75,10 +75,10 @@
         </div>
       </button>
       <button
+        :class="{'v-btn--active': dataSource === 'personal'}"
         type="button"
         value="personal"
         class="v-btn theme--dark"
-        :class="{'v-btn--active': dataSource === 'personal'}"
         @click="dataSource = 'personal'"
       >
         <div class="v-btn__content">
