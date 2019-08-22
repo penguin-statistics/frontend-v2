@@ -118,7 +118,7 @@
         v-for="(skill, key) in skills"
         :key="key"
       >
-        {{ skill }}
+        {{ $t(`contribute.skills.${skill}`) }}
       </li>
     </ul>
   </v-card>
@@ -129,14 +129,14 @@ export default {
   name: 'Contribute',
   data() {
     return {
-      skills: {
-        'frontend': this.$t('contribute.skills.skill_0'),
-        'backend': this.$t('contribute.skills.skill_1'),
-        'maintenance': this.$t('contribute.skills.skill_2'),
-        'design': this.$t('contribute.skills.skill_3'),
-        'analysis': this.$t('contribute.skills.skill_4'),
-        'others': '...'
-      }
+      skills: [
+        'frontend',
+        'backend',
+        'maintenance',
+        'design',
+        'analysis',
+        'others'
+      ]
     }
   },
   methods: {
