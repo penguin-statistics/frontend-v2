@@ -38,7 +38,7 @@
           "preContact": "如果您认为这是误判，欢迎",
           "contact": "联系作者",
           "sufContact": "（最好附上掉落截图），确认后会尽快修正。",
-          "noDrop": "您尚未选择任何掉落物品，您确定此次上传数据正确么？",
+          "noDrop": "您尚未选择任何掉落物品，您确定此次上传数据正确吗？",
           "finalAlert": "您真的确定要继续吗？",
           "continue": "确定要继续吗？"
         }
@@ -82,7 +82,7 @@
         "success": "Successfully submitted",
         "undo": "Recall",
         "undoSuccess": "Successfully recalled submission",
-        "clear": "Reset",
+        "clear": "Clear",
         "unable": "Failed to submit: ",
         "alertMsg": {
           "alert": "Warning",
@@ -92,7 +92,7 @@
           "sufContact": "(attach the screenshot if possible). We will correct it as soon as possible after confirmation.",
           "noDrop": "You have not selected any dropped items. Are you sure that the upload data is correct?",
           "finalAlert": "Are you sure you want to continue?",
-          "continue": "Are you sure you want to continue?"
+          "continue": "Do you want to continue?"
         }
       },
       "rules": {
@@ -105,7 +105,7 @@
       "usage": "Increase by left click, decrease by right click"
     },
     "ja": {
-      "opensAt": "限定期間：{0} ~ {1}",
+      "opensAt": "開催期間：{0} ~ {1}",
       "zone": {
         "name": "章",
         "types": {
@@ -120,7 +120,7 @@
       },
       "stage": {
         "name": "作戦",
-        "apCost": "{apCost} AP required",
+        "apCost": "消費理智：{apCost}",
         "loots": {
           "normal": "通常ドロップ",
           "extra": "エクストラドロップ",
@@ -132,19 +132,19 @@
         "furniture": "家具ドロップ：{state}",
         "submit": "送信",
         "success": "送信成功",
-        "undo": "Recall",
-        "undoSuccess": "送信をリコールしました",
+        "undo": "送信キャンセル",
+        "undoSuccess": "キャンセルしました",
         "unable": "送信失敗：",
-        "clear": "リセット",
+        "clear": "クリア",
         "alertMsg": {
           "alert": "警告",
           "limitation": "今回報告しようとしている内容は既存のデータとの差が大きくなっており、このまま報告するのであれば今回の報告は異常と判定され、全て統計データに反映されることはありません。",
           "preContact": "誤った情報であると判断した場合は",
           "contact": "管理人に連絡を行ってください",
           "sufContact": "（その際はスクリーンショットの添付をお願いいたします）。確認次第速やかに修正を行わせて頂きます。",
-          "noDrop": "ドロップされたアイテムは選択されていません。 アップロードデータが正しいことを確認しますか？",
-          "finalAlert": "本当にいいですか？",
-          "continue": "続行しますか？"
+          "noDrop": "ドロップアイテムが何も選択されていません。送信するデータに問題はありませんか？",
+          "finalAlert": "本当にこのデータを送信しますか？",
+          "continue": "本当に送信しますか？"
         }
       },
       "rules": {

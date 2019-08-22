@@ -3,6 +3,10 @@
     "zh": {
       "donate": {
         "donate_0": "用户量激增，服务器月费上涨，企鹅数据的运营陷入了危机。站长红白为了保护喜爱的企鹅数据而决定...",
+        "donate_1": "随着访问量的增加，目前的小水管服务器已经有些不堪重负了。如果各位刀客塔能捐助一些",
+        "donate_2": "服务器费用",
+        "donate_3": "pocky、阿噗噜派也可",
+        "donate_4": "，我们将不胜感激!",
         "redirectToApp": "打开“{app}” APP 捐助",
         "methods": {
           "alipay": "支付宝",
@@ -13,6 +17,10 @@
     "en": {
       "donate": {
         "donate_0": "用户量激增，服务器月费上涨，企鹅数据的运营陷入了危机。站长红白为了保护喜爱的企鹅数据而决定...",
+        "donate_1": "随着访问量的增加，目前的小水管服务器已经有些不堪重负了。如果各位刀客塔能捐助一些",
+        "donate_2": "服务器费用",
+        "donate_3": "pocky、阿噗噜派也可",
+        "donate_4": "，我们将不胜感激!",
         "redirectToApp": "Donate using \"{app}\" App",
         "methods": {
           "alipay": "Alipay",
@@ -23,6 +31,11 @@
     "ja": {
       "donate": {
         "donate_0": "ユーザー数が急増し、サーバーの月額は上昇、企鹅数据の運営は危機的状況に...。管理人の紅白は大好きな企鹅数据を守るため、自分に出来ることは何か？紅白が悩んで見つけ出した答えは「アイドルになること」！？",
+        "donate_1": "アクセス数が増加し、サーバーが負荷に耐えることが出来なくなっています。サーバーの",
+        "donate_2": "運営費用",
+        "donate_3": "ポッキーやアップルパイでも可",
+        "donate_4": "を寄付頂けると非常にありがたいです。",
+        "redirectToApp": "{app}アプリで寄付します",
         "methods": {
           "alipay": "Alipay",
           "wechatPay": "WeChat Pay"
@@ -50,17 +63,17 @@
         </v-flex>
         <v-divider />
         <v-flex class="subheading">
-          随着访问量的增加，目前的小水管服务器已经有些不堪重负了。如果各位刀客塔能捐助一些
+          {{ $t('donate.donate_1') }}
           <v-tooltip top>
             <template v-slot:activator="{ on }">
               <span
                 style="border-bottom:1px dashed #ccc;"
                 v-on="on"
-              >服务器费用</span>
+              >{{ $t('donate.donate_2') }}</span>
             </template>
-            pocky、阿噗噜派也可
+            {{ $t('donate.donate_3') }}
           </v-tooltip>
-          ，我们将不胜感激!
+          {{ $t('donate.donate_4') }}
         </v-flex>
       </v-layout>
     </v-card-title>

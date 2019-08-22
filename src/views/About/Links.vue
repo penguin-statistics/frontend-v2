@@ -1,3 +1,65 @@
+<i18n>
+  {
+    "zh": {
+      "links": {
+        "tags": {
+          "hr": "公招查询",
+          "levelup": "升级计算",
+          "materials": "材料需求计算",
+          "planner": "刷图规划",
+          "storage": "库存管理",
+          "character": "角色查看",
+          "enemy": "整合图鉴",
+          "apRanking": "理智效率排行",
+          "dropRateRanking": "掉率排行",
+          "generalRanking": "综合收益排行",
+          "walkthrough": "通关攻略",
+          "experience": "经验分享",
+          "ja_translation": "剧情日文翻译"
+        }
+      }
+    },
+    "en": {
+      "links": {
+        "tags": {
+          "hr": "公招查询",
+          "levelup": "升级计算",
+          "materials": "材料需求计算",
+          "planner": "刷图规划",
+          "storage": "库存管理",
+          "character": "角色查看",
+          "enemy": "整合图鉴",
+          "apRanking": "理智效率排行",
+          "dropRateRanking": "掉率排行",
+          "generalRanking": "综合收益排行",
+          "walkthrough": "通关攻略",
+          "experience": "经验分享",
+          "ja_translation": "剧情日文翻译"
+        }
+      }
+    },
+    "ja": {
+      "links": {
+        "tags": {
+          "hr": "公募一覧",
+          "levelup": "レベル計算機",
+          "materials": "素材必要数計算機",
+          "planner": "周回計画作成ツール",
+          "storage": "素材在庫管理",
+          "character": "オペレーター一覧",
+          "enemy": "レユニオン一覧",
+          "apRanking": "理智効率順位表",
+          "dropRateRanking": "ドロップ率順位表",
+          "generalRanking": "総合収益順位表",
+          "walkthrough": "ステージ攻略",
+          "experience": "ゲームレビュー",
+          "ja_translation": "剧情日文翻译"
+        }
+      }
+    }
+  }
+</i18n>
+
 <template>
   <v-layout
     row
@@ -40,7 +102,7 @@
             label
             text-color="white"
           >
-            {{ feature.name }}
+            {{ $t(`links.tags.${feature.name}`) }}
           </v-chip>
         </v-card-title>
         <div
@@ -66,25 +128,6 @@
             </v-chip>
           </v-layout>
         </div>
-        <v-layout
-          align-center
-          justify-center
-          fill-height
-        >
-          <div
-            v-if="link.text"
-            class="pa-3"
-          >
-            <v-layout
-              align-center
-              justify-center
-              row
-              fill-height
-            >
-              {{ link.text }}
-            </v-layout>
-          </div>
-        </v-layout>
       </v-card>
     </v-flex>
   </v-layout>
@@ -101,23 +144,23 @@ export default {
           author: "一只灰喵",
           features: [
             {
-              name: "公招查询",
+              name: "hr",
               color: "cyan"
             },
             {
-              name: "升级计算",
+              name: "levelup",
               color: "green"
             },
             {
-              name: "材料需求计算",
+              name: "materials",
               color: "indigo"
             },
             {
-              name: "刷图规划",
+              name: "planner",
               color: "indigo"
             },
             {
-              name: "库存管理",
+              name: "storage",
               color: "purple"
             }
           ],
@@ -128,19 +171,19 @@ export default {
           author: "Laplace",
           features: [
             {
-              name: "角色查看",
+              name: "character",
               color: "orange"
             },
             {
-              name: "整合图鉴",
+              name: "enemy",
               color: "black"
             },
             {
-              name: "材料需求计算",
+              name: "materials",
               color: "indigo"
             },
             {
-              name: "刷图规划",
+              name: "planner",
               color: "indigo"
             }
           ],
@@ -151,19 +194,19 @@ export default {
           author: "凤瞳",
           features: [
             {
-              name: "角色查看",
+              name: "character",
               color: "orange"
             },
             {
-              name: "材料需求计算",
+              name: "materials",
               color: "indigo"
             },
             {
-              name: "刷图规划",
+              name: "planner",
               color: "indigo"
             },
             {
-              name: "库存管理",
+              name: "storage",
               color: "purple"
             }
           ],
@@ -174,15 +217,15 @@ export default {
           author: "Kindle",
           features: [
             {
-              name: "理智效率排行",
+              name: "apRanking",
               color: "grey"
             },
             {
-              name: "掉率排行",
+              name: "dropRateRanking",
               color: "grey"
             },
             {
-              name: "综合收益排行",
+              name: "generalRanking",
               color: "grey"
             }
           ],
@@ -193,11 +236,11 @@ export default {
           author: "麻辣花蛤",
           features: [
             {
-              name: "通关攻略",
+              name: "walkthrough",
               color: "brown"
             },
             {
-              name: "经验分享",
+              name: "experience",
               color: "brown"
             }
           ],
@@ -206,21 +249,30 @@ export default {
         {
           title: "ゲームの果て",
           author: "方舟航海図",
-          features: [],
+          features: [
+            {
+              name: "character",
+              color: "orange"
+            },
+            {
+              name: "walkthrough",
+              color: "brown"
+            },
+            {
+              name: "experience",
+              color: "brown"
+            },
+            {
+              name: "ja_translation",
+              color: "blue-grey"
+            }
+          ],
           url: "https://smartgamecap.net"
         }
       ]
     };
   },
-  mounted() {
-    if (!this.$vuetify.breakpoint.xsOnly && this.links && this.links.length % 2 !== 0) {
-      this.links.push({
-        text: "陆续添加中..."
-      });
-    }
-  },
   methods: {
-
     goToHref(href) {
       window.open(href);
     }
