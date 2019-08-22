@@ -7,7 +7,8 @@
         "types": {
           "MAINLINE": "主线",
           "WEEKLY": "物资筹备",
-          "ACTIVITY": "限时活动"
+          "ACTIVITY_OPEN": "限时活动（开放中）",
+          "ACTIVITY_CLOSED": "限时活动（已结束）"
         },
         "status": {
           "closed": "已结束",
@@ -35,7 +36,8 @@
         "types": {
           "MAINLINE": "Mainline",
           "WEEKLY": "Weekly",
-          "ACTIVITY": "Activity"
+          "ACTIVITY_OPEN": "Event (Opening)",
+          "ACTIVITY_CLOSED": "Event (Closed)"
         },
         "status": {
           "closed": "Closed",
@@ -63,7 +65,8 @@
         "types": {
           "MAINLINE": "メインストーリー",
           "WEEKLY": "曜日クエスト",
-          "ACTIVITY": "イベント"
+          "ACTIVITY_OPEN": "イベント（開催中）",
+          "ACTIVITY_CLOSED": "イベント（終了）"
         },
         "status": {
           "closed": "終了",
@@ -481,13 +484,25 @@ export default {
       return this.currentTrends && this.currentTrends.results;
     },
     categorizedZones() {
-      const categories = ["MAINLINE", "WEEKLY", "ACTIVITY"];
+      const categories = ["ACTIVITY_OPEN", "MAINLINE", "WEEKLY", "ACTIVITY_CLOSED"];
       let result = [];
       for (let category of categories) {
-        result.push({
-          id: category,
-          zones: get.zones.byType(category)
-        });
+        let filter = null;
+        let zones = get.zones.byType(category.startsWith("ACTIVITY") ? "ACTIVITY" : category);
+        if (category === "ACTIVITY_OPEN") {
+          filter = zone => !zone.isOutdated;
+        } else if (category === "ACTIVITY_CLOSED") {
+          filter = zone => zone.isOutdated;
+        }
+        if (filter) {
+          zones = zones.filter(filter);
+        }
+        if (zones && zones.length) {
+          result.push({
+            id: category,
+            zones: zones
+          })
+        }
       }
       return result;
     },

@@ -646,13 +646,16 @@
         };
       },
       categorizedZones() {
-        const categories = ["MAINLINE", "WEEKLY", "ACTIVITY"];
+        const categories = ["ACTIVITY", "MAINLINE", "WEEKLY"]; // in the report page we want activity to be the first
         let result = [];
         for (let category of categories) {
-          result.push({
-            id: category,
-            zones: get.zones.byType(category)
-          })
+          let zones = get.zones.byType(category).filter(zone => !zone.isOutdated);
+          if (zones && zones.length) {
+            result.push({
+              id: category,
+              zones: zones
+            })
+          }
         }
         return result
       },
