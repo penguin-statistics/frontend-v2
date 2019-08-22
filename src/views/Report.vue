@@ -165,17 +165,24 @@
     fill-height
   >
     <v-snackbar
-      v-model="submitted"
+      v-model="showSubmittedSnackbar"
       color="success"
-      :timeout="15000"
+      :timeout="0"
     >
       {{ $t('report.success') }}
       <v-btn
         :loading="undoing"
-        flat
         @click="undo"
       >
         {{ $t('report.undo') }}
+      </v-btn>
+      <v-btn
+        dark
+        flat
+        icon
+        @click="submitted = false"
+      >
+        <v-icon>mdi-close</v-icon>
       </v-btn>
     </v-snackbar>
 
@@ -711,6 +718,9 @@
       typeLimitation () {
         if (!this.selected.stage) return {};
         return get.limitations.byStageId(this.selected.stage).itemTypeBounds
+      },
+      showSubmittedSnackbar () {
+        return this.submitted && this.$store.getters.authed
       }
     },
     watch: {
@@ -836,6 +846,7 @@
         }
       },
       async doSubmit () {
+        this.submitted = false;
         this.submitting = true;
         let userId = Cookies.get('userID');
         let {data} = await report.submitReport({
@@ -866,7 +877,6 @@
       },
       async undo () {
         this.undoing = true;
-        // TODO: replace with real api
         await report.recallReport(this.lastSubmissionId);
         this.submitted = false;
         this.undoing = false;
