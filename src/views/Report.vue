@@ -165,7 +165,7 @@
     fill-height
   >
     <v-snackbar
-      v-model="submitted"
+      v-model="showSubmittedSnackbar"
       color="success"
       :timeout="0"
     >
@@ -715,6 +715,9 @@
       typeLimitation () {
         if (!this.selected.stage) return {};
         return get.limitations.byStageId(this.selected.stage).itemTypeBounds
+      },
+      showSubmittedSnackbar () {
+        return this.submitted && this.$store.getters.authed
       }
     },
     watch: {
@@ -840,6 +843,7 @@
         }
       },
       async doSubmit () {
+        this.submitted = false;
         this.submitting = true;
         let userId = Cookies.get('userID');
         let {data} = await report.submitReport({
