@@ -125,6 +125,9 @@
       },
       validationRules() {
         let limitation = this.limitations.itemQuantityBounds.find(v => v.itemId === this.item.itemId);
+        if (!limitation) {
+          return [];
+        }
         const gte = (value) => {
           return (compare) => {
             return compare >= value ? true : this.$t('rules.gte', { item: this.item.name, quantity: value })
