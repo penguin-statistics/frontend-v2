@@ -22,19 +22,19 @@
     "en": {
       "links": {
         "tags": {
-          "hr": "公招查询",
-          "levelup": "升级计算",
-          "materials": "材料需求计算",
-          "planner": "刷图规划",
-          "storage": "库存管理",
-          "character": "角色查看",
-          "enemy": "整合图鉴",
-          "apRanking": "理智效率排行",
-          "dropRateRanking": "掉率排行",
-          "generalRanking": "综合收益排行",
-          "walkthrough": "通关攻略",
-          "experience": "经验分享",
-          "ja_translation": "剧情日文翻译"
+          "hr": "Public Recruiting Lookup",
+          "levelup": "Level Up Calculator",
+          "materials": "Material Requirement Calculator",
+          "planner": "Planner",
+          "storage": "Inventory Management",
+          "character": "Operators List",
+          "enemy": "Enemies List",
+          "apRanking": "AP Efficiency Ranking",
+          "dropRateRanking": "Drop Rate Ranking",
+          "generalRanking": "General Ranking",
+          "walkthrough": "Walkthrough",
+          "experience": "Experience",
+          "ja_translation": "Japanese Translation of Main Story"
         }
       }
     },
