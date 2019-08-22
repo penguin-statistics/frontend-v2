@@ -53,7 +53,7 @@
           "generalRanking": "総合収益順位表",
           "walkthrough": "ステージ攻略",
           "experience": "ゲームレビュー",
-          "ja_translation": "剧情日文翻译"
+          "ja_translation": "ストーリー和訳"
         }
       }
     }
