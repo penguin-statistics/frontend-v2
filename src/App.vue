@@ -38,22 +38,72 @@
       </v-card>
     </v-dialog>
     <v-dialog
-      v-model="prefetchingResources"
+      v-model="$store.getters.ajaxErrors.length"
       persistent
-      width="300"
+      width="600"
     >
-      <v-card
-        color="primary"
-        dark
-      >
-        <v-card-text>
-          {{ $t('meta.loading') }}
-          <v-progress-linear
-            indeterminate
-            color="white"
-            class="mb-0"
-          />
+      <v-card>
+        <v-card-title
+          class="headline red"
+          primary-title
+        >
+          <v-icon>mdi-alert</v-icon>
+          <span class="ml-2">{{ $t('fetch.failed.title') }}</span>
+        </v-card-title>
+
+        <v-card-text class="pa-4">
+          <span class="subheading">
+            {{ $t('fetch.failed.subtitle') }}
+          </span>
+          <v-divider class="my-4" />
+          <v-expansion-panel>
+            <v-expansion-panel-content>
+              <template v-slot:header>
+                <div>{{ $t('meta.details') }}</div>
+              </template>
+              <v-list two-line>
+                <v-list-tile
+                  v-for="error in $store.getters.ajaxErrors"
+                  :key="error.id"
+                  avatar
+                >
+                  <v-list-tile-content>
+                    <v-list-tile-title>
+                      {{ error.id }}
+                    </v-list-tile-title>
+                    <v-list-tile-sub-title>
+                      {{ error.error }}
+                    </v-list-tile-sub-title>
+                  </v-list-tile-content>
+
+                  <v-list-tile-action>
+                    <v-progress-circular
+                      v-if="error.pending"
+                      indeterminate
+                    />
+                    <v-icon v-else>
+                      mdi-alert-circle-outline
+                    </v-icon>
+                  </v-list-tile-action>
+                </v-list-tile>
+              </v-list>
+            </v-expansion-panel-content>
+          </v-expansion-panel>
         </v-card-text>
+
+        <v-card-actions>
+          <v-spacer />
+          <v-btn
+            flat
+            :loading="$store.getters.ajaxPending"
+            @click="refreshData"
+          >
+            <v-icon left>
+              mdi-database-refresh
+            </v-icon>
+            {{ $t('fetch.failed.retry') }}
+          </v-btn>
+        </v-card-actions>
       </v-card>
     </v-dialog>
     <v-navigation-drawer
@@ -269,6 +319,22 @@
         </v-tooltip>
       </a>
       <v-spacer />
+      <v-fade-transition>
+        <span
+          v-if="$store.getters.ajaxPending"
+        >
+          <v-progress-circular
+            indeterminate
+            color="accent"
+            class="mr-2"
+            :size="16"
+            :width="3"
+          />
+          <span>
+            {{ $t('meta.loading') }}
+          </span>
+        </span>
+      </v-fade-transition>
     </v-footer>
   </v-app>
 </template>

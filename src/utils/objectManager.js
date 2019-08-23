@@ -60,7 +60,7 @@ class ObjectManager {
       return Promise.resolve(context.cache.data);
     } else {
       // outdated cache, fetch api
-      context.ajaxHooks.request();
+      context.ajaxHooks.request(context.name);
       let response = service.get(context.api)
         .then(({ data }) => {
           context.cache.data = data;
@@ -74,7 +74,7 @@ class ObjectManager {
           store.commit("storeCacheUpdateAt", cacheUpdateAtTemp);
           return context.cache.data
         });
-      context.ajaxHooks.response(response);
+      context.ajaxHooks.response(context.name, response);
       return Promise.resolve(context.cache.data);
     }
   }
