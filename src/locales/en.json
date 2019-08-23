@@ -1,21 +1,35 @@
 {
+  "app": {
+    "name": "Penguin Statistics",
+    "name_line1": "Penguin Statistics",
+    "name_line2": ""
+  },
   "menu": {
     "home": "Home",
-    "report": "Loot Report",
+    "report": "Drop Report",
     "stats": {
       "_name": "Statistics",
       "stage": "by stage",
       "item": "by item"
     },
-    "planner": "Planner",
-    "changelog": "Change Log",
-    "logo": "Penguin Statistics"
+    "about": {
+      "_name": "About Penguin Statistics",
+      "members": "Team Members",
+      "contribute": "Contribute",
+      "changelog": "Change Log",
+      "contact": "Contact us",
+      "donate": "Donate",
+      "links": "Links"
+    },
+    "planner": "ArkPlanner",
+    "changelog": "Change Log"
   },
   "meta": {
+    "details": "View Details",
     "loading": "Fetching application data...",
     "footer": {
       "copyright": "(Click to view license) Data was collected by Penguin Delivery, licensed under a Creative Commons Attribution-NonCommercial 4.0 International License. In case of redistribution and transformation towards the material, you must give appropriate credit, provide a link to the license, indicate if changes were made, and may not use the material for commercial purposes.",
-      "credit": "Penguin Delivery | {date}"
+      "credit": "Penguin Statistics | {date}"
     }
   },
   "stats": {
@@ -34,6 +48,42 @@
       "title": "Preview Build",
       "description": "You are currently browsing the development build",
       "ok": "OH YEAH!"
+    }
+  },
+  "boolean": {
+    "true": "Yes",
+    "false": "No"
+  },
+  "hasNorNot": {
+    "true": "Yes",
+    "false": "No"
+  },
+  "dialog": {
+    "cancel": "Cancel",
+    "confirm": "Confirm",
+    "submit": "Submit",
+    "close": "Close"
+  },
+  "contribute": {
+    "repo": "Project repositories: ",
+    "frontend": "Front End",
+    "backend": "Back End",
+    "contribute_0": "If you have experience with any of the following skills, and want to contribute to Penguin Statistics, please add QQ group: 747099627.",
+    "contribute_1": "This is a nonprofit and open source project",
+    "skills": {
+      "frontend": "Front End Development (Vue.js)",
+      "backend": "Back End Development (Java Spring Boot, MongoDB)",
+      "maintenance": "DevOps",
+      "design": "UI/UX Design",
+      "analysis": "Data Analysis",
+      "others": "..."
+    }
+  },
+  "fetch": {
+    "failed": {
+      "title": "Failed to connect",
+      "subtitle": "Unable to establish synchronized connection with the neural network; missing partial resource.",
+      "retry": "Retry"
     }
   }
 }

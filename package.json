@@ -4,14 +4,19 @@
   "private": true,
   "scripts": {
     "serve": "vue-cli-service serve",
-    "build": "vue-cli-service build",
+    "build": "npx --max_old_space_size=4096 vue-cli-service build",
     "lint": "vue-cli-service lint",
     "i18n:report": "vue-cli-service i18n:report --src './src/**/*.?(js|vue)' --locales './src/locales/**/*.json'"
   },
   "dependencies": {
+    "@sentry/browser": "^5.6.2",
+    "@sentry/integrations": "^5.6.1",
+    "aos": "^2.3.4",
     "core-js": "^2.6.5",
     "dayjs": "^1.8.15",
     "idb": "^4.0.4",
+    "js-cookie": "^2.2.1",
+    "plotly.js": "^1.49.2",
     "vue": "^2.6.10",
     "vue-analytics": "^5.17.0",
     "vue-i18n": "^8.0.0",
@@ -25,6 +30,7 @@
     "@mdi/font": "^3.8.95",
     "@vue/cli-plugin-babel": "^3.9.0",
     "@vue/cli-plugin-eslint": "^3.9.0",
+    "@vue/cli-plugin-pwa": "^3.10.0",
     "@vue/cli-service": "^3.9.0",
     "axios": "^0.19.0",
     "babel-eslint": "^10.0.1",

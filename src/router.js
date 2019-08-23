@@ -1,18 +1,30 @@
 import Vue from 'vue'
 import Router from 'vue-router'
+
 import Home from './views/Home'
 import Report from './views/Report'
+
+import StatsLayout from './layouts/StatsLayout'
 import StatsByStage from './views/Stats/Stage'
 import StatsByItem from './views/Stats/Item'
-import StatsLayout from './layouts/StatsLayout'
-import ChangeLog from './views/ChangeLog'
 
-Vue.use(Router)
+import AboutLayout from './layouts/AboutLayout'
 
-export default new Router({
+import AboutMembers from './views/About/Members'
+import AboutContribute from './views/About/Contribute'
+import AboutChangelog from './views/About/Changelog'
+import AboutContact from './views/About/Contact'
+import AboutDonate from './views/About/Donate'
+import AboutLinks from './views/About/Links'
+
+Vue.use(Router);
+
+const router = new Router({
   mode: 'history',
-  routes: [
-    {
+  scrollBehavior() { // params: (to, from, savedPosition)
+    return { x: 0, y: 0 }
+  },
+  routes: [{
       path: '/',
       name: 'home',
       component: Home,
@@ -23,7 +35,7 @@ export default new Router({
     },
     {
       path: '/report',
-      name: 'Report',
+      name: 'ReportByZone',
       // route level code-splitting
       // this generates a separate chunk (about.[hash].js) for this route
       // which is lazy-loaded when the route is visited.
@@ -31,8 +43,29 @@ export default new Router({
       component: Report,
       meta: {
         icon: 'mdi-upload',
-        i18n: 'menu.report'
-      }
+        i18n: 'menu.report',
+        forceSingle: true
+      },
+      children: [
+        {
+          path: ':zoneId',
+          name: 'ReportByZone_SelectedZone',
+          component: Report,
+          props: true,
+          meta: {
+            i18n: 'menu.report'
+          },
+        },
+        {
+          path: ':zoneId/:stageId',
+          name: 'ReportByZone_SelectedStage',
+          component: Report,
+          props: true,
+          meta: {
+            i18n: 'menu.report'
+          },
+        }
+      ]
     },
     {
       path: '/result',
@@ -40,10 +73,10 @@ export default new Router({
       component: StatsLayout,
       meta: {
         icon: 'mdi-chart-pie',
-        i18n: 'menu.stats._name'
+        i18n: 'menu.stats._name',
+        active: true
       },
-      children: [
-        {
+      children: [{
           path: 'stage',
           name: 'StatsByStage',
           component: StatsByStage,
@@ -71,7 +104,7 @@ export default new Router({
           meta: {
             hide: true,
             i18n: 'menu.stats.stage'
-          },
+          }
         },
         {
           path: 'item',
@@ -98,7 +131,8 @@ export default new Router({
     {
       path: '/planner',
       name: 'Planner',
-      beforeEnter () {
+      beforeEnter() {
+        this.$ga.event('redirect', 'links', 'ArkPlanner', 1)
         window.location.replace("https://planner.penguin-stats.io")
       },
       meta: {
@@ -108,13 +142,78 @@ export default new Router({
       }
     },
     {
-      path: '/changelog',
-      name: 'ChangeLog',
-      component: ChangeLog,
+      path: '/about',
+      name: 'About',
+      component: AboutLayout,
       meta: {
-        icon: 'mdi-clipboard-text',
-        i18n: 'menu.changelog'
-      }
+        icon: 'mdi-account-group',
+        i18n: 'menu.about._name'
+      },
+      children: [{
+          path: 'members',
+          name: 'AboutMembers',
+          component: AboutMembers,
+          props: true,
+          meta: {
+            icon: 'mdi-account-multiple',
+            i18n: 'menu.about.members'
+          },
+        },
+        {
+          path: 'contribute',
+          name: 'AboutContribute',
+          component: AboutContribute,
+          props: true,
+          meta: {
+            icon: 'mdi-hammer',
+            i18n: 'menu.about.contribute',
+            hide: true
+          },
+        },
+        {
+          path: 'changelog',
+          name: 'AboutChangelog',
+          component: AboutChangelog,
+          props: true,
+          meta: {
+            icon: 'mdi-timeline',
+            i18n: 'menu.about.changelog'
+          },
+        },
+        {
+          path: 'contact',
+          name: 'AboutContact',
+          component: AboutContact,
+          props: true,
+          meta: {
+            icon: 'mdi-account-card-details',
+            i18n: 'menu.about.contact'
+          },
+        },
+        {
+          path: 'donate',
+          name: 'AboutDonate',
+          component: AboutDonate,
+          props: true,
+          meta: {
+            icon: 'mdi-gift',
+            i18n: 'menu.about.donate',
+            hide: true
+          },
+        },
+        {
+          path: 'links',
+          name: 'AboutLinks',
+          component: AboutLinks,
+          props: true,
+          meta: {
+            icon: 'mdi-link-variant',
+            i18n: 'menu.about.links'
+          },
+        },
+      ]
     }
   ]
-})
+});
+
+export default router

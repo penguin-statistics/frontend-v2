@@ -9,8 +9,10 @@
   export default {
     name: "RandomBackground",
     props: {
-      interval: Number,
-      required: true
+      interval: {
+        type: Number,
+        required: true
+      }
     },
     data () {
       return {
@@ -34,11 +36,11 @@
         let current = this.last;
         // avoid change to the same background than the last one
         while (current === this.last) {
-          current = Math.floor(Math.random() * 69)
+          current = Math.floor(Math.random() * 70)
         }
         this.last = current;
         // console.log(current)
-        return require(`../assets/backgrounds/${current}.png`)
+        return `https://penguin-stats.s3-ap-southeast-1.amazonaws.com/avatar/backgrounds/${current}.png`
       },
       updateBackground() {
         let background = this.$refs.background;

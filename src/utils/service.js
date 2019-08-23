@@ -1,28 +1,17 @@
 import axios from 'axios'
-import store from '@/store'
 
 const service = axios.create({
-  baseURL: "https://penguin-stats.io/PenguinStats/api"
-});
-
-service.interceptors.request.use(function (config) {
-  store.dispatch("ajax_began")
-
-  // Do something before request is sent
-  return config;
-}, function (error) {
-  // Do something with request error
-  return Promise.reject(error);
+  // on non-production environments the client will try to send any unknown requests (requests that did not match a static file)
+  // to http://localhost:8081/PenguinStats/api , described in vue.config.js
+  baseURL: process.env.NODE_ENV === "production" ? "/PenguinStats/api" : "/"
 });
 
 // Add a response interceptor
 service.interceptors.response.use(function (response) {
-  store.dispatch("ajax_finished")
-
   // Do something with response data
   return response;
 }, function (error) {
-  error.errorMessage = error.response.data.message || `${error.message} (http-${error.statusCode})`;
+  error.errorMessage = `${error.message} (http-${error.statusCode})`;
   // Do something with response error
   return Promise.reject(error);
 });
