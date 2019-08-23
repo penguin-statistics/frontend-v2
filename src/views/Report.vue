@@ -856,7 +856,7 @@
           furnitureNum: this.furniture ? 1 : 0
         });
         let reportedUserId = Cookies.get('userID');
-        if (!userId && reportedUserId) {
+        if (userId !== reportedUserId) {
           this.$store.commit("authLogin", reportedUserId);
         }
         this.lastSubmissionId = data;
