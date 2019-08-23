@@ -15,7 +15,13 @@ Vue.use(Vuex);
 export default new Vuex.Store({
   plugins: [
     createPersistedState({
-      key: "penguin-stats-state"
+      key: "penguin-stats-state",
+      paths: [
+        "data",
+        "settings",
+        "auth",
+        "cacheUpdateAt"
+      ]
     })
   ],
   state: {
@@ -71,13 +77,11 @@ export default new Vuex.Store({
       await personalMatrixManager.get(true)
     },
     ajaxStarted({getters}, {id}) {
-      let found = getters._getOrCreateAjaxStateObject(id)
-      console.log("start", found);
+      let found = getters._getOrCreateAjaxStateObject(id);
       found.pending = true
     },
     ajaxFinished({getters}, {id, error}) {
-      let found = getters._getOrCreateAjaxStateObject(id)
-      console.log("end", found);
+      let found = getters._getOrCreateAjaxStateObject(id);
       found.pending = false;
       found.error = error
     }
@@ -106,7 +110,6 @@ export default new Vuex.Store({
     },
     _getOrCreateAjaxStateObject: state => id => {
       let found = state.ajax.states.find(value => value.id === id);
-      console.log("_getOrCreateAjaxStateObject:", found);
       if (found) {
         return found
       } else {
