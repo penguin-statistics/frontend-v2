@@ -36,7 +36,7 @@ router.beforeEach(async(to, from, next) => {
 });
 
 Vue.use(VueAnalytics, {
-  id: 'UA-142226262-2',
+  id: 'UA-142226262-1',
   // customResourceURL: "https://www.google-analytics.com/analytics.js",
   router,
   debug: {

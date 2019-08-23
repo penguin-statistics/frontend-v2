@@ -104,7 +104,7 @@ const router = new Router({
           meta: {
             hide: true,
             i18n: 'menu.stats.stage'
-          },
+          }
         },
         {
           path: 'item',
@@ -132,6 +132,7 @@ const router = new Router({
       path: '/planner',
       name: 'Planner',
       beforeEnter() {
+        this.$ga.event('redirect', 'links', 'ArkPlanner', 1)
         window.location.replace("https://planner.penguin-stats.io")
       },
       meta: {

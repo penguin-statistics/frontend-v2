@@ -119,7 +119,7 @@
               class="ma-2"
               color="primary"
               text-color="white"
-              @click="goToHref(link.url)"
+              @click="goToHref(link)"
             >
               {{ link.title }}
               <v-icon right>
@@ -273,8 +273,9 @@ export default {
     };
   },
   methods: {
-    goToHref(href) {
-      window.open(href);
+    goToHref(link) {
+      this.$ga.event('redirect', 'links', link.title, 1)
+      window.open(link.url);
     }
   }
 };
