@@ -210,6 +210,12 @@
         return !!("ontouchstart" in window) || window.navigator.maxTouchPoints > 0;
       }
     },
+    mounted () {
+      let userId = Cookies.get(this.cookies.key);
+      if (!this.$store.getters.authed && userId) {
+        this.$store.commit("authLogin", userId);
+      }
+    },
     methods: {
       login() {
         this.auth.loading = true;
