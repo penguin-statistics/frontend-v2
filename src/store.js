@@ -15,15 +15,19 @@ Vue.use(Vuex);
 export default new Vuex.Store({
   plugins: [
     createPersistedState({
-      key: "penguin-stats-state"
+      key: "penguin-stats-state",
+      paths: [
+        "data",
+        "settings",
+        "auth",
+        "cacheUpdateAt"
+      ]
     })
   ],
   state: {
     data: {},
     ajax: {
-      pending: false,
-      success: true,
-      error: null
+      states: []
     },
     settings: {
       dark: true,
@@ -56,34 +60,30 @@ export default new Vuex.Store({
     },
     authLogout(state) {
       state.auth.username = null
-    },
-    ajaxFired(state) {
-      state.ajax.pending = true;
-    },
-    ajaxSucceeded(state) {
-      state.ajax.pending = false;
-      state.ajax.success = true;
-      state.ajax.error = null
-    },
-    ajaxFailed(state, errorMessage) {
-      state.ajax.pending = false;
-      state.ajax.success = false;
-      state.ajax.error = errorMessage
     }
   },
   actions: {
     // eslint-disable-next-line
     async fetchData({}, refresh = false) {
-      await itemsManager.get(refresh)
-      await limitationsManager.get(refresh)
-      await stagesManager.get(refresh)
-      await zonesManager.get(refresh)
-      await trendsManager.get(refresh)
-      await globalMatrixManager.get(refresh)
+      await itemsManager.get(refresh);
+      await limitationsManager.get(refresh);
+      await stagesManager.get(refresh);
+      await zonesManager.get(refresh);
+      await trendsManager.get(refresh);
+      await globalMatrixManager.get(refresh);
       await personalMatrixManager.get(refresh)
     },
     async refreshPersonalMatrixData() {
       await personalMatrixManager.get(true)
+    },
+    ajaxStarted({getters}, {id}) {
+      let found = getters._getOrCreateAjaxStateObject(id);
+      found.pending = true
+    },
+    ajaxFinished({getters}, {id, error}) {
+      let found = getters._getOrCreateAjaxStateObject(id);
+      found.pending = false;
+      found.error = error
     }
   },
   getters: {
@@ -93,14 +93,33 @@ export default new Vuex.Store({
     authUsername: state => {
       return state.auth.username || ''
     },
-    ajax: state => {
-      return state.ajax
+    ajaxPending: state => {
+      return state.ajax.states.some(value => value.pending)
+    },
+    ajaxFinishedAll: state => {
+      return state.ajax.states.every(value => !value.pending)
+    },
+    ajaxErrors: state => {
+      return state.ajax.states.filter(value => !!value.error)
     },
     dataByKey: (state) => (id) => {
       return state.data[id]
     },
     cacheUpdateAt: (state) => (name) => {
       return state.cacheUpdateAt[name]
+    },
+    _getOrCreateAjaxStateObject: state => id => {
+      let found = state.ajax.states.find(value => value.id === id);
+      if (found) {
+        return found
+      } else {
+        let pushing = Object.create(null);
+        pushing.id = id;
+        pushing.pending = false;
+        pushing.error = null;
+        state.ajax.states.push(pushing);
+        return pushing
+      }
     }
   }
 })
