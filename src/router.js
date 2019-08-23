@@ -166,7 +166,8 @@ const router = new Router({
           props: true,
           meta: {
             icon: 'mdi-hammer',
-            i18n: 'menu.about.contribute'
+            i18n: 'menu.about.contribute',
+            hide: true
           },
         },
         {
@@ -196,7 +197,8 @@ const router = new Router({
           props: true,
           meta: {
             icon: 'mdi-gift',
-            i18n: 'menu.about.donate'
+            i18n: 'menu.about.donate',
+            hide: true
           },
         },
         {
