@@ -217,6 +217,7 @@
           .then(() => {
             this.$store.commit("authLogin", this.auth.username);
             Cookies.set(this.cookies.key, this.auth.username, {expires: 7, path: "/"});
+            this.$ga.event('account', 'login', 'login_success', 1)
             console.log(Cookies);
             this.snackbar = {
               enabled: true,
