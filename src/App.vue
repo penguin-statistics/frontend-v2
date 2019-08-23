@@ -342,6 +342,7 @@ export default {
     },
     changeLocale (localeId) {
       this.$i18n.locale = localeId
+      document.title = `${this.$t('app.name')}`;
     },
     logRouteEvent (newValue) {
       if (newValue.name === "StatsByStage_SelectedBoth") {
