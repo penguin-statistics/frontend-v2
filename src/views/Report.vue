@@ -841,6 +841,7 @@
       submit () {
         if (!this.valid || this.results.length === 0) {
           this.showLimitationAlert = true;
+          this.$ga.event('report', 'show_warning', this.selected.stage, 1)
         } else {
           this.doSubmit()
         }
@@ -862,6 +863,7 @@
         this.submitting = false;
         this.reset();
         this.submitted = true
+        this.$ga.event('report', 'submit_single', this.selected.stage, 1)
       },
       confirmSubmit () {
         this.showLimitationAlert = false
@@ -873,6 +875,7 @@
       },
       confirmFinalSubmit () {
         this.showLimitationRepeatAlert = false
+        this.$ga.event('report', 'ignore_warning', this.selected.stage, 1)
         this.doSubmit()
       },
       async undo () {
@@ -881,6 +884,7 @@
         this.submitted = false;
         this.undoing = false;
         this.undoed = true
+        this.$ga.event('report', 'undo', Cookies.get('userID'), 1)
       }
     }
   }
