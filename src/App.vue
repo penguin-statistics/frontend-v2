@@ -39,7 +39,6 @@
     </v-dialog>
     <v-dialog
       v-model="$store.getters.ajaxErrors.length"
-      persistent
       width="600"
     >
       <v-card>
