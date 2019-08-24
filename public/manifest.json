@@ -1,0 +1,20 @@
+{
+    "name": "企鹅物流数据统计",
+    "short_name": "企鹅物流数据",
+    "icons": [
+        {
+            "src": "/favicon/android-chrome-192x192.png",
+            "sizes": "192x192",
+            "type": "image/png"
+        },
+        {
+            "src": "/favicon/android-chrome-512x512.png",
+            "sizes": "512x512",
+            "type": "image/png"
+        }
+    ],
+    "start_url": "/?utm_source=pwa",
+    "display": "standalone",
+    "theme_color": "#2D66BA",
+    "background_color": "#303030"
+}
