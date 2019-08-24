@@ -46,8 +46,7 @@ const router = new Router({
         i18n: 'menu.report',
         forceSingle: true
       },
-      children: [
-        {
+      children: [{
           path: ':zoneId',
           name: 'ReportByZone_SelectedZone',
           component: Report,
@@ -131,10 +130,14 @@ const router = new Router({
     {
       path: '/planner',
       name: 'Planner',
-      beforeEnter() {
-        window.location.replace("https://planner.penguin-stats.io")
-      },
       meta: {
+        ga: {
+          category: 'redirect',
+          action: 'links',
+          label: 'ArkPlanner',
+          value: 1
+        },
+        link: "https://planner.penguin-stats.io",
         icon: 'mdi-floor-plan',
         i18n: 'menu.planner',
         externalRedirect: true
