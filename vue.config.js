@@ -20,11 +20,11 @@ module.exports = {
 
     workboxPluginMode: "GenerateSW",
     iconPaths: {
-      favicon32: 'assets/favicon/favicon-32x32.png',
-      favicon16: 'assets/favicon/favicon-16x16.png',
-      appleTouchIcon: 'assets/favicon/apple-touch-icon.png',
-      maskIcon: 'assets/favicon/safari-pinned-tab.svg',
-      msTileImage: 'assets/favicon/mstile-150x150.png'
+      favicon32: 'favicon/favicon-32x32.png',
+      favicon16: 'favicon/favicon-16x16.png',
+      appleTouchIcon: 'favicon/apple-touch-icon.png',
+      maskIcon: 'favicon/safari-pinned-tab.svg',
+      msTileImage: 'favicon/mstile-150x150.png'
     }
   }
 };
