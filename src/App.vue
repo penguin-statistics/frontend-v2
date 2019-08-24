@@ -136,7 +136,7 @@
           <v-list-tile
             v-if="!route.children || route.meta.forceSingle"
             :key="route.name"
-            :to="route.path"
+            @click="onMenuItemClicked(route)"
           >
             <v-list-tile-action>
               <v-icon>{{ route.meta.icon }}</v-icon>
@@ -170,7 +170,7 @@
             <v-list-tile
               v-for="child in route.children.filter(el => !(el.meta.hide))"
               :key="child.name"
-              :to="{ 'name': child.name }"
+              @click="onMenuItemClicked(child)"
             >
               <v-list-tile-content>
                 <v-list-tile-title>{{ $t(child.meta.i18n) }}</v-list-tile-title>
@@ -395,6 +395,23 @@ export default {
     this.randomizeLogo();
   },
   methods: {
+    onMenuItemClicked (route) {
+      if (route.meta && route.meta.externalRedirect) {
+        if (route.meta.ga) {
+          let ga = route.meta.ga;
+          this.$ga.event(
+            ga.category || 'redirect',
+            ga.action || 'links',
+            ga.label || 'unknown',
+            ga.value || 1);
+        }
+        if (route.meta.link) {
+          window.open(route.meta.link);
+        }
+      } else {
+        this.$router.push({'name': route.name})
+      }
+    },
     async refreshData () {
       await this.$store.dispatch("fetchData", true);
     },
