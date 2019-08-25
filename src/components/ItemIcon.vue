@@ -21,6 +21,7 @@
           v-show="item.itemId !== 'furni'"
           ref="icon"
           class="item-icon--sprite"
+          :alt="`${item.name} (${item.itemId})`"
           v-on="on"
         />
       </template>
@@ -38,6 +39,7 @@
         v-show="item.itemId !== 'furni'"
         ref="icon"
         class="item-icon--sprite"
+        :alt="`${item.name} (${item.itemId})`"
       />
     </span>
   </span>
@@ -172,6 +174,7 @@ export default {
   display: inline-block;
   overflow: hidden;
   background-size: 360px 480px;
+  transition: transform 150ms cubic-bezier(.25,.8,.5,1);
 }
 
 .item-icon--sprite:hover {
