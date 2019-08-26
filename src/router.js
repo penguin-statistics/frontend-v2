@@ -214,6 +214,22 @@ const router = new Router({
           },
         },
       ]
+    },
+    {
+      path: '/',
+      name: 'OldVersion',
+      meta: {
+        ga: {
+          category: 'redirect',
+          action: 'links',
+          label: 'OldVersion',
+          value: 1
+        },
+        link: "https://v1.penguin-stats.io",
+        icon: 'mdi-penguin',
+        i18n: 'menu.v1',
+        externalRedirect: true
+      }
     }
   ]
 });
