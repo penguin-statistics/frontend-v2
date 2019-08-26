@@ -22,7 +22,8 @@
       "links": "相互リンク"
     },
     "planner": "周回計画作成ツール",
-    "changelog": "更新履歴"
+    "changelog": "更新履歴",
+    "v1": "旧バージョン"
   },
   "meta": {
     "details": "詳細を見る",
