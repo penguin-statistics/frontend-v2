@@ -216,7 +216,7 @@ const router = new Router({
       ]
     },
     {
-      path: '/',
+      path: '/_redirect/v1',
       name: 'OldVersion',
       meta: {
         ga: {
