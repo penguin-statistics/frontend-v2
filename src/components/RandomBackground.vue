@@ -40,7 +40,7 @@
         }
         this.last = current;
         // console.log(current)
-        return `https://penguin-stats.s3-ap-southeast-1.amazonaws.com/avatar/backgrounds/${current}.png`
+        return `https://penguin-stats.cdn.iblueg.cn/backgrounds/${current}.png`
       },
       updateBackground() {
         let background = this.$refs.background;

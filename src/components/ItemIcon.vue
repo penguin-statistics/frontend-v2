@@ -167,7 +167,7 @@ export default {
 
 <style scoped>
 .item-icon--sprite {
-  background-image: url("https://penguin-stats.s3-ap-southeast-1.amazonaws.com/item_sprite.png");
+  background-image: url("https://penguin-stats.cdn.iblueg.cn/item_sprite.png");
   background-repeat: no-repeat;
   height: 60px;
   width: 60px;
