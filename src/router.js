@@ -128,7 +128,7 @@ const router = new Router({
       ]
     },
     {
-      path: '/planner',
+      path: '/_redirect/planner',
       name: 'Planner',
       meta: {
         ga: {
