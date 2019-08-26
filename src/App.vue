@@ -445,10 +445,10 @@ export default {
     },
     randomizeLogo () {
       let random = Math.random();
-      this.randomizedLogo = random < .25 ? "https://penguin-stats.s3-ap-southeast-1.amazonaws.com/penguin_stats_logo_exia.png"
-        : random < .5 ? "https://penguin-stats.s3-ap-southeast-1.amazonaws.com/penguin_stats_logo_texas.png"
-          : random < .75 ? "https://penguin-stats.s3-ap-southeast-1.amazonaws.com/penguin_stats_logo_sora.png"
-            : "https://penguin-stats.s3-ap-southeast-1.amazonaws.com/penguin_stats_logo_croissant.png"
+      this.randomizedLogo = random < .25 ? "https://penguin-stats.cdn.iblueg.cn/logos/penguin_stats_logo_exia.png"
+        : random < .5 ? "https://penguin-stats.cdn.iblueg.cn/logos/penguin_stats_logo_texas.png"
+          : random < .75 ? "https://penguin-stats.cdn.iblueg.cn/logos/penguin_stats_logo_sora.png"
+            : "https://penguin-stats.cdn.iblueg.cn/logos/penguin_stats_logo_croissant.png"
     },
     changeLocale (localeId) {
       this.$i18n.locale = localeId
