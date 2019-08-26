@@ -268,55 +268,82 @@
       class="white--text px-3"
       app
     >
-      <a
-        href="https://creativecommons.org/licenses/by-nc/4.0/"
-        target="_blank"
+      <v-dialog
+        v-model="showLicenseDialog"
+        width="500"
       >
-        <v-tooltip
-          top
-          content-class="transparent elevation-0 pa-0"
-          lazy
-        >
-          <template v-slot:activator="{ on }">
-            <span v-on="on">
-              <v-avatar
-                size="24"
-              >
-                <v-img
-                  :src="require('@/assets/ccIcon/cc.svg')"
-                  alt="Creative Commons - Logo"
-                />
-              </v-avatar>
-              <v-avatar
-                size="24"
-              >
-                <v-img
-                  :src="require('@/assets/ccIcon/by.svg')"
-                  alt="Creative Commons - BY"
-                />
-              </v-avatar>
-              <v-avatar
-                size="24"
-              >
-                <v-img
-                  :src="require('@/assets/ccIcon/nc.svg')"
-                  alt="Creative Commons - Non-commercial"
-                />
-              </v-avatar>
-            </span>
-          </template>
-
-          <v-card
-            max-width="300"
-            color="accent"
-            class="black--text body-2 pa-3"
+        <template v-slot:activator="{ on }">
+          <span
+            class="cursor-pointer"
+            v-on="on"
           >
-            <v-card-title>
-              <span>{{ $t('meta.footer.copyright') }}</span>
-            </v-card-title>
-          </v-card>
-        </v-tooltip>
-      </a>
+            <v-avatar
+              size="24"
+              class="mr-1"
+            >
+              <v-img
+                :src="require('@/assets/ccIcon/cc.svg')"
+                alt="Creative Commons - Logo"
+              />
+            </v-avatar>
+            <v-avatar
+              size="24"
+              class="mr-1"
+            >
+              <v-img
+                :src="require('@/assets/ccIcon/by.svg')"
+                alt="Creative Commons - BY"
+              />
+            </v-avatar>
+            <v-avatar
+              size="24"
+            >
+              <v-img
+                :src="require('@/assets/ccIcon/nc.svg')"
+                alt="Creative Commons - Non-commercial"
+              />
+            </v-avatar>
+          </span>
+        </template>
+
+        <v-card>
+          <v-card-title
+            class="headline primary lighten-1"
+            primary-title
+          >
+            <v-avatar
+              size="24"
+              class="mr-2"
+            >
+              <v-img
+                :src="require('@/assets/ccIcon/cc.svg')"
+                alt="Creative Commons - Logo"
+              />
+            </v-avatar>
+            {{ $t('meta.footer.copyright.title') }}
+          </v-card-title>
+
+          <v-card-text>
+            {{ $t('meta.footer.copyright.content') }}
+          </v-card-text>
+
+          <v-divider />
+
+          <v-card-actions>
+            <v-spacer />
+            <v-btn
+              flat
+              href="https://creativecommons.org/licenses/by-nc/4.0/"
+              target="_blank"
+            >
+              <v-icon left>
+                mdi-eye
+              </v-icon>
+              {{ $t('meta.details') }}
+            </v-btn>
+          </v-card-actions>
+        </v-card>
+      </v-dialog>
       <v-spacer />
       <v-fade-transition>
         <span
@@ -366,7 +393,8 @@ export default {
       ],
       prefetchingResources: false,
       drawer: !this.$vuetify.breakpoint.xsOnly,
-      buildNoticeNotClosed: true
+      buildNoticeNotClosed: true,
+      showLicenseDialog: false
     }
   },
   computed: {
