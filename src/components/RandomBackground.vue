@@ -11,7 +11,14 @@
     props: {
       interval: {
         type: Number,
-        required: true
+        default () {
+          if ((typeof window.orientation !== "undefined") || (navigator.userAgent.indexOf('IEMobile') !== -1)) {
+            // is mobile device; reduce data usage, use ttl of 5minutes
+            return 300
+          } else {
+            return 60
+          }
+        }
       }
     },
     data () {
@@ -56,6 +63,7 @@
             !this.lastUrl && URL.revokeObjectURL(this.lastUrl);
             this.lastUrl = dataUrl
           })
+          .catch(() => {}) // i can do nothing :(
           .finally(() => {
             this.lastLoading = false
           })

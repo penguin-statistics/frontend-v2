@@ -3,7 +3,7 @@
     id="__app_root"
     :dark="dark"
   >
-    <RandomBackground :interval="30" />
+    <RandomBackground />
     <v-dialog
       :value="buildNotice && buildNoticeNotClosed"
       max-width="600"

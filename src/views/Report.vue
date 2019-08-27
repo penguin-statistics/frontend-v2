@@ -826,6 +826,8 @@
 
         // check for item outlier
         for (let item of this.results) {
+          // if the item is not having a limitation record then skip it
+          if (!this.limitation["itemQuantityBounds"].find(v => v["itemId"] === item.itemId)) continue;
           let [rules, limitation] = this.generateVerificationRule("item", item.itemId);
           let validation = validate(rules, item.quantity);
           if (validation !== true) {
@@ -841,16 +843,18 @@
         }
 
         // check for type outlier
-        let [rules, limitation] = this.generateVerificationRule("type");
-        let quantity = this.results.length;
-        let validation = validate(rules, quantity);
-        if (validation !== true) {
-          let rate = calculateOutlierRate(limitation, quantity);
-          typeOutlier = {
-            quantity,
-            limitation,
-            rate,
-            message: validation
+        if (this.limitation["itemTypeBounds"]) {
+          let [rules, limitation] = this.generateVerificationRule("type");
+          let quantity = this.results.length;
+          let validation = validate(rules, quantity);
+          if (validation !== true) {
+            let rate = calculateOutlierRate(limitation, quantity);
+            typeOutlier = {
+              quantity,
+              limitation,
+              rate,
+              message: validation
+            }
           }
         }
 
@@ -1005,12 +1009,12 @@
         this.lastSubmissionId = data;
         this.submitting = false;
         this.reset();
-        this.submitted = true
+        this.submitted = true;
         this.$ga.event('report', 'submit_single', this.selected.stage, 1)
       },
       confirmSubmit () {
         this.closeAllDialogs();
-        this.$ga.event('report', 'ignore_warning', this.selected.stage, 1)
+        this.$ga.event('report', 'ignore_warning', this.selected.stage, 1);
         this.doSubmit()
       },
       async undo () {
@@ -1018,7 +1022,7 @@
         await report.recallReport(this.lastSubmissionId);
         this.submitted = false;
         this.undoing = false;
-        this.undoed = true
+        this.undoed = true;
         this.$ga.event('report', 'undo', Cookies.get('userID'), 1)
       },
       closeAllDialogs () {
@@ -1029,12 +1033,9 @@
         let isItemType = type === "item";
         let limitation;
         if (isItemType) {
-          limitation = this.limitation["itemQuantityBounds"].find(v => v["itemId"] === value)["bounds"];
+          limitation = this.limitation["itemQuantityBounds"].find(v => v["itemId"] === value)["bounds"]
         } else if (type === "type") {
-          limitation = this.limitation["itemTypeBounds"]
-        }
-        if (!limitation) {
-          return [];
+          limitation = this.limitation["itemTypeBounds"];
         }
 
         let itemResponse = isItemType ? {item: this.getItem(value).name} : {};
