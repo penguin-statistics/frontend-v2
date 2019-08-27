@@ -2,10 +2,10 @@ export default {
   api: {
     submitParams: {
       source: "frontend-v2",
-      version: "v1.0.1"
+      version: "v1.0.2"
     }
   },
   cdn: {
-    global: "https://penguin-stats.s3-ap-southeast-1.amazonaws.com"
+    global: "https://penguin-stats.cdn.iblueg.cn"
   }
 }

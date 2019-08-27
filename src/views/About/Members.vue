@@ -72,7 +72,7 @@
         >
           <v-list-tile-avatar>
             <v-img
-              :src="'https://penguin-stats.s3-ap-southeast-1.amazonaws.com/avatar/' + profile.avatar"
+              :src="'https://penguin-stats.cdn.iblueg.cn/avatars/' + profile.avatar"
             />
           </v-list-tile-avatar>
 

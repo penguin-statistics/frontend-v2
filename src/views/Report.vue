@@ -31,17 +31,7 @@
         "undo": "撤销",
         "undoSuccess": "撤销成功",
         "unable": "无法提交：",
-        "clear": "清空",
-        "alertMsg": {
-          "alert": "警告",
-          "limitation": "您的本次汇报与现有数据差距较大，继续提交可能导致此次汇报被判定为异常，无法进入全部统计数据中。",
-          "preContact": "如果您认为这是误判，欢迎",
-          "contact": "联系作者",
-          "sufContact": "（最好附上掉落截图），确认后会尽快修正。",
-          "noDrop": "您尚未选择任何掉落物品，您确定此次上传数据正确吗？",
-          "finalAlert": "您真的确定要继续吗？",
-          "continue": "确定要继续吗？"
-        }
+        "clear": "清空"
       },
       "rules": {
         "rule_1": "这是单次作战的提交，请注意核对数目；",
@@ -473,10 +463,8 @@
                   <!--                  </h5>-->
                   <ItemStepper
                     :item="item"
-                    :stage="selected.stage"
                     :bus="eventBus"
                     @change="handleChange"
-                    @change:valid="validChange"
                   />
                 </v-flex>
               </v-container>
@@ -522,39 +510,117 @@
         </v-stepper>
       </v-flex>
     </v-layout>
-    <!-- TODO: refactor dialog code -->
+
     <v-dialog
-      v-model="showLimitationAlert"
+      v-model="dialogs.first.enabled"
       width="500"
     >
       <v-card>
         <v-card-title
-          class="headline indigo"
+          class="headline"
+          :class="slashStripClasses"
           primary-title
         >
           <v-icon>mdi-alert</v-icon>
-          <span class="ml-2">{{ $t('report.alertMsg.alert') }}</span>
+          <span class="ml-2">{{ $t('report.alert.title.first') }}</span>
         </v-card-title>
 
         <v-card-text>
-          {{ results.length ? $t('report.alertMsg.limitation') : $t('report.alertMsg.noDrop') }}
-        </v-card-text>
+          <p v-if="results.length">
+            <span>
+              {{ $t('report.alert.causes.limitation') }}
+            </span>
+            <v-expansion-panel
+              class="mt-3"
+              popout
+            >
+              <v-expansion-panel-content>
+                <template v-slot:header>
+                  <div>{{ $t('meta.details') }}</div>
+                </template>
+                <div>
+                  <v-list
+                    v-if="validation.type"
+                    two-line
+                    subheader
+                  >
+                    <v-subheader>
+                      {{ $t('report.rules.type._name') }}
+                    </v-subheader>
+                    <v-list-tile
+                      avatar
+                    >
+                      <v-list-tile-avatar>
+                        <v-icon>mdi-alert-circle-outline</v-icon>
+                      </v-list-tile-avatar>
+                      <v-list-tile-content>
+                        <v-list-tile-title>
+                          {{ $t('report.rules.type.now', {quantity: validation.type.quantity}) }}
+                        </v-list-tile-title>
+                        <v-list-tile-sub-title>
+                          {{ validation.type.message }}
+                        </v-list-tile-sub-title>
+                      </v-list-tile-content>
+                    </v-list-tile>
+                  </v-list>
+                  <v-divider v-if="validation.type && validation.item.length" />
+                  <v-list
+                    v-if="validation.item.length"
+                    two-line
+                    subheader
+                  >
+                    <v-subheader>
+                      {{ $t('report.rules.item._name') }}
+                    </v-subheader>
+                    <v-list-tile
+                      v-for="item in validation.item"
+                      :key="item.id"
+                      avatar
+                    >
+                      <v-list-tile-avatar>
+                        <Item
+                          :item="getItem(item.id)"
+                          :ratio="0.5"
+                          disable-link
+                        />
+                      </v-list-tile-avatar>
+                      <v-list-tile-content>
+                        <v-list-tile-title>
+                          {{ $t('report.rules.item.now', {item: getItem(item.id).name, quantity: item.quantity}) }}
+                        </v-list-tile-title>
+                        <v-list-tile-sub-title>
+                          {{ item.message }}
+                        </v-list-tile-sub-title>
+                      </v-list-tile-content>
+                    </v-list-tile>
+                  </v-list>
+                </div>
+              </v-expansion-panel-content>
+            </v-expansion-panel>
+          </p>
+          <p v-if="!results.length">
+            {{ $t('report.alert.causes.noDrop') }}
+          </p>
 
-        <v-card-text v-if="results.length">
-          {{ $t('report.alertMsg.preContact') }}
-
-          <span
-            class="font-weight-black cursor-pointer"
-            @click="goToPage('AboutContact')"
+          <blockquote
+            v-if="results.length"
+            class="blockquote"
           >
-            {{ $t('report.alertMsg.contact') }}
-          </span>
+            {{ $t('report.alert.contact.before') }}
 
-          {{ $t('report.alertMsg.sufContact') }}
-        </v-card-text>
+            <span
+              class="font-weight-black cursor-pointer"
+              @click="goToPage('AboutContact')"
+            >
+              {{ $t('report.alert.contact.activator') }}
+            </span>
 
-        <v-card-text>
-          {{ $t('report.alertMsg.continue') }}
+            {{ $t('report.alert.contact.after') }}
+          </blockquote>
+
+          <p class="subheading">
+            {{ $t('report.alert.continue.first') }}
+          </p>
         </v-card-text>
 
         <v-divider />
@@ -563,7 +629,47 @@
           <v-btn
             color="primary"
             flat
-            @click="showLimitationAlert = false"
+            @click="dialogs.first.enabled = false"
+          >
+            {{ $t('dialog.cancel') }}
+          </v-btn>
+          <v-spacer />
+          <v-btn
+            color="error"
+            flat
+            @click="dialogs.repeat.enabled = true"
+          >
+            {{ $t('dialog.confirm') }}
+          </v-btn>
+        </v-card-actions>
+      </v-card>
+    </v-dialog>
+    <v-dialog
+      v-model="dialogs.repeat.enabled"
+      width="300"
+    >
+      <v-card>
+        <v-card-title
+          class="headline warning"
+          primary-title
+        >
+          <v-icon>mdi-alert</v-icon>
+          <span class="ml-2">{{ $t('report.alert.title.repeat') }}</span>
+        </v-card-title>
+
+        <v-card-text>
+          <span class="subheading">
+            {{ $t('report.alert.continue.repeat') }}
+          </span>
+        </v-card-text>
+
+        <v-divider />
+
+        <v-card-actions>
+          <v-btn
+            color="primary"
+            flat
+            @click="closeAllDialogs"
           >
             {{ $t('dialog.cancel') }}
           </v-btn>
@@ -572,44 +678,6 @@
             color="error"
             flat
             @click="confirmSubmit"
-          >
-            {{ $t('dialog.confirm') }}
-          </v-btn>
-        </v-card-actions>
-      </v-card>
-    </v-dialog>
-    <v-dialog
-      v-model="showLimitationRepeatAlert"
-      width="500"
-    >
-      <v-card>
-        <v-card-title
-          class="headline red"
-          primary-title
-        >
-          <v-icon>mdi-alert</v-icon>
-          <span class="ml-2">{{ $t('report.alertMsg.alert') }}</span>
-        </v-card-title>
-
-        <v-card-text>
-          {{ $t('report.alertMsg.finalAlert') }}
-        </v-card-text>
-
-        <v-divider />
-
-        <v-card-actions>
-          <v-btn
-            color="primary"
-            flat
-            @click="showLimitationRepeatAlert = false"
-          >
-            {{ $t('dialog.cancel') }}
-          </v-btn>
-          <v-spacer />
-          <v-btn
-            color="error"
-            flat
-            @click="confirmFinalSubmit"
           >
             {{ $t('dialog.confirm') }}
           </v-btn>
@@ -641,9 +709,15 @@
       furniture: false,
       invalidCount: 0,
       eventBus: new Vue(),
-      showLimitationAlert: false,
-      showLimitationRepeatAlert: false,
-      submitted: false
+      submitted: false,
+      dialogs: {
+        first: {
+          enabled: false
+        },
+        repeat: {
+          enabled: false
+        }
+      }
     }),
     computed: {
       selected() {
@@ -710,27 +784,110 @@
         }
         return items
       },
-      valid () {
-        // return this.invalidCount === 0 &&
-        //   this.results.length >= this.typeLimitation.lower &&
-        //   this.results.length <= this.typeLimitation.upper
-        return true; // workaround
+      /**
+       * @typedef {{lower: number, upper: number, exceptions: number[]}} Limitation
+       * @typedef {{id: string, quantity: number, limitation: Limitation, rate: number, message: string}} ItemOutlier
+       * @typedef {{quantity: number, limitation: Limitation, rate: number, message: string}|null} TypeOutlier
+       * @returns {{item: ItemOutlier[], type: TypeOutlier}} returns item data outliers and type data outliers in the whole dataset, respectively
+       */
+      validation () {
+        // initiate the array that will be storing every data outlier
+        /** @type ItemOutlier[] */
+        let itemOutliers = [];
+
+        /** @type TypeOutlier */
+        let typeOutlier = null;
+
+        if (!this.selected.stage) return {item: itemOutliers, type: typeOutlier, rate: 0};
+
+        /**
+         * validate the quantity using their corresponding rule
+         * @returns {String|boolean} error message or success
+         */
+        function validate(rules, quantity) {
+          for (let rule of rules) {
+            let evaluation = rule(quantity);
+            if (evaluation !== true) return evaluation
+          }
+          return true
+        }
+
+        /**
+         * calculate the outlier rate
+         * @param {Limitation} limitation rules to verify with
+         * @param {number} value value to verify with
+         * @returns {number} percentage in decimal format (e.g. 150% = 1.5)
+         */
+        function calculateOutlierRate(limitation, value) {
+          let upper = (value - limitation.upper) ? Math.max(0, (value - limitation.upper) / limitation.upper) : 0;
+          let lower = (limitation.lower - value) ? Math.max(0, (limitation.lower - value) / limitation.lower) : 0;
+          return upper + lower;
+        }
+
+        // check for item outlier
+        for (let item of this.results) {
+          // if the item is not having a limitation record then skip it
+          if (!this.limitation["itemQuantityBounds"].find(v => v["itemId"] === item.itemId)) continue;
+          let [rules, limitation] = this.generateVerificationRule("item", item.itemId);
+          let validation = validate(rules, item.quantity);
+          if (validation !== true) {
+            let rate = calculateOutlierRate(limitation, item.quantity);
+            itemOutliers.push({
+              id: item.itemId,
+              quantity: item.quantity,
+              limitation,
+              rate,
+              message: validation
+            })
+          }
+        }
+
+        // check for type outlier
+        if (this.limitation["itemTypeBounds"]) {
+          let [rules, limitation] = this.generateVerificationRule("type");
+          let quantity = this.results.length;
+          let validation = validate(rules, quantity);
+          if (validation !== true) {
+            let rate = calculateOutlierRate(limitation, quantity);
+            typeOutlier = {
+              quantity,
+              limitation,
+              rate,
+              message: validation
+            }
+          }
+        }
+
+        // calculate total outlier rate
+        let itemRatesInitial = 0;
+        let itemRates = itemOutliers.reduce(
+          (accumulator, current) => accumulator + current.rate,
+          itemRatesInitial
+        );
+        let totalRates = itemRates + (typeOutlier ? typeOutlier.rate : 0);
+
+        return {
+          item: itemOutliers,
+          type: typeOutlier,
+          rate: totalRates
+        }
       },
-      typeLimitation () {
+      valid () {
+        let {item, type} = this.validation;
+        return item.length === 0 && type === null
+      },
+      limitation () {
         if (!this.selected.stage) return {};
-        return get.limitations.byStageId(this.selected.stage).itemTypeBounds
+        return get.limitations.byStageId(this.selected.stage)
+      },
+      slashStripClasses () {
+        return {'slash-strip--warning': this.validation.rate <= 2, 'slash-strip--danger': this.validation.rate > 2}
       },
       showSubmittedSnackbar () {
         return this.submitted && this.$store.getters.authed
       }
     },
     watch: {
-      results: function(value) {
-        this.eventBus.$emit(
-          "fulfilled",
-          this.typeLimitationFulfilled(value.length)
-        );
-      },
       $route: function(to, from) {
         console.log("step route changed from", from.path, "to", to.path);
         if (to.name === "ReportByZone") {
@@ -813,13 +970,6 @@
         item.quantity = quantity;
         item.quantity <= 0 && (this.results = this.results.filter(v => v.itemId !== item.itemId))
       },
-      validChange (newState) {
-        if (newState) {
-          this.invalidCount -= 1
-        } else {
-          this.invalidCount += 1
-        }
-      },
       getOrCreateItem (itemId) {
         let item = this.results.find(v => v.itemId === itemId);
         if (item === undefined) {
@@ -831,17 +981,13 @@
         }
         return item
       },
-      typeLimitationFulfilled (types) {
-        let limit = this.typeLimitation;
-        return types > limit.lower && types < limit.upper && limit.exceptions.indexOf(types) === -1
-      },
       reset () {
         this.eventBus.$emit("reset");
         this.furniture = false
       },
       submit () {
         if (!this.valid || this.results.length === 0) {
-          this.showLimitationAlert = true;
+          this.dialogs.first.enabled = true;
           this.$ga.event('report', 'show_warning', this.selected.stage, 1)
         } else {
           this.doSubmit()
@@ -863,20 +1009,12 @@
         this.lastSubmissionId = data;
         this.submitting = false;
         this.reset();
-        this.submitted = true
+        this.submitted = true;
         this.$ga.event('report', 'submit_single', this.selected.stage, 1)
       },
       confirmSubmit () {
-        this.showLimitationAlert = false
-        if (this.results.length === 0) {
-          this.doSubmit()
-        } else {
-          this.showLimitationRepeatAlert = true
-        }
-      },
-      confirmFinalSubmit () {
-        this.showLimitationRepeatAlert = false
-        this.$ga.event('report', 'ignore_warning', this.selected.stage, 1)
+        this.closeAllDialogs();
+        this.$ga.event('report', 'ignore_warning', this.selected.stage, 1);
         this.doSubmit()
       },
       async undo () {
@@ -884,8 +1022,50 @@
         await report.recallReport(this.lastSubmissionId);
         this.submitted = false;
         this.undoing = false;
-        this.undoed = true
+        this.undoed = true;
         this.$ga.event('report', 'undo', Cookies.get('userID'), 1)
+      },
+      closeAllDialogs () {
+        this.dialogs.first.enabled = false;
+        this.dialogs.repeat.enabled = false
+      },
+      generateVerificationRule(type, value=null) {
+        let isItemType = type === "item";
+        let limitation;
+        if (isItemType) {
+          limitation = this.limitation["itemQuantityBounds"].find(v => v["itemId"] === value)["bounds"]
+        } else if (type === "type") {
+          limitation = this.limitation["itemTypeBounds"];
+        }
+
+        let itemResponse = isItemType ? {item: this.getItem(value).name} : {};
+
+        const gte = (value) => {
+          return (compare) => {
+            let response = { ...itemResponse, quantity: Array.isArray(value) ? value.join(", ") : value };
+            return compare >= value ? true : this.$t(`report.rules.${type}.gte`, response)
+          }
+        };
+
+        const lte = (value) => {
+          return (compare) => {
+            let response = { ...itemResponse, quantity: Array.isArray(value) ? value.join(", ") : value };
+            return compare <= value ? true : this.$t(`report.rules.${type}.lte`, response)
+          }
+        };
+
+        const notIncludes = (values) => {
+          return (compare) => {
+            let response = { ...itemResponse, quantity: Array.isArray(value) ? value.join(", ") : value };
+            return values.indexOf(compare) === -1 ? true : this.$t(`report.rules.${type}.not`, response)
+          }
+        };
+
+        return [[
+          gte(limitation.lower),
+          lte(limitation.upper),
+          notIncludes(limitation.exceptions)
+        ], limitation]
       }
     }
   }
@@ -898,5 +1078,13 @@
 
 .v-table {
   background: transparent !important;
+}
+
+  .slash-strip--warning {
+    background: repeating-linear-gradient(-45deg, rgb(237, 144, 53), rgb(237, 144, 53) 45px, rgb(0, 0, 0) 45px, rgb(0, 0, 0) 90px);
+  }
+
+.slash-strip--danger {
+  background: repeating-linear-gradient(-45deg, rgb(226, 81, 65), rgb(226, 81, 65) 45px, rgb(0, 0, 0) 45px, rgb(0, 0, 0) 90px);
 }
 </style>

@@ -71,21 +71,6 @@
           return false
         }
       }
-    },
-    data () {
-      return {
-      }
-    },
-    computed: {
-    },
-    watch: {
-    },
-    mounted() {
-    },
-    methods: {
     }
   }
 </script>
-
-<style>
-</style>

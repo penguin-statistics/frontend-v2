@@ -22,13 +22,17 @@
       "links": "相互リンク"
     },
     "planner": "周回計画作成ツール",
-    "changelog": "更新履歴"
+    "changelog": "更新履歴",
+    "v1": "旧バージョン"
   },
   "meta": {
     "details": "詳細を見る",
     "loading": "Now Loading...",
     "footer": {
-      "copyright": "（クリックすることでライセンス及び利用許諾のページにジャンプします）ドロップ統計データはクリエイティブ・コモンズ 表示 - 非営利 4.0 国際 ライセンスの下に提供されています。当サイトのいかなる内容の転載や公開を行う場合は、必ず内容の元となっているページまたはトップページのURLのリンクを行い、データ統計の転載を行ったことを明記しなければなりません。また許可無しに当サイトの内容または派生作品を商業目的で利用することを許可しません。",
+      "copyright": {
+        "title": "利用許諾",
+        "content": "ドロップ統計データはクリエイティブ・コモンズ 表示 - 非営利 4.0 国際 ライセンスの下に提供されています。当サイトのいかなる内容の転載や公開を行う場合は、必ず内容の元となっているページまたはトップページのURLのリンクを行い、データ統計の転載を行ったことを明記しなければなりません。また許可無しに当サイトの内容または派生作品を商業目的で利用することを許可しません。"
+      },
       "credit": "ペンギン急便データ統計処理部門 | {date}"
     }
   },
@@ -84,6 +88,20 @@
       "title": "接続エラー",
       "subtitle": "Unable to establish synchronized connection with the neural network; missing partial resource.",
       "retry": "再試行"
+    }
+  },
+  "report": {
+    "rules": {
+      "item": {
+        "gte": "Quantity of \"{item}\" should ≥{quantity}",
+        "lte": "Quantity of \"{item}\" should ≤{quantity}",
+        "not": "Quantity of \"{item}\" should ≠{quantity}"
+      },
+      "type": {
+        "gte": "There should have at least {quantity} types of item in this stage",
+        "lte": "There should have at most {quantity} types of item in this stage",
+        "not": "There should not be {quantity} types of item in this stage"
+      }
     }
   }
 }
