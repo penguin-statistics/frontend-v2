@@ -17,8 +17,16 @@
           style="border-radius: 50%;"
           v-on="on"
         >mdi-lamp</v-icon>
+        <v-icon
+          v-show="item.itemId !== 'furni' && !item.spriteCoord"
+          :class="furniturePadding"
+          :style="furnitureWidth"
+          class="blue"
+          style="border-radius: 50%;"
+          v-on="on"
+        >mdi-treasure-chest</v-icon>
         <figure
-          v-show="item.itemId !== 'furni'"
+          v-show="item.itemId !== 'furni' && item.spriteCoord"
           ref="icon"
           class="item-icon--sprite"
           :alt="`${item.name} (${item.itemId})`"
@@ -35,8 +43,15 @@
         class="deep-orange"
         style="border-radius: 50%;"
       >mdi-lamp</v-icon>
+      <v-icon
+        v-show="item.itemId !== 'furni' && !item.spriteCoord"
+        :class="furniturePadding"
+        :style="furnitureWidth"
+        class="blue"
+        style="border-radius: 50%;"
+      >mdi-treasure-chest</v-icon>
       <figure
-        v-show="item.itemId !== 'furni'"
+        v-show="item.itemId !== 'furni' && item.spriteCoord"
         ref="icon"
         class="item-icon--sprite"
         :alt="`${item.name} (${item.itemId})`"
@@ -116,7 +131,7 @@ export default {
     }
   },
   mounted() {
-    if (this.item.itemId !== "furni") {
+    if (this.item.itemId !== "furni" && this.item.spriteCoord) {
       this.updatePosition(this.item.spriteCoord);
       this.updateScale(this.ratio);
       this.updateHoverEffect();

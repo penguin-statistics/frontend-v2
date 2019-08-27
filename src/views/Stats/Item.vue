@@ -11,7 +11,8 @@
       "categories": {
         "CARD_EXP": "作战记录",
         "MATERIAL": "材料",
-        "FURN": "家具"
+        "FURN": "家具",
+        "ACTIVITY_ITEM": "活动道具"
       }
     },
     "en": {
@@ -25,7 +26,8 @@
       "categories": {
         "CARD_EXP": "作战记录",
         "MATERIAL": "材料",
-        "FURN": "家具"
+        "FURN": "家具",
+        "ACTIVITY_ITEM": "Event item"
       }
     },
     "ja": {
@@ -39,7 +41,8 @@
       "categories": {
         "CARD_EXP": "作战记录",
         "MATERIAL": "材料",
-        "FURN": "家具"
+        "FURN": "家具",
+        "ACTIVITY_ITEM": "イベントアイテム"
       }
     }
   }
@@ -309,7 +312,7 @@ export default {
     },
     categorizedItems() {
       let all = get.item.all();
-      const categories = ["MATERIAL", "CARD_EXP", "FURN"];
+      const categories = ["MATERIAL", "CARD_EXP", "FURN", "ACTIVITY_ITEM"];
       let results = {};
       for (let category of categories) {
         results[category] = all.filter(el => el.itemType === category);

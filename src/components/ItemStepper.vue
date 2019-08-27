@@ -3,8 +3,8 @@
     row
     wrap
     align-center
-    justify-start
-    class="px-1 pb-1"
+    justify-center
+    class="pr-1 pb-1"
   >
     <v-flex>
       <!-- <v-badge
@@ -42,6 +42,27 @@
           />
         </div>
       </v-badge>
+
+      <template v-if="item.itemType === 'ACTIVITY_ITEM'">
+        <v-layout
+          flex
+          row
+          wrap
+          align-center
+          justify-center
+        >
+          <div class="text-center mt-2">
+            <v-btn
+              small
+              class="add-quantity-btn"
+              @click="increseQuantity(10)"
+            >
+              +10
+            </v-btn>
+          </div>
+        </v-layout>
+      </template>
+
       <!-- </v-badge> -->
     </v-flex>
   </v-layout>
@@ -93,6 +114,9 @@
       increment() {
         this.quantity++;
       },
+      increseQuantity(quantity) {
+        this.quantity += quantity;
+      },
       reduction() {
         // -1 when greater than 0 to avoid negative number
         // (will not reduce when =0)
@@ -123,6 +147,11 @@
 
   .cursor-pointer {
     cursor: pointer;
+  }
+
+  ::v-deep .add-quantity-btn {
+    margin: 0;
+    min-width: 32px;
   }
 
   /* ::v-deep .reduction-badge span.v-badge__badge.red {
