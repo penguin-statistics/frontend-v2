@@ -36,6 +36,11 @@ Getters.item = {
           name: "家具",
           icon: "mdi-lamp",
           color: "blue-grey"
+        },
+        ACTIVITY_ITEM: {
+          name: "活动道具",
+          icon: "mdi-treasure-chest",
+          color: "blue"
         }
       };
 
