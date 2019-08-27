@@ -902,6 +902,7 @@
       },
       step: function(newValue, oldValue) {
         console.log("step changed from", oldValue, "to", newValue);
+        this.reset();
         switch (newValue) {
           case 1:
             console.log("- [router go] index");
@@ -982,6 +983,7 @@
         return item
       },
       reset () {
+        this.results = [];
         this.eventBus.$emit("reset");
         this.furniture = false
       },
