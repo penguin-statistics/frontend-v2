@@ -51,7 +51,7 @@
         {{ $t('dialog.close') }}
       </v-btn>
     </v-snackbar>
-    
+
     <v-dialog
       v-model="auth.dialog"
       max-width="450px"
@@ -142,7 +142,7 @@
           v-if="hover && !mobile"
           key="logout"
           round
-          @click="logout"
+          @click="auth.logoutPrompt = true"
         >
           <v-icon
             left
