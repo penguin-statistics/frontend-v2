@@ -25,6 +25,7 @@
       >
         <Contribute
           data-aos="fade"
+          data-aos-offset="60"
         />
       </v-flex>
       <v-flex
