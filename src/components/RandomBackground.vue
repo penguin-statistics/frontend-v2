@@ -61,7 +61,7 @@
         if (this.webpSupport === null) {
           this.webpSupport = await this.testWebp();
         }
-        return `https://penguin-stats.cdn.iblueg.cn/backgrounds/${current}.${this.webpSupport ? 'webp' : 'jpg'}`
+        return `https://penguin-stats.cdn.iblueg.cn/backgrounds/${current}.${this.webpSupport ? 'webp' : 'optimized.png'}`
       },
       async updateBackground() {
         let background = this.$refs.background;
