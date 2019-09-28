@@ -13,10 +13,11 @@
         type: Number,
         default () {
           if ((typeof window.orientation !== "undefined") || (navigator.userAgent.indexOf('IEMobile') !== -1)) {
-            // is mobile device; reduce data usage, use ttl of 5minutes
-            return 300
+            // is mobile device; reduce data usage, use ttl of 15 minutes
+            return 15 * 60
           } else {
-            return 60
+            // is not mobile device; use ttl of 5 minutes to show off ;)
+            return 5 * 60
           }
         }
       }
@@ -26,20 +27,30 @@
         lastLoading: false,
         last: 1,
         lastUrl: "",
-        timer: null
+        timer: null,
+        webpSupport: null
       }
     },
     mounted () {
       this.updateBackground();
       this.timer = setInterval(() => {
         !this.lastLoading && this.updateBackground()
-      }, 1000 * this.interval)
+      }, 1000 * this.interval);
     },
     beforeDestroy () {
       clearInterval(this.timer)
     },
     methods: {
-      getBackground() {
+      async testWebp() {
+        return new Promise(res => {
+          const webP = new Image();
+          webP.src = 'data:image/webp;base64,UklGRjoAAABXRUJQVlA4IC4AAACyAgCdASoCAAIALmk0mk0iIiIiIgBoSygABc6WWgAA/veff/0PP8bA//LwYAAA';
+          webP.onload = webP.onerror = function () {
+            res(webP.height === 2)
+          };
+        })
+      },
+      async getBackground() {
         let current = this.last;
         // avoid change to the same background than the last one
         while (current === this.last) {
@@ -47,12 +58,15 @@
         }
         this.last = current;
         // console.log(current)
-        return `https://penguin-stats.cdn.iblueg.cn/backgrounds/${current}.png`
+        if (this.webpSupport === null) {
+          this.webpSupport = await this.testWebp();
+        }
+        return `https://penguin-stats.s3.ap-southeast-1.amazonaws.com/backgrounds/${current}.${this.webpSupport ? 'webp' : 'optimized.png'}`
       },
-      updateBackground() {
+      async updateBackground() {
         let background = this.$refs.background;
         this.lastLoading = true;
-        window.fetch(this.getBackground())
+        window.fetch(await this.getBackground())
           .then((response) => {
             return response.blob();
           })
