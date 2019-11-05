@@ -527,4 +527,13 @@ export default {
   .transparentTable > .v-table__overflow > .v-table {
     background: transparent;
   }
+
+  .v-navigation-drawer::-webkit-scrollbar {
+    width: 2px;
+  }
+
+  .v-navigation-drawer::-webkit-scrollbar-thumb {
+    background-color: rgb(200, 200, 200);
+  }
+
 </style>
