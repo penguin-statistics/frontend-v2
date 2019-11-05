@@ -966,9 +966,9 @@
       getItem(itemId) {
         return get.item.byItemId(itemId)
       },
-      handleChange ([itemId, quantity]) {
+      handleChange ([itemId, diff]) {
         let item = this.getOrCreateItem(itemId);
-        item.quantity = quantity;
+        item.quantity += diff;
         item.quantity <= 0 && (this.results = this.results.filter(v => v.itemId !== item.itemId))
       },
       getOrCreateItem (itemId) {

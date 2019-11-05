@@ -55,7 +55,7 @@
             <v-btn
               small
               class="add-quantity-btn"
-              @click="increseQuantity(10)"
+              @click="increaseQuantity(10)"
             >
               +10
             </v-btn>
@@ -102,9 +102,9 @@
       },
     },
     watch: {
-      quantity: function (value) {
-        // this form have no errors
-        this.$emit("change", [this.item.itemId, value])
+      quantity: function (newValue, oldValue) {
+        let diff = newValue - oldValue;
+        this.$emit("change", [this.item.itemId, diff])
       }
     },
     mounted() {
@@ -114,7 +114,7 @@
       increment() {
         this.quantity++;
       },
-      increseQuantity(quantity) {
+      increaseQuantity(quantity) {
         this.quantity += quantity;
       },
       reduction() {
