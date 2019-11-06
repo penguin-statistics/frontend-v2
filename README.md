@@ -10,3 +10,4 @@
 
 ## Contribute Guideline
 Our contribute guideline can be found at [Penguin Developers](https://developer.penguin-stats.io)
+
