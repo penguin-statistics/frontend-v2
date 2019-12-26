@@ -162,6 +162,7 @@
       {{ $t('report.success') }}
       <v-btn
         :loading="undoing"
+        color="primary"
         @click="undo"
       >
         {{ $t('report.undo') }}
