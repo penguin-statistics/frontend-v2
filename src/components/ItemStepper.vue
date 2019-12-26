@@ -43,7 +43,7 @@
         </div>
       </v-badge>
 
-      <template v-if="item.itemType === 'ACTIVITY_ITEM'">
+      <template v-if="item.itemType === 'ACTIVITY_ITEM_BATCH'">
         <v-layout
           flex
           row

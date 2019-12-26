@@ -11,6 +11,11 @@
       >
         <Intro data-aos="fade" />
       </v-flex>
+      <v-flex
+        xs12
+      >
+        <Bulletin data-aos="fade" />
+      </v-flex>
       <!--      <v-flex-->
       <!--        xs12-->
       <!--        sm6-->
@@ -34,6 +39,7 @@
       >
         <Donate
           data-aos="fade"
+          data-aos-offset="60"
         />
       </v-flex>
     </v-layout>
@@ -44,9 +50,10 @@
 import Contribute from "@/views/About/Contribute";
 import Donate from "@/views/About/Donate";
 import Intro from "@/views/About/Intro";
+import Bulletin from "@/views/About/Bulletin";
 export default {
   name: "Home",
-  components: { Contribute, Donate, Intro },
+  components: { Contribute, Donate, Intro, Bulletin },
   data: () => ({}),
   methods: {
     goToPage(name) {
