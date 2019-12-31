@@ -33,8 +33,8 @@
         // [key] is a special "zoneId" to display a special "background image"
         // [value] represents a "background image url" on such route
         specialImageMap: {
-          "main_06-14": "https://penguin-stats.s3.ap-southeast-1.amazonaws.com/logos/penguin_stats_logo_sora.png", // 6-16
-          "main_06-15": "https://penguin-stats.s3.ap-southeast-1.amazonaws.com/logos/penguin_stats_logo_croissant.png", // 6-17
+          "main_06-14": "https://penguin-stats.s3.ap-southeast-1.amazonaws.com/backgrounds/fn_0_1.png", // 6-16
+          "main_06-15": "https://penguin-stats.s3.ap-southeast-1.amazonaws.com/backgrounds/fn_0_0.png", // 6-17
         }
       }
     },
@@ -42,8 +42,9 @@
       "$route": "checkSpecialImage"
     },
     mounted () {
+      this.updateBackgroundByRandom(true);
       this.timer = setInterval(() => {
-        !this.lastLoading && this.updateBackgroundByRandom()
+        !this.lastLoading && this.updateBackgroundByRandom(false)
       }, 1000 * this.interval);
     },
     beforeDestroy () {
@@ -75,10 +76,10 @@
         }
         return this.getImageUrl(current)
       },
-      async updateBackgroundByRandom() {
+      async updateBackgroundByRandom(ignoreUrl) {
         // console.log("check at random", this.isSpecialUrl(this.$route), this.$route)
         let isSpecial = this.isSpecialUrl(this.$route);
-        if (isSpecial === true) {
+        if (ignoreUrl || isSpecial === false) {
           this.updateBackgroundByUrl(await this.getRandomBackgroundUrl())
         }
       },
@@ -102,7 +103,10 @@
           })
       },
       isSpecialUrl (url) {
-        return url.params && url.params.stageId && url.params.stageId in this.specialImageMap
+        if (!url.params || !url.params.stageId || !(url.params.stageId in this.specialImageMap)) {
+          return false;
+        }
+        return true;
       },
       checkSpecialImage (to, from) {
         if (this.isSpecialUrl(to)) {
