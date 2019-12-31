@@ -28,19 +28,31 @@
         last: 1,
         lastUrl: "",
         timer: null,
-        webpSupport: null
+        webpSupport: null,
+        // TODO: Update image map.
+        // [key] is a special "zoneId" to display a special "background image"
+        // [value] represents a "background image url" on such route
+        specialImageMap: {
+          "main_06-14": "https://penguin-stats.s3.ap-southeast-1.amazonaws.com/logos/penguin_stats_logo_sora.png", // 6-16
+          "main_06-15": "https://penguin-stats.s3.ap-southeast-1.amazonaws.com/logos/penguin_stats_logo_croissant.png", // 6-17
+        }
       }
     },
+    watch: {
+      "$route": "checkSpecialImage"
+    },
     mounted () {
-      this.updateBackground();
       this.timer = setInterval(() => {
-        !this.lastLoading && this.updateBackground()
+        !this.lastLoading && this.updateBackgroundByRandom()
       }, 1000 * this.interval);
     },
     beforeDestroy () {
       clearInterval(this.timer)
     },
     methods: {
+      getImageUrl (id) {
+        return `https://penguin-stats.s3.ap-southeast-1.amazonaws.com/backgrounds/${id}.${this.webpSupport ? 'webp' : 'optimized.png'}`
+      },
       async testWebp() {
         return new Promise(res => {
           const webP = new Image();
@@ -50,7 +62,7 @@
           };
         })
       },
-      async getBackground() {
+      async getRandomBackgroundUrl() {
         let current = this.last;
         // avoid change to the same background than the last one
         while (current === this.last) {
@@ -61,12 +73,19 @@
         if (this.webpSupport === null) {
           this.webpSupport = await this.testWebp();
         }
-        return `https://penguin-stats.s3.ap-southeast-1.amazonaws.com/backgrounds/${current}.${this.webpSupport ? 'webp' : 'optimized.png'}`
+        return this.getImageUrl(current)
       },
-      async updateBackground() {
+      async updateBackgroundByRandom() {
+        console.log("check at random", this.isSpecialUrl(this.$route), this.$route)
+        let isSpecial = this.isSpecialUrl(this.$route);
+        if (isSpecial === true) {
+          this.updateBackgroundByUrl(await this.getRandomBackgroundUrl())
+        }
+      },
+      async updateBackgroundByUrl(url) {
         let background = this.$refs.background;
         this.lastLoading = true;
-        window.fetch(await this.getBackground())
+        window.fetch(url)
           .then((response) => {
             return response.blob();
           })
@@ -81,6 +100,23 @@
           .finally(() => {
             this.lastLoading = false
           })
+      },
+      isSpecialUrl (url) {
+        return url.params && url.params.stageId && url.params.stageId in this.specialImageMap
+      },
+      checkSpecialImage (to, from) {
+        console.log("checking to", to, "and from", from)
+        if (this.isSpecialUrl(to)) {
+          // yes we do have a special image for the CURRENT path. APPLY IT!
+          console.log("to path is a special image")
+          let imageUrl = this.specialImageMap[to.params.stageId]
+          this.updateBackgroundByUrl(imageUrl)
+        } else if (this.isSpecialUrl(from)) {
+          // we do not have a special image for the current path but we DO have a special image for the PREVIOUS path.
+          // we need to restore the last background image
+          console.log("from path is a special image")
+          this.updateBackgroundByUrl(this.getImageUrl(this.last))
+        }
       }
     }
   }
