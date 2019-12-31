@@ -76,7 +76,7 @@
         return this.getImageUrl(current)
       },
       async updateBackgroundByRandom() {
-        console.log("check at random", this.isSpecialUrl(this.$route), this.$route)
+        // console.log("check at random", this.isSpecialUrl(this.$route), this.$route)
         let isSpecial = this.isSpecialUrl(this.$route);
         if (isSpecial === true) {
           this.updateBackgroundByUrl(await this.getRandomBackgroundUrl())
@@ -105,17 +105,14 @@
         return url.params && url.params.stageId && url.params.stageId in this.specialImageMap
       },
       checkSpecialImage (to, from) {
-        console.log("checking to", to, "and from", from)
         if (this.isSpecialUrl(to)) {
           // yes we do have a special image for the CURRENT path. APPLY IT!
-          console.log("to path is a special image")
           let imageUrl = this.specialImageMap[to.params.stageId]
           this.updateBackgroundByUrl(imageUrl)
         } else if (this.isSpecialUrl(from)) {
           // we do not have a special image for the current path but we DO have a special image for the PREVIOUS path.
           // we need to restore the last background image
-          console.log("from path is a special image")
-          this.updateBackgroundByUrl(this.getImageUrl(this.last))
+          this.updateBackgroundByUrl(this.getImageUrl(this.last ? this.last : this.getRandomBackgroundUrl()))
         }
       }
     }
