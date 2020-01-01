@@ -2,20 +2,23 @@
   {
     "zh": {
       "bulletin": {
-        "bulletin_0": "12月24日的更新中添加了4种新素材，第4、5章部分关卡添加了这些素材的掉落，导致这些关卡的掉率结果可能会受到影响。",
-        "bulletin_1": "企鹅数据团队正在努力解决中，由此带来的不便敬请谅解。（掉落汇报不受影响）"
+        "bulletin_0": "企鹅数据新年抽奖活动，转发微博即可参与。",
+        "bulletin_1": "奖品实物图",
+        "bulletin_2": "点我跳转"
       }
     },
     "en": {
       "bulletin": {
-        "bulletin_0": "12月24日的更新中添加了4种新素材，第4、5章部分关卡添加了这些素材的掉落，导致这些关卡的掉率结果可能会受到影响。",
-        "bulletin_1": "企鹅数据团队正在努力解决中，由此带来的不便敬请谅解。（掉落汇报不受影响）"
+        "bulletin_0": "企鹅数据新年抽奖活动，转发微博即可参与。",
+        "bulletin_1": "奖品实物图",
+        "bulletin_2": "点我跳转"
       }
     },
     "ja": {
       "bulletin": {
-        "bulletin_0": "12月24日的更新中添加了4种新素材，第4、5章部分关卡添加了这些素材的掉落，导致这些关卡的掉率结果可能会受到影响。",
-        "bulletin_1": "企鹅数据团队正在努力解决中，由此带来的不便敬请谅解。（掉落汇报不受影响）"
+        "bulletin_0": "企鹅数据新年抽奖活动，转发微博即可参与。",
+        "bulletin_1": "奖品实物图",
+        "bulletin_2": "点我跳转"
       }
     }
   }
@@ -38,8 +41,34 @@
             class="subheading line-height-wide"
           >
             {{ $t('bulletin.bulletin_0') }}
+            <v-btn
+              href="https://www.weibo.com/6434065694/InnvF4n6n"
+              target="_blank"
+              flat
+            >
+              {{ $t('bulletin.bulletin_2') }}
+              <v-icon
+                right
+                small
+              >
+                mdi-open-in-new
+              </v-icon>
+            </v-btn>
             <br>
-            {{ $t('bulletin.bulletin_1') }}
+            <v-tooltip top>
+              <template v-slot:activator="{ on }">
+                <span
+                  style="border-bottom:1px dashed #ccc;"
+                  v-on="on"
+                >{{ $t('bulletin.bulletin_1') }}</span>
+              </template>
+              <v-img
+                :src="'https://penguin-stats.s3.ap-southeast-1.amazonaws.com/bulletin/prize.jpg'"
+                max-height="600px"
+                min-width="340px"
+                contain
+              />
+            </v-tooltip>
           </p>
         </v-flex>
       </v-card-title>
