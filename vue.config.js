@@ -8,7 +8,9 @@ module.exports = {
     }
   },
   devServer: {
-    proxy: 'https://penguin-stats.io/PenguinStats/api'
+    "/PenguinStats": {
+      target: "https://penguin-stats.io/"
+    }
   },
   integrity: true,
   runtimeCompiler: true,
