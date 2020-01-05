@@ -360,7 +360,7 @@
                             <div>{{ $t('stage.loots.normal') }}</div>
                             <Item
                               v-for="item in stage.normalDrop"
-                              :key="item"
+                              :key="`normal_${item}`"
                               :item="getItem(item)"
                               :ratio="0.6"
                               disable-link
@@ -380,7 +380,7 @@
                             <div>{{ $t('stage.loots.extra') }}</div>
                             <Item
                               v-for="item in stage.extraDrop"
-                              :key="item*10"
+                              :key="`extra_${item}`"
                               :item="getItem(item)"
                               :ratio="0.6"
                               disable-link
@@ -400,7 +400,7 @@
                             <div>{{ $t('stage.loots.special') }}</div>
                             <Item
                               v-for="item in stage.specialDrop"
-                              :key="item*100"
+                              :key="`special_${item}`"
                               :item="getItem(item)"
                               :ratio="0.6"
                               disable-link
