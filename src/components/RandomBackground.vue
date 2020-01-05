@@ -70,14 +70,14 @@
           current = Math.floor(Math.random() * 70)
         }
         this.last = current;
-        // console.log(current)
+        // Console.log(current)
         if (this.webpSupport === null) {
           this.webpSupport = await this.testWebp();
         }
         return this.getImageUrl(current)
       },
       async updateBackgroundByRandom(ignoreUrl) {
-        // console.log("check at random", this.isSpecialUrl(this.$route), this.$route)
+        // Console.log("check at random", this.isSpecialUrl(this.$route), this.$route)
         let isSpecial = this.isSpecialUrl(this.$route);
         if (ignoreUrl || isSpecial === false) {
           this.updateBackgroundByUrl(await this.getRandomBackgroundUrl())
@@ -93,7 +93,7 @@
           .then((blob) => {
             let dataUrl = URL.createObjectURL(blob);
             background.style.backgroundImage = `url(${dataUrl})`;
-            // console.log(`created ${dataUrl} | revoking ${this.lastUrl}`)
+            // Console.log(`created ${dataUrl} | revoking ${this.lastUrl}`)
             !this.lastUrl && URL.revokeObjectURL(this.lastUrl);
             this.lastUrl = dataUrl
           })

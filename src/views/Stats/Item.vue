@@ -247,6 +247,7 @@ import get from "@/utils/getters";
 import Item from "@/components/Item";
 import Charts from "@/components/Charts";
 import DataSourceToggle from "@/components/DataSourceToggle";
+import Console from "@/utils/Console";
 
 export default {
   name: "StatsByItem",
@@ -336,7 +337,7 @@ export default {
   },
   watch: {
     $route: function(to, from) {
-      console.log("step route changed from", from.path, "to", to.path);
+      Console.log("step route changed from", from.path, "to", to.path);
       if (to.name === "StatsByItem") {
         this.step = 1;
       }
@@ -345,21 +346,21 @@ export default {
       }
     },
     step: function(newValue, oldValue) {
-      console.log("step changed from", oldValue, "to", newValue);
+      Console.log("step changed from", oldValue, "to", newValue);
       switch (newValue) {
         case 1:
-          console.log("- [router go] index");
+          Console.log("- [router go] index");
           this.$router.push({ name: "StatsByItem" });
           break;
         case 2:
-          console.log("- [router go] item", this.selected.item.itemId);
+          Console.log("- [router go] item", this.selected.item.itemId);
           this.$router.push({
             name: "StatsByItem_SelectedItem",
             params: { itemId: this.selected.item.itemId }
           });
           break;
         default:
-          console.error(
+          Console.error(
             "unexpected step number",
             newValue,
             "with [newStep, oldStep]",
