@@ -3,8 +3,9 @@ import Console from "@/utils/Console";
 
 const service = axios.create({
   // on non-production environments the client will try to send any unknown requests (requests that did not match a static file)
-  // to https://penguin-stats.io/PenguinStats/api via `webpack-dev-server`, described in vue.config.js
-  baseURL: "/PenguinStats/api"
+  // to https://penguin-stats.io/PenguinStats/api via `webpack-dev-server`, described in `vue.config.js`
+  // in order to use local server, please change the corresponding setting in `vue.config.js`
+  baseURL: process.env.NODE_ENV === "development" ? "/PenguinStats/api" : "https://penguin-stats.io/PenguinStats/api"
 });
 
 // Add a response interceptor
