@@ -102,15 +102,9 @@
       },
     },
     watch: {
-<<<<<<< HEAD
       quantity: function (newValue, oldValue) {
         let diff = newValue - oldValue;
         this.$emit("change", [this.item.itemId, diff])
-=======
-      quantity: function (value) {
-        // this form have no errors
-        this.$emit("change", [this.item.itemId, value])
->>>>>>> 078f7f6... fix(report): refactored Report view
       }
     },
     mounted() {
@@ -120,12 +114,9 @@
       increment() {
         this.quantity++;
       },
-<<<<<<< HEAD
       increaseQuantity(quantity) {
         this.quantity += quantity;
       },
-=======
->>>>>>> 078f7f6... fix(report): refactored Report view
       reduction() {
         // -1 when greater than 0 to avoid negative number
         // (will not reduce when =0)
