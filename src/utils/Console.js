@@ -14,7 +14,6 @@ class Console {
   static log (...content) {
     this._render("log", ...content)
   }
-
   /**
    * @static
    * @private
