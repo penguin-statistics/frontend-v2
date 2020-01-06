@@ -695,6 +695,7 @@
   import ItemStepper from "@/components/ItemStepper";
   import Vue from "vue";
   import Cookies from 'js-cookie';
+  import Console from "@/utils/Console";
 
   export default {
     name: "Report",
@@ -890,7 +891,7 @@
     },
     watch: {
       $route: function(to, from) {
-        console.log("step route changed from", from.path, "to", to.path);
+        Console.log("step route changed from", from.path, "to", to.path);
         if (to.name === "ReportByZone") {
           this.step = 1;
         }
@@ -902,22 +903,22 @@
         }
       },
       step: function(newValue, oldValue) {
-        console.log("step changed from", oldValue, "to", newValue);
+        Console.log("step changed from", oldValue, "to", newValue);
         this.reset();
         switch (newValue) {
           case 1:
-            console.log("- [router go] index");
+            Console.log("- [router go] index");
             this.$router.push({ name: "ReportByZone" });
             break;
           case 2:
-            console.log("- [router go] zone", this.selected.zone);
+            Console.log("- [router go] zone", this.selected.zone);
             this.$router.push({
               name: "ReportByZone_SelectedZone",
               params: { zoneId: this.selected.zone }
             });
             break;
           case 3:
-            console.log("- [router go] stage", this.selected);
+            Console.log("- [router go] stage", this.selected);
             this.$router.push({
               name: "ReportByZone_SelectedStage",
               params: {
@@ -927,7 +928,7 @@
             });
             break;
           default:
-            console.error(
+            Console.error(
               "unexpected step number",
               newValue,
               "with [newStep, oldStep]",

@@ -182,6 +182,7 @@
 <script>
   import service from '@/utils/service'
   import Cookies from 'js-cookie'
+  import Console from "@/utils/Console";
 
   export default {
     name: "AccountManager",
@@ -224,7 +225,7 @@
             this.$store.commit("authLogin", this.auth.username);
             Cookies.set(this.cookies.key, this.auth.username, {expires: 7, path: "/"});
             this.$ga.event('account', 'login', 'login_success', 1)
-            console.log(Cookies);
+            Console.log(Cookies);
             this.snackbar = {
               enabled: true,
               color: "success",

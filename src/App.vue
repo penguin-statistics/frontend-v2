@@ -253,6 +253,7 @@
   import RandomBackground from '@/components/RandomBackground'
   import AccountManager from '@/components/AccountManager'
   import NetworkStateIndicator from "@/components/widgets/NetworkStateIndicator";
+  import Console from "@/utils/Console";
 
 export default {
   name: 'App',
@@ -348,7 +349,7 @@ export default {
     },
     logRouteEvent (newValue) {
       if (newValue.name === "StatsByStage_SelectedBoth") {
-        console.log(this.$store.state.dataSource, newValue.params.stageId);
+        Console.log(this.$store.state.dataSource, newValue.params.stageId);
         this.$ga.event('result', 'fetch_' + this.$store.state.dataSource, newValue.params.stageId, 1)
       } else if (newValue.name === "StatsByItem_SelectedItem") {
         this.$ga.event('result', 'fetch_' + this.$store.state.dataSource, newValue.params.itemId, 1)

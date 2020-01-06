@@ -3,6 +3,7 @@
     <v-dialog
       v-model="model"
       width="600"
+      origin="right bottom"
     >
       <v-card>
         <v-card-title
@@ -66,7 +67,7 @@
     </v-dialog>
     <v-fade-transition>
       <span
-        v-if="haveError"
+        v-if="haveError && !model"
         style="cursor: pointer"
         @click="model = true"
       >
@@ -81,6 +82,7 @@
         <v-icon
           v-else
           :size="16"
+          class="mr-1"
         >
           mdi-alert
         </v-icon>
