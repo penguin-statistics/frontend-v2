@@ -828,8 +828,11 @@
 
         // check for item outlier
         for (let item of this.results) {
+<<<<<<< HEAD
           // if the item is not having a limitation record then skip it
           if (!this.limitation["itemQuantityBounds"].find(v => v["itemId"] === item.itemId)) continue;
+=======
+>>>>>>> 078f7f6... fix(report): refactored Report view
           let [rules, limitation] = this.generateVerificationRule("item", item.itemId);
           let validation = validate(rules, item.quantity);
           if (validation !== true) {
@@ -845,6 +848,7 @@
         }
 
         // check for type outlier
+<<<<<<< HEAD
         if (this.limitation["itemTypeBounds"]) {
           let [rules, limitation] = this.generateVerificationRule("type");
           let quantity = this.results.length;
@@ -857,6 +861,18 @@
               rate,
               message: validation
             }
+=======
+        let [rules, limitation] = this.generateVerificationRule("type");
+        let quantity = this.results.length;
+        let validation = validate(rules, quantity);
+        if (validation !== true) {
+          let rate = calculateOutlierRate(limitation, quantity);
+          typeOutlier = {
+            quantity,
+            limitation,
+            rate,
+            message: validation
+>>>>>>> 078f7f6... fix(report): refactored Report view
           }
         }
 
@@ -1018,7 +1034,11 @@
       },
       confirmSubmit () {
         this.closeAllDialogs();
+<<<<<<< HEAD
         this.$ga.event('report', 'ignore_warning', this.selected.stage, 1);
+=======
+        this.$ga.event('report', 'ignore_warning', this.selected.stage, 1)
+>>>>>>> 078f7f6... fix(report): refactored Report view
         this.doSubmit()
       },
       async undo () {
@@ -1037,9 +1057,18 @@
         let isItemType = type === "item";
         let limitation;
         if (isItemType) {
+<<<<<<< HEAD
           limitation = this.limitation["itemQuantityBounds"].find(v => v["itemId"] === value)["bounds"]
         } else if (type === "type") {
           limitation = this.limitation["itemTypeBounds"];
+=======
+          limitation = this.limitation["itemQuantityBounds"].find(v => v["itemId"] === value)["bounds"];
+        } else if (type === "type") {
+          limitation = this.limitation["itemTypeBounds"]
+        }
+        if (!limitation) {
+          return [];
+>>>>>>> 078f7f6... fix(report): refactored Report view
         }
 
         let itemResponse = isItemType ? {item: this.getItem(value).name} : {};

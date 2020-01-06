@@ -9,14 +9,12 @@ class ObjectManager {
   /** Creates a manager
    *
    * @param {string} api endpoint url that will be used to get the data from. the manager will send a GET request to the corresponding url
-   * @param {Function[]} transform transform functions that will be called in sequence and will transform the object using the return value of the functions
    * @param {number} ttl time-to-live (TTL), in milliseconds
    * @param {Object<Function, Function(Promise)>} ajaxHooks the first function will be called before sending the request, and the second function will be called after done receiving the request, with the request Promise as the argument
    */
-  constructor({ name, api, transform, ttl, ajaxHooks }) {
+  constructor({ name, api, ttl, ajaxHooks }) {
     this.name = name;
     this.api = api;
-    this.transform = transform
     this.ttl = ttl;
     this.ajaxHooks = ajaxHooks;
 
@@ -28,22 +26,6 @@ class ObjectManager {
   }
 
   // private methods
-
-  /**
-   * sequentially transforms the object
-   *
-   * @private
-   * @type {Object} data the object to be transform
-   * @returns {Object} the transformed object
-   */
-  _transform (data) {
-    let context = this;
-    let current = data; // the current transform result
-    for (let func of context.transform) {
-      current = func(current) // transform the object by calling the function and get its result
-    }
-    return current
-  }
 
   /**
    * check the cache validity

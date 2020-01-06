@@ -14,6 +14,10 @@ class Console {
   static log (...content) {
     this._render("log", ...content)
   }
+  /**
+   * @static
+   * @private
+   */
   static _render (level, ...content) {
     const PROD_IGNORE = ["debug", "info"]
     if (process.env.NODE_ENV === "production" && !(level in PROD_IGNORE)) return false

@@ -280,6 +280,10 @@ export default {
       ],
       prefetchingResources: false,
       drawer: !this.$vuetify.breakpoint.xsOnly,
+<<<<<<< HEAD
+=======
+      buildNoticeNotClosed: true,
+>>>>>>> 078f7f6... fix(report): refactored Report view
       showLicenseDialog: false
     }
   },

@@ -188,7 +188,11 @@ export default {
   width: 60px;
   display: inline-block;
   overflow: hidden;
+<<<<<<< HEAD
   background-size: 360px 600px;
+=======
+  background-size: 360px 480px;
+>>>>>>> 078f7f6... fix(report): refactored Report view
   transition: transform 150ms cubic-bezier(.25,.8,.5,1);
 }
 
