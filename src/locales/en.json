@@ -94,7 +94,6 @@
   "report": {
     "rules": {
       "item": {
-<<<<<<< HEAD
         "gte": "\"{item}\" should ≥{quantity}",
         "lte": "\"{item}\" should ≤{quantity}",
         "not": "\"{item}\" should ≠{quantity}"
@@ -103,16 +102,6 @@
         "gte": "Should have at least {quantity} types",
         "lte": "Should have at most {quantity} types",
         "not": "Should not be {quantity} types"
-=======
-        "gte": "Quantity of \"{item}\" should ≥{quantity}",
-        "lte": "Quantity of \"{item}\" should ≤{quantity}",
-        "not": "Quantity of \"{item}\" should ≠{quantity}"
-      },
-      "type": {
-        "gte": "There should have at least {quantity} types of item in this stage",
-        "lte": "There should have at most {quantity} types of item in this stage",
-        "not": "There should not be {quantity} types of item in this stage"
->>>>>>> 078f7f6... fix(report): refactored Report view
       }
     }
   }
