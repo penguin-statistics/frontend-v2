@@ -360,10 +360,6 @@ export default {
 </script>
 
 <style>
-  #__app_root {
-    padding: env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);
-  }
-
   .slide-fade-enter-active {
     transition: all .325s cubic-bezier(0.165, 0.84, 0.44, 1);
   }
@@ -431,6 +427,15 @@ export default {
 
   .v-navigation-drawer::-webkit-scrollbar-thumb {
     background-color: rgb(200, 200, 200);
+  }
+
+  .v-toolbar {
+    padding-top: env(safe-area-inset-top);
+  }
+
+  .v-footer {
+    height: calc(32px + env(safe-area-inset-bottom)) !important;
+    padding-bottom: calc(env(safe-area-inset-bottom));
   }
 
 </style>
