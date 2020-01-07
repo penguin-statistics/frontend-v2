@@ -62,8 +62,6 @@ class ObjectManager {
       context.ajaxHooks.request(context.name);
       let response = service.get(context.api)
         .then(({ data }) => {
-          data = context._transform(data)
-
           context.cache.data = data;
           context.cache.updatedAt = Date.now();
           let temp = {};
@@ -76,7 +74,7 @@ class ObjectManager {
           return context.cache.data
         });
       context.ajaxHooks.response(context.name, response);
-      return response;
+      return Promise.resolve(context.cache.data);
     }
   }
 

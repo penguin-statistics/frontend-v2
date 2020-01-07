@@ -16,6 +16,7 @@ import AboutChangelog from './views/About/Changelog'
 import AboutContact from './views/About/Contact'
 import AboutDonate from './views/About/Donate'
 import AboutLinks from './views/About/Links'
+import NotFound from "@/views/NotFound";
 
 Vue.use(Router);
 
@@ -230,7 +231,16 @@ const router = new Router({
         i18n: 'menu.v1',
         externalRedirect: true
       }
-    }
+    },
+    {
+      path: '*',
+      name: 'ErrorNotFound',
+      component: NotFound,
+      meta: {
+        i18n: 'meta.notfound',
+        hide: true
+      }
+    },
   ]
 });
 

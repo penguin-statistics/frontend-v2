@@ -29,6 +29,7 @@
   "meta": {
     "details": "Details",
     "loading": "Fetching application data...",
+    "notfound": "???",
     "footer": {
       "copyright": {
         "title": "License",

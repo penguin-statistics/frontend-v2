@@ -301,7 +301,7 @@ export default {
     'dark': ['onDarkChange']
   },
   beforeMount() {
-    this.routes = this.$router.options.routes
+    this.routes = this.$router.options.routes.filter(el => !(el.meta.hide))
   },
   mounted () {
     this.randomizeLogo();

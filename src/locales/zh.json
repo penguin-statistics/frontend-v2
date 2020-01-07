@@ -29,6 +29,7 @@
   "meta": {
     "details": "详细信息",
     "loading": "正在加载...",
+    "notfound": "？？？",
     "footer": {
       "copyright": {
         "title": "许可协议",
