@@ -130,8 +130,7 @@
         }
       },
       checkBlur(to) {
-        console.log(to)
-        this.blurred = to.name === "ErrorNotFound";
+        if (to && to.name) this.blurred = to.name === "ErrorNotFound";
       }
     }
   }

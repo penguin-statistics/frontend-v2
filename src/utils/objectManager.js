@@ -34,12 +34,11 @@ class ObjectManager {
    */
   get cacheValid() {
     let cacheUpdateAt = this.cache.updatedAt || store.getters.cacheUpdateAt(this.name)
-    Console.debug("[debug]: ",
-      this.name,
-      "objectManager cache valid:",
-      cacheUpdateAt + this.ttl > Date.now(),
-      "|",
-      cacheUpdateAt, this.ttl, Date.now());
+    // Console.debug(this.name,
+    //   "objectManager cache valid:",
+    //   cacheUpdateAt + this.ttl > Date.now(),
+    //   "|",
+    //   cacheUpdateAt, this.ttl, Date.now());
     return cacheUpdateAt + this.ttl > Date.now()
   }
 
