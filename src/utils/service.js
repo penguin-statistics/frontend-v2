@@ -13,8 +13,11 @@ service.interceptors.response.use(function (response) {
   // Do something with response data
   return response;
 }, function (error) {
-  Console.debug({error})
-  error.errorMessage = `(${error.response.status}) ${error.response.data ? error.response.data : error.message}`;
+  if (error.response) {
+    error.errorMessage = `(${error.response.status}) ${error.response.data ? error.response.data : error.message}`;
+  } else {
+    error.errorMessage = `(undone) ${error.message}`;
+  }
   // Do something with response error
   return Promise.reject(error);
 });

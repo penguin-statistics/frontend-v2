@@ -115,7 +115,6 @@
     data () {
       return {
         model: false,
-        close: false,
       }
     },
     computed: {
