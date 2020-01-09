@@ -125,8 +125,11 @@
     watch: {
       haveError(newValue, oldValue) {
         if (newValue && !oldValue) {
-          // changed from false to true
+          // error appeared. force open the window
           this.model = true
+        } else if (!newValue && oldValue) {
+          // error resolved. force close the window
+          this.model = false
         }
       }
     },
