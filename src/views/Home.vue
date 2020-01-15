@@ -14,7 +14,10 @@
       <v-flex
         xs12
       >
-        <Bulletin data-aos="fade" />
+        <Bulletin
+          data-aos="fade"
+          data-aos-offset="60"
+        />
       </v-flex>
       <!--      <v-flex-->
       <!--        xs12-->

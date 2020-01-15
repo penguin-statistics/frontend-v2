@@ -60,6 +60,9 @@ export default new Vuex.Store({
     },
     authLogout(state) {
       state.auth.username = null
+    },
+    ajaxNewState(state, payload) {
+      state.ajax.states.push(payload);
     }
   },
   actions: {
@@ -76,14 +79,32 @@ export default new Vuex.Store({
     async refreshPersonalMatrixData() {
       await personalMatrixManager.get(true)
     },
-    ajaxStarted({getters}, {id}) {
-      let found = getters._getOrCreateAjaxStateObject(id);
-      found.pending = true
+    _getOrCreateAjaxStateObject ({commit, state}, id) {
+      let found = state.ajax.states.find(value => value.id === id);
+      if (found) {
+        return found
+      } else {
+        let pushing = Object.create(null);
+        pushing.id = id;
+        pushing.pending = false;
+        pushing.error = null;
+
+        commit('ajaxNewState', pushing);
+        return pushing
+      }
+    } ,
+    ajaxStarted({dispatch}, {id}) {
+      dispatch('_getOrCreateAjaxStateObject', id)
+        .then(res => {
+          res.pending = true
+        });
     },
-    ajaxFinished({getters}, {id, error}) {
-      let found = getters._getOrCreateAjaxStateObject(id);
-      found.pending = false;
-      found.error = error
+    ajaxFinished({dispatch}, {id, error}) {
+      dispatch('_getOrCreateAjaxStateObject', id)
+        .then(res => {
+          res.pending = false;
+          res.error = error
+        });
     }
   },
   getters: {
@@ -107,19 +128,6 @@ export default new Vuex.Store({
     },
     cacheUpdateAt: (state) => (name) => {
       return state.cacheUpdateAt[name]
-    },
-    _getOrCreateAjaxStateObject: state => id => {
-      let found = state.ajax.states.find(value => value.id === id);
-      if (found) {
-        return found
-      } else {
-        let pushing = Object.create(null);
-        pushing.id = id;
-        pushing.pending = false;
-        pushing.error = null;
-        state.ajax.states.push(pushing);
-        return pushing
-      }
     }
   }
 })

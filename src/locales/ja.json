@@ -28,7 +28,8 @@
   },
   "meta": {
     "details": "詳細を見る",
-    "loading": "Now Loading...",
+    "loading": "読み込み中...",
+    "notfound": "¿¿¿",
     "footer": {
       "copyright": {
         "title": "利用許諾",
@@ -94,14 +95,14 @@
   "report": {
     "rules": {
       "item": {
-        "gte": "Quantity of \"{item}\" should ≥{quantity}",
-        "lte": "Quantity of \"{item}\" should ≤{quantity}",
-        "not": "Quantity of \"{item}\" should ≠{quantity}"
+        "gte": "\"{item}\" should ≥{quantity}",
+        "lte": "\"{item}\" should ≤{quantity}",
+        "not": "\"{item}\" should ≠{quantity}"
       },
       "type": {
-        "gte": "There should have at least {quantity} types of item in this stage",
-        "lte": "There should have at most {quantity} types of item in this stage",
-        "not": "There should not be {quantity} types of item in this stage"
+        "gte": "Should have at least {quantity} types",
+        "lte": "Should have at most {quantity} types",
+        "not": "Should not be {quantity} types"
       }
     }
   }

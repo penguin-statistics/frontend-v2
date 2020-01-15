@@ -160,7 +160,7 @@ Getters.trends = {
           temp[key] = {};
           temp[key]["results"] = trends[key]["results"][
             itemId
-          ];
+            ];
           temp[key]["interval"] = trends[key]["interval"];
           temp[key]["startTime"] = trends[key]["startTime"];
         }

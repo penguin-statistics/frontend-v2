@@ -2,10 +2,13 @@
   <div
     ref="background"
     class="random-background"
+    :style="{filter: blurred ? 'blur(5px)' : 'blur(0px)'}"
   />
 </template>
 
 <script>
+  import Console from "@/utils/Console";
+
   export default {
     name: "RandomBackground",
     props: {
@@ -29,6 +32,7 @@
         lastUrl: "",
         timer: null,
         webpSupport: null,
+        blurred: false,
         // TODO: Update image map.
         // [key] is a special "zoneId" to display a special "background image"
         // [value] represents a "background image url" on such route
@@ -39,13 +43,15 @@
       }
     },
     watch: {
-      "$route": "checkSpecialImage"
+      "$route": ["checkSpecialImage", "checkBlur"]
     },
     mounted () {
       this.updateBackgroundByRandom(true);
       this.timer = setInterval(() => {
         !this.lastLoading && this.updateBackgroundByRandom(false)
       }, 1000 * this.interval);
+
+      this.checkBlur(this.$route)
     },
     beforeDestroy () {
       clearInterval(this.timer)
@@ -53,6 +59,10 @@
     methods: {
       getImageUrl (id) {
         return `https://penguin-stats.s3.ap-southeast-1.amazonaws.com/backgrounds/${id}.${this.webpSupport ? 'webp' : 'optimized.png'}`
+      },
+      setBlur (flag) {
+        Console.info("setting blur to", flag)
+        this.blurred = flag
       },
       async testWebp() {
         return new Promise(res => {
@@ -70,14 +80,14 @@
           current = Math.floor(Math.random() * 70)
         }
         this.last = current;
-        // console.log(current)
+        // Console.log(current)
         if (this.webpSupport === null) {
           this.webpSupport = await this.testWebp();
         }
         return this.getImageUrl(current)
       },
       async updateBackgroundByRandom(ignoreUrl) {
-        // console.log("check at random", this.isSpecialUrl(this.$route), this.$route)
+        // Console.log("check at random", this.isSpecialUrl(this.$route), this.$route)
         let isSpecial = this.isSpecialUrl(this.$route);
         if (ignoreUrl || isSpecial === false) {
           this.updateBackgroundByUrl(await this.getRandomBackgroundUrl())
@@ -93,7 +103,7 @@
           .then((blob) => {
             let dataUrl = URL.createObjectURL(blob);
             background.style.backgroundImage = `url(${dataUrl})`;
-            // console.log(`created ${dataUrl} | revoking ${this.lastUrl}`)
+            // Console.log(`created ${dataUrl} | revoking ${this.lastUrl}`)
             !this.lastUrl && URL.revokeObjectURL(this.lastUrl);
             this.lastUrl = dataUrl
           })
@@ -118,6 +128,9 @@
           // we need to restore the last background image
           this.updateBackgroundByUrl(this.getImageUrl(this.last ? this.last : this.getRandomBackgroundUrl()))
         }
+      },
+      checkBlur(to) {
+        if (to && to.name) this.blurred = to.name === "ErrorNotFound";
       }
     }
   }
@@ -135,7 +148,7 @@
     background-position: bottom right;
     opacity: .75;
     filter: saturate(.5) drop-shadow(0 2px 5px rgba(0, 0, 0, .75));
-    transition: background-image 2s cubic-bezier(0.165, 0.84, 0.44, 1);
+    transition: background-image 1s cubic-bezier(0.165, 0.84, 0.44, 1), filter .225s cubic-bezier(0.165, 0.84, 0.44, 1);
     /*background-image: url("../assets/background/1.jpg");*/
     z-index: 0;
   }

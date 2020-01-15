@@ -1,5 +1,6 @@
 import service from './service'
 import store from '@/store'
+import Console from "@/utils/Console";
 /**
  * Object Life-cycle manager
  * Automatically fetch data when passed object's TTL and provide getter api
@@ -8,14 +9,12 @@ class ObjectManager {
   /** Creates a manager
    *
    * @param {string} api endpoint url that will be used to get the data from. the manager will send a GET request to the corresponding url
-   * @param {Function[]} transform transform functions that will be called in sequence and will transform the object using the return value of the functions
    * @param {number} ttl time-to-live (TTL), in milliseconds
    * @param {Object<Function, Function(Promise)>} ajaxHooks the first function will be called before sending the request, and the second function will be called after done receiving the request, with the request Promise as the argument
    */
   constructor({ name, api, ttl, ajaxHooks }) {
     this.name = name;
     this.api = api;
-
     this.ttl = ttl;
     this.ajaxHooks = ajaxHooks;
 
@@ -35,12 +34,11 @@ class ObjectManager {
    */
   get cacheValid() {
     let cacheUpdateAt = this.cache.updatedAt || store.getters.cacheUpdateAt(this.name)
-    console.debug("[debug]: ",
-      this.name,
-      "objectManager cache valid:",
-      cacheUpdateAt + this.ttl > Date.now(),
-      "|",
-      cacheUpdateAt, this.ttl, Date.now());
+    // Console.debug(this.name,
+    //   "objectManager cache valid:",
+    //   cacheUpdateAt + this.ttl > Date.now(),
+    //   "|",
+    //   cacheUpdateAt, this.ttl, Date.now());
     return cacheUpdateAt + this.ttl > Date.now()
   }
 
@@ -69,7 +67,7 @@ class ObjectManager {
           temp[context.name] = context.cache.data;
           let cacheUpdateAtTemp = {};
           cacheUpdateAtTemp[context.name] = context.cache.updatedAt;
-          console.log(`fetch new ${context.name} data${temp} at ${context.cache.updatedAt}`)
+          Console.debug(`fetched new ${context.name} data at ${context.cache.updatedAt}`)
           store.commit("store", temp);
           store.commit("storeCacheUpdateAt", cacheUpdateAtTemp);
           return context.cache.data

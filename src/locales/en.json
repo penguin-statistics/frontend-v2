@@ -27,8 +27,9 @@
     "v1": "Visit Old Version"
   },
   "meta": {
-    "details": "View Details",
+    "details": "Details",
     "loading": "Fetching application data...",
+    "notfound": "???",
     "footer": {
       "copyright": {
         "title": "License",
@@ -86,22 +87,22 @@
   },
   "fetch": {
     "failed": {
-      "title": "Failed to connect",
-      "subtitle": "Unable to establish synchronized connection with the neural network; missing partial resource.",
+      "title": "Failed to fetch resources",
+      "subtitle": "Unable to establish synchronized connection with neural network. Missing partial or all resources.",
       "retry": "Retry"
     }
   },
   "report": {
     "rules": {
       "item": {
-        "gte": "Quantity of \"{item}\" should ≥{quantity}",
-        "lte": "Quantity of \"{item}\" should ≤{quantity}",
-        "not": "Quantity of \"{item}\" should ≠{quantity}"
+        "gte": "\"{item}\" should ≥{quantity}",
+        "lte": "\"{item}\" should ≤{quantity}",
+        "not": "\"{item}\" should ≠{quantity}"
       },
       "type": {
-        "gte": "There should have at least {quantity} types of item in this stage",
-        "lte": "There should have at most {quantity} types of item in this stage",
-        "not": "There should not be {quantity} types of item in this stage"
+        "gte": "Should have at least {quantity} types",
+        "lte": "Should have at most {quantity} types",
+        "not": "Should not be {quantity} types"
       }
     }
   }

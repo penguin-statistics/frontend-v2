@@ -4,107 +4,6 @@
     :dark="dark"
   >
     <RandomBackground />
-    <v-dialog
-      :value="buildNotice && buildNoticeNotClosed"
-      max-width="600"
-      persistent
-    >
-      <v-card
-        class="white--text pa-4"
-        style="background: repeating-linear-gradient(-45deg, rgba(168, 128, 36, .6), rgba(168, 128, 36, .6) 45px, rgba(0, 0, 0, .8) 45px, rgba(0, 0, 0, .8) 90px)"
-      >
-        <v-card-title class="headline font-weight-black">
-          <v-icon left>
-            mdi-hammer
-          </v-icon> {{ $t('builds.development.title') }}
-        </v-card-title>
-
-        <v-card-text>
-          <p class="subheading font-weight-bold">
-            {{ $t('builds.development.description') }}
-          </p>
-        </v-card-text>
-
-        <v-card-actions>
-          <v-spacer />
-
-          <v-btn
-            color="green darken-1"
-            @click="nowBuildNoticeNotClosed = false"
-          >
-            {{ $t('builds.development.ok') }}
-          </v-btn>
-        </v-card-actions>
-      </v-card>
-    </v-dialog>
-    <v-dialog
-      v-model="$store.getters.ajaxErrors.length"
-      width="600"
-    >
-      <v-card>
-        <v-card-title
-          class="headline red"
-          primary-title
-        >
-          <v-icon>mdi-alert</v-icon>
-          <span class="ml-2">{{ $t('fetch.failed.title') }}</span>
-        </v-card-title>
-
-        <v-card-text class="pa-4">
-          <span class="subheading">
-            {{ $t('fetch.failed.subtitle') }}
-          </span>
-          <v-divider class="my-4" />
-          <v-expansion-panel>
-            <v-expansion-panel-content>
-              <template v-slot:header>
-                <div>{{ $t('meta.details') }}</div>
-              </template>
-              <v-list two-line>
-                <v-list-tile
-                  v-for="error in $store.getters.ajaxErrors"
-                  :key="error.id"
-                  avatar
-                >
-                  <v-list-tile-content>
-                    <v-list-tile-title>
-                      {{ error.id }}
-                    </v-list-tile-title>
-                    <v-list-tile-sub-title>
-                      {{ error.error }}
-                    </v-list-tile-sub-title>
-                  </v-list-tile-content>
-
-                  <v-list-tile-action>
-                    <v-progress-circular
-                      v-if="error.pending"
-                      indeterminate
-                    />
-                    <v-icon v-else>
-                      mdi-alert-circle-outline
-                    </v-icon>
-                  </v-list-tile-action>
-                </v-list-tile>
-              </v-list>
-            </v-expansion-panel-content>
-          </v-expansion-panel>
-        </v-card-text>
-
-        <v-card-actions>
-          <v-spacer />
-          <v-btn
-            flat
-            :loading="$store.getters.ajaxPending"
-            @click="refreshData"
-          >
-            <v-icon left>
-              mdi-database-refresh
-            </v-icon>
-            {{ $t('fetch.failed.retry') }}
-          </v-btn>
-        </v-card-actions>
-      </v-card>
-    </v-dialog>
     <v-navigation-drawer
       v-model="drawer"
       app
@@ -345,22 +244,7 @@
         </v-card>
       </v-dialog>
       <v-spacer />
-      <v-fade-transition>
-        <span
-          v-if="$store.getters.ajaxPending"
-        >
-          <v-progress-circular
-            indeterminate
-            color="accent"
-            class="mr-2"
-            :size="16"
-            :width="3"
-          />
-          <span>
-            {{ $t('meta.loading') }}
-          </span>
-        </span>
-      </v-fade-transition>
+      <NetworkStateIndicator />
     </v-footer>
   </v-app>
 </template>
@@ -368,10 +252,13 @@
 <script>
   import RandomBackground from '@/components/RandomBackground'
   import AccountManager from '@/components/AccountManager'
+  import NetworkStateIndicator from "@/components/widgets/NetworkStateIndicator";
+  import Console from "@/utils/Console";
 
 export default {
   name: 'App',
   components: {
+    NetworkStateIndicator,
     RandomBackground,
     AccountManager
   },
@@ -393,14 +280,10 @@ export default {
       ],
       prefetchingResources: false,
       drawer: !this.$vuetify.breakpoint.xsOnly,
-      buildNoticeNotClosed: true,
       showLicenseDialog: false
     }
   },
   computed: {
-    buildNotice () {
-      return process.env.NOW_GITHUB_DEPLOYMENT || process.env.CI_BUILD === "TRAVIS-CI"
-    },
     dark: {
       get () {
         return this.$store.state.settings.dark
@@ -414,15 +297,28 @@ export default {
     '$route': [
       'randomizeLogo',
       'logRouteEvent'
-    ]
+    ],
+    'dark': ['onDarkChange']
   },
   beforeMount() {
-    this.routes = this.$router.options.routes
+    this.routes = this.$router.options.routes.filter(el => !(el.meta.hide))
   },
   mounted () {
     this.randomizeLogo();
+    this.onDarkChange(this.$store.state.settings.dark);
   },
   methods: {
+    async refreshData () {
+      await this.$store.dispatch("fetchData", true);
+    },
+    onDarkChange (newValue) {
+      if (newValue) {
+        document.body.style.backgroundColor = "#303030"
+      } else {
+        document.body.style.backgroundColor = "#fafafa"
+      }
+    },
+
     onMenuItemClicked (route) {
       if (route.meta && route.meta.externalRedirect) {
         if (route.meta.ga) {
@@ -440,9 +336,6 @@ export default {
         this.$router.push({'name': route.name})
       }
     },
-    async refreshData () {
-      await this.$store.dispatch("fetchData", true);
-    },
     randomizeLogo () {
       let random = Math.random();
       this.randomizedLogo = random < .25 ? "https://penguin-stats.s3.ap-southeast-1.amazonaws.com/logos/penguin_stats_logo_exia.png"
@@ -456,7 +349,7 @@ export default {
     },
     logRouteEvent (newValue) {
       if (newValue.name === "StatsByStage_SelectedBoth") {
-        console.log(this.$store.state.dataSource, newValue.params.stageId);
+        Console.log(this.$store.state.dataSource, newValue.params.stageId);
         this.$ga.event('result', 'fetch_' + this.$store.state.dataSource, newValue.params.stageId, 1)
       } else if (newValue.name === "StatsByItem_SelectedItem") {
         this.$ga.event('result', 'fetch_' + this.$store.state.dataSource, newValue.params.itemId, 1)
@@ -534,6 +427,15 @@ export default {
 
   .v-navigation-drawer::-webkit-scrollbar-thumb {
     background-color: rgb(200, 200, 200);
+  }
+
+  .v-toolbar {
+    padding-top: env(safe-area-inset-top);
+  }
+
+  .v-footer {
+    height: calc(32px + env(safe-area-inset-bottom)) !important;
+    padding-bottom: calc(env(safe-area-inset-bottom));
   }
 
 </style>
