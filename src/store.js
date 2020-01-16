@@ -6,7 +6,7 @@ import itemsManager from '@/models/items'
 import limitationsManager from '@/models/limitations'
 import stagesManager from '@/models/stages'
 import zonesManager from '@/models/zones'
-import trendsManager from '@/models/trends'
+// import trendsManager from '@/models/trends'
 import globalMatrixManager from '@/models/matrices/globalMatrix'
 import personalMatrixManager from '@/models/matrices/personalMatrix'
 
