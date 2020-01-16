@@ -22,7 +22,7 @@ class MatrixObjectManager extends ObjectManager {
             el.apPPR = (stage.apCost / el.percentage).toFixed(2);
           });
 
-          return Object.freeze(object)
+          return object
         }
       ],
       ttl,

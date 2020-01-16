@@ -33,7 +33,7 @@
       }
     },
     "en": {
-      "opensAt": "Opens At: {0} - {1}",
+      "opensAt": "Opens at: {0} - {1}",
       "zone": {
         "name": "Zone",
         "types": {
@@ -225,7 +225,7 @@
           class="py-0"
         >
           <v-list
-            :three-line="!small"
+            three-line
             subheader
             class="transparent"
           >
@@ -281,45 +281,45 @@
                       />
                     </v-flex>
 
-                    <v-divider
-                      v-if="stage.extraDrop.length > 0"
-                      vertical
-                      class="hidden-sm-and-down mx-1"
-                    />
+                    <!--                    <v-divider-->
+                    <!--                      v-if="stage.extraDrop.length > 0"-->
+                    <!--                      vertical-->
+                    <!--                      class="hidden-sm-and-down mx-1"-->
+                    <!--                    />-->
 
-                    <v-flex
-                      v-if="stage.extraDrop.length > 0"
-                      class="hidden-sm-and-down"
-                    >
-                      <div>{{ $t('stage.loots.extra') }}</div>
-                      <Item
-                        v-for="item in stage.extraDrop"
-                        :key="`extra_${item}`"
-                        :item="getItem(item)"
-                        :ratio="0.6"
-                        disable-link
-                      />
-                    </v-flex>
+                    <!--                    <v-flex-->
+                    <!--                      v-if="stage.extraDrop.length > 0"-->
+                    <!--                      class="hidden-sm-and-down"-->
+                    <!--                    >-->
+                    <!--                      <div>{{ $t('stage.loots.extra') }}</div>-->
+                    <!--                      <Item-->
+                    <!--                        v-for="item in stage.extraDrop"-->
+                    <!--                        :key="`extra_${item}`"-->
+                    <!--                        :item="getItem(item)"-->
+                    <!--                        :ratio="0.6"-->
+                    <!--                        disable-link-->
+                    <!--                      />-->
+                    <!--                    </v-flex>-->
 
-                    <v-divider
-                      v-if="stage.specialDrop.length > 0"
-                      vertical
-                      class="hidden-sm-and-down mx-1"
-                    />
+                    <!--                    <v-divider-->
+                    <!--                      v-if="stage.specialDrop.length > 0"-->
+                    <!--                      vertical-->
+                    <!--                      class="hidden-sm-and-down mx-1"-->
+                    <!--                    />-->
 
-                    <v-flex
-                      v-if="stage.specialDrop.length > 0"
-                      class="hidden-sm-and-down"
-                    >
-                      <div>{{ $t('stage.loots.special') }}</div>
-                      <Item
-                        v-for="item in stage.specialDrop"
-                        :key="`special_${item}`"
-                        :item="getItem(item)"
-                        :ratio="0.6"
-                        disable-link
-                      />
-                    </v-flex>
+                    <!--                    <v-flex-->
+                    <!--                      v-if="stage.specialDrop.length > 0"-->
+                    <!--                      class="hidden-sm-and-down"-->
+                    <!--                    >-->
+                    <!--                      <div>{{ $t('stage.loots.special') }}</div>-->
+                    <!--                      <Item-->
+                    <!--                        v-for="item in stage.specialDrop"-->
+                    <!--                        :key="`special_${item}`"-->
+                    <!--                        :item="getItem(item)"-->
+                    <!--                        :ratio="0.6"-->
+                    <!--                        disable-link-->
+                    <!--                      />-->
+                    <!--                    </v-flex>-->
                   </v-layout>
                 </v-list-tile-sub-title>
               </v-list-tile-content>

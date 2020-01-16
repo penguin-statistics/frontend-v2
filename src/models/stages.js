@@ -9,7 +9,7 @@ const stages = new ObjectManager({
       object.forEach(el => {
         el.dropsSet = [...el.normalDrop, ...el.extraDrop, ...el.specialDrop]
       });
-      return Object.freeze(object)
+      return object
     }
   ],
   ttl: 1000 * 60 * 60 * 1, // 1 hours

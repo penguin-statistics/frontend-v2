@@ -30,12 +30,12 @@ const items = new ObjectManager({
       };
 
       object.forEach(el => {
-        el.meta = Object.freeze(META_MAP[el.itemType])
+        el.meta = META_MAP[el.itemType]
       });
 
       object.sort((a, b) => a.sortId - b.sortId)
 
-      return Object.freeze(object)
+      return object
     },
   ],
   ttl: 1000 * 60 * 60, // 1 hours

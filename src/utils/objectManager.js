@@ -16,7 +16,7 @@ class ObjectManager {
   constructor({ name, api, transform, ttl, ajaxHooks }) {
     this.name = name;
     this.api = api;
-    this.transform = transform ? transform : [object => Object.freeze(object)];
+    this.transform = transform ? transform : [object => object];
     this.ttl = ttl;
     this.ajaxHooks = ajaxHooks;
 

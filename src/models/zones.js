@@ -26,7 +26,7 @@ const zones = new ObjectManager({
           el.isOutdated = formatter.isOutdated(el.closeTime)
         }
       });
-      return Object.freeze(object)
+      return object
     }
   ],
   ttl: 1000 * 60 * 60 * 1, // 1 hours
