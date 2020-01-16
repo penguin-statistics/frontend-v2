@@ -72,7 +72,7 @@ export default new Vuex.Store({
       await limitationsManager.get(refresh);
       await stagesManager.get(refresh);
       await zonesManager.get(refresh);
-      await trendsManager.get(refresh);
+      // await trendsManager.get(refresh);
       await globalMatrixManager.get(refresh);
       await personalMatrixManager.get(refresh)
     },

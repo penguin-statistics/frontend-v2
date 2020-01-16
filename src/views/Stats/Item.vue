@@ -116,9 +116,7 @@
                 >
                   <Item
                     :item="item"
-                    :ratio="0.75"
                     disable-link
-                    disable-tooltip
                   />
                 </v-avatar>
               </div>
@@ -137,7 +135,6 @@
               <Item
                 v-if="selected.item"
                 :item="selected.item"
-                :ratio="0.75"
                 disable-tooltip
                 disable-link
               />
@@ -264,7 +261,7 @@ export default {
   computed: {
     selected() {
       return {
-        item: get.item.byItemId(this.$route.params.itemId)
+        item: get.items.byItemId(this.$route.params.itemId)
       };
     },
     currentItemTrends() {
@@ -312,7 +309,7 @@ export default {
       ];
     },
     categorizedItems() {
-      let all = get.item.all();
+      let all = get.items.all();
       const categories = ["MATERIAL", "CARD_EXP", "FURN", "ACTIVITY_ITEM"];
       let results = {};
       for (let category of categories) {
@@ -371,7 +368,7 @@ export default {
   },
   beforeMount() {
     this.$route.params.itemId &&
-      (this.selected.item = get.item.byItemId(this.$route.params.itemId)) &&
+      (this.selected.item = get.items.byItemId(this.$route.params.itemId)) &&
       (this.step += 1);
   },
   methods: {

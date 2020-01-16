@@ -1,10 +1,14 @@
 <template>
-  <span>
+  <span
+    :class="{ 'cursor-pointer': !disableLink }"
+    @click="redirectItemPage"
+  >
     <v-tooltip
       v-if="!disableTooltip"
-      :open-delay="200"
+      :open-delay="100"
+      :nudge-top="10"
+
       bottom
-      content-class="elevation-0 transparent"
       lazy
     >
       <template v-slot:activator="{ on }">
@@ -12,39 +16,24 @@
           <ItemIcon
             :item="item"
             :ratio="ratio"
-            :disable-link="disableLink"
-            :disable-tooltip="true"
+            :disable-tooltip="disableTooltip"
           />
         </span>
       </template>
-      <v-card>
-        <v-card-title>
-          <h1 class="mr-2">{{ item.name }}</h1>
-
-          <v-chip
-            :color="item.meta.color"
-            text-color="black"
-          >
-            <v-avatar>
-              <v-icon>{{ item.meta.icon }}</v-icon>
-            </v-avatar>
-            {{ item.meta.name }}
-          </v-chip>
-        </v-card-title>
-      </v-card>
+      <span>{{ item.name }}</span>
     </v-tooltip>
-    <ItemIcon
-      v-if="disableTooltip"
-      :item="item"
-      :ratio="ratio"
-      :disable-link="disableLink"
-      :disable-tooltip="false"
-    />
+    <span v-if="disableTooltip">
+      <ItemIcon
+        :item="item"
+        :ratio="ratio"
+        :disable-tooltip="disableTooltip"
+      />
+    </span>
   </span>
 </template>
 
 <script>
-  import ItemIcon from '@/components/ItemIcon'
+  import ItemIcon from "@/components/ItemIcon";
   export default {
     name: "Item",
     components: {ItemIcon},
@@ -55,22 +44,43 @@
       },
       ratio: {
         type: Number,
-        default () {
-          return 1
+        default() {
+          return 0.75;
         }
       },
       disableTooltip: {
         type: Boolean,
-        default () {
-          return false
+        default() {
+          return false;
         }
       },
       disableLink: {
         type: Boolean,
-        default () {
-          return false
+        default() {
+          return false;
+        }
+      }
+    },
+    data() {
+      return {
+        showTooltip: false
+      };
+    },
+    methods: {
+      redirectItemPage() {
+        if (!this.disableLink) {
+          this.showTooltip = false;
+          this.$router.push({
+            name: "StatsByItem_SelectedItem",
+            params: {
+              itemId: this.item.itemId
+            }
+          });
         }
       }
     }
-  }
+  };
 </script>
+
+<style scoped>
+</style>

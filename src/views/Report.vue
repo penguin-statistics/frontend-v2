@@ -176,7 +176,6 @@
         <v-icon>mdi-close</v-icon>
       </v-btn>
     </v-snackbar>
-
     <v-snackbar
       v-model="undoed"
       color="success"
@@ -192,323 +191,98 @@
     </v-snackbar>
     <v-layout align-center>
       <v-flex>
-        <v-stepper
-          v-model="step"
-          class="bkop-light transparent"
-          :alt-labels="!$vuetify.breakpoint.xsOnly"
+        <StageSelector
+          name="report.name"
+          :prefill="prefill"
+          hide-closed
+          @selected="select"
         >
-          <v-stepper-header>
-            <v-stepper-step
-              :complete="step > 1"
-              :editable="step > 1"
-              :step="1"
+          <v-alert
+            :value="true"
+            color="warning"
+            class="mb-3"
+          >
+            <ol>
+              <li>{{ $t('rules.rule_1') }}</li>
+              <li>{{ $t('rules.rule_2') }}</li>
+              <li>{{ $t('rules.rule_3') }}</li>
+              <li>{{ $t('rules.rule_4') }}</li>
+              <li>{{ $t('rules.rule_5') }}</li>
+            </ol>
+          </v-alert>
+
+          <v-container v-if="!$vuetify.breakpoint.smAndDown">
+            {{ $t('usage') }}
+          </v-container>
+
+          <v-container
+            v-for="stage in stageItems"
+            :key="stage.id"
+            fluid
+            grid-list-sm
+            class="py-0"
+          >
+            <v-subheader>
+              {{ $t('stage.loots.' + stage.id) }}
+            </v-subheader>
+            <v-flex
+              v-for="item in stage.drops"
+              :key="item.itemId"
+              class="py-1 px-2 d-inline-block"
+              xs12
+              sm6
+              md4
+              lg3
+              xl2
+            >
+              <!--                  <h5 class="title mb-3">-->
+              <!--                    {{ item.name }}-->
+              <!--                  </h5>-->
+              <ItemStepper
+                :item="item"
+                :bus="eventBus"
+                @change="handleChange"
+              />
+            </v-flex>
+          </v-container>
+
+          <v-flex class="pa-4">
+            <v-switch
+              v-model="furniture"
+              :label="$t('report.furniture', {state: $t(`hasNorNot.${furniture}`)})"
+            />
+
+            <v-flex
+              xs12
+              sm8
             >
               <v-layout
-                column
-                align-center
-                justify-center
+                row
                 wrap
-                class="text-xs-center"
+                justify-space-around
               >
-                {{ $t('zone.name') }}
-                <small v-if="step > 1">{{ selectedZone.zoneName }}</small>
+                <v-btn
+                  large
+                  round
+                  color="error"
+                  @click="reset"
+                >
+                  {{ $t('report.clear') }}
+                </v-btn>
+
+                <v-btn
+                  large
+                  round
+                  color="primary"
+                  :loading="submitting"
+                  @click="submit"
+                >
+                  {{ $t('report.submit') }}
+                </v-btn>
               </v-layout>
-            </v-stepper-step>
-
-            <v-divider />
-
-            <v-stepper-step
-              :complete="step > 2"
-              :editable="step > 2"
-              :step="2"
-            >
-              <v-layout
-                column
-                align-center
-                justify-center
-                wrap
-                class="text-xs-center"
-              >
-                {{ $t('stage.name') }}
-                <small v-if="step > 2">{{ selectedStage.code }}</small>
-              </v-layout>
-            </v-stepper-step>
-
-            <v-divider />
-
-            <v-stepper-step
-              :complete="step === 3"
-              :step="3"
-            >
-              <v-layout
-                column
-                align-center
-                justify-center
-                wrap
-                class="text-xs-center"
-              >
-                {{ $t('report.name') }}
-              </v-layout>
-            </v-stepper-step>
-          </v-stepper-header>
-
-          <v-stepper-items>
-            <v-stepper-content :step="1">
-              <v-container
-                fluid
-                grid-list-lg
-                class="py-0"
-              >
-                <v-list
-                  v-for="zoneCategory in categorizedZones"
-                  :key="zoneCategory.id"
-                  subheader
-                  class="transparent"
-                >
-                  <v-subheader inset>
-                    {{ $t(['zone.types', zoneCategory.id].join('.')) }}
-                  </v-subheader>
-
-                  <v-list-tile
-                    v-for="zone in zoneCategory.zones"
-                    :key="zone.zoneId"
-                    v-ripple
-                    :disabled="zone.isOutdated"
-                    avatar
-                    @click="storeZoneSelection(zone.zoneId)"
-                  >
-                    <v-list-tile-avatar>
-                      <v-icon>{{ zone.icon }}</v-icon>
-                    </v-list-tile-avatar>
-
-                    <v-list-tile-content>
-                      <v-list-tile-title>{{ zone.zoneName }}</v-list-tile-title>
-                      <v-list-tile-sub-title v-if="zone.isActivity">
-                        <span
-                          :class="{ 'text--darken-1 font-weight-bold': true, 'red--text': zone.isOutdated, 'green--text': !zone.isOutdated }"
-                        >{{ zone.isOutdated ? $t('zone.status.closed') : $t('zone.status.open') }}</span>
-                        {{ $t('opensAt', zone.activityActiveTime) }}
-                      </v-list-tile-sub-title>
-                    </v-list-tile-content>
-
-                    <v-list-tile-action>
-                      <v-icon color="grey lighten-1">
-                        mdi-chevron-right
-                      </v-icon>
-                    </v-list-tile-action>
-                  </v-list-tile>
-                </v-list>
-              </v-container>
-            </v-stepper-content>
-
-            <v-stepper-content
-              v-if="selected.zone"
-              :step="2"
-            >
-              <v-container
-                fluid
-                grid-list-lg
-                class="py-0"
-              >
-                <v-list
-                  subheader
-                  :three-line="$vuetify.breakpoint.smAndUp"
-                  class="transparent"
-                >
-                  <v-subheader
-                    v-if="selectedZone"
-                    inset
-                  >
-                    {{ selectedZone.zoneName || '' }}
-                  </v-subheader>
-
-                  <v-list-tile
-                    v-for="stage in stages"
-                    :key="stage.stageId"
-                    v-ripple
-                    avatar
-                    @click="storeStageSelection(stage.stageId)"
-                  >
-                    <v-list-tile-avatar>
-                      <v-icon>mdi-cube-outline</v-icon>
-                    </v-list-tile-avatar>
-
-                    <v-list-tile-content>
-                      <v-list-tile-title>{{ stage.code }}</v-list-tile-title>
-                      <v-list-tile-sub-title>
-                        <v-layout
-                          align-center
-                          justify-start
-                          row
-                          wrap
-                          d-inline-flex
-                        >
-                          <v-flex :class="{ 'yellow--text font-weight-bold': true, 'amber--text text--darken-4': !$vuetify.dark }">
-                            {{ $t('stage.apCost', {apCost: stage.apCost}) }}
-                          </v-flex>
-
-                          <v-divider
-                            v-if="stage.normalDrop.length > 0"
-                            vertical
-                            class="hidden-xs-only mx-1"
-                          />
-
-                          <v-flex
-                            v-if="stage.normalDrop.length > 0"
-                            class="hidden-xs-only"
-                          >
-                            <div>{{ $t('stage.loots.normal') }}</div>
-                            <Item
-                              v-for="item in stage.normalDrop"
-                              :key="`normal_${item}`"
-                              :item="getItem(item)"
-                              :ratio="0.6"
-                              disable-link
-                            />
-                          </v-flex>
-
-                          <v-divider
-                            v-if="stage.extraDrop.length > 0"
-                            vertical
-                            class="hidden-sm-and-down mx-1"
-                          />
-
-                          <v-flex
-                            v-if="stage.extraDrop.length > 0"
-                            class="hidden-sm-and-down"
-                          >
-                            <div>{{ $t('stage.loots.extra') }}</div>
-                            <Item
-                              v-for="item in stage.extraDrop"
-                              :key="`extra_${item}`"
-                              :item="getItem(item)"
-                              :ratio="0.6"
-                              disable-link
-                            />
-                          </v-flex>
-
-                          <v-divider
-                            v-if="stage.specialDrop.length > 0"
-                            vertical
-                            class="hidden-sm-and-down mx-1"
-                          />
-
-                          <v-flex
-                            v-if="stage.specialDrop.length > 0"
-                            class="hidden-sm-and-down"
-                          >
-                            <div>{{ $t('stage.loots.special') }}</div>
-                            <Item
-                              v-for="item in stage.specialDrop"
-                              :key="`special_${item}`"
-                              :item="getItem(item)"
-                              :ratio="0.6"
-                              disable-link
-                            />
-                          </v-flex>
-                        </v-layout>
-                      </v-list-tile-sub-title>
-                    </v-list-tile-content>
-
-                    <v-list-tile-action>
-                      <v-icon color="grey lighten-1">
-                        mdi-chevron-right
-                      </v-icon>
-                    </v-list-tile-action>
-                  </v-list-tile>
-                </v-list>
-              </v-container>
-            </v-stepper-content>
-
-            <v-stepper-content :step="3">
-              <v-alert
-                :value="true"
-                color="warning"
-                class="mb-3"
-              >
-                <ol>
-                  <li>{{ $t('rules.rule_1') }}</li>
-                  <li>{{ $t('rules.rule_2') }}</li>
-                  <li>{{ $t('rules.rule_3') }}</li>
-                  <li>{{ $t('rules.rule_4') }}</li>
-                  <li>{{ $t('rules.rule_5') }}</li>
-                </ol>
-              </v-alert>
-
-              <v-container v-if="!$vuetify.breakpoint.smAndDown">
-                {{ $t('usage') }}
-              </v-container>
-
-              <v-container
-                v-for="stage in stageItems"
-                :key="stage.id"
-                fluid
-                grid-list-sm
-                class="py-0"
-              >
-                <v-subheader>
-                  {{ $t('stage.loots.' + stage.id) }}
-                </v-subheader>
-                <v-flex
-                  v-for="item in stage.drops"
-                  :key="item.itemId"
-                  class="py-1 px-2 d-inline-block"
-                  xs12
-                  sm6
-                  md4
-                  lg3
-                  xl2
-                >
-                  <!--                  <h5 class="title mb-3">-->
-                  <!--                    {{ item.name }}-->
-                  <!--                  </h5>-->
-                  <ItemStepper
-                    :item="item"
-                    :bus="eventBus"
-                    @change="handleChange"
-                  />
-                </v-flex>
-              </v-container>
-
-              <v-flex class="pa-4">
-                <v-switch
-                  v-model="furniture"
-                  :label="$t('report.furniture', {state: $t(`hasNorNot.${furniture}`)})"
-                />
-
-                <v-flex
-                  xs12
-                  sm8
-                >
-                  <v-layout
-                    row
-                    wrap
-                    justify-space-around
-                  >
-                    <v-btn
-                      large
-                      round
-                      color="error"
-                      @click="reset"
-                    >
-                      {{ $t('report.clear') }}
-                    </v-btn>
-
-                    <v-btn
-                      large
-                      round
-                      color="primary"
-                      :loading="submitting"
-                      @click="submit"
-                    >
-                      {{ $t('report.submit') }}
-                    </v-btn>
-                  </v-layout>
-                </v-flex>
-              </v-flex>
-            </v-stepper-content>
-          </v-stepper-items>
-        </v-stepper>
+            </v-flex>
+          </v-flex>
+        </StageSelector>
       </v-flex>
     </v-layout>
 
@@ -696,12 +470,12 @@
   import Vue from "vue";
   import Cookies from 'js-cookie';
   import Console from "@/utils/Console";
+  import StageSelector from "@/components/StageSelector";
 
   export default {
     name: "Report",
-    components: {ItemStepper, Item},
+    components: {StageSelector, ItemStepper, Item},
     data: () => ({
-      step: 1,
       snackbar: false,
       submitting: false,
       undoing: false,
@@ -719,39 +493,21 @@
         repeat: {
           enabled: false
         }
+      },
+      selected: {
+        zone: null,
+        stage: null,
       }
     }),
     computed: {
-      selected() {
-        return {
-          zone: this.$route.params.zoneId,
-          stage: this.$route.params.stageId
-        };
-      },
-      categorizedZones() {
-        const categories = ["ACTIVITY", "MAINLINE", "WEEKLY"]; // in the report page we want activity to be the first
-        let result = [];
-        for (let category of categories) {
-          let zones = get.zones.byType(category).filter(zone => !zone.isOutdated);
-          if (zones && zones.length) {
-            result.push({
-              id: category,
-              zones: zones
-            })
-          }
-        }
-        return result
-      },
-      selectedZone() {
-        if (!this.selected.zone) return {zoneName: ''};
-        return get.zones.byZoneId(this.selected.zone)
-      },
-      selectedStage() {
-        if (!this.selected.stage) return {};
-        return get.stages.byStageId(this.selected.stage)
-      },
-      stages() {
-        return get.stages.byParentZoneId(this.selected.zone)
+      prefill () {
+        let prefills = {};
+        const params = this.$route.params;
+
+        if (params.zoneId) prefills.zone = params.zoneId
+        if (params.stageId) prefills.stage = params.stageId
+
+        return prefills
       },
       stageItems () {
         if (!this.selected.stage) return [];
@@ -776,7 +532,7 @@
 
           let drops = [];
           for (let drop of dropIds) {
-            drops.push(get.item.byItemId(drop))
+            drops.push(get.items.byItemId(drop))
           }
 
           items.push({
@@ -786,6 +542,7 @@
         }
         return items
       },
+
       /**
        * @typedef {{lower: number, upper: number, exceptions: number[]}} Limitation
        * @typedef {{id: string, quantity: number, limitation: Limitation, rate: number, message: string}} ItemOutlier
@@ -889,36 +646,29 @@
         return this.submitted && this.$store.getters.authed
       }
     },
-    watch: {
-      $route: function(to, from) {
-        Console.log("step route changed from", from.path, "to", to.path);
-        if (to.name === "ReportByZone") {
-          this.step = 1;
-        }
-        if (to.name === "ReportByZone_SelectedZone") {
-          this.step = 2;
-        }
-        if (to.name === "ReportByZone_SelectedStage") {
-          this.step = 3;
-        }
+    methods: {
+      goToPage(name) {
+        this.$router.push({ name: name })
       },
-      step: function(newValue, oldValue) {
-        Console.log("step changed from", oldValue, "to", newValue);
-        this.reset();
-        switch (newValue) {
-          case 1:
-            Console.log("- [router go] index");
-            this.$router.push({ name: "ReportByZone" });
-            break;
-          case 2:
-            Console.log("- [router go] zone", this.selected.zone);
+      select (selection) {
+        this.selected[selection.type] = selection.payload;
+
+        Console.debug(selection)
+
+        if (this.selected.zone === null) {
+          if (this.selected.stage === null) {
+            Console.debug("report - [router go] index");
+            this.$router.push({name: "ReportByZone"});
+          }
+        } else {
+          if (this.selected.stage === null) {
+            Console.debug("report - [router go] zone", this.selected.zone);
             this.$router.push({
               name: "ReportByZone_SelectedZone",
-              params: { zoneId: this.selected.zone }
+              params: {zoneId: this.selected.zone}
             });
-            break;
-          case 3:
-            Console.log("- [router go] stage", this.selected);
+          } else {
+            Console.debug("- [router go] stage", this.selected);
             this.$router.push({
               name: "ReportByZone_SelectedStage",
               params: {
@@ -926,47 +676,11 @@
                 stageId: this.selected.stage
               }
             });
-            break;
-          default:
-            Console.error(
-              "unexpected step number",
-              newValue,
-              "with [newStep, oldStep]",
-              [newValue, oldValue]
-            );
-        }
-      }
-    },
-    beforeMount() {
-      this.$route.params.zoneId &&
-        (this.selected.zone = this.$route.params.zoneId) &&
-        (this.step += 1);
-      this.$route.params.stageId &&
-        (this.selected.stage = this.$route.params.stageId) &&
-        (this.step += 1);
-    },
-    methods: {
-      goToPage(name) {
-        this.$router.push({ name: name })
-      },
-      storeZoneSelection(zoneId) {
-        this.$router.push({
-          name: "ReportByZone_SelectedZone",
-          params: { zoneId: zoneId }
-        });
-      },
-      storeStageSelection(stageId) {
-        this.reset();
-        this.$router.push({
-          name: "ReportByZone_SelectedStage",
-          params: {
-            zoneId: this.selected.zone,
-            stageId: stageId
           }
-        });
+        }
       },
       getItem(itemId) {
-        return get.item.byItemId(itemId)
+        return get.items.byItemId(itemId)
       },
       handleChange ([itemId, diff]) {
         let item = this.getOrCreateItem(itemId);
