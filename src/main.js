@@ -29,8 +29,7 @@ if (production) {
   });
 }
 
-router.beforeEach(async(to, from, next) => {
-  await store.dispatch("fetchData", false);
+router.beforeEach((to, from, next) => {
   document.title = `${I18n.t(to.meta.i18n)} | ${I18n.t('app.name')}`;
   next();
 });

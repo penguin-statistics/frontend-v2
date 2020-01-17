@@ -40,8 +40,8 @@ export default new Vuex.Store({
     dataSource: 'global'
   },
   mutations: {
-    store: (state, d) => {
-      state.data = Object.assign(state.data, d);
+    store: (state, {key, value}) => {
+      Vue.set(state.data, key, value)
     },
     storeCacheUpdateAt: (state, d) => {
       state.cacheUpdateAt = Object.assign(state.cacheUpdateAt, d);

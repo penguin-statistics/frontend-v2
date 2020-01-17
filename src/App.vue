@@ -302,6 +302,7 @@ export default {
   },
   beforeMount() {
     this.routes = this.$router.options.routes.filter(el => !(el.meta.hide))
+    this.$store.dispatch("fetchData", false)
   },
   mounted () {
     this.randomizeLogo();

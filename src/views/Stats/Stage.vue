@@ -187,17 +187,17 @@
                 class="charts-wrapper cursor-pointer"
                 fill-height
               >
-                <Charts
-                  v-if="currentTrends"
-                  :interval="currentTrends && currentTrends.interval"
-                  :x-start="currentTrends && currentTrends.startTime"
-                  :show-dialog="expanded[props.item.item.itemId]"
-                  :data-keys="['quantity']"
-                  :data="currentTrendsData && currentTrendsData[props.item.item.itemId]"
-                  :charts-id="props.item.item.itemId"
-                  sparkline-key="quantity"
-                  sparkline-sub-key="times"
-                />
+                <!--                <Charts-->
+                <!--                  v-if="currentTrends"-->
+                <!--                  :interval="currentTrends && currentTrends.interval"-->
+                <!--                  :x-start="currentTrends && currentTrends.startTime"-->
+                <!--                  :show-dialog="expanded[props.item.item.itemId]"-->
+                <!--                  :data-keys="['quantity']"-->
+                <!--                  :data="currentTrendsData && currentTrendsData[props.item.item.itemId]"-->
+                <!--                  :charts-id="props.item.item.itemId"-->
+                <!--                  sparkline-key="quantity"-->
+                <!--                  sparkline-sub-key="times"-->
+                <!--                />-->
               </div>
             </div>
           </td>
@@ -216,14 +216,13 @@
 <script>
 import get from "@/utils/getters";
 import Item from "@/components/Item";
-import Charts from "@/components/Charts";
 import DataSourceToggle from "@/components/DataSourceToggle";
 import Console from "@/utils/Console";
 import StageSelector from "@/components/StageSelector";
 
 export default {
   name: "StatsByStage",
-  components: {StageSelector, Item, Charts, DataSourceToggle },
+  components: {StageSelector, Item, DataSourceToggle },
   data: () => ({
     expanded: {},
     selected: {

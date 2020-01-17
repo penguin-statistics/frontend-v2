@@ -79,9 +79,7 @@ class ObjectManager {
           data = context._transform(data)
           context.cache = data
 
-          let storingData = {};
-          storingData[context.name] = data;
-          store.commit("store", storingData);
+          store.commit("store", {key: context.name, value: data});
 
           const now = Date.now();
 

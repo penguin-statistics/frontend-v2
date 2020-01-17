@@ -212,17 +212,17 @@
                   class="charts-wrapper cursor-pointer"
                   fill-height
                 >
-                  <Charts
-                    v-if="getStageItemTrend(props.item.stage.stageId)"
-                    :interval="getStageItemTrendInterval(props.item.stage.stageId)"
-                    :x-start="getStageItemTrendStartTime(props.item.stage.stageId)"
-                    :show-dialog="expanded[props.item.stage.stageId]"
-                    :data-keys="['quantity']"
-                    :data="getStageItemTrendResults(props.item.stage.stageId)"
-                    :charts-id="props.item.stage.stageId"
-                    sparkline-key="quantity"
-                    sparkline-sub-key="times"
-                  />
+                  <!--                  <Charts-->
+                  <!--                    v-if="getStageItemTrend(props.item.stage.stageId)"-->
+                  <!--                    :interval="getStageItemTrendInterval(props.item.stage.stageId)"-->
+                  <!--                    :x-start="getStageItemTrendStartTime(props.item.stage.stageId)"-->
+                  <!--                    :show-dialog="expanded[props.item.stage.stageId]"-->
+                  <!--                    :data-keys="['quantity']"-->
+                  <!--                    :data="getStageItemTrendResults(props.item.stage.stageId)"-->
+                  <!--                    :charts-id="props.item.stage.stageId"-->
+                  <!--                    sparkline-key="quantity"-->
+                  <!--                    sparkline-sub-key="times"-->
+                  <!--                  />-->
                 </div>
               </div>
             </td>
@@ -242,13 +242,12 @@
 <script>
 import get from "@/utils/getters";
 import Item from "@/components/Item";
-import Charts from "@/components/Charts";
 import DataSourceToggle from "@/components/DataSourceToggle";
 import Console from "@/utils/Console";
 
 export default {
   name: "StatsByItem",
-  components: { Item, Charts, DataSourceToggle },
+  components: { Item, DataSourceToggle },
   data: () => ({
     expanded: {},
     step: 1,

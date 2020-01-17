@@ -119,7 +119,7 @@
           class="text-xs-center"
         >
           {{ $t('zone.name') }}
-          <small v-if="step > 1">{{ selectedZone.zoneName }}</small>
+          <small v-if="step > 1">{{ selectedZone.zoneName || '' }}</small>
         </v-layout>
       </v-stepper-step>
 
@@ -138,7 +138,7 @@
           class="text-xs-center"
         >
           {{ $t('stage.name') }}
-          <small v-if="step > 2">{{ selectedStage.code }}</small>
+          <small v-if="step > 2">{{ selectedStage.code || '' }}</small>
         </v-layout>
       </v-stepper-step>
 
@@ -198,7 +198,7 @@
                       'green--text': !zone.isOutdated }"
                   >
                     {{ zone.isOutdated ? $t('zone.status.closed') : $t('zone.status.open') }}
-                  </span> {{ zone.zoneName }}
+                  </span> {{ zone.zoneName || '' }}
                 </v-list-tile-title>
                 <v-list-tile-sub-title v-if="zone.isActivity">
                   {{ !small ? `${$t('opensAt', zone.activityActiveTime)}` : null }}
@@ -248,7 +248,7 @@
               </v-list-tile-avatar>
 
               <v-list-tile-content>
-                <v-list-tile-title>{{ stage.code }}</v-list-tile-title>
+                <v-list-tile-title>{{ stage.code || '' }}</v-list-tile-title>
                 <v-list-tile-sub-title>
                   <v-layout
                     align-center
@@ -401,8 +401,9 @@
         return result;
       },
       selectedZone() {
-        if (!this.selected.zone) return { zoneName: "" };
-        return get.zones.byZoneId(this.selected.zone);
+        const fallback = { zoneName: "" };
+        if (!this.selected.zone) return fallback;
+        return get.zones.byZoneId(this.selected.zone) || fallback;
       },
       selectedStage() {
         if (!this.selected.stage) return {};
