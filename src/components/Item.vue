@@ -20,7 +20,7 @@
           />
         </span>
       </template>
-      <span>{{ item.name }}</span>
+      <span>{{ name }}</span>
     </v-tooltip>
     <span v-if="disableTooltip">
       <ItemIcon
@@ -66,6 +66,17 @@
         showTooltip: false
       };
     },
+    computed: {
+      name() {
+        if (this.item["name_i18n"]) {
+          return this.item["name_i18n"][this.$i18n.locale] || ""
+        } else if (this.item) {
+          return this.item.name
+        } else {
+          return ""
+        }
+      }
+    },
     methods: {
       redirectItemPage() {
         if (!this.disableLink) {
@@ -78,7 +89,7 @@
           });
         }
       }
-    }
+    },
   };
 </script>
 

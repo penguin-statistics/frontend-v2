@@ -13,7 +13,7 @@ function getIcon (key) {
 
 const zones = new ObjectManager({
   name: 'zones',
-  api: '/zones',
+  api: '/zones?i18n=true',
   transform: [
     (object) => {
       object.forEach((el) => {

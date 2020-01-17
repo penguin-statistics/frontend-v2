@@ -4,7 +4,7 @@
       v-if="item.itemId !== 'furni' && item.spriteCoord"
       ref="icon"
       :class="{'item-icon--sprite': true, 'item-icon--sprite--disable-hover-effect': disableTooltip}"
-      :alt="`${item.name} (${item.itemId})`"
+      :alt="`item(${item.itemId})`"
     />
     <v-icon
       v-else-if="item.itemId === 'furni'"

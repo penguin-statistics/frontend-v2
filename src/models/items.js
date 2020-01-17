@@ -3,7 +3,7 @@ import commons from './_common'
 
 const items = new ObjectManager({
   name: 'items',
-  api: '/items',
+  api: '/items?i18n=true',
   transform: [
     (object) => {
       const META_MAP = {

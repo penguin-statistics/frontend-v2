@@ -119,7 +119,7 @@
           class="text-xs-center"
         >
           {{ $t('zone.name') }}
-          <small v-if="step > 1">{{ selectedZone.zoneName || '' }}</small>
+          <small v-if="step > 1">{{ selectedZoneName }}</small>
         </v-layout>
       </v-stepper-step>
 
@@ -233,7 +233,7 @@
               v-if="selectedZone"
               inset
             >
-              {{ selectedZone.zoneName || '' }}
+              {{ selectedZoneName }}
             </v-subheader>
 
             <v-list-tile
@@ -403,7 +403,20 @@
       selectedZone() {
         const fallback = { zoneName: "" };
         if (!this.selected.zone) return fallback;
-        return get.zones.byZoneId(this.selected.zone) || fallback;
+        const zone = get.zones.byZoneId(this.selected.zone);
+        if (!zone) return fallback;
+        return zone;
+      },
+      selectedZoneName () {
+        if (this.selectedZone) {
+          if (this.selectedZone["zoneName_i18n"]) {
+            return this.selectedZone["zoneName_i18n"][this.$i18n.locale] || ""
+          } else {
+            return this.selectedZone["zoneName"] || ""
+          }
+        } else {
+          return ""
+        }
       },
       selectedStage() {
         if (!this.selected.stage) return {};
