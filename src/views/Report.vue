@@ -200,7 +200,6 @@
           <v-alert
             :value="true"
             color="warning"
-            class="mb-3"
           >
             <ol>
               <li>{{ $t('rules.rule_1') }}</li>
@@ -211,9 +210,14 @@
             </ol>
           </v-alert>
 
-          <v-container v-if="!$vuetify.breakpoint.smAndDown">
+          <v-alert
+            v-if="!$vuetify.breakpoint.smAndDown"
+            :value="true"
+            color="secondary darken-2"
+            class="subheading pl-4 mb-3"
+          >
             {{ $t('usage') }}
-          </v-container>
+          </v-alert>
 
           <v-container
             v-for="stage in stageItems"
