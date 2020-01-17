@@ -88,18 +88,8 @@
     },
     data() {
       return {
-        rawQuantity: 0
+        quantity: 0
       }
-    },
-    computed: {
-      quantity: {
-        get() {
-          return this.rawQuantity
-        },
-        set(v) {
-          this.rawQuantity = parseInt(v)
-        }
-      },
     },
     watch: {
       quantity: function (newValue, oldValue) {
