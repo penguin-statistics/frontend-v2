@@ -25,9 +25,6 @@ const zones = new ObjectManager({
 
           el.isOutdated = formatter.isOutdated(el.closeTime)
         }
-
-        // DEV: mock
-        el["zoneName_i18n"] = {zh: el.zoneName, en: `en: ${el.zoneName}`, ja: `ja: ${el.zoneName}`}
       });
       return object
     }

@@ -31,8 +31,6 @@ const items = new ObjectManager({
 
       object.forEach(el => {
         el.meta = META_MAP[el.itemType]
-        // DEV: mock
-        el["name_i18n"] = {zh: el.name, en: `en: ${el.name}`, ja: `ja: ${el.name}`}
       });
 
       object.sort((a, b) => a.sortId - b.sortId)
