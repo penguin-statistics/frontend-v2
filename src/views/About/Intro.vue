@@ -66,12 +66,7 @@
 
 <script>
 export default {
-  name: 'Intro',
-  methods: {
-    goToHref(href) {
-      window.open(href)
-    }
-  }
+  name: 'Intro'
 }
 </script>
 

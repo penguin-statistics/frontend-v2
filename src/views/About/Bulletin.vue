@@ -46,12 +46,7 @@
 
 <script>
 export default {
-  name: 'Bulletin',
-  methods: {
-    goToHref(href) {
-      window.open(href)
-    }
-  }
+  name: 'Bulletin'
 }
 </script>
 

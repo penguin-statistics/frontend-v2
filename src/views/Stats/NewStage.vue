@@ -91,7 +91,9 @@
 </i18n>
 
 <template>
-  <NewStageSelector />
+  <NewStageSelector :name="$t('stats.name')">
+    hello!
+  </NewStageSelector>
 </template>
 
 <script>

@@ -23,13 +23,6 @@
           "extra": "额外物资",
           "special": "特殊掉落"
         }
-      },
-      "stats": {
-        "name": "统计结果",
-        "title": "{stage} 统计结果"
-      },
-      "report": {
-        "name": "上报结果"
       }
     },
     "en": {
@@ -55,13 +48,6 @@
           "extra": "Extra",
           "special": "Special"
         }
-      },
-      "stats": {
-        "name": "Statistics",
-        "title": "Statistics of {stage}"
-      },
-      "report": {
-        "name": "Report"
       }
     },
     "ja": {
@@ -87,13 +73,6 @@
           "extra": "エクストラドロップ",
           "special": "スペシャルドロップ"
         }
-      },
-      "stats": {
-        "name": "統計結果",
-        "title": "{stage} 統計結果"
-      },
-      "report": {
-        "name": "報告"
       }
     }
   }
@@ -101,74 +80,136 @@
 
 <template>
   <v-container>
-    <div
-      v-for="category in categorizedZones"
-      :key="category.id"
+    <v-stepper
+      v-model="step"
+      :alt-labels="!small"
+      class="pa-2 transparent elevation-0"
     >
-      <v-subheader>
-        <v-icon class="mr-2">
-          {{ category.zones[0].icon }}
-        </v-icon>
-        <span>
-          {{ $t(['zone.types', category.id].join('.')) }}
-        </span>
-      </v-subheader>
-
-      <v-expansion-panels
-        hover
-        eager
-        class="mb-2"
-      >
-        <v-expansion-panel
-          v-for="zone in category.zones"
-          :key="zone.zoneId"
-          class="bkop-light"
+      <v-stepper-header class="elevation-6">
+        <v-stepper-step
+          :complete="step > 1"
+          :editable="step > 1"
+          :step="1"
         >
-          <v-expansion-panel-header class="overflow-hidden">
-            <v-row align="center">
-              <span
-                v-if="zone.isActivity && !small"
-                :class="{
-                  'text--darken-1 font-weight-bold': true,
-                  'red--text': zone.isOutdated,
-                  'green--text': !zone.isOutdated }"
-              >
-                {{ zone.isOutdated ? $t('zone.status.closed') : $t('zone.status.open') }}
-              </span>
+          <v-row
+            align="center"
+            justify="center"
 
-              <span
-                :class="{'subtitle-1 pl-2': true, 'text--darken-1 font-weight-bold': zone.isActivity && small, 'red--text': zone.isActivity && small && zone.isOutdated,
-                         'green--text': zone.isActivity && small && !zone.isOutdated}"
-              >
-                {{ strings.translate(zone, "zoneName") }}
-              </span>
+            class="text-center"
+          >
+            {{ $t('stage.name') }}{{ $t('meta.separator') }}{{ $t('zone.name') }}
+            <small v-if="step > 1">{{ selectedStage.code || '' }}</small>
+          </v-row>
+        </v-stepper-step>
 
-              <v-spacer />
+        <v-divider />
 
-              <span
-                v-if="zone.isActivity"
-                class="grey--text text--lighten-1 mr-4 text-truncate"
-              >
-                {{ !small ? $t('opensAt', zone.activityActiveTime) : null }}
-              </span>
-            </v-row>
-          </v-expansion-panel-header>
-          <v-expansion-panel-content>
-            <div
-              v-if="zone.isActivity && small"
-              class="grey--text text--lighten-1 caption"
+        <v-stepper-step
+          :complete="step === 2"
+          :step="2"
+        >
+          <v-row
+            align="center"
+            justify="center"
+
+            class="text-center"
+          >
+            {{ name }}
+          </v-row>
+        </v-stepper-step>
+      </v-stepper-header>
+      <v-stepper-items>
+        <v-stepper-content
+          :step="1"
+        >
+          <v-row>
+            <v-col
+              v-for="(categories, index) in categorizedZones"
+              :key="index"
+              cols="12"
+              sm="12"
+              md="6"
+              lg="6"
+              xl="6"
             >
-              {{ $t('opensAt', zone.activityActiveTime) }}
-            </div>
-            <StageCard
-              v-for="stage in getStages(zone.zoneId)"
-              :key="stage.stageId"
-              :stage="stage"
-            />
-          </v-expansion-panel-content>
-        </v-expansion-panel>
-      </v-expansion-panels>
-    </div>
+              <div
+                v-for="category in categories"
+                :key="category.id"
+              >
+                <v-subheader>
+                  <v-icon class="mr-2">
+                    {{ category.zones[0].icon }}
+                  </v-icon>
+                  <span>
+                    {{ $t(['zone.types', category.id].join('.')) }}
+                  </span>
+                </v-subheader>
+                <v-expansion-panels
+                  hover
+                  eager
+                  class="mb-2"
+                >
+                  <v-expansion-panel
+                    v-for="zone in category.zones"
+                    :key="zone.zoneId"
+                    class="bkop-light"
+                  >
+                    <v-expansion-panel-header class="overflow-hidden">
+                      <v-row align="center">
+                        <span
+                          v-if="zone.isActivity && !small"
+                          :class="{
+                            'text--darken-1 font-weight-bold ml-2 mr-1': true,
+                            'red--text': zone.isOutdated,
+                            'green--text': !zone.isOutdated }"
+                        >
+                          {{ zone.isOutdated ? $t('zone.status.closed') : $t('zone.status.open') }}
+                        </span>
+
+                        <span
+                          :class="{'subtitle-1 pl-2': true, 'text--darken-1 font-weight-bold': zone.isActivity && small, 'red--text': zone.isActivity && small && zone.isOutdated,
+                                   'green--text': zone.isActivity && small && !zone.isOutdated}"
+                        >
+                          {{ strings.translate(zone, "zoneName") }}
+                        </span>
+
+                        <v-spacer />
+
+                        <span class="font-weight-bold monospace mr-6">
+                          <v-badge
+                            inline
+                            color="black"
+                            :content="zone.stages.length"
+                          />
+                        </span>
+                      </v-row>
+                    </v-expansion-panel-header>
+                    <v-expansion-panel-content>
+                      <div
+                        v-if="zone.isActivity"
+                        class="grey--text text--lighten-1 caption mb-2 mt-1"
+                      >
+                        {{ $t('opensAt', zone.activityActiveTime) }}
+                      </div>
+                      <StageCard
+                        v-for="stage in getStages(zone.zoneId)"
+                        :key="stage.stageId"
+                        :stage="stage"
+
+                        @click="selectStage(stage.stageId)"
+                      />
+                    </v-expansion-panel-content>
+                  </v-expansion-panel>
+                </v-expansion-panels>
+              </div>
+            </v-col>
+          </v-row>
+        </v-stepper-content>
+        <v-stepper-content :step="2">
+          <slot />
+        </v-stepper-content>
+      </v-stepper-items>
+    </v-stepper>
   </v-container>
 </template>
 
@@ -176,10 +217,25 @@
   import get from "@/utils/getters";
   import strings from "@/utils/strings";
   import StageCard from "@/components/stats/StageCard";
+  import Console from "@/utils/Console";
 
   export default {
     name: "NewStageSelector",
     components: {StageCard},
+    props: {
+      name: {
+        type: String,
+        required: true
+      },
+    },
+    data() {
+      return {
+        step: 1,
+        selected: {
+          stage: null
+        }
+      }
+    },
     computed: {
       strings () {
         return strings
@@ -209,18 +265,31 @@
             })
           }
         }
+        result = [result.slice(0, -1), result.slice(-1)]
         return result;
+      },
+      selectedStage() {
+        if (!this.selected.stage) return {};
+        return get.stages.byStageId(this.selected.stage);
       },
     },
 
     methods: {
       getStages (zoneId) {
         return get.stages.byParentZoneId(zoneId);
+      },
+      selectStage (stageId) {
+        Console.log("choosed", stageId);
+        this.selected.stage = stageId;
+        this.$emit("selected", stageId);
+        this.step += 1
       }
     },
   }
 </script>
 
 <style scoped>
-
+.monospace {
+  font-family: Consolas, Courier, monospace;
+}
 </style>
