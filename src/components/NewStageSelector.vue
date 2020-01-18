@@ -121,6 +121,7 @@
       <v-stepper-items>
         <v-stepper-content
           :step="1"
+          :class="{'pa-0': small}"
         >
           <v-row>
             <v-col
