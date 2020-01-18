@@ -36,7 +36,8 @@
         "content": "ドロップ統計データはクリエイティブ・コモンズ 表示 - 非営利 4.0 国際 ライセンスの下に提供されています。当サイトのいかなる内容の転載や公開を行う場合は、必ず内容の元となっているページまたはトップページのURLのリンクを行い、データ統計の転載を行ったことを明記しなければなりません。また許可無しに当サイトの内容または派生作品を商業目的で利用することを許可しません。"
       },
       "credit": "ペンギン急便データ統計処理部門 | {date}"
-    }
+    },
+    "separator": "、"
   },
   "stats": {
     "headers": {
@@ -93,16 +94,38 @@
     }
   },
   "report": {
+    "alert": {
+      "title": {
+        "first": "Potential Failure Risk Detected",
+        "repeat": "Warning"
+      },
+      "continue": {
+        "first": "Are you still want to submit this record?",
+        "repeat": "Confirm submitting this record?"
+      },
+      "contact": {
+        "before": "If you know that this is a mistake, we cannot be more happier if you",
+        "activator": "contact us.",
+        "after": "(Please indicate the stage name, the actual drops, and screenshot is preferred for verification purposes) After confirming this is an error, our team will fix the limitation."
+      },
+      "causes": {
+        "noDrop": "Haven't selected any drop items.",
+        "limitation": "Your current submission is having large mis-match with our existing data. Submitting this record will have a risk to be judged as a false-report, letting the current submission being deleted from our dataset."
+      }
+    },
     "rules": {
       "item": {
+        "_name": "Item Quantities",
+        "now": "Selected {item} ×{quantity}",
         "gte": "\"{item}\" should ≥{quantity}",
         "lte": "\"{item}\" should ≤{quantity}",
         "not": "\"{item}\" should ≠{quantity}"
       },
       "type": {
-        "gte": "Should have at least {quantity} types",
-        "lte": "Should have at most {quantity} types",
-        "not": "Should not be {quantity} types"
+        "_name": "Items",
+        "gte": "Should have at least {quantity} kinds of item",
+        "lte": "Should have at most {quantity} kinds of item",
+        "not": "Should not be {quantity} kinds of item"
       }
     }
   }

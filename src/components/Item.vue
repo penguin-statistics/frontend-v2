@@ -5,10 +5,10 @@
   >
     <v-tooltip
       v-if="!disableTooltip"
-      :open-delay="100"
+      :open-delay="60"
       :nudge-top="10"
 
-      bottom
+      v-bind="calculatedTooltipPosition"
       lazy
     >
       <template v-slot:activator="{ on }">
@@ -20,7 +20,7 @@
           />
         </span>
       </template>
-      <span>{{ name }}</span>
+      <span :style="tooltipSize">{{ name }}</span>
     </v-tooltip>
     <span v-if="disableTooltip">
       <ItemIcon
@@ -34,6 +34,7 @@
 
 <script>
   import ItemIcon from "@/components/ItemIcon";
+  import strings from "@/utils/strings";
   export default {
     name: "Item",
     components: {ItemIcon},
@@ -59,6 +60,12 @@
         default() {
           return false;
         }
+      },
+      tooltipPosition: {
+        type: String,
+        default () {
+          return "bottom";
+        }
       }
     },
     data() {
@@ -68,13 +75,14 @@
     },
     computed: {
       name() {
-        if (this.item["name_i18n"]) {
-          return this.item["name_i18n"][this.$i18n.locale] || ""
-        } else if (this.item) {
-          return this.item.name
-        } else {
-          return ""
-        }
+        return strings.translate(this.item, "name")
+      },
+      calculatedTooltipPosition () {
+        return {[this.tooltipPosition]: true}
+      },
+      tooltipSize () {
+        let size = Math.max(this.ratio * 16, 12);
+        return {fontSize: `${size}px`}
       }
     },
     methods: {

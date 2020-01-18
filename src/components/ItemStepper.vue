@@ -37,8 +37,8 @@
           <Item
             :item="item"
             :ratio="1"
-            disable-tooltip
             disable-link
+            tooltip-position="top"
           />
         </div>
       </v-badge>

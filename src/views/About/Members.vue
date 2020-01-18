@@ -11,6 +11,18 @@
         "github": "GitHub",
         "twitter": "Twitter",
         "qq": "QQ"
+      },
+      "responsibilities": {
+        "frontend": "前端",
+        "backend": "后端",
+        "maintenance": "运维",
+        "statistics": "统计分析",
+        "arkplanner": "ArkPlanner 作者",
+        "bulkupload": "批量上传",
+        "customersupport": "客服",
+        "logo": "Logo 画师",
+        "materials": "素材提供",
+        "localization_ja": "日语化"
       }
     },
     "en": {
@@ -24,6 +36,18 @@
         "github": "GitHub",
         "twitter": "Twitter",
         "qq": "QQ"
+      },
+      "responsibilities": {
+        "frontend": "Frontend",
+        "backend": "Backend",
+        "maintenance": "Maintenance",
+        "statistics": "Statistics and Analysis",
+        "arkplanner": "Author of ArkPlanner",
+        "bulkupload": "Bulk Upload",
+        "customersupport": "Customer Support",
+        "logo": "Logo Designer",
+        "materials": "Materials Supplier",
+        "localization_ja": "Japanese Localization Provider"
       }
     },
     "ja": {
@@ -37,6 +61,18 @@
         "github": "GitHub",
         "twitter": "Twitter",
         "qq": "QQ"
+      },
+      "responsibilities": {
+        "frontend": "フロントエンド",
+        "backend": "バックエンド",
+        "maintenance": "メンテナンス",
+        "statistics": "統計と分析",
+        "arkplanner": "ArkPlannerの著者",
+        "bulkupload": "一括アップロード",
+        "customersupport": "顧客サービス",
+        "logo": "ロゴデザイナー",
+        "materials": "材料サプライヤー",
+        "localization_ja": "日本語化"
       }
     }
   }
@@ -82,7 +118,7 @@
             </v-list-tile-title>
 
             <v-list-tile-sub-title>
-              {{ profile.responsibility }}
+              {{ renderResponsibility(profile.responsibility) }}
             </v-list-tile-sub-title>
           </v-list-tile-content>
           <v-list-tile-action>
@@ -120,6 +156,20 @@
 </template>
 
 <script>
+  const r = {
+    frontend: "frontend",
+    backend: "backend",
+    maintenance: "maintenance",
+    statistics: "statistics",
+    arkplanner: "arkplanner",
+    bulkupload: "bulkupload",
+    customersupport: "customersupport",
+    logo: "logo",
+    materials: "materials",
+    localization: {
+      ja: "localization_ja"
+    }
+  }
   export default {
     name: 'Members',
     data () {
@@ -127,7 +177,11 @@
         profiles: {
           owner: [{
             name: "AlvISs_红白",
-            responsibility: "前端 后端 运维",
+            responsibility: [
+              r.frontend,
+              r.backend,
+              r.maintenance,
+            ],
             avatar: "hongbai.jpg",
             socials: {
               weibo: "https://www.weibo.com/u/6434065694",
@@ -139,7 +193,9 @@
           developers: [
             {
               name: "Galvin Gao",
-              responsibility: "前端",
+              responsibility: [
+                r.frontend
+              ],
               avatar: "gg.png",
               socials: {
                 github: "https://github.com/GalvinGao"
@@ -147,7 +203,9 @@
             },
             {
               name: "YukiC",
-              responsibility: "后端",
+              responsibility: [
+                r.backend
+              ],
               avatar: "yukic.jpg",
               socials: {
                 github: "https://github.com/cyj5230"
@@ -155,7 +213,9 @@
             },
             {
               name: "AsahiLuna",
-              responsibility: "前端",
+              responsibility: [
+                r.frontend
+              ],
               avatar: "luna.png",
               socials: {
                 github: "https://github.com/AsahiLuna"
@@ -163,7 +223,9 @@
             },
             {
               name: "🦀",
-              responsibility: "ArkPlanner作者",
+              responsibility: [
+                r.arkplanner
+              ],
               avatar: "xie.jpeg",
               socials: {
                 github: "https://github.com/ycremar"
@@ -171,7 +233,9 @@
             },
             {
               name: "Einzithy.D",
-              responsibility: "统计分析",
+              responsibility: [
+                r.statistics
+              ],
               avatar: "j.png",
               socials: {
                 github: "https://github.com/Einzithy-D"
@@ -179,7 +243,9 @@
             },
             {
               name: "ChaosNiku",
-              responsibility: "后端",
+              responsibility: [
+                r.backend
+              ],
               avatar: "chaosniku.png",
               socials: {
                 github: "https://github.com/ChaosNiku"
@@ -187,7 +253,9 @@
             },
             {
               name: "SrO²",
-              responsibility: "批量上传",
+              responsibility: [
+                r.bulkupload
+              ],
               avatar: "sr.png",
               socials: {
                 github: "https://github.com/Strontium233"
@@ -195,7 +263,9 @@
             },
             {
               name: "路夏早苗",
-              responsibility: "前端",
+              responsibility: [
+                r.frontend
+              ],
               avatar: "sanae.jpeg",
               socials: {
                 github: "https://github.com/RokaSanae"
@@ -203,7 +273,9 @@
             },
             {
               name: "冰糖雪梨橙#9594",
-              responsibility: "前端",
+              responsibility: [
+                r.frontend
+              ],
               avatar: "wish.png",
               socials: {
                 github: "https://github.com/jdgjxxchy"
@@ -213,7 +285,9 @@
           others: [
             {
               name: "Nemunemu",
-              responsibility: "客服",
+              responsibility: [
+                r.customersupport
+              ],
               avatar: "nemunemu.jpg",
               socials: {
                 weibo: "https://www.weibo.com/nemunemu"
@@ -221,7 +295,9 @@
             },
             {
               name: "侠",
-              responsibility: "Logo画师",
+              responsibility: [
+                r.logo
+              ],
               avatar: "xia.png",
               socials: {
                 weibo: "https://www.weibo.com/u/2290638732"
@@ -229,7 +305,9 @@
             },
             {
               name: "水晶泡芙",
-              responsibility: "素材提供",
+              responsibility: [
+                r.materials
+              ],
               avatar: "paofu.png",
               socials: {
                 github: "https://github.com/Evealicemier"
@@ -237,7 +315,9 @@
             },
             {
               name: "方舟航海図",
-              responsibility: "日语化",
+              responsibility: [
+                r.localization.ja
+              ],
               avatar: "koukaizu.jpg",
               socials: {
                 twitter: "https://twitter.com/Arkn1ghts"
@@ -245,7 +325,9 @@
             },
             {
               name: "ウィン",
-              responsibility: "日语化",
+              responsibility: [
+                r.localization.ja
+              ],
               avatar: "win.png",
               socials: {
                 twitter: "https://twitter.com/Winterer000000"
@@ -283,6 +365,13 @@
       },
       getSocial (id) {
         return this.socials.find(v => v.id === id)
+      },
+      renderResponsibility (responsibilities) {
+        let translated = [];
+        for (let responsibility of responsibilities) {
+          translated.push(this.$t(`responsibilities.${responsibility}`))
+        }
+        return translated.join(this.$t('meta.separator'))
       }
     }
   }

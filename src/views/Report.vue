@@ -365,7 +365,7 @@
                       </v-list-tile-avatar>
                       <v-list-tile-content>
                         <v-list-tile-title>
-                          {{ $t('report.rules.item.now', {item: getItem(item.id).name, quantity: item.quantity}) }}
+                          {{ $t('report.rules.item.now', {item: strings.translate(getItem(item.id), "name"), quantity: item.quantity}) }}
                         </v-list-tile-title>
                         <v-list-tile-sub-title>
                           {{ item.message }}
@@ -475,6 +475,7 @@
   import Cookies from 'js-cookie';
   import Console from "@/utils/Console";
   import StageSelector from "@/components/StageSelector";
+  import strings from "@/utils/strings";
 
   export default {
     name: "Report",
@@ -504,12 +505,15 @@
       }
     }),
     computed: {
+      strings () {
+        return strings
+      },
       prefill () {
         let prefills = {};
         const params = this.$route.params;
 
-        if (params.zoneId) prefills.zone = params.zoneId
-        if (params.stageId) prefills.stage = params.stageId
+        prefills.zone = params.zoneId ? params.zoneId : null
+        prefills.stage =  params.stageId ? params.stageId : null
 
         return prefills
       },
@@ -657,8 +661,6 @@
       select (selection) {
         this.selected[selection.type] = selection.payload;
 
-        Console.debug(selection)
-
         if (this.selected.zone === null) {
           if (this.selected.stage === null) {
             Console.debug("report - [router go] index");
@@ -763,7 +765,7 @@
           return [];
         }
 
-        let itemResponse = isItemType ? {item: this.getItem(value).name} : {};
+        let itemResponse = isItemType ? {item: strings.translate(this.getItem(value), "name")} : {};
 
         const gte = (value) => {
           return (compare) => {

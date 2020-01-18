@@ -24,9 +24,9 @@
         "title": "Statistics of {item}"
       },
       "categories": {
-        "CARD_EXP": "作战记录",
-        "MATERIAL": "材料",
-        "FURN": "家具",
+        "CARD_EXP": "Battle Records",
+        "MATERIAL": "Materials",
+        "FURN": "Furniture",
         "ACTIVITY_ITEM": "Event item"
       }
     },
@@ -244,6 +244,7 @@ import get from "@/utils/getters";
 import Item from "@/components/Item";
 import DataSourceToggle from "@/components/DataSourceToggle";
 import Console from "@/utils/Console";
+import strings from "@/utils/strings";
 
 export default {
   name: "StatsByItem",
@@ -328,7 +329,7 @@ export default {
     },
     selectedItemName() {
       if (!this.selected.item) return "";
-      return this.selected.item.name;
+      return strings.translate(this.selected.item, "name");
     }
   },
   watch: {

@@ -198,7 +198,7 @@
                       'green--text': !zone.isOutdated }"
                   >
                     {{ zone.isOutdated ? $t('zone.status.closed') : $t('zone.status.open') }}
-                  </span> {{ zone.zoneName || '' }}
+                  </span> {{ strings.translate(zone, "zoneName") }}
                 </v-list-tile-title>
                 <v-list-tile-sub-title v-if="zone.isActivity">
                   {{ !small ? `${$t('opensAt', zone.activityActiveTime)}` : null }}
@@ -344,6 +344,7 @@
 <script>
   import get from "@/utils/getters";
   import Item from "@/components/Item";
+  import strings from "@/utils/strings";
 
   export default {
     name: "StageSelector",
@@ -376,6 +377,9 @@
       }
     },
     computed: {
+      strings () {
+        return strings
+      },
       categorizedZones() {
         const categories = ["ACTIVITY_OPEN", "MAINLINE", "WEEKLY"];
         !this.hideClosed ? categories.push("ACTIVITY_CLOSED") : null;
@@ -409,11 +413,7 @@
       },
       selectedZoneName () {
         if (this.selectedZone) {
-          if (this.selectedZone["zoneName_i18n"]) {
-            return this.selectedZone["zoneName_i18n"][this.$i18n.locale] || ""
-          } else {
-            return this.selectedZone["zoneName"] || ""
-          }
+          return strings.translate(this.selectedZone, "zoneName")
         } else {
           return ""
         }
@@ -437,27 +437,38 @@
         if (newValue === 1) {
           this.$emit("selected", {type: "zone", payload: null})
         }
+      },
+      prefill (newValue) {
+        this.update(newValue, true)
       }
     },
     created () {
-      if (this.prefill) {
-        if (this.prefill.zone) this.selectZone(this.prefill.zone);
-        if (this.prefill.stage) this.selectStage(this.prefill.stage)
-      }
+      this.update(this.prefill)
     },
     methods: {
-      selectZone(zoneId) {
-        this.$emit("selected", {type: "zone", payload: zoneId})
+      selectZone(zoneId, emitEvent=true) {
+        if (emitEvent) this.$emit("selected", {type: "zone", payload: zoneId})
         this.step = 2
         this.selected.zone = zoneId
       },
-      selectStage(stageId) {
-        this.$emit("selected", {type: "stage", payload: stageId})
+      selectStage(stageId, emitEvent=true) {
+        if (emitEvent) this.$emit("selected", {type: "stage", payload: stageId})
         this.step = 3
         this.selected.stage = stageId
       },
       getItem(itemId) {
         return get.items.byItemId(itemId);
+      },
+      update (object, update=false) {
+        if (object) {
+          if (object.zone) this.selectZone(this.prefill.zone, false);
+          if (object.stage) this.selectStage(this.prefill.stage, false);
+          if (!object.zone && !object.stage && update) {
+            this.step = 1;
+            this.selected.stage = null;
+            this.selected.zone = null
+          }
+        }
       }
     }
   }

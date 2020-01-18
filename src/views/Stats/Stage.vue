@@ -150,7 +150,7 @@
                     v-if="!$vuetify.breakpoint.xsOnly"
                     class="ml-2"
                   >
-                    {{ props.item.item.name }}
+                    {{ strings.translate(props.item.item, "name") }}
                   </span>
                   <v-slide-x-transition>
                     <v-icon
@@ -219,6 +219,7 @@ import Item from "@/components/Item";
 import DataSourceToggle from "@/components/DataSourceToggle";
 import Console from "@/utils/Console";
 import StageSelector from "@/components/StageSelector";
+import strings from "@/utils/strings";
 
 export default {
   name: "StatsByStage",
@@ -236,12 +237,15 @@ export default {
     }
   }),
   computed: {
+    strings() {
+      return strings
+    },
     prefill () {
       let prefills = {};
       const params = this.$route.params;
 
-      if (params.zoneId) prefills.zone = params.zoneId
-      if (params.stageId) prefills.stage = params.stageId
+      prefills.zone = params.zoneId ? params.zoneId : null
+      prefills.stage =  params.stageId ? params.stageId : null
 
       return prefills
     },
