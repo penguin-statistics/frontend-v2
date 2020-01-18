@@ -31,7 +31,7 @@ export default new Vuex.Store({
     },
     settings: {
       dark: true,
-      locale: 'zh'
+      language: null
     },
     auth: {
       username: null
@@ -53,7 +53,7 @@ export default new Vuex.Store({
       state.settings.dark = newState
     },
     changeLocale(state, newLocale) {
-      state.settings.locale = newLocale
+      state.settings.language = newLocale
     },
     authLogin(state, username) {
       state.auth.username = username
@@ -128,6 +128,7 @@ export default new Vuex.Store({
     },
     cacheUpdateAt: (state) => (name) => {
       return state.cacheUpdateAt[name]
-    }
+    },
+    language: state => state.settings.language
   }
 })

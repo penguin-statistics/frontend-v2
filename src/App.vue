@@ -254,6 +254,7 @@
   import AccountManager from '@/components/AccountManager'
   import NetworkStateIndicator from "@/components/widgets/NetworkStateIndicator";
   import Console from "@/utils/Console";
+  import strings from "@/utils/strings";
 
 export default {
   name: 'App',
@@ -268,7 +269,7 @@ export default {
       randomizedLogo: "",
       localizations: [
         {
-          id: 'zh_CN',
+          id: 'zh-CN',
           name: '简体中文'
         }, {
           id: 'en',
@@ -307,6 +308,17 @@ export default {
   mounted () {
     this.randomizeLogo();
     this.onDarkChange(this.$store.state.settings.dark);
+
+    if (this.$store.getters.language) {
+      this.changeLocale(this.$store.getters.language, false)
+    } else {
+      let language = strings.getFirstBrowserLanguage();
+      if (language) {
+        // because this is a detection result, thus we are not storing it,
+        // unless the user manually set one.
+        this.changeLocale(language, false)
+      }
+    }
   },
   methods: {
     async refreshData () {
@@ -344,9 +356,11 @@ export default {
           : random < .75 ? "https://penguin-stats.s3.ap-southeast-1.amazonaws.com/logos/penguin_stats_logo_sora.png"
             : "https://penguin-stats.s3.ap-southeast-1.amazonaws.com/logos/penguin_stats_logo_croissant.png"
     },
-    changeLocale (localeId) {
-      this.$i18n.locale = localeId
-      document.title = `${this.$t('app.name')}`;
+    changeLocale (localeId, save=true) {
+      Console.debug("changing locale to", localeId, ", save:", save)
+      this.$i18n.locale = localeId;
+      if (save) this.$store.commit("changeLocale", localeId);
+      document.title = `${this.$t(this.$route.meta.i18n) + ' | ' || ''}${this.$t('app.name')}`;
     },
     logRouteEvent (newValue) {
       if (newValue.name === "StatsByStage_SelectedBoth") {
