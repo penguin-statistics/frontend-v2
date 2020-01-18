@@ -3,16 +3,12 @@
     class="fill-height"
     fluid
   >
-    <v-row align="center">
-      <v-col>
-        <transition
-          name="slide-fade"
-          mode="out-in"
-        >
-          <router-view />
-        </transition>
-      </v-col>
-    </v-row>
+    <transition
+      name="slide-fade"
+      mode="out-in"
+    >
+      <router-view />
+    </transition>
   </v-container>
 </template>
 

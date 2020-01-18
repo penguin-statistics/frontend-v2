@@ -90,7 +90,7 @@
 </template>
 
 <script>
-import AccountManager from "@/components/AccountManager";
+import AccountManager from "@/components/toolbar/AccountManager";
 export default {
   name: "DataSourceToggle",
   components: {

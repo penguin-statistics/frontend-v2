@@ -463,12 +463,12 @@
 <script>
   import get from '@/utils/getters'
   import report from '@/apis/report'
-  import Item from "@/components/Item";
-  import ItemStepper from "@/components/ItemStepper";
+  import Item from "@/components/global/Item";
+  import ItemStepper from "@/components/global/ItemStepper";
   import Vue from "vue";
   import Cookies from 'js-cookie';
   import Console from "@/utils/Console";
-  import StageSelector from "@/components/StageSelector";
+  import StageSelector from "@/components/stats/StageSelector";
   import strings from "@/utils/strings";
 
   export default {

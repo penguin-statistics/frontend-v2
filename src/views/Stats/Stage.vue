@@ -215,10 +215,10 @@
 
 <script>
 import get from "@/utils/getters";
-import Item from "@/components/Item";
-import DataSourceToggle from "@/components/DataSourceToggle";
+import Item from "@/components/global/Item";
+import DataSourceToggle from "@/components/stats/DataSourceToggle";
 import Console from "@/utils/Console";
-import StageSelector from "@/components/StageSelector";
+import StageSelector from "@/components/stats/StageSelector";
 import strings from "@/utils/strings";
 
 export default {

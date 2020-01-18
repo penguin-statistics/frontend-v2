@@ -67,7 +67,7 @@
 </template>
 
 <script>
-  import Item from '@/components/Item'
+  import Item from '@/components/global/Item'
 
   export default {
     name: "ItemStepper",

@@ -134,7 +134,7 @@
     >
       <v-app-bar-nav-icon @click.stop="drawer = !drawer" />
 
-      <v-app-bar-title>
+      <v-toolbar-title>
         <transition
           name="fade-transition"
           mode="out-in"
@@ -152,7 +152,7 @@
         <span class="title">
           {{ $t($router.currentRoute.meta.i18n) }}
         </span>
-      </v-app-bar-title>
+      </v-toolbar-title>
 
       <v-spacer />
 
@@ -255,9 +255,9 @@
 </template>
 
 <script>
-  import RandomBackground from '@/components/RandomBackground'
-  import AccountManager from '@/components/AccountManager'
-  import NetworkStateIndicator from "@/components/widgets/NetworkStateIndicator";
+  import RandomBackground from '@/components/global/RandomBackground'
+  import AccountManager from '@/components/toolbar/AccountManager'
+  import NetworkStateIndicator from "@/components/toolbar/NetworkStateIndicator";
   import Console from "@/utils/Console";
   import strings from "@/utils/strings";
 
@@ -431,11 +431,11 @@ export default {
   }
 
   .theme--light .bkop-light {
-    background: rgba(255, 255, 255, .65) !important;
+    background: rgba(255, 255, 255, .75) !important;
   }
 
   .theme--dark .bkop-light {
-    background: rgba(66, 66, 66, .75) !important;
+    background: rgba(66, 66, 66, .85) !important;
   }
 
   .cursor-pointer {

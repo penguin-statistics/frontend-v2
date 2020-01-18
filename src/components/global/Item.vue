@@ -33,7 +33,7 @@
 </template>
 
 <script>
-  import ItemIcon from "@/components/ItemIcon";
+  import ItemIcon from "@/components/global/ItemIcon";
   import strings from "@/utils/strings";
   export default {
     name: "Item",
