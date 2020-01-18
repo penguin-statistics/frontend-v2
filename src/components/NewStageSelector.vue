@@ -155,7 +155,7 @@
                     :key="zone.zoneId"
                     class="bkop-light"
                   >
-                    <v-expansion-panel-header class="overflow-hidden">
+                    <v-expansion-panel-header class="overflow-hidden bkop-medium">
                       <v-row align="center">
                         <span
                           v-if="zone.isActivity && !small"

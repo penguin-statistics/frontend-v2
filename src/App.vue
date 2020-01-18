@@ -438,6 +438,14 @@ export default {
     background: rgba(66, 66, 66, .85) !important;
   }
 
+  .theme--light .bkop-medium {
+    background: rgba(255, 255, 255, .9) !important;
+  }
+
+  .theme--dark .bkop-medium {
+    background: rgba(66, 66, 66, .9) !important;
+  }
+
   .cursor-pointer {
     cursor: pointer;
   }
