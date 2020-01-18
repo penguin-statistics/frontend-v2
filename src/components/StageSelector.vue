@@ -111,230 +111,85 @@
         :editable="step > 1"
         :step="1"
       >
-        <v-layout
-          column
-          align-center
-          justify-center
-          wrap
-          class="text-xs-center"
+        <v-row
+          align="center"
+          justify="center"
+          
+          class="text-center"
         >
-          {{ $t('zone.name') }}
-          <small v-if="step > 1">{{ selectedZoneName }}</small>
-        </v-layout>
+          {{ $t('stage.name') }}{{ $t('meta.separator') }}{{ $t('zone.name') }}
+          <small v-if="step > 1">{{ selectedStage.code || '' }}</small>
+        </v-row>
       </v-stepper-step>
 
       <v-divider />
 
       <v-stepper-step
-        :complete="step > 2"
-        :editable="step > 2"
+        :complete="step === 2"
         :step="2"
       >
-        <v-layout
-          column
-          align-center
-          justify-center
-          wrap
-          class="text-xs-center"
-        >
-          {{ $t('stage.name') }}
-          <small v-if="step > 2">{{ selectedStage.code || '' }}</small>
-        </v-layout>
-      </v-stepper-step>
-
-      <v-divider />
-
-      <v-stepper-step
-        :complete="step === 3"
-        :step="3"
-      >
-        <v-layout
-          column
-          align-center
-          justify-center
-          wrap
-          class="text-xs-center"
+        <v-row
+          align="center"
+          justify="center"
+          
+          class="text-center"
         >
           {{ $t(name) }}
-        </v-layout>
+        </v-row>
       </v-stepper-step>
     </v-stepper-header>
 
     <v-stepper-items>
       <v-stepper-content :step="1">
-        <v-container
-          fluid
-          grid-list-lg
-          class="py-0"
-        >
-          <v-list
+        <v-container>
+          <v-expansion-panels
             v-for="zoneCategory in categorizedZones"
             :key="zoneCategory.id"
-            subheader
-            class="transparent"
           >
-            <v-subheader inset>
+            <v-subheader>
               {{ $t(['zone.types', zoneCategory.id].join('.')) }}
             </v-subheader>
-
-            <v-list-tile
+            <v-expansion-panel-header>
+              <v-icon>{{ zone.icon }}</v-icon>
+              <v-list-item-title>
+                <span
+                  v-if="zone.isActivity"
+                  :class="{
+                    'text--darken-1 font-weight-bold': true,
+                    'red--text': zone.isOutdated,
+                    'green--text': !zone.isOutdated }"
+                >
+                  {{ zone.isOutdated ? $t('zone.status.closed') : $t('zone.status.open') }}
+                </span>
+                <span class="subtitle-1">
+                  {{ strings.translate(zone, "zoneName") }}
+                </span>
+              </v-list-item-title>
+              <v-list-item-subtitle v-if="zone.isActivity">
+                {{ !small ? `${$t('opensAt', zone.activityActiveTime)}` : null }}
+              </v-list-item-subtitle>
+            </v-expansion-panel-header>
+            <v-expansion-panel-content
               v-for="zone in zoneCategory.zones"
               :key="zone.zoneId"
-              v-ripple
-              avatar
-              @click="selectZone(zone.zoneId)"
+              ripple
             >
-              <v-list-tile-avatar>
-                <v-icon>{{ zone.icon }}</v-icon>
-              </v-list-tile-avatar>
-
-              <v-list-tile-content>
-                <v-list-tile-title>
-                  <span
-                    v-if="zone.isActivity"
-                    :class="{
-                      'text--darken-1 font-weight-bold': true,
-                      'red--text': zone.isOutdated,
-                      'green--text': !zone.isOutdated }"
-                  >
-                    {{ zone.isOutdated ? $t('zone.status.closed') : $t('zone.status.open') }}
-                  </span> {{ strings.translate(zone, "zoneName") }}
-                </v-list-tile-title>
-                <v-list-tile-sub-title v-if="zone.isActivity">
-                  {{ !small ? `${$t('opensAt', zone.activityActiveTime)}` : null }}
-                </v-list-tile-sub-title>
-              </v-list-tile-content>
-
-              <v-list-tile-action>
-                <v-icon color="grey lighten-1">
-                  mdi-chevron-right
-                </v-icon>
-              </v-list-tile-action>
-            </v-list-tile>
-          </v-list>
+              <v-row class="grid-list-xl">
+                <v-col
+                  v-for="stage in zone.stages"
+                  :key="stage.stageId"
+                >
+                  <v-card>
+                    {{ stage }}
+                  </v-card>
+                </v-col>
+              </v-row>
+            </v-expansion-panel-content>
+          </v-expansion-panels>
         </v-container>
       </v-stepper-content>
 
-      <v-stepper-content
-        v-if="selected.zone"
-        :step="2"
-      >
-        <v-container
-          fluid
-          grid-list-lg
-          class="py-0"
-        >
-          <v-list
-            three-line
-            subheader
-            class="transparent"
-          >
-            <v-subheader
-              v-if="selectedZone"
-              inset
-            >
-              {{ selectedZoneName }}
-            </v-subheader>
-
-            <v-list-tile
-              v-for="stage in stages"
-              :key="stage.stageId"
-              v-ripple
-              avatar
-              @click="selectStage(stage.stageId)"
-            >
-              <v-list-tile-avatar>
-                <v-icon>mdi-cube-outline</v-icon>
-              </v-list-tile-avatar>
-
-              <v-list-tile-content>
-                <v-list-tile-title>{{ stage.code || '' }}</v-list-tile-title>
-                <v-list-tile-sub-title>
-                  <v-layout
-                    align-center
-                    justify-start
-                    row
-                    wrap
-                    d-inline-flex
-                  >
-                    <v-flex :class="{ 'yellow--text font-weight-bold': true, 'amber--text text--darken-4': !$vuetify.dark }">
-                      {{ $t('stage.apCost', {apCost: stage.apCost}) }}
-                    </v-flex>
-
-                    <v-divider
-                      v-if="stage.normalDrop.length > 0"
-                      vertical
-                      class="hidden-xs-only mx-1"
-                    />
-
-                    <v-flex
-                      v-if="stage.normalDrop.length > 0"
-                      class="hidden-xs-only"
-                    >
-                      <div>{{ $t('stage.loots.normal') }}</div>
-                      <Item
-                        v-for="item in stage.normalDrop.slice(0, 5)"
-                        :key="`normal_${item}`"
-                        :item="getItem(item)"
-                        :ratio="0.6"
-                        disable-link
-                      />
-                    </v-flex>
-
-                    <!--                    <v-divider-->
-                    <!--                      v-if="stage.extraDrop.length > 0"-->
-                    <!--                      vertical-->
-                    <!--                      class="hidden-sm-and-down mx-1"-->
-                    <!--                    />-->
-
-                    <!--                    <v-flex-->
-                    <!--                      v-if="stage.extraDrop.length > 0"-->
-                    <!--                      class="hidden-sm-and-down"-->
-                    <!--                    >-->
-                    <!--                      <div>{{ $t('stage.loots.extra') }}</div>-->
-                    <!--                      <Item-->
-                    <!--                        v-for="item in stage.extraDrop"-->
-                    <!--                        :key="`extra_${item}`"-->
-                    <!--                        :item="getItem(item)"-->
-                    <!--                        :ratio="0.6"-->
-                    <!--                        disable-link-->
-                    <!--                      />-->
-                    <!--                    </v-flex>-->
-
-                    <!--                    <v-divider-->
-                    <!--                      v-if="stage.specialDrop.length > 0"-->
-                    <!--                      vertical-->
-                    <!--                      class="hidden-sm-and-down mx-1"-->
-                    <!--                    />-->
-
-                    <!--                    <v-flex-->
-                    <!--                      v-if="stage.specialDrop.length > 0"-->
-                    <!--                      class="hidden-sm-and-down"-->
-                    <!--                    >-->
-                    <!--                      <div>{{ $t('stage.loots.special') }}</div>-->
-                    <!--                      <Item-->
-                    <!--                        v-for="item in stage.specialDrop"-->
-                    <!--                        :key="`special_${item}`"-->
-                    <!--                        :item="getItem(item)"-->
-                    <!--                        :ratio="0.6"-->
-                    <!--                        disable-link-->
-                    <!--                      />-->
-                    <!--                    </v-flex>-->
-                  </v-layout>
-                </v-list-tile-sub-title>
-              </v-list-tile-content>
-
-              <v-list-tile-action>
-                <v-icon color="grey lighten-1">
-                  mdi-chevron-right
-                </v-icon>
-              </v-list-tile-action>
-            </v-list-tile>
-          </v-list>
-        </v-container>
-      </v-stepper-content>
-
-      <v-stepper-content :step="3">
+      <v-stepper-content :step="2">
         <slot :selected="selected" />
       </v-stepper-content>
     </v-stepper-items>
@@ -343,12 +198,11 @@
 
 <script>
   import get from "@/utils/getters";
-  import Item from "@/components/Item";
   import strings from "@/utils/strings";
 
   export default {
     name: "StageSelector",
-    components: {Item},
+    components: {},
     props: {
       name: {
         type: String,

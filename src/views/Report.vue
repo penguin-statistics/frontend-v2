@@ -151,8 +151,8 @@
 
 <template>
   <v-container
+    class="fill-height"
     fluid
-    fill-height
   >
     <v-snackbar
       v-model="showSubmittedSnackbar"
@@ -169,7 +169,7 @@
       </v-btn>
       <v-btn
         dark
-        flat
+        text
         icon
         @click="submitted = false"
       >
@@ -183,14 +183,14 @@
     >
       {{ $t('report.undoSuccess') }}
       <v-btn
-        flat
+        text
         @click="undoed = false"
       >
         {{ $t('dialog.close') }}
       </v-btn>
     </v-snackbar>
-    <v-layout align-center>
-      <v-flex>
+    <v-row align="center">
+      <v-col>
         <StageSelector
           name="report.name"
           :prefill="prefill"
@@ -198,7 +198,6 @@
           @selected="select"
         >
           <v-alert
-            :value="true"
             color="warning"
           >
             <ol>
@@ -212,9 +211,8 @@
 
           <v-alert
             v-if="!$vuetify.breakpoint.smAndDown"
-            :value="true"
             color="secondary darken-2"
-            class="subheading pl-4 mb-3"
+            class="subtitle-1 pl-6 mb-4"
           >
             {{ $t('usage') }}
           </v-alert>
@@ -223,23 +221,22 @@
             v-for="stage in stageItems"
             :key="stage.id"
             fluid
-            grid-list-sm
             class="py-0"
           >
             <v-subheader>
               {{ $t('stage.loots.' + stage.id) }}
             </v-subheader>
-            <v-flex
+            <v-col
               v-for="item in stage.drops"
               :key="item.itemId"
               class="py-1 px-2 d-inline-block"
-              xs12
-              sm6
-              md4
-              lg3
-              xl2
+              cols="12"
+              sm="6"
+              md="4"
+              lg="3"
+              xl="2"
             >
-              <!--                  <h5 class="title mb-3">-->
+              <!--                  <h5 class="title mb-4">-->
               <!--                    {{ item.name }}-->
               <!--                  </h5>-->
               <ItemStepper
@@ -247,27 +244,27 @@
                 :bus="eventBus"
                 @change="handleChange"
               />
-            </v-flex>
+            </v-col>
           </v-container>
 
-          <v-flex class="pa-4">
+          <v-col class="pa-6">
             <v-switch
               v-model="furniture"
               :label="$t('report.furniture', {state: $t(`hasNorNot.${furniture}`)})"
             />
 
-            <v-flex
-              xs12
-              sm8
+            <v-col
+              cols="12"
+              sm="8"
             >
-              <v-layout
-                row
-                wrap
-                justify-space-around
+              <v-row
+                
+                
+                justify="space-around"
               >
                 <v-btn
                   large
-                  round
+                  rounded
                   color="error"
                   @click="reset"
                 >
@@ -276,19 +273,19 @@
 
                 <v-btn
                   large
-                  round
+                  rounded
                   color="primary"
                   :loading="submitting"
                   @click="submit"
                 >
                   {{ $t('report.submit') }}
                 </v-btn>
-              </v-layout>
-            </v-flex>
-          </v-flex>
+              </v-row>
+            </v-col>
+          </v-col>
         </StageSelector>
-      </v-flex>
-    </v-layout>
+      </v-col>
+    </v-row>
 
     <v-dialog
       v-model="dialogs.first.enabled"
@@ -309,14 +306,14 @@
             <span>
               {{ $t('report.alert.causes.limitation') }}
             </span>
-            <v-expansion-panel
-              class="mt-3"
+            <v-expansion-panels
+              class="mt-4"
               popout
             >
+              <v-expansion-panel-header>
+                {{ $t('meta.details') }}
+              </v-expansion-panel-header>
               <v-expansion-panel-content>
-                <template v-slot:header>
-                  <div>{{ $t('meta.details') }}</div>
-                </template>
                 <div>
                   <v-list
                     v-if="validation.type"
@@ -326,21 +323,19 @@
                     <v-subheader>
                       {{ $t('report.rules.type._name') }}
                     </v-subheader>
-                    <v-list-tile
-                      avatar
-                    >
-                      <v-list-tile-avatar>
+                    <v-list-item>
+                      <v-list-item-avatar>
                         <v-icon>mdi-alert-circle-outline</v-icon>
-                      </v-list-tile-avatar>
-                      <v-list-tile-content>
-                        <v-list-tile-title>
+                      </v-list-item-avatar>
+                      <v-list-item-content>
+                        <v-list-item-title>
                           {{ $t('report.rules.type.now', {quantity: validation.type.quantity}) }}
-                        </v-list-tile-title>
-                        <v-list-tile-sub-title>
+                        </v-list-item-title>
+                        <v-list-item-subtitle>
                           {{ validation.type.message }}
-                        </v-list-tile-sub-title>
-                      </v-list-tile-content>
-                    </v-list-tile>
+                        </v-list-item-subtitle>
+                      </v-list-item-content>
+                    </v-list-item>
                   </v-list>
                   <v-divider v-if="validation.type && validation.item.length" />
                   <v-list
@@ -351,31 +346,30 @@
                     <v-subheader>
                       {{ $t('report.rules.item._name') }}
                     </v-subheader>
-                    <v-list-tile
+                    <v-list-item
                       v-for="item in validation.item"
                       :key="item.id"
-                      avatar
                     >
-                      <v-list-tile-avatar>
+                      <v-list-item-avatar>
                         <Item
                           :item="getItem(item.id)"
                           :ratio="0.5"
                           disable-link
                         />
-                      </v-list-tile-avatar>
-                      <v-list-tile-content>
-                        <v-list-tile-title>
+                      </v-list-item-avatar>
+                      <v-list-item-content>
+                        <v-list-item-title>
                           {{ $t('report.rules.item.now', {item: strings.translate(getItem(item.id), "name"), quantity: item.quantity}) }}
-                        </v-list-tile-title>
-                        <v-list-tile-sub-title>
+                        </v-list-item-title>
+                        <v-list-item-subtitle>
                           {{ item.message }}
-                        </v-list-tile-sub-title>
-                      </v-list-tile-content>
-                    </v-list-tile>
+                        </v-list-item-subtitle>
+                      </v-list-item-content>
+                    </v-list-item>
                   </v-list>
                 </div>
               </v-expansion-panel-content>
-            </v-expansion-panel>
+            </v-expansion-panels>
           </p>
           <p v-if="!results.length">
             {{ $t('report.alert.causes.noDrop') }}
@@ -397,7 +391,7 @@
             {{ $t('report.alert.contact.after') }}
           </blockquote>
 
-          <p class="subheading">
+          <p class="subtitle-1">
             {{ $t('report.alert.continue.first') }}
           </p>
         </v-card-text>
@@ -407,7 +401,7 @@
         <v-card-actions>
           <v-btn
             color="primary"
-            flat
+            text
             @click="dialogs.first.enabled = false"
           >
             {{ $t('dialog.cancel') }}
@@ -415,7 +409,7 @@
           <v-spacer />
           <v-btn
             color="error"
-            flat
+            text
             @click="dialogs.repeat.enabled = true"
           >
             {{ $t('dialog.confirm') }}
@@ -437,7 +431,7 @@
         </v-card-title>
 
         <v-card-text>
-          <span class="subheading">
+          <span class="subtitle-1">
             {{ $t('report.alert.continue.repeat') }}
           </span>
         </v-card-text>
@@ -447,7 +441,7 @@
         <v-card-actions>
           <v-btn
             color="primary"
-            flat
+            text
             @click="closeAllDialogs"
           >
             {{ $t('dialog.cancel') }}
@@ -455,7 +449,7 @@
           <v-spacer />
           <v-btn
             color="error"
-            flat
+            text
             @click="confirmSubmit"
           >
             {{ $t('dialog.confirm') }}

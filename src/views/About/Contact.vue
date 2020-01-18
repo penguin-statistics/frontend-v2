@@ -30,9 +30,7 @@
 </i18n>
 
 <template>
-  <v-layout
-    wrap
-  >
+  <v-row>
     <h1 class="title">
       {{ $t('contact.contact_0') }}
     </h1>
@@ -71,7 +69,7 @@
         </v-icon>
       </v-chip>
     </p>
-  </v-layout>
+  </v-row>
 <!--  <v-card class="mx-auto bkop-light">-->
 <!--    <v-card-title>-->
 <!--      <div>{{ $t('contact.contact_0') }}</div>-->

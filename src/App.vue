@@ -7,6 +7,7 @@
     <v-navigation-drawer
       v-model="drawer"
       app
+      width="300"
     >
       <div class="drawer-logo blue darken-4">
         <v-img
@@ -16,144 +17,147 @@
           contain
         />
         <div class="white--text description">
-          <v-layout
-            column
-            align-center
-            justify-center
-            wrap
+          <v-row
+            align="center"
+            justify="center"
           >
             <span>{{ $t('app.name_line1') }}</span>
             <span>{{ $t('app.name_line2') }}</span>
-          </v-layout>
+          </v-row>
         </div>
       </div>
-      <v-list>
+      <v-list
+        dense
+        nav
+      >
         <div
           v-for="route in routes"
           :key="route.name"
         >
-          <v-list-tile
+          <v-list-item
             v-if="!route.children || route.meta.forceSingle"
             :key="route.name"
             @click="onMenuItemClicked(route)"
           >
-            <v-list-tile-action>
-              <v-icon>{{ route.meta.icon }}</v-icon>
-            </v-list-tile-action>
-            <v-list-tile-content>
-              <v-list-tile-title>
+            <v-list-item-icon>
+              <v-icon v-text="route.meta.icon" />
+            </v-list-item-icon>
+            <v-list-item-content>
+              <v-list-item-title>
                 {{ $t(route.meta.i18n) }} &nbsp; <v-icon
                   v-if="!route.component && !route.meta.forceSingle"
                   small
                 >
                   mdi-open-in-new
                 </v-icon>
-              </v-list-tile-title>
-            </v-list-tile-content>
-          </v-list-tile>
+              </v-list-item-title>
+            </v-list-item-content>
+          </v-list-item>
           <v-list-group
             v-else
-            v-model="route.meta.active"
+            :value="route.meta.active"
             :prepend-icon="route.meta.icon"
             no-action
-            mandatory
           >
             <template v-slot:activator>
-              <v-list-tile>
-                <v-list-tile-content>
-                  <v-list-tile-title>{{ $t(route.meta.i18n) }}</v-list-tile-title>
-                </v-list-tile-content>
-              </v-list-tile>
+              <v-list-item-title>{{ $t(route.meta.i18n) }}</v-list-item-title>
             </template>
 
-            <v-list-tile
-              v-for="child in route.children.filter(el => !(el.meta.hide))"
+            <v-list-item
+              v-for="child in route.children.filter(el => !el.meta.hide)"
               :key="child.name"
               @click="onMenuItemClicked(child)"
             >
-              <v-list-tile-content>
-                <v-list-tile-title>{{ $t(child.meta.i18n) }}</v-list-tile-title>
-              </v-list-tile-content>
+              <v-list-item-title>{{ $t(child.meta.i18n) }}</v-list-item-title>
 
-              <v-list-tile-action>
-                <v-icon>{{ child.meta.icon }}</v-icon>
-              </v-list-tile-action>
-            </v-list-tile>
+              <v-list-item-icon>
+                <v-icon v-text="child.meta.icon" />
+              </v-list-item-icon>
+            </v-list-item>
           </v-list-group>
         </div>
 
         <v-divider class="my-2" />
 
-        <v-layout
-          justify-end
-          row
-          wrap
-        >
-          <v-btn
-            icon
-            @click="refreshData"
+        <v-container>
+          <v-row
+            justify="end"
           >
-            <v-icon>mdi-database-refresh</v-icon>
-          </v-btn>
-          <v-btn
-            icon
-            @click="dark = !dark"
-          >
-            <v-icon>mdi-invert-colors</v-icon>
-          </v-btn>
-          <v-menu
-            bottom
-            left
-          >
-            <template v-slot:activator="{ on }">
-              <v-btn
-                icon
-                v-on="on"
-              >
-                <v-icon>mdi-translate</v-icon>
-              </v-btn>
-            </template>
+            <v-btn
+              icon
+              class="mx-1"
+              @click="refreshData"
+            >
+              <v-icon>mdi-database-refresh</v-icon>
+            </v-btn>
+            <v-btn
+              icon
+              class="mx-1"
+              @click="dark = !dark"
+            >
+              <v-icon>mdi-invert-colors</v-icon>
+            </v-btn>
+            <v-menu
+              bottom
+              left
+              transition="slide-y-transition"
+            >
+              <template v-slot:activator="{ on }">
+                <v-btn
+                  icon
+                  class="mx-1"
+                  v-on="on"
+                >
+                  <v-icon>mdi-translate</v-icon>
+                </v-btn>
+              </template>
 
-            <v-list>
-              <v-list-tile
-                v-for="(locale, i) in localizations"
-                :key="i"
-                @click="changeLocale(locale.id)"
-              >
-                <v-list-tile-title>{{ locale.name }}</v-list-tile-title>
-              </v-list-tile>
-            </v-list>
-          </v-menu>
-        </v-layout>
+              <v-list>
+                <v-list-item
+                  v-for="(locale, i) in localizations"
+                  :key="i"
+                  @click="changeLocale(locale.id)"
+                >
+                  <v-list-item-title>{{ locale.name }}</v-list-item-title>
+                </v-list-item>
+              </v-list>
+            </v-menu>
+          </v-row>
+        </v-container>
       </v-list>
     </v-navigation-drawer>
-    <v-toolbar
-      color="blue darken-3"
-      dark
-      fixed
+    <v-app-bar
       app
+      fixed
+      dark
+      color="blue darken-3"
     >
-      <v-toolbar-side-icon @click.stop="drawer = !drawer" />
-      <v-toolbar-title>
+      <v-app-bar-nav-icon @click.stop="drawer = !drawer" />
+
+      <v-app-bar-title>
         <transition
           name="fade-transition"
           mode="out-in"
         >
           <v-avatar
             :size="32"
-            class="mr-3"
+            class="mx-2"
           >
             <v-img
               :src="randomizedLogo"
               class="randomizedLogo"
             />
           </v-avatar>
-        </transition>{{ $t($router.currentRoute.meta.i18n) }}
-      </v-toolbar-title>
+        </transition>
+        <span class="title">
+          {{ $t($router.currentRoute.meta.i18n) }}
+        </span>
+      </v-app-bar-title>
+
       <v-spacer />
 
       <AccountManager />
-    </v-toolbar>
+    </v-app-bar>
     <v-content>
       <transition
         name="slide-fade"
@@ -163,13 +167,14 @@
       </transition>
     </v-content>
     <v-footer
-      color="blue darken-3"
-      class="white--text px-3"
       app
+      color="blue darken-3"
+      class="white--text px-4 py-0"
     >
       <v-dialog
         v-model="showLicenseDialog"
         width="500"
+        origin="bottom left"
       >
         <template v-slot:activator="{ on }">
           <span
@@ -231,7 +236,7 @@
           <v-card-actions>
             <v-spacer />
             <v-btn
-              flat
+              text
               href="https://creativecommons.org/licenses/by-nc/4.0/"
               target="_blank"
             >
@@ -291,6 +296,7 @@ export default {
       },
       set (value) {
         this.$store.commit('switchDark', value)
+        this.$vuetify.theme.dark = value
       }
     }
   },
@@ -318,6 +324,10 @@ export default {
         // unless the user manually set one.
         this.changeLocale(language, false)
       }
+    }
+
+    if (this.$store.state.settings.dark) {
+      this.$vuetify.theme.dark = this.$store.state.settings.dark
     }
   },
   methods: {

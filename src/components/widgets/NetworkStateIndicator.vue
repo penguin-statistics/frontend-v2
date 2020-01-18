@@ -14,30 +14,30 @@
           <span class="ml-2">{{ $t('fetch.failed.title') }}</span>
         </v-card-title>
 
-        <v-card-text class="pa-4">
-          <span class="subheading">
+        <v-card-text class="pa-6">
+          <span class="subtitle-1">
             {{ $t('fetch.failed.subtitle') }}
           </span>
-          <v-divider class="my-4" />
+          <v-divider class="my-6" />
           <v-subheader>
             {{ $t('meta.details') }}
           </v-subheader>
           <v-list two-line>
-            <v-list-tile
+            <v-list-item
               v-for="error in $store.getters.ajaxErrors"
               :key="error.id"
               avatar
             >
-              <v-list-tile-content>
-                <v-list-tile-title>
+              <v-list-item-content>
+                <v-list-item-title>
                   {{ error.id }}
-                </v-list-tile-title>
-                <v-list-tile-sub-title>
+                </v-list-item-title>
+                <v-list-item-subtitle>
                   {{ error.error }}
-                </v-list-tile-sub-title>
-              </v-list-tile-content>
+                </v-list-item-subtitle>
+              </v-list-item-content>
 
-              <v-list-tile-action>
+              <v-list-item-action>
                 <v-progress-circular
                   v-if="error.pending"
                   indeterminate
@@ -45,15 +45,15 @@
                 <v-icon v-else>
                   mdi-alert-circle-outline
                 </v-icon>
-              </v-list-tile-action>
-            </v-list-tile>
+              </v-list-item-action>
+            </v-list-item>
           </v-list>
         </v-card-text>
 
         <v-card-actions>
           <v-spacer />
           <v-btn
-            flat
+            text
             :loading="$store.getters.ajaxPending"
             @click="refreshData"
           >

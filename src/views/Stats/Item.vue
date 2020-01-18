@@ -60,16 +60,15 @@
         :editable="step > 1"
         :step="1"
       >
-        <v-layout
-          column
-          align-center
-          justify-center
-          wrap
-          class="text-xs-center"
+        <v-row
+          align="center"
+          justify="center"
+          
+          class="text-center"
         >
           {{ $t('choose.name') }}
           <small v-if="step > 1">{{ selectedItemName }}</small>
-        </v-layout>
+        </v-row>
       </v-stepper-step>
 
       <v-divider />
@@ -78,15 +77,14 @@
         :complete="step === 2"
         :step="2"
       >
-        <v-layout
-          column
-          align-center
-          justify-center
-          wrap
-          class="text-xs-center"
+        <v-row
+          align="center"
+          justify="center"
+          
+          class="text-center"
         >
           {{ $t('result.name') }}
-        </v-layout>
+        </v-row>
       </v-stepper-step>
     </v-stepper-header>
 
@@ -126,32 +124,32 @@
       </v-stepper-content>
 
       <v-stepper-content :step="2">
-        <v-layout
-          align-center
-          justify-space-between
+        <v-row
+          align="center"
+          justify="space-between"
         >
-          <h1 class="title mx-3 my-1">
-            <v-layout align-center>
+          <h1 class="title mx-4 my-1">
+            <v-row align="center">
               <Item
                 v-if="selected.item"
                 :item="selected.item"
                 disable-tooltip
                 disable-link
               />
-              <v-flex class="ml-2">
+              <v-col class="ml-2">
                 {{ $t('result.title', {item: selectedItemName}) }}
-              </v-flex>
-            </v-layout>
+              </v-col>
+            </v-row>
           </h1>
           <DataSourceToggle />
-        </v-layout>
+        </v-row>
         <v-data-table
           :headers="tableHeaders"
           :items="itemStagesStats"
           :pagination.sync="tablePagination"
           :calculate-widths="true"
           must-sort
-          hide-actions
+          hide-default-footer
           class="elevation-0 transparentTable stat-table"
         >
           <template v-slot:items="props">
@@ -186,25 +184,25 @@
             </td>
             <td
               :class="{'px-3': $vuetify.breakpoint.xsOnly}"
-              class="text-xs-center"
+              class="text-center"
             >
               {{ props.item.stage.apCost }}
             </td>
             <td
               :class="{'px-3': $vuetify.breakpoint.xsOnly}"
-              class="text-xs-center"
+              class="text-center"
             >
               {{ props.item.times }}
             </td>
             <td
               :class="{'px-3': $vuetify.breakpoint.xsOnly}"
-              class="text-xs-center"
+              class="text-center"
             >
               {{ props.item.quantity }}
             </td>
             <td
               :class="{'px-3': $vuetify.breakpoint.xsOnly}"
-              class="text-xs-center"
+              class="text-center"
             >
               <div class="charts-data-wrapper">
                 {{ props.item.percentageText }}
@@ -228,7 +226,7 @@
             </td>
             <td
               :class="{'px-3': $vuetify.breakpoint.xsOnly}"
-              class="text-xs-center"
+              class="text-center"
             >
               {{ props.item.apPPR }}
             </td>

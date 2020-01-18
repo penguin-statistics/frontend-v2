@@ -46,49 +46,40 @@
 </i18n>
 
 <template>
-  <v-card class="bkop-light pa-4">
+  <v-card class="bkop-light pa-6">
     <h1 class="headline">
       {{ $t('menu.about.donate') }}
     </h1>
 
     <v-card-title>
-      <v-layout
-        column
-        wrap
-      >
-        <v-flex class="caption">
-          <del>
-            {{ $t('donate.donate_0') }}
-          </del>
-        </v-flex>
-        <v-divider />
-        <v-flex class="subheading">
-          {{ $t('donate.donate_1') }}
-          <v-tooltip top>
-            <template v-slot:activator="{ on }">
-              <span
-                style="border-bottom:1px dashed #ccc;"
-                v-on="on"
-              >{{ $t('donate.donate_2') }}</span>
-            </template>
-            {{ $t('donate.donate_3') }}
-          </v-tooltip>
-          {{ $t('donate.donate_4') }}
-        </v-flex>
-      </v-layout>
+      <del class="caption mb-2">
+        {{ $t('donate.donate_0') }}
+      </del>
+      <div class="subtitle-1">
+        {{ $t('donate.donate_1') }}
+        <v-tooltip top>
+          <template v-slot:activator="{ on }">
+            <span
+              style="border-bottom:1px dashed #ccc;"
+              v-on="on"
+            >{{ $t('donate.donate_2') }}</span>
+          </template>
+          {{ $t('donate.donate_3') }}
+        </v-tooltip>
+        {{ $t('donate.donate_4') }}
+      </div>
     </v-card-title>
 
-    <v-layout
-      wrap
-      align-start
-      justify-center
+    <v-row
+      align="start"
+      justify="center"
       class="px-2"
     >
-      <v-flex
-        xs12
-        sm6
+      <v-col
+        cols="12"
+        sm="6"
       >
-        <v-card class="bkop-light pt-3 pb-2 elevation-5">
+        <v-card class="bkop-light pt-4 pb-2 elevation-5">
           <v-img
             :src="require('@/assets/qrcodes/alipay-qrcode.svg')"
             :alt="$t('donate.methods.alipay')"
@@ -98,35 +89,35 @@
           />
 
           <v-card-title primary-title>
-            <v-layout
-              align-center
-              justify-center
-              column
-              fill-height
+            <v-row
+              class="fill-height"
+              align="center"
+              justify="center"
             >
               <v-btn
                 v-show="$vuetify.breakpoint.smAndDown"
-                flat
-                outline
+                text
+                outlined
+                class="my-0"
 
                 @click="redirectAlipay"
               >
                 {{ $t('donate.redirectToApp', {app: $t('donate.methods.alipay')}) }}
               </v-btn>
 
-              <v-flex>
+              <span class="text-center mt-2">
                 {{ $t('donate.methods.alipay') }}
-              </v-flex>
-            </v-layout>
+              </span>
+            </v-row>
           </v-card-title>
         </v-card>
-      </v-flex>
+      </v-col>
 
-      <v-flex
-        xs12
-        sm6
+      <v-col
+        cols="12"
+        sm="6"
       >
-        <v-card class="bkop-light pt-3 pb-2 elevation-5">
+        <v-card class="bkop-light pt-4 pb-2 elevation-5">
           <v-img
             :src="require('@/assets/qrcodes/wechatpay-qrcode.svg')"
             :alt="$t('donate.methods.wechatPay')"
@@ -135,30 +126,30 @@
           />
 
           <v-card-title primary-title>
-            <v-layout
-              align-center
-              justify-center
-              column
-              fill-height
+            <v-row
+              class="fill-height"
+              align="center"
+              justify="center"
             >
               <v-btn
                 v-show="$vuetify.breakpoint.smAndDown"
-                flat
-                outline
+                text
+                outlined
+                class="my-0"
 
                 @click="redirectWechatPay"
               >
                 {{ $t('donate.redirectToApp', {app: $t('donate.methods.wechatPay')}) }}
               </v-btn>
 
-              <v-flex>
+              <span class="text-center mt-2">
                 {{ $t('donate.methods.wechatPay') }}
-              </v-flex>
-            </v-layout>
+              </span>
+            </v-row>
           </v-card-title>
         </v-card>
-      </v-flex>
-    </v-layout>
+      </v-col>
+    </v-row>
   </v-card>
 </template>
 

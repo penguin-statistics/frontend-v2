@@ -49,7 +49,7 @@
 </i18n>
 
 <template>
-  <v-card class="bkop-light pa-4">
+  <v-card class="bkop-light pa-6">
     <h1 class="headline">
       {{ $t('menu.about.contribute') }}
     </h1>
@@ -57,71 +57,55 @@
       * {{ $t('contribute.contribute_1') }}
     </div>
 
-    <v-list
-      dense
-      class="mt-2 transparent outline"
+    <v-row
+      class="mx-0 py-1 transparent outline"
+      align="center"
+      justify="center"
     >
-      <v-list-tile>
-        <v-layout
-          align-center
-          justify-center
-          wrap
-          fill-height
-        >
-          <v-list-tile-action>
-            <v-layout
-              align-center
-              justify-center
-              wrap
-              fill-height
-            >
-              <v-btn
-                href="https://github.com/penguin-statistics/frontend-v2"
-                target="_blank"
-                :class="{
-                  'mx-2': $vuetify.breakpoint.smAndUp,
-                  'mx-1': $vuetify.breakpoint.xsOnly
-                }"
-                flat
-              >
-                {{ $t('contribute.frontend') }}
-                <v-icon right>
-                  mdi-github-circle
-                </v-icon>
-              </v-btn>
+      <v-btn
+        href="https://github.com/penguin-statistics/frontend-v2"
+        target="_blank"
+        :class="{
+          'mx-2': $vuetify.breakpoint.smAndUp,
+          'mx-1': $vuetify.breakpoint.xsOnly
+        }"
+        text
+      >
+        {{ $t('contribute.frontend') }}
+        <v-icon right>
+          mdi-github-circle
+        </v-icon>
+      </v-btn>
 
-              <v-divider vertical />
+      <v-divider vertical />
 
-              <v-btn
-                href="https://github.com/penguin-statistics/backend"
-                target="_blank"
-                :class="{
-                  'mx-2': $vuetify.breakpoint.smAndUp,
-                  'mx-1': $vuetify.breakpoint.xsOnly
-                }"
-                flat
-              >
-                {{ $t('contribute.backend') }}
-                <v-icon right>
-                  mdi-github-circle
-                </v-icon>
-              </v-btn>
-            </v-layout>
-          </v-list-tile-action>
-        </v-layout>
-      </v-list-tile>
-    </v-list>
+      <v-btn
+        href="https://github.com/penguin-statistics/backend"
+        target="_blank"
+        :class="{
+          'mx-2': $vuetify.breakpoint.smAndUp,
+          'mx-1': $vuetify.breakpoint.xsOnly
+        }"
+        text
+      >
+        {{ $t('contribute.backend') }}
+        <v-icon right>
+          mdi-github-circle
+        </v-icon>
+      </v-btn>
+    </v-row>
 
-    <v-divider class="my-3" />
+    <v-divider class="my-4" />
 
-    <blockquote class="blockquote pl-0">
+    <p class="subtitle-2 pl-0">
       {{ $t('contribute.contribute_0') }}
-    </blockquote>
+    </p>
 
     <ul class="ml-4">
       <li
         v-for="(skill, key) in skills"
         :key="key"
+        class="subtitle-2"
       >
         {{ $t(`contribute.skills.${skill}`) }}
       </li>

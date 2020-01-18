@@ -62,9 +62,9 @@ export default {
       } else if (this.ratio <= 0.75) {
         return ["pa-2"];
       } else if (this.ratio <= 1) {
-        return ["pa-3"];
-      } else {
         return ["pa-4"];
+      } else {
+        return ["pa-6"];
       }
     },
     furnitureWidth() {

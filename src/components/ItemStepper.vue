@@ -1,12 +1,10 @@
 <template>
-  <v-layout
-    row
-    wrap
-    align-center
-    justify-center
+  <v-row
+    align="center"
+    justify="center"
     class="pr-1 pb-1"
   >
-    <v-flex>
+    <v-col>
       <!-- <v-badge
         color="red"
         :value="quantity > 0"
@@ -44,12 +42,12 @@
       </v-badge>
 
       <template v-if="item.itemType === 'ACTIVITY_ITEM_BATCH'">
-        <v-layout
-          flex
-          row
-          wrap
-          align-center
-          justify-center
+        <v-row
+          class="flex"
+                    
+          
+          align="center"
+          justify="center"
         >
           <div class="text-center mt-2">
             <v-btn
@@ -60,12 +58,12 @@
               +10
             </v-btn>
           </div>
-        </v-layout>
+        </v-row>
       </template>
 
       <!-- </v-badge> -->
-    </v-flex>
-  </v-layout>
+    </v-col>
+  </v-row>
 </template>
 
 <script>

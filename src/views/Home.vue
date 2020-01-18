@@ -1,24 +1,19 @@
 <template>
-  <v-container
-    grid-list-lg
-  >
-    <v-layout
-      row
-      wrap
-    >
-      <v-flex
-        xs12
+  <v-container>
+    <v-row dense>
+      <v-col
+        cols="12"
       >
         <Intro data-aos="fade" />
-      </v-flex>
-      <v-flex
-        xs12
+      </v-col>
+      <v-col
+        cols="12"
       >
         <Bulletin
           data-aos="fade"
-          data-aos-offset="60"
+          data-aos-offset="100"
         />
-      </v-flex>
+      </v-col>
       <!--      <v-flex-->
       <!--        xs12-->
       <!--        sm6-->
@@ -27,25 +22,25 @@
       <!--          data-aos="fade"-->
       <!--        />-->
       <!--      </v-flex>-->
-      <v-flex
-        xs12
-        md6
+      <v-col
+        cols="12"
+        md="6"
       >
         <Contribute
           data-aos="fade"
-          data-aos-offset="60"
+          data-aos-offset="100"
         />
-      </v-flex>
-      <v-flex
-        xs12
-        md6
+      </v-col>
+      <v-col
+        cols="12"
+        md="6"
       >
         <Donate
           data-aos="fade"
-          data-aos-offset="60"
+          data-aos-offset="100"
         />
-      </v-flex>
-    </v-layout>
+      </v-col>
+    </v-row>
   </v-container>
 </template>
 

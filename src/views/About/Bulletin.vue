@@ -22,28 +22,25 @@
 </i18n>
 
 <template>
-  <v-card class="bkop-light pa-4">
+  <v-card class="bkop-light pa-6">
     <h1 class="headline">
       {{ $t('menu.about.bulletin') }}
     </h1>
-    <v-layout
-      row
-      wrap
-    >
+    <v-row>
       <v-card-title>
-        <v-flex
-          xs12
+        <v-col
+          cols="12"
         >
           <p
-            class="subheading line-height-wide"
+            class="subtitle-1 line-height-wide"
           >
             {{ $t('bulletin.bulletin_0') }}
             <br>
             {{ $t('bulletin.bulletin_1') }}
           </p>
-        </v-flex>
+        </v-col>
       </v-card-title>
-    </v-layout>
+    </v-row>
   </v-card>
 </template>
 

@@ -5,7 +5,7 @@ import Home from './views/Home'
 import Report from './views/Report'
 
 import StatsLayout from './layouts/StatsLayout'
-import StatsByStage from './views/Stats/Stage'
+// import StatsByStage from './views/Stats/Stage'
 import StatsByItem from './views/Stats/Item'
 
 import AboutLayout from './layouts/AboutLayout'
@@ -17,6 +17,7 @@ import AboutContact from './views/About/Contact'
 import AboutDonate from './views/About/Donate'
 import AboutLinks from './views/About/Links'
 import NotFound from "@/views/NotFound";
+import NewStage from "@/views/Stats/NewStage";
 
 Vue.use(Router);
 
@@ -79,7 +80,7 @@ const router = new Router({
       children: [{
           path: 'stage',
           name: 'StatsByStage',
-          component: StatsByStage,
+          component: NewStage,
           props: true,
           meta: {
             icon: 'mdi-cube',
@@ -87,19 +88,9 @@ const router = new Router({
           },
         },
         {
-          path: 'stage/:zoneId',
-          name: 'StatsByStage_SelectedZone',
-          component: StatsByStage,
-          props: true,
-          meta: {
-            hide: true,
-            i18n: 'menu.stats.stage'
-          },
-        },
-        {
           path: 'stage/:zoneId/:stageId',
-          name: 'StatsByStage_SelectedBoth',
-          component: StatsByStage,
+          name: 'StatsByStage_Selected',
+          component: NewStage,
           props: true,
           meta: {
             hide: true,

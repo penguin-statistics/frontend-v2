@@ -61,16 +61,13 @@
 </i18n>
 
 <template>
-  <v-layout
-    row
-    wrap
-  >
-    <v-flex
+  <v-row>
+    <v-col
       v-for="(link, index) in links"
       :key="index"
-      d-flex
-      sm6
-      md4
+      class="d-flex"
+      sm="6"
+      md="4"
     >
       <v-card
         class="bkop-light"
@@ -79,7 +76,7 @@
         <v-card-title
           v-if="link.title"
           primary-title
-          class="px-3 pt-3 pb-2"
+          class="px-4 pt-4 pb-2"
         >
           <div>
             <div>
@@ -92,7 +89,7 @@
         <v-card-title
           v-if="link.features"
           primary-title
-          class="px-3 py-1"
+          class="px-4 py-1"
         >
           <v-chip
             v-for="(feature, featIndex) in link.features"
@@ -107,13 +104,12 @@
         </v-card-title>
         <div
           v-if="link.url"
-          class="px-3 pt-2 pb-3"
+          class="px-4 pt-2 pb-4"
         >
-          <v-layout
-            align-center
-            justify-center
-            row
-            fill-height
+          <v-row
+            class="fill-height"
+            align="center"
+            justify="center"
           >
             <v-chip
               class="ma-2"
@@ -126,11 +122,11 @@
                 mdi-share
               </v-icon>
             </v-chip>
-          </v-layout>
+          </v-row>
         </div>
       </v-card>
-    </v-flex>
-  </v-layout>
+    </v-col>
+  </v-row>
 </template>
 
 <script>

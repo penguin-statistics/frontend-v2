@@ -96,22 +96,22 @@
     :prefill="prefill"
     @selected="select"
   >
-    <v-layout
-      align-center
-      justify-space-between
+    <v-row
+      align="center"
+      justify="space-between"
     >
-      <h1 class="title ma-3">
+      <h1 class="title ma-4">
         {{ $t('stats.title', {stage: selectedStage.code}) }}
       </h1>
       <DataSourceToggle />
-    </v-layout>
+    </v-row>
     <v-data-table
       :headers="tableHeaders"
       :items="stageStats"
       :pagination.sync="tablePagination"
       :calculate-widths="true"
       must-sort
-      hide-actions
+      hide-default-footer
       class="elevation-0 transparentTable stat-table"
     >
       <template v-slot:items="props">
@@ -164,19 +164,19 @@
           </td>
           <td
             :class="{'px-3': $vuetify.breakpoint.xsOnly}"
-            class="text-xs-center"
+            class="text-center"
           >
             {{ props.item.times }}
           </td>
           <td
             :class="{'px-3': $vuetify.breakpoint.xsOnly}"
-            class="text-xs-center"
+            class="text-center"
           >
             {{ props.item.quantity }}
           </td>
           <td
             :class="{'px-3': $vuetify.breakpoint.xsOnly}"
-            class="text-xs-center"
+            class="text-center"
           >
             <div
               class="charts-data-wrapper"
@@ -203,7 +203,7 @@
           </td>
           <td
             :class="{'px-3': $vuetify.breakpoint.xsOnly}"
-            class="text-xs-center"
+            class="text-center"
           >
             {{ props.item.apPPR }}
           </td>

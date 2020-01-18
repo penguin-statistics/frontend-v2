@@ -1,5 +1,5 @@
 import Vue from 'vue'
-import './plugins/vuetify'
+import vuetify from './plugins/vuetify';
 import 'vuetify/dist/vuetify.min.css'
 import App from './App.vue'
 import router from './router'
@@ -57,6 +57,7 @@ Vue.use(VueAnalytics, {
 Vue.config.productionTip = false;
 
 new Vue({
+  vuetify,
   router,
   store,
   i18n,
