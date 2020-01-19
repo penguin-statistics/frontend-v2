@@ -14,7 +14,7 @@ function translate (object, key) {
         if (languages.length === 2 && languages[0] !== "") {
           return object[localeKey][languages[0]] || "";
         } else {
-          Console.debug(`translation error: ${key}: Specific country code detected but no translation message is matching it.`)
+          Console.debug(`translation error: ${key}: Specific country code detected but it's invalid`)
           return ""
         }
       }

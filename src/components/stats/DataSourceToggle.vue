@@ -62,35 +62,20 @@
         </v-card-actions>
       </v-card>
     </v-dialog>
-    <div class="v-item-group theme--dark v-btn-toggle v-btn-toggle--only-child v-btn-toggle--selected">
-      <button
-        :class="{'v-btn--active': dataSource === 'global'}"
-        type="button"
-        value="global"
-        class="v-btn theme--dark"
-        @click="dataSource = 'global'"
-      >
-        <div class="v-btn__content">
-          {{ $t('dataSourceToggle.all') }}
-        </div>
-      </button>
-      <button
-        :class="{'v-btn--active': dataSource === 'personal'}"
-        type="button"
-        value="personal"
-        class="v-btn theme--dark"
-        @click="dataSource = 'personal'"
-      >
-        <div class="v-btn__content">
-          {{ $t('dataSourceToggle.personal') }}
-        </div>
-      </button>
-    </div>
+    <v-btn-toggle v-model="dataSourceModifier">
+      <v-btn small>
+        {{ $t('dataSourceToggle.all') }}
+      </v-btn>
+      <v-btn small>
+        {{ $t('dataSourceToggle.personal') }}
+      </v-btn>
+    </v-btn-toggle>
   </span>
 </template>
 
 <script>
 import AccountManager from "@/components/toolbar/AccountManager";
+import Console from "@/utils/Console";
 export default {
   name: "DataSourceToggle",
   components: {
@@ -99,7 +84,8 @@ export default {
   data() {
     return {
       dialog: false,
-      prefetchingResources: false
+      prefetchingResources: false,
+      dataSourceId: null
     };
   },
   computed: {
@@ -124,6 +110,23 @@ export default {
             break;
         }
         this.$store.commit("switchDataSource", value);
+      }
+    },
+    dataSourceModifier: {
+      get() {
+        if (this.dataSourceId) return this.dataSourceId;
+        const source = this.$store.state.dataSource;
+        return source === "global" ? 0 : 1;
+      },
+      set(value) {
+        if (value === 0) {
+          // global
+          this.dataSource = "global";
+        } else if (value === 1) {
+          this.dataSource = "personal";
+        } else {
+          Console.error("unknown data source", this.dataSource)
+        }
       }
     }
   },

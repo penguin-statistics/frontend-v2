@@ -1,26 +1,29 @@
 <template>
-  <span>
-    <figure
-      v-if="item.itemId !== 'furni' && item.spriteCoord"
-      ref="icon"
-      :class="{'item-icon--sprite': true, 'item-icon--sprite--disable-hover-effect': disableTooltip}"
-      :alt="`item(${item.itemId})`"
-    />
-    <v-icon
-      v-else-if="item.itemId === 'furni'"
-      :class="furniturePadding"
-      :style="furnitureWidth"
-      class="deep-orange"
-      style="border-radius: 50%;"
-    >mdi-lamp</v-icon>
-    <v-icon
-      v-else-if="item.itemId !== 'furni' && !item.spriteCoord"
-      :class="furniturePadding"
-      :style="furnitureWidth"
-      class="blue"
-      style="border-radius: 50%;"
-    >mdi-treasure-chest</v-icon>
-  </span>
+  <figure
+    v-if="item.itemId !== 'furni' && item.spriteCoord"
+    ref="icon"
+    :class="{'item-icon--sprite': true, 'item-icon--sprite--disable-hover-effect': disableTooltip}"
+    :alt="`item(${item.itemId})`"
+    :style="style"
+  />
+  <v-icon
+    v-else-if="item.itemId === 'furni'"
+    :class="furniturePadding"
+    class="deep-orange"
+    style="border-radius: 50%;"
+    :size="30 * ratio"
+  >
+    mdi-lamp
+  </v-icon>
+  <v-icon
+    v-else-if="item.itemId !== 'furni' && !item.spriteCoord"
+    :class="furniturePadding"
+    class="blue"
+    style="border-radius: 50%;"
+    :size="30 * ratio"
+  >
+    mdi-treasure-chest
+  </v-icon>
 </template>
 
 <script>
@@ -67,42 +70,19 @@ export default {
         return ["pa-6"];
       }
     },
-    furnitureWidth() {
-      return {
-        fontSize: 36 * this.ratio
+    style () {
+      const style = {
+        height: `${this.ratio * this.originalIconSize}px`,
+        width: `${this.ratio * this.originalIconSize}px`,
+        backgroundSize: `${this.ratio * this.originalSpriteDimensions.x}px ${this.ratio * this.originalSpriteDimensions.y}px`,
       };
-    }
-  },
-  watch: {
-    item: function(newItem) {
-      if (newItem.itemId !== "furni") this.updatePosition(newItem.spriteCoord);
-      this.updateScale(this.ratio);
-    },
-    ratio: function(newRatio) {
-      this.updateScale(newRatio);
-      if (this.item.itemId !== "furni")
-        this.updatePosition(this.item.spriteCoord);
-    }
-  },
-  mounted() {
-    if (this.item.itemId !== "furni" && this.item.spriteCoord) {
-      this.updatePosition(this.item.spriteCoord);
-      this.updateScale(this.ratio);
+      if (this.item.spriteCoord) {
+        style["backgroundPosition"] = this.transformCoordinate(this.item.spriteCoord)
+      }
+      return style
     }
   },
   methods: {
-    updatePosition(coordinate) {
-      this.$refs.icon.style.backgroundPosition = this.transformCoordinate(
-        coordinate
-      );
-    },
-    updateScale(ratio) {
-      this.$refs.icon.style.height = `${ratio * this.originalIconSize}px`;
-      this.$refs.icon.style.width = `${ratio * this.originalIconSize}px`;
-      this.$refs.icon.style.backgroundSize = `${ratio *
-        this.originalSpriteDimensions.x}px ${ratio *
-        this.originalSpriteDimensions.y}px`;
-    },
     transformCoordinate(coordinate) {
       const FACTOR = this.ratio * this.originalIconSize;
       return `-${coordinate[0] * FACTOR}px -${coordinate[1] * FACTOR}px`;

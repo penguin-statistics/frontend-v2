@@ -152,9 +152,7 @@
           rounded
           @click="auth.logoutPrompt = true"
         >
-          <v-icon
-            left
-          >
+          <v-icon left>
             mdi-logout-variant
           </v-icon>
           {{ $t('logout') }}

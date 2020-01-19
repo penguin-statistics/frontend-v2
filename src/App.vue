@@ -90,6 +90,7 @@
             >
               <v-icon>mdi-database-refresh</v-icon>
             </v-btn>
+
             <v-btn
               icon
               class="mx-1"
@@ -97,6 +98,7 @@
             >
               <v-icon>mdi-invert-colors</v-icon>
             </v-btn>
+            
             <v-menu
               bottom
               left

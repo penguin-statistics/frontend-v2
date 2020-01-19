@@ -1,6 +1,7 @@
 <template>
   <v-card
     hover
+    ripple
     :class="{'d-inline-flex ma-1 stage-card cursor-pointer': true, 'stage-card--light': !dark, 'stage-card--dark': dark }"
   >
     <v-card-title class="subtitle-1 py-1 px-3">
@@ -103,9 +104,9 @@
       generateStyle(type) {
         if (type === s.separator) return {c: ["grey--text"]}
         if (type === s.S) return {c: ["pink--text font-weight-bold"]}
-        if (type === s.prefix) return {c: ["grey--text text--darken-1"]}
-        if (type === s.middle) return {c: ["grey--text text--lighten-2"]}
-        if (type === s.stage) return {c: ["yellow--text font-weight-black"]}
+        if (type === s.prefix) return {c: ["grey--text", this.dark ? "text--darken-1" : ""]}
+        if (type === s.middle) return {c: ["grey--text", this.dark ? "text--lighten-2" : "text--darken-3"]}
+        if (type === s.stage) return {c: ["font-weight-black", this.dark ? "yellow--text text--lighten-2" : "black--text"]}
       }
     },
   }

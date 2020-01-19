@@ -94,32 +94,36 @@
         :step="1"
       >
         <v-container>
-          <div
-            v-for="(items, name) in categorizedItems"
-            :key="name"
-            class="item-list-wrapper"
-          >
-            <div class="ml-2 my-2">
-              {{ $t(`categories.${name}`) }}
-            </div>
-            <div class="item-list">
+          <v-row justify="center">
+            <v-col cols="12">
               <div
-                v-for="item in items"
-                :key="item.itemId"
-                class="item-list-item-wrapper"
+                v-for="(items, name) in categorizedItems"
+                :key="name"
+                class="item-list-wrapper"
               >
-                <v-avatar
-                  class="item-list-item-avatar cursor-pointer"
-                  @click="storeItemSelection(item.itemId)"
-                >
-                  <Item
-                    :item="item"
-                    disable-link
-                  />
-                </v-avatar>
+                <div class="ml-2 my-2">
+                  {{ $t(`categories.${name}`) }}
+                </div>
+                <div class="item-list">
+                  <div
+                    v-for="item in items"
+                    :key="item.itemId"
+                    class="item-list-item-wrapper"
+                  >
+                    <div
+                      class="item-list-item-avatar cursor-pointer"
+                      @click="storeItemSelection(item.itemId)"
+                    >
+                      <Item
+                        :item="item"
+                        disable-link
+                      />
+                    </div>
+                  </div>
+                </div>
               </div>
-            </div>
-          </div>
+            </v-col>
+          </v-row>
         </v-container>
       </v-stepper-content>
 

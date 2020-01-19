@@ -42,7 +42,7 @@
   "stats": {
     "headers": {
       "stage": "关卡",
-      "apCost": "理智消耗",
+      "apCost": "理智",
       "item": "物品",
       "times": "样本数",
       "quantity": "掉落数",

@@ -16,6 +16,9 @@ const zones = new ObjectManager({
   api: '/zones?i18n=true',
   transform: [
     (object) => {
+      object.push(
+        {"zoneId":"testzone","zoneIndex":0,"type":"ACTIVITY","zoneName":"测试活动","openTime":1578513600000,"closeTime":1580118399000,"stages":["teststage01", "teststage02"]}
+      )
       object.forEach((el) => {
         el.icon = getIcon(el.type);
 

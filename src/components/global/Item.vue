@@ -1,35 +1,28 @@
 <template>
-  <span
-    :class="{ 'cursor-pointer': !disableLink }"
-    @click="redirectItemPage"
-  >
-    <v-tooltip
-      v-if="!disableTooltip"
-      :open-delay="60"
-      :nudge-top="10"
+  <v-tooltip
+    v-if="!disableTooltip"
+    :open-delay="60"
+    :nudge-top="10"
 
-      v-bind="calculatedTooltipPosition"
-      lazy
-    >
-      <template v-slot:activator="{ on }">
-        <span v-on="on">
-          <ItemIcon
-            :item="item"
-            :ratio="ratio"
-            :disable-tooltip="disableTooltip"
-          />
-        </span>
-      </template>
-      <span :style="tooltipSize">{{ name }}</span>
-    </v-tooltip>
-    <span v-if="disableTooltip">
-      <ItemIcon
-        :item="item"
-        :ratio="ratio"
-        :disable-tooltip="disableTooltip"
-      />
-    </span>
-  </span>
+    v-bind="calculatedTooltipPosition"
+  >
+    <template v-slot:activator="{ on }">
+      <span v-on="on">
+        <ItemIcon
+          :item="item"
+          :ratio="ratio"
+          :disable-tooltip="disableTooltip"
+        />
+      </span>
+    </template>
+    <span :style="tooltipSize">{{ name }}</span>
+  </v-tooltip>
+  <ItemIcon
+    v-else-if="disableTooltip"
+    :item="item"
+    :ratio="ratio"
+    :disable-tooltip="disableTooltip"
+  />
 </template>
 
 <script>

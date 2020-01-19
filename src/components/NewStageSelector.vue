@@ -79,140 +79,134 @@
 </i18n>
 
 <template>
-  <v-container>
-    <v-stepper
-      v-model="step"
-      :alt-labels="!small"
-      class="pa-2 transparent elevation-0"
+  <v-stepper
+    v-model="step"
+    :alt-labels="!small"
+    class="pa-2 transparent elevation-0"
+  >
+    <v-stepper-header
+      class="bkop-light elevation-6"
+      style="border-radius: 4px"
     >
-      <v-stepper-header class="elevation-6">
-        <v-stepper-step
-          :complete="step > 1"
-          :editable="step > 1"
-          :step="1"
+      <v-stepper-step
+        :complete="step > 1"
+        :editable="step > 1"
+        :step="1"
+      >
+        {{ $t('stage.name') }}{{ $t('meta.separator') }}{{ $t('zone.name') }}
+        <small
+          v-if="step > 1"
+          class="mt-2"
         >
-          <v-row
-            align="center"
-            justify="center"
+          {{ selectedStage.code || '' }}
+        </small>
+      </v-stepper-step>
 
-            class="text-center"
+      <v-divider />
+
+      <v-stepper-step
+        :complete="step === 2"
+        :step="2"
+      >
+        {{ name }}
+      </v-stepper-step>
+    </v-stepper-header>
+    <v-stepper-items>
+      <v-stepper-content
+        :step="1"
+        :class="{'pa-0': small}"
+      >
+        <v-row>
+          <v-col
+            v-for="(categories, index) in categorizedZones"
+            :key="index"
+            cols="12"
+            sm="12"
+            md="6"
+            lg="6"
+            xl="6"
           >
-            {{ $t('stage.name') }}{{ $t('meta.separator') }}{{ $t('zone.name') }}
-            <small v-if="step > 1">{{ selectedStage.code || '' }}</small>
-          </v-row>
-        </v-stepper-step>
-
-        <v-divider />
-
-        <v-stepper-step
-          :complete="step === 2"
-          :step="2"
-        >
-          <v-row
-            align="center"
-            justify="center"
-
-            class="text-center"
-          >
-            {{ name }}
-          </v-row>
-        </v-stepper-step>
-      </v-stepper-header>
-      <v-stepper-items>
-        <v-stepper-content
-          :step="1"
-          :class="{'pa-0': small}"
-        >
-          <v-row>
-            <v-col
-              v-for="(categories, index) in categorizedZones"
-              :key="index"
-              cols="12"
-              sm="12"
-              md="6"
-              lg="6"
-              xl="6"
+            <div
+              v-for="category in categories"
+              :key="category.id"
             >
-              <div
-                v-for="category in categories"
-                :key="category.id"
+              <v-subheader>
+                <v-icon class="mr-2">
+                  {{ category.zones[0].icon }}
+                </v-icon>
+                <span>
+                  {{ $t(['zone.types', category.id].join('.')) }}
+                </span>
+              </v-subheader>
+              <v-expansion-panels
+                hover
+                eager
+                class="mb-2"
               >
-                <v-subheader>
-                  <v-icon class="mr-2">
-                    {{ category.zones[0].icon }}
-                  </v-icon>
-                  <span>
-                    {{ $t(['zone.types', category.id].join('.')) }}
-                  </span>
-                </v-subheader>
-                <v-expansion-panels
-                  hover
-                  eager
-                  class="mb-2"
-                  multiple
+                <v-expansion-panel
+                  v-for="zone in category.zones"
+                  :key="zone.zoneId"
+                  class="bkop-light"
                 >
-                  <v-expansion-panel
-                    v-for="zone in category.zones"
-                    :key="zone.zoneId"
-                    class="bkop-light"
-                  >
-                    <v-expansion-panel-header class="overflow-hidden bkop-medium">
-                      <v-row align="center">
-                        <span
-                          v-if="zone.isActivity && !small"
-                          :class="{
-                            'text--darken-1 font-weight-bold ml-2 mr-1': true,
-                            'red--text': zone.isOutdated,
-                            'green--text': !zone.isOutdated }"
-                        >
-                          {{ zone.isOutdated ? $t('zone.status.closed') : $t('zone.status.open') }}
-                        </span>
-
-                        <span
-                          :class="{'subtitle-1 pl-2': true, 'text--darken-1 font-weight-bold': zone.isActivity && small, 'red--text': zone.isActivity && small && zone.isOutdated,
-                                   'green--text': zone.isActivity && small && !zone.isOutdated}"
-                        >
-                          {{ strings.translate(zone, "zoneName") }}
-                        </span>
-
-                        <!--                        <v-spacer />-->
-
-                        <!--                        <span class="font-weight-bold monospace mr-6">-->
-                        <!--                          <v-badge-->
-                        <!--                            inline-->
-                        <!--                            color="black"-->
-                        <!--                            :content="zone.stages.length"-->
-                        <!--                          />-->
-                        <!--                        </span>-->
-                      </v-row>
-                    </v-expansion-panel-header>
-                    <v-expansion-panel-content class="pt-2">
-                      <div
-                        v-if="zone.isActivity"
-                        class="grey--text text--lighten-1 caption mb-2 mt-1"
+                  <v-expansion-panel-header class="overflow-hidden bkop-medium">
+                    <v-row align="center">
+                      <span
+                        v-if="zone.isActivity && !small"
+                        :class="{
+                          'text--darken-1 font-weight-bold ml-2 mr-1': true,
+                          'red--text': zone.isOutdated,
+                          'green--text': !zone.isOutdated }"
                       >
-                        {{ $t('opensAt', zone.activityActiveTime) }}
-                      </div>
-                      <StageCard
-                        v-for="stage in getStages(zone.zoneId)"
-                        :key="stage.stageId"
-                        :stage="stage"
+                        {{ zone.isOutdated ? $t('zone.status.closed') : $t('zone.status.open') }}
+                      </span>
 
-                        @click="selectStage(stage.stageId)"
-                      />
-                    </v-expansion-panel-content>
-                  </v-expansion-panel>
-                </v-expansion-panels>
-              </div>
-            </v-col>
-          </v-row>
-        </v-stepper-content>
-        <v-stepper-content :step="2">
-          <slot />
-        </v-stepper-content>
-      </v-stepper-items>
-    </v-stepper>
-  </v-container>
+                      <span
+                        :class="{'subtitle-1 pl-2': true, 'text--darken-1 font-weight-bold': zone.isActivity && small, 'red--text': zone.isActivity && small && zone.isOutdated,
+                                 'green--text': zone.isActivity && small && !zone.isOutdated}"
+                      >
+                        {{ strings.translate(zone, "zoneName") }}
+                      </span>
+
+                      <!--                        <v-spacer />-->
+
+                      <!--                        <span class="font-weight-bold monospace mr-6">-->
+                      <!--                          <v-badge-->
+                      <!--                            inline-->
+                      <!--                            color="black"-->
+                      <!--                            :content="zone.stages.length"-->
+                      <!--                          />-->
+                      <!--                        </span>-->
+                    </v-row>
+                  </v-expansion-panel-header>
+                  <v-expansion-panel-content class="pt-2">
+                    <div
+                      v-if="zone.isActivity"
+                      class="caption mb-2 mt-1"
+                    >
+                      {{ $t('opensAt', zone.activityActiveTime) }}
+                    </div>
+                    <StageCard
+                      v-for="stage in getStages(zone.zoneId)"
+                      :key="stage.stageId"
+                      :stage="stage"
+
+                      @click.native="selectStage(zone.zoneId, stage.stageId)"
+                    />
+                  </v-expansion-panel-content>
+                </v-expansion-panel>
+              </v-expansion-panels>
+            </div>
+          </v-col>
+        </v-row>
+      </v-stepper-content>
+      <v-stepper-content
+        :step="2"
+        class="pa-0 pt-2"
+      >
+        <slot />
+      </v-stepper-content>
+    </v-stepper-items>
+  </v-stepper>
 </template>
 
 <script>
@@ -229,6 +223,12 @@
         type: String,
         required: true
       },
+      hideClosed: {
+        type: Boolean,
+        default () {
+          return false
+        }
+      }
     },
     data() {
       return {
@@ -280,10 +280,10 @@
       getStages (zoneId) {
         return get.stages.byParentZoneId(zoneId);
       },
-      selectStage (stageId) {
-        Console.log("chose", stageId);
-        this.selected.stage = stageId;
-        this.$emit("selected", stageId);
+      selectStage (zone, stage) {
+        Console.log("chose", zone, stage);
+        this.selected.stage = stage;
+        this.$emit("select", {zone, stage});
         this.step += 1
       }
     },
