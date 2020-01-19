@@ -149,6 +149,7 @@
                   hover
                   eager
                   class="mb-2"
+                  multiple
                 >
                   <v-expansion-panel
                     v-for="zone in category.zones"
@@ -174,18 +175,18 @@
                           {{ strings.translate(zone, "zoneName") }}
                         </span>
 
-                        <v-spacer />
+                        <!--                        <v-spacer />-->
 
-                        <span class="font-weight-bold monospace mr-6">
-                          <v-badge
-                            inline
-                            color="black"
-                            :content="zone.stages.length"
-                          />
-                        </span>
+                        <!--                        <span class="font-weight-bold monospace mr-6">-->
+                        <!--                          <v-badge-->
+                        <!--                            inline-->
+                        <!--                            color="black"-->
+                        <!--                            :content="zone.stages.length"-->
+                        <!--                          />-->
+                        <!--                        </span>-->
                       </v-row>
                     </v-expansion-panel-header>
-                    <v-expansion-panel-content>
+                    <v-expansion-panel-content class="pt-2">
                       <div
                         v-if="zone.isActivity"
                         class="grey--text text--lighten-1 caption mb-2 mt-1"
@@ -280,7 +281,7 @@
         return get.stages.byParentZoneId(zoneId);
       },
       selectStage (stageId) {
-        Console.log("choosed", stageId);
+        Console.log("chose", stageId);
         this.selected.stage = stageId;
         this.$emit("selected", stageId);
         this.step += 1

@@ -4,23 +4,108 @@
     :class="{'d-inline-flex ma-1 stage-card cursor-pointer': true, 'stage-card--light': !dark, 'stage-card--dark': dark }"
   >
     <v-card-title class="subtitle-1 py-1 px-3">
-      {{ stage.code }}
+      <span
+        v-for="[index, code] in codes.entries()"
+        :key="index"
+        :class="generateStyle(code.s).c"
+        :style="generateStyle(code.s).s"
+      >
+        {{ code.t }}
+      </span>
     </v-card-title>
   </v-card>
 </template>
 
 <script>
+  const s = {
+    separator: -1,
+    S: 0,
+    prefix: 1,
+    middle: 2,
+    stage: 3
+  }
   export default {
     name: "StageCard",
     props: {
       stage: {
         type: Object,
         required: true
-      },
+      }
     },
     computed: {
       dark() {
         return this.$vuetify.theme.dark;
+      },
+      codes () {
+        const segments = this.stage.code.split("-");
+        const results = [];
+        // format: []{s: (style), t: (text)}
+
+        if (segments.length === 1) {
+          results.push({
+            s: s.stage,
+            t: segments[0]
+          })
+          return results
+        }
+
+        for (const [index, segment] of segments.entries()) {
+          if (index === 0) {
+            // e.g. S4-1 S4-2
+            if (segment[0] === "S" && Number.isInteger(+segment[1])) {
+              results.push({
+                s: s.S,
+                t: "S"
+              });
+              results.push({
+                s: s.prefix,
+                t: segment.slice(1)
+              });
+            } else {
+              results.push({
+                s: s.prefix,
+                t: segment
+              })
+            }
+          } else if (index === 1) {
+            if (Number.isInteger(+segment.slice(-1))) {
+              // is stage code
+              results.push({
+                s: s.stage,
+                t: segment
+              })
+            } else {
+              // e.g. SW-EV-1
+              results.push({
+                s: s.middle,
+                t: segment
+              })
+            }
+          } else if (index === 2) {
+            // e.g. SW-EV-1
+            results.push({
+              s: s.stage,
+              t: segment
+            })
+          }
+
+          if (index !== segments.length - 1) {
+            results.push({
+              s: s.separator,
+              t: "-"
+            })
+          }
+        }
+        return results
+      }
+    },
+    methods: {
+      generateStyle(type) {
+        if (type === s.separator) return {c: ["grey--text"]}
+        if (type === s.S) return {c: ["pink--text font-weight-bold"]}
+        if (type === s.prefix) return {c: ["grey--text text--darken-1"]}
+        if (type === s.middle) return {c: ["grey--text text--lighten-2"]}
+        if (type === s.stage) return {c: ["yellow--text font-weight-black"]}
       }
     },
   }

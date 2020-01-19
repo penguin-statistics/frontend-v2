@@ -105,7 +105,6 @@ export default {
   data: () => ({
     expanded: {},
     selected: {
-      zone: null,
       stage: null,
     },
     tablePagination: {

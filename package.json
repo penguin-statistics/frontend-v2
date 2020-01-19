@@ -6,7 +6,8 @@
     "serve": "vue-cli-service serve",
     "build": "npx --max_old_space_size=4096 vue-cli-service build",
     "lint": "vue-cli-service lint",
-    "i18n:report": "vue-cli-service i18n:report --src './src/**/*.?(js|vue)' --locales './src/locales/**/*.json'"
+    "i18n:report": "vue-cli-service i18n:report --src './src/**/*.?(js|vue)' --locales './src/locales/**/*.json'",
+    "submit": "git add . && git cz && git push"
   },
   "dependencies": {
     "@sentry/browser": "^5.6.2",
