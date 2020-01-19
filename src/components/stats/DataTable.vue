@@ -127,11 +127,10 @@
 <script>
   import strings from "@/utils/strings";
   import Item from "@/components/global/Item";
-  import DataSourceToggle from "@/components/stats/DataSourceToggle";
 
   export default {
     name: "DataTable",
-    components: {DataSourceToggle, Item},
+    components: {Item},
     props: {
       items: {
         type: Array,
