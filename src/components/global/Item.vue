@@ -1,7 +1,7 @@
 <template>
   <v-tooltip
     v-if="!disableTooltip"
-    :open-delay="60"
+    :open-delay="40"
     :nudge-top="10"
 
     v-bind="calculatedTooltipPosition"
@@ -15,7 +15,7 @@
         />
       </span>
     </template>
-    <span :style="tooltipSize">{{ name }}</span>
+    <span>{{ name }}</span>
   </v-tooltip>
   <ItemIcon
     v-else-if="disableTooltip"
@@ -72,23 +72,6 @@
       },
       calculatedTooltipPosition () {
         return {[this.tooltipPosition]: true}
-      },
-      tooltipSize () {
-        let size = Math.max(this.ratio * 16, 12);
-        return {fontSize: `${size}px`}
-      }
-    },
-    methods: {
-      redirectItemPage() {
-        if (!this.disableLink) {
-          this.showTooltip = false;
-          this.$router.push({
-            name: "StatsByItem_SelectedItem",
-            params: {
-              itemId: this.item.itemId
-            }
-          });
-        }
       }
     },
   };

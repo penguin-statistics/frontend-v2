@@ -70,8 +70,8 @@
       md="4"
     >
       <v-card
-        class="bkop-light"
         data-aos="fade"
+        class="link-card bkop-light elevation-0"
       >
         <v-card-title
           v-if="link.title"
@@ -79,10 +79,13 @@
           class="px-4 pt-4 pb-2"
         >
           <div>
-            <div>
+            <div class="title">
               {{ link.title }}
             </div>
-            <span v-if="link.author">by {{ link.author }}</span>
+            <span
+              v-if="link.author"
+              class="subtitle-1"
+            >by {{ link.author }}</span>
           </div>
         </v-card-title>
 
@@ -116,11 +119,15 @@
               color="primary"
               text-color="white"
               @click="goToHref(link)"
+              v-on="on"
             >
-              {{ link.title }}
-              <v-icon right>
-                mdi-share
+              <v-icon
+                left
+                small
+              >
+                mdi-link
               </v-icon>
+              {{ link.title }}
             </v-chip>
           </v-row>
         </div>
@@ -276,3 +283,15 @@ export default {
   }
 };
 </script>
+
+<style scoped>
+  .link-card {
+    width: 100%;
+    border: 1px solid rgba(255, 255, 255, .75)
+  }
+
+  .monospace {
+    font-family: SF Mono, Consolas, Courier, Courier New, monospace;
+    font-size: 10px;
+  }
+</style>

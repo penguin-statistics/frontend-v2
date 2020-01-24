@@ -36,7 +36,7 @@
             :item="item"
             :ratio="1"
             disable-link
-            tooltip-position="top"
+            tooltip-position="bottom"
           />
         </div>
       </v-badge>
@@ -44,8 +44,7 @@
       <template v-if="item.itemType === 'ACTIVITY_ITEM_BATCH'">
         <v-row
           class="flex"
-                    
-          
+
           align="center"
           justify="center"
         >

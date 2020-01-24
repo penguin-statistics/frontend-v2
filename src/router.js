@@ -48,18 +48,10 @@ const router = new Router({
         i18n: 'menu.report',
         forceSingle: true
       },
-      children: [{
-          path: ':zoneId',
-          name: 'ReportByZone_SelectedZone',
-          component: Report,
-          props: true,
-          meta: {
-            i18n: 'menu.report'
-          },
-        },
+      children: [
         {
           path: ':zoneId/:stageId',
-          name: 'ReportByZone_SelectedStage',
+          name: 'ReportByZone_Selected',
           component: Report,
           props: true,
           meta: {

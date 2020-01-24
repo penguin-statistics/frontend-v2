@@ -138,41 +138,18 @@
       </v-card>
     </v-dialog>
 
-    <v-hover v-if="$store.getters.authed">
-      <transition
-        slot-scope="{ hover }"
-
-        :name="`slide-x${hover ? '-reverse' : ''}-transition`"
-        mode="out-in"
-        duration="30"
+    <v-chip
+      v-if="$store.getters.authed"
+      style="box-shadow: 0 0 0 4px rgba(0, 0, 0, .3)"
+      @click="auth.logoutPrompt = true"
+    >
+      <v-icon
+        left
       >
-        <v-btn
-          v-if="hover && !mobile"
-          key="logout"
-          rounded
-          @click="auth.logoutPrompt = true"
-        >
-          <v-icon left>
-            mdi-logout-variant
-          </v-icon>
-          {{ $t('logout') }}
-        </v-btn>
-
-        <v-chip
-          v-else
-          key="nameTag"
-          style="box-shadow: 0 0 0 4px rgba(0, 0, 0, .3)"
-          @click="auth.logoutPrompt = true"
-        >
-          <v-icon
-            left
-          >
-            mdi-account-circle
-          </v-icon>
-          {{ $store.getters.authUsername }}
-        </v-chip>
-      </transition>
-    </v-hover>
+        mdi-account-circle
+      </v-icon>
+      {{ $store.getters.authUsername }}
+    </v-chip>
 
     <v-btn
       v-if="!$store.getters.authed"
@@ -242,9 +219,10 @@
             this.auth.dialog = false
           })
           .catch((err) => {
-            this.error = this.$t('failed.message', {message: err.errorMessage})
             if (err.response && err.response.status && err.response.status === 404) {
               this.error = this.$t('failed.message', {message: this.$t('failed.notfound')})
+            } else {
+              this.error = this.$t('failed.message', {message: err.errorMessage})
             }
           })
           .finally(() => {

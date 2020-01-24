@@ -1,22 +1,7 @@
 <i18n>
   {
     "zh": {
-      "opensAt": "开放时间：{0} ~ {1}",
-      "zone": {
-        "name": "章节",
-        "types": {
-          "MAINLINE": "主线",
-          "WEEKLY": "物资筹备",
-          "ACTIVITY": "限时活动"
-        },
-        "status": {
-          "closed": "已结束",
-          "open": "开放中"
-        }
-      },
       "stage": {
-        "name": "关卡",
-        "apCost": "{apCost} 点理智",
         "loots": {
           "normal": "常规掉落",
           "extra": "额外物资",
@@ -43,22 +28,8 @@
       "usage": "左键增加，右键减少"
     },
     "en": {
-      "opensAt": "Opens At: {0} ~ {1}",
-      "zone": {
-        "name": "Zone",
-        "types": {
-          "MAINLINE": "Mainline",
-          "WEEKLY": "Weekly",
-          "ACTIVITY": "Activity"
-        },
-        "status": {
-          "closed": "Closed",
-          "open": "Opening"
-        }
-      },
+
       "stage": {
-        "name": "Stage",
-        "apCost": "{apCost} AP required",
         "loots": {
           "normal": "Normal",
           "extra": "Extra",
@@ -95,22 +66,7 @@
       "usage": "Increase by left click, decrease by right click"
     },
     "ja": {
-      "opensAt": "開催期間：{0} ~ {1}",
-      "zone": {
-        "name": "章",
-        "types": {
-          "MAINLINE": "メインストーリー",
-          "WEEKLY": "曜日クエスト",
-          "ACTIVITY": "イベント"
-        },
-        "status": {
-          "closed": "終了",
-          "open": "開催中"
-        }
-      },
       "stage": {
-        "name": "作戦",
-        "apCost": "消費理智：{apCost}",
         "loots": {
           "normal": "通常ドロップ",
           "extra": "エクストラドロップ",
@@ -189,103 +145,93 @@
         {{ $t('dialog.close') }}
       </v-btn>
     </v-snackbar>
-    <v-row align="center">
-      <v-col>
-        <NewStageSelector
-          :name="$t('report.name')"
-          hide-closed
-          @select="select"
+    <NewStageSelector
+      :name="$t('report.name')"
+      hide-closed
+      @select="select"
+    >
+      <v-card class="pa-2">
+        <v-alert
+          color="warning"
         >
-          <v-alert
-            color="warning"
-            class="mt-2"
-          >
-            <ol>
-              <li>{{ $t('rules.rule_1') }}</li>
-              <li>{{ $t('rules.rule_2') }}</li>
-              <li>{{ $t('rules.rule_3') }}</li>
-              <li>{{ $t('rules.rule_4') }}</li>
-              <li>{{ $t('rules.rule_5') }}</li>
-            </ol>
-          </v-alert>
+          <ol>
+            <li>{{ $t('rules.rule_1') }}</li>
+            <li>{{ $t('rules.rule_2') }}</li>
+            <li>{{ $t('rules.rule_3') }}</li>
+            <li>{{ $t('rules.rule_4') }}</li>
+            <li>{{ $t('rules.rule_5') }}</li>
+          </ol>
+        </v-alert>
 
-          <v-alert
-            v-if="!$vuetify.breakpoint.smAndDown"
-            color="secondary darken-2"
-            class="subtitle-1 pl-6 mb-4"
-          >
-            {{ $t('usage') }}
-          </v-alert>
+        <v-alert
+          v-if="!$vuetify.breakpoint.smAndDown"
+          color="secondary darken-2"
+          class="subtitle-1 pl-6 mb-4"
+        >
+          {{ $t('usage') }}
+        </v-alert>
 
-          <v-container
-            v-for="stage in stageItems"
-            :key="stage.id"
-            fluid
-            class="py-0"
+        <v-container
+          v-for="stage in stageItems"
+          :key="stage.id"
+          fluid
+          class="py-0"
+        >
+          <v-subheader>
+            {{ $t('stage.loots.' + stage.id) }}
+          </v-subheader>
+          <span
+            v-for="item in stage.drops"
+            :key="item.itemId"
+            class="py-1 px-2 d-inline-block"
           >
-            <v-subheader>
-              {{ $t('stage.loots.' + stage.id) }}
-            </v-subheader>
-            <v-col
-              v-for="item in stage.drops"
-              :key="item.itemId"
-              class="py-1 px-2 d-inline-block"
-              cols="12"
-              sm="6"
-              md="4"
-              lg="3"
-              xl="2"
-            >
-              <!--                  <h5 class="title mb-4">-->
-              <!--                    {{ item.name }}-->
-              <!--                  </h5>-->
-              <ItemStepper
-                :item="item"
-                :bus="eventBus"
-                @change="handleChange"
-              />
-            </v-col>
-          </v-container>
-
-          <v-col class="pa-6">
-            <v-switch
-              v-model="furniture"
-              :label="$t('report.furniture', {state: $t(`hasNorNot.${furniture}`)})"
+            <!--                  <h5 class="title mb-4">-->
+            <!--                    {{ item.name }}-->
+            <!--                  </h5>-->
+            <ItemStepper
+              :item="item"
+              :bus="eventBus"
+              @change="handleChange"
             />
+          </span>
+        </v-container>
 
-            <v-col
-              cols="12"
-              sm="8"
+        <v-col class="pa-6 pt-0">
+          <v-switch
+            v-model="furniture"
+            color="primary"
+            :label="$t('report.furniture', {state: $t(`hasNorNot.${furniture}`)})"
+            class="mb-5 pb-0"
+            hide-details
+          />
+
+          <v-row
+            justify="space-around"
+          >
+            <v-btn
+              large
+              rounded
+              color="error"
+              class="px-4 py-2"
+              @click="reset"
             >
-              <v-row
+              {{ $t('report.clear') }}
+            </v-btn>
 
-
-                justify="space-around"
-              >
-                <v-btn
-                  large
-                  rounded
-                  color="error"
-                  @click="reset"
-                >
-                  {{ $t('report.clear') }}
-                </v-btn>
-
-                <v-btn
-                  large
-                  rounded
-                  color="primary"
-                  :loading="submitting"
-                  @click="submit"
-                >
-                  {{ $t('report.submit') }}
-                </v-btn>
-              </v-row>
-            </v-col>
-          </v-col>
-        </NewStageSelector>
-      </v-col>
-    </v-row>
+            <v-btn
+              large
+              rounded
+              color="primary"
+              :loading="submitting"
+              class="px-4 py-2"
+              @click="submit"
+            >
+              {{ $t('report.submit') }}
+            </v-btn>
+          </v-row>
+        </v-col>
+      </v-card>
+    </NewStageSelector>
 
     <v-dialog
       v-model="dialogs.first.enabled"
@@ -293,15 +239,14 @@
     >
       <v-card>
         <v-card-title
-          class="headline"
+          class="headline pa-5"
           :class="slashStripClasses"
-          primary-title
         >
           <v-icon>mdi-alert</v-icon>
-          <span class="ml-2">{{ $t('report.alert.title.first') }}</span>
+          <span class="pl-2">{{ $t('report.alert.title.first') }}</span>
         </v-card-title>
 
-        <v-card-text>
+        <v-card-text class="mt-4">
           <p v-if="results.length">
             <span>
               {{ $t('report.alert.causes.limitation') }}
@@ -310,11 +255,11 @@
               class="mt-4"
               popout
             >
-              <v-expansion-panel-header>
-                {{ $t('meta.details') }}
-              </v-expansion-panel-header>
-              <v-expansion-panel-content>
-                <div>
+              <v-expansion-panel>
+                <v-expansion-panel-header>
+                  {{ $t('meta.details') }}
+                </v-expansion-panel-header>
+                <v-expansion-panel-content class="px-0">
                   <v-list
                     v-if="validation.type"
                     two-line
@@ -354,6 +299,7 @@
                         <Item
                           :item="getItem(item.id)"
                           :ratio="0.5"
+                          disable-tooltip
                           disable-link
                         />
                       </v-list-item-avatar>
@@ -367,8 +313,8 @@
                       </v-list-item-content>
                     </v-list-item>
                   </v-list>
-                </div>
-              </v-expansion-panel-content>
+                </v-expansion-panel-content>
+              </v-expansion-panel>
             </v-expansion-panels>
           </p>
           <p v-if="!results.length">
@@ -423,14 +369,13 @@
     >
       <v-card>
         <v-card-title
-          class="headline warning"
-          primary-title
+          class="headline warning pa-5"
         >
           <v-icon>mdi-alert</v-icon>
           <span class="ml-2">{{ $t('report.alert.title.repeat') }}</span>
         </v-card-title>
 
-        <v-card-text>
+        <v-card-text class="mt-4">
           <span class="subtitle-1">
             {{ $t('report.alert.continue.repeat') }}
           </span>
@@ -467,7 +412,6 @@
   import ItemStepper from "@/components/global/ItemStepper";
   import Vue from "vue";
   import Cookies from 'js-cookie';
-  import Console from "@/utils/Console";
   import strings from "@/utils/strings";
   import NewStageSelector from "@/components/NewStageSelector";
 
@@ -496,20 +440,15 @@
       selected: {
         zone: null,
         stage: null,
+      },
+      routerNames: {
+        index: "ReportByZone",
+        details: "ReportByZone_Selected"
       }
     }),
     computed: {
       strings () {
         return strings
-      },
-      prefill () {
-        let prefills = {};
-        const params = this.$route.params;
-
-        prefills.zone = params.zoneId ? params.zoneId : null
-        prefills.stage =  params.stageId ? params.stageId : null
-
-        return prefills
       },
       stageItems () {
         if (!this.selected.stage) return [];
@@ -652,32 +591,9 @@
       goToPage(name) {
         this.$router.push({ name: name })
       },
-      select (selection) {
-        this.selected[selection.type] = selection.payload;
-
-        if (this.selected.zone === null) {
-          if (this.selected.stage === null) {
-            Console.debug("report - [router go] index");
-            this.$router.push({name: "ReportByZone"});
-          }
-        } else {
-          if (this.selected.stage === null) {
-            Console.debug("report - [router go] zone", this.selected.zone);
-            this.$router.push({
-              name: "ReportByZone_SelectedZone",
-              params: {zoneId: this.selected.zone}
-            });
-          } else {
-            Console.debug("- [router go] stage", this.selected);
-            this.$router.push({
-              name: "ReportByZone_SelectedStage",
-              params: {
-                zoneId: this.selected.zone,
-                stageId: this.selected.stage
-              }
-            });
-          }
-        }
+      select ({zone, stage}) {
+        this.selected.zone = zone;
+        this.selected.stage = stage;
       },
       getItem(itemId) {
         return get.items.byItemId(itemId)
@@ -808,4 +724,8 @@
 .slash-strip--danger {
   background: repeating-linear-gradient(-45deg, rgb(226, 81, 65), rgb(226, 81, 65) 45px, rgb(0, 0, 0) 45px, rgb(0, 0, 0) 90px);
 }
+
+  .round {
+    border-radius: 4px;
+  }
 </style>
