@@ -7,6 +7,7 @@
     <v-navigation-drawer
       v-model="drawer"
       app
+      style="max-height: calc(100vh - 36.76px)"
       width="300"
     >
       <div class="drawer-logo blue darken-4">
@@ -160,7 +161,9 @@
 
       <AccountManager />
     </v-app-bar>
-    <v-content>
+    <v-content
+      class="mb-8"
+    >
       <transition
         name="slide-fade"
         mode="out-in"
@@ -171,7 +174,7 @@
     <v-footer
       app
       color="blue darken-3"
-      class="white--text px-4 py-0"
+      class="white--text px-4"
     >
       <v-dialog
         v-model="showLicenseDialog"
@@ -215,7 +218,6 @@
         <v-card>
           <v-card-title
             class="headline primary lighten-1"
-            primary-title
           >
             <v-avatar
               size="24"
@@ -229,7 +231,7 @@
             {{ $t('meta.footer.copyright.title') }}
           </v-card-title>
 
-          <v-card-text>
+          <v-card-text class="mt-2 body-1">
             {{ $t('meta.footer.copyright.content') }}
           </v-card-text>
 
@@ -262,6 +264,7 @@
   import NetworkStateIndicator from "@/components/toolbar/NetworkStateIndicator";
   import Console from "@/utils/Console";
   import strings from "@/utils/strings";
+  import config from "@/config";
 
 export default {
   name: 'App',
@@ -310,7 +313,7 @@ export default {
     'dark': ['onDarkChange']
   },
   beforeMount() {
-    this.routes = this.$router.options.routes.filter(el => !(el.meta.hide))
+    this.routes = this.$router.options.routes.filter(el => !(el.meta.hide));
     this.$store.dispatch("fetchData", false)
   },
   mounted () {
@@ -320,7 +323,8 @@ export default {
     if (this.$store.getters.language) {
       this.changeLocale(this.$store.getters.language, false)
     } else {
-      let language = strings.getFirstBrowserLanguage();
+      const language = strings.getFirstBrowserLanguage();
+      Console.debug("[i18n] detected language", language);
       if (language) {
         // because this is a detection result, thus we are not storing it,
         // unless the user manually set one.
@@ -362,23 +366,26 @@ export default {
       }
     },
     randomizeLogo () {
-      let random = Math.random();
-      this.randomizedLogo = random < .25 ? "https://penguin-stats.s3.ap-southeast-1.amazonaws.com/logos/penguin_stats_logo_exia.png"
-        : random < .5 ? "https://penguin-stats.s3.ap-southeast-1.amazonaws.com/logos/penguin_stats_logo_texas.png"
-          : random < .75 ? "https://penguin-stats.s3.ap-southeast-1.amazonaws.com/logos/penguin_stats_logo_sora.png"
-            : "https://penguin-stats.s3.ap-southeast-1.amazonaws.com/logos/penguin_stats_logo_croissant.png"
+      const random = Math.random();
+      function imageUrl (character) {
+        return `${config.cdn.global}/logos/penguin_stats_logo_${character}.png`
+      }
+      this.randomizedLogo = random < .25 ? imageUrl("exia")
+        : random < .5 ? imageUrl("texas")
+          : random < .75 ? imageUrl("sora")
+            : imageUrl("croissant")
     },
     changeLocale (localeId, save=true) {
-      Console.debug("changing locale to", localeId, ", save:", save)
+      Console.debug("[locale] locale changed to:", localeId, "| saving to vuex:", save);
       this.$i18n.locale = localeId;
       if (save) this.$store.commit("changeLocale", localeId);
       document.title = `${this.$t(this.$route.meta.i18n) + ' | ' || ''}${this.$t('app.name')}`;
     },
     logRouteEvent (newValue) {
-      if (newValue.name === "StatsByStage_SelectedBoth") {
-        Console.log(this.$store.state.dataSource, newValue.params.stageId);
+      if (newValue.name === "StatsByStage_Selected") {
+        // Console.log(this.$store.state.dataSource, newValue.params.stageId);
         this.$ga.event('result', 'fetch_' + this.$store.state.dataSource, newValue.params.stageId, 1)
-      } else if (newValue.name === "StatsByItem_SelectedItem") {
+      } else if (newValue.name === "StatsByItem_Selected") {
         this.$ga.event('result', 'fetch_' + this.$store.state.dataSource, newValue.params.itemId, 1)
       }
     }
@@ -464,13 +471,17 @@ export default {
     background-color: rgb(200, 200, 200);
   }
 
-  .v-toolbar {
-    padding-top: env(safe-area-inset-top);
-  }
+  /*.v-toolbar {*/
+  /*  padding-top: env(safe-area-inset-top);*/
+  /*}*/
 
-  .v-footer {
-    height: calc(32px + env(safe-area-inset-bottom)) !important;
-    padding-bottom: calc(env(safe-area-inset-bottom));
+  /*.v-footer {*/
+  /*  height: calc(32px + env(safe-area-inset-bottom)) !important;*/
+  /*  padding-bottom: calc(env(safe-area-inset-bottom));*/
+  /*}*/
+
+  .no-wrap--text {
+    word-break: break-word;
   }
 
 </style>

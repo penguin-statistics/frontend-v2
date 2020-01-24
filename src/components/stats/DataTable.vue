@@ -27,14 +27,16 @@
         <v-icon
           small
           color="grey"
-        >mdi-arrow-left</v-icon>
+          class="scroll-chevron-left"
+        >mdi-chevron-double-left</v-icon>
 
-        <span>{{ $t('scroll') }}</span>
+        <span class="scroll-keyword">{{ $t('scroll') }}</span>
 
         <v-icon
           small
           color="grey"
-        >mdi-arrow-right</v-icon>
+          class="scroll-chevron-right"
+        >mdi-chevron-double-right</v-icon>
       </span>
     </v-row>
     <v-data-table
@@ -148,23 +150,24 @@
               </v-row>
             </td>
             <td
-              class="px-2"
+              :class="tableCellClasses"
+              class="yellow--text"
             >
               {{ props.item.stage.apCost }}
             </td>
           </template>
           <td
-            class="px-2"
-          >
-            {{ props.item.times }}
-          </td>
-          <td
-            class="px-2"
+            :class="tableCellClasses"
           >
             {{ props.item.quantity }}
           </td>
           <td
-            class="px-2"
+            :class="tableCellClasses"
+          >
+            {{ props.item.times }}
+          </td>
+          <td
+            :class="tableCellClasses"
           >
             <!--          <div-->
             <!--            class="charts-data-wrapper"-->
@@ -191,7 +194,7 @@
             {{ props.item.percentageText }}
           </td>
           <td
-            class="px-2"
+            :class="tableCellClasses"
           >
             {{ props.item.apPPR }}
           </td>
@@ -234,32 +237,33 @@
       return {
         options: {
           itemsPerPage: -1
-        }
+        },
+        tableCellClasses: "px-2 font-weight-bold"
       }
     },
     computed: {
       headers() {
         const headers = [
           {
-            text: this.$t("stats.headers.times"),
-            value: "times",
-            align: "left",
-            sortable: true,
-            width: "75px"
-          },
-          {
             text: this.$t("stats.headers.quantity"),
             value: "quantity",
             align: "left",
             sortable: true,
-            width: "75px"
+            width: "85px"
+          },
+          {
+            text: this.$t("stats.headers.times"),
+            value: "times",
+            align: "left",
+            sortable: true,
+            width: "85px"
           },
           {
             text: this.$t("stats.headers.percentage"),
             value: "percentage",
             align: "left",
             sortable: true,
-            width: "75px"
+            width: "100px"
           },
           {
             text: this.$t("stats.headers.apPPR"),
@@ -381,5 +385,59 @@
 
   .item-name:hover .item-name--line {
     opacity: 1;
+  }
+
+  .scroll-keyword {
+    animation: scroll-keyword 3.5s infinite cubic-bezier(0.77, 0, 0.175, 1);
+  }
+
+  .scroll-chevron-left {
+    animation: scroll-left 3.5s infinite cubic-bezier(0.77, 0, 0.175, 1);
+  }
+
+  .scroll-chevron-right {
+    animation: scroll-right 3.5s infinite cubic-bezier(0.77, 0, 0.175, 1);
+  }
+
+  @keyframes scroll-left {
+    from {
+      transform: translateX(0px) translateY(-1px);
+      filter: brightness(1);
+    }
+    30% {
+      transform: translateX(-5px) translateY(-1px);
+      filter: brightness(2);
+    }
+    to {
+      transform: translateX(0px) translateY(-1px);
+      filter: brightness(1);
+    }
+  }
+
+  @keyframes scroll-right {
+    from {
+      transform: translateX(0px) translateY(-1px);
+      filter: brightness(1);
+    }
+    30% {
+      transform: translateX(5px) translateY(-1px);
+      filter: brightness(2);
+    }
+    to {
+      transform: translateX(0px) translateY(-1px);
+      filter: brightness(1);
+    }
+  }
+
+  @keyframes scroll-keyword {
+    from {
+      filter: brightness(1);
+    }
+    30% {
+      filter: brightness(1.5);
+    }
+    to {
+      filter: brightness(1);
+    }
   }
 </style>

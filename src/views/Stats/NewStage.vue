@@ -32,12 +32,14 @@
       <v-card-title class="pb-0">
         <v-row
           align="center"
-          justify="space-between"
+          justify="center"
+          class="px-6 pb-2"
         >
-          <h1 class="title pl-7 pt-2 text-truncate">
+          <h1 class="title pl-2 pt-2 no-wrap--text">
             {{ $t('stats.title', {stage: stage.code}) }}
           </h1>
-          <DataSourceToggle class="pr-5" />
+          <v-spacer /> 
+          <DataSourceToggle />
         </v-row>
       </v-card-title>
 
@@ -45,7 +47,7 @@
         :items="stats"
         type="stage"
 
-        class="pt-3"
+        class="px-6 pb-6"
       />
     </v-card>
   </NewStageSelector>

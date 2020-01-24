@@ -39,8 +39,8 @@
         "title": "{item} 統計結果"
       },
       "categories": {
-        "CARD_EXP": "作战记录",
-        "MATERIAL": "材料",
+        "CARD_EXP": "作戦記録",
+        "MATERIAL": "素材",
         "FURN": "家具",
         "ACTIVITY_ITEM": "イベントアイテム"
       }
@@ -131,6 +131,7 @@
             <v-row
               align="center"
               justify="center"
+              class="px-6 pb-2"
             >
               <Item
                 v-if="selected.item"
@@ -139,14 +140,12 @@
 
                 disable-tooltip
                 disable-link
-
-                class="ml-7"
               />
-              <h1 class="title pl-2 pt-2 text-truncate">
+              <h1 class="title pl-2 pt-2 no-wrap--text">
                 {{ $t('result.title', {item: selectedItemName}) }}
               </h1>
               <v-spacer />
-              <DataSourceToggle class="pr-5" />
+              <DataSourceToggle />
             </v-row>
           </v-card-title>
 
@@ -154,7 +153,7 @@
             :items="itemStagesStats"
             type="item"
 
-            class="pa-6"
+            class="px-6 pb-6"
           />
         </v-card>
       </v-stepper-content>

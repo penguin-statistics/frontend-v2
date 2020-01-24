@@ -42,12 +42,12 @@
   "stats": {
     "headers": {
       "stage": "Stage",
-      "apCost": "Costs AP",
+      "apCost": "Sanity",
       "item": "Item",
       "times": "Samples",
       "quantity": "Loots",
       "percentage": "Percentage",
-      "apPPR": "Expected AP required every 1 item"
+      "apPPR": "Sanity Required Per Item"
     }
   },
   "builds": {
@@ -96,7 +96,7 @@
   "report": {
     "alert": {
       "title": {
-        "first": "Potential Failure Risk Detected",
+        "first": "Failure Risk Detected",
         "repeat": "Warning"
       },
       "continue": {

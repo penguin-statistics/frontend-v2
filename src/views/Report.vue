@@ -28,7 +28,6 @@
       "usage": "左键增加，右键减少"
     },
     "en": {
-
       "stage": {
         "loots": {
           "normal": "Normal",
@@ -44,24 +43,14 @@
         "undo": "Recall",
         "undoSuccess": "Successfully recalled submission",
         "clear": "Clear",
-        "unable": "Failed to submit: ",
-        "alertMsg": {
-          "alert": "Warning",
-          "limitation": "There is a big gap between your current report and the existing data. If you continue to submit, the report may be judged to be abnormal and cannot be counted into all statistics.",
-          "preContact": "If you think this is a misjudgment, ",
-          "contact": "please contact the site owner or team members ",
-          "sufContact": "(attach the screenshot if possible). We will correct it as soon as possible after confirmation.",
-          "noDrop": "You have not selected any dropped items. Are you sure that the upload data is correct?",
-          "finalAlert": "Are you sure you want to continue?",
-          "continue": "Do you want to continue?"
-        }
+        "unable": "Failed to submit: "
       },
       "rules": {
-        "rule_1": "这是单次作战的提交，请注意核对数目；",
-        "rule_2": "若无素材掉落，请直接点击提交；",
-        "rule_3": "请不要只汇报比较“欧”的掉落；",
-        "rule_4": "请保证通关评价是3星；",
-        "rule_5": "不要汇报首次通关奖励，谢谢！"
+        "rule_1": "This is only intended for reporting a single combat, please double-check your inputting.",
+        "rule_2": "If there's no drops, please click submit directly without inputting any drops.",
+        "rule_3": "Please don't only report the situations where you are lucky ‒ report all drops.",
+        "rule_4": "Please guarantee that you get a 3-stars score.",
+        "rule_5": "Please don't report the first time you accomplish a mission ‒ drops are different for the first time."
       },
       "usage": "Increase by left click, decrease by right click"
     },
@@ -81,17 +70,7 @@
         "undo": "送信キャンセル",
         "undoSuccess": "キャンセルしました",
         "unable": "送信失敗：",
-        "clear": "クリア",
-        "alertMsg": {
-          "alert": "警告",
-          "limitation": "今回報告しようとしている内容は既存のデータとの差が大きくなっており、このまま報告するのであれば今回の報告は異常と判定され、全て統計データに反映されることはありません。",
-          "preContact": "誤った情報であると判断した場合は",
-          "contact": "管理人に連絡を行ってください",
-          "sufContact": "（その際はスクリーンショットの添付をお願いいたします）。確認次第速やかに修正を行わせて頂きます。",
-          "noDrop": "ドロップアイテムが何も選択されていません。送信するデータに問題はありませんか？",
-          "finalAlert": "本当にこのデータを送信しますか？",
-          "continue": "本当に送信しますか？"
-        }
+        "clear": "クリア"
       },
       "rules": {
         "rule_1": "ここに追加する内容は1回でドロップした内容です。",
@@ -114,24 +93,44 @@
       v-model="showSubmittedSnackbar"
       color="success"
       :timeout="0"
+      :vertical="$vuetify.breakpoint.xsOnly"
+      bottom
     >
-      {{ $t('report.success') }}
-      <v-btn
-        :loading="undoing"
-        color="primary"
-        @click="undo"
+      <v-row
+        align="center"
+        class="mx-0"
       >
-        {{ $t('report.undo') }}
-      </v-btn>
-      <v-btn
-        dark
-        text
-        icon
-        @click="submitted = false"
-      >
-        <v-icon>mdi-close</v-icon>
-      </v-btn>
+        <v-icon
+          class="mr-4"
+        >
+          mdi-check
+        </v-icon>
+
+        <v-btn
+          :ripple="false"
+          :loading="undoing"
+          class="text--primary ml-auto ml-sm-4"
+          color="white"
+          depressed
+          v-bind="bind"
+          @click="undo"
+        >
+          {{ snackbar.text }}
+        </v-btn>
+
+        <v-btn
+          :ripple="false"
+          class="ml-4"
+          color="grey darken-1"
+          icon
+          small
+          @click="submitted = false"
+        >
+          <v-icon>$vuetify.cancel</v-icon>
+        </v-btn>
+      </v-row>
     </v-snackbar>
+
     <v-snackbar
       v-model="undoed"
       color="success"
@@ -153,6 +152,7 @@
       <v-card class="pa-2">
         <v-alert
           color="warning"
+          border="left"
         >
           <ol>
             <li>{{ $t('rules.rule_1') }}</li>
@@ -167,6 +167,8 @@
           v-if="!$vuetify.breakpoint.smAndDown"
           color="secondary darken-2"
           class="subtitle-1 pl-6 mb-4"
+          dark
+          border="left"
         >
           {{ $t('usage') }}
         </v-alert>

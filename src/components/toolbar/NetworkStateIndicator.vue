@@ -75,18 +75,18 @@
           indeterminate
           color="white"
           class="mr-1"
-          :size="16"
+          small
           :width="2"
         />
         <v-icon
           v-else
-          :size="16"
+          small
           class="mr-1"
         >
           mdi-alert
         </v-icon>
 
-        <span>
+        <span class="caption">
           {{ $t('fetch.failed.title') }} ({{ $store.getters.ajaxErrors.length }})
         </span>
       </span>
@@ -100,7 +100,7 @@
           :size="16"
           :width="2"
         />
-        <span>
+        <span class="caption">
           {{ $t('meta.loading') }}
         </span>
       </span>
