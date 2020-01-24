@@ -28,7 +28,7 @@
 
     @select="select"
   >
-    <v-card class="bkop-light">
+    <v-card class="bkop-light pt-2">
       <v-card-title class="pb-0">
         <v-row
           align="center"
