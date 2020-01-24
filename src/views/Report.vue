@@ -191,14 +191,14 @@
     </v-snackbar>
     <v-row align="center">
       <v-col>
-        <StageSelector
-          name="report.name"
-          :prefill="prefill"
+        <NewStageSelector
+          :name="$t('report.name')"
           hide-closed
-          @selected="select"
+          @select="select"
         >
           <v-alert
             color="warning"
+            class="mt-2"
           >
             <ol>
               <li>{{ $t('rules.rule_1') }}</li>
@@ -258,8 +258,8 @@
               sm="8"
             >
               <v-row
-                
-                
+
+
                 justify="space-around"
               >
                 <v-btn
@@ -283,7 +283,7 @@
               </v-row>
             </v-col>
           </v-col>
-        </StageSelector>
+        </NewStageSelector>
       </v-col>
     </v-row>
 
@@ -468,12 +468,12 @@
   import Vue from "vue";
   import Cookies from 'js-cookie';
   import Console from "@/utils/Console";
-  import StageSelector from "@/components/stats/StageSelector";
   import strings from "@/utils/strings";
+  import NewStageSelector from "@/components/NewStageSelector";
 
   export default {
     name: "Report",
-    components: {StageSelector, ItemStepper, Item},
+    components: {NewStageSelector, ItemStepper, Item},
     data: () => ({
       snackbar: false,
       submitting: false,

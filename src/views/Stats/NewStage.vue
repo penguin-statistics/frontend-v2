@@ -55,7 +55,6 @@
   import NewStageSelector from "@/components/NewStageSelector";
   import DataTable from "@/components/stats/DataTable";
   import get from "@/utils/getters";
-  import Console from "@/utils/Console";
   import DataSourceToggle from "@/components/stats/DataSourceToggle";
 
 export default {
