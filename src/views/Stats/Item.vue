@@ -52,23 +52,22 @@
   <v-stepper
     v-model="step"
     :alt-labels="!$vuetify.breakpoint.xsOnly"
-    class="bkop-light transparent"
+    class="pa-2 transparent elevation-0 full-width"
   >
-    <v-stepper-header>
+    <v-stepper-header
+      class="bkop-light elevation-6"
+      style="border-radius: 4px"
+    >
       <v-stepper-step
         :complete="step > 1"
         :editable="step > 1"
         :step="1"
       >
-        <v-row
-          align="center"
-          justify="center"
-          
-          class="text-center"
-        >
-          {{ $t('choose.name') }}
-          <small v-if="step > 1">{{ selectedItemName }}</small>
-        </v-row>
+        {{ $t('choose.name') }}
+        <small
+          v-if="step > 1"
+          class="mt-2"
+        >{{ selectedItemName }}</small>
       </v-stepper-step>
 
       <v-divider />
@@ -77,14 +76,7 @@
         :complete="step === 2"
         :step="2"
       >
-        <v-row
-          align="center"
-          justify="center"
-          
-          class="text-center"
-        >
-          {{ $t('result.name') }}
-        </v-row>
+        {{ $t('result.name') }}
       </v-stepper-step>
     </v-stepper-header>
 
@@ -92,150 +84,79 @@
       <v-stepper-content
         v-if="categorizedItems"
         :step="1"
+        class="bkop-light mt-6 elevation-4"
+        style="border-radius: 4px"
       >
-        <v-container>
-          <v-row justify="center">
-            <v-col cols="12">
-              <div
-                v-for="(items, name) in categorizedItems"
-                :key="name"
-                class="item-list-wrapper"
-              >
-                <div class="ml-2 my-2">
-                  {{ $t(`categories.${name}`) }}
-                </div>
-                <div class="item-list">
+        <v-row
+          justify="center"
+          align="center"
+        >
+          <v-col>
+            <div
+              v-for="(items, name) in categorizedItems"
+              :key="name"
+              class="item-list-wrapper"
+            >
+              <div class="ml-2 my-2">
+                {{ $t(`categories.${name}`) }}
+              </div>
+              <div class="item-list">
+                <div
+                  v-for="item in items"
+                  :key="item.itemId"
+                  class="item-list-item-wrapper"
+                >
                   <div
-                    v-for="item in items"
-                    :key="item.itemId"
-                    class="item-list-item-wrapper"
+                    class="item-list-item-avatar cursor-pointer"
+                    @click="storeItemSelection(item.itemId)"
                   >
-                    <div
-                      class="item-list-item-avatar cursor-pointer"
-                      @click="storeItemSelection(item.itemId)"
-                    >
-                      <Item
-                        :item="item"
-                        disable-link
-                      />
-                    </div>
+                    <Item
+                      :item="item"
+                      disable-link
+                    />
                   </div>
                 </div>
               </div>
-            </v-col>
-          </v-row>
-        </v-container>
+            </div>
+          </v-col>
+        </v-row>
       </v-stepper-content>
 
-      <v-stepper-content :step="2">
-        <v-row
-          align="center"
-          justify="space-between"
-        >
-          <h1 class="title mx-4 my-1">
-            <v-row align="center">
+      <v-stepper-content
+        :step="2"
+        class="pa-0 mt-6 elevation-4"
+      >
+        <v-card class="bkop-light">
+          <v-card-title class="pb-0">
+            <v-row
+              align="center"
+              justify="center"
+            >
               <Item
                 v-if="selected.item"
                 :item="selected.item"
+                :ratio="0.7"
+
                 disable-tooltip
                 disable-link
+
+                class="ml-7"
               />
-              <v-col class="ml-2">
+              <h1 class="title pl-2 pt-2 text-truncate">
                 {{ $t('result.title', {item: selectedItemName}) }}
-              </v-col>
+              </h1>
+              <v-spacer />
+              <DataSourceToggle class="pr-5" />
             </v-row>
-          </h1>
-          <DataSourceToggle />
-        </v-row>
-        <v-data-table
-          :headers="tableHeaders"
-          :items="itemStagesStats"
-          :pagination.sync="tablePagination"
-          :calculate-widths="true"
-          must-sort
-          hide-default-footer
-          class="elevation-0 transparentTable stat-table"
-        >
-          <template v-slot:items="props">
-            <td 
-              :class="{
-                'px-3': $vuetify.breakpoint.xsOnly,
-                'stage-code-td-xs': $vuetify.breakpoint.xsOnly
-              }"
-            >
-              <span
-                class="cursor-pointer"
-                @click="redirectStage(props.item)"
-              >
-                <v-hover>
-                  <span slot-scope="{ hover }">
-                    <v-avatar
-                      :size="30"
-                      class="mr-1"
-                    >
-                      <v-icon>{{ props.item.zone.icon }}</v-icon>
-                    </v-avatar>
-                    {{ props.item.stage.code }}
-                    <v-slide-x-transition>
-                      <v-icon
-                        v-if="hover || $vuetify.breakpoint.smAndDown"
-                        small
-                      >mdi-chevron-right</v-icon>
-                    </v-slide-x-transition>
-                  </span>
-                </v-hover>
-              </span>
-            </td>
-            <td
-              :class="{'px-3': $vuetify.breakpoint.xsOnly}"
-              class="text-center"
-            >
-              {{ props.item.stage.apCost }}
-            </td>
-            <td
-              :class="{'px-3': $vuetify.breakpoint.xsOnly}"
-              class="text-center"
-            >
-              {{ props.item.times }}
-            </td>
-            <td
-              :class="{'px-3': $vuetify.breakpoint.xsOnly}"
-              class="text-center"
-            >
-              {{ props.item.quantity }}
-            </td>
-            <td
-              :class="{'px-3': $vuetify.breakpoint.xsOnly}"
-              class="text-center"
-            >
-              <div class="charts-data-wrapper">
-                {{ props.item.percentageText }}
-                <div
-                  class="charts-wrapper cursor-pointer"
-                  fill-height
-                >
-                  <!--                  <Charts-->
-                  <!--                    v-if="getStageItemTrend(props.item.stage.stageId)"-->
-                  <!--                    :interval="getStageItemTrendInterval(props.item.stage.stageId)"-->
-                  <!--                    :x-start="getStageItemTrendStartTime(props.item.stage.stageId)"-->
-                  <!--                    :show-dialog="expanded[props.item.stage.stageId]"-->
-                  <!--                    :data-keys="['quantity']"-->
-                  <!--                    :data="getStageItemTrendResults(props.item.stage.stageId)"-->
-                  <!--                    :charts-id="props.item.stage.stageId"-->
-                  <!--                    sparkline-key="quantity"-->
-                  <!--                    sparkline-sub-key="times"-->
-                  <!--                  />-->
-                </div>
-              </div>
-            </td>
-            <td
-              :class="{'px-3': $vuetify.breakpoint.xsOnly}"
-              class="text-center"
-            >
-              {{ props.item.apPPR }}
-            </td>
-          </template>
-        </v-data-table>
+          </v-card-title>
+
+          <DataTable
+            :items="itemStagesStats"
+            type="item"
+
+            class="pa-6"
+          />
+        </v-card>
       </v-stepper-content>
     </v-stepper-items>
   </v-stepper>
@@ -247,10 +168,11 @@ import Item from "@/components/global/Item";
 import DataSourceToggle from "@/components/stats/DataSourceToggle";
 import Console from "@/utils/Console";
 import strings from "@/utils/strings";
+import DataTable from "@/components/stats/DataTable";
 
 export default {
   name: "StatsByItem",
-  components: { Item, DataSourceToggle },
+  components: {DataTable, Item, DataSourceToggle },
   data: () => ({
     expanded: {},
     step: 1,
@@ -438,14 +360,19 @@ export default {
   min-width: 62px;
   margin: 4px 0;
 }
-::v-deep .stat-table th {
-  padding-left: 8px !important;
-  padding-right: 8px !important;
+.full-width {
+  width: 100%;
 }
-::v-deep .stat-table th i {
-  margin-left: -16px;
-}
-.stage-code-td-xs {
-  min-width: 122px;
-}
+
+
+/*::v-deep .stat-table th {*/
+/*  padding-left: 8px !important;*/
+/*  padding-right: 8px !important;*/
+/*}*/
+/*::v-deep .stat-table th i {*/
+/*  margin-left: -16px;*/
+/*}*/
+/*.stage-code-td-xs {*/
+/*  min-width: 122px;*/
+/*}*/
 </style>

@@ -22,33 +22,33 @@
 </i18n>
 
 <template>
-  <v-row
-    align="center"
-    align-content="center"
-    justify="center"
+  <NewStageSelector
+    :name="$t('stats.name')"
+    :router-names="routerNames"
+
+    @select="select"
   >
-    <NewStageSelector
-      :name="$t('stats.name')"
-      @select="select"
-    >
-      <v-card>
+    <v-card class="bkop-light">
+      <v-card-title class="pb-0">
         <v-row
           align="center"
-          justify="end"
+          justify="space-between"
         >
-          <DataSourceToggle />
+          <h1 class="title pl-7 pt-2 text-truncate">
+            {{ $t('stats.title', {stage: stage.code}) }}
+          </h1>
+          <DataSourceToggle class="pr-5" />
         </v-row>
+      </v-card-title>
 
-        <DataTable
-          :items="stats"
-          :search="search"
-          type="stage"
+      <DataTable
+        :items="stats"
+        type="stage"
 
-          class="pa-6"
-        />
-      </v-card>
-    </NewStageSelector>
-  </v-row>
+        class="pt-3"
+      />
+    </v-card>
+  </NewStageSelector>
 </template>
 
 <script>
@@ -67,13 +67,21 @@ export default {
       zone: null,
       stage: null,
     },
-    search: ""
+    search: "",
+    routerNames: {
+      index: "StatsByStage",
+      details: "StatsByStage_Selected"
+    }
   }),
   computed: {
-    stats() {
+    stats () {
       const got = get.statistics.byStageId(this.selected.stage);
-      Console.debug(got)
-      if (!got) return []
+      if (!got) return [];
+      return got
+    },
+    stage () {
+      const got = get.stages.byStageId(this.selected.stage);
+      if (!got) return { code: "" };
       return got
     }
   },
@@ -81,7 +89,7 @@ export default {
     select({zone, stage}) {
       this.selected.zone = zone;
       this.selected.stage = stage;
-    }
+    },
   },
 };
 </script>

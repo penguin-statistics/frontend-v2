@@ -26,7 +26,6 @@
             <v-list-item
               v-for="error in $store.getters.ajaxErrors"
               :key="error.id"
-              avatar
             >
               <v-list-item-content>
                 <v-list-item-title>

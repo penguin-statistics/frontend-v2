@@ -2,6 +2,7 @@
   {
     "zh": {
       "dataSourceToggle": {
+        "title": "需要登录",
         "loginNotice": "查看个人掉落数据前，请先登录",
         "all": "全平台",
         "personal": "个人"
@@ -9,6 +10,7 @@
     },
     "en": {
       "dataSourceToggle": {
+        "title": "Login Required",
         "loginNotice": "Please log in before viewing personal drop data.",
         "all": "All",
         "personal": "Personal"
@@ -16,6 +18,7 @@
     },
     "ja": {
       "dataSourceToggle": {
+        "title": "ログインが必要です",
         "loginNotice": "個人のドロップデータを表示するにはログインが必要となります。",
         "all": "全体",
         "personal": "個人"
@@ -50,11 +53,12 @@
       max-width="290"
     >
       <v-card>
+        <v-card-title class="headline">
+          {{ $t('dataSourceToggle.title') }}
+        </v-card-title>
         <v-card-text>
           {{ $t('dataSourceToggle.loginNotice') }}
         </v-card-text>
-
-        <v-divider />
 
         <v-card-actions>
           <v-spacer />
@@ -62,11 +66,21 @@
         </v-card-actions>
       </v-card>
     </v-dialog>
-    <v-btn-toggle v-model="dataSourceModifier">
-      <v-btn small>
+    <v-btn-toggle
+      v-model="dataSource"
+      borderless
+      class="data-source-switch"
+    >
+      <v-btn
+        small
+        value="global"
+      >
         {{ $t('dataSourceToggle.all') }}
       </v-btn>
-      <v-btn small>
+      <v-btn
+        small
+        value="personal"
+      >
         {{ $t('dataSourceToggle.personal') }}
       </v-btn>
     </v-btn-toggle>
@@ -75,7 +89,6 @@
 
 <script>
 import AccountManager from "@/components/toolbar/AccountManager";
-import Console from "@/utils/Console";
 export default {
   name: "DataSourceToggle",
   components: {
@@ -111,23 +124,6 @@ export default {
         }
         this.$store.commit("switchDataSource", value);
       }
-    },
-    dataSourceModifier: {
-      get() {
-        if (this.dataSourceId) return this.dataSourceId;
-        const source = this.$store.state.dataSource;
-        return source === "global" ? 0 : 1;
-      },
-      set(value) {
-        if (value === 0) {
-          // global
-          this.dataSource = "global";
-        } else if (value === 1) {
-          this.dataSource = "personal";
-        } else {
-          Console.error("unknown data source", this.dataSource)
-        }
-      }
     }
   },
   methods: {
@@ -140,4 +136,10 @@ export default {
 </script>
 
 <style scoped>
+  .theme--light.data-source-switch {
+    border: 1px solid rgba(0, 0, 0, .8);
+  }
+  .theme--dark.data-source-switch {
+    border: 1px solid rgba(255, 255, 255, .6);
+  }
 </style>

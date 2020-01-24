@@ -1,104 +1,180 @@
+<i18n>
+  {
+    "zh": {
+      "scroll": "左右滑动查看数据"
+    },
+    "en": {
+      "scroll": "Scroll to view details"
+    },
+    "ja": {
+      "scroll": "Scroll to view details"
+    }
+  }
+</i18n>
+
 <template>
-  <v-data-table
-    :headers="headers"
-    :items="items"
-    :search="search"
+  <div>
+    <v-row
+      v-if="$vuetify.breakpoint.xsOnly"
+      align="center"
+      justify="center"
+      class="pt-1"
+    >
+      <span
 
-    must-sort
-    sort-by="percentage"
-    :sort-desc="true"
-    :locale="$i18n.locale"
+        class="caption grey--text"
+      >
+        <v-icon
+          small
+          color="grey"
+        >mdi-arrow-left</v-icon>
 
-    :calculate-widths="true"
-    hide-default-footer
-    :mobile-breakpoint="1"
+        <span>{{ $t('scroll') }}</span>
 
-    class="elevation-0 transparentTable stat-table container--fluid"
-  >
-    <!--    <template v-slot:item.stage="{ item }">-->
-    <!--      <v-row-->
-    <!--        align="center"-->
-    <!--        align-content="center"-->
-    <!--        class="pl-2"-->
-    <!--      >-->
-    <!--        <Item-->
-    <!--          :item="item.item"-->
-    <!--          :ratio="0.6"-->
-    <!--          disable-tooltip-->
-    <!--          disable-link-->
-    <!--        />-->
-    <!--        <span-->
-    <!--          class="ml-2"-->
-    <!--        >-->
-    <!--          {{ strings.translate(item.item, "name") }}-->
-    <!--        </span>-->
-    <!--        <v-icon-->
-    <!--          small-->
-    <!--        >-->
-    <!--          mdi-chevron-right-->
-    <!--        </v-icon>-->
-    <!--      </v-row>-->
-    <!--    </template>-->
-    <!--    <template v-slot:item.percentage="{ item }">-->
-    <!--      {{ item.percentageText }}-->
-    <!--    </template>-->
-    <template v-slot:item="props">
-      <tr>
-        <td
-          :class="{
-            'px-3': $vuetify.breakpoint.smAndDown,
-            'item-name-td-xs': $vuetify.breakpoint.xsOnly,
-            'item-name-td-sm': $vuetify.breakpoint.smOnly
-          }"
-        >
-          <v-row
-            align="center"
-            align-content="center"
-            class="pl-2"
+        <v-icon
+          small
+          color="grey"
+        >mdi-arrow-right</v-icon>
+      </span>
+    </v-row>
+    <v-data-table
+      :headers="headers"
+      :items="items"
+      :search="search"
+      :options="options"
+
+      must-sort
+      sort-by="percentage"
+      :sort-desc="true"
+      :locale="$i18n.locale"
+
+      :calculate-widths="true"
+      hide-default-footer
+      :mobile-breakpoint="1"
+
+      :class="{'elevation-0 transparentTable stat-table container--fluid pa-2': true, 'pt-0': $vuetify.breakpoint.xsOnly}"
+    >
+      <!--    <template v-slot:item.stage="{ item }">-->
+      <!--      <v-row-->
+      <!--        align="center"-->
+      <!--        align-content="center"-->
+      <!--        class="pl-2"-->
+      <!--      >-->
+      <!--        <Item-->
+      <!--          :item="item.item"-->
+      <!--          :ratio="0.6"-->
+      <!--          disable-tooltip-->
+      <!--          disable-link-->
+      <!--        />-->
+      <!--        <span-->
+      <!--          class="ml-2"-->
+      <!--        >-->
+      <!--          {{ strings.translate(item.item, "name") }}-->
+      <!--        </span>-->
+      <!--        <v-icon-->
+      <!--          small-->
+      <!--        >-->
+      <!--          mdi-chevron-right-->
+      <!--        </v-icon>-->
+      <!--      </v-row>-->
+      <!--    </template>-->
+      <!--    <template v-slot:item.percentage="{ item }">-->
+      <!--      {{ item.percentageText }}-->
+      <!--    </template>-->
+      <template v-slot:item="props">
+        <tr>
+          <template v-if="type === 'stage'">
+            <td
+              :class="{
+                'item-name-td-xs': $vuetify.breakpoint.xsOnly,
+                'item-name-td-sm': $vuetify.breakpoint.smOnly
+              }"
+            >
+              <v-row
+                align="center"
+                class="cursor-pointer item-name pl-2"
+                @click="redirectItem(props.item.item.itemId)"
+              >
+                <Item
+                  :item="props.item.item"
+                  :ratio="0.6"
+                  disable-tooltip
+                  disable-link
+                />
+                <span
+                  class="ml-2"
+                >
+                  {{ strings.translate(props.item.item, "name") }}
+                </span>
+                <v-icon
+                  x-small
+                  class="ml-1 item-name--chevron"
+                >
+                  mdi-link
+                </v-icon>
+                <v-divider
+                  class="mx-4 item-name--line"
+                />
+              </v-row>
+            </td>
+          </template>
+          <template v-else>
+            <td
+              :class="{
+                'item-name-td-xs': $vuetify.breakpoint.xsOnly,
+                'item-name-td-sm': $vuetify.breakpoint.smOnly
+              }"
+            >
+              <v-row
+                align="center"
+                class="cursor-pointer item-name"
+                @click="redirectStage(props.item.stage.stageId)"
+              >
+                <v-icon>{{ props.item.zone.icon }}</v-icon>
+                <span
+                  class="ml-2"
+                >
+                  {{ props.item.stage.code }}
+                </span>
+                <v-icon
+                  x-small
+                  class="ml-1 item-name--chevron"
+                >
+                  mdi-link
+                </v-icon>
+                <v-divider
+                  class="mx-4 item-name--line"
+                />
+              </v-row>
+            </td>
+            <td
+              class="px-2"
+            >
+              {{ props.item.stage.apCost }}
+            </td>
+          </template>
+          <td
+            class="px-2"
           >
-            <Item
-              :item="props.item.item"
-              :ratio="0.6"
-              disable-tooltip
-              disable-link
-            />
-            <span
-              class="ml-2"
-            >
-              {{ strings.translate(props.item.item, "name") }}
-            </span>
-            <v-icon
-              small
-            >
-              mdi-chevron-right
-            </v-icon>
-          </v-row>
-        </td>
-        <td
-          :class="{'px-3': $vuetify.breakpoint.xsOnly}"
-          class="text-center"
-        >
-          {{ props.item.times }}
-        </td>
-        <td
-          :class="{'px-3': $vuetify.breakpoint.xsOnly}"
-          class="text-center"
-        >
-          {{ props.item.quantity }}
-        </td>
-        <td
-          :class="{'px-3': $vuetify.breakpoint.xsOnly}"
-          class="text-center"
-        >
-          <div
-            class="charts-data-wrapper"
-            fill-height
+            {{ props.item.times }}
+          </td>
+          <td
+            class="px-2"
           >
-            {{ props.item.percentageText }}
-            <div
-              class="charts-wrapper cursor-pointer"
-              fill-height
-            >
+            {{ props.item.quantity }}
+          </td>
+          <td
+            class="px-2"
+          >
+            <!--          <div-->
+            <!--            class="charts-data-wrapper"-->
+            <!--            fill-height-->
+            <!--          >-->
+            <!--            -->
+            <!--            <div-->
+            <!--              class="charts-wrapper cursor-pointer"-->
+            <!--              fill-height-->
+            <!--            >-->
             <!--                <Charts-->
             <!--                  v-if="currentTrends"-->
             <!--                  :interval="currentTrends && currentTrends.interval"-->
@@ -110,22 +186,29 @@
             <!--                  sparkline-key="quantity"-->
             <!--                  sparkline-sub-key="times"-->
             <!--                />-->
-            </div>
-          </div>
-        </td>
-        <td
-          :class="{'px-3': $vuetify.breakpoint.xsOnly}"
-          class="text-center"
-        >
-          {{ props.item.apPPR }}
-        </td>
-      </tr>
-    </template>
-  </v-data-table>
+            <!--            </div>-->
+            <!--          </div>-->
+            {{ props.item.percentageText }}
+          </td>
+          <td
+            class="px-2"
+          >
+            {{ props.item.apPPR }}
+          </td>
+        </tr>
+      </template>
+      <!--          <template v-slot:item.percentage="{item}">-->
+      <!--            <span class="px-0">-->
+      <!--              {{ item.percentageText }}-->
+      <!--            </span>-->
+      <!--          </template>-->
+    </v-data-table>
+  </div>
 </template>
 
 <script>
   import strings from "@/utils/strings";
+  import get from "@/utils/getters";
   import Item from "@/components/global/Item";
 
   export default {
@@ -149,47 +232,54 @@
     },
     data() {
       return {
+        options: {
+          itemsPerPage: -1
+        }
       }
     },
     computed: {
       headers() {
+        const headers = [
+          {
+            text: this.$t("stats.headers.times"),
+            value: "times",
+            align: "left",
+            sortable: true,
+            width: "75px"
+          },
+          {
+            text: this.$t("stats.headers.quantity"),
+            value: "quantity",
+            align: "left",
+            sortable: true,
+            width: "75px"
+          },
+          {
+            text: this.$t("stats.headers.percentage"),
+            value: "percentage",
+            align: "left",
+            sortable: true,
+            width: "75px"
+          },
+          {
+            text: this.$t("stats.headers.apPPR"),
+            value: "apPPR",
+            align: "left",
+            sortable: true,
+            width: "110px"
+          }
+        ];
+
         if (this.type === "stage") {
-          return [
-            {
-              text: this.$t("stats.headers.item"),
-              value: "icon",
-              align: "center",
-              sortable: false,
-              width: "250px"
-            },
-            {
-              text: this.$t("stats.headers.times"),
-              value: "times",
-              align: "center",
-              sortable: true
-            },
-            {
-              text: this.$t("stats.headers.quantity"),
-              value: "quantity",
-              align: "center",
-              sortable: true
-            },
-            {
-              text: this.$t("stats.headers.percentage"),
-              value: "percentage",
-              align: "center",
-              sortable: true
-            },
-            {
-              text: this.$t("stats.headers.apPPR"),
-              value: "apPPR",
-              align: "center",
-              sortable: true
-            }
-          ];
+          headers.unshift({
+            text: this.$t("stats.headers.item"),
+            value: "icon",
+            align: "left",
+            sortable: false,
+            width: "250px"
+          });
         } else {
-          return [
-            {
+          headers.unshift({
               text: this.$t("stats.headers.stage"),
               value: "stage",
               align: "left",
@@ -201,34 +291,10 @@
               value: "stage.apCost",
               align: "left",
               sortable: true,
-            },
-            {
-              text: this.$t("stats.headers.times"),
-              value: "times",
-              align: "left",
-              sortable: true,
-            },
-            {
-              text: this.$t("stats.headers.quantity"),
-              value: "quantity",
-              align: "left",
-              sortable: true,
-            },
-            {
-              text: this.$t("stats.headers.percentage"),
-              value: "percentage",
-              align: "left",
-              sortable: true,
-            },
-            {
-              text: this.$t("stats.headers.apPPR"),
-              value: "apPPR",
-              align: "left",
-              sortable: true,
-
-            }
-          ];
+              width: "70px"
+            })
         }
+        return headers
       },
       strings () {
         return strings
@@ -243,6 +309,16 @@
           }
         });
       },
+      redirectStage(stageId) {
+        const got = get.stages.byStageId(stageId);
+        this.$router.push({
+          name: "StatsByStage_Selected",
+          params: {
+            zoneId: got.zoneId,
+            stageId
+          }
+        });
+      }
     },
   }
 </script>
@@ -261,7 +337,7 @@
     min-width: 160px;
   }
 
-  .v-table {
+  .stat-table {
     background: transparent !important;
   }
 
@@ -274,5 +350,36 @@
   .charts-wrapper {
     display: flex;
     align-items: center;
+  }
+
+  .item-name, .item-name--chevron {
+    transition: text-shadow .1s cubic-bezier(.25,.8,.5,1), filter .1s cubic-bezier(.25,.8,.5,1), transform .225s cubic-bezier(.25,.8,.5,1) !important;
+  }
+  .item-name {
+    text-shadow: none;
+    filter: none;
+  }
+  .theme--dark .item-name:hover {
+    text-shadow: 0 0 8px rgba(255, 255, 255, .6);
+    filter: drop-shadow(0 0 6px rgba(255, 255, 255, .4));
+  }
+  .theme--light .item-name:hover {
+    text-shadow: 0 0 4px rgba(0, 0, 0, .2);
+    filter: drop-shadow(0 0 4px rgba(0, 0, 0, .4));
+  }
+
+  .item-name:hover .item-name--chevron {
+    transform: translateX(4px) scale(1.3) rotate(-60deg);
+  }
+  .item-name:active .item-name--chevron {
+    transform: translateX(4px) scale(1.05) rotate(-60deg);
+  }
+
+  .item-name--line {
+    opacity: 0;
+  }
+
+  .item-name:hover .item-name--line {
+    opacity: 1;
   }
 </style>

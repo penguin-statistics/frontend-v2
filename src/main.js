@@ -9,6 +9,7 @@ import VueAnalytics from "vue-analytics"
 import AOS from 'aos'
 import 'aos/dist/aos.css'
 import I18n from "@/i18n"
+import config from "@/config"
 
 import * as Sentry from '@sentry/browser';
 import * as Integrations from '@sentry/integrations';
@@ -26,6 +27,7 @@ if (production) {
     // So I've turned this setting off. If necessary please re-enable it.
     // More info at: https://docs.sentry.io/platforms/javascript/vue/
     logErrors: false,
+    release: 'frontend-v2@' + (config.version || 'unknown'),
   });
 }
 

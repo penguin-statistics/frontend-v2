@@ -82,7 +82,7 @@
   <v-stepper
     v-model="step"
     :alt-labels="!small"
-    class="pa-2 transparent elevation-0"
+    class="pa-2 transparent elevation-0 full-width"
   >
     <v-stepper-header
       class="bkop-light elevation-6"
@@ -93,7 +93,7 @@
         :editable="step > 1"
         :step="1"
       >
-        {{ $t('stage.name') }}{{ $t('meta.separator') }}{{ $t('zone.name') }}
+        {{ $t('zone.name') }} & {{ $t('stage.name') }}
         <small
           v-if="step > 1"
           class="mt-2"
@@ -116,7 +116,7 @@
         :step="1"
         :class="{'pa-0': small}"
       >
-        <v-row>
+        <v-row class="px-1">
           <v-col
             v-for="(categories, index) in categorizedZones"
             :key="index"
@@ -140,7 +140,6 @@
               </v-subheader>
               <v-expansion-panels
                 hover
-                eager
                 class="mb-2"
               >
                 <v-expansion-panel
@@ -228,17 +227,52 @@
         default () {
           return false
         }
+      },
+      routerNames: {
+        type: Object,
+        default () {
+          return {
+            index: "",
+            details: ""
+          }
+        }
       }
     },
     data() {
       return {
-        step: 1,
+        internalStep: 1,
         selected: {
+          zone: null,
           stage: null
         }
       }
     },
     computed: {
+      bindRouter () {
+        return this.routerNames.index !== "" && this.routerNames.details !== ""
+      },
+      step: {
+        get () {
+          return this.internalStep
+        },
+        set (val) {
+          this.internalStep = val;
+          if (!this.bindRouter) return;
+          if (val === 1) {
+            this.$router.push({
+              name: this.routerNames.index
+            })
+          } else if (val === 2) {
+            this.$router.push({
+              name: this.routerNames.details,
+              params: {
+                zoneId: this.selected.zone,
+                stageId: this.selected.stage
+              }
+            })
+          }
+        }
+      },
       strings () {
         return strings
       },
@@ -275,16 +309,40 @@
         return get.stages.byStageId(this.selected.stage);
       },
     },
-
+    watch: {
+      '$route' () {
+        this.checkRoute()
+      }
+    },
+    beforeMount () {
+      this.checkRoute()
+    },
     methods: {
       getStages (zoneId) {
         return get.stages.byParentZoneId(zoneId);
       },
       selectStage (zone, stage) {
         Console.log("chose", zone, stage);
+        this.selected.zone = zone;
         this.selected.stage = stage;
         this.$emit("select", {zone, stage});
         this.step += 1
+      },
+      checkRoute () {
+        if (!this.bindRouter) return;
+        if (this.$route.name === this.routerNames.details) {
+          this.internalStep = 2;
+          const zone = this.$route.params.zoneId;
+          const stage = this.$route.params.stageId;
+          this.selected.zone = zone;
+          this.selected.stage = stage;
+          this.$emit("select", {zone, stage});
+        } else if (this.$route.name === this.routerNames.index) {
+          this.internalStep = 1;
+
+          this.selected.zone = null;
+          this.selected.stage = null;
+        }
       }
     },
   }
@@ -294,4 +352,8 @@
 .monospace {
   font-family: Consolas, Courier, monospace;
 }
+
+  .full-width {
+    width: 100%;
+  }
 </style>
