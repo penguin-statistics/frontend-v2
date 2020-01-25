@@ -25,12 +25,12 @@
 </i18n>
 
 <template>
-  <v-card class="bkop-light pa-6">
+  <v-card class="bkop-light px-6 py-1">
     <v-row
       align="center"
       justify="center"
     >
-      <v-card-title>
+      <v-card-title style="word-break:normal">
         <v-img
           :src="require('@/assets/logo.png')"
           aspect-ratio="1"
@@ -39,21 +39,17 @@
           contain
           class="my-6"
         />
-        <v-col
-          cols="12"
-        >
+        <v-col cols="12">
           <h1
             :class="{
               'display-2': $vuetify.breakpoint.mdAndUp,
               'display-1': $vuetify.breakpoint.smAndDown
             }"
-            class="font-weight-bold mb-4"
+            class="font-weight-bold mb-4 display-1"
           >
             {{ $t('intro.intro_0') }}
           </h1>
-          <p
-            class="subtitle-1 line-height-wide"
-          >
+          <p class="subtitle-1 line-height-wide">
             {{ $t('intro.intro_1') }}
             <br>
             {{ $t('intro.intro_2') }}
@@ -71,7 +67,7 @@ export default {
 </script>
 
 <style scoped>
-  .line-height-wide {
-    line-height: 1.8
-  }
+.line-height-wide {
+  line-height: 1.8;
+}
 </style>

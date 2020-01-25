@@ -10,7 +10,8 @@
         "weibo": "微博",
         "github": "GitHub",
         "twitter": "Twitter",
-        "qq": "QQ"
+        "qq": "QQ",
+        "email": "Email"
       },
       "responsibilities": {
         "frontend": "前端",
@@ -27,7 +28,7 @@
     },
     "en": {
       "categories": {
-        "owner": "Owner",
+        "owner": "Webmaster",
         "developers": "Developers",
         "others": "Others"
       },
@@ -35,7 +36,8 @@
         "weibo": "Weibo",
         "github": "GitHub",
         "twitter": "Twitter",
-        "qq": "QQ"
+        "qq": "QQ",
+        "email": "Email"
       },
       "responsibilities": {
         "frontend": "Frontend",
@@ -60,7 +62,8 @@
         "weibo": "Weibo",
         "github": "GitHub",
         "twitter": "Twitter",
-        "qq": "QQ"
+        "qq": "QQ",
+        "email": "Email"
       },
       "responsibilities": {
         "frontend": "フロントエンド",
@@ -115,7 +118,7 @@
               {{ profile.name }}
             </v-list-item-title>
 
-            <v-list-item-subtitle>
+            <v-list-item-subtitle style="white-space: pre-line;">
               {{ renderResponsibility(profile.responsibility) }}
             </v-list-item-subtitle>
           </v-list-item-content>
@@ -183,7 +186,8 @@
               weibo: "https://www.weibo.com/u/6434065694",
               twitter: "https://twitter.com/AlvISs_Reimu",
               github: "https://github.com/AlvISsReimu",
-              qq: "https://wpa.qq.com/msgrd?v=3&uin=498704999&site=qq&menu=yes"
+              qq: "https://wpa.qq.com/msgrd?v=3&uin=498704999&site=qq&menu=yes",
+              email: "mailto:alvissreimu@gmail.com"
             }
           }],
           developers: [
@@ -351,6 +355,11 @@
             "id": "qq",
             "name": "QQ",
             "icon": "mdi-qqchat"
+          },
+          {
+            "id": "email",
+            "name": "Email",
+            "icon": "mdi-email"
           }
         ]
       }

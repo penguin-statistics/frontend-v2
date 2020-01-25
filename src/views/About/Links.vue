@@ -215,40 +215,40 @@ export default {
           ],
           url: "https://ark-nights.com"
         },
-        {
-          title: "刷素材一图流",
-          author: "Kindle",
-          features: [
-            {
-              name: "apRanking",
-              color: "grey"
-            },
-            {
-              name: "dropRateRanking",
-              color: "grey"
-            },
-            {
-              name: "generalRanking",
-              color: "grey"
-            }
-          ],
-          url: "https://dwz.cn/AkhN4Va6"
-        },
-        {
-          title: "酒馆攻略组",
-          author: "麻辣花蛤",
-          features: [
-            {
-              name: "walkthrough",
-              color: "brown"
-            },
-            {
-              name: "experience",
-              color: "brown"
-            }
-          ],
-          url: "https://www.pigeonpub.com"
-        },
+        // {
+        //   title: "刷素材一图流",
+        //   author: "Kindle",
+        //   features: [
+        //     {
+        //       name: "apRanking",
+        //       color: "grey"
+        //     },
+        //     {
+        //       name: "dropRateRanking",
+        //       color: "grey"
+        //     },
+        //     {
+        //       name: "generalRanking",
+        //       color: "grey"
+        //     }
+        //   ],
+        //   url: "https://dwz.cn/AkhN4Va6"
+        // },
+        // {
+        //   title: "酒馆攻略组",
+        //   author: "麻辣花蛤",
+        //   features: [
+        //     {
+        //       name: "walkthrough",
+        //       color: "brown"
+        //     },
+        //     {
+        //       name: "experience",
+        //       color: "brown"
+        //     }
+        //   ],
+        //   url: "https://www.pigeonpub.com"
+        // },
         {
           title: "ゲームの果て",
           author: "方舟航海図",
@@ -285,13 +285,13 @@ export default {
 </script>
 
 <style scoped>
-  .link-card {
-    width: 100%;
-    border: 1px solid rgba(255, 255, 255, .75)
-  }
+.link-card {
+  width: 100%;
+  border: 1px solid rgba(255, 255, 255, 0.75);
+}
 
-  .monospace {
-    font-family: SF Mono, Consolas, Courier, Courier New, monospace;
-    font-size: 10px;
-  }
+.monospace {
+  font-family: SF Mono, Consolas, Courier, Courier New, monospace;
+  font-size: 10px;
+}
 </style>

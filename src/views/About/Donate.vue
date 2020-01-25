@@ -10,13 +10,14 @@
         "redirectToApp": "打开“{app}” APP 捐助",
         "methods": {
           "alipay": "支付宝",
-          "wechatPay": "微信支付"
+          "wechatPay": "微信支付",
+          "paypal": "使用PayPal捐助"
         }
       }
     },
     "en": {
       "donate": {
-        "donate_0": "用户量激增，服务器月费上涨，企鹅数据的运营陷入了危机。站长红白为了保护喜爱的企鹅数据而决定...",
+        "donate_0": "Increasing number of users and server fee make Penguin Statistics drop into crisis. In order to protect our beloved Penguin Statistics, the webmaster decides to...",
         "donate_1": "The number of accesses is increasing. The server is becoming overwhelmed. If Doctors can donate some",
         "donate_2": "server fee",
         "donate_3": "pocky or apple pie is also accepted",
@@ -24,7 +25,8 @@
         "redirectToApp": "Donate using \"{app}\" App",
         "methods": {
           "alipay": "Alipay",
-          "wechatPay": "WeChat Pay"
+          "wechatPay": "WeChat Pay",
+          "paypal": "Donate with PayPal"
         }
       }
     },
@@ -38,7 +40,8 @@
         "redirectToApp": "{app}アプリで寄付します",
         "methods": {
           "alipay": "Alipay",
-          "wechatPay": "WeChat Pay"
+          "wechatPay": "WeChat Pay",
+          "paypal": "PayPalで寄付"
         }
       }
     }
@@ -51,7 +54,7 @@
       {{ $t('menu.about.donate') }}
     </h1>
 
-    <v-card-title>
+    <v-card-title style="word-break:normal">
       <del class="caption mb-2">
         {{ $t('donate.donate_0') }}
       </del>
@@ -84,7 +87,6 @@
             :src="require('@/assets/qrcodes/alipay-qrcode.svg')"
             :alt="$t('donate.methods.alipay')"
             max-height="128px"
-
             contain
           />
 
@@ -99,7 +101,6 @@
                 text
                 outlined
                 class="my-0"
-
                 @click="redirectAlipay"
               >
                 {{ $t('donate.redirectToApp', {app: $t('donate.methods.alipay')}) }}
@@ -136,7 +137,6 @@
                 text
                 outlined
                 class="my-0"
-
                 @click="redirectWechatPay"
               >
                 {{ $t('donate.redirectToApp', {app: $t('donate.methods.wechatPay')}) }}
@@ -150,26 +150,45 @@
         </v-card>
       </v-col>
     </v-row>
+    <v-row
+      align="start"
+      justify="center"
+      class="py-3"
+    >
+      <v-btn
+        rounded
+        color="primary"
+        @click="redirectPayPal"
+      >
+        <v-icon left>
+          mdi-paypal
+        </v-icon> {{ $t('donate.methods.paypal') }}
+      </v-btn>
+    </v-row>
   </v-card>
 </template>
 
 <script>
 export default {
   name: "Donate",
-  data () {
+  data() {
     return {
       qr: {
         alipay: "https://qr.alipay.com/fkx03351nnunmv19b5yavdf",
-        wechatPay: "wxp://f2f0F8Z93ZkS3boz8JY3FwarwyAwcIfXC2CN"
+        wechatPay: "wxp://f2f0F8Z93ZkS3boz8JY3FwarwyAwcIfXC2CN",
+        paypal: "https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=T9LRK3VEL645J&item_name=Penguin+Statistics+Donation&currency_code=USD&source=url"
       }
     }
   },
   methods: {
-    redirectAlipay () {
+    redirectAlipay() {
       window.location = this.qr.alipay
     },
-    redirectWechatPay () {
+    redirectWechatPay() {
       window.location = this.qr.wechatPay
+    },
+    redirectPayPal() {
+      window.open(this.qr.paypal)
     }
   }
 };

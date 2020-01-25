@@ -1,17 +1,13 @@
 <template>
   <v-container>
     <v-row dense>
-      <v-col
-        cols="12"
-      >
+      <v-col cols="12">
         <Intro data-aos="fade" />
       </v-col>
-      <v-col
-        cols="12"
-      >
+      <v-col cols="12">
         <Bulletin
           data-aos="fade"
-          data-aos-offset="100"
+          data-aos-offset="50"
         />
       </v-col>
       <!--      <v-flex-->
@@ -28,7 +24,12 @@
       >
         <Contribute
           data-aos="fade"
-          data-aos-offset="100"
+          data-aos-offset="50"
+        />
+        <Contact
+          class="mt-2"
+          data-aos="fade"
+          data-aos-offset="50"
         />
       </v-col>
       <v-col
@@ -37,7 +38,7 @@
       >
         <Donate
           data-aos="fade"
-          data-aos-offset="100"
+          data-aos-offset="50"
         />
       </v-col>
     </v-row>
@@ -49,9 +50,10 @@ import Contribute from "@/views/About/Contribute";
 import Donate from "@/views/About/Donate";
 import Intro from "@/views/About/Intro";
 import Bulletin from "@/views/About/Bulletin";
+import Contact from "@/views/About/Contact";
 export default {
   name: "Home",
-  components: { Contribute, Donate, Intro, Bulletin },
+  components: { Contribute, Donate, Intro, Bulletin, Contact },
   data: () => ({}),
   methods: {
     goToPage(name) {

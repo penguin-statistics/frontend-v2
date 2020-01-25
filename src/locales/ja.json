@@ -20,7 +20,7 @@
       "contact": "連絡先",
       "donate": "寄付について",
       "links": "相互リンク",
-      "bulletin": "掲示板"
+      "bulletin": "お知らせ"
     },
     "planner": "周回計画作成ツール",
     "changelog": "更新履歴",
@@ -117,9 +117,9 @@
       "item": {
         "_name": "アイテム数量",
         "now": "選択された {item} ×{quantity}",
-        "gte": "\"{item}\" すべき ≥{quantity}",
-        "lte": "\"{item}\" すべき ≤{quantity}",
-        "not": "\"{item}\" すべき ≠{quantity}"
+        "gte": "\"{item}\" should ≥{quantity}",
+        "lte": "\"{item}\" should ≤{quantity}",
+        "not": "\"{item}\" should ≠{quantity}"
       },
       "type": {
         "_name": "アイテム",

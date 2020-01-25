@@ -1,6 +1,6 @@
 const client = {
   source: "frontend-v2",
-  version: "v1.0.5"
+  version: "v1.1.0"
 };
 
 export default {
