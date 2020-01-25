@@ -26,19 +26,20 @@
 
 <template>
   <v-card class="bkop-light pa-6">
-    <h1 class="headline">
+    <h1 class="headline font-weight-black">
       {{ $t('menu.about.bulletin') }}
     </h1>
     <v-row>
       <v-col
         cols="12"
-        class="subtitle-1 line-height-wide"
-        style="word-break:normal">
-        {{ $t('bulletin.bulletin_0') }}
+        class="subtitle-1 line-height-wide font-weight-bold"
+        style="word-break: normal"
+      >
+        <span>{{ $t('bulletin.bulletin_0') }}</span>
         <br>
-        {{ $t('bulletin.bulletin_1') }}
+        <span>{{ $t('bulletin.bulletin_1') }}</span>
         <br>
-        {{ $t('bulletin.bulletin_2') }}
+        <span>{{ $t('bulletin.bulletin_2') }}</span>
       </v-col>
     </v-row>
   </v-card>

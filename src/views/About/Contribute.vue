@@ -10,8 +10,8 @@
     },
     "en": {
       "contribute": {
-        "frontend": "Front End",
-        "backend": "Back End",
+        "frontend": "Frontend",
+        "backend": "Backend",
         "contribute_0": "If you have experience with any of the following skills, and want to contribute to Penguin Statistics, please add QQ group: 747099627.",
         "contribute_1": "This is a nonprofit and open source project"
       }
@@ -76,7 +76,7 @@
 
     <v-divider class="my-4" />
 
-    <p class="subtitle-2 pl-0">
+    <p class="subtitle-1 pl-0">
       {{ $t('contribute.contribute_0') }}
     </p>
 
