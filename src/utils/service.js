@@ -1,4 +1,5 @@
 import axios from 'axios'
+import Console from "@/utils/Console";
 
 const service = axios.create({
   // on non-production environments the client will try to send any unknown requests (requests that did not match a static file)
@@ -12,10 +13,11 @@ service.interceptors.response.use(function (response) {
   // Do something with response data
   return response;
 }, function (error) {
+  Console.error("[ajax] error", error);
   if (error.response) {
     error.errorMessage = `(${error.response.status}) ${error.response.data ? error.response.data : error.message}`;
   } else {
-    error.errorMessage = `(undone) ${error.message}`;
+    error.errorMessage = `(-1) ${error.message}`;
   }
   // Do something with response error
   return Promise.reject(error);

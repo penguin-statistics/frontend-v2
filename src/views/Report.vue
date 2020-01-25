@@ -409,7 +409,7 @@ import ItemStepper from "@/components/global/ItemStepper";
 import Vue from "vue";
 import Cookies from 'js-cookie';
 import strings from "@/utils/strings";
-import NewStageSelector from "@/components/NewStageSelector";
+import NewStageSelector from "@/components/stats/StageSelector";
 
 export default {
   name: "Report",

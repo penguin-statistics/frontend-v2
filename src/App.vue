@@ -31,9 +31,8 @@
         dense
         nav
       >
-        <div
+        <template
           v-for="route in routes"
-          :key="route.name"
         >
           <v-list-item
             v-if="!route.children || route.meta.forceSingle"
@@ -56,6 +55,7 @@
           </v-list-item>
           <v-list-group
             v-else
+            :key="route.name"
             :value="route.meta.active"
             :prepend-icon="route.meta.icon"
             no-action
@@ -76,7 +76,7 @@
               </v-list-item-icon>
             </v-list-item>
           </v-list-group>
-        </div>
+        </template>
 
         <v-divider class="my-2" />
 
@@ -135,16 +135,18 @@
       dark
       color="blue darken-3"
     >
-      <v-app-bar-nav-icon @click.stop="drawer = !drawer" />
+      <v-app-bar-nav-icon
+        @click.stop="drawer = !drawer"
+      />
 
-      <v-toolbar-title>
+      <v-toolbar-title class="pl-2">
         <transition
           name="fade-transition"
           mode="out-in"
         >
           <v-avatar
             :size="32"
-            class="mx-2"
+            class="mr-2"
           >
             <v-img
               :src="randomizedLogo"
@@ -279,8 +281,8 @@ export default {
       randomizedLogo: "",
       localizations: [
         {
-          id: 'zh-CN',
-          name: '简体中文'
+          id: 'zh',
+          name: '中文'
         }, {
           id: 'en',
           name: 'English'

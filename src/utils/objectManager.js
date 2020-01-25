@@ -16,7 +16,7 @@ class ObjectManager {
   constructor({ name, api, transform, ttl, ajaxHooks }) {
     this.name = name;
     this.api = api;
-    this.transform = transform ? [...transform, o => Object.freeze(o)] : [object => object, o => Object.freeze(o)];
+    this.transform = transform ? [...transform, o => Object.freeze(o)] : [o => Object.freeze(o)];
     this.ttl = ttl;
     this.ajaxHooks = ajaxHooks;
 
@@ -36,7 +36,6 @@ class ObjectManager {
     let context = this;
     let current = data; // the current transform result
     for (let func of context.transform) {
-      Console.debug(func)
       current = func(current) // transform the object by calling the function and get its result
     }
     return current

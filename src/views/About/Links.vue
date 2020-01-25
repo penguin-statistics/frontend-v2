@@ -119,7 +119,6 @@
               color="primary"
               text-color="white"
               @click="goToHref(link)"
-              v-on="on"
             >
               <v-icon
                 left

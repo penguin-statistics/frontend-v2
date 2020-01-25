@@ -21,7 +21,7 @@
         "donate_1": "The number of accesses is increasing. The server is becoming overwhelmed. If Doctors can donate some",
         "donate_2": "server fee",
         "donate_3": "pocky or apple pie is also accepted",
-        "donate_4": ", We will be grateful!",
+        "donate_4": ", we will be much appreciated!",
         "redirectToApp": "Donate with \"{app}\" App",
         "methods": {
           "alipay": "Alipay",
@@ -104,7 +104,7 @@
             justify="center"
           >
             <v-btn
-              v-if="$vuetify.breakpoint.smAndDown"
+              v-if="$vuetify.breakpoint.xsOnly"
               text
               outlined
               class="my-0 d-block"

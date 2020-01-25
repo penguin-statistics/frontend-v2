@@ -23,13 +23,6 @@
           "extra": "额外物资",
           "special": "特殊掉落"
         }
-      },
-      "stats": {
-        "name": "统计结果",
-        "title": "{stage} 统计结果"
-      },
-      "report": {
-        "name": "上报结果"
       }
     },
     "en": {
@@ -55,13 +48,6 @@
           "extra": "Extra",
           "special": "Special"
         }
-      },
-      "stats": {
-        "name": "Statistics",
-        "title": "Statistics of {stage}"
-      },
-      "report": {
-        "name": "Report"
       }
     },
     "ja": {
@@ -87,13 +73,6 @@
           "extra": "エクストラドロップ",
           "special": "スペシャルドロップ"
         }
-      },
-      "stats": {
-        "name": "統計結果",
-        "title": "{stage} 統計結果"
-      },
-      "report": {
-        "name": "報告"
       }
     }
   }
@@ -103,23 +82,24 @@
   <v-stepper
     v-model="step"
     :alt-labels="!small"
-    class="bkop-light transparent"
+    class="pa-2 transparent elevation-0 full-width"
   >
-    <v-stepper-header>
+    <v-stepper-header
+      class="bkop-light elevation-6"
+      style="border-radius: 4px"
+    >
       <v-stepper-step
         :complete="step > 1"
         :editable="step > 1"
         :step="1"
       >
-        <v-row
-          align="center"
-          justify="center"
-          
-          class="text-center"
+        {{ $t('zone.name') }} & {{ $t('stage.name') }}
+        <small
+          v-if="step > 1"
+          class="mt-2"
         >
-          {{ $t('stage.name') }}{{ $t('meta.separator') }}{{ $t('zone.name') }}
-          <small v-if="step > 1">{{ selectedStage.code || '' }}</small>
-        </v-row>
+          {{ selectedStage.code || '' }}
+        </small>
       </v-stepper-step>
 
       <v-divider />
@@ -128,69 +108,101 @@
         :complete="step === 2"
         :step="2"
       >
-        <v-row
-          align="center"
-          justify="center"
-          
-          class="text-center"
-        >
-          {{ $t(name) }}
-        </v-row>
+        {{ name }}
       </v-stepper-step>
     </v-stepper-header>
-
     <v-stepper-items>
-      <v-stepper-content :step="1">
-        <v-container>
-          <v-expansion-panels
-            v-for="zoneCategory in categorizedZones"
-            :key="zoneCategory.id"
+      <v-stepper-content
+        :step="1"
+        :class="{'pa-0': small}"
+      >
+        <v-row class="px-1">
+          <v-col
+            v-for="(categories, index) in categorizedZones"
+            :key="index"
+            cols="12"
+            sm="12"
+            md="6"
+            lg="6"
+            xl="6"
           >
-            <v-subheader>
-              {{ $t(['zone.types', zoneCategory.id].join('.')) }}
-            </v-subheader>
-            <v-expansion-panel-header>
-              <v-icon>{{ zone.icon }}</v-icon>
-              <v-list-item-title>
-                <span
-                  v-if="zone.isActivity"
-                  :class="{
-                    'text--darken-1 font-weight-bold': true,
-                    'red--text': zone.isOutdated,
-                    'green--text': !zone.isOutdated }"
-                >
-                  {{ zone.isOutdated ? $t('zone.status.closed') : $t('zone.status.open') }}
-                </span>
-                <span class="subtitle-1">
-                  {{ strings.translate(zone, "zoneName") }}
-                </span>
-              </v-list-item-title>
-              <v-list-item-subtitle v-if="zone.isActivity">
-                {{ !small ? `${$t('opensAt', zone.activityActiveTime)}` : null }}
-              </v-list-item-subtitle>
-            </v-expansion-panel-header>
-            <v-expansion-panel-content
-              v-for="zone in zoneCategory.zones"
-              :key="zone.zoneId"
-              ripple
+            <div
+              v-for="category in categories"
+              :key="category.id"
             >
-              <v-row class="grid-list-xl">
-                <v-col
-                  v-for="stage in zone.stages"
-                  :key="stage.stageId"
+              <v-subheader>
+                <v-icon class="mr-2">
+                  {{ category.zones[0].icon }}
+                </v-icon>
+                <span>
+                  {{ $t(['zone.types', category.id].join('.')) }}
+                </span>
+              </v-subheader>
+              <v-expansion-panels
+                hover
+                class="mb-2"
+              >
+                <v-expansion-panel
+                  v-for="zone in category.zones"
+                  :key="zone.zoneId"
+                  class="bkop-light"
                 >
-                  <v-card>
-                    {{ stage }}
-                  </v-card>
-                </v-col>
-              </v-row>
-            </v-expansion-panel-content>
-          </v-expansion-panels>
-        </v-container>
-      </v-stepper-content>
+                  <v-expansion-panel-header class="overflow-hidden bkop-medium">
+                    <v-row align="center">
+                      <span
+                        v-if="zone.isActivity && !small"
+                        :class="{
+                          'text--darken-1 font-weight-bold ml-2 mr-1': true,
+                          'red--text': zone.isOutdated,
+                          'green--text': !zone.isOutdated }"
+                      >
+                        {{ zone.isOutdated ? $t('zone.status.closed') : $t('zone.status.open') }}
+                      </span>
 
-      <v-stepper-content :step="2">
-        <slot :selected="selected" />
+                      <span
+                        :class="{'subtitle-1 pl-2': true, 'text--darken-1 font-weight-bold': zone.isActivity && small, 'red--text': zone.isActivity && small && zone.isOutdated,
+                                 'green--text': zone.isActivity && small && !zone.isOutdated}"
+                      >
+                        {{ strings.translate(zone, "zoneName") }}
+                      </span>
+
+                      <!--                        <v-spacer />-->
+
+                      <!--                        <span class="font-weight-bold monospace mr-6">-->
+                      <!--                          <v-badge-->
+                      <!--                            inline-->
+                      <!--                            color="black"-->
+                      <!--                            :content="zone.stages.length"-->
+                      <!--                          />-->
+                      <!--                        </span>-->
+                    </v-row>
+                  </v-expansion-panel-header>
+                  <v-expansion-panel-content class="pt-2">
+                    <div
+                      v-if="zone.isActivity"
+                      class="caption mb-2 mt-1"
+                    >
+                      {{ $t('opensAt', zone.activityActiveTime) }}
+                    </div>
+                    <StageCard
+                      v-for="stage in getStages(zone.zoneId)"
+                      :key="stage.stageId"
+                      :stage="stage"
+
+                      @click.native="selectStage(zone.zoneId, stage.stageId)"
+                    />
+                  </v-expansion-panel-content>
+                </v-expansion-panel>
+              </v-expansion-panels>
+            </div>
+          </v-col>
+        </v-row>
+      </v-stepper-content>
+      <v-stepper-content
+        :step="2"
+        class="pa-0 pt-2"
+      >
+        <slot />
       </v-stepper-content>
     </v-stepper-items>
   </v-stepper>
@@ -199,40 +211,73 @@
 <script>
   import get from "@/utils/getters";
   import strings from "@/utils/strings";
+  import StageCard from "@/components/stats/StageCard";
+  import Console from "@/utils/Console";
 
   export default {
     name: "StageSelector",
-    components: {},
+    components: {StageCard},
     props: {
       name: {
         type: String,
         required: true
-      },
-      prefill: {
-        type: Object,
-        default () {
-          return null
-        }
       },
       hideClosed: {
         type: Boolean,
         default () {
           return false
         }
+      },
+      routerNames: {
+        type: Object,
+        default () {
+          return {
+            index: "",
+            details: ""
+          }
+        }
       }
     },
     data() {
       return {
-        step: 1,
+        internalStep: 1,
         selected: {
           zone: null,
-          stage: null,
+          stage: null
         }
       }
     },
     computed: {
+      bindRouter () {
+        return this.routerNames.index !== "" && this.routerNames.details !== ""
+      },
+      step: {
+        get () {
+          return this.internalStep
+        },
+        set (val) {
+          this.internalStep = val;
+          if (!this.bindRouter) return;
+          if (val === 1) {
+            this.$router.push({
+              name: this.routerNames.index
+            })
+          } else if (val === 2) {
+            this.$router.push({
+              name: this.routerNames.details,
+              params: {
+                zoneId: this.selected.zone,
+                stageId: this.selected.stage
+              }
+            })
+          }
+        }
+      },
       strings () {
         return strings
+      },
+      small () {
+        return this.$vuetify.breakpoint.xsOnly
       },
       categorizedZones() {
         const categories = ["ACTIVITY_OPEN", "MAINLINE", "WEEKLY"];
@@ -256,78 +301,59 @@
             })
           }
         }
+        result = [result.slice(0, -1), result.slice(-1)]
         return result;
-      },
-      selectedZone() {
-        const fallback = { zoneName: "" };
-        if (!this.selected.zone) return fallback;
-        const zone = get.zones.byZoneId(this.selected.zone);
-        if (!zone) return fallback;
-        return zone;
-      },
-      selectedZoneName () {
-        if (this.selectedZone) {
-          return strings.translate(this.selectedZone, "zoneName")
-        } else {
-          return ""
-        }
       },
       selectedStage() {
         if (!this.selected.stage) return {};
         return get.stages.byStageId(this.selected.stage);
       },
-      stages() {
-        return get.stages.byParentZoneId(this.selected.zone);
-      },
-      small () {
-        return this.$vuetify.breakpoint.xsOnly
-      }
     },
     watch: {
-      step(newValue) {
-        if (newValue <= 2) {
-          this.$emit("selected", {type: "stage", payload: null})
-        }
-        if (newValue === 1) {
-          this.$emit("selected", {type: "zone", payload: null})
-        }
-      },
-      prefill (newValue) {
-        this.update(newValue, true)
+      '$route' () {
+        this.checkRoute()
       }
     },
-    created () {
-      this.update(this.prefill)
+    beforeMount () {
+      this.checkRoute()
     },
     methods: {
-      selectZone(zoneId, emitEvent=true) {
-        if (emitEvent) this.$emit("selected", {type: "zone", payload: zoneId})
-        this.step = 2
-        this.selected.zone = zoneId
+      getStages (zoneId) {
+        return get.stages.byParentZoneId(zoneId);
       },
-      selectStage(stageId, emitEvent=true) {
-        if (emitEvent) this.$emit("selected", {type: "stage", payload: stageId})
-        this.step = 3
-        this.selected.stage = stageId
+      selectStage (zone, stage) {
+        Console.log("chose", zone, stage);
+        this.selected.zone = zone;
+        this.selected.stage = stage;
+        this.$emit("select", {zone, stage});
+        this.step += 1
       },
-      getItem(itemId) {
-        return get.items.byItemId(itemId);
-      },
-      update (object, update=false) {
-        if (object) {
-          if (object.zone) this.selectZone(this.prefill.zone, false);
-          if (object.stage) this.selectStage(this.prefill.stage, false);
-          if (!object.zone && !object.stage && update) {
-            this.step = 1;
-            this.selected.stage = null;
-            this.selected.zone = null
-          }
+      checkRoute () {
+        if (!this.bindRouter) return;
+        if (this.$route.name === this.routerNames.details) {
+          this.internalStep = 2;
+          const zone = this.$route.params.zoneId;
+          const stage = this.$route.params.stageId;
+          this.selected.zone = zone;
+          this.selected.stage = stage;
+          this.$emit("select", {zone, stage});
+        } else if (this.$route.name === this.routerNames.index) {
+          this.internalStep = 1;
+
+          this.selected.zone = null;
+          this.selected.stage = null;
         }
       }
-    }
+    },
   }
 </script>
 
 <style scoped>
+.monospace {
+  font-family: Consolas, Courier, monospace;
+}
 
+  .full-width {
+    width: 100%;
+  }
 </style>

@@ -10,8 +10,10 @@
           class="headline red"
           primary-title
         >
-          <v-icon>mdi-alert</v-icon>
-          <span class="ml-2">{{ $t('fetch.failed.title') }}</span>
+          <v-icon class="mr-2">
+            mdi-alert
+          </v-icon>
+          <span>{{ $t('fetch.failed.title') }}</span>
         </v-card-title>
 
         <v-card-text class="pa-6">
