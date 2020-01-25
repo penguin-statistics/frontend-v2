@@ -22,7 +22,7 @@
         "donate_2": "server fee",
         "donate_3": "pocky or apple pie is also accepted",
         "donate_4": ", We will be grateful!",
-        "redirectToApp": "Donate using \"{app}\" App",
+        "redirectToApp": "Donate with \"{app}\" App",
         "methods": {
           "alipay": "Alipay",
           "wechatPay": "WeChat Pay",
@@ -82,7 +82,7 @@
         cols="12"
         sm="6"
       >
-        <v-card class="bkop-light pt-4 pb-2 elevation-5">
+        <v-card class="bkop-light py-4 elevation-5">
           <v-img
             :src="require('@/assets/qrcodes/alipay-qrcode.svg')"
             :alt="$t('donate.methods.alipay')"
@@ -90,27 +90,29 @@
             contain
           />
 
-          <v-card-title primary-title>
-            <v-row
-              class="fill-height"
-              align="center"
-              justify="center"
+          <v-row
+            align="center"
+            justify="center"
+            class="py-2"
+          >
+            <span class="text-center title">
+              {{ $t('donate.methods.alipay') }}
+            </span>
+          </v-row>
+          <v-row
+            align="center"
+            justify="center"
+          >
+            <v-btn
+              v-if="$vuetify.breakpoint.smAndDown"
+              text
+              outlined
+              class="my-0 d-block"
+              @click="redirectAlipay"
             >
-              <v-btn
-                v-show="$vuetify.breakpoint.smAndDown"
-                text
-                outlined
-                class="my-0"
-                @click="redirectAlipay"
-              >
-                {{ $t('donate.redirectToApp', {app: $t('donate.methods.alipay')}) }}
-              </v-btn>
-
-              <span class="text-center mt-2">
-                {{ $t('donate.methods.alipay') }}
-              </span>
-            </v-row>
-          </v-card-title>
+              {{ $t('donate.redirectToApp', {app: $t('donate.methods.alipay')}) }}
+            </v-btn>
+          </v-row>
         </v-card>
       </v-col>
 
@@ -118,7 +120,7 @@
         cols="12"
         sm="6"
       >
-        <v-card class="bkop-light pt-4 pb-2 elevation-5">
+        <v-card class="bkop-light py-4 elevation-5">
           <v-img
             :src="require('@/assets/qrcodes/wechatpay-qrcode.svg')"
             :alt="$t('donate.methods.wechatPay')"
@@ -126,34 +128,22 @@
             contain
           />
 
-          <v-card-title primary-title>
-            <v-row
-              class="fill-height"
-              align="center"
-              justify="center"
-            >
-              <v-btn
-                v-show="$vuetify.breakpoint.smAndDown"
-                text
-                outlined
-                class="my-0"
-                @click="redirectWechatPay"
-              >
-                {{ $t('donate.redirectToApp', {app: $t('donate.methods.wechatPay')}) }}
-              </v-btn>
-
-              <span class="text-center mt-2">
-                {{ $t('donate.methods.wechatPay') }}
-              </span>
-            </v-row>
-          </v-card-title>
+          <v-row
+            align="center"
+            justify="center"
+            class="py-2"
+          >
+            <span class="text-center title">
+              {{ $t('donate.methods.wechatPay') }}
+            </span>
+          </v-row>
         </v-card>
       </v-col>
     </v-row>
     <v-row
       align="start"
       justify="center"
-      class="py-3"
+      class="pt-5 pb-3"
     >
       <v-btn
         rounded

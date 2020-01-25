@@ -28,7 +28,7 @@ function translate (object, key) {
 
 // from https://stackoverflow.com/questions/1043339/javascript-for-detecting-browser-language-preference
 
-function getFirstBrowserLanguage() {
+function getFirstBrowserLanguageWithRegionCode() {
   let nav = window.navigator,
     browserLanguagePropertyKeys = ['language', 'browserLanguage', 'systemLanguage', 'userLanguage'],
     i,
@@ -65,6 +65,20 @@ function getFirstBrowserLanguage() {
   }
 
   return shortLanguage;
+}
+
+function getFirstBrowserLanguage () {
+  const language = getFirstBrowserLanguageWithRegionCode().replace("_", "-");
+  if (!language) return I18n.fallbackLocale; // use default
+  const languages = language.split("-");
+  if (languages.length === 1) {
+    return language
+  } else if (languages.length === 2) {
+    return languages[0]
+  } else {
+    // probably malformed...
+    return language
+  }
 }
 
 export default {translate, getFirstBrowserLanguage}

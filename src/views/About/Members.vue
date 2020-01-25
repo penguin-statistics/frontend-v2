@@ -118,7 +118,7 @@
               {{ profile.name }}
             </v-list-item-title>
 
-            <v-list-item-subtitle style="white-space: pre-line;">
+            <v-list-item-subtitle class="mt-1">
               {{ renderResponsibility(profile.responsibility) }}
             </v-list-item-subtitle>
           </v-list-item-content>
@@ -192,7 +192,7 @@
           }],
           developers: [
             {
-              name: "Galvin Gao",
+              name: "GalvinGao",
               responsibility: [
                 r.frontend
               ],

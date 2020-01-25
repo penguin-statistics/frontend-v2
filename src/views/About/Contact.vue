@@ -42,7 +42,7 @@
         {{ $t('contact.contact_2') }}
       </v-col>
       <v-chip
-        class="mx-2"
+        class="mx-2 my-1"
         color="secondary"
         text-color="white"
         @click="$router.push({name: 'AboutMembers'})"
@@ -53,7 +53,7 @@
         </v-icon>
       </v-chip>
       <v-chip
-        class="mx-2"
+        class="mx-2 my-1"
         color="secondary"
         text-color="white"
         @click="goToHref('https://github.com/penguin-statistics/frontend-v2/issues')"
@@ -64,7 +64,7 @@
         </v-icon>
       </v-chip>
       <v-chip
-        class="mx-2"
+        class="mx-2 my-1"
         color="secondary"
         text-color="white"
         @click="goToHref('https://bbs.nga.cn/read.php?tid=17340880')"
