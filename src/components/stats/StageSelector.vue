@@ -67,7 +67,7 @@
       },
       "stage": {
         "name": "作戦",
-        "apCost": "消費理智：{apCost}",
+        "apCost": "消費理性：{apCost}",
         "loots": {
           "normal": "通常ドロップ",
           "extra": "エクストラドロップ",

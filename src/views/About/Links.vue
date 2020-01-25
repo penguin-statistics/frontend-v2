@@ -48,7 +48,7 @@
           "storage": "素材在庫管理",
           "character": "オペレーター一覧",
           "enemy": "レユニオン一覧",
-          "apRanking": "理智効率順位表",
+          "apRanking": "理性効率順位表",
           "dropRateRanking": "ドロップ率順位表",
           "generalRanking": "総合収益順位表",
           "walkthrough": "ステージ攻略",

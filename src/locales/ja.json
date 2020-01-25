@@ -42,12 +42,12 @@
   "stats": {
     "headers": {
       "stage": "ステージ",
-      "apCost": "消費理智",
+      "apCost": "消費理性",
       "item": "アイテム",
       "times": "サンプル数",
       "quantity": "ドロップ数",
       "percentage": "ドロップ率",
-      "apPPR": "１個あたりの必要期待理智数"
+      "apPPR": "１個あたりの必要期待理性数"
     }
   },
   "builds": {
