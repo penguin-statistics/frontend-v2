@@ -68,13 +68,17 @@ export default new Vuex.Store({
   actions: {
     // eslint-disable-next-line
     async fetchData({}, refresh = false) {
-      await itemsManager.get(refresh);
-      await limitationsManager.get(refresh);
-      await stagesManager.get(refresh);
-      await zonesManager.get(refresh);
+      Promise.all([
+        itemsManager.get(refresh),
+        limitationsManager.get(refresh),
+        stagesManager.get(refresh),
+        zonesManager.get(refresh)
+      ]).then(() => {
+        globalMatrixManager.get(refresh);
+        personalMatrixManager.get(refresh)
+      })
       // await trendsManager.get(refresh);
-      await globalMatrixManager.get(refresh);
-      await personalMatrixManager.get(refresh)
+
     },
     async refreshPersonalMatrixData() {
       await personalMatrixManager.get(true)

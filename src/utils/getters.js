@@ -21,12 +21,16 @@ Getters.limitations = {
 }
 Getters.statistics = {
   byItemId(itemId) {
-    return store.state.data[`${store.state.dataSource}Matrix`].filter(el => {
+    const stats = store.state.data[`${store.state.dataSource}Matrix`];
+    if (!stats) return [];
+    return stats.filter(el => {
       return el.itemId === itemId
     })
   },
   byStageId(stageId) {
-    return store.state.data[`${store.state.dataSource}Matrix`].filter(el => {
+    const stats = store.state.data[`${store.state.dataSource}Matrix`];
+    if (!stats) return [];
+    return stats.filter(el => {
       return el.stageId === stageId
     })
   }

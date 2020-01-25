@@ -76,7 +76,9 @@ class ObjectManager {
       context.ajaxHooks.request(context.name);
       let response = service.get(context.api)
         .then(({ data }) => {
+          Console.debug("[objectManager]", context.name , "before transform", data)
           data = context._transform(data)
+          Console.debug("[objectManager]", context.name , "after transform", data)
           context.cache = data
 
           store.commit("store", {key: context.name, value: data});
@@ -92,7 +94,7 @@ class ObjectManager {
           return context.cache
         });
       context.ajaxHooks.response(context.name, response);
-      return Promise.resolve(context.cache);
+      return response;
     }
   }
 
