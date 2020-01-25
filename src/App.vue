@@ -380,6 +380,7 @@ export default {
     changeLocale (localeId, save=true) {
       Console.debug("[i18n] locale changed to:", localeId, "| saving to vuex:", save);
       this.$i18n.locale = localeId;
+      this.$vuetify.lang.current = localeId;
       if (save) this.$store.commit("changeLocale", localeId);
       document.title = `${this.$t(this.$route.meta.i18n) + ' | ' || ''}${this.$t('app.name')}`;
     },
