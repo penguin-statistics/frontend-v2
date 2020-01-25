@@ -80,46 +80,46 @@ export default {
 }
 
 .theme--light .animation-blink {
-  animation: light-blink 5s infinite ease-in-out;
+  background: repeating-linear-gradient(
+      -45deg,
+      rgba(240, 240, 240, 0.95),
+      rgba(240, 240, 240, 0.95) 45px,
+      rgba(255, 255, 255, 0.9) 45px,
+      rgba(255, 255, 255, 0.9) 90px
+  ) !important;
+  animation: light-blink 3s infinite alternate ease-in-out;
 }
 
 .theme--dark .animation-blink {
-  animation: dark-blink 5s infinite ease-in-out;
+  background: repeating-linear-gradient(
+      -45deg,
+      rgba(81, 81, 81, 0.95),
+      rgba(81, 81, 81, 0.95) 45px,
+      rgba(66, 66, 66, 0.9) 45px,
+      rgba(66, 66, 66, 0.9) 90px
+  ) !important;
+  animation: dark-blink 3s infinite alternate ease-in-out;
 }
 
 @keyframes light-blink {
   from {
-    background: rgba(255, 230, 230, 0.9);
-    text-shadow: 0 0 5px rgba(0, 0, 0, .0);
-    box-shadow: 0 0 0 1px rgba(0, 0, 0, .5);
-  }
-  50% {
-    background: rgba(255, 255, 130, 0.9);
-    text-shadow: 0 0 5px rgba(0, 0, 0, .5);
-    box-shadow: 0 0 0 3px rgba(0, 0, 0, .5);
+    text-shadow: 0 0 0 rgba(0, 0, 0, .3);
+    box-shadow: 0 0 0 1px rgba(0, 0, 0, .5), 0 3px 1px -2px rgba(0,0,0,.2), 0 2px 2px 0 rgba(0,0,0,.14), 0 1px 5px 0 rgba(0,0,0,.12);;
   }
   to {
-    background: rgba(255, 230, 230, 0.9);
-    text-shadow: 0 0 5px rgba(0, 0, 0, .0);
-    box-shadow: 0 0 0 1px rgba(0, 0, 0, .5);
+    text-shadow: 0 0 5px rgba(0, 0, 0, .3);
+    box-shadow: 0 0 0 3px rgba(0, 0, 0, .5), 0 3px 1px -2px rgba(0,0,0,.2), 0 2px 2px 0 rgba(0,0,0,.14), 0 1px 5px 0 rgba(0,0,0,.12);;
   }
 }
 
 @keyframes dark-blink {
   from {
-    background: rgba(97, 97, 80, 0.9);
-    text-shadow: 0 0 5px rgba(0, 0, 0, .0);
-    box-shadow: 0 0 0 1px rgba(255, 255, 255, .5);
-  }
-  50% {
-    background: rgb(140, 140, 73);
-    text-shadow: 0 0 5px rgba(0, 0, 0, .5);
-    box-shadow: 0 0 0 3px rgba(255, 255, 255, .5);
+    text-shadow: 0 0 0 rgba(255, 255, 255, .5);
+    box-shadow: 0 0 0 1px rgba(255, 255, 255, .5), 0 3px 1px -2px rgba(0,0,0,.2), 0 2px 2px 0 rgba(0,0,0,.14), 0 1px 5px 0 rgba(0,0,0,.12);;
   }
   to {
-    background: rgba(97, 97, 80, 0.9);
-    text-shadow: 0 0 5px rgba(0, 0, 0, .0);
-    box-shadow: 0 0 0 1px rgba(255, 255, 255, .5);
+    text-shadow: 0 0 5px rgba(255, 255, 255, .5);
+    box-shadow: 0 0 0 3px rgba(255, 255, 255, .5), 0 3px 1px -2px rgba(0,0,0,.2), 0 2px 2px 0 rgba(0,0,0,.14), 0 1px 5px 0 rgba(0,0,0,.12);;
   }
 }
 </style>
