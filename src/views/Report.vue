@@ -93,7 +93,6 @@
       v-model="showSubmittedSnackbar"
       color="success"
       :timeout="0"
-      :vertical="$vuetify.breakpoint.xsOnly"
       bottom
     >
       <v-row
@@ -104,27 +103,34 @@
           mdi-check
         </v-icon>
 
+        {{ $t('report.success') }}
+
+        <v-spacer />
+
         <v-btn
-          :ripple="false"
           :loading="undoing"
-          class="text--primary ml-auto ml-sm-4"
-          color="white"
+          class="ml-sm-4"
+          small
           depressed
-          v-bind="bind"
+          ripple
           @click="undo"
         >
-          {{ snackbar.text }}
+          <v-icon
+            small
+            class="mr-1"
+          >
+            mdi-undo
+          </v-icon>
+          {{ $t('report.undo') }}
         </v-btn>
 
         <v-btn
-          :ripple="false"
           class="ml-4"
-          color="grey darken-1"
-          icon
+          text
           small
           @click="submitted = false"
         >
-          <v-icon>$vuetify.cancel</v-icon>
+          {{ $t('dialog.close') }}
         </v-btn>
       </v-row>
     </v-snackbar>
@@ -133,8 +139,13 @@
       v-model="undoed"
       color="success"
       :timeout="15000"
+      bottom
     >
+      <v-icon class="mr-4">
+        mdi-check-all
+      </v-icon>
       {{ $t('report.undoSuccess') }}
+      <v-spacer />
       <v-btn
         text
         @click="undoed = false"
@@ -142,6 +153,7 @@
         {{ $t('dialog.close') }}
       </v-btn>
     </v-snackbar>
+
     <NewStageSelector
       :name="$t('report.name')"
       hide-closed

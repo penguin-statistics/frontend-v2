@@ -94,7 +94,7 @@
             >
               <v-row
                 align="center"
-                class="cursor-pointer item-name pl-2"
+                class="cursor-pointer item-name pl-1"
                 @click="redirectItem(props.item.item.itemId)"
               >
                 <Item
@@ -102,6 +102,7 @@
                   :ratio="0.6"
                   disable-tooltip
                   disable-link
+                  sticky="left"
                 />
                 <span
                   class="ml-2"

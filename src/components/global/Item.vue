@@ -11,6 +11,7 @@
         <ItemIcon
           :item="item"
           :ratio="ratio"
+          :class="{'sticky-left': sticky === 'left'}"
           :disable-tooltip="disableTooltip"
         />
       </span>
@@ -21,6 +22,7 @@
     v-else-if="disableTooltip"
     :item="item"
     :ratio="ratio"
+    :class="{'sticky-left': sticky === 'left'}"
     :disable-tooltip="disableTooltip"
   />
 </template>
@@ -59,6 +61,12 @@
         default () {
           return "bottom";
         }
+      },
+      sticky: {
+        type: String,
+        default () {
+          return "";
+        }
       }
     },
     data() {
@@ -78,4 +86,9 @@
 </script>
 
 <style scoped>
+  .sticky-left {
+    position: -webkit-sticky;
+    position: sticky;
+    left: 0;
+  }
 </style>
