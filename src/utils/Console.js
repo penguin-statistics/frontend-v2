@@ -21,7 +21,7 @@ class Console {
   static _render (level, ...content) {
     const PROD_IGNORE = ["debug", "info"];
     const OVERWRITE = "__penguin_stats_debug_overwrite__";
-    if (!window[OVERWRITE] && process.env.NODE_ENV !== "production" && !(level in PROD_IGNORE)) return;
+    if (!window[OVERWRITE] && process.env.NODE_ENV === "production" && !(level in PROD_IGNORE)) return;
     const now = new Date();
     const date = `${now.getDate()} ${now.getHours()}:${now.getMinutes()}:${now.getSeconds()}.${now.getMilliseconds()}`;
     let prefix = [`(${date})`];

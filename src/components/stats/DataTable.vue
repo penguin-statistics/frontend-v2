@@ -102,10 +102,10 @@
                   :ratio="0.6"
                   disable-tooltip
                   disable-link
-                  sticky="left"
+                  class="item-icon"
                 />
                 <span
-                  class="ml-2"
+                  style="padding-left: 44px;"
                 >
                   {{ strings.translate(props.item.item, "name") }}
                 </span>
@@ -366,11 +366,9 @@
   }
   .theme--dark .item-name:hover {
     text-shadow: 0 0 8px rgba(255, 255, 255, .6);
-    filter: drop-shadow(0 0 6px rgba(255, 255, 255, .4));
   }
   .theme--light .item-name:hover {
     text-shadow: 0 0 4px rgba(0, 0, 0, .2);
-    filter: drop-shadow(0 0 4px rgba(0, 0, 0, .4));
   }
 
   .item-name:hover .item-name--chevron {
@@ -440,5 +438,9 @@
     to {
       filter: brightness(1);
     }
+  }
+
+  .item-icon {
+    position: absolute;
   }
 </style>

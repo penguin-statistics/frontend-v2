@@ -1,4 +1,5 @@
 import store from '@/store'
+import Console from "@/utils/Console";
 
 let Getters = {};
 
@@ -22,6 +23,7 @@ Getters.limitations = {
 Getters.statistics = {
   byItemId(itemId) {
     const stats = store.state.data[`${store.state.dataSource}Matrix`];
+    Console.debug(stats)
     if (!stats) return [];
     return stats.filter(el => {
       return el.itemId === itemId
@@ -29,6 +31,7 @@ Getters.statistics = {
   },
   byStageId(stageId) {
     const stats = store.state.data[`${store.state.dataSource}Matrix`];
+    Console.debug(stats)
     if (!stats) return [];
     return stats.filter(el => {
       return el.stageId === stageId
