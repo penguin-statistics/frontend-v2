@@ -207,8 +207,7 @@
           .then(() => {
             this.$store.commit("authLogin", this.auth.username);
             Cookies.set(this.cookies.key, this.auth.username, {expires: 7, path: "/"});
-            this.$ga.event('account', 'login', 'login_success', 1)
-            Console.log(Cookies);
+            this.$ga.event('account', 'login', 'login_success', 1);
             this.snackbar = {
               enabled: true,
               color: "success",
@@ -219,6 +218,7 @@
             this.auth.dialog = false
           })
           .catch((err) => {
+            Console.debug(err)
             if (err.response && err.response.status && err.response.status === 404) {
               this.error = this.$t('failed.message', {message: this.$t('failed.notfound')})
             } else {
