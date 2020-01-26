@@ -592,7 +592,7 @@ export default {
       return { 'slash-strip--warning': this.validation.rate <= 2, 'slash-strip--danger': this.validation.rate > 2 }
     },
     showSubmittedSnackbar() {
-      return this.submitted && this.$store.getters.authed
+      return this.submitted
     }
   },
   methods: {
