@@ -48,7 +48,7 @@
           "storage": "素材在庫管理",
           "character": "オペレーター一覧",
           "enemy": "レユニオン一覧",
-          "apRanking": "理智効率順位表",
+          "apRanking": "理性効率順位表",
           "dropRateRanking": "ドロップ率順位表",
           "generalRanking": "総合収益順位表",
           "walkthrough": "ステージ攻略",
@@ -61,38 +61,38 @@
 </i18n>
 
 <template>
-  <v-layout
-    row
-    wrap
-  >
-    <v-flex
+  <v-row>
+    <v-col
       v-for="(link, index) in links"
       :key="index"
-      d-flex
-      sm6
-      md4
+      class="d-flex"
+      sm="6"
+      md="4"
     >
       <v-card
-        class="bkop-light"
         data-aos="fade"
+        class="link-card bkop-light elevation-0"
       >
         <v-card-title
           v-if="link.title"
           primary-title
-          class="px-3 pt-3 pb-2"
+          class="px-4 pt-4 pb-2"
         >
           <div>
-            <div>
+            <div class="title">
               {{ link.title }}
             </div>
-            <span v-if="link.author">by {{ link.author }}</span>
+            <span
+              v-if="link.author"
+              class="subtitle-1"
+            >by {{ link.author }}</span>
           </div>
         </v-card-title>
 
         <v-card-title
           v-if="link.features"
           primary-title
-          class="px-3 py-1"
+          class="px-4 py-1"
         >
           <v-chip
             v-for="(feature, featIndex) in link.features"
@@ -107,13 +107,12 @@
         </v-card-title>
         <div
           v-if="link.url"
-          class="px-3 pt-2 pb-3"
+          class="px-4 pt-2 pb-4"
         >
-          <v-layout
-            align-center
-            justify-center
-            row
-            fill-height
+          <v-row
+            class="fill-height"
+            align="center"
+            justify="center"
           >
             <v-chip
               class="ma-2"
@@ -121,16 +120,19 @@
               text-color="white"
               @click="goToHref(link)"
             >
-              {{ link.title }}
-              <v-icon right>
-                mdi-share
+              <v-icon
+                left
+                small
+              >
+                mdi-link
               </v-icon>
+              {{ link.title }}
             </v-chip>
-          </v-layout>
+          </v-row>
         </div>
       </v-card>
-    </v-flex>
-  </v-layout>
+    </v-col>
+  </v-row>
 </template>
 
 <script>
@@ -212,40 +214,40 @@ export default {
           ],
           url: "https://ark-nights.com"
         },
-        {
-          title: "刷素材一图流",
-          author: "Kindle",
-          features: [
-            {
-              name: "apRanking",
-              color: "grey"
-            },
-            {
-              name: "dropRateRanking",
-              color: "grey"
-            },
-            {
-              name: "generalRanking",
-              color: "grey"
-            }
-          ],
-          url: "https://dwz.cn/AkhN4Va6"
-        },
-        {
-          title: "酒馆攻略组",
-          author: "麻辣花蛤",
-          features: [
-            {
-              name: "walkthrough",
-              color: "brown"
-            },
-            {
-              name: "experience",
-              color: "brown"
-            }
-          ],
-          url: "https://www.pigeonpub.com"
-        },
+        // {
+        //   title: "刷素材一图流",
+        //   author: "Kindle",
+        //   features: [
+        //     {
+        //       name: "apRanking",
+        //       color: "grey"
+        //     },
+        //     {
+        //       name: "dropRateRanking",
+        //       color: "grey"
+        //     },
+        //     {
+        //       name: "generalRanking",
+        //       color: "grey"
+        //     }
+        //   ],
+        //   url: "https://dwz.cn/AkhN4Va6"
+        // },
+        // {
+        //   title: "酒馆攻略组",
+        //   author: "麻辣花蛤",
+        //   features: [
+        //     {
+        //       name: "walkthrough",
+        //       color: "brown"
+        //     },
+        //     {
+        //       name: "experience",
+        //       color: "brown"
+        //     }
+        //   ],
+        //   url: "https://www.pigeonpub.com"
+        // },
         {
           title: "ゲームの果て",
           author: "方舟航海図",
@@ -280,3 +282,15 @@ export default {
   }
 };
 </script>
+
+<style scoped>
+.link-card {
+  width: 100%;
+  border: 1px solid rgba(255, 255, 255, 0.75);
+}
+
+.monospace {
+  font-family: SF Mono, Consolas, Courier, Courier New, monospace;
+  font-size: 10px;
+}
+</style>

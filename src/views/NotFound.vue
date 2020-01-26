@@ -1,80 +1,64 @@
 <template>
   <v-container
     id="__not_found_page"
+    class="fill-height"
     fluid
-    fill-height
-    grid-list-xl
-    style="cursor: pointer"
+    style="cursor: pointer; padding: 0;"
     @click="redirect"
   >
-    <v-layout
-      row
-      wrap
-      align-center
+    <v-row
+      align="center"
+      class="full-width"
     >
-      <v-flex
-        xs12
-        style="box-shadow: 0 3px 5px rgba(0, 0, 0, .6)"
+      <v-col
+        cols="12"
+        style="margin: 0; padding: 0; box-shadow: 0 3px 5px rgba(0, 0, 0, .6)"
       >
-        <v-layout
-          row
-          wrap
-          align-center
-          justify-center
+        <v-row
+          align="center"
+          justify="center"
           class="prts-notice"
           style="height: 128px; font-size: 1.5em"
         >
-          <v-flex
+          <v-col
             style="max-width: 96px"
           >
             <v-icon
-              class="right"
+              class="float-right"
               :size="small ? 48 : 64"
               :style="{padding: small ? '8px' : '16px'}"
             >
               mdi-alert
             </v-icon>
-          </v-flex>
-          <v-flex style="flex-grow: 0">
-            <v-layout
-              row
-              align-center
+          </v-col>
+          <v-col style="flex-grow: 0;">
+            <div
+              class="display-2 font-weight-medium letter"
+              style="width: 240px; padding: 4px 4px 2px 16px"
             >
-              <div
-                class="display-2 font-weight-medium letter"
-                style="padding: 4px 4px 2px 16px"
-              >
-                PRTS提示
-              </div>
-            </v-layout>
-            <v-layout
-              row
-              align-center
+              PRTS提示
+            </div>
+            <div
+              class="display-2 font-weight-medium letter strip"
+              style="width: 325px; margin-top: -2px; margin-right: -64px; padding: 4px 64px 4px 16px"
             >
-              <div
-                class="display-2 font-weight-medium letter strip"
-                style="margin-top: -2px; margin-right: -64px; padding: 4px 64px 4px 16px"
-              >
-                页面不存在
-              </div>
-            </v-layout>
-          </v-flex>
-        </v-layout>
-        <v-layout
-          row
-          wrap
-          align-center
+              页面不存在
+            </div>
+          </v-col>
+        </v-row>
+        <v-row
+          align="center"
           style="height: 48px; background: #20211e"
         >
-          <v-flex xs12>
-            <div class="title text-center letter">
+          <v-col cols="12">
+            <div class="subtitle-1 text-center letter">
               {{ small ? "此地" : "未知环境" }}不宜久留 / PRTS请求返回首页
             </div>
-          </v-flex>
-        </v-layout>
-      </v-flex>
-    </v-layout>
-    <div class="float-bottom subheading text-center light-shadow wide-letter">
+          </v-col>
+        </v-row>
+      </v-col>
+    </v-row>
+    <div class="float-bottom subtitle-1 text-center light-shadow wide-letter">
       点击画面以继续
     </div>
   </v-container>
@@ -139,5 +123,9 @@ export default {
   }
   #__not_found_page, .strip {
     overflow: hidden;
+  }
+
+  .full-width {
+    width: 100%;
   }
 </style>

@@ -3,7 +3,10 @@
     "zh": {
       "notice": "用户 ID 仅用来标记您的上传身份。在不同设备上使用此 ID 登录，可让掉落数据集中于一个账号下，方便管理上传以及查看个人掉落数据。",
       "success": "登录成功",
-      "failed": "登录失败：{message}",
+      "failed": {
+        "message": "登录失败：{message}",
+        "notfound": "未找到所提供的用户 ID"
+      },
       "login": "登录",
       "logout": "退出登录",
       "logoutPrompt": "确定要退出登录吗？",
@@ -13,7 +16,10 @@
     "en": {
       "notice": "The User ID helps us identifies your upload identity. Inputting this ID on other devices enable you to manage and inspect your uploads with ease.",
       "success": "Successfully logged in",
-      "failed": "Failed to log in: {message}",
+      "failed": {
+        "message": "Failed to log in: {message}",
+        "notfound": "The specified User ID could not been found"
+      },
       "login": "Login",
       "logout": "Logout",
       "logoutPrompt": "Are you sure?",
@@ -23,7 +29,10 @@
     "ja": {
       "notice": "ユーザーIDはアップロードの際にのみ使用します。このIDを使用し各機器を登録することでデータを1つのアカウントに統合することが可能となり、アップロードの管理や個人のドロップデータを調べることが可能となります。",
       "success": "ログイン成功",
-      "failed": "ログイン失敗：{message}",
+      "failed": {
+        "message": "ログイン失敗：{message}",
+        "notfound": "指定されたユーザーIDが見つかりませんでした"
+      },
       "login": "ログイン",
       "logout": "ログアウト",
       "logoutPrompt": "本当にログアウトしますか？",
@@ -45,7 +54,7 @@
     >
       {{ snackbar.text }}
       <v-btn
-        flat
+        text
         @click="snackbar.enabled = false"
       >
         {{ $t('dialog.close') }}
@@ -57,32 +66,31 @@
       max-width="450px"
     >
       <v-card class="pa-2">
-        <v-card-title>
-          <span class="headline">
-            {{ $t('login') }}
-          </span>
+        <v-card-title class="headline">
+          {{ $t('login') }}
         </v-card-title>
         <v-card-text>
           <v-alert
-            :value="true"
+            prominent
             type="info"
+            border="left"
+            class="mt-2 mb-6"
           >
             {{ $t('notice') }}
           </v-alert>
-          <v-divider class="my-4" />
           <v-text-field
             v-model="auth.username"
             :label="`${$t('userId')} *`"
             :error-messages="error"
             required
-
-            outline
+            outlined
+            :hide-details="error === ''"
 
             @keyup.enter.native="login"
             @input="emitError"
           />
         </v-card-text>
-        <v-card-actions class="mx-2 mb-3">
+        <v-card-actions class="mx-4 mb-2">
           <v-btn
             :loading="auth.loading"
             :disabled="auth.username === ''"
@@ -95,7 +103,7 @@
               mdi-login-variant
             </v-icon>
 
-            {{ $t('dialog.confirm') }}
+            {{ $t('dialog.submit') }}
           </v-btn>
         </v-card-actions>
       </v-card>
@@ -130,47 +138,22 @@
       </v-card>
     </v-dialog>
 
-    <v-hover v-if="$store.getters.authed">
-      <transition
-        slot-scope="{ hover }"
-
-        :name="`slide-x${hover ? '-reverse' : ''}-transition`"
-        mode="out-in"
-        duration="30"
+    <v-chip
+      v-if="$store.getters.authed"
+      style="box-shadow: 0 0 0 4px rgba(0, 0, 0, .3)"
+      @click="auth.logoutPrompt = true"
+    >
+      <v-icon
+        left
       >
-        <v-btn
-          v-if="hover && !mobile"
-          key="logout"
-          round
-          @click="auth.logoutPrompt = true"
-        >
-          <v-icon
-            left
-          >
-            mdi-logout-variant
-          </v-icon>
-          {{ $t('logout') }}
-        </v-btn>
-
-        <v-chip
-          v-else
-          key="nameTag"
-          style="box-shadow: 0 0 0 4px rgba(0, 0, 0, .3)"
-          @click="auth.logoutPrompt = true"
-        >
-          <v-icon
-            left
-          >
-            mdi-account-circle
-          </v-icon>
-          {{ $store.getters.authUsername }}
-        </v-chip>
-      </transition>
-    </v-hover>
+        mdi-account-circle
+      </v-icon>
+      {{ $store.getters.authUsername }}
+    </v-chip>
 
     <v-btn
       v-if="!$store.getters.authed"
-      round
+      rounded
       icon
       @click="auth.dialog = true"
     >
@@ -224,8 +207,7 @@
           .then(() => {
             this.$store.commit("authLogin", this.auth.username);
             Cookies.set(this.cookies.key, this.auth.username, {expires: 7, path: "/"});
-            this.$ga.event('account', 'login', 'login_success', 1)
-            Console.log(Cookies);
+            this.$ga.event('account', 'login', 'login_success', 1);
             this.snackbar = {
               enabled: true,
               color: "success",
@@ -236,12 +218,12 @@
             this.auth.dialog = false
           })
           .catch((err) => {
-            this.snackbar = {
-              enabled: true,
-              color: "error",
-              text: this.$t('failed', {message: err.errorMessage})
-            };
-            this.error = this.$t('failed', {message: err.errorMessage})
+            Console.debug(err)
+            if (err.response && err.response.status && err.response.status === 404) {
+              this.error = this.$t('failed.message', {message: this.$t('failed.notfound')})
+            } else {
+              this.error = this.$t('failed.message', {message: err.errorMessage})
+            }
           })
           .finally(() => {
             this.auth.loading = false

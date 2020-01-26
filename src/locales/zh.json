@@ -36,12 +36,13 @@
         "content": "素材掉落统计数据由企鹅物流统计，采用知识共享 署名-非商业性使用 4.0 国际 许可协议进行许可。转载、公开或以任何形式复制、发行、再传播本站任何内容时，必须注明从企鹅物流数据统计转载，并提供版权标识、许可协议标识、免责标识和作品链接；且未经许可，不得将本站内容或由其衍生作品用于商业目的。"
       },
       "credit": "企鹅物流数据统计 | {date}"
-    }
+    },
+    "separator": "、"
   },
   "stats": {
     "headers": {
       "stage": "关卡",
-      "apCost": "理智消耗",
+      "apCost": "理智",
       "item": "物品",
       "times": "样本数",
       "quantity": "掉落数",
@@ -115,7 +116,7 @@
     "rules": {
       "item": {
         "_name": "物品项",
-        "now": "已选 {item} x{quantity}",
+        "now": "已选 {item} ×{quantity}",
         "gte": "“{item}” 应至少有 {quantity} 个",
         "lte": "“{item}” 应至多有 {quantity} 个",
         "not": "“{item}” 不应有 {quantity} 个"

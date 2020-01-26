@@ -20,7 +20,7 @@
       "contact": "Contact us",
       "donate": "Donate",
       "links": "Links",
-      "bulletin": "Bulletin"
+      "bulletin": "Notice"
     },
     "planner": "ArkPlanner",
     "changelog": "Change Log",
@@ -36,17 +36,18 @@
         "content": "Data was collected by Penguin Delivery, licensed under a Creative Commons Attribution-NonCommercial 4.0 International License. In case of redistribution and transformation towards the material, you must give appropriate credit, provide a link to the license, indicate if changes were made, and may not use the material for commercial purposes."
       },
       "credit": "Penguin Statistics | {date}"
-    }
+    },
+    "separator": ", "
   },
   "stats": {
     "headers": {
       "stage": "Stage",
-      "apCost": "Costs AP",
+      "apCost": "Sanity",
       "item": "Item",
       "times": "Samples",
       "quantity": "Loots",
       "percentage": "Percentage",
-      "apPPR": "Expected AP required every 1 item"
+      "apPPR": "Sanity Required Per Item"
     }
   },
   "builds": {
@@ -93,16 +94,38 @@
     }
   },
   "report": {
+    "alert": {
+      "title": {
+        "first": "Failure Risk Detected",
+        "repeat": "Warning"
+      },
+      "continue": {
+        "first": "Are you still want to submit this record?",
+        "repeat": "Confirm submitting this record?"
+      },
+      "contact": {
+        "before": "If you know that this is a mistake, we cannot be more happier if you",
+        "activator": "contact us.",
+        "after": "(Please indicate the stage name, the actual drops, and screenshot is preferred for verification purposes) After confirming this is an error, our team will fix the limitation."
+      },
+      "causes": {
+        "noDrop": "Haven't selected any drop items.",
+        "limitation": "Your current submission is having large mis-match with our existing data. Submitting this record will have a risk to be judged as a false-report, letting the current submission being deleted from our dataset."
+      }
+    },
     "rules": {
       "item": {
+        "_name": "Item Quantities",
+        "now": "Selected {item} ×{quantity}",
         "gte": "\"{item}\" should ≥{quantity}",
         "lte": "\"{item}\" should ≤{quantity}",
         "not": "\"{item}\" should ≠{quantity}"
       },
       "type": {
-        "gte": "Should have at least {quantity} types",
-        "lte": "Should have at most {quantity} types",
-        "not": "Should not be {quantity} types"
+        "_name": "Items",
+        "gte": "Should have at least {quantity} kinds of item",
+        "lte": "Should have at most {quantity} kinds of item",
+        "not": "Should not be {quantity} kinds of item"
       }
     }
   }

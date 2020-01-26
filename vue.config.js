@@ -30,5 +30,8 @@ module.exports = {
       maskIcon: 'favicon/safari-pinned-tab.svg',
       msTileImage: 'favicon/mstile-150x150.png'
     }
-  }
+  },
+  transpileDependencies: [
+    "vuetify"
+  ]
 };

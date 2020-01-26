@@ -1,12 +1,10 @@
 <template>
-  <v-layout
-    row
-    wrap
-    align-center
-    justify-center
+  <v-row
+    align="center"
+    justify="center"
     class="pr-1 pb-1"
   >
-    <v-flex>
+    <v-col>
       <!-- <v-badge
         color="red"
         :value="quantity > 0"
@@ -37,19 +35,18 @@
           <Item
             :item="item"
             :ratio="1"
-            disable-tooltip
             disable-link
+            tooltip-position="bottom"
           />
         </div>
       </v-badge>
 
       <template v-if="item.itemType === 'ACTIVITY_ITEM_BATCH'">
-        <v-layout
-          flex
-          row
-          wrap
-          align-center
-          justify-center
+        <v-row
+          class="flex"
+
+          align="center"
+          justify="center"
         >
           <div class="text-center mt-2">
             <v-btn
@@ -60,16 +57,16 @@
               +10
             </v-btn>
           </div>
-        </v-layout>
+        </v-row>
       </template>
 
       <!-- </v-badge> -->
-    </v-flex>
-  </v-layout>
+    </v-col>
+  </v-row>
 </template>
 
 <script>
-  import Item from '@/components/Item'
+  import Item from '@/components/global/Item'
 
   export default {
     name: "ItemStepper",
@@ -88,18 +85,8 @@
     },
     data() {
       return {
-        rawQuantity: 0
+        quantity: 0
       }
-    },
-    computed: {
-      quantity: {
-        get() {
-          return this.rawQuantity
-        },
-        set(v) {
-          this.rawQuantity = parseInt(v)
-        }
-      },
     },
     watch: {
       quantity: function (newValue, oldValue) {

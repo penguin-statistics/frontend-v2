@@ -7,6 +7,8 @@
     <v-navigation-drawer
       v-model="drawer"
       app
+      style="max-height: calc(100vh - 36.76px)"
+      width="300"
     >
       <div class="drawer-logo blue darken-4">
         <v-img
@@ -16,145 +18,154 @@
           contain
         />
         <div class="white--text description">
-          <v-layout
-            column
-            align-center
-            justify-center
-            wrap
+          <v-row
+            align="center"
+            justify="center"
           >
             <span>{{ $t('app.name_line1') }}</span>
             <span>{{ $t('app.name_line2') }}</span>
-          </v-layout>
+          </v-row>
         </div>
       </div>
-      <v-list>
-        <div
+      <v-list
+        dense
+        nav
+      >
+        <template
           v-for="route in routes"
-          :key="route.name"
         >
-          <v-list-tile
+          <v-list-item
             v-if="!route.children || route.meta.forceSingle"
             :key="route.name"
             @click="onMenuItemClicked(route)"
           >
-            <v-list-tile-action>
-              <v-icon>{{ route.meta.icon }}</v-icon>
-            </v-list-tile-action>
-            <v-list-tile-content>
-              <v-list-tile-title>
+            <v-list-item-icon>
+              <v-icon v-text="route.meta.icon" />
+            </v-list-item-icon>
+            <v-list-item-content>
+              <v-list-item-title>
                 {{ $t(route.meta.i18n) }} &nbsp; <v-icon
                   v-if="!route.component && !route.meta.forceSingle"
                   small
                 >
                   mdi-open-in-new
                 </v-icon>
-              </v-list-tile-title>
-            </v-list-tile-content>
-          </v-list-tile>
+              </v-list-item-title>
+            </v-list-item-content>
+          </v-list-item>
           <v-list-group
             v-else
-            v-model="route.meta.active"
+            :key="route.name"
+            :value="route.meta.active"
             :prepend-icon="route.meta.icon"
             no-action
-            mandatory
           >
             <template v-slot:activator>
-              <v-list-tile>
-                <v-list-tile-content>
-                  <v-list-tile-title>{{ $t(route.meta.i18n) }}</v-list-tile-title>
-                </v-list-tile-content>
-              </v-list-tile>
+              <v-list-item-title>{{ $t(route.meta.i18n) }}</v-list-item-title>
             </template>
 
-            <v-list-tile
-              v-for="child in route.children.filter(el => !(el.meta.hide))"
+            <v-list-item
+              v-for="child in route.children.filter(el => !el.meta.hide)"
               :key="child.name"
               @click="onMenuItemClicked(child)"
             >
-              <v-list-tile-content>
-                <v-list-tile-title>{{ $t(child.meta.i18n) }}</v-list-tile-title>
-              </v-list-tile-content>
+              <v-list-item-title>{{ $t(child.meta.i18n) }}</v-list-item-title>
 
-              <v-list-tile-action>
-                <v-icon>{{ child.meta.icon }}</v-icon>
-              </v-list-tile-action>
-            </v-list-tile>
+              <v-list-item-icon>
+                <v-icon v-text="child.meta.icon" />
+              </v-list-item-icon>
+            </v-list-item>
           </v-list-group>
-        </div>
+        </template>
 
         <v-divider class="my-2" />
 
-        <v-layout
-          justify-end
-          row
-          wrap
-        >
-          <v-btn
-            icon
-            @click="refreshData"
+        <v-container>
+          <v-row
+            justify="end"
           >
-            <v-icon>mdi-database-refresh</v-icon>
-          </v-btn>
-          <v-btn
-            icon
-            @click="dark = !dark"
-          >
-            <v-icon>mdi-invert-colors</v-icon>
-          </v-btn>
-          <v-menu
-            bottom
-            left
-          >
-            <template v-slot:activator="{ on }">
-              <v-btn
-                icon
-                v-on="on"
-              >
-                <v-icon>mdi-translate</v-icon>
-              </v-btn>
-            </template>
+            <v-btn
+              icon
+              class="mx-1"
+              @click="refreshData"
+            >
+              <v-icon>mdi-database-refresh</v-icon>
+            </v-btn>
 
-            <v-list>
-              <v-list-tile
-                v-for="(locale, i) in localizations"
-                :key="i"
-                @click="changeLocale(locale.id)"
-              >
-                <v-list-tile-title>{{ locale.name }}</v-list-tile-title>
-              </v-list-tile>
-            </v-list>
-          </v-menu>
-        </v-layout>
+            <v-btn
+              icon
+              class="mx-1"
+              @click="dark = !dark"
+            >
+              <v-icon>mdi-invert-colors</v-icon>
+            </v-btn>
+            
+            <v-menu
+              bottom
+              left
+              transition="slide-y-transition"
+            >
+              <template v-slot:activator="{ on }">
+                <v-btn
+                  icon
+                  class="mx-1"
+                  v-on="on"
+                >
+                  <v-icon>mdi-translate</v-icon>
+                </v-btn>
+              </template>
+
+              <v-list>
+                <v-list-item
+                  v-for="(locale, i) in localizations"
+                  :key="i"
+                  @click="changeLocale(locale.id)"
+                >
+                  <v-list-item-title>{{ locale.name }}</v-list-item-title>
+                </v-list-item>
+              </v-list>
+            </v-menu>
+          </v-row>
+        </v-container>
       </v-list>
     </v-navigation-drawer>
-    <v-toolbar
-      color="blue darken-3"
-      dark
-      fixed
+    <v-app-bar
       app
+      fixed
+      dark
+      color="blue darken-3"
     >
-      <v-toolbar-side-icon @click.stop="drawer = !drawer" />
-      <v-toolbar-title>
+      <v-app-bar-nav-icon
+        @click.stop="drawer = !drawer"
+      />
+
+      <v-toolbar-title class="pl-2">
         <transition
           name="fade-transition"
           mode="out-in"
         >
           <v-avatar
             :size="32"
-            class="mr-3"
+            class="mr-2"
           >
             <v-img
               :src="randomizedLogo"
               class="randomizedLogo"
             />
           </v-avatar>
-        </transition>{{ $t($router.currentRoute.meta.i18n) }}
+        </transition>
+        <span class="title">
+          {{ $t($router.currentRoute.meta.i18n) }}
+        </span>
       </v-toolbar-title>
+
       <v-spacer />
 
       <AccountManager />
-    </v-toolbar>
-    <v-content>
+    </v-app-bar>
+    <v-content
+      class="mb-8"
+    >
       <transition
         name="slide-fade"
         mode="out-in"
@@ -163,13 +174,14 @@
       </transition>
     </v-content>
     <v-footer
-      color="blue darken-3"
-      class="white--text px-3"
       app
+      color="blue darken-3"
+      class="white--text px-4"
     >
       <v-dialog
         v-model="showLicenseDialog"
         width="500"
+        origin="bottom left"
       >
         <template v-slot:activator="{ on }">
           <span
@@ -208,7 +220,6 @@
         <v-card>
           <v-card-title
             class="headline primary lighten-1"
-            primary-title
           >
             <v-avatar
               size="24"
@@ -222,7 +233,7 @@
             {{ $t('meta.footer.copyright.title') }}
           </v-card-title>
 
-          <v-card-text>
+          <v-card-text class="mt-2 body-1">
             {{ $t('meta.footer.copyright.content') }}
           </v-card-text>
 
@@ -231,7 +242,7 @@
           <v-card-actions>
             <v-spacer />
             <v-btn
-              flat
+              text
               href="https://creativecommons.org/licenses/by-nc/4.0/"
               target="_blank"
             >
@@ -250,10 +261,12 @@
 </template>
 
 <script>
-  import RandomBackground from '@/components/RandomBackground'
-  import AccountManager from '@/components/AccountManager'
-  import NetworkStateIndicator from "@/components/widgets/NetworkStateIndicator";
+  import RandomBackground from '@/components/global/RandomBackground'
+  import AccountManager from '@/components/toolbar/AccountManager'
+  import NetworkStateIndicator from "@/components/toolbar/NetworkStateIndicator";
   import Console from "@/utils/Console";
+  import strings from "@/utils/strings";
+  import config from "@/config";
 
 export default {
   name: 'App',
@@ -268,8 +281,8 @@ export default {
       randomizedLogo: "",
       localizations: [
         {
-          id: 'zh_CN',
-          name: '简体中文'
+          id: 'zh',
+          name: '中文'
         }, {
           id: 'en',
           name: 'English'
@@ -290,6 +303,7 @@ export default {
       },
       set (value) {
         this.$store.commit('switchDark', value)
+        this.$vuetify.theme.dark = value
       }
     }
   },
@@ -301,11 +315,28 @@ export default {
     'dark': ['onDarkChange']
   },
   beforeMount() {
-    this.routes = this.$router.options.routes.filter(el => !(el.meta.hide))
+    this.routes = this.$router.options.routes.filter(el => !(el.meta.hide));
+    this.$store.dispatch("fetchData", false)
   },
   mounted () {
     this.randomizeLogo();
     this.onDarkChange(this.$store.state.settings.dark);
+
+    if (this.$store.getters.language) {
+      this.changeLocale(this.$store.getters.language, false)
+    } else {
+      const language = strings.getFirstBrowserLanguage();
+      Console.debug("[i18n] detected language", language);
+      if (language) {
+        // because this is a detection result, thus we are not storing it,
+        // unless the user manually set one.
+        this.changeLocale(language, false)
+      }
+    }
+
+    if (this.$store.state.settings.dark) {
+      this.$vuetify.theme.dark = this.$store.state.settings.dark
+    }
   },
   methods: {
     async refreshData () {
@@ -337,21 +368,27 @@ export default {
       }
     },
     randomizeLogo () {
-      let random = Math.random();
-      this.randomizedLogo = random < .25 ? "https://penguin-stats.s3.ap-southeast-1.amazonaws.com/logos/penguin_stats_logo_exia.png"
-        : random < .5 ? "https://penguin-stats.s3.ap-southeast-1.amazonaws.com/logos/penguin_stats_logo_texas.png"
-          : random < .75 ? "https://penguin-stats.s3.ap-southeast-1.amazonaws.com/logos/penguin_stats_logo_sora.png"
-            : "https://penguin-stats.s3.ap-southeast-1.amazonaws.com/logos/penguin_stats_logo_croissant.png"
+      const random = Math.random();
+      function imageUrl (character) {
+        return `${config.cdn.global}/logos/penguin_stats_logo_${character}.png`
+      }
+      this.randomizedLogo = random < .25 ? imageUrl("exia")
+        : random < .5 ? imageUrl("texas")
+          : random < .75 ? imageUrl("sora")
+            : imageUrl("croissant")
     },
-    changeLocale (localeId) {
-      this.$i18n.locale = localeId
-      document.title = `${this.$t('app.name')}`;
+    changeLocale (localeId, save=true) {
+      Console.debug("[i18n] locale changed to:", localeId, "| saving to vuex:", save);
+      this.$i18n.locale = localeId;
+      // this.$vuetify.lang.current = localeId;
+      if (save) this.$store.commit("changeLocale", localeId);
+      document.title = `${this.$t(this.$route.meta.i18n) + ' | ' || ''}${this.$t('app.name')}`;
     },
     logRouteEvent (newValue) {
-      if (newValue.name === "StatsByStage_SelectedBoth") {
-        Console.log(this.$store.state.dataSource, newValue.params.stageId);
+      if (newValue.name === "StatsByStage_Selected") {
+        // Console.log(this.$store.state.dataSource, newValue.params.stageId);
         this.$ga.event('result', 'fetch_' + this.$store.state.dataSource, newValue.params.stageId, 1)
-      } else if (newValue.name === "StatsByItem_SelectedItem") {
+      } else if (newValue.name === "StatsByItem_Selected") {
         this.$ga.event('result', 'fetch_' + this.$store.state.dataSource, newValue.params.itemId, 1)
       }
     }
@@ -361,14 +398,14 @@ export default {
 
 <style>
   .slide-fade-enter-active {
-    transition: all .325s cubic-bezier(0.165, 0.84, 0.44, 1);
+    transition: all .225s cubic-bezier(0.165, 0.84, 0.44, 1);
   }
   .slide-fade-leave-active {
-    transition: all .175s cubic-bezier(0.165, 0.84, 0.44, 1);
+    transition: all .125s cubic-bezier(0.165, 0.84, 0.44, 1);
   }
   .slide-fade-enter, .slide-fade-leave-to
     /* .slide-fade-leave-active for below version 2.1.8 */ {
-    transform: translateY(2vh);
+    transform: translateY(1.5vh);
     opacity: 0;
   }
 
@@ -406,11 +443,19 @@ export default {
   }
 
   .theme--light .bkop-light {
-    background: rgba(255, 255, 255, .65) !important;
+    background: rgba(255, 255, 255, .75) !important;
   }
 
   .theme--dark .bkop-light {
-    background: rgba(66, 66, 66, .75) !important;
+    background: rgba(66, 66, 66, .85) !important;
+  }
+
+  .theme--light .bkop-medium {
+    background: rgba(255, 255, 255, .9) !important;
+  }
+
+  .theme--dark .bkop-medium {
+    background: rgba(66, 66, 66, .9) !important;
   }
 
   .cursor-pointer {
@@ -429,13 +474,17 @@ export default {
     background-color: rgb(200, 200, 200);
   }
 
-  .v-toolbar {
-    padding-top: env(safe-area-inset-top);
-  }
+  /*.v-toolbar {*/
+  /*  padding-top: env(safe-area-inset-top);*/
+  /*}*/
 
-  .v-footer {
-    height: calc(32px + env(safe-area-inset-bottom)) !important;
-    padding-bottom: calc(env(safe-area-inset-bottom));
+  /*.v-footer {*/
+  /*  height: calc(32px + env(safe-area-inset-bottom)) !important;*/
+  /*  padding-bottom: calc(env(safe-area-inset-bottom));*/
+  /*}*/
+
+  .no-wrap--text {
+    word-break: break-word;
   }
 
 </style>

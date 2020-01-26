@@ -1,5 +1,5 @@
 import Vue from 'vue'
-import './plugins/vuetify'
+import vuetify from './plugins/vuetify';
 import 'vuetify/dist/vuetify.min.css'
 import App from './App.vue'
 import router from './router'
@@ -9,6 +9,7 @@ import VueAnalytics from "vue-analytics"
 import AOS from 'aos'
 import 'aos/dist/aos.css'
 import I18n from "@/i18n"
+import config from "@/config"
 
 import * as Sentry from '@sentry/browser';
 import * as Integrations from '@sentry/integrations';
@@ -26,11 +27,11 @@ if (production) {
     // So I've turned this setting off. If necessary please re-enable it.
     // More info at: https://docs.sentry.io/platforms/javascript/vue/
     logErrors: false,
+    release: 'frontend-v2@' + (config.version || 'unknown'),
   });
 }
 
-router.beforeEach(async(to, from, next) => {
-  await store.dispatch("fetchData", false);
+router.beforeEach((to, from, next) => {
   document.title = `${I18n.t(to.meta.i18n)} | ${I18n.t('app.name')}`;
   next();
 });
@@ -58,6 +59,7 @@ Vue.use(VueAnalytics, {
 Vue.config.productionTip = false;
 
 new Vue({
+  vuetify,
   router,
   store,
   i18n,

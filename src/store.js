@@ -6,7 +6,7 @@ import itemsManager from '@/models/items'
 import limitationsManager from '@/models/limitations'
 import stagesManager from '@/models/stages'
 import zonesManager from '@/models/zones'
-import trendsManager from '@/models/trends'
+// import trendsManager from '@/models/trends'
 import globalMatrixManager from '@/models/matrices/globalMatrix'
 import personalMatrixManager from '@/models/matrices/personalMatrix'
 
@@ -31,7 +31,7 @@ export default new Vuex.Store({
     },
     settings: {
       dark: true,
-      locale: 'zh'
+      language: null
     },
     auth: {
       username: null
@@ -40,8 +40,8 @@ export default new Vuex.Store({
     dataSource: 'global'
   },
   mutations: {
-    store: (state, d) => {
-      state.data = Object.assign(state.data, d);
+    store: (state, {key, value}) => {
+      Vue.set(state.data, key, value)
     },
     storeCacheUpdateAt: (state, d) => {
       state.cacheUpdateAt = Object.assign(state.cacheUpdateAt, d);
@@ -53,7 +53,7 @@ export default new Vuex.Store({
       state.settings.dark = newState
     },
     changeLocale(state, newLocale) {
-      state.settings.locale = newLocale
+      state.settings.language = newLocale
     },
     authLogin(state, username) {
       state.auth.username = username
@@ -68,13 +68,17 @@ export default new Vuex.Store({
   actions: {
     // eslint-disable-next-line
     async fetchData({}, refresh = false) {
-      await itemsManager.get(refresh);
-      await limitationsManager.get(refresh);
-      await stagesManager.get(refresh);
-      await zonesManager.get(refresh);
-      await trendsManager.get(refresh);
-      await globalMatrixManager.get(refresh);
-      await personalMatrixManager.get(refresh)
+      Promise.all([
+        itemsManager.get(refresh),
+        limitationsManager.get(refresh),
+        stagesManager.get(refresh),
+        zonesManager.get(refresh)
+      ]).then(() => {
+        globalMatrixManager.get(refresh);
+        personalMatrixManager.get(refresh)
+      })
+      // await trendsManager.get(refresh);
+
     },
     async refreshPersonalMatrixData() {
       await personalMatrixManager.get(true)
@@ -128,6 +132,7 @@ export default new Vuex.Store({
     },
     cacheUpdateAt: (state) => (name) => {
       return state.cacheUpdateAt[name]
-    }
+    },
+    language: state => state.settings.language
   }
 })
