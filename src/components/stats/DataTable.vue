@@ -102,21 +102,32 @@
                   :ratio="0.6"
                   disable-tooltip
                   disable-link
+
                   class="item-icon"
                 />
                 <span
-                  style="padding-left: 44px;"
+                  v-intersect="{
+                    handler: onIntersect,
+                    options: {
+                      threshold: [0.95]
+                    }
+                  }"
+                  style="padding-left: 44px"
+                  class="item-name--text"
+                  :class="{'item-name--hide': hideItemName}"
                 >
                   {{ strings.translate(props.item.item, "name") }}
                 </span>
                 <v-icon
                   x-small
                   class="ml-1 item-name--chevron"
+                  :class="{'item-name--hide': hideItemName}"
                 >
                   mdi-link
                 </v-icon>
                 <v-divider
                   class="mx-4 item-name--line"
+                  :class="{'item-name--hide': hideItemName}"
                 />
               </v-row>
             </td>
@@ -239,7 +250,8 @@
         options: {
           itemsPerPage: -1
         },
-        tableCellClasses: "px-2 font-weight-bold"
+        tableCellClasses: "px-2 font-weight-bold",
+        hideItemName: false
       }
     },
     computed: {
@@ -323,6 +335,13 @@
             stageId
           }
         });
+      },
+      onIntersect (entries, observer, isIntersecting) {
+        if (isIntersecting) {
+          this.hideItemName = false
+        } else {
+          this.hideItemName = true
+        }
       }
     },
   }
@@ -357,8 +376,11 @@
     align-items: center;
   }
 
-  .item-name, .item-name--chevron {
-    transition: text-shadow .1s cubic-bezier(.25,.8,.5,1), filter .1s cubic-bezier(.25,.8,.5,1), transform .225s cubic-bezier(.25,.8,.5,1) !important;
+  .item-name, .item-name--chevron, .item-name--text {
+    transition: text-shadow .1s cubic-bezier(.25,.8,.5,1), filter .1s cubic-bezier(.25,.8,.5,1), transform .225s cubic-bezier(.25,.8,.5,1), opacity .225s cubic-bezier(.25,.8,.5,1) !important;
+  }
+  .item-name--text {
+    z-index: 0;
   }
   .item-name {
     text-shadow: none;
@@ -442,5 +464,9 @@
 
   .item-icon {
     position: absolute;
+  }
+
+  .item-name--hide{
+    opacity: 0;
   }
 </style>
