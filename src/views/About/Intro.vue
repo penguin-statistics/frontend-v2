@@ -25,7 +25,10 @@
 </i18n>
 
 <template>
-  <v-card elevation="5" class="bkop-light px-6 py-1">
+  <v-card 
+    elevation="5" 
+    class="bkop-light px-6 py-1"
+  >
     <v-row
       align="center"
       justify="center"

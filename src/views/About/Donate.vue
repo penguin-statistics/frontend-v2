@@ -49,7 +49,10 @@
 </i18n>
 
 <template>
-  <v-card elevation="5" class="bkop-light pa-6">
+  <v-card 
+    elevation="5" 
+    class="bkop-light pa-6"
+  >
     <h1 class="headline">
       {{ $t('menu.about.donate') }}
     </h1>

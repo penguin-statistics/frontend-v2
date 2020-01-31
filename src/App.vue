@@ -10,11 +10,13 @@
       style="max-height: calc(100vh - 36.76px)"
       width="300"
     >
-      <div :class="{
-        'drawer-logo blue': true,
-        'darken-4': dark,
-        'darken-3': !dark
-      }">
+      <div 
+        :class="{
+          'drawer-logo blue': true,
+          'darken-4': dark,
+          'darken-3': !dark
+        }"
+      >
         <v-img
           :src="require('@/assets/logo.png')"
           aspect-ratio="1"
@@ -40,8 +42,8 @@
         >
           <v-list-item
             v-if="!route.children || route.meta.forceSingle"
-            :class="route.path === $route.path ? 'v-list-item--active' : ''"
             :key="route.name"
+            :class="route.path === $route.path ? 'v-list-item--active' : ''"
             @click="onMenuItemClicked(route)"
           >
             <v-list-item-icon>
@@ -72,8 +74,8 @@
 
             <v-list-item
               v-for="child in route.children.filter(el => !el.meta.hide)"
-              :class="child.path === $route.path.split('/')[2] ? 'v-list-item--active' : ''"
               :key="child.name"
+              :class="child.path === $route.path.split('/')[2] ? 'v-list-item--active' : ''"
               @click="onMenuItemClicked(child)"
             >
               <v-list-item-title>{{ $t(child.meta.i18n) }}</v-list-item-title>
@@ -94,9 +96,9 @@
             <v-tooltip bottom>
               <template v-slot:activator="{ on }">
                 <v-btn
-                  v-on="on"
                   icon
                   class="mx-1"
+                  v-on="on"
                   @click="refreshData"
                 >
                   <v-icon>mdi-database-refresh</v-icon>
@@ -108,9 +110,9 @@
             <v-tooltip bottom>
               <template v-slot:activator="{ on }">
                 <v-btn
-                  v-on="on"
                   icon
                   class="mx-1"
+                  v-on="on"
                   @click="dark = !dark"
                 >
                   <v-icon>mdi-invert-colors</v-icon>
