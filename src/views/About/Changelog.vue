@@ -12,6 +12,7 @@
       <v-card
         class="bkop-light"
         data-aos="fade"
+        elevation="5"
       >
         <v-card-title class="title">
           {{ dateKey }}
