@@ -506,7 +506,7 @@ export default {
       /** @type TypeOutlier */
       let typeOutlier = null;
 
-      if (!this.selected.stage) return { item: itemOutliers, type: typeOutlier, rate: 0 };
+      if (!this.selected.stage || get.stages.byStageId(this.selected.stage).isGacha) return { item: itemOutliers, type: typeOutlier, rate: 0 };
 
       /**
        * validate the quantity using their corresponding rule
@@ -628,7 +628,7 @@ export default {
       this.furniture = false
     },
     submit() {
-      if (!this.valid || this.results.length === 0) {
+      if (!get.stages.byStageId(this.selected.stage).isGacha && (!this.valid || this.results.length === 0)) {
         this.dialogs.first.enabled = true;
         this.$ga.event('report', 'show_warning', this.selected.stage, 1)
       } else {
