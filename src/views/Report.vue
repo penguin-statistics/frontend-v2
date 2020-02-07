@@ -25,7 +25,8 @@
         "rule_4": "请保证通关评价是3星；",
         "rule_5": "请只上传国服的掉落，谢谢。"
       },
-      "usage": "左键增加，右键减少"
+      "usage": "左键增加，右键减少",
+      "gacha": "本关卡允许在一次汇报内包含多次掉落数据"
     },
     "en": {
       "stage": {
@@ -52,7 +53,8 @@
         "rule_4": "Please guarantee that you get a 3-stars score.",
         "rule_5": "Please only submit drop data from CN server, thanks."
       },
-      "usage": "Increase by left click, decrease by right click"
+      "usage": "Increase by left click, decrease by right click",
+      "gacha": "本关卡允许在一次汇报内包含多次掉落数据"
     },
     "ja": {
       "stage": {
@@ -79,7 +81,8 @@
         "rule_4": "クリア時の評価が☆3である場合のみ報告してください。",
         "rule_5": "大陸版のドロップデータのみをアップロードして下さい。ご協力ありがとうございます。"
       },
-      "usage": "左クリックで個数増加、右クリックで個数減少"
+      "usage": "左クリックで個数増加、右クリックで個数減少",
+      "gacha": "本关卡允许在一次汇报内包含多次掉落数据"
     }
   }
 </i18n>
@@ -165,7 +168,9 @@
           border="left"
         >
           <ol>
-            <li>{{ $t('rules.rule_1') }}</li>
+            <li v-if="!isGacha">
+              {{ $t('rules.rule_1') }}
+            </li>
             <li>{{ $t('rules.rule_2') }}</li>
             <li>{{ $t('rules.rule_3') }}</li>
             <li>{{ $t('rules.rule_4') }}</li>
@@ -181,6 +186,16 @@
           border="left"
         >
           {{ $t('usage') }}
+        </v-alert>
+
+        <v-alert
+          v-if="isGacha"
+          color="blue darken-2"
+          class="subtitle-1 pl-6 mb-4"
+          dark
+          border="left"
+        >
+          {{ $t('gacha') }}
         </v-alert>
 
         <v-container
@@ -492,6 +507,10 @@ export default {
       return items
     },
 
+    isGacha () {
+      return this.selected.stage && get.stages.byStageId(this.selected.stage).isGacha
+    },
+
     /**
      * @typedef {{lower: number, upper: number, exceptions: number[]}} Limitation
      * @typedef {{id: string, quantity: number, limitation: Limitation, rate: number, message: string}} ItemOutlier
@@ -506,7 +525,7 @@ export default {
       /** @type TypeOutlier */
       let typeOutlier = null;
 
-      if (!this.selected.stage || get.stages.byStageId(this.selected.stage).isGacha) return { item: itemOutliers, type: typeOutlier, rate: 0 };
+      if (!this.selected.stage) return { item: itemOutliers, type: typeOutlier, rate: 0 };
 
       /**
        * validate the quantity using their corresponding rule
@@ -551,7 +570,7 @@ export default {
       }
 
       // check for type outlier
-      if (this.limitation["itemTypeBounds"]) {
+      if (!this.isGacha && this.limitation["itemTypeBounds"]) {
         let [rules, limitation] = this.generateVerificationRule("type");
         let quantity = this.results.length;
         let validation = validate(rules, quantity);
@@ -602,6 +621,10 @@ export default {
     select({ zone, stage }) {
       this.selected.zone = zone;
       this.selected.stage = stage;
+
+      if (!zone && !stage) {
+        this.reset();
+      }
     },
     getItem(itemId) {
       return get.items.byItemId(itemId)
@@ -628,7 +651,7 @@ export default {
       this.furniture = false
     },
     submit() {
-      if (!get.stages.byStageId(this.selected.stage).isGacha && (!this.valid || this.results.length === 0)) {
+      if (!this.isGacha && (!this.valid || this.results.length === 0)) {
         this.dialogs.first.enabled = true;
         this.$ga.event('report', 'show_warning', this.selected.stage, 1)
       } else {
