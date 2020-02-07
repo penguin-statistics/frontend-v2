@@ -257,11 +257,13 @@
         },
         set (val) {
           this.internalStep = val;
+          if (val === 1) this.$emit("select", {zone: null, stage: null});
+
           if (!this.bindRouter) return;
           if (val === 1) {
             this.$router.push({
               name: this.routerNames.index
-            })
+            });
           } else if (val === 2) {
             this.$router.push({
               name: this.routerNames.details,
