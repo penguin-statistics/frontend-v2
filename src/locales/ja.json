@@ -19,7 +19,8 @@
       "changelog": "更新履歴",
       "contact": "連絡先",
       "donate": "寄付について",
-      "links": "相互リンク"
+      "links": "相互リンク",
+      "bulletin": "お知らせ"
     },
     "planner": "周回計画作成ツール",
     "changelog": "更新履歴",
@@ -27,24 +28,26 @@
   },
   "meta": {
     "details": "詳細を見る",
-    "loading": "Now Loading...",
+    "loading": "読み込み中...",
+    "notfound": "これはどこ¿¿¿",
     "footer": {
       "copyright": {
         "title": "利用許諾",
         "content": "ドロップ統計データはクリエイティブ・コモンズ 表示 - 非営利 4.0 国際 ライセンスの下に提供されています。当サイトのいかなる内容の転載や公開を行う場合は、必ず内容の元となっているページまたはトップページのURLのリンクを行い、データ統計の転載を行ったことを明記しなければなりません。また許可無しに当サイトの内容または派生作品を商業目的で利用することを許可しません。"
       },
       "credit": "ペンギン急便データ統計処理部門 | {date}"
-    }
+    },
+    "separator": "、"
   },
   "stats": {
     "headers": {
       "stage": "ステージ",
-      "apCost": "消費理智",
+      "apCost": "消費理性",
       "item": "アイテム",
       "times": "サンプル数",
       "quantity": "ドロップ数",
       "percentage": "ドロップ率",
-      "apPPR": "１個あたりの必要期待理智数"
+      "apPPR": "１個あたりの必要期待理性数"
     }
   },
   "builds": {
@@ -72,7 +75,7 @@
     "repo": "プロジェクトリポジトリ：",
     "frontend": "フロントエンド",
     "backend": "バックエンド",
-    "contribute_0": "以下のような開発の経験があるのであれば、Penguin Statisticsに自身の力を使ってみませんか？右記のQQグループを追加してください：747099627",
+    "contribute_0": "以下のような開発の経験があるのであれば、Penguin Statistics に自身の力を使ってみませんか？右記のQQグループを追加してください：747099627",
     "contribute_1": "本プロジェクトは無償のオープンソースプロジェクトです",
     "skills": {
       "frontend": "フロントエンド開発 Vue.js",
@@ -86,21 +89,43 @@
   "fetch": {
     "failed": {
       "title": "接続エラー",
-      "subtitle": "Unable to establish synchronized connection with the neural network; missing partial resource.",
+      "subtitle": "ニューラルネットワークとの同期接続を確立できません。部分的なリソースがありません。",
       "retry": "再試行"
     }
   },
   "report": {
+    "alert": {
+      "title": {
+        "first": "障害リスクの検出",
+        "repeat": "警告"
+      },
+      "continue": {
+        "first": "本当に送信しますか？",
+        "repeat": "本当にこのデータを送信しますか？"
+      },
+      "contact": {
+        "before": "誤った情報であると判断した場合は",
+        "activator": "管理人に連絡を行ってください",
+        "after": "（その際はスクリーンショットの添付をお願いいたします）。確認次第速やかに修正を行わせて頂きます。"
+      },
+      "causes": {
+        "noDrop": "ドロップアイテムが何も選択されていません。送信するデータに問題はありませんか？",
+        "limitation": "今回報告しようとしている内容は既存のデータとの差が大きくなっており、このまま報告するのであれば今回の報告は異常と判定され、全て統計データに反映されることはありません。"
+      }
+    },
     "rules": {
       "item": {
-        "gte": "Quantity of \"{item}\" should ≥{quantity}",
-        "lte": "Quantity of \"{item}\" should ≤{quantity}",
-        "not": "Quantity of \"{item}\" should ≠{quantity}"
+        "_name": "アイテム数量",
+        "now": "選択された {item} ×{quantity}",
+        "gte": "\"{item}\" should ≥{quantity}",
+        "lte": "\"{item}\" should ≤{quantity}",
+        "not": "\"{item}\" should ≠{quantity}"
       },
       "type": {
-        "gte": "There should have at least {quantity} types of item in this stage",
-        "lte": "There should have at most {quantity} types of item in this stage",
-        "not": "There should not be {quantity} types of item in this stage"
+        "_name": "アイテム",
+        "gte": "最少 {quantity} 種類のアイテムが必要です",
+        "lte": "最大 {quantity} 種類のアイテムが必要です",
+        "not": "{quantity}種類のアイテムであってはなりません"
       }
     }
   }

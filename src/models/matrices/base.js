@@ -1,28 +1,29 @@
 import ObjectManager from '@/utils/objectManager'
-import stages from '@/models/stages'
-import items from '@/models/items'
-import zones from '@/models/zones'
+import get from "@/utils/getters";
 
 class MatrixObjectManager extends ObjectManager {
   /** Creates a matrix object manager */
-  constructor({ name, api, transform, ttl, ajaxHooks }) {
+  constructor({ name, api, ttl, ajaxHooks }) {
     super({
       name,
       api,
       transform: [
         (object) => {
-          const stage = stages.getOne("stageId", object.stageId);
-          object.stage = stage;
-          object.zone = zones.getOne("zoneId", stage.zoneId);
-          object.item = items.getOne("itemId", object.itemId);
+          object = object.matrix;
 
-          object.percentage = (object.quantity / object.times);
-          object.percentageText = `${(object.percentage * 100).toFixed(2)}%`;
-          object.apPPR = (stage.apCost / object.percentage).toFixed(2);
+          object.forEach(el => {
+            const stage = get.stages.byStageId(el.stageId);
+            el.stage = stage;
+            el.zone = get.zones.byZoneId(stage.zoneId);
+            el.item = get.items.byItemId(el.itemId);
+
+            el.percentage = (el.quantity / el.times);
+            el.percentageText = `${(el.percentage * 100).toFixed(2)}%`;
+            el.apPPR = (stage.apCost / el.percentage).toFixed(2);
+          });
 
           return object
-        },
-        transform
+        }
       ],
       ttl,
       ajaxHooks

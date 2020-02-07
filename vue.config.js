@@ -8,7 +8,11 @@ module.exports = {
     }
   },
   devServer: {
-    proxy: 'http://localhost:8081/PenguinStats/api'
+    proxy: {
+      "/PenguinStats": {
+        target: "https://penguin-stats.io/"
+      }
+    }
   },
   integrity: true,
   runtimeCompiler: true,
@@ -26,5 +30,8 @@ module.exports = {
       maskIcon: 'favicon/safari-pinned-tab.svg',
       msTileImage: 'favicon/mstile-150x150.png'
     }
-  }
+  },
+  transpileDependencies: [
+    "vuetify"
+  ]
 };

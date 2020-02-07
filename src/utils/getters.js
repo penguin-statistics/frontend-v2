@@ -1,53 +1,16 @@
 import store from '@/store'
-import formatter from '@/utils/timeFormatter'
+import Console from "@/utils/Console";
 
 let Getters = {};
 
-Getters.item = {
+Getters.items = {
   byItemId(itemId) {
-    // if (itemId === "furni") return {
-    //   "itemId": "furni",
-    //   "name": "家具",
-    //   "sortId": 9999,
-    //   "rarity": 0,
-    //   "itemType": "FURN",
-    //   "spriteCoord": [0, 0]
-    // };
-    return this.all(false).find(el => {
+    return this.all().find(el => {
       return el.itemId === itemId
     })
   },
-  all(sort = true) {
-    if (!store.state.data.items) return [];
-    let r = store.state.data.items;
-    r.forEach(el => {
-      const meta = {
-        CARD_EXP: {
-          name: "作战记录",
-          icon: "mdi-card-bulleted",
-          color: "light-blue"
-        },
-        MATERIAL: {
-          name: "材料",
-          icon: "mdi-cube-outline",
-          color: "lime"
-        },
-        FURN: {
-          name: "家具",
-          icon: "mdi-lamp",
-          color: "blue-grey"
-        },
-        ACTIVITY_ITEM: {
-          name: "活动道具",
-          icon: "mdi-treasure-chest",
-          color: "blue"
-        }
-      };
-
-      el.meta = meta[el.itemType]
-    });
-    if (sort) r.sort((a, b) => a.sortId - b.sortId)
-    return r
+  all() {
+    return store.state.data.items || []
   }
 }
 Getters.limitations = {
@@ -59,45 +22,25 @@ Getters.limitations = {
 }
 Getters.statistics = {
   byItemId(itemId) {
-    let result = store.state.data[`${store.state.dataSource}Matrix`].matrix.filter(el => {
+    const stats = store.state.data[`${store.state.dataSource}Matrix`];
+    Console.debug(stats)
+    if (!stats) return [];
+    return stats.filter(el => {
       return el.itemId === itemId
-    });
-
-    result.forEach(el => {
-      let stage = Getters.stages.byStageId(el.stageId);
-
-      el.stage = stage;
-      el.zone = Getters.zones.byZoneId(el.stage.zoneId);
-
-      el.percentage = (el.quantity / el.times);
-      el.percentageText = `${(el.percentage * 100).toFixed(2)}%`;
-
-      el.apPPR = (stage.apCost / el.percentage).toFixed(2)
-    });
-    return result
+    })
   },
   byStageId(stageId) {
-    let result = store.state.data[`${store.state.dataSource}Matrix`].matrix.filter(el => {
+    const stats = store.state.data[`${store.state.dataSource}Matrix`];
+    Console.debug(stats)
+    if (!stats) return [];
+    return stats.filter(el => {
       return el.stageId === stageId
-    });
-    let stage = Getters.stages.byStageId(stageId);
-    result.forEach(el => {
-      el.item = Getters.item.byItemId(el.itemId);
-      el.percentage = (el.quantity / el.times);
-      el.percentageText = `${(el.percentage * 100).toFixed(2)}%`;
-
-      el.apPPR = (stage.apCost / el.percentage).toFixed(2)
-    });
-    return result
+    })
   }
 }
 Getters.stages = {
   all() {
-    let all = store.state.data.stages;
-    all.forEach(el => {
-      el.dropsSet = [...el.normalDrop, ...el.extraDrop, ...el.specialDrop]
-    });
-    return all
+    return store.state.data.stages || []
   },
   byStageId(stageId) {
     return this.all().find(el => {
@@ -111,14 +54,6 @@ Getters.stages = {
   }
 }
 Getters.zones = {
-  getIcon(zoneType) {
-    const ICON_MAP = {
-      "MAINLINE": "mdi-checkerboard",
-      "WEEKLY": "mdi-treasure-chest",
-      "ACTIVITY": "mdi-sack"
-    };
-    return ICON_MAP[zoneType]
-  },
   byZoneId(zoneId) {
     return this.all().find(el => {
       return el.zoneId === zoneId
@@ -130,20 +65,7 @@ Getters.zones = {
     });
   },
   all() {
-    let zones = store.state.data.zones;
-    if (!zones) return [];
-
-    zones.forEach((object) => {
-      object.icon = this.getIcon(object.type);
-
-      object.isActivity = object.type === "ACTIVITY";
-      if (object.isActivity) {
-        object.activityActiveTime = formatter.dates([object.openTime, object.closeTime]);
-
-        object.isOutdated = formatter.isOutdated(object.closeTime)
-      }
-    });
-    return zones
+    return store.state.data.zones || []
   }
 }
 Getters.trends = {

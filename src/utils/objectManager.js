@@ -1,5 +1,6 @@
 import service from './service'
 import store from '@/store'
+import Console from "@/utils/Console";
 /**
  * Object Life-cycle manager
  * Automatically fetch data when passed object's TTL and provide getter api
@@ -12,21 +13,33 @@ class ObjectManager {
    * @param {number} ttl time-to-live (TTL), in milliseconds
    * @param {Object<Function, Function(Promise)>} ajaxHooks the first function will be called before sending the request, and the second function will be called after done receiving the request, with the request Promise as the argument
    */
-  constructor({ name, api, ttl, ajaxHooks }) {
+  constructor({ name, api, transform, ttl, ajaxHooks }) {
     this.name = name;
     this.api = api;
-
+    this.transform = transform ? [...transform, o => Object.freeze(o)] : [o => Object.freeze(o)];
     this.ttl = ttl;
     this.ajaxHooks = ajaxHooks;
 
-    this.cache = {
-      createdAt: Date.now(),
-      updatedAt: 0,
-      data: null
-    };
+    this.cache = null;
   }
 
   // private methods
+
+  /**
+   * sequentially transforms the object
+   *
+   * @private
+   * @type {Object} data the object to be transform
+   * @returns {Object} the transformed object
+   */
+  _transform (data) {
+    let context = this;
+    let current = data; // the current transform result
+    for (let func of context.transform) {
+      current = func(current) // transform the object by calling the function and get its result
+    }
+    return current
+  }
 
   /**
    * check the cache validity
@@ -34,13 +47,13 @@ class ObjectManager {
    * @returns {boolean} validity of the current cache
    */
   get cacheValid() {
-    let cacheUpdateAt = this.cache.updatedAt || store.getters.cacheUpdateAt(this.name)
-    console.debug("[debug]: ",
-      this.name,
-      "objectManager cache valid:",
-      cacheUpdateAt + this.ttl > Date.now(),
-      "|",
-      cacheUpdateAt, this.ttl, Date.now());
+    let cacheUpdateAt = store.getters.cacheUpdateAt(this.name)
+    // Console.debug("[debug]: ",
+    //   this.name,
+    //   "objectManager cache valid:",
+    //   cacheUpdateAt + this.ttl > Date.now(),
+    //   "|",
+    //   cacheUpdateAt, this.ttl, Date.now());
     return cacheUpdateAt + this.ttl > Date.now()
   }
 
@@ -57,25 +70,31 @@ class ObjectManager {
     let context = this;
     if (!refresh && context.cacheValid) {
       // valid cache
-      return Promise.resolve(context.cache.data);
+      return Promise.resolve(store.getters.dataByKey(context.name));
     } else {
       // outdated cache, fetch api
       context.ajaxHooks.request(context.name);
       let response = service.get(context.api)
         .then(({ data }) => {
-          context.cache.data = data;
-          context.cache.updatedAt = Date.now();
-          let temp = {};
-          temp[context.name] = context.cache.data;
+          Console.debug("[objectManager]", context.name , "before transform", data)
+          data = context._transform(data)
+          Console.debug("[objectManager]", context.name , "after transform", data)
+          context.cache = data
+
+          store.commit("store", {key: context.name, value: data});
+
+          const now = Date.now();
+
           let cacheUpdateAtTemp = {};
-          cacheUpdateAtTemp[context.name] = context.cache.updatedAt;
-          console.log(`fetch new ${context.name} data${temp} at ${context.cache.updatedAt}`)
-          store.commit("store", temp);
+          cacheUpdateAtTemp[context.name] = now;
           store.commit("storeCacheUpdateAt", cacheUpdateAtTemp);
-          return context.cache.data
+
+          Console.debug(`fetched new ${context.name} data at ${now}`)
+
+          return context.cache
         });
       context.ajaxHooks.response(context.name, response);
-      return Promise.resolve(context.cache.data);
+      return response;
     }
   }
 
@@ -83,25 +102,23 @@ class ObjectManager {
 
   /**
    * Find the object that its [key] equals [value]
-   * @param {string} key the key to match the value
-   * @param {string} value the value
+   * @param {Function} filter the filter function
    * @returns {Object} the found object
    */
-  async getOne(key, value) {
-    let data = await this.get();
-    return data.find(v => v[key] === value)
-  }
+  // async find(filter) {
+  //   await this.get();
+  //   return Promise.resolve(this.cache.find(filter))
+  // }
 
   /**
    * Find the objects that their [key] equals [value]
-   * @param {string} key the key to match the value
-   * @param {string} value the value
+   * @param {Function} filter the filter function
    * @returns {Object[]} the found objects
    */
-  async getAll(key, value) {
-    let data = await this.get();
-    return data.filter(v => v[key] === value)
-  }
+  // async filter(filter) {
+  //   await this.get();
+  //   return Promise.resolve(this.cache.filter(filter))
+  // }
 }
 
 

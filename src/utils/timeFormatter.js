@@ -2,7 +2,7 @@ import dayjs from 'dayjs'
 
 const FORMATS = {
   MD: "M.D",
-  YMD: "YYYY.M.D",
+  YMD: "YY.M.D",
   HM: "H:mm",
   HMS: "H:mm:ss",
 };
@@ -10,7 +10,7 @@ const FORMATS = {
 function needYear(moments) {
   for (let index in moments) {
     if (index === "0") continue;
-    if (!(moments[index].isSame.apply(moments[index], [moments[index - 1], 'year']))) {
+    if (!dayjs().isSame(moments[index], 'year') || !(moments[index].isSame.apply(moments[index], [moments[index - 1], 'year']))) {
       return true
     }
   }

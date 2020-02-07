@@ -2,6 +2,7 @@
   {
     "zh": {
       "dataSourceToggle": {
+        "title": "需要登录",
         "loginNotice": "查看个人掉落数据前，请先登录",
         "all": "全平台",
         "personal": "个人"
@@ -9,6 +10,7 @@
     },
     "en": {
       "dataSourceToggle": {
+        "title": "Login Required",
         "loginNotice": "Please log in before viewing personal drop data.",
         "all": "All",
         "personal": "Personal"
@@ -16,6 +18,7 @@
     },
     "ja": {
       "dataSourceToggle": {
+        "title": "ログインが必要です",
         "loginNotice": "個人のドロップデータを表示するにはログインが必要となります。",
         "all": "全体",
         "personal": "個人"
@@ -50,11 +53,12 @@
       max-width="290"
     >
       <v-card>
+        <v-card-title class="headline">
+          {{ $t('dataSourceToggle.title') }}
+        </v-card-title>
         <v-card-text>
           {{ $t('dataSourceToggle.loginNotice') }}
         </v-card-text>
-
-        <v-divider />
 
         <v-card-actions>
           <v-spacer />
@@ -62,35 +66,29 @@
         </v-card-actions>
       </v-card>
     </v-dialog>
-    <div class="v-item-group theme--dark v-btn-toggle v-btn-toggle--only-child v-btn-toggle--selected">
-      <button
-        :class="{'v-btn--active': dataSource === 'global'}"
-        type="button"
+    <v-btn-toggle
+      v-model="dataSource"
+      borderless
+      class="data-source-switch"
+    >
+      <v-btn
+        small
         value="global"
-        class="v-btn theme--dark"
-        @click="dataSource = 'global'"
       >
-        <div class="v-btn__content">
-          {{ $t('dataSourceToggle.all') }}
-        </div>
-      </button>
-      <button
-        :class="{'v-btn--active': dataSource === 'personal'}"
-        type="button"
+        {{ $t('dataSourceToggle.all') }}
+      </v-btn>
+      <v-btn
+        small
         value="personal"
-        class="v-btn theme--dark"
-        @click="dataSource = 'personal'"
       >
-        <div class="v-btn__content">
-          {{ $t('dataSourceToggle.personal') }}
-        </div>
-      </button>
-    </div>
+        {{ $t('dataSourceToggle.personal') }}
+      </v-btn>
+    </v-btn-toggle>
   </span>
 </template>
 
 <script>
-import AccountManager from "@/components/AccountManager";
+import AccountManager from "@/components/toolbar/AccountManager";
 export default {
   name: "DataSourceToggle",
   components: {
@@ -99,7 +97,8 @@ export default {
   data() {
     return {
       dialog: false,
-      prefetchingResources: false
+      prefetchingResources: false,
+      dataSourceId: null
     };
   },
   computed: {
@@ -137,4 +136,10 @@ export default {
 </script>
 
 <style scoped>
+  .theme--light.data-source-switch {
+    border: 1px solid rgba(0, 0, 0, .8);
+  }
+  .theme--dark.data-source-switch {
+    border: 1px solid rgba(255, 255, 255, .6);
+  }
 </style>
