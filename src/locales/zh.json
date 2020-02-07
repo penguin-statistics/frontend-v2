@@ -24,7 +24,9 @@
     },
     "planner": "刷图规划器",
     "changelog": "更新日志",
-    "v1": "访问旧版"
+    "v1": "访问旧版",
+    "refreshData": "刷新数据",
+    "invertColors": "转换主题"
   },
   "meta": {
     "details": "详细信息",
