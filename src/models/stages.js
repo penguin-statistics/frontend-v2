@@ -6,6 +6,9 @@ const stages = new ObjectManager({
   api: '/stages',
   transform: [
     (object) => {
+      // object.push({"stageType":"ACTIVITY","stageId":"test01_001","zoneId":"test01","code":"测试活动 1","apCost":99,"normalDrop":["30011"],"specialDrop":[],"extraDrop":[], "isGacha": true})
+      // object.push({"stageType":"ACTIVITY","stageId":"test01_002","zoneId":"test01","code":"测试活动 2","apCost":99,"normalDrop":["30011"],"specialDrop":[],"extraDrop":[], "isGacha": true})
+
       object.forEach(el => {
         el.dropsSet = [...el.normalDrop, ...el.extraDrop, ...el.specialDrop]
       });

@@ -15,7 +15,8 @@
           "generalRanking": "综合收益排行",
           "walkthrough": "通关攻略",
           "experience": "经验分享",
-          "ja_translation": "剧情日文翻译"
+          "ja_translation": "剧情日文翻译",
+          "jp_wiki": "日服Wiki"
         }
       }
     },
@@ -34,7 +35,8 @@
           "generalRanking": "General Ranking",
           "walkthrough": "Walkthrough",
           "experience": "Experience",
-          "ja_translation": "Japanese Translation of Main Story"
+          "ja_translation": "Japanese Translation of Main Story",
+          "jp_wiki": "JP Server Wiki"
         }
       }
     },
@@ -53,7 +55,8 @@
           "generalRanking": "総合収益順位表",
           "walkthrough": "ステージ攻略",
           "experience": "ゲームレビュー",
-          "ja_translation": "ストーリー和訳"
+          "ja_translation": "ストーリー和訳",
+          "jp_wiki": "日本版Wiki"
         }
       }
     }
@@ -214,40 +217,25 @@ export default {
           ],
           url: "https://ark-nights.com"
         },
-        // {
-        //   title: "刷素材一图流",
-        //   author: "Kindle",
-        //   features: [
-        //     {
-        //       name: "apRanking",
-        //       color: "grey"
-        //     },
-        //     {
-        //       name: "dropRateRanking",
-        //       color: "grey"
-        //     },
-        //     {
-        //       name: "generalRanking",
-        //       color: "grey"
-        //     }
-        //   ],
-        //   url: "https://dwz.cn/AkhN4Va6"
-        // },
-        // {
-        //   title: "酒馆攻略组",
-        //   author: "麻辣花蛤",
-        //   features: [
-        //     {
-        //       name: "walkthrough",
-        //       color: "brown"
-        //     },
-        //     {
-        //       name: "experience",
-        //       color: "brown"
-        //     }
-        //   ],
-        //   url: "https://www.pigeonpub.com"
-        // },
+        {
+          title: "刷素材推荐一图流",
+          author: "SrO²、根派",
+          features: [
+            {
+              name: "apRanking",
+              color: "grey"
+            },
+            {
+              name: "dropRateRanking",
+              color: "grey"
+            },
+            {
+              name: "generalRanking",
+              color: "grey"
+            }
+          ],
+          url: "https://arkonegraph.herokuapp.com/"
+        },
         {
           title: "ゲームの果て",
           author: "方舟航海図",
@@ -270,6 +258,24 @@ export default {
             }
           ],
           url: "https://smartgamecap.net"
+        },
+        {
+          title: "ANWiki",
+          features: [
+            {
+              name: "jp_wiki",
+              color: "blue-grey"
+            },
+            {
+              name: "walkthrough",
+              color: "brown"
+            },
+            {
+              name: "character",
+              color: "orange"
+            }
+          ],
+          url: "https://wiki.gamerclub.jp/anwiki"
         }
       ]
     };
