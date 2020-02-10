@@ -297,6 +297,9 @@ export default {
     RandomBackground,
     AccountManager
   },
+  created () {
+    console.log(this.$store.state)
+  },
   data () {
     return {
       routes: [],
@@ -324,6 +327,7 @@ export default {
         return this.$store.state.settings.dark
       },
       set (value) {
+        console.log(value)
         this.$store.commit('switchDark', value)
         this.$vuetify.theme.dark = value
       }
