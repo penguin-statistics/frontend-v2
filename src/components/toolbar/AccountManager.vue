@@ -139,25 +139,25 @@
     </v-dialog>
 
     <v-chip
-      v-if="!$store.getters.authed"
+      v-if="$store.getters.authed"
       style="box-shadow: 0 0 0 4px rgba(0, 0, 0, .3)"
-      @click="auth.dialog = true"
+      @click="auth.logoutPrompt = true"
     >
-      <v-icon left>
+      <v-icon 
+        left
+      >
         mdi-account-circle
       </v-icon>
       {{ $store.getters.authUsername }}
     </v-chip>
 
     <v-btn
-      v-if="$store.getters.authed"
+      v-if="!$store.getters.authed"
       rounded
       icon
-      @click="auth.logoutPrompt = true"
+      @click="auth.dialog = true"
     >
-      <v-icon>
-        mdi-login-variant
-      </v-icon>
+      <v-icon>mdi-login-variant</v-icon>
     </v-btn>
   </div>
 </template>
