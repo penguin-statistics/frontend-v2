@@ -3,22 +3,19 @@
     "zh": {
       "bulletin": {
         "bulletin_0": "1月16日海外版正式上线，为了避免数据混淆，请只上传国服的掉落。",
-        "bulletin_1": "专用于海外版的素材统计站是否开放正在计划中。",
-        "bulletin_2": "另外，希望有会韩语的博士可以一起来完成网站韩语化工作。"
+        "bulletin_1": "专用于海外版的素材统计站是否开放正在计划中。"
       }
     },
     "en": {
       "bulletin": {
         "bulletin_0": "Arknights EN server was officially released on 1/16. In order not to mess up the data, please only submit drop data from CN server.",
-        "bulletin_1": "We are considering whether to open another website for overseas servers.",
-        "bulletin_2": "In addition, we are sincerely looking for someone who can help us translate the website into Korean."
+        "bulletin_1": "We are considering whether to open another website for overseas servers."
       }
     },
     "ja": {
       "bulletin": {
         "bulletin_0": "1月16日に海外版が正式にリリースされます。データの混雑を避けるために、当サイトでは大陸版のドロップデータのみをアップロードして下さい。",
-        "bulletin_1": "海外版のドロップまとめサイトを開設するかは現時点では思案中のみとなっています。",
-        "bulletin_2": "さらに、ウェブサイトを韓国語に翻訳する方を募集しています。"
+        "bulletin_1": "海外版のドロップまとめサイトを開設するかは現時点では思案中のみとなっています。"
       }
     }
   }
@@ -41,8 +38,6 @@
         <span>{{ $t('bulletin.bulletin_0') }}</span>
         <br>
         <span>{{ $t('bulletin.bulletin_1') }}</span>
-        <br>
-        <span>{{ $t('bulletin.bulletin_2') }}</span>
       </v-col>
     </v-row>
   </v-card>
