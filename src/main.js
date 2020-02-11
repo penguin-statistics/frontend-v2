@@ -18,7 +18,7 @@ const production = process.env.NODE_ENV === 'production';
 
 if (production) {
   Sentry.init({
-    dsn: 'https://9636aaa824a744f98a619df0aaabba00@sentry.io/1536764',
+    dsn: 'https://aebfbfbe08de42f7a9f291f5ae9ebf97@sentry.imgal.vin/2',
     integrations: [new Integrations.Vue({Vue, attachProps: true})],
 
     // NOTE: the config below (`logErrors`) controls whether the error will be logged
