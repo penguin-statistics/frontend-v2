@@ -24,7 +24,9 @@
     },
     "planner": "ArkPlanner",
     "changelog": "Change Log",
-    "v1": "Visit Old Version"
+    "v1": "Visit Old Version",
+    "refreshData": "Refresh Data",
+    "invertColors": "Change Theme Color"
   },
   "meta": {
     "details": "Details",

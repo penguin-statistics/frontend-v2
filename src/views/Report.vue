@@ -26,7 +26,7 @@
         "rule_5": "请只上传国服的掉落，谢谢。"
       },
       "usage": "左键增加，右键减少",
-      "gacha": "本关卡允许在一次汇报内包含多次掉落数据"
+      "gacha": "本作战允许在一次汇报内包含多个结果。"
     },
     "en": {
       "stage": {
@@ -54,7 +54,7 @@
         "rule_5": "Please only submit drop data from CN server, thanks."
       },
       "usage": "Increase by left click, decrease by right click",
-      "gacha": "本关卡允许在一次汇报内包含多次掉落数据"
+      "gacha": "Multiple results are allowed in the reporting of this stage."
     },
     "ja": {
       "stage": {
@@ -82,7 +82,7 @@
         "rule_5": "大陸版のドロップデータのみをアップロードして下さい。ご協力ありがとうございます。"
       },
       "usage": "左クリックで個数増加、右クリックで個数減少",
-      "gacha": "本关卡允许在一次汇报内包含多次掉落数据"
+      "gacha": "Multiple results are allowed in the reporting of this stage."
     }
   }
 </i18n>

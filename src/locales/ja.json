@@ -24,7 +24,9 @@
     },
     "planner": "周回計画作成ツール",
     "changelog": "更新履歴",
-    "v1": "旧バージョン"
+    "v1": "旧バージョン",
+    "refreshData": "データ更新",
+    "invertColors": "テーマ変更"
   },
   "meta": {
     "details": "詳細を見る",

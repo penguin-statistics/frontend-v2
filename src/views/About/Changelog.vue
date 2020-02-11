@@ -12,6 +12,7 @@
       <v-card
         class="bkop-light"
         data-aos="fade"
+        elevation="5"
       >
         <v-card-title class="title">
           {{ dateKey }}
@@ -35,6 +36,9 @@ export default {
   data() {
     return {
       logs: {
+        'v1.1.1': [
+          '“岁过华灯”等一系列开箱子的汇报支持批量上传'
+        ],
         'v1.1.0': [
           '作战选择界面重做',
           '对多语言更友好的支持',

@@ -10,7 +10,13 @@
       style="max-height: calc(100vh - 36.76px)"
       width="300"
     >
-      <div class="drawer-logo blue darken-4">
+      <div 
+        :class="{
+          'drawer-logo blue': true,
+          'darken-4': dark,
+          'darken-3': !dark
+        }"
+      >
         <v-img
           :src="require('@/assets/logo.png')"
           aspect-ratio="1"
@@ -37,6 +43,7 @@
           <v-list-item
             v-if="!route.children || route.meta.forceSingle"
             :key="route.name"
+            :class="route.path === $route.path ? 'v-list-item--active' : ''"
             @click="onMenuItemClicked(route)"
           >
             <v-list-item-icon>
@@ -58,6 +65,7 @@
             :key="route.name"
             :value="route.meta.active"
             :prepend-icon="route.meta.icon"
+            color="grey"
             no-action
           >
             <template v-slot:activator>
@@ -67,6 +75,7 @@
             <v-list-item
               v-for="child in route.children.filter(el => !el.meta.hide)"
               :key="child.name"
+              :class="child.path === $route.path.split('/')[2] ? 'v-list-item--active' : ''"
               @click="onMenuItemClicked(child)"
             >
               <v-list-item-title>{{ $t(child.meta.i18n) }}</v-list-item-title>
@@ -84,25 +93,38 @@
           <v-row
             justify="end"
           >
-            <v-btn
-              icon
-              class="mx-1"
-              @click="refreshData"
-            >
-              <v-icon>mdi-database-refresh</v-icon>
-            </v-btn>
-
-            <v-btn
-              icon
-              class="mx-1"
-              @click="dark = !dark"
-            >
-              <v-icon>mdi-invert-colors</v-icon>
-            </v-btn>
+            <v-tooltip bottom>
+              <template v-slot:activator="{ on }">
+                <v-btn
+                  icon
+                  class="mx-1"
+                  v-on="on"
+                  @click="refreshData"
+                >
+                  <v-icon>mdi-database-refresh</v-icon>
+                </v-btn>
+              </template>
+              <span>{{ $t('menu.refreshData') }}</span>
+            </v-tooltip>
+            
+            <v-tooltip bottom>
+              <template v-slot:activator="{ on }">
+                <v-btn
+                  icon
+                  class="mx-1"
+                  v-on="on"
+                  @click="dark = !dark"
+                >
+                  <v-icon>mdi-invert-colors</v-icon>
+                </v-btn>
+              </template>
+              <span>{{ $t('menu.invertColors') }}</span>
+            </v-tooltip>
             
             <v-menu
               bottom
               left
+              open-on-hover
               transition="slide-y-transition"
             >
               <template v-slot:activator="{ on }">
@@ -378,11 +400,15 @@ export default {
             : imageUrl("croissant")
     },
     changeLocale (localeId, save=true) {
-      Console.debug("[i18n] locale changed to:", localeId, "| saving to vuex:", save);
-      this.$i18n.locale = localeId;
-      // this.$vuetify.lang.current = localeId;
-      if (save) this.$store.commit("changeLocale", localeId);
-      document.title = `${this.$t(this.$route.meta.i18n) + ' | ' || ''}${this.$t('app.name')}`;
+      if (localeId !== this.$i18n.locale) {
+        Console.debug("[i18n] locale changed to:", localeId, "| saving to vuex:", save);
+        this.$i18n.locale = localeId;
+        // this.$vuetify.lang.current = localeId;
+        if (save) this.$store.commit("changeLocale", localeId);
+        document.title = `${this.$t(this.$route.meta.i18n) + ' | ' || ''}${this.$t('app.name')}`;
+      } else {
+        Console.debug("[i18n] Same locale");
+      }
     },
     logRouteEvent (newValue) {
       if (newValue.name === "StatsByStage_Selected") {
