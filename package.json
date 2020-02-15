@@ -13,6 +13,7 @@
     "@sentry/browser": "^5.6.2",
     "@sentry/integrations": "^5.6.1",
     "aos": "^2.3.4",
+    "clipboard-polyfill": "^2.8.6",
     "core-js": "^2.6.5",
     "dayjs": "^1.8.15",
     "idb": "^4.0.4",

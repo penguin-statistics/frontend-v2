@@ -81,7 +81,7 @@
                     <v-btn
                       color="green"
                       text
-                      @click="Navigator.clipboard.writeText(exportJson)"
+                      @click="copyExportJson"
                     >
                       Copy
                     </v-btn>
@@ -244,6 +244,8 @@
   import get from "@/utils/getters";
   import Item from "@/components/global/Item";
 
+  import * as clipboard from "clipboard-polyfill";
+
   export default {
     name: "Planner",
     components: {Item},
@@ -296,6 +298,9 @@
         }
         this.itemsData = newItemsData;
         this.importExportDialog = false;
+      },
+      copyExportJson() {
+        clipboard.writeText(this.exportJson);
       }
     }
   };
