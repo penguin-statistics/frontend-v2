@@ -4,30 +4,30 @@
   >
     <v-row
       no-gutters
-      class="px-2"
+      class="px-2 mx-10"
       align="center"
       justify="center"
     >
-      <v-col cols="3">
+      <v-col>
         <v-switch label="Consider by-products" />
       </v-col>
-      <v-col cols="3">
+      <v-col>
         <v-switch label="Require large amount of EXP" />
       </v-col>
-      <v-col cols="3">
+      <v-col>
         <v-switch label="Require large amount of LMB" />
       </v-col>
     </v-row>
     <v-row
       no-gutters
-      class="px-2 pb-2 mb-6"
+      class="px-2 pb-2 mb-6 mx-10"
       align="center"
       justify="center"
     >
-      <v-col cols="3">
+      <v-col>
         <v-dialog
-          v-model="import_export_dialog"
-          width="500"
+          v-model="importExportDialog"
+          width="800"
         >
           <template v-slot:activator="{ on }">
             <v-btn
@@ -38,24 +38,63 @@
             </v-btn>
           </template>
           <v-card>
-            <v-card-title class="headline">
-              Import/Export
-            </v-card-title>
-            <v-card-actions>
-              <v-spacer />
-              <v-btn
-                color="primary"
-                text
-              >
-                Import
-              </v-btn>
-            </v-card-actions>
+            <v-tabs
+              v-model="importExportDialogTab"
+              background-color="green"
+              color="white"
+            >
+              <v-tab>Import</v-tab>
+              <v-tab>Export</v-tab>
+            </v-tabs>
+            <v-tabs-items v-model="importExportDialogTab">
+              <v-tab-item>
+                <v-card flat>
+                  <v-container class="pa-4">
+                    <v-textarea
+                      v-model="importJson"
+                      dense
+                      hide-details
+                      outlined
+                    />
+                  </v-container>
+                  <v-divider />
+                  <v-card-actions>
+                    <v-spacer />
+                    <v-btn
+                      color="green"
+                      text
+                      @click="importToItemsData"
+                    >
+                      Import
+                    </v-btn>
+                  </v-card-actions>
+                </v-card>
+              </v-tab-item>
+              <v-tab-item>
+                <v-card flat>
+                  <v-card-text class="white--text">
+                    {{ exportJson }}
+                  </v-card-text>
+                  <v-divider />
+                  <v-card-actions>
+                    <v-spacer />
+                    <v-btn
+                      color="green"
+                      text
+                      @click="Navigator.clipboard.writeText(exportJson)"
+                    >
+                      Copy
+                    </v-btn>
+                  </v-card-actions>
+                </v-card>
+              </v-tab-item>
+            </v-tabs-items>
           </v-card>
         </v-dialog>
       </v-col>
-      <v-col cols="3">
+      <v-col>
         <v-dialog
-          v-model="fund_dress_dialog"
+          v-model="fundDressDialog"
           width="500"
         >
           <template v-slot:activator="{ on }">
@@ -75,7 +114,7 @@
               <v-btn
                 color="primary"
                 text
-                @click="fund_dress_dialog = false"
+                @click="fundDressDialog = false"
               >
                 OK
               </v-btn>
@@ -83,7 +122,7 @@
           </v-card>
         </v-dialog>
       </v-col>
-      <v-col cols="3">
+      <v-col>
         <v-btn color="red">
           Calculate
         </v-btn>
@@ -95,9 +134,12 @@
       dense
     >
       <v-col
-        v-for="item in materialItems"
-        :key="item.itemId"
+        v-for="itemData in itemsData"
+        :key="itemData.id"
         lg="1"
+        md="2"
+        sm="3"
+        cols="4"
       >
         <v-card
           class="pa-1 ma-0"
@@ -109,7 +151,7 @@
               no-gutters
             >
               <Item
-                :item="item"
+                :item="itemIdMap.get(itemData.id)"
                 :ratio="1"
                 disable-link
                 tooltip-position="bottom"
@@ -117,7 +159,7 @@
             </v-row>
           </v-container>
           <v-divider />
-          <v-container class="px-0 pb-0 pt-3 ma-0">
+          <v-container class="px-0 pt-0 pb-1 ma-0">
             <v-row
               align="center"
               justify="center"
@@ -125,18 +167,18 @@
             >
               <v-col>
                 <v-text-field
-                  hide-details="true"
-                  dense
+                  v-model.number="itemData.have"
+                  hide-details
                   label="已有"
                   @click:prepend="{}"
                   @click:append-outer="{}"
-                  v-on="on"
                 >
                   <template v-slot:prepend>
                     <v-btn
                       text
                       icon
                       x-small
+                      @click="itemData.have = decrement(itemData.have)"
                     >
                       <v-icon>mdi-minus</v-icon>
                     </v-btn>
@@ -146,6 +188,7 @@
                       text
                       icon
                       x-small
+                      @click="itemData.have = increment(itemData.have)"
                     >
                       <v-icon>mdi-plus</v-icon>
                     </v-btn>
@@ -160,8 +203,8 @@
             >
               <v-col>
                 <v-text-field
-                  hide-details="true"
-                  dense
+                  v-model.number="itemData.need"
+                  hide-details
                   label="需求"
                   @click:prepend="{}"
                   @click:append-outer="{}"
@@ -172,6 +215,7 @@
                       text
                       icon
                       x-small
+                      @click="itemData.need = decrement(itemData.need)"
                     >
                       <v-icon>mdi-minus</v-icon>
                     </v-btn>
@@ -181,6 +225,7 @@
                       text
                       icon
                       x-small
+                      @click="itemData.need = increment(itemData.need)"
                     >
                       <v-icon>mdi-plus</v-icon>
                     </v-btn>
@@ -196,22 +241,64 @@
 </template>
 
 <script>
-import get from "@/utils/getters";
-import Item from "@/components/global/Item";
+  import get from "@/utils/getters";
+  import Item from "@/components/global/Item";
 
-export default {
-  name: "Planner",
-  components: { Item },
-  data: () => ({
-    fund_dress_dialog: false,
-    import_export_dialog: false,
-  }),
-  computed: {
-    materialItems() {
-      return get.items.all().filter(item => item.itemType === "MATERIAL" && item.itemId.length === 5);
+  export default {
+    name: "Planner",
+    components: {Item},
+    data: () => {
+      let items = get.items.all().filter(item => item.itemType === "MATERIAL" && item.itemId.length === 5);
+      return {
+        fundDressDialog: false,
+        importExportDialog: false,
+        importExportDialogTab: null,
+        importJson: "",
+        items: items,
+        itemIdMap: new Map(items.map(item => [item.itemId, item])),
+        itemsData: items.map(item => ({
+          id: item.itemId,
+          need: 0,
+          have: 0,
+        }))
+      }
     },
-  }
-};
+    computed: {
+      exportJson() {
+        return JSON.stringify(this.itemsData);
+      }
+    },
+    methods: {
+      decrement(orig) {
+        if (orig > 0)
+          return orig - 1;
+        return 0;
+      },
+      increment(orig) {
+        return orig + 1;
+      },
+      importToItemsData() {
+        let imported = JSON.parse(this.importJson);
+        if (imported.length !== this.itemsData.length)
+          return;
+        let importedAsMap = new Map();
+        for (const itemData of imported)
+          if (!(itemData.hasOwnProperty("id") && this.itemIdMap.has(itemData.id) &&
+            itemData.hasOwnProperty("need") && Number.isInteger(itemData.need) && itemData.need >= 0 &&
+            itemData.hasOwnProperty("have") && Number.isInteger(itemData.have) && itemData.have >= 0))
+            return;
+          else
+            importedAsMap.set(itemData.id, [itemData.need, itemData.have]);
+        let newItemsData = [];
+        for (const item of this.items) {
+          let importedItem = importedAsMap.get(item.itemId);
+          newItemsData.push({id: item.itemId, need: importedItem[0], have: importedItem[1]});
+        }
+        this.itemsData = newItemsData;
+        this.importExportDialog = false;
+      }
+    }
+  };
 </script>
 
 <style scoped>
