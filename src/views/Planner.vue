@@ -136,9 +136,10 @@
       <v-col
         v-for="itemData in itemsData"
         :key="itemData.id"
-        lg="1"
+        xl="1"
         md="2"
         sm="3"
+        class="col-lg-1-8"
         cols="4"
       >
         <v-card
@@ -307,4 +308,12 @@
 </script>
 
 <style scoped>
+  @media (min-width: 1264px) and (max-width: 1903px) {
+    .col-lg-1-8 {
+      -webkit-box-flex: 0;
+      -ms-flex: 0 0 12.5%;
+      flex: 0 0 12.5%;
+      max-width: 12.5%
+    }
+  }
 </style>
