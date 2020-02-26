@@ -1,6 +1,10 @@
 import I18n from "@/i18n"
 import Console from "@/utils/Console";
 
+function getLocaleMessage(object, localeKey, key, language) {
+  return object[localeKey][language] || object[localeKey][I18n.fallbackLocale] || object[key] || "";
+}
+
 function translate (object, key) {
   let locale = I18n.locale;
   let localeKey = `${key}_i18n`;
@@ -8,13 +12,13 @@ function translate (object, key) {
   if (object) {
     if (object[localeKey]) {
       if (object[localeKey][locale]) {
-        return object[localeKey][locale] || ""
+        return getLocaleMessage(object, localeKey, key, locale)
       } else {
-        let languages = locale.split("-")
-        if (languages.length === 2 && languages[0] !== "") {
-          return object[localeKey][languages[0]] || "";
+        let languages = locale.split("-");
+        if (languages.length <= 2 && languages[0] !== "") {
+          return getLocaleMessage(object, localeKey, key, languages[0])
         } else {
-          Console.debug(`translation error: ${key}: Specific country code detected but it's invalid`)
+          Console.debug(`translation error: ${key}: Specific country code detected but it's invalid`, locale, languages)
           return ""
         }
       }

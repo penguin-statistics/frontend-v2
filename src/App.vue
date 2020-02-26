@@ -138,18 +138,23 @@
               </template>
 
               <v-list>
-                <v-list-item
-                  v-for="(locale, i) in localizations"
-                  :key="i"
-                  @click="changeLocale(locale.id)"
-                >
-                  <v-list-item-title>{{ locale.name }}</v-list-item-title>
-                  <v-list-item-action v-if="locale.beta">
-                    <v-icon small>
-                      mdi-beta
-                    </v-icon>
-                  </v-list-item-action>
-                </v-list-item>
+                <v-subheader style="height: 36px;">
+                  {{ $t('menu.languages') }}
+                </v-subheader>
+                <v-list-item-group>
+                  <v-list-item
+                    v-for="(locale, i) in localizations"
+                    :key="i"
+                    @click="changeLocale(locale.id)"
+                  >
+                    <v-list-item-title>{{ locale.name }}</v-list-item-title>
+                    <v-list-item-action v-if="locale.beta">
+                      <v-icon small>
+                        mdi-beta
+                      </v-icon>
+                    </v-list-item-action>
+                  </v-list-item>
+                </v-list-item-group>
               </v-list>
             </v-menu>
           </v-row>
@@ -337,6 +342,11 @@ export default {
       set (value) {
         this.$store.commit('settings/switchDark', value)
         this.$vuetify.theme.dark = value
+      }
+    },
+    localizationMapper: {
+      get () {
+        return this.localizations.indexOf(this.localizations.find(el => el.id === this.$i18n.locale))
       }
     }
   },
