@@ -30,8 +30,8 @@
       "zone": {
         "name": "Zone",
         "types": {
-          "MAINLINE": "Mainline",
-          "WEEKLY": "Weekly",
+          "MAINLINE": "Main Storyline",
+          "WEEKLY": "Supplies",
           "ACTIVITY_OPEN": "Event (Opening)",
           "ACTIVITY_CLOSED": "Event (Closed)"
         },
@@ -55,8 +55,8 @@
       "zone": {
         "name": "章",
         "types": {
-          "MAINLINE": "メインストーリー",
-          "WEEKLY": "曜日クエスト",
+          "MAINLINE": "メインステージ",
+          "WEEKLY": "物資調達",
           "ACTIVITY_OPEN": "イベント（開催中）",
           "ACTIVITY_CLOSED": "イベント（終了）"
         },
@@ -72,6 +72,31 @@
           "normal": "通常ドロップ",
           "extra": "エクストラドロップ",
           "special": "スペシャルドロップ"
+        }
+      }
+    },
+    "ko": {
+      "opensAt": "Opens at: {0} - {1}",
+      "zone": {
+        "name": "에피소드",
+        "types": {
+          "MAINLINE": "메인",
+          "WEEKLY": "물자 비축",
+          "ACTIVITY_OPEN": "Event (Opening)",
+          "ACTIVITY_CLOSED": "Event (Closed)"
+        },
+        "status": {
+          "closed": "Closed",
+          "open": "Opening"
+        }
+      },
+      "stage": {
+        "name": "작전지역",
+        "apCost": "{apCost} AP required",
+        "loots": {
+          "normal": "일반 드랍",
+          "extra": "추가 드랍",
+          "special": "특수 드랍"
         }
       }
     }

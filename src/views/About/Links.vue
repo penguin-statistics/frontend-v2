@@ -23,7 +23,7 @@
     "en": {
       "links": {
         "tags": {
-          "hr": "Public Recruiting Lookup",
+          "hr": "Recruiting Lookup",
           "levelup": "Level Up Calculator",
           "materials": "Material Requirement Calculator",
           "planner": "Planner",
@@ -57,6 +57,26 @@
           "experience": "ゲームレビュー",
           "ja_translation": "ストーリー和訳",
           "jp_wiki": "日本版Wiki"
+        }
+      }
+    },
+    "ko": {
+      "links": {
+        "tags": {
+          "hr": "공개모집 계산기",
+          "levelup": "레벨링 계산기",
+          "materials": "육성 재료 계산기",
+          "planner": "계획기",
+          "storage": "창고 관리기",
+          "character": "오퍼레이터 목록",
+          "enemy": "적 목록",
+          "apRanking": "이성 효율 순위",
+          "dropRateRanking": "드랍률 순위",
+          "generalRanking": "종합 순위",
+          "walkthrough": "공략집",
+          "experience": "팁 모음",
+          "ja_translation": "메인스토리 일본어 번역",
+          "jp_wiki": "일본서버 위키"
         }
       }
     }

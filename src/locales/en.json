@@ -126,9 +126,10 @@
       },
       "type": {
         "_name": "Items",
-        "gte": "Should have at least {quantity} kinds of item",
-        "lte": "Should have at most {quantity} kinds of item",
-        "not": "Should not be {quantity} kinds of item"
+        "now": "Selected {quantity} kinds of items",
+        "gte": "Should have at least {quantity} kinds of items",
+        "lte": "Should have at most {quantity} kinds of items",
+        "not": "Should not be {quantity} kinds of items"
       }
     }
   }

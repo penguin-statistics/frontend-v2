@@ -339,7 +339,7 @@ export default {
           id: 'ja',
           name: '日本語'
         }, {
-          id: 'kr',
+          id: 'ko',
           name: '한국어',
           beta: true,
         }
