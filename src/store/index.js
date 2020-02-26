@@ -3,12 +3,13 @@ import Vuex from 'vuex'
 import createPersistedState from 'vuex-persistedstate'
 
 // store file
-import ajax from '@/store/ajax';
-import auth from '@/store/auth';
-import cacheUpdateAt from '@/store/cacheUpdateAt';
-import data from '@/store/data';
-import dataSource from '@/store/dataSource';
-import settings from '@/store/settings';
+import ajax from './modules/ajax';
+import auth from './modules/auth';
+import cacheUpdateAt from './modules/cacheUpdateAt';
+import data from './modules/data';
+import dataSource from './modules/dataSource';
+import settings from './modules/settings';
+
 Vue.use(Vuex);
 
 export default new Vuex.Store({
@@ -24,11 +25,11 @@ export default new Vuex.Store({
     })
   ],
   modules: {
-    ajax: ajax,
-    auth: auth,
-    cacheUpdateAt: cacheUpdateAt,
-    data: data,
-    dataSource: dataSource,
-    settings: settings
+    ajax,
+    auth,
+    cacheUpdateAt,
+    data,
+    dataSource,
+    settings
   }
 });

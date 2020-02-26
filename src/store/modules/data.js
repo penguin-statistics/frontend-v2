@@ -8,6 +8,7 @@ import globalMatrixManager from '@/models/matrices/globalMatrix'
 import personalMatrixManager from '@/models/matrices/personalMatrix'
 
 export default {
+  namespaced: true,
   state: {},
   mutations: {
     store: (state, {key, value}) => {
@@ -16,7 +17,7 @@ export default {
   },
   actions: {
     // eslint-disable-next-line
-    async fetchData({}, refresh = false) {
+    async fetch({}, refresh = false) {
       Promise.all([
         itemsManager.get(refresh),
         limitationsManager.get(refresh),
@@ -28,12 +29,12 @@ export default {
       })
     // await trendsManager.get(refresh);
     },
-    async refreshPersonalMatrixData() {
+    async refreshPersonalMatrix() {
       await personalMatrixManager.get(true)
     }
   },
   getters: {
-    dataByKey: (state) => (id) => {
+    byKey: (state) => (id) => {
       return state[id]
     }
   }

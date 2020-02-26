@@ -26,7 +26,7 @@
           </v-subheader>
           <v-list two-line>
             <v-list-item
-              v-for="error in $store.getters.ajaxErrors"
+              v-for="error in errors"
               :key="error.id"
             >
               <v-list-item-content>
@@ -55,7 +55,7 @@
           <v-spacer />
           <v-btn
             text
-            :loading="$store.getters.ajaxPending"
+            :loading="pending"
             @click="refreshData"
           >
             <v-icon left>
@@ -73,7 +73,7 @@
         @click="model = true"
       >
         <v-progress-circular
-          v-if="$store.getters.ajaxPending"
+          v-if="pending"
           indeterminate
           color="white"
           class="mr-1"
@@ -89,11 +89,11 @@
         </v-icon>
 
         <span class="caption">
-          {{ $t('fetch.failed.title') }} ({{ $store.getters.ajaxErrors.length }})
+          {{ $t('fetch.failed.title') }} ({{ errors.length }})
         </span>
       </span>
       <span
-        v-else-if="$store.getters.ajaxPending"
+        v-else-if="pending"
       >
         <v-progress-circular
           indeterminate
@@ -111,6 +111,8 @@
 </template>
 
 <script>
+  import {mapGetters} from "vuex";
+
   export default {
     name: "NetworkStateIndicator",
     data () {
@@ -119,8 +121,9 @@
       }
     },
     computed: {
+      ...mapGetters('ajax', ['pending', 'errors']),
       haveError () {
-        return this.$store.getters.ajaxErrors.length > 0
+        return this.$store.getters['ajax/errors'].length > 0
       }
     },
     watch: {
@@ -136,7 +139,7 @@
     },
     methods: {
       async refreshData () {
-        await this.$store.dispatch("fetchData", true);
+        await this.$store.dispatch("data/fetch", true);
       },
     },
   }

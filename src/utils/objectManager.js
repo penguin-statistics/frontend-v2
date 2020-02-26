@@ -47,7 +47,7 @@ class ObjectManager {
    * @returns {boolean} validity of the current cache
    */
   get cacheValid() {
-    let cacheUpdateAt = store.getters.cacheUpdateAt(this.name)
+    let cacheUpdateAt = store.getters['cacheUpdateAt/byName'](this.name)
     // Console.debug("[debug]: ",
     //   this.name,
     //   "objectManager cache valid:",
@@ -70,7 +70,7 @@ class ObjectManager {
     let context = this;
     if (!refresh && context.cacheValid) {
       // valid cache
-      return Promise.resolve(store.getters.dataByKey(context.name));
+      return Promise.resolve(store.getters['data/byKey'](context.name));
     } else {
       // outdated cache, fetch api
       context.ajaxHooks.request(context.name);
@@ -81,13 +81,13 @@ class ObjectManager {
           Console.debug("[objectManager]", context.name , "after transform", data)
           context.cache = data
 
-          store.commit("store", {key: context.name, value: data});
+          store.commit("data/store", {key: context.name, value: data});
 
           const now = Date.now();
 
           let cacheUpdateAtTemp = {};
           cacheUpdateAtTemp[context.name] = now;
-          store.commit("storeCacheUpdateAt", cacheUpdateAtTemp);
+          store.commit("cacheUpdateAt/store", cacheUpdateAtTemp);
 
           Console.debug(`fetched new ${context.name} data at ${now}`)
 
