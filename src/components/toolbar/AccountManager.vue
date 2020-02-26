@@ -139,20 +139,20 @@
     </v-dialog>
 
     <v-chip
-      v-if="$store.getters.authed"
+      v-if="$store.getters['auth/loggedIn']"
       style="box-shadow: 0 0 0 4px rgba(0, 0, 0, .3)"
       @click="auth.logoutPrompt = true"
     >
-      <v-icon
+      <v-icon 
         left
       >
         mdi-account-circle
       </v-icon>
-      {{ $store.getters.authUsername }}
+      {{ $store.getters['auth/username'] }}
     </v-chip>
 
     <v-btn
-      v-if="!$store.getters.authed"
+      v-if="!$store.getters['auth/loggedIn']"
       rounded
       icon
       @click="auth.dialog = true"
@@ -196,8 +196,8 @@
     },
     mounted () {
       let userId = Cookies.get(this.cookies.key);
-      if (userId !== this.$store.getters.authUsername) {
-        this.$store.commit("authLogin", userId);
+      if (userId !== this.$store.getters['auth/username']) {
+        this.$store.commit("auth/login", userId);
       }
     },
     methods: {
@@ -205,7 +205,7 @@
         this.auth.loading = true;
         service.post("/users", this.auth.username, {headers: {'Content-Type': 'text/plain'}})
           .then(() => {
-            this.$store.commit("authLogin", this.auth.username);
+            this.$store.commit("auth/login", this.auth.username);
             Cookies.set(this.cookies.key, this.auth.username, {expires: 7, path: "/"});
             this.$ga.event('account', 'login', 'login_success', 1);
             this.snackbar = {
@@ -213,7 +213,7 @@
               color: "success",
               text: this.$t('success')
             };
-            this.$store.dispatch("refreshPersonalMatrixData");
+            this.$store.dispatch("data/refreshPersonalMatrix");
             this.$emit('afterLogin');
             this.auth.dialog = false
           })
@@ -231,14 +231,14 @@
       },
       logout() {
         Cookies.remove(this.cookies.key);
-        this.$store.commit("authLogout");
+        this.$store.commit("auth/logout");
         this.snackbar = {
           enabled: true,
           color: "success",
           text: this.$t('loggedOut')
         };
         this.auth.logoutPrompt = false;
-        this.$store.commit("switchDataSource", "global");
+        this.$store.commit("dataSource/switch", "global");
       },
       emitError () {
         this.error = ''

@@ -89,6 +89,7 @@
 
 <script>
 import AccountManager from "@/components/toolbar/AccountManager";
+import {mapGetters} from "vuex";
 export default {
   name: "DataSourceToggle",
   components: {
@@ -102,6 +103,7 @@ export default {
     };
   },
   computed: {
+    ...mapGetters('auth', ['loggedIn']),
     dataSource: {
       get() {
         return this.$store.state.dataSource;
@@ -112,17 +114,17 @@ export default {
             break;
           case "personal":
             // refresh personal data
-            if (!this.$store.getters.authed) {
+            if (!this.loggedIn) {
               // please login
               this.dialog = true;
               return;
             }
             // fetch data
-            this.$store.dispatch("refreshPersonalMatrixData");
+            this.$store.dispatch("data/refreshPersonalMatrix");
             // change data source after fetch data
             break;
         }
-        this.$store.commit("switchDataSource", value);
+        this.$store.commit("dataSource/switch", value);
       }
     }
   },
