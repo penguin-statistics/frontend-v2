@@ -144,6 +144,11 @@
                   @click="changeLocale(locale.id)"
                 >
                   <v-list-item-title>{{ locale.name }}</v-list-item-title>
+                  <v-list-item-action v-if="locale.beta">
+                    <v-icon small>
+                      mdi-beta
+                    </v-icon>
+                  </v-list-item-action>
                 </v-list-item>
               </v-list>
             </v-menu>
@@ -312,6 +317,10 @@ export default {
         }, {
           id: 'ja',
           name: '日本語'
+        }, {
+          id: 'kr',
+          name: '한국어',
+          beta: true,
         }
       ],
       prefetchingResources: false,
