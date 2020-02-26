@@ -8,6 +8,7 @@
           name="slide-fade"
           mode="out-in"
         >
+          about
           <router-view />
         </transition>
       </v-col>

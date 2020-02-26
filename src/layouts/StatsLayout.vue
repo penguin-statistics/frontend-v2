@@ -1,6 +1,6 @@
 <template>
   <v-container
-    class="fill-height"
+    class="align-start"
     fluid
   >
     <transition

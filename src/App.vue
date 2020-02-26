@@ -211,104 +211,104 @@
       >
         <router-view />
       </transition>
-      <v-footer
-        padless
-        color="blue darken-3"
-        class="white--text px-4"
-      >
-        <v-card
-          flat
-          tile
-          width="100%"
-          class="blue darken-3 text-center"
-        >
-          <v-card-text>
-            <v-dialog
-              v-model="showLicenseDialog"
-              width="500"
-              origin="bottom center"
-            >
-              <template v-slot:activator="{ on }">
-                <span
-                  class="cursor-pointer"
-                  v-on="on"
-                >
-                  <v-avatar
-                    size="24"
-                    class="mr-1"
-                  >
-                    <v-img
-                      :src="require('@/assets/ccIcon/cc.svg')"
-                      alt="Creative Commons - Logo"
-                    />
-                  </v-avatar>
-                  <v-avatar
-                    size="24"
-                    class="mr-1"
-                  >
-                    <v-img
-                      :src="require('@/assets/ccIcon/by.svg')"
-                      alt="Creative Commons - BY"
-                    />
-                  </v-avatar>
-                  <v-avatar
-                    size="24"
-                  >
-                    <v-img
-                      :src="require('@/assets/ccIcon/nc.svg')"
-                      alt="Creative Commons - Non-commercial"
-                    />
-                  </v-avatar>
-                </span>
-              </template>
-
-              <v-card>
-                <v-card-title
-                  class="headline primary lighten-1"
-                >
-                  <v-avatar
-                    size="24"
-                    class="mr-2"
-                  >
-                    <v-img
-                      :src="require('@/assets/ccIcon/cc.svg')"
-                      alt="Creative Commons - Logo"
-                    />
-                  </v-avatar>
-                  {{ $t('meta.footer.copyright.title') }}
-                </v-card-title>
-
-                <v-card-text class="mt-2 body-1">
-                  {{ $t('meta.footer.copyright.content') }}
-                </v-card-text>
-
-                <v-divider />
-
-                <v-card-actions>
-                  <v-spacer />
-                  <v-btn
-                    text
-                    href="https://creativecommons.org/licenses/by-nc/4.0/"
-                    target="_blank"
-                  >
-                    <v-icon left>
-                      mdi-eye
-                    </v-icon>
-                    {{ $t('meta.details') }}
-                  </v-btn>
-                </v-card-actions>
-              </v-card>
-            </v-dialog>
-          </v-card-text>
-
-          <v-divider />
-
-          <v-card-text class="white--text">
-            <strong>Penguin Statistics</strong> — {{ new Date().getFullYear() }}
-          </v-card-text>
-        </v-card>
-      </v-footer>
     </v-content>
+    <v-footer
+      padless
+      color="blue darken-3"
+      class="white--text px-4"
+    >
+      <v-card
+        flat
+        tile
+        width="100%"
+        class="blue darken-3 text-center"
+      >
+        <v-card-text>
+          <v-dialog
+            v-model="showLicenseDialog"
+            width="500"
+            origin="bottom center"
+          >
+            <template v-slot:activator="{ on }">
+              <span
+                class="cursor-pointer"
+                v-on="on"
+              >
+                <v-avatar
+                  size="24"
+                  class="mr-1"
+                >
+                  <v-img
+                    :src="require('@/assets/ccIcon/cc.svg')"
+                    alt="Creative Commons - Logo"
+                  />
+                </v-avatar>
+                <v-avatar
+                  size="24"
+                  class="mr-1"
+                >
+                  <v-img
+                    :src="require('@/assets/ccIcon/by.svg')"
+                    alt="Creative Commons - BY"
+                  />
+                </v-avatar>
+                <v-avatar
+                  size="24"
+                >
+                  <v-img
+                    :src="require('@/assets/ccIcon/nc.svg')"
+                    alt="Creative Commons - Non-commercial"
+                  />
+                </v-avatar>
+              </span>
+            </template>
+
+            <v-card>
+              <v-card-title
+                class="headline primary lighten-1"
+              >
+                <v-avatar
+                  size="24"
+                  class="mr-2"
+                >
+                  <v-img
+                    :src="require('@/assets/ccIcon/cc.svg')"
+                    alt="Creative Commons - Logo"
+                  />
+                </v-avatar>
+                {{ $t('meta.footer.copyright.title') }}
+              </v-card-title>
+
+              <v-card-text class="mt-2 body-1">
+                {{ $t('meta.footer.copyright.content') }}
+              </v-card-text>
+
+              <v-divider />
+
+              <v-card-actions>
+                <v-spacer />
+                <v-btn
+                  text
+                  href="https://creativecommons.org/licenses/by-nc/4.0/"
+                  target="_blank"
+                >
+                  <v-icon left>
+                    mdi-eye
+                  </v-icon>
+                  {{ $t('meta.details') }}
+                </v-btn>
+              </v-card-actions>
+            </v-card>
+          </v-dialog>
+        </v-card-text>
+
+        <v-divider />
+
+        <v-card-text class="white--text">
+          <strong>Penguin Statistics</strong> — {{ new Date().getFullYear() }}
+        </v-card-text>
+      </v-card>
+    </v-footer>
     <NetworkStateIndicator />
   </v-app>
 </template>

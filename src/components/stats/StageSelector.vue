@@ -82,7 +82,7 @@
   <v-stepper
     v-model="step"
     :alt-labels="!small"
-    class="pa-2 transparent elevation-0 full-width"
+    class="px-2 transparent elevation-0 full-width"
   >
     <v-stepper-header
       class="bkop-light elevation-6"
