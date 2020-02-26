@@ -1,6 +1,6 @@
 <template>
   <v-container
-    class="fill-height"
+    class="fill-height justify-center"
   >
     <v-row align="center">
       <v-col>
@@ -8,7 +8,6 @@
           name="slide-fade"
           mode="out-in"
         >
-          about
           <router-view />
         </transition>
       </v-col>

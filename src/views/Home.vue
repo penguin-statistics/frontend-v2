@@ -1,6 +1,8 @@
 <template>
   <v-container>
-    <v-row dense>
+    <v-row
+      dense
+    >
       <v-col cols="12">
         <Intro data-aos="fade" />
       </v-col>

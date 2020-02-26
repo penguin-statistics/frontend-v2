@@ -69,6 +69,7 @@
       v-for="(link, index) in links"
       :key="index"
       class="d-flex"
+      cols="12"
       sm="6"
       md="4"
     >

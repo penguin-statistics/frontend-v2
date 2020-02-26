@@ -1,5 +1,5 @@
 <template>
-  <v-app>
+  <v-app :dark="appDark">
     <v-navigation-drawer
       v-model="drawer"
       app
@@ -88,22 +88,17 @@
           <v-row
             justify="space-around"
           >
-            <v-tooltip bottom>
-              <template v-slot:activator="{ on }">
-                <v-btn
-                  class="mx-1"
-                  text
-                  v-on="on"
-                  @click="refreshData"
-                >
-                  <v-icon left>
-                    mdi-database-refresh
-                  </v-icon>
-                  {{ $t('menu.refreshData') }}
-                </v-btn>
-              </template>
-              <span>{{ $t('menu.refreshData') }}</span>
-            </v-tooltip>
+            <v-btn
+              class="mx-1"
+              text
+              v-on="on"
+              @click="refreshData"
+            >
+              <v-icon left>
+                mdi-database-refresh
+              </v-icon>
+              {{ $t('menu.refreshData') }}
+            </v-btn>
 
             <v-tooltip bottom>
               <template v-slot:activator="{ on }">
@@ -382,7 +377,7 @@ export default {
     this.routes = this.$router.options.routes.filter(el => !el.meta.hide);
     this.$store.dispatch("data/fetch", false)
   },
-  mounted () {
+  created () {
     this.randomizeLogo();
     this.onDarkChange(this.dark);
 
