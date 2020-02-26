@@ -91,7 +91,6 @@
             <v-btn
               class="mx-1"
               text
-              v-on="on"
               @click="refreshData"
             >
               <v-icon left>
@@ -210,96 +209,92 @@
     <v-footer
       padless
       color="blue darken-3"
-      class="white--text px-4"
+      class="white--text"
     >
       <v-card
         flat
         tile
         width="100%"
-        class="blue darken-3 text-center"
+        class="blue darken-3 text-center footer--safe-area"
       >
-        <v-card-text>
-          <v-dialog
-            v-model="showLicenseDialog"
-            width="500"
-            origin="bottom center"
-          >
-            <template v-slot:activator="{ on }">
-              <span
-                class="cursor-pointer"
-                v-on="on"
+        <v-dialog
+          v-model="showLicenseDialog"
+          width="500"
+          origin="bottom center"
+        >
+          <template v-slot:activator="{ on }">
+            <span
+              class="cursor-pointer"
+              v-on="on"
+            >
+              <v-avatar
+                size="24"
+                class="mr-1"
               >
-                <v-avatar
-                  size="24"
-                  class="mr-1"
-                >
-                  <v-img
-                    :src="require('@/assets/ccIcon/cc.svg')"
-                    alt="Creative Commons - Logo"
-                  />
-                </v-avatar>
-                <v-avatar
-                  size="24"
-                  class="mr-1"
-                >
-                  <v-img
-                    :src="require('@/assets/ccIcon/by.svg')"
-                    alt="Creative Commons - BY"
-                  />
-                </v-avatar>
-                <v-avatar
-                  size="24"
-                >
-                  <v-img
-                    :src="require('@/assets/ccIcon/nc.svg')"
-                    alt="Creative Commons - Non-commercial"
-                  />
-                </v-avatar>
-              </span>
-            </template>
-
-            <v-card>
-              <v-card-title
-                class="headline primary lighten-1"
+                <v-img
+                  :src="require('@/assets/ccIcon/cc.svg')"
+                  alt="Creative Commons - Logo"
+                />
+              </v-avatar>
+              <v-avatar
+                size="24"
+                class="mr-1"
               >
-                <v-avatar
-                  size="24"
-                  class="mr-2"
-                >
-                  <v-img
-                    :src="require('@/assets/ccIcon/cc.svg')"
-                    alt="Creative Commons - Logo"
-                  />
-                </v-avatar>
-                {{ $t('meta.footer.copyright.title') }}
-              </v-card-title>
+                <v-img
+                  :src="require('@/assets/ccIcon/by.svg')"
+                  alt="Creative Commons - BY"
+                />
+              </v-avatar>
+              <v-avatar
+                size="24"
+              >
+                <v-img
+                  :src="require('@/assets/ccIcon/nc.svg')"
+                  alt="Creative Commons - Non-commercial"
+                />
+              </v-avatar>
+            </span>
+          </template>
 
-              <v-card-text class="mt-2 body-1">
-                {{ $t('meta.footer.copyright.content') }}
-              </v-card-text>
+          <v-card>
+            <v-card-title
+              class="headline primary lighten-1"
+            >
+              <v-avatar
+                size="24"
+                class="mr-2"
+              >
+                <v-img
+                  :src="require('@/assets/ccIcon/cc.svg')"
+                  alt="Creative Commons - Logo"
+                />
+              </v-avatar>
+              {{ $t('meta.footer.copyright.title') }}
+            </v-card-title>
 
-              <v-divider />
+            <v-card-text class="mt-2 body-1">
+              {{ $t('meta.footer.copyright.content') }}
+            </v-card-text>
 
-              <v-card-actions>
-                <v-spacer />
-                <v-btn
-                  text
-                  href="https://creativecommons.org/licenses/by-nc/4.0/"
-                  target="_blank"
-                >
-                  <v-icon left>
-                    mdi-eye
-                  </v-icon>
-                  {{ $t('meta.details') }}
-                </v-btn>
-              </v-card-actions>
-            </v-card>
-          </v-dialog>
-        </v-card-text>
+            <v-divider />
 
-        <v-divider />
+            <v-card-actions>
+              <v-spacer />
+              <v-btn
+                text
+                href="https://creativecommons.org/licenses/by-nc/4.0/"
+                target="_blank"
+              >
+                <v-icon left>
+                  mdi-eye
+                </v-icon>
+                {{ $t('meta.details') }}
+              </v-btn>
+            </v-card-actions>
+          </v-card>
+        </v-dialog>
 
-        <v-card-text class="white--text">
+        <v-card-text class="white--text d-inline py-0">
           <strong>Penguin Statistics</strong> — {{ new Date().getFullYear() }}
         </v-card-text>
       </v-card>
@@ -552,6 +547,13 @@ export default {
 
   .monospace {
     font-family: SF Mono, "Droid Sans Mono", Ubuntu Mono, Consolas, Courier New, Courier, monospace;
+  }
+
+  .footer--safe-area {
+    padding-top: 8px !important;
+    /*In case the old browsers doesn't support advanced CSS calculations*/
+    padding-bottom: 8px !important;
+    padding-bottom: calc(max(env(safe-area-inset-bottom), 8px)) !important;
   }
 
 </style>
