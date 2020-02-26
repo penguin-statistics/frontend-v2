@@ -1,17 +1,18 @@
 export default {
+  namespaced: true,
   state: {
     states: []
   },
   mutations: {
-    ajaxNewState(state, payload) {
+    newState(state, payload) {
       state.states.push(payload);
     }
   },
   actions: {
-    ajaxNewState(state, payload) {
-      state.states.push(payload);
-    },
-    _getOrCreateAjaxStateObject ({commit, state}, id) {
+    // ajaxNewState(state, payload) {
+    //   state.states.push(payload);
+    // },
+    _getOrCreateState ({commit, state}, id) {
       let found = state.states.find(value => value.id === id);
       if (found) {
         return found
@@ -20,19 +21,19 @@ export default {
         pushing.id = id;
         pushing.pending = false;
         pushing.error = null;
-  
-        commit('ajaxNewState', pushing);
+
+        commit('newState', pushing);
         return pushing
       }
     } ,
-    ajaxStarted({dispatch}, {id}) {
-      dispatch('_getOrCreateAjaxStateObject', id)
+    started({dispatch}, {id}) {
+      dispatch('_getOrCreateState', id)
         .then(res => {
           res.pending = true
         });
     },
-    ajaxFinished({dispatch}, {id, error}) {
-      dispatch('_getOrCreateAjaxStateObject', id)
+    finished({dispatch}, {id, error}) {
+      dispatch('_getOrCreateState', id)
         .then(res => {
           res.pending = false;
           res.error = error
@@ -40,13 +41,13 @@ export default {
     }
   },
   getters: {
-    ajaxPending: state => {
+    pending: state => {
       return state.states.some(value => value.pending)
     },
-    ajaxFinishedAll: state => {
-      return state.states.every(value => !value.pending)
-    },
-    ajaxErrors: state => {
+    // finishedAll: state => {
+    //   return state.states.every(value => !value.pending)
+    // },
+    errors: state => {
       return state.states.filter(value => !!value.error)
     },
   }

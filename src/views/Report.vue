@@ -669,7 +669,7 @@ export default {
       });
       let reportedUserId = Cookies.get('userID');
       if (userId !== reportedUserId) {
-        this.$store.commit("authLogin", reportedUserId);
+        this.$store.commit("auth/login", reportedUserId);
       }
       this.lastSubmissionId = data;
       this.submitting = false;

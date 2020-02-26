@@ -104,7 +104,7 @@ export default {
   },
   computed: {
     gradient() {
-      return this.$store.state.settings.dark ? ["white"] : ["black"];
+      return this.$store.getters['settings/dark'] ? ["white"] : ["black"];
     },
     sparkline() {
       return {

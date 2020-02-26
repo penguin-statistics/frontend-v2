@@ -1,12 +1,13 @@
 export default {
+  namespaced: true,
   state: {},
   mutations: {
-    storeCacheUpdateAt: (state, d) => {
+    store: (state, d) => {
       state = Object.assign(state, d);
     }
   },
   getters: {
-    cacheUpdateAt: (state) => (name) => {
+    byName: (state) => (name) => {
       return state[name]
     }
   }

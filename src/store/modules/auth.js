@@ -1,20 +1,21 @@
 export default {
+  namespaced: true,
   state: {
     username: null
   },
   mutations: {
-    authLogin(state, username) {
+    login(state, username) {
       state.username = username
     },
-    authLogout(state) {
+    logout(state) {
       state.username = null
     }
   },
   getters: {
-    authed: state => {
+    loggedIn: state => {
       return !!state.username
     },
-    authUsername: state => {
+    username: state => {
       return state.username || ''
     }
   }

@@ -1,4 +1,5 @@
 export default {
+  namespaced: true,
   state: {
     dark: true,
     language: null
@@ -12,6 +13,7 @@ export default {
     }
   },
   getters: {
-    language: state => state.language
+    language: state => state.language,
+    dark: state => state.dark,
   }
 };

@@ -1,7 +1,7 @@
 <template>
   <v-app
     id="__app_root"
-    :dark="dark"
+    :dark="appDark"
   >
     <RandomBackground />
     <v-navigation-drawer
@@ -13,8 +13,8 @@
       <div 
         :class="{
           'drawer-logo blue': true,
-          'darken-4': dark,
-          'darken-3': !dark
+          'darken-4': appDark,
+          'darken-3': !appDark
         }"
       >
         <v-img
@@ -113,7 +113,7 @@
                   icon
                   class="mx-1"
                   v-on="on"
-                  @click="dark = !dark"
+                  @click="appDark = !appDark"
                 >
                   <v-icon>mdi-invert-colors</v-icon>
                 </v-btn>
@@ -289,6 +289,7 @@
   import Console from "@/utils/Console";
   import strings from "@/utils/strings";
   import config from "@/config";
+  import {mapGetters} from "vuex";
 
 export default {
   name: 'App',
@@ -319,12 +320,13 @@ export default {
     }
   },
   computed: {
-    dark: {
+    ...mapGetters('settings', ['language', 'dark']),
+    appDark: {
       get () {
-        return this.$store.state.settings.dark
+        return this.dark
       },
       set (value) {
-        this.$store.commit('switchDark', value)
+        this.$store.commit('settings/switchDark', value)
         this.$vuetify.theme.dark = value
       }
     }
@@ -337,15 +339,15 @@ export default {
     'dark': ['onDarkChange']
   },
   beforeMount() {
-    this.routes = this.$router.options.routes.filter(el => !(el.meta.hide));
-    this.$store.dispatch("fetchData", false)
+    this.routes = this.$router.options.routes.filter(el => !el.meta.hide);
+    this.$store.dispatch("data/fetch", false)
   },
   mounted () {
     this.randomizeLogo();
-    this.onDarkChange(this.$store.state.settings.dark);
+    this.onDarkChange(this.dark);
 
-    if (this.$store.getters.language) {
-      this.changeLocale(this.$store.getters.language, false)
+    if (this.language) {
+      this.changeLocale(this.language, false)
     } else {
       const language = strings.getFirstBrowserLanguage();
       Console.debug("[i18n] detected language", language);
@@ -356,13 +358,13 @@ export default {
       }
     }
 
-    if (this.$store.state.settings.dark) {
-      this.$vuetify.theme.dark = this.$store.state.settings.dark
+    if (this.dark) {
+      this.$vuetify.theme.dark = this.dark
     }
   },
   methods: {
     async refreshData () {
-      await this.$store.dispatch("fetchData", true);
+      await this.$store.dispatch("data/fetch", true);
     },
     onDarkChange (newValue) {
       if (newValue) {
@@ -404,7 +406,7 @@ export default {
         Console.debug("[i18n] locale changed to:", localeId, "| saving to vuex:", save);
         this.$i18n.locale = localeId;
         // this.$vuetify.lang.current = localeId;
-        if (save) this.$store.commit("changeLocale", localeId);
+        if (save) this.$store.commit("settings/changeLocale", localeId);
         document.title = `${this.$t(this.$route.meta.i18n) + ' | ' || ''}${this.$t('app.name')}`;
       } else {
         Console.debug("[i18n] Same locale");
