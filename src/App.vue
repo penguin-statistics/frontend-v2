@@ -209,7 +209,7 @@
         name="slide-fade"
         mode="out-in"
       >
-        <router-view class="mb-12" />
+        <router-view />
       </transition>
       <v-footer
         padless

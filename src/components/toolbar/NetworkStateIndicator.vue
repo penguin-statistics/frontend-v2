@@ -67,9 +67,10 @@
       </v-card>
     </v-dialog>
     <v-slide-y-reverse-transition>
-      <div
+      <v-card
         v-if="(haveError && !model) || pending"
-        class="network-state-indicator blue darken-4"
+        class="network-state-indicator"
+        :class="{'error': haveError, 'blue darken-2': !haveError}"
       >
         <v-fade-transition>
           <span
@@ -112,7 +113,7 @@
             </span>
           </span>
         </v-fade-transition>
-      </div>
+      </v-card>
     </v-slide-y-reverse-transition>
   </div>
 </template>
@@ -158,6 +159,6 @@
     right: 0;
     bottom: 0;
     padding: 4px 8px;
-    border-radius: 8px 0 0 0;
+    border-radius: 4px 0 0 0 !important;
   }
 </style>

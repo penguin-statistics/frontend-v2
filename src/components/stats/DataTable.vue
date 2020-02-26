@@ -106,28 +106,19 @@
                   class="item-icon"
                 />
                 <span
-                  v-intersect="{
-                    handler: onIntersect,
-                    options: {
-                      threshold: [0.95]
-                    }
-                  }"
                   style="padding-left: 44px"
                   class="item-name--text"
-                  :class="{'item-name--hide': hideItemName}"
                 >
                   {{ strings.translate(props.item.item, "name") }}
                 </span>
                 <v-icon
                   x-small
                   class="ml-1 item-name--chevron"
-                  :class="{'item-name--hide': hideItemName}"
                 >
                   mdi-link
                 </v-icon>
                 <v-divider
                   class="mx-4 item-name--line"
-                  :class="{'item-name--hide': hideItemName}"
                 />
               </v-row>
             </td>
@@ -335,13 +326,6 @@
             stageId
           }
         });
-      },
-      onIntersect (entries, observer, isIntersecting) {
-        if (isIntersecting) {
-          this.hideItemName = false
-        } else {
-          this.hideItemName = true
-        }
       }
     },
   }
@@ -464,9 +448,5 @@
 
   .item-icon {
     position: absolute;
-  }
-
-  .item-name--hide{
-    opacity: 0;
   }
 </style>
