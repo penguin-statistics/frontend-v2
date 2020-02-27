@@ -151,7 +151,7 @@
                     </v-list-item-title>
                     <v-list-item-action v-if="locale.beta">
                       <v-icon small>
-                        mdi-test-tube
+                        mdi-beta
                       </v-icon>
                     </v-list-item-action>
                     <v-list-item-action-text class="monospace">
