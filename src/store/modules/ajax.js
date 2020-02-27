@@ -1,5 +1,3 @@
-import Console from "@/utils/Console";
-
 export default {
   namespaced: true,
   state: {

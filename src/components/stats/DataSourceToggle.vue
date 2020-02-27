@@ -98,7 +98,6 @@
 <script>
 import AccountManager from "@/components/toolbar/AccountManager";
 import {mapGetters} from "vuex";
-import Console from "@/utils/Console";
 export default {
   name: "DataSourceToggle",
   components: {
