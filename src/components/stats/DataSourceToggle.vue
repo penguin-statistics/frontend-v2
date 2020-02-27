@@ -112,9 +112,10 @@ export default {
   },
   computed: {
     ...mapGetters('auth', ['loggedIn']),
+    ...mapGetters('dataSource', ['source']),
     dataSource: {
       get() {
-        return this.$store.state.dataSource;
+        return this.source;
       },
       async set(value) {
         switch (value) {
