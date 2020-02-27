@@ -118,7 +118,12 @@
         :editable="step > 1"
         :step="1"
       >
-        {{ $t('zone.name') }} & {{ $t('stage.name') }}
+        <span
+          class="text-center"
+          style="word-break: keep-all"
+        >
+          {{ $t('zone.name') }} & {{ $t('stage.name') }}
+        </span>
         <small
           v-if="step > 1"
           class="mt-2"
