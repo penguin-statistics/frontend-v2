@@ -38,6 +38,19 @@
       "logoutPrompt": "本当にログアウトしますか？",
       "loggedOut": "ログアウトしました",
       "userId": "ユーザーID"
+    },
+    "ko": {
+      "notice": "The User ID helps us identifies your upload identity. Inputting this ID on other devices enable you to manage and inspect your uploads with ease.",
+      "success": "Successfully logged in",
+      "failed": {
+        "message": "Failed to log in: {message}",
+        "notfound": "The specified User ID could not been found"
+      },
+      "login": "Login",
+      "logout": "Logout",
+      "logoutPrompt": "Are you sure?",
+      "loggedOut": "Logged out",
+      "userId": "User ID"
     }
   }
 </i18n>

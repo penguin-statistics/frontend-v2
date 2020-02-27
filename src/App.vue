@@ -1,13 +1,8 @@
 <template>
-  <v-app
-    id="__app_root"
-    :dark="appDark"
-  >
-    <RandomBackground />
+  <v-app>
     <v-navigation-drawer
       v-model="drawer"
       app
-      style="max-height: calc(100vh - 36.76px)"
       width="300"
     >
       <div 
@@ -91,22 +86,19 @@
 
         <v-container>
           <v-row
-            justify="end"
+            justify="space-around"
           >
-            <v-tooltip bottom>
-              <template v-slot:activator="{ on }">
-                <v-btn
-                  icon
-                  class="mx-1"
-                  v-on="on"
-                  @click="refreshData"
-                >
-                  <v-icon>mdi-database-refresh</v-icon>
-                </v-btn>
-              </template>
-              <span>{{ $t('menu.refreshData') }}</span>
-            </v-tooltip>
-            
+            <v-btn
+              class="mx-1"
+              text
+              @click="refreshData"
+            >
+              <v-icon left>
+                mdi-database-refresh
+              </v-icon>
+              {{ $t('menu.refreshData') }}
+            </v-btn>
+
             <v-tooltip bottom>
               <template v-slot:activator="{ on }">
                 <v-btn
@@ -120,7 +112,7 @@
               </template>
               <span>{{ $t('menu.invertColors') }}</span>
             </v-tooltip>
-            
+
             <v-menu
               bottom
               left
@@ -138,13 +130,34 @@
               </template>
 
               <v-list>
-                <v-list-item
-                  v-for="(locale, i) in localizations"
-                  :key="i"
-                  @click="changeLocale(locale.id)"
-                >
-                  <v-list-item-title>{{ locale.name }}</v-list-item-title>
-                </v-list-item>
+                <v-subheader style="height: 36px;">
+                  <v-icon
+                    small
+                    color="grey lighten-1"
+                    class="mr-1"
+                  >
+                    mdi-translate
+                  </v-icon> {{ $t('menu.languages') }}
+                </v-subheader>
+                <v-list-item-group v-model="localizationMapper">
+                  <v-list-item
+                    v-for="(locale, i) in localizations"
+                    :key="i"
+                    @click="changeLocale(locale.id)"
+                  >
+                    <v-list-item-title>
+                      {{ locale.name }}
+                    </v-list-item-title>
+                    <v-list-item-action v-if="locale.beta">
+                      <v-icon small>
+                        mdi-test-tube
+                      </v-icon>
+                    </v-list-item-action>
+                    <v-list-item-action-text class="monospace">
+                      {{ locale.id }}
+                    </v-list-item-action-text>
+                  </v-list-item>
+                </v-list-item-group>
               </v-list>
             </v-menu>
           </v-row>
@@ -153,7 +166,6 @@
     </v-navigation-drawer>
     <v-app-bar
       app
-      fixed
       dark
       color="blue darken-3"
     >
@@ -185,9 +197,8 @@
 
       <AccountManager />
     </v-app-bar>
-    <v-content
-      class="mb-8"
-    >
+    <RandomBackground />
+    <v-content>
       <transition
         name="slide-fade"
         mode="out-in"
@@ -196,89 +207,99 @@
       </transition>
     </v-content>
     <v-footer
-      app
+      padless
       color="blue darken-3"
-      class="white--text px-4"
+      class="white--text"
     >
-      <v-dialog
-        v-model="showLicenseDialog"
-        width="500"
-        origin="bottom left"
+      <v-card
+        flat
+        tile
+        width="100%"
+        class="blue darken-3 text-center footer--safe-area"
       >
-        <template v-slot:activator="{ on }">
-          <span
-            class="cursor-pointer"
-            v-on="on"
-          >
-            <v-avatar
-              size="24"
-              class="mr-1"
+        <v-dialog
+          v-model="showLicenseDialog"
+          width="500"
+          origin="bottom center"
+        >
+          <template v-slot:activator="{ on }">
+            <span
+              class="cursor-pointer"
+              v-on="on"
             >
-              <v-img
-                :src="require('@/assets/ccIcon/cc.svg')"
-                alt="Creative Commons - Logo"
-              />
-            </v-avatar>
-            <v-avatar
-              size="24"
-              class="mr-1"
-            >
-              <v-img
-                :src="require('@/assets/ccIcon/by.svg')"
-                alt="Creative Commons - BY"
-              />
-            </v-avatar>
-            <v-avatar
-              size="24"
-            >
-              <v-img
-                :src="require('@/assets/ccIcon/nc.svg')"
-                alt="Creative Commons - Non-commercial"
-              />
-            </v-avatar>
-          </span>
-        </template>
+              <v-avatar
+                size="24"
+                class="mr-1"
+              >
+                <v-img
+                  :src="require('@/assets/ccIcon/cc.svg')"
+                  alt="Creative Commons - Logo"
+                />
+              </v-avatar>
+              <v-avatar
+                size="24"
+                class="mr-1"
+              >
+                <v-img
+                  :src="require('@/assets/ccIcon/by.svg')"
+                  alt="Creative Commons - BY"
+                />
+              </v-avatar>
+              <v-avatar
+                size="24"
+              >
+                <v-img
+                  :src="require('@/assets/ccIcon/nc.svg')"
+                  alt="Creative Commons - Non-commercial"
+                />
+              </v-avatar>
+            </span>
+          </template>
 
-        <v-card>
-          <v-card-title
-            class="headline primary lighten-1"
-          >
-            <v-avatar
-              size="24"
-              class="mr-2"
+          <v-card>
+            <v-card-title
+              class="headline primary lighten-1"
             >
-              <v-img
-                :src="require('@/assets/ccIcon/cc.svg')"
-                alt="Creative Commons - Logo"
-              />
-            </v-avatar>
-            {{ $t('meta.footer.copyright.title') }}
-          </v-card-title>
+              <v-avatar
+                size="24"
+                class="mr-2"
+              >
+                <v-img
+                  :src="require('@/assets/ccIcon/cc.svg')"
+                  alt="Creative Commons - Logo"
+                />
+              </v-avatar>
+              {{ $t('meta.footer.copyright.title') }}
+            </v-card-title>
 
-          <v-card-text class="mt-2 body-1">
-            {{ $t('meta.footer.copyright.content') }}
-          </v-card-text>
+            <v-card-text class="mt-2 body-1">
+              {{ $t('meta.footer.copyright.content') }}
+            </v-card-text>
 
-          <v-divider />
+            <v-divider />
 
-          <v-card-actions>
-            <v-spacer />
-            <v-btn
-              text
-              href="https://creativecommons.org/licenses/by-nc/4.0/"
-              target="_blank"
-            >
-              <v-icon left>
-                mdi-eye
-              </v-icon>
-              {{ $t('meta.details') }}
-            </v-btn>
-          </v-card-actions>
-        </v-card>
-      </v-dialog>
-      <v-spacer />
-      <NetworkStateIndicator />
+            <v-card-actions>
+              <v-spacer />
+              <v-btn
+                text
+                href="https://creativecommons.org/licenses/by-nc/4.0/"
+                target="_blank"
+              >
+                <v-icon left>
+                  mdi-eye
+                </v-icon>
+                {{ $t('meta.details') }}
+              </v-btn>
+            </v-card-actions>
+          </v-card>
+        </v-dialog>
+
+        <v-card-text class="white--text d-inline py-0">
+          <strong>Penguin Statistics</strong> — {{ new Date().getFullYear() }}
+        </v-card-text>
+      </v-card>
     </v-footer>
+    <NetworkStateIndicator />
   </v-app>
 </template>
 
@@ -312,6 +333,10 @@ export default {
         }, {
           id: 'ja',
           name: '日本語'
+        }, {
+          id: 'ko',
+          name: '한국어',
+          beta: true,
         }
       ],
       prefetchingResources: false,
@@ -329,6 +354,12 @@ export default {
         this.$store.commit('settings/switchDark', value)
         this.$vuetify.theme.dark = value
       }
+    },
+    localizationMapper: {
+      get () {
+        return this.localizations.indexOf(this.localizations.find(el => el.id === this.$i18n.locale))
+      },
+      set () {}
     }
   },
   watch: {
@@ -342,7 +373,7 @@ export default {
     this.routes = this.$router.options.routes.filter(el => !el.meta.hide);
     this.$store.dispatch("data/fetch", false)
   },
-  mounted () {
+  created () {
     this.randomizeLogo();
     this.onDarkChange(this.dark);
 
@@ -358,9 +389,11 @@ export default {
       }
     }
 
-    if (this.dark) {
+    Console.debug("(before init) dark status", this.dark, this.$vuetify.theme.dark);
+    if (typeof this.dark === "boolean") {
       this.$vuetify.theme.dark = this.dark
     }
+    Console.debug("(after init) dark status", this.dark, this.$vuetify.theme.dark)
   },
   methods: {
     async refreshData () {
@@ -513,6 +546,17 @@ export default {
 
   .no-wrap--text {
     word-break: break-word;
+  }
+
+  .monospace {
+    font-family: SF Mono, "Droid Sans Mono", Ubuntu Mono, Consolas, Courier New, Courier, monospace;
+  }
+
+  .footer--safe-area {
+    padding-top: 8px !important;
+    /*In case the old browsers doesn't support advanced CSS calculations*/
+    padding-bottom: 8px !important;
+    padding-bottom: calc(max(env(safe-area-inset-bottom), 8px)) !important;
   }
 
 </style>

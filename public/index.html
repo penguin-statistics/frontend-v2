@@ -28,7 +28,8 @@
     width: 100%;
     height: 100%;
     z-index: 999999;
-    background: #303030
+    background: #303030;
+    background: linear-gradient(to top right, #294266 30%, #00608c);
   }
 
   #loader-logo {
@@ -149,7 +150,7 @@
     z-index: 9999999999999;
     position: absolute;
     opacity: 1;
-    line-height: 30px
+    line-height: 30px;
   }
 
   #loader-wrapper .load_title {
@@ -162,7 +163,8 @@
     font-size: 13px;
   }
 
-  #loader-wrapper .load_text span {
+  #loader-wrapper .load_text span.load_caption {
+    line-height: 16px;
     font-weight: 400;
     font-size: 13px;
     color: #f0f0f0;
@@ -266,15 +268,128 @@
       <div class="sk-chase-dot"></div>
     </div>
     <div class="load_text load_title">
-      正在加载
+      <span id="load_title--text">正在加载</span>
       <br>
-      <span>首次加载可能较慢，请耐心等待</span>
+      <span class="load_caption" id="load_caption--text">首次加载可能较慢，请耐心等待</span>
     </div>
     <div class="load_text load_footer">
-      企鹅物流数据统计 &copy; 2020
+      <span id="load_copyright--text">企鹅物流数据统计</span> &copy; <span id="load_copyright_year--text">2020</span>
     </div>
   </div>
 </main>
+<script>
+  function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _nonIterableRest(); }
+
+  function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance"); }
+
+  function _iterableToArrayLimit(arr, i) { if (!(Symbol.iterator in Object(arr) || Object.prototype.toString.call(arr) === "[object Arguments]")) { return; } var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+
+  function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
+  var _i18n = {
+    getFirstBrowserLanguageWithRegionCode: function getFirstBrowserLanguageWithRegionCode() {
+      var nav = window.navigator,
+        browserLanguagePropertyKeys = ['language', 'browserLanguage', 'systemLanguage', 'userLanguage'],
+        i,
+        language,
+        len,
+        shortLanguage = null; // support for HTML 5.1 "navigator.languages"
+
+      if (Array.isArray(nav.languages)) {
+        for (i = 0; i < nav.languages.length; i++) {
+          language = nav.languages[i];
+          len = language.length;
+
+          if (!shortLanguage && len) {
+            shortLanguage = language;
+          }
+
+          if (language && len > 2) {
+            return language;
+          }
+        }
+      } // support for other well known properties in browsers
+
+
+      for (i = 0; i < browserLanguagePropertyKeys.length; i++) {
+        language = nav[browserLanguagePropertyKeys[i]]; //skip this loop iteration if property is null/undefined.  IE11 fix.
+
+        if (language == null) {
+          continue;
+        }
+
+        len = language.length;
+
+        if (!shortLanguage && len) {
+          shortLanguage = language;
+        }
+
+        if (language && len > 2) {
+          return language;
+        }
+      }
+
+      return shortLanguage;
+    },
+    getFirstBrowserLanguage: function getFirstBrowserLanguage() {
+      var language = this.getFirstBrowserLanguageWithRegionCode().replace("_", "-");
+      if (!language) return "zh"; // use default
+
+      var languages = language.split("-");
+
+      if (languages.length === 1) {
+        return language;
+      } else if (languages.length === 2) {
+        return languages[0];
+      } else {
+        // probably malformed...
+        return language;
+      }
+    },
+    data: {
+      "en": {
+        "load_title--text": "Loading...",
+        "load_caption--text": "Initialization may take some time",
+        "load_copyright--text": "Penguin Statistics"
+      },
+      "ja": {
+        "load_title--text": "読み込み中...",
+        "load_caption--text": "読み込みが初めて遅くなる場合があります<br>しばらくお待ちください",
+        "load_copyright--text": "ペンギン急便データ統計処理部門"
+      },
+      "ko": {
+        "load_title--text": "로딩...",
+        "load_caption--text": "처음으로 로딩이 느려질 수 있으므로 잠시 기다려주십시오",
+        "load_copyright--text": "펭귄 물류 데이터 분석 부서"
+      }
+    },
+    fill: function fill(key, content) {
+      document.querySelector("#" + key).innerHTML = content;
+    },
+    render: function render() {
+      document.querySelector("#load_copyright_year--text").textContent = new Date().getFullYear().toString();
+      var language = this.getFirstBrowserLanguage();
+
+      if (language in this.data && typeof language === "string" && language.length <= 2) {
+        var messages = this.data[language];
+
+        for (var _i = 0, _Object$entries = Object.entries(messages); _i < _Object$entries.length; _i++) {
+          var _Object$entries$_i = _slicedToArray(_Object$entries[_i], 2),
+            key = _Object$entries$_i[0],
+            value = _Object$entries$_i[1];
+
+          this.fill(key, value);
+        }
+      }
+    }
+  };
+
+  try {
+    _i18n.render();
+  } catch (e) {
+    console.error(e);
+  }
+</script>
 <script>"serviceWorker" in navigator && window.addEventListener("load", function () {
   navigator.serviceWorker.register("/service-worker.js")
 });</script>

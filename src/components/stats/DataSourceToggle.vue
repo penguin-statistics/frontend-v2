@@ -23,6 +23,14 @@
         "all": "全体",
         "personal": "個人"
       }
+    },
+    "ko": {
+      "dataSourceToggle": {
+        "title": "Login Required",
+        "loginNotice": "Please log in before viewing personal drop data.",
+        "all": "All",
+        "personal": "Personal"
+      }
     }
   }
 </i18n>

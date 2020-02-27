@@ -4,7 +4,8 @@
       "categories": {
         "owner": "站长",
         "developers": "开发者",
-        "others": "其他"
+        "others": "其他",
+        "translators": "翻译"
       },
       "socials": {
         "weibo": "微博",
@@ -23,14 +24,16 @@
         "customersupport": "客服",
         "logo": "Logo 画师",
         "materials": "素材提供",
-        "localization_ja": "日语化"
+        "localization_ja": "日语化",
+        "localization_ko": "韩语化"
       }
     },
     "en": {
       "categories": {
         "owner": "Webmaster",
         "developers": "Developers",
-        "others": "Others"
+        "others": "Others",
+        "translators": "Translators"
       },
       "socials": {
         "weibo": "Weibo",
@@ -46,17 +49,19 @@
         "statistics": "Statistics and Analysis",
         "arkplanner": "Author of ArkPlanner",
         "bulkupload": "Bulk Upload",
-        "customersupport": "Customer Support",
+        "customersupport": "User Support",
         "logo": "Logo Designer",
         "materials": "Materials Supplier",
-        "localization_ja": "Japanese Localization Provider"
+        "localization_ja": "Japanese Localization Provider",
+        "localization_ko": "Korean Localization Provider"
       }
     },
     "ja": {
       "categories": {
         "owner": "管理人",
         "developers": "開発者",
-        "others": "その他"
+        "others": "その他",
+        "translators": "翻訳者"
       },
       "socials": {
         "weibo": "Weibo",
@@ -75,7 +80,36 @@
         "customersupport": "顧客サービス",
         "logo": "ロゴデザイナー",
         "materials": "材料サプライヤー",
-        "localization_ja": "日本語化"
+        "localization_ja": "日本語化",
+        "localization_ko": "韓国語化"
+      }
+    },
+    "ko": {
+      "categories": {
+        "owner": "관리자",
+        "developers": "개발자",
+        "others": "기타",
+        "translators": "번역가"
+      },
+      "socials": {
+        "weibo": "웨이보",
+        "github": "GitHub",
+        "twitter": "Twitter",
+        "qq": "QQ",
+        "email": "Email"
+      },
+      "responsibilities": {
+        "frontend": "프론트엔드",
+        "backend": "백엔드",
+        "maintenance": "데브옵스",
+        "statistics": "분석 및 통계",
+        "arkplanner": "명일방주 계획기 제작",
+        "bulkupload": "대량의 보고서 제출",
+        "customersupport": "고객 지원",
+        "logo": "로고 디자이너",
+        "materials": "재료 이미지 제공",
+        "localization_ja": "일본 현지화 제공",
+        "localization_ko": "한국 현지화 제공"
       }
     }
   }
@@ -166,7 +200,8 @@
     logo: "logo",
     materials: "materials",
     localization: {
-      ja: "localization_ja"
+      ja: "localization_ja",
+      ko: "localization_ko",
     }
   }
   export default {
@@ -311,6 +346,18 @@
               avatar: "paofu.png",
               socials: {
                 github: "https://github.com/Evealicemier"
+              }
+            }
+          ],
+          translators: [
+            {
+              name: "シャロ",
+              responsibility: [
+                r.localization.ko
+              ],
+              avatar: "syaro.jpeg",
+              socials: {
+                twitter: "https://twitter.com/StarNight_ko"
               }
             },
             {

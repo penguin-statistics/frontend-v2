@@ -66,47 +66,55 @@
         </v-card-actions>
       </v-card>
     </v-dialog>
-    <v-fade-transition>
-      <span
-        v-if="haveError && !model"
-        style="cursor: pointer"
-        @click="model = true"
+    <v-slide-y-reverse-transition>
+      <v-card
+        v-if="(haveError && !model) || pending"
+        class="network-state-indicator"
+        :class="{'error': haveError, 'blue darken-2': !haveError}"
       >
-        <v-progress-circular
-          v-if="pending"
-          indeterminate
-          color="white"
-          class="mr-1"
-          small
-          :width="2"
-        />
-        <v-icon
-          v-else
-          small
-          class="mr-1"
-        >
-          mdi-alert
-        </v-icon>
+        <v-fade-transition>
+          <span
+            v-if="haveError && !model"
+            style="cursor: pointer"
+            @click="model = true"
+          >
+            <v-progress-circular
+              v-if="pending"
+              indeterminate
+              color="white"
+              class="mr-1"
+              :size="16"
+              :width="2"
+            />
+            <v-icon
+              v-else
+              small
+              class="mr-1"
+            >
+              mdi-alert
+            </v-icon>
 
-        <span class="caption">
-          {{ $t('fetch.failed.title') }} ({{ errors.length }})
-        </span>
-      </span>
-      <span
-        v-else-if="pending"
-      >
-        <v-progress-circular
-          indeterminate
-          color="white"
-          class="mr-1"
-          :size="16"
-          :width="2"
-        />
-        <span class="caption">
-          {{ $t('meta.loading') }}
-        </span>
-      </span>
-    </v-fade-transition>
+            <span class="caption">
+              {{ $t('fetch.failed.title') }} ({{ errors.length }})
+            </span>
+          </span>
+          <span
+            v-else-if="pending"
+          >
+            <v-progress-circular
+              indeterminate
+              color="white"
+              class="mr-1"
+              :size="16"
+              :width="2"
+            />
+            <span class="caption">
+              {{ $t('meta.loading') }}
+            </span>
+          </span>
+        </v-fade-transition>
+      </v-card>
+    </v-slide-y-reverse-transition>
   </div>
 </template>
 
@@ -123,7 +131,7 @@
     computed: {
       ...mapGetters('ajax', ['pending', 'errors']),
       haveError () {
-        return this.$store.getters['ajax/errors'].length > 0
+        return this.errors.length > 0
       }
     },
     watch: {
@@ -146,5 +154,11 @@
 </script>
 
 <style scoped>
-
+  .network-state-indicator {
+    position: fixed;
+    right: 0;
+    bottom: 0;
+    padding: 4px 8px;
+    border-radius: 4px 0 0 0 !important;
+  }
 </style>

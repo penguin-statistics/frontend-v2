@@ -26,12 +26,13 @@
     "changelog": "更新履歴",
     "v1": "旧バージョン",
     "refreshData": "データ更新",
-    "invertColors": "テーマ変更"
+    "invertColors": "テーマ変更",
+    "languages": "言語切替"
   },
   "meta": {
     "details": "詳細を見る",
     "loading": "読み込み中...",
-    "notfound": "これはどこ¿¿¿",
+    "notfound": "ここはどこ¿¿¿",
     "footer": {
       "copyright": {
         "title": "利用許諾",
@@ -125,6 +126,7 @@
       },
       "type": {
         "_name": "アイテム",
+        "now": "選択されたアイテムは {quantity} 種類です",
         "gte": "最少 {quantity} 種類のアイテムが必要です",
         "lte": "最大 {quantity} 種類のアイテムが必要です",
         "not": "{quantity}種類のアイテムであってはなりません"
