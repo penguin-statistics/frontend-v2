@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0,viewport-fit=cover">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700">
   <link rel="icon" href="/favicon.ico">
   <link rel="apple-touch-icon" sizes="180x180" href="/favicon/apple-touch-icon.png">
@@ -16,7 +16,7 @@
   <title>企鹅物流数据统计</title>
   <link rel="preconnect" href="https://penguin-stats.s3.ap-southeast-1.amazonaws.com">
   <style>#app, body, html {
-    height: 100%;
+    height: 100vh;
     margin: 0;
     padding: 0
   }
@@ -393,7 +393,6 @@
 <script>"serviceWorker" in navigator && window.addEventListener("load", function () {
   navigator.serviceWorker.register("/service-worker.js")
 });</script>
-<!-- built files will be auto injected -->
 </body>
 </html>
 

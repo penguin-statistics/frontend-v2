@@ -16,6 +16,8 @@ import * as Integrations from '@sentry/integrations';
 
 const production = process.env.NODE_ENV === 'production';
 
+Vue.config.performance = true;
+
 if (production) {
   Sentry.init({
     dsn: 'https://aebfbfbe08de42f7a9f291f5ae9ebf97@sentry.imgal.vin/2',

@@ -169,6 +169,7 @@
       app
       dark
       color="blue darken-3"
+      style="min-height: calc(56px + env(safe-area-inset-top)); padding-top: env(safe-area-inset-top)"
     >
       <v-app-bar-nav-icon
         @click.stop="drawer = !drawer"
@@ -199,7 +200,7 @@
       <AccountManager />
     </v-app-bar>
     <RandomBackground />
-    <v-content>
+    <v-content style="padding-top: calc(env(safe-area-inset-top) + 56px) !important;">
       <transition
         name="slide-fade"
         mode="out-in"
@@ -476,18 +477,17 @@ export default {
   }
 
   .drawer-logo {
-    height: 256px;
-    padding: 32px;
+    height: calc(256px + env(safe-area-inset-top));
+    padding: calc(32px + env(safe-area-inset-top)) 32px 32px 32px;
     overflow: hidden;
     transition: all .5s cubic-bezier(0.19, 1, 0.22, 1);
   }
 
   .drawer-logo:hover {
-    height: 304px;
-    padding: 32px;
+    height: calc(304px + env(safe-area-inset-top));
   }
   .drawer-logo--two-line:hover {
-    height: 336px;
+    height: calc(336px + env(safe-area-inset-top));
   }
   .drawer-logo > .description {
     margin-top: 16px;
