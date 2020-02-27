@@ -1,5 +1,5 @@
 <template>
-  <v-app :dark="appDark">
+  <v-app>
     <v-navigation-drawer
       v-model="drawer"
       app
@@ -358,7 +358,8 @@ export default {
     localizationMapper: {
       get () {
         return this.localizations.indexOf(this.localizations.find(el => el.id === this.$i18n.locale))
-      }
+      },
+      set () {}
     }
   },
   watch: {
@@ -388,9 +389,11 @@ export default {
       }
     }
 
-    if (this.dark) {
+    console.log("(before init) dark status", this.dark, this.$vuetify.theme.dark);
+    if (typeof this.dark === "boolean") {
       this.$vuetify.theme.dark = this.dark
     }
+    console.log("(after init) dark status", this.dark, this.$vuetify.theme.dark)
   },
   methods: {
     async refreshData () {

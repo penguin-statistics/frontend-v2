@@ -28,7 +28,8 @@
     width: 100%;
     height: 100%;
     z-index: 999999;
-    background: #303030
+    background: #303030;
+    background: linear-gradient(to top right, #294266 30%, #00608c);
   }
 
   #loader-logo {
@@ -276,9 +277,6 @@
     </div>
   </div>
 </main>
-<script>"serviceWorker" in navigator && window.addEventListener("load", function () {
-  navigator.serviceWorker.register("/service-worker.js")
-});</script>
 <script>
   function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _nonIterableRest(); }
 
@@ -392,6 +390,9 @@
     console.error(e);
   }
 </script>
+<script>"serviceWorker" in navigator && window.addEventListener("load", function () {
+  navigator.serviceWorker.register("/service-worker.js")
+});</script>
 <!-- built files will be auto injected -->
 </body>
 </html>
