@@ -389,11 +389,11 @@ export default {
       }
     }
 
-    console.log("(before init) dark status", this.dark, this.$vuetify.theme.dark);
+    Console.debug("(before init) dark status", this.dark, this.$vuetify.theme.dark);
     if (typeof this.dark === "boolean") {
       this.$vuetify.theme.dark = this.dark
     }
-    console.log("(after init) dark status", this.dark, this.$vuetify.theme.dark)
+    Console.debug("(after init) dark status", this.dark, this.$vuetify.theme.dark)
   },
   methods: {
     async refreshData () {
