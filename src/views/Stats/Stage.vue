@@ -17,6 +17,12 @@
         "name": "統計結果",
         "title": "{stage} 統計結果"
       }
+    },
+    "ko": {
+      "stats": {
+        "name": "통계 결과",
+        "title": "{stage}의 통계 결과"
+      }
     }
   }
 </i18n>

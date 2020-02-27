@@ -44,6 +44,21 @@
         "FURN": "家具",
         "ACTIVITY_ITEM": "イベントアイテム"
       }
+    },
+    "ko": {
+      "choose": {
+        "name": "아이템 선택"
+      },
+      "result": {
+        "name": "통계 결과",
+        "title": "{item}의 통계 결과"
+      },
+      "categories": {
+        "CARD_EXP": "작전 기록",
+        "MATERIAL": "재료",
+        "FURN": "가구",
+        "ACTIVITY_ITEM": "이벤트 아이템"
+      }
     }
   }
 </i18n>
@@ -52,7 +67,7 @@
   <v-stepper
     v-model="step"
     :alt-labels="!$vuetify.breakpoint.xsOnly"
-    class="pa-2 transparent elevation-0 full-width"
+    class="px-2 transparent elevation-0 full-width"
   >
     <v-stepper-header
       class="bkop-light elevation-6"

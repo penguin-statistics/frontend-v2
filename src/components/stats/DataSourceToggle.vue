@@ -23,6 +23,14 @@
         "all": "全体",
         "personal": "個人"
       }
+    },
+    "ko": {
+      "dataSourceToggle": {
+        "title": "Login Required",
+        "loginNotice": "Please log in before viewing personal drop data.",
+        "all": "All",
+        "personal": "Personal"
+      }
     }
   }
 </i18n>
@@ -89,6 +97,7 @@
 
 <script>
 import AccountManager from "@/components/toolbar/AccountManager";
+import {mapGetters} from "vuex";
 export default {
   name: "DataSourceToggle",
   components: {
@@ -102,9 +111,11 @@ export default {
     };
   },
   computed: {
+    ...mapGetters('auth', ['loggedIn']),
+    ...mapGetters('dataSource', ['source']),
     dataSource: {
       get() {
-        return this.$store.state.dataSource;
+        return this.source;
       },
       async set(value) {
         switch (value) {
@@ -112,17 +123,17 @@ export default {
             break;
           case "personal":
             // refresh personal data
-            if (!this.$store.getters.authed) {
+            if (!this.loggedIn) {
               // please login
               this.dialog = true;
               return;
             }
             // fetch data
-            this.$store.dispatch("refreshPersonalMatrixData");
+            this.$store.dispatch("data/refreshPersonalMatrix");
             // change data source after fetch data
             break;
         }
-        this.$store.commit("switchDataSource", value);
+        this.$store.commit("dataSource/switch", value);
       }
     }
   },

@@ -1,0 +1,136 @@
+{
+  "app": {
+    "name": "펭귄 물류 데이터 분석 부서",
+    "name_line1": "펭귄 물류 데이터 분석 부서",
+    "name_line2": ""
+  },
+  "menu": {
+    "home": "톱 페이지",
+    "report": "보고서 작성",
+    "stats": {
+      "_name": "통계",
+      "stage": "작전지역별 통계",
+      "item": "아이템별 통계"
+    },
+    "about": {
+      "_name": "펭귄 통계에 대해",
+      "members": "팀 구성원",
+      "contribute": "기여",
+      "changelog": "변경 로그",
+      "contact": "문의",
+      "donate": "기부",
+      "links": "링크",
+      "bulletin": "공지"
+    },
+    "planner": "명일방주 계획기",
+    "changelog": "변경 로그",
+    "v1": "구 버전 방문하기",
+    "refreshData": "데이터 새로고침",
+    "invertColors": "페이지 테마 변경",
+    "languages": "언어 전환"
+  },
+  "meta": {
+    "details": "세부 사항",
+    "loading": "데이터 새로고침 중...",
+    "notfound": "???",
+    "footer": {
+      "copyright": {
+        "title": "라이센스",
+        "content": "Data was collected by Penguin Delivery, licensed under a Creative Commons Attribution-NonCommercial 4.0 International License. In case of redistribution and transformation towards the material, you must give appropriate credit, provide a link to the license, indicate if changes were made, and may not use the material for commercial purposes."
+      },
+      "credit": "펭귄 물류 데이터 분석 부서 | {date}"
+    },
+    "separator": ", "
+  },
+  "stats": {
+    "headers": {
+      "stage": "작전지역",
+      "apCost": "이성",
+      "item": "아이템",
+      "times": "보고서의 수",
+      "quantity": "확득한 수",
+      "percentage": "백분율",
+      "apPPR": "아이템당 필요 이성 기대치"
+    }
+  },
+  "builds": {
+    "development": {
+      "title": "Preview Build",
+      "description": "You are currently browsing the development build",
+      "ok": "OH YEAH!"
+    }
+  },
+  "boolean": {
+    "true": "네",
+    "false": "아니오"
+  },
+  "hasNorNot": {
+    "true": "드랍됨",
+    "false": "드랍되지 않음"
+  },
+  "dialog": {
+    "cancel": "취소",
+    "confirm": "확인",
+    "submit": "제출",
+    "close": "닫기"
+  },
+  "contribute": {
+    "repo": "프로젝트 저장소: ",
+    "frontend": "프론트엔드",
+    "backend": "백엔드",
+    "contribute_0": "다음 기술중 하나라도 경험이 있고, 펭귄 물류에 기여하고자 한다면. QQ 그룹 : 747099627로 연락하여 주십시오.",
+    "contribute_1": "펭귄 물류 데이터 분석 부서는 비영리 오픈소스 프로젝트 입니다",
+    "skills": {
+      "frontend": "프로트엔드 개발자 (Vue.js)",
+      "backend": "백엔드 개발자 (Java Spring Boot, MongoDB)",
+      "maintenance": "데브옵스",
+      "design": "UI/UX 디자인",
+      "analysis": "데이터 분석",
+      "others": "..."
+    }
+  },
+  "fetch": {
+    "failed": {
+      "title": "신경 네트워크와 연결할 수 없습니다",
+      "subtitle": "신경 네트워크와의 연결할 수 없습니다. 일부 혹은 모든 정보를 불러올 수 없습니다.",
+      "retry": "재시도"
+    }
+  },
+  "report": {
+    "alert": {
+      "title": {
+        "first": "거짓 보고 감지",
+        "repeat": "주의"
+      },
+      "continue": {
+        "first": "이대로 보고서를 제출하시겠습니까?",
+        "repeat": "보고서를 제출하시겠습니까?"
+      },
+      "contact": {
+        "before": "만약 이 오류가 잘못됐다면, ",
+        "activator": "저희에게 문의",
+        "after": " 해주시면 더없이 기쁠 것입니다. (검증을 위해 스테이지 이름과 드랍 목록을 볼 수 있는 스크린샷을 보내 주십시오)저희 팀이 잘못됐음을 확인하면, 최대치를 수정할 것입니다."
+      },
+      "causes": {
+        "noDrop": "드랍된 아이템이 선택되지 않았습니다.",
+        "limitation": "지금 제출되려는 보고서는 저희가 가진 데이터와 큰 차이가 있습니다, 이 보고서를 제출하면, 거짓 보고서로 판단되어 삭제될 수 있습니다."
+      }
+    },
+    "rules": {
+      "item": {
+        "_name": "아이템 수",
+        "now": "{item} ×{quantity}개가 선택되었습니다",
+        "gte": "\"{item}\" ≥ {quantity}개 여야 합니다",
+        "lte": "\"{item}\" ≤ {quantity}개 여야 합니다",
+        "not": "\"{item}\" ≠ {quantity}개 여야 합니다"
+      },
+      "type": {
+        "_name": "아이템 종류",
+        "now": "{quantity}가지의 아이템이 선택되었습니다.",
+        "gte": "최소 {quantity}가지의 아이템이 드랍되어야 합니다",
+        "lte": "최대 {quantity}가지의 아이템만이 드랍될 수 있습니다",
+        "not": "{quantity}가지의 아이템이 드랍될 수 없습니다"
+      }
+    }
+  }
+}

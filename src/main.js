@@ -31,11 +31,6 @@ if (production) {
   });
 }
 
-router.beforeEach((to, from, next) => {
-  document.title = `${I18n.t(to.meta.i18n)} | ${I18n.t('app.name')}`;
-  next();
-});
-
 Vue.use(VueAnalytics, {
   id: 'UA-142226262-1',
   // customResourceURL: "https://www.google-analytics.com/analytics.js",
@@ -54,6 +49,11 @@ Vue.use(VueAnalytics, {
     exception: true,
     exceptionLogs: !production
   }
+});
+
+router.beforeEach((to, from, next) => {
+  document.title = `${I18n.t(to.meta.i18n)} | ${I18n.t('app.name')}`;
+  next();
 });
 
 Vue.config.productionTip = false;

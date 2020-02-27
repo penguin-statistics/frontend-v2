@@ -1,6 +1,6 @@
 {
   "name": "penguin-stats-frontend",
-  "version": "1.1.1",
+  "version": "1.1.2",
   "private": true,
   "scripts": {
     "serve": "vue-cli-service serve",
@@ -15,7 +15,6 @@
     "aos": "^2.3.4",
     "core-js": "^2.6.5",
     "dayjs": "^1.8.15",
-    "idb": "^4.0.4",
     "js-cookie": "^2.2.1",
     "plotly.js": "^1.49.2",
     "vue": "^2.6.10",

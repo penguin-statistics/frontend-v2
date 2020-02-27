@@ -22,7 +22,7 @@ Getters.limitations = {
 }
 Getters.statistics = {
   byItemId(itemId) {
-    const stats = store.state.data[`${store.state.dataSource}Matrix`];
+    const stats = store.state.data[`${store.getters['dataSource/source']}Matrix`];
     Console.debug(stats)
     if (!stats) return [];
     return stats.filter(el => {
@@ -30,7 +30,7 @@ Getters.statistics = {
     })
   },
   byStageId(stageId) {
-    const stats = store.state.data[`${store.state.dataSource}Matrix`];
+    const stats = store.state.data[`${store.getters['dataSource/source']}Matrix`];
     Console.debug(stats)
     if (!stats) return [];
     return stats.filter(el => {
@@ -94,7 +94,7 @@ Getters.trends = {
     return this.all() && this.all()[stageId];
   },
   all() {
-    if (store.state.dataSource !== 'global') {
+    if (store.getters['dataSource/source'] !== 'global') {
       return null;
     }
     return store.state.data && store.state.data.trends && store.state.data.trends.results

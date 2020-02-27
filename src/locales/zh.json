@@ -26,7 +26,8 @@
     "changelog": "更新日志",
     "v1": "访问旧版",
     "refreshData": "刷新数据",
-    "invertColors": "转换主题"
+    "invertColors": "转换主题",
+    "languages": "语言切换"
   },
   "meta": {
     "details": "详细信息",
