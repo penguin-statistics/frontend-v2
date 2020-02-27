@@ -1,9 +1,14 @@
 export default {
   namespaced: true,
-  state: 'global',
+  state: {
+    source: 'global'
+  },
   mutations: {
-    switchDataSource: (state, value) => {
-      state = value;
+    switch: (state, value) => {
+      state.source = value;
     }
+  },
+  getters: {
+    source: state => state.source
   }
 };

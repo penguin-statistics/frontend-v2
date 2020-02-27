@@ -1,3 +1,5 @@
+import Console from "@/utils/Console";
+
 export default {
   namespaced: true,
   state: {
@@ -9,9 +11,6 @@ export default {
     }
   },
   actions: {
-    // ajaxNewState(state, payload) {
-    //   state.states.push(payload);
-    // },
     _getOrCreateState ({commit, state}, id) {
       let found = state.states.find(value => value.id === id);
       if (found) {

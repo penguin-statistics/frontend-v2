@@ -98,6 +98,7 @@
 <script>
 import AccountManager from "@/components/toolbar/AccountManager";
 import {mapGetters} from "vuex";
+import Console from "@/utils/Console";
 export default {
   name: "DataSourceToggle",
   components: {
@@ -112,9 +113,10 @@ export default {
   },
   computed: {
     ...mapGetters('auth', ['loggedIn']),
+    ...mapGetters('dataSource', ['source']),
     dataSource: {
       get() {
-        return this.$store.state.dataSource;
+        return this.source;
       },
       async set(value) {
         switch (value) {
