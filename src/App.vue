@@ -9,7 +9,8 @@
         :class="{
           'drawer-logo blue': true,
           'darken-4': appDark,
-          'darken-3': !appDark
+          'darken-3': !appDark,
+          'drawer-logo--two-line': $t('app.name_line2') !== ''
         }"
       >
         <v-img
@@ -482,10 +483,12 @@ export default {
   }
 
   .drawer-logo:hover {
-    height: 320px;
+    height: 304px;
     padding: 32px;
   }
-
+  .drawer-logo--two-line:hover {
+    height: 336px;
+  }
   .drawer-logo > .description {
     margin-top: 16px;
     text-align: center;
