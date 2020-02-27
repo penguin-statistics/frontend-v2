@@ -145,12 +145,12 @@
                     :key="i"
                     @click="changeLocale(locale.id)"
                   >
-                    <v-list-item-title class="font-weight-bold">
+                    <v-list-item-title>
                       {{ locale.name }}
                     </v-list-item-title>
                     <v-list-item-action v-if="locale.beta">
                       <v-icon small>
-                        mdi-beta
+                        mdi-test-tube
                       </v-icon>
                     </v-list-item-action>
                     <v-list-item-action-text class="monospace">
