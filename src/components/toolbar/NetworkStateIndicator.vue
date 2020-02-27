@@ -66,7 +66,7 @@
         </v-card-actions>
       </v-card>
     </v-dialog>
-    <v-slide-y-reverse-transition>
+    <v-slide-x-reverse-transition>
       <v-card
         v-if="(haveError && !model) || pending"
         class="network-state-indicator"
@@ -114,7 +114,7 @@
           </span>
         </v-fade-transition>
       </v-card>
-    </v-slide-y-reverse-transition>
+    </v-slide-x-reverse-transition>
   </div>
 </template>
 
@@ -159,6 +159,7 @@
     right: 0;
     bottom: 0;
     padding: 4px 8px;
-    border-radius: 4px 0 0 0 !important;
+    border-radius: 4px 0 0 4px !important;
+    margin-bottom: calc(max(env(safe-area-inset-bottom) - 4px, 4px)) !important;
   }
 </style>
