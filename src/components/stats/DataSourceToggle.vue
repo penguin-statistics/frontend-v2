@@ -143,9 +143,6 @@ export default {
     afterLogin() {
       this.dialog = false;
       this.dataSource = "personal";
-    },
-    alert(a) {
-      alert(a)
     }
   }
 };
