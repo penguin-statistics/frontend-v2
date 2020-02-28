@@ -146,7 +146,7 @@
             <v-row
               align="center"
               justify="center"
-              class="px-3 px-sm-4 px-md-6 px-lg-6 px-xl-8 pt-0 pb-4"
+              class="px-4 px-sm-4 px-md-6 px-lg-6 px-xl-8 pt-0 pb-4"
             >
               <Item
                 v-if="selected.item"
