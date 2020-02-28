@@ -472,10 +472,6 @@ export default {
     opacity: 0;
   }
 
-  .theme--dark, .theme--light {
-    transition: all .3s cubic-bezier(.25,.8,.5,1) !important;
-  }
-
   .drawer-logo {
     height: calc(256px + env(safe-area-inset-top));
     padding: calc(32px + env(safe-area-inset-top)) 32px 32px 32px;

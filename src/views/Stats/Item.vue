@@ -99,7 +99,7 @@
       <v-stepper-content
         v-if="categorizedItems"
         :step="1"
-        class="bkop-light mt-6 elevation-4"
+        class="bkop-light mt-2 elevation-4"
         style="border-radius: 4px"
       >
         <v-row

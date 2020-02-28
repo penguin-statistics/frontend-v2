@@ -94,7 +94,6 @@
       md="4"
     >
       <v-card
-        data-aos="fade"
         class="link-card bkop-light elevation-0"
       >
         <v-card-title
