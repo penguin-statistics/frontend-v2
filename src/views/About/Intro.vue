@@ -34,7 +34,7 @@
 <template>
   <v-card 
     elevation="5" 
-    class="bkop-light px-6 py-1"
+    class="bkop-light pa-2 pa-sm-4 pa-md-6 pa-lg-6 pa-xl-8 pt-0 py-1"
   >
     <v-row
       align="center"

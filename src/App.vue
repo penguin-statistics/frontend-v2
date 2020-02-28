@@ -353,8 +353,8 @@ export default {
         return this.dark
       },
       set (value) {
+        this.$vuetify.theme.dark = value;
         this.$store.commit('settings/switchDark', value)
-        this.$vuetify.theme.dark = value
       }
     },
     localizationMapper: {
@@ -560,6 +560,10 @@ export default {
     /*In case the old browsers doesn't support advanced CSS calculations*/
     padding-bottom: 8px !important;
     padding-bottom: calc(max(env(safe-area-inset-bottom), 8px)) !important;
+  }
+
+  .v-stepper__items, .v-stepper__wrapper {
+    overflow: initial !important;
   }
 
 </style>

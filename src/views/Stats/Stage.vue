@@ -39,9 +39,9 @@
         <v-row
           align="center"
           justify="center"
-          class="px-6 pb-2"
+          class="px-3 px-sm-4 px-md-6 px-lg-6 px-xl-8 pt-0 pb-4"
         >
-          <h1 class="title pl-2 pt-2 no-wrap--text">
+          <h1 class="title pl-2 pt-1 no-wrap--text">
             {{ $t('stats.title', {stage: stage.code}) }}
           </h1>
           <v-spacer /> 
@@ -53,7 +53,7 @@
         :items="stats"
         type="stage"
 
-        class="px-6 pb-6"
+        class="px-3 px-sm-4 px-md-6 px-lg-6 px-xl-8 pt-0 pb-6"
       />
     </v-card>
   </NewStageSelector>

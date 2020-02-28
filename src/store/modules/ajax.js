@@ -47,5 +47,6 @@ export default {
     errors: state => {
       return state.states.filter(value => !!value.error)
     },
+    matrixPending: state => state.states.some(value => value.pending && value.id.includes("Matrix"))
   }
 };
