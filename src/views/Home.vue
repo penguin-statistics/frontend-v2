@@ -1,7 +1,7 @@
 <template>
-  <v-container>
+  <v-container class="fill-height justify-center">
     <v-row
-      dense
+      :dense="$vuetify.breakpoint.mdAndDown"
     >
       <v-col cols="12">
         <Intro
@@ -26,21 +26,23 @@
       <v-col
         cols="12"
         md="6"
+        class="align-self-stretch"
       >
         <Contribute
-          class="card-translate-up"
-        />
-        <Contact
-          class="mt-2 card-translate-up"
+          class="card-translate-up align-self-stretch"
         />
       </v-col>
       <v-col
         cols="12"
         md="6"
+        class="align-self-stretch"
       >
         <Donate
           class="card-translate-up"
         />
+      </v-col>
+      <v-col cols="12">
+        <Contact class="card-translate-up" />
       </v-col>
     </v-row>
   </v-container>
@@ -59,14 +61,25 @@ export default {
   components: { Contribute, Donate, Intro, Bulletin, Contact },
   data: () => ({}),
   mounted () {
-    window.ANIME = anime({
-      targets: 'div.card-translate-up',
-      translateY: [36, 0],
-      opacity: [0, 1],
-      duration: 400,
-      delay: (el, i) => i * 125 + 300,
-      easings: "easeOutQuad"
-    })
+    setTimeout(() => {
+      anime({
+        targets: '.card-translate-up',
+        translateY: [48, 0],
+        opacity: [0, 1],
+        duration: 425 * (Math.sqrt(document.body.clientWidth / 375)),
+        delay: (el, i) => i * 175,
+        easing: "easeOutExpo"
+      })
+      anime({
+        targets: ['.card-translate-up h1', '.card-translate-up h2', '.card-translate-up p', '.card-translate-up span'],
+        translateY: [16, 0],
+        opacity: [0, 1],
+        duration: 425 * (Math.sqrt(document.body.clientWidth / 375)),
+        delay: (el, i) => i * 75,
+        easing: "easeOutExpo"
+      })
+    }, 0)
+
   },
   methods: {
     goToPage(name) {

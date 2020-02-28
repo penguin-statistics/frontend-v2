@@ -39,6 +39,7 @@
   <v-card
     elevation="5"
     class="bkop-light pa-6"
+    style="height: 100%"
   >
     <h1 class="headline">
       {{ $t('menu.about.contribute') }}

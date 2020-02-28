@@ -106,6 +106,7 @@
             :alt="$t('donate.methods.alipay')"
             max-height="128px"
             contain
+            aspect-ratio="1"
           />
 
           <v-row
@@ -126,7 +127,8 @@
               text
               outlined
               class="my-0 d-block"
-              @click="redirectAlipay"
+              :href="qr.alipay"
+              target="_blank"
             >
               {{ $t('donate.redirectToApp', {app: $t('donate.methods.alipay')}) }}
             </v-btn>
@@ -144,6 +146,7 @@
             :alt="$t('donate.methods.wechatPay')"
             max-height="128px"
             contain
+            aspect-ratio="1"
           />
 
           <v-row
@@ -166,7 +169,8 @@
       <v-btn
         rounded
         color="primary"
-        @click="redirectPayPal"
+        :href="qr.paypal"
+        target="_blank"
       >
         <v-icon left>
           mdi-paypal
@@ -186,17 +190,6 @@ export default {
         wechatPay: "wxp://f2f0F8Z93ZkS3boz8JY3FwarwyAwcIfXC2CN",
         paypal: "https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=T9LRK3VEL645J&item_name=Penguin+Statistics+Donation&currency_code=USD&source=url"
       }
-    }
-  },
-  methods: {
-    redirectAlipay() {
-      window.location = this.qr.alipay
-    },
-    redirectWechatPay() {
-      window.location = this.qr.wechatPay
-    },
-    redirectPayPal() {
-      window.open(this.qr.paypal)
     }
   }
 };
