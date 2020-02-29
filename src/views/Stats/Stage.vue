@@ -71,7 +71,6 @@
   import get from "@/utils/getters";
   import DataSourceToggle from "@/components/stats/DataSourceToggle";
   import strings from "@/utils/strings";
-  import anime from "animejs";
 
 export default {
   name: "StatsByStage",
