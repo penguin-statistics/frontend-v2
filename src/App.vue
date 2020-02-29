@@ -118,6 +118,8 @@
               bottom
               left
               open-on-hover
+              :close-on-content-click="false"
+              :close-on-click="false"
               transition="slide-y-transition"
             >
               <template v-slot:activator="{ on }">
