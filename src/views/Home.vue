@@ -66,18 +66,27 @@ export default {
         targets: '.card-translate-up',
         translateY: [48, 0],
         opacity: [0, 1],
-        duration: 425 * (Math.sqrt(document.body.clientWidth / 375)),
+        duration: 775,
         delay: (el, i) => i * 175,
-        easing: "easeOutExpo"
+        easing: "easeOutQuint"
       })
       anime({
-        targets: ['.card-translate-up h1', '.card-translate-up h2', '.card-translate-up p', '.card-translate-up span'],
-        translateY: [16, 0],
+        targets: ['.card-translate-up h1', '.card-translate-up h2'],
+        translateY: [48, 0],
         opacity: [0, 1],
-        duration: 425 * (Math.sqrt(document.body.clientWidth / 375)),
+        duration: 775,
         delay: (el, i) => i * 75,
-        easing: "easeOutExpo"
+        easing: "easeOutQuint"
       })
+      anime({
+        targets: ['.card-translate-up p', '.card-translate-up span'],
+        translateY: [48, 0],
+        opacity: [0, 1],
+        duration: 775,
+        delay: (el, i) => i * 75,
+        easing: "easeOutQuint"
+      })
+
     }, 0)
 
   },

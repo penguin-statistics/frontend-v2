@@ -159,6 +159,7 @@
             <div
               v-for="category in categories"
               :key="category.id"
+              class="stage-selector--stage"
             >
               <v-subheader>
                 <v-icon class="mr-2">

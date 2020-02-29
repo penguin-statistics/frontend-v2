@@ -71,6 +71,7 @@
   import get from "@/utils/getters";
   import DataSourceToggle from "@/components/stats/DataSourceToggle";
   import strings from "@/utils/strings";
+  import anime from "animejs";
 
 export default {
   name: "StatsByStage",
@@ -107,6 +108,26 @@ export default {
       return strings
     }
   },
+  mounted () {
+    anime({
+      targets: '.stage-selector--stage',
+      translateY: [48, 0],
+      opacity: [0, 1],
+      duration: 425,
+      delay: (el, i) => i * 225,
+      easing: "easeOutQuint"
+    })
+    // anime({
+    //   targets: '.v-expansion-panel span',
+    //   translateY: [48, 0],
+    //   opacity: [0, 1],
+    //   duration: 525,
+    //   delay: (el, i) => i * 0,
+    //   easing: "easeOutQuint"
+    // })
+
+
+  },
   methods: {
     select({zone, stage}) {
       this.selected.zone = zone;
@@ -124,4 +145,8 @@ export default {
 .v-table {
   background: transparent !important;
 }
+  /*.v-expansion-panel {*/
+  /*  transform: translateY(48px);*/
+  /*  opacity: 0;*/
+  /*}*/
 </style>
