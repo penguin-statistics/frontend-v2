@@ -129,8 +129,9 @@
       <v-list
         v-for="[key, value] in Object.entries(profiles)"
         :key="key"
-        class="bkop-light mb-1"
+        class="bkop-light mb-4 members--list"
         two-line
+        elevation="5"
       >
         <v-subheader :key="key">
           {{ $t('categories.' + key) }}
@@ -139,7 +140,7 @@
         <v-list-item
           v-for="profile in value"
           :key="profile.name"
-          class="grow px-4"
+          class="grow px-4 members--list-item"
         >
           <v-list-item-avatar>
             <v-img
@@ -162,24 +163,19 @@
               align="center"
               justify="end"
             >
-              <v-tooltip
+              <v-btn
                 v-for="[id, url] in Object.entries(profile.socials)"
                 :key="`${profile.name}-${id}`"
-                bottom
+                icon
+                :href="url"
+                target="_blank"
+                :title="$t(`socials.${id}`)"
+                v-on="on"
               >
-                <template v-slot:activator="{ on }">
-                  <v-btn
-                    icon
-                    @click="openTab(url)"
-                    v-on="on"
-                  >
-                    <v-icon>
-                      {{ getSocial(id).icon }}
-                    </v-icon>
-                  </v-btn>
-                </template>
-                <span>{{ $t(`socials.${id}`) }}</span>
-              </v-tooltip>
+                <v-icon>
+                  {{ getSocial(id).icon }}
+                </v-icon>
+              </v-btn>
             </v-row>
           </v-list-item-action>
         </v-list-item>
@@ -189,6 +185,8 @@
 </template>
 
 <script>
+  import anime from "animejs";
+
   const r = {
     frontend: "frontend",
     backend: "backend",
@@ -203,7 +201,7 @@
       ja: "localization_ja",
       ko: "localization_ko",
     }
-  }
+  };
   export default {
     name: 'Members',
     data () {
@@ -411,10 +409,25 @@
         ]
       }
     },
+    mounted () {
+      anime({
+        targets: '.members--list-item',
+        translateY: [48, 0],
+        opacity: [0, 1],
+        duration: 425,
+        delay: (el, i) => i * 50,
+        easing: "easeOutQuint"
+      })
+      // anime({
+      //   targets: '.members--list',
+      //   translateY: [48, 0],
+      //   opacity: [0, 1],
+      //   duration: 425,
+      //   delay: (el, i) => i * 175,
+      //   easing: "easeOutQuint"
+      // })
+    },
     methods: {
-      openTab (url) {
-        window.open(url)
-      },
       getSocial (id) {
         return this.socials.find(v => v.id === id)
       },

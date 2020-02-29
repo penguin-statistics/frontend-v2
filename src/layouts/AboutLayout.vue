@@ -3,7 +3,7 @@
     class="fill-height justify-center"
   >
     <v-row align="center">
-      <v-col>
+      <v-col class="pa-0">
         <transition
           name="slide-fade"
           mode="out-in"

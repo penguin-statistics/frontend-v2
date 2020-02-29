@@ -33,8 +33,8 @@
 
 <template>
   <v-card 
-    elevation="5" 
-    class="bkop-light px-6 py-1"
+    elevation="0"
+    class="transparent pt-0 py-1"
   >
     <v-row
       align="center"

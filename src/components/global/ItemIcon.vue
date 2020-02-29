@@ -1,7 +1,6 @@
 <template>
   <figure
     v-if="item.itemId !== 'furni' && item.spriteCoord"
-    ref="icon"
     :class="{'item-icon--sprite': true, 'item-icon--sprite--disable-hover-effect': disableTooltip}"
     :alt="`item(${item.itemId})`"
     :style="style"
@@ -9,8 +8,7 @@
   <v-icon
     v-else-if="item.itemId === 'furni'"
     :class="furniturePadding"
-    class="deep-orange"
-    style="border-radius: 50%;"
+    class="deep-orange item-icon--special"
     :size="30 * ratio"
   >
     mdi-lamp
@@ -18,8 +16,7 @@
   <v-icon
     v-else-if="item.itemId !== 'furni' && !item.spriteCoord"
     :class="furniturePadding"
-    class="blue"
-    style="border-radius: 50%;"
+    class="blue item-icon--special"
     :size="30 * ratio"
   >
     mdi-treasure-chest
@@ -91,7 +88,7 @@ export default {
 };
 </script>
 
-<style scoped>
+<style>
 .item-icon--sprite {
   background-image: url("https://penguin-stats.s3.ap-southeast-1.amazonaws.com/item_sprite.png");
   background-repeat: no-repeat;
@@ -110,4 +107,8 @@ export default {
 .item-icon--sprite--disable-hover-effect {
   transform: none !important;
 }
+
+  .item-icon--special {
+    border-radius: 50%;
+  }
 </style>
