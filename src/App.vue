@@ -193,6 +193,7 @@
                   :src="require('@/assets/logo.png')"
                   aspect-ratio="1"
                   height="32px"
+                  contain
                 />
               </template>
             </v-img>
@@ -384,7 +385,7 @@ export default {
     this.$store.dispatch("data/fetch", false)
   },
   created () {
-    this.randomizeLogo();
+    // this.randomizeLogo();
     this.onDarkChange(this.dark);
 
     if (this.language) {
