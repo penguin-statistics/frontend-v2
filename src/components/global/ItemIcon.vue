@@ -88,7 +88,7 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 .item-icon--sprite {
   background-image: url("https://penguin-stats.s3.ap-southeast-1.amazonaws.com/item_sprite.png");
   background-repeat: no-repeat;

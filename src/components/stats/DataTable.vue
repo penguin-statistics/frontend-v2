@@ -460,4 +460,7 @@
     position: absolute;
     z-index: 4
   }
+  .item-icon.item-icon--special {
+    position: absolute !important;
+  }
 </style>

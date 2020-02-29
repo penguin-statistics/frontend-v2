@@ -121,7 +121,7 @@
     fluid
   >
     <v-snackbar
-      v-model="showSubmittedSnackbar"
+      v-model="submitted"
       color="success"
       :timeout="0"
       bottom
@@ -185,12 +185,26 @@
       </v-btn>
     </v-snackbar>
 
-    <NewStageSelector
+    <StageSelector
       :name="$t('report.name')"
+      :router-names="routerNames"
+
       hide-closed
       @select="select"
     >
-      <v-card class="pa-2">
+      <v-card class="bkop-light pa-2">
+        <div class="ma-4">
+          <h2
+            class="overline d-block"
+            style="width: 100%"
+          >
+            {{ strings.translate(selectedZone, "zoneName") }}
+          </h2>
+          <h1 class="title pt-1 no-wrap--text">
+            {{ selectedStage.code }}
+          </h1>
+        </div>
+
         <v-alert
           color="orange darken-3"
           border="left"
@@ -238,7 +252,7 @@
           <span
             v-for="item in stage.drops"
             :key="item.itemId"
-            class="py-1 px-2 d-inline-block"
+            class="py-1 px-1 d-inline-block"
           >
             <!--                  <h5 class="title mb-4">-->
             <!--                    {{ item.name }}-->
@@ -284,7 +298,7 @@
           </v-row>
         </v-col>
       </v-card>
-    </NewStageSelector>
+    </StageSelector>
 
     <v-dialog
       v-model="dialogs.first.enabled"
@@ -464,11 +478,11 @@ import ItemStepper from "@/components/global/ItemStepper";
 import Vue from "vue";
 import Cookies from 'js-cookie';
 import strings from "@/utils/strings";
-import NewStageSelector from "@/components/stats/StageSelector";
+import StageSelector from "@/components/stats/StageSelector";
 
 export default {
   name: "Report",
-  components: { NewStageSelector, ItemStepper, Item },
+  components: { StageSelector, ItemStepper, Item },
   data: () => ({
     snackbar: false,
     submitting: false,
@@ -501,9 +515,17 @@ export default {
     strings() {
       return strings
     },
+    selectedZone () {
+      if (!this.selected.zone) return [];
+      return get.zones.byZoneId(this.selected.zone);
+    },
+    selectedStage () {
+      if (!this.selected.stage) return [];
+      return get.stages.byStageId(this.selected.stage);
+    },
     stageItems() {
       if (!this.selected.stage) return [];
-      let stages = get.stages.byStageId(this.selected.stage);
+      let stages = this.selectedStage;
       let items = [];
       const categories = [{
         i18n: "normal",
@@ -637,9 +659,6 @@ export default {
     },
     slashStripClasses() {
       return { 'slash-strip--warning': this.validation.rate <= 2, 'slash-strip--danger': this.validation.rate > 2 }
-    },
-    showSubmittedSnackbar() {
-      return this.submitted
     }
   },
   methods: {
@@ -647,12 +666,9 @@ export default {
       this.$router.push({ name: name })
     },
     select({ zone, stage }) {
+      this.reset();
       this.selected.zone = zone;
       this.selected.stage = stage;
-
-      if (!zone && !stage) {
-        this.reset();
-      }
     },
     getItem(itemId) {
       return get.items.byItemId(itemId)

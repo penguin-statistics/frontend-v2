@@ -67,10 +67,10 @@
   <v-stepper
     v-model="step"
     :alt-labels="!$vuetify.breakpoint.xsOnly"
-    class="px-2 transparent elevation-0 full-width"
+    class="pa-3 transparent elevation-0 full-width"
   >
     <v-stepper-header
-      class="bkop-light elevation-6"
+      class="bkop-light elevation-4"
       style="border-radius: 4px"
     >
       <v-stepper-step
