@@ -8,6 +8,7 @@
       :key="dateKey"
       right
       icon="mdi-book-variant"
+      class="changelog--item"
       fill-dot
     >
       <v-card
@@ -31,6 +32,8 @@
 </template>
 
 <script>
+import anime from "animejs";
+
 export default {
   name: 'Changelog',
   data() {
@@ -74,7 +77,17 @@ export default {
         ]
       }
     }
-  }
+  },
+  mounted () {
+    anime({
+      targets: '.changelog--item',
+      translateY: [48, 0],
+      opacity: [0, 1],
+      duration: 425,
+      delay: (el, i) => i * 50,
+      easing: "easeOutQuint"
+    });
+  },
 }
 </script>
 

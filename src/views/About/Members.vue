@@ -131,6 +131,7 @@
         :key="key"
         class="bkop-light mb-4 members--list"
         two-line
+        elevation="5"
       >
         <v-subheader :key="key">
           {{ $t('categories.' + key) }}
@@ -162,25 +163,19 @@
               align="center"
               justify="end"
             >
-              <v-tooltip
+              <v-btn
                 v-for="[id, url] in Object.entries(profile.socials)"
                 :key="`${profile.name}-${id}`"
-                bottom
+                icon
+                :href="url"
+                target="_blank"
+                :title="$t(`socials.${id}`)"
+                v-on="on"
               >
-                <template v-slot:activator="{ on }">
-                  <v-btn
-                    icon
-                    :href="url"
-                    target="_blank"
-                    v-on="on"
-                  >
-                    <v-icon>
-                      {{ getSocial(id).icon }}
-                    </v-icon>
-                  </v-btn>
-                </template>
-                <span>{{ $t(`socials.${id}`) }}</span>
-              </v-tooltip>
+                <v-icon>
+                  {{ getSocial(id).icon }}
+                </v-icon>
+              </v-btn>
             </v-row>
           </v-list-item-action>
         </v-list-item>
@@ -423,14 +418,14 @@
         delay: (el, i) => i * 50,
         easing: "easeOutQuint"
       })
-      anime({
-        targets: '.members--list',
-        translateY: [48, 0],
-        opacity: [0, 1],
-        duration: 425,
-        delay: (el, i) => i * 175,
-        easing: "easeOutQuint"
-      })
+      // anime({
+      //   targets: '.members--list',
+      //   translateY: [48, 0],
+      //   opacity: [0, 1],
+      //   duration: 425,
+      //   delay: (el, i) => i * 175,
+      //   easing: "easeOutQuint"
+      // })
     },
     methods: {
       getSocial (id) {
