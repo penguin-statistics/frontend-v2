@@ -1,11 +1,12 @@
 <template>
   <v-timeline
-    :dense="$vuetify.breakpoint.smAndDown"
+    dense
     align-top
   >
     <v-timeline-item
       v-for="(log, dateKey) in logs"
       :key="dateKey"
+      right
       icon="mdi-book-variant"
       fill-dot
     >

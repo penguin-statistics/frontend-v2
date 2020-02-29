@@ -108,26 +108,6 @@ export default {
       return strings
     }
   },
-  mounted () {
-    anime({
-      targets: '.stage-selector--stage',
-      translateY: [48, 0],
-      opacity: [0, 1],
-      duration: 425,
-      delay: (el, i) => i * 225,
-      easing: "easeOutQuint"
-    })
-    // anime({
-    //   targets: '.v-expansion-panel span',
-    //   translateY: [48, 0],
-    //   opacity: [0, 1],
-    //   duration: 525,
-    //   delay: (el, i) => i * 0,
-    //   easing: "easeOutQuint"
-    // })
-
-
-  },
   methods: {
     select({zone, stage}) {
       this.selected.zone = zone;

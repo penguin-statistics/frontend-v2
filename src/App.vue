@@ -187,7 +187,15 @@
             <v-img
               :src="randomizedLogo"
               class="randomizedLogo"
-            />
+            >
+              <template v-slot:placeholder>
+                <v-img
+                  :src="require('@/assets/logo.png')"
+                  aspect-ratio="1"
+                  height="32px"
+                />
+              </template>
+            </v-img>
           </v-avatar>
         </transition>
         <span class="title">
@@ -470,6 +478,10 @@ export default {
     /* .slide-fade-leave-active for below version 2.1.8 */ {
     transform: translateY(1.5vh);
     opacity: 0;
+  }
+
+  .v-navigation-drawer {
+    transition: all .3s cubic-bezier(.25,.8,.5,1) !important;
   }
 
   .drawer-logo {
