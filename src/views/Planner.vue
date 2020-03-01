@@ -251,7 +251,7 @@
     name: "Planner",
     components: {Item},
     data: () => {
-      let items = get.items.all().filter(item => item.itemType === "MATERIAL" && item.itemId.length === 5);
+      let items = get.items.all().filter(item => item.itemType === "MATERIAL" && item.itemId.length === 5 || item.itemType === "ARKPLANNER");
       return {
         fundDressDialog: false,
         importExportDialog: false,
