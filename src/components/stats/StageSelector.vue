@@ -351,10 +351,6 @@
 </script>
 
 <style scoped>
-.monospace {
-  font-family: Consolas, Courier, monospace;
-}
-
   .full-width {
     width: 100%;
   }

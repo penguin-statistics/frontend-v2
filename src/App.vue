@@ -513,4 +513,8 @@ export default {
     word-break: break-word;
   }
 
+  .monospace {
+    font-family: SF Mono, Consolas, Courier, Courier New, monospace;
+  }
+
 </style>
