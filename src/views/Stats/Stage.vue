@@ -28,7 +28,7 @@
 </i18n>
 
 <template>
-  <NewStageSelector
+  <StageSelector
     :name="$t('stats.name')"
     :router-names="routerNames"
 
@@ -51,6 +51,23 @@
             {{ $t('stats.title', {stage: stage.code}) }}
           </h1>
           <v-spacer />
+          <v-btn
+            v-if="!zone.isOutdated"
+            depressed
+            color="primary"
+            small
+            class="mx-2"
+            style="transform: translateY(2px);"
+            :to="{name: 'ReportByZone_Selected', params: {zoneId: selected.zone, stageId: selected.stage}}"
+          >
+            <v-icon
+              left
+              small
+            >
+              mdi-upload
+            </v-icon>
+            {{ $t('menu.report') }}
+          </v-btn>
           <DataSourceToggle />
         </v-row>
       </v-card-title>
@@ -62,11 +79,11 @@
         class="px-3 px-sm-4 px-md-6 px-lg-6 px-xl-8 pt-0 pb-6"
       />
     </v-card>
-  </NewStageSelector>
+  </StageSelector>
 </template>
 
 <script>
-  import NewStageSelector from "@/components/stats/StageSelector";
+  import StageSelector from "@/components/stats/StageSelector";
   import DataTable from "@/components/stats/DataTable";
   import get from "@/utils/getters";
   import DataSourceToggle from "@/components/stats/DataSourceToggle";
@@ -74,7 +91,7 @@
 
 export default {
   name: "StatsByStage",
-  components: {DataSourceToggle, DataTable, NewStageSelector},
+  components: {DataSourceToggle, DataTable, StageSelector},
   data: () => ({
     expanded: {},
     selected: {

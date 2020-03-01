@@ -1,8 +1,9 @@
 <template>
   <v-tooltip
     v-if="!disableTooltip"
+    transition="slide-y-transition"
     :open-delay="40"
-    :nudge-top="10"
+    :nudge-top="tooltipNudge"
 
     v-bind="calculatedTooltipPosition"
   >
@@ -60,6 +61,12 @@
         type: String,
         default () {
           return "bottom";
+        }
+      },
+      tooltipNudge: {
+        type: Number,
+        default () {
+          return 10
         }
       },
       sticky: {

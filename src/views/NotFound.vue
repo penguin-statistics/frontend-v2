@@ -4,7 +4,7 @@
     class="fill-height"
     fluid
     style="cursor: pointer; padding: 0;"
-    @click="redirect"
+    @click="$router.push({name: 'home'})"
   >
     <v-row
       align="center"
@@ -72,12 +72,7 @@ export default {
     small() {
       return this.$vuetify.breakpoint.smAndDown;
     }
-  },
-  methods: {
-    redirect() {
-      this.$router.push({name: "home"})
-    }
-  },
+  }
 };
 </script>
 

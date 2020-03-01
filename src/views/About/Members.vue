@@ -170,7 +170,6 @@
                 :href="url"
                 target="_blank"
                 :title="$t(`socials.${id}`)"
-                v-on="on"
               >
                 <v-icon>
                   {{ getSocial(id).icon }}
@@ -414,8 +413,8 @@
         targets: '.members--list-item',
         translateY: [48, 0],
         opacity: [0, 1],
-        duration: 425,
-        delay: (el, i) => i * 50,
+        duration: 775,
+        delay: (el, i) => i * 75,
         easing: "easeOutQuint"
       })
       // anime({

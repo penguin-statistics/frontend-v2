@@ -67,10 +67,10 @@
   <v-stepper
     v-model="step"
     :alt-labels="!$vuetify.breakpoint.xsOnly"
-    class="px-2 transparent elevation-0 full-width"
+    class="pa-3 transparent elevation-0 full-width"
   >
     <v-stepper-header
-      class="bkop-light elevation-6"
+      class="bkop-light elevation-4"
       style="border-radius: 4px"
     >
       <v-stepper-step
@@ -310,18 +310,18 @@ export default {
       (this.step += 1);
   },
   methods: {
-    getStageItemTrendInterval(stageId) {
-      let trend = this.getStageItemTrend(stageId);
-      return trend && trend.interval;
-    },
-    getStageItemTrendStartTime(stageId) {
-      let trend = this.getStageItemTrend(stageId);
-      return trend && trend.startTime;
-    },
-    getStageItemTrendResults(stageId) {
-      let trend = this.getStageItemTrend(stageId);
-      return trend && trend.results;
-    },
+    // getStageItemTrendInterval(stageId) {
+    //   let trend = this.getStageItemTrend(stageId);
+    //   return trend && trend.interval;
+    // },
+    // getStageItemTrendStartTime(stageId) {
+    //   let trend = this.getStageItemTrend(stageId);
+    //   return trend && trend.startTime;
+    // },
+    // getStageItemTrendResults(stageId) {
+    //   let trend = this.getStageItemTrend(stageId);
+    //   return trend && trend.results;
+    // },
     getStageItemTrend(stageId) {
       return this.currentItemTrends && this.currentItemTrends[stageId];
     },

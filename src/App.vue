@@ -412,9 +412,9 @@ export default {
     },
     onDarkChange (newValue) {
       if (newValue) {
-        document.body.style.backgroundColor = "#303030"
+        document.body.style.backgroundColor = "#121212"
       } else {
-        document.body.style.backgroundColor = "#fafafa"
+        document.body.style.backgroundColor = "#ffffff"
       }
     },
 
@@ -470,10 +470,10 @@ export default {
 
 <style>
   .slide-fade-enter-active {
-    transition: all .225s cubic-bezier(0.165, 0.84, 0.44, 1);
+    transition: all .175s cubic-bezier(0.165, 0.84, 0.44, 1);
   }
   .slide-fade-leave-active {
-    transition: all .125s cubic-bezier(0.165, 0.84, 0.44, 1);
+    transition: all .075s cubic-bezier(0.165, 0.84, 0.44, 1);
   }
   .slide-fade-enter, .slide-fade-leave-to
     /* .slide-fade-leave-active for below version 2.1.8 */ {
@@ -520,7 +520,7 @@ export default {
   }
 
   .theme--dark .bkop-light {
-    background: rgba(66, 66, 66, .85) !important;
+    background: rgba(46, 46, 46, .85) !important;
   }
 
   .theme--light .bkop-medium {
@@ -528,7 +528,7 @@ export default {
   }
 
   .theme--dark .bkop-medium {
-    background: rgba(66, 66, 66, .9) !important;
+    background: rgba(46, 46, 46, .9) !important;
   }
 
   .cursor-pointer {

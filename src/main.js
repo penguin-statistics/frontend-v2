@@ -29,6 +29,14 @@ if (production) {
     // More info at: https://docs.sentry.io/platforms/javascript/vue/
     logErrors: false,
     release: 'frontend-v2@' + (config.version || 'unknown'),
+    beforeSend(event, hint) {
+      if (!(event.exception.values
+        && event.exception.values[0]
+        && event.exception.values[0].type
+        && event.exception.values[0].type === "NavigationDuplicated")) {
+        return event, hint;
+      }
+    }
   });
 }
 

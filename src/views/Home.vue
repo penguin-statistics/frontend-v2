@@ -99,8 +99,8 @@ export default {
 .theme--light .animation-blink {
   background: repeating-linear-gradient(
       -45deg,
-      rgba(240, 240, 240, 0.95),
-      rgba(240, 240, 240, 0.95) 45px,
+      rgba(240, 240, 240, 0.98),
+      rgba(240, 240, 240, 0.98) 45px,
       rgba(255, 255, 255, 0.9) 45px,
       rgba(255, 255, 255, 0.9) 90px
   ) !important;
@@ -110,10 +110,10 @@ export default {
 .theme--dark .animation-blink {
   background: repeating-linear-gradient(
       -45deg,
-      rgba(81, 81, 81, 0.95),
-      rgba(81, 81, 81, 0.95) 45px,
-      rgba(66, 66, 66, 0.9) 45px,
-      rgba(66, 66, 66, 0.9) 90px
+      rgba(61, 61, 61, 0.98),
+      rgba(61, 61, 61, 0.98) 45px,
+      rgba(46, 46, 46, 0.9) 45px,
+      rgba(46, 46, 46, 0.9) 90px
   ) !important;
   animation: dark-blink 3s infinite alternate ease-in-out;
 }

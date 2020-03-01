@@ -107,10 +107,10 @@
   <v-stepper
     v-model="step"
     :alt-labels="!small"
-    class="px-2 transparent elevation-0 full-width"
+    class="pa-3 transparent elevation-0 full-width"
   >
     <v-stepper-header
-      class="bkop-light elevation-6"
+      class="bkop-light elevation-4"
       style="border-radius: 4px"
     >
       <v-stepper-step
@@ -161,7 +161,9 @@
               :key="category.id"
             >
               <v-subheader>
-                <v-icon class="mr-2">
+                <v-icon
+                  class="mr-2"
+                >
                   {{ category.zones[0].icon }}
                 </v-icon>
                 <span>
@@ -219,7 +221,7 @@
                       :key="stage.stageId"
                       :stage="stage"
 
-                      @click.native="selectStage(zone.zoneId, stage.stageId)"
+                      @click.native="selectStage(zone.zoneId, stage.stageId, stage.code)"
                     />
                   </v-expansion-panel-content>
                 </v-expansion-panel>
@@ -232,6 +234,12 @@
         :step="2"
         class="pa-0 pt-2"
       >
+        <span
+          v-if="$vuetify.breakpoint.smAndUp"
+          class="stage-id--background font-weight-black display-4 px-12 py-6"
+        >
+          {{ selectedStage.code || "" }}
+        </span>
         <slot />
       </v-stepper-content>
     </v-stepper-items>
@@ -312,28 +320,29 @@
         return this.$vuetify.breakpoint.xsOnly
       },
       categorizedZones() {
-        const categories = ["ACTIVITY_OPEN", "MAINLINE", "WEEKLY"];
-        !this.hideClosed ? categories.push("ACTIVITY_CLOSED") : null;
-        let result = [];
-        for (let category of categories) {
-          let filter = null;
-          let zones = get.zones.byType(category.startsWith("ACTIVITY") ? "ACTIVITY" : category);
-          if (category === "ACTIVITY_OPEN") {
-            filter = zone => !zone.isOutdated;
-          } else if (category === "ACTIVITY_CLOSED") {
-            filter = zone => zone.isOutdated;
-          }
-          if (filter) {
-            zones = zones.filter(filter);
-          }
-          if (zones && zones.length) {
-            result.push({
-              id: category,
-              zones: zones
-            })
+        const categoriesSet = [["ACTIVITY_OPEN", "MAINLINE"], ["WEEKLY"]];
+        if (!this.hideClosed) categoriesSet[1].push("ACTIVITY_CLOSED");
+        let result = [[], []];
+        for (let [index, categories] of categoriesSet.entries()) {
+          for (let category of categories) {
+            let filter = null;
+            let zones = get.zones.byType(category.startsWith("ACTIVITY") ? "ACTIVITY" : category);
+            if (category === "ACTIVITY_OPEN") {
+              filter = zone => !zone.isOutdated;
+            } else if (category === "ACTIVITY_CLOSED") {
+              filter = zone => zone.isOutdated;
+            }
+            if (filter) {
+              zones = zones.filter(filter);
+            }
+            if (zones && zones.length) {
+              result[index].push({
+                id: category,
+                zones: zones
+              })
+            }
           }
         }
-        result = [result.slice(0, -1), result.slice(-1)]
         return result;
       },
       selectedStage() {
@@ -387,5 +396,20 @@
 
   .full-width {
     width: 100%;
+  }
+
+.stage-id--background {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  color: rgba(255, 255, 255, .075);
+  user-select: none;
+  z-index: 1;
+  letter-spacing: -.10em !important;
+  word-break: break-all;
+  overflow: hidden;
+}
+  .theme--light .stage-id--background {
+    color: rgba(0, 0, 0, .075);
   }
 </style>

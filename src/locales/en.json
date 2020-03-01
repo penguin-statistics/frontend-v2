@@ -9,8 +9,8 @@
     "report": "Drop Report",
     "stats": {
       "_name": "Statistics",
-      "stage": "by stage",
-      "item": "by item"
+      "stage": "By stage",
+      "item": "By item"
     },
     "about": {
       "_name": "About Penguin Statistics",
