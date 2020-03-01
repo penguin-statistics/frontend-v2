@@ -161,7 +161,9 @@
               :key="category.id"
             >
               <v-subheader>
-                <v-icon class="mr-2">
+                <v-icon
+                  class="mr-2"
+                >
                   {{ category.zones[0].icon }}
                 </v-icon>
                 <span>
@@ -233,7 +235,7 @@
         class="pa-0 pt-2"
       >
         <span
-          v-if="$vuetify.breakpoint.mdAndUp"
+          v-if="$vuetify.breakpoint.smAndUp"
           class="stage-id--background font-weight-black display-4 px-12 py-6"
         >
           {{ selectedStage.code || "" }}
