@@ -84,7 +84,7 @@
         "rule_5": "大陸版のドロップデータのみをアップロードして下さい。ご協力ありがとうございます。"
       },
       "usage": "左クリックで個数増加、右クリックで個数減少",
-      "gacha": "Multiple results are allowed in the reporting of this stage."
+      "gacha": "この操作を行うことでデータに複数の結果を反映させることが出来ます。"
     },
     "ko": {
       "stage": {

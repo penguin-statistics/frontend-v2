@@ -49,7 +49,7 @@ export default {
       originalIconSize: 60,
       originalSpriteDimensions: {
         x: 360,
-        y: 600
+        y: 720
       }
     };
   },
@@ -96,7 +96,7 @@ export default {
   width: 60px;
   display: inline-block;
   overflow: hidden;
-  background-size: 360px 600px;
+  background-size: 360px 720px;
   transition: transform 150ms cubic-bezier(.25,.8,.5,1);
 }
 
