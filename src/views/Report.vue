@@ -16,7 +16,8 @@
         "undo": "撤销",
         "undoSuccess": "撤销成功",
         "unable": "无法提交：",
-        "clear": "清空"
+        "clear": "清空",
+        "expired": "此活动关卡已过期，汇报已关闭"
       },
       "rules": {
         "rule_1": "这是单次作战的提交，请注意核对数目；",
@@ -44,7 +45,8 @@
         "undo": "Recall",
         "undoSuccess": "Successfully recalled submission",
         "clear": "Clear",
-        "unable": "Failed to submit: "
+        "unable": "Failed to submit: ",
+        "expired": "This activity has ended, thus the report function of this stage has been closed."
       },
       "rules": {
         "rule_1": "This is only intended for reporting a single combat, please double-check your inputting.",
@@ -193,17 +195,55 @@
       @select="select"
     >
       <v-card class="bkop-light pa-2">
-        <div class="ma-4">
-          <h2
-            class="overline d-block"
-            style="width: 100%"
+        <v-overlay
+          :opacity="0.75"
+          absolute
+          :value="invalidPath"
+          :class="{'slash-strip--warning-transparent': invalidPath}"
+        >
+          <v-row
+            align="center"
+            justify="center"
+            class="fill-height text-center mx-3"
           >
-            {{ strings.translate(selectedZone, "zoneName") }}
-          </h2>
-          <h1 class="title pt-1 no-wrap--text">
+            <v-icon
+              large
+              class="d-block mb-3"
+              style="width: 100%"
+            >
+              mdi-cancel
+            </v-icon>
+            <span class="title">
+              {{ $t('report.expired') }}
+            </span>
+          </v-row>
+        </v-overlay>
+
+        <v-row
+          class="ma-4"
+          align="start"
+        >
+          <h1 class="title no-wrap--text">
+            <span class="overline">{{ strings.translate(selectedZone, "zoneName") }}</span>
             {{ selectedStage.code }}
           </h1>
-        </div>
+          <v-spacer />
+          <v-btn
+            depressed
+            color="primary"
+            small
+            class="mx-2"
+            :to="{name: 'StatsByStage_Selected', params: {zoneId: selected.zone, stageId: selected.stage}}"
+          >
+            <v-icon
+              left
+              small
+            >
+              mdi-chart-pie
+            </v-icon>
+            {{ $t('menu.stats._name') }}
+          </v-btn>
+        </v-row>
 
         <v-alert
           color="orange darken-3"
@@ -484,6 +524,7 @@ export default {
   name: "Report",
   components: { StageSelector, ItemStepper, Item },
   data: () => ({
+    invalidPath: false,
     snackbar: false,
     submitting: false,
     undoing: false,
@@ -661,7 +702,19 @@ export default {
       return { 'slash-strip--warning': this.validation.rate <= 2, 'slash-strip--danger': this.validation.rate > 2 }
     }
   },
+  created () {
+    this.validateZone(this.$route.params.zoneId)
+  },
   methods: {
+    validateZone (zoneId) {
+      if (zoneId) {
+        const got = get.zones.byZoneId(zoneId);
+        if (got.isOutdated) {
+          return this.invalidPath = true;
+        }
+      }
+      return this.invalidPath = false;
+    },
     goToPage(name) {
       this.$router.push({ name: name })
     },
@@ -669,6 +722,7 @@ export default {
       this.reset();
       this.selected.zone = zone;
       this.selected.stage = stage;
+      this.validateZone(zone);
     },
     getItem(itemId) {
       return get.items.byItemId(itemId)
@@ -799,6 +853,16 @@ export default {
     rgb(237, 144, 53) 45px,
     rgb(0, 0, 0) 45px,
     rgb(0, 0, 0) 90px
+  );
+}
+
+.slash-strip--warning-transparent {
+  background: repeating-linear-gradient(
+      -45deg,
+      rgba(237, 144, 53, 0.5),
+      rgba(237, 144, 53, 0.5) 45px,
+      rgba(0, 0, 0, 0.5) 45px,
+      rgba(0, 0, 0, 0.5) 90px
   );
 }
 

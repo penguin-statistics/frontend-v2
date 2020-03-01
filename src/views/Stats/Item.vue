@@ -310,18 +310,18 @@ export default {
       (this.step += 1);
   },
   methods: {
-    getStageItemTrendInterval(stageId) {
-      let trend = this.getStageItemTrend(stageId);
-      return trend && trend.interval;
-    },
-    getStageItemTrendStartTime(stageId) {
-      let trend = this.getStageItemTrend(stageId);
-      return trend && trend.startTime;
-    },
-    getStageItemTrendResults(stageId) {
-      let trend = this.getStageItemTrend(stageId);
-      return trend && trend.results;
-    },
+    // getStageItemTrendInterval(stageId) {
+    //   let trend = this.getStageItemTrend(stageId);
+    //   return trend && trend.interval;
+    // },
+    // getStageItemTrendStartTime(stageId) {
+    //   let trend = this.getStageItemTrend(stageId);
+    //   return trend && trend.startTime;
+    // },
+    // getStageItemTrendResults(stageId) {
+    //   let trend = this.getStageItemTrend(stageId);
+    //   return trend && trend.results;
+    // },
     getStageItemTrend(stageId) {
       return this.currentItemTrends && this.currentItemTrends[stageId];
     },

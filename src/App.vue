@@ -118,8 +118,6 @@
               bottom
               left
               open-on-hover
-              :close-on-content-click="false"
-              :close-on-click="false"
               transition="slide-y-transition"
             >
               <template v-slot:activator="{ on }">
@@ -472,10 +470,10 @@ export default {
 
 <style>
   .slide-fade-enter-active {
-    transition: all .225s cubic-bezier(0.165, 0.84, 0.44, 1);
+    transition: all .175s cubic-bezier(0.165, 0.84, 0.44, 1);
   }
   .slide-fade-leave-active {
-    transition: all .125s cubic-bezier(0.165, 0.84, 0.44, 1);
+    transition: all .075s cubic-bezier(0.165, 0.84, 0.44, 1);
   }
   .slide-fade-enter, .slide-fade-leave-to
     /* .slide-fade-leave-active for below version 2.1.8 */ {

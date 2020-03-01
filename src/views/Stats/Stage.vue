@@ -52,10 +52,21 @@
           </h1>
           <v-spacer />
           <v-btn
-            outlined
+            v-if="!zone.isOutdated"
+            depressed
+            color="primary"
+            small
+            class="mx-2"
+            style="transform: translateY(2px);"
             :to="{name: 'ReportByZone_Selected', params: {zoneId: selected.zone, stageId: selected.stage}}"
           >
-            Report
+            <v-icon
+              left
+              small
+            >
+              mdi-upload
+            </v-icon>
+            {{ $t('menu.report') }}
           </v-btn>
           <DataSourceToggle />
         </v-row>

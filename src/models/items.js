@@ -6,9 +6,10 @@ const items = new ObjectManager({
   api: '/items?i18n=true',
   transform: [
     (object) => {
-      object.sort((a, b) => a.sortId - b.sortId)
+      let filtered = object.filter(el => !el.hide);
+      filtered = filtered.sort((a, b) => a.sortId - b.sortId);
 
-      return object
+      return filtered
     },
   ],
   ttl: 1000 * 60 * 60, // 1 hours
