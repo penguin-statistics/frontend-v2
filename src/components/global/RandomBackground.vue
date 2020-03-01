@@ -143,7 +143,7 @@
     right: 5vw;
     margin: 2em 0;
     height: 50vh;
-    width: 100vw;
+    width: 90vw;
     background-size: contain;
     background-position: bottom right;
     opacity: .75;

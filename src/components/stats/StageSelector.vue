@@ -30,8 +30,8 @@
       "zone": {
         "name": "Zone",
         "types": {
-          "MAINLINE": "Mainline",
-          "WEEKLY": "Weekly",
+          "MAINLINE": "Main Storyline",
+          "WEEKLY": "Supplies",
           "ACTIVITY_OPEN": "Event (Opening)",
           "ACTIVITY_CLOSED": "Event (Closed)"
         },
@@ -55,8 +55,8 @@
       "zone": {
         "name": "章",
         "types": {
-          "MAINLINE": "メインストーリー",
-          "WEEKLY": "曜日クエスト",
+          "MAINLINE": "メインステージ",
+          "WEEKLY": "物資調達",
           "ACTIVITY_OPEN": "イベント（開催中）",
           "ACTIVITY_CLOSED": "イベント（終了）"
         },
@@ -74,6 +74,31 @@
           "special": "スペシャルドロップ"
         }
       }
+    },
+    "ko": {
+      "opensAt": "이벤트 기간: {0} - {1}",
+      "zone": {
+        "name": "에피소드",
+        "types": {
+          "MAINLINE": "메인 스토리",
+          "WEEKLY": "물자 비축",
+          "ACTIVITY_OPEN": "이벤트 (개방중)",
+          "ACTIVITY_CLOSED": "이벤트 (종료)"
+        },
+        "status": {
+          "closed": "Closed",
+          "open": "Opening"
+        }
+      },
+      "stage": {
+        "name": "작전지역",
+        "apCost": "{apCost} 이성 필요",
+        "loots": {
+          "normal": "일반 드랍",
+          "extra": "추가 드랍",
+          "special": "특수 드랍"
+        }
+      }
     }
   }
 </i18n>
@@ -82,7 +107,7 @@
   <v-stepper
     v-model="step"
     :alt-labels="!small"
-    class="pa-2 transparent elevation-0 full-width"
+    class="px-2 transparent elevation-0 full-width"
   >
     <v-stepper-header
       class="bkop-light elevation-6"
@@ -93,7 +118,12 @@
         :editable="step > 1"
         :step="1"
       >
-        {{ $t('zone.name') }} & {{ $t('stage.name') }}
+        <span
+          class="text-center"
+          style="word-break: keep-all"
+        >
+          {{ $t('zone.name') }} & {{ $t('stage.name') }}
+        </span>
         <small
           v-if="step > 1"
           class="mt-2"

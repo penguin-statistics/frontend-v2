@@ -6,7 +6,6 @@ import router from './router'
 import store from './store'
 import i18n from './i18n'
 import VueAnalytics from "vue-analytics"
-import AOS from 'aos'
 import 'aos/dist/aos.css'
 import I18n from "@/i18n"
 import config from "@/config"
@@ -15,6 +14,8 @@ import * as Sentry from '@sentry/browser';
 import * as Integrations from '@sentry/integrations';
 
 const production = process.env.NODE_ENV === 'production';
+
+Vue.config.performance = true;
 
 if (production) {
   Sentry.init({
@@ -30,11 +31,6 @@ if (production) {
     release: 'frontend-v2@' + (config.version || 'unknown'),
   });
 }
-
-router.beforeEach((to, from, next) => {
-  document.title = `${I18n.t(to.meta.i18n)} | ${I18n.t('app.name')}`;
-  next();
-});
 
 Vue.use(VueAnalytics, {
   id: 'UA-142226262-1',
@@ -56,6 +52,11 @@ Vue.use(VueAnalytics, {
   }
 });
 
+router.beforeEach((to, from, next) => {
+  document.title = `${I18n.t(to.meta.i18n)} | ${I18n.t('app.name')}`;
+  next();
+});
+
 Vue.config.productionTip = false;
 
 new Vue({
@@ -63,12 +64,5 @@ new Vue({
   router,
   store,
   i18n,
-  created() {
-    AOS.init({
-      delay: 100,
-      duration: 700,
-      easing: 'ease-in-out-sine'
-    })
-  },
   render: h => h(App),
 }).$mount('#app');

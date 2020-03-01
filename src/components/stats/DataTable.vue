@@ -7,7 +7,10 @@
       "scroll": "Scroll to view details"
     },
     "ja": {
-      "scroll": "Scroll to view details"
+      "scroll": "左右にスクロールでデータを表示"
+    },
+    "ko": {
+      "scroll": "스크롤로 세부 사항을 볼 수 있습니다"
     }
   }
 </i18n>
@@ -18,25 +21,30 @@
       v-if="$vuetify.breakpoint.xsOnly"
       align="center"
       justify="center"
-      class="pt-1"
+      class="mt-1 mb-3"
     >
       <span
-
         class="caption grey--text"
       >
         <v-icon
           small
           color="grey"
-          class="scroll-chevron-left"
-        >mdi-chevron-double-left</v-icon>
+          class="scroll-chevron-left mr-1"
+        >
+          mdi-chevron-double-left
+        </v-icon>
 
-        <span class="scroll-keyword">{{ $t('scroll') }}</span>
+        <span
+          class="scroll-keyword"
+        >{{ $t('scroll') }}</span>
 
         <v-icon
           small
           color="grey"
-          class="scroll-chevron-right"
-        >mdi-chevron-double-right</v-icon>
+          class="scroll-chevron-right ml-1"
+        >
+          mdi-chevron-double-right
+        </v-icon>
       </span>
     </v-row>
     <v-data-table
@@ -53,8 +61,9 @@
       :calculate-widths="true"
       hide-default-footer
       :mobile-breakpoint="1"
+      :loading="matrixPending"
 
-      :class="{'elevation-0 transparentTable stat-table container--fluid pa-2': true, 'pt-0': $vuetify.breakpoint.xsOnly}"
+      :class="{'elevation-0 transparentTable stat-table container--fluid px-2': true, 'pt-0': $vuetify.breakpoint.xsOnly}"
     >
       <!--    <template v-slot:item.stage="{ item }">-->
       <!--      <v-row-->
@@ -106,28 +115,19 @@
                   class="item-icon"
                 />
                 <span
-                  v-intersect="{
-                    handler: onIntersect,
-                    options: {
-                      threshold: [0.95]
-                    }
-                  }"
                   style="padding-left: 44px"
                   class="item-name--text"
-                  :class="{'item-name--hide': hideItemName}"
                 >
                   {{ strings.translate(props.item.item, "name") }}
                 </span>
                 <v-icon
                   x-small
                   class="ml-1 item-name--chevron"
-                  :class="{'item-name--hide': hideItemName}"
                 >
                   mdi-link
                 </v-icon>
                 <v-divider
                   class="mx-4 item-name--line"
-                  :class="{'item-name--hide': hideItemName}"
                 />
               </v-row>
             </td>
@@ -225,6 +225,7 @@
   import strings from "@/utils/strings";
   import get from "@/utils/getters";
   import Item from "@/components/global/Item";
+  import {mapGetters} from "vuex";
 
   export default {
     name: "DataTable",
@@ -255,6 +256,7 @@
       }
     },
     computed: {
+      ...mapGetters('ajax', ['matrixPending']),
       headers() {
         const headers = [
           {
@@ -335,13 +337,6 @@
             stageId
           }
         });
-      },
-      onIntersect (entries, observer, isIntersecting) {
-        if (isIntersecting) {
-          this.hideItemName = false
-        } else {
-          this.hideItemName = true
-        }
       }
     },
   }
@@ -409,6 +404,7 @@
   }
 
   .scroll-chevron-left {
+    margin-top: -3px;
     animation: scroll-left 3.5s infinite cubic-bezier(0.455, 0.03, 0.515, 0.955);
   }
 
@@ -417,6 +413,7 @@
   }
 
   .scroll-chevron-right {
+    margin-top: -3px;
     animation: scroll-right 3.5s infinite cubic-bezier(0.455, 0.03, 0.515, 0.955);
   }
 
@@ -464,9 +461,6 @@
 
   .item-icon {
     position: absolute;
-  }
-
-  .item-name--hide{
-    opacity: 0;
+    z-index: 4
   }
 </style>

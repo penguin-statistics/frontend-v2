@@ -3,15 +3,15 @@ import store from '@/store'
 export default {
   defaultAjaxHooks: {
     request: (id) => {
-      store.dispatch("ajaxStarted", {id})
+      store.dispatch("ajax/started", {id})
     },
     response: (id, promise) => {
       promise.then(
         () => {
-          store.dispatch("ajaxFinished", {id, error: null});
+          store.dispatch("ajax/finished", {id, error: null});
         },
         ({errorMessage}) => {
-          store.dispatch("ajaxFinished", {id, error: errorMessage});
+          store.dispatch("ajax/finished", {id, error: errorMessage});
         }
       )
     }

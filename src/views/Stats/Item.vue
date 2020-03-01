@@ -44,6 +44,21 @@
         "FURN": "家具",
         "ACTIVITY_ITEM": "イベントアイテム"
       }
+    },
+    "ko": {
+      "choose": {
+        "name": "아이템 선택"
+      },
+      "result": {
+        "name": "통계 결과",
+        "title": "{item}의 통계 결과"
+      },
+      "categories": {
+        "CARD_EXP": "작전 기록",
+        "MATERIAL": "재료",
+        "FURN": "가구",
+        "ACTIVITY_ITEM": "이벤트 아이템"
+      }
     }
   }
 </i18n>
@@ -52,7 +67,7 @@
   <v-stepper
     v-model="step"
     :alt-labels="!$vuetify.breakpoint.xsOnly"
-    class="pa-2 transparent elevation-0 full-width"
+    class="px-2 transparent elevation-0 full-width"
   >
     <v-stepper-header
       class="bkop-light elevation-6"
@@ -84,7 +99,7 @@
       <v-stepper-content
         v-if="categorizedItems"
         :step="1"
-        class="bkop-light mt-6 elevation-4"
+        class="bkop-light mt-2 elevation-4"
         style="border-radius: 4px"
       >
         <v-row
@@ -124,14 +139,14 @@
 
       <v-stepper-content
         :step="2"
-        class="pa-0 mt-6 elevation-4"
+        class="pa-0 mt-2 elevation-4"
       >
         <v-card class="bkop-light pt-2">
           <v-card-title class="pb-0">
             <v-row
               align="center"
               justify="center"
-              class="px-6 pb-2"
+              class="px-4 px-sm-4 px-md-6 px-lg-6 px-xl-8 pt-0 pb-4"
             >
               <Item
                 v-if="selected.item"
@@ -141,7 +156,7 @@
                 disable-tooltip
                 disable-link
               />
-              <h1 class="title pl-2 pt-2 no-wrap--text">
+              <h1 class="title pl-2 pt-1 no-wrap--text">
                 {{ $t('result.title', {item: selectedItemName}) }}
               </h1>
               <v-spacer />
@@ -153,7 +168,7 @@
             :items="itemStagesStats"
             type="item"
 
-            class="px-6 pb-6"
+            class="px-3 px-sm-4 px-md-6 px-lg-6 px-xl-8 pt-0 pb-6"
           />
         </v-card>
       </v-stepper-content>

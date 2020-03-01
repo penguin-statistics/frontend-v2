@@ -1,6 +1,6 @@
 {
   "name": "penguin-stats-frontend",
-  "version": "1.1.1",
+  "version": "1.1.2",
   "private": true,
   "scripts": {
     "serve": "vue-cli-service serve",
@@ -12,11 +12,11 @@
   "dependencies": {
     "@sentry/browser": "^5.6.2",
     "@sentry/integrations": "^5.6.1",
+    "animejs": "^3.1.0",
     "aos": "^2.3.4",
     "clipboard-polyfill": "^2.8.6",
     "core-js": "^2.6.5",
     "dayjs": "^1.8.15",
-    "idb": "^4.0.4",
     "js-cookie": "^2.2.1",
     "plotly.js": "^1.49.2",
     "vue": "^2.6.10",
@@ -36,6 +36,7 @@
     "@vue/cli-service": "^3.9.0",
     "axios": "^0.19.0",
     "babel-eslint": "^10.0.1",
+    "browserslist-ga-export": "^2.0.0",
     "cz-conventional-changelog": "3.0.2",
     "eslint": "^5.16.0",
     "eslint-plugin-vue": "^5.0.0",
@@ -55,8 +56,10 @@
     }
   },
   "browserslist": [
-    "> 1%",
-    "last 2 versions"
+    "> 0.1% in my stats",
+    "> 1% in CN",
+    "last 5 versions",
+    "defaults"
   ],
   "config": {
     "commitizen": {

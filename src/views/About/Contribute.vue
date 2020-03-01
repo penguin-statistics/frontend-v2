@@ -23,6 +23,14 @@
         "contribute_0": "以下のような開発の経験があるのであれば、Penguin Statisticsに自身の力を使ってみませんか？右記のQQグループを追加してください：747099627",
         "contribute_1": "本プロジェクトは無償のオープンソースプロジェクトです"
       }
+    },
+    "ko": {
+      "contribute": {
+        "frontend": "프론트엔드",
+        "backend": "백엔드",
+        "contribute_0": "다음 기술중 하나라도 경험이 있고, 펭귄 물류에 기여하고자 한다면. QQ 그룹 : 747099627로 연락하여 주십시오.",
+        "contribute_1": "펭귄 물류 데이터 분석 부서는 비영리 오픈소스 프로젝트 입니다"
+      }
     }
   }
 </i18n>
@@ -31,6 +39,7 @@
   <v-card
     elevation="5"
     class="bkop-light pa-6"
+    style="height: 100%"
   >
     <h1 class="headline">
       {{ $t('menu.about.contribute') }}

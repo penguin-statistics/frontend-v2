@@ -82,7 +82,35 @@
         "rule_5": "大陸版のドロップデータのみをアップロードして下さい。ご協力ありがとうございます。"
       },
       "usage": "左クリックで個数増加、右クリックで個数減少",
-      "gacha": "Multiple results are allowed in the reporting of this stage."
+      "gacha": "この操作を行うことでデータに複数の結果を反映させることが出来ます。"
+    },
+    "ko": {
+      "stage": {
+        "loots": {
+          "normal": "일반 드랍",
+          "extra": "추가 드랍",
+          "special": "특수 드랍"
+        }
+      },
+      "report": {
+        "name": "보고",
+        "furniture": "럭키 드랍: {state}",
+        "submit": "제출",
+        "success": "성공적으로 제출되었습니다",
+        "undo": "제출 취소",
+        "undoSuccess": "성공적으로 취소되었습니다",
+        "clear": "초기화",
+        "unable": "제출 실패: "
+      },
+      "rules": {
+        "rule_1": "한 번에 하나의 전투에 대한 보고서를 작성하여야 합니다, 제출 전에 입력 내용을 한번 더 확인해 주십시오.",
+        "rule_2": "드랍이 없는 경우에는, 아무것도 누르지 않은 채로 제출을 눌러 주십시오.",
+        "rule_3": "처음으로 클리어한 작전은 보고하지 마시고, 운이 좋았던 작전만 보고하지 마십시오 - 모든 드랍을 보고해 주십시오.",
+        "rule_4": "3성으로 클리어하여 주십시오.",
+        "rule_5": "중국 서버에서의 드랍만 보고하여 주십시오, 감사합니다."
+      },
+      "usage": "왼쪽 클릭시 증가하며, 오른쪽 클릭시 감소합니다",
+      "gacha": "이 작전지역은 여러 개의 결과를 한 보고서에 제출할 수 있습니다."
     }
   }
 </i18n>
@@ -669,7 +697,7 @@ export default {
       });
       let reportedUserId = Cookies.get('userID');
       if (userId !== reportedUserId) {
-        this.$store.commit("authLogin", reportedUserId);
+        this.$store.commit("auth/login", reportedUserId);
       }
       this.lastSubmissionId = data;
       this.submitting = false;

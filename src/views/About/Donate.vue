@@ -44,6 +44,21 @@
           "paypal": "PayPalで寄付"
         }
       }
+    },
+    "ko": {
+      "donate": {
+        "donate_0": "사용자 수와 서버비가 늘어나면서 펭귄 통계는 폐쇄의 위기에 처하게 된다. 관리자는 사랑하는 펭귄 통계를 지키기 위해...",
+        "donate_1": "사용자 수가 늘어나면서 서버에 무리가 가고 있습니다. 만약 몇몇 박사들이",
+        "donate_2": "서버비",
+        "donate_3": "빼빼로나 애플파이도 환영합니다!",
+        "donate_4": "를 기부해 줄 수 있다면, 우리는 매우 감사할 것입니다!",
+        "redirectToApp": "{app}로 기부하기",
+        "methods": {
+          "alipay": "Alipay",
+          "wechatPay": "WeChat Pay",
+          "paypal": "PayPal로 기부하기"
+        }
+      }
     }
   }
 </i18n>
@@ -91,6 +106,7 @@
             :alt="$t('donate.methods.alipay')"
             max-height="128px"
             contain
+            aspect-ratio="1"
           />
 
           <v-row
@@ -111,7 +127,8 @@
               text
               outlined
               class="my-0 d-block"
-              @click="redirectAlipay"
+              :href="qr.alipay"
+              target="_blank"
             >
               {{ $t('donate.redirectToApp', {app: $t('donate.methods.alipay')}) }}
             </v-btn>
@@ -129,6 +146,7 @@
             :alt="$t('donate.methods.wechatPay')"
             max-height="128px"
             contain
+            aspect-ratio="1"
           />
 
           <v-row
@@ -151,7 +169,8 @@
       <v-btn
         rounded
         color="primary"
-        @click="redirectPayPal"
+        :href="qr.paypal"
+        target="_blank"
       >
         <v-icon left>
           mdi-paypal
@@ -171,17 +190,6 @@ export default {
         wechatPay: "wxp://f2f0F8Z93ZkS3boz8JY3FwarwyAwcIfXC2CN",
         paypal: "https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=T9LRK3VEL645J&item_name=Penguin+Statistics+Donation&currency_code=USD&source=url"
       }
-    }
-  },
-  methods: {
-    redirectAlipay() {
-      window.location = this.qr.alipay
-    },
-    redirectWechatPay() {
-      window.location = this.qr.wechatPay
-    },
-    redirectPayPal() {
-      window.open(this.qr.paypal)
     }
   }
 };

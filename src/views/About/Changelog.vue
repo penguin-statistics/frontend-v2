@@ -1,17 +1,18 @@
 <template>
   <v-timeline
-    :dense="$vuetify.breakpoint.smAndDown"
+    dense
     align-top
   >
     <v-timeline-item
       v-for="(log, dateKey) in logs"
       :key="dateKey"
+      right
       icon="mdi-book-variant"
+      class="changelog--item"
       fill-dot
     >
       <v-card
         class="bkop-light"
-        data-aos="fade"
         elevation="5"
       >
         <v-card-title class="title">
@@ -31,11 +32,17 @@
 </template>
 
 <script>
+import anime from "animejs";
+
 export default {
   name: 'Changelog',
   data() {
     return {
       logs: {
+        'v1.1.2': [
+          '加入韩语翻译',
+          '增加载入界面'
+        ],
         'v1.1.1': [
           '“岁过华灯”等一系列开箱子的汇报支持批量上传'
         ],
@@ -70,7 +77,17 @@ export default {
         ]
       }
     }
-  }
+  },
+  mounted () {
+    anime({
+      targets: '.changelog--item',
+      translateY: [48, 0],
+      opacity: [0, 1],
+      duration: 425,
+      delay: (el, i) => i * 50,
+      easing: "easeOutQuint"
+    });
+  },
 }
 </script>
 
