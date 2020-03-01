@@ -4,7 +4,8 @@
       "categories": {
         "owner": "站长",
         "developers": "开发者",
-        "others": "其他"
+        "others": "其他",
+        "translators": "翻译"
       },
       "socials": {
         "weibo": "微博",
@@ -23,14 +24,16 @@
         "customersupport": "客服",
         "logo": "Logo 画师",
         "materials": "素材提供",
-        "localization_ja": "日语化"
+        "localization_ja": "日语化",
+        "localization_ko": "韩语化"
       }
     },
     "en": {
       "categories": {
         "owner": "Webmaster",
         "developers": "Developers",
-        "others": "Others"
+        "others": "Others",
+        "translators": "Translators"
       },
       "socials": {
         "weibo": "Weibo",
@@ -46,17 +49,19 @@
         "statistics": "Statistics and Analysis",
         "arkplanner": "Author of ArkPlanner",
         "bulkupload": "Bulk Upload",
-        "customersupport": "Customer Support",
+        "customersupport": "User Support",
         "logo": "Logo Designer",
         "materials": "Materials Supplier",
-        "localization_ja": "Japanese Localization Provider"
+        "localization_ja": "Japanese Localization Provider",
+        "localization_ko": "Korean Localization Provider"
       }
     },
     "ja": {
       "categories": {
         "owner": "管理人",
         "developers": "開発者",
-        "others": "その他"
+        "others": "その他",
+        "translators": "翻訳者"
       },
       "socials": {
         "weibo": "Weibo",
@@ -75,7 +80,36 @@
         "customersupport": "顧客サービス",
         "logo": "ロゴデザイナー",
         "materials": "材料サプライヤー",
-        "localization_ja": "日本語化"
+        "localization_ja": "日本語化",
+        "localization_ko": "韓国語化"
+      }
+    },
+    "ko": {
+      "categories": {
+        "owner": "관리자",
+        "developers": "개발자",
+        "others": "기타",
+        "translators": "번역가"
+      },
+      "socials": {
+        "weibo": "웨이보",
+        "github": "GitHub",
+        "twitter": "Twitter",
+        "qq": "QQ",
+        "email": "Email"
+      },
+      "responsibilities": {
+        "frontend": "프론트엔드",
+        "backend": "백엔드",
+        "maintenance": "데브옵스",
+        "statistics": "분석 및 통계",
+        "arkplanner": "명일방주 계획기 제작",
+        "bulkupload": "대량의 보고서 제출",
+        "customersupport": "고객 지원",
+        "logo": "로고 디자이너",
+        "materials": "재료 이미지 제공",
+        "localization_ja": "일본 현지화 제공",
+        "localization_ko": "한국 현지화 제공"
       }
     }
   }
@@ -95,8 +129,9 @@
       <v-list
         v-for="[key, value] in Object.entries(profiles)"
         :key="key"
-        class="bkop-light mb-1"
+        class="bkop-light mb-4 members--list"
         two-line
+        elevation="5"
       >
         <v-subheader :key="key">
           {{ $t('categories.' + key) }}
@@ -105,7 +140,7 @@
         <v-list-item
           v-for="profile in value"
           :key="profile.name"
-          class="grow px-4"
+          class="grow px-4 members--list-item"
         >
           <v-list-item-avatar>
             <v-img
@@ -128,24 +163,19 @@
               align="center"
               justify="end"
             >
-              <v-tooltip
+              <v-btn
                 v-for="[id, url] in Object.entries(profile.socials)"
                 :key="`${profile.name}-${id}`"
-                bottom
+                icon
+                :href="url"
+                target="_blank"
+                :title="$t(`socials.${id}`)"
+                v-on="on"
               >
-                <template v-slot:activator="{ on }">
-                  <v-btn
-                    icon
-                    @click="openTab(url)"
-                    v-on="on"
-                  >
-                    <v-icon>
-                      {{ getSocial(id).icon }}
-                    </v-icon>
-                  </v-btn>
-                </template>
-                <span>{{ $t(`socials.${id}`) }}</span>
-              </v-tooltip>
+                <v-icon>
+                  {{ getSocial(id).icon }}
+                </v-icon>
+              </v-btn>
             </v-row>
           </v-list-item-action>
         </v-list-item>
@@ -155,6 +185,8 @@
 </template>
 
 <script>
+  import anime from "animejs";
+
   const r = {
     frontend: "frontend",
     backend: "backend",
@@ -166,9 +198,10 @@
     logo: "logo",
     materials: "materials",
     localization: {
-      ja: "localization_ja"
+      ja: "localization_ja",
+      ko: "localization_ko",
     }
-  }
+  };
   export default {
     name: 'Members',
     data () {
@@ -312,6 +345,18 @@
               socials: {
                 github: "https://github.com/Evealicemier"
               }
+            }
+          ],
+          translators: [
+            {
+              name: "Syaro",
+              responsibility: [
+                r.localization.ko
+              ],
+              avatar: "syaro.png",
+              socials: {
+                twitter: "https://twitter.com/StarNight_ko"
+              }
             },
             {
               name: "方舟航海図",
@@ -364,10 +409,25 @@
         ]
       }
     },
+    mounted () {
+      anime({
+        targets: '.members--list-item',
+        translateY: [48, 0],
+        opacity: [0, 1],
+        duration: 425,
+        delay: (el, i) => i * 50,
+        easing: "easeOutQuint"
+      })
+      // anime({
+      //   targets: '.members--list',
+      //   translateY: [48, 0],
+      //   opacity: [0, 1],
+      //   duration: 425,
+      //   delay: (el, i) => i * 175,
+      //   easing: "easeOutQuint"
+      // })
+    },
     methods: {
-      openTab (url) {
-        window.open(url)
-      },
       getSocial (id) {
         return this.socials.find(v => v.id === id)
       },

@@ -38,6 +38,19 @@
       "logoutPrompt": "本当にログアウトしますか？",
       "loggedOut": "ログアウトしました",
       "userId": "ユーザーID"
+    },
+    "ko": {
+      "notice": "사용자 ID는 당신의 보고서를 확인하는데 사용됩니다. 이 ID를 다른 기기에 입력하면 편리하게 보고서를 관리하고 검사할 수 있습니다.",
+      "success": "성공적으로 로그인 되었습니다.",
+      "failed": {
+        "message": "로그인에 실패했습니다: {message}",
+        "notfound": "지정된 사용자 ID를 찾을 수 없습니다"
+      },
+      "login": "로그인",
+      "logout": "로그아웃",
+      "logoutPrompt": "정말로 로그아웃 하시겠습니까?",
+      "loggedOut": "로그아웃 되었습니다",
+      "userId": "사용자 ID"
     }
   }
 </i18n>
@@ -139,20 +152,20 @@
     </v-dialog>
 
     <v-chip
-      v-if="$store.getters.authed"
+      v-if="$store.getters['auth/loggedIn']"
       style="box-shadow: 0 0 0 4px rgba(0, 0, 0, .3)"
       @click="auth.logoutPrompt = true"
     >
-      <v-icon
+      <v-icon 
         left
       >
         mdi-account-circle
       </v-icon>
-      {{ $store.getters.authUsername }}
+      {{ $store.getters['auth/username'] }}
     </v-chip>
 
     <v-btn
-      v-if="!$store.getters.authed"
+      v-if="!$store.getters['auth/loggedIn']"
       rounded
       icon
       @click="auth.dialog = true"
@@ -196,8 +209,8 @@
     },
     mounted () {
       let userId = Cookies.get(this.cookies.key);
-      if (userId !== this.$store.getters.authUsername) {
-        this.$store.commit("authLogin", userId);
+      if (userId !== this.$store.getters['auth/username']) {
+        this.$store.commit("auth/login", userId);
       }
     },
     methods: {
@@ -205,7 +218,7 @@
         this.auth.loading = true;
         service.post("/users", this.auth.username, {headers: {'Content-Type': 'text/plain'}})
           .then(() => {
-            this.$store.commit("authLogin", this.auth.username);
+            this.$store.commit("auth/login", this.auth.username);
             Cookies.set(this.cookies.key, this.auth.username, {expires: 7, path: "/"});
             this.$ga.event('account', 'login', 'login_success', 1);
             this.snackbar = {
@@ -213,7 +226,7 @@
               color: "success",
               text: this.$t('success')
             };
-            this.$store.dispatch("refreshPersonalMatrixData");
+            this.$store.dispatch("data/refreshPersonalMatrix");
             this.$emit('afterLogin');
             this.auth.dialog = false
           })
@@ -231,14 +244,14 @@
       },
       logout() {
         Cookies.remove(this.cookies.key);
-        this.$store.commit("authLogout");
+        this.$store.commit("auth/logout");
         this.snackbar = {
           enabled: true,
           color: "success",
           text: this.$t('loggedOut')
         };
         this.auth.logoutPrompt = false;
-        this.$store.commit("switchDataSource", "global");
+        this.$store.commit("dataSource/switch", "global");
       },
       emitError () {
         this.error = ''

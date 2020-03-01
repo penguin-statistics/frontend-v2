@@ -23,6 +23,14 @@
         "all": "全体",
         "personal": "個人"
       }
+    },
+    "ko": {
+      "dataSourceToggle": {
+        "title": "로그인 필요",
+        "loginNotice": "개인 보고서를 보려면 로그인하여 주십시오.",
+        "all": "전체",
+        "personal": "개인"
+      }
     }
   }
 </i18n>
@@ -68,6 +76,8 @@
     </v-dialog>
     <v-btn-toggle
       v-model="dataSource"
+      active-class="font-weight-bold"
+      mandatory
       borderless
       class="data-source-switch"
     >
@@ -89,6 +99,7 @@
 
 <script>
 import AccountManager from "@/components/toolbar/AccountManager";
+import {mapGetters} from "vuex";
 export default {
   name: "DataSourceToggle",
   components: {
@@ -102,9 +113,11 @@ export default {
     };
   },
   computed: {
+    ...mapGetters('auth', ['loggedIn']),
+    ...mapGetters('dataSource', ['source']),
     dataSource: {
       get() {
-        return this.$store.state.dataSource;
+        return this.source;
       },
       async set(value) {
         switch (value) {
@@ -112,17 +125,17 @@ export default {
             break;
           case "personal":
             // refresh personal data
-            if (!this.$store.getters.authed) {
+            if (!this.loggedIn) {
               // please login
               this.dialog = true;
               return;
             }
             // fetch data
-            this.$store.dispatch("refreshPersonalMatrixData");
+            this.$store.dispatch("data/refreshPersonalMatrix");
             // change data source after fetch data
             break;
         }
-        this.$store.commit("switchDataSource", value);
+        this.$store.commit("dataSource/switch", value);
       }
     }
   },

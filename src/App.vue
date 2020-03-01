@@ -1,20 +1,16 @@
 <template>
-  <v-app
-    id="__app_root"
-    :dark="dark"
-  >
-    <RandomBackground />
+  <v-app>
     <v-navigation-drawer
       v-model="drawer"
       app
-      style="max-height: calc(100vh - 36.76px)"
       width="300"
     >
       <div 
         :class="{
           'drawer-logo blue': true,
-          'darken-4': dark,
-          'darken-3': !dark
+          'darken-4': appDark,
+          'darken-3': !appDark,
+          'drawer-logo--two-line': $t('app.name_line2') !== ''
         }"
       >
         <v-img
@@ -91,36 +87,33 @@
 
         <v-container>
           <v-row
-            justify="end"
+            justify="space-around"
           >
+            <v-btn
+              class="mx-1"
+              text
+              @click="refreshData"
+            >
+              <v-icon left>
+                mdi-database-refresh
+              </v-icon>
+              {{ $t('menu.refreshData') }}
+            </v-btn>
+
             <v-tooltip bottom>
               <template v-slot:activator="{ on }">
                 <v-btn
                   icon
                   class="mx-1"
                   v-on="on"
-                  @click="refreshData"
-                >
-                  <v-icon>mdi-database-refresh</v-icon>
-                </v-btn>
-              </template>
-              <span>{{ $t('menu.refreshData') }}</span>
-            </v-tooltip>
-            
-            <v-tooltip bottom>
-              <template v-slot:activator="{ on }">
-                <v-btn
-                  icon
-                  class="mx-1"
-                  v-on="on"
-                  @click="dark = !dark"
+                  @click="appDark = !appDark"
                 >
                   <v-icon>mdi-invert-colors</v-icon>
                 </v-btn>
               </template>
               <span>{{ $t('menu.invertColors') }}</span>
             </v-tooltip>
-            
+
             <v-menu
               bottom
               left
@@ -138,13 +131,34 @@
               </template>
 
               <v-list>
-                <v-list-item
-                  v-for="(locale, i) in localizations"
-                  :key="i"
-                  @click="changeLocale(locale.id)"
-                >
-                  <v-list-item-title>{{ locale.name }}</v-list-item-title>
-                </v-list-item>
+                <v-subheader style="height: 36px;">
+                  <v-icon
+                    small
+                    color="grey lighten-1"
+                    class="mr-1"
+                  >
+                    mdi-translate
+                  </v-icon> {{ $t('menu.languages') }}
+                </v-subheader>
+                <v-list-item-group v-model="localizationMapper">
+                  <v-list-item
+                    v-for="(locale, i) in localizations"
+                    :key="i"
+                    @click="changeLocale(locale.id)"
+                  >
+                    <v-list-item-title>
+                      {{ locale.name }}
+                    </v-list-item-title>
+                    <v-list-item-action v-if="locale.beta">
+                      <v-icon small>
+                        mdi-beta
+                      </v-icon>
+                    </v-list-item-action>
+                    <v-list-item-action-text class="monospace">
+                      {{ locale.id }}
+                    </v-list-item-action-text>
+                  </v-list-item>
+                </v-list-item-group>
               </v-list>
             </v-menu>
           </v-row>
@@ -153,9 +167,9 @@
     </v-navigation-drawer>
     <v-app-bar
       app
-      fixed
       dark
       color="blue darken-3"
+      style="min-height: calc(56px + env(safe-area-inset-top)); padding-top: env(safe-area-inset-top)"
     >
       <v-app-bar-nav-icon
         @click.stop="drawer = !drawer"
@@ -173,7 +187,16 @@
             <v-img
               :src="randomizedLogo"
               class="randomizedLogo"
-            />
+            >
+              <template v-slot:placeholder>
+                <v-img
+                  :src="require('@/assets/logo.png')"
+                  aspect-ratio="1"
+                  height="32px"
+                  contain
+                />
+              </template>
+            </v-img>
           </v-avatar>
         </transition>
         <span class="title">
@@ -185,100 +208,109 @@
 
       <AccountManager />
     </v-app-bar>
-    <v-content
-      class="mb-8"
-    >
+    <RandomBackground />
+    <v-content style="padding-top: calc(env(safe-area-inset-top) + 56px) !important;">
       <transition
         name="slide-fade"
         mode="out-in"
       >
         <router-view />
       </transition>
-    </v-content>
-    <v-footer
-      app
-      color="blue darken-3"
-      class="white--text px-4"
-    >
-      <v-dialog
-        v-model="showLicenseDialog"
-        width="500"
-        origin="bottom left"
+      <v-footer
+        padless
+        color="blue darken-3"
+        class="white--text"
       >
-        <template v-slot:activator="{ on }">
-          <span
-            class="cursor-pointer"
-            v-on="on"
+        <v-card
+          flat
+          tile
+          width="100%"
+          class="blue darken-3 text-center footer--safe-area"
+        >
+          <v-dialog
+            v-model="showLicenseDialog"
+            width="500"
+            origin="bottom center"
           >
-            <v-avatar
-              size="24"
-              class="mr-1"
-            >
-              <v-img
-                :src="require('@/assets/ccIcon/cc.svg')"
-                alt="Creative Commons - Logo"
-              />
-            </v-avatar>
-            <v-avatar
-              size="24"
-              class="mr-1"
-            >
-              <v-img
-                :src="require('@/assets/ccIcon/by.svg')"
-                alt="Creative Commons - BY"
-              />
-            </v-avatar>
-            <v-avatar
-              size="24"
-            >
-              <v-img
-                :src="require('@/assets/ccIcon/nc.svg')"
-                alt="Creative Commons - Non-commercial"
-              />
-            </v-avatar>
-          </span>
-        </template>
+            <template v-slot:activator="{ on }">
+              <span
+                class="cursor-pointer"
+                v-on="on"
+              >
+                <v-avatar
+                  size="24"
+                  class="mr-1"
+                >
+                  <v-img
+                    :src="require('@/assets/ccIcon/cc.svg')"
+                    alt="Creative Commons - Logo"
+                  />
+                </v-avatar>
+                <v-avatar
+                  size="24"
+                  class="mr-1"
+                >
+                  <v-img
+                    :src="require('@/assets/ccIcon/by.svg')"
+                    alt="Creative Commons - BY"
+                  />
+                </v-avatar>
+                <v-avatar
+                  size="24"
+                >
+                  <v-img
+                    :src="require('@/assets/ccIcon/nc.svg')"
+                    alt="Creative Commons - Non-commercial"
+                  />
+                </v-avatar>
+              </span>
+            </template>
 
-        <v-card>
-          <v-card-title
-            class="headline primary lighten-1"
-          >
-            <v-avatar
-              size="24"
-              class="mr-2"
-            >
-              <v-img
-                :src="require('@/assets/ccIcon/cc.svg')"
-                alt="Creative Commons - Logo"
-              />
-            </v-avatar>
-            {{ $t('meta.footer.copyright.title') }}
-          </v-card-title>
+            <v-card>
+              <v-card-title
+                class="headline primary lighten-1"
+              >
+                <v-avatar
+                  size="24"
+                  class="mr-2"
+                >
+                  <v-img
+                    :src="require('@/assets/ccIcon/cc.svg')"
+                    alt="Creative Commons - Logo"
+                  />
+                </v-avatar>
+                {{ $t('meta.footer.copyright.title') }}
+              </v-card-title>
 
-          <v-card-text class="mt-2 body-1">
-            {{ $t('meta.footer.copyright.content') }}
+              <v-card-text class="mt-2 body-1">
+                {{ $t('meta.footer.copyright.content') }}
+              </v-card-text>
+
+              <v-divider />
+
+              <v-card-actions>
+                <v-spacer />
+                <v-btn
+                  text
+                  href="https://creativecommons.org/licenses/by-nc/4.0/"
+                  target="_blank"
+                >
+                  <v-icon left>
+                    mdi-eye
+                  </v-icon>
+                  {{ $t('meta.details') }}
+                </v-btn>
+              </v-card-actions>
+            </v-card>
+          </v-dialog>
+
+          <v-card-text class="white--text d-inline py-0">
+            <strong>Penguin Statistics</strong> — {{ new Date().getFullYear() }}
           </v-card-text>
-
-          <v-divider />
-
-          <v-card-actions>
-            <v-spacer />
-            <v-btn
-              text
-              href="https://creativecommons.org/licenses/by-nc/4.0/"
-              target="_blank"
-            >
-              <v-icon left>
-                mdi-eye
-              </v-icon>
-              {{ $t('meta.details') }}
-            </v-btn>
-          </v-card-actions>
         </v-card>
-      </v-dialog>
-      <v-spacer />
-      <NetworkStateIndicator />
-    </v-footer>
+      </v-footer>
+    </v-content>
+    <NetworkStateIndicator />
   </v-app>
 </template>
 
@@ -289,6 +321,7 @@
   import Console from "@/utils/Console";
   import strings from "@/utils/strings";
   import config from "@/config";
+  import {mapGetters} from "vuex";
 
 export default {
   name: 'App',
@@ -311,6 +344,10 @@ export default {
         }, {
           id: 'ja',
           name: '日本語'
+        }, {
+          id: 'ko',
+          name: '한국어',
+          beta: true,
         }
       ],
       prefetchingResources: false,
@@ -319,14 +356,21 @@ export default {
     }
   },
   computed: {
-    dark: {
+    ...mapGetters('settings', ['language', 'dark']),
+    appDark: {
       get () {
-        return this.$store.state.settings.dark
+        return this.dark
       },
       set (value) {
-        this.$store.commit('switchDark', value)
-        this.$vuetify.theme.dark = value
+        this.$vuetify.theme.dark = value;
+        this.$store.commit('settings/switchDark', value)
       }
+    },
+    localizationMapper: {
+      get () {
+        return this.localizations.indexOf(this.localizations.find(el => el.id === this.$i18n.locale))
+      },
+      set () {}
     }
   },
   watch: {
@@ -337,15 +381,15 @@ export default {
     'dark': ['onDarkChange']
   },
   beforeMount() {
-    this.routes = this.$router.options.routes.filter(el => !(el.meta.hide));
-    this.$store.dispatch("fetchData", false)
+    this.routes = this.$router.options.routes.filter(el => !el.meta.hide);
+    this.$store.dispatch("data/fetch", false)
   },
-  mounted () {
-    this.randomizeLogo();
-    this.onDarkChange(this.$store.state.settings.dark);
+  created () {
+    // this.randomizeLogo();
+    this.onDarkChange(this.dark);
 
-    if (this.$store.getters.language) {
-      this.changeLocale(this.$store.getters.language, false)
+    if (this.language) {
+      this.changeLocale(this.language, false)
     } else {
       const language = strings.getFirstBrowserLanguage();
       Console.debug("[i18n] detected language", language);
@@ -356,13 +400,15 @@ export default {
       }
     }
 
-    if (this.$store.state.settings.dark) {
-      this.$vuetify.theme.dark = this.$store.state.settings.dark
+    Console.debug("(before init) dark status", this.dark, this.$vuetify.theme.dark);
+    if (typeof this.dark === "boolean") {
+      this.$vuetify.theme.dark = this.dark
     }
+    Console.debug("(after init) dark status", this.dark, this.$vuetify.theme.dark)
   },
   methods: {
     async refreshData () {
-      await this.$store.dispatch("fetchData", true);
+      await this.$store.dispatch("data/fetch", true);
     },
     onDarkChange (newValue) {
       if (newValue) {
@@ -404,7 +450,7 @@ export default {
         Console.debug("[i18n] locale changed to:", localeId, "| saving to vuex:", save);
         this.$i18n.locale = localeId;
         // this.$vuetify.lang.current = localeId;
-        if (save) this.$store.commit("changeLocale", localeId);
+        if (save) this.$store.commit("settings/changeLocale", localeId);
         document.title = `${this.$t(this.$route.meta.i18n) + ' | ' || ''}${this.$t('app.name')}`;
       } else {
         Console.debug("[i18n] Same locale");
@@ -413,9 +459,9 @@ export default {
     logRouteEvent (newValue) {
       if (newValue.name === "StatsByStage_Selected") {
         // Console.log(this.$store.state.dataSource, newValue.params.stageId);
-        this.$ga.event('result', 'fetch_' + this.$store.state.dataSource, newValue.params.stageId, 1)
+        this.$ga.event('result', 'fetch_' + this.$store.getters['dataSource/source'], newValue.params.stageId, 1)
       } else if (newValue.name === "StatsByItem_Selected") {
-        this.$ga.event('result', 'fetch_' + this.$store.state.dataSource, newValue.params.itemId, 1)
+        this.$ga.event('result', 'fetch_' + this.$store.getters['dataSource/source'], newValue.params.itemId, 1)
       }
     }
   }
@@ -435,22 +481,23 @@ export default {
     opacity: 0;
   }
 
-  .theme--dark, .theme--light {
+  .v-navigation-drawer {
     transition: all .3s cubic-bezier(.25,.8,.5,1) !important;
   }
 
   .drawer-logo {
-    height: 256px;
-    padding: 32px;
+    height: calc(256px + env(safe-area-inset-top));
+    padding: calc(32px + env(safe-area-inset-top)) 32px 32px 32px;
     overflow: hidden;
     transition: all .5s cubic-bezier(0.19, 1, 0.22, 1);
   }
 
   .drawer-logo:hover {
-    height: 320px;
-    padding: 32px;
+    height: calc(304px + env(safe-area-inset-top));
   }
-
+  .drawer-logo--two-line:hover {
+    height: calc(336px + env(safe-area-inset-top));
+  }
   .drawer-logo > .description {
     margin-top: 16px;
     text-align: center;
@@ -511,6 +558,21 @@ export default {
 
   .no-wrap--text {
     word-break: break-word;
+  }
+
+  .monospace {
+    font-family: SF Mono, "Droid Sans Mono", Ubuntu Mono, Consolas, Courier New, Courier, monospace;
+  }
+
+  .footer--safe-area {
+    padding-top: 8px !important;
+    /*In case the old browsers doesn't support advanced CSS calculations*/
+    padding-bottom: 8px !important;
+    padding-bottom: calc(max(env(safe-area-inset-bottom), 8px)) !important;
+  }
+
+  .v-stepper__items, .v-stepper__wrapper {
+    overflow: initial !important;
   }
 
 </style>
