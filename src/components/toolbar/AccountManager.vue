@@ -40,17 +40,17 @@
       "userId": "ユーザーID"
     },
     "ko": {
-      "notice": "The User ID helps us identifies your upload identity. Inputting this ID on other devices enable you to manage and inspect your uploads with ease.",
-      "success": "Successfully logged in",
+      "notice": "사용자 ID는 당신의 보고서를 확인하는데 사용됩니다. 이 ID를 다른 기기에 입력하면 편리하게 보고서를 관리하고 검사할 수 있습니다.",
+      "success": "성공적으로 로그인 되었습니다.",
       "failed": {
-        "message": "Failed to log in: {message}",
-        "notfound": "The specified User ID could not been found"
+        "message": "로그인에 실패했습니다: {message}",
+        "notfound": "지정된 사용자 ID를 찾을 수 없습니다"
       },
-      "login": "Login",
-      "logout": "Logout",
-      "logoutPrompt": "Are you sure?",
-      "loggedOut": "Logged out",
-      "userId": "User ID"
+      "login": "로그인",
+      "logout": "로그아웃",
+      "logoutPrompt": "정말로 로그아웃 하시겠습니까?",
+      "loggedOut": "로그아웃 되었습니다",
+      "userId": "사용자 ID"
     }
   }
 </i18n>

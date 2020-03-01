@@ -351,11 +351,11 @@
           ],
           translators: [
             {
-              name: "シャロ",
+              name: "Syaro",
               responsibility: [
                 r.localization.ko
               ],
-              avatar: "syaro.jpeg",
+              avatar: "syaro.png",
               socials: {
                 twitter: "https://twitter.com/StarNight_ko"
               }

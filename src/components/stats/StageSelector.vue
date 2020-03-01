@@ -76,14 +76,14 @@
       }
     },
     "ko": {
-      "opensAt": "Opens at: {0} - {1}",
+      "opensAt": "이벤트 기간: {0} - {1}",
       "zone": {
         "name": "에피소드",
         "types": {
-          "MAINLINE": "메인",
+          "MAINLINE": "메인 스토리",
           "WEEKLY": "물자 비축",
-          "ACTIVITY_OPEN": "Event (Opening)",
-          "ACTIVITY_CLOSED": "Event (Closed)"
+          "ACTIVITY_OPEN": "이벤트 (개방중)",
+          "ACTIVITY_CLOSED": "이벤트 (종료)"
         },
         "status": {
           "closed": "Closed",
@@ -92,7 +92,7 @@
       },
       "stage": {
         "name": "작전지역",
-        "apCost": "{apCost} AP required",
+        "apCost": "{apCost} 이성 필요",
         "loots": {
           "normal": "일반 드랍",
           "extra": "추가 드랍",
