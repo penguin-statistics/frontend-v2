@@ -160,6 +160,6 @@
     bottom: 0;
     padding: 4px 8px;
     border-radius: 4px 0 0 4px !important;
-    margin-bottom: calc(max(env(safe-area-inset-bottom) - 4px, 4px)) !important;
+    margin-bottom: calc(max(env(safe-area-inset-bottom), 8px)) !important;
   }
 </style>

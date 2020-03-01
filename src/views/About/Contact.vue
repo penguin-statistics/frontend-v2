@@ -57,10 +57,13 @@
         class="mx-2 my-1"
         color="secondary"
         text-color="white"
-        @click="$router.push({name: 'AboutMembers'})"
+        :to="{name: 'AboutMembers'}"
+        target="_blank"
       >
         {{ $t('contact.contributor') }}
-        <v-icon right>
+        <v-icon
+          right
+        >
           mdi-account-multiple
         </v-icon>
       </v-chip>
@@ -68,10 +71,13 @@
         class="mx-2 my-1"
         color="secondary"
         text-color="white"
-        @click="goToHref('https://github.com/penguin-statistics/frontend-v2/issues')"
+        href="https://github.com/penguin-statistics/frontend-v2/issues"
+        target="_blank"
       >
         {{ $t('contact.github') }}
-        <v-icon right>
+        <v-icon
+          right
+        >
           mdi-github-circle
         </v-icon>
       </v-chip>
@@ -79,11 +85,14 @@
         class="mx-2 my-1"
         color="secondary"
         text-color="white"
-        @click="goToHref('https://bbs.nga.cn/read.php?tid=17340880')"
+        href="https://bbs.nga.cn/read.php?tid=17340880"
+        target="_blank"
       >
         {{ $t('contact.nga') }}
-        <v-icon right>
-          mdi-share
+        <v-icon
+          right
+        >
+          mdi-forum
         </v-icon>
       </v-chip>
     </v-row>
@@ -153,9 +162,6 @@
 export default {
   name: 'Contact',
   methods: {
-    goToHref(href) {
-      window.open(href)
-    }
   }
 }
 </script>

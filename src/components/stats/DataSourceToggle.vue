@@ -76,6 +76,8 @@
     </v-dialog>
     <v-btn-toggle
       v-model="dataSource"
+      active-class="font-weight-bold"
+      mandatory
       borderless
       class="data-source-switch"
     >

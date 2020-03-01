@@ -169,6 +169,7 @@
       app
       dark
       color="blue darken-3"
+      style="min-height: calc(56px + env(safe-area-inset-top)); padding-top: env(safe-area-inset-top)"
     >
       <v-app-bar-nav-icon
         @click.stop="drawer = !drawer"
@@ -186,7 +187,16 @@
             <v-img
               :src="randomizedLogo"
               class="randomizedLogo"
-            />
+            >
+              <template v-slot:placeholder>
+                <v-img
+                  :src="require('@/assets/logo.png')"
+                  aspect-ratio="1"
+                  height="32px"
+                  contain
+                />
+              </template>
+            </v-img>
           </v-avatar>
         </transition>
         <span class="title">
@@ -199,7 +209,7 @@
       <AccountManager />
     </v-app-bar>
     <RandomBackground />
-    <v-content>
+    <v-content style="padding-top: calc(env(safe-area-inset-top) + 56px) !important;">
       <transition
         name="slide-fade"
         mode="out-in"
@@ -352,8 +362,8 @@ export default {
         return this.dark
       },
       set (value) {
+        this.$vuetify.theme.dark = value;
         this.$store.commit('settings/switchDark', value)
-        this.$vuetify.theme.dark = value
       }
     },
     localizationMapper: {
@@ -375,7 +385,7 @@ export default {
     this.$store.dispatch("data/fetch", false)
   },
   created () {
-    this.randomizeLogo();
+    // this.randomizeLogo();
     this.onDarkChange(this.dark);
 
     if (this.language) {
@@ -471,23 +481,22 @@ export default {
     opacity: 0;
   }
 
-  .theme--dark, .theme--light {
+  .v-navigation-drawer {
     transition: all .3s cubic-bezier(.25,.8,.5,1) !important;
   }
 
   .drawer-logo {
-    height: 256px;
-    padding: 32px;
+    height: calc(256px + env(safe-area-inset-top));
+    padding: calc(32px + env(safe-area-inset-top)) 32px 32px 32px;
     overflow: hidden;
     transition: all .5s cubic-bezier(0.19, 1, 0.22, 1);
   }
 
   .drawer-logo:hover {
-    height: 304px;
-    padding: 32px;
+    height: calc(304px + env(safe-area-inset-top));
   }
   .drawer-logo--two-line:hover {
-    height: 336px;
+    height: calc(336px + env(safe-area-inset-top));
   }
   .drawer-logo > .description {
     margin-top: 16px;
@@ -560,6 +569,10 @@ export default {
     /*In case the old browsers doesn't support advanced CSS calculations*/
     padding-bottom: 8px !important;
     padding-bottom: calc(max(env(safe-area-inset-bottom), 8px)) !important;
+  }
+
+  .v-stepper__items, .v-stepper__wrapper {
+    overflow: initial !important;
   }
 
 </style>

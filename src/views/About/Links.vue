@@ -94,7 +94,6 @@
       md="4"
     >
       <v-card
-        data-aos="fade"
         class="link-card bkop-light elevation-0"
       >
         <v-card-title
@@ -160,6 +159,8 @@
 </template>
 
 <script>
+import anime from "animejs";
+
 export default {
   name: "Links",
   data() {
@@ -301,12 +302,22 @@ export default {
       ]
     };
   },
+  mounted () {
+    anime({
+      targets: '.link-card',
+      translateY: [48, 0],
+      opacity: [0, 1],
+      duration: 425,
+      delay: (el, i) => i * 50,
+      easing: "easeOutQuint"
+    });
+  },
   methods: {
     goToHref(link) {
       this.$ga.event('redirect', 'links', link.title, 1)
       window.open(link.url);
     }
-  }
+  },
 };
 </script>
 
