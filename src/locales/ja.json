@@ -45,7 +45,7 @@
   "stats": {
     "headers": {
       "stage": "ステージ",
-      "apCost": "消費理性",
+      "apCost": "理性",
       "item": "アイテム",
       "times": "サンプル数",
       "quantity": "ドロップ数",
@@ -120,12 +120,12 @@
       "item": {
         "_name": "アイテム数量",
         "now": "選択された {item} ×{quantity}",
-        "gte": "\"{item}\" should ≥{quantity}",
-        "lte": "\"{item}\" should ≤{quantity}",
-        "not": "\"{item}\" should ≠{quantity}"
+        "gte": "入力をした“{item}”の数がこのステージのドロップ最大数である {quantity} 個以上に設定されています",
+        "lte": "“{item}”の数を　{quantity}　個以下の数値で再入力して下さい",
+        "not": "“{item}”はこのステージでは1回のドロップ数が {quantity} 個になることはありません"
       },
       "type": {
-        "_name": "アイテム",
+        "_name": "アイテム種類数",
         "now": "選択されたアイテムは {quantity} 種類です",
         "gte": "最少 {quantity} 種類のアイテムが必要です",
         "lte": "最大 {quantity} 種類のアイテムが必要です",

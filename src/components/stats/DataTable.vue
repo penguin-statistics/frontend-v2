@@ -7,7 +7,10 @@
       "scroll": "Scroll to view details"
     },
     "ja": {
-      "scroll": "Scroll to view details"
+      "scroll": "左右にスクロールでデータを表示"
+    },
+    "ko": {
+      "scroll": "스크롤로 세부 사항을 볼 수 있습니다"
     }
   }
 </i18n>

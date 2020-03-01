@@ -26,10 +26,10 @@
     },
     "ko": {
       "dataSourceToggle": {
-        "title": "Login Required",
-        "loginNotice": "Please log in before viewing personal drop data.",
-        "all": "All",
-        "personal": "Personal"
+        "title": "로그인 필요",
+        "loginNotice": "개인 보고서를 보려면 로그인하여 주십시오.",
+        "all": "전체",
+        "personal": "개인"
       }
     }
   }
