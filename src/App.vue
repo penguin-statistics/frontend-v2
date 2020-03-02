@@ -581,10 +581,10 @@ export default {
     overflow: initial !important;
   }
 
-  .force-lang-font, .lang-ja {
+  .lang-ja .force-lang-font, .lang-ja {
     font-family: YuGothic, 'Meiryo UI', Meiryo, 'MS Pgothic', Osaka, 'Roboto', Tahoma, Arial, sans-serif !important
   }
-  .force-lang-font, .lang-ko {
+  .lang-ko .force-lang-font, .lang-ko {
     font-family: 'Malgun Gothic', Gulim, 'Roboto', Tahoma, Arial, sans-serif !important
   }
   .force-not-lang-font {
