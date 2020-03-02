@@ -128,6 +128,7 @@
             {{ $t(`links.tags.${feature.name}`) }}
           </v-chip>
         </v-card-title>
+
         <div
           v-if="link.url"
           class="px-4 pt-2 pb-4"
@@ -146,6 +147,7 @@
               <v-icon
                 left
                 small
+                style="transform: rotate(-45deg)"
               >
                 mdi-link
               </v-icon>

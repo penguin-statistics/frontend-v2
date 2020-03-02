@@ -7,7 +7,7 @@
         "contributor": "团队成员页面",
         "contact_1": "页面内的各种联系方式",
         "github": "Github Issues",
-        "nga": "NGA讨论帖"
+        "nga": "NGA 讨论帖"
       }
     },
     "en": {
@@ -26,7 +26,7 @@
         "contact_2": "ご質問、ご要望などございましたら、管理人さんにお気軽にお問い合わせください。（日本語でもOKです）",
         "contributor": "制作協力者ページ",
         "github": "Github Issues",
-        "nga": "NGAスレッド"
+        "nga": "NGA スレッド"
       }
     },
     "ko": {
@@ -58,7 +58,6 @@
         color="secondary"
         text-color="white"
         :to="{name: 'AboutMembers'}"
-        target="_blank"
       >
         {{ $t('contact.contributor') }}
         <v-icon
