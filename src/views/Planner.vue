@@ -280,7 +280,7 @@
                       :disabled="itemData.have === 0"
                       @click="itemData.have = decrement(itemData.have)"
                     >
-                      <v-icon>mdi-minus</v-icon>
+                      <v-icon>mdi-minus-circle</v-icon>
                     </v-btn>
                   </template>
                   <template v-slot:append>
@@ -290,7 +290,7 @@
                       class="fix-icon--right"
                       @click="itemData.have = increment(itemData.have)"
                     >
-                      <v-icon>mdi-plus</v-icon>
+                      <v-icon>mdi-plus-circle</v-icon>
                     </v-btn>
                   </template>
                 </v-text-field>
@@ -322,7 +322,7 @@
                       :disabled="itemData.need === 0"
                       @click="itemData.need = decrement(itemData.need)"
                     >
-                      <v-icon>mdi-minus</v-icon>
+                      <v-icon>mdi-minus-circle</v-icon>
                     </v-btn>
                   </template>
                   <template v-slot:append>
@@ -332,7 +332,7 @@
                       class="fix-icon--right"
                       @click="itemData.need = increment(itemData.need)"
                     >
-                      <v-icon>mdi-plus</v-icon>
+                      <v-icon>mdi-plus-circle</v-icon>
                     </v-btn>
                   </template>
                 </v-text-field>
