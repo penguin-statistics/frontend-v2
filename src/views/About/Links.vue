@@ -138,7 +138,7 @@
             justify="center"
           >
             <v-chip
-              class="ma-2"
+              class="ma-2 force-not-lang-font"
               color="primary"
               text-color="white"
               @click="goToHref(link)"

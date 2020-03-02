@@ -15,6 +15,7 @@ import * as Integrations from '@sentry/integrations';
 
 const production = process.env.NODE_ENV === 'production';
 
+Vue.config.devtools = true;
 Vue.config.performance = true;
 
 if (production) {

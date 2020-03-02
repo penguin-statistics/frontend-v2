@@ -10,7 +10,7 @@
       "actions": {
         "import": "导入",
         "export": "导出",
-        "importExport": "@:(actions.import)@:(meta.separator)@:(actions.export)",
+        "importExport": "@:(actions.import)/@:(actions.export)",
         "becomeIdol": "众筹站长女装",
         "calculate": "计算规划"
       },
@@ -28,7 +28,7 @@
       "actions": {
         "import": "Import",
         "export": "Export",
-        "importExport": "@:(actions.import)@:(meta.separator)@:(actions.export)",
+        "importExport": "@:(actions.import)/@:(actions.export)",
         "becomeIdol": "Become Idol!",
         "calculate": "Calculate"
       },
@@ -42,17 +42,32 @@
 <template>
   <v-container
     fluid
+    class="fill-height align-content-center justify-center"
   >
+    <v-btn
+      fab
+      bottom
+      right
+      fixed
+      ripple
+      color="primary"
+      @click="calculate"
+    >
+      <v-icon>
+        mdi-calculator
+      </v-icon>
+    </v-btn>
     <v-row
       align="center"
       justify="center"
     >
       <v-col
         cols="12"
-        sm="12"
+        sm="5"
         md="4"
         lg="3"
         xl="3"
+        class="px-0"
       >
         <v-row
           no-gutters
@@ -87,10 +102,11 @@
       </v-col>
       <v-col
         cols="12"
-        sm="12"
+        sm="7"
         md="8"
         lg="9"
         xl="9"
+        class="pt-0 pb-2 px-0"
       >
         <v-row
           no-gutters
@@ -105,6 +121,7 @@
             <template v-slot:activator="{ on }">
               <v-btn
                 color="green"
+                class="my-1"
                 v-on="on"
               >
                 {{ $t('actions.importExport') }}
@@ -173,6 +190,7 @@
             <template v-slot:activator="{ on }">
               <v-btn
                 color="yellow darken-3"
+                class="my-1"
                 v-on="on"
               >
                 {{ $t('actions.becomeIdol') }}
@@ -194,14 +212,16 @@
               </v-card-actions>
             </v-card>
           </v-dialog>
-          <v-btn color="red">
+          <v-btn
+            color="red"
+            class="my-1"
+            @click="calculate"
+          >
             {{ $t('actions.calculate') }}
           </v-btn>
         </v-row>
       </v-col>
     </v-row>
-    
-    <v-divider />
     <v-row
       class="pt-2"
       dense
@@ -212,7 +232,7 @@
         xl="1"
         md="2"
         sm="3"
-        class="col-lg-1-8"
+        class="col-xs-1-2 col-md-1-10 col-lg-1-8"
         cols="4"
       >
         <v-card
@@ -225,7 +245,7 @@
               no-gutters
             >
               <Item
-                :item="itemIdMap.get(itemData.id)"
+                :item="items.get(itemData.id)"
                 :ratio="1"
                 disable-link
                 tooltip-position="bottom"
@@ -243,30 +263,34 @@
                 <v-text-field
                   v-model.number="itemData.have"
                   outlined
+                  rounded
                   dense
                   hide-details
                   :label="$t('have')"
+                  class="input-field transition-all"
+                  :class="{'input-field--is-zero': itemData.have === 0}"
                   @click:prepend-inner="{}"
                   @click:append="{}"
                 >
                   <template v-slot:prepend-inner>
                     <v-btn
-                      text
                       icon
-                      x-small
+                      left
+                      class="fix-icon--left"
+                      :disabled="itemData.have === 0"
                       @click="itemData.have = decrement(itemData.have)"
                     >
-                      <v-icon>mdi-minus-circle</v-icon>
+                      <v-icon>mdi-minus</v-icon>
                     </v-btn>
                   </template>
                   <template v-slot:append>
                     <v-btn
-                      text
                       icon
-                      x-small
+                      left
+                      class="fix-icon--right"
                       @click="itemData.have = increment(itemData.have)"
                     >
-                      <v-icon>mdi-plus-circle</v-icon>
+                      <v-icon>mdi-plus</v-icon>
                     </v-btn>
                   </template>
                 </v-text-field>
@@ -282,29 +306,33 @@
                   v-model.number="itemData.need"
                   hide-details
                   outlined
+                  rounded
                   dense
                   :label="$t('need')"
+                  class="input-field transition-all"
+                  :class="{'input-field--is-zero': itemData.need === 0}"
                   @click:prepend-inner="{}"
                   @click:append="{}"
                 >
                   <template v-slot:prepend-inner>
                     <v-btn
-                      text
                       icon
-                      x-small
+                      left
+                      class="fix-icon--left"
+                      :disabled="itemData.need === 0"
                       @click="itemData.need = decrement(itemData.need)"
                     >
-                      <v-icon>mdi-minus-circle</v-icon>
+                      <v-icon>mdi-minus</v-icon>
                     </v-btn>
                   </template>
                   <template v-slot:append>
                     <v-btn
-                      text
                       icon
-                      x-small
+                      left
+                      class="fix-icon--right"
                       @click="itemData.need = increment(itemData.need)"
                     >
-                      <v-icon>mdi-plus-circle</v-icon>
+                      <v-icon>mdi-plus</v-icon>
                     </v-btn>
                   </template>
                 </v-text-field>
@@ -327,19 +355,20 @@
     name: "Planner",
     components: {Item},
     data: () => {
-      let items = get.items.all().filter(item => item.itemType === "MATERIAL" && item.itemId.length === 5 || item.itemType === "ARKPLANNER");
+      const items = get.items.all(true);
       return {
         fundDressDialog: false,
         importExportDialog: false,
         importExportDialogTab: null,
         importJson: "",
-        items: items,
-        itemIdMap: new Map(items.map(item => [item.itemId, item])),
-        itemsData: items.map(item => ({
-          id: item.itemId,
-          need: 0,
-          have: 0,
-        }))
+        items,
+        itemsData: get.items.all(false)
+          .filter(item => item.itemType === "MATERIAL" && item.itemId.length === 5 || item.itemType === "ARKPLANNER")
+          .map(item => ({
+            id: item.itemId,
+            need: 0,
+            have: 0,
+          }))
       }
     },
     computed: {
@@ -356,13 +385,16 @@
       increment(orig) {
         return orig + 1;
       },
+      calculate () {
+
+      },
       importToItemsData() {
         let imported = JSON.parse(this.importJson);
         if (imported.length !== this.itemsData.length)
           return;
         let importedAsMap = new Map();
         for (const itemData of imported)
-          if (!(itemData.hasOwnProperty("id") && this.itemIdMap.has(itemData.id) &&
+          if (!(itemData.hasOwnProperty("id") && this.items.has(itemData.id) &&
             itemData.hasOwnProperty("need") && Number.isInteger(itemData.need) && itemData.need >= 0 &&
             itemData.hasOwnProperty("have") && Number.isInteger(itemData.have) && itemData.have >= 0))
             return;
@@ -384,7 +416,15 @@
 </script>
 
 <style scoped>
-  @media (min-width: 1264px) and (max-width: 1903px) {
+  @media (max-width: 380px) {
+    .col-xs-1-2 {
+      -webkit-box-flex: 0;
+      -ms-flex: 0 0 50%;
+      flex: 0 0 50%;
+      max-width: 50%;
+    }
+  }
+  @media (min-width: 1264px) and (max-width: 1584px) {
     .col-lg-1-8 {
       -webkit-box-flex: 0;
       -ms-flex: 0 0 12.5%;
@@ -392,14 +432,53 @@
       max-width: 12.5%
     }
   }
+  @media (min-width: 1584px) and (max-width: 1904px) {
+    .col-md-1-10 {
+      -webkit-box-flex: 0;
+      -ms-flex: 0 0 10%;
+      flex: 0 0 10%;
+      max-width: 10%
+    }
+  }
   .planner-export {
     word-break: break-all;
     line-height: 1.1 !important;
     font-size: 12px;
-    height: 300px;
+    max-height: 300px;
     -webkit-backface-visibility: hidden;
     backface-visibility: hidden;
     flex: 1 1 auto;
     overflow-y: auto;
+  }
+
+  .fix-icon--left {
+    transform: translate(-2px, -3.5px)
+  }
+  .fix-icon--right {
+    transform: translate(2px, -3.5px)
+  }
+
+  ::v-deep .input-field input {
+    text-align: center !important;
+    /*font-family: SF Mono, "Droid Sans Mono", Ubuntu Mono, Consolas, Courier New, Courier, monospace;*/
+    font-weight: bold;
+  }
+
+  ::v-deep .input-field .v-input__slot {
+    padding: 0 6px !important;
+  }
+
+  ::v-deep .input-field legend {
+    margin: 0 6px !important;
+  }
+
+  ::v-deep .input-field label {
+    margin: 0 12px !important;
+    max-width: none;
+  }
+
+
+  ::v-deep .input-field--is-zero input {
+    opacity: 0.5
   }
 </style>

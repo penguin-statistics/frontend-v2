@@ -1,5 +1,5 @@
 <template>
-  <v-app>
+  <v-app :class="languageFont">
     <v-navigation-drawer
       v-model="drawer"
       app
@@ -146,7 +146,7 @@
                     :key="i"
                     @click="changeLocale(locale.id)"
                   >
-                    <v-list-item-title>
+                    <v-list-item-title class="mr-2">
                       {{ locale.name }}
                     </v-list-item-title>
                     <v-list-item-action v-if="locale.beta">
@@ -154,7 +154,7 @@
                         mdi-beta
                       </v-icon>
                     </v-list-item-action>
-                    <v-list-item-action-text class="monospace">
+                    <v-list-item-action-text class="monospace ml-2">
                       {{ locale.id }}
                     </v-list-item-action-text>
                   </v-list-item>
@@ -199,7 +199,7 @@
             </v-img>
           </v-avatar>
         </transition>
-        <span class="title">
+        <span class="title force-lang-font">
           {{ $t($router.currentRoute.meta.i18n) }}
         </span>
       </v-toolbar-title>
@@ -346,8 +346,7 @@ export default {
           name: '日本語'
         }, {
           id: 'ko',
-          name: '한국어',
-          beta: true,
+          name: '한국어'
         }
       ],
       prefetchingResources: false,
@@ -371,6 +370,9 @@ export default {
         return this.localizations.indexOf(this.localizations.find(el => el.id === this.$i18n.locale))
       },
       set () {}
+    },
+    languageFont () {
+      return [`lang-${this.$i18n.locale}`]
     }
   },
   watch: {
@@ -481,6 +483,10 @@ export default {
     opacity: 0;
   }
 
+  .transition-all {
+    transition: all .225s cubic-bezier(0.165, 0.84, 0.44, 1);
+  }
+
   .v-navigation-drawer {
     transition: all .3s cubic-bezier(.25,.8,.5,1) !important;
   }
@@ -573,6 +579,16 @@ export default {
 
   .v-stepper__items, .v-stepper__wrapper {
     overflow: initial !important;
+  }
+
+  .force-lang-font, .lang-ja {
+    font-family: YuGothic, 'Meiryo UI', Meiryo, 'MS Pgothic', Osaka, 'Roboto', Tahoma, Arial, sans-serif !important
+  }
+  .force-lang-font, .lang-ko {
+    font-family: 'Malgun Gothic', Gulim, 'Roboto', Tahoma, Arial, sans-serif !important
+  }
+  .force-not-lang-font {
+    font-family: Roboto, sans-serif!important
   }
 
 </style>

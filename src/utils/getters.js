@@ -4,13 +4,21 @@ import Console from "@/utils/Console";
 let Getters = {};
 
 Getters.items = {
+  _cache: null,
   byItemId(itemId) {
-    return this.all().find(el => {
-      return el.itemId === itemId
-    })
+    const got = this.all(true);
+    if (!got) return {};
+    return got.get(itemId)
   },
-  all() {
-    return store.state.data.items || []
+  all(map=false) {
+    const items = store.state.data.items;
+    if (!items) return [];
+    if (map) {
+      if (!this._cache) this._cache = new Map(items.map(item => [item.itemId, item]))
+      return this._cache
+    } else {
+      return items
+    }
   }
 }
 Getters.limitations = {

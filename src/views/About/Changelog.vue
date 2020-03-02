@@ -12,7 +12,7 @@
       fill-dot
     >
       <v-card
-        class="bkop-light"
+        class="bkop-light force-not-lang-font"
         elevation="5"
       >
         <v-card-title class="title">

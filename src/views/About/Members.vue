@@ -170,7 +170,6 @@
                 :href="url"
                 target="_blank"
                 :title="$t(`socials.${id}`)"
-                v-on="on"
               >
                 <v-icon>
                   {{ getSocial(id).icon }}
