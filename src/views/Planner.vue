@@ -852,11 +852,10 @@
     top: 2px !important;
     height: 27px !important;
     width: 27px !important;
-    transition: all .575s cubic-bezier(0.165, 0.84, 0.44, 1);
+    transition: all .225s cubic-bezier(0.165, 0.84, 0.44, 1);
   }
   ::v-deep .number-input-theme .number-input__button:hover {
     transform: scale(1.15);
-    transition: all .125s cubic-bezier(0.165, 0.84, 0.44, 1);
   }
   ::v-deep .number-input-theme .number-input__button:active {
     transform: scale(1.05);
