@@ -29,7 +29,9 @@
         "exp": "预计获得录像带经验",
         "times": "次",
         "items": "将得到物品",
-        "level": "素材等级"
+        "level": "素材等级",
+        "noStage": "未找到需要作战的关卡。是不是忘记选择所需素材了？",
+        "noSyntheses": "未找到需要合成的素材。是不是忘记选择所需素材了？"
       }
     },
     "en": {
@@ -61,7 +63,9 @@
         "exp": "Estimated EXP from Battle Records",
         "times": "battles",
         "items": "Will get",
-        "level": "Material Level"
+        "level": "Material Level",
+        "noStage": "No stage found. Have you selected any material yet?",
+        "noSyntheses": "No syntheses found. Have you selected any material yet?"
       }
     }
   }
@@ -184,6 +188,14 @@
               <v-icon>{{ tab.icon }}</v-icon>
             </v-tab>
             <v-tab-item>
+              <v-alert
+                v-if="!calculation.data.stages.length"
+                type="warning"
+                border="left"
+                class="mt-4"
+              >
+                {{ $t('calculation.noStage') }}
+              </v-alert>
               <v-row
                 align="start"
                 justify="start"
@@ -227,6 +239,14 @@
               </v-row>
             </v-tab-item>
             <v-tab-item>
+              <v-alert
+                v-if="!calculation.data.syntheses.length"
+                type="warning"
+                border="left"
+                class="mt-4"
+              >
+                {{ $t('calculation.noSyntheses') }}
+              </v-alert>
               <v-row
                 align="start"
                 justify="start"
@@ -574,7 +594,7 @@
                   center
                   controls
                   :placeholder="$t('have')"
-                  class="monospace font-weight-bold number-input-theme"
+                  class="monospace font-weight-bold number-input-theme transition-all"
                   :min="0"
                 />
               </v-col>
@@ -601,7 +621,7 @@
                   center
                   controls
                   :placeholder="$t('need')"
-                  class="monospace font-weight-bold number-input-theme"
+                  class="monospace font-weight-bold number-input-theme transition-all"
                   :min="0"
                 />
               </v-col>
@@ -827,12 +847,21 @@
   }
 
   ::v-deep .number-input-theme .number-input__button {
-    border: none !important;
+    border: 1px solid #ddd !important;
     border-radius: 50% !important;
     top: 2px !important;
     height: 27px !important;
     width: 27px !important;
+    transition: all .575s cubic-bezier(0.165, 0.84, 0.44, 1);
   }
+  ::v-deep .number-input-theme .number-input__button:hover {
+    transform: scale(1.15);
+    transition: all .125s cubic-bezier(0.165, 0.84, 0.44, 1);
+  }
+  ::v-deep .number-input-theme .number-input__button:active {
+    transform: scale(1.05);
+  }
+
   ::v-deep .number-input-theme .number-input__button--minus {
     left: 2px !important;
   }
