@@ -170,7 +170,7 @@
           </v-row>
           <v-tabs
             v-model="calculation.tab"
-            icons-and-text
+            icons-and-text 
             grow
             centered
             class="elevated-tab"
@@ -829,15 +829,15 @@
   ::v-deep .number-input-theme .number-input__button {
     border: none !important;
     border-radius: 50% !important;
-    top: 6px !important;
-    height: 18px !important;
-    width: 18px !important;
+    top: 2px !important;
+    height: 27px !important;
+    width: 27px !important;
   }
   ::v-deep .number-input-theme .number-input__button--minus {
-    left: 7px !important;
+    left: 2px !important;
   }
   ::v-deep .number-input-theme .number-input__button--plus {
-    right: 7px !important;
+    right: 2px !important;
   }
 
   .field-caption {
