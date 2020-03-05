@@ -595,6 +595,7 @@
                   controls
                   :placeholder="$t('have')"
                   class="monospace font-weight-bold number-input-theme transition-all"
+                  :class="{'number-input-theme--dense': $vuetify.breakpoint.smAndDown}"
                   :min="0"
                 />
               </v-col>
@@ -622,6 +623,7 @@
                   controls
                   :placeholder="$t('need')"
                   class="monospace font-weight-bold number-input-theme transition-all"
+                  :class="{'number-input-theme--dense': $vuetify.breakpoint.smAndDown}"
                   :min="0"
                 />
               </v-col>
@@ -827,6 +829,12 @@
     border: 1px solid #ddd;
     border-radius: 1rem !important;
     top: 0 !important;
+    font-size: 16px;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+    padding-left: 30px !important;
+    padding-right: 30px !important;
   }
 
   ::v-deep .number-input-theme .number-input__input:hover {
@@ -848,10 +856,10 @@
 
   ::v-deep .number-input-theme .number-input__button {
     border: 1px solid #ddd !important;
-    border-radius: 50% !important;
     top: 2px !important;
-    height: 27px !important;
-    width: 27px !important;
+    border-radius: 50% !important;
+    height: 30px !important;
+    width: 30px !important;
     transition: all .225s cubic-bezier(0.165, 0.84, 0.44, 1);
   }
   ::v-deep .number-input-theme .number-input__button:hover {
@@ -866,6 +874,23 @@
   }
   ::v-deep .number-input-theme .number-input__button--plus {
     right: 2px !important;
+  }
+
+  ::v-deep .number-input-theme--dense .number-input__button--minus {
+    border-radius: 15px 0 0 15px !important;
+  }
+  ::v-deep .number-input-theme--dense .number-input__button--plus {
+    border-radius: 0 15px 15px 0 !important;
+  }
+  ::v-deep .number-input-theme--dense .number-input__button::before {
+    width: 75%;
+  }
+  ::v-deep .number-input-theme--dense .number-input__button {
+    width: 20px !important;
+  }
+  ::v-deep .number-input-theme--dense .number-input__input {
+    padding-left: 20px !important;
+    padding-right: 20px !important;
   }
 
   .field-caption {
