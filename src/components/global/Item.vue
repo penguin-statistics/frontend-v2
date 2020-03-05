@@ -17,7 +17,7 @@
         />
       </span>
     </template>
-    <span>{{ name }}</span>
+    <span class="force-lang-font">{{ name }}</span>
   </v-tooltip>
   <ItemIcon
     v-else-if="disableTooltip"

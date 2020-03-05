@@ -4,19 +4,16 @@ import 'vuetify/dist/vuetify.min.css'
 import App from './App.vue'
 import router from './router'
 import store from './store'
-import i18n from './i18n'
 import VueAnalytics from "vue-analytics"
 import 'aos/dist/aos.css'
-import I18n from "@/i18n"
+import i18n from "@/i18n"
 import config from "@/config"
+import VueNumberInput from '@chenfengyuan/vue-number-input';
 
 import * as Sentry from '@sentry/browser';
 import * as Integrations from '@sentry/integrations';
 
 const production = process.env.NODE_ENV === 'production';
-
-Vue.config.devtools = true;
-Vue.config.performance = true;
 
 if (production) {
   Sentry.init({
@@ -62,11 +59,13 @@ Vue.use(VueAnalytics, {
 });
 
 router.beforeEach((to, from, next) => {
-  document.title = `${I18n.t(to.meta.i18n)} | ${I18n.t('app.name')}`;
+  document.title = `${i18n.t(to.meta.i18n)} | ${i18n.t('app.name')}`;
   next();
 });
 
 Vue.config.productionTip = false;
+
+Vue.use(VueNumberInput);
 
 new Vue({
   vuetify,

@@ -372,7 +372,7 @@ export default {
       set () {}
     },
     languageFont () {
-      return [`lang-${this.$i18n.locale}`]
+      return `lang-${this.$i18n.locale}`
     }
   },
   watch: {
@@ -451,9 +451,11 @@ export default {
       if (localeId !== this.$i18n.locale) {
         Console.debug("[i18n] locale changed to:", localeId, "| saving to vuex:", save);
         this.$i18n.locale = localeId;
+        this.$vuetify.lang.current = localeId;
+        document.title = `${this.$t(this.$route.meta.i18n) + ' | ' || ''}${this.$t('app.name')}`;
+        document.documentElement.lang = localeId;
         // this.$vuetify.lang.current = localeId;
         if (save) this.$store.commit("settings/changeLocale", localeId);
-        document.title = `${this.$t(this.$route.meta.i18n) + ' | ' || ''}${this.$t('app.name')}`;
       } else {
         Console.debug("[i18n] Same locale");
       }
@@ -565,6 +567,9 @@ export default {
   .no-wrap--text {
     word-break: break-word;
   }
+  .no-break--text {
+    word-break: keep-all;
+  }
 
   .monospace {
     font-family: SF Mono, "Droid Sans Mono", Ubuntu Mono, Consolas, Courier New, Courier, monospace;
@@ -582,7 +587,10 @@ export default {
   }
 
   .lang-ja .force-lang-font, .lang-ja {
-    font-family: YuGothic, 'Meiryo UI', Meiryo, 'MS Pgothic', Osaka, 'Roboto', Tahoma, Arial, sans-serif !important
+    /*font-family : 'ヒラギノ角ゴ ProN' , 'Hiragino Kaku Gothic ProN' , '游ゴシック' , '游ゴシック体' , YuGothic , 'Yu Gothic' , 'メイリオ' , Meiryo , 'ＭＳ ゴシック' , 'MS Gothic' , HiraKakuProN-W3 , 'TakaoExゴシック' , TakaoExGothic , 'MotoyaLCedar' , 'Droid Sans Japanese' , sans-serif !important;*/
+  }
+  .lang-ja .v-application .headline, .lang-ja .v-application .title {
+    font-family : 'ヒラギノ明朝 ProN' , 'Hiragino Mincho ProN' , '游明朝','游明朝体',YuMincho,'Yu Mincho' , 'ＭＳ 明朝' , 'MS Mincho' , HiraMinProN-W3 , 'TakaoEx明朝' , TakaoExMincho , 'MotoyaLCedar' , 'Droid Sans Japanese' , serif !important;
   }
   .lang-ko .force-lang-font, .lang-ko {
     font-family: 'Malgun Gothic', Gulim, 'Roboto', Tahoma, Arial, sans-serif !important

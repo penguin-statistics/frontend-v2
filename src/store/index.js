@@ -12,14 +12,31 @@ import settings from './modules/settings';
 
 Vue.use(Vuex);
 
+localStorage.removeItem("penguin-stats-state");
+
 export default new Vuex.Store({
   plugins: [
     createPersistedState({
-      key: "penguin-stats-state",
+      key: "penguin-stats-data",
       paths: [
-        "data",
-        "settings",
-        "auth",
+        "data"
+      ]
+    }),
+    createPersistedState({
+      key: "penguin-stats-settings",
+      paths: [
+        "settings"
+      ]
+    }),
+    createPersistedState({
+      key: "penguin-stats-auth",
+      paths: [
+        "auth"
+      ]
+    }),
+    createPersistedState({
+      key: "penguin-stats-cacheTTL",
+      paths: [
         "cacheUpdateAt"
       ]
     })
