@@ -12,7 +12,8 @@
         "import": {
           "jsonError": "导入失败：数据格式错误，请检查后重试（{error}）",
           "success": "导入成功：导入了 {amount} 个物品数据"
-        }
+        },
+        "calculationError": "计算失败：{error}"
       }
     },
     "en": {
@@ -27,7 +28,8 @@
         "import": {
           "jsonError": "Failed to import: Data parsing error, please check your input ({error})",
           "success": "Successfully imported data for {amount} items"
-        }
+        },
+        "calculationError": "Failed to calculate: {error}"
       }
     }
   }
