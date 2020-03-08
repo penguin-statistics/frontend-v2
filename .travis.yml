@@ -6,4 +6,4 @@ cache:
     - node_modules
 script:
   - yarn lint
-  - yarn build
+  - yarn build:single
