@@ -5,7 +5,8 @@
         "_name": "选项",
         "byProduct": "考虑合成副产物",
         "requireExp": "大量需求经验",
-        "requireLmb": "大量需求龙门币"
+        "requireLmb": "大量需求龙门币",
+        "foreignServer": "仅计算国际服关卡"
       },
       "actions": {
         "import": "导入",
@@ -37,7 +38,8 @@
         "_name": "Options",
         "byProduct": "Consider by-products",
         "requireExp": "Large demand for EXP",
-        "requireLmb": "Large demand for LMD"
+        "requireLmb": "Large demand for LMD",
+        "foreignServer": "Only foreign server stages"
       },
       "actions": {
         "import": "Import",
@@ -492,6 +494,13 @@
               hide-details
             />
           </v-col>
+          <v-col cols="12">
+            <v-switch
+              v-model="options.foreignServer"
+              :label="$t('options.foreignServer')"
+              hide-details
+            />
+          </v-col>
         </v-row>
       </v-col>
       <v-col
@@ -526,7 +535,6 @@
               <v-tabs
                 v-model="importExportDialogTab"
                 icons-and-text
-                grow
                 centered
                 background-color="green"
                 color="white"
@@ -782,7 +790,8 @@
         options: {
           byProduct: false,
           requireExp: false,
-          requireLmb: false
+          requireLmb: false,
+          foreignServer: false
         },
         getItem: get.items
       }
@@ -790,6 +799,15 @@
     computed: {
       exportJson() {
         return JSON.stringify(this.itemsData);
+      },
+      foreignServerSwitchMap: {
+        MAP: [true, false],
+        get () {
+          return this.MAP.indexOf(this.options.foreignServer)
+        },
+        set (value) {
+          this.options.foreignServer = this.MAP[value]
+        }
       }
     },
     methods: {
@@ -941,7 +959,6 @@
           }
         })
       }
-
     }
   };
 </script>
@@ -1057,13 +1074,13 @@
     border-radius: 50% !important;
     height: 30px !important;
     width: 30px !important;
-    transition: all .225s cubic-bezier(0.165, 0.84, 0.44, 1);
+    transition: all .125s cubic-bezier(0.165, 0.84, 0.44, 1);
   }
   ::v-deep .number-input-theme .number-input__button:hover {
     transform: scale(1.12);
   }
   ::v-deep .number-input-theme .number-input__button:active {
-    transform: scale(1.05);
+    transform: scale(1.02);
   }
 
   ::v-deep .number-input-theme .number-input__button--minus {
@@ -1106,5 +1123,10 @@
 
     user-select: none;
   }
+
+  ::v-deep .v-tabs .v-slide-group__prev {
+    display: none !important;
+  }
+
 
 </style>
