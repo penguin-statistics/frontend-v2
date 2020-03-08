@@ -8,7 +8,12 @@ Getters.items = {
   byItemId(itemId) {
     const got = this.all(true);
     if (!got) return {};
-    return got.get(itemId)
+    return got.get(itemId) || {}
+  },
+  byName (name) {
+    const got = this.all(false);
+    if (!got) return {};
+    return got.find(el => el.name === name) || {}
   },
   all(map=false) {
     const items = store.state.data.items;

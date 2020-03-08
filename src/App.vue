@@ -1,5 +1,6 @@
 <template>
   <v-app :class="languageFont">
+    <GlobalSnackbar />
     <v-navigation-drawer
       v-model="drawer"
       app
@@ -322,10 +323,12 @@
   import strings from "@/utils/strings";
   import config from "@/config";
   import {mapGetters} from "vuex";
+  import GlobalSnackbar from "@/components/global/GlobalSnackbar";
 
 export default {
   name: 'App',
   components: {
+    GlobalSnackbar,
     NetworkStateIndicator,
     RandomBackground,
     AccountManager

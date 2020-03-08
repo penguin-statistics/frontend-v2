@@ -68,8 +68,8 @@
     </v-dialog>
     <v-slide-x-reverse-transition>
       <v-card
-        v-if="(haveError && !model) || pending"
-        class="network-state-indicator"
+        v-if="show"
+        class="network-state-indicator transition-all"
         :class="{'error': haveError, 'blue darken-2': !haveError}"
       >
         <v-fade-transition>
@@ -125,13 +125,16 @@
     name: "NetworkStateIndicator",
     data () {
       return {
-        model: false,
+        model: false
       }
     },
     computed: {
       ...mapGetters('ajax', ['pending', 'errors']),
       haveError () {
         return this.errors.length > 0
+      },
+      show () {
+        return (this.haveError && !this.model) || this.pending
       }
     },
     watch: {
@@ -153,7 +156,7 @@
   }
 </script>
 
-<style scoped>
+<style>
   .network-state-indicator {
     position: fixed;
     right: 0;

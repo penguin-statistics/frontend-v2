@@ -138,7 +138,6 @@
   >
     <v-dialog
       v-model="calculation.done"
-      persistent
       scrollable
       max-width="calc(max(450px, 80vw))"
     >
@@ -276,20 +275,32 @@
                         <span class="font-weight-bold headline">{{ stage.stage }}</span>
                         <small class="float-right">#{{ index + 1 }}</small>
                       </div>
-                      <div class="display-1 text-center monospace font-weight-bold mb-2">
+                      <div class="display-1 text-center monospace font-weight-bold my-2">
                         {{ parseInt(stage.count).toLocaleString() }} <small class="title">{{ $t('calculation.times') }}</small>
                       </div>
-                      <ul class="pl-2">
-                        <li
+                      <div>
+                        <div
                           v-for="[name, value] in Object.entries(stage.items)"
                           :key="name"
-                          class="d-flex align-center"
+                          class="d-inline-flex mx-2 my-1 cursor-pointer"
+                          @click="redirectItem(getItem.byName(name).itemId)"
                         >
-                          <span class="font-weight-bold">{{ name }}</span>
-                          <v-divider class="mx-2" />
-                          <span class="monospace float-right">&times;{{ value }}</span>
-                        </li>
-                      </ul>
+                          <v-badge
+                            bottom
+                            overlap
+                            bordered
+                            label
+                            color="indigo"
+                            :offset-x="24"
+                            :offset-y="20"
+                            :content="`×${value}`"
+                          >
+                            <Item
+                              :item="getItem.byName(name)"
+                            />
+                          </v-badge>
+                        </div>
+                      </div>
                     </v-card-text>
                   </v-card>
                 </v-col>
@@ -320,24 +331,40 @@
                 >
                   <v-card class="card-item">
                     <v-card-text>
-                      <div class="title">
+                      <div class="title d-flex">
                         <span class="font-weight-bold headline">{{ synthesis.target }}</span>
-                        <small class="float-right">#{{ index + 1 }}</small>
+                        <v-spacer />
+                        <Item
+                          :item="getItem.byName(synthesis.target)"
+                          class="float-right"
+                          disable-tooltip
+                          :ratio="0.5"
+                        />
                       </div>
-                      <div class="display-1 text-center monospace font-weight-bold mb-2">
+                      <div class="display-1 text-center monospace font-weight-bold my-2">
                         &times;{{ parseInt(synthesis.count).toLocaleString() }}
                       </div>
-                      <ul class="pl-2">
-                        <li
-                          v-for="[name, value] in Object.entries(synthesis.materials)"
-                          :key="name"
-                          class="d-flex align-center"
+                      <div
+                        v-for="[name, value] in Object.entries(synthesis.materials)"
+                        :key="name"
+                        class="d-inline-flex mx-2 my-1 cursor-pointer"
+                        @click="redirectItem(getItem.byName(name).itemId)"
+                      >
+                        <v-badge
+                          bottom
+                          overlap
+                          bordered
+                          label
+                          color="secondary"
+                          :offset-x="24"
+                          :offset-y="20"
+                          :content="`×${value}`"
                         >
-                          <span class="font-weight-bold">{{ name }}</span>
-                          <v-divider class="mx-2" />
-                          <span class="monospace float-right">&times;{{ value }}</span>
-                        </li>
-                      </ul>
+                          <Item
+                            :item="getItem.byName(name)"
+                          />
+                        </v-badge>
+                      </div>
                     </v-card-text>
                   </v-card>
                 </v-col>
@@ -534,7 +561,9 @@
                   </v-card>
                 </v-tab-item>
                 <v-tab-item>
-                  <v-card flat>
+                  <v-card
+                    flat
+                  >
                     <v-card-text
                       class="monospace planner-import-export"
                     >
@@ -699,6 +728,8 @@
 
   import * as clipboard from "clipboard-polyfill";
   import marshaller from "@/utils/marshaller";
+  import snackbar from "@/utils/snackbar";
+  import Console from "@/utils/Console";
 
   export default {
     name: "Planner",
@@ -721,8 +752,8 @@
           })),
         calculation: {
           pending: false,
-          done: false,
-          data: {},
+          done: true,
+          data: {"cost":523285,"gcost":2200222,"gold":6279429,"exp":867763,"stages":[{"stage":"4-2","count":"2705","items":{"\u7cd6\u7ec4":"1067","\u5f02\u94c1":"417","\u5f02\u94c1\u788e\u7247":"348","\u7cd6":"532","\u4ee3\u7cd6":"448","\u7cd6\u805a\u5757":"107"}},{"stage":"4-4","count":"3048","items":{"\u56fa\u6e90\u5ca9\u7ec4":"69","\u56fa\u6e90\u5ca9":"934","\u6e90\u5ca9":"870","\u88c5\u7f6e":"376","\u626d\u8f6c\u9187":"1127","\u7834\u635f\u88c5\u7f6e":"340","\u767d\u9a6c\u9187":"153"}},{"stage":"4-9","count":"3237","items":{"\u916e\u51dd\u96c6":"249","\u7814\u78e8\u77f3":"74","RMA70-12":"960","\u916f\u539f\u6599":"1299","\u916e\u51dd\u96c6\u7ec4":"85","\u805a\u9178\u916f\u7ec4":"113","\u805a\u9178\u916f":"290","\u53cc\u916e":"1026","RMA70-24":"141"}},{"stage":"4-6","count":"3494","items":{"\u56fa\u6e90\u5ca9\u7ec4":"1566","\u56fa\u6e90\u5ca9":"1083","\u6e90\u5ca9":"989","\u88c5\u7f6e":"433","\u626d\u8f6c\u9187":"75","\u7834\u635f\u88c5\u7f6e":"381","\u63d0\u7eaf\u6e90\u5ca9":"190"}},{"stage":"4-5","count":"2753","items":{"\u916e\u51dd\u96c6":"258","\u916f\u539f\u6599":"1126","\u916e\u51dd\u96c6\u7ec4":"854","\u805a\u9178\u916f":"290","\u53cc\u916e":"902","\u916e\u9635\u5217":"101"}},{"stage":"4-8","count":"2262","items":{"\u916e\u51dd\u96c6":"160","\u7814\u78e8\u77f3":"786","RMA70-12":"46","\u916f\u539f\u6599":"910","\u916e\u51dd\u96c6\u7ec4":"59","\u805a\u9178\u916f\u7ec4":"77","\u805a\u9178\u916f":"192","\u53cc\u916e":"732","\u4e94\u6c34\u7814\u78e8\u77f3":"102"}},{"stage":"4-7","count":"3889","items":{"\u56fa\u6e90\u5ca9\u7ec4":"89","\u56fa\u6e90\u5ca9":"1220","\u6e90\u5ca9":"1077","\u88c5\u7f6e":"477","\u7834\u635f\u88c5\u7f6e":"432","\u8f7b\u9530\u77ff":"1157","\u4e09\u6c34\u9530\u77ff":"154"}},{"stage":"6-4","count":"1198","items":{"\u916e\u51dd\u96c6":"110","\u7814\u78e8\u77f3":"25","\u916f\u539f\u6599":"501","\u805a\u9178\u916f\u7ec4":"460","\u805a\u9178\u916f":"129","\u53cc\u916e":"382","\u805a\u9178\u916f\u5757":"47"}},{"stage":"4-10","count":"1924","items":{"\u5168\u65b0\u88c5\u7f6e":"577","\u56fa\u6e90\u5ca9\u7ec4":"71","\u56fa\u6e90\u5ca9":"664","\u6e90\u5ca9":"422","\u88c5\u7f6e":"266","\u626d\u8f6c\u9187":"70","\u7834\u635f\u88c5\u7f6e":"159","\u6539\u91cf\u88c5\u7f6e":"59"}},{"stage":"S4-1","count":"3325","items":{"\u5f02\u94c1":"521","\u5f02\u94c1\u788e\u7247":"452","\u7cd6":"637","\u4ee3\u7cd6":"553","\u5f02\u94c1\u7ec4":"1041","\u5f02\u94c1\u5757":"109"}}],"syntheses":[{"target":"D32\u94a2","count":"202","materials":{"\u4e09\u6c34\u9530\u77ff":"202","\u4e94\u6c34\u7814\u78e8\u77f3":"202","RMA70-24":"202"}},{"target":"\u53cc\u6781\u7eb3\u7c73\u7247","count":"222","materials":{"\u6539\u91cf\u88c5\u7f6e":"222","\u767d\u9a6c\u9187":"444"}},{"target":"\u805a\u5408\u5242","count":"204","materials":{"\u63d0\u7eaf\u6e90\u5ca9":"204","\u5f02\u94c1\u5757":"204","\u916e\u9635\u5217":"204"}},{"target":"RMA70-24","count":"297","materials":{"RMA70-12":"297","\u56fa\u6e90\u5ca9\u7ec4":"594","\u916e\u51dd\u96c6\u7ec4":"297"}},{"target":"\u4e94\u6c34\u7814\u78e8\u77f3","count":"389","materials":{"\u7814\u78e8\u77f3":"389","\u5f02\u94c1\u7ec4":"389","\u5168\u65b0\u88c5\u7f6e":"389"}},{"target":"\u4e09\u6c34\u9530\u77ff","count":"284","materials":{"\u8f7b\u9530\u77ff":"568","\u805a\u9178\u916f\u7ec4":"284","\u626d\u8f6c\u9187":"284"}},{"target":"\u767d\u9a6c\u9187","count":"574","materials":{"\u626d\u8f6c\u9187":"574","\u7cd6\u7ec4":"574","RMA70-12":"574"}},{"target":"\u88c5\u7f6e","count":"422","materials":{"\u7834\u635f\u88c5\u7f6e":"1266"}},{"target":"\u5168\u65b0\u88c5\u7f6e","count":"465","materials":{"\u88c5\u7f6e":"1860"}},{"target":"\u6539\u91cf\u88c5\u7f6e","count":"325","materials":{"\u5168\u65b0\u88c5\u7f6e":"325","\u56fa\u6e90\u5ca9\u7ec4":"650","\u7814\u78e8\u77f3":"325"}},{"target":"\u916e\u51dd\u96c6","count":"997","materials":{"\u53cc\u916e":"2991"}},{"target":"\u916e\u51dd\u96c6\u7ec4","count":"407","materials":{"\u916e\u51dd\u96c6":"1628"}},{"target":"\u916e\u9635\u5217","count":"311","materials":{"\u916e\u51dd\u96c6\u7ec4":"622","\u7cd6\u7ec4":"311","\u8f7b\u9530\u77ff":"311"}},{"target":"\u5f02\u94c1","count":"246","materials":{"\u5f02\u94c1\u788e\u7247":"738"}},{"target":"\u5f02\u94c1\u7ec4","count":"258","materials":{"\u5f02\u94c1":"1032"}},{"target":"\u5f02\u94c1\u5757","count":"293","materials":{"\u5f02\u94c1\u7ec4":"586","\u5168\u65b0\u88c5\u7f6e":"293","\u805a\u9178\u916f\u7ec4":"293"}},{"target":"\u805a\u9178\u916f","count":"1251","materials":{"\u916f\u539f\u6599":"3753"}},{"target":"\u805a\u9178\u916f\u7ec4","count":"493","materials":{"\u805a\u9178\u916f":"1972"}},{"target":"\u805a\u9178\u916f\u5757","count":"199","materials":{"\u805a\u9178\u916f\u7ec4":"398","\u916e\u51dd\u96c6\u7ec4":"199","\u626d\u8f6c\u9187":"199"}},{"target":"\u7cd6","count":"309","materials":{"\u4ee3\u7cd6":"927"}},{"target":"\u7cd6\u7ec4","count":"324","materials":{"\u7cd6":"1296"}},{"target":"\u7cd6\u805a\u5757","count":"162","materials":{"\u7cd6\u7ec4":"324","\u5f02\u94c1\u7ec4":"162","\u8f7b\u9530\u77ff":"162"}},{"target":"\u56fa\u6e90\u5ca9","count":"1082","materials":{"\u6e90\u5ca9":"3246"}},{"target":"\u56fa\u6e90\u5ca9\u7ec4","count":"949","materials":{"\u56fa\u6e90\u5ca9":"4745"}},{"target":"\u63d0\u7eaf\u6e90\u5ca9","count":"301","materials":{"\u56fa\u6e90\u5ca9\u7ec4":"1204"}}],"values":[{"level":"5","items":[{"name":"\u805a\u5408\u5242","value":"325.07"},{"name":"D32\u94a2","value":"322.68"},{"name":"\u53cc\u6781\u7eb3\u7c73\u7247","value":"287.93"}]},{"level":"4","items":[{"name":"\u5f02\u94c1\u5757","value":"128.63"},{"name":"\u916e\u9635\u5217","value":"114.94"},{"name":"\u6539\u91cf\u88c5\u7f6e","value":"114.30"},{"name":"\u4e09\u6c34\u9530\u77ff","value":"109.34"},{"name":"\u7cd6\u805a\u5757","value":"109.20"},{"name":"RMA70-24","value":"108.65"},{"name":"\u805a\u9178\u916f\u5757","value":"105.59"},{"name":"\u4e94\u6c34\u7814\u78e8\u77f3","value":"104.69"},{"name":"\u767d\u9a6c\u9187","value":"86.82"},{"name":"\u63d0\u7eaf\u6e90\u5ca9","value":"81.51"},{"name":"\u70bd\u5408\u91d1\u5757","value":"32.43"},{"name":"\u805a\u5408\u51dd\u80f6","value":"15.20"}]},{"level":"3","items":[{"name":"\u5168\u65b0\u88c5\u7f6e","value":"41.45"},{"name":"RMA70-12","value":"37.35"},{"name":"\u7814\u78e8\u77f3","value":"32.10"},{"name":"\u5f02\u94c1\u7ec4","value":"31.14"},{"name":"\u916e\u51dd\u96c6\u7ec4","value":"30.55"},{"name":"\u8f7b\u9530\u77ff","value":"29.60"},{"name":"\u626d\u8f6c\u9187","value":"25.24"},{"name":"\u805a\u9178\u916f\u7ec4","value":"24.90"},{"name":"\u7cd6\u7ec4","value":"24.23"},{"name":"\u56fa\u6e90\u5ca9\u7ec4","value":"20.38"},{"name":"\u51dd\u80f6","value":"0.00000"},{"name":"\u70bd\u5408\u91d1","value":"0.00000"}]},{"level":"2","items":[{"name":"\u88c5\u7f6e","value":"10.36"},{"name":"\u5f02\u94c1","value":"7.79"},{"name":"\u916e\u51dd\u96c6","value":"7.64"},{"name":"\u805a\u9178\u916f","value":"6.22"},{"name":"\u7cd6","value":"6.06"},{"name":"\u56fa\u6e90\u5ca9","value":"4.08"}]},{"level":"1","items":[{"name":"\u7834\u635f\u88c5\u7f6e","value":"3.45"},{"name":"\u5f02\u94c1\u788e\u7247","value":"2.60"},{"name":"\u53cc\u916e","value":"2.55"},{"name":"\u916f\u539f\u6599","value":"2.07"},{"name":"\u4ee3\u7cd6","value":"2.02"},{"name":"\u6e90\u5ca9","value":"1.36"}]}]},
           tab: null,
           tabs: [{
             id: "stages",
@@ -742,7 +773,8 @@
           byProduct: false,
           requireExp: false,
           requireLmb: false
-        }
+        },
+        getItem: get.items
       }
     },
     computed: {
@@ -760,9 +792,12 @@
           })
         )
           .then(({data}) => {
-            console.log(data);
+            Console.log(data);
             this.$set(this.calculation, "data", data);
             this.calculation.done = true
+          })
+          .catch(() => {
+            snackbar.networkError()
           })
           .finally(() => {
             this.calculation.pending = false;
@@ -777,30 +812,79 @@
         try {
           imported = JSON.parse(this.importJson);
         } catch (e) {
-          alert(e);
+          Console.error("json error", e)
+          snackbar.launch("error", 5000, "planner.import.jsonError", {
+            error: e.toString()
+          });
           return
         }
-        if (imported.length !== this.itemsData.length)
-          return;
-        let importedAsMap = new Map();
-        for (const itemData of imported)
-          if (!(itemData.hasOwnProperty("id") && this.items.has(itemData.id) &&
-            itemData.hasOwnProperty("need") && Number.isInteger(itemData.need) && itemData.need >= 0 &&
-            itemData.hasOwnProperty("have") && Number.isInteger(itemData.have) && itemData.have >= 0))
-            return;
-          else
-            importedAsMap.set(itemData.id, [itemData.need, itemData.have]);
-        let newItemsData = [];
-        for (const item of this.items) {
-          let importedItem = importedAsMap.get(item.itemId);
-          newItemsData.push({id: item.itemId, need: importedItem[0], have: importedItem[1]});
+        let convertedImported = [];
+        for (const itemData of imported) {
+          if (!(itemData.hasOwnProperty("need") && Number.isInteger(itemData.need) && itemData.need >= 0 &&
+            itemData.hasOwnProperty("have") && Number.isInteger(itemData.have) && itemData.have >= 0)) {
+            Console.warn("one of the item data is invalid. not importing this and continue to the next one (reason: need or have invalid): ", itemData)
+            continue
+          }
+          const haveId = itemData.hasOwnProperty("id");
+          const haveName = itemData.hasOwnProperty("name");
+          if (haveId) {
+            if (!haveName) {
+              itemData.name = get.items.byItemId(itemData.id).name
+            }
+            convertedImported.push(itemData)
+          } else if (!haveId) {
+            if (!haveName) {
+              Console.warn("one of the item data is invalid. not importing this and continue to the next one (reason: no id and name): ", itemData)
+              continue
+            }
+            const item = get.items.byName(itemData.name);
+            convertedImported.push({
+              id: item.itemId,
+              name: item.name,
+              need: itemData.need,
+              have: itemData.have
+            })
+          }
         }
-        this.itemsData = newItemsData;
+
+        let importedCounter = 0;
+
+        for (const item of convertedImported) {
+          const object = this.itemsData.find(el => el.id === item.id);
+          if (!object) {
+            Console.warn("no item found with", item);
+            continue
+          }
+          object.have = item.have;
+          object.need = item.need;
+          importedCounter++;
+        }
+
+        this.importJson = "";
         this.importExportDialog = false;
+        snackbar.launch("success", 5000, "planner.import.success", {
+          amount: importedCounter
+        })
       },
       copyExportJson() {
-        clipboard.writeText(this.exportJson);
+        clipboard.writeText(this.exportJson)
+          .then(() => {
+            snackbar.launch("success", 5000, "clipboard.success")
+          })
+          .catch(() => {
+            snackbar.launch("error", 5000, "clipboard.error")
+          })
+      },
+      redirectItem(itemId) {
+        console.log(itemId)
+        this.$router.push({
+          name: "StatsByItem_SelectedItem",
+          params: {
+            itemId
+          }
+        })
       }
+
     }
   };
 </script>
@@ -835,13 +919,12 @@
 
   .planner-import-export, ::v-deep .planner-import-export textarea {
     word-break: break-all;
-    line-height: 1.1 !important;
+    line-height: 1.2 !important;
     font-size: 12px;
-    max-height: 300px;
-    -webkit-backface-visibility: hidden;
-    backface-visibility: hidden;
-    flex: 1 1 auto;
-    overflow-y: auto;
+  }
+
+  ::v-deep .planner-import-export textarea {
+    padding: 8px 0;
   }
 
   .fix-icon--left {
@@ -884,7 +967,7 @@
   ::v-deep .number-input-theme .number-input__input {
     background: rgba(0, 0, 0, .2) !important;
     border: 1px solid #ddd;
-    border-radius: 1rem !important;
+    border-radius: 17px !important;
     top: 0 !important;
     font-size: 16px;
     text-overflow: ellipsis;
@@ -920,7 +1003,7 @@
     transition: all .225s cubic-bezier(0.165, 0.84, 0.44, 1);
   }
   ::v-deep .number-input-theme .number-input__button:hover {
-    transform: scale(1.15);
+    transform: scale(1.12);
   }
   ::v-deep .number-input-theme .number-input__button:active {
     transform: scale(1.05);
