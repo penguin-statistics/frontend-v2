@@ -741,6 +741,7 @@
 <script>
   import planner from "@/apis/planner";
   import get from "@/utils/getters";
+  import i18n from "@/i18n";
   import Item from "@/components/global/Item";
 
   import * as clipboard from "clipboard-polyfill";
@@ -791,7 +792,7 @@
           byProduct: false,
           requireExp: false,
           requireLmb: false,
-          foreignServer: false
+          foreignServer: i18n.locale !== "zh"
         },
         getItem: get.items
       }
@@ -799,15 +800,6 @@
     computed: {
       exportJson() {
         return JSON.stringify(this.itemsData);
-      },
-      foreignServerSwitchMap: {
-        MAP: [true, false],
-        get () {
-          return this.MAP.indexOf(this.options.foreignServer)
-        },
-        set (value) {
-          this.options.foreignServer = this.MAP[value]
-        }
       }
     },
     methods: {
