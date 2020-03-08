@@ -331,15 +331,14 @@
                 >
                   <v-card class="card-item">
                     <v-card-text>
-                      <div class="title d-flex">
-                        <span class="font-weight-bold headline">{{ synthesis.target.name }}</span>
-                        <v-spacer />
+                      <div class="title d-block">
                         <Item
                           :item="synthesis.target.item"
-                          class="float-right"
                           disable-tooltip
+                          class="float-right"
                           :ratio="0.5"
                         />
+                        <span class="font-weight-bold headline">{{ synthesis.target.name }}</span>
                       </div>
                       <div class="display-1 text-center monospace font-weight-bold my-2">
                         &times;{{ parseInt(synthesis.count).toLocaleString() }}
@@ -563,7 +562,7 @@
                       <v-btn
                         color="green"
                         text
-                        @click="importToItemsData"
+                        @click="importFromText"
                       >
                         {{ $t('actions.import') }}
                       </v-btn>
@@ -862,11 +861,7 @@
             this.calculation.pending = false;
           })
       },
-      // fontSize (v) {
-      //   return {fontSize: `${(16 + (v.toString().length * -1.8)) * (document.body.clientWidth / 800)}px`}
-      //   // return {fontSize: `${2 - (v.toString().length - 1) * 0.5}ch`}
-      // },
-      importToItemsData() {
+      importFromText () {
         let imported;
         try {
           imported = JSON.parse(this.importJson);
@@ -877,6 +872,9 @@
           });
           return
         }
+        this.importToItemsData(imported)
+      },
+      importToItemsData(imported) {
         let convertedImported = [];
         for (const itemData of imported) {
           if (!(itemData.hasOwnProperty("need") && Number.isInteger(itemData.need) && itemData.need >= 0 &&
@@ -1082,10 +1080,13 @@
     border-radius: 0 15px 15px 0 !important;
   }
   ::v-deep .number-input-theme--dense .number-input__button::before {
-    width: 75%;
+    width: 14px;
   }
   ::v-deep .number-input-theme--dense .number-input__button {
-    width: 20px !important;
+    width: 24px !important;
+  }
+  ::v-deep .number-input-theme--dense .number-input__button:hover {
+    width: 30px !important;
   }
   ::v-deep .number-input-theme--dense .number-input__input {
     padding-left: 20px !important;

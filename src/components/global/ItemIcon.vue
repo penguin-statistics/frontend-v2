@@ -2,7 +2,7 @@
   <figure
     v-if="item.itemId !== 'furni' && item.spriteCoord"
     :class="{'item-icon--sprite': true, 'item-icon--sprite--disable-hover-effect': disableTooltip}"
-    :alt="`item(${item.itemId})`"
+    :alt="item.name"
     :style="style"
   />
   <v-icon
