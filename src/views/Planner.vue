@@ -3,7 +3,7 @@
     "zh": {
       "options": {
         "_name": "选项",
-        "byProduct": "计算合成副产物",
+        "byProduct": "考虑合成副产物",
         "requireExp": "大量需求经验",
         "requireLmb": "大量需求龙门币"
       },
@@ -11,7 +11,6 @@
         "import": "导入",
         "export": "导出",
         "importExport": "@:(actions.import)/@:(actions.export)",
-        "becomeIdol": "众筹站长女装",
         "calculate": "计算规划"
       },
       "have": "已有",
@@ -28,9 +27,8 @@
         "sanity": "预计需要理智",
         "exp": "预计获得录像带经验",
         "times": "次",
-        "items": "将得到物品",
-        "level": "素材等级",
-        "noStage": "未找到需要作战的关卡。是不是忘记选择所需素材了？",
+        "level": "材料等级",
+        "noStage": "未找到需要进行的作战。是不是忘记选择所需素材了？",
         "noSyntheses": "未找到需要合成的素材。是不是忘记选择所需素材了？"
       }
     },
@@ -38,14 +36,13 @@
       "options": {
         "_name": "Options",
         "byProduct": "Consider by-products",
-        "requireExp": "Require large amount of EXP",
-        "requireLmb": "Require large amount of LMB"
+        "requireExp": "Large demand for EXP",
+        "requireLmb": "Large demand for LMD"
       },
       "actions": {
         "import": "Import",
         "export": "Export",
         "importExport": "@:(actions.import)/@:(actions.export)",
-        "becomeIdol": "Become Idol!",
         "calculate": "Calculate"
       },
       "have": "Have",
@@ -58,14 +55,77 @@
           "syntheses": "Syntheses",
           "values": "Values"
         },
-        "lmb": "Estimated LMB income",
+        "lmb": "Estimated LMD income",
         "sanity": "Estimated Sanity required",
         "exp": "Estimated EXP from Battle Records",
         "times": "battles",
-        "items": "Will get",
         "level": "Material Level",
         "noStage": "No stage found. Have you selected any material yet?",
         "noSyntheses": "No syntheses found. Have you selected any material yet?"
+      }
+    },
+    "ja": {
+      "options": {
+        "_name": "オプション",
+        "byProduct": "加工副産物を考慮する",
+        "requireExp": "大量の経験値が必要",
+        "requireLmb": "大量の龍門幣が必要"
+      },
+      "actions": {
+        "import": "インポート",
+        "export": "エクスポート",
+        "importExport": "@:(actions.import)/@:(actions.export)",
+        "calculate": "計算を行う"
+      },
+      "have": "所持数",
+      "need": "必要数",
+      "copy": "クリップボードにコピー",
+      "calculation": {
+        "title": "計算結果",
+        "tabs": {
+          "stages": "ステージ",
+          "syntheses": "素材加工",
+          "values": "素材等級"
+        },
+        "lmb": "推定獲得龍門幣",
+        "sanity": "推定必要理性",
+        "exp": "戦闘で入手出来る経験値の推定",
+        "times": "回",
+        "level": "素材レベル",
+        "noStage": "入力内容に不備があるため結果を表示出来ません。必要な素材の入力を忘れていませんか？",
+        "noSyntheses": "入力内容に不備があるため結果を表示出来ません。必要な素材の入力を忘れていませんか？"
+      }
+    },
+    "ko": {
+      "options": {
+        "_name": "설정",
+        "byProduct": "부산물 획득 고려",
+        "requireExp": "경험치 획득 고려",
+        "requireLmb": "용문폐 획득 고려"
+      },
+      "actions": {
+        "import": "가져오기",
+        "export": "내보내기",
+        "importExport": "@:(actions.import)/@:(actions.export)",
+        "calculate": "계산하기"
+      },
+      "have": "소유량",
+      "need": "필요량",
+      "copy": "클립보드에 복사",
+      "calculation": {
+        "title": "계산 결과",
+        "tabs": {
+          "stages": "작전 지역 기준",
+          "syntheses": "재료 가공 기준",
+          "values": "재료 등급 기준"
+        },
+        "lmb": "예상 용문폐 획득량",
+        "sanity": "예상 이성 필요량",
+        "exp": "예상 경험치 획득량",
+        "times": "회",
+        "level": "재료 등급",
+        "noStage": "작전 지역을 찾을 수 없습니다. 필요한 재료를 선택하셨습니까?",
+        "noSyntheses": "가공할 재료를 찾을 수 없습니다. 필요한 재료를 선택하셨습니까?"
       }
     }
   }
@@ -218,9 +278,6 @@
                       </div>
                       <div class="display-1 text-center monospace font-weight-bold mb-2">
                         {{ parseInt(stage.count).toLocaleString() }} <small class="title">{{ $t('calculation.times') }}</small>
-                      </div>
-                      <div class="subtitle-1">
-                        {{ $t('calculation.items') }}
                       </div>
                       <ul class="pl-2">
                         <li
