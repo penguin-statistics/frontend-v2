@@ -6,7 +6,7 @@
         "byProduct": "考虑合成副产物",
         "requireExp": "大量需求经验",
         "requireLmb": "大量需求龙门币",
-        "foreignServer": "仅计算国际服关卡"
+        "foreignServer": "不考虑第六章"
       },
       "actions": {
         "import": "导入",
@@ -39,7 +39,7 @@
         "byProduct": "Consider by-products",
         "requireExp": "Large demand for EXP",
         "requireLmb": "Large demand for LMD",
-        "foreignServer": "Only foreign server stages"
+        "foreignServer": "Do not add Chapter 6 into calculation"
       },
       "actions": {
         "import": "Import",
@@ -71,7 +71,8 @@
         "_name": "オプション",
         "byProduct": "加工副産物を考慮する",
         "requireExp": "大量の経験値が必要",
-        "requireLmb": "大量の龍門幣が必要"
+        "requireLmb": "大量の龍門幣が必要",
+        "foreignServer": "第6章を計算に追加しません"
       },
       "actions": {
         "import": "インポート",
@@ -103,7 +104,8 @@
         "_name": "설정",
         "byProduct": "부산물 획득 고려",
         "requireExp": "경험치 획득 고려",
-        "requireLmb": "용문폐 획득 고려"
+        "requireLmb": "용문폐 획득 고려",
+        "foreignServer": "에피소드 6을 계산에 추가하지 않습니다"
       },
       "actions": {
         "import": "가져오기",
