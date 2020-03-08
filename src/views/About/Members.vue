@@ -264,6 +264,16 @@
               }
             },
             {
+              name: "根派",
+              responsibility: [
+                r.arkplanner
+              ],
+              avatar: "genpai.jpg",
+              socials: {
+                github: "https://github.com/SQRPI"
+              }
+            },
+            {
               name: "Einzithy.D",
               responsibility: [
                 r.statistics
@@ -271,6 +281,16 @@
               avatar: "j.png",
               socials: {
                 github: "https://github.com/Einzithy-D"
+              }
+            },
+            {
+              name: "Blealtan",
+              responsibility: [
+                r.frontend
+              ],
+              avatar: "blealtan.png",
+              socials: {
+                github: "https://github.com/Blealtan"
               }
             },
             {
@@ -314,38 +334,6 @@
               }
             }
           ],
-          others: [
-            {
-              name: "Nemunemu",
-              responsibility: [
-                r.customersupport
-              ],
-              avatar: "nemunemu.jpg",
-              socials: {
-                weibo: "https://www.weibo.com/nemunemu"
-              }
-            },
-            {
-              name: "侠",
-              responsibility: [
-                r.logo
-              ],
-              avatar: "xia.png",
-              socials: {
-                weibo: "https://www.weibo.com/u/2290638732"
-              }
-            },
-            {
-              name: "水晶泡芙",
-              responsibility: [
-                r.materials
-              ],
-              avatar: "paofu.png",
-              socials: {
-                github: "https://github.com/Evealicemier"
-              }
-            }
-          ],
           translators: [
             {
               name: "Syaro",
@@ -375,6 +363,38 @@
               avatar: "win.png",
               socials: {
                 twitter: "https://twitter.com/Winterer000000"
+              }
+            }
+          ],
+          others: [
+            {
+              name: "Nemunemu",
+              responsibility: [
+                r.customersupport
+              ],
+              avatar: "nemunemu.jpg",
+              socials: {
+                weibo: "https://www.weibo.com/nemunemu"
+              }
+            },
+            {
+              name: "侠",
+              responsibility: [
+                r.logo
+              ],
+              avatar: "xia.png",
+              socials: {
+                weibo: "https://www.weibo.com/u/2290638732"
+              }
+            },
+            {
+              name: "水晶泡芙",
+              responsibility: [
+                r.materials
+              ],
+              avatar: "paofu.png",
+              socials: {
+                github: "https://github.com/Evealicemier"
               }
             }
           ]
