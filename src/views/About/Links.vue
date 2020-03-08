@@ -16,6 +16,7 @@
           "walkthrough": "通关攻略",
           "experience": "经验分享",
           "ja_translation": "剧情日文翻译",
+          "cn_wiki": "国服wiki",
           "jp_wiki": "日服Wiki"
         }
       }
@@ -36,6 +37,7 @@
           "walkthrough": "Walkthrough",
           "experience": "Experience",
           "ja_translation": "Japanese Translation of Main Story",
+          "cn_wiki": "CN Server Wiki",
           "jp_wiki": "JP Server Wiki"
         }
       }
@@ -56,6 +58,7 @@
           "walkthrough": "ステージ攻略",
           "experience": "ゲームレビュー",
           "ja_translation": "ストーリー和訳",
+          "cn_wiki": "大陸版Wiki",
           "jp_wiki": "日本版Wiki"
         }
       }
@@ -76,6 +79,7 @@
           "walkthrough": "공략집",
           "experience": "팁 모음",
           "ja_translation": "메인스토리 일본어 번역",
+          "cn_wiki": "중국서버 위키",
           "jp_wiki": "일본서버 위키"
         }
       }
@@ -284,19 +288,21 @@ export default {
           url: "https://smartgamecap.net"
         },
         {
+          title: "PRTS",
+          features: [
+            {
+              name: "cn_wiki",
+              color: "blue-grey"
+            }
+          ],
+          url: "http://ak.mooncell.wiki/id/1"
+        },
+        {
           title: "ANWiki",
           features: [
             {
               name: "jp_wiki",
               color: "blue-grey"
-            },
-            {
-              name: "walkthrough",
-              color: "brown"
-            },
-            {
-              name: "character",
-              color: "orange"
             }
           ],
           url: "https://wiki.gamerclub.jp/anwiki"
