@@ -118,11 +118,6 @@
 </script>
 
 <style scoped>
-  .quantity {
-    font-family: Consolas, Courier New, Courier, monospace;
-    font-weight: 700;
-  }
-
   .disabled {
     user-select: none;
   }

@@ -143,7 +143,7 @@
             justify="center"
           >
             <v-chip
-              class="ma-2"
+              class="ma-2 force-not-lang-font"
               color="primary"
               text-color="white"
               @click="goToHref(link)"
@@ -333,10 +333,5 @@ export default {
 .link-card {
   width: 100%;
   border: 1px solid rgba(255, 255, 255, 0.75);
-}
-
-.monospace {
-  font-family: SF Mono, Consolas, Courier, Courier New, monospace;
-  font-size: 10px;
 }
 </style>
