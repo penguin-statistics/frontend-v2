@@ -1,5 +1,6 @@
 <template>
-  <v-app>
+  <v-app :class="languageFont">
+    <GlobalSnackbar />
     <v-navigation-drawer
       v-model="drawer"
       app
@@ -146,7 +147,7 @@
                     :key="i"
                     @click="changeLocale(locale.id)"
                   >
-                    <v-list-item-title>
+                    <v-list-item-title class="mr-2">
                       {{ locale.name }}
                     </v-list-item-title>
                     <v-list-item-action v-if="locale.beta">
@@ -154,7 +155,7 @@
                         mdi-beta
                       </v-icon>
                     </v-list-item-action>
-                    <v-list-item-action-text class="monospace">
+                    <v-list-item-action-text class="monospace ml-2">
                       {{ locale.id }}
                     </v-list-item-action-text>
                   </v-list-item>
@@ -169,6 +170,7 @@
       app
       dark
       color="blue darken-3"
+      style="min-height: calc(56px + env(safe-area-inset-top)); padding-top: env(safe-area-inset-top)"
     >
       <v-app-bar-nav-icon
         @click.stop="drawer = !drawer"
@@ -186,10 +188,19 @@
             <v-img
               :src="randomizedLogo"
               class="randomizedLogo"
-            />
+            >
+              <template v-slot:placeholder>
+                <v-img
+                  :src="require('@/assets/logo.png')"
+                  aspect-ratio="1"
+                  height="32px"
+                  contain
+                />
+              </template>
+            </v-img>
           </v-avatar>
         </transition>
-        <span class="title">
+        <span class="title force-lang-font">
           {{ $t($router.currentRoute.meta.i18n) }}
         </span>
       </v-toolbar-title>
@@ -199,7 +210,7 @@
       <AccountManager />
     </v-app-bar>
     <RandomBackground />
-    <v-content>
+    <v-content style="padding-top: calc(env(safe-area-inset-top) + 56px) !important;">
       <transition
         name="slide-fade"
         mode="out-in"
@@ -312,10 +323,12 @@
   import strings from "@/utils/strings";
   import config from "@/config";
   import {mapGetters} from "vuex";
+  import GlobalSnackbar from "@/components/global/GlobalSnackbar";
 
 export default {
   name: 'App',
   components: {
+    GlobalSnackbar,
     NetworkStateIndicator,
     RandomBackground,
     AccountManager
@@ -336,8 +349,7 @@ export default {
           name: '日本語'
         }, {
           id: 'ko',
-          name: '한국어',
-          beta: true,
+          name: '한국어'
         }
       ],
       prefetchingResources: false,
@@ -352,8 +364,8 @@ export default {
         return this.dark
       },
       set (value) {
+        this.$vuetify.theme.dark = value;
         this.$store.commit('settings/switchDark', value)
-        this.$vuetify.theme.dark = value
       }
     },
     localizationMapper: {
@@ -361,6 +373,9 @@ export default {
         return this.localizations.indexOf(this.localizations.find(el => el.id === this.$i18n.locale))
       },
       set () {}
+    },
+    languageFont () {
+      return `lang-${this.$i18n.locale}`
     }
   },
   watch: {
@@ -375,7 +390,7 @@ export default {
     this.$store.dispatch("data/fetch", false)
   },
   created () {
-    this.randomizeLogo();
+    // this.randomizeLogo();
     this.onDarkChange(this.dark);
 
     if (this.language) {
@@ -402,9 +417,9 @@ export default {
     },
     onDarkChange (newValue) {
       if (newValue) {
-        document.body.style.backgroundColor = "#303030"
+        document.body.style.backgroundColor = "#121212"
       } else {
-        document.body.style.backgroundColor = "#fafafa"
+        document.body.style.backgroundColor = "#ffffff"
       }
     },
 
@@ -439,9 +454,11 @@ export default {
       if (localeId !== this.$i18n.locale) {
         Console.debug("[i18n] locale changed to:", localeId, "| saving to vuex:", save);
         this.$i18n.locale = localeId;
+        this.$vuetify.lang.current = localeId;
+        document.title = `${this.$t(this.$route.meta.i18n) + ' | ' || ''}${this.$t('app.name')}`;
+        document.documentElement.lang = localeId;
         // this.$vuetify.lang.current = localeId;
         if (save) this.$store.commit("settings/changeLocale", localeId);
-        document.title = `${this.$t(this.$route.meta.i18n) + ' | ' || ''}${this.$t('app.name')}`;
       } else {
         Console.debug("[i18n] Same locale");
       }
@@ -460,10 +477,10 @@ export default {
 
 <style>
   .slide-fade-enter-active {
-    transition: all .225s cubic-bezier(0.165, 0.84, 0.44, 1);
+    transition: all .175s cubic-bezier(0.165, 0.84, 0.44, 1);
   }
   .slide-fade-leave-active {
-    transition: all .125s cubic-bezier(0.165, 0.84, 0.44, 1);
+    transition: all .075s cubic-bezier(0.165, 0.84, 0.44, 1);
   }
   .slide-fade-enter, .slide-fade-leave-to
     /* .slide-fade-leave-active for below version 2.1.8 */ {
@@ -471,23 +488,26 @@ export default {
     opacity: 0;
   }
 
-  .theme--dark, .theme--light {
+  .transition-all {
+    transition: all .225s cubic-bezier(0.165, 0.84, 0.44, 1);
+  }
+
+  .v-navigation-drawer {
     transition: all .3s cubic-bezier(.25,.8,.5,1) !important;
   }
 
   .drawer-logo {
-    height: 256px;
-    padding: 32px;
+    height: calc(256px + env(safe-area-inset-top));
+    padding: calc(32px + env(safe-area-inset-top)) 32px 32px 32px;
     overflow: hidden;
     transition: all .5s cubic-bezier(0.19, 1, 0.22, 1);
   }
 
   .drawer-logo:hover {
-    height: 304px;
-    padding: 32px;
+    height: calc(304px + env(safe-area-inset-top));
   }
   .drawer-logo--two-line:hover {
-    height: 336px;
+    height: calc(336px + env(safe-area-inset-top));
   }
   .drawer-logo > .description {
     margin-top: 16px;
@@ -511,7 +531,7 @@ export default {
   }
 
   .theme--dark .bkop-light {
-    background: rgba(66, 66, 66, .85) !important;
+    background: rgba(46, 46, 46, .85) !important;
   }
 
   .theme--light .bkop-medium {
@@ -519,7 +539,7 @@ export default {
   }
 
   .theme--dark .bkop-medium {
-    background: rgba(66, 66, 66, .9) !important;
+    background: rgba(46, 46, 46, .9) !important;
   }
 
   .cursor-pointer {
@@ -550,6 +570,9 @@ export default {
   .no-wrap--text {
     word-break: break-word;
   }
+  .no-break--text {
+    word-break: keep-all;
+  }
 
   .monospace {
     font-family: SF Mono, "Droid Sans Mono", Ubuntu Mono, Consolas, Courier New, Courier, monospace;
@@ -560,6 +583,21 @@ export default {
     /*In case the old browsers doesn't support advanced CSS calculations*/
     padding-bottom: 8px !important;
     padding-bottom: calc(max(env(safe-area-inset-bottom), 8px)) !important;
+  }
+
+  .v-stepper__items, .v-stepper__wrapper {
+    overflow: initial !important;
+  }
+
+  .lang-ja .force-lang-font, .lang-ja {
+    /*font-family : 'ヒラギノ角ゴ ProN' , 'Hiragino Kaku Gothic ProN' , '游ゴシック' , '游ゴシック体' , YuGothic , 'Yu Gothic' , 'メイリオ' , Meiryo , 'ＭＳ ゴシック' , 'MS Gothic' , HiraKakuProN-W3 , 'TakaoExゴシック' , TakaoExGothic , 'MotoyaLCedar' , 'Droid Sans Japanese' , sans-serif !important;*/
+    font-family : 'ヒラギノ角ゴ ProN' , 'Hiragino Kaku Gothic ProN' , 'ヒラギノ明朝 ProN' , 'Hiragino Mincho ProN' , '游明朝','游明朝体',YuMincho,'Yu Mincho' , 'ＭＳ 明朝' , 'MS Mincho' , HiraMinProN-W3 , 'TakaoEx明朝' , TakaoExMincho , 'MotoyaLCedar' , 'Droid Sans Japanese' , serif !important;
+  }
+  .lang-ko .force-lang-font, .lang-ko {
+    font-family: 'Malgun Gothic', Gulim, 'Roboto', Tahoma, Arial, sans-serif !important
+  }
+  .force-not-lang-font {
+    font-family: Roboto, sans-serif!important
   }
 
 </style>

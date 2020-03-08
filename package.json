@@ -1,29 +1,34 @@
 {
   "name": "penguin-stats-frontend",
-  "version": "1.1.2",
+  "version": "1.1.3",
   "private": true,
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "npx --max_old_space_size=4096 vue-cli-service build --modern",
+    "build:single": "npx --max_old_space_size=4096 vue-cli-service build",
     "lint": "vue-cli-service lint",
     "i18n:report": "vue-cli-service i18n:report --src './src/**/*.?(js|vue)' --locales './src/locales/**/*.json'",
     "submit": "git add . && git cz && git push"
   },
   "dependencies": {
+    "@babel/plugin-transform-modules-commonjs": "^7.8.3",
+    "@chenfengyuan/vue-number-input": "^1.2.1",
     "@sentry/browser": "^5.6.2",
     "@sentry/integrations": "^5.6.1",
+    "animejs": "^3.1.0",
     "aos": "^2.3.4",
+    "clipboard-polyfill": "^2.8.6",
     "core-js": "^2.6.5",
-    "dayjs": "^1.8.15",
+    "dayjs": "^1.8.21",
     "js-cookie": "^2.2.1",
     "plotly.js": "^1.49.2",
     "vue": "^2.6.10",
-    "vue-analytics": "^5.17.0",
+    "vue-analytics": "^5.22.1",
     "vue-i18n": "^8.0.0",
     "vue-router": "^3.0.3",
-    "vuetify": "^2.2.4",
+    "vuetify": "^2.2.15",
     "vuex": "^3.0.1",
-    "vuex-persistedstate": "^2.5.4"
+    "vuex-persistedstate": "^2.7.1"
   },
   "devDependencies": {
     "@kazupon/vue-i18n-loader": "^0.3.0",
@@ -34,6 +39,7 @@
     "@vue/cli-service": "^3.9.0",
     "axios": "^0.19.0",
     "babel-eslint": "^10.0.1",
+    "browserslist-ga-export": "^2.0.0",
     "cz-conventional-changelog": "3.0.2",
     "eslint": "^5.16.0",
     "eslint-plugin-vue": "^5.0.0",
@@ -42,8 +48,8 @@
     "sass-loader": "^8.0.2",
     "stylus": "^0.54.5",
     "stylus-loader": "^3.0.1",
-    "vue-cli-plugin-i18n": "^0.6.0",
-    "vue-cli-plugin-vuetify": "^2.0.3",
+    "vue-cli-plugin-i18n": "^0.6.1",
+    "vue-cli-plugin-vuetify": "^2.0.5",
     "vue-template-compiler": "^2.6.10",
     "vuetify-loader": "^1.4.3"
   },
@@ -53,8 +59,10 @@
     }
   },
   "browserslist": [
-    "> 1%",
-    "last 2 versions"
+    "> 0.1% in my stats",
+    "> 1% in CN",
+    "last 5 versions",
+    "defaults"
   ],
   "config": {
     "commitizen": {

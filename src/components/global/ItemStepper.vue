@@ -37,6 +37,7 @@
             :ratio="1"
             disable-link
             tooltip-position="bottom"
+            :tooltip-nudge="0"
           />
         </div>
       </v-badge>
@@ -117,11 +118,6 @@
 </script>
 
 <style scoped>
-  .quantity {
-    font-family: Consolas, Courier New, Courier, monospace;
-    font-weight: 700;
-  }
-
   .disabled {
     user-select: none;
   }

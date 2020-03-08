@@ -34,7 +34,7 @@
         webpSupport: null,
         blurred: false,
         // TODO: Update image map.
-        // [key] is a special "zoneId" to display a special "background image"
+        // [key] is a special "stageId" to display a special "background image"
         // [value] represents a "background image url" on such route
         specialImageMap: {
           "main_06-14": "https://penguin-stats.s3.ap-southeast-1.amazonaws.com/backgrounds/fn_0_1.png", // 6-16
@@ -143,7 +143,7 @@
     right: 5vw;
     margin: 2em 0;
     height: 50vh;
-    width: 100vw;
+    width: 90vw;
     background-size: contain;
     background-position: bottom right;
     opacity: .75;

@@ -1,11 +1,11 @@
 {
   "app": {
     "name": "펭귄 물류 데이터 분석 부서",
-    "name_line1": "펭귄 물류 데이터 분석 부서",
-    "name_line2": ""
+    "name_line1": "펭귄 물류",
+    "name_line2": "데이터 분석 부서"
   },
   "menu": {
-    "home": "톱 페이지",
+    "home": "홈",
     "report": "보고서 작성",
     "stats": {
       "_name": "통계",
@@ -24,10 +24,10 @@
     },
     "planner": "명일방주 계획기",
     "changelog": "변경 로그",
-    "v1": "구 버전 방문하기",
+    "v1": "구 버전 방문",
     "refreshData": "데이터 새로고침",
     "invertColors": "페이지 테마 변경",
-    "languages": "언어 전환"
+    "languages": "언어 변경"
   },
   "meta": {
     "details": "세부 사항",
@@ -36,7 +36,7 @@
     "footer": {
       "copyright": {
         "title": "라이센스",
-        "content": "Data was collected by Penguin Delivery, licensed under a Creative Commons Attribution-NonCommercial 4.0 International License. In case of redistribution and transformation towards the material, you must give appropriate credit, provide a link to the license, indicate if changes were made, and may not use the material for commercial purposes."
+        "content": "데이터는 펭귄 물류 데이터 분석 부서에 의하여 수집되었으며, 크리에이티브 커먼즈 저작자표시-비영리 4.0 국제 라이센스를 따릅니다. 재배포 혹은 변경시 적절한 출처와 라이센스 링크를 제공하여야 하며, 상업적 용도로 사용할 수 없습니다."
       },
       "credit": "펭귄 물류 데이터 분석 부서 | {date}"
     },

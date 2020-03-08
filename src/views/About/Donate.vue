@@ -7,11 +7,11 @@
         "donate_2": "服务器费用",
         "donate_3": "pocky、阿噗噜派也可",
         "donate_4": "，我们将不胜感激!",
-        "redirectToApp": "打开“{app}” APP 捐助",
+        "redirectToApp": "打开 “{app}” APP 捐助",
         "methods": {
           "alipay": "支付宝",
           "wechatPay": "微信支付",
-          "paypal": "使用PayPal捐助"
+          "paypal": "使用 PayPal 捐助"
         }
       }
     },
@@ -37,11 +37,11 @@
         "donate_2": "運営費用",
         "donate_3": "ポッキーやアップルパイでも可",
         "donate_4": "を寄付頂けると非常にありがたいです。",
-        "redirectToApp": "{app}アプリで寄付します",
+        "redirectToApp": "{app} アプリで寄付します",
         "methods": {
           "alipay": "Alipay",
           "wechatPay": "WeChat Pay",
-          "paypal": "PayPalで寄付"
+          "paypal": "PayPal で寄付"
         }
       }
     },
@@ -52,11 +52,11 @@
         "donate_2": "서버비",
         "donate_3": "빼빼로나 애플파이도 환영합니다!",
         "donate_4": "를 기부해 줄 수 있다면, 우리는 매우 감사할 것입니다!",
-        "redirectToApp": "{app}로 기부하기",
+        "redirectToApp": "{app} 로 기부하기",
         "methods": {
           "alipay": "Alipay",
           "wechatPay": "WeChat Pay",
-          "paypal": "PayPal로 기부하기"
+          "paypal": "PayPal 로 기부하기"
         }
       }
     }
@@ -106,6 +106,7 @@
             :alt="$t('donate.methods.alipay')"
             max-height="128px"
             contain
+            aspect-ratio="1"
           />
 
           <v-row
@@ -126,7 +127,8 @@
               text
               outlined
               class="my-0 d-block"
-              @click="redirectAlipay"
+              :href="qr.alipay"
+              target="_blank"
             >
               {{ $t('donate.redirectToApp', {app: $t('donate.methods.alipay')}) }}
             </v-btn>
@@ -144,6 +146,7 @@
             :alt="$t('donate.methods.wechatPay')"
             max-height="128px"
             contain
+            aspect-ratio="1"
           />
 
           <v-row
@@ -166,7 +169,8 @@
       <v-btn
         rounded
         color="primary"
-        @click="redirectPayPal"
+        :href="qr.paypal"
+        target="_blank"
       >
         <v-icon left>
           mdi-paypal
@@ -186,17 +190,6 @@ export default {
         wechatPay: "wxp://f2f0F8Z93ZkS3boz8JY3FwarwyAwcIfXC2CN",
         paypal: "https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=T9LRK3VEL645J&item_name=Penguin+Statistics+Donation&currency_code=USD&source=url"
       }
-    }
-  },
-  methods: {
-    redirectAlipay() {
-      window.location = this.qr.alipay
-    },
-    redirectWechatPay() {
-      window.location = this.qr.wechatPay
-    },
-    redirectPayPal() {
-      window.open(this.qr.paypal)
     }
   }
 };

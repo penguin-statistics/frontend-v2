@@ -1,8 +1,9 @@
 <template>
   <v-tooltip
     v-if="!disableTooltip"
+    transition="slide-y-transition"
     :open-delay="40"
-    :nudge-top="10"
+    :nudge-top="tooltipNudge"
 
     v-bind="calculatedTooltipPosition"
   >
@@ -16,7 +17,7 @@
         />
       </span>
     </template>
-    <span>{{ name }}</span>
+    <span class="force-lang-font">{{ name }}</span>
   </v-tooltip>
   <ItemIcon
     v-else-if="disableTooltip"
@@ -60,6 +61,12 @@
         type: String,
         default () {
           return "bottom";
+        }
+      },
+      tooltipNudge: {
+        type: Number,
+        default () {
+          return 10
         }
       },
       sticky: {

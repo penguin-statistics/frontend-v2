@@ -7,7 +7,7 @@
         "contributor": "团队成员页面",
         "contact_1": "页面内的各种联系方式",
         "github": "Github Issues",
-        "nga": "NGA讨论帖"
+        "nga": "NGA 讨论帖"
       }
     },
     "en": {
@@ -26,7 +26,7 @@
         "contact_2": "ご質問、ご要望などございましたら、管理人さんにお気軽にお問い合わせください。（日本語でもOKです）",
         "contributor": "制作協力者ページ",
         "github": "Github Issues",
-        "nga": "NGAスレッド"
+        "nga": "NGA スレッド"
       }
     },
     "ko": {
@@ -57,10 +57,12 @@
         class="mx-2 my-1"
         color="secondary"
         text-color="white"
-        @click="$router.push({name: 'AboutMembers'})"
+        :to="{name: 'AboutMembers'}"
       >
         {{ $t('contact.contributor') }}
-        <v-icon right>
+        <v-icon
+          right
+        >
           mdi-account-multiple
         </v-icon>
       </v-chip>
@@ -68,10 +70,13 @@
         class="mx-2 my-1"
         color="secondary"
         text-color="white"
-        @click="goToHref('https://github.com/penguin-statistics/frontend-v2/issues')"
+        href="https://github.com/penguin-statistics/frontend-v2/issues"
+        target="_blank"
       >
         {{ $t('contact.github') }}
-        <v-icon right>
+        <v-icon
+          right
+        >
           mdi-github-circle
         </v-icon>
       </v-chip>
@@ -79,11 +84,14 @@
         class="mx-2 my-1"
         color="secondary"
         text-color="white"
-        @click="goToHref('https://bbs.nga.cn/read.php?tid=17340880')"
+        href="https://bbs.nga.cn/read.php?tid=17340880"
+        target="_blank"
       >
         {{ $t('contact.nga') }}
-        <v-icon right>
-          mdi-share
+        <v-icon
+          right
+        >
+          mdi-forum
         </v-icon>
       </v-chip>
     </v-row>
@@ -153,9 +161,6 @@
 export default {
   name: 'Contact',
   methods: {
-    goToHref(href) {
-      window.open(href)
-    }
   }
 }
 </script>

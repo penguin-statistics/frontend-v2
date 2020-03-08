@@ -4,12 +4,11 @@ import 'vuetify/dist/vuetify.min.css'
 import App from './App.vue'
 import router from './router'
 import store from './store'
-import i18n from './i18n'
 import VueAnalytics from "vue-analytics"
-import AOS from 'aos'
 import 'aos/dist/aos.css'
-import I18n from "@/i18n"
+import i18n from "@/i18n"
 import config from "@/config"
+import VueNumberInput from '@chenfengyuan/vue-number-input';
 
 import * as Sentry from '@sentry/browser';
 import * as Integrations from '@sentry/integrations';
@@ -28,6 +27,14 @@ if (production) {
     // More info at: https://docs.sentry.io/platforms/javascript/vue/
     logErrors: false,
     release: 'frontend-v2@' + (config.version || 'unknown'),
+    beforeSend(event, hint) {
+      if (!(event.exception.values
+        && event.exception.values[0]
+        && event.exception.values[0].type
+        && event.exception.values[0].type === "NavigationDuplicated")) {
+        return event, hint;
+      }
+    }
   });
 }
 
@@ -52,23 +59,18 @@ Vue.use(VueAnalytics, {
 });
 
 router.beforeEach((to, from, next) => {
-  document.title = `${I18n.t(to.meta.i18n)} | ${I18n.t('app.name')}`;
+  document.title = `${i18n.t(to.meta.i18n)} | ${i18n.t('app.name')}`;
   next();
 });
 
 Vue.config.productionTip = false;
+
+Vue.use(VueNumberInput);
 
 new Vue({
   vuetify,
   router,
   store,
   i18n,
-  created() {
-    AOS.init({
-      delay: 100,
-      duration: 700,
-      easing: 'ease-in-out-sine'
-    })
-  },
   render: h => h(App),
 }).$mount('#app');

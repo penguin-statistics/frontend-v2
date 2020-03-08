@@ -3,6 +3,7 @@ import Router from 'vue-router'
 
 import Home from './views/Home'
 import Report from './views/Report'
+import Planner from './views/Planner'
 
 import StatsLayout from './layouts/StatsLayout'
 import StatsByStage from './views/Stats/Stage'
@@ -111,19 +112,12 @@ const router = new Router({
     ]
   },
   {
-    path: '/_redirect/planner',
+    path: '/planner',
     name: 'Planner',
+    component: Planner,
     meta: {
-      ga: {
-        category: 'redirect',
-        action: 'links',
-        label: 'ArkPlanner',
-        value: 1
-      },
-      link: "https://planner.penguin-stats.io",
       icon: 'mdi-floor-plan',
-      i18n: 'menu.planner',
-      externalRedirect: true
+      i18n: 'menu.planner'
     }
   },
   {

@@ -9,8 +9,8 @@
     "report": "Drop Report",
     "stats": {
       "_name": "Statistics",
-      "stage": "by stage",
-      "item": "by item"
+      "stage": "By stage",
+      "item": "By item"
     },
     "about": {
       "_name": "About Penguin Statistics",
@@ -19,7 +19,7 @@
       "changelog": "Change Log",
       "contact": "Contact us",
       "donate": "Donate",
-      "links": "Links",
+      "links": "Link Exchange",
       "bulletin": "Notice"
     },
     "planner": "ArkPlanner",
@@ -36,7 +36,7 @@
     "footer": {
       "copyright": {
         "title": "License",
-        "content": "Data was collected by Penguin Delivery, licensed under a Creative Commons Attribution-NonCommercial 4.0 International License. In case of redistribution and transformation towards the material, you must give appropriate credit, provide a link to the license, indicate if changes were made, and may not use the material for commercial purposes."
+        "content": "Data was collected by Penguin Statistics, licensed under a Creative Commons Attribution-NonCommercial 4.0 International License. In case of redistribution and transformation towards the material, you must give appropriate credit, provide a link to the license, indicate if changes were made, and may not use the material for commercial purposes."
       },
       "credit": "Penguin Statistics | {date}"
     },

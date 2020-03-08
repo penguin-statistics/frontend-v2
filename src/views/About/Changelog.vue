@@ -1,17 +1,18 @@
 <template>
   <v-timeline
-    :dense="$vuetify.breakpoint.smAndDown"
+    dense
     align-top
   >
     <v-timeline-item
       v-for="(log, dateKey) in logs"
       :key="dateKey"
+      right
       icon="mdi-book-variant"
+      class="changelog--item"
       fill-dot
     >
       <v-card
-        class="bkop-light"
-        data-aos="fade"
+        class="bkop-light force-not-lang-font"
         elevation="5"
       >
         <v-card-title class="title">
@@ -31,11 +32,16 @@
 </template>
 
 <script>
+import anime from "animejs";
+
 export default {
   name: 'Changelog',
   data() {
     return {
       logs: {
+        'v1.1.3': [
+          '重做ArkPlanner'
+        ],
         'v1.1.2': [
           '加入韩语翻译',
           '增加载入界面'
@@ -74,7 +80,17 @@ export default {
         ]
       }
     }
-  }
+  },
+  mounted () {
+    anime({
+      targets: '.changelog--item',
+      translateY: [48, 0],
+      opacity: [0, 1],
+      duration: 425,
+      delay: (el, i) => i * 50,
+      easing: "easeOutQuint"
+    });
+  },
 }
 </script>
 
