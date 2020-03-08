@@ -537,6 +537,7 @@
               <v-tabs
                 v-model="importExportDialogTab"
                 icons-and-text
+                grow
                 centered
                 background-color="green"
                 color="white"
@@ -1069,6 +1070,7 @@
     height: 30px !important;
     width: 30px !important;
     transition: all .125s cubic-bezier(0.165, 0.84, 0.44, 1);
+    touch-action: manipulation;
   }
   ::v-deep .number-input-theme .number-input__button:hover {
     transform: scale(1.12);
