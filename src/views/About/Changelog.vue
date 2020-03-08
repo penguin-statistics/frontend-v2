@@ -39,6 +39,9 @@ export default {
   data() {
     return {
       logs: {
+        'v1.1.3': [
+          '重做ArkPlanner'
+        ],
         'v1.1.2': [
           '加入韩语翻译',
           '增加载入界面'
