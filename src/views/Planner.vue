@@ -105,7 +105,7 @@
         "byProduct": "부산물 획득 고려",
         "requireExp": "경험치 획득 고려",
         "requireLmb": "용문폐 획득 고려",
-        "foreignServer": "에피소드 6을 계산에 추가하지 않습니다"
+        "foreignServer": "에피소드 6을 계산에 넣지 마십시오"
       },
       "actions": {
         "import": "가져오기",
