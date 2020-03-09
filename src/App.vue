@@ -4,7 +4,7 @@
     <v-navigation-drawer
       v-model="drawer"
       app
-      width="300"
+      width="calc(env(safe-area-inset-left) + 300px)"
     >
       <div 
         :class="{
@@ -13,6 +13,7 @@
           'darken-3': !appDark,
           'drawer-logo--two-line': $t('app.name_line2') !== ''
         }"
+        style="padding-left: calc(max(env(safe-area-inset-left), 32px))"
       >
         <v-img
           :src="require('@/assets/logo.png')"
@@ -33,6 +34,7 @@
       <v-list
         dense
         nav
+        style="padding-left: calc(max(env(safe-area-inset-left), 8px))"
       >
         <template
           v-for="route in routes"
@@ -171,6 +173,7 @@
       dark
       color="blue darken-3"
       style="min-height: calc(56px + env(safe-area-inset-top)); padding-top: env(safe-area-inset-top)"
+      class="x--safe-area toolbar--safe-area"
     >
       <v-app-bar-nav-icon
         @click.stop="drawer = !drawer"
@@ -210,12 +213,14 @@
       <AccountManager />
     </v-app-bar>
     <RandomBackground />
-    <v-content style="padding-top: calc(env(safe-area-inset-top) + 56px) !important;">
+    <v-content
+      style="padding-top: calc(env(safe-area-inset-top) + 56px) !important;"
+    >
       <transition
         name="slide-fade"
         mode="out-in"
       >
-        <router-view />
+        <router-view class="x--safe-area" />
       </transition>
       <v-footer
         padless
@@ -598,6 +603,21 @@ export default {
   }
   .force-not-lang-font {
     font-family: Roboto, sans-serif!important
+  }
+
+  .x--safe-area {
+    padding-left: calc(max(env(safe-area-inset-left), 12px)) !important;
+    padding-right: calc(max(env(safe-area-inset-right), 12px)) !important;
+  }
+
+  .toolbar--safe-area {
+    padding-left: calc(max(env(safe-area-inset-left), 16px)) !important;
+    padding-right: calc(max(env(safe-area-inset-right), 16px)) !important;
+  }
+
+  .toolbar--safe-area .v-toolbar__content {
+    padding-left: 0 !important;
+    padding-right: 0 !important;
   }
 
 </style>
