@@ -42,34 +42,19 @@ export default new Vuex.Store({
       key: "penguin-stats-settings",
       paths: [
         "settings"
-      ],
-      storage: {
-        getItem: key => ls.get(key),
-        setItem: (key, value) => ls.set(key, value),
-        removeItem: key => ls.remove(key)
-      }
+      ]
     }),
     createPersistedState({
       key: "penguin-stats-auth",
       paths: [
         "auth"
-      ],
-      storage: {
-        getItem: key => ls.get(key),
-        setItem: (key, value) => ls.set(key, value),
-        removeItem: key => ls.remove(key)
-      }
+      ]
     }),
     createPersistedState({
       key: "penguin-stats-cacheTTL",
       paths: [
         "cacheUpdateAt"
-      ],
-      storage: {
-        getItem: key => ls.get(key),
-        setItem: (key, value) => ls.set(key, value),
-        removeItem: key => ls.remove(key)
-      }
+      ]
     })
   ],
   modules: {
