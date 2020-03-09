@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import createPersistedState from 'vuex-persistedstate'
+import SecureLS from "secure-ls";
 
 // store file
 import ajax from './modules/ajax';
@@ -22,31 +23,53 @@ if (previousState) {
   localStorage.removeItem("penguin-stats-state")
 }
 
+const ls = new SecureLS({ isCompression: true });
+
 export default new Vuex.Store({
   plugins: [
     createPersistedState({
       key: "penguin-stats-data",
       paths: [
         "data"
-      ]
+      ],
+      storage: {
+        getItem: key => ls.get(key),
+        setItem: (key, value) => ls.set(key, value),
+        removeItem: key => ls.remove(key)
+      }
     }),
     createPersistedState({
       key: "penguin-stats-settings",
       paths: [
         "settings"
-      ]
+      ],
+      storage: {
+        getItem: key => ls.get(key),
+        setItem: (key, value) => ls.set(key, value),
+        removeItem: key => ls.remove(key)
+      }
     }),
     createPersistedState({
       key: "penguin-stats-auth",
       paths: [
         "auth"
-      ]
+      ],
+      storage: {
+        getItem: key => ls.get(key),
+        setItem: (key, value) => ls.set(key, value),
+        removeItem: key => ls.remove(key)
+      }
     }),
     createPersistedState({
       key: "penguin-stats-cacheTTL",
       paths: [
         "cacheUpdateAt"
-      ]
+      ],
+      storage: {
+        getItem: key => ls.get(key),
+        setItem: (key, value) => ls.set(key, value),
+        removeItem: key => ls.remove(key)
+      }
     })
   ],
   modules: {
