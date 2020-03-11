@@ -19,6 +19,12 @@ import AboutDonate from './views/About/Donate'
 import AboutLinks from './views/About/Links'
 import NotFound from "@/views/NotFound";
 
+const originalPush = Router.prototype.push;
+Router.prototype.push = function push(location, onResolve, onReject) {
+  if (onResolve || onReject) return originalPush.call(this, location, onResolve, onReject)
+  return originalPush.call(this, location).catch(err => err)
+};
+
 Vue.use(Router);
 
 const router = new Router({
