@@ -10,8 +10,8 @@
     "en": {
       "intro": {
         "intro_0": "Welcome to Penguin Statistics!",
-        "intro_1": "Penguin Statistics is the Department of Data Analysis in Penguin Logistics. We devote ourselves to the item drop analysis.",
-        "intro_2": "Now most of the drop data were submitted by players manually. Our team is conducting a comprehensive review on the data to reduce the impact of false reports and false positives on results."
+        "intro_1": "Penguin Statistics is the Department of Data Analysis of Penguin Logistics. We devote ourselves to item drop analysis.",
+        "intro_2": "Item drop data are submitted by the players. Our team conduct comprehensive review on the submitted data to reduce the impact of false reports."
       }
     },
     "ja": {

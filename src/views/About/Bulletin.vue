@@ -9,9 +9,9 @@
     },
     "en": {
       "bulletin": {
-        "bulletin_0": "Arknights EN server was officially released on 1/16. In order not to mess up the data, please only submit drop data from CN server.",
+        "bulletin_0": "Arknights EN server was officially released on 1/16. In order to not mess up the current data, please only submit drop data from the CN server.",
         "bulletin_1": "We are considering whether to open another website for overseas servers.",
-        "bulletin_2": "The translation of the entire website has been finished. Thanks Syaro and 方舟航海図 for their efforts!"
+        "bulletin_2": "The translation of the entire website has been finished. Thanks to Syaro and 方舟航海図 for their efforts!"
       }
     },
     "ja": {
