@@ -26,18 +26,18 @@
       }
     },
     "en": {
-      "opensAt": "Opens at: {0} - {1}",
+      "opensAt": "Event period: {0} - {1}",
       "zone": {
         "name": "Zone",
         "types": {
           "MAINLINE": "Main Storyline",
           "WEEKLY": "Supplies",
-          "ACTIVITY_OPEN": "Event (Opening)",
+          "ACTIVITY_OPEN": "Event (Open)",
           "ACTIVITY_CLOSED": "Event (Closed)"
         },
         "status": {
           "closed": "Closed",
-          "open": "Opening"
+          "open": "Open"
         }
       },
       "stage": {
@@ -87,7 +87,7 @@
         },
         "status": {
           "closed": "Closed",
-          "open": "Opening"
+          "open": "Open"
         }
       },
       "stage": {

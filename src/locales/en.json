@@ -6,7 +6,7 @@
   },
   "menu": {
     "home": "Home",
-    "report": "Drop Report",
+    "report": "Report Drops",
     "stats": {
       "_name": "Statistics",
       "stage": "By stage",
@@ -48,7 +48,7 @@
       "apCost": "Sanity",
       "item": "Item",
       "times": "Samples",
-      "quantity": "Loots",
+      "quantity": "Loot",
       "percentage": "Percentage",
       "apPPR": "Sanity Required Per Item"
     }
@@ -78,7 +78,7 @@
     "repo": "Project repositories: ",
     "frontend": "Front End",
     "backend": "Back End",
-    "contribute_0": "If you have experience with any of the following skills, and want to contribute to Penguin Statistics, please add QQ group: 747099627.",
+    "contribute_0": "If you have experience with any of the following, and want to contribute to Penguin Statistics, contact us at QQ group: 747099627.",
     "contribute_1": "This is a nonprofit and open source project",
     "skills": {
       "frontend": "Front End Development (Vue.js)",
@@ -103,26 +103,26 @@
         "repeat": "Warning"
       },
       "continue": {
-        "first": "Are you still want to submit this record?",
+        "first": "Are you sure you want to submit this record?",
         "repeat": "Confirm submitting this record?"
       },
       "contact": {
-        "before": "If you know that this is a mistake, we cannot be more happier if you",
+        "before": "If you are sure you got this drop in-game, submit this report and ",
         "activator": "contact us.",
-        "after": "(Please indicate the stage name, the actual drops, and screenshot is preferred for verification purposes) After confirming this is an error, our team will fix the limitation."
+        "after": "Please indicate the stage name and drops. A screenshot is preferred for verification purposes. Our team will mark your report appropiately after verifying it."
       },
       "causes": {
-        "noDrop": "Haven't selected any drop items.",
-        "limitation": "Your current submission is having large mis-match with our existing data. Submitting this record will have a risk to be judged as a false-report, letting the current submission being deleted from our dataset."
+        "noDrop": "No items selected.",
+        "limitation": "Your current submission has a large deviation from our existing data. This submission could be marked as a false report, removing it from our data set."
       }
     },
     "rules": {
       "item": {
         "_name": "Item Quantities",
         "now": "Selected {item} ×{quantity}",
-        "gte": "\"{item}\" should ≥{quantity}",
-        "lte": "\"{item}\" should ≤{quantity}",
-        "not": "\"{item}\" should ≠{quantity}"
+        "gte": "\"{item}\" expecting ≥{quantity}",
+        "lte": "\"{item}\" expecting ≤{quantity}",
+        "not": "\"{item}\" expecting ≠{quantity}"
       },
       "type": {
         "_name": "Items",

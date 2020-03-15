@@ -12,7 +12,7 @@
       "contribute": {
         "frontend": "Frontend",
         "backend": "Backend",
-        "contribute_0": "If you have experience with any of the following skills, and want to contribute to Penguin Statistics, please add QQ group: 747099627.",
+        "contribute_0": "If you have experience with any of the following, and want to contribute to Penguin Statistics, contact us at QQ group: 747099627.",
         "contribute_1": "This is a nonprofit and open source project"
       }
     },

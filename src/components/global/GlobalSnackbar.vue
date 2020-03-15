@@ -18,7 +18,7 @@
     },
     "en": {
       "network": {
-        "error": "Network error, please check your network and try again."
+        "error": "Network error, please check your internet connection and try again."
       },
       "clipboard": {
         "success": "Copied to clipboard",
