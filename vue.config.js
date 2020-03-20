@@ -1,8 +1,14 @@
 const webpack = require("webpack");
 
-let commitHash = require('child_process')
-  .execSync('git rev-parse --short HEAD')
-  .toString() || "(unknown)";
+let commitHash;
+
+try {
+  commitHash = require('child_process')
+    .execSync('git rev-parse --short HEAD')
+    .toString() || "(unknown)";
+} catch (e) {
+  commitHash = "(unknown)"
+}
 
 module.exports = {
   pluginOptions: {
