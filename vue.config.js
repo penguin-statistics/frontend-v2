@@ -1,3 +1,9 @@
+const webpack = require("webpack");
+
+let commitHash = require('child_process')
+  .execSync('git rev-parse --short HEAD')
+  .toString() || "(unknown)";
+
 module.exports = {
   pluginOptions: {
     i18n: {
@@ -33,5 +39,12 @@ module.exports = {
   },
   transpileDependencies: [
     "vuetify"
-  ]
+  ],
+  configureWebpack: {
+    plugins: [
+      new webpack.DefinePlugin({
+        GIT_COMMIT: JSON.stringify(commitHash).trim()
+      }),
+    ],
+  },
 };

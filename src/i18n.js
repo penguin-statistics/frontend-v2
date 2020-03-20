@@ -20,6 +20,7 @@ export default new VueI18n({
   locale: 'zh',
   fallbackLocale: 'en',
   silentFallbackWarn: true,
+  formatFallbackMessages: true,
   // dateTimeFormats: {
   //   'en': {
   //     short: {

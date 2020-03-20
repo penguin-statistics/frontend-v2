@@ -52,7 +52,8 @@
     "vue-cli-plugin-i18n": "^0.6.1",
     "vue-cli-plugin-vuetify": "^2.0.5",
     "vue-template-compiler": "^2.6.10",
-    "vuetify-loader": "^1.4.3"
+    "vuetify-loader": "^1.4.3",
+    "webpack": "^4.42.0"
   },
   "postcss": {
     "plugins": {
