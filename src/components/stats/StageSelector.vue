@@ -398,12 +398,13 @@
   position: absolute;
   bottom: 0;
   right: 0;
-  color: rgba(255, 255, 255, .075);
+  color: rgba(255, 255, 255, .45);
   user-select: none;
-  z-index: 1;
+  z-index: 0;
   letter-spacing: -.10em !important;
   word-break: break-all;
   overflow: hidden;
+  pointer-events: none;
 }
   .theme--light .stage-id--background {
     color: rgba(0, 0, 0, .075);
