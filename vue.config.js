@@ -5,9 +5,9 @@ let commitHash;
 try {
   commitHash = require('child_process')
     .execSync('git rev-parse --short HEAD')
-    .toString() || "(unknown)";
+    .toString() || "unknown";
 } catch (e) {
-  commitHash = "(unknown)"
+  commitHash = "unknown"
 }
 
 module.exports = {
