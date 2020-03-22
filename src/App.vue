@@ -423,6 +423,14 @@ export default {
       'version',
       config.version
     );
+
+    // push crisp session
+    window.$crisp.push(["set", "session:data", [[
+      ["loggedIn", this.$store.getters["auth/loggedIn"]],
+      ["username", this.$store.getters["auth/username"]],
+      ["language", this.$store.getters["settings/language"]],
+      ["dark", this.$store.getters["settings/dark"]],
+    ]]])
   },
   methods: {
     async refreshData () {
