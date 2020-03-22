@@ -414,7 +414,15 @@ export default {
     if (typeof this.dark === "boolean") {
       this.$vuetify.theme.dark = this.dark
     }
-    Console.debug("(after init) dark status", this.dark, this.$vuetify.theme.dark)
+    Console.debug("(after init) dark status", this.dark, this.$vuetify.theme.dark);
+
+    // report current version
+    this.$ga.event(
+      'runtime',
+      'appInited',
+      'version',
+      config.version
+    );
   },
   methods: {
     async refreshData () {

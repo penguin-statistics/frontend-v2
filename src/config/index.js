@@ -9,6 +9,6 @@ export default {
     submitParams: client
   },
   cdn: {
-    global: "https://penguin-stats.s3.ap-southeast-1.amazonaws.com"
+    global: "https://penguin.upyun.galvincdn.com"
   }
 }
