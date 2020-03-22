@@ -438,20 +438,6 @@
         </v-card-actions>
       </v-card>
     </v-dialog>
-    <v-btn
-      fab
-      bottom
-      right
-      fixed
-      ripple
-      color="primary"
-      :loading="calculation.pending"
-      @click="calculate"
-    >
-      <v-icon>
-        mdi-calculator
-      </v-icon>
-    </v-btn>
     <v-row
       align="center"
       justify="center"
@@ -530,6 +516,9 @@
                 large
                 v-on="on"
               >
+                <v-icon left>
+                  mdi-file-restore
+                </v-icon>
                 {{ $t('actions.importExport') }}
               </v-btn>
             </template>
@@ -641,6 +630,9 @@
             large
             @click="calculate"
           >
+            <v-icon left>
+              mdi-calculator
+            </v-icon>
             {{ $t('actions.calculate') }}
           </v-btn>
         </v-row>
@@ -1069,7 +1061,7 @@
     border-radius: 50% !important;
     height: 30px !important;
     width: 30px !important;
-    transition: all .125s cubic-bezier(0.165, 0.84, 0.44, 1);
+    transition: all .225s cubic-bezier(0.165, 0.84, 0.44, 1);
     touch-action: manipulation;
   }
   ::v-deep .number-input-theme .number-input__button:hover {
