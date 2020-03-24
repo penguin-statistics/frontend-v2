@@ -4,36 +4,36 @@
       "contribute": {
         "frontend": "前端",
         "backend": "后端",
-        "contribute_0": "如果您有以下一项或多项经验，愿意为企鹅数据贡献自己的一份力量，请加QQ群：747099627 或加入",
+        "contribute_0": "如果您有以下一项或多项经验，愿意为企鹅数据贡献自己的一份力量，欢迎联系我们。",
         "contribute_1": "本项目为无偿开源项目",
-        "contribute_2": "。"
+        "qq_group": "QQ群："
       }
     },
     "en": {
       "contribute": {
         "frontend": "Frontend",
         "backend": "Backend",
-        "contribute_0": "If you have experience with any of the following skills, and want to contribute to Penguin Statistics, please add QQ group: 747099627 or join our",
+        "contribute_0": "If you have experience with any of the following skills, and want to contribute to Penguin Statistics, please feel free to contact us.",
         "contribute_1": "This is a nonprofit and open source project",
-        "contribute_2": "channel."
+        "qq_group": "QQ Group: "
       }
     },
     "ja": {
       "contribute": {
         "frontend": "フロントエンド",
         "backend": "バックエンド",
-        "contribute_0": "以下のような開発の経験があるのであれば、Penguin Statisticsに自身の力を使ってみませんか？右記のQQグループを追加してください：747099627，または参加する",
+        "contribute_0": "以下のような開発の経験があるのであれば、Penguin Statisticsに自身の力を使ってみませんか？",
         "contribute_1": "本プロジェクトは無償のオープンソースプロジェクトです",
-        "contribute_2": "。"
+        "qq_group": "QQグループ："
       }
     },
     "ko": {
       "contribute": {
         "frontend": "프론트엔드",
         "backend": "백엔드",
-        "contribute_0": "다음 기술중 하나라도 경험이 있고, 펭귄 물류에 기여하고자 한다면. QQ 그룹 : 747099627로 연락하여 주십시오 & ",
+        "contribute_0": "다음 기술중 하나라도 경험이 있고, 펭귄 물류에 기여하고자 한다면.",
         "contribute_1": "펭귄 물류 데이터 분석 부서는 비영리 오픈소스 프로젝트 입니다",
-        "contribute_2": "."
+        "qq_group": "QQ 그룹 : "
       }
     }
   }
@@ -94,6 +94,10 @@
 
     <p class="subtitle-1 pl-0">
       {{ $t('contribute.contribute_0') }}
+      <br>
+      {{ $t('contribute.qq_group') }}
+      747099627
+      <br>
       <v-chip
         small
         href="https://discord.gg/raQjSpq"
@@ -107,7 +111,6 @@
         </v-icon>
         Discord
       </v-chip>
-      {{ $t('contribute.contribute_2') }}
     </p>
 
     <ul class="ml-4">
