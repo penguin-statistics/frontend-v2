@@ -126,7 +126,8 @@
               v-if="$vuetify.breakpoint.xsOnly"
               text
               outlined
-              class="my-0 d-block"
+              rounded
+              class="my-0"
               :href="qr.alipay"
               target="_blank"
             >

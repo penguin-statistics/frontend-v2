@@ -71,7 +71,7 @@ export default {
         easing: "easeOutQuint"
       });
       anime({
-        targets: ['.card-translate-up h1', '.card-translate-up h2', '.card-translate-up p', '.card-translate-up span'],
+        targets: ['.card-translate-up h1', '.card-translate-up h2', '.card-translate-up p', '.card-translate-up span:not(.v-btn__content)'],
         translateY: [48, 0],
         opacity: [0, 1],
         duration: 775,

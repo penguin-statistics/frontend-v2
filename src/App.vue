@@ -310,8 +310,13 @@
             </v-card>
           </v-dialog>
 
-          <v-card-text class="white--text d-inline py-0">
+          <v-card-text class="white--text d-inline">
             <strong>Penguin Statistics</strong> — {{ new Date().getFullYear() }}
+          </v-card-text>
+
+          <v-card-text class="white--text d-block pt-2 pb-0">
+            <strong>{{ version.VERSION }}</strong>&nbsp;
+            <span class="overline monospace">{{ version.GIT_COMMIT }}-{{ version.ENV }}</span>
           </v-card-text>
         </v-card>
       </v-footer>
@@ -381,6 +386,13 @@ export default {
     },
     languageFont () {
       return `lang-${this.$i18n.locale}`
+    },
+    version () {
+      return {
+        VERSION: config.version,
+        GIT_COMMIT: GIT_COMMIT.trim(),
+        ENV: process.env.NODE_ENV === 'production' ? "prod" : "dev"
+      }
     }
   },
   watch: {
@@ -616,9 +628,9 @@ export default {
     padding-bottom: calc(max(env(safe-area-inset-bottom), 8px)) !important;
   }
 
-  .v-stepper__items, .v-stepper__wrapper {
-    overflow: initial !important;
-  }
+  /*.v-stepper__items, .v-stepper__wrapper {*/
+  /*  overflow: initial !important;*/
+  /*}*/
 
   .lang-ja .force-lang-font, .lang-ja {
     /*font-family : 'ヒラギノ角ゴ ProN' , 'Hiragino Kaku Gothic ProN' , '游ゴシック' , '游ゴシック体' , YuGothic , 'Yu Gothic' , 'メイリオ' , Meiryo , 'ＭＳ ゴシック' , 'MS Gothic' , HiraKakuProN-W3 , 'TakaoExゴシック' , TakaoExGothic , 'MotoyaLCedar' , 'Droid Sans Japanese' , sans-serif !important;*/
