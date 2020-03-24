@@ -3,7 +3,7 @@ const client = {
   version: "v1.1.3"
 };
 
-export default {
+module.exports = {
   version: client.version,
   api: {
     submitParams: client

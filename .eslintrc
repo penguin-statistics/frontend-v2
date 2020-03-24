@@ -1,5 +1,8 @@
 {
   "root": true,
+  "globals": {
+    "GIT_COMMIT": true
+  },
   "env": {
     "node": true
   },
