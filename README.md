@@ -1,4 +1,4 @@
-<img src="https://penguin-stats.s3.ap-southeast-1.amazonaws.com/logos/penguin_stats_logo.png"
+<img src="https://penguin.upyun.galvincdn.com/logos/penguin_stats_logo.png"
      alt="Penguin Statistics - Logo"
      style="width: 64px" />
 
