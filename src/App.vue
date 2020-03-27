@@ -337,7 +337,7 @@ export default {
   data () {
     return {
       routes: [],
-      randomizedLogo: "",
+      randomizedLogo: require("@/assets/logo.png"),
       localizations: [
         {
           id: 'zh',
