@@ -54,7 +54,7 @@ let _i18n = {
   },
   data: {
     "en": {
-      "load_title--text": "Loading...",
+      "load_title--text": "Loading",
       "load_caption--text": "Initialization may take some time",
       "load_copyright--text": "Penguin Statistics"
     },
