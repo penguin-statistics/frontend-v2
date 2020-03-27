@@ -398,13 +398,15 @@ export default {
   watch: {
     '$route': [
       'randomizeLogo',
-      'logRouteEvent'
+      'logRouteEvent',
+      'crispOpacityChanger'
     ],
     'dark': ['onDarkChange']
   },
   beforeMount() {
     this.routes = this.$router.options.routes.filter(el => !el.meta.hide);
-    this.$store.dispatch("data/fetch", false)
+    this.$store.dispatch("data/fetch", false);
+    this.crispOpacityChanger(this.$route)
   },
   created () {
     // this.randomizeLogo();
@@ -447,7 +449,34 @@ export default {
     window.$crisp.push(["on", "chat:initiated", function () {
       // resolve safe-area
       try {
-        document.querySelector("div.crisp-client > div#crisp-chatbox > div > a").style.setProperty("bottom", "calc(max(env(safe-area-inset-bottom), 14px))", "important")
+        document.querySelector("div.crisp-client > div#crisp-chatbox > div > a").style.setProperty("bottom", "calc(max(env(safe-area-inset-bottom), 14px))", "important");
+        document.querySelector("div.crisp-client > div#crisp-chatbox > div > a > span:nth-child(2)").style.setProperty("box-shadow", "0 0 5px rgba(0, 0, 0, .4)", "important")
+      } catch (e) {
+        Console.error("failed to change crisp chat box bottom: ", e)
+      }
+    }])
+    Console.debug("(after init) dark status", this.dark, this.$vuetify.theme.dark);
+
+    // report current version
+    this.$ga.event(
+      'runtime',
+      'appInited',
+      'version',
+      config.version
+    );
+
+    // push crisp session
+    window.$crisp.push(["set", "session:data", [[
+      ["loggedIn", this.$store.getters["auth/loggedIn"]],
+      ["username", this.$store.getters["auth/username"]],
+      ["language", this.$store.getters["settings/language"]],
+      ["dark", this.$store.getters["settings/dark"]],
+    ]]]);
+
+    window.$crisp.push(["on", "chat:initiated", function () {
+      // resolve safe-area
+      try {
+        document.querySelector("div.crisp-client > div#crisp-chatbox > div > a").style.setProperty("bottom", "calc(max(env(safe-area-inset-bottom), 14px))", "important");
         document.querySelector("div.crisp-client > div#crisp-chatbox > div > a > span:nth-child(2)").style.setProperty("box-shadow", "0 0 5px rgba(0, 0, 0, .4)", "important")
       } catch (e) {
         Console.error("failed to change crisp chat box bottom: ", e)
@@ -512,6 +541,17 @@ export default {
         this.$ga.event('result', 'fetch_' + this.$store.getters['dataSource/source'], newValue.params.stageId, 1)
       } else if (newValue.name === "StatsByItem_Selected") {
         this.$ga.event('result', 'fetch_' + this.$store.getters['dataSource/source'], newValue.params.itemId, 1)
+      }
+    },
+    crispOpacityChanger (newRoute) {
+      document.querySelector("div.crisp-client").style.setProperty("transition", "all 275ms cubic-bezier(0.165, 0.84, 0.44, 1)", "important");
+
+      if (newRoute.name === "home") {
+        document.querySelector("div.crisp-client").style.setProperty("opacity", 1, "important");
+        // document.querySelector("div.crisp-client").style.setProperty("transform", "translateY(0px)", "important")
+      } else {
+        document.querySelector("div.crisp-client").style.setProperty("opacity", 0, "important");
+        // document.querySelector("div.crisp-client").style.setProperty("transform", "translateY(32px)", "important")
       }
     }
   }
