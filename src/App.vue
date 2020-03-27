@@ -191,16 +191,7 @@
             <v-img
               :src="randomizedLogo"
               class="randomizedLogo"
-            >
-              <template v-slot:placeholder>
-                <v-img
-                  :src="require('@/assets/logo.png')"
-                  aspect-ratio="1"
-                  height="32px"
-                  contain
-                />
-              </template>
-            </v-img>
+            />
           </v-avatar>
         </transition>
         <span class="title force-lang-font">
