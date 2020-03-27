@@ -10,12 +10,12 @@ class Console {
   static warn (...content) {
     this._render("warn", ...content);
     const contents = [...content];
-    Sentry.captureMessage(contents.join(" | "), Sentry.Severity.Warning)
+    Sentry.captureMessage(contents.join(" | "), "warning")
   }
   static error (...content) {
     this._render("error", ...content);
     const contents = [...content];
-    Sentry.captureMessage(contents.join(" | "), Sentry.Severity.Error)
+    Sentry.captureMessage(contents.join(" | "), "error")
   }
   static log (...content) {
     this._render("log", ...content)

@@ -1,14 +1,14 @@
 const client = {
   source: "frontend-v2",
-  version: "v1.1.3"
+  version: "v1.1.4"
 };
 
-export default {
+module.exports = {
   version: client.version,
   api: {
     submitParams: client
   },
   cdn: {
-    global: "https://penguin-stats.s3.ap-southeast-1.amazonaws.com"
+    global: "https://penguin.upyun.galvincdn.com"
   }
 }

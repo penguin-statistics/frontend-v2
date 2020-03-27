@@ -144,7 +144,7 @@
         >
           <v-list-item-avatar>
             <v-img
-              :src="'https://penguin-stats.s3.ap-southeast-1.amazonaws.com/avatars/' + profile.avatar"
+              :src="'https://penguin.upyun.galvincdn.com/avatars/' + profile.avatar"
             />
           </v-list-item-avatar>
 

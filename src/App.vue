@@ -4,7 +4,7 @@
     <v-navigation-drawer
       v-model="drawer"
       app
-      width="300"
+      width="calc(env(safe-area-inset-left) + 300px)"
     >
       <div 
         :class="{
@@ -13,6 +13,7 @@
           'darken-3': !appDark,
           'drawer-logo--two-line': $t('app.name_line2') !== ''
         }"
+        style="padding-left: calc(max(env(safe-area-inset-left), 32px))"
       >
         <v-img
           :src="require('@/assets/logo.png')"
@@ -33,6 +34,7 @@
       <v-list
         dense
         nav
+        style="padding-left: calc(max(env(safe-area-inset-left), 8px))"
       >
         <template
           v-for="route in routes"
@@ -171,6 +173,7 @@
       dark
       color="blue darken-3"
       style="min-height: calc(56px + env(safe-area-inset-top)); padding-top: env(safe-area-inset-top)"
+      class="x--safe-area toolbar--safe-area"
     >
       <v-app-bar-nav-icon
         @click.stop="drawer = !drawer"
@@ -188,16 +191,7 @@
             <v-img
               :src="randomizedLogo"
               class="randomizedLogo"
-            >
-              <template v-slot:placeholder>
-                <v-img
-                  :src="require('@/assets/logo.png')"
-                  aspect-ratio="1"
-                  height="32px"
-                  contain
-                />
-              </template>
-            </v-img>
+            />
           </v-avatar>
         </transition>
         <span class="title force-lang-font">
@@ -210,12 +204,14 @@
       <AccountManager />
     </v-app-bar>
     <RandomBackground />
-    <v-content style="padding-top: calc(env(safe-area-inset-top) + 56px) !important;">
+    <v-content
+      style="padding-top: calc(env(safe-area-inset-top) + 56px) !important;"
+    >
       <transition
         name="slide-fade"
         mode="out-in"
       >
-        <router-view />
+        <router-view class="x--safe-area" />
       </transition>
       <v-footer
         padless
@@ -305,8 +301,13 @@
             </v-card>
           </v-dialog>
 
-          <v-card-text class="white--text d-inline py-0">
+          <v-card-text class="white--text d-inline">
             <strong>Penguin Statistics</strong> — {{ new Date().getFullYear() }}
+          </v-card-text>
+
+          <v-card-text class="white--text d-block pt-2 pb-0">
+            <strong>{{ version.VERSION }}</strong>&nbsp;
+            <span class="overline monospace">{{ version.GIT_COMMIT }}-{{ version.ENV }}</span>
           </v-card-text>
         </v-card>
       </v-footer>
@@ -336,7 +337,7 @@ export default {
   data () {
     return {
       routes: [],
-      randomizedLogo: "",
+      randomizedLogo: require("@/assets/logo.png"),
       localizations: [
         {
           id: 'zh',
@@ -376,18 +377,27 @@ export default {
     },
     languageFont () {
       return `lang-${this.$i18n.locale}`
+    },
+    version () {
+      return {
+        VERSION: config.version,
+        GIT_COMMIT: GIT_COMMIT.trim(),
+        ENV: process.env.NODE_ENV === 'production' ? "prod" : "dev"
+      }
     }
   },
   watch: {
     '$route': [
       'randomizeLogo',
-      'logRouteEvent'
+      'logRouteEvent',
+      'crispOpacityChanger'
     ],
     'dark': ['onDarkChange']
   },
   beforeMount() {
     this.routes = this.$router.options.routes.filter(el => !el.meta.hide);
-    this.$store.dispatch("data/fetch", false)
+    this.$store.dispatch("data/fetch", false);
+    this.crispOpacityChanger(this.$route)
   },
   created () {
     // this.randomizeLogo();
@@ -409,7 +419,60 @@ export default {
     if (typeof this.dark === "boolean") {
       this.$vuetify.theme.dark = this.dark
     }
-    Console.debug("(after init) dark status", this.dark, this.$vuetify.theme.dark)
+    Console.debug("(after init) dark status", this.dark, this.$vuetify.theme.dark);
+
+    // report current version
+    this.$ga.event(
+      'runtime',
+      'appInited',
+      'version',
+      config.version
+    );
+
+    // push crisp session
+    window.$crisp.push(["set", "session:data", [[
+      ["loggedIn", this.$store.getters["auth/loggedIn"]],
+      ["username", this.$store.getters["auth/username"]],
+      ["language", this.$store.getters["settings/language"]],
+      ["dark", this.$store.getters["settings/dark"]],
+    ]]])
+
+    window.$crisp.push(["on", "chat:initiated", function () {
+      // resolve safe-area
+      try {
+        document.querySelector("div.crisp-client > div#crisp-chatbox > div > a").style.setProperty("bottom", "calc(max(env(safe-area-inset-bottom), 14px))", "important");
+        document.querySelector("div.crisp-client > div#crisp-chatbox > div > a > span:nth-child(2)").style.setProperty("box-shadow", "0 0 5px rgba(0, 0, 0, .4)", "important")
+      } catch (e) {
+        Console.error("failed to change crisp chat box bottom: ", e)
+      }
+    }])
+    Console.debug("(after init) dark status", this.dark, this.$vuetify.theme.dark);
+
+    // report current version
+    this.$ga.event(
+      'runtime',
+      'appInited',
+      'version',
+      config.version
+    );
+
+    // push crisp session
+    window.$crisp.push(["set", "session:data", [[
+      ["loggedIn", this.$store.getters["auth/loggedIn"]],
+      ["username", this.$store.getters["auth/username"]],
+      ["language", this.$store.getters["settings/language"]],
+      ["dark", this.$store.getters["settings/dark"]],
+    ]]]);
+
+    window.$crisp.push(["on", "chat:initiated", function () {
+      // resolve safe-area
+      try {
+        document.querySelector("div.crisp-client > div#crisp-chatbox > div > a").style.setProperty("bottom", "calc(max(env(safe-area-inset-bottom), 14px))", "important");
+        document.querySelector("div.crisp-client > div#crisp-chatbox > div > a > span:nth-child(2)").style.setProperty("box-shadow", "0 0 5px rgba(0, 0, 0, .4)", "important")
+      } catch (e) {
+        Console.error("failed to change crisp chat box bottom: ", e)
+      }
+    }])
   },
   methods: {
     async refreshData () {
@@ -469,6 +532,17 @@ export default {
         this.$ga.event('result', 'fetch_' + this.$store.getters['dataSource/source'], newValue.params.stageId, 1)
       } else if (newValue.name === "StatsByItem_Selected") {
         this.$ga.event('result', 'fetch_' + this.$store.getters['dataSource/source'], newValue.params.itemId, 1)
+      }
+    },
+    crispOpacityChanger (newRoute) {
+      document.querySelector("div.crisp-client").style.setProperty("transition", "all 275ms cubic-bezier(0.165, 0.84, 0.44, 1)", "important");
+
+      if (newRoute.name === "home") {
+        document.querySelector("div.crisp-client").style.setProperty("opacity", 1, "important");
+        // document.querySelector("div.crisp-client").style.setProperty("transform", "translateY(0px)", "important")
+      } else {
+        document.querySelector("div.crisp-client").style.setProperty("opacity", 0, "important");
+        // document.querySelector("div.crisp-client").style.setProperty("transform", "translateY(32px)", "important")
       }
     }
   }
@@ -585,19 +659,34 @@ export default {
     padding-bottom: calc(max(env(safe-area-inset-bottom), 8px)) !important;
   }
 
-  .v-stepper__items, .v-stepper__wrapper {
-    overflow: initial !important;
-  }
+  /*.v-stepper__items, .v-stepper__wrapper {*/
+  /*  overflow: initial !important;*/
+  /*}*/
 
   .lang-ja .force-lang-font, .lang-ja {
     /*font-family : 'ヒラギノ角ゴ ProN' , 'Hiragino Kaku Gothic ProN' , '游ゴシック' , '游ゴシック体' , YuGothic , 'Yu Gothic' , 'メイリオ' , Meiryo , 'ＭＳ ゴシック' , 'MS Gothic' , HiraKakuProN-W3 , 'TakaoExゴシック' , TakaoExGothic , 'MotoyaLCedar' , 'Droid Sans Japanese' , sans-serif !important;*/
-    font-family : 'ヒラギノ角ゴ ProN' , 'Hiragino Kaku Gothic ProN' , 'ヒラギノ明朝 ProN' , 'Hiragino Mincho ProN' , '游明朝','游明朝体',YuMincho,'Yu Mincho' , 'ＭＳ 明朝' , 'MS Mincho' , HiraMinProN-W3 , 'TakaoEx明朝' , TakaoExMincho , 'MotoyaLCedar' , 'Droid Sans Japanese' , serif !important;
+    font-family : 'ヒラギノ角ゴ ProN' , 'Hiragino Kaku Gothic ProN' , 'ヒラギノ明朝 ProN' , 'Hiragino Mincho ProN' , '游明朝','游明朝体',YuMincho,'Yu Mincho' , 'Meiryo', 'ＭＳ 明朝' , 'MS Mincho' , HiraMinProN-W3 , 'TakaoEx明朝' , TakaoExMincho , 'MotoyaLCedar' , 'Droid Sans Japanese' , serif !important;
   }
   .lang-ko .force-lang-font, .lang-ko {
     font-family: 'Malgun Gothic', Gulim, 'Roboto', Tahoma, Arial, sans-serif !important
   }
   .force-not-lang-font {
     font-family: Roboto, sans-serif!important
+  }
+
+  .x--safe-area {
+    padding-left: calc(max(env(safe-area-inset-left), 12px)) !important;
+    padding-right: calc(max(env(safe-area-inset-right), 12px)) !important;
+  }
+
+  .toolbar--safe-area {
+    padding-left: calc(max(env(safe-area-inset-left), 16px)) !important;
+    padding-right: calc(max(env(safe-area-inset-right), 16px)) !important;
+  }
+
+  .toolbar--safe-area .v-toolbar__content {
+    padding-left: 0 !important;
+    padding-right: 0 !important;
   }
 
 </style>

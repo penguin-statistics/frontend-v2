@@ -37,9 +37,11 @@
         // [key] is a special "stageId" to display a special "background image"
         // [value] represents a "background image url" on such route
         specialImageMap: {
-          "main_06-14": "https://penguin-stats.s3.ap-southeast-1.amazonaws.com/backgrounds/fn_0_1.png", // 6-16
-          "main_06-15": "https://penguin-stats.s3.ap-southeast-1.amazonaws.com/backgrounds/fn_0_0.png", // 6-17
-        }
+          "main_06-14": "https://penguin.upyun.galvincdn.com/backgrounds/fn_0_1.png", // 6-16
+          "main_06-15": "https://penguin.upyun.galvincdn.com/backgrounds/fn_0_0.png", // 6-17
+        },
+        imageRange: 104 + 1 // if x images use ${x + 1}, because Math.random() generates float in [0, 1) range, so we
+                           // need to +1 in order to get the last image also in range
       }
     },
     watch: {
@@ -58,7 +60,7 @@
     },
     methods: {
       getImageUrl (id) {
-        return `https://penguin-stats.s3.ap-southeast-1.amazonaws.com/backgrounds/${id}.${this.webpSupport ? 'webp' : 'optimized.png'}`
+        return `https://penguin.upyun.galvincdn.com/backgrounds/${id}.${this.webpSupport ? 'webp' : 'optimized.png'}`
       },
       setBlur (flag) {
         Console.info("setting blur to", flag)
@@ -77,7 +79,7 @@
         let current = this.last;
         // avoid change to the same background than the last one
         while (current === this.last) {
-          current = Math.floor(Math.random() * 70)
+          current = Math.floor(Math.random() * this.imageRange)
         }
         this.last = current;
         // Console.log(current)

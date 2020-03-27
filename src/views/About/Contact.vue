@@ -13,7 +13,7 @@
     "en": {
       "contact": {
         "contact_0": "Contact us",
-        "contact_2": "If you have any questions or concerns, feel free to contact the webmaster. (English is OK)",
+        "contact_2": "If you have any questions or suggestions, feel free to contact the webmaster. (English is fine)",
         "contributor": "Team Members Page",
         "contact_1": "Contact Information",
         "github": "Github Issues",

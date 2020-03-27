@@ -14,11 +14,11 @@
       "userId": "用户 ID"
     },
     "en": {
-      "notice": "The User ID helps us identifies your upload identity. Inputting this ID on other devices enable you to manage and inspect your uploads with ease.",
+      "notice": "You can connect and manage drop reports using your User ID.",
       "success": "Successfully logged in",
       "failed": {
         "message": "Failed to log in: {message}",
-        "notfound": "The specified User ID could not been found"
+        "notfound": "The specified User ID could not be found"
       },
       "login": "Login",
       "logout": "Logout",

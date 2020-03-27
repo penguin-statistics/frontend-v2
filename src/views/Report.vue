@@ -46,17 +46,17 @@
         "undoSuccess": "Successfully recalled submission",
         "clear": "Clear",
         "unable": "Failed to submit: ",
-        "expired": "This activity has ended, thus the report function of this stage has been closed."
+        "expired": "This stage is not available in-game anymore. The report function for this stage has been closed."
       },
       "rules": {
-        "rule_1": "This is only intended for reporting a single combat, please double-check your inputting.",
-        "rule_2": "If there's no drops, please click submit directly without inputting any drops.",
-        "rule_3": "Please don't report the first time you accomplish a mission, and don't only report the situations where you are lucky ‒ report all drops.",
-        "rule_4": "Please guarantee that you get a 3-stars score.",
-        "rule_5": "Please only submit drop data from CN server, thanks."
+        "rule_1": "Report one clear at a time. Please double-check your drop selection.",
+        "rule_2": "If there are no drops, click submit directly without selecting any drops.",
+        "rule_3": "Please do not report the first-clear of a stage, and do not only report the clears where you were lucky - report all clears.",
+        "rule_4": "Please make sure that you get a 3-stars clear.",
+        "rule_5": "Please only submit drop data from the CN server."
       },
-      "usage": "Increase by left click, decrease by right click",
-      "gacha": "Multiple results are allowed in the reporting of this stage."
+      "usage": "Increase drop amount by left mouse click, decrease by right click",
+      "gacha": "Multiple results are allowed for the reports of this stage."
     },
     "ja": {
       "stage": {
