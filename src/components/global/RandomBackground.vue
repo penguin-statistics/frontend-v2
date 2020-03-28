@@ -149,7 +149,7 @@
     background-size: contain;
     background-position: bottom right;
     opacity: .75;
-    filter: saturate(.5) drop-shadow(0 2px 5px rgba(0, 0, 0, .75));
+    filter: drop-shadow(0 2px 5px rgba(0, 0, 0, .75));
     transition: background-image 1s cubic-bezier(0.165, 0.84, 0.44, 1), filter .225s cubic-bezier(0.165, 0.84, 0.44, 1);
     /*background-image: url("../assets/background/1.jpg");*/
     z-index: 0;

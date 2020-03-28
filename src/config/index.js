@@ -1,10 +1,12 @@
+const version = process.env.npm_package_version;
+
 const client = {
   source: "frontend-v2",
-  version: "v1.1.4"
+  version
 };
 
 module.exports = {
-  version: client.version,
+  version: version,
   api: {
     submitParams: client
   },
