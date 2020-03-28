@@ -32,9 +32,15 @@ module.exports = {
     name: "企鹅物流数据统计",
     themeColor: "#2d66ba",
     msTileColor: "#1d499b",
+    appleMobileWebAppCapable: "yes",
     appleMobileWebAppStatusBarStyle: "black-translucent",
 
     workboxPluginMode: "GenerateSW",
+    workboxOptions: {
+      include: [
+        /https:\/\/penguin\.upyun\.galvincdn\.com\/(backgrounds|avatars|logos)/
+      ]
+    },
     iconPaths: {
       favicon32: 'favicon/favicon-32x32.png',
       favicon16: 'favicon/favicon-16x16.png',

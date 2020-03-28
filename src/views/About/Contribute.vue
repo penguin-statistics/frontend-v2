@@ -94,34 +94,34 @@
 
     <p class="subtitle-1 pl-0">
       {{ $t('contribute.contribute_0') }}
-      <br>
-      <ul class="ml-2">
-        <li>
-          <v-icon
-              small
-          >
-            mdi-penguin
-          </v-icon>
-          {{ $t('contribute.qq_group') }}747099627
-        </li>
-        <li>
-          <v-chip
-            link
-            small
-            href="https://discord.gg/raQjSpq"
-            target="_blank"
-          >
-            <v-icon
-              left
-              small
-            >
-              mdi-discord
-            </v-icon>
-            Discord
-          </v-chip>
-        </li>
-      </ul>
     </p>
+
+    <ul class="ml-2 mb-4">
+      <li>
+        <v-icon
+          small
+        >
+          mdi-penguin
+        </v-icon>
+        {{ $t('contribute.qq_group') }}747099627
+      </li>
+      <li>
+        <v-chip
+          link
+          small
+          href="https://discord.gg/raQjSpq"
+          target="_blank"
+        >
+          <v-icon
+            left
+            small
+          >
+            mdi-discord
+          </v-icon>
+          Discord
+        </v-chip>
+      </li>
+    </ul>
 
     <ul class="ml-4">
       <li

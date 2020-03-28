@@ -446,33 +446,6 @@ export default {
         Console.error("failed to change crisp chat box bottom: ", e)
       }
     }])
-    Console.debug("(after init) dark status", this.dark, this.$vuetify.theme.dark);
-
-    // report current version
-    this.$ga.event(
-      'runtime',
-      'appInited',
-      'version',
-      config.version
-    );
-
-    // push crisp session
-    window.$crisp.push(["set", "session:data", [[
-      ["loggedIn", this.$store.getters["auth/loggedIn"]],
-      ["username", this.$store.getters["auth/username"]],
-      ["language", this.$store.getters["settings/language"]],
-      ["dark", this.$store.getters["settings/dark"]],
-    ]]]);
-
-    window.$crisp.push(["on", "chat:initiated", function () {
-      // resolve safe-area
-      try {
-        document.querySelector("div.crisp-client > div#crisp-chatbox > div > a").style.setProperty("bottom", "calc(max(env(safe-area-inset-bottom), 14px))", "important");
-        document.querySelector("div.crisp-client > div#crisp-chatbox > div > a > span:nth-child(2)").style.setProperty("box-shadow", "0 0 5px rgba(0, 0, 0, .4)", "important")
-      } catch (e) {
-        Console.error("failed to change crisp chat box bottom: ", e)
-      }
-    }])
   },
   methods: {
     async refreshData () {

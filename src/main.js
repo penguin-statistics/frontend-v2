@@ -5,7 +5,6 @@ import App from './App.vue'
 import router from './router'
 import store from './store'
 import VueAnalytics from "vue-analytics"
-import 'aos/dist/aos.css'
 import i18n from "@/i18n"
 import config from "@/config"
 import VueNumberInput from '@chenfengyuan/vue-number-input';
