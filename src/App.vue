@@ -396,8 +396,7 @@ export default {
   },
   beforeMount() {
     this.routes = this.$router.options.routes.filter(el => !el.meta.hide);
-    this.$store.dispatch("data/fetch", false);
-    this.crispOpacityChanger()
+    this.$store.dispatch("data/fetch", false)
   },
   created () {
     // this.randomizeLogo();
@@ -415,35 +414,35 @@ export default {
       }
     }
 
-    Console.debug("(before init) dark status", this.dark, this.$vuetify.theme.dark);
     if (typeof this.dark === "boolean") {
       this.$vuetify.theme.dark = this.dark
     }
-    Console.debug("(after init) dark status", this.dark, this.$vuetify.theme.dark);
+
+    window.$crisp.push(["on", "session:loaded", () => {
+      // resolve safe-area
+      Console.debug("[crisp] triggered | chat:loaded")
+      try {
+        document.querySelector("div.crisp-client > div#crisp-chatbox > div > a").style.setProperty("bottom", "calc(max(env(safe-area-inset-bottom), 14px))", "important");
+        document.querySelector("div.crisp-client > div#crisp-chatbox > div > a > span:nth-child(2)").style.setProperty("box-shadow", "0 0 5px rgba(0, 0, 0, .4)", "important");
+        this.crispOpacityChanger()
+      } catch (e) {
+        Console.error("[crisp] failed to initialize custom style:", e)
+      }
+    }]);
 
     // push crisp session
     window.$crisp.push(["set", "session:data", [[
-      ["loggedIn", this.$store.getters["auth/loggedIn"]],
-      ["username", this.$store.getters["auth/username"]],
-      ["language", this.$store.getters["settings/language"]],
-      ["dark", this.$store.getters["settings/dark"]],
+      ["LoggedIn", this.$store.getters["auth/loggedIn"]],
+      ["Username", this.$store.getters["auth/username"]],
+      ["LanguageActive", this.$i18n.locale],
+      ["LanguagePersisted", this.$store.getters["settings/language"]],
+      ["Theme", this.$store.getters["settings/dark"] ? "Dark" : "Light"],
     ]]]);
-
-    window.$crisp.push(["on", "chat:initiated", function () {
-      // resolve safe-area
-      try {
-        document.querySelector("div.crisp-client > div#crisp-chatbox > div > a").style.setProperty("bottom", "calc(max(env(safe-area-inset-bottom), 14px))", "important");
-        document.querySelector("div.crisp-client > div#crisp-chatbox > div > a > span:nth-child(2)").style.setProperty("box-shadow", "0 0 5px rgba(0, 0, 0, .4)", "important")
-      } catch (e) {
-        Console.error("failed to change crisp chat box bottom: ", e)
-      }
-      this.crispOpacityChanger()
-    }])
 
     // report current version
     this.$ga.event(
       'runtime',
-      'appInited',
+      'launched',
       'version',
       config.version
     );
@@ -509,6 +508,8 @@ export default {
       }
     },
     crispOpacityChanger (newRoute = this.$route) {
+      Console.debug("[crisp] customize | changing opacity");
+      Console.debug(document.querySelector("div.crisp-client"));
       try {
         document.querySelector("div.crisp-client").style.setProperty("transition", "all 275ms cubic-bezier(0.165, 0.84, 0.44, 1)", "important");
 
