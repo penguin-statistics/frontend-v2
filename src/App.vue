@@ -397,7 +397,7 @@ export default {
   beforeMount() {
     this.routes = this.$router.options.routes.filter(el => !el.meta.hide);
     this.$store.dispatch("data/fetch", false);
-    this.crispOpacityChanger(this.$route)
+    this.crispOpacityChanger()
   },
   created () {
     // this.randomizeLogo();
@@ -421,21 +421,13 @@ export default {
     }
     Console.debug("(after init) dark status", this.dark, this.$vuetify.theme.dark);
 
-    // report current version
-    this.$ga.event(
-      'runtime',
-      'appInited',
-      'version',
-      config.version
-    );
-
     // push crisp session
     window.$crisp.push(["set", "session:data", [[
       ["loggedIn", this.$store.getters["auth/loggedIn"]],
       ["username", this.$store.getters["auth/username"]],
       ["language", this.$store.getters["settings/language"]],
       ["dark", this.$store.getters["settings/dark"]],
-    ]]])
+    ]]]);
 
     window.$crisp.push(["on", "chat:initiated", function () {
       // resolve safe-area
@@ -445,7 +437,16 @@ export default {
       } catch (e) {
         Console.error("failed to change crisp chat box bottom: ", e)
       }
+      this.crispOpacityChanger()
     }])
+
+    // report current version
+    this.$ga.event(
+      'runtime',
+      'appInited',
+      'version',
+      config.version
+    );
   },
   methods: {
     async refreshData () {
@@ -507,15 +508,19 @@ export default {
         this.$ga.event('result', 'fetch_' + this.$store.getters['dataSource/source'], newValue.params.itemId, 1)
       }
     },
-    crispOpacityChanger (newRoute) {
-      document.querySelector("div.crisp-client").style.setProperty("transition", "all 275ms cubic-bezier(0.165, 0.84, 0.44, 1)", "important");
+    crispOpacityChanger (newRoute = this.$route) {
+      try {
+        document.querySelector("div.crisp-client").style.setProperty("transition", "all 275ms cubic-bezier(0.165, 0.84, 0.44, 1)", "important");
 
-      if (newRoute.name === "home") {
-        document.querySelector("div.crisp-client").style.setProperty("opacity", 1, "important");
-        // document.querySelector("div.crisp-client").style.setProperty("transform", "translateY(0px)", "important")
-      } else {
-        document.querySelector("div.crisp-client").style.setProperty("opacity", 0, "important");
-        // document.querySelector("div.crisp-client").style.setProperty("transform", "translateY(32px)", "important")
+        if (newRoute.name === "home") {
+          document.querySelector("div.crisp-client").style.setProperty("opacity", 1, "important");
+          // document.querySelector("div.crisp-client").style.setProperty("transform", "translateY(0px)", "important")
+        } else {
+          document.querySelector("div.crisp-client").style.setProperty("opacity", 0, "important");
+          // document.querySelector("div.crisp-client").style.setProperty("transform", "translateY(32px)", "important")
+        }
+      } catch (e) {
+        Console.error("failed to change crisp opacity: ", e, newRoute)
       }
     }
   }

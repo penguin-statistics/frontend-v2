@@ -38,7 +38,7 @@ Vue.use(VueAnalytics, {
   },
   autoTracking: {
     exception: true,
-    exceptionLogs: !production
+    exceptionLogs: true
   }
 });
 
