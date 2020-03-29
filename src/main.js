@@ -16,7 +16,7 @@ const production = process.env.NODE_ENV === 'production';
 
 if (production) {
   Sentry.init({
-    dsn: 'https://5d8bed30aca44a19a3a49c4de2ca73d9@sentry.imgal.vin/2',
+    dsn: 'https://9636aaa824a744f98a619df0aaabba00@sentry.io/1536764',
     integrations: [new Integrations.Vue({Vue, attachProps: true})],
     release: 'frontend-v2@' + (config.version || 'unknown')
   });
