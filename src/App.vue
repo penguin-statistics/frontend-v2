@@ -380,7 +380,7 @@ export default {
     },
     version () {
       return {
-        VERSION: config.version,
+        VERSION: config.version || "v0.0.0",
         GIT_COMMIT: GIT_COMMIT.trim(),
         ENV: process.env.NODE_ENV === 'production' ? "prod" : "dev"
       }
