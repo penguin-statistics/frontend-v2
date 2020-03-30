@@ -76,10 +76,8 @@ class ObjectManager {
       context.ajaxHooks.request(context.name);
       let response = service.get(context.api)
         .then(({ data }) => {
-          Console.debug("[objectManager]", context.name , "before transform", data)
-          data = context._transform(data)
-          Console.debug("[objectManager]", context.name , "after transform", data)
-          context.cache = data
+          data = context._transform(data);
+          context.cache = data;
 
           store.commit("data/store", {key: context.name, value: data});
 
@@ -89,7 +87,7 @@ class ObjectManager {
           cacheUpdateAtTemp[context.name] = now;
           store.commit("cacheUpdateAt/store", cacheUpdateAtTemp);
 
-          Console.debug(`fetched new ${context.name} data at ${now}`)
+          Console.info(`fetched data "${context.name}" at ${now}`);
 
           return context.cache
         });

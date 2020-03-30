@@ -406,7 +406,7 @@ export default {
       this.changeLocale(this.language, false)
     } else {
       const language = strings.getFirstBrowserLanguage();
-      Console.debug("[i18n] detected language", language);
+      Console.info("[i18n] detected language", language);
       if (language) {
         // because this is a detection result, thus we are not storing it,
         // unless the user manually set one.
@@ -420,7 +420,7 @@ export default {
 
     window.$crisp.push(["on", "session:loaded", () => {
       // resolve safe-area
-      Console.debug("[crisp] triggered | chat:loaded")
+      Console.info("[crisp] triggered | chat:loaded")
       try {
         document.querySelector("div.crisp-client > div#crisp-chatbox > div > a").style.setProperty("bottom", "calc(max(env(safe-area-inset-bottom), 14px))", "important");
         document.querySelector("div.crisp-client > div#crisp-chatbox > div > a > span:nth-child(2)").style.setProperty("box-shadow", "0 0 5px rgba(0, 0, 0, .4)", "important");
@@ -488,7 +488,7 @@ export default {
     },
     changeLocale (localeId, save=true) {
       if (localeId !== this.$i18n.locale) {
-        Console.debug("[i18n] locale changed to:", localeId, "| saving to vuex:", save);
+        Console.info("[i18n] locale changed to:", localeId, "| saving to vuex:", save);
         this.$i18n.locale = localeId;
         this.$vuetify.lang.current = localeId;
         document.title = `${this.$t(this.$route.meta.i18n) + ' | ' || ''}${this.$t('app.name')}`;
@@ -496,7 +496,7 @@ export default {
         // this.$vuetify.lang.current = localeId;
         if (save) this.$store.commit("settings/changeLocale", localeId);
       } else {
-        Console.debug("[i18n] Same locale");
+        Console.info("[i18n] Same locale");
       }
     },
     logRouteEvent (newValue) {
@@ -508,7 +508,7 @@ export default {
       }
     },
     crispOpacityChanger (newRoute = this.$route) {
-      Console.debug("[crisp] customize | changing opacity");
+      Console.info("[crisp] customize | changing opacity");
       Console.debug(document.querySelector("div.crisp-client"));
       try {
         document.querySelector("div.crisp-client").style.setProperty("transition", "all 275ms cubic-bezier(0.165, 0.84, 0.44, 1)", "important");
