@@ -36,11 +36,6 @@ module.exports = {
     appleMobileWebAppStatusBarStyle: "black-translucent",
 
     workboxPluginMode: "GenerateSW",
-    workboxOptions: {
-      include: [
-        /https:\/\/penguin\.upyun\.galvincdn\.com\/(backgrounds|avatars|logos)/
-      ]
-    },
     iconPaths: {
       favicon32: 'favicon/favicon-32x32.png',
       favicon16: 'favicon/favicon-16x16.png',
