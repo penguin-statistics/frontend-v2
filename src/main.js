@@ -38,7 +38,8 @@ Vue.use(VueAnalytics, {
   },
   autoTracking: {
     exception: true,
-    exceptionLogs: true
+    exceptionLogs: true,
+    screenview: true
   }
 });
 
