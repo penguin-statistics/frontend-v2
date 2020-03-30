@@ -438,6 +438,20 @@
         </v-card-actions>
       </v-card>
     </v-dialog>
+    <v-btn
+      fab
+      bottom
+      right
+      fixed
+      ripple
+      color="primary"
+      :loading="calculation.pending"
+      @click="calculate"
+    >
+      <v-icon>
+        mdi-calculator
+      </v-icon>
+    </v-btn>
     <v-row
       align="center"
       justify="center"

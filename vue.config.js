@@ -32,6 +32,7 @@ module.exports = {
     name: "企鹅物流数据统计",
     themeColor: "#2d66ba",
     msTileColor: "#1d499b",
+    appleMobileWebAppCapable: "yes",
     appleMobileWebAppStatusBarStyle: "black-translucent",
 
     workboxPluginMode: "GenerateSW",

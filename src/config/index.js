@@ -1,6 +1,6 @@
 const client = {
   source: "frontend-v2",
-  version: "v1.1.4"
+  version: "v1.1.5"
 };
 
 module.exports = {

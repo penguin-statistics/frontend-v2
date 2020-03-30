@@ -231,7 +231,7 @@
             this.auth.dialog = false
           })
           .catch((err) => {
-            Console.debug(err)
+            Console.error(err)
             if (err.response && err.response.status && err.response.status === 404) {
               this.error = this.$t('failed.message', {message: this.$t('failed.notfound')})
             } else {

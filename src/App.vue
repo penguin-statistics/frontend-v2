@@ -325,6 +325,7 @@
   import config from "@/config";
   import {mapGetters} from "vuex";
   import GlobalSnackbar from "@/components/global/GlobalSnackbar";
+  import * as Sentry from '@sentry/browser';
 
 export default {
   name: 'App',
@@ -380,7 +381,7 @@ export default {
     },
     version () {
       return {
-        VERSION: config.version,
+        VERSION: config.version || "v0.0.0",
         GIT_COMMIT: GIT_COMMIT.trim(),
         ENV: process.env.NODE_ENV === 'production' ? "prod" : "dev"
       }
@@ -396,8 +397,7 @@ export default {
   },
   beforeMount() {
     this.routes = this.$router.options.routes.filter(el => !el.meta.hide);
-    this.$store.dispatch("data/fetch", false);
-    this.crispOpacityChanger(this.$route)
+    this.$store.dispatch("data/fetch", false)
   },
   created () {
     // this.randomizeLogo();
@@ -407,7 +407,7 @@ export default {
       this.changeLocale(this.language, false)
     } else {
       const language = strings.getFirstBrowserLanguage();
-      Console.debug("[i18n] detected language", language);
+      Console.info("[i18n] detected language", language);
       if (language) {
         // because this is a detection result, thus we are not storing it,
         // unless the user manually set one.
@@ -415,64 +415,46 @@ export default {
       }
     }
 
-    Console.debug("(before init) dark status", this.dark, this.$vuetify.theme.dark);
     if (typeof this.dark === "boolean") {
       this.$vuetify.theme.dark = this.dark
     }
-    Console.debug("(after init) dark status", this.dark, this.$vuetify.theme.dark);
 
-    // report current version
-    this.$ga.event(
-      'runtime',
-      'appInited',
-      'version',
-      config.version
-    );
-
-    // push crisp session
-    window.$crisp.push(["set", "session:data", [[
-      ["loggedIn", this.$store.getters["auth/loggedIn"]],
-      ["username", this.$store.getters["auth/username"]],
-      ["language", this.$store.getters["settings/language"]],
-      ["dark", this.$store.getters["settings/dark"]],
-    ]]])
-
-    window.$crisp.push(["on", "chat:initiated", function () {
+    window.$crisp.push(["on", "session:loaded", () => {
       // resolve safe-area
+      Console.info("[crisp] triggered | chat:loaded")
       try {
         document.querySelector("div.crisp-client > div#crisp-chatbox > div > a").style.setProperty("bottom", "calc(max(env(safe-area-inset-bottom), 14px))", "important");
-        document.querySelector("div.crisp-client > div#crisp-chatbox > div > a > span:nth-child(2)").style.setProperty("box-shadow", "0 0 5px rgba(0, 0, 0, .4)", "important")
+        document.querySelector("div.crisp-client > div#crisp-chatbox > div > a > span:nth-child(2)").style.setProperty("box-shadow", "0 0 5px rgba(0, 0, 0, .4)", "important");
+        this.crispOpacityChanger()
       } catch (e) {
-        Console.error("failed to change crisp chat box bottom: ", e)
+        Console.error("[crisp] failed to initialize custom style:", e)
       }
-    }])
-    Console.debug("(after init) dark status", this.dark, this.$vuetify.theme.dark);
-
-    // report current version
-    this.$ga.event(
-      'runtime',
-      'appInited',
-      'version',
-      config.version
-    );
+    }]);
 
     // push crisp session
     window.$crisp.push(["set", "session:data", [[
-      ["loggedIn", this.$store.getters["auth/loggedIn"]],
-      ["username", this.$store.getters["auth/username"]],
-      ["language", this.$store.getters["settings/language"]],
-      ["dark", this.$store.getters["settings/dark"]],
+      ["LoggedIn", this.$store.getters["auth/loggedIn"]],
+      ["Username", this.$store.getters["auth/username"]],
+      ["LanguageActive", this.$i18n.locale],
+      ["LanguagePersisted", this.$store.getters["settings/language"]],
+      ["Theme", this.$store.getters["settings/dark"] ? "Dark" : "Light"],
     ]]]);
 
-    window.$crisp.push(["on", "chat:initiated", function () {
-      // resolve safe-area
-      try {
-        document.querySelector("div.crisp-client > div#crisp-chatbox > div > a").style.setProperty("bottom", "calc(max(env(safe-area-inset-bottom), 14px))", "important");
-        document.querySelector("div.crisp-client > div#crisp-chatbox > div > a > span:nth-child(2)").style.setProperty("box-shadow", "0 0 5px rgba(0, 0, 0, .4)", "important")
-      } catch (e) {
-        Console.error("failed to change crisp chat box bottom: ", e)
-      }
-    }])
+    Sentry.configureScope(function(scope) {
+      scope.setTag("LoggedIn", this.$store.getters["auth/loggedIn"]);
+      scope.setTag("Username", this.$store.getters["auth/username"]);
+      scope.setTag("LanguageActive", this.$i18n.locale);
+      scope.setTag("LanguagePersisted", this.$store.getters["settings/language"]);
+      scope.setTag("Theme", this.$store.getters["settings/dark"] ? "Dark" : "Light")
+    });
+
+    // report current version
+    this.$ga.event(
+      'runtime',
+      'launched',
+      'version',
+      config.version
+    );
   },
   methods: {
     async refreshData () {
@@ -515,7 +497,7 @@ export default {
     },
     changeLocale (localeId, save=true) {
       if (localeId !== this.$i18n.locale) {
-        Console.debug("[i18n] locale changed to:", localeId, "| saving to vuex:", save);
+        Console.info("[i18n] locale changed to:", localeId, "| saving to vuex:", save);
         this.$i18n.locale = localeId;
         this.$vuetify.lang.current = localeId;
         document.title = `${this.$t(this.$route.meta.i18n) + ' | ' || ''}${this.$t('app.name')}`;
@@ -523,7 +505,7 @@ export default {
         // this.$vuetify.lang.current = localeId;
         if (save) this.$store.commit("settings/changeLocale", localeId);
       } else {
-        Console.debug("[i18n] Same locale");
+        Console.info("[i18n] Same locale");
       }
     },
     logRouteEvent (newValue) {
@@ -534,15 +516,21 @@ export default {
         this.$ga.event('result', 'fetch_' + this.$store.getters['dataSource/source'], newValue.params.itemId, 1)
       }
     },
-    crispOpacityChanger (newRoute) {
-      document.querySelector("div.crisp-client").style.setProperty("transition", "all 275ms cubic-bezier(0.165, 0.84, 0.44, 1)", "important");
+    crispOpacityChanger (newRoute = this.$route) {
+      Console.info("[crisp] customize | changing opacity");
+      Console.debug(document.querySelector("div.crisp-client"));
+      try {
+        document.querySelector("div.crisp-client").style.setProperty("transition", "all 275ms cubic-bezier(0.165, 0.84, 0.44, 1)", "important");
 
-      if (newRoute.name === "home") {
-        document.querySelector("div.crisp-client").style.setProperty("opacity", 1, "important");
-        // document.querySelector("div.crisp-client").style.setProperty("transform", "translateY(0px)", "important")
-      } else {
-        document.querySelector("div.crisp-client").style.setProperty("opacity", 0, "important");
-        // document.querySelector("div.crisp-client").style.setProperty("transform", "translateY(32px)", "important")
+        if (newRoute.name === "home") {
+          document.querySelector("div.crisp-client").style.setProperty("opacity", 1, "important");
+          // document.querySelector("div.crisp-client").style.setProperty("transform", "translateY(0px)", "important")
+        } else {
+          document.querySelector("div.crisp-client").style.setProperty("opacity", 0, "important");
+          // document.querySelector("div.crisp-client").style.setProperty("transform", "translateY(32px)", "important")
+        }
+      } catch (e) {
+        Console.error("failed to change crisp opacity: ", e, newRoute)
       }
     }
   }
