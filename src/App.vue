@@ -325,6 +325,7 @@
   import config from "@/config";
   import {mapGetters} from "vuex";
   import GlobalSnackbar from "@/components/global/GlobalSnackbar";
+  import * as Sentry from '@sentry/browser';
 
 export default {
   name: 'App',
@@ -438,6 +439,14 @@ export default {
       ["LanguagePersisted", this.$store.getters["settings/language"]],
       ["Theme", this.$store.getters["settings/dark"] ? "Dark" : "Light"],
     ]]]);
+
+    Sentry.configureScope(function(scope) {
+      scope.setTag("LoggedIn", this.$store.getters["auth/loggedIn"]);
+      scope.setTag("Username", this.$store.getters["auth/username"]);
+      scope.setTag("LanguageActive", this.$i18n.locale);
+      scope.setTag("LanguagePersisted", this.$store.getters["settings/language"]);
+      scope.setTag("Theme", this.$store.getters["settings/dark"] ? "Dark" : "Light")
+    });
 
     // report current version
     this.$ga.event(
