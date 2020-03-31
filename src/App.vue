@@ -326,6 +326,7 @@
   import {mapGetters} from "vuex";
   import GlobalSnackbar from "@/components/global/GlobalSnackbar";
   import * as Sentry from '@sentry/browser';
+  import dayjs from "dayjs";
 
 export default {
   name: 'App',
@@ -496,6 +497,7 @@ export default {
             : imageUrl("croissant")
     },
     changeLocale (localeId, save=true) {
+      dayjs.locale(localeId)
       if (localeId !== this.$i18n.locale) {
         Console.info("[i18n] locale changed to:", localeId, "| saving to vuex:", save);
         this.$i18n.locale = localeId;
