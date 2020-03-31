@@ -13,7 +13,6 @@ export default {
   },
   fool: {
     enabled () {
-      return true
       return timeFormatter.dayjs().isBetween('2020-04-01', '2020-04-02', 'day', '[)')
     },
     messages: {
