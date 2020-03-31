@@ -47,7 +47,8 @@
           max-height="128px"
           min-width="128px"
           contain
-          class="my-6 drop-shadow transition-all"
+          class="my-6"
+          :class="{'drop-shadow transition-all': content.isSpecial}"
         />
         <v-col cols="12">
           <h1
@@ -71,13 +72,13 @@
 </template>
 
 <script>
-import timeFormatter from "@/utils/timeFormatter";
+import special from "@/models/special";
 
 export default {
   name: 'Intro',
   computed: {
     content () {
-      if (this.$i18n.locale === "zh" && timeFormatter.dayjs("2020-04-01").isBetween('2020-04-01', '2020-04-02', 'day', '[)')) {
+      if (special.fool()) {
         const fool = {
           "zh": {
             "intro": {
@@ -110,6 +111,7 @@ export default {
         }
 
         return {
+          isSpecial: true,
           logo: "https://penguin.upyun.galvincdn.com/logos/penguin_stats_logo_fool.png",
           title: fool[this.$i18n.locale]["intro"]["intro_0"],
           subtitle: [
@@ -117,15 +119,16 @@ export default {
             fool[this.$i18n.locale]["intro"]["intro_2"]
           ]
         }
-      } else {
-        return {
-          logo: require('@/assets/logo.png'),
-          title: this.$t("intro.intro_0"),
-          subtitle: [
-            this.$t("intro.intro_1"),
-            this.$t("intro.intro_2")
-          ]
-        }
+      }
+
+      return {
+        isSpecial: false,
+        logo: require('@/assets/logo.png'),
+        title: this.$t("intro.intro_0"),
+        subtitle: [
+          this.$t("intro.intro_1"),
+          this.$t("intro.intro_2")
+        ]
       }
     }
   },
