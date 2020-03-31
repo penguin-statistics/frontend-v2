@@ -71,13 +71,13 @@
 </template>
 
 <script>
-import timeFormatter from "@/utils/timeFormatter";
+import special from "@/models/special";
 
 export default {
   name: 'Intro',
   computed: {
     content () {
-      if (this.$i18n.locale === "zh" && timeFormatter.dayjs("2020-04-01").isBetween('2020-04-01', '2020-04-02', 'day', '[)')) {
+      if (special.fool()) {
         const fool = {
           "zh": {
             "intro": {
@@ -117,15 +117,15 @@ export default {
             fool[this.$i18n.locale]["intro"]["intro_2"]
           ]
         }
-      } else {
-        return {
-          logo: require('@/assets/logo.png'),
-          title: this.$t("intro.intro_0"),
-          subtitle: [
-            this.$t("intro.intro_1"),
-            this.$t("intro.intro_2")
-          ]
-        }
+      }
+
+      return {
+        logo: require('@/assets/logo.png'),
+        title: this.$t("intro.intro_0"),
+        subtitle: [
+          this.$t("intro.intro_1"),
+          this.$t("intro.intro_2")
+        ]
       }
     }
   },
