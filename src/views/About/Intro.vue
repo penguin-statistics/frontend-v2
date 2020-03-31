@@ -47,7 +47,8 @@
           max-height="128px"
           min-width="128px"
           contain
-          class="my-6 drop-shadow transition-all"
+          class="my-6"
+          :class="{'drop-shadow transition-all': content.isSpecial}"
         />
         <v-col cols="12">
           <h1
@@ -110,6 +111,7 @@ export default {
         }
 
         return {
+          isSpecial: true,
           logo: "https://penguin.upyun.galvincdn.com/logos/penguin_stats_logo_fool.png",
           title: fool[this.$i18n.locale]["intro"]["intro_0"],
           subtitle: [
@@ -120,6 +122,7 @@ export default {
       }
 
       return {
+        isSpecial: false,
         logo: require('@/assets/logo.png'),
         title: this.$t("intro.intro_0"),
         subtitle: [
