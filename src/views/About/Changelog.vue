@@ -34,7 +34,7 @@
           <v-spacer />
 
           <span
-            class="overline mr-2"
+            class="caption mr-2"
             :title="item.date"
             v-text="formatTime(item.date)"
           />
