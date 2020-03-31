@@ -78,7 +78,7 @@
     "repo": "Project repositories: ",
     "frontend": "Front End",
     "backend": "Back End",
-    "contribute_0": "If you have experience with any of the following, and want to contribute to Penguin Statistics, contact us at QQ group: 747099627.",
+    "contribute_0": "If you have experience with any of the following skills, and want to contribute to Penguin Statistics, please feel free to contact us.",
     "contribute_1": "This is a nonprofit and open source project",
     "skills": {
       "frontend": "Front End Development (Vue.js)",
@@ -132,5 +132,8 @@
         "not": "Should not be {quantity} kinds of items"
       }
     }
+  },
+  "donate": {
+    "donate_0": "Increasing number of users and server fees are putting Penguin Statistics into crisis. In order to protect our beloved Penguin Statistics, the webmaster decided to..."
   }
 }

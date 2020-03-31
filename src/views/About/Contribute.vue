@@ -4,8 +4,6 @@
       "contribute": {
         "frontend": "前端",
         "backend": "后端",
-        "contribute_0": "如果您有以下一项或多项经验，愿意为企鹅数据贡献自己的一份力量，欢迎联系我们。",
-        "contribute_1": "本项目为无偿开源项目",
         "qq_group": "QQ群："
       }
     },
@@ -13,8 +11,6 @@
       "contribute": {
         "frontend": "Frontend",
         "backend": "Backend",
-        "contribute_0": "If you have experience with any of the following skills, and want to contribute to Reunion Statistics, please feel free to contact us.",
-        "contribute_1": "This is a nonprofit and open source project",
         "qq_group": "QQ Group: "
       }
     },
@@ -22,8 +18,6 @@
       "contribute": {
         "frontend": "フロントエンド",
         "backend": "バックエンド",
-        "contribute_0": "以下のような開発の経験があるのであれば、Reunion Statisticsに自身の力を使ってみませんか？",
-        "contribute_1": "本プロジェクトは無償のオープンソースプロジェクトです",
         "qq_group": "QQグループ："
       }
     },

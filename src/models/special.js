@@ -13,6 +13,7 @@ export default {
   },
   fool: {
     enabled () {
+      return true
       return timeFormatter.dayjs().isBetween('2020-04-01', '2020-04-02', 'day', '[)')
     },
     messages: {
@@ -33,6 +34,9 @@ export default {
           "intro_0": "欢迎来到整合运动数据统计。",
           "intro_1": "整合运动数据统计（Reunion Statistics）是整合运动旗下数据处理部门，致力于各作战素材库存统计分析。",
           "intro_2": "目前绝大部分数据由玩家手动上传，为了尽量减少谎报、误报对结果的影响，整合运动干部们会对库存进行多方位的审查。"
+        },
+        "donate": {
+          "donate_0": "用户量激增，服务器月费上涨，整合运动的运营陷入了危机。站长红白为了保护喜爱的整合运动而决定..."
         }
       },
       en: {
@@ -51,7 +55,7 @@ export default {
           }
         },
         contribute: {
-          contribute_0: "If you have experience with any of the following, and want to contribute to Reunion Statistics, contact us at QQ group: 747099627."
+          "contribute_0": "If you have experience with any of the following skills, and want to contribute to Reunion Statistics, please feel free to contact us.",
         },
         "donate": {
           "donate_0": "Increasing number of users and server fees are putting Reunion Statistics into crisis. In order to protect our beloved Reunion Statistics, the webmaster decided to..."
