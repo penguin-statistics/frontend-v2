@@ -1,4 +1,9 @@
 import dayjs from 'dayjs'
+import 'dayjs/locale/zh'
+import 'dayjs/locale/ja'
+import 'dayjs/locale/ko'
+const relativeTime = require('dayjs/plugin/relativeTime')
+dayjs.extend(relativeTime)
 
 const FORMATS = {
   MD: "M.D",
