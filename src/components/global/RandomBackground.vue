@@ -40,7 +40,7 @@
           "main_06-14": "https://penguin.upyun.galvincdn.com/backgrounds/fn_0_1.png", // 6-16
           "main_06-15": "https://penguin.upyun.galvincdn.com/backgrounds/fn_0_0.png", // 6-17
         },
-        imageRange: 104 + 1 // if x images use ${x + 1}, because Math.random() generates float in [0, 1) range, so we
+        imageRange: 6 + 1 // if x images use ${x + 1}, because Math.random() generates float in [0, 1) range, so we
                            // need to +1 in order to get the last image also in range
       }
     },
@@ -60,7 +60,7 @@
     },
     methods: {
       getImageUrl (id) {
-        return `https://penguin.upyun.galvincdn.com/backgrounds/${id}.${this.webpSupport ? 'webp' : 'optimized.png'}`
+        return `https://penguin.upyun.galvincdn.com/backgrounds/reunion/${id}.${this.webpSupport ? 'webp' : 'optimized.png'}`
       },
       setBlur (flag) {
         Console.info("setting blur to", flag)
