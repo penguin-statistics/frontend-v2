@@ -72,6 +72,7 @@ export default {
           date: "2020-03-30T23:31:00Z",
           changes: [
             "添加：User ID 说明",
+            "重构：更新日志页面",
             "修复：有时无法自动隐藏 Crisp 的错误",
             "修复：重新使用 SaaS 版 Sentry",
             "若干错误修复与性能优化"
