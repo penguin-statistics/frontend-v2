@@ -17,7 +17,7 @@
     },
     "en": {
       "donate": {
-        "donate_0": "Increasing number of users and server fees are putting Penguin Statistics into crisis. In order to protect our beloved Penguin Statistics, the webmaster decided to...",
+        "donate_0": "Increasing number of users and server fees are putting Reunion Statistics into crisis. In order to protect our beloved Reunion Statistics, the webmaster decided to...",
         "donate_1": "The number of users is increasing. The server is becoming overwhelmed. We will appreciate it a lot if Doctors can donate some",
         "donate_2": "server fee.",
         "donate_3": "pocky or apple pie are also accepted",

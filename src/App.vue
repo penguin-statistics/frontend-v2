@@ -302,7 +302,7 @@
           </v-dialog>
 
           <v-card-text class="white--text d-inline">
-            <strong>Penguin Statistics</strong> — {{ new Date().getFullYear() }}
+            <strong>Reunion Statistics</strong> — {{ new Date().getFullYear() }}
           </v-card-text>
 
           <v-card-text class="white--text d-block pt-2 pb-0">

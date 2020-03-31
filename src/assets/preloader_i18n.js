@@ -56,12 +56,12 @@ let _i18n = {
     "en": {
       "load_title--text": "Loading",
       "load_caption--text": "Initialization may take some time",
-      "load_copyright--text": "Penguin Statistics"
+      "load_copyright--text": "Reunion Statistics"
     },
     "ja": {
       "load_title--text": "読み込み中...",
       "load_caption--text": "初めての読み込みは動作が遅くなる可能性があります<br>少々お待ち下さい",
-      "load_copyright--text": "ペンギン急便データ統計処理部門"
+      "load_copyright--text": "レユニオンデータ統計処理部門"
     },
     "ko": {
       "load_title--text": "로딩중...",

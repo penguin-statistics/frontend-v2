@@ -13,7 +13,7 @@
       "contribute": {
         "frontend": "Frontend",
         "backend": "Backend",
-        "contribute_0": "If you have experience with any of the following skills, and want to contribute to Penguin Statistics, please feel free to contact us.",
+        "contribute_0": "If you have experience with any of the following skills, and want to contribute to Reunion Statistics, please feel free to contact us.",
         "contribute_1": "This is a nonprofit and open source project",
         "qq_group": "QQ Group: "
       }
@@ -22,7 +22,7 @@
       "contribute": {
         "frontend": "フロントエンド",
         "backend": "バックエンド",
-        "contribute_0": "以下のような開発の経験があるのであれば、Penguin Statisticsに自身の力を使ってみませんか？",
+        "contribute_0": "以下のような開発の経験があるのであれば、Reunion Statisticsに自身の力を使ってみませんか？",
         "contribute_1": "本プロジェクトは無償のオープンソースプロジェクトです",
         "qq_group": "QQグループ："
       }
