@@ -302,7 +302,7 @@
           </v-dialog>
 
           <v-card-text class="white--text d-inline">
-            <strong>Reunion Statistics</strong> — {{ new Date().getFullYear() }}
+            <strong>Penguin Statistics</strong> — {{ new Date().getFullYear() }}
           </v-card-text>
 
           <v-card-text class="white--text d-block pt-2 pb-0">
@@ -329,6 +329,14 @@
   import dayjs from "dayjs";
   import special from "@/models/special";
 
+  function logo() {
+    if (special.fool.enabled()) {
+      return `${config.cdn.global}/logos/penguin_stats_logo_fool.png`
+    } else {
+      return require("@/assets/logo.png")
+    }
+  }
+
 export default {
   name: 'App',
   components: {
@@ -340,7 +348,7 @@ export default {
   data () {
     return {
       routes: [],
-      randomizedLogo: `${config.cdn.global}/logos/penguin_stats_logo_fool.png`,
+      randomizedLogo: logo(),
       localizations: [
         {
           id: 'zh',
@@ -389,11 +397,7 @@ export default {
       }
     },
     logo () {
-      if (special.fool.enabled()) {
-        return `${config.cdn.global}/logos/penguin_stats_logo_fool.png`
-      } else {
-        return require("@/assets/logo.png")
-      }
+      return logo()
     }
   },
   watch: {
@@ -499,13 +503,20 @@ export default {
       function imageUrl (character) {
         return `${config.cdn.global}/logos/penguin_stats_logo_${character}.png`
       }
-      this.randomizedLogo = random < (1.0/7) ? imageUrl("talulah")
-        : random < (2.0/7) ? imageUrl("w")
-          : random < (3.0/7) ? imageUrl("skullshatterer")
-          : random < (4.0/7) ? imageUrl("frostnova")
-          : random < (5.0/7) ? imageUrl("crownslayer")
-          : random < (6.0/7) ? imageUrl("faustus")
-            : imageUrl("mephisto")
+      if (special.fool.enabled()) {
+        this.randomizedLogo = random < (1.0/7) ? imageUrl("talulah")
+          : random < (2.0/7) ? imageUrl("w")
+            : random < (3.0/7) ? imageUrl("skullshatterer")
+              : random < (4.0/7) ? imageUrl("frostnova")
+                : random < (5.0/7) ? imageUrl("crownslayer")
+                  : random < (6.0/7) ? imageUrl("faustus")
+                    : imageUrl("mephisto")
+      } else {
+        this.randomizedLogo = random < .25 ? imageUrl("exia")
+          : random < .5 ? imageUrl("texas")
+            : random < .75 ? imageUrl("sora")
+              : imageUrl("croissant")
+      }
     },
     changeLocale (localeId, save=true) {
       dayjs.locale(localeId)

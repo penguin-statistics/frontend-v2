@@ -8,6 +8,7 @@
 
 <script>
   import Console from "@/utils/Console";
+  import special from "@/models/special";
 
   export default {
     name: "RandomBackground",
@@ -40,7 +41,7 @@
           "main_06-14": "https://penguin.upyun.galvincdn.com/backgrounds/fn_0_1.png", // 6-16
           "main_06-15": "https://penguin.upyun.galvincdn.com/backgrounds/fn_0_0.png", // 6-17
         },
-        imageRange: 6 + 1 // if x images use ${x + 1}, because Math.random() generates float in [0, 1) range, so we
+        imageRange: 104 + 1 // if x images use ${x + 1}, because Math.random() generates float in [0, 1) range, so we
                            // need to +1 in order to get the last image also in range
       }
     },
@@ -59,8 +60,12 @@
       clearInterval(this.timer)
     },
     methods: {
-      getImageUrl (id) {
-        return `https://penguin.upyun.galvincdn.com/backgrounds/reunion/${id}.${this.webpSupport ? 'webp' : 'optimized.png'}`
+      getImageUrl (id, subpath) {
+        if (subpath) {
+          return `https://penguin.upyun.galvincdn.com/backgrounds/${subpath}/${id}.${this.webpSupport ? 'webp' : 'optimized.png'}`
+        } else {
+          return `https://penguin.upyun.galvincdn.com/backgrounds/${id}.${this.webpSupport ? 'webp' : 'optimized.png'}`
+        }
       },
       setBlur (flag) {
         Console.info("setting blur to", flag)
@@ -77,16 +82,25 @@
       },
       async getRandomBackgroundUrl() {
         let current = this.last;
-        // avoid change to the same background than the last one
-        while (current === this.last) {
-          current = Math.floor(Math.random() * this.imageRange)
+        if (special.fool.enabled()) {
+          current = Math.floor(Math.random() * (6 + 1));
+          this.last = current;
+          // Console.log(current)
+          if (this.webpSupport === null) {
+            this.webpSupport = await this.testWebp();
+          }
+          return this.getImageUrl(current, "reunion")
+        } else {
+          // avoid change to the same background than the last one
+          while (current === this.last) {
+            current = Math.floor(Math.random() * this.imageRange)
+          }
+          this.last = current;
+          if (this.webpSupport === null) {
+            this.webpSupport = await this.testWebp();
+          }
+          return this.getImageUrl(current)
         }
-        this.last = current;
-        // Console.log(current)
-        if (this.webpSupport === null) {
-          this.webpSupport = await this.testWebp();
-        }
-        return this.getImageUrl(current)
       },
       async updateBackgroundByRandom(ignoreUrl) {
         // Console.log("check at random", this.isSpecialUrl(this.$route), this.$route)

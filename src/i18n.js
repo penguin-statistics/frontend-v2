@@ -14,9 +14,7 @@ function loadLocaleMessages () {
       messages[locale] = locales(key)
     }
   });
-  console.log(Object.assign({}, messages))
   messages = special.apply(messages);
-  console.log(Object.assign({}, messages))
   return messages
 }
 
