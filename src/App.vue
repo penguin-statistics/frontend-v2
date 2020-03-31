@@ -16,7 +16,7 @@
         style="padding-left: calc(max(env(safe-area-inset-left), 32px))"
       >
         <v-img
-          :src="require('@/assets/logo.png')"
+          :src="logo"
           aspect-ratio="1"
           height="192px"
           contain
@@ -327,6 +327,7 @@
   import GlobalSnackbar from "@/components/global/GlobalSnackbar";
   import * as Sentry from '@sentry/browser';
   import dayjs from "dayjs";
+  import special from "@/models/special";
 
 export default {
   name: 'App',
@@ -339,7 +340,7 @@ export default {
   data () {
     return {
       routes: [],
-      randomizedLogo: require("@/assets/logo.png"),
+      randomizedLogo: `${config.cdn.global}/logos/penguin_stats_logo_fool.png`,
       localizations: [
         {
           id: 'zh',
@@ -385,6 +386,13 @@ export default {
         VERSION: config.version || "v0.0.0",
         GIT_COMMIT: GIT_COMMIT.trim(),
         ENV: process.env.NODE_ENV === 'production' ? "prod" : "dev"
+      }
+    },
+    logo () {
+      if (special.fool.enabled()) {
+        return `${config.cdn.global}/logos/penguin_stats_logo_fool.png`
+      } else {
+        return require("@/assets/logo.png")
       }
     }
   },
