@@ -78,7 +78,7 @@ export default {
   name: 'Intro',
   computed: {
     content () {
-      if (special.fool()) {
+      if (special.fool.enabled()) {
         const fool = {
           "zh": {
             "intro": {

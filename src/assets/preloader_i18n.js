@@ -56,7 +56,7 @@ let _i18n = {
     "en": {
       "load_title--text": "Loading",
       "load_caption--text": "Initialization may take some time",
-      "load_copyright--text": "Reunion Statistics"
+      "load_copyright--text": "Penguin Statistics"
     },
     "ja": {
       "load_title--text": "読み込み中...",
