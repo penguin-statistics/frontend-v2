@@ -3,7 +3,9 @@ import 'dayjs/locale/zh'
 import 'dayjs/locale/ja'
 import 'dayjs/locale/ko'
 const relativeTime = require('dayjs/plugin/relativeTime')
+const isBetween = require('dayjs/plugin/isBetween')
 dayjs.extend(relativeTime)
+dayjs.extend(isBetween)
 
 const FORMATS = {
   MD: "M.D",
