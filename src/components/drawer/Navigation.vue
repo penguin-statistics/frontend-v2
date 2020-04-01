@@ -2,7 +2,7 @@
   <v-list-item
     v-if="!route.children || route.meta.forceSingle"
     :key="route.name"
-    :class="route.path === $route.path ? 'v-list-item--active' : ''"
+    :class="route.path === $route.path ? activeClass : ''"
     @click="navigate(route)"
   >
     <v-list-item-icon>
@@ -24,7 +24,7 @@
     :key="route.name"
     :value="route.meta.active"
     :prepend-icon="route.meta.icon"
-    color="grey"
+    :color="`blue ${dark ? 'lighten-1' : 'darken-2'}`"
     no-action
   >
     <template v-slot:activator>
@@ -34,7 +34,7 @@
     <v-list-item
       v-for="child in route.children.filter(el => !el.meta.hide)"
       :key="child.name"
-      :class="child.path === $route.path.split('/')[2] ? 'v-list-item--active' : ''"
+      :class="child.path === $route.path.split('/')[2] ? activeClass : ''"
       @click="navigate(child)"
     >
       <v-list-item-title>{{ $t(child.meta.i18n) }}</v-list-item-title>
@@ -47,13 +47,24 @@
 </template>
 
 <script>
+  import Theme from "@/mixins/Theme";
+
   export default {
     name: "Navigation",
+    mixins: [Theme],
     props: {
       route: {
         type: Object,
         required: true
       },
+    },
+    computed: {
+      activeClass() {
+        return {
+          "v-list-item--active": true,
+          "white--text": this.dark
+        }
+      }
     },
     methods: {
       navigate (route) {
@@ -82,7 +93,3 @@
     },
   }
 </script>
-
-<style scoped>
-
-</style>

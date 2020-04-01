@@ -1,10 +1,10 @@
-import {mapGetters} from "vuex";
+import Theme from "../Theme";
 
 export default {
-  ...mapGetters('settings', ['dark']),
   watch: {
     'dark': ['onDarkChange']
   },
+  mixins: [Theme],
   created () {
     this.onDarkChange(this.dark);
   },
