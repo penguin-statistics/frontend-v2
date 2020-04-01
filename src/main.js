@@ -8,7 +8,6 @@ import VueAnalytics from "vue-analytics"
 import i18n from "@/i18n"
 import config from "@/config"
 import VueNumberInput from '@chenfengyuan/vue-number-input';
-import './build/preloader-i18n-inline'
 
 import * as Sentry from '@sentry/browser';
 import * as Integrations from '@sentry/integrations';
