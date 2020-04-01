@@ -36,6 +36,18 @@ module.exports = {
     appleMobileWebAppStatusBarStyle: "black-translucent",
 
     workboxPluginMode: "GenerateSW",
+    workboxConfig: {
+      exclude: [
+        /\/$/,
+        /\.map$/,
+        /favicon\.ico$/,
+        /manifest\.json$/
+      ],
+      dontCacheBustURLsMatching: /.\/(css|img|js|fonts)\/.$/,
+      ignoreURLParametersMatching: [
+        /utm_(source|medium|campaign|content|term)./
+      ]
+    },
     iconPaths: {
       favicon32: 'favicon/favicon-32x32.png',
       favicon16: 'favicon/favicon-16x16.png',

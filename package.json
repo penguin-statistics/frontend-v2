@@ -8,7 +8,9 @@
     "build:single": "npx --max_old_space_size=4096 vue-cli-service build",
     "lint": "vue-cli-service lint",
     "i18n:report": "vue-cli-service i18n:report --src './src/**/*.?(js|vue)' --locales './src/locales/**/*.json'",
-    "submit": "git add . && git cz && git push"
+    "submit": "git add . && git cz && git push",
+    "preview": "yarn build && serve -s -d dist",
+    "preview:single": "yarn build:single && serve -s -d dist"
   },
   "dependencies": {
     "@babel/plugin-transform-modules-commonjs": "^7.8.3",
@@ -41,8 +43,11 @@
     "eslint": "^5.16.0",
     "eslint-plugin-vue": "^5.0.0",
     "eslint-plugin-vuetify": "^1.0.0-beta.5",
+    "html-webpack-inline-source-plugin": "^0.0.10",
+    "html-webpack-plugin": "^4.0.3",
     "sass": "^1.25.0",
     "sass-loader": "^8.0.2",
+    "script-ext-html-webpack-plugin": "^2.1.4",
     "stylus": "^0.54.5",
     "stylus-loader": "^3.0.1",
     "vue-cli-plugin-i18n": "^0.6.1",

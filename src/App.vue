@@ -1,3 +1,4 @@
+<!--suppress CssInvalidFunction -->
 <template>
   <v-app :class="languageFont">
     <GlobalSnackbar />
@@ -9,8 +10,8 @@
       <div 
         :class="{
           'drawer-logo blue': true,
-          'darken-4': appDark,
-          'darken-3': !appDark,
+          'darken-4': dark,
+          'darken-3': !dark,
           'drawer-logo--two-line': $t('app.name_line2') !== ''
         }"
         style="padding-left: calc(max(env(safe-area-inset-left), 32px))"
@@ -36,55 +37,11 @@
         nav
         style="padding-left: calc(max(env(safe-area-inset-left), 8px))"
       >
-        <template
+        <Navigation
           v-for="route in routes"
-        >
-          <v-list-item
-            v-if="!route.children || route.meta.forceSingle"
-            :key="route.name"
-            :class="route.path === $route.path ? 'v-list-item--active' : ''"
-            @click="onMenuItemClicked(route)"
-          >
-            <v-list-item-icon>
-              <v-icon v-text="route.meta.icon" />
-            </v-list-item-icon>
-            <v-list-item-content>
-              <v-list-item-title>
-                {{ $t(route.meta.i18n) }} &nbsp; <v-icon
-                  v-if="!route.component && !route.meta.forceSingle"
-                  small
-                >
-                  mdi-open-in-new
-                </v-icon>
-              </v-list-item-title>
-            </v-list-item-content>
-          </v-list-item>
-          <v-list-group
-            v-else
-            :key="route.name"
-            :value="route.meta.active"
-            :prepend-icon="route.meta.icon"
-            color="grey"
-            no-action
-          >
-            <template v-slot:activator>
-              <v-list-item-title>{{ $t(route.meta.i18n) }}</v-list-item-title>
-            </template>
-
-            <v-list-item
-              v-for="child in route.children.filter(el => !el.meta.hide)"
-              :key="child.name"
-              :class="child.path === $route.path.split('/')[2] ? 'v-list-item--active' : ''"
-              @click="onMenuItemClicked(child)"
-            >
-              <v-list-item-title>{{ $t(child.meta.i18n) }}</v-list-item-title>
-
-              <v-list-item-icon>
-                <v-icon v-text="child.meta.icon" />
-              </v-list-item-icon>
-            </v-list-item>
-          </v-list-group>
-        </template>
+          :key="route.name"
+          :route="route"
+        />
 
         <v-divider class="my-2" />
 
@@ -103,67 +60,9 @@
               {{ $t('menu.refreshData') }}
             </v-btn>
 
-            <v-tooltip bottom>
-              <template v-slot:activator="{ on }">
-                <v-btn
-                  icon
-                  class="mx-1"
-                  v-on="on"
-                  @click="appDark = !appDark"
-                >
-                  <v-icon>mdi-invert-colors</v-icon>
-                </v-btn>
-              </template>
-              <span>{{ $t('menu.invertColors') }}</span>
-            </v-tooltip>
+            <ThemeSwitcher />
 
-            <v-menu
-              bottom
-              left
-              open-on-hover
-              transition="slide-y-transition"
-            >
-              <template v-slot:activator="{ on }">
-                <v-btn
-                  icon
-                  class="mx-1"
-                  v-on="on"
-                >
-                  <v-icon>mdi-translate</v-icon>
-                </v-btn>
-              </template>
-
-              <v-list>
-                <v-subheader style="height: 36px;">
-                  <v-icon
-                    small
-                    color="grey lighten-1"
-                    class="mr-1"
-                  >
-                    mdi-translate
-                  </v-icon> {{ $t('menu.languages') }}
-                </v-subheader>
-                <v-list-item-group v-model="localizationMapper">
-                  <v-list-item
-                    v-for="(locale, i) in localizations"
-                    :key="i"
-                    @click="changeLocale(locale.id)"
-                  >
-                    <v-list-item-title class="mr-2">
-                      {{ locale.name }}
-                    </v-list-item-title>
-                    <v-list-item-action v-if="locale.beta">
-                      <v-icon small>
-                        mdi-beta
-                      </v-icon>
-                    </v-list-item-action>
-                    <v-list-item-action-text class="monospace ml-2">
-                      {{ locale.id }}
-                    </v-list-item-action-text>
-                  </v-list-item>
-                </v-list-item-group>
-              </v-list>
-            </v-menu>
+            <LocaleSwitcher />
           </v-row>
         </v-container>
       </v-list>
@@ -318,68 +217,42 @@
 
 <script>
   import RandomBackground from '@/components/global/RandomBackground'
+  import GlobalSnackbar from "@/components/global/GlobalSnackbar";
+
   import AccountManager from '@/components/toolbar/AccountManager'
   import NetworkStateIndicator from "@/components/toolbar/NetworkStateIndicator";
-  import Console from "@/utils/Console";
-  import strings from "@/utils/strings";
+
+  import Navigation from "@/components/drawer/Navigation";
+  import LocaleSwitcher from "@/components/drawer/LocaleSwitcher";
+  import ThemeSwitcher from "@/components/drawer/ThemeSwitcher";
+
+  import GlobalEntry from "@/mixins/hooks/GlobalEntry";
+
   import config from "@/config";
+  import './styles/global.css'
   import {mapGetters} from "vuex";
-  import GlobalSnackbar from "@/components/global/GlobalSnackbar";
-  import * as Sentry from '@sentry/browser';
-  import dayjs from "dayjs";
 
 export default {
   name: 'App',
   components: {
+    LocaleSwitcher,
+    ThemeSwitcher,
+    Navigation,
     GlobalSnackbar,
     NetworkStateIndicator,
     RandomBackground,
     AccountManager
   },
+  mixins: [GlobalEntry],
   data () {
     return {
       routes: [],
-      randomizedLogo: require("@/assets/logo.png"),
-      localizations: [
-        {
-          id: 'zh',
-          name: '中文'
-        }, {
-          id: 'en',
-          name: 'English'
-        }, {
-          id: 'ja',
-          name: '日本語'
-        }, {
-          id: 'ko',
-          name: '한국어'
-        }
-      ],
-      prefetchingResources: false,
       drawer: !this.$vuetify.breakpoint.xsOnly,
       showLicenseDialog: false
     }
   },
   computed: {
-    ...mapGetters('settings', ['language', 'dark']),
-    appDark: {
-      get () {
-        return this.dark
-      },
-      set (value) {
-        this.$vuetify.theme.dark = value;
-        this.$store.commit('settings/switchDark', value)
-      }
-    },
-    localizationMapper: {
-      get () {
-        return this.localizations.indexOf(this.localizations.find(el => el.id === this.$i18n.locale))
-      },
-      set () {}
-    },
-    languageFont () {
-      return `lang-${this.$i18n.locale}`
-    },
+    ...mapGetters('settings', ['dark']),
     version () {
       return {
         VERSION: config.version || "v0.0.0",
@@ -388,295 +261,14 @@ export default {
       }
     }
   },
-  watch: {
-    '$route': [
-      'randomizeLogo',
-      'logRouteEvent',
-      'crispOpacityChanger'
-    ],
-    'dark': ['onDarkChange']
-  },
-  beforeMount() {
-    this.routes = this.$router.options.routes.filter(el => !el.meta.hide);
-    this.$store.dispatch("data/fetch", false)
-  },
   created () {
-    // this.randomizeLogo();
-    this.onDarkChange(this.dark);
-
-    if (this.language) {
-      this.changeLocale(this.language, false)
-    } else {
-      const language = strings.getFirstBrowserLanguage();
-      Console.info("[i18n] detected language", language);
-      if (language) {
-        // because this is a detection result, thus we are not storing it,
-        // unless the user manually set one.
-        this.changeLocale(language, false)
-      }
-    }
-
-    if (typeof this.dark === "boolean") {
-      this.$vuetify.theme.dark = this.dark
-    }
-
-    window.$crisp.push(["on", "session:loaded", () => {
-      // resolve safe-area
-      Console.info("[crisp] triggered | chat:loaded")
-      try {
-        document.querySelector("div.crisp-client > div#crisp-chatbox > div > a").style.setProperty("bottom", "calc(max(env(safe-area-inset-bottom), 14px))", "important");
-        document.querySelector("div.crisp-client > div#crisp-chatbox > div > a > span:nth-child(2)").style.setProperty("box-shadow", "0 0 5px rgba(0, 0, 0, .4)", "important");
-        this.crispOpacityChanger()
-      } catch (e) {
-        Console.error("[crisp] failed to initialize custom style:", e)
-      }
-    }]);
-
-    // push crisp session
-    window.$crisp.push(["set", "session:data", [[
-      ["LoggedIn", this.$store.getters["auth/loggedIn"]],
-      ["Username", this.$store.getters["auth/username"]],
-      ["LanguageActive", this.$i18n.locale],
-      ["LanguagePersisted", this.$store.getters["settings/language"]],
-      ["Theme", this.$store.getters["settings/dark"] ? "Dark" : "Light"],
-    ]]]);
-
-    Sentry.configureScope(function(scope) {
-      scope.setTag("LoggedIn", this.$store.getters["auth/loggedIn"]);
-      scope.setTag("Username", this.$store.getters["auth/username"]);
-      scope.setTag("LanguageActive", this.$i18n.locale);
-      scope.setTag("LanguagePersisted", this.$store.getters["settings/language"]);
-      scope.setTag("Theme", this.$store.getters["settings/dark"] ? "Dark" : "Light")
-    });
-
-    // report current version
-    this.$ga.event(
-      'runtime',
-      'launched',
-      'version',
-      config.version
-    );
+    this.routes = this.$router.options.routes.filter(el => !el.meta.hide);
+    this.$store.dispatch("data/fetch", false);
   },
   methods: {
     async refreshData () {
       await this.$store.dispatch("data/fetch", true);
     },
-    onDarkChange (newValue) {
-      if (newValue) {
-        document.body.style.backgroundColor = "#121212"
-      } else {
-        document.body.style.backgroundColor = "#ffffff"
-      }
-    },
-
-    onMenuItemClicked (route) {
-      if (route.meta && route.meta.externalRedirect) {
-        if (route.meta.ga) {
-          let ga = route.meta.ga;
-          this.$ga.event(
-            ga.category || 'redirect',
-            ga.action || 'links',
-            ga.label || 'unknown',
-            ga.value || 1);
-        }
-        if (route.meta.link) {
-          window.open(route.meta.link);
-        }
-      } else {
-        this.$router.push({'name': route.name})
-      }
-    },
-    randomizeLogo () {
-      const random = Math.random();
-      function imageUrl (character) {
-        return `${config.cdn.global}/logos/penguin_stats_logo_${character}.png`
-      }
-      this.randomizedLogo = random < .25 ? imageUrl("exia")
-        : random < .5 ? imageUrl("texas")
-          : random < .75 ? imageUrl("sora")
-            : imageUrl("croissant")
-    },
-    changeLocale (localeId, save=true) {
-      dayjs.locale(localeId)
-      if (localeId !== this.$i18n.locale) {
-        Console.info("[i18n] locale changed to:", localeId, "| saving to vuex:", save);
-        this.$i18n.locale = localeId;
-        this.$vuetify.lang.current = localeId;
-        document.title = `${this.$t(this.$route.meta.i18n) + ' | ' || ''}${this.$t('app.name')}`;
-        document.documentElement.lang = localeId;
-        // this.$vuetify.lang.current = localeId;
-        if (save) this.$store.commit("settings/changeLocale", localeId);
-      } else {
-        Console.info("[i18n] Same locale");
-      }
-    },
-    logRouteEvent (newValue) {
-      if (newValue.name === "StatsByStage_Selected") {
-        // Console.log(this.$store.state.dataSource, newValue.params.stageId);
-        this.$ga.event('result', 'fetch_' + this.$store.getters['dataSource/source'], newValue.params.stageId, 1)
-      } else if (newValue.name === "StatsByItem_Selected") {
-        this.$ga.event('result', 'fetch_' + this.$store.getters['dataSource/source'], newValue.params.itemId, 1)
-      }
-    },
-    crispOpacityChanger (newRoute = this.$route) {
-      Console.info("[crisp] customize | changing opacity");
-      Console.debug(document.querySelector("div.crisp-client"));
-      try {
-        document.querySelector("div.crisp-client").style.setProperty("transition", "all 275ms cubic-bezier(0.165, 0.84, 0.44, 1)", "important");
-
-        if (newRoute.name === "home") {
-          document.querySelector("div.crisp-client").style.setProperty("opacity", 1, "important");
-          // document.querySelector("div.crisp-client").style.setProperty("transform", "translateY(0px)", "important")
-        } else {
-          document.querySelector("div.crisp-client").style.setProperty("opacity", 0, "important");
-          // document.querySelector("div.crisp-client").style.setProperty("transform", "translateY(32px)", "important")
-        }
-      } catch (e) {
-        Console.error("failed to change crisp opacity: ", e, newRoute)
-      }
-    }
   }
 }
 </script>
-
-<style>
-  .slide-fade-enter-active {
-    transition: all .175s cubic-bezier(0.165, 0.84, 0.44, 1);
-  }
-  .slide-fade-leave-active {
-    transition: all .075s cubic-bezier(0.165, 0.84, 0.44, 1);
-  }
-  .slide-fade-enter, .slide-fade-leave-to
-    /* .slide-fade-leave-active for below version 2.1.8 */ {
-    transform: translateY(1.5vh);
-    opacity: 0;
-  }
-
-  .transition-all {
-    transition: all .225s cubic-bezier(0.165, 0.84, 0.44, 1);
-  }
-
-  .v-navigation-drawer {
-    transition: all .3s cubic-bezier(.25,.8,.5,1) !important;
-  }
-
-  .drawer-logo {
-    height: calc(256px + env(safe-area-inset-top));
-    padding: calc(32px + env(safe-area-inset-top)) 32px 32px 32px;
-    overflow: hidden;
-    transition: all .5s cubic-bezier(0.19, 1, 0.22, 1);
-  }
-
-  .drawer-logo:hover {
-    height: calc(304px + env(safe-area-inset-top));
-  }
-  .drawer-logo--two-line:hover {
-    height: calc(336px + env(safe-area-inset-top));
-  }
-  .drawer-logo > .description {
-    margin-top: 16px;
-    text-align: center;
-    line-height: 36px;
-    font-size: 24px;
-    opacity: 0;
-    transition: all .5s cubic-bezier(0.19, 1, 0.22, 1);
-  }
-
-  .drawer-logo:hover > .description {
-    opacity: 1;
-  }
-
-  .randomizedLogo > .v-image__image {
-    transition: background .5s cubic-bezier(0.19, 1, 0.22, 1);
-  }
-
-  .theme--light .bkop-light {
-    background: rgba(255, 255, 255, .75) !important;
-  }
-
-  .theme--dark .bkop-light {
-    background: rgba(46, 46, 46, .85) !important;
-  }
-
-  .theme--light .bkop-medium {
-    background: rgba(255, 255, 255, .9) !important;
-  }
-
-  .theme--dark .bkop-medium {
-    background: rgba(46, 46, 46, .9) !important;
-  }
-
-  .cursor-pointer {
-    cursor: pointer;
-  }
-
-  .transparentTable > .v-table__overflow > .v-table {
-    background: transparent;
-  }
-
-  .v-navigation-drawer::-webkit-scrollbar {
-    width: 2px;
-  }
-
-  .v-navigation-drawer::-webkit-scrollbar-thumb {
-    background-color: rgb(200, 200, 200);
-  }
-
-  /*.v-toolbar {*/
-  /*  padding-top: env(safe-area-inset-top);*/
-  /*}*/
-
-  /*.v-footer {*/
-  /*  height: calc(32px + env(safe-area-inset-bottom)) !important;*/
-  /*  padding-bottom: calc(env(safe-area-inset-bottom));*/
-  /*}*/
-
-  .no-wrap--text {
-    word-break: break-word;
-  }
-  .no-break--text {
-    word-break: keep-all;
-  }
-
-  .monospace {
-    font-family: SF Mono, "Droid Sans Mono", Ubuntu Mono, Consolas, Courier New, Courier, monospace;
-  }
-
-  .footer--safe-area {
-    padding-top: 8px !important;
-    /*In case the old browsers doesn't support advanced CSS calculations*/
-    padding-bottom: 8px !important;
-    padding-bottom: calc(max(env(safe-area-inset-bottom), 8px)) !important;
-  }
-
-  /*.v-stepper__items, .v-stepper__wrapper {*/
-  /*  overflow: initial !important;*/
-  /*}*/
-
-  .lang-ja .force-lang-font, .lang-ja {
-    /*font-family : 'ヒラギノ角ゴ ProN' , 'Hiragino Kaku Gothic ProN' , '游ゴシック' , '游ゴシック体' , YuGothic , 'Yu Gothic' , 'メイリオ' , Meiryo , 'ＭＳ ゴシック' , 'MS Gothic' , HiraKakuProN-W3 , 'TakaoExゴシック' , TakaoExGothic , 'MotoyaLCedar' , 'Droid Sans Japanese' , sans-serif !important;*/
-    font-family : 'ヒラギノ角ゴ ProN' , 'Hiragino Kaku Gothic ProN' , 'ヒラギノ明朝 ProN' , 'Hiragino Mincho ProN' , '游明朝','游明朝体',YuMincho,'Yu Mincho' , 'Meiryo', 'ＭＳ 明朝' , 'MS Mincho' , HiraMinProN-W3 , 'TakaoEx明朝' , TakaoExMincho , 'MotoyaLCedar' , 'Droid Sans Japanese' , serif !important;
-  }
-  .lang-ko .force-lang-font, .lang-ko {
-    font-family: 'Malgun Gothic', Gulim, 'Roboto', Tahoma, Arial, sans-serif !important
-  }
-  .force-not-lang-font {
-    font-family: Roboto, sans-serif!important
-  }
-
-  .x--safe-area {
-    padding-left: calc(max(env(safe-area-inset-left), 12px)) !important;
-    padding-right: calc(max(env(safe-area-inset-right), 12px)) !important;
-  }
-
-  .toolbar--safe-area {
-    padding-left: calc(max(env(safe-area-inset-left), 16px)) !important;
-    padding-right: calc(max(env(safe-area-inset-right), 16px)) !important;
-  }
-
-  .toolbar--safe-area .v-toolbar__content {
-    padding-left: 0 !important;
-    padding-right: 0 !important;
-  }
-
-</style>
