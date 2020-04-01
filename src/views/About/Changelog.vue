@@ -68,7 +68,7 @@ export default {
       index: null,
       logs: [
         {
-          version: "v1.1.5",
+          version: "v1.1.6",
           date: "2020-04-02T12:00:00Z",
           changes: [
             "内部重构：优化应用启动时的模块初始化",
@@ -82,7 +82,7 @@ export default {
           date: "2020-03-31T10:31:00Z",
           changes: [
             "添加：User ID 说明",
-            "重构：更新日志页面",
+            "重构：更新记录",
             "修复：有时无法自动隐藏 Crisp 的错误",
             "修复：重新使用 SaaS 版 Sentry",
             "若干错误修复与性能优化"
