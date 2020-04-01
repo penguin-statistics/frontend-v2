@@ -164,7 +164,7 @@
 
             <v-card>
               <v-card-title
-                class="headline primary lighten-1"
+                class="headline"
               >
                 <v-avatar
                   size="24"
@@ -185,16 +185,20 @@
               <v-divider />
 
               <v-card-actions>
-                <v-spacer />
                 <v-btn
                   text
+                  block
+                  large
                   href="https://creativecommons.org/licenses/by-nc/4.0/"
                   target="_blank"
                 >
-                  <v-icon left>
-                    mdi-eye
-                  </v-icon>
                   {{ $t('meta.details') }}
+                  <v-icon
+                    right
+                    small
+                  >
+                    mdi-open-in-new
+                  </v-icon>
                 </v-btn>
               </v-card-actions>
             </v-card>

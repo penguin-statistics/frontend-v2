@@ -73,7 +73,7 @@ export default {
           changes: [
             "内部重构：优化应用启动时的模块初始化",
             "修复：Google Analytics 未上报版本的错误",
-            "修复：重新使用 SaaS 版 Sentry",
+            "优化：许可协议 Modal 弹窗样式",
           ]
         },
         {
