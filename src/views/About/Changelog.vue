@@ -71,7 +71,7 @@ export default {
           version: "v1.1.6",
           date: "2020-04-02T12:00:00Z",
           changes: [
-            "内部重构：优化应用启动时的模块初始化",
+            "内部重构：优化应用启动时的模块初始化逻辑",
             "修复：Google Analytics 未上报版本的错误",
             "优化：许可协议 Modal 弹窗样式",
             "优化：菜单栏样式",
@@ -196,7 +196,7 @@ export default {
   methods: {
     formatTime(t) {
       return timeFormatter.dayjs(t).fromNow()
-    }
+    },
   },
 }
 </script>

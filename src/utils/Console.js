@@ -10,10 +10,13 @@ class Console {
   static warn (...content) {
     this._render("warn", ...content)
   }
-  static error (...content) {
-    this._render("error", ...content);
-    const contents = [...content];
-    Sentry.captureMessage(contents.join(" | "), "error")
+  static error (module, ...content) {
+    const contents = [`[${module}]`, ...content];
+    this._render("error", contents);
+    Sentry.withScope(scope => {
+      scope.setFingerprint([module]);
+      Sentry.captureMessage(contents.join(" | "), "error")
+    })
   }
   static log (...content) {
     this._render("log", ...content)
