@@ -69,11 +69,20 @@ export default {
       logs: [
         {
           version: "v1.1.5",
-          date: "2020-03-30T23:31:00Z",
+          date: "2020-04-02T12:00:00Z",
+          changes: [
+            "内部重构：优化应用启动时的模块初始化",
+            "修复：Google Analytics 未上报版本的错误",
+            "修复：重新使用 SaaS 版 Sentry",
+          ]
+        },
+        {
+          version: "v1.1.5",
+          date: "2020-03-31T10:31:00Z",
           changes: [
             "添加：User ID 说明",
             "重构：更新日志页面",
-            "修复：有时无法自动隐藏 CrispCustomizer 的错误",
+            "修复：有时无法自动隐藏 Crisp 的错误",
             "修复：重新使用 SaaS 版 Sentry",
             "若干错误修复与性能优化"
           ]

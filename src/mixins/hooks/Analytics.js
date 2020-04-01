@@ -10,7 +10,6 @@ export default {
     // report current version
     this.$ga.event(
       'runtime',
-      'launched',
       'version',
       config.version
     );
