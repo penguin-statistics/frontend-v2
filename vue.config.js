@@ -37,7 +37,7 @@ module.exports = {
 
     workboxPluginMode: "InjectManifest",
     workboxOptions: {
-      swSrc: "src/serviceWorker/worker.js",
+      swSrc: "src/serviceWorker/service-worker.js",
       exclude: [
         /\.map$/,
         /favicon\.ico$/,

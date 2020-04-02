@@ -123,7 +123,7 @@
       </li>
     </ul>
 
-    <ul class="ml-4">
+    <ul class="ml-2">
       <li
         v-for="(skill, key) in skills"
         :key="key"

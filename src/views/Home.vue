@@ -41,8 +41,19 @@
           class="card-translate-up"
         />
       </v-col>
-      <v-col cols="12">
-        <Contact class="card-translate-up" />
+      <v-col
+        cols="12"
+        md="6"
+        class="align-self-stretch"
+      >
+        <Contact class="card-translate-up align-self-stretch" />
+      </v-col>
+      <v-col
+        cols="12"
+        md="6"
+        class="align-self-stretch"
+      >
+        <License class="card-translate-up" />
       </v-col>
     </v-row>
   </v-container>
@@ -55,10 +66,11 @@ import Intro from "@/views/About/Intro";
 import Bulletin from "@/views/About/Bulletin";
 import Contact from "@/views/About/Contact";
 import anime from 'animejs/lib/anime.es.js';
+import License from "@/views/About/License";
 
 export default {
   name: "Home",
-  components: { Contribute, Donate, Intro, Bulletin, Contact },
+  components: {License, Contribute, Donate, Intro, Bulletin, Contact },
   data: () => ({}),
   mounted () {
     setTimeout(() => {
@@ -75,7 +87,7 @@ export default {
         translateY: [48, 0],
         opacity: [0, 1],
         duration: 775,
-        delay: (el, i) => i * 75,
+        delay: (el, i) => i * 55,
         easing: "easeOutQuint"
       })
     }, 0)

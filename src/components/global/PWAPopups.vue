@@ -76,7 +76,6 @@
     },
     methods: {
       serviceWorkerMessageHandler (evt) {
-        console.log(evt, evt.data, evt.data.from === "serviceWorker", evt.data.action === "updated");
         if (evt && evt.data && evt.data.from === "serviceWorker" && evt.data.action === "updated") {
           this.update.enabled = true
         }
@@ -92,7 +91,7 @@
           this.update.loading = false;
           this.update.enabled = false;
           snackbar.launch("error", 10000, "pwaPopup.update.skipWaitingTimeout")
-        }, 5000)
+        }, 10000)
       }
     },
   }

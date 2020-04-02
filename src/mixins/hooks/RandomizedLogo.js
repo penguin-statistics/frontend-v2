@@ -1,9 +1,10 @@
 import config from "@/config";
+import CDN from "@/mixins/CDN";
 
 export default {
   data() {
     return {
-      randomizedLogo: require("@/assets/logo.png")
+      randomizedLogo: `${config.cdn.global}/logos/penguin_stats_logo.png`
     }
   },
   watch: {

@@ -20,6 +20,7 @@
     "animejs": "^3.1.0",
     "clipboard-polyfill": "^2.8.6",
     "dayjs": "^1.8.23",
+    "extract-domain": "^2.2.1",
     "js-cookie": "^2.2.1",
     "register-service-worker": "^1.7.1",
     "vue": "^2.6.10",

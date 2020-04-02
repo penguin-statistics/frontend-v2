@@ -18,7 +18,7 @@
         style="padding-left: calc(max(env(safe-area-inset-left), 32px))"
       >
         <v-img
-          :src="require('@/assets/logo.png')"
+          :src="cdnResource('/logos/penguin_stats_logo.png')"
           aspect-ratio="1"
           height="192px"
           contain
@@ -113,108 +113,7 @@
       >
         <router-view class="x--safe-area" />
       </transition>
-      <v-footer
-        padless
-        color="blue darken-3"
-        class="white--text"
-      >
-        <v-card
-          flat
-          tile
-          width="100%"
-          class="blue darken-3 text-center footer--safe-area"
-        >
-          <v-dialog
-            v-model="showLicenseDialog"
-            width="500"
-            origin="bottom center"
-          >
-            <template v-slot:activator="{ on }">
-              <span
-                class="cursor-pointer"
-                v-on="on"
-              >
-                <v-avatar
-                  size="24"
-                  class="mr-1"
-                >
-                  <v-img
-                    :src="require('@/assets/ccIcon/cc.svg')"
-                    alt="Creative Commons - Logo"
-                  />
-                </v-avatar>
-                <v-avatar
-                  size="24"
-                  class="mr-1"
-                >
-                  <v-img
-                    :src="require('@/assets/ccIcon/by.svg')"
-                    alt="Creative Commons - BY"
-                  />
-                </v-avatar>
-                <v-avatar
-                  size="24"
-                >
-                  <v-img
-                    :src="require('@/assets/ccIcon/nc.svg')"
-                    alt="Creative Commons - Non-commercial"
-                  />
-                </v-avatar>
-              </span>
-            </template>
-
-            <v-card>
-              <v-card-title
-                class="headline"
-              >
-                <v-avatar
-                  size="24"
-                  class="mr-2"
-                >
-                  <v-img
-                    :src="require('@/assets/ccIcon/cc.svg')"
-                    alt="Creative Commons - Logo"
-                  />
-                </v-avatar>
-                {{ $t('meta.footer.copyright.title') }}
-              </v-card-title>
-
-              <v-card-text class="mt-2 body-1">
-                {{ $t('meta.footer.copyright.content') }}
-              </v-card-text>
-
-              <v-divider />
-
-              <v-card-actions>
-                <v-btn
-                  text
-                  block
-                  large
-                  href="https://creativecommons.org/licenses/by-nc/4.0/"
-                  target="_blank"
-                >
-                  {{ $t('meta.details') }}
-                  <v-icon
-                    right
-                    small
-                  >
-                    mdi-open-in-new
-                  </v-icon>
-                </v-btn>
-              </v-card-actions>
-            </v-card>
-          </v-dialog>
-
-          <v-card-text class="white--text d-inline">
-            <strong>Penguin Statistics</strong> — {{ new Date().getFullYear() }}
-          </v-card-text>
-
-          <v-card-text class="white--text d-block pt-2 pb-0">
-            <strong>{{ version.VERSION }}</strong>&nbsp;
-            <span class="overline monospace">{{ version.GIT_COMMIT }}-{{ version.ENV }}</span>
-          </v-card-text>
-        </v-card>
-      </v-footer>
+      <Footer />
     </v-content>
     <NetworkStateIndicator />
   </v-app>
@@ -233,14 +132,16 @@
 
   import GlobalEntry from "@/mixins/hooks/GlobalEntry";
 
-  import config from "@/config";
   import './styles/global.css'
   import {mapGetters} from "vuex";
   import PWAPopups from "@/components/global/PWAPopups";
+  import Footer from "@/components/global/Footer";
+  import CDN from "@/mixins/CDN";
 
 export default {
   name: 'App',
   components: {
+    Footer,
     PWAPopups,
     LocaleSwitcher,
     ThemeSwitcher,
@@ -250,7 +151,7 @@ export default {
     RandomBackground,
     AccountManager
   },
-  mixins: [GlobalEntry],
+  mixins: [GlobalEntry, CDN],
   data () {
     return {
       routes: [],
@@ -260,13 +161,6 @@ export default {
   },
   computed: {
     ...mapGetters('settings', ['dark']),
-    version () {
-      return {
-        VERSION: config.version || "v0.0.0",
-        GIT_COMMIT: GIT_COMMIT.trim(),
-        ENV: process.env.NODE_ENV === 'production' ? "prod" : "dev"
-      }
-    }
   },
   created () {
     this.routes = this.$router.options.routes.filter(el => !el.meta.hide);
