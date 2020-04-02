@@ -6,9 +6,9 @@ class SessionData {
   constructor () {
     this.data = {
       "LoggedIn": store.getters["auth/loggedIn"],
-      "Username": store.getters["auth/username"],
-      "LanguageActive": i18n.locale,
-      "LanguagePersisted": store.getters["settings/language"],
+      "Username": store.getters["auth/username"] || "(null)",
+      "LanguageActive": i18n.locale || "(null)",
+      "LanguagePersisted": store.getters["settings/language"] || "(null)",
       "Theme": store.getters["settings/dark"] ? "Dark" : "Light"
     }
   }
