@@ -61,7 +61,7 @@
     data() {
       return {
         update: {
-          enabled: window.SW_UPDATED || true,
+          enabled: window.SW_UPDATED || false,
           loading: false,
         }
       }
