@@ -13,14 +13,19 @@ import './serviceWorker/register'
 
 import * as Sentry from '@sentry/browser';
 import * as Integrations from '@sentry/integrations';
+import { Integrations as ApmIntegrations } from '@sentry/apm';
 
 const production = process.env.NODE_ENV === 'production';
 
 if (production) {
   Sentry.init({
     dsn: 'https://9636aaa824a744f98a619df0aaabba00@sentry.io/1536764',
-    integrations: [new Integrations.Vue({Vue, attachProps: true})],
-    release: 'frontend-v2@' + (config.version || 'unknown')
+    integrations: [
+      new Integrations.Vue({Vue, attachProps: true}),
+      new ApmIntegrations.Tracing(),
+    ],
+    tracesSampleRate: 0.05,
+    release: 'frontend-v2@' + (config.version || 'unknown'),
   });
 }
 
