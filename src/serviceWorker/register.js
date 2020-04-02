@@ -8,13 +8,25 @@ if (process.env.NODE_ENV === 'production') {
       console.log(
         'App is being served from cache by a service worker.\n' +
         'For more details, visit https://goo.gl/AFskqB'
-      )
+      );
+      window.postMessage({
+        from: "serviceWorker",
+        action: "ready"
+      }, "*");
     },
     registered () {
-      console.log('Service worker has been registered.')
+      console.log('Service worker has been registered.');
+      window.postMessage({
+        from: "serviceWorker",
+        action: "registered"
+      }, "*");
     },
     cached () {
-      console.log('Content has been cached for offline use.')
+      console.log('Content has been cached for offline use.');
+      window.postMessage({
+        from: "serviceWorker",
+        action: "cached"
+      }, "*");
     },
     updatefound () {
       console.log('New content is downloading.');
@@ -43,17 +55,25 @@ if (process.env.NODE_ENV === 'production') {
       })
     },
     offline () {
-      console.log('No internet connection found. App is running in offline mode.')
+      console.log('No internet connection found. App is running in offline mode.');
+      window.postMessage({
+        from: "serviceWorker",
+        action: "offline"
+      }, "*");
     },
     error (error) {
-      console.error('Error during service worker registration:', error)
+      console.error('Error during service worker registration:', error);
+      window.postMessage({
+        from: "serviceWorker",
+        action: "error"
+      }, "*");
     }
   });
 
-  let refreshing
+  let refreshing;
   navigator.serviceWorker.addEventListener("controllerchange", () => {
-    if (refreshing) return
-    window.location.reload()
+    if (refreshing) return;
+    window.location.reload();
     refreshing = true
   })
 }
