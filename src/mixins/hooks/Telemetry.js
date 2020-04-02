@@ -30,6 +30,7 @@ export default {
 
     // set crisp session data
     window.$crisp.push(["set", "session:data", sessionData.crisp]);
+    window.$crisp.push(["safe", true]);
 
     // set sentry tags
     Sentry.configureScope(scope => scope.setTags(sessionData.normal));

@@ -7,6 +7,7 @@ export default {
     ],
   },
   created () {
+    window.$crisp.push(["config", "container:index", [1]]);
     window.$crisp.push(["on", "session:loaded", () => {
       // resolve safe-area
       Console.info("CrispCustomizer", "triggered | chat:loaded")

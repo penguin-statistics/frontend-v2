@@ -2,6 +2,7 @@
 <template>
   <v-app :class="languageFont">
     <GlobalSnackbar />
+    <PWAPopups />
     <v-navigation-drawer
       v-model="drawer"
       app
@@ -235,10 +236,12 @@
   import config from "@/config";
   import './styles/global.css'
   import {mapGetters} from "vuex";
+  import PWAPopups from "@/components/global/PWAPopups";
 
 export default {
   name: 'App',
   components: {
+    PWAPopups,
     LocaleSwitcher,
     ThemeSwitcher,
     Navigation,

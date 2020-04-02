@@ -35,17 +35,14 @@ module.exports = {
     appleMobileWebAppCapable: "yes",
     appleMobileWebAppStatusBarStyle: "black-translucent",
 
-    workboxPluginMode: "GenerateSW",
-    workboxConfig: {
+    workboxPluginMode: "InjectManifest",
+    workboxOptions: {
+      swSrc: "src/serviceWorker/worker.js",
       exclude: [
-        /\/$/,
         /\.map$/,
         /favicon\.ico$/,
-        /manifest\.json$/
-      ],
-      dontCacheBustURLsMatching: /.\/(css|img|js|fonts)\/.$/,
-      ignoreURLParametersMatching: [
-        /utm_(source|medium|campaign|content|term)./
+        /manifest\.json$/,
+        /precache-manifest.\.json$/,
       ]
     },
     iconPaths: {

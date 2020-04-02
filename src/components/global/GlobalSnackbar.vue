@@ -14,6 +14,11 @@
           "success": "导入成功：导入了 {amount} 个物品数据"
         },
         "calculationError": "计算失败：{error}"
+      },
+      "pwaPopup": {
+        "update": {
+          "skipWaitingTimeout": "更新失败：ServiceWorker 超时。请刷新页面重试"
+        }
       }
     },
     "en": {
@@ -30,6 +35,11 @@
           "success": "Successfully imported data for {amount} items"
         },
         "calculationError": "Failed to calculate: {error}"
+      },
+      "pwaPopup": {
+        "update": {
+          "skipWaitingTimeout": "Failed to apply changes: ServiceWorker timed out. Please refresh page and try again"
+        }
       }
     }
   }

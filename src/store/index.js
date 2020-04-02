@@ -10,6 +10,7 @@ import data from './modules/data';
 import dataSource from './modules/dataSource';
 import settings from './modules/settings';
 import ui from './modules/ui';
+// import compressor from "@/utils/compressor";
 
 Vue.use(Vuex);
 
@@ -28,7 +29,30 @@ export default new Vuex.Store({
       key: "penguin-stats-data",
       paths: [
         "data"
-      ]
+      ],
+      // storage: {
+      //   getItem: (key) => {
+      //     const timerId = Math.random();
+      //     console.time("getItem " + timerId)
+      //     const got = compressor.decompress(
+      //       localStorage.getItem(key)
+      //     )
+      //     console.timeEnd("getItem " + timerId)
+      //     return got
+      //   },
+      //   // Please see https://github.com/js-cookie/js-cookie#json, on how to handle JSON.
+      //   setItem: (key, value) => {
+      //     const timerId = Math.random();
+      //     console.time("setItem " + timerId)
+      //     const set = localStorage.setItem(
+      //       key,
+      //       compressor.compress(value)
+      //     )
+      //     console.timeEnd("setItem " + timerId)
+      //     return set
+      //   },
+      //   removeItem: (key) => localStorage.removeItem(key),
+      // },
     }),
     createPersistedState({
       key: "penguin-stats-settings",
