@@ -8,7 +8,7 @@
 [![Last Commit](https://img.shields.io/github/last-commit/penguin-statistics/frontend-v2)](https://github.com/penguin-statistics/frontend-v2/commits/dev)
 [![Docs](https://img.shields.io/badge/docs-GitBook-blue)](https://developer.penguin-stats.io)
 
-## Supports we've got
+## Supports
 Thanks for the kindness support for this Open Source project from:
 - [![Sentry.io](https://img.shields.io/badge/Sentry.io-DBD3E9?logo=sentry&style=flat&logoColor=DBD3E9&labelColor=16111C&color=9990AB)](https://sentry.io)
 
