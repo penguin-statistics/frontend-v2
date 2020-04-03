@@ -13,7 +13,10 @@ service.interceptors.response.use(function (response) {
   // Do something with response data
   return response;
 }, function (error) {
-  Console.error("[ajax] error", error);
+  // eliminate `users not found` errors (reports 404).
+  if (error.response && error.response.status !== 404) {
+    Console.error("Ajax", "error", error);
+  }
   if (error.response) {
     error.errorMessage = `(${error.response.status}) ${error.response.data ? error.response.data : error.message}`;
   } else {

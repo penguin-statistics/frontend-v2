@@ -42,7 +42,7 @@
     >
       <v-card-title style="word-break:normal">
         <v-img
-          :src="require('@/assets/logo.png')"
+          :src="cdnResource('/logos/penguin_stats_logo.png')"
           aspect-ratio="1"
           max-height="128px"
           min-width="128px"
@@ -71,8 +71,11 @@
 </template>
 
 <script>
+import CDN from "@/mixins/CDN";
+
 export default {
-  name: 'Intro'
+  name: 'Intro',
+  mixins: [CDN]
 }
 </script>
 

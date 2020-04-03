@@ -438,6 +438,20 @@
         </v-card-actions>
       </v-card>
     </v-dialog>
+    <v-btn
+      fab
+      bottom
+      right
+      fixed
+      ripple
+      color="primary"
+      :loading="calculation.pending"
+      @click="calculate"
+    >
+      <v-icon>
+        mdi-calculator
+      </v-icon>
+    </v-btn>
     <v-row
       align="center"
       justify="center"
@@ -859,7 +873,7 @@
             this.calculation.done = true
           })
           .catch((err) => {
-            Console.error(err)
+            Console.error("Planner", "failed to get plan", err)
             snackbar.networkError()
           })
           .finally(() => {
@@ -871,7 +885,7 @@
         try {
           imported = JSON.parse(this.importJson);
         } catch (e) {
-          Console.error("json error", e)
+          Console.info("json error", e)
           snackbar.launch("error", 5000, "planner.import.jsonError", {
             error: e.toString()
           });

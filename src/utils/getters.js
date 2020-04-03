@@ -7,7 +7,7 @@ Getters.items = {
   _cache: null,
   byItemId(itemId) {
     const got = this.all(true);
-    if (!got) return {};
+    if (!got || !got.get) return {};
     return got.get(itemId) || {}
   },
   byName (name) {

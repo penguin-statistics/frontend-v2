@@ -8,14 +8,15 @@ class Console {
     this._render("info", ...content)
   }
   static warn (...content) {
-    this._render("warn", ...content);
-    const contents = [...content];
-    Sentry.captureMessage(contents.join(" | "), "warning")
+    this._render("warn", ...content)
   }
-  static error (...content) {
-    this._render("error", ...content);
-    const contents = [...content];
-    Sentry.captureMessage(contents.join(" | "), "error")
+  static error (component, ...content) {
+    const contents = [`[${component}]`, ...content];
+    this._render("error", ...contents);
+    Sentry.withScope(scope => {
+      scope.setFingerprint([component]);
+      Sentry.captureMessage(contents.join(" "), "error")
+    })
   }
   static log (...content) {
     this._render("log", ...content)
@@ -25,18 +26,16 @@ class Console {
    * @private
    */
   static _render (level, ...content) {
-    const PROD_IGNORE = ["debug", "info"];
-    const OVERWRITE = "__penguin_stats_debug_overwrite__";
-    if (!window[OVERWRITE] && process.env.NODE_ENV === "production" && !(level in PROD_IGNORE)) return;
+    const PROD_IGNORE = ["debug"];
+    if (process.env.NODE_ENV !== "production" && (PROD_IGNORE.includes(level))) return;
     const now = new Date();
     const date = `${now.getDate()} ${now.getHours()}:${now.getMinutes()}:${now.getSeconds()}.${now.getMilliseconds()}`;
-    let prefix = [`(${date})`];
-    if (!(level in console)) prefix.push(`[${level}]`);
+    let prefix = `(${date})`;
 
     if (console[level]) {
-      console[level](...prefix, ...content)
+      console[level](prefix, ...content)
     } else {
-      console.log(...prefix, ...content)
+      console.log(prefix, ...content)
     }
   }
 }

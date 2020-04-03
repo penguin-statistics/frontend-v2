@@ -296,6 +296,7 @@ export default {
           break;
         default:
           Console.error(
+            "StatsByItem",
             "unexpected step number",
             newValue,
             "with [newStep, oldStep]",
