@@ -26,8 +26,8 @@ class Console {
    * @private
    */
   static _render (level, ...content) {
-    const PROD_IGNORE = ["debug", "info"];
-    if (process.env.NODE_ENV === "production" && !(level in PROD_IGNORE)) return;
+    const PROD_IGNORE = ["debug"];
+    if (process.env.NODE_ENV !== "production" && (PROD_IGNORE.includes(level))) return;
     const now = new Date();
     const date = `${now.getDate()} ${now.getHours()}:${now.getMinutes()}:${now.getSeconds()}.${now.getMilliseconds()}`;
     let prefix = `(${date})`;
