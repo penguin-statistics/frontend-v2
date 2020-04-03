@@ -1,26 +1,15 @@
-import timeFormatter from "@/utils/timeFormatter";
 import Console from "@/utils/Console";
 
 export default {
   computed: {
     isInSpecialUI () {
-      const time = timeFormatter.dayjs()
-        .isBetween(
-          '2020-04-04T00:00:00+0800',
-          '2020-04-05T04:10:00+0800',
-          null,
-          '[)'
-        );
+      const time = new Date().getTime() >= 1585929600000 && new Date().getTime() <= 1586031000000
       Console.info(
         "Special UI conditions matching:",
         "In special ui time duration",
         time,
         "| current time parsed as",
-        timeFormatter.dayjs().toString(),
-        "| is after start",
-        timeFormatter.dayjs().isAfter('2020-04-04T00:00:00+0800'),
-        "| is before end",
-        timeFormatter.dayjs().isBefore('2020-04-05T04:10:00+0800'),
+        new Date().toString(),
         "| locale is",
         this.$i18n.locale
       );
