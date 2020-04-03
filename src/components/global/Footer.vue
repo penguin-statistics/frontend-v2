@@ -1,23 +1,26 @@
 <template>
   <v-footer
     padless
-    color="blue darken-3"
+    :color="primaryColor"
     class="white--text"
   >
     <v-card
       flat
       tile
       width="100%"
-      class="blue darken-3 text-center footer--safe-area my-1"
+      :color="primaryColor"
+      class="text-center footer--safe-area my-1"
     >
       <v-card-text class="white--text d-inline">
-        <strong>Penguin Statistics</strong> — <strong>{{ version.VERSION }}</strong>&nbsp;<span class="overline monospace">{{ version.GIT_COMMIT }}-{{ version.ENV }}</span>
+        <strong>Penguin Statistics</strong>
+        —
+        <strong>{{ version.VERSION }}</strong>
+        <span class="overline monospace condensed ml-1">{{ version.GIT_COMMIT }}</span>
       </v-card-text>
 
       <v-card-text
-        v-if="true"
-        class="white--text d-block pt-2 pb-0 overline"
-        style="letter-spacing: .075em !important;"
+        v-if="isCNMirror"
+        class="white--text d-block pt-2 pb-0 overline condensed"
       >
         <span>
           京ICP备xxxxxxxx号-x
@@ -33,6 +36,15 @@
             contain
           />
           京公网安备xxxxxxxxxxxxxx号
+        </span>
+      </v-card-text>
+
+      <v-card-text
+        v-if="isZeitNow"
+        class="white--text d-block pt-2 pb-0 overline"
+      >
+        <span>
+          Zeit Now 预览构建
         </span>
       </v-card-text>
     </v-card>
@@ -51,8 +63,7 @@
       version () {
         return {
           VERSION: config.version || "v0.0.0",
-          GIT_COMMIT: GIT_COMMIT.trim(),
-          ENV: process.env.NODE_ENV === 'production' ? "prod" : "dev"
+          GIT_COMMIT: GIT_COMMIT.trim() || "unknown"
         }
       }
     },
@@ -60,5 +71,7 @@
 </script>
 
 <style scoped>
-
+.condensed {
+  letter-spacing: .075em !important;
+}
 </style>

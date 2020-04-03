@@ -8,7 +8,7 @@
       app
       width="calc(env(safe-area-inset-left) + 300px)"
     >
-      <div 
+      <div
         :class="{
           'drawer-logo blue': true,
           'darken-4': dark,
@@ -71,7 +71,7 @@
     <v-app-bar
       app
       dark
-      color="blue darken-3"
+      :color="primaryColor"
       style="min-height: calc(56px + env(safe-area-inset-top)); padding-top: env(safe-area-inset-top)"
       class="x--safe-area toolbar--safe-area"
     >
@@ -137,6 +137,7 @@
   import PWAPopups from "@/components/global/PWAPopups";
   import Footer from "@/components/global/Footer";
   import CDN from "@/mixins/CDN";
+  import Mirror from "@/mixins/Mirror";
 
 export default {
   name: 'App',
@@ -151,7 +152,7 @@ export default {
     RandomBackground,
     AccountManager
   },
-  mixins: [GlobalEntry, CDN],
+  mixins: [GlobalEntry, CDN, Mirror],
   data () {
     return {
       routes: [],
