@@ -1,5 +1,5 @@
 const webpack = require("webpack");
-const { GenerateSW } = require("workbox-webpack-plugin");
+// const { GenerateSW } = require("workbox-webpack-plugin");
 
 let commitHash;
 
@@ -68,7 +68,7 @@ module.exports = {
       //     to: "register.js"
       //   }
       // ])
-      new GenerateSW()
+      // new GenerateSW()
     ],
   },
   chainWebpack: config => {

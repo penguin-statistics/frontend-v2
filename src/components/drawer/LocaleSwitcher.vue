@@ -81,7 +81,7 @@
         },
         set (localeIndex) {
           const localeObject = this.localizations[localeIndex];
-          this.changeLocale(localeObject.id, false)
+          this.changeLocale(localeObject.id, true)
         }
       },
     },
