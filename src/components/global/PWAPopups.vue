@@ -54,45 +54,28 @@
 </template>
 
 <script>
-  import snackbar from "@/utils/snackbar";
-
   export default {
     name: "PWAPopups",
     data() {
       return {
         update: {
-          enabled: window.SW_UPDATED || false,
+          enabled: false,
           loading: false,
         }
       }
     },
     created () {
-      const context = this;
-      window.addEventListener("message", context.serviceWorkerMessageHandler)
-    },
-    beforeDestroy () {
-      const context = this;
-      window.removeEventListener("message", context.serviceWorkerMessageHandler)
+      if (this.$workbox) {
+        this.$workbox.addEventListener("waiting", () => {
+          this.update.enabled = true;
+        });
+      }
     },
     methods: {
-      serviceWorkerMessageHandler (evt) {
-        if (evt && evt.data && evt.data.from === "serviceWorker" && evt.data.action === "updated") {
-          this.update.enabled = true
-        }
-      },
-      refresh() {
+      async refresh() {
         this.update.loading = true;
-        window.postMessage({
-          to: "serviceWorker",
-          action: "skipWaiting"
-        }, "*");
-
-        setTimeout(() => {
-          this.update.loading = false;
-          this.update.enabled = false;
-          snackbar.launch("error", 10000, "pwaPopup.update.skipWaitingTimeout")
-        }, 10000)
-      }
+        await this.$workbox.messageSW({ type: "SKIP_WAITING" });
+      },
     },
   }
 </script>
