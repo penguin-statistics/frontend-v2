@@ -101,13 +101,13 @@
         sm="6"
       >
         <v-card class="bkop-light py-4 elevation-5">
-          <v-img
+          <img
+            svg-inline
             :src="require('@/assets/qrcodes/alipay-qrcode.svg')"
             :alt="$t('donate.methods.alipay')"
-            max-height="128px"
-            contain
-            aspect-ratio="1"
-          />
+            style="max-height: 128px"
+            class="d-block justify-center mx-auto"
+          >
 
           <v-row
             align="center"
@@ -142,13 +142,13 @@
         sm="6"
       >
         <v-card class="bkop-light py-4 elevation-5">
-          <v-img
+          <img
+            svg-inline
             :src="require('@/assets/qrcodes/wechatpay-qrcode.svg')"
             :alt="$t('donate.methods.wechatPay')"
-            max-height="128px"
-            contain
-            aspect-ratio="1"
-          />
+            style="max-height: 128px"
+            class="d-block justify-center mx-auto"
+          >
 
           <v-row
             align="center"

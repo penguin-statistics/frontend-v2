@@ -873,7 +873,7 @@
             this.calculation.done = true
           })
           .catch((err) => {
-            Console.error(err)
+            Console.error("Planner", "failed to get plan", err)
             snackbar.networkError()
           })
           .finally(() => {
@@ -885,7 +885,7 @@
         try {
           imported = JSON.parse(this.importJson);
         } catch (e) {
-          Console.error("json error", e)
+          Console.info("json error", e)
           snackbar.launch("error", 5000, "planner.import.jsonError", {
             error: e.toString()
           });

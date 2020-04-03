@@ -1,4 +1,5 @@
 const webpack = require("webpack");
+const { GenerateSW } = require("workbox-webpack-plugin");
 
 let commitHash;
 
@@ -28,22 +29,31 @@ module.exports = {
   },
   integrity: true,
   runtimeCompiler: true,
-  pwa: {
-    name: "企鹅物流数据统计",
-    themeColor: "#2d66ba",
-    msTileColor: "#1d499b",
-    appleMobileWebAppCapable: "yes",
-    appleMobileWebAppStatusBarStyle: "black-translucent",
-
-    workboxPluginMode: "GenerateSW",
-    iconPaths: {
-      favicon32: 'favicon/favicon-32x32.png',
-      favicon16: 'favicon/favicon-16x16.png',
-      appleTouchIcon: 'favicon/apple-touch-icon.png',
-      maskIcon: 'favicon/safari-pinned-tab.svg',
-      msTileImage: 'favicon/mstile-150x150.png'
-    }
-  },
+  // pwa: {
+  //   name: "企鹅物流数据统计",
+  //   themeColor: "#2d66ba",
+  //   msTileColor: "#1d499b",
+  //   appleMobileWebAppCapable: "yes",
+  //   appleMobileWebAppStatusBarStyle: "black-translucent",
+  //
+  //   workboxPluginMode: "InjectManifest",
+  //   workboxOptions: {
+  //     swSrc: "src/serviceWorker/service-worker.js",
+  //     exclude: [
+  //       /\.map$/,
+  //       /favicon\.ico$/,
+  //       /manifest\.json$/,
+  //       /precache-manifest.\.json$/,
+  //     ]
+  //   },
+  //   iconPaths: {
+  //     favicon32: 'favicon/favicon-32x32.png',
+  //     favicon16: 'favicon/favicon-16x16.png',
+  //     appleTouchIcon: 'favicon/apple-touch-icon.png',
+  //     maskIcon: 'favicon/safari-pinned-tab.svg',
+  //     msTileImage: 'favicon/mstile-150x150.png'
+  //   }
+  // },
   transpileDependencies: [
     "vuetify"
   ],
@@ -52,6 +62,19 @@ module.exports = {
       new webpack.DefinePlugin({
         GIT_COMMIT: JSON.stringify(commitHash).trim()
       }),
+      // new CopyWebpackPlugin([
+      //   {
+      //     from: "./serviceWorker/register.js",
+      //     to: "register.js"
+      //   }
+      // ])
+      new GenerateSW()
     ],
   },
+  chainWebpack: config => {
+    config.module
+      .rule("vue")
+      .use("vue-svg-inline-loader")
+      .loader("vue-svg-inline-loader");
+  }
 };

@@ -68,11 +68,24 @@ export default {
       index: null,
       logs: [
         {
+          version: "v1.1.6",
+          date: "2020-04-02T18:00:00Z",
+          changes: [
+            "内部重构：优化应用启动时的模块初始化逻辑",
+            "内部重构：独立菜单栏设置项为单一组件",
+            "修复：Google Analytics 未上报版本的错误",
+            "修复：ServiceWorker 缓存问题",
+            "优化：许可协议 Modal 弹窗样式",
+            "优化：菜单栏样式",
+            "添加：新版本更新提示",
+          ]
+        },
+        {
           version: "v1.1.5",
-          date: "2020-03-30T23:31:00Z",
+          date: "2020-03-31T10:31:00Z",
           changes: [
             "添加：User ID 说明",
-            "重构：更新日志页面",
+            "重构：更新记录",
             "修复：有时无法自动隐藏 Crisp 的错误",
             "修复：重新使用 SaaS 版 Sentry",
             "若干错误修复与性能优化"
@@ -186,7 +199,7 @@ export default {
   methods: {
     formatTime(t) {
       return timeFormatter.dayjs(t).fromNow()
-    }
+    },
   },
 }
 </script>

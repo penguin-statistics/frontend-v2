@@ -2,15 +2,17 @@
   <div
     ref="background"
     class="random-background"
-    :style="{filter: blurred ? 'blur(5px)' : 'blur(0px)'}"
+    :style="{filter: `${blurred ? 'blur(5px)' : 'blur(0px)'} ${isInSpecialUI ? 'grayscale(0.75)' : ''}`}"
   />
 </template>
 
 <script>
   import Console from "@/utils/Console";
+  import SpecialUI from "@/mixins/SpecialUI";
 
   export default {
     name: "RandomBackground",
+    mixins: [SpecialUI],
     props: {
       interval: {
         type: Number,
