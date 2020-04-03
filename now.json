@@ -1,6 +1,18 @@
 {
   "version": 2,
-  "env": {
-    "IS_NOW_BUILD": "yes"
+  "public": true,
+  "headers": [
+    {
+      "source": "/service-worker.js",
+      "headers" : [
+        {
+          "key" : "Cache-Control",
+          "value" : "public, max-age=0, must-revalidate"
+        }
+      ]
+    },
+  ],
+  "github": {
+    "autoJobCancelation": true
   }
 }
