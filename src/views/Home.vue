@@ -67,30 +67,65 @@ import Bulletin from "@/views/About/Bulletin";
 import Contact from "@/views/About/Contact";
 import anime from 'animejs/lib/anime.es.js';
 import License from "@/views/About/License";
+import Console from "@/utils/Console";
 
 export default {
   name: "Home",
   components: {License, Contribute, Donate, Intro, Bulletin, Contact },
   data: () => ({}),
   mounted () {
+    Console.info("mounted");
     setTimeout(() => {
-      anime({
-        targets: '.card-translate-up',
-        translateY: [48, 0],
-        opacity: [0, 1],
-        duration: 775,
-        delay: (el, i) => i * 175,
-        easing: "easeOutQuint"
-      });
-      anime({
-        targets: ['.card-translate-up h1', '.card-translate-up h2', '.card-translate-up p', '.card-translate-up span:not(.v-btn__content)'],
-        translateY: [48, 0],
-        opacity: [0, 1],
-        duration: 775,
-        delay: (el, i) => i * 55,
-        easing: "easeOutQuint"
-      })
-    }, 0)
+      try {
+        anime({
+          targets: '.card-translate-up',
+          translateY: [48, 0],
+          opacity: [0, 1],
+          duration: 775,
+          delay: (el, i) => i * 175,
+          easing: "easeOutQuint"
+        });
+        anime({
+          targets: ['.card-translate-up h1', '.card-translate-up h2', '.card-translate-up p', '.card-translate-up span:not(.v-btn__content)'],
+          translateY: [48, 0],
+          opacity: [0, 1],
+          duration: 775,
+          delay: (el, i) => i * 55,
+          easing: "easeOutQuint"
+        })
+      } catch (e) {
+        Console.error("HomeAnimation", "error when animating home entry animation", e)
+      }
+    }, 0);
+
+    this.$nextTick(() => {
+      setTimeout(() => {
+        const el1 = document.querySelector(".card-translate-up");
+        const el2 = document.querySelector(".card-translate-up h1");
+        if (el1.style.opacity === "0" || el2.style.opacity === "0") {
+          Console.error("HomeAnimation", "potential blank screen on home detected");
+
+          // try to fix this
+          const selectors = [
+            ".card-translate-up",
+            ".card-translate-up h1",
+            ".card-translate-up h2",
+            ".card-translate-up p",
+            ".card-translate-up span:not(.v-btn__content)",
+          ];
+          try {
+            for (const selector of selectors) {
+              for (const element of document.querySelectorAll(selector)) {
+                element.style.setProperty("opacity", 1);
+              }
+            }
+          } catch (e) {
+            Console.error("HomeAnimation", "blank screen fix trial failed", e)
+          }
+        }
+      }, 5000)
+
+    })
   },
 };
 </script>

@@ -102,7 +102,6 @@
       >
         <v-card class="bkop-light py-4 elevation-5">
           <v-img
-            svg-inline
             :src="require('@/assets/qrcodes/alipay-qrcode.svg')"
             :alt="$t('donate.methods.alipay')"
             max-height="128px"
@@ -144,7 +143,6 @@
       >
         <v-card class="bkop-light py-4 elevation-5">
           <v-img
-            svg-inline
             :src="require('@/assets/qrcodes/wechatpay-qrcode.svg')"
             :alt="$t('donate.methods.wechatPay')"
             max-height="128px"
