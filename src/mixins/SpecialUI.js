@@ -11,7 +11,19 @@ export default {
           null,
           '[)'
         );
-      Console.info("in special ui time duration", time, "| current time parsed as", timeFormatter.dayjs().toString());
+      Console.info(
+        "Special UI conditions matching:",
+        "In special ui time duration",
+        time,
+        "| current time parsed as",
+        timeFormatter.dayjs().toString(),
+        "| is after start",
+        timeFormatter.dayjs().isAfter('2020-04-04T00:00:00+0800'),
+        "| is before end",
+        timeFormatter.dayjs().isBefore('2020-04-05T04:10:00+0800'),
+        "| locale is",
+        this.$i18n.locale
+      );
       return time && this.$i18n.locale === "zh"
     }
   },
