@@ -11,8 +11,5 @@
         }
       ]
     },
-  ],
-  "github": {
-    "autoJobCancelation": true
-  }
+  ]
 }
