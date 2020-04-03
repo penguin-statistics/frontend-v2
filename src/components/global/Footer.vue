@@ -18,6 +18,17 @@
         <span class="overline monospace condensed ml-1">{{ version.GIT_COMMIT }}</span>
       </v-card-text>
 
+      <v-expand-transition>
+        <v-card-text
+          v-if="isInSpecialUI"
+          class="white--text d-block pt-2 pb-0 overline"
+        >
+          <span>
+            致敬英雄，逝者安息
+          </span>
+        </v-card-text>
+      </v-expand-transition>
+
       <v-card-text
         v-if="isCNMirror"
         class="white--text d-block pt-2 pb-0 overline condensed"
@@ -55,10 +66,11 @@
   import Mirror from "@/mixins/Mirror";
   import config from "@/config";
   import CDN from "@/mixins/CDN";
+  import SpecialUI from "@/mixins/SpecialUI";
 
   export default {
     name: "Footer",
-    mixins: [Mirror, CDN],
+    mixins: [Mirror, CDN, SpecialUI],
     computed: {
       version () {
         return {

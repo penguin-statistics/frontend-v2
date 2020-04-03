@@ -1,11 +1,14 @@
 <!--suppress CssInvalidFunction -->
 <template>
-  <v-app :class="languageFont">
+  <v-app
+    :class="languageFont"
+  >
     <GlobalSnackbar />
     <PWAPopups />
     <v-navigation-drawer
       v-model="drawer"
       app
+      :style="{'filter': isInSpecialUI ? 'grayscale(1)' : ''}"
       width="calc(env(safe-area-inset-left) + 300px)"
     >
       <div
@@ -73,6 +76,7 @@
       dark
       :color="primaryColor"
       style="min-height: calc(56px + env(safe-area-inset-top)); padding-top: env(safe-area-inset-top)"
+      :style="{'filter': isInSpecialUI ? 'grayscale(1)' : ''}"
       class="x--safe-area toolbar--safe-area"
     >
       <v-app-bar-nav-icon
@@ -105,6 +109,7 @@
     </v-app-bar>
     <RandomBackground />
     <v-content
+      :style="{'filter': isInSpecialUI ? 'grayscale(1)' : ''}"
       style="padding-top: calc(env(safe-area-inset-top) + 56px) !important;"
     >
       <transition
@@ -138,6 +143,7 @@
   import Footer from "@/components/global/Footer";
   import CDN from "@/mixins/CDN";
   import Mirror from "@/mixins/Mirror";
+  import SpecialUI from "@/mixins/SpecialUI";
 
 export default {
   name: 'App',
@@ -152,7 +158,7 @@ export default {
     RandomBackground,
     AccountManager
   },
-  mixins: [GlobalEntry, CDN, Mirror],
+  mixins: [GlobalEntry, CDN, Mirror, SpecialUI],
   data () {
     return {
       routes: [],

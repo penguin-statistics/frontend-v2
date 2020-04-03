@@ -1,4 +1,5 @@
 import Console from "@/utils/Console";
+import SpecialUI from "@/mixins/SpecialUI";
 
 export default {
   watch: {
@@ -6,6 +7,7 @@ export default {
       'crispOpacityChanger'
     ],
   },
+  mixins: [SpecialUI],
   created () {
     window.$crisp.push(["config", "container:index", [1]]);
     window.$crisp.push(["on", "session:loaded", () => {
@@ -14,6 +16,11 @@ export default {
       try {
         document.querySelector("div.crisp-client > div#crisp-chatbox > div > a").style.setProperty("bottom", "calc(max(env(safe-area-inset-bottom), 14px))", "important");
         document.querySelector("div.crisp-client > div#crisp-chatbox > div > a > span:nth-child(2)").style.setProperty("box-shadow", "0 0 5px rgba(0, 0, 0, .4)", "important");
+
+        if (this.isInSpecialUI) {
+          document.querySelector("div.crisp-client > div#crisp-chatbox > div > a > span:nth-child(2)").style.setProperty("filter", "grayscale(1)", "important");
+        }
+
         this.crispOpacityChanger()
       } catch (e) {
         Console.error("CrispCustomizer", "failed to initialize custom style:", e)
