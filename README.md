@@ -8,10 +8,20 @@
 [![Last Commit](https://img.shields.io/github/last-commit/penguin-statistics/frontend-v2)](https://github.com/penguin-statistics/frontend-v2/commits/dev)
 [![Docs](https://img.shields.io/badge/docs-GitBook-blue)](https://developer.penguin-stats.io)
 
+This is the **frontend** project repository for the [Penguin Statistics](https://penguin-stats.io/?utm_source=github) website.
+
+## Maintainers
+This frontend project has mainly being maintained by the following contributors (in alphabetical order):
+- [AlvISsReimu](https://github.com/AlvISsReimu)
+- [AsahiLuna](https://github.com/AsahiLuna)
+- [GalvinGao](https://github.com/GalvinGao)
+
+> The full list of active contributors of the *Penguin Statistics* project can be found at the [Team Members page](https://penguin-stats.io/about/members) of the website.
+
 ## Supports
 Thanks for the kindness support for this Open Source project from:
 - [![Sentry.io](https://img.shields.io/badge/Sentry.io-DBD3E9?logo=sentry&style=flat&logoColor=DBD3E9&labelColor=16111C&color=9990AB)](https://sentry.io)
 
 ## How to contribute?
-Our contribute guideline can be found at [Penguin Developers](https://developer.penguin-stats.io)
+Our contribute guideline can be found at [Penguin Developers](https://developer.penguin-stats.io). PRs are always more than welcome!
 
