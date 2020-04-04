@@ -898,7 +898,7 @@
         for (const itemData of imported) {
           if (!(itemData.hasOwnProperty("need") && Number.isInteger(itemData.need) && itemData.need >= 0 &&
             itemData.hasOwnProperty("have") && Number.isInteger(itemData.have) && itemData.have >= 0)) {
-            Console.warn("one of the item data is invalid. not importing this and continue to the next one (reason: need or have invalid): ", itemData)
+            Console.info("one of the item data is invalid. not importing this and continue to the next one (reason: need or have invalid): ", itemData)
             continue
           }
           const haveId = itemData.hasOwnProperty("id");
@@ -910,7 +910,7 @@
             convertedImported.push(itemData)
           } else if (!haveId) {
             if (!haveName) {
-              Console.warn("one of the item data is invalid. not importing this and continue to the next one (reason: no id and name): ", itemData)
+              Console.info("one of the item data is invalid. not importing this and continue to the next one (reason: no id and name): ", itemData)
               continue
             }
             const item = get.items.byName(itemData.name);
@@ -928,7 +928,7 @@
         for (const item of convertedImported) {
           const object = this.itemsData.find(el => el.id === item.id);
           if (!object) {
-            Console.warn("no item found with", item);
+            Console.info("no item found with", item);
             continue
           }
           object.have = item.have;

@@ -24,7 +24,7 @@ if (production) {
       new Integrations.Vue({Vue, attachProps: true}),
       new ApmIntegrations.Tracing(),
     ],
-    tracesSampleRate: 0.05,
+    tracesSampleRate: 0.001,
     release: 'frontend-v2@' + (config.version || 'unknown'),
     ignoreErrors: [
       //// START: those errors are found at https://docs.sentry.io/platforms/javascript/#decluttering-sentry
@@ -53,7 +53,8 @@ if (production) {
       //// Those are our customized ones
       "QuotaExceededError",
       "vivoNewsDetailPage",
-      "Request aborted"
+      "Request aborted",
+      "TypeError: Cannot read property 'style' of null"
     ]
   });
 }
