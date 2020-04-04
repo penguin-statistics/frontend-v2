@@ -101,7 +101,7 @@ export default {
       setTimeout(() => {
         const el1 = document.querySelector(".card-translate-up");
         const el2 = document.querySelector(".card-translate-up h1");
-        if (el1.style.opacity === "0" || el2.style.opacity === "0") {
+        if ((el1 && el1.style.opacity === "0") || (el2 && el2.style.opacity === "0")) {
           Console.warn("HomeAnimation", "potential blank screen on home detected");
 
           // try to fix this

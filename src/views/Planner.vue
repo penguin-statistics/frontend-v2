@@ -952,7 +952,7 @@
           })
       },
       redirectItem(itemId) {
-        console.log(itemId)
+        Console.debug(itemId)
         this.$router.push({
           name: "StatsByItem_SelectedItem",
           params: {

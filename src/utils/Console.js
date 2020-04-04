@@ -8,28 +8,25 @@ function reportSentry(severity, component, contents) {
 }
 
 class Console {
-  static debug (...content) {
+  static debug (component, ...content) {
     this._render("debug", ...content)
   }
-  static info (...content) {
+  static info (component, ...content) {
     this._render("info", ...content)
   }
   static warn (component, ...content) {
-    const contents = [`[${component}]`, ...content];
-    this._render("warn", ...contents);
-    reportSentry("warning", component, contents)
+    this._render("warn", ...content);
+    reportSentry("warning", component, content)
   }
   static error (component, ...content) {
-    const contents = [`[${component}]`, ...content];
-    this._render("error", ...contents);
-    reportSentry("error", component, contents)
+    this._render("error", ...content);
+    reportSentry("error", component, content)
   }
   static fatal (component, ...content) {
-    const contents = [`[FATAL] [${component}]`, ...content];
-    this._render("error", ...contents);
-    reportSentry("fatal", component, contents)
+    this._render("error", ...content);
+    reportSentry("fatal", component, content)
   }
-  static log (...content) {
+  static log (component, ...content) {
     this._render("log", ...content)
   }
   /**
@@ -38,7 +35,7 @@ class Console {
    */
   static _render (level, ...content) {
     const PROD_IGNORE = ["debug"];
-    if (process.env.NODE_ENV !== "production" && (PROD_IGNORE.includes(level))) return;
+    if (process.env.NODE_ENV === "production" && (PROD_IGNORE.includes(level))) return;
     const now = new Date();
     const date = `${now.getDate()} ${now.getHours()}:${now.getMinutes()}:${now.getSeconds()}.${now.getMilliseconds()}`;
     let prefix = `(${date})`;

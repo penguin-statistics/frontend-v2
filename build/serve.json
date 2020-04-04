@@ -1,6 +1,5 @@
 {
-  "version": 2,
-  "public": true,
+  "public": "dist",
   "headers": [
     {
       "source": "/service-worker.js",
