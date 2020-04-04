@@ -18,13 +18,18 @@ import { Integrations as ApmIntegrations } from '@sentry/apm';
 const production = process.env.NODE_ENV === 'production';
 
 if (production) {
+  const sentEvents = {};
+
+  // set the limitation of a same client sending the same message event to Sentry for every session
+  const maxSameEventPerClient = 20;
+
   Sentry.init({
     dsn: 'https://9636aaa824a744f98a619df0aaabba00@sentry.io/1536764',
     integrations: [
       new Integrations.Vue({Vue, attachProps: true}),
       new ApmIntegrations.Tracing(),
     ],
-    tracesSampleRate: 0.001,
+    tracesSampleRate: 0.005,
     release: 'frontend-v2@' + (config.version || 'unknown'),
     ignoreErrors: [
       //// START: those errors are found at https://docs.sentry.io/platforms/javascript/#decluttering-sentry
@@ -72,7 +77,25 @@ if (production) {
       /127\.0\.0\.1:4001\/isrunning/i,  // Cacaoweb
       /webappstoolbarba\.texthelp\.com\//i,
       /metrics\.itunes\.apple\.com\.edgesuite\.net\//i
-    ]
+    ],
+    beforeSend(event) {
+      const {message} = event;
+      if (message in sentEvents) {
+        const counts = sentEvents[message];
+
+        // if there's still 'quota' for the client to send this event
+        if (counts < maxSameEventPerClient) {
+          // record that we have send the event this time
+          sentEvents[message] = counts + 1;
+          // report event
+          return event
+        }
+      } else {
+        // this has not yet been sent; init var and send it
+        sentEvents[message] = 1;
+        return event
+      }
+    }
   });
 }
 
