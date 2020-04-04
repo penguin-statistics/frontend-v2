@@ -208,7 +208,7 @@
       }
     },
     mounted () {
-      let userId = Cookies.get(this.cookies.key);
+      const userId = Cookies.get(this.cookies.key);
       if (userId !== this.$store.getters['auth/username']) {
         this.$store.commit("auth/login", userId);
       }
@@ -226,12 +226,12 @@
               color: "success",
               text: this.$t('success')
             };
-            this.$store.dispatch("data/refreshPersonalMatrix");
             this.$emit('afterLogin');
             this.auth.dialog = false
+            this.$store.dispatch("data/refreshPersonalMatrix");
           })
           .catch((err) => {
-            Console.error("AccountManager", "auth failed", err)
+            Console.info("[AccountManager] auth failed", err)
             if (err.response && err.response.status && err.response.status === 404) {
               this.error = this.$t('failed.message', {message: this.$t('failed.notfound')})
             } else {

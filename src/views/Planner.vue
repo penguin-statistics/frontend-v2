@@ -829,7 +829,7 @@
 
             data.stages = data.stages.map(el => {
               el.materials = [];
-              for (let [name, value] of Object.entries(el.items)) {
+              for (const [name, value] of Object.entries(el.items)) {
                 const item = get.items.byName(name);
                 el.materials.push({
                   name: strings.translate(item, "name"),
@@ -845,7 +845,7 @@
               };
               el.target.name = strings.translate(el.target.item, "name");
               el.items = [];
-              for (let [name, value] of Object.entries(el.materials)) {
+              for (const [name, value] of Object.entries(el.materials)) {
                 const item = get.items.byName(name);
                 el.items.push({
                   name: strings.translate(item, "name"),
@@ -857,7 +857,7 @@
             });
             data.values = data.values.map(el => {
               el.materials = [];
-              for (let {name, value} of el.items) {
+              for (const {name, value} of el.items) {
                 if (parseFloat(value) === 0) continue;
                 const itemObject = get.items.byName(name);
                 el.materials.push({
@@ -868,7 +868,7 @@
               }
               return el
             });
-            Console.log(data)
+            Console.debug(data)
             this.$set(this.calculation, "data", data);
             this.calculation.done = true
           })
@@ -894,7 +894,7 @@
         this.importToItemsData(imported)
       },
       importToItemsData(imported) {
-        let convertedImported = [];
+        const convertedImported = [];
         for (const itemData of imported) {
           if (!(itemData.hasOwnProperty("need") && Number.isInteger(itemData.need) && itemData.need >= 0 &&
             itemData.hasOwnProperty("have") && Number.isInteger(itemData.have) && itemData.have >= 0)) {

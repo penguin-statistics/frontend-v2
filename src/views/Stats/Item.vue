@@ -247,10 +247,10 @@ export default {
       ];
     },
     categorizedItems() {
-      let all = get.items.all();
+      const all = get.items.all();
       const categories = ["MATERIAL", "CARD_EXP", "FURN", "ACTIVITY_ITEM"];
-      let results = {};
-      for (let category of categories) {
+      const results = {};
+      for (const category of categories) {
         results[category] = all.filter(el => el.itemType === category);
         // move 3003 to the last member
         results[category].sort((a, b) => {
@@ -295,7 +295,7 @@ export default {
           });
           break;
         default:
-          Console.error(
+          Console.warn(
             "StatsByItem",
             "unexpected step number",
             newValue,

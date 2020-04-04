@@ -74,7 +74,6 @@ export default {
   components: {License, Contribute, Donate, Intro, Bulletin, Contact },
   data: () => ({}),
   mounted () {
-    Console.info("mounted");
     setTimeout(() => {
       try {
         anime({
@@ -94,7 +93,7 @@ export default {
           easing: "easeOutQuint"
         })
       } catch (e) {
-        Console.error("HomeAnimation", "error when animating home entry animation", e)
+        Console.warn("HomeAnimation", "error when animating home entry animation", e)
       }
     }, 0);
 

@@ -4,7 +4,7 @@ export default {
   computed: {
     isInSpecialUI () {
       const time = new Date().getTime() >= 1585929600000 && new Date().getTime() <= 1586031000000
-      Console.info(
+      Console.debug(
         "Special UI conditions matching:",
         "In special ui time duration",
         time,

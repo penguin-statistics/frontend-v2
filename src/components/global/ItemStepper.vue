@@ -91,7 +91,7 @@
     },
     watch: {
       quantity: function (newValue, oldValue) {
-        let diff = newValue - oldValue;
+        const diff = newValue - oldValue;
         this.$emit("change", [this.item.itemId, diff])
       }
     },
