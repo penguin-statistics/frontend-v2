@@ -272,7 +272,7 @@ export default {
   },
   watch: {
     $route: function(to, from) {
-      Console.log("step route changed from", from.path, "to", to.path);
+      Console.log("StatsByItem", "step route changed from", from.path, "to", to.path);
       if (to.name === "StatsByItem") {
         this.step = 1;
       }
@@ -281,14 +281,14 @@ export default {
       }
     },
     step: function(newValue, oldValue) {
-      Console.log("step changed from", oldValue, "to", newValue);
+      Console.log("StatsByItem", "step changed from", oldValue, "to", newValue);
       switch (newValue) {
         case 1:
-          Console.log("- [router go] index");
+          Console.log("StatsByItem", "- [router go] index");
           this.$router.push({ name: "StatsByItem" });
           break;
         case 2:
-          Console.log("- [router go] item", this.selected.item.itemId);
+          Console.log("StatsByItem", "- [router go] item", this.selected.item.itemId);
           this.$router.push({
             name: "StatsByItem_SelectedItem",
             params: { itemId: this.selected.item.itemId }

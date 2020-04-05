@@ -231,7 +231,7 @@
             this.$store.dispatch("data/refreshPersonalMatrix");
           })
           .catch((err) => {
-            Console.info("[AccountManager] auth failed", err)
+            Console.info("AccountManager", "auth failed", err)
             if (err.response && err.response.status && err.response.status === 404) {
               this.error = this.$t('failed.message', {message: this.$t('failed.notfound')})
             } else {

@@ -868,7 +868,7 @@
               }
               return el
             });
-            Console.debug(data)
+            Console.debug("Planner", data)
             this.$set(this.calculation, "data", data);
             this.calculation.done = true
           })
@@ -885,7 +885,7 @@
         try {
           imported = JSON.parse(this.importJson);
         } catch (e) {
-          Console.info("json error", e)
+          Console.info("PlannerImport", "json error", e)
           snackbar.launch("error", 5000, "planner.import.jsonError", {
             error: e.toString()
           });
@@ -898,7 +898,7 @@
         for (const itemData of imported) {
           if (!(itemData.hasOwnProperty("need") && Number.isInteger(itemData.need) && itemData.need >= 0 &&
             itemData.hasOwnProperty("have") && Number.isInteger(itemData.have) && itemData.have >= 0)) {
-            Console.info("one of the item data is invalid. not importing this and continue to the next one (reason: need or have invalid): ", itemData)
+            Console.info("PlannerImport", "one of the item data is invalid. not importing this and continue to the next one (reason: need or have invalid): ", itemData)
             continue
           }
           const haveId = itemData.hasOwnProperty("id");
@@ -910,7 +910,7 @@
             convertedImported.push(itemData)
           } else if (!haveId) {
             if (!haveName) {
-              Console.info("one of the item data is invalid. not importing this and continue to the next one (reason: no id and name): ", itemData)
+              Console.info("PlannerImport", "one of the item data is invalid. not importing this and continue to the next one (reason: no id and name): ", itemData)
               continue
             }
             const item = get.items.byName(itemData.name);
@@ -928,7 +928,7 @@
         for (const item of convertedImported) {
           const object = this.itemsData.find(el => el.id === item.id);
           if (!object) {
-            Console.info("no item found with", item);
+            Console.info("PlannerImport","no item found with", item);
             continue
           }
           object.have = item.have;
@@ -952,7 +952,6 @@
           })
       },
       redirectItem(itemId) {
-        Console.debug(itemId)
         this.$router.push({
           name: "StatsByItem_SelectedItem",
           params: {

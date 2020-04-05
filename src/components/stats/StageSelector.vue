@@ -363,7 +363,7 @@
         return get.stages.byParentZoneId(zoneId);
       },
       selectStage (zone, stage) {
-        Console.log("chose", zone, stage);
+        Console.log("StageSelector", "chose", zone, stage);
         this.selected.zone = zone;
         this.selected.stage = stage;
         this.$emit("select", {zone, stage});

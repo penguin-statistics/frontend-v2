@@ -65,7 +65,7 @@
         return `https://penguin.upyun.galvincdn.com/backgrounds/${id}.${this.webpSupport ? 'webp' : 'optimized.png'}`
       },
       setBlur (flag) {
-        Console.info("setting blur to", flag)
+        Console.info("RandomBackground", "setting blur to", flag)
         this.blurred = flag
       },
       async testWebp() {

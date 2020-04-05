@@ -87,7 +87,7 @@ class ObjectManager {
           cacheUpdateAtTemp[context.name] = now;
           store.commit("cacheUpdateAt/store", cacheUpdateAtTemp);
 
-          Console.info(`fetched data "${context.name}" at ${now}`);
+          Console.info("ObjectManager", `fetched data "${context.name}" at ${now}`);
 
           return context.cache
         });
