@@ -89,7 +89,7 @@ export default {
       logs: [
         {
           future: true,
-          version: "v3",
+          version: "v3.0.0",
           date: "2020-05-01T08:00:00Z",
           changes: [
             "添加：多服务器数据源切换支持",
@@ -110,9 +110,10 @@ export default {
           version: "v1.1.7",
           date: "2020-04-06T18:00:00Z",
           changes: [
+            "修复：语言设置未进行 Rehydration",
             "优化：Sentry 报告进行本地频率限制",
             "优化：控制台信息",
-            "添加：更新日志添加未来规划的版本更新信息",
+            "添加：于更新记录的未来规划版本信息",
           ]
         },
         {
@@ -235,7 +236,7 @@ export default {
           el.value = true
         } else if (el.future) {
           el.color = 'secondary';
-          el.icon = 'mdi-history';
+          el.icon = 'mdi-dots-horizontal';
           el.value = false
         } else {
           el.color = 'orange darken-2';
