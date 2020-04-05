@@ -6,52 +6,72 @@
     <v-timeline-item
       v-for="item in logs"
       :key="item.version"
-      :color="item.active ? 'green' : 'grey darken-1'"
-      :icon="item.active ? 'mdi-check' : 'mdi-history'"
+      :color="item.color"
+      :icon="item.icon"
       :small="!item.active"
       fill-dot
-      class="changelog--item"
+      class="changelog--item force-not-lang-font"
     >
       <v-card
         class="bkop-light"
-        :class="{'elevation-12': item.active}"
+        :class="{'elevation-12': item.value}"
+
+        @click.native="item.value = !item.value"
       >
         <v-card-title
           class="py-2 pl-4 pr-2"
         >
           <span
             class="title"
-            v-text="item.version"
-          />
+          >
+            <span
+              v-if="item.future"
+              class="caption"
+            >
+              正在开发
+            </span>
 
-          <!--          <v-icon-->
-          <!--            v-if="item.active"-->
-          <!--            right-->
-          <!--          >-->
-          <!--            mdi-check-circle-->
-          <!--          </v-icon>-->
+            {{ item.version }}
+          </span>
 
           <v-spacer />
 
-          <span
-            class="caption mr-2"
-            :title="item.date"
-            v-text="formatTime(item.date)"
-          />
+          <v-btn
+            :color="item.value && item.future ? 'primary' : ''"
+            :input-value="item.value"
+            :ripple="false"
+            class="ma-0"
+            text
+            @click.stop="item.value = !item.value"
+          >
+            <span
+              class="mr-2"
+              v-text="formatTime(item.date)"
+            />
+
+            <v-icon
+              small
+              v-text="item.value ? '$close' : 'mdi-calendar'"
+            />
+          </v-btn>
         </v-card-title>
 
-        <v-divider />
+        <v-expand-transition>
+          <div v-if="item.value">
+            <v-divider />
 
-        <v-card-text>
-          <ol>
-            <li
-              v-for="(text, key) in item.changes"
-              :key="key"
-            >
-              {{ text }}
-            </li>
-          </ol>
-        </v-card-text>
+            <v-card-text>
+              <ol>
+                <li
+                  v-for="(text, key) in item.changes"
+                  :key="key"
+                >
+                  {{ text }}
+                </li>
+              </ol>
+            </v-card-text>
+          </div>
+        </v-expand-transition>
       </v-card>
     </v-timeline-item>
   </v-timeline>
@@ -67,6 +87,34 @@ export default {
     return {
       index: null,
       logs: [
+        {
+          future: true,
+          version: "v3",
+          date: "2020-05-01T08:00:00Z",
+          changes: [
+            "添加：多服务器数据源切换支持",
+            "添加：物品掉落分时查询",
+            "内部重构：所有数据将引入版本概念，从底层保证数据一致性",
+          ]
+        },
+        {
+          future: true,
+          version: "v1.1.8",
+          date: "2020-04-25T08:00:00Z",
+          changes: [
+            "添加：国内加速镜像站点"
+          ]
+        },
+        {
+          active: true,
+          version: "v1.1.7",
+          date: "2020-04-06T18:00:00Z",
+          changes: [
+            "优化：Sentry 报告进行本地频率限制",
+            "优化：控制台信息",
+            "添加：更新日志添加未来规划的版本更新信息",
+          ]
+        },
         {
           version: "v1.1.6",
           date: "2020-04-02T18:00:00Z",
@@ -180,8 +228,21 @@ export default {
             "新版本上线"
           ]
         }
-      ].map((el, i) => {
-        if (i === 0) el.active = true;
+      ].map((el) => {
+        if (el.active) {
+          el.color = 'green';
+          el.icon = 'mdi-check';
+          el.value = true
+        } else if (el.future) {
+          el.color = 'secondary';
+          el.icon = 'mdi-history';
+          el.value = false
+        } else {
+          el.color = 'orange darken-2';
+          el.icon = 'mdi-history';
+          el.value = false
+        }
+
         return el
       })
     }

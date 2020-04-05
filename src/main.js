@@ -26,7 +26,10 @@ if (production) {
   Sentry.init({
     dsn: 'https://9636aaa824a744f98a619df0aaabba00@sentry.io/1536764',
     integrations: [
-      new Integrations.Vue({Vue, attachProps: true}),
+      new Integrations.Vue({
+        Vue,
+        attachProps: true
+      }),
       new ApmIntegrations.Tracing(),
     ],
     tracesSampleRate: 0.005,

@@ -1,5 +1,6 @@
 import dayjs from "dayjs";
 import Console from "@/utils/Console";
+import {mapGetters} from "vuex";
 
 export default {
   methods: {
@@ -17,5 +18,8 @@ export default {
         Console.info("i18n", "Same locale");
       }
     }
+  },
+  computed: {
+    ...mapGetters('settings', ['language'])
   },
 }

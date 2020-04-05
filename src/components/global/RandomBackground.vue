@@ -22,7 +22,7 @@
             return 15 * 60
           } else {
             // is not mobile device; use ttl of 5 minutes to show off ;)
-            return 5 * 60
+            return 10 * 60
           }
         }
       }
