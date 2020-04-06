@@ -1,20 +1,41 @@
 <template>
-  <v-container class="fill-height justify-center">
+  <v-container
+    fluid
+    class="fill-height justify-center"
+    style="max-width: 1785px"
+  >
     <v-row
+      align="center"
       :dense="$vuetify.breakpoint.mdAndDown"
     >
-      <v-col cols="12">
+      <v-col
+        cols="12"
+        lg="6"
+        xl="8"
+      >
         <Intro
           class="card-translate-up"
         />
       </v-col>
+
       <v-col
         cols="12"
+        lg="6"
+        xl="4"
       >
         <Bulletin
           class="animation-blink card-translate-up"
         />
       </v-col>
+
+      <v-col
+        cols="12"
+      >
+        <GettingStarted
+          class="card-translate-up"
+        />
+      </v-col>
+
       <!--      <v-flex-->
       <!--        xs12-->
       <!--        sm6-->
@@ -68,10 +89,11 @@ import Contact from "@/views/About/Contact";
 import anime from 'animejs/lib/anime.es.js';
 import License from "@/views/About/License";
 import Console from "@/utils/Console";
+import GettingStarted from "@/views/About/GettingStarted";
 
 export default {
   name: "Home",
-  components: {License, Contribute, Donate, Intro, Bulletin, Contact },
+  components: {GettingStarted, License, Contribute, Donate, Intro, Bulletin, Contact },
   data: () => ({}),
   mounted () {
     setTimeout(() => {

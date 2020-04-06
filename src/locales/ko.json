@@ -39,7 +39,11 @@
       },
       "credit": "펭귄 물류 데이터 분석 부서 | {date}"
     },
-    "separator": ", "
+    "separator": ", ",
+    "quotation": {
+      "start": "“",
+      "end": "”"
+    }
   },
   "stats": {
     "headers": {

@@ -39,7 +39,11 @@
       },
       "credit": "Penguin Statistics | {date}"
     },
-    "separator": ", "
+    "separator": ", ",
+    "quotation": {
+      "start": "\"",
+      "end": "\""
+    }
   },
   "stats": {
     "headers": {

@@ -117,8 +117,6 @@ Vue.use(VueAnalytics, {
     delay: 2000 // delay in milliseconds
   },
   autoTracking: {
-    exception: true,
-    exceptionLogs: true,
     screenview: true
   }
 });

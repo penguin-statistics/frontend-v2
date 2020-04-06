@@ -39,7 +39,11 @@
       },
       "credit": "ペンギン急便データ統計処理部門 | {date}"
     },
-    "separator": "、"
+    "separator": "、",
+    "quotation": {
+      "start": "「",
+      "end": "」"
+    }
   },
   "stats": {
     "headers": {

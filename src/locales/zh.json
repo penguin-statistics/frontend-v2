@@ -39,7 +39,11 @@
       },
       "credit": "企鹅物流数据统计 | {date}"
     },
-    "separator": "、"
+    "separator": "、",
+    "quotation": {
+      "start": "“",
+      "end": "”"
+    }
   },
   "stats": {
     "headers": {

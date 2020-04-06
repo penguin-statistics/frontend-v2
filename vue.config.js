@@ -62,12 +62,6 @@ module.exports = {
       new webpack.DefinePlugin({
         GIT_COMMIT: JSON.stringify(commitHash).trim()
       }),
-      // new CopyWebpackPlugin([
-      //   {
-      //     from: "./serviceWorker/register.js",
-      //     to: "register.js"
-      //   }
-      // ])
       new GenerateSW()
     ],
   },

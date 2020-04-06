@@ -34,19 +34,23 @@
 <template>
   <v-card 
     elevation="0"
-    class="transparent pt-0 py-1"
+    class="transparent pt-0 my-1"
   >
     <v-row
       align="center"
       justify="center"
     >
-      <v-card-title style="word-break:normal">
+      <v-card-title
+        class="justify-start"
+        style="word-break:normal"
+      >
         <v-img
           :src="cdnResource('/logos/penguin_stats_logo.png')"
           aspect-ratio="1"
-          max-height="128px"
-          min-width="128px"
+          height="128px"
+          width="128px"
           contain
+          :position="$vuetify.breakpoint.mdAndDown ? 'center center' : 'left center'"
           class="my-6"
         />
         <v-col cols="12">
