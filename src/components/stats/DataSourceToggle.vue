@@ -24,10 +24,10 @@
         "personal": "個人"
       }
     },
-    "ko": {
+    "ko": { 
       "dataSourceToggle": {
         "title": "로그인 필요",
-        "loginNotice": "개인 보고서를 보려면 로그인하여 주십시오.",
+        "loginNotice": "개인 보고서를 보시려면 로그인해 주세요.",
         "all": "전체",
         "personal": "개인"
       }
