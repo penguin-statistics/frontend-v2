@@ -54,8 +54,8 @@
   },
   "builds": {
     "development": {
-      "title": "Preview Build",
-      "description": "You are currently browsing the development build",
+      "title": "프리뷰 버젼",
+      "description": "현재 개발 빌드를 탐색하고 있습니다.",
       "ok": "OH YEAH!"
     }
   },

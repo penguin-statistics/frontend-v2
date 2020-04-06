@@ -86,8 +86,8 @@
           "ACTIVITY_CLOSED": "이벤트 (종료)"
         },
         "status": {
-          "closed": "Closed",
-          "open": "Open"
+          "closed": "닫힘",
+          "open": "개방중"
         }
       },
       "stage": {

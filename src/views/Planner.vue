@@ -105,7 +105,7 @@
         "byProduct": "부산물 획득 고려",
         "requireExp": "경험치 획득 고려",
         "requireLmb": "용문폐 획득 고려",
-        "foreignServer": "에피소드 6을 계산에 넣지 마십시오"
+        "foreignServer": "에피소드 6 제외"
       },
       "actions": {
         "import": "가져오기",
@@ -113,7 +113,7 @@
         "importExport": "@:(actions.import)/@:(actions.export)",
         "calculate": "계산하기"
       },
-      "have": "소유량",
+      "have": "보유량",
       "need": "필요량",
       "copy": "클립보드에 복사",
       "calculation": {
