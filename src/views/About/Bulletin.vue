@@ -36,7 +36,7 @@
     elevation="5"
     class="bkop-light pa-6"
   >
-    <h1 class="headline font-weight-black d-flex align-center flex-row">
+    <h1 class="headline font-weight-black d-flex align-center">
       <v-icon left>
         mdi-alert-decagram
       </v-icon>
