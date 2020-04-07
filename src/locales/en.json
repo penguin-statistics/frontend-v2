@@ -8,7 +8,7 @@
     "home": "Home",
     "report": "Report Drops",
     "stats": {
-      "_name": "Statistics",
+      "_name": "Drop Rates",
       "stage": "By stage",
       "item": "By item"
     },
