@@ -5,7 +5,7 @@
       "success": "登录成功",
       "failed": {
         "message": "登录失败：{message}",
-        "notfound": "未找到所提供的用户 ID"
+        "notfound": "未找到此用户ID。请注意这不是游戏内的ID。在本站上传一次掉落数据即可自动获得。"
       },
       "login": "登录",
       "logout": "退出登录",
@@ -18,7 +18,7 @@
       "success": "Successfully logged in",
       "failed": {
         "message": "Failed to log in: {message}",
-        "notfound": "The specified User ID could not be found"
+        "notfound": "This User ID cannot be found. Please not that this is not the ID in the game. You will get one after your first drop report."
       },
       "login": "Login",
       "logout": "Logout",
