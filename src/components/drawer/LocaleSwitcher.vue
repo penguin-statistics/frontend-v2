@@ -25,7 +25,10 @@
           mdi-translate
         </v-icon> {{ $t('menu.languages') }}
       </v-subheader>
-      <v-list-item-group v-model="activeLocale">
+      <v-list-item-group
+        v-model="activeLocale"
+        mandatory
+      >
         <v-list-item
           v-for="(locale, i) in localizations"
           :key="i"

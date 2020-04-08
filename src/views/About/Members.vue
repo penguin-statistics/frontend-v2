@@ -451,8 +451,8 @@
         return this.socials.find(v => v.id === id)
       },
       renderResponsibility (responsibilities) {
-        let translated = [];
-        for (let responsibility of responsibilities) {
+        const translated = [];
+        for (const responsibility of responsibilities) {
           translated.push(this.$t(`responsibilities.${responsibility}`))
         }
         return translated.join(this.$t('meta.separator'))

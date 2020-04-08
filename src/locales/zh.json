@@ -8,7 +8,7 @@
     "home": "首页",
     "report": "掉落汇报",
     "stats": {
-      "_name": "统计结果",
+      "_name": "素材掉率",
       "stage": "按作战",
       "item": "按素材"
     },
@@ -39,7 +39,11 @@
       },
       "credit": "企鹅物流数据统计 | {date}"
     },
-    "separator": "、"
+    "separator": "、",
+    "quotation": {
+      "start": "“",
+      "end": "”"
+    }
   },
   "stats": {
     "headers": {

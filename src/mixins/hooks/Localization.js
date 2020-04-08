@@ -9,7 +9,7 @@ export default {
       this.changeLocale(this.language, false)
     } else {
       const language = strings.getFirstBrowserLanguage();
-      Console.info("[i18n] detected language", language);
+      Console.info("i18n", "detected language", language);
       if (language) {
         // because this is a detection result, thus we are not storing it,
         // unless the user manually set one.

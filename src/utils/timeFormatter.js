@@ -18,7 +18,7 @@ const FORMATS = {
 };
 
 function needYear(moments) {
-  for (let index in moments) {
+  for (const index in moments) {
     if (index === "0") continue;
     if (!dayjs().isSame(moments[index], 'year') || !(moments[index].isSame.apply(moments[index], [moments[index - 1], 'year']))) {
       return true

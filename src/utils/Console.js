@@ -1,41 +1,54 @@
 import * as Sentry from "@sentry/browser";
 
+function reportSentry(severity, component, contents) {
+  Sentry.withScope(scope => {
+    scope.setFingerprint([component]);
+    Sentry.captureMessage(contents.join(" "), severity)
+  })
+}
+
 class Console {
-  static debug (...content) {
-    this._render("debug", ...content)
+  static debug (component, ...content) {
+    this._render("debug", component, ...content)
   }
-  static info (...content) {
-    this._render("info", ...content)
+  static info (component, ...content) {
+    this._render("info", component, ...content)
   }
-  static warn (...content) {
-    this._render("warn", ...content)
+  static warn (component, ...content) {
+    this._render("warn", component, ...content);
+    reportSentry("warning", component, content)
   }
   static error (component, ...content) {
-    const contents = [`[${component}]`, ...content];
-    this._render("error", ...contents);
-    Sentry.withScope(scope => {
-      scope.setFingerprint([component]);
-      Sentry.captureMessage(contents.join(" "), "error")
-    })
+    this._render("error", component, ...content);
+    reportSentry("error", component, content)
   }
-  static log (...content) {
-    this._render("log", ...content)
+  static fatal (component, ...content) {
+    this._render("error", component, ...content);
+    reportSentry("fatal", component, content)
+  }
+  static log (component, ...content) {
+    this._render("log", component, ...content)
   }
   /**
    * @static
    * @private
    */
-  static _render (level, ...content) {
+  static _render (level, component, ...content) {
     const PROD_IGNORE = ["debug"];
-    if (process.env.NODE_ENV !== "production" && (PROD_IGNORE.includes(level))) return;
-    const now = new Date();
-    const date = `${now.getDate()} ${now.getHours()}:${now.getMinutes()}:${now.getSeconds()}.${now.getMilliseconds()}`;
-    let prefix = `(${date})`;
+    if (process.env.NODE_ENV === "production" && (PROD_IGNORE.includes(level))) return;
+    // const now = new Date();
+    // const date = `${now.getDate()} ${now.getHours()}:${now.getMinutes()}:${now.getSeconds()}.${now.getMilliseconds()}`;
+
+    const prefix = [
+      `%c${level}%c${component}`,
+      "background: #FF9800; color: #000; padding: 2px 4px; border-radius: 4px; margin-right: 4px; font-weight: 900; font-size: 10px;",
+      "background: #673AB7; color: #fff; padding: 2px 4px; border-radius: 4px; font-weight: 700; font-size: 10px;"
+    ];
 
     if (console[level]) {
-      console[level](prefix, ...content)
+      console[level](...prefix, ...content)
     } else {
-      console.log(prefix, ...content)
+      console.log(...prefix, ...content)
     }
   }
 }

@@ -235,7 +235,7 @@
         class="pa-0 pt-2"
       >
         <span
-          v-if="$vuetify.breakpoint.smAndUp"
+          v-if="!$vuetify.breakpoint.xs"
           class="stage-id--background font-weight-black display-4 px-12 py-6"
         >
           {{ selectedStage.code || "" }}
@@ -322,10 +322,10 @@
       categorizedZones() {
         const categoriesSet = [["ACTIVITY_OPEN", "MAINLINE"], ["WEEKLY"]];
         if (!this.hideClosed) categoriesSet[1].push("ACTIVITY_CLOSED");
-        let result = [[], []];
-        for (let [index, categories] of categoriesSet.entries()) {
-          for (let category of categories) {
-            let filter = null;
+        const result = [[], []];
+        for (const [index, categories] of categoriesSet.entries()) {
+          for (const category of categories) {
+            let filter;
             let zones = get.zones.byType(category.startsWith("ACTIVITY") ? "ACTIVITY" : category);
             if (category === "ACTIVITY_OPEN") {
               filter = zone => !zone.isOutdated;
@@ -363,7 +363,7 @@
         return get.stages.byParentZoneId(zoneId);
       },
       selectStage (zone, stage) {
-        Console.log("chose", zone, stage);
+        Console.log("StageSelector", "chose", zone, stage);
         this.selected.zone = zone;
         this.selected.stage = stage;
         this.$emit("select", {zone, stage});
@@ -405,6 +405,7 @@
   word-break: break-all;
   overflow: hidden;
   pointer-events: none;
+  text-align: right;
 }
   .theme--light .stage-id--background {
     color: rgba(0, 0, 0, .075);

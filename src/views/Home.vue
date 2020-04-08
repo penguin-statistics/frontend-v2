@@ -1,20 +1,41 @@
 <template>
-  <v-container class="fill-height justify-center">
+  <v-container
+    fluid
+    class="fill-height justify-center"
+    style="max-width: 1785px"
+  >
     <v-row
+      align="center"
       :dense="$vuetify.breakpoint.mdAndDown"
     >
-      <v-col cols="12">
+      <v-col
+        cols="12"
+        lg="6"
+        xl="8"
+      >
         <Intro
           class="card-translate-up"
         />
       </v-col>
+
       <v-col
         cols="12"
+        lg="6"
+        xl="4"
       >
         <Bulletin
           class="animation-blink card-translate-up"
         />
       </v-col>
+
+      <v-col
+        cols="12"
+      >
+        <GettingStarted
+          class="card-translate-up"
+        />
+      </v-col>
+
       <!--      <v-flex-->
       <!--        xs12-->
       <!--        sm6-->
@@ -68,13 +89,13 @@ import Contact from "@/views/About/Contact";
 import anime from 'animejs/lib/anime.es.js';
 import License from "@/views/About/License";
 import Console from "@/utils/Console";
+import GettingStarted from "@/views/About/GettingStarted";
 
 export default {
   name: "Home",
-  components: {License, Contribute, Donate, Intro, Bulletin, Contact },
+  components: {GettingStarted, License, Contribute, Donate, Intro, Bulletin, Contact },
   data: () => ({}),
   mounted () {
-    Console.info("mounted");
     setTimeout(() => {
       try {
         anime({
@@ -94,7 +115,7 @@ export default {
           easing: "easeOutQuint"
         })
       } catch (e) {
-        Console.error("HomeAnimation", "error when animating home entry animation", e)
+        Console.warn("HomeAnimation", "error when animating home entry animation", e)
       }
     }, 0);
 
@@ -102,8 +123,8 @@ export default {
       setTimeout(() => {
         const el1 = document.querySelector(".card-translate-up");
         const el2 = document.querySelector(".card-translate-up h1");
-        if (el1.style.opacity === "0" || el2.style.opacity === "0") {
-          Console.error("HomeAnimation", "potential blank screen on home detected");
+        if ((el1 && el1.style.opacity === "0") || (el2 && el2.style.opacity === "0")) {
+          Console.warn("HomeAnimation", "potential blank screen on home detected");
 
           // try to fix this
           const selectors = [
@@ -135,13 +156,13 @@ export default {
   height: 100%;
 }
 
-.animation-blink {
-  animation-play-state: running;
-}
+/*.animation-blink {*/
+/*  animation-play-state: running;*/
+/*}*/
 
-.animation-blink:hover{
-  animation-play-state: paused !important;
-}
+/*.animation-blink:hover{*/
+/*  animation-play-state: paused !important;*/
+/*}*/
 
 .theme--light .animation-blink {
   background: repeating-linear-gradient(
@@ -151,7 +172,8 @@ export default {
       rgba(255, 255, 255, 0.9) 45px,
       rgba(255, 255, 255, 0.9) 90px
   ) !important;
-  animation: light-blink 3s infinite alternate ease-in-out;
+  box-shadow: 0 0 0 3px rgba(0, 0, 0, .5), 0 3px 1px -2px rgba(0,0,0,.2), 0 2px 2px 0 rgba(0,0,0,.14), 0 1px 5px 0 rgba(0,0,0,.12);
+/*  animation: light-blink 3s infinite alternate ease-in-out;*/
 }
 
 .theme--dark .animation-blink {
@@ -162,28 +184,29 @@ export default {
       rgba(46, 46, 46, 0.9) 45px,
       rgba(46, 46, 46, 0.9) 90px
   ) !important;
-  animation: dark-blink 3s infinite alternate ease-in-out;
+  box-shadow: 0 0 0 3px rgba(255, 255, 255, .5), 0 3px 1px -2px rgba(0,0,0,.2), 0 2px 2px 0 rgba(0,0,0,.14), 0 1px 5px 0 rgba(0,0,0,.12);
+  /*animation: dark-blink 3s infinite alternate ease-in-out;*/
 }
 
-@keyframes light-blink {
-  from {
-    text-shadow: 0 0 0 rgba(0, 0, 0, .2);
-    box-shadow: 0 0 0 1px rgba(0, 0, 0, .5), 0 3px 1px -2px rgba(0,0,0,.2), 0 2px 2px 0 rgba(0,0,0,.14), 0 1px 5px 0 rgba(0,0,0,.12);
-  }
-  to {
-    text-shadow: 0 0 5px rgba(0, 0, 0, .2);
-    box-shadow: 0 0 0 3px rgba(0, 0, 0, .5), 0 3px 1px -2px rgba(0,0,0,.2), 0 2px 2px 0 rgba(0,0,0,.14), 0 1px 5px 0 rgba(0,0,0,.12);
-  }
-}
+/*@keyframes light-blink {*/
+/*  from {*/
+/*    text-shadow: 0 0 0 rgba(0, 0, 0, .2);*/
+/*    box-shadow: 0 0 0 1px rgba(0, 0, 0, .5), 0 3px 1px -2px rgba(0,0,0,.2), 0 2px 2px 0 rgba(0,0,0,.14), 0 1px 5px 0 rgba(0,0,0,.12);*/
+/*  }*/
+/*  to {*/
+/*    text-shadow: 0 0 5px rgba(0, 0, 0, .2);*/
+/*    box-shadow: 0 0 0 3px rgba(0, 0, 0, .5), 0 3px 1px -2px rgba(0,0,0,.2), 0 2px 2px 0 rgba(0,0,0,.14), 0 1px 5px 0 rgba(0,0,0,.12);*/
+/*  }*/
+/*}*/
 
-@keyframes dark-blink {
-  from {
-    text-shadow: 0 0 0 rgba(255, 255, 255, .3);
-    box-shadow: 0 0 0 1px rgba(255, 255, 255, .5), 0 3px 1px -2px rgba(0,0,0,.2), 0 2px 2px 0 rgba(0,0,0,.14), 0 1px 5px 0 rgba(0,0,0,.12);
-  }
-  to {
-    text-shadow: 0 0 5px rgba(255, 255, 255, .3);
-    box-shadow: 0 0 0 3px rgba(255, 255, 255, .5), 0 3px 1px -2px rgba(0,0,0,.2), 0 2px 2px 0 rgba(0,0,0,.14), 0 1px 5px 0 rgba(0,0,0,.12);
-  }
-}
+/*@keyframes dark-blink {*/
+/*  from {*/
+/*    text-shadow: 0 0 0 rgba(255, 255, 255, .3);*/
+/*    box-shadow: 0 0 0 1px rgba(255, 255, 255, .5), 0 3px 1px -2px rgba(0,0,0,.2), 0 2px 2px 0 rgba(0,0,0,.14), 0 1px 5px 0 rgba(0,0,0,.12);*/
+/*  }*/
+/*  to {*/
+/*    text-shadow: 0 0 5px rgba(255, 255, 255, .3);*/
+/*    box-shadow: 0 0 0 3px rgba(255, 255, 255, .5), 0 3px 1px -2px rgba(0,0,0,.2), 0 2px 2px 0 rgba(0,0,0,.14), 0 1px 5px 0 rgba(0,0,0,.12);*/
+/*  }*/
+/*}*/
 </style>

@@ -5,7 +5,7 @@
       "success": "登录成功",
       "failed": {
         "message": "登录失败：{message}",
-        "notfound": "未找到所提供的用户 ID"
+        "notfound": "未找到此用户ID。请注意这不是游戏内的ID。在本站上传一次掉落数据即可自动获得。"
       },
       "login": "登录",
       "logout": "退出登录",
@@ -18,7 +18,7 @@
       "success": "Successfully logged in",
       "failed": {
         "message": "Failed to log in: {message}",
-        "notfound": "The specified User ID could not be found"
+        "notfound": "This User ID cannot be found. Please not that this is not the ID in the game. You will get one after your first drop report."
       },
       "login": "Login",
       "logout": "Logout",
@@ -208,7 +208,7 @@
       }
     },
     mounted () {
-      let userId = Cookies.get(this.cookies.key);
+      const userId = Cookies.get(this.cookies.key);
       if (userId !== this.$store.getters['auth/username']) {
         this.$store.commit("auth/login", userId);
       }
@@ -226,12 +226,12 @@
               color: "success",
               text: this.$t('success')
             };
-            this.$store.dispatch("data/refreshPersonalMatrix");
             this.$emit('afterLogin');
             this.auth.dialog = false
+            this.$store.dispatch("data/refreshPersonalMatrix");
           })
           .catch((err) => {
-            Console.error("AccountManager", "auth failed", err)
+            Console.info("AccountManager", "auth failed", err)
             if (err.response && err.response.status && err.response.status === 404) {
               this.error = this.$t('failed.message', {message: this.$t('failed.notfound')})
             } else {

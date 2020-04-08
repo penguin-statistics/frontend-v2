@@ -18,7 +18,7 @@ function translate (object, key) {
         if (languages.length <= 2 && languages[0] !== "") {
           return getLocaleMessage(object, localeKey, key, languages[0])
         } else {
-          Console.warn(`translation error: ${key}: Specific country code detected but it's invalid`, locale, languages)
+          Console.warn("StringI18n", `translation error: ${key}: Specific country code detected but it's invalid`, locale, languages)
           return ""
         }
       }
