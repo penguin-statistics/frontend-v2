@@ -11,6 +11,13 @@ if (process.env.NODE_ENV === "production" && "serviceWorker" in navigator) {
     window.location.reload();
   });
 
+  workbox.addEventListener("waiting", event => {
+    console.log(event)
+    if (event.wasWaitingBeforeRegister) {
+      workbox.messageSW({ type: "SKIP_WAITING" });
+    }
+  });
+
   workbox.register();
 } else {
   workbox = null;
