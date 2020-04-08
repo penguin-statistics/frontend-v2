@@ -1,3 +1,60 @@
+<i18n>
+  {
+    "zh": {
+      "quickStart": "快速上手",
+      "title": {
+        "planner": "刷图规划",
+        "byItem": "素材掉率",
+        "byStage": "关卡掉率"
+      },
+      "subtitle": {
+        "planner": "请给我刷图建议",
+        "byItem": "我该去哪刷石头？",
+        "byStage": "这图掉率如何？"
+      }
+    },
+    "en": {
+      "quickStart": "Quick Start",
+      "title": {
+        "planner": "Farm Planning",
+        "byItem": "Item Drop Rates",
+        "byStage": "Stage Drop Rates"
+      },
+      "subtitle": {
+        "planner": "Please gimme some farming advice",
+        "byItem": "Where should I farm for Orirock?",
+        "byStage": "What are the drop rates of this stage?"
+      }
+    },
+    "ja": {
+      "quickStart": "クイックスタート",
+      "title": {
+        "planner": "周回計画",
+        "byItem": "素材ドロップ率",
+        "byStage": "作戦ドロップ率"
+      },
+      "subtitle": {
+        "planner": "Please gimme some farming advice",
+        "byItem": "Where should I farm for Orirock?",
+        "byStage": "What are the drop rates of this stage?"
+      }
+    },
+    "ko": {
+      "quickStart": "빠른 시작",
+      "title": {
+        "planner": "Farm Planning",
+        "byItem": "Item Drop Rates",
+        "byStage": "Stage Drop Rates"
+      },
+      "subtitle": {
+        "planner": "Please gimme some farming advice",
+        "byItem": "Where should I farm for Orirock?",
+        "byStage": "What are the drop rates of this stage?"
+      }
+    }
+  }
+</i18n>
+
 <template>
   <v-card
     elevation="5"
@@ -10,7 +67,7 @@
         mdi-speedometer
       </v-icon>
 
-      快速上手
+      {{ $t('quickStart') }}
     </h1>
 
     <v-row
@@ -43,23 +100,12 @@
             {{ link.icon }}
           </v-icon>
 
-          <span class="overline d-flex align-center justify-center mt-2">
-            <v-icon
-              left
-              small
-            >
-              mdi-link
-            </v-icon>
-
-            {{ link.name }}
-          </span>
-
           <h2 class="heading my-1">
-            {{ link.title }}
+            {{ renderTranslation(link.title) }}
           </h2>
 
           <span class="caption font-italic">
-            {{ $t('meta.quotation.start') }}{{ link.subtitle }}{{ $t('meta.quotation.end') }}
+            {{ $t('meta.quotation.start') }}{{ renderTranslation(link.subtitle) }}{{ $t('meta.quotation.end') }}
           </span>
         </v-card>
       </v-col>
@@ -141,27 +187,29 @@
           {
             route: "Planner",
             icon: "mdi-directions-fork",
-            name: "刷图规划器",
-            title: "刷图规划",
-            subtitle: "请给我刷图建议"
+            title: 'title.planner',
+            subtitle: 'subtitle.planner'
           },
           {
             route: "StatsByItem",
             icon: "mdi-treasure-chest",
-            name: "素材统计数据",
-            title: "素材掉落",
-            subtitle: "我该到哪去刷土？"
+            title: 'title.byItem',
+            subtitle: 'subtitle.byItem'
           },
           {
             route: "StatsByStage",
             icon: "mdi-cube",
-            name: "关卡统计数据",
-            title: "关卡掉落",
-            subtitle: "这图掉率如何？"
-          },
+            title: 'title.byStage',
+            subtitle: 'subtitle.byStage'
+          }
         ]
       }
     },
+    methods: {
+      renderTranslation(t) {
+        return this.$t(t);
+      }
+    }
   }
 </script>
 
