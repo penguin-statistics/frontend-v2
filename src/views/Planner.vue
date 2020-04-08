@@ -105,7 +105,7 @@
         "byProduct": "부산물 획득 고려",
         "requireExp": "경험치 획득 고려",
         "requireLmb": "용문폐 획득 고려",
-        "foreignServer": "에피소드 6을 계산에 넣지 마십시오"
+        "foreignServer": "에피소드 6 제외"
       },
       "actions": {
         "import": "가져오기",
@@ -113,7 +113,7 @@
         "importExport": "@:(actions.import)/@:(actions.export)",
         "calculate": "계산하기"
       },
-      "have": "소유량",
+      "have": "보유량",
       "need": "필요량",
       "copy": "클립보드에 복사",
       "calculation": {
@@ -829,7 +829,7 @@
 
             data.stages = data.stages.map(el => {
               el.materials = [];
-              for (let [name, value] of Object.entries(el.items)) {
+              for (const [name, value] of Object.entries(el.items)) {
                 const item = get.items.byName(name);
                 el.materials.push({
                   name: strings.translate(item, "name"),
@@ -845,7 +845,7 @@
               };
               el.target.name = strings.translate(el.target.item, "name");
               el.items = [];
-              for (let [name, value] of Object.entries(el.materials)) {
+              for (const [name, value] of Object.entries(el.materials)) {
                 const item = get.items.byName(name);
                 el.items.push({
                   name: strings.translate(item, "name"),
@@ -857,7 +857,7 @@
             });
             data.values = data.values.map(el => {
               el.materials = [];
-              for (let {name, value} of el.items) {
+              for (const {name, value} of el.items) {
                 if (parseFloat(value) === 0) continue;
                 const itemObject = get.items.byName(name);
                 el.materials.push({
@@ -868,7 +868,7 @@
               }
               return el
             });
-            Console.log(data)
+            Console.debug("Planner", data)
             this.$set(this.calculation, "data", data);
             this.calculation.done = true
           })
@@ -885,7 +885,7 @@
         try {
           imported = JSON.parse(this.importJson);
         } catch (e) {
-          Console.info("json error", e)
+          Console.info("PlannerImport", "json error", e)
           snackbar.launch("error", 5000, "planner.import.jsonError", {
             error: e.toString()
           });
@@ -894,11 +894,11 @@
         this.importToItemsData(imported)
       },
       importToItemsData(imported) {
-        let convertedImported = [];
+        const convertedImported = [];
         for (const itemData of imported) {
           if (!(itemData.hasOwnProperty("need") && Number.isInteger(itemData.need) && itemData.need >= 0 &&
             itemData.hasOwnProperty("have") && Number.isInteger(itemData.have) && itemData.have >= 0)) {
-            Console.warn("one of the item data is invalid. not importing this and continue to the next one (reason: need or have invalid): ", itemData)
+            Console.info("PlannerImport", "one of the item data is invalid. not importing this and continue to the next one (reason: need or have invalid): ", itemData)
             continue
           }
           const haveId = itemData.hasOwnProperty("id");
@@ -910,7 +910,7 @@
             convertedImported.push(itemData)
           } else if (!haveId) {
             if (!haveName) {
-              Console.warn("one of the item data is invalid. not importing this and continue to the next one (reason: no id and name): ", itemData)
+              Console.info("PlannerImport", "one of the item data is invalid. not importing this and continue to the next one (reason: no id and name): ", itemData)
               continue
             }
             const item = get.items.byName(itemData.name);
@@ -928,7 +928,7 @@
         for (const item of convertedImported) {
           const object = this.itemsData.find(el => el.id === item.id);
           if (!object) {
-            Console.warn("no item found with", item);
+            Console.info("PlannerImport","no item found with", item);
             continue
           }
           object.have = item.have;
@@ -952,7 +952,6 @@
           })
       },
       redirectItem(itemId) {
-        console.log(itemId)
         this.$router.push({
           name: "StatsByItem_SelectedItem",
           params: {

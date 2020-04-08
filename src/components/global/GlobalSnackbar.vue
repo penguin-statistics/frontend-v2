@@ -41,6 +41,27 @@
           "skipWaitingTimeout": "Failed to apply changes: ServiceWorker timed out. Please refresh page and try again"
         }
       }
+    },
+    "ko": {
+      "network": {
+        "error": "네트워크 오류. 인터넷 연결을 확인한 후 다시 시도하세요."
+      },
+      "clipboard": {
+        "success": "클립보드에 복사되었습니다.",
+        "error": "클립보드에 복사하지 못했습니다. 텍스트를 수동으로 선택하고 복사해주세요."
+      },
+      "planner": {
+        "import": {
+          "jsonError": "가져오지 못했습니다. 데이터 구문 분석 오류입니다. 입력값을 확인해 주세요. ({error})",
+          "success": "{amount}개 항목에 대한 데이터를 성공적으로 가져왔습니다."
+        },
+        "calculationError": "계산오류: {error}"
+      },
+      "pwaPopup": {
+        "update": {
+          "skipWaitingTimeout": "변경 내용을 적용하지 못했습니다. 서비스가 시간 초과되었습니다. 페이지를 새로 고친 후 다시 시도하세요."
+        }
+      }
     }
   }
 </i18n>

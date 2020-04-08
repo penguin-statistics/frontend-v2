@@ -1,6 +1,6 @@
 {
   "name": "penguin-stats-frontend",
-  "version": "1.1.5",
+  "version": "1.1.7",
   "private": true,
   "scripts": {
     "serve": "vue-cli-service serve",
@@ -8,9 +8,10 @@
     "build:single": "npx --max_old_space_size=4096 vue-cli-service build",
     "lint": "vue-cli-service lint",
     "i18n:report": "vue-cli-service i18n:report --src './src/**/*.?(js|vue)' --locales './src/locales/**/*.json'",
-    "submit": "git add . && git cz && git push",
-    "preview": "yarn build && serve -s -d dist",
-    "preview:single": "yarn build:single && serve -s -d dist"
+    "serveDist": "serve -c build/serve.json",
+    "preview": "yarn build && yarn serveDist",
+    "preview:single": "yarn build:single && yarn serveDist",
+    "release": "standard-version"
   },
   "dependencies": {
     "@babel/plugin-transform-modules-commonjs": "^7.8.3",

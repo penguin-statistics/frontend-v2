@@ -22,7 +22,7 @@
             return 15 * 60
           } else {
             // is not mobile device; use ttl of 5 minutes to show off ;)
-            return 5 * 60
+            return 10 * 60
           }
         }
       }
@@ -65,7 +65,7 @@
         return `https://penguin.upyun.galvincdn.com/backgrounds/${id}.${this.webpSupport ? 'webp' : 'optimized.png'}`
       },
       setBlur (flag) {
-        Console.info("setting blur to", flag)
+        Console.info("RandomBackground", "setting blur to", flag)
         this.blurred = flag
       },
       async testWebp() {
@@ -92,20 +92,20 @@
       },
       async updateBackgroundByRandom(ignoreUrl) {
         // Console.log("check at random", this.isSpecialUrl(this.$route), this.$route)
-        let isSpecial = this.isSpecialUrl(this.$route);
+        const isSpecial = this.isSpecialUrl(this.$route);
         if (ignoreUrl || isSpecial === false) {
           this.updateBackgroundByUrl(await this.getRandomBackgroundUrl())
         }
       },
       async updateBackgroundByUrl(url) {
-        let background = this.$refs.background;
+        const background = this.$refs.background;
         this.lastLoading = true;
         window.fetch(url)
           .then((response) => {
             return response.blob();
           })
           .then((blob) => {
-            let dataUrl = URL.createObjectURL(blob);
+            const dataUrl = URL.createObjectURL(blob);
             background.style.backgroundImage = `url(${dataUrl})`;
             // Console.log(`created ${dataUrl} | revoking ${this.lastUrl}`)
             !this.lastUrl && URL.revokeObjectURL(this.lastUrl);
@@ -125,7 +125,7 @@
       checkSpecialImage (to, from) {
         if (this.isSpecialUrl(to)) {
           // yes we do have a special image for the CURRENT path. APPLY IT!
-          let imageUrl = this.specialImageMap[to.params.stageId]
+          const imageUrl = this.specialImageMap[to.params.stageId]
           this.updateBackgroundByUrl(imageUrl)
         } else if (this.isSpecialUrl(from)) {
           // we do not have a special image for the current path but we DO have a special image for the PREVIOUS path.

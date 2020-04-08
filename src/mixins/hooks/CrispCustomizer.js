@@ -7,10 +7,16 @@ export default {
       'crispOpacityChanger'
     ],
   },
+  data() {
+    return {
+      crispLoaded: false
+    }
+  },
   mixins: [SpecialUI],
   created () {
     window.$crisp.push(["config", "container:index", [1]]);
     window.$crisp.push(["on", "session:loaded", () => {
+      this.crispLoaded = true;
       // resolve safe-area
       Console.info("CrispCustomizer", "triggered | chat:loaded")
       try {

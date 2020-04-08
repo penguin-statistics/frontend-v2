@@ -8,7 +8,7 @@
     "home": "トップページ",
     "report": "ドロップ報告",
     "stats": {
-      "_name": "統計結果",
+      "_name": "ドロップ率",
       "stage": "作戦別",
       "item": "素材別"
     },
@@ -39,7 +39,11 @@
       },
       "credit": "ペンギン急便データ統計処理部門 | {date}"
     },
-    "separator": "、"
+    "separator": "、",
+    "quotation": {
+      "start": "「",
+      "end": "」"
+    }
   },
   "stats": {
     "headers": {

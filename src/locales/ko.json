@@ -8,7 +8,7 @@
     "home": "홈",
     "report": "보고서 작성",
     "stats": {
-      "_name": "통계",
+      "_name": "드랍률",
       "stage": "작전지역별 통계",
       "item": "아이템별 통계"
     },
@@ -39,7 +39,11 @@
       },
       "credit": "펭귄 물류 데이터 분석 부서 | {date}"
     },
-    "separator": ", "
+    "separator": ", ",
+    "quotation": {
+      "start": "“",
+      "end": "”"
+    }
   },
   "stats": {
     "headers": {
@@ -54,8 +58,8 @@
   },
   "builds": {
     "development": {
-      "title": "Preview Build",
-      "description": "You are currently browsing the development build",
+      "title": "프리뷰 버젼",
+      "description": "현재 개발 빌드를 탐색하고 있습니다.",
       "ok": "OH YEAH!"
     }
   },

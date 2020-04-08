@@ -8,7 +8,7 @@
     "home": "Home",
     "report": "Report Drops",
     "stats": {
-      "_name": "Statistics",
+      "_name": "Drop Rates",
       "stage": "By stage",
       "item": "By item"
     },
@@ -39,7 +39,11 @@
       },
       "credit": "Penguin Statistics | {date}"
     },
-    "separator": ", "
+    "separator": ", ",
+    "quotation": {
+      "start": "\"",
+      "end": "\""
+    }
   },
   "stats": {
     "headers": {

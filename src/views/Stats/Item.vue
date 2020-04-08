@@ -247,10 +247,10 @@ export default {
       ];
     },
     categorizedItems() {
-      let all = get.items.all();
+      const all = get.items.all();
       const categories = ["MATERIAL", "CARD_EXP", "FURN", "ACTIVITY_ITEM"];
-      let results = {};
-      for (let category of categories) {
+      const results = {};
+      for (const category of categories) {
         results[category] = all.filter(el => el.itemType === category);
         // move 3003 to the last member
         results[category].sort((a, b) => {
@@ -272,7 +272,7 @@ export default {
   },
   watch: {
     $route: function(to, from) {
-      Console.log("step route changed from", from.path, "to", to.path);
+      Console.log("StatsByItem", "step route changed from", from.path, "to", to.path);
       if (to.name === "StatsByItem") {
         this.step = 1;
       }
@@ -281,21 +281,21 @@ export default {
       }
     },
     step: function(newValue, oldValue) {
-      Console.log("step changed from", oldValue, "to", newValue);
+      Console.log("StatsByItem", "step changed from", oldValue, "to", newValue);
       switch (newValue) {
         case 1:
-          Console.log("- [router go] index");
+          Console.log("StatsByItem", "- [router go] index");
           this.$router.push({ name: "StatsByItem" });
           break;
         case 2:
-          Console.log("- [router go] item", this.selected.item.itemId);
+          Console.log("StatsByItem", "- [router go] item", this.selected.item.itemId);
           this.$router.push({
             name: "StatsByItem_SelectedItem",
             params: { itemId: this.selected.item.itemId }
           });
           break;
         default:
-          Console.error(
+          Console.warn(
             "StatsByItem",
             "unexpected step number",
             newValue,

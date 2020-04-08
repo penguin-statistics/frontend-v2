@@ -143,7 +143,6 @@
         <v-btn
           :loading="undoing"
           class="ml-sm-4"
-          small
           depressed
           ripple
           @click="undo"
@@ -160,7 +159,6 @@
         <v-btn
           class="ml-4"
           text
-          small
           @click="submitted = false"
         >
           {{ $t('dialog.close') }}
@@ -248,6 +246,7 @@
         <v-alert
           color="orange darken-3"
           border="left"
+          class=" mx-2"
         >
           <ol>
             <li v-if="!isGacha">
@@ -263,7 +262,7 @@
         <v-alert
           v-if="!$vuetify.breakpoint.smAndDown"
           color="secondary darken-2"
-          class="subtitle-1 pl-6 mb-4"
+          class="subtitle-1 pl-6 mb-4 mx-2"
           dark
           border="left"
         >
@@ -273,7 +272,7 @@
         <v-alert
           v-if="isGacha"
           color="blue darken-2"
-          class="subtitle-1 pl-6 mb-4"
+          class="subtitle-1 pl-6 mb-4 mx-2"
           dark
           border="left"
         >
@@ -286,8 +285,9 @@
           fluid
           class="py-0"
         >
-          <v-subheader>
+          <v-subheader class="pl-2">
             {{ $t('stage.loots.' + stage.id) }}
+            <v-divider class="ml-4" />
           </v-subheader>
           <span
             v-for="item in stage.drops"
@@ -519,6 +519,7 @@ import Vue from "vue";
 import Cookies from 'js-cookie';
 import strings from "@/utils/strings";
 import StageSelector from "@/components/stats/StageSelector";
+import snackbar from "@/utils/snackbar";
 
 export default {
   name: "Report",
@@ -566,8 +567,8 @@ export default {
     },
     stageItems() {
       if (!this.selected.stage) return [];
-      let stages = this.selectedStage;
-      let items = [];
+      const stages = this.selectedStage;
+      const items = [];
       const categories = [{
         i18n: "normal",
         value: "normalDrop"
@@ -580,15 +581,17 @@ export default {
       }];
 
       for (let category of categories) {
-        let dropIds = stages[category.value];
+        const dropIds = stages[category.value];
 
         // skip the category where it is not having any drop
         if (dropIds.length === 0) continue;
 
-        let drops = [];
+        const drops = [];
         for (let drop of dropIds) {
           drops.push(get.items.byItemId(drop))
         }
+
+        drops.sort((a, b) => a.sortId - b.sortId);
 
         items.push({
           id: category.i18n,
@@ -611,7 +614,7 @@ export default {
     validation() {
       // initiate the array that will be storing every data outlier
       /** @type ItemOutlier[] */
-      let itemOutliers = [];
+      const itemOutliers = [];
 
       /** @type TypeOutlier */
       let typeOutlier = null;
@@ -623,8 +626,8 @@ export default {
        * @returns {String|boolean} error message or success
        */
       function validate(rules, quantity) {
-        for (let rule of rules) {
-          let evaluation = rule(quantity);
+        for (const rule of rules) {
+          const evaluation = rule(quantity);
           if (evaluation !== true) return evaluation
         }
         return true
@@ -637,19 +640,19 @@ export default {
        * @returns {number} percentage in decimal format (e.g. 150% = 1.5)
        */
       function calculateOutlierRate(limitation, value) {
-        let upper = (value - limitation.upper) ? Math.max(0, (value - limitation.upper) / limitation.upper) : 0;
-        let lower = (limitation.lower - value) ? Math.max(0, (limitation.lower - value) / limitation.lower) : 0;
+        const upper = (value - limitation.upper) ? Math.max(0, (value - limitation.upper) / limitation.upper) : 0;
+        const lower = (limitation.lower - value) ? Math.max(0, (limitation.lower - value) / limitation.lower) : 0;
         return upper + lower;
       }
 
       // check for item outlier
-      for (let item of this.results) {
+      for (const item of this.results) {
         // if the item is not having a limitation record then skip it
         if (!this.limitation["itemQuantityBounds"].find(v => v["itemId"] === item.itemId)) continue;
-        let [rules, limitation] = this.generateVerificationRule("item", item.itemId);
-        let validation = validate(rules, item.quantity);
+        const [rules, limitation] = this.generateVerificationRule("item", item.itemId);
+        const validation = validate(rules, item.quantity);
         if (validation !== true) {
-          let rate = calculateOutlierRate(limitation, item.quantity);
+          const rate = calculateOutlierRate(limitation, item.quantity);
           itemOutliers.push({
             id: item.itemId,
             quantity: item.quantity,
@@ -662,9 +665,9 @@ export default {
 
       // check for type outlier
       if (!this.isGacha && this.limitation["itemTypeBounds"]) {
-        let [rules, limitation] = this.generateVerificationRule("type");
-        let quantity = this.results.length;
-        let validation = validate(rules, quantity);
+        const [rules, limitation] = this.generateVerificationRule("type");
+        const quantity = this.results.length;
+        const validation = validate(rules, quantity);
         if (validation !== true) {
           let rate = calculateOutlierRate(limitation, quantity);
           typeOutlier = {
@@ -677,12 +680,12 @@ export default {
       }
 
       // calculate total outlier rate
-      let itemRatesInitial = 0;
-      let itemRates = itemOutliers.reduce(
+      const itemRatesInitial = 0;
+      const itemRates = itemOutliers.reduce(
         (accumulator, current) => accumulator + current.rate,
         itemRatesInitial
       );
-      let totalRates = itemRates + (typeOutlier ? typeOutlier.rate : 0);
+      const totalRates = itemRates + (typeOutlier ? typeOutlier.rate : 0);
 
       return {
         item: itemOutliers,
@@ -691,7 +694,7 @@ export default {
       }
     },
     valid() {
-      let { item, type } = this.validation;
+      const { item, type } = this.validation;
       return item.length === 0 && type === null
     },
     limitation() {
@@ -733,7 +736,7 @@ export default {
       item.quantity <= 0 && (this.results = this.results.filter(v => v.itemId !== item.itemId))
     },
     getOrCreateItem(itemId) {
-      let item = this.results.find(v => v.itemId === itemId);
+      const item = this.results.find(v => v.itemId === itemId);
       if (item === undefined) {
         this.results.push({
           itemId,
@@ -759,21 +762,29 @@ export default {
     async doSubmit() {
       this.submitted = false;
       this.submitting = true;
-      let userId = Cookies.get('userID');
-      let { data } = await report.submitReport({
+      const userId = Cookies.get('userID');
+      report.submitReport({
         stageId: this.selected.stage,
         drops: this.results,
         furnitureNum: this.furniture ? 1 : 0
-      });
-      let reportedUserId = Cookies.get('userID');
-      if (userId !== reportedUserId) {
-        this.$store.commit("auth/login", reportedUserId);
-      }
-      this.lastSubmissionId = data;
-      this.submitting = false;
-      this.reset();
-      this.submitted = true;
-      this.$ga.event('report', 'submit_single', this.selected.stage, 1)
+      })
+      .then(({data}) => {
+        const reportedUserId = Cookies.get('userID');
+        if (userId !== reportedUserId) {
+          this.$store.commit("auth/login", reportedUserId);
+        }
+        this.reset();
+        this.submitted = true;
+        this.$ga.event('report', 'submit_single', this.selected.stage, 1)
+
+        this.lastSubmissionId = data;
+      })
+      .catch(() => {
+        snackbar.networkError()
+      })
+      .finally(() => {
+        this.submitting = false;
+      })
     },
     confirmSubmit() {
       this.closeAllDialogs();
@@ -793,7 +804,7 @@ export default {
       this.dialogs.repeat.enabled = false
     },
     generateVerificationRule(type, value = null) {
-      let isItemType = type === "item";
+      const isItemType = type === "item";
       let limitation;
       if (isItemType) {
         limitation = this.limitation["itemQuantityBounds"].find(v => v["itemId"] === value)["bounds"];
@@ -804,25 +815,25 @@ export default {
         return [];
       }
 
-      let itemResponse = isItemType ? { item: strings.translate(this.getItem(value), "name") } : {};
+      const itemResponse = isItemType ? { item: strings.translate(this.getItem(value), "name") } : {};
 
       const gte = (value) => {
         return (compare) => {
-          let response = { ...itemResponse, quantity: Array.isArray(value) ? value.join(", ") : value };
+          const response = { ...itemResponse, quantity: Array.isArray(value) ? value.join(", ") : value };
           return compare >= value ? true : this.$t(`report.rules.${type}.gte`, response)
         }
       };
 
       const lte = (value) => {
         return (compare) => {
-          let response = { ...itemResponse, quantity: Array.isArray(value) ? value.join(", ") : value };
+          const response = { ...itemResponse, quantity: Array.isArray(value) ? value.join(", ") : value };
           return compare <= value ? true : this.$t(`report.rules.${type}.lte`, response)
         }
       };
 
       const notIncludes = (values) => {
         return (compare) => {
-          let response = { ...itemResponse, quantity: Array.isArray(value) ? value.join(", ") : value };
+          const response = { ...itemResponse, quantity: Array.isArray(value) ? value.join(", ") : value };
           return values.indexOf(compare) === -1 ? true : this.$t(`report.rules.${type}.not`, response)
         }
       };
