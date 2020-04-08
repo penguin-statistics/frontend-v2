@@ -235,7 +235,7 @@
         class="pa-0 pt-2"
       >
         <span
-          v-if="$vuetify.breakpoint.smAndUp"
+          v-if="!$vuetify.breakpoint.xs"
           class="stage-id--background font-weight-black display-4 px-12 py-6"
         >
           {{ selectedStage.code || "" }}
@@ -405,6 +405,7 @@
   word-break: break-all;
   overflow: hidden;
   pointer-events: none;
+  text-align: right;
 }
   .theme--light .stage-id--background {
     color: rgba(0, 0, 0, .075);

@@ -222,7 +222,7 @@
   }
 
   .theme--dark .backdrop-card {
-    background: rgba(50, 50, 50, .9) !important;
+    background: rgba(30, 30, 30, .9) !important;
   }
 
   .backdrop-card:hover .backdrop-icon {
