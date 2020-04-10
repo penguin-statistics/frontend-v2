@@ -62,8 +62,9 @@ if (production) {
       "QuotaExceededError",
       "vivoNewsDetailPage",
       "Request aborted",
-      "TypeError: Cannot read property 'style' of null",
-      "removeAD"
+      "Cannot read property 'style' of null",
+      "removeAD",
+      "querySelectorAll"
     ],
     ignoreUrls: [
       // Facebook flakiness
