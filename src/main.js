@@ -1,4 +1,4 @@
-import workbox from "./registerServiceWorker"
+import workbox from "./workers/register"
 
 import Vue from 'vue'
 import vuetify from './plugins/vuetify';

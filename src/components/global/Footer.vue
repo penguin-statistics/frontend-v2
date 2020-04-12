@@ -9,7 +9,7 @@
       tile
       width="100%"
       :color="primaryColor"
-      class="text-center footer--safe-area my-1"
+      class="text-center footer--safe-area mt-1 mb-2"
     >
       <v-card-text class="white--text d-inline">
         <strong>Penguin Statistics</strong>
