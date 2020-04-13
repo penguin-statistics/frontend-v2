@@ -2,9 +2,11 @@
 
 import { registerRoute } from 'workbox-routing';
 import { precacheAndRoute, cleanupOutdatedCaches } from 'workbox-precaching';
-import { NetworkFirst, CacheFirst, StaleWhileRevalidate } from 'workbox-strategies'
+import { NetworkFirst, CacheFirst } from 'workbox-strategies'
 import { ExpirationPlugin } from 'workbox-expiration'
 import { CacheableResponsePlugin } from 'workbox-cacheable-response'
+
+skipWaiting();
 
 self.addEventListener('activate', () => self.clients.claim());
 
@@ -18,12 +20,12 @@ cleanupOutdatedCaches();
 
 // === Google Fonts ===
 
-registerRoute(
-  /^https:\/\/fonts\.googleapis\.com/,
-  new StaleWhileRevalidate({
-    cacheName: 'google-fonts-stylesheets',
-  })
-);
+// registerRoute(
+//   /^https:\/\/fonts\.googleapis\.com/,
+//   new StaleWhileRevalidate({
+//     cacheName: 'google-fonts-stylesheets',
+//   })
+// );
 
 // Cache the underlying font files with a cache-first strategy for 1 year.
 registerRoute(
@@ -49,12 +51,12 @@ registerRoute(
   /^https:\/\/penguin\.upyun\.galvincdn\.com\/backgrounds\//,
   new CacheFirst({
     cacheName: "penguin-backgrounds",
-    plugins: [
-      new ExpirationPlugin({
-        // maxEntries: 30,
-        purgeOnQuotaError: true
-      })
-    ]
+    // plugins: [
+    //   new ExpirationPlugin({
+    //     // maxEntries: 30,
+    //     purgeOnQuotaError: true
+    //   })
+    // ]
   })
 )
 
@@ -82,12 +84,12 @@ registerRoute(
   /^https:\/\/penguin-stats\.io\/PenguinStats\//,
   new NetworkFirst({
     cacheName: "penguin-api-responses",
-    plugins: [
-      new ExpirationPlugin({
-        maxAgeSeconds: 60 * 60 * 24,
-        maxEntries: 10
-      }),
-    ]
+    // plugins: [
+    //   new ExpirationPlugin({
+    //     maxAgeSeconds: 60 * 60 * 24,
+    //     maxEntries: 10
+    //   }),
+    // ]
   })
 )
 
