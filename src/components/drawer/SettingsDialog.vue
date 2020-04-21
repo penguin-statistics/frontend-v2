@@ -18,7 +18,7 @@
         {{ $t('menu.settings.name') }}
       </v-btn>
     </template>
-    <v-card>
+    <v-card :color="`grey ${dark ? 'darken-3' : 'lighten-3'}`">
       <v-card-title class="headline">
         <v-icon left>
           mdi-settings
@@ -29,9 +29,9 @@
       <v-card-text>
         <v-container>
           <v-row class="flex-column">
-            <ThemeSwitcher />
+            <ThemeSwitcher class="mb-2" />
 
-            <LocaleSwitcher />
+            <LocaleSwitcher class="mb-2" />
           </v-row>
         </v-container>
       </v-card-text>
@@ -42,9 +42,11 @@
 <script>
   import ThemeSwitcher from "@/components/drawer/ThemeSwitcher";
   import LocaleSwitcher from "@/components/drawer/LocaleSwitcher";
+  import Theme from "@/mixins/Theme";
   export default {
     name: "SettingsDialog",
     components: {LocaleSwitcher, ThemeSwitcher},
+    mixins: [Theme],
     data() {
       return {
         active: false

@@ -82,7 +82,7 @@
             <v-btn
               outlined
               text
-              class="mb-1 flex-grow-1"
+              class="flex-grow-1"
               @click="refreshData"
             >
               <v-icon left>

@@ -30,7 +30,7 @@
       "name": "Settings",
       "themes": {
         "name": "Change Color Theme",
-        "system": "Follow System ({mode} detected)",
+        "system": "Follow System",
         "dark": "Always Dark",
         "light": "Always Light"
       }
