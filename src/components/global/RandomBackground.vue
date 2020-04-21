@@ -9,20 +9,21 @@
 <script>
   import Console from "@/utils/Console";
   import SpecialUI from "@/mixins/SpecialUI";
+  import CDN from "@/mixins/CDN";
 
   export default {
     name: "RandomBackground",
-    mixins: [SpecialUI],
+    mixins: [SpecialUI, CDN],
     props: {
       interval: {
         type: Number,
         default () {
           if ((typeof window.orientation !== "undefined") || (navigator.userAgent.indexOf('IEMobile') !== -1)) {
-            // is mobile device; reduce data usage, use ttl of 15 minutes
-            return 15 * 60
+            // is mobile device; reduce data usage, use ttl of 30 minutes
+            return 30 * 60
           } else {
-            // is not mobile device; use ttl of 5 minutes to show off ;)
-            return 10 * 60
+            // is not mobile device; use ttl of 20 minutes to show off ;)
+            return 20 * 60
           }
         }
       }
@@ -39,8 +40,8 @@
         // [key] is a special "stageId" to display a special "background image"
         // [value] represents a "background image url" on such route
         specialImageMap: {
-          "main_06-14": "https://penguin.upyun.galvincdn.com/backgrounds/fn_0_1.png", // 6-16
-          "main_06-15": "https://penguin.upyun.galvincdn.com/backgrounds/fn_0_0.png", // 6-17
+          "main_06-14": "/backgrounds/fn_0_1.png", // 6-16
+          "main_06-15": "/backgrounds/fn_0_0.png", // 6-17
         },
         imageRange: 104 + 1 // if x images use ${x + 1}, because Math.random() generates float in [0, 1) range, so we
                            // need to +1 in order to get the last image also in range
@@ -62,7 +63,7 @@
     },
     methods: {
       getImageUrl (id) {
-        return `https://penguin.upyun.galvincdn.com/backgrounds/${id}.${this.webpSupport ? 'webp' : 'optimized.png'}`
+        return this.cdnResource(`/backgrounds/${id}.${this.webpSupport ? 'webp' : 'optimized.png'}`)
       },
       setBlur (flag) {
         Console.info("RandomBackground", "setting blur to", flag)
@@ -126,7 +127,7 @@
         if (this.isSpecialUrl(to)) {
           // yes we do have a special image for the CURRENT path. APPLY IT!
           const imageUrl = this.specialImageMap[to.params.stageId]
-          this.updateBackgroundByUrl(imageUrl)
+          this.updateBackgroundByUrl(this.cdnResource(imageUrl))
         } else if (this.isSpecialUrl(from)) {
           // we do not have a special image for the current path but we DO have a special image for the PREVIOUS path.
           // we need to restore the last background image

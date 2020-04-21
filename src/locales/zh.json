@@ -25,8 +25,16 @@
     "planner": "刷图规划器",
     "v1": "访问旧版",
     "refreshData": "刷新数据",
-    "invertColors": "转换主题",
-    "languages": "语言切换"
+    "languages": "语言切换",
+    "settings": {
+      "name": "设置",
+      "themes": {
+        "name": "转换主题",
+        "system": "跟随系统设置",
+        "dark": "总是使用暗色",
+        "light": "总是使用亮色"
+      }
+    }
   },
   "meta": {
     "details": "详细信息",

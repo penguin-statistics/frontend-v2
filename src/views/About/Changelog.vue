@@ -98,15 +98,15 @@ export default {
           ]
         },
         {
-          future: true,
+          active: true,
           version: "v1.1.8",
           date: "2020-04-25T08:00:00Z",
           changes: [
-            "添加：国内加速镜像站点"
+            "添加：国内加速镜像站点",
+            "优化：菜单设置"
           ]
         },
         {
-          active: true,
           version: "v1.1.7",
           date: "2020-04-06T18:00:00Z",
           changes: [

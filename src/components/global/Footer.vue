@@ -34,7 +34,7 @@
         class="white--text d-block pt-2 pb-0 overline condensed"
       >
         <span>
-          京ICP备xxxxxxxx号-x
+          京ICP备20012825号-1
         </span>
         <span class="ml-1">
           <v-img

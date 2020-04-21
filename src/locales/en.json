@@ -25,8 +25,16 @@
     "planner": "ArkPlanner",
     "v1": "Visit Old Version",
     "refreshData": "Reload Data",
-    "invertColors": "Change Color Theme",
-    "languages": "Language"
+    "languages": "Language",
+    "settings": {
+      "name": "Settings",
+      "themes": {
+        "name": "Change Color Theme",
+        "system": "Follow System ({mode} detected)",
+        "dark": "Always Dark",
+        "light": "Always Light"
+      }
+    }
   },
   "meta": {
     "details": "Details",

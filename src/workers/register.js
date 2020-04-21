@@ -9,7 +9,7 @@ if (process.env.NODE_ENV === "production" && "serviceWorker" in navigator) {
   workbox = new Workbox(`${process.env.BASE_URL}service-worker.js`);
 
   workbox.addEventListener("controlling", (event) => {
-    Console.log("SWRegister", "a service worker has taken control (controlling): ", event);
+    Console.info("SWRegister", "a service worker has taken control (controlling): ", event);
     window.location.reload();
   });
 

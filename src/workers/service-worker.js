@@ -6,8 +6,6 @@ import { NetworkFirst, CacheFirst } from 'workbox-strategies'
 import { ExpirationPlugin } from 'workbox-expiration'
 import { CacheableResponsePlugin } from 'workbox-cacheable-response'
 
-skipWaiting();
-
 self.addEventListener('activate', () => self.clients.claim());
 
 self.addEventListener('message', (event) => {

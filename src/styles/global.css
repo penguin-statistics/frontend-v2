@@ -37,11 +37,13 @@
     line-height: 36px;
     font-size: 24px;
     opacity: 0;
+    transform: scaleX(0.95) scaleY(0.9);
     transition: all .5s cubic-bezier(0.19, 1, 0.22, 1);
 }
 
 .drawer-logo:hover > .description {
     opacity: 1;
+    transform: scale(1);
 }
 
 .randomizedLogo > .v-image__image {

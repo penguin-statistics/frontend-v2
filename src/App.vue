@@ -55,6 +55,7 @@
           <v-row
             align="center"
             justify="center"
+            class="flex-column"
           >
             <span>{{ $t('app.name_line1') }}</span>
             <span>{{ $t('app.name_line2') }}</span>
@@ -72,15 +73,16 @@
           :route="route"
         />
 
-        <v-divider class="my-2" />
+        <v-divider class="mt-2 mb-1" />
 
         <v-container>
           <v-row
             justify="space-around"
           >
             <v-btn
-              class="mx-1"
+              outlined
               text
+              class="mb-1 flex-grow-1"
               @click="refreshData"
             >
               <v-icon left>
@@ -89,9 +91,7 @@
               {{ $t('menu.refreshData') }}
             </v-btn>
 
-            <ThemeSwitcher />
-
-            <LocaleSwitcher />
+            <SettingsDialog />
           </v-row>
         </v-container>
       </v-list>
@@ -157,8 +157,6 @@
   import NetworkStateIndicator from "@/components/toolbar/NetworkStateIndicator";
 
   import Navigation from "@/components/drawer/Navigation";
-  import LocaleSwitcher from "@/components/drawer/LocaleSwitcher";
-  import ThemeSwitcher from "@/components/drawer/ThemeSwitcher";
 
   import GlobalEntry from "@/mixins/hooks/GlobalEntry";
 
@@ -169,14 +167,14 @@
   import CDN from "@/mixins/CDN";
   import Mirror from "@/mixins/Mirror";
   import SpecialUI from "@/mixins/SpecialUI";
+  import SettingsDialog from "@/components/drawer/SettingsDialog";
 
 export default {
   name: 'App',
   components: {
+    SettingsDialog,
     Footer,
     PWAPopups,
-    LocaleSwitcher,
-    ThemeSwitcher,
     Navigation,
     GlobalSnackbar,
     NetworkStateIndicator,
@@ -202,6 +200,6 @@ export default {
     async refreshData () {
       await this.$store.dispatch("data/fetch", true);
     },
-  }
+  },
 }
 </script>

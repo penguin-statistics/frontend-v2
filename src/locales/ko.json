@@ -25,8 +25,16 @@
     "planner": "명일방주 계획기",
     "v1": "구 버전 방문",
     "refreshData": "데이터 새로고침",
-    "invertColors": "페이지 테마 변경",
-    "languages": "언어 변경"
+    "languages": "언어 변경",
+    "settings": {
+      "name": "Settings",
+      "themes": {
+        "name": "페이지 테마 변경",
+        "system": "Follow System",
+        "dark": "Always Dark",
+        "light": "Always Light"
+      }
+    }
   },
   "meta": {
     "details": "세부 사항",
