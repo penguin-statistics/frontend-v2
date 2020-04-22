@@ -36,18 +36,18 @@
         <span>
           京ICP备20012825号-1
         </span>
-        <span class="ml-1">
-          <v-img
-            style="transform: translateY(.275em)"
-            alt="公安网备案图标"
-            :src="cdnResource('/logos/gonganwang.png')"
-            class="d-inline-block"
-            height="12"
-            width="12"
-            contain
-          />
-          京公网安备xxxxxxxxxxxxxx号
-        </span>
+        <!--        <span class="ml-1">-->
+        <!--          <v-img-->
+        <!--            style="transform: translateY(.275em)"-->
+        <!--            alt="公安网备案图标"-->
+        <!--            :src="cdnResource('/logos/gonganwang.png')"-->
+        <!--            class="d-inline-block"-->
+        <!--            height="12"-->
+        <!--            width="12"-->
+        <!--            contain-->
+        <!--          />-->
+        <!--          京公网安备xxxxxxxxxxxxxx号-->
+        <!--        </span>-->
       </v-card-text>
 
       <v-card-text
