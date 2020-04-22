@@ -1,7 +1,7 @@
 export default {
   namespaced: true,
   state: {
-    dark: true,
+    dark: "system",
     language: null
   },
   mutations: {

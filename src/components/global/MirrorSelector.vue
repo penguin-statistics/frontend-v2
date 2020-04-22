@@ -42,7 +42,7 @@
     </v-dialog>
 
     <v-snackbar
-      v-if="enabled"
+      v-if="enabled && mirror"
       v-model="enabled"
       :color="`stripped--${dark ? 'dark' : 'light'}`"
       :timeout="0"
@@ -129,19 +129,15 @@
         if (this.mirror === "cn") {
           return {
             t: "penguin-stats.cn",
-            v: "https://penguin-stats.cn/"
+            v: "https://penguin-stats.cn/?utm_source=penguin-stats&utm_medium=mirror-notification"
           }
         } else if (this.mirror === "global") {
           return {
             t: "penguin-stats.io",
-            v: "https://penguin-stats.io/"
+            v: "https://penguin-stats.io/?utm_source=penguin-stats&utm_medium=mirror-notification"
           }
         } else {
-          // this should not happen at all...
-          return {
-            t: "penguin-stats.io",
-            v: "https://penguin-stats.io/"
-          }
+          return null
         }
       }
     },

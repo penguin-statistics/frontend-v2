@@ -1,13 +1,11 @@
-import Theme from "@/mixins/Theme";
-
 export default {
-  mixins: [Theme],
   created () {
     // dark mode
-    if (typeof this.dark === "boolean") {
-      this.appDark = this.dark ? "dark" : "light"
-    } else if (this.dark === null || this.dark === undefined) {
-      this.appDark = "system"
+    const dark = this.$store.getters["settings/dark"]
+    if (typeof dark === "boolean") {
+      this.$store.commit("settings/switchDark", this.dark ? "dark" : "light")
+    } else if (dark === null || dark === undefined) {
+      this.$store.commit("settings/switchDark", "system")
     }
   }
 }

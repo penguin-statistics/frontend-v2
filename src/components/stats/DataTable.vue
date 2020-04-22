@@ -162,8 +162,7 @@
               </v-row>
             </td>
             <td
-              :class="tableCellClasses"
-              class="yellow--text"
+              :class="`${tableCellClasses} yellow--text ${dark ? '' : 'text--darken-3'}`"
             >
               {{ props.item.stage.apCost }}
             </td>
@@ -226,10 +225,12 @@
   import get from "@/utils/getters";
   import Item from "@/components/global/Item";
   import {mapGetters} from "vuex";
+  import Theme from "@/mixins/Theme";
 
   export default {
     name: "DataTable",
     components: {Item},
+    mixins: [Theme],
     props: {
       items: {
         type: Array,

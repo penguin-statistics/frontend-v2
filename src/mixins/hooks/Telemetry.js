@@ -10,7 +10,7 @@ class SessionData {
       "Username": store.getters["auth/username"] || "(null)",
       "LanguageActive": i18n.locale || "(null)",
       "LanguagePersisted": store.getters["settings/language"] || "(null)",
-      "Theme": store.getters["settings/dark"] ? "Dark" : "Light"
+      "Theme": store.getters["settings/dark"]
     }
   }
 
