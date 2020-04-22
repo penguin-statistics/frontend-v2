@@ -37,32 +37,7 @@
       :style="{'filter': isInSpecialUI ? 'grayscale(1)' : ''}"
       width="calc(env(safe-area-inset-left) + 300px)"
     >
-      <div
-        :class="{
-          'drawer-logo blue': true,
-          'darken-4': dark,
-          'darken-3': !dark,
-          'drawer-logo--two-line': $t('app.name_line2') !== ''
-        }"
-        style="padding-left: calc(max(env(safe-area-inset-left), 32px))"
-      >
-        <v-img
-          :src="cdnResource('/logos/penguin_stats_logo.png')"
-          aspect-ratio="1"
-          height="192px"
-          contain
-        />
-        <div class="white--text description">
-          <v-row
-            align="center"
-            justify="center"
-            class="flex-column"
-          >
-            <span>{{ $t('app.name_line1') }}</span>
-            <span>{{ $t('app.name_line2') }}</span>
-          </v-row>
-        </div>
-      </div>
+      <Logo />
       <v-list
         dense
         nav
@@ -170,11 +145,12 @@
   import SpecialUI from "@/mixins/SpecialUI";
   import SettingsDialog from "@/components/drawer/SettingsDialog";
   import MirrorSelector from "@/components/global/MirrorSelector";
-  import Theme from "@/mixins/Theme";
+  import Logo from "@/components/drawer/Logo";
 
 export default {
   name: 'App',
   components: {
+    Logo,
     MirrorSelector,
     SettingsDialog,
     Footer,
@@ -185,7 +161,7 @@ export default {
     RandomBackground,
     AccountManager
   },
-  mixins: [GlobalEntry, CDN, Mirror, SpecialUI, Theme],
+  mixins: [GlobalEntry, CDN, Mirror, SpecialUI],
   data () {
     return {
       routes: [],
