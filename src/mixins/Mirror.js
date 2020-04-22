@@ -1,12 +1,12 @@
-import extractDomain from 'extract-domain';
+import mirror from "@/utils/mirror";
 
 export default {
   computed: {
     isCNMirror () {
-      return extractDomain(window.location.href) === "penguin-stats.cn"
+      return mirror.cn.isCurrent()
     },
     isZeitNow () {
-      return extractDomain(window.location.href) === "now.sh"
+      return mirror.zeitNow.isCurrent()
     },
     primaryColor () {
       if (this.isZeitNow) {

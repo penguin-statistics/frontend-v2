@@ -14,6 +14,7 @@ import VueNumberInput from '@chenfengyuan/vue-number-input';
 import * as Sentry from '@sentry/browser';
 import * as Integrations from '@sentry/integrations';
 import { Integrations as ApmIntegrations } from '@sentry/apm';
+import mirror from "@/utils/mirror";
 
 const production = process.env.NODE_ENV === 'production';
 
@@ -103,8 +104,10 @@ if (production) {
   });
 }
 
+const googleAnalyticsID = mirror.cn.isCurrent() ? 'UA-142226262-2' : 'UA-142226262-1'
+
 Vue.use(VueAnalytics, {
-  id: 'UA-142226262-1',
+  id: googleAnalyticsID,
   // customResourceURL: "https://www.google-analytics.com/analytics.js",
   router,
   debug: {
