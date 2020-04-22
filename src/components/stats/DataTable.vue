@@ -51,7 +51,8 @@
       :headers="headers"
       :items="items"
       :search="search"
-      :options="options"
+      :options="options.table"
+      :footer-props="options.footer"
 
       must-sort
       sort-by="percentage"
@@ -59,7 +60,6 @@
       :locale="$i18n.locale"
 
       :calculate-widths="true"
-      hide-default-footer
       :mobile-breakpoint="1"
       :loading="matrixPending"
 
@@ -249,7 +249,13 @@
     data() {
       return {
         options: {
-          itemsPerPage: -1
+          table: {
+            itemsPerPage: 20
+          },
+          footer: {
+            itemsPerPageOptions: [10, 20, 40, -1],
+            showCurrentPage: true
+          }
         },
         tableCellClasses: "px-2 font-weight-bold",
         hideItemName: false

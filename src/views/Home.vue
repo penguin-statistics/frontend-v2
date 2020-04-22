@@ -90,10 +90,11 @@ import anime from 'animejs/lib/anime.es.js';
 import License from "@/views/About/License";
 import Console from "@/utils/Console";
 import GettingStarted from "@/views/About/GettingStarted";
+import MirrorSelector from "@/components/global/MirrorSelector";
 
 export default {
   name: "Home",
-  components: {GettingStarted, License, Contribute, Donate, Intro, Bulletin, Contact },
+  components: {MirrorSelector, GettingStarted, License, Contribute, Donate, Intro, Bulletin, Contact },
   data: () => ({}),
   mounted () {
     setTimeout(() => {
@@ -141,7 +142,7 @@ export default {
               }
             }
           } catch (e) {
-            Console.error("HomeAnimation", "blank screen fix trial failed", e)
+            Console.info("HomeAnimation", "blank screen fix trial failed", e)
           }
         }
       }, 5000)

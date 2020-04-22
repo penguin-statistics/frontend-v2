@@ -30,6 +30,7 @@
     <!--    </v-overlay>-->
     <GlobalSnackbar />
     <PWAPopups />
+    <MirrorSelector />
     <v-navigation-drawer
       v-model="drawer"
       app
@@ -75,7 +76,8 @@
 
         <v-divider class="mt-2 mb-1" />
 
-        <v-container>
+        <!-- This is to fix that s**tty Safari doesn't allow me to scroll down as I want. 128px is just the right amount-->
+        <v-container style="margin-bottom: 120px">
           <v-row
             justify="space-around"
           >
@@ -102,7 +104,7 @@
       :color="primaryColor"
       style="min-height: calc(56px + env(safe-area-inset-top)); padding-top: env(safe-area-inset-top)"
       :style="{'filter': isInSpecialUI ? 'grayscale(1)' : ''}"
-      class="x--safe-area toolbar--safe-area"
+      class="x--safe-area toolbar--safe-area flex-column"
     >
       <v-app-bar-nav-icon
         @click.stop="drawer = !drawer"
@@ -161,17 +163,19 @@
   import GlobalEntry from "@/mixins/hooks/GlobalEntry";
 
   import './styles/global.css'
-  import {mapGetters} from "vuex";
   import PWAPopups from "@/components/global/PWAPopups";
   import Footer from "@/components/global/Footer";
   import CDN from "@/mixins/CDN";
   import Mirror from "@/mixins/Mirror";
   import SpecialUI from "@/mixins/SpecialUI";
   import SettingsDialog from "@/components/drawer/SettingsDialog";
+  import MirrorSelector from "@/components/global/MirrorSelector";
+  import Theme from "@/mixins/Theme";
 
 export default {
   name: 'App',
   components: {
+    MirrorSelector,
     SettingsDialog,
     Footer,
     PWAPopups,
@@ -181,16 +185,13 @@ export default {
     RandomBackground,
     AccountManager
   },
-  mixins: [GlobalEntry, CDN, Mirror, SpecialUI],
+  mixins: [GlobalEntry, CDN, Mirror, SpecialUI, Theme],
   data () {
     return {
       routes: [],
       drawer: !this.$vuetify.breakpoint.xsOnly,
       showLicenseDialog: false
     }
-  },
-  computed: {
-    ...mapGetters('settings', ['dark']),
   },
   created () {
     this.routes = this.$router.options.routes.filter(el => !el.meta.hide);

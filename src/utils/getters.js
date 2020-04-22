@@ -1,4 +1,5 @@
 import store from '@/store'
+import Console from "@/utils/Console";
 
 let Getters = {};
 
@@ -34,18 +35,64 @@ Getters.limitations = {
 }
 Getters.statistics = {
   byItemId(itemId) {
-    const stats = store.state.data[`${store.getters['dataSource/source']}Matrix`];
-    if (!stats) return [];
-    return stats.filter(el => {
-      return el.itemId === itemId
-    })
+    const matrix = store.state.data[`${store.getters['dataSource/source']}Matrix`];
+    if (matrix.matrix) {
+      // Console.info("getter", "new data: transform on the fly")
+      // new data, transform on-the-fly
+      const result = matrix.matrix.filter(el => {
+        return el.itemId === itemId
+      });
+
+      result.map(el => {
+        const stage = Getters.stages.byStageId(el.stageId);
+
+        el.stage = stage;
+        el.zone = Getters.zones.byZoneId(el.stage.zoneId);
+
+        el.percentage = (el.quantity / el.times);
+        el.percentageText = `${(el.percentage * 100).toFixed(2)}%`;
+
+        el.apPPR = (stage.apCost / el.percentage).toFixed(2)
+
+        return el
+      });
+      return result
+
+    } else {
+      // Console.info("getter", "old data: return directly")
+      // used old transformer. can return directly.
+      return matrix.filter(el => {
+        return el.itemId === itemId
+      });
+    }
   },
   byStageId(stageId) {
-    const stats = store.state.data[`${store.getters['dataSource/source']}Matrix`];
-    if (!stats) return [];
-    return stats.filter(el => {
-      return el.stageId === stageId
-    })
+    const matrix = store.state.data[`${store.getters['dataSource/source']}Matrix`];
+    if (matrix.matrix) {
+      // Console.info("getter", "new data: transform on the fly")
+      // new data, transform on-the-fly
+      const result = matrix.matrix.filter(el => {
+        return el.stageId === stageId
+      });
+
+      result.map(el => {
+        const stage = Getters.stages.byStageId(el.stageId);
+        el.item = Getters.items.byItemId(el.itemId);
+        el.percentage = (el.quantity / el.times);
+        el.percentageText = `${(el.percentage * 100).toFixed(2)}%`;
+
+        el.apPPR = (stage.apCost / el.percentage).toFixed(2)
+        return el
+      });
+      return result
+
+    } else {
+      // Console.info("getter", "old data: return directly")
+      // used old transformer. can return directly.
+      return matrix.filter(el => {
+        return el.stageId === stageId
+      });
+    }
   }
 }
 Getters.stages = {
