@@ -1,6 +1,7 @@
 import * as Sentry from "@sentry/browser";
 import store from "@/store";
 import i18n from "@/i18n";
+import config from "@/config"
 
 class SessionData {
   constructor () {
@@ -19,7 +20,8 @@ class SessionData {
 
   get crisp () {
     return [[
-      ...Object.entries(this.data)
+      ...Object.entries(this.data),
+      ["Version", config.version]
     ]];
   }
 }

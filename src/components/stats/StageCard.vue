@@ -18,6 +18,8 @@
 </template>
 
 <script>
+  import Theme from "@/mixins/Theme";
+
   const s = {
     separator: -1,
     S: 0,
@@ -27,6 +29,7 @@
   }
   export default {
     name: "StageCard",
+    mixins: [Theme],
     props: {
       stage: {
         type: Object,
@@ -34,9 +37,6 @@
       }
     },
     computed: {
-      dark() {
-        return this.$vuetify.theme.dark;
-      },
       codes () {
         const segments = this.stage.code.split("-");
         const results = [];

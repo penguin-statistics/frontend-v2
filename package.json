@@ -1,7 +1,19 @@
 {
   "name": "penguin-stats-frontend",
-  "version": "1.1.7",
+  "version": "1.1.8",
   "private": true,
+  "homepage": "https://github.com/penguin-statistics/frontend-v2#readme",
+  "bugs": {
+    "url": "https://github.com/penguin-statistics/frontend-v2/issues"
+  },
+  "license" : "MIT",
+  "author": "All Contributors <*@*.*> (https://github.com/*)",
+  "contributors": [
+    "AlvISs_Reimu <alvissreimu@gmail.com> (https://github.com/AlvISsReimu)",
+    "Galvin Gao <me@galvingao.com> (https://github.com/GalvinGao)",
+    "Asahi <asahi@alpgo.cc> (https://github.com/AsahiLuna)",
+    "Blealtan <blealtan@outlook.com> (https://github.com/Blealtan)"
+  ],
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "npx --max_old_space_size=4096 vue-cli-service build --modern",

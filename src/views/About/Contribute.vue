@@ -109,7 +109,7 @@
         <v-chip
           link
           small
-          href="https://discord.gg/raQjSpq"
+          href="https://discord.gg/uEXJcue"
           target="_blank"
         >
           <v-icon

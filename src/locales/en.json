@@ -24,9 +24,17 @@
     },
     "planner": "ArkPlanner",
     "v1": "Visit Old Version",
-    "refreshData": "Reload Data",
-    "invertColors": "Change Color Theme",
-    "languages": "Language"
+    "refreshData": "Reload",
+    "languages": "Language",
+    "settings": {
+      "name": "Settings",
+      "themes": {
+        "name": "Change Color Theme",
+        "system": "Follow System",
+        "dark": "Always Dark",
+        "light": "Always Light"
+      }
+    }
   },
   "meta": {
     "details": "Details",
@@ -133,6 +141,20 @@
         "gte": "Should have at least {quantity} kinds of items",
         "lte": "Should have at most {quantity} kinds of items",
         "not": "Should not be {quantity} kinds of items"
+      }
+    }
+  },
+  "mirrors": {
+    "global": {
+      "notification": "For performance concerns, we recommend you to use the global site {0}."
+    },
+    "cn": {
+      "notification": "For performance concerns, we recommend you to use the CN mirror site {0}."
+    },
+    "_notification": {
+      "ignore": {
+        "title": "Ignore Mirror Notification?",
+        "subtitle": "Are you sure you want to ignore all mirror optimization notifications? Performance issues may occur."
       }
     }
   }

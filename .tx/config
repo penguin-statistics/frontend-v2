@@ -1,0 +1,10 @@
+[main]
+host = https://www.transifex.com
+
+[penguin-statistics-website.main]
+file_filter = src/locales/<lang>.json
+minimum_perc = 0
+source_file = src/locales/zh.json
+source_lang = zh
+type = KEYVALUEJSON
+

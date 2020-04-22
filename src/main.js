@@ -1,4 +1,4 @@
-import workbox from "./registerServiceWorker"
+import workbox from "./workers/register"
 
 import Vue from 'vue'
 import vuetify from './plugins/vuetify';
@@ -62,8 +62,9 @@ if (production) {
       "QuotaExceededError",
       "vivoNewsDetailPage",
       "Request aborted",
-      "TypeError: Cannot read property 'style' of null",
-      "removeAD"
+      "Cannot read property 'style' of null",
+      "removeAD",
+      "querySelectorAll"
     ],
     ignoreUrls: [
       // Facebook flakiness

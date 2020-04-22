@@ -4,10 +4,11 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width,initial-scale=1.0,viewport-fit=cover">
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700" crossorigin="anonymous">
   <link rel="icon" href="/favicon.ico">
   <title>企鹅物流数据统计</title>
   <link rel="preconnect" href="https://penguin.upyun.galvincdn.com">
+  <link rel="preconnect" href="https://penguin-stats.s3.amazonaws.com">
   <style>#app,body,html{height:100vh;margin:0;padding:0;transition:background .3s cubic-bezier(.25,.8,.5,1)!important}body{background:#121212}#loader-wrapper{position:fixed;top:0;left:0;width:100%;height:100%;z-index:999999;background:#121212;background:linear-gradient(to top right,#294266 30%,#00608c)}#loader-logo{top:20%;height:100px;width:100px;margin:-50px 0 0 -50px}#loader-logo,.sk-chase{display:block;position:relative;left:50%}.sk-chase{top:50%;width:72px;height:72px;margin:-152px 0 0 -36px;animation:sk-chase 2.5s infinite linear both}.sk-chase-dot{width:100%;height:100%;position:absolute;left:0;top:0;animation:sk-chase-dot 2s infinite cubic-bezier(.455,.03,.515,.955) both}.sk-chase-dot:before{content:'';display:block;width:25%;height:25%;background-color:#f0f0f0;border-radius:100%;animation:sk-chase-dot-before 2s infinite cubic-bezier(.455,.03,.515,.955) both}.sk-chase-dot:nth-child(1){animation-delay:-1.1s}.sk-chase-dot:nth-child(2){animation-delay:-1s}.sk-chase-dot:nth-child(3){animation-delay:-.9s}.sk-chase-dot:nth-child(4){animation-delay:-.8s}.sk-chase-dot:nth-child(5){animation-delay:-.7s}.sk-chase-dot:nth-child(6){animation-delay:-.6s}.sk-chase-dot:nth-child(1):before{animation-delay:-1.1s}.sk-chase-dot:nth-child(2):before{animation-delay:-1s}.sk-chase-dot:nth-child(3):before{animation-delay:-.9s}.sk-chase-dot:nth-child(4):before{animation-delay:-.8s}.sk-chase-dot:nth-child(5):before{animation-delay:-.7s}.sk-chase-dot:nth-child(6):before{animation-delay:-.6s}@keyframes sk-chase{to{transform:rotate(360deg)}}@keyframes sk-chase-dot{80%,to{transform:rotate(360deg)}}@keyframes sk-chase-dot-before{50%{transform:scale(.4)}0%,to{transform:scale(1)}}#loader-wrapper .load_text{font-family:Open Sans,sans-serif;color:#f0f0f0;font-size:19px;width:100%;text-align:center;z-index:9999999999999;position:absolute;opacity:1;line-height:30px}#loader-wrapper .load_title{top:55%}#loader-wrapper .load_footer{bottom:15%;opacity:.7;font-size:13px}#loader-wrapper .load_text span.load_caption{line-height:16px;font-weight:400;font-size:13px;color:#f0f0f0;opacity:.5}</style>
   <link rel="icon" type="image/png" sizes="32x32" href="/favicon/favicon-32x32.png">
   <link rel="icon" type="image/png" sizes="16x16" href="/favicon/favicon-16x16.png">
@@ -20,6 +21,21 @@
   <link rel="mask-icon" href="/favicon/safari-pinned-tab.svg" color="#2d66ba">
   <meta name="msapplication-TileImage" content="/favicon/mstile-150x150.png">
   <meta name="msapplication-TileColor" content="#1d499b">
+
+  <meta name="description" content="Penguin Statistics is the Department of Data Analysis of Penguin Logistics." />
+
+  <meta name="robots" content="index,follow" />
+  <meta name="googlebot" content="index,follow" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:creator" content="@AlvISs_Reimu" />
+  <meta property="og:url" content="https://penguin-stats.io" />
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Penguin Statistics" />
+  <meta property="og:description" content="Penguin Statistics is the Department of Data Analysis of Penguin Logistics." />
+  <meta property="og:image" content="https://penguin.upyun.galvincdn.com/logos/penguin_stats_logo.png" />
+  <meta property="og:image:alt" content="Penguin Statistics" />
+  <meta property="og:image:width" content="800" />
+  <meta property="og:image:height" content="600" />
 </head>
 <body>
 <noscript><style type="text/css">body{background:#4d2222}.nojs h1{font-size:48px}.nojs h2{font-size:36px}.nojs hr{margin:48px 0;border:1px solid #000}.nojs{vertical-align:middle;margin:32px 13%;width:70%;font-weight:700;font-size:18px;font-family:-apple-system,Noto Sans SC,BlinkMacSystemFont,"Segoe UI",Microsoft YaHei UI,Microsoft Yahei,微软雅黑,Helvetica,Arial,sans-serif;padding:36px 48px;word-break:break-all;text-align:center;line-height:2;border-radius:8px;background:#cc696f;border:4px solid #ff878f;color:#261415}.nojs a{display:inline-block;border:2px solid #000;padding:16px 24px;margin:0 8px;text-decoration:none;background:#3375e0;color:#fff;font-family:sans-serif;font-size:14px;cursor:pointer;text-align:center;transition:background 50ms ease-out,transform 150ms ease;-webkit-appearance:none;-moz-appearance:none}.nojs a:focus,.nojs a:hover{background:#368dff;color:#000;transform:scale(1.05)}.nojs a:focus{outline:1px solid #fff;outline-offset:-4px}.nojs a:active{transform:scale(.99)}.nojs del{padding:4px 8px;background:#000;color:#fff}</style><div class="nojs"><h1>JavaScript 已被禁用</h1><p>很抱歉，但企鹅物流数据统计需要您启用 <del>等离子发动机（不是）</del> JavaScript 以提供服务。若您确信自己已开启相关技术，那么可能是您的浏览器版本太低了；请点击下方按钮升级浏览器。</p><hr><a href="https://www.google.cn/chrome/" title="得益于内置的 Google 智能工具，Chrome 现在更易用、更安全、更快速。" target="_blank">使用 Google Chrome (推荐)</a> <a href="https://www.mozilla.org/zh-CN/firefox/new/" title="使用我们一系列隐私优先产品，得回您应受到的重视。" target="_blank">使用 Mozilla Firefox</a><br><p>&copy; 企鹅物流</p></div></noscript>

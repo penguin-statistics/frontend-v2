@@ -141,7 +141,7 @@ export default {
               }
             }
           } catch (e) {
-            Console.error("HomeAnimation", "blank screen fix trial failed", e)
+            Console.info("HomeAnimation", "blank screen fix trial failed", e)
           }
         }
       }, 5000)

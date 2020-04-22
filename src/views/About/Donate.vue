@@ -91,6 +91,32 @@
       </div>
     </v-card-title>
 
+    <svg
+      style="position: absolute; width: 0; height: 0;"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <defs>
+        <symbol
+          id="alipay"
+          viewBox="0 0 40 40"
+        >
+          <path
+            d="M32.9 25.1c-1.6-.5-3.7-1.4-6.1-2.2a31.32 31.32 0 003.3-8.4h-7.9v-2.8h9.7v-1.6h-9.7V5.4h-3.9a.69.69 0 00-.7.7v4H7.8v1.6h9.8v2.8H9.5v1.6h15.6a24.52 24.52 0 01-2.3 5.5c-5.1-1.7-10.5-3-13.9-2.2a7.64 7.64 0 00-4.4 2.5c-3.8 4.6-1.1 11.5 6.9 11.5 4.7 0 9.3-2.6 12.8-6.9 5.3 2.5 15.7 6.8 15.7 6.8v-6.2a50.91 50.91 0 01-7-2zm-22.1 5.6c-6.2 0-8.1-4.9-5-7.6a7.72 7.72 0 013.9-1.4c3.7-.4 7.1 1 11.2 3-2.9 3.7-6.5 6-10.1 6z"
+            fill="currentColor"
+          />
+        </symbol>
+        <symbol
+          id="wechatpay"
+          viewBox="0 0 40.1 35.4"
+        >
+          <path
+            fill="currentColor"
+            d="M14.5 22.5a1.27 1.27 0 01-.6.1 1.52 1.52 0 01-1.2-.7l-.1-.2-3.6-8c0-.1-.1-.2-.1-.3a.68.68 0 01.7-.7.6.6 0 01.4.1l4.3 3.1a2 2 0 001.1.3 1.7 1.7 0 00.7-.1l20.2-9A21.27 21.27 0 0020 0C9 0 0 7.5 0 16.7c0 5 2.7 9.5 6.9 12.6a1.36 1.36 0 01.6 1.1.6.6 0 01-.1.4c-.3 1.3-.9 3.3-.9 3.4s-.1.3-.1.5a.68.68 0 00.7.7c.1 0 .3-.1.4-.1l4.4-2.5a2 2 0 011.1-.3 1.27 1.27 0 01.6.1 22.69 22.69 0 006.5.9c11 0 20-7.5 20-16.7a13.92 13.92 0 00-2.3-7.7l-23 13.3-.3.1z"
+          />
+        </symbol>
+      </defs>
+    </svg>
+
     <v-row
       align="start"
       justify="center"
@@ -100,7 +126,19 @@
         cols="12"
         sm="6"
       >
-        <v-card class="bkop-light py-4 elevation-5">
+        <BackdropCard
+          darken
+          class="bkop-light pt-6 pb-4 elevation-3"
+        >
+          <template v-slot:backdrop>
+            <svg
+              :alt="$t('donate.methods.alipay')"
+              style="height: 96px; width: 96px; color: inherit"
+            >
+              <use xlink:href="#alipay" />
+            </svg>
+          </template>
+
           <img
             svg-inline
             :src="require('@/assets/qrcodes/alipay-qrcode.svg')"
@@ -112,7 +150,7 @@
           <v-row
             align="center"
             justify="center"
-            class="py-2"
+            class="pt-2"
           >
             <span class="text-center title">
               {{ $t('donate.methods.alipay') }}
@@ -134,14 +172,26 @@
               {{ $t('donate.redirectToApp', {app: $t('donate.methods.alipay')}) }}
             </v-btn>
           </v-row>
-        </v-card>
+        </BackdropCard>
       </v-col>
 
       <v-col
         cols="12"
         sm="6"
       >
-        <v-card class="bkop-light py-4 elevation-5">
+        <BackdropCard
+          darken
+          class="bkop-light pt-6 pb-4 elevation-3"
+        >
+          <template v-slot:backdrop>
+            <svg
+              :alt="$t('donate.methods.wechatPay')"
+              style="height: 96px; width: 96px; color: inherit"
+            >
+              <use xlink:href="#wechatpay" />
+            </svg>
+          </template>
+
           <img
             svg-inline
             :src="require('@/assets/qrcodes/wechatpay-qrcode.svg')"
@@ -153,13 +203,13 @@
           <v-row
             align="center"
             justify="center"
-            class="py-2"
+            class="pt-2"
           >
             <span class="text-center title">
               {{ $t('donate.methods.wechatPay') }}
             </span>
           </v-row>
-        </v-card>
+        </BackdropCard>
       </v-col>
     </v-row>
     <v-row
@@ -169,6 +219,7 @@
     >
       <v-btn
         rounded
+        large
         color="primary"
         :href="qr.paypal"
         target="_blank"
@@ -182,8 +233,13 @@
 </template>
 
 <script>
+import Theme from "@/mixins/Theme";
+import BackdropCard from "@/components/global/BackdropCard";
+
 export default {
   name: "Donate",
+  components: {BackdropCard},
+  mixins: [Theme],
   data() {
     return {
       qr: {
@@ -195,3 +251,7 @@ export default {
   }
 };
 </script>
+
+<style>
+
+</style>

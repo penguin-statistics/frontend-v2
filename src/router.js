@@ -132,7 +132,8 @@ const router = new Router({
     component: AboutLayout,
     meta: {
       icon: 'mdi-account-group',
-      i18n: 'menu.about._name'
+      i18n: 'menu.about._name',
+      active: true
     },
     children: [{
       path: 'members',

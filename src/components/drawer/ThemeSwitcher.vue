@@ -1,17 +1,35 @@
 <template>
-  <v-tooltip bottom>
-    <template v-slot:activator="{ on }">
-      <v-btn
-        icon
-        class="mx-1"
-        v-on="on"
-        @click="appDark = !appDark"
+  <v-select
+    v-model="appDark"
+    hide-details
+    :menu-props="{ offsetY: true }"
+    filled
+    :items="themes"
+    :label="$t('menu.settings.themes.name')"
+    transition="slide-y-transition"
+  >
+    <template v-slot:item="{ item }">
+      <v-icon
+        left
       >
-        <v-icon>mdi-invert-colors</v-icon>
-      </v-btn>
+        {{ item.icon }}
+      </v-icon>
+      {{ item.text }}
+      <v-spacer />
+      <v-icon v-if="item.value === dark">
+        mdi-check
+      </v-icon>
     </template>
-    <span>{{ $t('menu.invertColors') }}</span>
-  </v-tooltip>
+    <template v-slot:selection="{item}">
+      <v-icon
+        small
+        left
+      >
+        {{ item.icon }}
+      </v-icon>
+      {{ item.text }}
+    </template>
+  </v-select>
 </template>
 
 <script>
@@ -26,10 +44,28 @@
           return this.dark
         },
         set (value) {
-          this.$vuetify.theme.dark = value;
           this.$store.commit('settings/switchDark', value)
         }
       },
+      themes () {
+        return [
+          {
+            icon: "mdi-brightness-auto",
+            text: this.$t('menu.settings.themes.system'),
+            value: "system"
+          },
+          {
+            icon: "mdi-brightness-2",
+            text: this.$t('menu.settings.themes.dark'),
+            value: "dark"
+          },
+          {
+            icon: "mdi-brightness-7",
+            text: this.$t('menu.settings.themes.light'),
+            value: "light"
+          }
+        ]
+      }
     },
   }
 </script>

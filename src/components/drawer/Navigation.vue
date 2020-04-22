@@ -62,7 +62,7 @@
       activeClass() {
         return {
           "v-list-item--active": true,
-          "white--text": this.dark
+          "white--text": this.$vuetify.theme.dark
         }
       }
     },

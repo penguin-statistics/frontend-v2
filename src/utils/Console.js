@@ -39,11 +39,17 @@ class Console {
     // const now = new Date();
     // const date = `${now.getDate()} ${now.getHours()}:${now.getMinutes()}:${now.getSeconds()}.${now.getMilliseconds()}`;
 
-    const prefix = [
-      `%c${level}%c${component}`,
-      "background: #FF9800; color: #000; padding: 2px 4px; border-radius: 4px; margin-right: 4px; font-weight: 900; font-size: 10px;",
-      "background: #673AB7; color: #fff; padding: 2px 4px; border-radius: 4px; font-weight: 700; font-size: 10px;"
-    ];
+    let prefix;
+
+    if (process.env.NODE_ENV !== "production" || window["__penguin_stats_debug__"]) {
+      prefix = [
+        `%c${level}%c${component}`,
+        "background: #FF9800; color: #000; padding: 2px 4px; border-radius: 4px; margin-right: 4px; font-weight: 900; font-size: 10px;",
+        "background: #673AB7; color: #fff; padding: 2px 4px; border-radius: 4px; font-weight: 700; font-size: 10px;"
+      ];
+    } else {
+      prefix = [`(${level})`, `[${component}]`];
+    }
 
     if (console[level]) {
       console[level](...prefix, ...content)
