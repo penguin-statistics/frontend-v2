@@ -104,7 +104,7 @@ if (production) {
   });
 }
 
-const googleAnalyticsID = mirror.cn.isCurrent() ? 'UA-142226262-2' : 'UA-142226262-1'
+const googleAnalyticsID = mirror.cn.isCurrent() ? 'UA-142226262-4' : 'UA-142226262-1'
 
 Vue.use(VueAnalytics, {
   id: googleAnalyticsID,
