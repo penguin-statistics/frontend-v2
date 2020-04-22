@@ -18,7 +18,7 @@
         {{ $t('menu.settings.name') }}
       </v-btn>
     </template>
-    <v-card :color="`grey ${dark ? 'darken-3' : 'lighten-3'}`">
+    <v-card :color="`${dark ? 'blue-grey darken-3' : 'white'}`">
       <v-card-title class="headline">
         <v-icon left>
           mdi-settings
@@ -35,6 +35,18 @@
           </v-row>
         </v-container>
       </v-card-text>
+
+      <v-divider />
+
+      <v-card-actions>
+        <v-spacer />
+        <v-btn
+          text
+          @click="active = false"
+        >
+          {{ $t('dialog.close') }}
+        </v-btn>
+      </v-card-actions>
     </v-card>
   </v-dialog>
 </template>

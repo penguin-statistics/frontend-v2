@@ -27,7 +27,7 @@
     "refreshData": "데이터 새로고침",
     "languages": "언어 변경",
     "settings": {
-      "name": "Settings",
+      "name": "설정",
       "themes": {
         "name": "페이지 테마 변경",
         "system": "Follow System",

@@ -24,7 +24,7 @@
     },
     "planner": "ArkPlanner",
     "v1": "Visit Old Version",
-    "refreshData": "Reload Data",
+    "refreshData": "Reload",
     "languages": "Language",
     "settings": {
       "name": "Settings",
