@@ -42,6 +42,7 @@
     </v-dialog>
 
     <v-snackbar
+      v-if="enabled"
       v-model="enabled"
       :color="`stripped--${dark ? 'dark' : 'light'}`"
       :timeout="0"
