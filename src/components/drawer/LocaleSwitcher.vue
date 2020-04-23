@@ -67,6 +67,11 @@
           this.busy = localeId
           setTimeout(() => {
             this.changeLocale(localeId, true)
+            this.$ga.event(
+              'settings',
+              'language',
+              localeId
+            )
             this.$nextTick(function () {
               this.busy = null
             })

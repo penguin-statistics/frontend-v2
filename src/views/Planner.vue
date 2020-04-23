@@ -39,7 +39,7 @@
         "byProduct": "Consider by-products",
         "requireExp": "Large demand for EXP",
         "requireLmb": "Large demand for LMD",
-        "foreignServer": "Do not add Chapter 6 into calculation"
+        "foreignServer": "Do not suggest CN-only stages"
       },
       "actions": {
         "import": "Import",

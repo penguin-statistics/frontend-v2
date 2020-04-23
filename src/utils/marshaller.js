@@ -17,7 +17,9 @@ export default {
     body.exp_demand = options.requireExp;
     body.gold_demand = options.requireLmb;
     if (options.foreignServer) {
-      body["exclude"] = ["6-1","6-10","6-11","6-12","6-14","6-15","6-16","6-2","6-3","6-4","6-5","6-8","6-9","S6-1","S6-2","S6-3","S6-4"]
+      body["exclude"] = ["6-1","6-10","6-11","6-12","6-14","6-15","6-16","6-2","6-3","6-4","6-5","6-8","6-9","S6-1","S6-2","S6-3","S6-4",
+        "DM-1","DM-2","DM-3","DM-4","DM-5","DM-6","DM-7","DM-8"
+      ]
     }
 
     return body

@@ -142,7 +142,9 @@
       }
     },
     created () {
-      if (!this.ignoreNotification) {
+      if (this.ignoreNotification) {
+        Console.info("MirrorSelector", "ignored notification")
+      } else {
         external.geoip()
           .then(({data}) => {
             Console.info("MirrorSelector", "successfully retrived geoip info", data)
@@ -156,14 +158,23 @@
               (!this.isCNMirror && this.mirror === "cn")
             ) {
               this.enabled = true
+              this.$ga.event(
+                'mirror',
+                'notification',
+                'opened',
+                this.mirror
+              )
             }
             Console.info("MirrorSelector", "current mirror:", this.mirror, "| popup?", this.enabled)
           })
           .catch((err) => {
+            this.$ga.event(
+              'mirror',
+              'notification',
+              'getIpFailed'
+            )
             Console.warn("MirrorSelector", "failed to get geoip information", err)
           })
-      } else {
-        Console.info("MirrorSelector", "ignored notification")
       }
     },
     methods: {
