@@ -90,7 +90,7 @@ export default {
         {
           future: true,
           version: "v3.0.0",
-          date: "2020-05-01T08:00:00Z",
+          date: "2020-04-30T08:00:00Z",
           changes: [
             "添加：多服务器数据源切换支持",
             "添加：物品掉落分时查询",
@@ -98,15 +98,25 @@ export default {
           ]
         },
         {
-          future: true,
-          version: "v1.1.8",
-          date: "2020-04-25T08:00:00Z",
+          active: true,
+          version: "v1.1.9",
+          date: "2020-04-23T06:00:00Z",
           changes: [
-            "添加：国内加速镜像站点"
+            "修复：由于添加国内加速镜像站点的若干问题",
           ]
         },
         {
           active: true,
+          version: "v1.1.8",
+          date: "2020-04-23T08:00:00Z",
+          changes: [
+            "添加：国内加速镜像站点",
+            "添加：跟随系统的暗色模式选项",
+            "优化：菜单设置",
+            "优化：首页若干图标显示效果",
+          ]
+        },
+        {
           version: "v1.1.7",
           date: "2020-04-06T18:00:00Z",
           changes: [

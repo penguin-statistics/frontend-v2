@@ -9,15 +9,6 @@
           "value": "public, max-age=0, must-revalidate"
         }
       ]
-    },
-    {
-      "source": "**",
-      "headers": [
-        {
-          "key": "Content-Security-Policy",
-          "value": "default-src 'self'; script-src 'self' 'unsafe-inline' https://client.crisp.chat https://settings.crisp.chat https://www.google-analytics.com/; script-src-attr 'none'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://client.crisp.chat; img-src 'self' data: blob: https://penguin.upyun.galvincdn.com https://www.google-analytics.com https://stats.g.doubleclick.net https://image.crisp.chat https://client.crisp.chat; font-src 'self' https://fonts.gstatic.com https://fonts.gstatic.cn https://client.crisp.chat; connect-src 'self' https://penguin-stats.io https://penguin.upyun.galvincdn.com https://sentry.io https://client.crisp.chat wss://client.relay.crisp.chat https://storage.crisp.chat; prefetch-src 'self' https://penguin.upyun.galvincdn.com; upgrade-insecure-requests; block-all-mixed-content"
-        }
-      ]
     }
   ],
   "rewrites": [

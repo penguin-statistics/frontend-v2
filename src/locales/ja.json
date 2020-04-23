@@ -25,8 +25,16 @@
     "planner": "周回計画作成ツール",
     "v1": "旧バージョン",
     "refreshData": "データ更新",
-    "invertColors": "テーマ変更",
-    "languages": "言語切替"
+    "languages": "言語切替",
+    "settings": {
+      "name": "設定",
+      "themes": {
+        "name": "テーマ変更",
+        "system": "Follow System",
+        "dark": "Always Dark",
+        "light": "Always Light"
+      }
+    }
   },
   "meta": {
     "details": "詳細を見る",

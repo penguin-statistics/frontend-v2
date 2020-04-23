@@ -8,6 +8,7 @@ import auth from './modules/auth';
 import cacheUpdateAt from './modules/cacheUpdateAt';
 import data from './modules/data';
 import dataSource from './modules/dataSource';
+import mirror from './modules/mirror';
 import settings from './modules/settings';
 import ui from './modules/ui';
 // import compressor from "@/utils/compressor";
@@ -16,11 +17,11 @@ Vue.use(Vuex);
 
 const previousState = localStorage.getItem("penguin-stats-state");
 if (previousState) {
+  localStorage.removeItem("penguin-stats-state")
   localStorage.setItem("penguin-stats-data", {data: previousState["data"]});
   localStorage.setItem("penguin-stats-settings", {settings: previousState["settings"]});
   localStorage.setItem("penguin-stats-auth", {auth: previousState["auth"]});
   localStorage.setItem("penguin-stats-cacheTTL", {cacheUpdateAt: previousState["cacheUpdateAt"]});
-  localStorage.removeItem("penguin-stats-state")
 }
 
 export default new Vuex.Store({
@@ -71,6 +72,12 @@ export default new Vuex.Store({
       paths: [
         "cacheUpdateAt"
       ]
+    }),
+    createPersistedState({
+      key: "penguin-stats-mirror",
+      paths: [
+        "mirror"
+      ]
     })
   ],
   modules: {
@@ -80,6 +87,7 @@ export default new Vuex.Store({
     data,
     dataSource,
     settings,
+    mirror,
     ui
   }
 });

@@ -2,6 +2,7 @@
   {
     "zh": {
       "opensAt": "开放时间：{0} - {1}",
+      "permanentOpen": "常驻开放",
       "zone": {
         "name": "章节",
         "types": {
@@ -27,6 +28,7 @@
     },
     "en": {
       "opensAt": "Event period: {0} - {1}",
+      "permanentOpen": "Permanently Opening",
       "zone": {
         "name": "Zone",
         "types": {
@@ -214,7 +216,7 @@
                       v-if="zone.isActivity"
                       class="caption mb-2 mt-1"
                     >
-                      {{ $t('opensAt', zone.activityActiveTime) }}
+                      {{ genActivityTime(zone.activityActiveTime) }}
                     </div>
                     <StageCard
                       v-for="stage in getStages(zone.zoneId)"
@@ -384,6 +386,9 @@
           this.selected.zone = null;
           this.selected.stage = null;
         }
+      },
+      genActivityTime (message) {
+        return message[0] === message[1] ? this.$t('permanentOpen') : this.$t('opensAt', message)
       }
     },
   }

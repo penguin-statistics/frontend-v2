@@ -1,53 +1,33 @@
 <template>
-  <v-menu
-    bottom
-    left
-    open-on-hover
+  <v-select
+    v-model="activeLocale"
+    hide-details
+    :menu-props="{ offsetY: true }"
+    filled
+    :items="localizations"
+    :label="$t('menu.languages')"
     transition="slide-y-transition"
   >
-    <template v-slot:activator="{ on }">
-      <v-btn
-        icon
-        class="mx-1"
-        v-on="on"
-      >
-        <v-icon>mdi-translate</v-icon>
-      </v-btn>
+    <template v-slot:item="{item}">
+      {{ item.text }}
+      <v-spacer />
+      <!--      <span class="monospace ml-2">-->
+      <!--        {{ item.value }}-->
+      <!--      </span>-->
+      <v-icon v-if="item.value === activeLocale">
+        mdi-check
+      </v-icon>
+      <v-progress-circular
+        v-if="busy === item.value"
+        indeterminate
+        size="24"
+        width="3"
+      />
+      <!--      <v-icon v-if="busy === item.value">-->
+      <!--        mdi-timer-sand-empty-->
+      <!--      </v-icon>-->
     </template>
-
-    <v-list>
-      <v-subheader style="height: 36px;">
-        <v-icon
-          small
-          color="grey lighten-1"
-          class="mr-1"
-        >
-          mdi-translate
-        </v-icon> {{ $t('menu.languages') }}
-      </v-subheader>
-      <v-list-item-group
-        v-model="activeLocale"
-        mandatory
-      >
-        <v-list-item
-          v-for="(locale, i) in localizations"
-          :key="i"
-        >
-          <v-list-item-title class="mr-2">
-            {{ locale.name }}
-          </v-list-item-title>
-          <v-list-item-action v-if="locale.beta">
-            <v-icon small>
-              mdi-beta
-            </v-icon>
-          </v-list-item-action>
-          <v-list-item-action-text class="monospace ml-2">
-            {{ locale.id }}
-          </v-list-item-action-text>
-        </v-list-item>
-      </v-list-item-group>
-    </v-list>
-  </v-menu>
+  </v-select>
 </template>
 
 <script>
@@ -61,30 +41,41 @@
       return {
         localizations: [
           {
-            id: 'zh',
-            name: '中文'
+            value: 'zh',
+            text: '中文'
           }, {
-            id: 'en',
-            name: 'English'
+            value: 'en',
+            text: 'English'
           }, {
-            id: 'ja',
-            name: '日本語'
+            value: 'ja',
+            text: '日本語'
           }, {
-            id: 'ko',
-            name: '한국어'
+            value: 'ko',
+            text: '한국어'
           }
         ],
+        busy: null,
       }
     },
     computed: {
       ...mapGetters('settings', ['language']),
       activeLocale: {
         get () {
-          return this.localizations.indexOf(this.localizations.find(el => el.id === this.$i18n.locale))
+          return this.$i18n.locale
         },
-        set (localeIndex) {
-          const localeObject = this.localizations[localeIndex];
-          this.changeLocale(localeObject.id, true)
+        set (localeId) {
+          this.busy = localeId
+          setTimeout(() => {
+            this.changeLocale(localeId, true)
+            this.$ga.event(
+              'settings',
+              'language',
+              localeId
+            )
+            this.$nextTick(function () {
+              this.busy = null
+            })
+          })
         }
       },
     },

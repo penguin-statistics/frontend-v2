@@ -1,4 +1,4 @@
-import workbox from "./registerServiceWorker"
+import workbox from "./workers/register"
 
 import Vue from 'vue'
 import vuetify from './plugins/vuetify';
@@ -14,6 +14,7 @@ import VueNumberInput from '@chenfengyuan/vue-number-input';
 import * as Sentry from '@sentry/browser';
 import * as Integrations from '@sentry/integrations';
 import { Integrations as ApmIntegrations } from '@sentry/apm';
+import mirror from "@/utils/mirror";
 
 const production = process.env.NODE_ENV === 'production';
 
@@ -62,8 +63,9 @@ if (production) {
       "QuotaExceededError",
       "vivoNewsDetailPage",
       "Request aborted",
-      "TypeError: Cannot read property 'style' of null",
-      "removeAD"
+      "Cannot read property 'style' of null",
+      "removeAD",
+      "querySelectorAll"
     ],
     ignoreUrls: [
       // Facebook flakiness
@@ -102,8 +104,10 @@ if (production) {
   });
 }
 
+const googleAnalyticsID = mirror.cn.isCurrent() ? 'UA-142226262-4' : 'UA-142226262-1'
+
 Vue.use(VueAnalytics, {
-  id: 'UA-142226262-1',
+  id: googleAnalyticsID,
   // customResourceURL: "https://www.google-analytics.com/analytics.js",
   router,
   debug: {

@@ -25,8 +25,16 @@
     "planner": "刷图规划器",
     "v1": "访问旧版",
     "refreshData": "刷新数据",
-    "invertColors": "转换主题",
-    "languages": "语言切换"
+    "languages": "语言切换",
+    "settings": {
+      "name": "设置",
+      "themes": {
+        "name": "转换主题",
+        "system": "跟随系统设置",
+        "dark": "总是使用暗色",
+        "light": "总是使用亮色"
+      }
+    }
   },
   "meta": {
     "details": "详细信息",
@@ -133,6 +141,20 @@
         "gte": "应至少有 {quantity} 种物品",
         "lte": "应至多有 {quantity} 种物品",
         "not": "物品种类应不为 {quantity}"
+      }
+    }
+  },
+  "mirrors": {
+    "global": {
+      "notification": "推荐使用海外镜像站 {0}，可以提升访问速度哦！"
+    },
+    "cn": {
+      "notification": "推荐使用国内镜像站 {0}，可以提升访问速度哦！"
+    },
+    "_notification": {
+      "ignore": {
+        "title": "不再显示镜像提示？",
+        "subtitle": "确定要忽略所有镜像提示吗？网站加载性能可能会受到影响。"
       }
     }
   }

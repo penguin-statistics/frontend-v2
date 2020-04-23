@@ -1,6 +1,6 @@
 const client = {
   source: "frontend-v2",
-  version: "v1.1.7"
+  version: "v1.1.9"
 };
 
 module.exports = {
@@ -9,6 +9,7 @@ module.exports = {
     submitParams: client
   },
   cdn: {
-    global: "https://penguin.upyun.galvincdn.com"
+    cn: "https://penguin.upyun.galvincdn.com",
+    global: "https://penguin-stats.s3.amazonaws.com"
   }
 }

@@ -30,37 +30,14 @@
     <!--    </v-overlay>-->
     <GlobalSnackbar />
     <PWAPopups />
+    <MirrorSelector />
     <v-navigation-drawer
       v-model="drawer"
       app
       :style="{'filter': isInSpecialUI ? 'grayscale(1)' : ''}"
       width="calc(env(safe-area-inset-left) + 300px)"
     >
-      <div
-        :class="{
-          'drawer-logo blue': true,
-          'darken-4': dark,
-          'darken-3': !dark,
-          'drawer-logo--two-line': $t('app.name_line2') !== ''
-        }"
-        style="padding-left: calc(max(env(safe-area-inset-left), 32px))"
-      >
-        <v-img
-          :src="cdnResource('/logos/penguin_stats_logo.png')"
-          aspect-ratio="1"
-          height="192px"
-          contain
-        />
-        <div class="white--text description">
-          <v-row
-            align="center"
-            justify="center"
-          >
-            <span>{{ $t('app.name_line1') }}</span>
-            <span>{{ $t('app.name_line2') }}</span>
-          </v-row>
-        </div>
-      </div>
+      <Logo />
       <v-list
         dense
         nav
@@ -72,15 +49,17 @@
           :route="route"
         />
 
-        <v-divider class="my-2" />
+        <v-divider class="mt-2 mb-1" />
 
-        <v-container>
+        <!-- This is to fix that s**tty Safari doesn't allow me to scroll down as I want. 128px is just the right amount-->
+        <v-container style="margin-bottom: 120px">
           <v-row
             justify="space-around"
           >
             <v-btn
-              class="mx-1"
+              outlined
               text
+              class="flex-grow-1 mr-1"
               @click="refreshData"
             >
               <v-icon left>
@@ -89,9 +68,7 @@
               {{ $t('menu.refreshData') }}
             </v-btn>
 
-            <ThemeSwitcher />
-
-            <LocaleSwitcher />
+            <SettingsDialog />
           </v-row>
         </v-container>
       </v-list>
@@ -102,7 +79,7 @@
       :color="primaryColor"
       style="min-height: calc(56px + env(safe-area-inset-top)); padding-top: env(safe-area-inset-top)"
       :style="{'filter': isInSpecialUI ? 'grayscale(1)' : ''}"
-      class="x--safe-area toolbar--safe-area"
+      class="x--safe-area toolbar--safe-area flex-column"
     >
       <v-app-bar-nav-icon
         @click.stop="drawer = !drawer"
@@ -157,26 +134,27 @@
   import NetworkStateIndicator from "@/components/toolbar/NetworkStateIndicator";
 
   import Navigation from "@/components/drawer/Navigation";
-  import LocaleSwitcher from "@/components/drawer/LocaleSwitcher";
-  import ThemeSwitcher from "@/components/drawer/ThemeSwitcher";
 
   import GlobalEntry from "@/mixins/hooks/GlobalEntry";
 
   import './styles/global.css'
-  import {mapGetters} from "vuex";
   import PWAPopups from "@/components/global/PWAPopups";
   import Footer from "@/components/global/Footer";
   import CDN from "@/mixins/CDN";
   import Mirror from "@/mixins/Mirror";
   import SpecialUI from "@/mixins/SpecialUI";
+  import SettingsDialog from "@/components/drawer/SettingsDialog";
+  import MirrorSelector from "@/components/global/MirrorSelector";
+  import Logo from "@/components/drawer/Logo";
 
 export default {
   name: 'App',
   components: {
+    Logo,
+    MirrorSelector,
+    SettingsDialog,
     Footer,
     PWAPopups,
-    LocaleSwitcher,
-    ThemeSwitcher,
     Navigation,
     GlobalSnackbar,
     NetworkStateIndicator,
@@ -191,9 +169,6 @@ export default {
       showLicenseDialog: false
     }
   },
-  computed: {
-    ...mapGetters('settings', ['dark']),
-  },
   created () {
     this.routes = this.$router.options.routes.filter(el => !el.meta.hide);
     this.$store.dispatch("data/fetch", false);
@@ -202,6 +177,6 @@ export default {
     async refreshData () {
       await this.$store.dispatch("data/fetch", true);
     },
-  }
+  },
 }
 </script>

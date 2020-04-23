@@ -80,18 +80,15 @@
         cols="12"
         sm="4"
       >
-        <v-card
-          hover 
-          class="pa-4 text-center backdrop-card transition-all"
+        <BackdropCard
+          hover
           :to="{name: link.route}"
         >
-          <div class="backdrop-icon transition-all">
-            <v-icon
-              class="backdrop-icon--icon"
-            >
+          <template v-slot:backdrop>
+            <v-icon>
               {{ link.icon }}
             </v-icon>
-          </div>
+          </template>
 
           <v-icon
             x-large
@@ -107,80 +104,17 @@
           <span class="caption font-italic">
             {{ $t('meta.quotation.start') }}{{ renderTranslation(link.subtitle) }}{{ $t('meta.quotation.end') }}
           </span>
-        </v-card>
+        </BackdropCard>
       </v-col>
     </v-row>
-
-
-
-    <!--    <v-card-title style="word-break:normal">-->
-    <!--      <div class="subtitle-1">-->
-    <!--        <ul-->
-    <!--          class="pl-2"-->
-    <!--          style="list-style: none"-->
-    <!--        >-->
-    <!--          <li class="d-flex flex-row align-center">-->
-    <!--            刷一指定素材：-->
-    <!--            <v-chip-->
-    <!--              link-->
-    <!--              color="primary"-->
-    <!--              :to="{name: 'StatsByItem'}"-->
-    <!--              small-->
-    <!--            >-->
-    <!--              <v-icon-->
-    <!--                left-->
-    <!--                small-->
-    <!--              >-->
-    <!--                mdi-link-->
-    <!--              </v-icon>-->
-    <!--              素材掉落数据-->
-    <!--            </v-chip>-->
-    <!--          </li>-->
-
-    <!--          <li>-->
-    <!--            查看关卡/活动/补给箱的掉落分布：-->
-    <!--            <v-chip-->
-    <!--              link-->
-    <!--              color="primary"-->
-    <!--              :to="{name: 'StatsByStage'}"-->
-    <!--              small-->
-    <!--            >-->
-    <!--              <v-icon-->
-    <!--                left-->
-    <!--                small-->
-    <!--              >-->
-    <!--                mdi-link-->
-    <!--              </v-icon>-->
-    <!--              关卡掉落数据-->
-    <!--            </v-chip>-->
-    <!--          </li>-->
-
-    <!--          <li>-->
-    <!--            刷图规划：-->
-    <!--            <v-chip-->
-    <!--              link-->
-    <!--              color="primary"-->
-    <!--              :to="{name: 'Planner'}"-->
-    <!--              small-->
-    <!--            >-->
-    <!--              <v-icon-->
-    <!--                left-->
-    <!--                small-->
-    <!--              >-->
-    <!--                mdi-link-->
-    <!--              </v-icon>-->
-    <!--              刷图规划器-->
-    <!--            </v-chip>-->
-    <!--          </li>-->
-    <!--        </ul>-->
-    <!--      </div>-->
-    <!--    </v-card-title>-->
   </v-card>
 </template>
 
 <script>
+  import BackdropCard from "@/components/global/BackdropCard";
   export default {
     name: "GettingStarted",
+    components: {BackdropCard},
     data() {
       return {
         links: [
@@ -214,9 +148,6 @@
 </script>
 
 <style scoped>
-  .backdrop-card {
-    overflow: hidden;
-  }
   .theme--light .backdrop-card {
     background: rgba(250, 250, 250, .9) !important;
   }
@@ -224,22 +155,4 @@
   .theme--dark .backdrop-card {
     background: rgba(30, 30, 30, .9) !important;
   }
-
-  .backdrop-card:hover .backdrop-icon {
-    opacity: 0.15;
-  }
-
-.backdrop-icon {
-  position: absolute;
-  bottom: -2rem;
-  right: 0;
-  user-select: none;
-  z-index: 0;
-  opacity: 0.05;
-}
-
-.backdrop-icon .backdrop-icon--icon {
-  font-size: 8rem;
-  /*transform: rotate(-60deg);*/
-}
 </style>

@@ -51,15 +51,16 @@
       :headers="headers"
       :items="items"
       :search="search"
-      :options="options"
+      :options="options.table"
+      :footer-props="options.footer"
 
       must-sort
       sort-by="percentage"
       :sort-desc="true"
       :locale="$i18n.locale"
+      :hide-default-footer="items.length <= 10"
 
       :calculate-widths="true"
-      hide-default-footer
       :mobile-breakpoint="1"
       :loading="matrixPending"
 
@@ -162,8 +163,7 @@
               </v-row>
             </td>
             <td
-              :class="tableCellClasses"
-              class="yellow--text"
+              :class="`${tableCellClasses} yellow--text ${dark ? '' : 'text--darken-3'}`"
             >
               {{ props.item.stage.apCost }}
             </td>
@@ -226,10 +226,12 @@
   import get from "@/utils/getters";
   import Item from "@/components/global/Item";
   import {mapGetters} from "vuex";
+  import Theme from "@/mixins/Theme";
 
   export default {
     name: "DataTable",
     components: {Item},
+    mixins: [Theme],
     props: {
       items: {
         type: Array,
@@ -249,7 +251,13 @@
     data() {
       return {
         options: {
-          itemsPerPage: -1
+          table: {
+            itemsPerPage: 20
+          },
+          footer: {
+            itemsPerPageOptions: [10, 20, 40, -1],
+            showCurrentPage: true
+          }
         },
         tableCellClasses: "px-2 font-weight-bold",
         hideItemName: false

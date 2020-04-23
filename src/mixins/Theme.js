@@ -1,7 +1,7 @@
-import {mapGetters} from "vuex";
-
 export default {
   computed: {
-    ...mapGetters('settings', ['dark']),
-  },
+    dark () {
+      return this.$vuetify.theme.dark
+    }
+  }
 }
