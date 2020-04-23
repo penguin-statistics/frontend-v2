@@ -100,7 +100,7 @@ export default {
         {
           active: true,
           version: "v1.1.9",
-          date: "2020-04-25T08:00:00Z",
+          date: "2020-04-23T06:00:00Z",
           changes: [
             "修复：由于添加国内加速镜像站点的若干问题",
           ]
