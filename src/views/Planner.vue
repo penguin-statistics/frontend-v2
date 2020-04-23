@@ -6,7 +6,7 @@
         "byProduct": "考虑合成副产物",
         "requireExp": "大量需求经验",
         "requireLmb": "大量需求龙门币",
-        "foreignServer": "不考虑第六章"
+        "foreignServer": "排除仅国服出现的关卡"
       },
       "actions": {
         "import": "导入",

@@ -11,12 +11,6 @@
         "refresh": "Refresh",
         "success": "Website Updated!"
       }
-    },
-    "en": {
-      "update": {
-        "refresh": "새로고침",
-        "success": "업데이트 완료!"
-      }
     }
   }
 </i18n>
