@@ -99,8 +99,16 @@ export default {
         },
         {
           active: true,
-          version: "v1.1.8",
+          version: "v1.1.9",
           date: "2020-04-25T08:00:00Z",
+          changes: [
+            "修复：由于添加国内加速镜像站点的若干问题",
+          ]
+        },
+        {
+          active: true,
+          version: "v1.1.8",
+          date: "2020-04-23T08:00:00Z",
           changes: [
             "添加：国内加速镜像站点",
             "添加：跟随系统的暗色模式选项",
