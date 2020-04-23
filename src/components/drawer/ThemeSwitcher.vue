@@ -47,7 +47,7 @@
           this.$store.commit('settings/switchDark', value)
           this.$ga.event(
             'settings',
-            'dark',
+            'theme',
             value
           )
         }
