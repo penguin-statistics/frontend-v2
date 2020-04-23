@@ -2,7 +2,7 @@
 
 import { registerRoute } from 'workbox-routing';
 import { precacheAndRoute, cleanupOutdatedCaches } from 'workbox-precaching';
-import { NetworkFirst, CacheFirst } from 'workbox-strategies'
+import { CacheFirst } from 'workbox-strategies'
 import { ExpirationPlugin } from 'workbox-expiration'
 import { CacheableResponsePlugin } from 'workbox-cacheable-response'
 
@@ -78,18 +78,18 @@ registerRoute(
 
 // if the network failed, use the cache instead; otherwise use the
 // fresh data coming from the api
-registerRoute(
-  /^https:\/\/penguin-stats\.io\/PenguinStats\//,
-  new NetworkFirst({
-    cacheName: "penguin-api-responses",
-    // plugins: [
-    //   new ExpirationPlugin({
-    //     maxAgeSeconds: 60 * 60 * 24,
-    //     maxEntries: 10
-    //   }),
-    // ]
-  })
-)
+// registerRoute(
+//   /^https:\/\/penguin-stats\.io\/PenguinStats\//,
+//   new NetworkFirst({
+//     cacheName: "penguin-api-responses",
+//     // plugins: [
+//     //   new ExpirationPlugin({
+//     //     maxAgeSeconds: 60 * 60 * 24,
+//     //     maxEntries: 10
+//     //   }),
+//     // ]
+//   })
+// )
 
 // precache the item sprite file
 // registerRoute(

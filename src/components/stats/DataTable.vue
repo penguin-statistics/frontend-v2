@@ -58,6 +58,7 @@
       sort-by="percentage"
       :sort-desc="true"
       :locale="$i18n.locale"
+      :hide-default-footer="items.length <= 10"
 
       :calculate-widths="true"
       :mobile-breakpoint="1"
