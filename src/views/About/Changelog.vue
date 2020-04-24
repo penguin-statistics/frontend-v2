@@ -99,8 +99,24 @@ export default {
         },
         {
           active: true,
+          version: "v1.1.10",
+          date: "2020-04-24T01:00:00Z",
+          changes: [
+            "添加：于 Planner 内添加更多外服排除关卡 (DM-* 关卡)",
+            "修复：Google Analytics Screenview Tracking 问题",
+            "修复：网站升级提示于 en 语言时出现 ko 语言下的提示信息",
+          ]
+        },
+        {
+          version: "v1.1.9",
+          date: "2020-04-23T07:00:00Z",
+          changes: [
+            "修复：由于添加国内加速镜像站点的若干问题",
+          ]
+        },
+        {
           version: "v1.1.8",
-          date: "2020-04-25T08:00:00Z",
+          date: "2020-04-23T05:00:00Z",
           changes: [
             "添加：国内加速镜像站点",
             "添加：跟随系统的暗色模式选项",
