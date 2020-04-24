@@ -171,7 +171,7 @@
             this.$ga.event(
               'mirror',
               'notification',
-              'getIpFailed'
+              'get_ip_failed'
             )
             Console.warn("MirrorSelector", "failed to get geoip information", err)
           })
@@ -182,10 +182,25 @@
         this.enabled = false;
         this.$store.commit("mirror/changeIgnoreNotification", true)
         this.dialog = false;
+        this.$ga.event(
+          'mirror',
+          'notification',
+          'ignored',
+          this.mirror
+        )
       },
       redirect(link) {
         this.$store.commit("mirror/changePreference", this.mirror)
         this.busy = true
+        this.$ga.event(
+          'mirror',
+          'notification',
+          'redirected',
+          this.mirror,
+          {
+            transport: 'beacon'
+          }
+        )
         window.location = link;
       }
     },
