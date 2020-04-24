@@ -12,7 +12,7 @@ export default {
   },
   vercel: {
     isCurrent () {
-      return isDomain("now.sh")
+      return isDomain("now.sh") || isDomain("vercel.app")
     }
   }
 }
