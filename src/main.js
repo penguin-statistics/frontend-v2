@@ -119,9 +119,6 @@ Vue.use(VueAnalytics, {
     enabled: true, // enable/disable
     amount: 5, // amount of events fired
     delay: 2000 // delay in milliseconds
-  },
-  autoTracking: {
-    screenview: true
   }
 });
 

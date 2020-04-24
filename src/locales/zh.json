@@ -146,10 +146,10 @@
   },
   "mirrors": {
     "global": {
-      "notification": "推荐使用海外镜像站 {0} 以获得更高访问速度"
+      "notification": "推荐使用海外镜像站 {0}，可以提升访问速度哦！"
     },
     "cn": {
-      "notification": "推荐使用国内镜像站 {0} 以获得更高访问速度"
+      "notification": "推荐使用国内镜像站 {0}，可以提升访问速度哦！"
     },
     "_notification": {
       "ignore": {

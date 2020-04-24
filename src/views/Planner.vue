@@ -6,7 +6,7 @@
         "byProduct": "考虑合成副产物",
         "requireExp": "大量需求经验",
         "requireLmb": "大量需求龙门币",
-        "foreignServer": "不考虑第六章"
+        "foreignServer": "排除仅国服出现的关卡"
       },
       "actions": {
         "import": "导入",
@@ -39,7 +39,7 @@
         "byProduct": "Consider by-products",
         "requireExp": "Large demand for EXP",
         "requireLmb": "Large demand for LMD",
-        "foreignServer": "Do not add Chapter 6 into calculation"
+        "foreignServer": "Do not suggest CN-only stages"
       },
       "actions": {
         "import": "Import",
