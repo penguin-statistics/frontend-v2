@@ -10,7 +10,7 @@ export default {
       return isDomain("penguin-stats.cn")
     }
   },
-  zeitNow: {
+  vercel: {
     isCurrent () {
       return isDomain("now.sh")
     }
