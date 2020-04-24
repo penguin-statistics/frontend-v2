@@ -60,6 +60,13 @@
           <div v-if="item.value">
             <v-divider />
 
+            <v-card-subtitle
+              v-if="item.future"
+              class="subtitle-1"
+            >
+              版本特性一览
+            </v-card-subtitle>
+
             <v-card-text>
               <ol>
                 <li
@@ -90,17 +97,20 @@ export default {
         {
           future: true,
           version: "v3.0.0",
-          date: "2020-04-30T08:00:00Z",
+          date: "2020-05-25T08:00:00Z",
           changes: [
-            "添加：多服务器数据源切换支持",
-            "添加：物品掉落分时查询",
-            "内部重构：所有数据将引入版本概念，从底层保证数据一致性",
+            "将添加：多服务器数据源切换支持",
+            "将添加：物品掉落分时查询",
+            "将添加：高级查询功能",
+            "将添加：数据导出功能",
+            "将优化：ArkPlanner 整体体验",
+            "将内部重构：所有数据将引入版本概念，从底层保证数据一致性",
           ]
         },
         {
           active: true,
           version: "v1.1.10",
-          date: "2020-04-23T06:00:00Z",
+          date: "2020-04-24T01:00:00Z",
           changes: [
             "添加：于 Planner 内添加更多外服排除关卡 (DM-* 关卡)",
             "修复：Google Analytics Screenview Tracking 问题",
