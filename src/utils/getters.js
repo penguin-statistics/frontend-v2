@@ -36,6 +36,7 @@ Getters.limitations = {
 Getters.statistics = {
   byItemId(itemId) {
     const matrix = store.state.data[`${store.getters['dataSource/source']}Matrix`];
+    if (!matrix) return [];
     if (matrix.matrix) {
       // Console.info("getter", "new data: transform on the fly")
       // new data, transform on-the-fly
@@ -68,6 +69,7 @@ Getters.statistics = {
   },
   byStageId(stageId) {
     const matrix = store.state.data[`${store.getters['dataSource/source']}Matrix`];
+    if (!matrix) return [];
     if (matrix.matrix) {
       // Console.info("getter", "new data: transform on the fly")
       // new data, transform on-the-fly

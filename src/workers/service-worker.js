@@ -44,27 +44,39 @@ registerRoute(
 
 // === CDN Resources ===
 
-// fancy backgrounds
-registerRoute(
-  /^https:\/\/penguin\.upyun\.galvincdn\.com\/backgrounds\//,
-  new CacheFirst({
-    cacheName: "penguin-backgrounds",
-    // plugins: [
-    //   new ExpirationPlugin({
-    //     // maxEntries: 30,
-    //     purgeOnQuotaError: true
-    //   })
-    // ]
-  })
-)
+if (~self.location.hostname.indexOf("penguin-stats.cn")) {
+  // fancy backgrounds
+  registerRoute(
+    /^https:\/\/penguin\.upyun\.galvincdn\.com\/backgrounds/,
+    new CacheFirst({
+      cacheName: "penguin-cn-backgrounds"
+    })
+  )
 
-// other images
-registerRoute(
-  /^https:\/\/penguin\.upyun\.galvincdn\.com\/(logos|avatars)\//,
-  new CacheFirst({
-    cacheName: "penguin-images"
-  })
-)
+  // other images
+  registerRoute(
+    /^https:\/\/penguin\.upyun\.galvincdn\.com\/(logos|avatars)/,
+    new CacheFirst({
+      cacheName: "penguin-cn-images"
+    })
+  )
+
+} else {
+
+  registerRoute(
+    /^https:\/\/penguin-stats\.s3\.amazonaws\.com\/backgrounds/,
+    new CacheFirst({
+      cacheName: "penguin-global-backgrounds"
+    })
+  )
+
+  registerRoute(
+    /^https:\/\/penguin-stats\.s3\.amazonaws\.com\/(logos|avatars)/,
+    new CacheFirst({
+      cacheName: "penguin-global-images"
+    })
+  )
+}
 
 // === Site Resources ===
 

@@ -6,7 +6,7 @@
   "bugs": {
     "url": "https://github.com/penguin-statistics/frontend-v2/issues"
   },
-  "license" : "MIT",
+  "license": "MIT",
   "author": "All Contributors <*@*.*> (https://github.com/*)",
   "contributors": [
     "AlvISs_Reimu <alvissreimu@gmail.com> (https://github.com/AlvISsReimu)",
@@ -27,7 +27,6 @@
   },
   "dependencies": {
     "@babel/plugin-transform-modules-commonjs": "^7.8.3",
-    "@chenfengyuan/vue-number-input": "^1.2.1",
     "@sentry/apm": "^5.15.4",
     "@sentry/browser": "^5.6.2",
     "@sentry/integrations": "^5.6.1",

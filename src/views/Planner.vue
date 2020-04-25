@@ -678,7 +678,6 @@
                 :item="items.get(itemData.id)"
                 :ratio="1"
                 disable-link
-                tooltip-position="bottom"
               />
             </v-row>
           </v-container>
@@ -728,7 +727,7 @@
                     {{ $t('need') }}
                   </span>
                 </div>
-                <number-input
+                <NumberInput
                   v-model="itemData.need"
                   size="small"
                   center
@@ -752,6 +751,7 @@
   import get from "@/utils/getters";
   import i18n from "@/i18n";
   import Item from "@/components/global/Item";
+  import NumberInput from "@/components/NumberInput";
 
   import * as clipboard from "clipboard-polyfill";
   import marshaller from "@/utils/marshaller";
@@ -761,7 +761,7 @@
 
   export default {
     name: "Planner",
-    components: {Item},
+    components: {Item, NumberInput},
     data: () => {
       const items = get.items.all(true);
       return {
@@ -1001,94 +1001,9 @@
     padding: 8px 0;
   }
 
-  .fix-icon--left {
-    transform: translate(-2px, -3.5px)
-  }
-
-  .fix-icon--right {
-    transform: translate(2px, -3.5px)
-  }
-
-  ::v-deep .input-field input {
-    text-align: center !important;
-    /*font-family: SF Mono, "Droid Sans Mono", Ubuntu Mono, Consolas, Courier New, Courier, monospace;*/
-    font-weight: bold;
-  }
-
-  ::v-deep .input-field .v-input__slot {
-    padding: 0 6px !important;
-  }
-
-  ::v-deep .input-field legend {
-    margin: 0 6px !important;
-  }
-
-  ::v-deep .input-field label {
-    margin: 0 12px !important;
-    max-width: none;
-  }
-
-
-  ::v-deep .input-field--is-zero input {
-    opacity: 0.5
-  }
-
   .card-item {
     border: 2px solid #4350b0;
     height: 100%
-  }
-
-  ::v-deep .number-input-theme .number-input__input {
-    background: rgba(0, 0, 0, .2) !important;
-    border: 1px solid #ddd;
-    border-radius: 17px !important;
-    top: 0 !important;
-    font-size: 16px;
-    text-overflow: ellipsis;
-    overflow: hidden;
-    white-space: nowrap;
-    padding-left: 30px !important;
-    padding-right: 30px !important;
-  }
-
-  ::v-deep .number-input-theme .number-input__input:hover {
-    background: rgba(0, 0, 0, .35) !important;
-  }
-  ::v-deep .number-input-theme .number-input__input:focus {
-    background: rgba(0, 0, 0, .5) !important;
-    border: 1px solid #0074d9;
-    /*border: none;*/
-    /*box-shadow: 0 0 0 1px #0074d9;*/
-  }
-
-  ::v-deep .theme--light .number-input-theme .number-input__input:hover {
-    background: rgba(0, 0, 0, .17) !important;
-  }
-  ::v-deep .theme--light .number-input-theme .number-input__input:focus {
-    background: rgba(0, 0, 0, .35) !important;
-  }
-
-  ::v-deep .number-input-theme .number-input__button {
-    border: 1px solid #ddd !important;
-    top: 2px !important;
-    border-radius: 50% !important;
-    height: 30px !important;
-    width: 30px !important;
-    transition: all .225s cubic-bezier(0.165, 0.84, 0.44, 1);
-    touch-action: manipulation;
-  }
-  ::v-deep .number-input-theme .number-input__button:hover {
-    transform: scale(1.12);
-  }
-  ::v-deep .number-input-theme .number-input__button:active {
-    transform: scale(1.02);
-  }
-
-  ::v-deep .number-input-theme .number-input__button--minus {
-    left: 2px !important;
-  }
-  ::v-deep .number-input-theme .number-input__button--plus {
-    right: 2px !important;
   }
 
   ::v-deep .number-input-theme--dense .number-input__button--minus {

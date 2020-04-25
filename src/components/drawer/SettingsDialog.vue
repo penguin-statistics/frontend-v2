@@ -1,7 +1,6 @@
 <template>
   <v-dialog
     v-model="active"
-    origin="bottom left"
     max-width="400px"
   >
     <template v-slot:activator="{ on }">
