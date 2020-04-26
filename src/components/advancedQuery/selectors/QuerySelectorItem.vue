@@ -6,11 +6,31 @@
     <template v-slot:activator="{ on }">
       <div class="d-flex flex-row align-center justify-center">
         <v-expand-x-transition>
-          <v-icon
-            v-if="value"
+          <v-tooltip
+            content-class="transparent"
+            right
+            nudge-right="-16"
+            transition="slide-x-transition"
           >
-            mdi-treasure-chest
-          </v-icon>
+            <template v-slot:activator="{ on }">
+              <v-icon
+                v-if="value"
+                v-on="on"
+              >
+                mdi-treasure-chest
+              </v-icon>
+            </template>
+            <v-card
+              max-width="400px"
+            >
+              <v-card-title>
+                物品选择
+              </v-card-title>
+              <v-card-text>
+                此物乃物品选择过滤器也；当选择任一过滤器后，则在同一查询内不可再选择其他过滤器。若欲过滤其他参数，可通过添加对比查询设置其他过滤参数。
+              </v-card-text>
+            </v-card>
+          </v-tooltip>
         </v-expand-x-transition>
         <v-btn
           class="flex-grow-1"
