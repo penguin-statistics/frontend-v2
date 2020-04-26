@@ -1,138 +1,138 @@
 <i18n>
-  {
-    "zh": {
-      "options": {
-        "_name": "选项",
-        "byProduct": "考虑合成副产物",
-        "requireExp": "大量需求经验",
-        "requireLmb": "大量需求龙门币",
-        "foreignServer": "排除仅国服出现的关卡"
-      },
-      "actions": {
-        "import": "导入",
-        "export": "导出",
-        "importExport": "@:(actions.import)/@:(actions.export)",
-        "calculate": "计算规划"
-      },
-      "have": "已有",
-      "need": "需要",
-      "copy": "复制到剪贴板",
-      "calculation": {
-        "title": "规划结果",
-        "tabs": {
-          "stages": "关卡列表",
-          "syntheses": "合成列表",
-          "values": "素材价值"
-        },
-        "lmb": "预计龙门币收益",
-        "sanity": "预计需要理智",
-        "exp": "预计获得录像带经验",
-        "times": "次",
-        "level": "材料等级",
-        "noStage": "未找到需要进行的作战。是不是忘记选择所需素材了？",
-        "noSyntheses": "未找到需要合成的素材。是不是忘记选择所需素材了？"
-      }
-    },
-    "en": {
-      "options": {
-        "_name": "Options",
-        "byProduct": "Consider by-products",
-        "requireExp": "Large demand for EXP",
-        "requireLmb": "Large demand for LMD",
-        "foreignServer": "Do not suggest CN-only stages"
-      },
-      "actions": {
-        "import": "Import",
-        "export": "Export",
-        "importExport": "@:(actions.import)/@:(actions.export)",
-        "calculate": "Calculate"
-      },
-      "have": "Have",
-      "need": "Need",
-      "copy": "Copy to Clipboard",
-      "calculation": {
-        "title": "Calculation Result",
-        "tabs": {
-          "stages": "Stages",
-          "syntheses": "Syntheses",
-          "values": "Values"
-        },
-        "lmb": "Estimated LMD income",
-        "sanity": "Estimated Sanity required",
-        "exp": "Estimated EXP from Battle Records",
-        "times": "battles",
-        "level": "Material Level",
-        "noStage": "No stage found. Have you selected any material yet?",
-        "noSyntheses": "No syntheses found. Have you selected any material yet?"
-      }
-    },
-    "ja": {
-      "options": {
-        "_name": "オプション",
-        "byProduct": "加工副産物を考慮する",
-        "requireExp": "大量の経験値が必要",
-        "requireLmb": "大量の龍門幣が必要",
-        "foreignServer": "第6章を計算に追加しません"
-      },
-      "actions": {
-        "import": "インポート",
-        "export": "エクスポート",
-        "importExport": "@:(actions.import)/@:(actions.export)",
-        "calculate": "計算を行う"
-      },
-      "have": "所持数",
-      "need": "必要数",
-      "copy": "クリップボードにコピー",
-      "calculation": {
-        "title": "計算結果",
-        "tabs": {
-          "stages": "ステージ",
-          "syntheses": "素材加工",
-          "values": "素材等級"
-        },
-        "lmb": "推定獲得龍門幣",
-        "sanity": "推定必要理性",
-        "exp": "戦闘で入手出来る経験値の推定",
-        "times": "回",
-        "level": "素材レベル",
-        "noStage": "入力内容に不備があるため結果を表示出来ません。必要な素材の入力を忘れていませんか？",
-        "noSyntheses": "入力内容に不備があるため結果を表示出来ません。必要な素材の入力を忘れていませんか？"
-      }
-    },
-    "ko": {
-      "options": {
-        "_name": "설정",
-        "byProduct": "부산물 획득 고려",
-        "requireExp": "경험치 획득 고려",
-        "requireLmb": "용문폐 획득 고려",
-        "foreignServer": "에피소드 6 제외"
-      },
-      "actions": {
-        "import": "가져오기",
-        "export": "내보내기",
-        "importExport": "@:(actions.import)/@:(actions.export)",
-        "calculate": "계산하기"
-      },
-      "have": "보유량",
-      "need": "필요량",
-      "copy": "클립보드에 복사",
-      "calculation": {
-        "title": "계산 결과",
-        "tabs": {
-          "stages": "작전 지역 기준",
-          "syntheses": "재료 가공 기준",
-          "values": "재료 등급 기준"
-        },
-        "lmb": "예상 용문폐 획득량",
-        "sanity": "예상 이성 필요량",
-        "exp": "예상 경험치 획득량",
-        "times": "회",
-        "level": "재료 등급",
-        "noStage": "작전 지역을 찾을 수 없습니다. 필요한 재료를 선택하셨습니까?",
-        "noSyntheses": "가공할 재료를 찾을 수 없습니다. 필요한 재료를 선택하셨습니까?"
-      }
-    }
-  }
+{
+	"en": {
+		"actions": {
+			"calculate": "Calculate",
+			"export": "Export",
+			"import": "Import",
+			"importExport": "@:(actions.import)/@:(actions.export)"
+		},
+		"calculation": {
+			"exp": "Estimated EXP from Battle Records",
+			"level": "Material Level",
+			"lmb": "Estimated LMD income",
+			"noStage": "No stage found. Have you selected any material yet?",
+			"noSyntheses": "No syntheses found. Have you selected any material yet?",
+			"sanity": "Estimated Sanity required",
+			"tabs": {
+				"stages": "Stages",
+				"syntheses": "Syntheses",
+				"values": "Values"
+			},
+			"times": "battles",
+			"title": "Calculation Result"
+		},
+		"copy": "Copy to Clipboard",
+		"have": "Have",
+		"need": "Need",
+		"options": {
+			"_name": "Options",
+			"byProduct": "Consider by-products",
+			"foreignServer": "Do not suggest CN-only stages",
+			"requireExp": "Large demand for EXP",
+			"requireLmb": "Large demand for LMD"
+		}
+	},
+	"ja": {
+		"actions": {
+			"calculate": "計算を行う",
+			"export": "エクスポート",
+			"import": "インポート",
+			"importExport": "@:(actions.import)/@:(actions.export)"
+		},
+		"calculation": {
+			"exp": "戦闘で入手出来る経験値の推定",
+			"level": "素材レベル",
+			"lmb": "推定獲得龍門幣",
+			"noStage": "入力内容に不備があるため結果を表示出来ません。必要な素材の入力を忘れていませんか？",
+			"noSyntheses": "入力内容に不備があるため結果を表示出来ません。必要な素材の入力を忘れていませんか？",
+			"sanity": "推定必要理性",
+			"tabs": {
+				"stages": "ステージ",
+				"syntheses": "素材加工",
+				"values": "素材等級"
+			},
+			"times": "回",
+			"title": "計算結果"
+		},
+		"copy": "クリップボードにコピー",
+		"have": "所持数",
+		"need": "必要数",
+		"options": {
+			"_name": "オプション",
+			"byProduct": "加工副産物を考慮する",
+			"foreignServer": "第6章を計算に追加しません",
+			"requireExp": "大量の経験値が必要",
+			"requireLmb": "大量の龍門幣が必要"
+		}
+	},
+	"ko": {
+		"actions": {
+			"calculate": "계산하기",
+			"export": "내보내기",
+			"import": "가져오기",
+			"importExport": "@:(actions.import)/@:(actions.export)"
+		},
+		"calculation": {
+			"exp": "예상 경험치 획득량",
+			"level": "재료 등급",
+			"lmb": "예상 용문폐 획득량",
+			"noStage": "작전 지역을 찾을 수 없습니다. 필요한 재료를 선택하셨습니까?",
+			"noSyntheses": "가공할 재료를 찾을 수 없습니다. 필요한 재료를 선택하셨습니까?",
+			"sanity": "예상 이성 필요량",
+			"tabs": {
+				"stages": "작전 지역 기준",
+				"syntheses": "재료 가공 기준",
+				"values": "재료 등급 기준"
+			},
+			"times": "회",
+			"title": "계산 결과"
+		},
+		"copy": "클립보드에 복사",
+		"have": "보유량",
+		"need": "필요량",
+		"options": {
+			"_name": "설정",
+			"byProduct": "부산물 획득 고려",
+			"foreignServer": "에피소드 6 제외",
+			"requireExp": "경험치 획득 고려",
+			"requireLmb": "용문폐 획득 고려"
+		}
+	},
+	"zh": {
+		"actions": {
+			"calculate": "计算规划",
+			"export": "导出",
+			"import": "导入",
+			"importExport": "@:(actions.import)/@:(actions.export)"
+		},
+		"calculation": {
+			"exp": "预计获得录像带经验",
+			"level": "材料等级",
+			"lmb": "预计龙门币收益",
+			"noStage": "未找到需要进行的作战。是不是忘记选择所需素材了？",
+			"noSyntheses": "未找到需要合成的素材。是不是忘记选择所需素材了？",
+			"sanity": "预计需要理智",
+			"tabs": {
+				"stages": "关卡列表",
+				"syntheses": "合成列表",
+				"values": "素材价值"
+			},
+			"times": "次",
+			"title": "规划结果"
+		},
+		"copy": "复制到剪贴板",
+		"have": "已有",
+		"need": "需要",
+		"options": {
+			"_name": "选项",
+			"byProduct": "考虑合成副产物",
+			"foreignServer": "排除仅国服出现的关卡",
+			"requireExp": "大量需求经验",
+			"requireLmb": "大量需求龙门币"
+		}
+	}
+}
 </i18n>
 
 <template>

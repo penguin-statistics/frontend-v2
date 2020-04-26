@@ -1,38 +1,38 @@
 <i18n>
-  {
-    "zh": {
-      "dataSourceToggle": {
-        "title": "需要登录",
-        "loginNotice": "查看个人掉落数据前，请先登录",
-        "all": "全平台",
-        "personal": "个人"
-      }
-    },
-    "en": {
-      "dataSourceToggle": {
-        "title": "Login Required",
-        "loginNotice": "Please log in before viewing personal drop data.",
-        "all": "All",
-        "personal": "Personal"
-      }
-    },
-    "ja": {
-      "dataSourceToggle": {
-        "title": "ログインが必要です",
-        "loginNotice": "個人のドロップデータを表示するにはログインが必要となります。",
-        "all": "全体",
-        "personal": "個人"
-      }
-    },
-    "ko": { 
-      "dataSourceToggle": {
-        "title": "로그인 필요",
-        "loginNotice": "개인 보고서를 보시려면 로그인해 주세요.",
-        "all": "전체",
-        "personal": "개인"
-      }
-    }
-  }
+{
+	"en": {
+		"dataSourceToggle": {
+			"all": "All",
+			"loginNotice": "Please log in before viewing personal drop data.",
+			"personal": "Personal",
+			"title": "Login Required"
+		}
+	},
+	"ja": {
+		"dataSourceToggle": {
+			"all": "全体",
+			"loginNotice": "個人のドロップデータを表示するにはログインが必要となります。",
+			"personal": "個人",
+			"title": "ログインが必要です"
+		}
+	},
+	"ko": {
+		"dataSourceToggle": {
+			"all": "전체",
+			"loginNotice": "개인 보고서를 보시려면 로그인해 주세요.",
+			"personal": "개인",
+			"title": "로그인 필요"
+		}
+	},
+	"zh": {
+		"dataSourceToggle": {
+			"all": "全平台",
+			"loginNotice": "查看个人掉落数据前，请先登录",
+			"personal": "个人",
+			"title": "需要登录"
+		}
+	}
+}
 </i18n>
 
 <template>

@@ -143,5 +143,16 @@
         "not": "{quantity}種類のアイテムであってはなりません"
       }
     }
+  },
+  "items": {
+    "choose": {
+      "name": "素材選択"
+    },
+    "categories": {
+      "ACTIVITY_ITEM": "イベントアイテム",
+      "CARD_EXP": "作戦記録",
+      "FURN": "家具",
+      "MATERIAL": "素材"
+    }
   }
 }

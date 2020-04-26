@@ -1,58 +1,58 @@
 <i18n>
-  {
-    "zh": {
-      "quickStart": "快速上手",
-      "title": {
-        "planner": "刷图规划",
-        "byItem": "素材掉率",
-        "byStage": "关卡掉率"
-      },
-      "subtitle": {
-        "planner": "请给我刷图建议",
-        "byItem": "我该去哪刷石头？",
-        "byStage": "这图掉率如何？"
-      }
-    },
-    "en": {
-      "quickStart": "Quick Start",
-      "title": {
-        "planner": "Farm Planning",
-        "byItem": "Item Drop Rates",
-        "byStage": "Stage Drop Rates"
-      },
-      "subtitle": {
-        "planner": "Please gimme some farming advice",
-        "byItem": "Where should I farm for Orirock?",
-        "byStage": "What are the drop rates of this stage?"
-      }
-    },
-    "ja": {
-      "quickStart": "クイックスタート",
-      "title": {
-        "planner": "周回計画",
-        "byItem": "素材ドロップ率",
-        "byStage": "作戦ドロップ率"
-      },
-      "subtitle": {
-        "planner": "Please gimme some farming advice",
-        "byItem": "Where should I farm for Orirock?",
-        "byStage": "What are the drop rates of this stage?"
-      }
-    },
-    "ko": {
-      "quickStart": "빠른 시작",
-      "title": {
-        "planner": "Farm Planning",
-        "byItem": "Item Drop Rates",
-        "byStage": "Stage Drop Rates"
-      },
-      "subtitle": {
-        "planner": "Please gimme some farming advice",
-        "byItem": "Where should I farm for Orirock?",
-        "byStage": "What are the drop rates of this stage?"
-      }
-    }
-  }
+{
+	"en": {
+		"quickStart": "Quick Start",
+		"subtitle": {
+			"byItem": "Where should I farm for Orirock?",
+			"byStage": "What are the drop rates of this stage?",
+			"planner": "Please gimme some farming advice"
+		},
+		"title": {
+			"byItem": "Item Drop Rates",
+			"byStage": "Stage Drop Rates",
+			"planner": "Farm Planning"
+		}
+	},
+	"ja": {
+		"quickStart": "クイックスタート",
+		"subtitle": {
+			"byItem": "Where should I farm for Orirock?",
+			"byStage": "What are the drop rates of this stage?",
+			"planner": "Please gimme some farming advice"
+		},
+		"title": {
+			"byItem": "素材ドロップ率",
+			"byStage": "作戦ドロップ率",
+			"planner": "周回計画"
+		}
+	},
+	"ko": {
+		"quickStart": "빠른 시작",
+		"subtitle": {
+			"byItem": "Where should I farm for Orirock?",
+			"byStage": "What are the drop rates of this stage?",
+			"planner": "Please gimme some farming advice"
+		},
+		"title": {
+			"byItem": "Item Drop Rates",
+			"byStage": "Stage Drop Rates",
+			"planner": "Farm Planning"
+		}
+	},
+	"zh": {
+		"quickStart": "快速上手",
+		"subtitle": {
+			"byItem": "我该去哪刷石头？",
+			"byStage": "这图掉率如何？",
+			"planner": "请给我刷图建议"
+		},
+		"title": {
+			"byItem": "素材掉率",
+			"byStage": "关卡掉率",
+			"planner": "刷图规划"
+		}
+	}
+}
 </i18n>
 
 <template>

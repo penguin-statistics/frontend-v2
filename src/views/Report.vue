@@ -1,120 +1,122 @@
 <i18n>
-  {
-    "zh": {
-      "stage": {
-        "loots": {
-          "normal": "常规掉落",
-          "extra": "额外物资",
-          "special": "特殊掉落"
-        }
-      },
-      "report": {
-        "name": "上报结果",
-        "furniture": "家具掉落：{state}",
-        "submit": "提交",
-        "success": "上传成功",
-        "undo": "撤销",
-        "undoSuccess": "撤销成功",
-        "unable": "无法提交：",
-        "clear": "清空",
-        "expired": "此活动关卡已过期，汇报已关闭"
-      },
-      "rules": {
-        "rule_1": "这是单次作战的提交，请注意核对数目；",
-        "rule_2": "若无素材掉落，请直接点击提交；",
-        "rule_3": "请不要汇报首次通关奖励，不要只汇报比较“欧”的掉落；",
-        "rule_4": "请保证通关评价是3星；",
-        "rule_5": "请只上传国服的掉落，谢谢。"
-      },
-      "usage": "左键增加，右键减少",
-      "gacha": "本作战允许在一次汇报内包含多个结果。"
-    },
-    "en": {
-      "stage": {
-        "loots": {
-          "normal": "Normal",
-          "extra": "Extra",
-          "special": "Special"
-        }
-      },
-      "report": {
-        "name": "Report",
-        "furniture": "Furniture Drop: {state}",
-        "submit": "Submit",
-        "success": "Successfully submitted",
-        "undo": "Recall",
-        "undoSuccess": "Successfully recalled submission",
-        "clear": "Clear",
-        "unable": "Failed to submit: ",
-        "expired": "This stage is not available in-game anymore. The report function for this stage has been closed."
-      },
-      "rules": {
-        "rule_1": "Report one clear at a time. Please double-check your drop selection.",
-        "rule_2": "If there are no drops, click submit directly without selecting any drops.",
-        "rule_3": "Please do not report the first-clear of a stage, and do not only report the clears where you were lucky - report all clears.",
-        "rule_4": "Please make sure that you get a 3-stars clear.",
-        "rule_5": "Please only submit drop data from the CN server."
-      },
-      "usage": "Increase drop amount by left mouse click, decrease by right click",
-      "gacha": "Multiple results are allowed for the reports of this stage."
-    },
-    "ja": {
-      "stage": {
-        "loots": {
-          "normal": "通常ドロップ",
-          "extra": "エクストラドロップ",
-          "special": "スペシャルドロップ"
-        }
-      },
-      "report": {
-        "name": "報告",
-        "furniture": "家具ドロップ：{state}",
-        "submit": "送信",
-        "success": "送信成功",
-        "undo": "送信キャンセル",
-        "undoSuccess": "キャンセルしました",
-        "unable": "送信失敗：",
-        "clear": "クリア"
-      },
-      "rules": {
-        "rule_1": "ここに追加する内容は1回でドロップした内容です。",
-        "rule_2": "素材がドロップしなかった場合は直接送信をクリックしてください。",
-        "rule_3": "初クリア時の報酬は報告しないでください。ドロップ結果が極端に良かったものだけを報告するのはご遠慮ください。",
-        "rule_4": "クリア時の評価が☆3である場合のみ報告してください。",
-        "rule_5": "大陸版のドロップデータのみをアップロードして下さい。ご協力ありがとうございます。"
-      },
-      "usage": "左クリックで個数増加、右クリックで個数減少",
-      "gacha": "この操作を行うことでデータに複数の結果を反映させることが出来ます。"
-    },
-    "ko": {
-      "stage": {
-        "loots": {
-          "normal": "일반 드랍",
-          "extra": "추가 드랍",
-          "special": "특수 드랍"
-        }
-      },
-      "report": {
-        "name": "보고",
-        "furniture": "럭키 드랍: {state}",
-        "submit": "제출",
-        "success": "성공적으로 제출되었습니다",
-        "undo": "제출 취소",
-        "undoSuccess": "성공적으로 취소되었습니다",
-        "clear": "초기화",
-        "unable": "제출 실패: "
-      },
-      "rules": {
-        "rule_1": "한 번에 하나의 전투에 대한 보고서를 작성하여야 합니다, 제출 전에 입력 내용을 한번 더 확인해 주십시오.",
-        "rule_2": "드랍이 없는 경우에는, 아무것도 누르지 않은 채로 제출을 눌러 주십시오.",
-        "rule_3": "처음으로 클리어한 작전은 보고하지 마시고, 운이 좋았던 작전만 보고하지 마십시오 - 모든 드랍을 보고해 주십시오.",
-        "rule_4": "3성으로 클리어하여 주십시오.",
-        "rule_5": "중국 서버에서의 드랍만 보고하여 주십시오, 감사합니다."
-      },
-      "usage": "왼쪽 클릭시 증가하며, 오른쪽 클릭시 감소합니다",
-      "gacha": "이 작전지역은 여러 개의 결과를 한 보고서에 제출할 수 있습니다."
-    }
-  }
+{
+	"en": {
+		"gacha": "Multiple results are allowed for the reports of this stage.",
+		"report": {
+			"clear": "Clear",
+			"expired": "This stage is not available in-game anymore. The report function for this stage has been closed.",
+			"furniture": "Furniture Drop: {state}",
+			"name": "Report",
+			"submit": "Submit",
+			"success": "Successfully submitted",
+			"unable": "Failed to submit: ",
+			"undo": "Recall",
+			"undoSuccess": "Successfully recalled submission"
+		},
+		"rules": {
+			"rule_1": "Report one clear at a time. Please double-check your drop selection.",
+			"rule_2": "If there are no drops, click submit directly without selecting any drops.",
+			"rule_3": "Please do not report the first-clear of a stage, and do not only report the clears where you were lucky - report all clears.",
+			"rule_4": "Please make sure that you get a 3-stars clear.",
+			"rule_5": "Please only submit drop data from the CN server."
+		},
+		"stage": {
+			"loots": {
+				"extra": "Extra",
+				"normal": "Normal",
+				"special": "Special"
+			}
+		},
+		"usage": "Increase drop amount by left mouse click, decrease by right click"
+	},
+	"ja": {
+		"gacha": "この操作を行うことでデータに複数の結果を反映させることが出来ます。",
+		"report": {
+			"clear": "クリア",
+			"expired": "",
+			"furniture": "家具ドロップ：{state}",
+			"name": "報告",
+			"submit": "送信",
+			"success": "送信成功",
+			"unable": "送信失敗：",
+			"undo": "送信キャンセル",
+			"undoSuccess": "キャンセルしました"
+		},
+		"rules": {
+			"rule_1": "ここに追加する内容は1回でドロップした内容です。",
+			"rule_2": "素材がドロップしなかった場合は直接送信をクリックしてください。",
+			"rule_3": "初クリア時の報酬は報告しないでください。ドロップ結果が極端に良かったものだけを報告するのはご遠慮ください。",
+			"rule_4": "クリア時の評価が☆3である場合のみ報告してください。",
+			"rule_5": "大陸版のドロップデータのみをアップロードして下さい。ご協力ありがとうございます。"
+		},
+		"stage": {
+			"loots": {
+				"extra": "エクストラドロップ",
+				"normal": "通常ドロップ",
+				"special": "スペシャルドロップ"
+			}
+		},
+		"usage": "左クリックで個数増加、右クリックで個数減少"
+	},
+	"ko": {
+		"gacha": "이 작전지역은 여러 개의 결과를 한 보고서에 제출할 수 있습니다.",
+		"report": {
+			"clear": "초기화",
+			"expired": "",
+			"furniture": "럭키 드랍: {state}",
+			"name": "보고",
+			"submit": "제출",
+			"success": "성공적으로 제출되었습니다",
+			"unable": "제출 실패: ",
+			"undo": "제출 취소",
+			"undoSuccess": "성공적으로 취소되었습니다"
+		},
+		"rules": {
+			"rule_1": "한 번에 하나의 전투에 대한 보고서를 작성하여야 합니다, 제출 전에 입력 내용을 한번 더 확인해 주십시오.",
+			"rule_2": "드랍이 없는 경우에는, 아무것도 누르지 않은 채로 제출을 눌러 주십시오.",
+			"rule_3": "처음으로 클리어한 작전은 보고하지 마시고, 운이 좋았던 작전만 보고하지 마십시오 - 모든 드랍을 보고해 주십시오.",
+			"rule_4": "3성으로 클리어하여 주십시오.",
+			"rule_5": "중국 서버에서의 드랍만 보고하여 주십시오, 감사합니다."
+		},
+		"stage": {
+			"loots": {
+				"extra": "추가 드랍",
+				"normal": "일반 드랍",
+				"special": "특수 드랍"
+			}
+		},
+		"usage": "왼쪽 클릭시 증가하며, 오른쪽 클릭시 감소합니다"
+	},
+	"zh": {
+		"gacha": "本作战允许在一次汇报内包含多个结果。",
+		"report": {
+			"clear": "清空",
+			"expired": "此活动关卡已过期，汇报已关闭",
+			"furniture": "家具掉落：{state}",
+			"name": "上报结果",
+			"submit": "提交",
+			"success": "上传成功",
+			"unable": "无法提交：",
+			"undo": "撤销",
+			"undoSuccess": "撤销成功"
+		},
+		"rules": {
+			"rule_1": "这是单次作战的提交，请注意核对数目；",
+			"rule_2": "若无素材掉落，请直接点击提交；",
+			"rule_3": "请不要汇报首次通关奖励，不要只汇报比较“欧”的掉落；",
+			"rule_4": "请保证通关评价是3星；",
+			"rule_5": "请只上传国服的掉落，谢谢。"
+		},
+		"stage": {
+			"loots": {
+				"extra": "额外物资",
+				"normal": "常规掉落",
+				"special": "特殊掉落"
+			}
+		},
+		"usage": "左键增加，右键减少"
+	}
+}
 </i18n>
 
 <template>

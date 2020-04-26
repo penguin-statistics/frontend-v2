@@ -1,90 +1,90 @@
 <i18n>
-  {
-    "zh": {
-      "links": {
-        "tags": {
-          "hr": "公招查询",
-          "levelup": "升级计算",
-          "materials": "材料需求计算",
-          "planner": "刷图规划",
-          "storage": "库存管理",
-          "character": "角色查看",
-          "enemy": "整合图鉴",
-          "apRanking": "理智效率排行",
-          "dropRateRanking": "掉率排行",
-          "generalRanking": "综合收益排行",
-          "walkthrough": "通关攻略",
-          "experience": "经验分享",
-          "ja_translation": "剧情日文翻译",
-          "cn_wiki": "国服wiki",
-          "jp_wiki": "日服Wiki"
-        }
-      }
-    },
-    "en": {
-      "links": {
-        "tags": {
-          "hr": "Recruiting Lookup",
-          "levelup": "Level Up Calculator",
-          "materials": "Material Requirement Calculator",
-          "planner": "Planner",
-          "storage": "Inventory Management",
-          "character": "Operators List",
-          "enemy": "Enemies List",
-          "apRanking": "AP Efficiency Ranking",
-          "dropRateRanking": "Drop Rate Ranking",
-          "generalRanking": "General Ranking",
-          "walkthrough": "Walkthrough",
-          "experience": "Experience",
-          "ja_translation": "Japanese Translation of Main Story",
-          "cn_wiki": "CN Server Wiki",
-          "jp_wiki": "JP Server Wiki"
-        }
-      }
-    },
-    "ja": {
-      "links": {
-        "tags": {
-          "hr": "公募一覧",
-          "levelup": "レベル計算機",
-          "materials": "素材必要数計算機",
-          "planner": "周回計画作成ツール",
-          "storage": "素材在庫管理",
-          "character": "オペレーター一覧",
-          "enemy": "レユニオン一覧",
-          "apRanking": "理性効率順位表",
-          "dropRateRanking": "ドロップ率順位表",
-          "generalRanking": "総合収益順位表",
-          "walkthrough": "ステージ攻略",
-          "experience": "ゲームレビュー",
-          "ja_translation": "ストーリー和訳",
-          "cn_wiki": "大陸版Wiki",
-          "jp_wiki": "日本版Wiki"
-        }
-      }
-    },
-    "ko": {
-      "links": {
-        "tags": {
-          "hr": "공개모집 계산기",
-          "levelup": "레벨링 계산기",
-          "materials": "육성 재료 계산기",
-          "planner": "계획기",
-          "storage": "창고 관리기",
-          "character": "오퍼레이터 목록",
-          "enemy": "적 목록",
-          "apRanking": "이성 효율 순위",
-          "dropRateRanking": "드랍률 순위",
-          "generalRanking": "종합 순위",
-          "walkthrough": "공략집",
-          "experience": "팁 모음",
-          "ja_translation": "메인스토리 일본어 번역",
-          "cn_wiki": "중국서버 위키",
-          "jp_wiki": "일본서버 위키"
-        }
-      }
-    }
-  }
+{
+	"en": {
+		"links": {
+			"tags": {
+				"apRanking": "AP Efficiency Ranking",
+				"character": "Operators List",
+				"cn_wiki": "CN Server Wiki",
+				"dropRateRanking": "Drop Rate Ranking",
+				"enemy": "Enemies List",
+				"experience": "Experience",
+				"generalRanking": "General Ranking",
+				"hr": "Recruiting Lookup",
+				"ja_translation": "Japanese Translation of Main Story",
+				"jp_wiki": "JP Server Wiki",
+				"levelup": "Level Up Calculator",
+				"materials": "Material Requirement Calculator",
+				"planner": "Planner",
+				"storage": "Inventory Management",
+				"walkthrough": "Walkthrough"
+			}
+		}
+	},
+	"ja": {
+		"links": {
+			"tags": {
+				"apRanking": "理性効率順位表",
+				"character": "オペレーター一覧",
+				"cn_wiki": "大陸版Wiki",
+				"dropRateRanking": "ドロップ率順位表",
+				"enemy": "レユニオン一覧",
+				"experience": "ゲームレビュー",
+				"generalRanking": "総合収益順位表",
+				"hr": "公募一覧",
+				"ja_translation": "ストーリー和訳",
+				"jp_wiki": "日本版Wiki",
+				"levelup": "レベル計算機",
+				"materials": "素材必要数計算機",
+				"planner": "周回計画作成ツール",
+				"storage": "素材在庫管理",
+				"walkthrough": "ステージ攻略"
+			}
+		}
+	},
+	"ko": {
+		"links": {
+			"tags": {
+				"apRanking": "이성 효율 순위",
+				"character": "오퍼레이터 목록",
+				"cn_wiki": "중국서버 위키",
+				"dropRateRanking": "드랍률 순위",
+				"enemy": "적 목록",
+				"experience": "팁 모음",
+				"generalRanking": "종합 순위",
+				"hr": "공개모집 계산기",
+				"ja_translation": "메인스토리 일본어 번역",
+				"jp_wiki": "일본서버 위키",
+				"levelup": "레벨링 계산기",
+				"materials": "육성 재료 계산기",
+				"planner": "계획기",
+				"storage": "창고 관리기",
+				"walkthrough": "공략집"
+			}
+		}
+	},
+	"zh": {
+		"links": {
+			"tags": {
+				"apRanking": "理智效率排行",
+				"character": "角色查看",
+				"cn_wiki": "国服wiki",
+				"dropRateRanking": "掉率排行",
+				"enemy": "整合图鉴",
+				"experience": "经验分享",
+				"generalRanking": "综合收益排行",
+				"hr": "公招查询",
+				"ja_translation": "剧情日文翻译",
+				"jp_wiki": "日服Wiki",
+				"levelup": "升级计算",
+				"materials": "材料需求计算",
+				"planner": "刷图规划",
+				"storage": "库存管理",
+				"walkthrough": "通关攻略"
+			}
+		}
+	}
+}
 </i18n>
 
 <template>

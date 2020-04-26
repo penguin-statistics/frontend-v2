@@ -1,18 +1,30 @@
 <i18n>
-  {
-    "zh": {
-      "update": {
-        "refresh": "体验新版",
-        "success": "更新啦！"
-      }
-    },
-    "en": {
-      "update": {
-        "refresh": "Refresh",
-        "success": "Website Updated!"
-      }
-    }
-  }
+{
+	"en": {
+		"update": {
+			"refresh": "Refresh",
+			"success": "Website Updated!"
+		}
+	},
+	"ja": {
+		"update": {
+			"refresh": "",
+			"success": ""
+		}
+	},
+	"ko": {
+		"update": {
+			"refresh": "",
+			"success": ""
+		}
+	},
+	"zh": {
+		"update": {
+			"refresh": "体验新版",
+			"success": "更新啦！"
+		}
+	}
+}
 </i18n>
 
 <template>

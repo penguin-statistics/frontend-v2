@@ -157,5 +157,16 @@
         "subtitle": "Are you sure you want to ignore all mirror optimization notifications? Performance issues may occur."
       }
     }
+  },
+  "items": {
+    "choose": {
+      "name": "Choose Item"
+    },
+    "categories": {
+      "ACTIVITY_ITEM": "Event item",
+      "CARD_EXP": "Battle Records",
+      "FURN": "Furniture",
+      "MATERIAL": "Materials"
+    }
   }
 }

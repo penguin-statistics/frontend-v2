@@ -1,34 +1,34 @@
 <i18n>
-  {
-    "zh": {
-      "bulletin": [
-        "为了优化国内和海外的访问速度，我们建立了相应的镜像站，推荐各位博士根据所处地理位置进行选择。（如果您拥有本站的ID，更换镜像后请重新登录）",
-        "国内：penguin-stats.cn",
-        "国际：penguin-stats.io"
-      ]
-    },
-    "en": {
-      "bulletin": [
-        "In order to increase the site speed, we built up two mirror websites. Please select the corresponding mirror according to your geographical location. (If you have Penguin Statistics user ID, you need to re-login after you switch to another mirror site)",
-        "China: penguin-stats.cn",
-        "Global: penguin-stats.io"
-      ]
-    },
-    "ja": {
-      "bulletin": [
-        "In order to increase the site speed, we built up two mirror websites. Please select the corresponding mirror according to your geographical location. (If you have Penguin Statistics user ID, you need to re-login after you switch to another mirror site)",
-        "China: penguin-stats.cn",
-        "Global: penguin-stats.io"
-      ]
-    },
-    "ko": {
-      "bulletin": [
-        "In order to increase the site speed, we built up two mirror websites. Please select the corresponding mirror according to your geographical location. (If you have Penguin Statistics user ID, you need to re-login after you switch to another mirror site)",
-        "China: penguin-stats.cn",
-        "Global: penguin-stats.io"
-      ]
-    }
-  }
+{
+	"en": {
+		"bulletin": [
+			"In order to increase the site speed, we built up two mirror websites. Please select the corresponding mirror according to your geographical location. (If you have Penguin Statistics user ID, you need to re-login after you switch to another mirror site)",
+			"China: penguin-stats.cn",
+			"Global: penguin-stats.io"
+		]
+	},
+	"ja": {
+		"bulletin": [
+			"In order to increase the site speed, we built up two mirror websites. Please select the corresponding mirror according to your geographical location. (If you have Penguin Statistics user ID, you need to re-login after you switch to another mirror site)",
+			"China: penguin-stats.cn",
+			"Global: penguin-stats.io"
+		]
+	},
+	"ko": {
+		"bulletin": [
+			"In order to increase the site speed, we built up two mirror websites. Please select the corresponding mirror according to your geographical location. (If you have Penguin Statistics user ID, you need to re-login after you switch to another mirror site)",
+			"China: penguin-stats.cn",
+			"Global: penguin-stats.io"
+		]
+	},
+	"zh": {
+		"bulletin": [
+			"为了优化国内和海外的访问速度，我们建立了相应的镜像站，推荐各位博士根据所处地理位置进行选择。（如果您拥有本站的ID，更换镜像后请重新登录）",
+			"国内：penguin-stats.cn",
+			"国际：penguin-stats.io"
+		]
+	}
+}
 </i18n>
 
 <template>

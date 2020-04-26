@@ -1,18 +1,18 @@
 <i18n>
-  {
-    "zh": {
-      "scroll": "左右滑动查看数据"
-    },
-    "en": {
-      "scroll": "Scroll to view details"
-    },
-    "ja": {
-      "scroll": "左右にスクロールでデータを表示"
-    },
-    "ko": {
-      "scroll": "스크롤로 세부 사항을 볼 수 있습니다"
-    }
-  }
+{
+	"en": {
+		"scroll": "Scroll to view details"
+	},
+	"ja": {
+		"scroll": "左右にスクロールでデータを表示"
+	},
+	"ko": {
+		"scroll": "스크롤로 세부 사항을 볼 수 있습니다"
+	},
+	"zh": {
+		"scroll": "左右滑动查看数据"
+	}
+}
 </i18n>
 
 <template>
@@ -245,7 +245,10 @@
       },
       type: {
         type: String,
-        required: true
+        required: true,
+        validator (val) {
+          return ['item', 'stage'].includes(val)
+        }
       }
     },
     data() {

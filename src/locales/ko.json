@@ -143,5 +143,16 @@
         "not": "{quantity}가지의 아이템이 드랍될 수 없습니다"
       }
     }
+  },
+  "items": {
+    "choose": {
+      "name": "아이템 선택"
+    },
+    "categories": {
+      "ACTIVITY_ITEM": "이벤트 아이템",
+      "CARD_EXP": "작전 기록",
+      "FURN": "가구",
+      "MATERIAL": "재료"
+    }
   }
 }

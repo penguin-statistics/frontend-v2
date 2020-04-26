@@ -10,7 +10,8 @@
     "stats": {
       "_name": "素材掉率",
       "stage": "按作战",
-      "item": "按素材"
+      "item": "按素材",
+      "advanced": "高级查询"
     },
     "about": {
       "_name": "关于本站",
@@ -156,6 +157,17 @@
         "title": "不再显示镜像提示？",
         "subtitle": "确定要忽略所有镜像提示吗？网站加载性能可能会受到影响。"
       }
+    }
+  },
+  "items": {
+    "choose": {
+      "name": "选择物品"
+    },
+    "categories": {
+      "ACTIVITY_ITEM": "活动道具",
+      "CARD_EXP": "作战记录",
+      "FURN": "家具",
+      "MATERIAL": "材料"
     }
   }
 }
