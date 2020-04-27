@@ -5,11 +5,11 @@ export default {
     isCNMirror () {
       return true || mirror.cn.isCurrent()
     },
-    isZeitNow () {
-      return mirror.zeitNow.isCurrent()
+    isVercel () {
+      return mirror.vercel.isCurrent()
     },
     primaryColor () {
-      if (this.isZeitNow) {
+      if (this.isVercel) {
         return "orange darken-4"
       } else {
         return "blue darken-3"

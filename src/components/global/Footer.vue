@@ -56,11 +56,11 @@
       </v-card-text>
 
       <v-card-text
-        v-if="isZeitNow"
+        v-if="isVercel"
         class="white--text d-block pt-2 pb-0 overline"
       >
         <span>
-          Zeit Now 预览构建
+          Vercel 预览构建
         </span>
       </v-card-text>
     </v-card>
