@@ -3,7 +3,7 @@ import mirror from "@/utils/mirror";
 export default {
   computed: {
     isCNMirror () {
-      return mirror.cn.isCurrent()
+      return true || mirror.cn.isCurrent()
     },
     isZeitNow () {
       return mirror.zeitNow.isCurrent()

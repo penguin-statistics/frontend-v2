@@ -26,15 +26,17 @@ export default {
         this.themeToggle(true)
       } else if (newValue === "light") {
         this.themeToggle(false)
-      } else if (newValue === "system" || typeof newValue === "boolean") {
+      } else if (newValue === "system") {
         const self = this;
         if (window.matchMedia) {
           // if support we then apply the current settings
           const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)')
           this.themeToggle(mediaQuery.matches)
           // and we listen for any additional changes being applied
-          mediaQuery.addListener(function(e) {
-            self.themeToggle(e.matches)
+          // using deprecated `addListener` instead of `addEventListener`: iOS 13.4 doesn't support `addEventListener`
+          // so the former one has been used. More at https://codepen.io/galvingao/pen/zYvoZeM.
+          mediaQuery.addListener(function (e) {
+            if (self.dark === "system") self.themeToggle(e.matches)
           })
         } else {
           // if the system doesn't support matchMedia, we then fallback to dark mode
