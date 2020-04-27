@@ -431,7 +431,7 @@
           >
             <v-divider style="opacity: 0.3" />
             <span class="mx-4">
-              <v-icon left>mdi-close</v-icon>{{ $t('dialog.close') }}
+              <v-icon left>mdi-close</v-icon>{{ $t('meta.dialog.close') }}
             </span>
             <v-divider style="opacity: 0.3" />
           </v-btn>

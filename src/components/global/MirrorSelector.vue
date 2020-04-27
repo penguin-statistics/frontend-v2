@@ -25,7 +25,7 @@
             text
             @click="() => {dialog = false; enabled = true}"
           >
-            {{ $t('dialog.cancel') }}
+            {{ $t('meta.dialog.cancel') }}
           </v-btn>
           <v-btn
             color="error"
@@ -35,7 +35,7 @@
               mdi-cancel
             </v-icon>
 
-            {{ $t('dialog.confirm') }}
+            {{ $t('meta.dialog.confirm') }}
           </v-btn>
         </v-card-actions>
       </v-card>

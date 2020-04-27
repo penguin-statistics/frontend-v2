@@ -52,6 +52,20 @@
     "quotation": {
       "start": "“",
       "end": "”"
+    },
+    "boolean": {
+      "true": "是",
+      "false": "否"
+    },
+    "hasNorNot": {
+      "true": "有",
+      "false": "无"
+    },
+    "dialog": {
+      "cancel": "取消",
+      "confirm": "确认",
+      "submit": "提交",
+      "close": "关闭"
     }
   },
   "stats": {
@@ -64,27 +78,6 @@
       "percentage": "百分比",
       "apPPR": "单件估算理智"
     }
-  },
-  "builds": {
-    "development": {
-      "title": "预览版",
-      "description": "现浏览网页属自动构建的开发用预览版本",
-      "ok": "OH YEAH!"
-    }
-  },
-  "boolean": {
-    "true": "是",
-    "false": "否"
-  },
-  "hasNorNot": {
-    "true": "有",
-    "false": "无"
-  },
-  "dialog": {
-    "cancel": "取消",
-    "confirm": "确认",
-    "submit": "提交",
-    "close": "关闭"
   },
   "contribute": {
     "repo": "项目仓库：",
@@ -161,13 +154,21 @@
   },
   "items": {
     "choose": {
-      "name": "选择物品"
+      "name": "选择素材"
     },
     "categories": {
       "ACTIVITY_ITEM": "活动道具",
       "CARD_EXP": "作战记录",
       "FURN": "家具",
       "MATERIAL": "材料"
+    }
+  },
+  "query": {
+    "selector": {
+      "item": {
+        "title": "选择素材",
+        "subtitle": "此物乃物品选择过滤器也；当选择任一过滤器后，则在同一查询内不可再选择其他过滤器。若欲过滤其他参数，可通过添加对比查询设置其他过滤参数。"
+      }
     }
   }
 }

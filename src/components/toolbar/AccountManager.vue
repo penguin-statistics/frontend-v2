@@ -70,7 +70,7 @@
         text
         @click="snackbar.enabled = false"
       >
-        {{ $t('dialog.close') }}
+        {{ $t('meta.dialog.close') }}
       </v-btn>
     </v-snackbar>
 
@@ -116,7 +116,7 @@
               mdi-login-variant
             </v-icon>
 
-            {{ $t('dialog.submit') }}
+            {{ $t('meta.dialog.submit') }}
           </v-btn>
         </v-card-actions>
       </v-card>

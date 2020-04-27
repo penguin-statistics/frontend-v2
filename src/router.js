@@ -119,7 +119,7 @@ const router = new Router({
     ]
   },
   {
-    path: 'advanced',
+    path: '/advanced',
     name: 'AdvancedQuery',
     component: AdvancedQuery,
     meta: {

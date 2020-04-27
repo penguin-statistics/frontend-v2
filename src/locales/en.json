@@ -51,6 +51,20 @@
     "quotation": {
       "start": "\"",
       "end": "\""
+    },
+    "boolean": {
+      "true": "Yes",
+      "false": "No"
+    },
+    "hasNorNot": {
+      "true": "Yes",
+      "false": "No"
+    },
+    "dialog": {
+      "cancel": "Cancel",
+      "confirm": "Confirm",
+      "submit": "Submit",
+      "close": "Close"
     }
   },
   "stats": {
@@ -63,27 +77,6 @@
       "percentage": "Percentage",
       "apPPR": "Sanity Required Per Item"
     }
-  },
-  "builds": {
-    "development": {
-      "title": "Preview Build",
-      "description": "You are currently browsing the development build",
-      "ok": "OH YEAH!"
-    }
-  },
-  "boolean": {
-    "true": "Yes",
-    "false": "No"
-  },
-  "hasNorNot": {
-    "true": "Yes",
-    "false": "No"
-  },
-  "dialog": {
-    "cancel": "Cancel",
-    "confirm": "Confirm",
-    "submit": "Submit",
-    "close": "Close"
   },
   "contribute": {
     "repo": "Project repositories: ",

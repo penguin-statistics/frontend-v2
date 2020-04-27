@@ -24,10 +24,10 @@
               max-width="400px"
             >
               <v-card-title>
-                物品选择
+                {{ $t('query.selector.item.title') }}
               </v-card-title>
               <v-card-text>
-                此物乃物品选择过滤器也；当选择任一过滤器后，则在同一查询内不可再选择其他过滤器。若欲过滤其他参数，可通过添加对比查询设置其他过滤参数。
+                {{ $t('query.selector.item.subtitle') }}
               </v-card-text>
             </v-card>
           </v-tooltip>
@@ -49,7 +49,7 @@
             <v-icon left>
               mdi-treasure-chest
             </v-icon>
-            选择素材
+            {{ $t('query.selector.item.title') }}
           </div>
         </v-btn>
         <v-expand-x-transition>
@@ -69,7 +69,7 @@
 
     <v-card>
       <v-card-title class="title">
-        选择素材
+        {{ $t('query.selector.item.title') }}
       </v-card-title>
       <ItemSelector
         class="px-4 pb-4"
@@ -82,7 +82,7 @@
           text
           @click="dialog = false"
         >
-          关闭
+          {{ $t('meta.dialog.close') }}
         </v-btn>
       </v-card-actions>
     </v-card>

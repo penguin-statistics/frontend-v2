@@ -44,7 +44,7 @@
           text
           @click="active = false"
         >
-          {{ $t('dialog.close') }}
+          {{ $t('meta.dialog.close') }}
         </v-btn>
       </v-card-actions>
     </v-card>

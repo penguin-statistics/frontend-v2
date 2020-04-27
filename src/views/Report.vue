@@ -163,7 +163,7 @@
           text
           @click="submitted = false"
         >
-          {{ $t('dialog.close') }}
+          {{ $t('meta.dialog.close') }}
         </v-btn>
       </v-row>
     </v-snackbar>
@@ -183,7 +183,7 @@
         text
         @click="undoed = false"
       >
-        {{ $t('dialog.close') }}
+        {{ $t('meta.dialog.close') }}
       </v-btn>
     </v-snackbar>
 
@@ -311,7 +311,7 @@
           <v-switch
             v-model="furniture"
             color="primary"
-            :label="$t('report.furniture', {state: $t(`hasNorNot.${furniture}`)})"
+            :label="$t('report.furniture', {state: $t(`meta.hasNorNot.${furniture}`)})"
             class="mb-5 pb-0"
             hide-details
           />
@@ -459,7 +459,7 @@
             text
             @click="dialogs.first.enabled = false"
           >
-            {{ $t('dialog.cancel') }}
+            {{ $t('meta.dialog.cancel') }}
           </v-btn>
           <v-spacer />
           <v-btn
@@ -467,7 +467,7 @@
             text
             @click="dialogs.repeat.enabled = true"
           >
-            {{ $t('dialog.confirm') }}
+            {{ $t('meta.dialog.confirm') }}
           </v-btn>
         </v-card-actions>
       </v-card>
@@ -496,7 +496,7 @@
             text
             @click="closeAllDialogs"
           >
-            {{ $t('dialog.cancel') }}
+            {{ $t('meta.dialog.cancel') }}
           </v-btn>
           <v-spacer />
           <v-btn
@@ -504,7 +504,7 @@
             text
             @click="confirmSubmit"
           >
-            {{ $t('dialog.confirm') }}
+            {{ $t('meta.dialog.confirm') }}
           </v-btn>
         </v-card-actions>
       </v-card>

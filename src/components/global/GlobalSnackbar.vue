@@ -103,7 +103,7 @@
     <!--      text-->
     <!--      @click="snackbar.enabled = false"-->
     <!--    >-->
-    <!--      {{ $t('dialog.close') }}-->
+    <!--      {{ $t('meta.dialog.close') }}-->
     <!--    </v-btn>-->
   </v-snackbar>
 </template>

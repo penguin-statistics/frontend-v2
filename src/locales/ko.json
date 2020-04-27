@@ -51,6 +51,20 @@
     "quotation": {
       "start": "“",
       "end": "”"
+    },
+    "boolean": {
+      "true": "네",
+      "false": "아니오"
+    },
+    "hasNorNot": {
+      "true": "드랍됨",
+      "false": "드랍되지 않음"
+    },
+    "dialog": {
+      "cancel": "취소",
+      "confirm": "확인",
+      "submit": "제출",
+      "close": "닫기"
     }
   },
   "stats": {
@@ -63,27 +77,6 @@
       "percentage": "백분율",
       "apPPR": "아이템당 필요 이성 기대치"
     }
-  },
-  "builds": {
-    "development": {
-      "title": "프리뷰 버젼",
-      "description": "현재 개발 빌드를 탐색하고 있습니다.",
-      "ok": "OH YEAH!"
-    }
-  },
-  "boolean": {
-    "true": "네",
-    "false": "아니오"
-  },
-  "hasNorNot": {
-    "true": "드랍됨",
-    "false": "드랍되지 않음"
-  },
-  "dialog": {
-    "cancel": "취소",
-    "confirm": "확인",
-    "submit": "제출",
-    "close": "닫기"
   },
   "contribute": {
     "repo": "프로젝트 저장소: ",

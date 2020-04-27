@@ -51,6 +51,20 @@
     "quotation": {
       "start": "「",
       "end": "」"
+    },
+    "boolean": {
+      "true": "はい",
+      "false": "いいえ"
+    },
+    "hasNorNot": {
+      "true": "有り",
+      "false": "無し"
+    },
+    "dialog": {
+      "cancel": "いいえ",
+      "confirm": "はい",
+      "submit": "送信",
+      "close": "閉じる"
     }
   },
   "stats": {
@@ -63,27 +77,6 @@
       "percentage": "ドロップ率",
       "apPPR": "１個あたりの必要期待理性数"
     }
-  },
-  "builds": {
-    "development": {
-      "title": "Preview Build",
-      "description": "You are currently browsing the development build",
-      "ok": "OH YEAH!"
-    }
-  },
-  "boolean": {
-    "true": "はい",
-    "false": "いいえ"
-  },
-  "hasNorNot": {
-    "true": "有り",
-    "false": "無し"
-  },
-  "dialog": {
-    "cancel": "いいえ",
-    "confirm": "はい",
-    "submit": "送信",
-    "close": "閉じる"
   },
   "contribute": {
     "repo": "プロジェクトリポジトリ：",
