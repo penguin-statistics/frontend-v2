@@ -1,4 +1,3 @@
-<!--suppress CssInvalidFunction -->
 <template>
   <v-app
     :class="languageFont"

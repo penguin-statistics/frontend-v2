@@ -179,9 +179,13 @@
                 <v-expansion-panel
                   v-for="zone in category.zones"
                   :key="zone.zoneId"
-                  class="bkop-light"
+                  class="bkop-light stage-card--background"
+                  :style="{'background-image': `url(${zone.image}) !important`}"
                 >
-                  <v-expansion-panel-header class="overflow-hidden bkop-medium">
+                  <v-expansion-panel-header
+                    class="overflow-hidden bkop-medium"
+                    :class="{'stage-card--header': !!zone.image}"
+                  >
                     <v-row align="center">
                       <span
                         v-if="zone.isActivity && !small"
@@ -211,20 +215,24 @@
                       <!--                        </span>-->
                     </v-row>
                   </v-expansion-panel-header>
-                  <v-expansion-panel-content class="pt-2">
+                  <v-expansion-panel-content
+                    :class="{'stage-card--content': !!zone.image}"
+                  >
                     <div
                       v-if="zone.isActivity"
                       class="caption mb-2 mt-1"
                     >
                       {{ genActivityTime(zone.activityActiveTime) }}
                     </div>
-                    <StageCard
-                      v-for="stage in getStages(zone.zoneId)"
-                      :key="stage.stageId"
-                      :stage="stage"
+                    <div class="pt-2">
+                      <StageCard
+                        v-for="stage in getStages(zone.zoneId)"
+                        :key="stage.stageId"
+                        :stage="stage"
 
-                      @click.native="selectStage(zone.zoneId, stage.stageId, stage.code)"
-                    />
+                        @click.native="selectStage(zone.zoneId, stage.stageId, stage.code)"
+                      />
+                    </div>
                   </v-expansion-panel-content>
                 </v-expansion-panel>
               </v-expansion-panels>
@@ -253,6 +261,23 @@
   import strings from "@/utils/strings";
   import StageCard from "@/components/stats/StageCard";
   import Console from "@/utils/Console";
+
+  const stageImages = {
+    "act5d0_zone1": require('@/assets/zonePageBackgrounds/act5d0_zone1.jpg'),
+    "act6d5_zone1": require('@/assets/zonePageBackgrounds/act6d5_zone1.jpg'),
+    "act7d5_zone1": require('@/assets/zonePageBackgrounds/act7d5_zone1.jpg'),
+    "act9d0_zone1": require('@/assets/zonePageBackgrounds/act9d0_zone1.jpg'),
+    "A001_zone1": require('@/assets/zonePageBackgrounds/A001_zone1.jpg'),
+    "A003_zone1": require('@/assets/zonePageBackgrounds/A003_zone1.jpg'),
+    "main_0": require('@/assets/zonePageBackgrounds/main_0.jpg'),
+    "main_1": require('@/assets/zonePageBackgrounds/main_1.jpg'),
+    "main_2": require('@/assets/zonePageBackgrounds/main_2.jpg'),
+    "main_3": require('@/assets/zonePageBackgrounds/main_3.jpg'),
+    "main_4": require('@/assets/zonePageBackgrounds/main_4.jpg'),
+    "main_5": require('@/assets/zonePageBackgrounds/main_5.jpg'),
+    "main_6": require('@/assets/zonePageBackgrounds/main_6.jpg'),
+    "main_e0": require('@/assets/zonePageBackgrounds/main_e0.jpg'),
+  }
 
   export default {
     name: "StageSelector",
@@ -334,9 +359,13 @@
             } else if (category === "ACTIVITY_CLOSED") {
               filter = zone => zone.isOutdated;
             }
-            if (filter) {
-              zones = zones.filter(filter);
-            }
+            if (filter) zones = zones.filter(filter);
+
+            zones = zones.map(el => {
+              el.image = stageImages[el.zoneId]
+              return el
+            })
+
             if (zones && zones.length) {
               result[index].push({
                 id: category,
@@ -414,5 +443,31 @@
 }
   .theme--light .stage-id--background {
     color: rgba(0, 0, 0, .075);
+  }
+
+  .stage-card--background {
+    background-size: cover !important;
+    background-repeat: no-repeat !important;
+    background-position: center center !important;
+  }
+
+  .theme--light .stage-card--header {
+    background: rgba(240, 240, 240, .9) !important;
+    background: linear-gradient(rgba(240, 240, 240, 0.9), rgba(240, 240, 240, 0.85)) !important;
+  }
+
+  .theme--light .stage-card--content {
+    background: rgba(255, 255, 255, .7) !important;
+    background: linear-gradient(rgba(255, 255, 255, 0.75), rgba(255, 255, 255, 0.3)) !important;
+  }
+
+  .theme--dark .stage-card--header {
+    background: rgba(30, 30, 30, .9) !important;
+    background: linear-gradient(rgba(30, 30, 30, 0.9), rgba(30, 30, 30, 0.8)) !important;
+  }
+
+  .theme--dark .stage-card--content {
+    background: rgba(0, 0, 0, .7) !important;
+    background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.2)) !important;
   }
 </style>
