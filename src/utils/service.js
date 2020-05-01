@@ -1,8 +1,10 @@
 import axios from 'axios'
 import Console from "@/utils/Console";
 
+const isValidHost = window.location.hostname === "penguin-stats.io" || window.location.hostname === "penguin-stats.cn"
+
 const service = axios.create({
-  baseURL: "/PenguinStats/api",
+  baseURL: isValidHost ? "/PenguinStats/api" : "https://penguin-stats.io/PenguinStats/api",
   withCredentials: true
 });
 
