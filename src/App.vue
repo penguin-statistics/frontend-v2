@@ -40,7 +40,6 @@
       <v-list
         dense
         nav
-        style="padding-left: calc(max(env(safe-area-inset-left), 8px))"
       >
         <Navigation
           v-for="route in routes"
@@ -68,6 +67,19 @@
             </v-btn>
 
             <SettingsDialog />
+          </v-row>
+          <v-row
+            justify="center"
+            class="mt-2"
+          >
+            <v-expand-transition>
+              <div
+                v-if="lowData"
+                class="text-center overline"
+              >
+                {{ $t('settings.optimization.lowData.active') }}
+              </div>
+            </v-expand-transition>
           </v-row>
         </v-container>
       </v-list>
@@ -111,7 +123,6 @@
     <RandomBackground />
     <v-content
       :style="{'filter': isInSpecialUI ? 'grayscale(1)' : ''}"
-      style="padding-top: calc(env(safe-area-inset-top) + 56px) !important;"
     >
       <transition
         name="slide-fade"
@@ -145,6 +156,7 @@
   import SettingsDialog from "@/components/drawer/SettingsDialog";
   import MirrorSelector from "@/components/global/MirrorSelector";
   import Logo from "@/components/drawer/Logo";
+  import {mapGetters} from "vuex";
 
 export default {
   name: 'App',
@@ -176,6 +188,15 @@ export default {
     async refreshData () {
       await this.$store.dispatch("data/fetch", true);
     },
+  },
+  computed: {
+    ...mapGetters("settings", ["lowData"]),
+    styleProvider () {
+      const styles = getComputedStyle(document.documentElement)
+      return {
+        top: styles.getPropertyValue("--safe-area-top")
+      }
+    }
   },
 }
 </script>

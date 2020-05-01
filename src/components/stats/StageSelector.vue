@@ -261,6 +261,7 @@
   import strings from "@/utils/strings";
   import StageCard from "@/components/stats/StageCard";
   import Console from "@/utils/Console";
+  import {mapGetters} from "vuex";
 
   const stageImages = {
     "act5d0_zone1": require('@/assets/zonePageBackgrounds/act5d0_zone1.jpg'),
@@ -276,7 +277,9 @@
     "main_4": require('@/assets/zonePageBackgrounds/main_4.jpg'),
     "main_5": require('@/assets/zonePageBackgrounds/main_5.jpg'),
     "main_6": require('@/assets/zonePageBackgrounds/main_6.jpg'),
+    "main_7": require('@/assets/zonePageBackgrounds/main_7.jpg'),
     "main_e0": require('@/assets/zonePageBackgrounds/main_e0.jpg'),
+    "gachabox": require('@/assets/zonePageBackgrounds/gachabox.jpg'),
   }
 
   export default {
@@ -313,6 +316,7 @@
       }
     },
     computed: {
+      ...mapGetters("settings", ["lowData"]),
       bindRouter () {
         return this.routerNames.index !== "" && this.routerNames.details !== ""
       },
@@ -361,10 +365,17 @@
             }
             if (filter) zones = zones.filter(filter);
 
-            zones = zones.map(el => {
-              el.image = stageImages[el.zoneId]
-              return el
-            })
+            if (this.lowData) {
+              zones = zones.map(el => {
+                el.image = null
+                return el
+              })
+            } else {
+              zones = zones.map(el => {
+                el.image = stageImages[el.zoneId]
+                return el
+              })
+            }
 
             if (zones && zones.length) {
               result[index].push({

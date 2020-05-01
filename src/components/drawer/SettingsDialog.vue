@@ -31,6 +31,8 @@
             <ThemeSwitcher class="mb-2" />
 
             <LocaleSwitcher class="mb-2" />
+
+            <OptimizationSwitcher />
           </v-row>
         </v-container>
       </v-card-text>
@@ -54,9 +56,10 @@
   import ThemeSwitcher from "@/components/drawer/ThemeSwitcher";
   import LocaleSwitcher from "@/components/drawer/LocaleSwitcher";
   import Theme from "@/mixins/Theme";
+  import OptimizationSwitcher from "@/components/drawer/OptimizationSwitcher";
   export default {
     name: "SettingsDialog",
-    components: {LocaleSwitcher, ThemeSwitcher},
+    components: {OptimizationSwitcher, LocaleSwitcher, ThemeSwitcher},
     mixins: [Theme],
     data() {
       return {

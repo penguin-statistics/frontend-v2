@@ -10,6 +10,7 @@
   import Console from "@/utils/Console";
   import SpecialUI from "@/mixins/SpecialUI";
   import CDN from "@/mixins/CDN";
+  import {mapGetters} from "vuex";
 
   export default {
     name: "RandomBackground",
@@ -48,18 +49,20 @@
       }
     },
     watch: {
-      "$route": ["checkSpecialImage", "checkBlur"]
+      "$route": ["checkSpecialImage", "checkBlur"],
+      lowData(newValue) {
+        if (newValue) {
+          this.shutdown()
+        } else {
+          this.bootup()
+        }
+      }
     },
     mounted () {
-      this.updateBackgroundByRandom(true);
-      this.timer = setInterval(() => {
-        !this.lastLoading && this.updateBackgroundByRandom(false)
-      }, 1000 * this.interval);
-
-      this.checkBlur(this.$route)
+      this.bootup()
     },
     beforeDestroy () {
-      clearInterval(this.timer)
+      this.shutdown()
     },
     methods: {
       getImageUrl (id) {
@@ -136,8 +139,24 @@
       },
       checkBlur(to) {
         if (to && to.name) this.blurred = to.name === "ErrorNotFound";
+      },
+      shutdown () {
+        clearInterval(this.timer)
+      },
+      bootup () {
+        if (!this.lowData) {
+          if (!this.lastUrl) this.updateBackgroundByRandom(true);
+          this.timer = setInterval(() => {
+            !this.lastLoading && this.updateBackgroundByRandom(false)
+          }, 1000 * this.interval);
+
+          this.checkBlur(this.$route)
+        }
       }
-    }
+    },
+    computed: {
+      ...mapGetters("settings", ["lowData"])
+    },
   }
 </script>
 

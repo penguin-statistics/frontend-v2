@@ -1,3 +1,10 @@
+:root {
+    --safe-area-top: env(safe-area-inset-top);
+    --safe-area-right: env(safe-area-inset-right);
+    --safe-area-bottom: env(safe-area-inset-bottom);
+    --safe-area-left: env(safe-area-inset-left);
+}
+
 .slide-fade-enter-active {
     transition: all .175s cubic-bezier(0.165, 0.84, 0.44, 1);
 }
@@ -106,7 +113,7 @@
     padding-top: 8px !important;
     /*In case the old browsers doesn't support advanced CSS calculations*/
     padding-bottom: 8px !important;
-    padding-bottom: calc(max(env(safe-area-inset-bottom), 8px)) !important;
+    /*padding-bottom: calc(max(env(safe-area-inset-bottom), 8px)) !important;*/
 }
 
 /*.v-stepper__items, .v-stepper__wrapper {*/
@@ -124,17 +131,17 @@
     font-family: Roboto, sans-serif!important
 }
 
-.x--safe-area {
-    padding-left: calc(max(env(safe-area-inset-left), 12px)) !important;
-    padding-right: calc(max(env(safe-area-inset-right), 12px)) !important;
-}
+/*.x--safe-area {*/
+/*    padding-left: calc(max(env(safe-area-inset-left), 12px)) !important;*/
+/*    padding-right: calc(max(env(safe-area-inset-right), 12px)) !important;*/
+/*}*/
 
-.toolbar--safe-area {
-    padding-left: calc(max(env(safe-area-inset-left), 16px)) !important;
-    padding-right: calc(max(env(safe-area-inset-right), 16px)) !important;
-}
+/*.toolbar--safe-area {*/
+/*    padding-left: calc(max(env(safe-area-inset-left), 16px)) !important;*/
+/*    padding-right: calc(max(env(safe-area-inset-right), 16px)) !important;*/
+/*}*/
 
-.toolbar--safe-area .v-toolbar__content {
-    padding-left: 0 !important;
-    padding-right: 0 !important;
-}
+/*.toolbar--safe-area .v-toolbar__content {*/
+/*    padding-left: 0 !important;*/
+/*    padding-right: 0 !important;*/
+/*}*/
