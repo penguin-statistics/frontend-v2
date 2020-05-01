@@ -14,7 +14,7 @@
         <v-icon left>
           mdi-database-remove
         </v-icon>
-        {{ $t('settings.reset.title') }}...
+        {{ $t('settings.data.reset.title') }}...
       </v-btn>
     </template>
     <v-card class="slash-strip--danger">
@@ -25,11 +25,11 @@
         <v-icon left>
           mdi-database-remove
         </v-icon>
-        {{ $t('settings.reset.title') }}
+        {{ $t('settings.data.reset.title') }}
       </v-card-title>
 
       <v-card-text>
-        {{ $t('settings.reset.subtitle') }}
+        {{ $t('settings.data.reset.subtitle') }}
       </v-card-text>
 
       <v-divider />
