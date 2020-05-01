@@ -6,8 +6,6 @@ import { CacheFirst } from 'workbox-strategies'
 import { ExpirationPlugin } from 'workbox-expiration'
 import { CacheableResponsePlugin } from 'workbox-cacheable-response'
 
-self.addEventListener('activate', () => self.clients.claim());
-
 self.addEventListener('message', (event) => {
   if (event.data && event.data.type === 'SKIP_WAITING') {
     skipWaiting();
@@ -27,7 +25,7 @@ cleanupOutdatedCaches();
 
 // Cache the underlying font files with a cache-first strategy for 1 year.
 registerRoute(
-  /^https:\/\/fonts\.gstatic\.com/,
+  new RegExp("^https://fonts.gstatic.com/"),
   new CacheFirst({
     cacheName: 'google-fonts-webfonts',
     plugins: [
@@ -47,7 +45,7 @@ registerRoute(
 if (~self.location.hostname.indexOf("penguin-stats.cn")) {
   // fancy backgrounds
   registerRoute(
-    /^https:\/\/penguin\.upyun\.galvincdn\.com\/backgrounds/,
+    new RegExp("^https://penguin.upyun.galvincdn.com/backgrounds/"),
     new CacheFirst({
       cacheName: "penguin-cn-backgrounds"
     })
@@ -55,7 +53,7 @@ if (~self.location.hostname.indexOf("penguin-stats.cn")) {
 
   // other images
   registerRoute(
-    /^https:\/\/penguin\.upyun\.galvincdn\.com\/(logos|avatars)/,
+    new RegExp("^https://penguin.upyun.galvincdn.com/(logos|avatars)"),
     new CacheFirst({
       cacheName: "penguin-cn-images"
     })
@@ -64,14 +62,14 @@ if (~self.location.hostname.indexOf("penguin-stats.cn")) {
 } else {
 
   registerRoute(
-    /^https:\/\/penguin-stats\.s3\.amazonaws\.com\/backgrounds/,
+    new RegExp("^https://penguin-stats.s3.amazonaws.com/backgrounds/"),
     new CacheFirst({
       cacheName: "penguin-global-backgrounds"
     })
   )
 
   registerRoute(
-    /^https:\/\/penguin-stats\.s3\.amazonaws\.com\/(logos|avatars)/,
+    new RegExp("^https://penguin-stats.s3.amazonaws.com/(logos|avatars)"),
     new CacheFirst({
       cacheName: "penguin-global-images"
     })
