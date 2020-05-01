@@ -7,7 +7,7 @@
     <v-card-text class="pr-0 pt-0">
       <ul>
         <li>
-          本地数据条目数：{{ dataSize }} 条
+          {{ $t('settings.data.length', {number: dataSize}) }}
         </li>
       </ul>
     </v-card-text>

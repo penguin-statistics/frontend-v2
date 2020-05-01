@@ -20,7 +20,10 @@
     <v-card class="slash-strip--danger">
       <v-card-title class="headline">
         <v-icon left>
-          mdi-settings
+          mdi-alert-circle
+        </v-icon>
+        <v-icon left>
+          mdi-database-remove
         </v-icon>
         {{ $t('settings.reset.title') }}
       </v-card-title>
