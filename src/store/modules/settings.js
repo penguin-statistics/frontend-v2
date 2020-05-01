@@ -24,6 +24,6 @@ export default {
   getters: {
     language: state => state.language,
     dark: state => state.dark,
-    lowData: state => state.lowData,
+    lowData: state => state.optimization.lowData,
   }
 };

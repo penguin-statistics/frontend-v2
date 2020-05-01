@@ -857,36 +857,6 @@ export default {
   background: transparent !important;
 }
 
-.slash-strip--warning {
-  background: repeating-linear-gradient(
-    -45deg,
-    rgb(237, 144, 53),
-    rgb(237, 144, 53) 45px,
-    rgb(0, 0, 0) 45px,
-    rgb(0, 0, 0) 90px
-  );
-}
-
-.slash-strip--warning-transparent {
-  background: repeating-linear-gradient(
-      -45deg,
-      rgba(237, 144, 53, 0.5),
-      rgba(237, 144, 53, 0.5) 45px,
-      rgba(0, 0, 0, 0.5) 45px,
-      rgba(0, 0, 0, 0.5) 90px
-  );
-}
-
-.slash-strip--danger {
-  background: repeating-linear-gradient(
-    -45deg,
-    rgb(226, 81, 65),
-    rgb(226, 81, 65) 45px,
-    rgb(0, 0, 0) 45px,
-    rgb(0, 0, 0) 90px
-  );
-}
-
 .round {
   border-radius: 4px;
 }

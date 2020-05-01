@@ -58,6 +58,7 @@
               outlined
               text
               class="flex-grow-1 mr-1"
+              :loading="pending"
               @click="refreshData"
             >
               <v-icon left>
@@ -191,6 +192,7 @@ export default {
   },
   computed: {
     ...mapGetters("settings", ["lowData"]),
+    ...mapGetters("ajax", ["pending"]),
     styleProvider () {
       const styles = getComputedStyle(document.documentElement)
       return {

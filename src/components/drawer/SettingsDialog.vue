@@ -26,13 +26,18 @@
       </v-card-title>
 
       <v-card-text>
-        <v-container>
+        <v-container class="pt-0">
           <v-row class="flex-column">
+            <Subheader>
+              {{ $t('settings.category.appearance') }}
+            </Subheader>
             <ThemeSwitcher class="mb-2" />
 
             <LocaleSwitcher class="mb-2" />
 
-            <OptimizationSwitcher />
+            <OptimizationSwitcher class="mb-2" />
+
+            <DataManager class="mt-2" />
           </v-row>
         </v-container>
       </v-card-text>
@@ -57,9 +62,11 @@
   import LocaleSwitcher from "@/components/drawer/LocaleSwitcher";
   import Theme from "@/mixins/Theme";
   import OptimizationSwitcher from "@/components/drawer/OptimizationSwitcher";
+  import DataManager from "@/components/drawer/DataManager";
+  import Subheader from "@/components/global/Subheader";
   export default {
     name: "SettingsDialog",
-    components: {OptimizationSwitcher, LocaleSwitcher, ThemeSwitcher},
+    components: {Subheader, DataManager, OptimizationSwitcher, LocaleSwitcher, ThemeSwitcher},
     mixins: [Theme],
     data() {
       return {

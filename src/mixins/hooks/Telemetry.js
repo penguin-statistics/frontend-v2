@@ -12,7 +12,7 @@ class SessionData {
       "LanguageActive": i18n.locale || "(null)",
       "LanguagePersisted": store.getters["settings/language"] || "(null)",
       "Theme": store.getters["settings/dark"],
-      "OptimizationLowData": store.getters["settings/lowData"],
+      "OptimizeLowData": store.getters["settings/lowData"],
     }
   }
 
@@ -39,8 +39,8 @@ export default {
   },
   methods: {
     updateTelemetryData() {
-      Console.info("Telemetry", "updating telemetry data")
       const sessionData = new SessionData();
+      Console.info("Telemetry", "updating telemetry data")
 
       // set crisp session data
       window.$crisp.push(["set", "session:data", sessionData.crisp]);
@@ -58,7 +58,7 @@ export default {
         "LanguageActive": i18n.locale || "(null)",
         "LanguagePersisted": store.getters["settings/language"] || "(null)",
         "Theme": store.getters["settings/dark"],
-        "OptimizationLowData": store.getters["settings/lowData"],
+        "OptimizeLowData": store.getters["settings/lowData"],
       };
     }
   },

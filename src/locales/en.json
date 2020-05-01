@@ -159,12 +159,20 @@
     }
   },
   "settings": {
+    "category": {
+      "appearance": "Appearance",
+      "data": "Data"
+    },
     "optimization": {
       "lowData": {
         "title": "Low Data Mode",
         "active": "Low Data Mode is Active",
         "subtitle": "Low Data Mode will stop fetching nonessential resources, such as the zone backgrounds in stage selector and the website background, to help reduce network data use."
       }
+    },
+    "reset": {
+      "title": "Reset All Local Data and Settings",
+      "subtitle": "This operation will delete all local data and settings you have set. After the deletion, all settings will be reset to default, all data needs to be downloaded again, and the web page will be reloaded. Are you sure to continue?"
     }
   }
 }
