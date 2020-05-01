@@ -18,7 +18,7 @@ export default {
     },
     changeOptimization (state, {type, value}) {
       if (!(type in state.optimization)) Console.warn("Store/Settings", "unknown optimization type", type)
-      state[type] = value
+      state.optimization[type] = value
     }
   },
   getters: {
