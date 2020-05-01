@@ -262,29 +262,12 @@
   import StageCard from "@/components/stats/StageCard";
   import Console from "@/utils/Console";
   import {mapGetters} from "vuex";
-
-  const stageImages = {
-    "act5d0_zone1": require('@/assets/zonePageBackgrounds/act5d0_zone1.jpg'),
-    "act6d5_zone1": require('@/assets/zonePageBackgrounds/act6d5_zone1.jpg'),
-    "act7d5_zone1": require('@/assets/zonePageBackgrounds/act7d5_zone1.jpg'),
-    "act9d0_zone1": require('@/assets/zonePageBackgrounds/act9d0_zone1.jpg'),
-    "A001_zone1": require('@/assets/zonePageBackgrounds/A001_zone1.jpg'),
-    "A003_zone1": require('@/assets/zonePageBackgrounds/A003_zone1.jpg'),
-    "main_0": require('@/assets/zonePageBackgrounds/main_0.jpg'),
-    "main_1": require('@/assets/zonePageBackgrounds/main_1.jpg'),
-    "main_2": require('@/assets/zonePageBackgrounds/main_2.jpg'),
-    "main_3": require('@/assets/zonePageBackgrounds/main_3.jpg'),
-    "main_4": require('@/assets/zonePageBackgrounds/main_4.jpg'),
-    "main_5": require('@/assets/zonePageBackgrounds/main_5.jpg'),
-    "main_6": require('@/assets/zonePageBackgrounds/main_6.jpg'),
-    "main_7": require('@/assets/zonePageBackgrounds/main_7.jpg'),
-    "main_e0": require('@/assets/zonePageBackgrounds/main_e0.jpg'),
-    "gachabox": require('@/assets/zonePageBackgrounds/gachabox.jpg'),
-  }
+  import CDN from "@/mixins/CDN";
 
   export default {
     name: "StageSelector",
     components: {StageCard},
+    mixins: [CDN],
     props: {
       name: {
         type: String,
@@ -312,6 +295,24 @@
         selected: {
           zone: null,
           stage: null
+        },
+        stageImages: {
+          "act5d0_zone1": this.cdnResource('/backgrounds/zones/act5d0_zone1.jpg'),
+          "act6d5_zone1": this.cdnResource('/backgrounds/zones/act6d5_zone1.jpg'),
+          "act7d5_zone1": this.cdnResource('/backgrounds/zones/act7d5_zone1.jpg'),
+          "act9d0_zone1": this.cdnResource('/backgrounds/zones/act9d0_zone1.jpg'),
+          "A001_zone1": this.cdnResource('/backgrounds/zones/A001_zone1.jpg'),
+          "A003_zone1": this.cdnResource('/backgrounds/zones/A003_zone1.jpg'),
+          "main_0": this.cdnResource('/backgrounds/zones/main_0.jpg'),
+          "main_1": this.cdnResource('/backgrounds/zones/main_1.jpg'),
+          "main_2": this.cdnResource('/backgrounds/zones/main_2.jpg'),
+          "main_3": this.cdnResource('/backgrounds/zones/main_3.jpg'),
+          "main_4": this.cdnResource('/backgrounds/zones/main_4.jpg'),
+          "main_5": this.cdnResource('/backgrounds/zones/main_5.jpg'),
+          "main_6": this.cdnResource('/backgrounds/zones/main_6.jpg'),
+          "main_7": this.cdnResource('/backgrounds/zones/main_7.jpg'),
+          "main_e0": this.cdnResource('/backgrounds/zones/main_e0.jpg'),
+          "gachabox": this.cdnResource('/backgrounds/zones/gachabox.jpg'),
         }
       }
     },
@@ -372,7 +373,7 @@
               })
             } else {
               zones = zones.map(el => {
-                if (el.zoneId in stageImages) el.image = stageImages[el.zoneId]
+                if (el.zoneId in this.stageImages) el.image = this.stageImages[el.zoneId]
                 return el
               })
             }
