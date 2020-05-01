@@ -180,7 +180,7 @@
                   v-for="zone in category.zones"
                   :key="zone.zoneId"
                   class="bkop-light stage-card--background"
-                  :style="{'background-image': `url(${zone.image}) !important`}"
+                  :style="{'background-image': zone.image ? `url(${zone.image}) !important` : null}"
                 >
                   <v-expansion-panel-header
                     class="overflow-hidden bkop-medium"
@@ -372,7 +372,7 @@
               })
             } else {
               zones = zones.map(el => {
-                el.image = stageImages[el.zoneId]
+                if (el.zoneId in stageImages) el.image = stageImages[el.zoneId]
                 return el
               })
             }
