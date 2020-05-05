@@ -357,8 +357,8 @@
   }
 
   .theme--light .stage-card--header {
-    background: rgba(240, 240, 240, .9) !important;
-    background: linear-gradient(rgba(240, 240, 240, 0.9), rgba(240, 240, 240, 0.85)) !important;
+    background: rgba(255, 255, 255, .9) !important;
+    background: linear-gradient(rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.85)) !important;
   }
 
   .theme--light .stage-card--content {

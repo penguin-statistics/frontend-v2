@@ -433,7 +433,7 @@
                         hide-details
                         outlined
                         rows="14"
-                        class="monospace planner-import-export"
+                        class="monospace-pure planner-import-export"
                         placeholder="[{&quot;name&quot;:&quot;双极纳米片&quot;,&quot;need&quot;:4,&quot;have&quot;:0},{&quot;name&quot;:&quot;D32钢&quot;,&quot;need&quot;:4,&quot;have&quot;:0}...]"
                       />
                     </v-container>
@@ -455,7 +455,7 @@
                     flat
                   >
                     <v-card-text
-                      class="monospace planner-import-export"
+                      class="monospace-pure planner-import-export"
                     >
                       {{ exportJson }}
                     </v-card-text>

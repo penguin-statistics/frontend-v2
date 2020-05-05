@@ -35,6 +35,7 @@
       app
       :style="{'filter': isInSpecialUI ? 'grayscale(1)' : ''}"
       class="safe-area--navigation-drawer"
+      width="300px"
     >
       <Logo />
       <v-list
@@ -150,6 +151,7 @@
   import GlobalEntry from "@/mixins/hooks/GlobalEntry";
 
   import './styles/global.css'
+  import './styles/fonts.css'
   import PWAPopups from "@/components/global/PWAPopups";
   import Footer from "@/components/global/Footer";
   import CDN from "@/mixins/CDN";
