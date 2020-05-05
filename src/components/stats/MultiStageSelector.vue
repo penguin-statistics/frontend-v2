@@ -63,7 +63,7 @@
             class="mx-2"
           />
           <div
-            class="d-flex flex-wrap align-center"
+            class="flex-wrap align-center"
             style="flex: 1 1 0"
           >
             <StageCard
@@ -72,6 +72,8 @@
               :stage="stage"
 
               :chosen="states[stage.stageId]"
+              class="d-inline"
+
               @click.native="toggle(stage.stageId)"
             />
           </div>
@@ -180,6 +182,7 @@
       },
       toggle (stageId) {
         this.states[stageId] = !this.states[stageId];
+        this.update()
       },
       update () {
         const entries = [];

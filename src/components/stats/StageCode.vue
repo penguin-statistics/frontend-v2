@@ -3,8 +3,7 @@
     <span
       v-for="[index, code] in codes.entries()"
       :key="index"
-      :class="generateStyle(code.s).c"
-      :style="generateStyle(code.s).s"
+      :class="generateStyle(code.s)"
     >{{ code.t }}</span>
   </span>
 </template>
@@ -99,11 +98,11 @@
     },
     methods: {
       generateStyle(type) {
-        if (type === s.separator) return {c: ["grey--text"]}
-        if (type === s.S) return {c: ["font-weight-bold", this.dark ? "pink--text" : "orange--text text--darken-3"]}
-        if (type === s.prefix) return {c: ["grey--text text--darken-1"]}
-        if (type === s.middle) return {c: ["grey--text", this.dark ? "text--lighten-2" : "text--darken-3"]}
-        if (type === s.stage) return {c: ["font-weight-black", this.dark ? "yellow--text text--lighten-2" : "black--text"]}
+        if (type === s.separator) return ["grey--text"]
+        if (type === s.S) return ["font-weight-bold", this.dark ? "pink--text" : "orange--text text--darken-3"]
+        if (type === s.prefix) return ["grey--text text--darken-1"]
+        if (type === s.middle) return ["grey--text", this.dark ? "text--lighten-2" : "text--darken-3"]
+        if (type === s.stage) return ["font-weight-black", this.dark ? "yellow--text text--lighten-2" : "black--text"]
       }
     },
   }
