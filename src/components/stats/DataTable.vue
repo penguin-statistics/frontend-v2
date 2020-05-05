@@ -259,7 +259,7 @@
             showCurrentPage: true
           }
         },
-        tableCellClasses: "px-2 font-weight-bold",
+        tableCellClasses: "px-2 font-weight-bold monospace",
         hideItemName: false
       }
     },

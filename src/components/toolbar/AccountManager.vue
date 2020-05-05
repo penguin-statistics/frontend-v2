@@ -63,7 +63,6 @@
       :timeout="5000"
 
       top
-      right
     >
       {{ snackbar.text }}
       <v-btn

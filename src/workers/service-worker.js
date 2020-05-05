@@ -27,7 +27,7 @@ cleanupOutdatedCaches();
 
 // Cache the underlying font files with a cache-first strategy for 1 year.
 registerRoute(
-  /^https:\/\/fonts\.gstatic\.com/,
+  new RegExp("^https://fonts.gstatic.com/"),
   new CacheFirst({
     cacheName: 'google-fonts-webfonts',
     plugins: [
@@ -44,27 +44,39 @@ registerRoute(
 
 // === CDN Resources ===
 
-// fancy backgrounds
-registerRoute(
-  /^https:\/\/penguin\.upyun\.galvincdn\.com\/backgrounds\//,
-  new CacheFirst({
-    cacheName: "penguin-backgrounds",
-    // plugins: [
-    //   new ExpirationPlugin({
-    //     // maxEntries: 30,
-    //     purgeOnQuotaError: true
-    //   })
-    // ]
-  })
-)
+if (~self.location.hostname.indexOf("penguin-stats.cn")) {
+  // fancy backgrounds
+  registerRoute(
+    new RegExp("^https://penguin.upyun.galvincdn.com/backgrounds/"),
+    new CacheFirst({
+      cacheName: "penguin-cn-backgrounds"
+    })
+  )
 
-// other images
-registerRoute(
-  /^https:\/\/penguin\.upyun\.galvincdn\.com\/(logos|avatars)\//,
-  new CacheFirst({
-    cacheName: "penguin-images"
-  })
-)
+  // other images
+  registerRoute(
+    new RegExp("^https://penguin.upyun.galvincdn.com/(logos|avatars)"),
+    new CacheFirst({
+      cacheName: "penguin-cn-images"
+    })
+  )
+
+} else {
+
+  registerRoute(
+    new RegExp("^https://penguin-stats.s3.amazonaws.com/backgrounds/"),
+    new CacheFirst({
+      cacheName: "penguin-global-backgrounds"
+    })
+  )
+
+  registerRoute(
+    new RegExp("^https://penguin-stats.s3.amazonaws.com/(logos|avatars)"),
+    new CacheFirst({
+      cacheName: "penguin-global-images"
+    })
+  )
+}
 
 // === Site Resources ===
 

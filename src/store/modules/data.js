@@ -18,15 +18,12 @@ export default {
   actions: {
     // eslint-disable-next-line
     async fetch({}, refresh = false) {
-      Promise.all([
-        itemsManager.get(refresh),
-        limitationsManager.get(refresh),
-        stagesManager.get(refresh),
-        zonesManager.get(refresh)
-      ]).then(() => {
-        globalMatrixManager.get(refresh);
-        personalMatrixManager.get(refresh)
-      })
+      itemsManager.get(refresh);
+      limitationsManager.get(refresh);
+      stagesManager.get(refresh);
+      zonesManager.get(refresh);
+      globalMatrixManager.get(refresh);
+      personalMatrixManager.get(refresh)
     // await trendsManager.get(refresh);
     },
     async refreshPersonalMatrix() {
@@ -36,6 +33,9 @@ export default {
   getters: {
     byKey: (state) => (id) => {
       return state[id]
+    },
+    length: (state) => {
+      return Object.keys(state).length;
     }
   }
 };

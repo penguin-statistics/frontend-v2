@@ -334,4 +334,7 @@ export default {
   width: 100%;
   border: 1px solid rgba(255, 255, 255, 0.75);
 }
+.theme--light .link-card {
+  border: 1px solid rgba(0, 0, 0, 0.75);
+}
 </style>
