@@ -125,7 +125,7 @@ Getters.zones = {
   },
   all() {
     return store.state.data.zones || []
-  }
+  },
 }
 Getters.trends = {
   byItemId(itemId) {

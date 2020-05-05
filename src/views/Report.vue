@@ -190,6 +190,7 @@
       :router-names="routerNames"
 
       hide-closed
+      class="pa-3"
       @select="select"
     >
       <v-card class="bkop-light pa-2">

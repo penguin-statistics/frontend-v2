@@ -34,12 +34,13 @@
       v-model="drawer"
       app
       :style="{'filter': isInSpecialUI ? 'grayscale(1)' : ''}"
-      width="calc(env(safe-area-inset-left) + 300px)"
+      class="safe-area--navigation-drawer"
     >
       <Logo />
       <v-list
         dense
         nav
+        class="safe-area--navigation"
       >
         <Navigation
           v-for="route in routes"
@@ -89,7 +90,6 @@
       app
       dark
       :color="primaryColor"
-      style="min-height: calc(56px + env(safe-area-inset-top)); padding-top: env(safe-area-inset-top)"
       :style="{'filter': isInSpecialUI ? 'grayscale(1)' : ''}"
       class="x--safe-area toolbar--safe-area flex-column"
     >
@@ -124,6 +124,7 @@
     <RandomBackground />
     <v-content
       :style="{'filter': isInSpecialUI ? 'grayscale(1)' : ''}"
+      class="safe-area--v-content"
     >
       <transition
         name="slide-fade"

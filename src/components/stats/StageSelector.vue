@@ -1,115 +1,8 @@
-<i18n>
-  {
-    "zh": {
-      "opensAt": "开放时间：{0} - {1}",
-      "permanentOpen": "常驻开放",
-      "zone": {
-        "name": "章节",
-        "types": {
-          "MAINLINE": "主线",
-          "WEEKLY": "物资筹备",
-          "ACTIVITY_OPEN": "限时活动（开放中）",
-          "ACTIVITY_CLOSED": "限时活动（已结束）"
-        },
-        "status": {
-          "closed": "已结束",
-          "open": "开放中"
-        }
-      },
-      "stage": {
-        "name": "关卡",
-        "apCost": "{apCost} 点理智",
-        "loots": {
-          "normal": "常规掉落",
-          "extra": "额外物资",
-          "special": "特殊掉落"
-        }
-      }
-    },
-    "en": {
-      "opensAt": "Event period: {0} - {1}",
-      "permanentOpen": "Permanently Opening",
-      "zone": {
-        "name": "Zone",
-        "types": {
-          "MAINLINE": "Main Storyline",
-          "WEEKLY": "Supplies",
-          "ACTIVITY_OPEN": "Event (Open)",
-          "ACTIVITY_CLOSED": "Event (Closed)"
-        },
-        "status": {
-          "closed": "Closed",
-          "open": "Open"
-        }
-      },
-      "stage": {
-        "name": "Stage",
-        "apCost": "{apCost} AP required",
-        "loots": {
-          "normal": "Normal",
-          "extra": "Extra",
-          "special": "Special"
-        }
-      }
-    },
-    "ja": {
-      "opensAt": "開催期間：{0} - {1}",
-      "zone": {
-        "name": "章",
-        "types": {
-          "MAINLINE": "メインステージ",
-          "WEEKLY": "物資調達",
-          "ACTIVITY_OPEN": "イベント（開催中）",
-          "ACTIVITY_CLOSED": "イベント（終了）"
-        },
-        "status": {
-          "closed": "終了",
-          "open": "開催中"
-        }
-      },
-      "stage": {
-        "name": "作戦",
-        "apCost": "消費理性：{apCost}",
-        "loots": {
-          "normal": "通常ドロップ",
-          "extra": "エクストラドロップ",
-          "special": "スペシャルドロップ"
-        }
-      }
-    },
-    "ko": {
-      "opensAt": "이벤트 기간: {0} - {1}",
-      "zone": {
-        "name": "에피소드",
-        "types": {
-          "MAINLINE": "메인 스토리",
-          "WEEKLY": "물자 비축",
-          "ACTIVITY_OPEN": "이벤트 (개방중)",
-          "ACTIVITY_CLOSED": "이벤트 (종료)"
-        },
-        "status": {
-          "closed": "닫힘",
-          "open": "개방중"
-        }
-      },
-      "stage": {
-        "name": "작전지역",
-        "apCost": "{apCost} 이성 필요",
-        "loots": {
-          "normal": "일반 드랍",
-          "extra": "추가 드랍",
-          "special": "특수 드랍"
-        }
-      }
-    }
-  }
-</i18n>
-
 <template>
   <v-stepper
     v-model="step"
     :alt-labels="!small"
-    class="pa-3 transparent elevation-0 full-width"
+    class="transparent elevation-0 full-width"
   >
     <v-stepper-header
       class="bkop-light elevation-4"
@@ -429,7 +322,7 @@
         }
       },
       genActivityTime (message) {
-        return message[0] === message[1] ? this.$t('permanentOpen') : this.$t('opensAt', message)
+        return message[0] === message[1] ? this.$t('zone.status.permanentOpen') : this.$t('zone.opensAt', message)
       }
     },
   }

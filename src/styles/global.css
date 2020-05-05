@@ -19,17 +19,17 @@
 }
 
 .drawer-logo {
-    height: calc(256px + env(safe-area-inset-top));
-    padding: calc(32px + env(safe-area-inset-top)) 32px 32px 32px;
+    height: 256px;
+    padding: 32px;
     overflow: hidden;
     transition: all .5s cubic-bezier(0.19, 1, 0.22, 1);
 }
 
 .drawer-logo:hover {
-    height: calc(304px + env(safe-area-inset-top));
+    height: 304px;
 }
 .drawer-logo--two-line:hover {
-    height: calc(336px + env(safe-area-inset-top));
+    height: 336px;
 }
 .drawer-logo > .description {
     margin-top: 16px;
@@ -102,13 +102,6 @@
     font-family: SF Mono, "Droid Sans Mono", Ubuntu Mono, Consolas, Courier New, Courier, monospace;
 }
 
-.footer--safe-area {
-    padding-top: 8px !important;
-    /*In case the old browsers doesn't support advanced CSS calculations*/
-    padding-bottom: 8px !important;
-    /*padding-bottom: calc(max(env(safe-area-inset-bottom), 8px)) !important;*/
-}
-
 /*.v-stepper__items, .v-stepper__wrapper {*/
 /*  overflow: initial !important;*/
 /*}*/
@@ -123,21 +116,6 @@
 .force-not-lang-font {
     font-family: Roboto, sans-serif!important
 }
-
-/*.x--safe-area {*/
-/*    padding-left: calc(max(env(safe-area-inset-left), 12px)) !important;*/
-/*    padding-right: calc(max(env(safe-area-inset-right), 12px)) !important;*/
-/*}*/
-
-/*.toolbar--safe-area {*/
-/*    padding-left: calc(max(env(safe-area-inset-left), 16px)) !important;*/
-/*    padding-right: calc(max(env(safe-area-inset-right), 16px)) !important;*/
-/*}*/
-
-/*.toolbar--safe-area .v-toolbar__content {*/
-/*    padding-left: 0 !important;*/
-/*    padding-right: 0 !important;*/
-/*}*/
 
 .slash-strip--warning {
     background: repeating-linear-gradient(
@@ -187,4 +165,61 @@
             rgb(255, 255, 255) 45px,
             rgb(255, 255, 255) 90px
     );
+}
+
+    .footer--safe-area {
+        padding: 8px;
+    }
+
+    .safe-area--navigation-drawer {
+        width: 300px !important;
+    }
+
+
+@supports(padding: calc(max(1px, 2px))) {
+    .drawer-logo {
+        height: calc(256px + env(safe-area-inset-top));
+        padding: calc(32px + env(safe-area-inset-top)) 32px 32px 32px;
+    }
+
+    .drawer-logo:hover {
+        height: calc(304px + env(safe-area-inset-top));
+    }
+    .drawer-logo--two-line:hover {
+        height: calc(336px + env(safe-area-inset-top));
+    }
+
+    .x--safe-area {
+        padding-left: calc(max(env(safe-area-inset-left), 12px)) !important;
+        padding-right: calc(max(env(safe-area-inset-right), 12px)) !important;
+    }
+
+    .toolbar--safe-area {
+        padding-left: calc(max(env(safe-area-inset-left), 16px)) !important;
+        padding-right: calc(max(env(safe-area-inset-right), 16px)) !important;
+        min-height: calc(56px + env(safe-area-inset-top)) !important;
+        padding-top: env(safe-area-inset-top) !important;
+    }
+
+    .toolbar--safe-area .v-toolbar__content {
+        padding-left: 0 !important;
+        padding-right: 0 !important;
+    }
+
+    .footer--safe-area {
+        padding-top: 8px !important;
+        padding-bottom: calc(max(env(safe-area-inset-bottom), 8px)) !important;
+    }
+
+    .safe-area--v-content {
+        padding-top: calc(env(safe-area-inset-top) + 56px) !important;
+    }
+
+    .safe-area--navigation {
+        padding-left: calc(max(env(safe-area-inset-left), 8px)) !important;
+    }
+
+    .safe-area--navigation-drawer {
+        width: calc(env(safe-area-inset-left) + 300px) !important;
+    }
 }
