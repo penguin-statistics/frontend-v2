@@ -84,6 +84,24 @@
                 </li>
               </ol>
             </v-card-text>
+
+            <v-card-subtitle
+              v-if="item.hotfix"
+              class="subtitle-1"
+            >
+              热修复记录
+            </v-card-subtitle>
+
+            <v-card-text v-if="item.hotfix">
+              <ol>
+                <li
+                  v-for="(text, key) in item.hotfix"
+                  :key="key"
+                >
+                  {{ text }}
+                </li>
+              </ol>
+            </v-card-text>
           </div>
         </v-expand-transition>
       </v-card>
@@ -146,6 +164,9 @@ export default {
             "优化：Service Worker 缓存逻辑与稳定性",
 
             "内部优化：i18n 语言文件整理",
+          ],
+          hotfix: [
+            "修复：作战选择界面背景图片 CDN 检测异常",
           ]
         },
         {
