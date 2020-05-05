@@ -146,7 +146,7 @@ export default {
         {
           active: true,
           version: "v1.1.11",
-          date: "2020-05-01T19:00:00Z",
+          date: "2020-05-05T09:43:12Z",
           changes: [
             "添加：低数据模式选项",
             "添加：本地数据重置器",
