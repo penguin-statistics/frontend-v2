@@ -3,7 +3,10 @@
     class="fill-height justify-center"
     fluid
   >
-    <v-row align="start">
+    <v-row
+      align="start"
+      no-gutters
+    >
       <v-col>
         <transition
           name="slide-fade"

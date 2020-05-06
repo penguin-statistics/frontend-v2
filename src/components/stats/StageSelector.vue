@@ -2,7 +2,7 @@
   <v-stepper
     v-model="step"
     :alt-labels="!small"
-    class="transparent elevation-0 full-width"
+    class="transparent elevation-0 full-width pa-4"
   >
     <v-stepper-header
       class="bkop-light elevation-4"
@@ -36,7 +36,7 @@
         {{ name }}
       </v-stepper-step>
     </v-stepper-header>
-    <v-stepper-items>
+    <v-stepper-items class="stepper-overflow-initial">
       <v-stepper-content
         :step="1"
         :class="{'pa-0': small}"
@@ -202,7 +202,7 @@
           "main_3": this.cdnResource('/backgrounds/zones/main_3.jpg'),
           "main_4": this.cdnResource('/backgrounds/zones/main_4.jpg'),
           "main_5": this.cdnResource('/backgrounds/zones/main_5.jpg'),
-          "main_6": this.cdnRemsource('/backgrounds/zones/main_6.jpg'),
+          "main_6": this.cdnResource('/backgrounds/zones/main_6.jpg'),
           "main_7": this.cdnResource('/backgrounds/zones/main_7.jpg'),
           "main_e0": this.cdnResource('/backgrounds/zones/main_e0.jpg'),
           "gachabox": this.cdnResource('/backgrounds/zones/gachabox.jpg'),
