@@ -118,7 +118,7 @@
         const results = [];
         for (const category of categories) {
           let zones = get.zones.byType(category.startsWith("ACTIVITY") ? "ACTIVITY" : category);
-          if (category === "ACTIVITY_OPEN") zones = zones.filter(zone => zone.zoneId !== "gachabox" && !zone.isOutdated);
+          if (category === "ACTIVITY_OPEN") zones = zones.filter(zone => !zone.isOutdated);
           zones = zones.map(el => {
             el.stages = get.stages.byParentZoneId(el.zoneId)
             return el

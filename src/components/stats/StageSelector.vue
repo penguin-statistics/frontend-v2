@@ -202,7 +202,7 @@
           "main_3": this.cdnResource('/backgrounds/zones/main_3.jpg'),
           "main_4": this.cdnResource('/backgrounds/zones/main_4.jpg'),
           "main_5": this.cdnResource('/backgrounds/zones/main_5.jpg'),
-          "main_6": this.cdnResource('/backgrounds/zones/main_6.jpg'),
+          "main_6": this.cdnRemsource('/backgrounds/zones/main_6.jpg'),
           "main_7": this.cdnResource('/backgrounds/zones/main_7.jpg'),
           "main_e0": this.cdnResource('/backgrounds/zones/main_e0.jpg'),
           "gachabox": this.cdnResource('/backgrounds/zones/gachabox.jpg'),
