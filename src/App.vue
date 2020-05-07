@@ -168,7 +168,6 @@ export default {
     MirrorSelector,
     SettingsDialog,
     Footer,
-    PWAPopups,
     Navigation,
     GlobalSnackbar,
     NetworkStateIndicator,
