@@ -196,12 +196,6 @@ export default {
   computed: {
     ...mapGetters("settings", ["lowData"]),
     ...mapGetters("ajax", ["pending"]),
-    styleProvider () {
-      const styles = getComputedStyle(document.documentElement)
-      return {
-        top: styles.getPropertyValue("--safe-area-top")
-      }
-    }
   },
 }
 </script>
