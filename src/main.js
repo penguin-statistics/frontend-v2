@@ -128,8 +128,6 @@ router.beforeEach((to, from, next) => {
 
 Vue.config.productionTip = false;
 
-Vue.prototype.$workbox = workbox;
-
 new Vue({
   vuetify,
   router,

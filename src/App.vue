@@ -28,7 +28,6 @@
     <!--      </v-row>-->
     <!--    </v-overlay>-->
     <GlobalSnackbar />
-    <PWAPopups />
     <MirrorSelector />
     <v-navigation-drawer
       v-model="drawer"
