@@ -84,6 +84,24 @@
                 </li>
               </ol>
             </v-card-text>
+
+            <v-card-subtitle
+              v-if="item.hotfix"
+              class="subtitle-1"
+            >
+              热修复记录
+            </v-card-subtitle>
+
+            <v-card-text v-if="item.hotfix">
+              <ol>
+                <li
+                  v-for="(text, key) in item.hotfix"
+                  :key="key"
+                >
+                  {{ text }}
+                </li>
+              </ol>
+            </v-card-text>
           </div>
         </v-expand-transition>
       </v-card>
@@ -128,7 +146,7 @@ export default {
         {
           active: true,
           version: "v1.1.11",
-          date: "2020-05-01T19:00:00Z",
+          date: "2020-05-05T09:43:12Z",
           changes: [
             "添加：低数据模式选项",
             "添加：本地数据重置器",
@@ -146,6 +164,15 @@ export default {
             "优化：Service Worker 缓存逻辑与稳定性",
 
             "内部优化：i18n 语言文件整理",
+          ],
+          hotfix: [
+            "修复：家具图标颜色异常",
+            "修复：基础资源加载失败加入同源资源判断",
+            "修复：作战选择界面背景图片 CDN 检测异常",
+            "修复：自选排除关卡无法排除物资补给的错误",
+            "修复：统一多页面 Stepper 卡片阴影与 Padding 值",
+            "修复：作战选择界面中活动关卡开启时间的排版微移问题",
+            "优化：作战选择界面点击元素对比度提升优化",
           ]
         },
         {

@@ -59,12 +59,16 @@
     transform: translateY(-0.5px);
   }
 
+  .stage-card--stateless:active {
+    transform: translateY(0.5px);
+  }
+
   .stage-card--light {
-    background: rgba(224, 224, 224, 0.8);
+    background: rgba(224, 224, 224, 0.95);
     border: 1px solid rgba(32, 32, 32, 0.95);
   }
   .stage-card--dark {
-    background: rgba(32, 32, 32, 0.8);
+    background: rgba(32, 32, 32, 0.95);
     border: 1px solid rgba(224, 224, 224, 0.95);
   }
 

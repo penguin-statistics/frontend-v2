@@ -2,7 +2,7 @@
   <v-stepper
     v-model="step"
     :alt-labels="!small"
-    class="transparent elevation-0 full-width"
+    class="transparent elevation-0 full-width pa-4"
   >
     <v-stepper-header
       class="bkop-light elevation-4"
@@ -36,7 +36,7 @@
         {{ name }}
       </v-stepper-step>
     </v-stepper-header>
-    <v-stepper-items>
+    <v-stepper-items class="stepper-overflow-initial">
       <v-stepper-content
         :step="1"
         :class="{'pa-0': small}"
@@ -83,15 +83,16 @@
                       <span
                         v-if="zone.isActivity && !small"
                         :class="{
-                          'text--darken-1 font-weight-bold ml-2 mr-1': true,
                           'red--text': zone.isOutdated,
                           'green--text': !zone.isOutdated }"
+                        class="text--darken-1 font-weight-bold ml-2 mr-1"
                       >
                         {{ zone.isOutdated ? $t('zone.status.closed') : $t('zone.status.open') }}
                       </span>
 
                       <span
-                        :class="{'subtitle-1 pl-2': true, 'text--darken-1 font-weight-bold': zone.isActivity && small, 'red--text': zone.isActivity && small && zone.isOutdated,
+                        class="subtitle-1 pl-2"
+                        :class="{'text--darken-1 font-weight-bold': zone.isActivity && small, 'red--text': zone.isActivity && small && zone.isOutdated,
                                  'green--text': zone.isActivity && small && !zone.isOutdated}"
                       >
                         {{ strings.translate(zone, "zoneName") }}
@@ -113,7 +114,7 @@
                   >
                     <div
                       v-if="zone.isActivity"
-                      class="caption mb-2 mt-1"
+                      class="caption mx-1 mt-3 mb-2"
                     >
                       {{ genActivityTime(zone.activityActiveTime) }}
                     </div>
@@ -357,22 +358,22 @@
   }
 
   .theme--light .stage-card--header {
-    background: rgba(255, 255, 255, .9) !important;
-    background: linear-gradient(rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.85)) !important;
+    background: rgba(240, 240, 240, .9) !important;
+    background: linear-gradient(to bottom, rgba(240, 240, 240, 0.9), rgba(240, 240, 240, 0.85)) !important;
   }
 
   .theme--light .stage-card--content {
-    background: rgba(255, 255, 255, .7) !important;
-    background: linear-gradient(rgba(255, 255, 255, 0.75), rgba(255, 255, 255, 0.3)) !important;
+    background: rgba(255, 255, 255, .85) !important;
+    background: linear-gradient(to bottom, rgba(255, 255, 255, 0.85), rgba(255, 255, 255, 0.7)) !important;
   }
 
   .theme--dark .stage-card--header {
     background: rgba(30, 30, 30, .9) !important;
-    background: linear-gradient(rgba(30, 30, 30, 0.9), rgba(30, 30, 30, 0.8)) !important;
+    background: linear-gradient(to bottom, rgba(30, 30, 30, 0.9), rgba(30, 30, 30, 0.85)) !important;
   }
 
   .theme--dark .stage-card--content {
-    background: rgba(0, 0, 0, .7) !important;
-    background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.2)) !important;
+    background: rgba(0, 0, 0, .8) !important;
+    background: linear-gradient(to bottom, rgba(0, 0, 0, 0.85), rgba(0, 0, 0, 0.70)) !important;
   }
 </style>

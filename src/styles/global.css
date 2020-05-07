@@ -172,14 +172,21 @@
     );
 }
 
-    .footer--safe-area {
-        padding: 8px;
-    }
+.footer--safe-area {
+    padding: 8px;
+}
 
-    .safe-area--navigation-drawer {
-        width: 300px !important;
-    }
+.safe-area--navigation-drawer {
+    width: 300px !important;
+}
 
+.stepper-overflow-initial {
+    overflow: initial;
+}
+
+.stepper-overflow-initial .v-stepper__wrapper {
+    overflow: initial;
+}
 
 @supports(padding: calc(max(1px, 2px))) {
     .drawer-logo {
