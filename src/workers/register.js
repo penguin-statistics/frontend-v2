@@ -1,22 +1,11 @@
-/* eslint-disable no-console */
-
-import { Workbox } from "workbox-window";
-
-let workbox;
+import Console from "@/utils/Console";
 
 if (process.env.NODE_ENV === "production" && "serviceWorker" in navigator) {
-  workbox = new Workbox(`${process.env.BASE_URL}service-worker.js`);
-
-  workbox.register();
-
-  var refreshing;
-  navigator.serviceWorker.addEventListener('controllerchange', function() {
-    if (refreshing) return;
-    window.location.reload();
-    refreshing = true;
-  });
-} else {
-  workbox = null;
+  navigator.serviceWorker.register(`${process.env.BASE_URL}service-worker.js`)
+    .then (result => {
+      Console.log("ServiceWorker", "successfully replaced to a no-op SW", result)
+    })
+    .catch (error => {
+      Console.error("ServiceWorker", "failed to replace to a no-op SW", error)
+    })
 }
-
-export default workbox;

@@ -1,10 +1,10 @@
 <template>
   <span>
     <span
-      v-for="[index, code] in codes.entries()"
+      v-for="[index, c] in codes.entries()"
       :key="index"
-      :class="generateStyle(code.s)"
-    >{{ code.t }}</span>
+      :class="generateStyle(c.s)"
+    >{{ c.t }}</span>
   </span>
 </template>
 

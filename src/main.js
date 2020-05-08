@@ -1,4 +1,4 @@
-import workbox from "./workers/register"
+import "./workers/register"
 
 import Vue from 'vue'
 import vuetify from './plugins/vuetify';
@@ -127,8 +127,6 @@ router.beforeEach((to, from, next) => {
 });
 
 Vue.config.productionTip = false;
-
-Vue.prototype.$workbox = workbox;
 
 new Vue({
   vuetify,

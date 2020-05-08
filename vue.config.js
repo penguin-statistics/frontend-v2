@@ -1,5 +1,4 @@
 const webpack = require("webpack");
-const { InjectManifest } = require("workbox-webpack-plugin");
 
 let commitHash;
 
@@ -37,10 +36,10 @@ module.exports = {
       new webpack.DefinePlugin({
         GIT_COMMIT: JSON.stringify(commitHash).trim()
       }),
-      new InjectManifest ({
-        swSrc: "./src/workers/service-worker.js",
-        dontCacheBustURLsMatching: /.[a-f0-9]{8}./
-      })
+      // new InjectManifest ({
+      //   swSrc: "./src/workers/service-worker.js",
+      //   dontCacheBustURLsMatching: /.[a-f0-9]{8}./
+      // })
     ],
   },
   chainWebpack: config => {
