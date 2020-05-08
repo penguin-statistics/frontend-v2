@@ -11,5 +11,11 @@
         }
       ]
     }
+  ],
+  "rewrites": [
+    {
+      "source": "/PenguinStats/api/(.*)",
+      "destination": "https://penguin-stats.io/PenguinStats/api/$1"
+    }
   ]
 }

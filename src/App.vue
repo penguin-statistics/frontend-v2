@@ -1,4 +1,3 @@
-<!--suppress CssInvalidFunction -->
 <template>
   <v-app
     :class="languageFont"
@@ -35,13 +34,14 @@
       v-model="drawer"
       app
       :style="{'filter': isInSpecialUI ? 'grayscale(1)' : ''}"
-      width="calc(env(safe-area-inset-left) + 300px)"
+      class="safe-area--navigation-drawer"
+      width="300px"
     >
       <Logo />
       <v-list
         dense
         nav
-        style="padding-left: calc(max(env(safe-area-inset-left), 8px))"
+        class="safe-area--navigation"
       >
         <Navigation
           v-for="route in routes"
@@ -60,6 +60,7 @@
               outlined
               text
               class="flex-grow-1 mr-1"
+              :loading="pending"
               @click="refreshData"
             >
               <v-icon left>
@@ -70,6 +71,19 @@
 
             <SettingsDialog />
           </v-row>
+          <v-row
+            justify="center"
+            class="mt-2"
+          >
+            <v-expand-transition>
+              <div
+                v-if="lowData"
+                class="text-center overline"
+              >
+                {{ $t('settings.optimization.lowData.active') }}
+              </div>
+            </v-expand-transition>
+          </v-row>
         </v-container>
       </v-list>
     </v-navigation-drawer>
@@ -77,7 +91,6 @@
       app
       dark
       :color="primaryColor"
-      style="min-height: calc(56px + env(safe-area-inset-top)); padding-top: env(safe-area-inset-top)"
       :style="{'filter': isInSpecialUI ? 'grayscale(1)' : ''}"
       class="x--safe-area toolbar--safe-area flex-column"
     >
@@ -112,7 +125,7 @@
     <RandomBackground />
     <v-content
       :style="{'filter': isInSpecialUI ? 'grayscale(1)' : ''}"
-      style="padding-top: calc(env(safe-area-inset-top) + 56px) !important;"
+      class="safe-area--v-content"
     >
       <transition
         name="slide-fade"
@@ -138,6 +151,7 @@
   import GlobalEntry from "@/mixins/hooks/GlobalEntry";
 
   import './styles/global.css'
+  import './styles/fonts.css'
   import PWAPopups from "@/components/global/PWAPopups";
   import Footer from "@/components/global/Footer";
   import CDN from "@/mixins/CDN";
@@ -146,6 +160,7 @@
   import SettingsDialog from "@/components/drawer/SettingsDialog";
   import MirrorSelector from "@/components/global/MirrorSelector";
   import Logo from "@/components/drawer/Logo";
+  import {mapGetters} from "vuex";
 
 export default {
   name: 'App',
@@ -177,6 +192,10 @@ export default {
     async refreshData () {
       await this.$store.dispatch("data/fetch", true);
     },
+  },
+  computed: {
+    ...mapGetters("settings", ["lowData"]),
+    ...mapGetters("ajax", ["pending"]),
   },
 }
 </script>

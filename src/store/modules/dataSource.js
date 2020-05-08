@@ -1,7 +1,7 @@
 export default {
   namespaced: true,
   state: {
-    source: 'global'
+    source: 'global',
   },
   mutations: {
     switch: (state, value) => {

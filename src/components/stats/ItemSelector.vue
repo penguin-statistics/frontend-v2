@@ -3,16 +3,16 @@
     <div
       v-for="(category, name) in items"
       :key="name"
-      class="item-list-wrapper"
+      class="d-flex flex-column"
     >
       <div class="ml-2 my-2">
         {{ $t(`items.categories.${name}`) }}
       </div>
-      <div class="item-list">
+      <div class="d-flex flex-wrap justify-start">
         <div
           v-for="item in category"
           :key="item.itemId"
-          class="item-list-item-wrapper"
+          class="d-flex flex-column align-center item-list-item-wrapper"
         >
           <div
             class="item-list-item-avatar cursor-pointer"

@@ -8,7 +8,7 @@
   <v-icon
     v-else-if="item.itemId === 'furni'"
     :class="furniturePadding"
-    class="deep-orange item-icon--special"
+    class="deep-orange item-icon--special white--text"
     :size="30 * ratio"
   >
     mdi-lamp
@@ -16,7 +16,7 @@
   <v-icon
     v-else-if="item.itemId !== 'furni' && !item.spriteCoord"
     :class="furniturePadding"
-    class="blue item-icon--special"
+    class="blue item-icon--special white--text"
     :size="30 * ratio"
   >
     mdi-treasure-chest

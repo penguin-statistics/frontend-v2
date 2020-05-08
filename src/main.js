@@ -9,7 +9,6 @@ import store from './store'
 import VueAnalytics from "vue-analytics"
 import i18n from "@/i18n"
 import config from "@/config"
-import VueNumberInput from '@chenfengyuan/vue-number-input';
 
 import * as Sentry from '@sentry/browser';
 import * as Integrations from '@sentry/integrations';
@@ -130,8 +129,6 @@ router.beforeEach((to, from, next) => {
 });
 
 Vue.config.productionTip = false;
-
-Vue.use(VueNumberInput);
 
 Vue.prototype.$workbox = workbox;
 

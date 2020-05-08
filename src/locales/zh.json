@@ -152,6 +152,88 @@
       }
     }
   },
+  "settings": {
+    "category": {
+      "appearance": "外观",
+      "data": "设置与数据"
+    },
+    "optimization": {
+      "lowData": {
+        "title": "低数据模式",
+        "active": "低数据模式已启用",
+        "subtitle": "低数据模式将停止加载诸如作战列表背景图、全站背景立绘等不必要资源以减少网络数据的使用。"
+      }
+    },
+    "data": {
+      "length": "本地数据条目数：{number} 条",
+      "reset": {
+        "title": "重置本地数据与设置",
+        "subtitle": "将会删除所有本地数据与设置。删除后，所有本地设置均会重置至默认值并刷新页面，数据将需要重新加载。确定要继续吗？"
+      }
+    }
+  },
+  "zone": {
+    "name": "章节",
+    "types": {
+      "MAINLINE": "主线",
+      "WEEKLY": "物资筹备",
+      "ACTIVITY_OPEN": "限时活动（开放中）",
+      "ACTIVITY_CLOSED": "限时活动（已结束）"
+    },
+    "status": {
+      "closed": "已结束",
+      "open": "开放中",
+      "permanentOpen": "常驻开放"
+    },
+    "opensAt": "开放时间：{0} - {1}"
+  },
+  "stage": {
+    "name": "关卡",
+    "apCost": "{apCost} 点理智",
+    "loots": {
+      "normal": "常规掉落",
+      "extra": "额外物资",
+      "special": "特殊掉落"
+    },
+    "selector": {
+      "plannerExclude": "排除规划关卡",
+      "excludeAll": "排除全部",
+      "includeAll": "选中全部"
+    }
+  },
+  "planner": {
+    "options": {
+      "_name": "选项",
+      "byProduct": "考虑合成副产物",
+      "requireExp": "大量需求经验",
+      "requireLmb": "大量需求龙门币",
+      "excludeStage": "选定计算排除关卡"
+    },
+    "actions": {
+      "import": "导入",
+      "export": "导出",
+      "importExport": "@:(planner.actions.import)/@:(planner.actions.export)",
+      "calculate": "计算规划"
+    },
+    "have": "已有",
+    "need": "需要",
+    "copy": "复制到剪贴板",
+    "calculation": {
+      "title": "规划结果",
+      "tabs": {
+        "stages": "关卡列表",
+        "syntheses": "合成列表",
+        "values": "素材价值"
+      },
+      "lmb": "预计龙门币收益",
+      "sanity": "预计需要理智",
+      "exp": "预计获得录像带经验",
+      "times": "次",
+      "level": "材料等级",
+      "noStage": "未找到需要进行的作战。",
+      "noSyntheses": "未找到需要合成的素材。"
+    }
+  },
   "items": {
     "choose": {
       "name": "选择素材"

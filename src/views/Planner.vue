@@ -1,140 +1,3 @@
-<i18n>
-{
-	"en": {
-		"actions": {
-			"calculate": "Calculate",
-			"export": "Export",
-			"import": "Import",
-			"importExport": "@:(actions.import)/@:(actions.export)"
-		},
-		"calculation": {
-			"exp": "Estimated EXP from Battle Records",
-			"level": "Material Level",
-			"lmb": "Estimated LMD income",
-			"noStage": "No stage found. Have you selected any material yet?",
-			"noSyntheses": "No syntheses found. Have you selected any material yet?",
-			"sanity": "Estimated Sanity required",
-			"tabs": {
-				"stages": "Stages",
-				"syntheses": "Syntheses",
-				"values": "Values"
-			},
-			"times": "battles",
-			"title": "Calculation Result"
-		},
-		"copy": "Copy to Clipboard",
-		"have": "Have",
-		"need": "Need",
-		"options": {
-			"_name": "Options",
-			"byProduct": "Consider by-products",
-			"foreignServer": "Do not suggest CN-only stages",
-			"requireExp": "Large demand for EXP",
-			"requireLmb": "Large demand for LMD"
-		}
-	},
-	"ja": {
-		"actions": {
-			"calculate": "計算を行う",
-			"export": "エクスポート",
-			"import": "インポート",
-			"importExport": "@:(actions.import)/@:(actions.export)"
-		},
-		"calculation": {
-			"exp": "戦闘で入手出来る経験値の推定",
-			"level": "素材レベル",
-			"lmb": "推定獲得龍門幣",
-			"noStage": "入力内容に不備があるため結果を表示出来ません。必要な素材の入力を忘れていませんか？",
-			"noSyntheses": "入力内容に不備があるため結果を表示出来ません。必要な素材の入力を忘れていませんか？",
-			"sanity": "推定必要理性",
-			"tabs": {
-				"stages": "ステージ",
-				"syntheses": "素材加工",
-				"values": "素材等級"
-			},
-			"times": "回",
-			"title": "計算結果"
-		},
-		"copy": "クリップボードにコピー",
-		"have": "所持数",
-		"need": "必要数",
-		"options": {
-			"_name": "オプション",
-			"byProduct": "加工副産物を考慮する",
-			"foreignServer": "第6章を計算に追加しません",
-			"requireExp": "大量の経験値が必要",
-			"requireLmb": "大量の龍門幣が必要"
-		}
-	},
-	"ko": {
-		"actions": {
-			"calculate": "계산하기",
-			"export": "내보내기",
-			"import": "가져오기",
-			"importExport": "@:(actions.import)/@:(actions.export)"
-		},
-		"calculation": {
-			"exp": "예상 경험치 획득량",
-			"level": "재료 등급",
-			"lmb": "예상 용문폐 획득량",
-			"noStage": "작전 지역을 찾을 수 없습니다. 필요한 재료를 선택하셨습니까?",
-			"noSyntheses": "가공할 재료를 찾을 수 없습니다. 필요한 재료를 선택하셨습니까?",
-			"sanity": "예상 이성 필요량",
-			"tabs": {
-				"stages": "작전 지역 기준",
-				"syntheses": "재료 가공 기준",
-				"values": "재료 등급 기준"
-			},
-			"times": "회",
-			"title": "계산 결과"
-		},
-		"copy": "클립보드에 복사",
-		"have": "보유량",
-		"need": "필요량",
-		"options": {
-			"_name": "설정",
-			"byProduct": "부산물 획득 고려",
-			"foreignServer": "에피소드 6 제외",
-			"requireExp": "경험치 획득 고려",
-			"requireLmb": "용문폐 획득 고려"
-		}
-	},
-	"zh": {
-		"actions": {
-			"calculate": "计算规划",
-			"export": "导出",
-			"import": "导入",
-			"importExport": "@:(actions.import)/@:(actions.export)"
-		},
-		"calculation": {
-			"exp": "预计获得录像带经验",
-			"level": "材料等级",
-			"lmb": "预计龙门币收益",
-			"noStage": "未找到需要进行的作战。是不是忘记选择所需素材了？",
-			"noSyntheses": "未找到需要合成的素材。是不是忘记选择所需素材了？",
-			"sanity": "预计需要理智",
-			"tabs": {
-				"stages": "关卡列表",
-				"syntheses": "合成列表",
-				"values": "素材价值"
-			},
-			"times": "次",
-			"title": "规划结果"
-		},
-		"copy": "复制到剪贴板",
-		"have": "已有",
-		"need": "需要",
-		"options": {
-			"_name": "选项",
-			"byProduct": "考虑合成副产物",
-			"foreignServer": "排除仅国服出现的关卡",
-			"requireExp": "大量需求经验",
-			"requireLmb": "大量需求龙门币"
-		}
-	}
-}
-</i18n>
-
 <template>
   <v-container
     fluid
@@ -161,7 +24,7 @@
             class="headline font-weight-bold d-block"
             style="width: 100%"
           >
-            {{ $t('calculation.title') }}
+            {{ $t('planner.calculation.title') }}
           </div>
         </v-card-title>
         <v-card-text>
@@ -187,7 +50,7 @@
                     {{ calculation.data.gold.toLocaleString() }}
                   </v-list-item-title>
                   <v-list-item-subtitle>
-                    {{ $t('calculation.lmb') }}
+                    {{ $t('planner.calculation.lmb') }}
                   </v-list-item-subtitle>
                 </v-list-item-content>
               </v-list-item>
@@ -208,7 +71,7 @@
                     {{ calculation.data.cost.toLocaleString() }}
                   </v-list-item-title>
                   <v-list-item-subtitle>
-                    {{ $t('calculation.sanity') }}
+                    {{ $t('planner.calculation.sanity') }}
                   </v-list-item-subtitle>
                 </v-list-item-content>
               </v-list-item>
@@ -229,7 +92,7 @@
                     {{ calculation.data.exp.toLocaleString() }} EXP
                   </v-list-item-title>
                   <v-list-item-subtitle>
-                    {{ $t('calculation.exp') }}
+                    {{ $t('planner.calculation.exp') }}
                   </v-list-item-subtitle>
                 </v-list-item-content>
               </v-list-item>
@@ -257,7 +120,7 @@
                 border="left"
                 class="mt-4"
               >
-                {{ $t('calculation.noStage') }}
+                {{ $t('planner.calculation.noStage') }}
               </v-alert>
               <v-row
                 align="start"
@@ -280,7 +143,7 @@
                         <small class="float-right">#{{ index + 1 }}</small>
                       </div>
                       <div class="display-1 text-center monospace font-weight-bold my-2">
-                        {{ parseInt(stage.count).toLocaleString() }} <small class="title">{{ $t('calculation.times') }}</small>
+                        {{ parseInt(stage.count).toLocaleString() }} <small class="title">{{ $t('planner.calculation.times') }}</small>
                       </div>
                       <div>
                         <div
@@ -317,7 +180,7 @@
                 border="left"
                 class="mt-4"
               >
-                {{ $t('calculation.noSyntheses') }}
+                {{ $t('planner.calculation.noSyntheses') }}
               </v-alert>
               <v-row
                 align="start"
@@ -391,7 +254,7 @@
                   <v-card class="card-item">
                     <v-card-text>
                       <div class="title">
-                        <span class="font-weight-bold headline">{{ $t('calculation.level') }} {{ value.level }}</span>
+                        <span class="font-weight-bold headline">{{ $t('planner.calculation.level') }} {{ value.level }}</span>
                       </div>
                       <div
                         v-for="item in value.materials"
@@ -466,43 +329,47 @@
       >
         <v-row
           no-gutters
-          class="my-3 mx-6"
-          align="center"
-          justify="center"
+          class="my-3 mx-6 flex-column"
+          align="start"
         >
-          <v-col cols="12">
-            <span class="title">
-              {{ $t('options._name') }}
-            </span>
-          </v-col>
-          <v-col cols="12">
-            <v-switch
-              v-model="options.byProduct"
-              :label="$t('options.byProduct')"
-              hide-details
+          <span class="title">
+            {{ $t('planner.options._name') }}
+          </span>
+          <v-switch
+            v-model="options.byProduct"
+            :label="$t('planner.options.byProduct')"
+            hide-details
+          />
+          <v-switch
+            v-model="options.requireExp"
+            :label="$t('planner.options.requireExp')"
+            hide-details
+          />
+          <v-switch
+            v-model="options.requireLmb"
+            :label="$t('planner.options.requireLmb')"
+            hide-details
+          />
+          <v-dialog
+            v-model="options.excludeDialog"
+            max-width="700px"
+          >
+            <template v-slot:activator="{ on }">
+              <v-btn
+                class="mt-4"
+                v-on="on"
+              >
+                <v-icon left>
+                  mdi-cube
+                </v-icon>
+                {{ $t('planner.options.excludeStage') }}{{ exclude.length ? ` (${exclude.length})` : "" }}
+              </v-btn>
+            </template>
+            <MultiStageSelector
+              v-model="exclude"
+              @close="options.excludeDialog = false"
             />
-          </v-col>
-          <v-col cols="12">
-            <v-switch
-              v-model="options.requireExp"
-              :label="$t('options.requireExp')"
-              hide-details
-            />
-          </v-col>
-          <v-col cols="12">
-            <v-switch
-              v-model="options.requireLmb"
-              :label="$t('options.requireLmb')"
-              hide-details
-            />
-          </v-col>
-          <v-col cols="12">
-            <v-switch
-              v-model="options.foreignServer"
-              :label="$t('options.foreignServer')"
-              hide-details
-            />
-          </v-col>
+          </v-dialog>
         </v-row>
       </v-col>
       <v-col
@@ -533,7 +400,7 @@
                 <v-icon left>
                   mdi-file-restore
                 </v-icon>
-                {{ $t('actions.importExport') }}
+                {{ $t('planner.actions.importExport') }}
               </v-btn>
             </template>
             <v-card>
@@ -546,13 +413,13 @@
                 color="white"
               >
                 <v-tab>
-                  {{ $t('actions.import') }}
+                  {{ $t('planner.actions.import') }}
                   <v-icon>
                     mdi-file-import
                   </v-icon>
                 </v-tab>
                 <v-tab>
-                  {{ $t('actions.export') }}
+                  {{ $t('planner.actions.export') }}
                   <v-icon>mdi-file-export</v-icon>
                 </v-tab>
               </v-tabs>
@@ -566,7 +433,7 @@
                         hide-details
                         outlined
                         rows="14"
-                        class="monospace planner-import-export"
+                        class="monospace-pure planner-import-export"
                         placeholder="[{&quot;name&quot;:&quot;双极纳米片&quot;,&quot;need&quot;:4,&quot;have&quot;:0},{&quot;name&quot;:&quot;D32钢&quot;,&quot;need&quot;:4,&quot;have&quot;:0}...]"
                       />
                     </v-container>
@@ -578,7 +445,7 @@
                         text
                         @click="importFromText"
                       >
-                        {{ $t('actions.import') }}
+                        {{ $t('planner.actions.import') }}
                       </v-btn>
                     </v-card-actions>
                   </v-card>
@@ -588,7 +455,7 @@
                     flat
                   >
                     <v-card-text
-                      class="monospace planner-import-export"
+                      class="monospace-pure planner-import-export"
                     >
                       {{ exportJson }}
                     </v-card-text>
@@ -600,7 +467,7 @@
                         text
                         @click="copyExportJson"
                       >
-                        {{ $t('copy') }}
+                        {{ $t('planner.copy') }}
                       </v-btn>
                     </v-card-actions>
                   </v-card>
@@ -608,35 +475,6 @@
               </v-tabs-items>
             </v-card>
           </v-dialog>
-          <!--          <v-dialog-->
-          <!--            v-model="fundDressDialog"-->
-          <!--            width="500"-->
-          <!--          >-->
-          <!--            <template v-slot:activator="{ on }">-->
-          <!--              <v-btn-->
-          <!--                color="yellow darken-3"-->
-          <!--                class="my-1"-->
-          <!--                v-on="on"-->
-          <!--              >-->
-          <!--                {{ $t('actions.becomeIdol') }}-->
-          <!--              </v-btn>-->
-          <!--            </template>-->
-          <!--            <v-card>-->
-          <!--              <v-card-title class="headline">-->
-          <!--                {{ $t('actions.becomeIdol') }}-->
-          <!--              </v-card-title>-->
-          <!--              <v-card-actions>-->
-          <!--                <v-spacer />-->
-          <!--                <v-btn-->
-          <!--                  color="primary"-->
-          <!--                  text-->
-          <!--                  @click="fundDressDialog = false"-->
-          <!--                >-->
-          <!--                  OK-->
-          <!--                </v-btn>-->
-          <!--              </v-card-actions>-->
-          <!--            </v-card>-->
-          <!--          </v-dialog>-->
           <v-btn
             color="red white--text"
             class="my-1"
@@ -647,7 +485,7 @@
             <v-icon left>
               mdi-calculator
             </v-icon>
-            {{ $t('actions.calculate') }}
+            {{ $t('planner.actions.calculate') }}
           </v-btn>
         </v-row>
       </v-col>
@@ -678,7 +516,6 @@
                 :item="items.get(itemData.id)"
                 :ratio="1"
                 disable-link
-                tooltip-position="bottom"
               />
             </v-row>
           </v-container>
@@ -697,7 +534,7 @@
                   <span
                     class="caption no-break--text field-caption white--text"
                   >
-                    {{ $t('have') }}
+                    {{ $t('planner.have') }}
                   </span>
                 </div>
                 <number-input
@@ -705,7 +542,7 @@
                   size="small"
                   center
                   controls
-                  :placeholder="$t('have')"
+                  :placeholder="$t('planner.have')"
                   class="monospace font-weight-bold number-input-theme transition-all"
                   :class="{'number-input-theme--dense': $vuetify.breakpoint.smAndDown}"
                   :min="0"
@@ -725,15 +562,15 @@
                   <span
                     class="caption no-break--text field-caption white--text"
                   >
-                    {{ $t('need') }}
+                    {{ $t('planner.need') }}
                   </span>
                 </div>
-                <number-input
+                <NumberInput
                   v-model="itemData.need"
                   size="small"
                   center
                   controls
-                  :placeholder="$t('need')"
+                  :placeholder="$t('planner.need')"
                   class="monospace font-weight-bold number-input-theme transition-all"
                   :class="{'number-input-theme--dense': $vuetify.breakpoint.smAndDown}"
                   :min="0"
@@ -750,18 +587,20 @@
 <script>
   import planner from "@/apis/planner";
   import get from "@/utils/getters";
-  import i18n from "@/i18n";
   import Item from "@/components/global/Item";
+  import NumberInput from "@/components/NumberInput";
 
   import * as clipboard from "clipboard-polyfill";
   import marshaller from "@/utils/marshaller";
   import snackbar from "@/utils/snackbar";
   import Console from "@/utils/Console";
   import strings from "@/utils/strings";
+  import MultiStageSelector from "@/components/stats/MultiStageSelector";
+  import {mapGetters} from "vuex";
 
   export default {
     name: "Planner",
-    components: {Item},
+    components: {MultiStageSelector, Item, NumberInput},
     data: () => {
       const items = get.items.all(true);
       return {
@@ -786,29 +625,38 @@
           tabs: [{
             id: "stages",
             icon: "mdi-cube",
-            text: "calculation.tabs.stages"
+            text: "planner.calculation.tabs.stages"
           }, {
             id: "syntheses",
             icon: "mdi-treasure-chest",
-            text: "calculation.tabs.syntheses"
+            text: "planner.calculation.tabs.syntheses"
           }, {
             id: "values",
             icon: "mdi-cash-usd",
-            text: "calculation.tabs.values"
+            text: "planner.calculation.tabs.values"
           }]
         },
         options: {
           byProduct: false,
           requireExp: false,
           requireLmb: false,
-          foreignServer: i18n.locale !== "zh"
+          excludeDialog: false
         },
         getItem: get.items
       }
     },
     computed: {
+      ...mapGetters("settings", ["excludedStages"]),
       exportJson() {
         return JSON.stringify(this.itemsData);
+      },
+      exclude: {
+        get () {
+          return this.excludedStages
+        },
+        set (val) {
+          this.$store.commit("settings/changeExcludedStages", val)
+        }
       }
     },
     methods: {
@@ -817,7 +665,8 @@
         planner.plan(
           marshaller.planner({
             items: this.itemsData,
-            options: this.options
+            options: this.options,
+            exclude: this.exclude
           })
         )
           .then(({data}) => {
@@ -1001,94 +850,9 @@
     padding: 8px 0;
   }
 
-  .fix-icon--left {
-    transform: translate(-2px, -3.5px)
-  }
-
-  .fix-icon--right {
-    transform: translate(2px, -3.5px)
-  }
-
-  ::v-deep .input-field input {
-    text-align: center !important;
-    /*font-family: SF Mono, "Droid Sans Mono", Ubuntu Mono, Consolas, Courier New, Courier, monospace;*/
-    font-weight: bold;
-  }
-
-  ::v-deep .input-field .v-input__slot {
-    padding: 0 6px !important;
-  }
-
-  ::v-deep .input-field legend {
-    margin: 0 6px !important;
-  }
-
-  ::v-deep .input-field label {
-    margin: 0 12px !important;
-    max-width: none;
-  }
-
-
-  ::v-deep .input-field--is-zero input {
-    opacity: 0.5
-  }
-
   .card-item {
     border: 2px solid #4350b0;
     height: 100%
-  }
-
-  ::v-deep .number-input-theme .number-input__input {
-    background: rgba(0, 0, 0, .2) !important;
-    border: 1px solid #ddd;
-    border-radius: 17px !important;
-    top: 0 !important;
-    font-size: 16px;
-    text-overflow: ellipsis;
-    overflow: hidden;
-    white-space: nowrap;
-    padding-left: 30px !important;
-    padding-right: 30px !important;
-  }
-
-  ::v-deep .number-input-theme .number-input__input:hover {
-    background: rgba(0, 0, 0, .35) !important;
-  }
-  ::v-deep .number-input-theme .number-input__input:focus {
-    background: rgba(0, 0, 0, .5) !important;
-    border: 1px solid #0074d9;
-    /*border: none;*/
-    /*box-shadow: 0 0 0 1px #0074d9;*/
-  }
-
-  ::v-deep .theme--light .number-input-theme .number-input__input:hover {
-    background: rgba(0, 0, 0, .17) !important;
-  }
-  ::v-deep .theme--light .number-input-theme .number-input__input:focus {
-    background: rgba(0, 0, 0, .35) !important;
-  }
-
-  ::v-deep .number-input-theme .number-input__button {
-    border: 1px solid #ddd !important;
-    top: 2px !important;
-    border-radius: 50% !important;
-    height: 30px !important;
-    width: 30px !important;
-    transition: all .225s cubic-bezier(0.165, 0.84, 0.44, 1);
-    touch-action: manipulation;
-  }
-  ::v-deep .number-input-theme .number-input__button:hover {
-    transform: scale(1.12);
-  }
-  ::v-deep .number-input-theme .number-input__button:active {
-    transform: scale(1.02);
-  }
-
-  ::v-deep .number-input-theme .number-input__button--minus {
-    left: 2px !important;
-  }
-  ::v-deep .number-input-theme .number-input__button--plus {
-    right: 2px !important;
   }
 
   ::v-deep .number-input-theme--dense .number-input__button--minus {

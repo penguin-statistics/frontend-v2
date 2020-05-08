@@ -1,112 +1,45 @@
 <template>
   <v-card
     hover
-    ripple
-    :class="{'d-inline-flex ma-1 stage-card cursor-pointer': true, 'stage-card--light': !dark, 'stage-card--dark': dark }"
+    :ripple="!stateful"
+    :class="{'d-inline-flex ma-1 stage-card cursor-pointer': true, 'stage-card--stateless': !stateful, 'stage-card--light': !dark, 'stage-card--dark': dark, 'stage-card--chosen': stateful, 'stage-card--chosen-true': chosen, 'stage-card--chosen-false': !chosen }"
   >
     <v-card-title class="subtitle-1 py-1 px-3">
-      <span
-        v-for="[index, code] in codes.entries()"
-        :key="index"
-        :class="generateStyle(code.s).c"
-        :style="generateStyle(code.s).s"
+      <v-icon
+        v-if="stateful"
+        class="stage-card--chosen-icon"
+        :size="18"
       >
-        {{ code.t }}
-      </span>
+        {{ chosen ? 'mdi-check' : 'mdi-close' }}
+      </v-icon>
+      <StageCode :code="stage.code" />
     </v-card-title>
   </v-card>
 </template>
 
 <script>
+  import StageCode from "@/components/stats/StageCode";
   import Theme from "@/mixins/Theme";
 
-  const s = {
-    separator: -1,
-    S: 0,
-    prefix: 1,
-    middle: 2,
-    stage: 3
-  }
   export default {
     name: "StageCard",
+    components: {StageCode},
     mixins: [Theme],
     props: {
       stage: {
         type: Object,
         required: true
+      },
+      chosen: {
+        type: Boolean,
+        default () {
+          return null
+        }
       }
     },
     computed: {
-      codes () {
-        const segments = this.stage.code.split("-");
-        const results = [];
-        // format: []{s: (style), t: (text)}
-
-        if (segments.length === 1) {
-          results.push({
-            s: s.stage,
-            t: segments[0]
-          })
-          return results
-        }
-
-        for (const [index, segment] of segments.entries()) {
-          if (index === 0) {
-            // e.g. S4-1 S4-2
-            if (segment[0] === "S" && Number.isInteger(+segment[1])) {
-              results.push({
-                s: s.S,
-                t: "S"
-              });
-              results.push({
-                s: s.prefix,
-                t: segment.slice(1)
-              });
-            } else {
-              results.push({
-                s: s.prefix,
-                t: segment
-              })
-            }
-          } else if (index === 1) {
-            if (Number.isInteger(+segment.slice(-1))) {
-              // is stage code
-              results.push({
-                s: s.stage,
-                t: segment
-              })
-            } else {
-              // e.g. SW-EV-1
-              results.push({
-                s: s.middle,
-                t: segment
-              })
-            }
-          } else if (index === 2) {
-            // e.g. SW-EV-1
-            results.push({
-              s: s.stage,
-              t: segment
-            })
-          }
-
-          if (index !== segments.length - 1) {
-            results.push({
-              s: s.separator,
-              t: "-"
-            })
-          }
-        }
-        return results
-      }
-    },
-    methods: {
-      generateStyle(type) {
-        if (type === s.separator) return {c: ["grey--text"]}
-        if (type === s.S) return {c: ["font-weight-bold", this.dark ? "pink--text" : "orange--text text--darken-3"]}
-        if (type === s.prefix) return {c: ["grey--text", this.dark ? "text--darken-1" : ""]}
-        if (type === s.middle) return {c: ["grey--text", this.dark ? "text--lighten-2" : "text--darken-3"]}
-        if (type === s.stage) return {c: ["font-weight-black", this.dark ? "yellow--text text--lighten-2" : "black--text"]}
+      stateful() {
+        return this.chosen !== null;
       }
     },
   }
@@ -114,22 +47,65 @@
 
 <style scoped>
   .stage-card {
-    transition: transform 50ms ease-out, box-shadow 35ms ease-out, background 100ms ease-out !important;
+    transition: transform 75ms ease-out, box-shadow 75ms ease-out, background 100ms ease-out, opacity 100ms cubic-bezier(0,.8,.2,1) !important;
     user-select: none;
-  }
-  .stage-card:hover {
-    transform: translateY(-0.5px);
   }
   .stage-card:active {
     transform: translateY(0.5px);
-    box-shadow: 0px 0px 3px rgba(0, 0, 0, .5); /*  0 0 10px rgba(255, 255, 255, 1), 0 0 20px rgba(255, 255, 255, .9), 0 0 45px rgba(255, 255, 255, .7), 0 0 60px 100px rgba(255, 255, 255, .5) */
+    box-shadow: 0 0 3px rgba(0, 0, 0, .5);
   }
+
+  .stage-card--stateless:hover {
+    transform: translateY(-0.5px);
+  }
+
+  .stage-card--stateless:active {
+    transform: translateY(0.5px);
+  }
+
   .stage-card--light {
-    background: rgba(224, 224, 224, 0.8);
+    background: rgba(224, 224, 224, 0.95);
     border: 1px solid rgba(32, 32, 32, 0.95);
   }
   .stage-card--dark {
-    background: rgba(32, 32, 32, 0.8);
+    background: rgba(32, 32, 32, 0.95);
     border: 1px solid rgba(224, 224, 224, 0.95);
+  }
+
+  .stage-card--chosen {
+    overflow: hidden;
+  }
+  .stage-card--chosen .stage-card--chosen-icon {
+    position: absolute;
+    bottom: -.05rem;
+    right: -.02rem;
+    user-select: none;
+    z-index: 0;
+    text-shadow: 0 0 2px rgba(0, 0, 0, .3);
+  }
+  .theme--light .stage-card--chosen-icon {
+    color: black;
+    text-shadow: 0 0 2px rgba(255, 255, 255, .3);
+  }
+
+  .stage-card--chosen.stage-card--chosen-true {
+    opacity: .9
+  }
+  .stage-card--chosen.stage-card--chosen-true:hover {
+    opacity: 1
+  }
+
+  .theme--light .stage-card--chosen.stage-card--chosen-true {
+    background: rgb(206, 229, 203)
+  }
+  .theme--dark .stage-card--chosen.stage-card--chosen-true{
+    background: rgb(49, 92, 40)
+  }
+
+  .theme--light .stage-card--chosen.stage-card--chosen-false {
+    background: rgb(247, 208, 211)
+  }
+  .theme--dark .stage-card--chosen.stage-card--chosen-false {
+    background: rgb(128, 59, 51)
   }
 </style>

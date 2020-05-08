@@ -6,7 +6,6 @@
       'darken-3': !dark,
       'drawer-logo--two-line': $t('app.name_line2') !== ''
     }"
-    style="padding-left: calc(max(env(safe-area-inset-left), 32px))"
   >
     <v-img
       :src="cdnResource('/logos/penguin_stats_logo.png')"

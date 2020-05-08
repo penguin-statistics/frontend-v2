@@ -137,6 +137,62 @@
       }
     }
   },
+  "zone": {
+    "name": "章",
+    "types": {
+      "MAINLINE": "メインステージ",
+      "WEEKLY": "物資調達",
+      "ACTIVITY_OPEN": "イベント（開催中）",
+      "ACTIVITY_CLOSED": "イベント（終了）"
+    },
+    "status": {
+      "closed": "終了",
+      "open": "開催中"
+    },
+    "opensAt": "開催期間：{0} - {1}"
+  },
+  "stage": {
+    "name": "作戦",
+    "apCost": "消費理性：{apCost}",
+    "loots": {
+      "normal": "通常ドロップ",
+      "extra": "エクストラドロップ",
+      "special": "スペシャルドロップ"
+    }
+  },
+  "planner": {
+    "options": {
+      "_name": "オプション",
+      "byProduct": "加工副産物を考慮する",
+      "requireExp": "大量の経験値が必要",
+      "requireLmb": "大量の龍門幣が必要",
+      "foreignServer": "第6章を計算に追加しません"
+    },
+    "actions": {
+      "import": "インポート",
+      "export": "エクスポート",
+      "importExport": "@:(planner.actions.import)/@:(planner.actions.export)",
+      "calculate": "計算を行う"
+    },
+    "have": "所持数",
+    "need": "必要数",
+    "copy": "クリップボードにコピー",
+    "calculation": {
+      "title": "計算結果",
+      "tabs": {
+        "stages": "ステージ",
+        "syntheses": "素材加工",
+        "values": "素材等級"
+      },
+      "lmb": "推定獲得龍門幣",
+      "sanity": "推定必要理性",
+      "exp": "戦闘で入手出来る経験値の推定",
+      "times": "回",
+      "level": "素材レベル",
+      "noStage": "入力内容に不備があるため結果を表示出来ません。",
+      "noSyntheses": "入力内容に不備があるため結果を表示出来ません。"
+    }
+  },
   "items": {
     "choose": {
       "name": "素材選択"

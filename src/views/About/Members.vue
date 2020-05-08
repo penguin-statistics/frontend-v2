@@ -134,7 +134,7 @@
         elevation="5"
       >
         <v-subheader :key="key">
-          {{ $t('categories.' + key) }}
+          {{ $t(`categories.${key}`) }}
         </v-subheader>
 
         <v-list-item
@@ -144,7 +144,7 @@
         >
           <v-list-item-avatar>
             <v-img
-              :src="'https://penguin.upyun.galvincdn.com/avatars/' + profile.avatar"
+              :src="avatar(profile.avatar)"
             />
           </v-list-item-avatar>
 
@@ -185,6 +185,7 @@
 
 <script>
   import anime from "animejs";
+  import CDN from "@/mixins/CDN";
 
   const r = {
     frontend: "frontend",
@@ -203,6 +204,7 @@
   };
   export default {
     name: 'Members',
+    mixins: [CDN],
     data () {
       return {
         profiles: {
@@ -456,6 +458,9 @@
           translated.push(this.$t(`responsibilities.${responsibility}`))
         }
         return translated.join(this.$t('meta.separator'))
+      },
+      avatar (src) {
+        return this.cdnResource(`/avatars/${src}`)
       }
     }
   }

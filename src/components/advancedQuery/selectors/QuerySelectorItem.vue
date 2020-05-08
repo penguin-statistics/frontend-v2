@@ -41,6 +41,7 @@
           <ItemById
             v-if="value"
             :id="value"
+            :key="value"
           />
           <div
             v-else

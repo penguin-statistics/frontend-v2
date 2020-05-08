@@ -12,6 +12,7 @@ export default {
   },
   mutations: {
     setSnackbar (state, {color, timeout, text, icon, extra}) {
+      state.snackbar.enabled = false;
       state.snackbar.enabled = true;
       state.snackbar.color = color;
       state.snackbar.timeout = timeout;

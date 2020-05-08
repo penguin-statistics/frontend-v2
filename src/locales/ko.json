@@ -137,6 +137,62 @@
       }
     }
   },
+  "zone": {
+    "name": "에피소드",
+    "types": {
+      "MAINLINE": "메인 스토리",
+      "WEEKLY": "물자 비축",
+      "ACTIVITY_OPEN": "이벤트 (개방중)",
+      "ACTIVITY_CLOSED": "이벤트 (종료)"
+    },
+    "status": {
+      "closed": "닫힘",
+      "open": "개방중"
+    },
+    "opensAt": "이벤트 기간: {0} - {1}"
+  },
+  "stage": {
+    "name": "작전지역",
+    "apCost": "{apCost} 이성 필요",
+    "loots": {
+      "normal": "일반 드랍",
+      "extra": "추가 드랍",
+      "special": "특수 드랍"
+    }
+  },
+  "planner": {
+    "options": {
+      "_name": "설정",
+      "byProduct": "부산물 획득 고려",
+      "requireExp": "경험치 획득 고려",
+      "requireLmb": "용문폐 획득 고려",
+      "foreignServer": "에피소드 6 제외"
+    },
+    "actions": {
+      "import": "가져오기",
+      "export": "내보내기",
+      "importExport": "@:(planner.actions.import)/@:(planner.actions.export)",
+      "calculate": "계산하기"
+    },
+    "have": "보유량",
+    "need": "필요량",
+    "copy": "클립보드에 복사",
+    "calculation": {
+      "title": "계산 결과",
+      "tabs": {
+        "stages": "작전 지역 기준",
+        "syntheses": "재료 가공 기준",
+        "values": "재료 등급 기준"
+      },
+      "lmb": "예상 용문폐 획득량",
+      "sanity": "예상 이성 필요량",
+      "exp": "예상 경험치 획득량",
+      "times": "회",
+      "level": "재료 등급",
+      "noStage": "작전 지역을 찾을 수 없습니다.",
+      "noSyntheses": "가공할 재료를 찾을 수 없습니다."
+    }
+  },
   "items": {
     "choose": {
       "name": "아이템 선택"

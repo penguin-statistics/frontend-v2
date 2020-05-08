@@ -31,7 +31,7 @@
   <v-stepper
     v-model="step"
     :alt-labels="!$vuetify.breakpoint.xsOnly"
-    class="pa-3 transparent elevation-0 full-width"
+    class="pa-2 transparent elevation-0 full-width"
   >
     <v-stepper-header
       class="bkop-light elevation-4"
@@ -59,7 +59,7 @@
       </v-stepper-step>
     </v-stepper-header>
 
-    <v-stepper-items>
+    <v-stepper-items class="stepper-overflow-initial">
       <v-stepper-content
         :step="1"
         class="bkop-light mt-2 elevation-4"
@@ -281,6 +281,23 @@ export default {
 .charts-wrapper {
   display: flex;
   align-items: center;
+}
+/*.item-list-wrapper {*/
+/*  display: flex;*/
+/*  flex-direction: column;*/
+/*}*/
+/*.item-list {*/
+/*  display: flex;*/
+/*  flex-wrap: wrap;*/
+/*  justify-content: flex-start;*/
+/*}*/
+.item-list-item-wrapper {
+  /*display: flex;*/
+  /*flex-direction: column;*/
+  /*justify-content: center;*/
+  /*align-items: center;*/
+  min-width: 62px;
+  margin: 4px 0;
 }
 .full-width {
   width: 100%;

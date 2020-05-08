@@ -21,7 +21,7 @@
         bottom
         color="secondary"
         overlap
-        class="cursor-pointer"
+        class="cursor-pointer monospace"
       >
         <template v-slot:badge>
           <span class="disabled">
