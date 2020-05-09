@@ -98,7 +98,16 @@
     "failed": {
       "title": "神经网络连接异常",
       "subtitle": "未能与神经网络建立对等连接，部分资源丢失",
-      "retry": "重试"
+      "retry": "重试",
+      "error": {
+        "zones": "章节元数据",
+        "stages": "关卡元数据",
+        "items": "物品数据",
+        "limitations": "汇报数据校验规则",
+        "trends": "汇报历史数据",
+        "globalMatrix": "全平台掉落数据",
+        "personalMatrix": "个人掉落数据"
+      }
     }
   },
   "report": {

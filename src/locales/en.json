@@ -97,7 +97,16 @@
     "failed": {
       "title": "Failed to fetch resources",
       "subtitle": "Unable to establish synchronized connection with neural network. Missing partial or all resources.",
-      "retry": "Retry"
+      "retry": "Retry",
+      "error": {
+        "zones": "Zones Data",
+        "stages": "Stages Data",
+        "items": "Items Data",
+        "limitations": "Report Validation Rules",
+        "trends": "History Report Trends",
+        "globalMatrix": "Global Drop Data",
+        "personalMatrix": "Personal Drop Data"
+      }
     }
   },
   "report": {
