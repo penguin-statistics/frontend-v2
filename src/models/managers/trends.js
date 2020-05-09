@@ -4,7 +4,7 @@ import commons from './_common'
 const trends = new ObjectManager({
   name: 'trends',
   api: '/result/trends',
-  ttl: 1000 * 60 * 60 * 1, // 1 hours
+  ttl: 1000 * 60 * 60 * 1, // 1 hour
   ajaxHooks: commons.defaultAjaxHooks
 });
 

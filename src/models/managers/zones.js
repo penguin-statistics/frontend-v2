@@ -23,15 +23,18 @@ const zones = new ObjectManager({
 
         el.isActivity = el.type === "ACTIVITY";
         if (el.isActivity) {
+          if (el.openTime === el.closeTime) el.isPermanentOpen = true
+
           el.activityActiveTime = formatter.dates([el.openTime, el.closeTime]);
 
+          // TODO: do comparison on getter instead during transform
           el.isOutdated = formatter.isOutdated(el.closeTime)
         }
       });
       return object
     }
   ],
-  ttl: 1000 * 60 * 60 * 1, // 1 hours
+  ttl: 1000 * 60 * 60 * 1, // 1 hour
   ajaxHooks: commons.defaultAjaxHooks
 });
 

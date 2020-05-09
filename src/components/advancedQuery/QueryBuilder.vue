@@ -61,9 +61,18 @@
                 </v-btn>
               </div>
               <div class="flex-column pt-2">
-                <QuerySelectorItem v-model="query.item" />
-                <!--                <QuerySelectorStage v-model="query.stage" />-->
-                <!--                <QuerySelectorTimeRange v-model="query.timeRange" />-->
+                <QuerySelectorItem
+                  v-model="query.item"
+                  :disabled="!!query.stage"
+                />
+                <QuerySelectorStage
+                  v-model="query.stage"
+                  :disabled="!!query.item"
+                />
+
+                <v-divider class="my-4" />
+
+                <QuerySelectorTimeRange v-model="query.timeRange" />
                 <!--                <QuerySelectorServer v-model="query.server" />-->
               </div>
             </v-card-text>

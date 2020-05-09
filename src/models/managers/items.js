@@ -12,7 +12,7 @@ const items = new ObjectManager({
       return filtered
     },
   ],
-  ttl: 1000 * 60 * 60, // 1 hours
+  ttl: 1000 * 60 * 60 * 1, // 1 hour
   ajaxHooks: commons.defaultAjaxHooks
 });
 

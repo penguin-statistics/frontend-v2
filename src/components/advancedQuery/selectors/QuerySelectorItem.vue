@@ -1,41 +1,44 @@
 <template>
   <v-dialog
     v-model="dialog"
-    max-width="550px"
+    max-width="590px"
   >
     <template v-slot:activator="{ on }">
       <div class="d-flex flex-row align-center justify-center">
-        <v-expand-x-transition>
-          <v-tooltip
-            content-class="transparent"
-            right
-            nudge-right="-16"
-            transition="slide-x-transition"
-          >
-            <template v-slot:activator="{ on }">
+        <v-tooltip
+          content-class="transparent"
+          right
+          nudge-right="-16"
+          transition="slide-x-transition"
+        >
+          <template v-slot:activator="{ on }">
+            <v-expand-x-transition>
               <v-icon
                 v-if="value"
                 v-on="on"
               >
                 mdi-treasure-chest
               </v-icon>
-            </template>
-            <v-card
-              max-width="400px"
-            >
-              <v-card-title>
-                {{ $t('query.selector.item.title') }}
-              </v-card-title>
-              <v-card-text>
-                {{ $t('query.selector.item.subtitle') }}
-              </v-card-text>
-            </v-card>
-          </v-tooltip>
-        </v-expand-x-transition>
+            </v-expand-x-transition>
+          </template>
+          <v-card
+            max-width="400px"
+          >
+            <v-card-title>
+              {{ $t('query.selector.item.title') }}
+            </v-card-title>
+            <v-card-text>
+              {{ $t('query.selector.item.subtitle') }}
+            </v-card-text>
+          </v-card>
+        </v-tooltip>
+
+
         <v-btn
           class="flex-grow-1"
           :class="{'mx-1': value}"
           large
+          :disabled="disabled"
           v-on="on"
         >
           <ItemById
@@ -101,6 +104,12 @@
         type: String,
         default () {
           return null
+        }
+      },
+      disabled: {
+        type: Boolean,
+        default () {
+          return false
         }
       }
     },

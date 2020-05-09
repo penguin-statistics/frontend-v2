@@ -15,7 +15,7 @@ Getters.items = {
     if (!got) return {};
     return got.find(el => el.name === name) || {}
   },
-  all(map=false) {
+  all(map = false) {
     const items = store.state.data.items;
     if (!items) return [];
     if (map) {
