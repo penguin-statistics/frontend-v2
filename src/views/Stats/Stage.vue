@@ -122,6 +122,9 @@ export default {
     },
     strings () {
       return strings
+    },
+    getter () {
+      return get
     }
   },
   methods: {

@@ -173,7 +173,8 @@
       }
     },
     "data": {
-      "length": "Local Data Entries: {number} entries",
+      "server": "Local Data includes servers: ",
+      "size": "Local Data size: ",
       "reset": {
         "title": "Reset All",
         "subtitle": "This operation will delete all local data and settings you have set. After the deletion, all settings will be reset to default, all data needs to be downloaded again, and the web page will be reloaded. Are you sure to continue?"

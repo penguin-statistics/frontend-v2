@@ -23,7 +23,7 @@ module.exports = {
   devServer: {
     proxy: {
       "/PenguinStats": {
-        target: "https://penguin-stats.io/"
+        target: "http://localhost:8081"
       }
     }
   },

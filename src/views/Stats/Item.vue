@@ -144,47 +144,6 @@ export default {
     currentItemTrends() {
       return get.trends.byItemId(this.$route.params.itemId);
     },
-    tableHeaders() {
-      return [
-        {
-          text: this.$t("stats.headers.stage"),
-          value: "icon",
-          align: "center",
-          sortable: false,
-          width: "250px"
-        },
-        {
-          text: this.$t("stats.headers.apCost"),
-          value: "stage.apCost",
-          align: "center",
-          sortable: true
-        },
-        {
-          text: this.$t("stats.headers.times"),
-          value: "times",
-          align: "center",
-          sortable: true
-        },
-        {
-          text: this.$t("stats.headers.quantity"),
-          value: "quantity",
-          align: "center",
-          sortable: true
-        },
-        {
-          text: this.$t("stats.headers.percentage"),
-          value: "percentage",
-          align: "center",
-          sortable: true
-        },
-        {
-          text: this.$t("stats.headers.apPPR"),
-          value: "apPPR",
-          align: "center",
-          sortable: true
-        }
-      ];
-    },
     itemStagesStats() {
       if (!this.selected.item) return [];
       return get.statistics.byItemId(this.selected.item.itemId);

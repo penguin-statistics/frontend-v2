@@ -722,7 +722,7 @@
             this.calculation.done = true
           })
           .catch((err) => {
-            Console.error("Planner", "failed to get plan", err)
+            Console.error("Planner", "failed to refresh plan", err)
             snackbar.networkError()
           })
           .finally(() => {

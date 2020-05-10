@@ -3,7 +3,11 @@ import commons from './_common'
 
 const items = new ObjectManager({
   name: 'items',
-  api: '/items?i18n=true',
+  api: {
+    i18n: true,
+
+    url: "/items",
+  },
   transform: [
     (object) => {
       let filtered = object.filter(el => !el.hide);

@@ -17,7 +17,7 @@
 			"rule_1": "Report one clear at a time. Please double-check your drop selection.",
 			"rule_2": "If there are no drops, click submit directly without selecting any drops.",
 			"rule_3": "Please do not report the first-clear of a stage, and do not only report the clears where you were lucky - report all clears.",
-			"rule_4": "Please make sure that you get a 3-stars clear.",
+			"rule_4": "Please make sure that you refresh a 3-stars clear.",
 			"rule_5": "Please only submit drop data from the CN server."
 		},
 		"stage": {

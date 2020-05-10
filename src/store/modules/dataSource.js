@@ -1,14 +1,21 @@
 export default {
   namespaced: true,
   state: {
+    /** current data source "global" | "personal" */
     source: 'global',
+    /** current data source server "CN" | "US" | ... */
+    server: "CN"
   },
   mutations: {
-    switch: (state, value) => {
+    changeSource: (state, value) => {
       state.source = value;
-    }
+    },
+    changeServer: (state, value) => {
+      state.server = value;
+    },
   },
   getters: {
-    source: state => state.source
+    source: state => state.source,
+    server: state => state.server,
   }
 };

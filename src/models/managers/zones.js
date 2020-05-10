@@ -13,7 +13,11 @@ function getIcon (key) {
 
 const zones = new ObjectManager({
   name: 'zones',
-  api: '/zones?i18n=true',
+  api: {
+    i18n: true,
+
+    url: "/zones",
+  },
   transform: [
     (object) => {
       // object.push({"zoneId":"test01","zoneIndex":0,"type":"ACTIVITY","zoneName":"测试活动","openTime":1577174400000,"closeTime":1598340799000,"stages":["test01_001","test01_002"],"zoneName_i18n":{"ja":"测试活动 ja","en":"测试活动 en","zh":"测试活动 zh"}})

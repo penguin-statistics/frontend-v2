@@ -13,10 +13,14 @@ export default {
     // new data
     const oldDataKeys = ["items", "limitations", "stages", "trends", "zones", "personalMatrix", "globalMatrix"];
     if (Object.keys(this.$store.state.data).some(key => ~oldDataKeys.indexOf(key))) {
-      Console.info("StoreMigrater", "deleting old data structure");
+      Console.info("StoreUpgrader", "deleting old data structure");
       for (const key of oldDataKeys) {
         delete this.$store.state.data[key]
       }
+      this.$store.dispatch("data/fetch", true);
     }
+
+    // remove deprecated penguin-stats-cacheTTL (cacheUpdatedAt)
+    localStorage.removeItem("penguin-stats-cacheTTL")
   }
 }

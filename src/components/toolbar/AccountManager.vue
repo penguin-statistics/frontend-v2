@@ -11,7 +11,8 @@
 		"logoutPrompt": "Are you sure?",
 		"notice": "You can connect and manage drop reports using your User ID. If you don't have a User ID yet, you will be automatically assigned one after you've made your first report.",
 		"success": "Successfully logged in",
-		"userId": "User ID"
+		"userId": "User ID",
+		"details": "User Detail"
 	},
 	"ja": {
 		"failed": {
@@ -50,7 +51,8 @@
 		"logoutPrompt": "确定要退出登录吗？",
 		"notice": "用户 ID 仅用来标记您的上传身份。在不同设备上使用此 ID 登录，可让掉落数据集中于一个账号下，方便管理上传以及查看个人掉落数据。若无用户 ID，上传一次掉落后即可拥有用户 ID。",
 		"success": "登录成功",
-		"userId": "用户 ID"
+		"userId": "用户 ID",
+    "details": "用户信息"
 	}
 }
 </i18n>
@@ -122,23 +124,34 @@
     </v-dialog>
 
     <v-dialog
-      v-model="auth.logoutPrompt"
+      v-model="auth.detailPrompt"
       max-width="450px"
     >
       <v-card class="pa-2">
         <v-card-title>
           <span class="headline">
-            {{ $t('logout') }}
+            {{ $t('details') }}
           </span>
         </v-card-title>
         <v-card-text>
-          {{ $t('logoutPrompt') }}
-        </v-card-text>
-        <v-card-actions class="mx-2 mb-2">
+          <Subheader class="mb-2">
+            已登录为
+          </Subheader>
+          <span
+            class="text-center monospace"
+            style="font-size: 36px"
+          >
+            <span style="font-size: 16px">
+              PenguinID#
+            </span>{{ $store.getters['auth/username'] }}
+          </span>
+
           <v-btn
             color="error"
             block
             large
+            class="mt-6"
+
             @click="logout"
           >
             <v-icon left>
@@ -146,26 +159,22 @@
             </v-icon>
             {{ $t('logout') }}
           </v-btn>
-        </v-card-actions>
+        </v-card-text>
       </v-card>
     </v-dialog>
 
-    <v-chip
+    <v-btn
       v-if="$store.getters['auth/loggedIn']"
-      style="box-shadow: 0 0 0 4px rgba(0, 0, 0, .3)"
-      @click="auth.logoutPrompt = true"
+
+      icon
+      @click="auth.detailPrompt = true"
     >
-      <v-icon 
-        left
-      >
-        mdi-account-circle
-      </v-icon>
-      {{ $store.getters['auth/username'] }}
-    </v-chip>
+      <v-icon>mdi-account-check</v-icon>
+    </v-btn>
 
     <v-btn
       v-if="!$store.getters['auth/loggedIn']"
-      rounded
+
       icon
       @click="auth.dialog = true"
     >
@@ -178,9 +187,11 @@
   import service from '@/utils/service'
   import Cookies from 'js-cookie'
   import Console from "@/utils/Console";
+  import Subheader from "@/components/global/Subheader";
 
   export default {
     name: "AccountManager",
+    components: {Subheader},
     data() {
       return {
         auth: {
@@ -188,7 +199,7 @@
           dialog: false,
           username: '',
           loading: false,
-          logoutPrompt: false
+          detailPrompt: false
         },
         snackbar: {
           enabled: false,
@@ -249,8 +260,8 @@
           color: "success",
           text: this.$t('loggedOut')
         };
-        this.auth.logoutPrompt = false;
-        this.$store.commit("dataSource/switch", "global");
+        this.auth.detailPrompt = false;
+        this.$store.commit("dataSource/changeSource", "global");
       },
       emitError () {
         this.error = ''

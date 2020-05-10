@@ -40,7 +40,7 @@
           :disabled="deleting"
           @click="cancel"
         >
-          {{ $t('dialog.cancel') }}
+          {{ $t('meta.dialog.cancel') }}
         </v-btn>
         <v-spacer />
         <v-btn
@@ -49,7 +49,7 @@
           :loading="deleting"
           @click="reset"
         >
-          {{ $t('dialog.confirm') }}{{ countdownNow !== 0 ? ` (${countdownNow})` : "" }}
+          {{ $t('meta.dialog.confirm') }}{{ countdownNow !== 0 ? ` (${countdownNow})` : "" }}
         </v-btn>
       </v-card-actions>
     </v-card>

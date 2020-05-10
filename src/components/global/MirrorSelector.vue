@@ -174,7 +174,7 @@
               'notification',
               'get_ip_failed'
             )
-            Console.warn("MirrorSelector", "failed to get geoip information", err)
+            Console.warn("MirrorSelector", "failed to refresh geoip information", err)
           })
       }
     },

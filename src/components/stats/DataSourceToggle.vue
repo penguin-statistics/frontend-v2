@@ -135,7 +135,7 @@ export default {
             // change data source after fetch data
             break;
         }
-        this.$store.commit("dataSource/switch", value);
+        this.$store.commit("dataSource/changeSource", value);
       }
     }
   },

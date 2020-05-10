@@ -1,4 +1,5 @@
-import config from "@/config";
+import CDN from "@/mixins/CDN";
+import config from "@/config"
 
 export default {
   data() {
@@ -6,6 +7,7 @@ export default {
       randomizedLogo: `${config.cdn.global}/logos/penguin_stats_logo.png`
     }
   },
+  mixins: [CDN],
   watch: {
     '$route': [
       'randomizeLogo',
@@ -15,7 +17,7 @@ export default {
     randomizeLogo () {
       const random = Math.random();
       function imageUrl (character) {
-        return `${config.cdn.global}/logos/penguin_stats_logo_${character}.png`
+        return this.cdnResource(`/logos/penguin_stats_logo_${character}.png`)
       }
       this.randomizedLogo = random < .25 ? imageUrl("exia")
         : random < .5 ? imageUrl("texas")

@@ -19,6 +19,7 @@ import AboutDonate from './views/About/Donate'
 import AboutLinks from './views/About/Links'
 import NotFound from "@/views/NotFound";
 import AdvancedQuery from "@/views/AdvancedQuery";
+import DataDebugger from "@/components/debug/DataDebugger";
 
 const originalPush = Router.prototype.push;
 Router.prototype.push = function push(location, onResolve, onReject) {
@@ -224,6 +225,16 @@ const router = new Router({
       icon: 'mdi-penguin',
       i18n: 'menu.v1',
       externalRedirect: true
+    }
+  },
+  {
+    path: '/_internal/debugger/data',
+    name: 'DataDebugger',
+    component: DataDebugger,
+    meta: {
+      icon: 'mdi-file',
+      i18n: 'meta.notfound',
+      hide: true
     }
   },
   {

@@ -2,31 +2,30 @@
   <v-app
     :class="languageFont"
   >
-    <!--    <v-overlay-->
-    <!--      :opacity="0.97"-->
-    <!--      style="z-index:99999999999"-->
-    <!--    >-->
-    <!--      <v-row class="justify-center">-->
-    <!--        <v-col-->
-    <!--          cols="10"-->
-    <!--          sm="10"-->
-    <!--          md="12"-->
-    <!--          lg="12"-->
-    <!--          xl="12"-->
-    <!--        >-->
-    <!--          <h1>-->
-    <!--            截断型信息标题-->
-    <!--          </h1>-->
-    <!--          <p class="subtitle-1 mb-9">-->
-    <!--            截断型信息内容-->
-    <!--          </p>-->
+    <v-overlay
+      color="rgb(18, 18, 18)"
+      :value="serverNotifyOverlay"
+      :opacity="0.99"
+      style="z-index:1000000"
+    >
+      <v-row class="justify-center text-center">
+        <v-col cols="12">
+          <v-icon :size="48">
+            mdi-server
+          </v-icon>
+          <h1 class="heading mt-4 mb-6">
+            服务器已切换至
+          </h1>
 
-    <!--          <h2 class="display-4">-->
-    <!--            00<span class="display-3">:00</span>-->
-    <!--          </h2>-->
-    <!--        </v-col>-->
-    <!--      </v-row>-->
-    <!--    </v-overlay>-->
+          <h2
+            class="monospace"
+            style="font-size: 128px"
+          >
+            {{ $store.getters['dataSource/server'] }}
+          </h2>
+        </v-col>
+      </v-row>
+    </v-overlay>
     <GlobalSnackbar />
     <PWAPopups />
     <MirrorSelector />
@@ -120,6 +119,8 @@
 
       <v-spacer />
 
+      <ServerSelector />
+
       <AccountManager />
     </v-app-bar>
     <RandomBackground />
@@ -161,10 +162,12 @@
   import MirrorSelector from "@/components/global/MirrorSelector";
   import Logo from "@/components/drawer/Logo";
   import {mapGetters} from "vuex";
+  import ServerSelector from "@/components/toolbar/ServerSelector";
 
 export default {
   name: 'App',
   components: {
+    ServerSelector,
     Logo,
     MirrorSelector,
     SettingsDialog,
@@ -180,8 +183,10 @@ export default {
   data () {
     return {
       routes: [],
+      swichi: true,
       drawer: !this.$vuetify.breakpoint.xsOnly,
-      showLicenseDialog: false
+      showLicenseDialog: false,
+      serverNotifyOverlay: false
     }
   },
   created () {
@@ -196,6 +201,17 @@ export default {
   computed: {
     ...mapGetters("settings", ["lowData"]),
     ...mapGetters("ajax", ["pending"]),
+    ...mapGetters("dataSource", ["server"]),
+  },
+  watch: {
+    server() {
+      this.serverNotifyOverlay = true
+
+      const self = this;
+      setTimeout(function () {
+        self.serverNotifyOverlay = false
+      }, 2500)
+    }
   },
 }
 </script>

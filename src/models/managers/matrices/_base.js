@@ -6,6 +6,12 @@ class MatrixObjectManager extends ObjectManager {
     super({
       name,
       api,
+      transform: [
+        (object) => {
+          if ("matrix" in object) return object["matrix"]
+          return object
+        },
+      ],
       ttl,
       ajaxHooks
     });

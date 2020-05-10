@@ -1,11 +1,26 @@
 import axios from 'axios'
 import Console from "@/utils/Console";
 
-const isValidHost = window.location.hostname === "penguin-stats.io" || window.location.hostname === "penguin-stats.cn"
+let baseURL;
+if (window.location.hostname === "penguin-stats.io" || window.location.hostname === "penguin-stats.cn") {
+  // those are official mirrors. just use the relative path.
+  baseURL = "/PenguinStats/api/v2"
+} else if (process.env.NODE_ENV === "development") {
+  // developing at localhost.
+  // also use the relative path, but we left the task to WebpackDevServer for proxying local API responses
+  // so use relative path.
+  baseURL = "/PenguinStats/api/v2"
+} else {
+  // high chance of using a staging environment where api is not available with the frontend deployment.
+  // use the absolute endpoint to get the juicy responses :)
+  baseURL = "https://penguin-stats.io/PenguinStats/api/v2"
+}
 
 const service = axios.create({
-  baseURL: isValidHost ? "/PenguinStats/api" : "https://penguin-stats.io/PenguinStats/api",
-  withCredentials: true
+  // baseURL: see rules above
+  baseURL,
+  withCredentials: true,
+  timeout: 90 * 1000 // 1.5 minute
 });
 
 // Add a response interceptor
@@ -13,14 +28,14 @@ service.interceptors.response.use(function (response) {
   // Do something with response data
   return response;
 }, function (error) {
-  // eliminate `users not found` errors (reports 404).
+  // eliminate `user not found` errors (reports 404).
   if (error.response && error.response.status !== 404) {
     Console.error("Ajax", "error", error);
   }
   if (error.response) {
-    error.errorMessage = `(${error.response.status}) ${error.response.data ? error.response.data : error.message}`;
+    error.errorMessage = `(s=${error.response.status}) ${error.response.data ? error.response.data : error.message}`;
   } else {
-    error.errorMessage = `(-1) ${error.message}`;
+    error.errorMessage = `(s=-1) ${error.message}`;
   }
   // Do something with response error
   return Promise.reject(error);
