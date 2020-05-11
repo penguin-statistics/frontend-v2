@@ -5,7 +5,7 @@ import store from "@/store";
 const isValidHost = window.location.hostname === "penguin-stats.io" || window.location.hostname === "penguin-stats.cn"
 
 const service = axios.create({
-  baseURL: isValidHost ? "/PenguinStats/api" : "http://localhost:8081/PenguinStats/api",
+  baseURL: isValidHost ? "/PenguinStats/api" : "https://penguin-stats.io/PenguinStats/api",
   withCredentials: true
 });
 
