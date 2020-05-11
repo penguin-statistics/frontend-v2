@@ -1,115 +1,8 @@
-<i18n>
-  {
-    "zh": {
-      "opensAt": "开放时间：{0} - {1}",
-      "permanentOpen": "常驻开放",
-      "zone": {
-        "name": "章节",
-        "types": {
-          "MAINLINE": "主线",
-          "WEEKLY": "物资筹备",
-          "ACTIVITY_OPEN": "限时活动（开放中）",
-          "ACTIVITY_CLOSED": "限时活动（已结束）"
-        },
-        "status": {
-          "closed": "已结束",
-          "open": "开放中"
-        }
-      },
-      "stage": {
-        "name": "关卡",
-        "apCost": "{apCost} 点理智",
-        "loots": {
-          "normal": "常规掉落",
-          "extra": "额外物资",
-          "special": "特殊掉落"
-        }
-      }
-    },
-    "en": {
-      "opensAt": "Event period: {0} - {1}",
-      "permanentOpen": "Permanently Opening",
-      "zone": {
-        "name": "Zone",
-        "types": {
-          "MAINLINE": "Main Storyline",
-          "WEEKLY": "Supplies",
-          "ACTIVITY_OPEN": "Event (Open)",
-          "ACTIVITY_CLOSED": "Event (Closed)"
-        },
-        "status": {
-          "closed": "Closed",
-          "open": "Open"
-        }
-      },
-      "stage": {
-        "name": "Stage",
-        "apCost": "{apCost} AP required",
-        "loots": {
-          "normal": "Normal",
-          "extra": "Extra",
-          "special": "Special"
-        }
-      }
-    },
-    "ja": {
-      "opensAt": "開催期間：{0} - {1}",
-      "zone": {
-        "name": "章",
-        "types": {
-          "MAINLINE": "メインステージ",
-          "WEEKLY": "物資調達",
-          "ACTIVITY_OPEN": "イベント（開催中）",
-          "ACTIVITY_CLOSED": "イベント（終了）"
-        },
-        "status": {
-          "closed": "終了",
-          "open": "開催中"
-        }
-      },
-      "stage": {
-        "name": "作戦",
-        "apCost": "消費理性：{apCost}",
-        "loots": {
-          "normal": "通常ドロップ",
-          "extra": "エクストラドロップ",
-          "special": "スペシャルドロップ"
-        }
-      }
-    },
-    "ko": {
-      "opensAt": "이벤트 기간: {0} - {1}",
-      "zone": {
-        "name": "에피소드",
-        "types": {
-          "MAINLINE": "메인 스토리",
-          "WEEKLY": "물자 비축",
-          "ACTIVITY_OPEN": "이벤트 (개방중)",
-          "ACTIVITY_CLOSED": "이벤트 (종료)"
-        },
-        "status": {
-          "closed": "닫힘",
-          "open": "개방중"
-        }
-      },
-      "stage": {
-        "name": "작전지역",
-        "apCost": "{apCost} 이성 필요",
-        "loots": {
-          "normal": "일반 드랍",
-          "extra": "추가 드랍",
-          "special": "특수 드랍"
-        }
-      }
-    }
-  }
-</i18n>
-
 <template>
   <v-stepper
     v-model="step"
     :alt-labels="!small"
-    class="pa-3 transparent elevation-0 full-width"
+    class="transparent elevation-0 full-width pa-4"
   >
     <v-stepper-header
       class="bkop-light elevation-4"
@@ -143,7 +36,7 @@
         {{ name }}
       </v-stepper-step>
     </v-stepper-header>
-    <v-stepper-items>
+    <v-stepper-items class="stepper-overflow-initial">
       <v-stepper-content
         :step="1"
         :class="{'pa-0': small}"
@@ -179,22 +72,27 @@
                 <v-expansion-panel
                   v-for="zone in category.zones"
                   :key="zone.zoneId"
-                  class="bkop-light"
+                  class="bkop-light stage-card--background"
+                  :style="{'background-image': zone.image ? `url(${zone.image}) !important` : null}"
                 >
-                  <v-expansion-panel-header class="overflow-hidden bkop-medium">
+                  <v-expansion-panel-header
+                    class="overflow-hidden bkop-medium"
+                    :class="{'stage-card--header': !!zone.image}"
+                  >
                     <v-row align="center">
                       <span
                         v-if="zone.isActivity && !small"
                         :class="{
-                          'text--darken-1 font-weight-bold ml-2 mr-1': true,
                           'red--text': zone.isOutdated,
                           'green--text': !zone.isOutdated }"
+                        class="text--darken-1 font-weight-bold ml-2 mr-1"
                       >
                         {{ zone.isOutdated ? $t('zone.status.closed') : $t('zone.status.open') }}
                       </span>
 
                       <span
-                        :class="{'subtitle-1 pl-2': true, 'text--darken-1 font-weight-bold': zone.isActivity && small, 'red--text': zone.isActivity && small && zone.isOutdated,
+                        class="subtitle-1 pl-2"
+                        :class="{'text--darken-1 font-weight-bold': zone.isActivity && small, 'red--text': zone.isActivity && small && zone.isOutdated,
                                  'green--text': zone.isActivity && small && !zone.isOutdated}"
                       >
                         {{ strings.translate(zone, "zoneName") }}
@@ -211,20 +109,24 @@
                       <!--                        </span>-->
                     </v-row>
                   </v-expansion-panel-header>
-                  <v-expansion-panel-content class="pt-2">
+                  <v-expansion-panel-content
+                    :class="{'stage-card--content': !!zone.image}"
+                  >
                     <div
                       v-if="zone.isActivity"
-                      class="caption mb-2 mt-1"
+                      class="caption mx-1 mt-3 mb-2"
                     >
                       {{ genActivityTime(zone.activityActiveTime) }}
                     </div>
-                    <StageCard
-                      v-for="stage in getStages(zone.zoneId)"
-                      :key="stage.stageId"
-                      :stage="stage"
+                    <div class="pt-2">
+                      <StageCard
+                        v-for="stage in getStages(zone.zoneId)"
+                        :key="stage.stageId"
+                        :stage="stage"
 
-                      @click.native="selectStage(zone.zoneId, stage.stageId, stage.code)"
-                    />
+                        @click.native="selectStage(zone.zoneId, stage.stageId, stage.code)"
+                      />
+                    </div>
                   </v-expansion-panel-content>
                 </v-expansion-panel>
               </v-expansion-panels>
@@ -253,10 +155,13 @@
   import strings from "@/utils/strings";
   import StageCard from "@/components/stats/StageCard";
   import Console from "@/utils/Console";
+  import {mapGetters} from "vuex";
+  import CDN from "@/mixins/CDN";
 
   export default {
     name: "StageSelector",
     components: {StageCard},
+    mixins: [CDN],
     props: {
       name: {
         type: String,
@@ -284,10 +189,29 @@
         selected: {
           zone: null,
           stage: null
+        },
+        stageImages: {
+          "act5d0_zone1": this.cdnResource('/backgrounds/zones/act5d0_zone1.jpg'),
+          "act6d5_zone1": this.cdnResource('/backgrounds/zones/act6d5_zone1.jpg'),
+          "act7d5_zone1": this.cdnResource('/backgrounds/zones/act7d5_zone1.jpg'),
+          "act9d0_zone1": this.cdnResource('/backgrounds/zones/act9d0_zone1.jpg'),
+          "A001_zone1": this.cdnResource('/backgrounds/zones/A001_zone1.jpg'),
+          "A003_zone1": this.cdnResource('/backgrounds/zones/A003_zone1.jpg'),
+          "main_0": this.cdnResource('/backgrounds/zones/main_0.jpg'),
+          "main_1": this.cdnResource('/backgrounds/zones/main_1.jpg'),
+          "main_2": this.cdnResource('/backgrounds/zones/main_2.jpg'),
+          "main_3": this.cdnResource('/backgrounds/zones/main_3.jpg'),
+          "main_4": this.cdnResource('/backgrounds/zones/main_4.jpg'),
+          "main_5": this.cdnResource('/backgrounds/zones/main_5.jpg'),
+          "main_6": this.cdnResource('/backgrounds/zones/main_6.jpg'),
+          "main_7": this.cdnResource('/backgrounds/zones/main_7.jpg'),
+          "main_e0": this.cdnResource('/backgrounds/zones/main_e0.jpg'),
+          "gachabox": this.cdnResource('/backgrounds/zones/gachabox.jpg'),
         }
       }
     },
     computed: {
+      ...mapGetters("settings", ["lowData"]),
       bindRouter () {
         return this.routerNames.index !== "" && this.routerNames.details !== ""
       },
@@ -334,9 +258,20 @@
             } else if (category === "ACTIVITY_CLOSED") {
               filter = zone => zone.isOutdated;
             }
-            if (filter) {
-              zones = zones.filter(filter);
+            if (filter) zones = zones.filter(filter);
+
+            if (this.lowData) {
+              zones = zones.map(el => {
+                el.image = null
+                return el
+              })
+            } else {
+              zones = zones.map(el => {
+                if (el.zoneId in this.stageImages) el.image = this.stageImages[el.zoneId]
+                return el
+              })
             }
+
             if (zones && zones.length) {
               result[index].push({
                 id: category,
@@ -388,7 +323,7 @@
         }
       },
       genActivityTime (message) {
-        return message[0] === message[1] ? this.$t('permanentOpen') : this.$t('opensAt', message)
+        return message[0] === message[1] ? this.$t('zone.status.permanentOpen') : this.$t('zone.opensAt', message)
       }
     },
   }
@@ -414,5 +349,31 @@
 }
   .theme--light .stage-id--background {
     color: rgba(0, 0, 0, .075);
+  }
+
+  .stage-card--background {
+    background-size: cover !important;
+    background-repeat: no-repeat !important;
+    background-position: center center !important;
+  }
+
+  .theme--light .stage-card--header {
+    background: rgba(240, 240, 240, .9) !important;
+    background: linear-gradient(to bottom, rgba(240, 240, 240, 0.9), rgba(240, 240, 240, 0.85)) !important;
+  }
+
+  .theme--light .stage-card--content {
+    background: rgba(255, 255, 255, .85) !important;
+    background: linear-gradient(to bottom, rgba(255, 255, 255, 0.85), rgba(255, 255, 255, 0.7)) !important;
+  }
+
+  .theme--dark .stage-card--header {
+    background: rgba(30, 30, 30, .9) !important;
+    background: linear-gradient(to bottom, rgba(30, 30, 30, 0.9), rgba(30, 30, 30, 0.85)) !important;
+  }
+
+  .theme--dark .stage-card--content {
+    background: rgba(0, 0, 0, .8) !important;
+    background: linear-gradient(to bottom, rgba(0, 0, 0, 0.85), rgba(0, 0, 0, 0.70)) !important;
   }
 </style>

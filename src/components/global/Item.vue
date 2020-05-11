@@ -2,10 +2,10 @@
   <v-tooltip
     v-if="!disableTooltip"
     transition="slide-y-transition"
-    :open-delay="40"
+    :open-delay="20"
     :nudge-top="tooltipNudge"
 
-    v-bind="calculatedTooltipPosition"
+    bottom
   >
     <template v-slot:activator="{ on }">
       <span v-on="on">
@@ -57,12 +57,6 @@
           return false;
         }
       },
-      tooltipPosition: {
-        type: String,
-        default () {
-          return "bottom";
-        }
-      },
       tooltipNudge: {
         type: Number,
         default () {
@@ -84,9 +78,6 @@
     computed: {
       name() {
         return strings.translate(this.item, "name")
-      },
-      calculatedTooltipPosition () {
-        return {[this.tooltipPosition]: true}
       }
     },
   };

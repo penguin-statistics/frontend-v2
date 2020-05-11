@@ -10,7 +10,7 @@
           <span
             v-if="haveError && !model"
             style="cursor: pointer"
-            @click="model = true"
+            @click="openModel"
           >
             <v-progress-circular
               v-if="pending"
@@ -52,7 +52,7 @@
     <v-dialog
       v-model="model"
       width="600"
-      origin="right bottom"
+      :origin="origin"
     >
       <v-card>
         <v-card-title
@@ -125,7 +125,8 @@
     name: "NetworkStateIndicator",
     data () {
       return {
-        model: false
+        model: false,
+        origin: 'center center'
       }
     },
     computed: {
@@ -152,6 +153,10 @@
       async refreshData () {
         await this.$store.dispatch("data/fetch", true);
       },
+      openModel (e) {
+        this.model = true;
+        this.origin = `${e.clientX}px ${e.clientY}px`
+      }
     },
   }
 </script>

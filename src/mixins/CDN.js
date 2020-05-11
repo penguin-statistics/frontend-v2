@@ -1,11 +1,10 @@
 import config from "@/config"
-import Mirror from "@/mixins/Mirror";
+import mirror from "@/utils/mirror";
 
 export default {
-  mixins: [Mirror],
   methods: {
     cdnResource (path) {
-      if (this.isCNMirror) {
+      if (mirror.cn.isCurrent()) {
         return config.cdn.cn + path
       } else {
         return config.cdn.global + path

@@ -1,4 +1,4 @@
-import workbox from "./workers/register"
+import "./workers/register"
 
 import Vue from 'vue'
 import vuetify from './plugins/vuetify';
@@ -9,12 +9,16 @@ import store from './store'
 import VueAnalytics from "vue-analytics"
 import i18n from "@/i18n"
 import config from "@/config"
-import VueNumberInput from '@chenfengyuan/vue-number-input';
 
 import * as Sentry from '@sentry/browser';
 import * as Integrations from '@sentry/integrations';
 import { Integrations as ApmIntegrations } from '@sentry/apm';
 import mirror from "@/utils/mirror";
+
+if (!window.Intl) {
+  console.log("Applying Intl polyfill...")
+  require("intl-collator")
+}
 
 const production = process.env.NODE_ENV === 'production';
 
@@ -128,10 +132,6 @@ router.beforeEach((to, from, next) => {
 });
 
 Vue.config.productionTip = false;
-
-Vue.use(VueNumberInput);
-
-Vue.prototype.$workbox = workbox;
 
 new Vue({
   vuetify,

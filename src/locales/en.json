@@ -157,5 +157,96 @@
         "subtitle": "Are you sure you want to ignore all mirror optimization notifications? Performance issues may occur."
       }
     }
+  },
+  "settings": {
+    "category": {
+      "appearance": "Appearance",
+      "data": "Data"
+    },
+    "optimization": {
+      "lowData": {
+        "title": "Low Data Mode",
+        "active": "Low Data Mode is Active",
+        "subtitle": "Low Data Mode will stop fetching nonessential resources, such as the zone backgrounds in stage selector and the website background, to help reduce network data use."
+      }
+    },
+    "data": {
+      "length": "Local Data Entries: {number} entries",
+      "reset": {
+        "title": "Reset All",
+        "subtitle": "This operation will delete all local data and settings you have set. After the deletion, all settings will be reset to default, all data needs to be downloaded again, and the web page will be reloaded. Are you sure to continue?"
+      }
+    }
+  },
+  "zone": {
+    "name": "Zone",
+    "types": {
+      "MAINLINE": "Main Storyline",
+      "WEEKLY": "Supplies",
+      "ACTIVITY_OPEN": "Event (Open)",
+      "ACTIVITY_CLOSED": "Event (Closed)"
+    },
+    "status": {
+      "closed": "Closed",
+      "open": "Open",
+      "permanentOpen": "Permanently Opening"
+    },
+    "opensAt": "Event period: {0} - {1}"
+  },
+  "stage": {
+    "name": "Stage",
+    "apCost": "{apCost} AP required",
+    "loots": {
+      "normal": "Normal",
+      "extra": "Extra",
+      "special": "Special"
+    },
+    "selector": {
+      "plannerExclude": "Exclude Planning Stages",
+      "excludeAll": "Exclude All",
+      "includeAll": "Include All"
+    }
+  },
+  "planner": {
+    "options": {
+      "_name": "Options",
+      "byProduct": "Consider by-products",
+      "requireExp": "Large demand for EXP",
+      "requireLmb": "Large demand for LMD",
+      "foreignServer": "Do not suggest CN-only stages",
+      "excludeStage": "Exclude Stages"
+    },
+    "actions": {
+      "import": "Import",
+      "export": "Export",
+      "importExport": "@:(planner.actions.import)/@:(planner.actions.export)",
+      "calculate": "Calculate"
+    },
+    "have": "Have",
+    "need": "Need",
+    "copy": "Copy to Clipboard",
+    "calculation": {
+      "title": "Calculation Result",
+      "tabs": {
+        "stages": "Stages",
+        "syntheses": "Syntheses",
+        "values": "Values"
+      },
+      "lmb": "Estimated LMD income",
+      "sanity": "Estimated Sanity required",
+      "exp": "Estimated EXP from Battle Records",
+      "times": "battles",
+      "level": "Material Level",
+      "noStage": "No stage found.",
+      "noSyntheses": "No syntheses found."
+    }
+  },
+  "version": {
+    "upgrade": {
+      "title": "Version Outdated",
+      "subtitle": "The current client version has outdated due to upgrade. Please retry after upgrade",
+      "action": "Upgrade",
+      "unable": "Can't Upgrade?"
+    }
   }
 }

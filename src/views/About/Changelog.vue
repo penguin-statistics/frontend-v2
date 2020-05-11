@@ -31,6 +31,13 @@
               正在开发
             </span>
 
+            <span
+              v-if="item.active"
+              class="caption"
+            >
+              现正使用
+            </span>
+
             {{ item.version }}
           </span>
 
@@ -60,10 +67,35 @@
           <div v-if="item.value">
             <v-divider />
 
+            <v-card-subtitle
+              v-if="item.future"
+              class="subtitle-1"
+            >
+              版本特性一览
+            </v-card-subtitle>
+
             <v-card-text>
               <ol>
                 <li
                   v-for="(text, key) in item.changes"
+                  :key="key"
+                >
+                  {{ text }}
+                </li>
+              </ol>
+            </v-card-text>
+
+            <v-card-subtitle
+              v-if="item.hotfix"
+              class="subtitle-1"
+            >
+              热修复记录
+            </v-card-subtitle>
+
+            <v-card-text v-if="item.hotfix">
+              <ol>
+                <li
+                  v-for="(text, key) in item.hotfix"
                   :key="key"
                 >
                   {{ text }}
@@ -89,18 +121,66 @@ export default {
       logs: [
         {
           future: true,
-          version: "v3.0.0",
-          date: "2020-04-30T08:00:00Z",
+          version: "v3.1.0",
+          date: "2020-06-15T08:00:00Z",
           changes: [
-            "添加：多服务器数据源切换支持",
-            "添加：物品掉落分时查询",
-            "内部重构：所有数据将引入版本概念，从底层保证数据一致性",
+            "将添加：关卡更多统计信息",
+            "将添加：特定物品掉率随时间趋势查询",
+            "将添加：关卡掉落组合频率查询",
+            "将添加：全站上传数据状态一览"
+          ]
+        },
+        {
+          future: true,
+          version: "v3.0.0",
+          date: "2020-05-25T08:00:00Z",
+          changes: [
+            "将添加：多服务器数据源切换支持",
+            "将添加：物品掉落分时查询",
+            "将添加：高级查询功能",
+            "将添加：数据导出功能",
+            "将优化：ArkPlanner 整体体验",
+            "将内部重构：所有数据将引入版本概念，从底层保证数据一致性",
           ]
         },
         {
           active: true,
+          version: "v1.1.11",
+          date: "2020-05-05T09:43:12Z",
+          changes: [
+            "添加：低数据模式选项",
+            "添加：本地数据重置器",
+            "添加：作战选择界面背景图片",
+            "添加：基础资源加载失败提示",
+            "添加：刷图规划器支持自选排除关卡",
+            "添加：数据展示组件使用同游戏内 基建 所使用的 Bender 字体",
+
+            "修复：国内镜像使用镜像 API",
+            "修复：在设置内选定主题 跟随系统 设定后再选定其他任一主题选项，在同一浏览会话内仍会在系统主题切换时自动切换为另一主题的问题",
+            "修复：不支持 CSS max() 浏览器上基础布局元素错位的问题",
+
+            "优化：镜像选择弹窗",
+            "优化：升级上游 Vuetify 至最新版本",
+            "优化：Service Worker 缓存逻辑与稳定性",
+
+            "内部优化：i18n 语言文件整理",
+          ],
+          hotfix: [
+            "修复：家具图标颜色异常",
+            "修复：基础资源加载失败加入同源资源判断",
+            "修复：作战选择界面背景图片 CDN 检测异常",
+            "修复：自选排除关卡无法排除物资补给的错误",
+            "修复：统一多页面 Stepper 卡片阴影与 Padding 值",
+            "修复：作战选择界面中活动关卡开启时间的排版微移问题",
+            "修复：数据表格由于浏览器缺失 Intl 而渲染失败的问题",
+            "修复：由于 Crisp 导致页面部分元素可能无法点击的问题",
+
+            "优化：作战选择界面点击元素对比度提升优化",
+          ]
+        },
+        {
           version: "v1.1.10",
-          date: "2020-04-23T06:00:00Z",
+          date: "2020-04-24T01:00:00Z",
           changes: [
             "添加：于 Planner 内添加更多外服排除关卡 (DM-* 关卡)",
             "修复：Google Analytics Screenview Tracking 问题",
@@ -109,14 +189,14 @@ export default {
         },
         {
           version: "v1.1.9",
-          date: "2020-04-23T06:00:00Z",
+          date: "2020-04-23T07:00:00Z",
           changes: [
             "修复：由于添加国内加速镜像站点的若干问题",
           ]
         },
         {
           version: "v1.1.8",
-          date: "2020-04-23T08:00:00Z",
+          date: "2020-04-23T05:00:00Z",
           changes: [
             "添加：国内加速镜像站点",
             "添加：跟随系统的暗色模式选项",

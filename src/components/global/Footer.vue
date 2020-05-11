@@ -33,9 +33,14 @@
         v-if="isCNMirror"
         class="white--text d-block pt-2 pb-0 overline condensed"
       >
-        <span>
+        <a
+          href="http://www.beian.miit.gov.cn/"
+          rel="noreferrer nofollow"
+          target="_blank"
+          class="clear-link"
+        >
           京ICP备20012825号-1
-        </span>
+        </a>
         <!--        <span class="ml-1">-->
         <!--          <v-img-->
         <!--            style="transform: translateY(.275em)"-->
@@ -51,11 +56,11 @@
       </v-card-text>
 
       <v-card-text
-        v-if="isZeitNow"
+        v-if="isVercel"
         class="white--text d-block pt-2 pb-0 overline"
       >
         <span>
-          Zeit Now 预览构建
+          Vercel 预览构建
         </span>
       </v-card-text>
     </v-card>
@@ -86,4 +91,8 @@
 .condensed {
   letter-spacing: .075em !important;
 }
+  .clear-link {
+    color: inherit !important;
+    text-decoration: none !important;
+  }
 </style>

@@ -41,9 +41,11 @@ export default {
 
         if (newRoute.name === "home") {
           document.querySelector("div.crisp-client").style.setProperty("opacity", 1, "important");
+          document.querySelector("div.crisp-client").style.setProperty("display", "block", "important");
           // document.querySelector("div.crisp-client").style.setProperty("transform", "translateY(0px)", "important")
         } else {
           document.querySelector("div.crisp-client").style.setProperty("opacity", 0, "important");
+          document.querySelector("div.crisp-client").style.setProperty("display", "none", "important");
           // document.querySelector("div.crisp-client").style.setProperty("transform", "translateY(32px)", "important")
         }
       } catch (e) {

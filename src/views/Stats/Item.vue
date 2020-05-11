@@ -67,7 +67,7 @@
   <v-stepper
     v-model="step"
     :alt-labels="!$vuetify.breakpoint.xsOnly"
-    class="pa-3 transparent elevation-0 full-width"
+    class="pa-2 transparent elevation-0 full-width"
   >
     <v-stepper-header
       class="bkop-light elevation-4"
@@ -95,7 +95,7 @@
       </v-stepper-step>
     </v-stepper-header>
 
-    <v-stepper-items>
+    <v-stepper-items class="stepper-overflow-initial">
       <v-stepper-content
         v-if="categorizedItems"
         :step="1"
@@ -110,16 +110,16 @@
             <div
               v-for="(items, name) in categorizedItems"
               :key="name"
-              class="item-list-wrapper"
+              class="d-flex flex-column"
             >
               <div class="ml-2 my-2">
                 {{ $t(`categories.${name}`) }}
               </div>
-              <div class="item-list">
+              <div class="d-flex flex-wrap justify-start">
                 <div
                   v-for="item in items"
                   :key="item.itemId"
-                  class="item-list-item-wrapper"
+                  class="d-flex flex-column align-center item-list-item-wrapper"
                 >
                   <div
                     class="item-list-item-avatar cursor-pointer"
@@ -358,20 +358,20 @@ export default {
   display: flex;
   align-items: center;
 }
-.item-list-wrapper {
-  display: flex;
-  flex-direction: column;
-}
-.item-list {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: flex-start;
-}
+/*.item-list-wrapper {*/
+/*  display: flex;*/
+/*  flex-direction: column;*/
+/*}*/
+/*.item-list {*/
+/*  display: flex;*/
+/*  flex-wrap: wrap;*/
+/*  justify-content: flex-start;*/
+/*}*/
 .item-list-item-wrapper {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+  /*display: flex;*/
+  /*flex-direction: column;*/
+  /*justify-content: center;*/
+  /*align-items: center;*/
   min-width: 62px;
   margin: 4px 0;
 }
