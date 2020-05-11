@@ -25,7 +25,21 @@
       {{ $t('menu.refreshData') }}
     </v-btn>
 
-    <DataResetter />
+    <DataResetter>
+      <template v-slot:default="{ on }">
+        <v-btn
+          depressed
+          block
+          color="error"
+          v-on="on"
+        >
+          <v-icon left>
+            mdi-database-remove
+          </v-icon>
+          {{ $t('settings.data.reset.title') }}...
+        </v-btn>
+      </template>
+    </DataResetter>
   </div>
 </template>
 

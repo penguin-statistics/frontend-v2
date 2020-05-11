@@ -4,18 +4,8 @@
     max-width="350px"
     persistent
   >
-    <template v-slot:activator="{ on }">
-      <v-btn
-        depressed
-        block
-        color="error"
-        v-on="on"
-      >
-        <v-icon left>
-          mdi-database-remove
-        </v-icon>
-        {{ $t('settings.data.reset.title') }}...
-      </v-btn>
+    <template v-slot:activator="props">
+      <slot v-bind="props" />
     </template>
     <v-card class="slash-strip--danger">
       <v-card-title class="headline">
@@ -59,6 +49,12 @@
 <script>
   export default {
     name: "DataResetter",
+    props: {
+      enable: {
+        type: Boolean,
+        default: false
+      },
+    },
     data() {
       return {
         dialog: false,
@@ -76,6 +72,9 @@
           this.stopCountdown();
         }
       }
+    },
+    created () {
+      this.dialog = this.enable
     },
     destroyed () {
       this.stopCountdown()

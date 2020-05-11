@@ -27,6 +27,7 @@
     <!--        </v-col>-->
     <!--      </v-row>-->
     <!--    </v-overlay>-->
+    <UpgradeNotifier />
     <GlobalSnackbar />
     <MirrorSelector />
     <v-navigation-drawer
@@ -159,10 +160,12 @@
   import MirrorSelector from "@/components/global/MirrorSelector";
   import Logo from "@/components/drawer/Logo";
   import {mapGetters} from "vuex";
+  import UpgradeNotifier from "@/components/global/UpgradeNotifier";
 
 export default {
   name: 'App',
   components: {
+    UpgradeNotifier,
     Logo,
     MirrorSelector,
     SettingsDialog,
