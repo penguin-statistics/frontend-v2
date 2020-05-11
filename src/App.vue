@@ -27,7 +27,6 @@
       </v-row>
     </v-overlay>
     <GlobalSnackbar />
-    <PWAPopups />
     <MirrorSelector />
     <v-navigation-drawer
       v-model="drawer"
@@ -153,7 +152,6 @@
 
   import './styles/global.css'
   import './styles/fonts.css'
-  import PWAPopups from "@/components/global/PWAPopups";
   import Footer from "@/components/global/Footer";
   import CDN from "@/mixins/CDN";
   import Mirror from "@/mixins/Mirror";
@@ -172,7 +170,6 @@ export default {
     MirrorSelector,
     SettingsDialog,
     Footer,
-    PWAPopups,
     Navigation,
     GlobalSnackbar,
     NetworkStateIndicator,
@@ -188,6 +185,10 @@ export default {
       showLicenseDialog: false,
       serverNotifyOverlay: false
     }
+  },
+  computed: {
+    ...mapGetters("settings", ["lowData"]),
+    ...mapGetters("ajax", ["pending"]),
   },
   created () {
     this.routes = this.$router.options.routes.filter(el => !el.meta.hide);

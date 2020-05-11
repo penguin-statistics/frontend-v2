@@ -48,6 +48,9 @@
                            // need to +1 in order to refresh the last image also in range
       }
     },
+    computed: {
+      ...mapGetters("settings", ["lowData"])
+    },
     watch: {
       "$route": ["checkSpecialImage", "checkBlur"],
       lowData(newValue) {
@@ -153,9 +156,6 @@
           this.checkBlur(this.$route)
         }
       }
-    },
-    computed: {
-      ...mapGetters("settings", ["lowData"])
     },
   }
 </script>
