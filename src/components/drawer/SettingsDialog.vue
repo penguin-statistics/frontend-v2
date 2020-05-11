@@ -37,7 +37,10 @@
 
             <OptimizationSwitcher class="mb-2" />
 
-            <DataManager class="mt-2" />
+            <DataManager
+              v-if="active"
+              class="mt-2"
+            />
           </v-row>
         </v-container>
       </v-card-text>

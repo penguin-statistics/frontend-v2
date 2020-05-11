@@ -63,6 +63,7 @@ export default {
       return getters.byDataId(query)["upd"]
     },
     stats: (state) => {
+      console.log("calculating data stats")
       return {
         size: strings.fileSize(JSON.stringify(state.data).length, true),
         keys: Object.keys(state.data)

@@ -165,8 +165,8 @@
 .theme--light .slash-strip--danger {
     background: repeating-linear-gradient(
             -45deg,
-            rgb(226, 81, 65),
-            rgb(226, 81, 65) 45px,
+            rgb(227, 100, 86),
+            rgb(227, 100, 86) 45px,
             rgb(255, 255, 255) 45px,
             rgb(255, 255, 255) 90px
     );
@@ -236,6 +236,6 @@
     }
 }
 
-.theme--dark.v-card, .theme--dark.v-tabs-items, .theme--dark.v-tabs>.v-tabs-bar {
+.v-dialog > .theme--dark.v-card {
     background-color: #272727;
 }

@@ -1,4 +1,5 @@
 import store from '@/store'
+import formatter from "@/utils/timeFormatter";
 // import Console from "@/utils/Console";
 
 const Getters = {};
@@ -7,7 +8,6 @@ Getters.items = {
   _cache: null,
   all(map = false) {
     let items = store.getters["data/content"]({id: "items"});
-    console.log("items", items)
     if (!items) return []
 
     items = items.filter(item => {
@@ -87,21 +87,40 @@ Getters.stages = {
     if (!stages) return []
     return stages
   },
-  byStageId(stageId) {
-    return this.all().find(el => {
+  byStageId(stageId, query) {
+    return this.all(query).find(el => {
       return el.stageId === stageId
-    })
+    }) || {}
   },
   byParentZoneId(zoneId) {
     return this.all().filter(el => {
       return el.zoneId === zoneId
-    })
+    }) || {}
   },
 }
 
 Getters.zones = {
   all() {
-    return store.getters["data/content"]({id: "zones"}) || []
+    let zones = store.getters["data/content"]({id: "zones"})
+    if (!zones) return []
+
+    const server = store.getters["dataSource/server"]
+
+    zones = zones.filter(el => el["existence"][server]["exist"])
+    zones = zones.map(el => {
+      if (el.isActivity) {
+        const existence = el["existence"][server]
+
+        if (!existence["openTime"] && !existence["closeTime"]) {
+          el.isPermanentOpen = true
+        } else {
+          el.activityActiveTime = formatter.dates([existence["openTime"], existence["closeTime"]]);
+          el.isOutdated = formatter.isOutdated(existence["closeTime"])
+        }
+      }
+      return el
+    })
+    return zones
   },
   byZoneId(zoneId) {
     return this.all().find(el => {
@@ -149,7 +168,6 @@ Getters.trends = {
     if (store.getters['dataSource/source'] !== 'global') {
       return null;
     }
-    console.log("getters", "trend content", store.getters["data/content"]({id: "trends"}))
     // otherwise just return it
     return store.getters["data/content"]({id: "trends"})
   }

@@ -7,7 +7,10 @@ const stages = new ObjectManager({
     serverSensitive: true,
     i18n: true,
 
-    url: '/stages'
+    url: '/stages',
+    extraParams: {
+      "show_closed_zones": true
+    }
   },
   transform: [
     (object) => {

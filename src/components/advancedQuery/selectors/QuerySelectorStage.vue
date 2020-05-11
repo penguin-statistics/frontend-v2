@@ -52,7 +52,7 @@
             >
               {{ selectedZone.icon }}
             </v-icon>
-            {{ selectedZone.translatedName }} | {{ selectedStage.code }}
+            {{ selectedZone.translatedName }} | {{ selectedStage.translatedCode }}
           </span>
           <div
             v-else
@@ -200,7 +200,11 @@
         }
       },
       selectedStage () {
-        return get.stages.byStageId(this.value)
+        const result = get.zones.byStageId(this.value)
+        return {
+          ...result,
+          translatedCode: this.translate(result, "code")
+        }
       },
       selectedZone () {
         const result = get.zones.byZoneId(this.selectedStage.zoneId)

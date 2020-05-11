@@ -133,17 +133,17 @@
     "rules": {
       "item": {
         "_name": "物品项",
-        "now": "已选 {item} ×{quantity}",
-        "gte": "“{item}” 应至少有 {quantity} 个",
-        "lte": "“{item}” 应至多有 {quantity} 个",
-        "not": "“{item}” 不应有 {quantity} 个"
+        "now": "已于 “{stage}” 选择了 {quantity} 个 “{item}”",
+        "gte": "“{stage}” 内的 “{item}” 应至少有 {quantity} 个",
+        "lte": "“{stage}” 内的 “{item}” 应至多有 {quantity} 个",
+        "not": "“{stage}” 内的 “{item}” 数量不应等于 {quantity}"
       },
       "type": {
         "_name": "物品种类",
-        "now": "已选 {quantity} 种物品",
-        "gte": "应至少有 {quantity} 种物品",
-        "lte": "应至多有 {quantity} 种物品",
-        "not": "物品种类应不为 {quantity}"
+        "now": "于 “{stage}” 已选 {quantity} 个物品",
+        "gte": "于 “{stage}” 应至少有 {quantity} 个物品",
+        "lte": "于 “{stage}” 应至多有 {quantity} 个物品",
+        "not": "于 “{stage}” 的物品数量应总计不为 {quantity}"
       }
     }
   },
@@ -201,9 +201,9 @@
     "name": "关卡",
     "apCost": "{apCost} 点理智",
     "loots": {
-      "normal": "常规掉落",
-      "extra": "额外物资",
-      "special": "特殊掉落"
+      "NORMAL_DROP": "常规掉落",
+      "EXTRA_DROP": "额外物资",
+      "SPECIAL_DROP": "特殊掉落"
     },
     "selector": {
       "plannerExclude": "排除规划关卡",

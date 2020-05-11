@@ -48,7 +48,7 @@
             {{ strings.translate(zone, "zoneName") }}
           </h2>
           <h1 class="title pt-1 no-wrap--text">
-            {{ $t('stats.title', {stage: stage.code}) }}
+            {{ $t('stats.title', {stage: strings.translate(stage, "code")}) }}
           </h1>
           <v-spacer />
           <v-btn

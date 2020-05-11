@@ -16,8 +16,9 @@ export default {
   methods: {
     randomizeLogo () {
       const random = Math.random();
+      const self = this;
       function imageUrl (character) {
-        return this.cdnResource(`/logos/penguin_stats_logo_${character}.png`)
+        return self.cdnResource(`/logos/penguin_stats_logo_${character}.png`)
       }
       this.randomizedLogo = random < .25 ? imageUrl("exia")
         : random < .5 ? imageUrl("texas")

@@ -105,18 +105,18 @@
           <li>
             Get By ID
             <ul>
-              <li>
-                <v-expansion-panels>
-                  <v-expansion-panel>
-                    <v-expansion-panel-header>
-                      byItemId 30013: Should get 30013 for all Servers
-                    </v-expansion-panel-header>
-                    <v-expansion-panel-content>
-                      <code>{{ getter.statistics.byItemId("30013") }}</code>
-                    </v-expansion-panel-content>
-                  </v-expansion-panel>
-                </v-expansion-panels>
-              </li>
+              <!--              <li>-->
+              <!--                <v-expansion-panels>-->
+              <!--                  <v-expansion-panel>-->
+              <!--                    <v-expansion-panel-header>-->
+              <!--                      byItemId 30013: Should get 30013 for all Servers-->
+              <!--                    </v-expansion-panel-header>-->
+              <!--                    <v-expansion-panel-content>-->
+              <!--                      <code>{{ getter.statistics.byItemId("30013") }}</code>-->
+              <!--                    </v-expansion-panel-content>-->
+              <!--                  </v-expansion-panel>-->
+              <!--                </v-expansion-panels>-->
+              <!--              </li>-->
 
               <li>
                 byStageId main_00-01: Should get main_00-01 for all Servers
