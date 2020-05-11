@@ -26,6 +26,7 @@
         </v-col>
       </v-row>
     </v-overlay>
+    <UpgradeNotifier />
     <GlobalSnackbar />
     <MirrorSelector />
     <v-navigation-drawer
@@ -160,12 +161,14 @@
   import MirrorSelector from "@/components/global/MirrorSelector";
   import Logo from "@/components/drawer/Logo";
   import {mapGetters} from "vuex";
+  import UpgradeNotifier from "@/components/global/UpgradeNotifier";
   import ServerSelector from "@/components/toolbar/ServerSelector";
 
 export default {
   name: 'App',
   components: {
     ServerSelector,
+    UpgradeNotifier,
     Logo,
     MirrorSelector,
     SettingsDialog,
@@ -180,24 +183,10 @@ export default {
   data () {
     return {
       routes: [],
-      swichi: true,
       drawer: !this.$vuetify.breakpoint.xsOnly,
       showLicenseDialog: false,
       serverNotifyOverlay: false
     }
-  },
-  computed: {
-    ...mapGetters("settings", ["lowData"]),
-    ...mapGetters("ajax", ["pending"]),
-  },
-  created () {
-    this.routes = this.$router.options.routes.filter(el => !el.meta.hide);
-    this.$store.dispatch("data/fetch", false);
-  },
-  methods: {
-    async refreshData () {
-      await this.$store.dispatch("data/fetch", true);
-    },
   },
   computed: {
     ...mapGetters("settings", ["lowData"]),
@@ -213,6 +202,15 @@ export default {
         self.serverNotifyOverlay = false
       }, 2500)
     }
+  },
+  created () {
+    this.routes = this.$router.options.routes.filter(el => !el.meta.hide);
+    this.$store.dispatch("data/fetch", false);
+  },
+  methods: {
+    async refreshData () {
+      await this.$store.dispatch("data/fetch", true);
+    },
   },
 }
 </script>

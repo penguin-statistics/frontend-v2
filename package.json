@@ -34,6 +34,7 @@
     "clipboard-polyfill": "^2.8.6",
     "dayjs": "^1.8.23",
     "extract-domain": "^2.2.1",
+    "intl-collator": "^0.1.6",
     "js-cookie": "^2.2.1",
     "vue": "^2.6.10",
     "vue-analytics": "^5.22.1",

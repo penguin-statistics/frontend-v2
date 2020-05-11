@@ -8,7 +8,8 @@ export default {
       text: "",
       icon: "",
       extra: {}
-    }
+    },
+    outdated: false
   },
   mutations: {
     setSnackbar (state, {color, timeout, text, icon, extra}) {
@@ -20,8 +21,12 @@ export default {
       state.snackbar.icon = icon;
       state.snackbar.extra = extra;
     },
+    setOutdated (state, value) {
+      state.outdated = value
+    }
   },
   getters: {
     snackbar: state => state.snackbar,
+    outdated: state => state.outdated,
   }
 };

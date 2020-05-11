@@ -254,5 +254,13 @@
       "FURN": "Furniture",
       "MATERIAL": "Materials"
     }
+  },
+  "version": {
+    "upgrade": {
+      "title": "Version Outdated",
+      "subtitle": "The current client version has outdated due to upgrade. Please retry after upgrade",
+      "action": "Upgrade",
+      "unable": "Can't Upgrade?"
+    }
   }
 }
