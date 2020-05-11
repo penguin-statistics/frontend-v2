@@ -10,7 +10,8 @@
     "stats": {
       "_name": "Drop Rates",
       "stage": "By stage",
-      "item": "By item"
+      "item": "By item",
+      "advanced": "Advanced Query"
     },
     "about": {
       "_name": "About Penguin Statistics",
@@ -132,17 +133,17 @@
     "rules": {
       "item": {
         "_name": "Item Quantities",
-        "now": "Selected {item} ×{quantity}",
-        "gte": "\"{item}\" expecting ≥{quantity}",
-        "lte": "\"{item}\" expecting ≤{quantity}",
-        "not": "\"{item}\" expecting ≠{quantity}"
+        "now": "Selected {quantity} {item} in \"{stage}\"",
+        "gte": "Should have at minimum {should} \"{item}\" in \"{stage}\"",
+        "lte": "Should have at maximum {should} \"{item}\" in \"{stage}\"",
+        "not": "Should not have exactly {should} \"{item}\" in \"{stage}\""
       },
       "type": {
         "_name": "Items",
-        "now": "Selected {quantity} kinds of items",
-        "gte": "Should have at least {quantity} kinds of items",
-        "lte": "Should have at most {quantity} kinds of items",
-        "not": "Should not be {quantity} kinds of items"
+        "now": "Selected {quantity} items in \"{stage}\"",
+        "gte": "Should have at minimum {should} items in \"{stage}\"",
+        "lte": "Should have at maximum {should} items in \"{stage}\"",
+        "not": "Should not have exactly {should} items in \"{stage}\""
       }
     }
   },
@@ -216,7 +217,6 @@
       "byProduct": "Consider by-products",
       "requireExp": "Large demand for EXP",
       "requireLmb": "Large demand for LMD",
-      "foreignServer": "Do not suggest CN-only stages",
       "excludeStage": "Exclude Stages"
     },
     "actions": {
@@ -253,6 +253,18 @@
       "CARD_EXP": "Battle Records",
       "FURN": "Furniture",
       "MATERIAL": "Materials"
+    }
+  },
+  "query": {
+    "selector": {
+      "item": {
+        "title": "Choose Item",
+        "subtitle": "Used to filter the query results by specified materials. When any filter is selected, no other filters can be selected in the same query. If you want to filter other parameters, you can do it by adding a comparison query."
+      },
+      "stage": {
+        "title": "Choose Stage",
+        "subtitle": "Used to filter the query results by specified materials. When any filter is selected, no other filters can be selected in the same query. If you want to filter other parameters, you can do it by adding a comparison query."
+      }
     }
   },
   "version": {

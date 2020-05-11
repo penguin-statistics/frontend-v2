@@ -134,16 +134,16 @@
       "item": {
         "_name": "物品项",
         "now": "已于 “{stage}” 选择了 {quantity} 个 “{item}”",
-        "gte": "“{stage}” 内的 “{item}” 应至少有 {quantity} 个",
-        "lte": "“{stage}” 内的 “{item}” 应至多有 {quantity} 个",
-        "not": "“{stage}” 内的 “{item}” 数量不应等于 {quantity}"
+        "gte": "“{stage}” 内的 “{item}” 应至少有 {should} 个",
+        "lte": "“{stage}” 内的 “{item}” 应至多有 {should} 个",
+        "not": "“{stage}” 内的 “{item}” 数量不应等于 {should}"
       },
       "type": {
         "_name": "物品种类",
         "now": "于 “{stage}” 已选 {quantity} 个物品",
-        "gte": "于 “{stage}” 应至少有 {quantity} 个物品",
-        "lte": "于 “{stage}” 应至多有 {quantity} 个物品",
-        "not": "于 “{stage}” 的物品数量应总计不为 {quantity}"
+        "gte": "“{stage}” 内应至少有 {should} 个物品",
+        "lte": "“{stage}” 内应至多有 {should} 个物品",
+        "not": "“{stage}” 内的物品数量应总计不为 {should}"
       }
     }
   },

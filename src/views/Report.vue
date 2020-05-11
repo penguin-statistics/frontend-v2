@@ -912,7 +912,7 @@ export default {
       // greater than or equal to
       const gte = (value) => {
         return (compare) => {
-          const response = { ...verificationResponse, quantity: value };
+          const response = { ...verificationResponse, quantity: compare, should: value };
           return compare >= value ? true : [this.$t(`report.rules.${type}.gte`, response), response]
         }
       };
@@ -920,7 +920,7 @@ export default {
       // less than or equal to
       const lte = (value) => {
         return (compare) => {
-          const response = { ...verificationResponse, quantity: value };
+          const response = { ...verificationResponse, quantity: compare, should: value };
           return compare <= value ? true : [this.$t(`report.rules.${type}.lte`, response), response]
         }
       };
@@ -928,7 +928,7 @@ export default {
       // not including
       const notIncludes = (values) => {
         return (compare) => {
-          const response = { ...verificationResponse, quantity: Array.isArray(values) ? values.join(", ") : values };
+          const response = { ...verificationResponse, quantity: compare, should: values.join(",") };
           return values.indexOf(compare) === -1 ? true : [this.$t(`report.rules.${type}.not`, response), response]
         }
       };

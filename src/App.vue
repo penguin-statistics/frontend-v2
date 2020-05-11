@@ -2,30 +2,7 @@
   <v-app
     :class="languageFont"
   >
-    <v-overlay
-      color="rgb(18, 18, 18)"
-      :value="serverNotifyOverlay"
-      :opacity="0.99"
-      style="z-index:1000000"
-    >
-      <v-row class="justify-center text-center">
-        <v-col cols="12">
-          <v-icon :size="48">
-            mdi-server
-          </v-icon>
-          <h1 class="heading mt-4 mb-6">
-            服务器已切换至
-          </h1>
-
-          <h2
-            class="monospace"
-            style="font-size: 128px"
-          >
-            {{ $store.getters['dataSource/server'] }}
-          </h2>
-        </v-col>
-      </v-row>
-    </v-overlay>
+    <ServerNotifyOverlay />
     <UpgradeNotifier />
     <GlobalSnackbar />
     <MirrorSelector />
@@ -163,10 +140,12 @@
   import {mapGetters} from "vuex";
   import UpgradeNotifier from "@/components/global/UpgradeNotifier";
   import ServerSelector from "@/components/toolbar/ServerSelector";
+  import ServerNotifyOverlay from "@/components/global/ServerNotifyOverlay";
 
 export default {
   name: 'App',
   components: {
+    ServerNotifyOverlay,
     ServerSelector,
     UpgradeNotifier,
     Logo,
@@ -185,23 +164,11 @@ export default {
       routes: [],
       drawer: !this.$vuetify.breakpoint.xsOnly,
       showLicenseDialog: false,
-      serverNotifyOverlay: false
     }
   },
   computed: {
     ...mapGetters("settings", ["lowData"]),
     ...mapGetters("ajax", ["pending"]),
-    ...mapGetters("dataSource", ["server"]),
-  },
-  watch: {
-    server() {
-      this.serverNotifyOverlay = true
-
-      const self = this;
-      setTimeout(function () {
-        self.serverNotifyOverlay = false
-      }, 2500)
-    }
   },
   created () {
     this.routes = this.$router.options.routes.filter(el => !el.meta.hide);

@@ -1,45 +1,26 @@
 import I18n from "@/i18n"
-import store from "@/store"
+import Console from "@/utils/Console";
 
-// function getLocaleMessage(object, localeKey, key, language) {
-//   return object[localeKey][language] || object[localeKey][I18n.fallbackLocale] || object[key] || "";
-// }
-//
-// function translate (object, key) {
-//   let locale = I18n.locale;
-//   let localeKey = `${key}_i18n`;
-//   // Console.debug("StringI18n", `generating translation. locale-${locale} key-${localeKey} [${key}]`, object)
-//   if (object) {
-//     if (object[localeKey]) {
-//       if (object[localeKey][locale]) {
-//         return getLocaleMessage(object, localeKey, key, locale)
-//       } else {
-//         let languages = locale.split("-");
-//         if (languages[0] !== "") {
-//           return getLocaleMessage(object, localeKey, key, languages[0])
-//         } else {
-//           Console.warn("StringI18n", `translation error: ${key}: Specific country code detected but it's invalid`, locale, languages)
-//           return ""
-//         }
-//       }
-//     } else {
-//       return object[key] || ""
-//     }
-//   } else {
-//     return ""
-//   }
-// }
+function getLocaleMessage(object, localeKey, key, language) {
+  return object[localeKey][language] || object[localeKey][I18n.fallbackLocale] || object[key] || "";
+}
 
 function translate (object, key) {
-  let server = store.getters["dataSource/server"];
-  let serverKey = `${key}_i18n`;
+  let locale = I18n.locale;
+  let localeKey = `${key}_i18n`;
   // Console.debug("StringI18n", `generating translation. locale-${locale} key-${localeKey} [${key}]`, object)
   if (object) {
-    if (serverKey in object) {
-      if (server in object[serverKey]) {
-        return object[serverKey][server]
+    if (object[localeKey]) {
+      if (object[localeKey][locale]) {
+        return getLocaleMessage(object, localeKey, key, locale)
       } else {
-        return ""
+        let languages = locale.split("-");
+        if (languages[0] !== "") {
+          return getLocaleMessage(object, localeKey, key, languages[0])
+        } else {
+          Console.warn("StringI18n", `translation error: ${key}: Specific country code detected but it's invalid`, locale, languages)
+          return ""
+        }
       }
     } else {
       return object[key] || ""
@@ -48,6 +29,25 @@ function translate (object, key) {
     return ""
   }
 }
+
+// function translate (object, key) {
+//   let server = store.getters["dataSource/server"];
+//   let serverKey = `${key}_i18n`;
+//   // Console.debug("StringI18n", `generating translation. locale-${locale} key-${localeKey} [${key}]`, object)
+//   if (object) {
+//     if (serverKey in object) {
+//       if (server in object[serverKey]) {
+//         return object[serverKey][server]
+//       } else {
+//         return ""
+//       }
+//     } else {
+//       return object[key] || ""
+//     }
+//   } else {
+//     return ""
+//   }
+// }
 
 // from https://stackoverflow.com/questions/1043339/javascript-for-detecting-browser-language-preference
 
