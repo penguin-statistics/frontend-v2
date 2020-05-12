@@ -78,7 +78,6 @@
             }, 500)
 
           setTimeout(function () {
-            console.log("timeout")
             anime.timeline({
               duration: 500,
               easing: "easeInExpo"
@@ -96,11 +95,10 @@
               .add({
                 targets: self.$refs["notifyOverlayServerName"],
                 opacity: [1, 0],
-                duration: 450,
+                duration: 550,
                 translateY: ["0px", "40px"],
               }, 125)
           }, 1500)
-
 
         })
 

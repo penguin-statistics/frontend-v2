@@ -289,6 +289,10 @@
             hide-details
           />
 
+          <code>
+            {{ JSON.stringify(results) }}
+          </code>
+
           <v-row justify="space-around">
             <v-btn
               large
@@ -380,7 +384,7 @@
                 </v-subheader>
                 <v-list-item
                   v-for="item in validation.item"
-                  :key="item.itemId"
+                  :key="`${item.extras.stage}--${item.itemId}`"
                 >
                   <v-list-item-avatar>
                     <Item
@@ -563,12 +567,12 @@ export default {
       set (val) {
         if (val === true) {
           this.results.push({
-            category: "FURNITURE",
+            dropType: "FURNITURE",
             itemId: "furni",
             quantity: 1
           });
         } else if (val === false) {
-          this.results = this.results.filter(el => el.category !== "FURNITURE" && el.itemId !== "furni")
+          this.results = this.results.filter(el => el.dropType !== "FURNITURE" && el.itemId !== "furni")
         }
       }
     },
@@ -670,14 +674,8 @@ export default {
 
       // loop the candidate results that user provided
       for (const result of this.results) {
-        // get itemId and category from result
-        const { itemId, category } = result
-
         // generate rules. rules: Function[]; limitation: the bounds
-        const {rules, limitation} = this.generateVerificationRule("item", {
-          itemId,
-          category
-        })
+        const {rules, limitation} = this.generateVerificationRule("item", result)
 
         if (limitation === null) return {
           error: "EMPTY_RULE",
@@ -698,7 +696,7 @@ export default {
           // store this outlier
           itemOutliers.push({
             itemId: result.itemId,
-            type: result.type,
+            type: result.dropType,
             quantity,
             limitation,
             rate,
@@ -709,10 +707,10 @@ export default {
       }
 
       // loop the type declarations (dropType limitations)
-      for (const category of categories) {
+      for (const dropType of categories) {
         // generate rules
         const {rules, limitation} = this.generateVerificationRule("type", {
-          category
+          dropType
         })
 
         if (limitation === null) return {
@@ -721,11 +719,8 @@ export default {
         }
 
         const quantity = this.results
-          .filter(el => el["category"] === category)
-          .reduce(
-            (accumulator, current) => accumulator + current.quantity,
-            0
-          );
+          .filter(el => el["dropType"] === dropType)
+          .length;
 
         // execute validation rules.
         const [validation, extras] = validate(rules, quantity);
@@ -738,7 +733,7 @@ export default {
 
           // store this outlier
           typeOutliers.push({
-            type: category,
+            type: dropType,
             quantity,
             limitation,
             rate,
@@ -800,20 +795,20 @@ export default {
     getItem(itemId) {
       return get.items.byItemId(itemId)
     },
-    handleChange(category, [itemId, diff]) {
-      let item = this.getOrCreateItem(category, itemId);
+    handleChange(dropType, [itemId, diff]) {
+      let item = this.getOrCreateItem(dropType, itemId);
       item.quantity += diff;
-      item.quantity <= 0 && (this.results = this.results.filter(v => v.itemId !== item.itemId))
+      item.quantity <= 0 && (this.results.splice(this.results.indexOf(item), 1))
     },
-    getOrCreateItem(category, itemId) {
-      const item = this.results.find(v => v.itemId === itemId);
+    getOrCreateItem(dropType, itemId) {
+      const item = this.results.find(v => v.itemId === itemId && v.dropType === dropType);
       if (item === undefined) {
-        this.results.push({
-          category,
+        const newLength = this.results.push({
+          dropType,
           itemId,
           quantity: 0
         });
-        return this.results.find(v => v.itemId === itemId)
+        return this.results[newLength - 1];
       }
       return item
     },
@@ -876,12 +871,12 @@ export default {
     generateVerificationRule(type, query) {
       let limitation;
       let verificationResponse = {
-        stage: this.$t(`stage.loots.${query["category"]}`)
+        stage: this.$t(`stage.loots.${query["dropType"]}`)
       };
       console.log("generating verification rule for", type, query)
       if (type === "item") {
         limitation = this.dropInfos.item
-          .find(v => v["itemId"] === query["itemId"] && v["dropType"] === query["category"])["bounds"];
+          .find(v => v["itemId"] === query["itemId"] && v["dropType"] === query["dropType"])["bounds"];
 
         verificationResponse = {
           ...verificationResponse,
@@ -889,7 +884,7 @@ export default {
         }
       } else if (type === "type") {
         limitation = this.dropInfos.type
-          .find(v => v["dropType"] === query["category"])["bounds"]
+          .find(v => v["dropType"] === query["dropType"])["bounds"]
 
       } else {
         throw new TypeError(`generateVerificationRule: Invalid argument ${type}`)
