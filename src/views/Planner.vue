@@ -293,7 +293,7 @@
             @click="calculation.done = false"
           >
             <v-divider style="opacity: 0.3" />
-            <span class="mx-4">
+            <span class="mx-4 d-flex align-center">
               <v-icon left>mdi-close</v-icon>{{ $t('meta.dialog.close') }}
             </span>
             <v-divider style="opacity: 0.3" />
