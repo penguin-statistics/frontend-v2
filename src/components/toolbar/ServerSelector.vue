@@ -1,3 +1,30 @@
+<i18n>
+{
+  "zh": {
+    "switchServer": "服务器切换",
+    "serverName": {
+      "CN": "国服",
+      "US": "美服",
+      "JP": "日服",
+      "KR": "韩服"
+    }
+	},
+	"en": {
+    "switchServer": "Switch Server",
+    "serverName": {
+      "CN": "CN",
+      "US": "US",
+      "JP": "JP",
+      "KR": "KR"
+    }
+	},
+	"ja": {
+	},
+	"ko": {
+	}
+}
+</i18n>
+
 <template>
   <v-menu
     bottom
@@ -17,7 +44,7 @@
         >
           mdi-server
         </v-icon>
-        <span class="monospace">{{ activeServerObject.name }}</span>
+        <span class="monospace">{{ renderTranslation(activeServerObject.name) }}</span>
       </v-btn>
     </template>
 
@@ -32,7 +59,7 @@
           class="mr-2"
         >
           mdi-server
-        </v-icon> 服务器切换
+        </v-icon> {{ $t("switchServer") }}
       </v-subheader>
       <v-list-item-group
         v-model="activeServer"
@@ -44,7 +71,7 @@
           :disabled="pending"
         >
           <v-list-item-title class="mr-2">
-            {{ server.name }}
+            {{ renderTranslation(server.name) }}
           </v-list-item-title>
           <v-list-item-action v-if="activeServer === i">
             <v-icon small>
@@ -72,19 +99,19 @@
         servers: [
           {
             id: 'CN',
-            name: '国服'
+            name: 'serverName.CN'
           },
           {
             id: 'US',
-            name: '美服'
+            name: 'serverName.US'
           },
           {
             id: 'JP',
-            name: '日服'
+            name: 'serverName.JP'
           },
           {
             id: 'KR',
-            name: '韩服'
+            name: 'serverName.KR'
           }
         ],
       }
@@ -108,6 +135,9 @@
       changeServer(serverId) {
         this.$store.commit("dataSource/changeServer", serverId)
         this.$store.dispatch("data/fetch", false)
+      },
+      renderTranslation(t) {
+        return this.$t(t);
       }
     },
   }
