@@ -32,14 +32,18 @@ export default {
   isOutdated(rangeEnd) {
     return dayjs().isAfter(rangeEnd)
   },
-  dates (times) {
+  dates (times, includeTime=true) {
     times = times.map(ts => {
       return dayjs(ts)
     });
     let needsYear = needYear(times);
     times = times.map(time => {
-      return time.format(`${needsYear ? FORMATS.YMD : FORMATS.MD} ${FORMATS.HM}`)
+      if (includeTime) return time.format(`${needsYear ? FORMATS.YMD : FORMATS.MD} ${FORMATS.HM}`)
+      return time.format(`${needsYear ? FORMATS.YMD : FORMATS.MD}`)
     });
     return times
   },
+  date (date) {
+    return dayjs(date).format(`${FORMATS.MD}`)
+  }
 }

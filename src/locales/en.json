@@ -85,7 +85,21 @@
       "times": "Samples",
       "quantity": "Loot",
       "percentage": "Percentage",
-      "apPPR": "Sanity Required Per Item"
+      "apPPR": "Sanity Required Per Item",
+      "timeRange": "Time Range"
+    },
+    "timeRange": {
+      "inBetween": "{0} to {1}",
+      "toPresent": "{date} to Present",
+      "endsAt": "Before {date}",
+      "unknown": "Unknown"
+    },
+    "trends": {
+      "name": "Historical Drop Data",
+      "set": {
+        "rate": "Drop Rate",
+        "sample": "Samples"
+      }
     }
   },
   "contribute": {

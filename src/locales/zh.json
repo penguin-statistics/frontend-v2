@@ -85,7 +85,21 @@
       "times": "样本数",
       "quantity": "掉落数",
       "percentage": "百分比",
-      "apPPR": "单件估算理智"
+      "apPPR": "单件估算理智",
+      "timeRange": "统计区间"
+    },
+    "timeRange": {
+      "inBetween": "{0} ~ {1}",
+      "toPresent": "{date} 至今",
+      "endsAt": "{date} 之前",
+      "unknown": "未知"
+    },
+    "trends": {
+      "name": "掉落历史趋势",
+      "set": {
+        "rate": "掉落率",
+        "sample": "当日样本量"
+      }
     }
   },
   "contribute": {

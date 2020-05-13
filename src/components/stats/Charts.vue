@@ -20,31 +20,21 @@
           :stroke-linecap="sparkline.lineCap"
           :gradient-direction="sparkline.gradientDirection"
           auto-draw
+          :auto-draw-duration="3000"
+          auto-draw-easing="cubic-bezier(0.165, 0.84, 0.44, 1)"
         />
       </div>
     </template>
-    <v-card>
-      <v-card-title>
-        <span class="headline">
-          Charts
-        </span>
-
-        <v-spacer />
-
-        <v-btn
-          icon
-          @click="showDialog = false"
-        >
-          <v-icon>mdi-close</v-icon>
-        </v-btn>
-      </v-card-title>
-      <v-card-text>
-        <div
-          :id="computedChartsId"
-          class="charts"
-        />
-      </v-card-text>
-    </v-card>
+    <DialogCard
+      :title="meta.name"
+      :subtitle="$t('stats.trends.name')"
+      @close="showDialog = false"
+    >
+      <div
+        :id="computedChartsId"
+        class="charts my-4"
+      />
+    </DialogCard>
   </v-dialog>
 </template>
 
@@ -52,8 +42,11 @@
 import Plotly from "@/vendors/plotly";
 import formatter from "@/utils/timeFormatter";
 import Theme from "@/mixins/Theme";
+import DialogCard from "@/components/global/DialogCard";
+
 export default {
   name: "Charts",
+  components: {DialogCard},
   mixins: [Theme],
   props: {
     xStart: {
@@ -71,7 +64,7 @@ export default {
     data: {
       type: Object,
       default: () => {
-        return [10, 15, 13, 17];
+        return {};
       }
     },
     dataKeys: {
@@ -91,6 +84,12 @@ export default {
     chartsId: {
       type: String,
       required: true
+    },
+    meta: {
+      type: Object,
+      default: () => {
+        return {};
+      }
     }
   },
   data() {
@@ -101,17 +100,19 @@ export default {
   },
   computed: {
     gradient() {
-      return this.dark ? ["white"] : ["black"];
+      return this.dark ?
+        ["rgba(255, 255, 255, .3)", "rgba(255, 255, 255, 1)"] :
+        ["rgba(0, 0, 0, .3)", "rgba(0, 0, 0, 1)"]
     },
     sparkline() {
       return {
-        width: 10,
+        width: 14,
         radius: 100,
-        padding: 0,
+        padding: 8,
         lineCap: "round",
         gradient: this.gradient,
         value: this.sparklineValue,
-        gradientDirection: "top"
+        gradientDirection: "left"
       };
     },
     computedChartsId() {
@@ -137,6 +138,8 @@ export default {
       if (
         this.sparklineKey &&
         this.sparklineSubKey &&
+        this.data[this.sparklineKey] &&
+        this.data[this.sparklineSubKey] &&
         this.data[this.sparklineKey].length &&
         this.data[this.sparklineSubKey].length
       ) {
@@ -182,7 +185,7 @@ export default {
           return [0, 0];
         }
       } else {
-        return [1, 1];
+        return null;
       }
     }
   },
@@ -193,10 +196,10 @@ export default {
           return {
             x: this.xAxis,
             y: this.yAxis[yAxisKey],
-            opacity: 0.3,
+            opacity: .8,
             type: "bar",
-            name: yAxisKey,
-            connectgaps: true
+            name: this.$t('stats.trends.set.sample'),
+            connectgaps: true,
           };
         });
         traceArray.push({
@@ -208,29 +211,44 @@ export default {
             value: 10
           },
           opacity: 1,
-          line: { shape: "spline", smoothing: 0.8 },
+          line: { shape: "spline", smoothing: 0.5 },
           connectgaps: true,
-          name: "rate"
+          name: this.$t('stats.trends.set.rate')
         });
+
         let layout = {
-          width: "100%",
-          height: "100%",
-          yaxis: { title: "Samples" },
+          // width: "500px",
+          // height: "500px",
+          yaxis: {
+            title: this.$t('stats.trends.set.sample'),
+            titlefont: { color: this.$vuetify.theme.currentTheme.accent2 },
+            tickfont: { color: this.$vuetify.theme.currentTheme.accent2 }
+          },
           yaxis2: {
-            title: "Rate",
-            titlefont: { color: "rgb(148, 103, 189)" },
-            tickfont: { color: "rgb(148, 103, 189)" },
+            title: this.$t('stats.trends.set.rate'),
+            titlefont: { color: this.$vuetify.theme.currentTheme.accent3 },
+            tickfont: { color: this.$vuetify.theme.currentTheme.accent3 },
             overlaying: "y",
             side: "right"
+          },
+          paper_bgcolor: this.$vuetify.theme.currentTheme.background,
+          plot_bgcolor: this.$vuetify.theme.currentTheme.background,
+          font: {
+            color: this.$vuetify.theme.currentTheme.text,
           }
         };
 
         let data = traceArray;
-
         this.$nextTick(function () {
           Plotly.newPlot(this.computedChartsId, data, layout, {
-            responsive: true,
             displayLogo: false,
+            toImageButtonOptions: {
+              format: 'png', // one of png, svg, jpeg, webp
+              filename: `penguin-stats_export-${this.chartsId}_time${new Date().getTime()}`,
+              height: 1000,
+              width: 1400,
+              scale: 1 // Multiply title/legend/axis/canvas sizes by this factor
+            }
           });
         })
       }
@@ -251,6 +269,5 @@ export default {
 }
 .sparkline {
   width: 40px;
-  margin-left: 5px;
 }
 </style>
