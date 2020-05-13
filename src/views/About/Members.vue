@@ -306,6 +306,15 @@
               }
             },
             {
+              name: "darkness",
+              responsibility: [
+                r.maintenance
+              ],
+              avatar: "darkness.jpg",
+              socials: {
+              }
+            },
+            {
               name: "SrO²",
               responsibility: [
                 r.bulkupload
