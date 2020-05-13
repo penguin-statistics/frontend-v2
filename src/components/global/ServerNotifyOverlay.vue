@@ -1,3 +1,18 @@
+<i18n>
+{
+  "zh": {
+    "switchedTo": "服务器已切换至"
+	},
+	"en": {
+    "switchedTo": "Server has been switched to"
+	},
+	"ja": {
+	},
+	"ko": {
+	}
+}
+</i18n>
+
 <template>
   <v-overlay
     color="rgb(18, 18, 18)"
@@ -21,7 +36,7 @@
           class="heading mt-4 mb-6"
           style="opacity: 0"
         >
-          服务器已切换至
+          {{ $t('switchedTo') }}
         </h1>
 
         <h2

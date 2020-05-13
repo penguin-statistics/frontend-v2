@@ -4,6 +4,15 @@
     "name_line1": "Penguin Statistics",
     "name_line2": ""
   },
+  "server": {
+    "switch": "Switch Server",
+    "servers": {
+      "CN": "CN",
+      "US": "US",
+      "JP": "JP",
+      "KO": "KR"
+    }
+  },
   "menu": {
     "home": "Home",
     "report": "Report Drops",

@@ -17,7 +17,9 @@
         >
           mdi-server
         </v-icon>
-        <span class="monospace">{{ activeServerId }}</span>
+        <span class="monospace">
+          {{ $t("server.servers." + activeServerId) }}
+        </span>
       </v-btn>
     </template>
 
@@ -32,7 +34,7 @@
           class="mr-2"
         >
           mdi-server
-        </v-icon> 服务器切换
+        </v-icon> {{ $t("server.switch") }}
       </v-subheader>
       <v-list-item-group
         v-model="activeServer"
@@ -44,19 +46,10 @@
           :disabled="pending"
         >
           <v-list-item-title class="mr-2">
-            {{ $t('servers.servers.' + server) }}
+            {{ $t("server.servers." + server) }}
           </v-list-item-title>
           <v-list-item-action v-if="activeServer === i">
-            <v-progress-circular
-              v-if="pending"
-              indeterminate
-              :width="2"
-              :size="16"
-            />
-            <v-icon
-              v-else
-              small
-            >
+            <v-icon small>
               mdi-check
             </v-icon>
           </v-list-item-action>
@@ -89,8 +82,7 @@
           return this.servers.indexOf(this.servers.find(el => el === this.$store.getters["dataSource/server"]))
         },
         set (localeIndex) {
-          const serverObject = this.servers[localeIndex];
-          this.changeServer(serverObject)
+          this.changeServer(this.servers[localeIndex])
         }
       },
       activeServerId () {

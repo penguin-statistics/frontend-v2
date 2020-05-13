@@ -8,7 +8,7 @@ const personalMatrix = new MatrixObjectManager({
 
     url: '/result/matrix',
     extraParams: {
-      // "show_closed_zones": true,
+      "show_closed_zones": true,
       "is_personal": true
     }
   },

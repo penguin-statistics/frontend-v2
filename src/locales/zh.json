@@ -4,6 +4,15 @@
     "name_line1": "企鹅物流数据统计",
     "name_line2": ""
   },
+  "server": {
+    "switch": "服务器切换",
+    "servers": {
+      "CN": "国服",
+      "US": "美服",
+      "JP": "日服",
+      "KO": "韩服"
+    }
+  },
   "menu": {
     "home": "首页",
     "report": "掉落汇报",

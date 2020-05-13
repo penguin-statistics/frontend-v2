@@ -308,11 +308,20 @@
               class="px-4 py-2"
               @click="submit"
             >
-              {{ $t('report.submit') }}
-              <div class="ml-2 d-inline-flex align-center justify-center">
-                <v-icon>
+              <span>
+                {{ $t('report.submit') }}
+              </span>
+              <v-divider
+                vertical
+                class="mx-2"
+              />
+              <div class="d-inline-flex align-center justify-center">
+                <v-icon small>
                   mdi-server
                 </v-icon>
+                <span class="caption ml-1">
+                  {{ serverName }}
+                </span>
               </div>
             </v-btn>
           </v-row>
@@ -550,6 +559,9 @@ export default {
     }
   }),
   computed: {
+    serverName() {
+      return this.$t('server.servers.' + this.$store.getters["dataSource/server"])
+    },
     strings() {
       return strings
     },

@@ -7,9 +7,9 @@ const globalMatrix = new MatrixObjectManager({
     serverSensitive: true,
 
     url: '/result/matrix',
-    // extraParams: {
-    //   "show_closed_zones": true
-    // }
+    extraParams: {
+      "show_closed_zones": true
+    }
   },
   ttl: 1000 * 60 * 60 * 1, // 1 hour
   ajaxHooks: commons.defaultAjaxHooks

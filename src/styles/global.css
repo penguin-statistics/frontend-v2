@@ -78,62 +78,56 @@
 /*    background-color: rgb(200, 200, 200);*/
 /*}*/
 
-.v-dialog::-webkit-scrollbar {
-    width: 4px;
-}
+/*
+ ********************
+ * Scrollbar Styles: need more cross-platform testing
+ ********************
+ */
 
-::-webkit-scrollbar {
-    height: 4px;
-    width: 6px;
-    background: transparent;
-}
+/*.v-dialog::-webkit-scrollbar {*/
+/*    width: 4px;*/
+/*}*/
 
-::-webkit-scrollbar-button:end:increment {
-    background: transparent;
-    display: none;
-}
-::-webkit-scrollbar-button:start:decrement {
-    background: transparent;
-    display: none;
-}
-::-webkit-scrollbar-track-piece:vertical {
-    background: linear-gradient(to right, rgba(0, 0, 0, .2), rgba(0, 0, 0, .3));
-}
-::-webkit-scrollbar-track-piece:horizontal {
-    background: linear-gradient(to bottom, rgba(0, 0, 0, .2), rgba(0, 0, 0, .3));
-}
-/*::-webkit-scrollbar-track-piece:vertical:start {*/
-/*    border-radius: 3px 0 0 0;*/
+/*::-webkit-scrollbar {*/
+/*    height: 4px;*/
+/*    width: 6px;*/
+/*    background: transparent;*/
 /*}*/
-/*::-webkit-scrollbar-track-piece:vertical:end  {*/
-/*    border-radius: 0 0 0 3px;*/
+
+/*::-webkit-scrollbar-button:end:increment {*/
+/*    background: transparent;*/
+/*    display: none;*/
 /*}*/
-/*::-webkit-scrollbar-track-piece:horizontal:start {*/
-/*    border-radius: 2px 0 0 0;*/
+/*::-webkit-scrollbar-button:start:decrement {*/
+/*    background: transparent;*/
+/*    display: none;*/
 /*}*/
-/*::-webkit-scrollbar-track-piece:horizontal:end  {*/
-/*    border-radius: 0 2px 0 0;*/
+/*::-webkit-scrollbar-track-piece:vertical {*/
+/*    background: linear-gradient(to right, rgba(0, 0, 0, .2), rgba(0, 0, 0, .3));*/
 /*}*/
-::-webkit-scrollbar-thumb:horizontal {
-    background: rgba(255, 255, 255, .4);
-    border-radius: 2px;
-    display: block;
-    height: 24px;
-}
-::-webkit-scrollbar-thumb:vertical {
-    background: rgba(255, 255, 255, .4);
-    border-radius: 3px;
-    display: block;
-}
-::-webkit-scrollbar-thumb:hover {
-    background: rgba(255, 255, 255, .55);
-}
-::-webkit-scrollbar-thumb:active {
-    background: rgba(255, 255, 255, .65);
-}
-.v-dialog::-webkit-scrollbar-thumb:vertical {
-    border-radius: 0 4px 4px 0;
-}
+/*::-webkit-scrollbar-track-piece:horizontal {*/
+/*    background: linear-gradient(to bottom, rgba(0, 0, 0, .2), rgba(0, 0, 0, .3));*/
+/*}*/
+/*::-webkit-scrollbar-thumb:horizontal {*/
+/*    background: rgba(255, 255, 255, .4);*/
+/*    border-radius: 2px;*/
+/*    display: block;*/
+/*    height: 24px;*/
+/*}*/
+/*::-webkit-scrollbar-thumb:vertical {*/
+/*    background: rgba(255, 255, 255, .4);*/
+/*    border-radius: 3px;*/
+/*    display: block;*/
+/*}*/
+/*::-webkit-scrollbar-thumb:hover {*/
+/*    background: rgba(255, 255, 255, .55);*/
+/*}*/
+/*::-webkit-scrollbar-thumb:active {*/
+/*    background: rgba(255, 255, 255, .65);*/
+/*}*/
+/*.v-dialog::-webkit-scrollbar-thumb:vertical {*/
+/*    border-radius: 0 4px 4px 0;*/
+/*}*/
 
 /*.v-toolbar {*/
 /*  padding-top: env(safe-area-inset-top);*/
