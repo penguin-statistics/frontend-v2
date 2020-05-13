@@ -44,7 +44,7 @@
           class="monospace"
           style="font-size: 128px; opacity: 0"
         >
-          {{ $store.getters['dataSource/server'] }}
+          {{ $t('server.servers.' + $store.getters['dataSource/server']) }}
         </h2>
       </v-col>
     </v-row>

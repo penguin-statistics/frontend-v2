@@ -16,7 +16,6 @@ import { Integrations as ApmIntegrations } from '@sentry/apm';
 import mirror from "@/utils/mirror";
 
 if (!window.Intl) {
-  console.log("Applying Intl polyfill...")
   require("intl-collator")
 }
 

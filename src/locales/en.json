@@ -7,10 +7,10 @@
   "server": {
     "switch": "Switch Server",
     "servers": {
-      "CN": "CN",
-      "US": "US",
-      "JP": "JP",
-      "KO": "KR"
+      "CN": "China",
+      "US": "U.S.A.",
+      "JP": "Japan",
+      "KR": "Korea"
     }
   },
   "menu": {
@@ -210,9 +210,9 @@
     "name": "Stage",
     "apCost": "{apCost} AP required",
     "loots": {
-      "normal": "Normal",
-      "extra": "Extra",
-      "special": "Special"
+      "NORMAL_DROP": "Normal",
+      "EXTRA_DROP": "Extra",
+      "SPECIAL_DROP": "Special"
     },
     "selector": {
       "plannerExclude": "Exclude Planning Stages",

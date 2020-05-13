@@ -155,9 +155,9 @@
     "name": "作戦",
     "apCost": "消費理性：{apCost}",
     "loots": {
-      "normal": "通常ドロップ",
-      "extra": "エクストラドロップ",
-      "special": "スペシャルドロップ"
+      "NORMAL_DROP": "通常ドロップ",
+      "EXTRA_DROP": "エクストラドロップ",
+      "SPECIAL_DROP": "スペシャルドロップ"
     }
   },
   "planner": {

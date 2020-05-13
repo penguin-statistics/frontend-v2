@@ -155,9 +155,9 @@
     "name": "작전지역",
     "apCost": "{apCost} 이성 필요",
     "loots": {
-      "normal": "일반 드랍",
-      "extra": "추가 드랍",
-      "special": "특수 드랍"
+      "NORMAL_DROP": "일반 드랍",
+      "EXTRA_DROP": "추가 드랍",
+      "SPECIAL_DROP": "특수 드랍"
     }
   },
   "planner": {

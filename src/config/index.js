@@ -15,5 +15,5 @@ module.exports = {
   advancedQuery: {
     maxQueries: 5,
   },
-  servers: ["CN", "US", "JP", "KO"]
+  servers: ["CN", "US", "JP", "KR"]
 }

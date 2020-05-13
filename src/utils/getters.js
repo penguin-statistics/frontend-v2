@@ -87,8 +87,8 @@ Getters.stages = {
     if (!stages) return []
     return stages
   },
-  byStageId(stageId, query) {
-    return this.all(query).find(el => {
+  byStageId(stageId) {
+    return this.all().find(el => {
       return el.stageId === stageId
     }) || {}
   },
