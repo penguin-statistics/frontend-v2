@@ -17,7 +17,7 @@
         >
           mdi-server
         </v-icon>
-        <span class="monospace">{{ activeServerObject.name }}</span>
+        <span class="monospace">{{ activeServerId }}</span>
       </v-btn>
     </template>
 
@@ -44,17 +44,26 @@
           :disabled="pending"
         >
           <v-list-item-title class="mr-2">
-            {{ server.name }}
+            {{ $t('servers.servers.' + server) }}
           </v-list-item-title>
           <v-list-item-action v-if="activeServer === i">
-            <v-icon small>
+            <v-progress-circular
+              v-if="pending"
+              indeterminate
+              :width="2"
+              :size="16"
+            />
+            <v-icon
+              v-else
+              small
+            >
               mdi-check
             </v-icon>
           </v-list-item-action>
           <v-list-item-action-text
             class="monospace ml-2"
           >
-            {{ server.id }}
+            {{ server }}
           </v-list-item-action-text>
         </v-list-item>
       </v-list-item-group>
@@ -63,45 +72,29 @@
 </template>
 
 <script>
+  import config from "@/config"
   import {mapGetters} from "vuex";
 
   export default {
     name: "ServerSelector",
     data() {
       return {
-        servers: [
-          {
-            id: 'CN',
-            name: '国服'
-          },
-          {
-            id: 'US',
-            name: '美服'
-          },
-          {
-            id: 'JP',
-            name: '日服'
-          },
-          {
-            id: 'KR',
-            name: '韩服'
-          }
-        ],
+        servers: config.servers
       }
     },
     computed: {
       ...mapGetters("ajax", ["pending"]),
       activeServer: {
         get () {
-          return this.servers.indexOf(this.servers.find(el => el.id === this.$store.getters["dataSource/server"]))
+          return this.servers.indexOf(this.servers.find(el => el === this.$store.getters["dataSource/server"]))
         },
         set (localeIndex) {
           const serverObject = this.servers[localeIndex];
-          this.changeServer(serverObject.id)
+          this.changeServer(serverObject)
         }
       },
-      activeServerObject () {
-        return this.servers.find(el => el.id === this.$store.getters["dataSource/server"])
+      activeServerId () {
+        return this.servers.find(el => el === this.$store.getters["dataSource/server"])
       }
     },
     methods: {

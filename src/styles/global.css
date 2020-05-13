@@ -205,6 +205,16 @@
     );
 }
 
+.theme--light .slash-strip--danger {
+    background: repeating-linear-gradient(
+            -45deg,
+            rgb(227, 100, 86),
+            rgb(227, 100, 86) 45px,
+            rgb(255, 255, 255) 45px,
+            rgb(255, 255, 255) 90px
+    );
+}
+
 .theme--light .slash-strip--warning {
     background: repeating-linear-gradient(
             -45deg,
@@ -215,11 +225,21 @@
     );
 }
 
+.theme--light .slash-strip--warning-transparent {
+    background: repeating-linear-gradient(
+            -45deg,
+            rgba(237, 144, 53, 0.5),
+            rgba(237, 144, 53, 0.5) 45px,
+            rgba(255, 255, 255, 0.5) 45px,
+            rgba(255, 255, 255, 0.5) 90px
+    );
+}
+
 .theme--light .slash-strip--danger {
     background: repeating-linear-gradient(
             -45deg,
-            rgb(227, 100, 86),
-            rgb(227, 100, 86) 45px,
+            rgba(226, 81, 65, .75),
+            rgba(226, 81, 65, .75) 45px,
             rgb(255, 255, 255) 45px,
             rgb(255, 255, 255) 90px
     );
@@ -294,4 +314,7 @@
 }
 .v-tabs > .v-tabs-bar, .v-tabs-items {
     background-color: transparent !important;
+}
+.markdown-content strong {
+
 }

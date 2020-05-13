@@ -75,6 +75,7 @@
       <DataTable
         :items="stats"
         type="stage"
+        :trends="trends"
 
         class="px-3 px-sm-4 px-md-6 px-lg-6 px-xl-8 pt-0 pb-6"
       />
@@ -125,7 +126,10 @@ export default {
     },
     getter () {
       return get
-    }
+    },
+    trends () {
+      return get.trends.byStageId(this.selected.stage)
+    },
   },
   methods: {
     select({zone, stage}) {

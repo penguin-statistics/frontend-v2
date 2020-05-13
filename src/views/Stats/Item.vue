@@ -105,6 +105,7 @@
           <DataTable
             :items="itemStagesStats"
             type="item"
+            :trends="trends"
 
             class="px-3 px-sm-4 px-md-6 px-lg-6 px-xl-8 pt-0 pb-6"
           />
@@ -141,8 +142,8 @@ export default {
         item: get.items.byItemId(this.$route.params.itemId)
       };
     },
-    currentItemTrends() {
-      return get.trends.byItemId(this.$route.params.itemId);
+    trends () {
+      return get.trends.byItemId(this.$route.params.itemId)
     },
     itemStagesStats() {
       if (!this.selected.item) return [];
@@ -231,32 +232,6 @@ export default {
 <style scoped>
 .v-table {
   background: transparent !important;
-}
-.charts-data-wrapper {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-.charts-wrapper {
-  display: flex;
-  align-items: center;
-}
-/*.item-list-wrapper {*/
-/*  display: flex;*/
-/*  flex-direction: column;*/
-/*}*/
-/*.item-list {*/
-/*  display: flex;*/
-/*  flex-wrap: wrap;*/
-/*  justify-content: flex-start;*/
-/*}*/
-.item-list-item-wrapper {
-  /*display: flex;*/
-  /*flex-direction: column;*/
-  /*justify-content: center;*/
-  /*align-items: center;*/
-  min-width: 62px;
-  margin: 4px 0;
 }
 .full-width {
   width: 100%;

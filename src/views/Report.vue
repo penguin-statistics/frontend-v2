@@ -289,10 +289,6 @@
             hide-details
           />
 
-          <code>
-            {{ JSON.stringify(results) }}
-          </code>
-
           <v-row justify="space-around">
             <v-btn
               large
@@ -313,6 +309,11 @@
               @click="submit"
             >
               {{ $t('report.submit') }}
+              <div class="ml-2 d-inline-flex align-center justify-center">
+                <v-icon>
+                  mdi-server
+                </v-icon>
+              </div>
             </v-btn>
           </v-row>
         </v-col>

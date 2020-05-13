@@ -13,8 +13,6 @@ function getIcon (key) {
 const zones = new ObjectManager({
   name: 'zones',
   api: {
-    i18n: true,
-
     url: "/zones",
   },
   transform: [

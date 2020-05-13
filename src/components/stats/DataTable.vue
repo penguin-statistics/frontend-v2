@@ -179,31 +179,24 @@
             {{ props.item.times }}
           </td>
           <td
+            class="d-flex align-center justify-left fill-height"
             :class="tableCellClasses"
           >
-            <!--          <div-->
-            <!--            class="charts-data-wrapper"-->
-            <!--            fill-height-->
-            <!--          >-->
-            <!--            -->
-            <!--            <div-->
-            <!--              class="charts-wrapper cursor-pointer"-->
-            <!--              fill-height-->
-            <!--            >-->
-            <!--                <Charts-->
-            <!--                  v-if="currentTrends"-->
-            <!--                  :interval="currentTrends && currentTrends.interval"-->
-            <!--                  :x-start="currentTrends && currentTrends.startTime"-->
-            <!--                  :show-dialog="expanded[props.item.item.itemId]"-->
-            <!--                  :data-keys="['quantity']"-->
-            <!--                  :data="currentTrendsData && currentTrendsData[props.item.item.itemId]"-->
-            <!--                  :charts-id="props.item.item.itemId"-->
-            <!--                  sparkline-key="quantity"-->
-            <!--                  sparkline-sub-key="times"-->
-            <!--                />-->
-            <!--            </div>-->
-            <!--          </div>-->
-            {{ props.item.percentageText }}
+            <span class="mr-2">
+              {{ props.item.percentageText }}
+            </span>
+
+            <Charts
+              v-if="trends"
+              :interval="trends && trends.interval"
+              :x-start="trends && trends.startTime"
+              :show-dialog="expandTrends"
+              :data-keys="['quantity']"
+              :data="currentTrendsData && currentTrendsData[chartId(props)]"
+              :charts-id="chartId(props)"
+              sparkline-key="quantity"
+              sparkline-sub-key="times"
+            />
           </td>
           <td
             :class="tableCellClasses"
@@ -227,10 +220,11 @@
   import Item from "@/components/global/Item";
   import {mapGetters} from "vuex";
   import Theme from "@/mixins/Theme";
+  import Charts from "@/components/stats/Charts";
 
   export default {
     name: "DataTable",
-    components: {Item},
+    components: {Item, Charts},
     mixins: [Theme],
     props: {
       items: {
@@ -249,6 +243,10 @@
         validator (val) {
           return ['item', 'stage'].includes(val)
         }
+      },
+      trends: {
+        type: Object,
+        required: true
       }
     },
     data() {
@@ -263,7 +261,8 @@
           }
         },
         tableCellClasses: "px-2 font-weight-bold monospace",
-        hideItemName: false
+        hideItemName: false,
+        expandTrends: false
       }
     },
     computed: {
@@ -328,6 +327,9 @@
       },
       strings () {
         return strings
+      },
+      currentTrendsData() {
+        return this.trends && this.trends.results;
       }
     },
     methods: {
@@ -348,6 +350,13 @@
             stageId
           }
         });
+      },
+      chartId (rowProps) {
+        if (this.type === "stage") {
+          return rowProps.item.item.itemId
+        } else {
+          return rowProps.item.stage.stageId
+        }
       }
     },
   }
@@ -381,6 +390,7 @@
     display: flex;
     align-items: center;
   }
+
 
   .item-name, .item-name--chevron, .item-name--text {
     transition: text-shadow .1s cubic-bezier(.25,.8,.5,1), filter .1s cubic-bezier(.25,.8,.5,1), transform .225s cubic-bezier(.25,.8,.5,1), opacity .225s cubic-bezier(.25,.8,.5,1) !important;

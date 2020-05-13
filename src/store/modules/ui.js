@@ -1,3 +1,5 @@
+import Vue from "vue"
+
 export default {
   namespaced: true,
   state: {
@@ -9,7 +11,8 @@ export default {
       icon: "",
       extra: {}
     },
-    outdated: false
+    outdated: false,
+    notice: null
   },
   mutations: {
     setSnackbar (state, {color, timeout, text, icon, extra}) {
@@ -23,10 +26,14 @@ export default {
     },
     setOutdated (state, value) {
       state.outdated = value
+    },
+    setNotice (state, value) {
+      Vue.set(state, "notice", value)
     }
   },
   getters: {
     snackbar: state => state.snackbar,
     outdated: state => state.outdated,
+    notice: state => state.notice
   }
 };

@@ -1,5 +1,15 @@
 import I18n from "@/i18n"
 import Console from "@/utils/Console";
+import marked from "marked"
+
+marked.setOptions({
+  breaks: true,
+  silent: true
+})
+
+function translateMarkdown (object, key) {
+  return marked(translate(object, key).replace(/\\n/gm, "\n"))
+}
 
 function getLocaleMessage(object, localeKey, key, language) {
   return object[localeKey][language] || object[localeKey][I18n.fallbackLocale] || object[key] || "";
@@ -120,4 +130,4 @@ function fileSize(bytes, si) {
   return bytes.toFixed(1)+' '+units[u];
 }
 
-export default {translate, getFirstBrowserLanguage, fileSize}
+export default {translate, translateMarkdown, getFirstBrowserLanguage, fileSize}

@@ -79,7 +79,6 @@ class ObjectManager {
     };
 
     if (this.api.serverSensitive) config.params["server"] = this.server
-    if (this.api.i18n) config.params["i18n"] = true
 
     return config
   }

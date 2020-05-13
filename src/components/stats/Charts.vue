@@ -1,14 +1,13 @@
 <template>
   <v-dialog
     v-model="showDialog"
-    fullscreen
-    hide-overlay
-    transition="dialog-bottom-transition"
+    transition="scale-transition"
+    max-width="750px"
   >
     <template v-slot:activator="{ on }">
       <slot />
       <div
-        class="sparkline"
+        class="sparkline cursor-pointer"
         v-on="on"
       >
         <v-sparkline
@@ -24,9 +23,11 @@
         />
       </div>
     </template>
-    <div class="charts-wrapper">
-      <v-toolbar>
-        <v-toolbar-title>Charts</v-toolbar-title>
+    <v-card>
+      <v-card-title>
+        <span class="headline">
+          Charts
+        </span>
 
         <v-spacer />
 
@@ -36,20 +37,24 @@
         >
           <v-icon>mdi-close</v-icon>
         </v-btn>
-      </v-toolbar>
-      <div
-        :id="computedChartsId"
-        class="charts"
-      />
-    </div>
+      </v-card-title>
+      <v-card-text>
+        <div
+          :id="computedChartsId"
+          class="charts"
+        />
+      </v-card-text>
+    </v-card>
   </v-dialog>
 </template>
 
 <script>
 import Plotly from "@/vendors/plotly";
 import formatter from "@/utils/timeFormatter";
+import Theme from "@/mixins/Theme";
 export default {
   name: "Charts",
+  mixins: [Theme],
   props: {
     xStart: {
       type: Number,
@@ -57,7 +62,7 @@ export default {
     },
     interval: {
       type: Number,
-      default: 1
+      default: 86400000
     },
     value: {
       type: Boolean,
@@ -86,25 +91,17 @@ export default {
     chartsId: {
       type: String,
       required: true
-    },
-    height: {
-      type: Number,
-      default: window.innerHeight - 64 // minus toolbar height
-    },
-    width: {
-      type: Number,
-      default: window.innerWidth
     }
   },
   data() {
     return {
-      initDate: new Date(),
+      initAt: Date.now(),
       showDialog: this.value
     };
   },
   computed: {
     gradient() {
-      return this.$store.getters['settings/dark'] ? ["white"] : ["black"];
+      return this.dark ? ["white"] : ["black"];
     },
     sparkline() {
       return {
@@ -118,7 +115,7 @@ export default {
       };
     },
     computedChartsId() {
-      return `${this.initDate.getTime().toString()}_${this.chartsId}`;
+      return `${this.initAt.toString()}_${this.chartsId}`;
     },
     xAxis() {
       let array = this.data[this.sparklineKey].map((item, index) => {
@@ -216,8 +213,8 @@ export default {
           name: "rate"
         });
         let layout = {
-          width: this.width,
-          height: this.height,
+          width: "100%",
+          height: "100%",
           yaxis: { title: "Samples" },
           yaxis2: {
             title: "Rate",
@@ -230,7 +227,12 @@ export default {
 
         let data = traceArray;
 
-        Plotly.newPlot(this.computedChartsId, data, layout);
+        this.$nextTick(function () {
+          Plotly.newPlot(this.computedChartsId, data, layout, {
+            responsive: true,
+            displayLogo: false,
+          });
+        })
       }
     }
   },
@@ -241,11 +243,10 @@ export default {
 <style scoped>
 .charts-wrapper {
   width: 100%;
-  height: -webkit-fill-available;
+  height: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
-  background: #fff;
   flex-direction: column;
 }
 .sparkline {

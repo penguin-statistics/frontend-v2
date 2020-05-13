@@ -18,8 +18,8 @@ import AboutContact from './views/About/Contact'
 import AboutDonate from './views/About/Donate'
 import AboutLinks from './views/About/Links'
 import NotFound from "@/views/NotFound";
-import AdvancedQuery from "@/views/AdvancedQuery";
-import DataDebugger from "@/components/debug/DataDebugger";
+// import AdvancedQuery from "@/views/AdvancedQuery";
+// import DataDebugger from "@/components/debug/DataDebugger";
 
 const originalPush = Router.prototype.push;
 Router.prototype.push = function push(location, onResolve, onReject) {
@@ -119,15 +119,15 @@ const router = new Router({
       }
     ]
   },
-  {
-    path: '/advanced',
-    name: 'AdvancedQuery',
-    component: AdvancedQuery,
-    meta: {
-      icon: 'mdi-database-search',
-      i18n: 'menu.stats.advanced'
-    },
-  },
+  // {
+  //   path: '/advanced',
+  //   name: 'AdvancedQuery',
+  //   component: AdvancedQuery,
+  //   meta: {
+  //     icon: 'mdi-database-search',
+  //     i18n: 'menu.stats.advanced'
+  //   },
+  // },
   {
     path: '/planner',
     name: 'Planner',
@@ -227,16 +227,16 @@ const router = new Router({
       externalRedirect: true
     }
   },
-  {
-    path: '/_internal/debugger/data',
-    name: 'DataDebugger',
-    component: DataDebugger,
-    meta: {
-      icon: 'mdi-file',
-      i18n: 'meta.notfound',
-      hide: true
-    }
-  },
+  // {
+  //   path: '/_internal/debugger/data',
+  //   name: 'DataDebugger',
+  //   component: DataDebugger,
+  //   meta: {
+  //     icon: 'mdi-file',
+  //     i18n: 'meta.notfound',
+  //     hide: true
+  //   }
+  // },
   {
     path: '*',
     name: 'ErrorNotFound',

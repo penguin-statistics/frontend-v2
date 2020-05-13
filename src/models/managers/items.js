@@ -4,8 +4,6 @@ import commons from './_common'
 const items = new ObjectManager({
   name: 'items',
   api: {
-    i18n: true,
-
     url: "/items",
   },
   transform: [

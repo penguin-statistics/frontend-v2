@@ -5,7 +5,6 @@ const stages = new ObjectManager({
   name: 'stages',
   api: {
     serverSensitive: true,
-    i18n: true,
 
     url: '/stages',
     extraParams: {
