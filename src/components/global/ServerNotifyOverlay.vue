@@ -4,11 +4,7 @@
     "switchedTo": "服务器已切换至"
 	},
 	"en": {
-    "switchedTo": "Server has been switched to"
-	},
-	"ja": {
-	},
-	"ko": {
+    "switchedTo": "Server switched to"
 	}
 }
 </i18n>
