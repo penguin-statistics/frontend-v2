@@ -138,7 +138,6 @@ Getters.trends = {
   byItemId(itemId) {
     let temp = {};
     let trends = this.all();
-    console.info("getting trends for item ", itemId)
     if (trends) {
       Object.keys(trends).map(key => {
         // if stage contains item
@@ -160,7 +159,6 @@ Getters.trends = {
     return temp;
   },
   byStageId(stageId) {
-    console.info("getting trends for stage", stageId, this.all()[stageId])
     // data has been already keyed with stageId. Just get it ;)
     return this.all() && this.all()[stageId];
   },
