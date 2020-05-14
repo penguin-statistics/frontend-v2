@@ -790,10 +790,13 @@ export default {
       return { 'slash-strip--warning': this.validation.rate <= 2, 'slash-strip--danger': this.validation.rate > 2 }
     },
     invalidStage () {
-      if (this.selected.zone) {
-        const got = get.zones.byZoneId(this.selected.zone);
-        if (!got || !got.zoneId) return "INVALID"
-        if (got.isOutdated) return "EXPIRED"
+      if (this.selected.zone && this.selected.stage) {
+        const zone = get.zones.byZoneId(this.selected.zone);
+        if (!zone || !zone.zoneId) return "INVALID"
+        if (zone.isOutdated) return "EXPIRED"
+
+        const stage = get.stages.byStageId(this.selected.stage);
+        if (!stage || !stage.stageId) return "INVALID"
       } else {
         return "INVALID"
       }

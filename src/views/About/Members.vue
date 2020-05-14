@@ -1,118 +1,118 @@
 <i18n>
-{
-	"en": {
-		"categories": {
-			"developers": "Developers",
-			"others": "Others",
-			"owner": "Webmaster",
-			"translators": "Translators"
-		},
-		"responsibilities": {
-			"arkplanner": "Author of ArkPlanner",
-			"backend": "Backend",
-			"bulkupload": "Bulk Upload",
-			"customersupport": "User Support",
-			"frontend": "Frontend",
-			"localization_ja": "Japanese Localization Provider",
-			"localization_ko": "Korean Localization Provider",
-			"logo": "Logo Designer",
-			"maintenance": "DevOps",
-			"materials": "Materials Supplier",
-			"statistics": "Statistics and Analysis"
-		},
-		"socials": {
-			"email": "Email",
-			"github": "GitHub",
-			"qq": "QQ",
-			"twitter": "Twitter",
-			"weibo": "Weibo"
-		}
-	},
-	"ja": {
-		"categories": {
-			"developers": "開発者",
-			"others": "その他",
-			"owner": "管理人",
-			"translators": "翻訳者"
-		},
-		"responsibilities": {
-			"arkplanner": "ArkPlannerの著者",
-			"backend": "バックエンド",
-			"bulkupload": "一括アップロード",
-			"customersupport": "顧客サービス",
-			"frontend": "フロントエンド",
-			"localization_ja": "日本語化",
-			"localization_ko": "韓国語化",
-			"logo": "ロゴデザイナー",
-			"maintenance": "DevOps",
-			"materials": "材料サプライヤー",
-			"statistics": "データ統計解析"
-		},
-		"socials": {
-			"email": "Email",
-			"github": "GitHub",
-			"qq": "QQ",
-			"twitter": "Twitter",
-			"weibo": "Weibo"
-		}
-	},
-	"ko": {
-		"categories": {
-			"developers": "개발자",
-			"others": "기타",
-			"owner": "관리자",
-			"translators": "번역가"
-		},
-		"responsibilities": {
-			"arkplanner": "명일방주 계획기 제작",
-			"backend": "백엔드",
-			"bulkupload": "대량의 보고서 제출",
-			"customersupport": "고객 지원",
-			"frontend": "프론트엔드",
-			"localization_ja": "일본 현지화 제공",
-			"localization_ko": "한국 현지화 제공",
-			"logo": "로고 디자이너",
-			"maintenance": "데브옵스",
-			"materials": "재료 이미지 제공",
-			"statistics": "분석 및 통계"
-		},
-		"socials": {
-			"email": "Email",
-			"github": "GitHub",
-			"qq": "QQ",
-			"twitter": "Twitter",
-			"weibo": "웨이보"
-		}
-	},
-	"zh": {
-		"categories": {
-			"developers": "开发者",
-			"others": "其他",
-			"owner": "站长",
-			"translators": "翻译"
-		},
-		"responsibilities": {
-			"arkplanner": "ArkPlanner 作者",
-			"backend": "后端",
-			"bulkupload": "批量上传",
-			"customersupport": "客服",
-			"frontend": "前端",
-			"localization_ja": "日语化",
-			"localization_ko": "韩语化",
-			"logo": "Logo 画师",
-			"maintenance": "运维",
-			"materials": "素材提供",
-			"statistics": "统计分析"
-		},
-		"socials": {
-			"email": "Email",
-			"github": "GitHub",
-			"qq": "QQ",
-			"twitter": "Twitter",
-			"weibo": "微博"
-		}
-	}
-}
+  {
+    "en": {
+      "categories": {
+        "developers": "Developers",
+        "others": "Others",
+        "owner": "Webmaster",
+        "translators": "Translators"
+      },
+      "responsibilities": {
+        "arkplanner": "Author of ArkPlanner",
+        "backend": "Backend",
+        "bulkupload": "Bulk Upload",
+        "customersupport": "User Support",
+        "frontend": "Frontend",
+        "localization_ja": "Japanese Localization Provider",
+        "localization_ko": "Korean Localization Provider",
+        "logo": "Logo Designer",
+        "maintenance": "DevOps",
+        "materials": "Materials Supplier",
+        "statistics": "Statistics and Analysis"
+      },
+      "socials": {
+        "email": "Email",
+        "github": "GitHub",
+        "qq": "QQ",
+        "twitter": "Twitter",
+        "weibo": "Weibo"
+      }
+    },
+    "ja": {
+      "categories": {
+        "developers": "開発者",
+        "others": "その他",
+        "owner": "管理人",
+        "translators": "翻訳者"
+      },
+      "responsibilities": {
+        "arkplanner": "ArkPlannerの著者",
+        "backend": "バックエンド",
+        "bulkupload": "一括アップロード",
+        "customersupport": "顧客サービス",
+        "frontend": "フロントエンド",
+        "localization_ja": "日本語化",
+        "localization_ko": "韓国語化",
+        "logo": "ロゴデザイナー",
+        "maintenance": "DevOps",
+        "materials": "材料サプライヤー",
+        "statistics": "データ統計解析"
+      },
+      "socials": {
+        "email": "Email",
+        "github": "GitHub",
+        "qq": "QQ",
+        "twitter": "Twitter",
+        "weibo": "Weibo"
+      }
+    },
+    "ko": {
+      "categories": {
+        "developers": "개발자",
+        "others": "기타",
+        "owner": "관리자",
+        "translators": "번역가"
+      },
+      "responsibilities": {
+        "arkplanner": "명일방주 계획기 제작",
+        "backend": "백엔드",
+        "bulkupload": "대량의 보고서 제출",
+        "customersupport": "고객 지원",
+        "frontend": "프론트엔드",
+        "localization_ja": "일본 현지화 제공",
+        "localization_ko": "한국 현지화 제공",
+        "logo": "로고 디자이너",
+        "maintenance": "데브옵스",
+        "materials": "재료 이미지 제공",
+        "statistics": "분석 및 통계"
+      },
+      "socials": {
+        "email": "Email",
+        "github": "GitHub",
+        "qq": "QQ",
+        "twitter": "Twitter",
+        "weibo": "웨이보"
+      }
+    },
+    "zh": {
+      "categories": {
+        "developers": "开发者",
+        "others": "其他",
+        "owner": "站长",
+        "translators": "翻译"
+      },
+      "responsibilities": {
+        "arkplanner": "ArkPlanner 作者",
+        "backend": "后端",
+        "bulkupload": "批量上传",
+        "customersupport": "客服",
+        "frontend": "前端",
+        "localization_ja": "日语化",
+        "localization_ko": "韩语化",
+        "logo": "Logo 画师",
+        "maintenance": "运维",
+        "materials": "素材提供",
+        "statistics": "统计分析"
+      },
+      "socials": {
+        "email": "Email",
+        "github": "GitHub",
+        "qq": "QQ",
+        "twitter": "Twitter",
+        "weibo": "微博"
+      }
+    }
+  }
 </i18n>
 
 <template>
@@ -205,7 +205,7 @@
   export default {
     name: 'Members',
     mixins: [CDN],
-    data () {
+    data() {
       return {
         profiles: {
           owner: [{
@@ -232,7 +232,9 @@
               ],
               avatar: "gg.png",
               socials: {
-                github: "https://github.com/GalvinGao"
+                github: "https://github.com/GalvinGao",
+                qq: "https://sighttp.qq.com/authd?IDKEY=19180d0365c9c1bdc56191cecdc6524eb938295d1d609625",
+                email: "mailto:me@galvingao.com"
               }
             },
             {
@@ -312,6 +314,7 @@
               ],
               avatar: "darkness.jpg",
               socials: {
+                github: "https://github.com/darknessWONG"
               }
             },
             {
@@ -439,7 +442,7 @@
         ]
       }
     },
-    mounted () {
+    mounted() {
       anime({
         targets: '.members--list-item',
         translateY: [48, 0],
@@ -458,17 +461,17 @@
       // })
     },
     methods: {
-      getSocial (id) {
+      getSocial(id) {
         return this.socials.find(v => v.id === id)
       },
-      renderResponsibility (responsibilities) {
+      renderResponsibility(responsibilities) {
         const translated = [];
         for (const responsibility of responsibilities) {
           translated.push(this.$t(`responsibilities.${responsibility}`))
         }
         return translated.join(this.$t('meta.separator'))
       },
-      avatar (src) {
+      avatar(src) {
         return this.cdnResource(`/avatars/${src}`)
       }
     }

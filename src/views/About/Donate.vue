@@ -3,10 +3,11 @@
 	"en": {
 		"donate": {
 			"donate_0": "Increasing number of users and server fees are putting Penguin Statistics into crisis. In order to protect our beloved Penguin Statistics, the webmaster decided to...",
-			"donate_1": "The number of users is increasing. The server is becoming overwhelmed. We will appreciate it a lot if Doctors can donate some",
-			"donate_2": "server fee.",
+			"donate_1": "There's now more than 100,000 users who visit Penguin Statistics every month, and the average Page View count has reached 300,000 per month. In order to let Penguin Statistics last long, please consider donating some",
+			"donate_2": "server fee",
 			"donate_3": "pocky or apple pie are also accepted",
-			"donate_4": " ",
+			"donate_4": ". We greatly appreciate your support!",
+      "accountBook": "Account Book",
 			"methods": {
 				"alipay": "Alipay",
 				"paypal": "Donate with PayPal",
@@ -48,10 +49,11 @@
 	"zh": {
 		"donate": {
 			"donate_0": "用户量激增，服务器月费上涨，企鹅数据的运营陷入了危机。站长红白为了保护喜爱的企鹅数据而决定...",
-			"donate_1": "随着访问量的增加，目前的小水管服务器已经有些不堪重负了。如果各位刀客塔能捐助一些",
+			"donate_1": "企鹅物流数据统计每月访问用户已达 10 万余人，平均访问量已达 30 万余次。为了企鹅物流可以维持收支平衡，各位刀客塔可以考虑捐赠一些",
 			"donate_2": "服务器费用",
 			"donate_3": "pocky、阿噗噜派也可",
 			"donate_4": "，我们将不胜感激!",
+			"accountBook": "查看收支一览",
 			"methods": {
 				"alipay": "支付宝",
 				"paypal": "使用 PayPal 捐助",
@@ -89,6 +91,23 @@
         </v-tooltip>
         {{ $t('donate.donate_4') }}
       </div>
+      <v-btn
+        color="blue-grey"
+        href="https://shimo.im/sheets/GJXgP9XQcPrj6rtg/2fC1m"
+        target="_blank"
+        class="mt-1"
+      >
+        <v-icon left>
+          mdi-bank-transfer
+        </v-icon>
+        {{ $t('donate.accountBook') }}
+        <v-icon
+          right
+          small
+        >
+          mdi-open-in-new
+        </v-icon>
+      </v-btn>
     </v-card-title>
 
     <svg
