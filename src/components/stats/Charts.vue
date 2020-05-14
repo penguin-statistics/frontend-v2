@@ -30,8 +30,11 @@
       :subtitle="$t('stats.trends.name')"
       @close="showDialog = false"
     >
-      <div
-        :id="computedChartsId"
+      <Plotly
+        v-if="showDialog"
+        :data="plotlyData.data"
+        :layout="plotlyData.layout"
+        v-bind="plotlyData.options"
         class="charts my-4"
       />
     </DialogCard>
@@ -39,14 +42,14 @@
 </template>
 
 <script>
-import Plotly from "@/vendors/plotly";
 import formatter from "@/utils/timeFormatter";
 import Theme from "@/mixins/Theme";
 import DialogCard from "@/components/global/DialogCard";
+import { Plotly } from "vue-plotly";
 
 export default {
   name: "Charts",
-  components: {DialogCard},
+  components: {DialogCard, Plotly},
   mixins: [Theme],
   props: {
     xStart: {
@@ -187,11 +190,9 @@ export default {
       } else {
         return null;
       }
-    }
-  },
-  watch: {
-    showDialog(value) {
-      if (value) {
+    },
+    plotlyData () {
+      if (this.showDialog) {
         const traceArray = Object.keys(this.yAxis).map(yAxisKey => {
           return {
             x: this.xAxis,
@@ -216,31 +217,30 @@ export default {
           name: this.$t('stats.trends.set.rate')
         });
 
-        let layout = {
-          // width: "500px",
-          // height: "500px",
-          yaxis: {
-            title: this.$t('stats.trends.set.sample'),
-            titlefont: { color: this.$vuetify.theme.currentTheme.accent2 },
-            tickfont: { color: this.$vuetify.theme.currentTheme.accent2 }
+        return {
+          data: traceArray,
+          layout: {
+            // width: "500px",
+            // height: "500px",
+            yaxis: {
+              title: this.$t('stats.trends.set.sample'),
+              titlefont: { color: this.$vuetify.theme.currentTheme.accent2 },
+              tickfont: { color: this.$vuetify.theme.currentTheme.accent2 }
+            },
+            yaxis2: {
+              title: this.$t('stats.trends.set.rate'),
+              titlefont: { color: this.$vuetify.theme.currentTheme.accent3 },
+              tickfont: { color: this.$vuetify.theme.currentTheme.accent3 },
+              overlaying: "y",
+              side: "right"
+            },
+            paper_bgcolor: this.$vuetify.theme.currentTheme.background,
+            plot_bgcolor: this.$vuetify.theme.currentTheme.background,
+            font: {
+              color: this.$vuetify.theme.currentTheme.text,
+            }
           },
-          yaxis2: {
-            title: this.$t('stats.trends.set.rate'),
-            titlefont: { color: this.$vuetify.theme.currentTheme.accent3 },
-            tickfont: { color: this.$vuetify.theme.currentTheme.accent3 },
-            overlaying: "y",
-            side: "right"
-          },
-          paper_bgcolor: this.$vuetify.theme.currentTheme.background,
-          plot_bgcolor: this.$vuetify.theme.currentTheme.background,
-          font: {
-            color: this.$vuetify.theme.currentTheme.text,
-          }
-        };
-
-        let data = traceArray;
-        this.$nextTick(function () {
-          Plotly.newPlot(this.computedChartsId, data, layout, {
+          options: {
             displayLogo: false,
             toImageButtonOptions: {
               format: 'png', // one of png, svg, jpeg, webp
@@ -249,8 +249,14 @@ export default {
               width: 1400,
               scale: 1 // Multiply title/legend/axis/canvas sizes by this factor
             }
-          });
-        })
+          }
+        }
+      } else {
+        return {
+          data: [],
+          layout: {},
+          options: {}
+        }
       }
     }
   },
