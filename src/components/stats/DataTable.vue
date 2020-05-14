@@ -189,10 +189,10 @@
             <Charts
               v-if="trends"
               :interval="trends && trends.interval"
-              :x-start="trends && trends.startTime"
+              :x-start="trends && getTrendsData(props).startTime"
               :show-dialog="expandTrends"
               :data-keys="['quantity']"
-              :data="currentTrendsData && currentTrendsData[chartId(props)]"
+              :data="getTrendsData(props).results"
               :charts-id="chartId(props)"
               sparkline-key="quantity"
               sparkline-sub-key="times"
@@ -345,12 +345,24 @@
       },
       strings () {
         return strings
-      },
-      currentTrendsData() {
-        return this.trends && this.trends.results;
       }
     },
     methods: {
+      getTrendsData(props) {
+        if (this.type === "stage") {
+          if (this.trends && this.trends.results && this.trends.results[props.item.item.itemId]) {
+            return {
+              results: this.trends.results[props.item.item.itemId],
+              startTime: this.trends.startTime
+            }
+          }
+        } else {
+          if (this.trends && props.item.stage.stageId in this.trends) {
+            return this.trends[props.item.stage.stageId]
+          }
+        }
+        return false
+      },
       redirectItem(itemId) {
         this.$router.push({
           name: "StatsByItem_SelectedItem",
