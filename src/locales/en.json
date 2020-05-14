@@ -297,5 +297,9 @@
       "action": "Upgrade",
       "unable": "Can't Upgrade?"
     }
+  },
+  "notice": {
+    "failed": "Failed to load notice: {error}",
+    "loading": "Loading Notice..."
   }
 }

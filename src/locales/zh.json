@@ -297,5 +297,9 @@
       "action": "升级",
       "unable": "无法升级？"
     }
+  },
+  "notice": {
+    "failed": "获取公告失败：{error}",
+    "loading": "正在加载公告"
   }
 }

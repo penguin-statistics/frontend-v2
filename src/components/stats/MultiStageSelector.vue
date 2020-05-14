@@ -1,7 +1,7 @@
 <template>
   <v-card>
     <v-card-title>
-      {{ $t('stage.selector.choose') }}
+      {{ $t('stage.selector.plannerExclude') }}
     </v-card-title>
     <div class="mx-6">
       <template v-for="category in categorizedZones">
@@ -25,7 +25,7 @@
           class="d-flex flex-column flex-sm-row mx-2 my-4"
         >
           <div
-            class="d-flex flex-column justify-center align-center text-right zone-title"
+            class="d-flex flex-column justify-center align-center text-center zone-title"
           >
             {{ translate(zone, 'zoneName') }}
           </div>

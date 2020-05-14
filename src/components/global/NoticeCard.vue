@@ -19,7 +19,7 @@
       class="mt-4 mb-0"
     >
       <span>
-        获取公告失败：{{ error }}
+        {{ $t('notice.failed', {error}) }}
       </span>
     </v-alert>
     <v-card
@@ -33,7 +33,7 @@
         :size="24"
       />
       <span class="ml-2">
-        正在加载公告
+        {{ $t('notice.loading') }}
       </span>
     </v-card>
     <div
