@@ -12,6 +12,6 @@ export default {
     })
   },
   async recallReport (submissionId) {
-    return service.post(`/report/recall?item_drop_hash_id=${submissionId}`)
+    return service.post("/report/recall", submissionId)
   }
 }
