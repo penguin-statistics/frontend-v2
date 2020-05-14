@@ -316,13 +316,6 @@
               class="px-4 py-2"
               @click="submit"
             >
-              <span>
-                {{ $t('report.submit') }}
-              </span>
-              <v-divider
-                vertical
-                class="mx-2"
-              />
               <div class="d-inline-flex align-center justify-center">
                 <v-icon small>
                   mdi-server
@@ -331,6 +324,13 @@
                   {{ serverName }}
                 </span>
               </div>
+              <v-divider
+                vertical
+                class="mx-2"
+              />
+              <span>
+                {{ $t('report.submit') }}
+              </span>
             </v-btn>
           </v-row>
         </v-col>

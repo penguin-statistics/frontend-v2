@@ -7,10 +7,10 @@
   "server": {
     "switch": "Switch Server",
     "servers": {
-      "CN": "China",
-      "US": "U.S.A.",
-      "JP": "Japan",
-      "KR": "Korea"
+      "CN": "CN",
+      "US": "US",
+      "JP": "JP",
+      "KR": "KR"
     }
   },
   "menu": {

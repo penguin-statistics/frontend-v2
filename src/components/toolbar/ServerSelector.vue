@@ -45,11 +45,20 @@
           :key="i"
           :disabled="pending"
         >
-          <v-list-item-title class="mr-2">
+          <v-list-item-title class="mr-2 monospace">
             {{ $t("server.servers." + server) }}
           </v-list-item-title>
-          <v-list-item-action v-if="activeServer === i">
-            <v-icon small>
+          <v-list-item-action v-if="activeServerId === server">
+            <v-progress-circular
+              v-if="pending"
+              indeterminate
+              :width="2"
+              :size="16"
+            />
+            <v-icon
+              v-else
+              small
+            >
               mdi-check
             </v-icon>
           </v-list-item-action>
