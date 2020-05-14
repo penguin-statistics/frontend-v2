@@ -151,15 +151,16 @@ Getters.trends = {
           // only include the current item data in the object
           temp[key]["results"] = trends[key]["results"][itemId];
           // copy all other values
-          temp[key]["interval"] = trends[key]["interval"];
           temp[key]["startTime"] = trends[key]["startTime"];
         }
       });
     }
+    console.log("getting trends byItemId", itemId, ": ", temp)
     return temp;
   },
   byStageId(stageId) {
     // data has been already keyed with stageId. Just get it ;)
+    console.log("getting trends byStageId ", stageId, ": ", this.all()[stageId])
     return this.all() && this.all()[stageId];
   },
   all() {
