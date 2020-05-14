@@ -3,8 +3,8 @@ module.exports = {
     '@vue/app'
   ],
   plugins: [
-    ["@babel/plugin-transform-modules-commonjs", {
-      loose: true
-    }]
+    // ["@babel/plugin-transform-modules-commonjs", {
+    //   loose: true
+    // }]
   ]
 }
