@@ -117,6 +117,7 @@
 
   export default {
     name: "QueryBuilder",
+    // eslint-disable-next-line vue/no-unused-components
     components: {QuerySelectorItem, QuerySelectorStage, QuerySelectorTimeRange, QuerySelectorServer},
     props: {
       value: {
