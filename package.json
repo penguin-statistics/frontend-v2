@@ -36,6 +36,8 @@
     "extract-domain": "^2.2.1",
     "intl-collator": "^0.1.6",
     "js-cookie": "^2.2.1",
+    "marked": "^1.0.0",
+    "plotly.js": "^1.54.1",
     "vue": "^2.6.10",
     "vue-analytics": "^5.22.1",
     "vue-i18n": "^8.0.0",

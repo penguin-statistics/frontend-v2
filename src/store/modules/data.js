@@ -1,41 +1,72 @@
 import Vue from 'vue';
-import itemsManager from '@/models/items'
-import limitationsManager from '@/models/limitations'
-import stagesManager from '@/models/stages'
-import zonesManager from '@/models/zones'
-// import trendsManager from '@/models/trends'
-import globalMatrixManager from '@/models/matrices/globalMatrix'
-import personalMatrixManager from '@/models/matrices/personalMatrix'
+import store from '@/store';
+import itemsManager from '@/models/managers/items'
+import stagesManager from '@/models/managers/stages'
+import zonesManager from '@/models/managers/zones'
+import trendsManager from '@/models/managers/trends'
+import globalMatrixManager from '@/models/managers/matrices/globalMatrix'
+import personalMatrixManager from '@/models/managers/matrices/personalMatrix'
+import strings from "@/utils/strings";
 
 export default {
   namespaced: true,
-  state: {},
+  state: {
+    meta: {
+      // current version
+      v: 2
+    },
+    data: {}
+  },
   mutations: {
-    store: (state, {key, value}) => {
-      Vue.set(state, key, value)
+    storeData: (state, {name, value, server}) => {
+      // this server has not stored any data, thus there's no such object. create one
+      if (!state.data[server]) Vue.set(state.data, server, {})
+
+      // store data into the corresponding object, keyed by the server ID
+      Vue.set(state.data[server], name, {
+        /** The data object last updated at time */
+        upd: Date.now(),
+        /** The content of the data object */
+        c: value
+      })
+    },
+    clearData: (state) => {
+      Vue.set(state, "data", {})
     }
   },
   actions: {
     // eslint-disable-next-line
-    async fetch({}, refresh = false) {
-      itemsManager.get(refresh);
-      limitationsManager.get(refresh);
-      stagesManager.get(refresh);
-      zonesManager.get(refresh);
-      globalMatrixManager.get(refresh);
-      personalMatrixManager.get(refresh)
-    // await trendsManager.get(refresh);
+    async fetch({commit}, refresh = false) {
+      if (refresh) commit("clearData")
+      itemsManager.refresh(refresh);
+      stagesManager.refresh(refresh);
+      zonesManager.refresh(refresh);
+      globalMatrixManager.refresh(refresh);
+      personalMatrixManager.refresh(refresh);
+      trendsManager.refresh(refresh);
     },
     async refreshPersonalMatrix() {
-      await personalMatrixManager.get(true)
+      await personalMatrixManager.refresh(true)
     }
   },
   getters: {
-    byKey: (state) => (id) => {
-      return state[id]
+    byDataId: (state) => ({id, server = store.getters["dataSource/server"]}) => {
+      if ("_shared" in state.data && id in state.data["_shared"]) return state.data["_shared"][id]
+      if (!(server in state.data) || !(id in state.data[server])) return {}
+
+      return state.data[server][id]
     },
-    length: (state) => {
-      return Object.keys(state).length;
+    content: (_, getters) => (query) => {
+      return getters.byDataId(query)["c"]
+    },
+    updated: (_, getters) => (query) => {
+      return getters.byDataId(query)["upd"]
+    },
+    stats: (state) => {
+      return {
+        size: strings.fileSize(JSON.stringify(state.data).length, true),
+        keys: Object.keys(state.data)
+      };
     }
   }
 };

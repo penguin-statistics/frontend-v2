@@ -1,80 +1,41 @@
 <i18n>
   {
-    "zh": {
-      "stage": {
-        "loots": {
-          "normal": "常规掉落",
-          "extra": "额外物资",
-          "special": "特殊掉落"
-        }
-      },
-      "report": {
-        "name": "上报结果",
-        "furniture": "家具掉落：{state}",
-        "submit": "提交",
-        "success": "上传成功",
-        "undo": "撤销",
-        "undoSuccess": "撤销成功",
-        "unable": "无法提交：",
-        "clear": "清空",
-        "expired": "此活动关卡已过期，汇报已关闭"
-      },
-      "rules": {
-        "rule_1": "这是单次作战的提交，请注意核对数目；",
-        "rule_2": "若无素材掉落，请直接点击提交；",
-        "rule_3": "请不要汇报首次通关奖励，不要只汇报比较“欧”的掉落；",
-        "rule_4": "请保证通关评价是3星；",
-        "rule_5": "请只上传国服的掉落，谢谢。"
-      },
-      "usage": "左键增加，右键减少",
-      "gacha": "本作战允许在一次汇报内包含多个结果。"
-    },
     "en": {
-      "stage": {
-        "loots": {
-          "normal": "Normal",
-          "extra": "Extra",
-          "special": "Special"
-        }
-      },
+      "gacha": "Multiple results are allowed for the reports of this stage.",
       "report": {
-        "name": "Report",
+        "clear": "Clear",
+        "closedReason": {
+          "INVALID": "Stage Not Found: The stage does not exist in the server you have selected.",
+          "EXPIRED": "Stage Report Closed: This activity stage has already been closed."
+        },
         "furniture": "Furniture Drop: {state}",
+        "name": "Report",
         "submit": "Submit",
         "success": "Successfully submitted",
-        "undo": "Recall",
-        "undoSuccess": "Successfully recalled submission",
-        "clear": "Clear",
         "unable": "Failed to submit: ",
-        "expired": "This stage is not available in-game anymore. The report function for this stage has been closed."
+        "undo": "Recall",
+        "undoSuccess": "Successfully recalled submission"
       },
       "rules": {
         "rule_1": "Report one clear at a time. Please double-check your drop selection.",
         "rule_2": "If there are no drops, click submit directly without selecting any drops.",
         "rule_3": "Please do not report the first-clear of a stage, and do not only report the clears where you were lucky - report all clears.",
-        "rule_4": "Please make sure that you get a 3-stars clear.",
+        "rule_4": "Please make sure that you refresh a 3-stars clear.",
         "rule_5": "Please only submit drop data from the CN server."
       },
-      "usage": "Increase drop amount by left mouse click, decrease by right click",
-      "gacha": "Multiple results are allowed for the reports of this stage."
+      "usage": "Increase drop amount by left mouse click, decrease by right click"
     },
     "ja": {
-      "stage": {
-        "loots": {
-          "normal": "通常ドロップ",
-          "extra": "エクストラドロップ",
-          "special": "スペシャルドロップ"
-        }
-      },
+      "gacha": "この操作を行うことでデータに複数の結果を反映させることが出来ます。",
       "report": {
-        "name": "報告",
+        "clear": "クリア",
         "furniture": "家具ドロップ：{state}",
+        "name": "報告",
         "submit": "送信",
         "success": "送信成功",
-        "undo": "送信キャンセル",
-        "undoSuccess": "キャンセルしました",
         "unable": "送信失敗：",
-        "clear": "クリア"
+        "undo": "送信キャンセル",
+        "undoSuccess": "キャンセルしました"
       },
       "rules": {
         "rule_1": "ここに追加する内容は1回でドロップした内容です。",
@@ -83,26 +44,19 @@
         "rule_4": "クリア時の評価が☆3である場合のみ報告してください。",
         "rule_5": "大陸版のドロップデータのみをアップロードして下さい。ご協力ありがとうございます。"
       },
-      "usage": "左クリックで個数増加、右クリックで個数減少",
-      "gacha": "この操作を行うことでデータに複数の結果を反映させることが出来ます。"
+      "usage": "左クリックで個数増加、右クリックで個数減少"
     },
     "ko": {
-      "stage": {
-        "loots": {
-          "normal": "일반 드랍",
-          "extra": "추가 드랍",
-          "special": "특수 드랍"
-        }
-      },
+      "gacha": "이 작전지역은 여러 개의 결과를 한 보고서에 제출할 수 있습니다.",
       "report": {
-        "name": "보고",
+        "clear": "초기화",
         "furniture": "럭키 드랍: {state}",
+        "name": "보고",
         "submit": "제출",
         "success": "성공적으로 제출되었습니다",
+        "unable": "제출 실패: ",
         "undo": "제출 취소",
-        "undoSuccess": "성공적으로 취소되었습니다",
-        "clear": "초기화",
-        "unable": "제출 실패: "
+        "undoSuccess": "성공적으로 취소되었습니다"
       },
       "rules": {
         "rule_1": "한 번에 하나의 전투에 대한 보고서를 작성하여야 합니다, 제출 전에 입력 내용을 한번 더 확인해 주십시오.",
@@ -111,8 +65,32 @@
         "rule_4": "3성으로 클리어하여 주십시오.",
         "rule_5": "중국 서버에서의 드랍만 보고하여 주십시오, 감사합니다."
       },
-      "usage": "왼쪽 클릭시 증가하며, 오른쪽 클릭시 감소합니다",
-      "gacha": "이 작전지역은 여러 개의 결과를 한 보고서에 제출할 수 있습니다."
+      "usage": "왼쪽 클릭시 증가하며, 오른쪽 클릭시 감소합니다"
+    },
+    "zh": {
+      "gacha": "本作战允许在一次汇报内包含多个结果。",
+      "report": {
+        "clear": "清空",
+        "closedReason": {
+          "EXPIRED": "关卡汇报已关闭：活动关卡已结束",
+          "INVALID": "关卡不存在：此关卡未在所选服务器上提供"
+        },
+        "furniture": "家具掉落：{state}",
+        "name": "上报结果",
+        "submit": "提交",
+        "success": "上传成功",
+        "unable": "无法提交：",
+        "undo": "撤销",
+        "undoSuccess": "撤销成功"
+      },
+      "rules": {
+        "rule_1": "这是单次作战的提交，请注意核对数目；",
+        "rule_2": "若无素材掉落，请直接点击提交；",
+        "rule_3": "请不要汇报首次通关奖励，不要只汇报比较“欧”的掉落；",
+        "rule_4": "请保证通关评价是3星；",
+        "rule_5": "请只上传国服的掉落，谢谢。"
+      },
+      "usage": "左键增加，右键减少"
     }
   }
 </i18n>
@@ -161,7 +139,7 @@
           text
           @click="submitted = false"
         >
-          {{ $t('dialog.close') }}
+          {{ $t('meta.dialog.close') }}
         </v-btn>
       </v-row>
     </v-snackbar>
@@ -181,7 +159,7 @@
         text
         @click="undoed = false"
       >
-        {{ $t('dialog.close') }}
+        {{ $t('meta.dialog.close') }}
       </v-btn>
     </v-snackbar>
 
@@ -193,12 +171,16 @@
       class="pa-3"
       @select="select"
     >
-      <v-card class="bkop-light pa-2">
+      <v-card
+        v-if="selected.stage"
+        class="bkop-light pa-2"
+      >
         <v-overlay
           :opacity="0.75"
           absolute
-          :value="invalidPath"
-          :class="{'slash-strip--warning-transparent': invalidPath}"
+          :value="invalidStage"
+          :class="{'slash-strip--warning-transparent': invalidStage}"
+          z-index="4"
         >
           <v-row
             align="center"
@@ -213,7 +195,7 @@
               mdi-cancel
             </v-icon>
             <span class="title">
-              {{ $t('report.expired') }}
+              {{ $t('report.closedReason.' + invalidStage) }}
             </span>
           </v-row>
         </v-overlay>
@@ -224,7 +206,7 @@
         >
           <h1 class="title no-wrap--text">
             <span class="overline">{{ strings.translate(selectedZone, "zoneName") }}</span>
-            {{ selectedStage.code }}
+            {{ strings.translate(selectedStage, "code") }}
           </h1>
           <v-spacer />
           <v-btn
@@ -281,17 +263,17 @@
         </v-alert>
 
         <v-container
-          v-for="stage in stageItems"
-          :key="stage.id"
+          v-for="category in stageItems"
+          :key="category.id"
           fluid
           class="py-0"
         >
           <v-subheader class="pl-2">
-            {{ $t('stage.loots.' + stage.id) }}
+            {{ $t('stage.loots.' + category.id) }}
             <v-divider class="ml-4" />
           </v-subheader>
           <span
-            v-for="item in stage.drops"
+            v-for="item in category.drops"
             :key="item.itemId"
             class="py-1 px-1 d-inline-block"
           >
@@ -299,9 +281,9 @@
             <!--                    {{ item.name }}-->
             <!--                  </h5>-->
             <ItemStepper
-              :item="item"
+              :item="item.item"
               :bus="eventBus"
-              @change="handleChange"
+              @change="(e) => handleChange(category.id, e)"
             />
           </span>
         </v-container>
@@ -310,7 +292,7 @@
           <v-switch
             v-model="furniture"
             color="primary"
-            :label="$t('report.furniture', {state: $t(`hasNorNot.${furniture}`)})"
+            :label="$t('report.furniture', {state: $t(`meta.hasNorNot.${furniture}`)})"
             class="mb-5 pb-0"
             hide-details
           />
@@ -334,7 +316,21 @@
               class="px-4 py-2"
               @click="submit"
             >
-              {{ $t('report.submit') }}
+              <div class="d-inline-flex align-center justify-center">
+                <v-icon small>
+                  mdi-server
+                </v-icon>
+                <span class="caption ml-1">
+                  {{ serverName }}
+                </span>
+              </div>
+              <v-divider
+                vertical
+                class="mx-2"
+              />
+              <span>
+                {{ $t('report.submit') }}
+              </span>
             </v-btn>
           </v-row>
         </v-col>
@@ -355,95 +351,104 @@
         </v-card-title>
 
         <v-card-text class="mt-4">
-          <p v-if="results.length">
+          <div
+            v-if="results.length"
+            class="d-flex flex-column"
+          >
             <span>
               {{ $t('report.alert.causes.limitation') }}
             </span>
-            <v-expansion-panels
-              class="mt-4"
-              popout
-            >
-              <v-expansion-panel>
-                <v-expansion-panel-header>
-                  {{ $t('meta.details') }}
-                </v-expansion-panel-header>
-                <v-expansion-panel-content class="px-0">
-                  <v-list
-                    v-if="validation.type"
-                    two-line
-                    subheader
-                  >
-                    <v-subheader>
-                      {{ $t('report.rules.type._name') }}
-                    </v-subheader>
-                    <v-list-item>
-                      <v-list-item-avatar>
-                        <v-icon>mdi-alert-circle-outline</v-icon>
-                      </v-list-item-avatar>
-                      <v-list-item-content>
-                        <v-list-item-title>
-                          {{ $t('report.rules.type.now', {quantity: validation.type.quantity}) }}
-                        </v-list-item-title>
-                        <v-list-item-subtitle>
-                          {{ validation.type.message }}
-                        </v-list-item-subtitle>
-                      </v-list-item-content>
-                    </v-list-item>
-                  </v-list>
-                  <v-divider v-if="validation.type && validation.item.length" />
-                  <v-list
-                    v-if="validation.item.length"
-                    two-line
-                    subheader
-                  >
-                    <v-subheader>
-                      {{ $t('report.rules.item._name') }}
-                    </v-subheader>
-                    <v-list-item
-                      v-for="item in validation.item"
-                      :key="item.id"
-                    >
-                      <v-list-item-avatar>
-                        <Item
-                          :item="getItem(item.id)"
-                          :ratio="0.5"
-                          disable-tooltip
-                          disable-link
-                        />
-                      </v-list-item-avatar>
-                      <v-list-item-content>
-                        <v-list-item-title>
-                          {{ $t('report.rules.item.now', {item: strings.translate(getItem(item.id), "name"), quantity: item.quantity}) }}
-                        </v-list-item-title>
-                        <v-list-item-subtitle>
-                          {{ item.message }}
-                        </v-list-item-subtitle>
-                      </v-list-item-content>
-                    </v-list-item>
-                  </v-list>
-                </v-expansion-panel-content>
-              </v-expansion-panel>
-            </v-expansion-panels>
-          </p>
+            <Subheader>
+              {{ $t('meta.details') }}
+            </Subheader>
+            <v-card class="pa-1">
+              <v-list
+                v-if="validation.type.length"
+                two-line
+                subheader
+              >
+                <v-subheader>
+                  {{ $t('report.rules.type._name') }}
+                </v-subheader>
+
+                <v-list-item
+                  v-for="type in validation.type"
+                  :key="type.type"
+                >
+                  <v-list-item-avatar>
+                    <v-icon>mdi-alert-circle-outline</v-icon>
+                  </v-list-item-avatar>
+                  <v-list-item-content>
+                    <v-list-item-title class="v-list--force-line-break">
+                      {{ $t('report.rules.type.now', type.extras) }}
+                    </v-list-item-title>
+                    <v-list-item-subtitle class="v-list--force-line-break">
+                      {{ type.message }}
+                    </v-list-item-subtitle>
+                  </v-list-item-content>
+                </v-list-item>
+              </v-list>
+              <v-divider
+                v-if="validation.type.length && validation.item.length"
+                class="mx-4"
+              />
+              <v-list
+                v-if="validation.item.length"
+                two-line
+                subheader
+              >
+                <v-subheader>
+                  {{ $t('report.rules.item._name') }}
+                </v-subheader>
+                <v-list-item
+                  v-for="item in validation.item"
+                  :key="`${item.extras.stage}--${item.itemId}`"
+                >
+                  <v-list-item-avatar>
+                    <Item
+                      :item="getItem(item.itemId)"
+                      :ratio="0.5"
+                      disable-tooltip
+                      disable-link
+                    />
+                  </v-list-item-avatar>
+                  <v-list-item-content>
+                    <v-list-item-title class="v-list--force-line-break">
+                      {{ $t('report.rules.item.now', item.extras) }}
+                    </v-list-item-title>
+                    <v-list-item-subtitle class="v-list--force-line-break">
+                      {{ item.message }}
+                    </v-list-item-subtitle>
+                  </v-list-item-content>
+                </v-list-item>
+              </v-list>
+            </v-card>
+          </div>
+
+
           <p v-if="!results.length">
             {{ $t('report.alert.causes.noDrop') }}
           </p>
 
-          <blockquote
+          <p
             v-if="results.length"
-            class="blockquote"
+            class="subtitle-1 mt-4"
           >
             {{ $t('report.alert.contact.before') }}
 
-            <span
-              class="font-weight-black cursor-pointer"
-              @click="goToPage('AboutContact')"
+            <v-btn
+              class="font-weight-bold"
+              small
+              color="blue"
+              rounded
+              outlined
+              :to="{name: 'AboutContact'}"
             >
               {{ $t('report.alert.contact.activator') }}
-            </span>
+            </v-btn>
 
             {{ $t('report.alert.contact.after') }}
-          </blockquote>
+          </p>
 
           <p class="subtitle-1">
             {{ $t('report.alert.continue.first') }}
@@ -458,7 +463,7 @@
             text
             @click="dialogs.first.enabled = false"
           >
-            {{ $t('dialog.cancel') }}
+            {{ $t('meta.dialog.cancel') }}
           </v-btn>
           <v-spacer />
           <v-btn
@@ -466,7 +471,7 @@
             text
             @click="dialogs.repeat.enabled = true"
           >
-            {{ $t('dialog.confirm') }}
+            {{ $t('meta.dialog.confirm') }}
           </v-btn>
         </v-card-actions>
       </v-card>
@@ -495,7 +500,7 @@
             text
             @click="closeAllDialogs"
           >
-            {{ $t('dialog.cancel') }}
+            {{ $t('meta.dialog.cancel') }}
           </v-btn>
           <v-spacer />
           <v-btn
@@ -503,7 +508,7 @@
             text
             @click="confirmSubmit"
           >
-            {{ $t('dialog.confirm') }}
+            {{ $t('meta.dialog.confirm') }}
           </v-btn>
         </v-card-actions>
       </v-card>
@@ -521,19 +526,25 @@ import Cookies from 'js-cookie';
 import strings from "@/utils/strings";
 import StageSelector from "@/components/stats/StageSelector";
 import snackbar from "@/utils/snackbar";
+import Subheader from "@/components/global/Subheader";
+
+const categories = [
+  "NORMAL_DROP",
+  "EXTRA_DROP",
+  "SPECIAL_DROP",
+];
 
 export default {
   name: "Report",
-  components: { StageSelector, ItemStepper, Item },
+  components: {Subheader, StageSelector, ItemStepper, Item },
   data: () => ({
-    invalidPath: false,
     snackbar: false,
     submitting: false,
     undoing: false,
     lastSubmissionId: null,
     undoed: false,
     results: [],
-    furniture: false,
+    furnitureInternal: false,
     invalidCount: 0,
     eventBus: new Vue(),
     submitted: false,
@@ -555,83 +566,120 @@ export default {
     }
   }),
   computed: {
+    serverName() {
+      return this.$t('server.servers.' + this.$store.getters["dataSource/server"])
+    },
     strings() {
       return strings
     },
     selectedZone () {
-      if (!this.selected.zone) return [];
+      if (!this.selected.zone) return {};
       return get.zones.byZoneId(this.selected.zone);
     },
     selectedStage () {
-      if (!this.selected.stage) return [];
+      if (!this.selected.stage) return {};
       return get.stages.byStageId(this.selected.stage);
     },
-    stageItems() {
-      if (!this.selected.stage) return [];
+    furniture: {
+      get () {
+        return this.furnitureInternal
+      },
+      set (val) {
+        if (val === true) {
+          this.results.push({
+            dropType: "FURNITURE",
+            itemId: "furni",
+            quantity: 1
+          });
+        } else if (val === false) {
+          this.results = this.results.filter(el => el.dropType !== "FURNITURE" && el.itemId !== "furni")
+        }
+      }
+    },
+    dropInfos() {
+      const dropInfos = {
+        type: [],
+        item: []
+      };
+
       const stages = this.selectedStage;
+      if (!this.selectedZone || this.invalidStage || !this.selectedZone.zoneId) return null;
+
+      for (const drop of stages["dropInfos"]) {
+        if (drop["itemId"]) {
+          dropInfos.item.push({
+            ...drop,
+            item: get.items.byItemId(drop["itemId"])
+          })
+        } else {
+          // when an itemId is not presented, a category drop bound is described.
+          dropInfos.type.push(drop)
+        }
+      }
+
+      dropInfos.item.sort((a, b) => a.item.sortId - b.item.sortId);
+
+      return dropInfos
+    },
+
+    stageItems () {
+      if (this.invalidStage) return []
+
       const items = [];
-      const categories = [{
-        i18n: "normal",
-        value: "normalDrop"
-      }, {
-        i18n: "extra",
-        value: "extraDrop"
-      }, {
-        i18n: "special",
-        value: "specialDrop"
-      }];
 
-      for (let category of categories) {
-        const dropIds = stages[category.value];
+      for (const category of categories) {
+        const categoryDrops = [];
 
-        // skip the category where it is not having any drop
-        if (dropIds.length === 0) continue;
+        for (const itemDropInfo of this.dropInfos.item.filter(v => v["dropType"] === category)) {
+          const dropType = itemDropInfo["dropType"]
+          if (dropType === "FURNITURE") continue
+          if (!(dropType in items)) this.$set(items, dropType , [])
 
-        const drops = [];
-        for (let drop of dropIds) {
-          drops.push(get.items.byItemId(drop))
+          categoryDrops.push(itemDropInfo)
         }
 
-        drops.sort((a, b) => a.sortId - b.sortId);
+        if (categoryDrops.length === 0) continue
 
         items.push({
-          id: category.i18n,
-          drops
+          id: category,
+          drops: categoryDrops
         })
       }
+
       return items
     },
 
     isGacha () {
-      return this.selected.stage && get.stages.byStageId(this.selected.stage).isGacha
+      return this.selected.stage && this.selectedStage["isGacha"]
     },
 
     /**
      * @typedef {{lower: number, upper: number, exceptions: number[]}} Limitation
-     * @typedef {{id: string, quantity: number, limitation: Limitation, rate: number, message: string}} ItemOutlier
-     * @typedef {{quantity: number, limitation: Limitation, rate: number, message: string}|null} TypeOutlier
-     * @returns {{item: ItemOutlier[], type: TypeOutlier}} returns item data outliers and type data outliers in the whole dataset, respectively
+     * @typedef {{itemId: string, type: string, quantity: number, limitation: Limitation, rate: number, message: string}} ItemOutlier
+     * @typedef {{type: string, quantity: number, limitation: Limitation, rate: number, message: string}|null} TypeOutlier
+     * @returns {{item: ItemOutlier[], type: TypeOutlier[], rate: number}} returns item data outliers and type data outliers in the whole dataset, respectively
      */
     validation() {
       // initiate the array that will be storing every data outlier
       /** @type ItemOutlier[] */
       const itemOutliers = [];
 
-      /** @type TypeOutlier */
-      let typeOutlier = null;
+      /** @type TypeOutlier[] */
+      const typeOutliers = [];
 
-      if (!this.selected.stage) return { item: itemOutliers, type: typeOutlier, rate: 0 };
+      const nullValidation = { item: itemOutliers, type: typeOutliers, rate: 0 };
+
+      if (!this.selectedZone || this.invalidStage) return nullValidation;
 
       /**
        * validate the quantity using their corresponding rule
-       * @returns {String|boolean} error message or success
        */
       function validate(rules, quantity) {
         for (const rule of rules) {
           const evaluation = rule(quantity);
           if (evaluation !== true) return evaluation
         }
-        return true
+        return [true, {}]
       }
 
       /**
@@ -646,79 +694,128 @@ export default {
         return upper + lower;
       }
 
-      // check for item outlier
-      for (const item of this.results) {
-        // if the item is not having a limitation record then skip it
-        if (!this.limitation["itemQuantityBounds"].find(v => v["itemId"] === item.itemId)) continue;
-        const [rules, limitation] = this.generateVerificationRule("item", item.itemId);
-        const validation = validate(rules, item.quantity);
+      // loop the candidate results that user provided
+      for (const result of this.results) {
+        // generate rules. rules: Function[]; limitation: the bounds
+        const {rules, limitation} = this.generateVerificationRule("item", result)
+
+        if (limitation === null) return {
+          error: "EMPTY_RULE",
+          ...nullValidation
+        }
+
+        const quantity = result.quantity;
+
+        // execute validation rules.
+        const [validation, extras] = validate(rules, quantity);
+
+        // if validation fails on a rule
         if (validation !== true) {
-          const rate = calculateOutlierRate(limitation, item.quantity);
+          // calculate the outlier rate based on the bounds and current value
+          // e.g. [0, 3), 6: will get 1 (outlier value 100%)
+          const rate = calculateOutlierRate(limitation, result.quantity);
+
+          // store this outlier
           itemOutliers.push({
-            id: item.itemId,
-            quantity: item.quantity,
+            itemId: result.itemId,
+            type: result.dropType,
+            quantity,
             limitation,
             rate,
-            message: validation
+            message: validation,
+            extras
           })
         }
       }
 
-      // check for type outlier
-      if (!this.isGacha && this.limitation["itemTypeBounds"]) {
-        const [rules, limitation] = this.generateVerificationRule("type");
-        const quantity = this.results.length;
-        const validation = validate(rules, quantity);
+      // loop the type declarations (dropType limitations)
+      for (const dropType of categories) {
+        // generate rules
+        const {rules, limitation} = this.generateVerificationRule("type", {
+          dropType
+        })
+
+        if (limitation === null) return {
+          error: "EMPTY_RULE",
+          ...nullValidation
+        }
+
+        const quantity = this.results
+          .filter(el => el["dropType"] === dropType)
+          .length;
+
+        // execute validation rules.
+        const [validation, extras] = validate(rules, quantity);
+
+        // if validation fails on a rule
         if (validation !== true) {
-          let rate = calculateOutlierRate(limitation, quantity);
-          typeOutlier = {
+          // calculate the outlier rate based on the bounds and current value
+          // e.g. [0, 3), 6: will get 1 (outlier value 100%)
+          const rate = calculateOutlierRate(limitation, quantity);
+
+          // store this outlier
+          typeOutliers.push({
+            type: dropType,
             quantity,
             limitation,
             rate,
-            message: validation
-          }
+            message: validation,
+            extras
+          })
         }
       }
 
       // calculate total outlier rate
-      const itemRatesInitial = 0;
       const itemRates = itemOutliers.reduce(
         (accumulator, current) => accumulator + current.rate,
-        itemRatesInitial
+        0
       );
-      const totalRates = itemRates + (typeOutlier ? typeOutlier.rate : 0);
+      const typeRates = typeOutliers.reduce(
+        (accumulator, current) => accumulator + current.rate,
+        0
+      );
+      const totalRates = itemRates + typeRates;
 
       return {
         item: itemOutliers,
-        type: typeOutlier,
+        type: typeOutliers,
         rate: totalRates
       }
     },
     valid() {
       const { item, type } = this.validation;
-      return item.length === 0 && type === null
-    },
-    limitation() {
-      if (!this.selected.stage) return {};
-      return get.limitations.byStageId(this.selected.stage)
+      return item.length === 0 && type.length === 0
     },
     slashStripClasses() {
       return { 'slash-strip--warning': this.validation.rate <= 2, 'slash-strip--danger': this.validation.rate > 2 }
+    },
+    invalidStage () {
+      if (this.selected.zone && this.selected.stage) {
+        const zone = get.zones.byZoneId(this.selected.zone);
+        if (!zone || !zone.zoneId) return "INVALID"
+        if (zone.isOutdated) return "EXPIRED"
+
+        const stage = get.stages.byStageId(this.selected.stage);
+        if (!stage || !stage.stageId) return "INVALID"
+      } else {
+        return "INVALID"
+      }
+      return false
     }
   },
-  created () {
-    this.validateZone(this.$route.params.zoneId)
-  },
+  // created () {
+  //   this.validateZone(this.$route.params.zoneId)
+  // },
   methods: {
-    validateZone (zoneId) {
-      if (zoneId) {
-        const got = get.zones.byZoneId(zoneId);
-        if (got.isOutdated) {
-          return this.invalidPath = true;
-        }
-      }
-      return this.invalidPath = false;
-    },
+    // validateZone (zoneId) {
+    //   if (zoneId) {
+    //     const got = get.zones.byZoneId(zoneId);
+    //     if (!got || got.isOutdated) {
+    //       return this.invalidPath = true;
+    //     }
+    //   }
+    //   return this.invalidPath = false;
+    // },
     goToPage(name) {
       this.$router.push({ name: name })
     },
@@ -726,24 +823,24 @@ export default {
       this.reset();
       this.selected.zone = zone;
       this.selected.stage = stage;
-      this.validateZone(zone);
     },
     getItem(itemId) {
       return get.items.byItemId(itemId)
     },
-    handleChange([itemId, diff]) {
-      let item = this.getOrCreateItem(itemId);
+    handleChange(dropType, [itemId, diff]) {
+      let item = this.getOrCreateItem(dropType, itemId);
       item.quantity += diff;
-      item.quantity <= 0 && (this.results = this.results.filter(v => v.itemId !== item.itemId))
+      item.quantity <= 0 && (this.results.splice(this.results.indexOf(item), 1))
     },
-    getOrCreateItem(itemId) {
-      const item = this.results.find(v => v.itemId === itemId);
+    getOrCreateItem(dropType, itemId) {
+      const item = this.results.find(v => v.itemId === itemId && v.dropType === dropType);
       if (item === undefined) {
-        this.results.push({
+        const newLength = this.results.push({
+          dropType,
           itemId,
           quantity: 0
         });
-        return this.results.find(v => v.itemId === itemId)
+        return this.results[newLength - 1];
       }
       return item
     },
@@ -767,7 +864,6 @@ export default {
       report.submitReport({
         stageId: this.selected.stage,
         drops: this.results,
-        furnitureNum: this.furniture ? 1 : 0
       })
       .then(({data}) => {
         const reportedUserId = Cookies.get('userID');
@@ -804,46 +900,90 @@ export default {
       this.dialogs.first.enabled = false;
       this.dialogs.repeat.enabled = false
     },
-    generateVerificationRule(type, value = null) {
-      const isItemType = type === "item";
+    generateVerificationRule(type, query) {
+      if (this.invalidStage || !this.dropInfos) return {
+        rules: [
+          () => {
+            return () => {
+              return true
+            }
+          }
+        ],
+        limitation: {}
+      }
+
       let limitation;
-      if (isItemType) {
-        limitation = this.limitation["itemQuantityBounds"].find(v => v["itemId"] === value)["bounds"];
+      let verificationResponse = {
+        stage: this.$t(`stage.loots.${query["dropType"]}`)
+      };
+      // console.log("generating verification rule for", type, query)
+      if (type === "item") {
+        limitation = this.dropInfos.item
+          .find(v => v["itemId"] === query["itemId"] && v["dropType"] === query["dropType"])["bounds"];
+
+        verificationResponse = {
+          ...verificationResponse,
+          item: strings.translate(this.getItem(query["itemId"]), "name")
+        }
       } else if (type === "type") {
-        limitation = this.limitation["itemTypeBounds"]
-      }
-      if (!limitation) {
-        return [];
+        limitation = this.dropInfos.type
+          .find(v => v["dropType"] === query["dropType"])["bounds"]
+
+      } else {
+        throw new TypeError(`generateVerificationRule: Invalid argument ${type}`)
       }
 
-      const itemResponse = isItemType ? { item: strings.translate(this.getItem(value), "name") } : {};
+      // can't found drop info based on the queries, means it should be zero/not presenting.
+      if (!limitation) return {
+        rules: [
+          () => {
+            return () => {
+              return this.$t(`report.rules.null`, {type})
+            }
+          }
+        ],
+        limitation
+      };
 
+      // rule declarations
+
+      // greater than or equal to
       const gte = (value) => {
         return (compare) => {
-          const response = { ...itemResponse, quantity: Array.isArray(value) ? value.join(", ") : value };
-          return compare >= value ? true : this.$t(`report.rules.${type}.gte`, response)
+          const response = { ...verificationResponse, quantity: compare, should: value };
+          return compare >= value ? true : [this.$t(`report.rules.${type}.gte`, response), response]
         }
       };
 
+      // less than or equal to
       const lte = (value) => {
         return (compare) => {
-          const response = { ...itemResponse, quantity: Array.isArray(value) ? value.join(", ") : value };
-          return compare <= value ? true : this.$t(`report.rules.${type}.lte`, response)
+          const response = { ...verificationResponse, quantity: compare, should: value };
+          return compare <= value ? true : [this.$t(`report.rules.${type}.lte`, response), response]
         }
       };
 
+      // not including
       const notIncludes = (values) => {
         return (compare) => {
-          const response = { ...itemResponse, quantity: Array.isArray(value) ? value.join(", ") : value };
-          return values.indexOf(compare) === -1 ? true : this.$t(`report.rules.${type}.not`, response)
+          const response = { ...verificationResponse, quantity: compare, should: values.join(",") };
+          return values.indexOf(compare) === -1 ? true : [this.$t(`report.rules.${type}.not`, response), response]
         }
       };
 
-      return [[
-        gte(limitation.lower),
-        lte(limitation.upper),
-        notIncludes(limitation.exceptions)
-      ], limitation]
+      // compose generation
+      const generated = {
+        rules: [
+          gte(limitation.lower),
+          lte(limitation.upper),
+        ],
+        limitation
+      }
+
+      // if there's limitation then we also need to verify the notIncludes.
+      if (limitation.exceptions) generated.rules.push(notIncludes(limitation.exceptions))
+
+      return generated
     }
   }
 }
@@ -861,4 +1001,8 @@ export default {
 .round {
   border-radius: 4px;
 }
+
+  .v-list--force-line-break {
+    white-space: normal;
+  }
 </style>

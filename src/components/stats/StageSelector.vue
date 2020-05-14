@@ -23,7 +23,7 @@
           v-if="step > 1"
           class="mt-2"
         >
-          {{ selectedStage.code || '' }}
+          {{ strings.translate(selectedStage, "code") }}
         </small>
       </v-stepper-step>
 
@@ -116,7 +116,7 @@
                       v-if="zone.isActivity"
                       class="caption mx-1 mt-3 mb-2"
                     >
-                      {{ genActivityTime(zone.activityActiveTime) }}
+                      {{ genActivityTime(zone) }}
                     </div>
                     <div class="pt-2">
                       <StageCard
@@ -124,7 +124,7 @@
                         :key="stage.stageId"
                         :stage="stage"
 
-                        @click.native="selectStage(zone.zoneId, stage.stageId, stage.code)"
+                        @click.native="selectStage(zone.zoneId, stage.stageId)"
                       />
                     </div>
                   </v-expansion-panel-content>
@@ -142,7 +142,7 @@
           v-if="!$vuetify.breakpoint.xs"
           class="stage-id--background font-weight-black display-4 px-12 py-6"
         >
-          {{ selectedStage.code || "" }}
+          {{ strings.translate(selectedStage, "code") }}
         </span>
         <slot />
       </v-stepper-content>
@@ -253,11 +253,13 @@
           for (const category of categories) {
             let filter;
             let zones = get.zones.byType(category.startsWith("ACTIVITY") ? "ACTIVITY" : category);
+
             if (category === "ACTIVITY_OPEN") {
               filter = zone => !zone.isOutdated;
             } else if (category === "ACTIVITY_CLOSED") {
               filter = zone => zone.isOutdated;
             }
+
             if (filter) zones = zones.filter(filter);
 
             if (this.lowData) {
@@ -322,8 +324,8 @@
           this.selected.stage = null;
         }
       },
-      genActivityTime (message) {
-        return message[0] === message[1] ? this.$t('zone.status.permanentOpen') : this.$t('zone.opensAt', message)
+      genActivityTime (zone) {
+        return zone.isPermanentOpen ? this.$t('zone.status.permanentOpen') : this.$t('zone.opensAt', zone.activityActiveTime)
       }
     },
   }
@@ -348,7 +350,7 @@
   text-align: right;
 }
   .theme--light .stage-id--background {
-    color: rgba(0, 0, 0, .075);
+    color: rgba(0, 0, 0, .3);
   }
 
   .stage-card--background {

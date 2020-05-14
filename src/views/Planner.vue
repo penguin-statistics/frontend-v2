@@ -293,8 +293,8 @@
             @click="calculation.done = false"
           >
             <v-divider style="opacity: 0.3" />
-            <span class="mx-4">
-              <v-icon left>mdi-close</v-icon>{{ $t('dialog.close') }}
+            <span class="mx-4 d-flex align-center">
+              <v-icon left>mdi-close</v-icon>{{ $t('meta.dialog.close') }}
             </span>
             <v-divider style="opacity: 0.3" />
           </v-btn>
@@ -722,7 +722,7 @@
             this.calculation.done = true
           })
           .catch((err) => {
-            Console.error("Planner", "failed to get plan", err)
+            Console.error("Planner", "failed to refresh plan", err)
             snackbar.networkError()
           })
           .finally(() => {

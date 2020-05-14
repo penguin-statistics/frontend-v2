@@ -1,14 +1,13 @@
 <template>
   <v-dialog
     v-model="showDialog"
-    fullscreen
-    hide-overlay
-    transition="dialog-bottom-transition"
+    transition="scale-transition"
+    max-width="750px"
   >
     <template v-slot:activator="{ on }">
       <slot />
       <div
-        class="sparkline"
+        class="sparkline cursor-pointer"
         v-on="on"
       >
         <v-sparkline
@@ -21,35 +20,34 @@
           :stroke-linecap="sparkline.lineCap"
           :gradient-direction="sparkline.gradientDirection"
           auto-draw
+          :auto-draw-duration="3000"
+          auto-draw-easing="cubic-bezier(0.165, 0.84, 0.44, 1)"
         />
       </div>
     </template>
-    <div class="charts-wrapper">
-      <v-toolbar>
-        <v-toolbar-title>Charts</v-toolbar-title>
-
-        <v-spacer />
-
-        <v-btn
-          icon
-          @click="showDialog = false"
-        >
-          <v-icon>mdi-close</v-icon>
-        </v-btn>
-      </v-toolbar>
+    <DialogCard
+      :title="meta.name"
+      :subtitle="$t('stats.trends.name')"
+      @close="showDialog = false"
+    >
       <div
         :id="computedChartsId"
-        class="charts"
+        class="charts my-4"
       />
-    </div>
+    </DialogCard>
   </v-dialog>
 </template>
 
 <script>
 import Plotly from "@/vendors/plotly";
 import formatter from "@/utils/timeFormatter";
+import Theme from "@/mixins/Theme";
+import DialogCard from "@/components/global/DialogCard";
+
 export default {
   name: "Charts",
+  components: {DialogCard},
+  mixins: [Theme],
   props: {
     xStart: {
       type: Number,
@@ -57,7 +55,7 @@ export default {
     },
     interval: {
       type: Number,
-      default: 1
+      default: 86400000
     },
     value: {
       type: Boolean,
@@ -66,7 +64,7 @@ export default {
     data: {
       type: Object,
       default: () => {
-        return [10, 15, 13, 17];
+        return {};
       }
     },
     dataKeys: {
@@ -87,38 +85,38 @@ export default {
       type: String,
       required: true
     },
-    height: {
-      type: Number,
-      default: window.innerHeight - 64 // minus toolbar height
-    },
-    width: {
-      type: Number,
-      default: window.innerWidth
+    meta: {
+      type: Object,
+      default: () => {
+        return {};
+      }
     }
   },
   data() {
     return {
-      initDate: new Date(),
+      initAt: Date.now(),
       showDialog: this.value
     };
   },
   computed: {
     gradient() {
-      return this.$store.getters['settings/dark'] ? ["white"] : ["black"];
+      return this.dark ?
+        ["rgba(255, 255, 255, .3)", "rgba(255, 255, 255, 1)"] :
+        ["rgba(0, 0, 0, .3)", "rgba(0, 0, 0, 1)"]
     },
     sparkline() {
       return {
-        width: 10,
+        width: 14,
         radius: 100,
-        padding: 0,
+        padding: 8,
         lineCap: "round",
         gradient: this.gradient,
         value: this.sparklineValue,
-        gradientDirection: "top"
+        gradientDirection: "left"
       };
     },
     computedChartsId() {
-      return `${this.initDate.getTime().toString()}_${this.chartsId}`;
+      return `${this.initAt.toString()}_${this.chartsId}`;
     },
     xAxis() {
       let array = this.data[this.sparklineKey].map((item, index) => {
@@ -140,6 +138,8 @@ export default {
       if (
         this.sparklineKey &&
         this.sparklineSubKey &&
+        this.data[this.sparklineKey] &&
+        this.data[this.sparklineSubKey] &&
         this.data[this.sparklineKey].length &&
         this.data[this.sparklineSubKey].length
       ) {
@@ -185,7 +185,7 @@ export default {
           return [0, 0];
         }
       } else {
-        return [1, 1];
+        return null;
       }
     }
   },
@@ -196,10 +196,10 @@ export default {
           return {
             x: this.xAxis,
             y: this.yAxis[yAxisKey],
-            opacity: 0.3,
+            opacity: .8,
             type: "bar",
-            name: yAxisKey,
-            connectgaps: true
+            name: this.$t('stats.trends.set.sample'),
+            connectgaps: true,
           };
         });
         traceArray.push({
@@ -211,26 +211,46 @@ export default {
             value: 10
           },
           opacity: 1,
-          line: { shape: "spline", smoothing: 0.8 },
+          line: { shape: "spline", smoothing: 0.5 },
           connectgaps: true,
-          name: "rate"
+          name: this.$t('stats.trends.set.rate')
         });
+
         let layout = {
-          width: this.width,
-          height: this.height,
-          yaxis: { title: "Samples" },
+          // width: "500px",
+          // height: "500px",
+          yaxis: {
+            title: this.$t('stats.trends.set.sample'),
+            titlefont: { color: this.$vuetify.theme.currentTheme.accent2 },
+            tickfont: { color: this.$vuetify.theme.currentTheme.accent2 }
+          },
           yaxis2: {
-            title: "Rate",
-            titlefont: { color: "rgb(148, 103, 189)" },
-            tickfont: { color: "rgb(148, 103, 189)" },
+            title: this.$t('stats.trends.set.rate'),
+            titlefont: { color: this.$vuetify.theme.currentTheme.accent3 },
+            tickfont: { color: this.$vuetify.theme.currentTheme.accent3 },
             overlaying: "y",
             side: "right"
+          },
+          paper_bgcolor: this.$vuetify.theme.currentTheme.background,
+          plot_bgcolor: this.$vuetify.theme.currentTheme.background,
+          font: {
+            color: this.$vuetify.theme.currentTheme.text,
           }
         };
 
         let data = traceArray;
-
-        Plotly.newPlot(this.computedChartsId, data, layout);
+        this.$nextTick(function () {
+          Plotly.newPlot(this.computedChartsId, data, layout, {
+            displayLogo: false,
+            toImageButtonOptions: {
+              format: 'png', // one of png, svg, jpeg, webp
+              filename: `penguin-stats_export-${this.chartsId}_time${new Date().getTime()}`,
+              height: 1000,
+              width: 1400,
+              scale: 1 // Multiply title/legend/axis/canvas sizes by this factor
+            }
+          });
+        })
       }
     }
   },
@@ -241,15 +261,13 @@ export default {
 <style scoped>
 .charts-wrapper {
   width: 100%;
-  height: -webkit-fill-available;
+  height: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
-  background: #fff;
   flex-direction: column;
 }
 .sparkline {
   width: 40px;
-  margin-left: 5px;
 }
 </style>

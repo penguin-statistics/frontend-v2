@@ -65,11 +65,11 @@
           <span>{{ $t('fetch.failed.title') }}</span>
         </v-card-title>
 
-        <v-card-text class="pa-6">
+        <v-card-text class="pt-4">
           <span class="subtitle-1">
             {{ $t('fetch.failed.subtitle') }}
           </span>
-          <v-divider class="my-6" />
+          <v-divider class="mt-3 mb-1" />
           <v-subheader>
             {{ $t('meta.details') }}
           </v-subheader>
@@ -80,9 +80,17 @@
             >
               <v-list-item-content>
                 <v-list-item-title>
-                  {{ error.id }}
+                  <span class="monospace grey--text">#{{ error.id }} - </span>
+                  {{ $t(`fetch.failed.error.${error.id}`) }}
                 </v-list-item-title>
-                <v-list-item-subtitle>
+                <v-list-item-subtitle class="d-flex monospace">
+                  <v-icon
+                    x-small
+                    left
+                    color="grey"
+                  >
+                    mdi-alert
+                  </v-icon>
                   {{ error.error }}
                 </v-list-item-subtitle>
               </v-list-item-content>
@@ -91,6 +99,7 @@
                 <v-progress-circular
                   v-if="error.pending"
                   indeterminate
+                  :width="3"
                 />
                 <v-icon v-else>
                   mdi-alert-circle-outline
@@ -100,6 +109,7 @@
           </v-list>
         </v-card-text>
 
+        <v-divider />
         <v-card-actions>
           <v-spacer />
           <v-btn

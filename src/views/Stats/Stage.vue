@@ -1,30 +1,30 @@
 <i18n>
-  {
-    "zh": {
-      "stats": {
-        "name": "统计结果",
-        "title": "{stage} 统计结果"
-      }
-    },
-    "en": {
-      "stats": {
-        "name": "Statistics",
-        "title": "Statistics of {stage}"
-      }
-    },
-    "ja": {
-      "stats": {
-        "name": "統計結果",
-        "title": "{stage} 統計結果"
-      }
-    },
-    "ko": {
-      "stats": {
-        "name": "통계 결과",
-        "title": "{stage}의 통계 결과"
-      }
-    }
-  }
+{
+	"en": {
+		"stats": {
+			"name": "Statistics",
+			"title": "Statistics of {stage}"
+		}
+	},
+	"ja": {
+		"stats": {
+			"name": "統計結果",
+			"title": "{stage} 統計結果"
+		}
+	},
+	"ko": {
+		"stats": {
+			"name": "통계 결과",
+			"title": "{stage}의 통계 결과"
+		}
+	},
+	"zh": {
+		"stats": {
+			"name": "统计结果",
+			"title": "{stage} 统计结果"
+		}
+	}
+}
 </i18n>
 
 <template>
@@ -48,7 +48,7 @@
             {{ strings.translate(zone, "zoneName") }}
           </h2>
           <h1 class="title pt-1 no-wrap--text">
-            {{ $t('stats.title', {stage: stage.code}) }}
+            {{ $t('stats.title', {stage: strings.translate(stage, "code")}) }}
           </h1>
           <v-spacer />
           <v-btn
@@ -75,6 +75,7 @@
       <DataTable
         :items="stats"
         type="stage"
+        :trends="trends"
 
         class="px-3 px-sm-4 px-md-6 px-lg-6 px-xl-8 pt-0 pb-6"
       />
@@ -122,7 +123,13 @@ export default {
     },
     strings () {
       return strings
-    }
+    },
+    getter () {
+      return get
+    },
+    trends () {
+      return get.trends.byStageId(this.selected.stage)
+    },
   },
   methods: {
     select({zone, stage}) {

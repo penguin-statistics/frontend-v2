@@ -74,13 +74,60 @@
     background: transparent;
 }
 
-.v-navigation-drawer::-webkit-scrollbar {
-    width: 2px;
-}
+/*.v-navigation-drawer::-webkit-scrollbar-thumb {*/
+/*    background-color: rgb(200, 200, 200);*/
+/*}*/
 
-.v-navigation-drawer::-webkit-scrollbar-thumb {
-    background-color: rgb(200, 200, 200);
-}
+/*
+ ********************
+ * Scrollbar Styles: need more cross-platform testing
+ ********************
+ */
+
+/*.v-dialog::-webkit-scrollbar {*/
+/*    width: 4px;*/
+/*}*/
+
+/*::-webkit-scrollbar {*/
+/*    height: 4px;*/
+/*    width: 6px;*/
+/*    background: transparent;*/
+/*}*/
+
+/*::-webkit-scrollbar-button:end:increment {*/
+/*    background: transparent;*/
+/*    display: none;*/
+/*}*/
+/*::-webkit-scrollbar-button:start:decrement {*/
+/*    background: transparent;*/
+/*    display: none;*/
+/*}*/
+/*::-webkit-scrollbar-track-piece:vertical {*/
+/*    background: linear-gradient(to right, rgba(0, 0, 0, .2), rgba(0, 0, 0, .3));*/
+/*}*/
+/*::-webkit-scrollbar-track-piece:horizontal {*/
+/*    background: linear-gradient(to bottom, rgba(0, 0, 0, .2), rgba(0, 0, 0, .3));*/
+/*}*/
+/*::-webkit-scrollbar-thumb:horizontal {*/
+/*    background: rgba(255, 255, 255, .4);*/
+/*    border-radius: 2px;*/
+/*    display: block;*/
+/*    height: 24px;*/
+/*}*/
+/*::-webkit-scrollbar-thumb:vertical {*/
+/*    background: rgba(255, 255, 255, .4);*/
+/*    border-radius: 3px;*/
+/*    display: block;*/
+/*}*/
+/*::-webkit-scrollbar-thumb:hover {*/
+/*    background: rgba(255, 255, 255, .55);*/
+/*}*/
+/*::-webkit-scrollbar-thumb:active {*/
+/*    background: rgba(255, 255, 255, .65);*/
+/*}*/
+/*.v-dialog::-webkit-scrollbar-thumb:vertical {*/
+/*    border-radius: 0 4px 4px 0;*/
+/*}*/
 
 /*.v-toolbar {*/
 /*  padding-top: env(safe-area-inset-top);*/
@@ -145,8 +192,8 @@
 .slash-strip--danger {
     background: repeating-linear-gradient(
             -45deg,
-            rgba(226, 81, 65, .75),
-            rgba(226, 81, 65, .75) 45px,
+            rgb(209, 75, 61),
+            rgb(209, 75, 61) 45px,
             rgb(0, 0, 0) 45px,
             rgb(0, 0, 0) 90px
     );
@@ -162,11 +209,21 @@
     );
 }
 
+.theme--light .slash-strip--warning-transparent {
+    background: repeating-linear-gradient(
+            -45deg,
+            rgba(237, 144, 53, 0.5),
+            rgba(237, 144, 53, 0.5) 45px,
+            rgba(255, 255, 255, 0.5) 45px,
+            rgba(255, 255, 255, 0.5) 90px
+    );
+}
+
 .theme--light .slash-strip--danger {
     background: repeating-linear-gradient(
             -45deg,
-            rgb(226, 81, 65),
-            rgb(226, 81, 65) 45px,
+            rgb(245, 104, 88),
+            rgb(245, 104, 88) 45px,
             rgb(255, 255, 255) 45px,
             rgb(255, 255, 255) 90px
     );
@@ -234,4 +291,14 @@
     .safe-area--navigation-drawer {
         width: calc(env(safe-area-inset-left) + 300px) !important;
     }
+}
+
+.v-dialog > .theme--dark.v-card {
+    background-color: #272727;
+}
+.v-tabs > .v-tabs-bar, .v-tabs-items {
+    background-color: transparent !important;
+}
+.markdown-content strong {
+
 }

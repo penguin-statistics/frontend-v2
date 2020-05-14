@@ -1,44 +1,46 @@
 <i18n>
-  {
-    "zh": {
-      "contact": {
-        "contact_0": "联系我们",
-        "contact_2": "如果您有任何问题或建议，欢迎联系站长。",
-        "contributor": "团队成员页面",
-        "contact_1": "页面内的各种联系方式",
-        "github": "Github Issues",
-        "nga": "NGA 讨论帖"
-      }
-    },
-    "en": {
-      "contact": {
-        "contact_0": "Contact us",
-        "contact_2": "If you have any questions or suggestions, feel free to contact the webmaster. (English is fine)",
-        "contributor": "Team Members Page",
-        "contact_1": "Contact Information",
-        "github": "Github Issues",
-        "nga": "NGA Thread"
-      }
-    },
-    "ja": {
-      "contact": {
-        "contact_0": "連絡先",
-        "contact_2": "ご質問、ご要望などございましたら、管理人さんにお気軽にお問い合わせください。（日本語でもOKです）",
-        "contributor": "制作協力者ページ",
-        "github": "Github Issues",
-        "nga": "NGA スレッド"
-      }
-    },
-    "ko": {
-      "contact": {
-        "contact_0": "문의",
-        "contact_2": "질문이나 건의 사안이 있다면, 언제든지 관리자에게 연락하여 주십시오.",
-        "contributor": "팀 구성원 페이지",
-        "github": "Github Issues",
-        "nga": "NGA (포럼) 스레드"
-      }
-    }
-  }
+{
+	"en": {
+		"contact": {
+			"contact_0": "Contact us",
+			"contact_1": "Contact Information",
+			"contact_2": "If you have any questions or suggestions, feel free to contact the webmaster. (English is fine)",
+			"contributor": "Team Members Page",
+			"github": "Github Issues",
+			"nga": "NGA Thread"
+		}
+	},
+	"ja": {
+		"contact": {
+			"contact_0": "連絡先",
+			"contact_1": "",
+			"contact_2": "ご質問、ご要望などございましたら、管理人さんにお気軽にお問い合わせください。（日本語でもOKです）",
+			"contributor": "制作協力者ページ",
+			"github": "Github Issues",
+			"nga": "NGA スレッド"
+		}
+	},
+	"ko": {
+		"contact": {
+			"contact_0": "문의",
+			"contact_1": "",
+			"contact_2": "질문이나 건의 사안이 있다면, 언제든지 관리자에게 연락하여 주십시오.",
+			"contributor": "팀 구성원 페이지",
+			"github": "Github Issues",
+			"nga": "NGA (포럼) 스레드"
+		}
+	},
+	"zh": {
+		"contact": {
+			"contact_0": "联系我们",
+			"contact_1": "页面内的各种联系方式",
+			"contact_2": "如果您有任何问题或建议，欢迎联系站长。",
+			"contributor": "团队成员页面",
+			"github": "Github Issues",
+			"nga": "NGA 讨论帖"
+		}
+	}
+}
 </i18n>
 
 <template>

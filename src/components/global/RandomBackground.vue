@@ -45,7 +45,7 @@
           "main_06-15": "/backgrounds/fn_0_0.png", // 6-17
         },
         imageRange: 104 + 1 // if x images use ${x + 1}, because Math.random() generates float in [0, 1) range, so we
-                           // need to +1 in order to get the last image also in range
+                           // need to +1 in order to refresh the last image also in range
       }
     },
     computed: {
