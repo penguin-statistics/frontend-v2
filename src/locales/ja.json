@@ -51,6 +51,20 @@
     "quotation": {
       "start": "「",
       "end": "」"
+    },
+    "boolean": {
+      "true": "はい",
+      "false": "いいえ"
+    },
+    "hasNorNot": {
+      "true": "有り",
+      "false": "無し"
+    },
+    "dialog": {
+      "cancel": "いいえ",
+      "confirm": "はい",
+      "submit": "送信",
+      "close": "閉じる"
     }
   },
   "stats": {
@@ -63,27 +77,6 @@
       "percentage": "ドロップ率",
       "apPPR": "１個あたりの必要期待理性数"
     }
-  },
-  "builds": {
-    "development": {
-      "title": "Preview Build",
-      "description": "You are currently browsing the development build",
-      "ok": "OH YEAH!"
-    }
-  },
-  "boolean": {
-    "true": "はい",
-    "false": "いいえ"
-  },
-  "hasNorNot": {
-    "true": "有り",
-    "false": "無し"
-  },
-  "dialog": {
-    "cancel": "いいえ",
-    "confirm": "はい",
-    "submit": "送信",
-    "close": "閉じる"
   },
   "contribute": {
     "repo": "プロジェクトリポジトリ：",
@@ -162,9 +155,9 @@
     "name": "作戦",
     "apCost": "消費理性：{apCost}",
     "loots": {
-      "normal": "通常ドロップ",
-      "extra": "エクストラドロップ",
-      "special": "スペシャルドロップ"
+      "NORMAL_DROP": "通常ドロップ",
+      "EXTRA_DROP": "エクストラドロップ",
+      "SPECIAL_DROP": "スペシャルドロップ"
     }
   },
   "planner": {
@@ -198,6 +191,17 @@
       "level": "素材レベル",
       "noStage": "入力内容に不備があるため結果を表示出来ません。",
       "noSyntheses": "入力内容に不備があるため結果を表示出来ません。"
+    }
+  },
+  "items": {
+    "choose": {
+      "name": "素材選択"
+    },
+    "categories": {
+      "ACTIVITY_ITEM": "イベントアイテム",
+      "CARD_EXP": "作戦記録",
+      "FURN": "家具",
+      "MATERIAL": "素材"
     }
   }
 }

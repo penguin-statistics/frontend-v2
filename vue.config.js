@@ -14,7 +14,7 @@ module.exports = {
   pluginOptions: {
     i18n: {
       locale: 'zh',
-      fallbackLocale: 'zh',
+      fallbackLocale: 'en',
       localeDir: 'locales',
       enableInSFC: true
     }
@@ -22,7 +22,7 @@ module.exports = {
   devServer: {
     proxy: {
       "/PenguinStats": {
-        target: "https://penguin-stats.io/"
+        target: "http://localhost:8081"
       }
     }
   },

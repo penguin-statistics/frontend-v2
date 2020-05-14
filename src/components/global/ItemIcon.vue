@@ -24,8 +24,11 @@
 </template>
 
 <script>
+import CDN from "@/mixins/CDN";
+
 export default {
   name: "ItemIcon",
+  mixins: [CDN],
   props: {
     item: {
       type: Object,
@@ -72,6 +75,7 @@ export default {
         height: `${this.ratio * this.originalIconSize}px`,
         width: `${this.ratio * this.originalIconSize}px`,
         backgroundSize: `${this.ratio * this.originalSpriteDimensions.x}px ${this.ratio * this.originalSpriteDimensions.y}px`,
+        backgroundImage: `url(${this.cdnResource('/sprite/sprite.202005140304.png')})`
       };
       if (this.item.spriteCoord) {
         style["backgroundPosition"] = this.transformCoordinate(this.item.spriteCoord)
@@ -90,7 +94,6 @@ export default {
 
 <style scoped>
 .item-icon--sprite {
-  background-image: url("https://penguin.upyun.galvincdn.com/item_sprite.png");
   background-repeat: no-repeat;
   height: 60px;
   width: 60px;

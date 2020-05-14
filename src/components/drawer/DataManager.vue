@@ -7,7 +7,10 @@
     <v-card-text class="pr-0 pt-0">
       <ul>
         <li>
-          {{ $t('settings.data.length', {number: dataSize}) }}
+          {{ $t('settings.data.server') }}<span class="monospace">{{ dataStats.keys.filter(el => !~el.indexOf("_")).join(", ") }}</span>
+        </li>
+        <li>
+          {{ $t('settings.data.size') }}<span class="monospace">{{ dataStats.size }}</span>
         </li>
       </ul>
     </v-card-text>
@@ -52,8 +55,8 @@
     components: {DataResetter, Subheader},
     computed: {
       ...mapGetters("ajax", ["pending"]),
-      dataSize() {
-        return this.$store.getters["data/length"];
+      dataStats() {
+        return this.$store.getters["data/stats"];
       }
     },
     methods: {

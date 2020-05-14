@@ -3,7 +3,9 @@ import commons from './_common'
 
 const items = new ObjectManager({
   name: 'items',
-  api: '/items?i18n=true',
+  api: {
+    url: "/items",
+  },
   transform: [
     (object) => {
       let filtered = object.filter(el => !el.hide);
@@ -12,7 +14,7 @@ const items = new ObjectManager({
       return filtered
     },
   ],
-  ttl: 1000 * 60 * 60, // 1 hours
+  ttl: 1000 * 60 * 60 * 1, // 1 hour
   ajaxHooks: commons.defaultAjaxHooks
 });
 

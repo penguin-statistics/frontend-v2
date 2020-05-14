@@ -4,13 +4,23 @@
     "name_line1": "企鹅物流数据统计",
     "name_line2": ""
   },
+  "server": {
+    "switch": "服务器切换",
+    "servers": {
+      "CN": "国服",
+      "US": "美服",
+      "JP": "日服",
+      "KR": "韩服"
+    }
+  },
   "menu": {
     "home": "首页",
     "report": "掉落汇报",
     "stats": {
       "_name": "素材掉率",
       "stage": "按作战",
-      "item": "按素材"
+      "item": "按素材",
+      "advanced": "高级查询"
     },
     "about": {
       "_name": "关于本站",
@@ -51,6 +61,20 @@
     "quotation": {
       "start": "“",
       "end": "”"
+    },
+    "boolean": {
+      "true": "是",
+      "false": "否"
+    },
+    "hasNorNot": {
+      "true": "有",
+      "false": "无"
+    },
+    "dialog": {
+      "cancel": "取消",
+      "confirm": "确认",
+      "submit": "提交",
+      "close": "关闭"
     }
   },
   "stats": {
@@ -61,29 +85,22 @@
       "times": "样本数",
       "quantity": "掉落数",
       "percentage": "百分比",
-      "apPPR": "单件估算理智"
+      "apPPR": "单件估算理智",
+      "timeRange": "统计区间"
+    },
+    "timeRange": {
+      "inBetween": "{0} ~ {1}",
+      "toPresent": "{date} 至今",
+      "endsAt": "{date} 之前",
+      "unknown": "未知"
+    },
+    "trends": {
+      "name": "掉落历史趋势",
+      "set": {
+        "rate": "掉落率",
+        "sample": "当日样本量"
+      }
     }
-  },
-  "builds": {
-    "development": {
-      "title": "预览版",
-      "description": "现浏览网页属自动构建的开发用预览版本",
-      "ok": "OH YEAH!"
-    }
-  },
-  "boolean": {
-    "true": "是",
-    "false": "否"
-  },
-  "hasNorNot": {
-    "true": "有",
-    "false": "无"
-  },
-  "dialog": {
-    "cancel": "取消",
-    "confirm": "确认",
-    "submit": "提交",
-    "close": "关闭"
   },
   "contribute": {
     "repo": "项目仓库：",
@@ -104,7 +121,16 @@
     "failed": {
       "title": "神经网络连接异常",
       "subtitle": "未能与神经网络建立对等连接，部分资源丢失",
-      "retry": "重试"
+      "retry": "重试",
+      "error": {
+        "zones": "章节元数据",
+        "stages": "关卡元数据",
+        "items": "物品数据",
+        "limitations": "汇报数据校验规则",
+        "trends": "汇报历史数据",
+        "globalMatrix": "全平台掉落数据",
+        "personalMatrix": "个人掉落数据"
+      }
     }
   },
   "report": {
@@ -130,17 +156,17 @@
     "rules": {
       "item": {
         "_name": "物品项",
-        "now": "已选 {item} ×{quantity}",
-        "gte": "“{item}” 应至少有 {quantity} 个",
-        "lte": "“{item}” 应至多有 {quantity} 个",
-        "not": "“{item}” 不应有 {quantity} 个"
+        "now": "已于 “{stage}” 选择了 {quantity} 个 “{item}”",
+        "gte": "“{stage}” 内的 “{item}” 应至少有 {should} 个",
+        "lte": "“{stage}” 内的 “{item}” 应至多有 {should} 个",
+        "not": "“{stage}” 内的 “{item}” 数量不应等于 {should}"
       },
       "type": {
         "_name": "物品种类",
-        "now": "已选 {quantity} 种物品",
-        "gte": "应至少有 {quantity} 种物品",
-        "lte": "应至多有 {quantity} 种物品",
-        "not": "物品种类应不为 {quantity}"
+        "now": "于 “{stage}” 已选 {quantity} 个物品",
+        "gte": "“{stage}” 内应至少有 {should} 个物品",
+        "lte": "“{stage}” 内应至多有 {should} 个物品",
+        "not": "“{stage}” 内的物品数量应总计不为 {should}"
       }
     }
   },
@@ -171,7 +197,8 @@
       }
     },
     "data": {
-      "length": "本地数据条目数：{number} 条",
+      "server": "本地缓存数据包含服务器：",
+      "size": "本地数据大小：",
       "reset": {
         "title": "重置本地数据与设置",
         "subtitle": "将会删除所有本地数据与设置。删除后，所有本地设置均会重置至默认值并刷新页面，数据将需要重新加载。确定要继续吗？"
@@ -197,9 +224,9 @@
     "name": "关卡",
     "apCost": "{apCost} 点理智",
     "loots": {
-      "normal": "常规掉落",
-      "extra": "额外物资",
-      "special": "特殊掉落"
+      "NORMAL_DROP": "常规掉落",
+      "EXTRA_DROP": "额外物资",
+      "SPECIAL_DROP": "特殊掉落"
     },
     "selector": {
       "plannerExclude": "排除规划关卡",
@@ -240,6 +267,29 @@
       "noSyntheses": "未找到需要合成的素材。"
     }
   },
+  "items": {
+    "choose": {
+      "name": "选择素材"
+    },
+    "categories": {
+      "ACTIVITY_ITEM": "活动道具",
+      "CARD_EXP": "作战记录",
+      "FURN": "家具",
+      "MATERIAL": "材料"
+    }
+  },
+  "query": {
+    "selector": {
+      "item": {
+        "title": "选择素材",
+        "subtitle": "用于将查询结果过滤为包含特定素材的所有关卡。当选择任一过滤器后，则在同一查询内不可再选择其他过滤器。若欲过滤其他参数，可通过添加对比查询设置其他过滤参数。"
+      },
+      "stage": {
+        "title": "选择关卡",
+        "subtitle": "用于将查询结果过滤为一特定关卡内的所有掉落。当选择任一过滤器后，则在同一查询内不可再选择其他过滤器。若欲过滤其他参数，可通过添加对比查询设置其他过滤参数。"
+      }
+    }
+  },
   "version": {
     "upgrade": {
       "title": "版本已过期",
@@ -247,5 +297,9 @@
       "action": "升级",
       "unable": "无法升级？"
     }
+  },
+  "notice": {
+    "failed": "获取公告失败：{error}",
+    "loading": "正在加载公告"
   }
 }

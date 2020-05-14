@@ -6,4 +6,8 @@
 //   require('plotly.js/lib/scatter')
 // ]);
 //
+// require('plotly.js/dist/plotly-locale-ja')
+// require('plotly.js/dist/plotly-locale-ko')
+// require('plotly.js/dist/plotly-locale-zh-cn')
+//
 // module.exports = Plotly;

@@ -18,6 +18,8 @@ import AboutContact from './views/About/Contact'
 import AboutDonate from './views/About/Donate'
 import AboutLinks from './views/About/Links'
 import NotFound from "@/views/NotFound";
+// import AdvancedQuery from "@/views/AdvancedQuery";
+// import DataDebugger from "@/components/debug/DataDebugger";
 
 const originalPush = Router.prototype.push;
 Router.prototype.push = function push(location, onResolve, onReject) {
@@ -76,47 +78,56 @@ const router = new Router({
       active: true
     },
     children: [{
-      path: 'stage',
-      name: 'StatsByStage',
-      component: StatsByStage,
-      props: true,
-      meta: {
-        icon: 'mdi-cube',
-        i18n: 'menu.stats.stage'
+        path: 'stage',
+        name: 'StatsByStage',
+        component: StatsByStage,
+        props: true,
+        meta: {
+          icon: 'mdi-cube',
+          i18n: 'menu.stats.stage'
+        },
       },
-    },
-    {
-      path: 'stage/:zoneId/:stageId',
-      name: 'StatsByStage_Selected',
-      component: StatsByStage,
-      props: true,
-      meta: {
-        hide: true,
-        i18n: 'menu.stats.stage'
+      {
+        path: 'stage/:zoneId/:stageId',
+        name: 'StatsByStage_Selected',
+        component: StatsByStage,
+        props: true,
+        meta: {
+          hide: true,
+          i18n: 'menu.stats.stage'
+        }
+      },
+      {
+        path: 'item',
+        name: 'StatsByItem',
+        component: StatsByItem,
+        props: true,
+        meta: {
+          icon: 'mdi-treasure-chest',
+          i18n: 'menu.stats.item'
+        },
+      },
+      {
+        path: 'item/:itemId',
+        name: 'StatsByItem_SelectedItem',
+        component: StatsByItem,
+        props: true,
+        meta: {
+          hide: true,
+          i18n: 'menu.stats.item'
+        },
       }
-    },
-    {
-      path: 'item',
-      name: 'StatsByItem',
-      component: StatsByItem,
-      props: true,
-      meta: {
-        icon: 'mdi-treasure-chest',
-        i18n: 'menu.stats.item'
-      },
-    },
-    {
-      path: 'item/:itemId',
-      name: 'StatsByItem_SelectedItem',
-      component: StatsByItem,
-      props: true,
-      meta: {
-        hide: true,
-        i18n: 'menu.stats.item'
-      },
-    }
     ]
   },
+  // {
+  //   path: '/advanced',
+  //   name: 'AdvancedQuery',
+  //   component: AdvancedQuery,
+  //   meta: {
+  //     icon: 'mdi-database-search',
+  //     i18n: 'menu.stats.advanced'
+  //   },
+  // },
   {
     path: '/planner',
     name: 'Planner',
@@ -216,6 +227,16 @@ const router = new Router({
       externalRedirect: true
     }
   },
+  // {
+  //   path: '/_internal/debugger/data',
+  //   name: 'DataDebugger',
+  //   component: DataDebugger,
+  //   meta: {
+  //     icon: 'mdi-file',
+  //     i18n: 'meta.notfound',
+  //     hide: true
+  //   }
+  // },
   {
     path: '*',
     name: 'ErrorNotFound',

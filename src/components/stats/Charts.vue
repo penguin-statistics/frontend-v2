@@ -1,14 +1,13 @@
 <template>
   <v-dialog
     v-model="showDialog"
-    fullscreen
-    hide-overlay
-    transition="dialog-bottom-transition"
+    transition="scale-transition"
+    max-width="750px"
   >
     <template v-slot:activator="{ on }">
       <slot />
       <div
-        class="sparkline"
+        class="sparkline cursor-pointer"
         v-on="on"
       >
         <v-sparkline
@@ -21,35 +20,35 @@
           :stroke-linecap="sparkline.lineCap"
           :gradient-direction="sparkline.gradientDirection"
           auto-draw
+          :auto-draw-duration="3000"
+          auto-draw-easing="cubic-bezier(0.165, 0.84, 0.44, 1)"
         />
       </div>
     </template>
-    <div class="charts-wrapper">
-      <v-toolbar>
-        <v-toolbar-title>Charts</v-toolbar-title>
-
-        <v-spacer />
-
-        <v-btn
-          icon
-          @click="showDialog = false"
-        >
-          <v-icon>mdi-close</v-icon>
-        </v-btn>
-      </v-toolbar>
-      <div
-        :id="computedChartsId"
-        class="charts"
+    <DialogCard
+      :title="meta.name"
+      :subtitle="$t('stats.trends.name')"
+      @close="showDialog = false"
+    >
+      <Chart
+        v-if="showDialog"
+        :options="chartData"
+        class="charts my-4"
       />
-    </div>
+    </DialogCard>
   </v-dialog>
 </template>
 
 <script>
-import Plotly from "@/vendors/plotly";
 import formatter from "@/utils/timeFormatter";
+import Theme from "@/mixins/Theme";
+import DialogCard from "@/components/global/DialogCard";
+import { Chart } from "highcharts-vue";
+
 export default {
   name: "Charts",
+  components: {DialogCard, Chart},
+  mixins: [Theme],
   props: {
     xStart: {
       type: Number,
@@ -57,7 +56,7 @@ export default {
     },
     interval: {
       type: Number,
-      default: 1
+      default: 86400000
     },
     value: {
       type: Boolean,
@@ -66,7 +65,7 @@ export default {
     data: {
       type: Object,
       default: () => {
-        return [10, 15, 13, 17];
+        return {};
       }
     },
     dataKeys: {
@@ -87,38 +86,38 @@ export default {
       type: String,
       required: true
     },
-    height: {
-      type: Number,
-      default: window.innerHeight - 64 // minus toolbar height
-    },
-    width: {
-      type: Number,
-      default: window.innerWidth
+    meta: {
+      type: Object,
+      default: () => {
+        return {};
+      }
     }
   },
   data() {
     return {
-      initDate: new Date(),
+      initAt: Date.now(),
       showDialog: this.value
     };
   },
   computed: {
     gradient() {
-      return this.$store.getters['settings/dark'] ? ["white"] : ["black"];
+      return this.dark ?
+        ["rgba(255, 255, 255, .3)", "rgba(255, 255, 255, 1)"] :
+        ["rgba(0, 0, 0, .3)", "rgba(0, 0, 0, 1)"]
     },
     sparkline() {
       return {
-        width: 10,
+        width: 14,
         radius: 100,
-        padding: 0,
+        padding: 8,
         lineCap: "round",
         gradient: this.gradient,
         value: this.sparklineValue,
-        gradientDirection: "top"
+        gradientDirection: "left"
       };
     },
     computedChartsId() {
-      return `${this.initDate.getTime().toString()}_${this.chartsId}`;
+      return `${this.initAt.toString()}_${this.chartsId}`;
     },
     xAxis() {
       let array = this.data[this.sparklineKey].map((item, index) => {
@@ -140,6 +139,8 @@ export default {
       if (
         this.sparklineKey &&
         this.sparklineSubKey &&
+        this.data[this.sparklineKey] &&
+        this.data[this.sparklineSubKey] &&
         this.data[this.sparklineKey].length &&
         this.data[this.sparklineSubKey].length
       ) {
@@ -185,52 +186,171 @@ export default {
           return [0, 0];
         }
       } else {
-        return [1, 1];
+        return null;
       }
-    }
-  },
-  watch: {
-    showDialog(value) {
-      if (value) {
-        const traceArray = Object.keys(this.yAxis).map(yAxisKey => {
-          return {
-            x: this.xAxis,
-            y: this.yAxis[yAxisKey],
-            opacity: 0.3,
-            type: "bar",
-            name: yAxisKey,
-            connectgaps: true
-          };
-        });
-        traceArray.push({
-          x: this.xAxis,
-          y: this.sparklineData,
-          yaxis: "y2",
-          error_y: {
-            type: 'percent',
-            value: 10
+    },
+    chartData () {
+      if (this.showDialog) {
+        const theme = this.$vuetify.theme.currentTheme
+
+        return {
+          title: {
+            style: {
+              color: theme.text
+            },
+            text: this.meta.name
           },
-          opacity: 1,
-          line: { shape: "spline", smoothing: 0.8 },
-          connectgaps: true,
-          name: "rate"
-        });
-        let layout = {
-          width: this.width,
-          height: this.height,
-          yaxis: { title: "Samples" },
-          yaxis2: {
-            title: "Rate",
-            titlefont: { color: "rgb(148, 103, 189)" },
-            tickfont: { color: "rgb(148, 103, 189)" },
-            overlaying: "y",
-            side: "right"
+
+          subtitle: {
+            style: {
+              color: theme.textDarken
+            },
+            text: this.$t('stats.trends.name')
+          },
+
+          xAxis: {
+            categories: this.xAxis,
+            labels: {
+              style: {
+                color: theme.text
+              }
+            },
+            title: {
+              style: {
+                color: theme.text
+              }
+            }
+          },
+          yAxis: [
+            {
+              min: 0,
+              name: this.$t('stats.trends.set.rate'),
+              title: {
+                style: {
+                  color: theme.text
+                },
+                text: this.$t('stats.trends.set.rate'),
+              },
+              labels: {
+                format: '{value} %',
+                style: {
+                  color: theme.text
+                }
+              },
+            },
+            {
+              min: 0,
+              name: this.$t('stats.trends.set.sample'),
+              title: {
+                style: {
+                  color: theme.text
+                },
+                text: this.$t('stats.trends.set.sample'),
+              },
+              labels: {
+                style: {
+                  color: theme.text
+                }
+              },
+              opposite: true
+            }
+          ],
+
+          series: [
+            {
+              name: this.$t('stats.trends.set.sample'),
+              type: "column",
+              yAxis: 1,
+              data: this.yAxis[0],
+              color: theme.accent2
+            },
+            {
+              name: this.$t('stats.trends.set.rate'),
+              type: "spline",
+              yAxis: 0,
+              data: this.sparklineData,
+              tooltip: {
+                valueSuffix: '%'
+              },
+              color: theme.accent3,
+              marker: {
+                lineWidth: 2,
+                radius: 2,
+                lineColor: theme.text,
+                fillColor: theme.text
+              },
+              connectNulls: true
+            }
+          ],
+          tooltip: {
+            shared: true
+          },
+          credits: {
+            enabled: false
+          },
+          legend: {
+            itemStyle: {
+              color: theme.text
+            }
+          },
+          pane: {
+            background: {
+              backgroundColor: theme.background
+            }
+          },
+          chart: {
+            backgroundColor: theme.background,
+            style: {
+              color: theme.text
+            }
           }
-        };
 
-        let data = traceArray;
+          // plotOptions: {
+          //   column: {
+          //     grouping: false,
+          //     shadow: false,
+          //     borderWidth: 0
+          //   }
+          // },
 
-        Plotly.newPlot(this.computedChartsId, data, layout);
+          // layout: {
+          //   // width: "500px",
+          //   // height: "500px",
+          //   yaxis: {
+          //     title: this.$t('stats.trends.set.sample'),
+          //     titlefont: { color: this.$vuetify.theme.currentTheme.accent2 },
+          //     tickfont: { color: this.$vuetify.theme.currentTheme.accent2 }
+          //   },
+          //   yaxis2: {
+          //     title: this.$t('stats.trends.set.rate'),
+          //     titlefont: { color: this.$vuetify.theme.currentTheme.accent3 },
+          //     tickfont: { color: this.$vuetify.theme.currentTheme.accent3 },
+          //     overlaying: "y",
+          //     side: "right"
+          //   },
+          //   paper_bgcolor: this.$vuetify.theme.currentTheme.background,
+          //   plot_bgcolor: this.$vuetify.theme.currentTheme.background,
+          //   font: {
+          //     color: this.$vuetify.theme.currentTheme.text,
+          //   }
+          // },
+          // options: {
+          //   displayLogo: false,
+          //   toImageButtonOptions: {
+          //     format: 'png', // one of png, svg, jpeg, webp
+          //     filename: `penguin-stats_export-${this.chartsId}_time${new Date().getTime()}`,
+          //     height: 1000,
+          //     width: 1400,
+          //     scale: 1 // Multiply title/legend/axis/canvas sizes by this factor
+          //   }
+          // }
+        }
+      } else {
+        return {
+          data: [],
+          layout: {},
+          options: {}
+        }
       }
     }
   },
@@ -241,15 +361,13 @@ export default {
 <style scoped>
 .charts-wrapper {
   width: 100%;
-  height: -webkit-fill-available;
+  height: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
-  background: #fff;
   flex-direction: column;
 }
 .sparkline {
   width: 40px;
-  margin-left: 5px;
 }
 </style>

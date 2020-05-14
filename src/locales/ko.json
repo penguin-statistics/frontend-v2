@@ -51,6 +51,20 @@
     "quotation": {
       "start": "“",
       "end": "”"
+    },
+    "boolean": {
+      "true": "네",
+      "false": "아니오"
+    },
+    "hasNorNot": {
+      "true": "드랍됨",
+      "false": "드랍되지 않음"
+    },
+    "dialog": {
+      "cancel": "취소",
+      "confirm": "확인",
+      "submit": "제출",
+      "close": "닫기"
     }
   },
   "stats": {
@@ -63,27 +77,6 @@
       "percentage": "백분율",
       "apPPR": "아이템당 필요 이성 기대치"
     }
-  },
-  "builds": {
-    "development": {
-      "title": "프리뷰 버젼",
-      "description": "현재 개발 빌드를 탐색하고 있습니다.",
-      "ok": "OH YEAH!"
-    }
-  },
-  "boolean": {
-    "true": "네",
-    "false": "아니오"
-  },
-  "hasNorNot": {
-    "true": "드랍됨",
-    "false": "드랍되지 않음"
-  },
-  "dialog": {
-    "cancel": "취소",
-    "confirm": "확인",
-    "submit": "제출",
-    "close": "닫기"
   },
   "contribute": {
     "repo": "프로젝트 저장소: ",
@@ -162,9 +155,9 @@
     "name": "작전지역",
     "apCost": "{apCost} 이성 필요",
     "loots": {
-      "normal": "일반 드랍",
-      "extra": "추가 드랍",
-      "special": "특수 드랍"
+      "NORMAL_DROP": "일반 드랍",
+      "EXTRA_DROP": "추가 드랍",
+      "SPECIAL_DROP": "특수 드랍"
     }
   },
   "planner": {
@@ -198,6 +191,17 @@
       "level": "재료 등급",
       "noStage": "작전 지역을 찾을 수 없습니다.",
       "noSyntheses": "가공할 재료를 찾을 수 없습니다."
+    }
+  },
+  "items": {
+    "choose": {
+      "name": "아이템 선택"
+    },
+    "categories": {
+      "ACTIVITY_ITEM": "이벤트 아이템",
+      "CARD_EXP": "작전 기록",
+      "FURN": "가구",
+      "MATERIAL": "재료"
     }
   }
 }

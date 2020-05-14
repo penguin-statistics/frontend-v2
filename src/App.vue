@@ -2,31 +2,7 @@
   <v-app
     :class="languageFont"
   >
-    <!--    <v-overlay-->
-    <!--      :opacity="0.97"-->
-    <!--      style="z-index:99999999999"-->
-    <!--    >-->
-    <!--      <v-row class="justify-center">-->
-    <!--        <v-col-->
-    <!--          cols="10"-->
-    <!--          sm="10"-->
-    <!--          md="12"-->
-    <!--          lg="12"-->
-    <!--          xl="12"-->
-    <!--        >-->
-    <!--          <h1>-->
-    <!--            截断型信息标题-->
-    <!--          </h1>-->
-    <!--          <p class="subtitle-1 mb-9">-->
-    <!--            截断型信息内容-->
-    <!--          </p>-->
-
-    <!--          <h2 class="display-4">-->
-    <!--            00<span class="display-3">:00</span>-->
-    <!--          </h2>-->
-    <!--        </v-col>-->
-    <!--      </v-row>-->
-    <!--    </v-overlay>-->
+    <ServerNotifyOverlay />
     <UpgradeNotifier />
     <GlobalSnackbar />
     <MirrorSelector />
@@ -120,6 +96,8 @@
 
       <v-spacer />
 
+      <ServerSelector />
+
       <AccountManager />
     </v-app-bar>
     <RandomBackground />
@@ -161,10 +139,14 @@
   import Logo from "@/components/drawer/Logo";
   import {mapGetters} from "vuex";
   import UpgradeNotifier from "@/components/global/UpgradeNotifier";
+  import ServerSelector from "@/components/toolbar/ServerSelector";
+  import ServerNotifyOverlay from "@/components/global/ServerNotifyOverlay";
 
 export default {
   name: 'App',
   components: {
+    ServerNotifyOverlay,
+    ServerSelector,
     UpgradeNotifier,
     Logo,
     MirrorSelector,
@@ -181,7 +163,7 @@ export default {
     return {
       routes: [],
       drawer: !this.$vuetify.breakpoint.xsOnly,
-      showLicenseDialog: false
+      showLicenseDialog: false,
     }
   },
   computed: {

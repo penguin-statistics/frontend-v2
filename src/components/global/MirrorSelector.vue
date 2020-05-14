@@ -26,7 +26,7 @@
             text
             @click="() => {dialog = false; enabled = true}"
           >
-            {{ $t('dialog.cancel') }}
+            {{ $t('meta.dialog.cancel') }}
           </v-btn>
           <v-btn
             color="error"
@@ -36,7 +36,7 @@
               mdi-cancel
             </v-icon>
 
-            {{ $t('dialog.confirm') }}
+            {{ $t('meta.dialog.confirm') }}
           </v-btn>
         </v-card-actions>
       </v-card>
@@ -174,7 +174,7 @@
               'notification',
               'get_ip_failed'
             )
-            Console.warn("MirrorSelector", "failed to get geoip information", err)
+            Console.warn("MirrorSelector", "failed to refresh geoip information", err)
           })
       }
     },

@@ -12,7 +12,7 @@
       >
         {{ chosen ? 'mdi-check' : 'mdi-close' }}
       </v-icon>
-      <StageCode :code="stage.code" />
+      <StageCode :code="translatedCode" />
     </v-card-title>
   </v-card>
 </template>
@@ -20,6 +20,7 @@
 <script>
   import StageCode from "@/components/stats/StageCode";
   import Theme from "@/mixins/Theme";
+  import strings from "@/utils/strings";
 
   export default {
     name: "StageCard",
@@ -40,6 +41,9 @@
     computed: {
       stateful() {
         return this.chosen !== null;
+      },
+      translatedCode () {
+        return strings.translate(this.stage, "code")
       }
     },
   }

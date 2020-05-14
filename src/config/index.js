@@ -1,15 +1,19 @@
-const client = {
-  source: "frontend-v2",
-  version: "v1.1.11"
-};
+const version = "v3.0.0";
 
 module.exports = {
-  version: client.version,
+  version,
   api: {
-    submitParams: client
+    submitParams: {
+      source: "frontend-v2",
+      version
+    }
   },
   cdn: {
     cn: "https://penguin.upyun.galvincdn.com",
     global: "https://penguin-stats.s3.amazonaws.com"
-  }
+  },
+  advancedQuery: {
+    maxQueries: 5,
+  },
+  servers: ["CN", "US", "JP", "KR"]
 }

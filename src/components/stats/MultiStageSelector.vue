@@ -3,23 +3,6 @@
     <v-card-title>
       {{ $t('stage.selector.plannerExclude') }}
     </v-card-title>
-    <v-card-actions class="mx-4">
-      <v-spacer />
-      <v-btn
-        outlined
-        color="error"
-        @click="disableAll"
-      >
-        {{ $t('stage.selector.excludeAll') }}
-      </v-btn>
-      <v-btn
-        outlined
-        color="success"
-        @click="enableAll"
-      >
-        {{ $t('stage.selector.includeAll') }}
-      </v-btn>
-    </v-card-actions>
     <div class="mx-6">
       <template v-for="category in categorizedZones">
         <v-subheader
@@ -35,11 +18,6 @@
             {{ $t(['zone.types', category.id].join('.')) }}
           </span>
           <v-divider class="mx-4" />
-          <v-checkbox
-            v-bind="statuses.category[category.id]"
-
-            @click.self="toggleCategory(category.id, statuses.category[category.id])"
-          />
         </v-subheader>
         <v-row
           v-for="zone in category.zones"
@@ -47,16 +25,9 @@
           class="d-flex flex-column flex-sm-row mx-2 my-4"
         >
           <div
-            class="d-flex flex-column justify-center align-center text-right zone-title"
+            class="d-flex flex-column justify-center align-center text-center zone-title"
           >
-            <v-checkbox
-              v-bind="statuses.zone[zone.zoneId]"
-
-              hide-details
-              :label="translate(zone, 'zoneName')"
-              class="ma-0 pa-0"
-              @click.stop="toggleZone(category.id, zone.zoneId, statuses.zone[zone.zoneId])"
-            />
+            {{ translate(zone, 'zoneName') }}
           </div>
           <v-divider
             vertical
@@ -87,7 +58,7 @@
         text
         @click="$emit('close')"
       >
-        {{ $t('dialog.close') }}
+        {{ $t('meta.dialog.close') }}
       </v-btn>
     </v-card-actions>
   </v-card>

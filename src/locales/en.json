@@ -4,13 +4,23 @@
     "name_line1": "Penguin Statistics",
     "name_line2": ""
   },
+  "server": {
+    "switch": "Switch Server",
+    "servers": {
+      "CN": "CN",
+      "US": "US",
+      "JP": "JP",
+      "KR": "KR"
+    }
+  },
   "menu": {
     "home": "Home",
     "report": "Report Drops",
     "stats": {
       "_name": "Drop Rates",
       "stage": "By stage",
-      "item": "By item"
+      "item": "By item",
+      "advanced": "Advanced Query"
     },
     "about": {
       "_name": "About Penguin Statistics",
@@ -51,6 +61,20 @@
     "quotation": {
       "start": "\"",
       "end": "\""
+    },
+    "boolean": {
+      "true": "Yes",
+      "false": "No"
+    },
+    "hasNorNot": {
+      "true": "Yes",
+      "false": "No"
+    },
+    "dialog": {
+      "cancel": "Cancel",
+      "confirm": "Confirm",
+      "submit": "Submit",
+      "close": "Close"
     }
   },
   "stats": {
@@ -61,29 +85,22 @@
       "times": "Samples",
       "quantity": "Loot",
       "percentage": "Percentage",
-      "apPPR": "Sanity Required Per Item"
+      "apPPR": "Sanity Required Per Item",
+      "timeRange": "Time Range"
+    },
+    "timeRange": {
+      "inBetween": "{0} to {1}",
+      "toPresent": "{date} to Present",
+      "endsAt": "Before {date}",
+      "unknown": "Unknown"
+    },
+    "trends": {
+      "name": "Historical Drop Data",
+      "set": {
+        "rate": "Drop Rate",
+        "sample": "Samples"
+      }
     }
-  },
-  "builds": {
-    "development": {
-      "title": "Preview Build",
-      "description": "You are currently browsing the development build",
-      "ok": "OH YEAH!"
-    }
-  },
-  "boolean": {
-    "true": "Yes",
-    "false": "No"
-  },
-  "hasNorNot": {
-    "true": "Yes",
-    "false": "No"
-  },
-  "dialog": {
-    "cancel": "Cancel",
-    "confirm": "Confirm",
-    "submit": "Submit",
-    "close": "Close"
   },
   "contribute": {
     "repo": "Project repositories: ",
@@ -104,7 +121,16 @@
     "failed": {
       "title": "Failed to fetch resources",
       "subtitle": "Unable to establish synchronized connection with neural network. Missing partial or all resources.",
-      "retry": "Retry"
+      "retry": "Retry",
+      "error": {
+        "zones": "Zones Data",
+        "stages": "Stages Data",
+        "items": "Items Data",
+        "limitations": "Report Validation Rules",
+        "trends": "History Report Trends",
+        "globalMatrix": "Global Drop Data",
+        "personalMatrix": "Personal Drop Data"
+      }
     }
   },
   "report": {
@@ -130,17 +156,17 @@
     "rules": {
       "item": {
         "_name": "Item Quantities",
-        "now": "Selected {item} ×{quantity}",
-        "gte": "\"{item}\" expecting ≥{quantity}",
-        "lte": "\"{item}\" expecting ≤{quantity}",
-        "not": "\"{item}\" expecting ≠{quantity}"
+        "now": "Selected {quantity} {item} in \"{stage}\"",
+        "gte": "Should have at minimum {should} \"{item}\" in \"{stage}\"",
+        "lte": "Should have at maximum {should} \"{item}\" in \"{stage}\"",
+        "not": "Should not have exactly {should} \"{item}\" in \"{stage}\""
       },
       "type": {
         "_name": "Items",
-        "now": "Selected {quantity} kinds of items",
-        "gte": "Should have at least {quantity} kinds of items",
-        "lte": "Should have at most {quantity} kinds of items",
-        "not": "Should not be {quantity} kinds of items"
+        "now": "Selected {quantity} items in \"{stage}\"",
+        "gte": "Should have at minimum {should} items in \"{stage}\"",
+        "lte": "Should have at maximum {should} items in \"{stage}\"",
+        "not": "Should not have exactly {should} items in \"{stage}\""
       }
     }
   },
@@ -171,7 +197,8 @@
       }
     },
     "data": {
-      "length": "Local Data Entries: {number} entries",
+      "server": "Local Data includes servers: ",
+      "size": "Local Data size: ",
       "reset": {
         "title": "Reset All",
         "subtitle": "This operation will delete all local data and settings you have set. After the deletion, all settings will be reset to default, all data needs to be downloaded again, and the web page will be reloaded. Are you sure to continue?"
@@ -197,9 +224,9 @@
     "name": "Stage",
     "apCost": "{apCost} AP required",
     "loots": {
-      "normal": "Normal",
-      "extra": "Extra",
-      "special": "Special"
+      "NORMAL_DROP": "Normal",
+      "EXTRA_DROP": "Extra",
+      "SPECIAL_DROP": "Special"
     },
     "selector": {
       "plannerExclude": "Exclude Planning Stages",
@@ -213,7 +240,6 @@
       "byProduct": "Consider by-products",
       "requireExp": "Large demand for EXP",
       "requireLmb": "Large demand for LMD",
-      "foreignServer": "Do not suggest CN-only stages",
       "excludeStage": "Exclude Stages"
     },
     "actions": {
@@ -241,6 +267,29 @@
       "noSyntheses": "No syntheses found."
     }
   },
+  "items": {
+    "choose": {
+      "name": "Choose Item"
+    },
+    "categories": {
+      "ACTIVITY_ITEM": "Event item",
+      "CARD_EXP": "Battle Records",
+      "FURN": "Furniture",
+      "MATERIAL": "Materials"
+    }
+  },
+  "query": {
+    "selector": {
+      "item": {
+        "title": "Choose Item",
+        "subtitle": "Used to filter the query results by specified materials. When any filter is selected, no other filters can be selected in the same query. If you want to filter other parameters, you can do it by adding a comparison query."
+      },
+      "stage": {
+        "title": "Choose Stage",
+        "subtitle": "Used to filter the query results by specified materials. When any filter is selected, no other filters can be selected in the same query. If you want to filter other parameters, you can do it by adding a comparison query."
+      }
+    }
+  },
   "version": {
     "upgrade": {
       "title": "Version Outdated",
@@ -248,5 +297,9 @@
       "action": "Upgrade",
       "unable": "Can't Upgrade?"
     }
+  },
+  "notice": {
+    "failed": "Failed to load notice: {error}",
+    "loading": "Loading Notice..."
   }
 }

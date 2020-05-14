@@ -1,18 +1,18 @@
 <i18n>
-  {
-    "zh": {
-      "scroll": "左右滑动查看数据"
-    },
-    "en": {
-      "scroll": "Scroll to view details"
-    },
-    "ja": {
-      "scroll": "左右にスクロールでデータを表示"
-    },
-    "ko": {
-      "scroll": "스크롤로 세부 사항을 볼 수 있습니다"
-    }
-  }
+{
+	"en": {
+		"scroll": "Scroll to view details"
+	},
+	"ja": {
+		"scroll": "左右にスクロールでデータを表示"
+	},
+	"ko": {
+		"scroll": "스크롤로 세부 사항을 볼 수 있습니다"
+	},
+	"zh": {
+		"scroll": "左右滑动查看数据"
+	}
+}
 </i18n>
 
 <template>
@@ -179,36 +179,36 @@
             {{ props.item.times }}
           </td>
           <td
+            class="d-flex align-center justify-start fill-height"
             :class="tableCellClasses"
           >
-            <!--          <div-->
-            <!--            class="charts-data-wrapper"-->
-            <!--            fill-height-->
-            <!--          >-->
-            <!--            -->
-            <!--            <div-->
-            <!--              class="charts-wrapper cursor-pointer"-->
-            <!--              fill-height-->
-            <!--            >-->
-            <!--                <Charts-->
-            <!--                  v-if="currentTrends"-->
-            <!--                  :interval="currentTrends && currentTrends.interval"-->
-            <!--                  :x-start="currentTrends && currentTrends.startTime"-->
-            <!--                  :show-dialog="expanded[props.item.item.itemId]"-->
-            <!--                  :data-keys="['quantity']"-->
-            <!--                  :data="currentTrendsData && currentTrendsData[props.item.item.itemId]"-->
-            <!--                  :charts-id="props.item.item.itemId"-->
-            <!--                  sparkline-key="quantity"-->
-            <!--                  sparkline-sub-key="times"-->
-            <!--                />-->
-            <!--            </div>-->
-            <!--          </div>-->
-            {{ props.item.percentageText }}
+            <span class="mr-2">
+              {{ props.item.percentageText }}
+            </span>
+
+            <Charts
+              v-if="trends"
+              :interval="trends && trends.interval"
+              :x-start="trends && getTrendsData(props).startTime"
+              :show-dialog="expandTrends"
+              :data-keys="['quantity']"
+              :data="getTrendsData(props).results"
+              :charts-id="chartId(props)"
+              sparkline-key="quantity"
+              sparkline-sub-key="times"
+
+              :meta="meta(props)"
+            />
           </td>
           <td
             :class="tableCellClasses"
           >
             {{ props.item.apPPR }}
+          </td>
+          <td
+            :class="tableCellClasses"
+          >
+            {{ formatDate(props.item) }}
           </td>
         </tr>
       </template>
@@ -227,10 +227,12 @@
   import Item from "@/components/global/Item";
   import {mapGetters} from "vuex";
   import Theme from "@/mixins/Theme";
+  import Charts from "@/components/stats/Charts";
+  import timeFormatter from "@/utils/timeFormatter";
 
   export default {
     name: "DataTable",
-    components: {Item},
+    components: {Item, Charts},
     mixins: [Theme],
     props: {
       items: {
@@ -245,7 +247,16 @@
       },
       type: {
         type: String,
-        required: true
+        required: true,
+        validator (val) {
+          return ['item', 'stage'].includes(val)
+        }
+      },
+      trends: {
+        type: Object,
+        default () {
+          return null
+        }
       }
     },
     data() {
@@ -260,7 +271,8 @@
           }
         },
         tableCellClasses: "px-2 font-weight-bold monospace",
-        hideItemName: false
+        hideItemName: false,
+        expandTrends: false
       }
     },
     computed: {
@@ -294,6 +306,13 @@
             align: "left",
             sortable: true,
             width: "110px"
+          },
+          {
+            text: this.$t("stats.headers.timeRange"),
+            value: "timeRange",
+            align: "left",
+            sortable: false,
+            width: "140px"
           }
         ];
 
@@ -321,6 +340,7 @@
               width: "70px"
             })
         }
+
         return headers
       },
       strings () {
@@ -328,6 +348,21 @@
       }
     },
     methods: {
+      getTrendsData(props) {
+        if (this.type === "stage") {
+          if (this.trends && this.trends.results && this.trends.results[props.item.item.itemId]) {
+            return {
+              results: this.trends.results[props.item.item.itemId],
+              startTime: this.trends.startTime
+            }
+          }
+        } else {
+          if (this.trends && props.item.stage.stageId in this.trends) {
+            return this.trends[props.item.stage.stageId]
+          }
+        }
+        return false
+      },
       redirectItem(itemId) {
         this.$router.push({
           name: "StatsByItem_SelectedItem",
@@ -345,6 +380,38 @@
             stageId
           }
         });
+      },
+      chartId (rowProps) {
+        if (this.type === "stage") {
+          return rowProps.item.item.itemId
+        } else {
+          return rowProps.item.stage.stageId
+        }
+      },
+      meta (rowProps) {
+        if (this.type === "stage") {
+          return {
+            name: strings.translate(rowProps.item.item, "name")
+          }
+        } else {
+          return {
+            name: strings.translate(rowProps.item.stage, "code")
+          }
+        }
+      },
+      formatDate (item) {
+        const start = item.start
+        const end = item.end
+
+        if (start && end) {
+          return this.$t('stats.timeRange.inBetween', timeFormatter.dates([item.start, item.end], false))
+        } else if (start && !end) {
+          return this.$t('stats.timeRange.toPresent', {date: timeFormatter.date(item.start)})
+        } else if (!start && end) {
+          return this.$t('stats.timeRange.endsAt', {date: timeFormatter.date(item.end)})
+        } else {
+          return this.$t('stats.timeRange.unknown')
+        }
       }
     },
   }
@@ -378,6 +445,7 @@
     display: flex;
     align-items: center;
   }
+
 
   .item-name, .item-name--chevron, .item-name--text {
     transition: text-shadow .1s cubic-bezier(.25,.8,.5,1), filter .1s cubic-bezier(.25,.8,.5,1), transform .225s cubic-bezier(.25,.8,.5,1), opacity .225s cubic-bezier(.25,.8,.5,1) !important;
