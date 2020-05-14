@@ -12,7 +12,7 @@
 		"notice": "You can connect and manage drop reports using your User ID. If you don't have a User ID yet, you will be automatically assigned one after you've made your first report.",
 		"success": "Successfully logged in",
 		"userId": "User ID",
-    "details": "User Detail",
+    "details": "Account",
     "loggedAs": "Logged in as"
 	},
 	"ja": {
@@ -53,7 +53,7 @@
 		"notice": "用户 ID 仅用来标记您的上传身份。在不同设备上使用此 ID 登录，可让掉落数据集中于一个账号下，方便管理上传以及查看个人掉落数据。若无用户 ID，上传一次掉落后即可拥有用户 ID。",
 		"success": "登录成功",
 		"userId": "用户 ID",
-    "details": "用户信息",
+    "details": "账户信息",
     "loggedAs": "已登录为"
 	}
 }
