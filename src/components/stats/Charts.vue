@@ -224,6 +224,7 @@ export default {
           yAxis: [
             {
               min: 0,
+              name: this.$t('stats.trends.set.rate'),
               title: {
                 style: {
                   color: theme.text
@@ -231,6 +232,7 @@ export default {
                 text: this.$t('stats.trends.set.rate'),
               },
               labels: {
+                format: '{value} %',
                 style: {
                   color: theme.text
                 }
@@ -238,6 +240,7 @@ export default {
             },
             {
               min: 0,
+              name: this.$t('stats.trends.set.sample'),
               title: {
                 style: {
                   color: theme.text
@@ -257,12 +260,14 @@ export default {
             {
               name: this.$t('stats.trends.set.sample'),
               type: "column",
+              yAxis: 1,
               data: this.yAxis[0],
               color: theme.accent2
             },
             {
               name: this.$t('stats.trends.set.rate'),
               type: "spline",
+              yAxis: 0,
               data: this.sparklineData,
               tooltip: {
                 valueSuffix: '%'

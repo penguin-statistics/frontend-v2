@@ -395,7 +395,7 @@
           }
         } else {
           return {
-            name: strings.translate(rowProps.item.item, "code")
+            name: strings.translate(rowProps.item.stage, "code")
           }
         }
       },
