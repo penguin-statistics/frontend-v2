@@ -30,11 +30,9 @@
       :subtitle="$t('stats.trends.name')"
       @close="showDialog = false"
     >
-      <Plotly
+      <Chart
         v-if="showDialog"
-        :data="plotlyData.data"
-        :layout="plotlyData.layout"
-        v-bind="plotlyData.options"
+        :options="chartData"
         class="charts my-4"
       />
     </DialogCard>
@@ -45,11 +43,11 @@
 import formatter from "@/utils/timeFormatter";
 import Theme from "@/mixins/Theme";
 import DialogCard from "@/components/global/DialogCard";
-import { Plotly } from "vue-plotly";
+import { Chart } from "highcharts-vue";
 
 export default {
   name: "Charts",
-  components: {DialogCard, Plotly},
+  components: {DialogCard, Chart},
   mixins: [Theme],
   props: {
     xStart: {
@@ -191,65 +189,156 @@ export default {
         return null;
       }
     },
-    plotlyData () {
+    chartData () {
       if (this.showDialog) {
-        const traceArray = Object.keys(this.yAxis).map(yAxisKey => {
-          return {
-            x: this.xAxis,
-            y: this.yAxis[yAxisKey],
-            opacity: .8,
-            type: "bar",
-            name: this.$t('stats.trends.set.sample'),
-            connectgaps: true,
-          };
-        });
-        traceArray.push({
-          x: this.xAxis,
-          y: this.sparklineData,
-          yaxis: "y2",
-          error_y: {
-            type: 'percent',
-            value: 10
-          },
-          opacity: 1,
-          line: { shape: "spline", smoothing: 0.5 },
-          connectgaps: true,
-          name: this.$t('stats.trends.set.rate')
-        });
+        const theme = this.$vuetify.theme.currentTheme
 
         return {
-          data: traceArray,
-          layout: {
-            // width: "500px",
-            // height: "500px",
-            yaxis: {
-              title: this.$t('stats.trends.set.sample'),
-              titlefont: { color: this.$vuetify.theme.currentTheme.accent2 },
-              tickfont: { color: this.$vuetify.theme.currentTheme.accent2 }
+          title: {
+            style: {
+              color: theme.text
             },
-            yaxis2: {
-              title: this.$t('stats.trends.set.rate'),
-              titlefont: { color: this.$vuetify.theme.currentTheme.accent3 },
-              tickfont: { color: this.$vuetify.theme.currentTheme.accent3 },
-              overlaying: "y",
-              side: "right"
+            text: this.meta.name
+          },
+
+          subtitle: {
+            style: {
+              color: theme.textDarken
             },
-            paper_bgcolor: this.$vuetify.theme.currentTheme.background,
-            plot_bgcolor: this.$vuetify.theme.currentTheme.background,
-            font: {
-              color: this.$vuetify.theme.currentTheme.text,
+            text: this.$t('stats.trends.name')
+          },
+
+          xAxis: {
+            categories: this.xAxis,
+            labels: {
+              style: {
+                color: theme.text
+              }
+            },
+            title: {
+              style: {
+                color: theme.text
+              }
             }
           },
-          options: {
-            displayLogo: false,
-            toImageButtonOptions: {
-              format: 'png', // one of png, svg, jpeg, webp
-              filename: `penguin-stats_export-${this.chartsId}_time${new Date().getTime()}`,
-              height: 1000,
-              width: 1400,
-              scale: 1 // Multiply title/legend/axis/canvas sizes by this factor
+          yAxis: [
+            {
+              min: 0,
+              title: {
+                style: {
+                  color: theme.text
+                },
+                text: this.$t('stats.trends.set.rate'),
+              },
+              labels: {
+                style: {
+                  color: theme.text
+                }
+              },
+            },
+            {
+              min: 0,
+              title: {
+                style: {
+                  color: theme.text
+                },
+                text: this.$t('stats.trends.set.sample'),
+              },
+              labels: {
+                style: {
+                  color: theme.text
+                }
+              },
+              opposite: true
+            }
+          ],
+
+          series: [
+            {
+              name: this.$t('stats.trends.set.sample'),
+              type: "column",
+              data: this.yAxis[0],
+              color: theme.accent2
+            },
+            {
+              name: this.$t('stats.trends.set.rate'),
+              type: "spline",
+              data: this.sparklineData,
+              tooltip: {
+                valueSuffix: '%'
+              },
+              color: theme.accent3,
+              marker: {
+                lineWidth: 2,
+                radius: 2,
+                lineColor: theme.text,
+                fillColor: theme.text
+              },
+              connectNulls: true
+            }
+          ],
+          tooltip: {
+            shared: true
+          },
+          credits: {
+            enabled: false
+          },
+          legend: {
+            itemStyle: {
+              color: theme.text
+            }
+          },
+          pane: {
+            background: {
+              backgroundColor: theme.background
+            }
+          },
+          chart: {
+            backgroundColor: theme.background,
+            style: {
+              color: theme.text
             }
           }
+
+          // plotOptions: {
+          //   column: {
+          //     grouping: false,
+          //     shadow: false,
+          //     borderWidth: 0
+          //   }
+          // },
+
+          // layout: {
+          //   // width: "500px",
+          //   // height: "500px",
+          //   yaxis: {
+          //     title: this.$t('stats.trends.set.sample'),
+          //     titlefont: { color: this.$vuetify.theme.currentTheme.accent2 },
+          //     tickfont: { color: this.$vuetify.theme.currentTheme.accent2 }
+          //   },
+          //   yaxis2: {
+          //     title: this.$t('stats.trends.set.rate'),
+          //     titlefont: { color: this.$vuetify.theme.currentTheme.accent3 },
+          //     tickfont: { color: this.$vuetify.theme.currentTheme.accent3 },
+          //     overlaying: "y",
+          //     side: "right"
+          //   },
+          //   paper_bgcolor: this.$vuetify.theme.currentTheme.background,
+          //   plot_bgcolor: this.$vuetify.theme.currentTheme.background,
+          //   font: {
+          //     color: this.$vuetify.theme.currentTheme.text,
+          //   }
+          // },
+          // options: {
+          //   displayLogo: false,
+          //   toImageButtonOptions: {
+          //     format: 'png', // one of png, svg, jpeg, webp
+          //     filename: `penguin-stats_export-${this.chartsId}_time${new Date().getTime()}`,
+          //     height: 1000,
+          //     width: 1400,
+          //     scale: 1 // Multiply title/legend/axis/canvas sizes by this factor
+          //   }
+          // }
         }
       } else {
         return {
