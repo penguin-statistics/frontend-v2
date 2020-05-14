@@ -192,20 +192,10 @@
 .slash-strip--danger {
     background: repeating-linear-gradient(
             -45deg,
-            rgba(226, 81, 65, .75),
-            rgba(226, 81, 65, .75) 45px,
+            rgb(209, 75, 61),
+            rgb(209, 75, 61) 45px,
             rgb(0, 0, 0) 45px,
             rgb(0, 0, 0) 90px
-    );
-}
-
-.theme--light .slash-strip--danger {
-    background: repeating-linear-gradient(
-            -45deg,
-            rgb(227, 100, 86),
-            rgb(227, 100, 86) 45px,
-            rgb(255, 255, 255) 45px,
-            rgb(255, 255, 255) 90px
     );
 }
 
@@ -232,8 +222,8 @@
 .theme--light .slash-strip--danger {
     background: repeating-linear-gradient(
             -45deg,
-            rgba(226, 81, 65, .75),
-            rgba(226, 81, 65, .75) 45px,
+            rgb(245, 104, 88),
+            rgb(245, 104, 88) 45px,
             rgb(255, 255, 255) 45px,
             rgb(255, 255, 255) 90px
     );

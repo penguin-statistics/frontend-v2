@@ -38,7 +38,7 @@
         <h2
           ref="notifyOverlayServerName"
           class="monospace"
-          style="font-size: 128px; opacity: 0"
+          style="font-size: 96px; opacity: 0"
         >
           {{ $t('server.servers.' + $store.getters['dataSource/server']) }}
         </h2>
