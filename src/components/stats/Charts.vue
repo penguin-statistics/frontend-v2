@@ -237,6 +237,7 @@ export default {
                   color: theme.text
                 }
               },
+              tickInterval: 1
             },
             {
               min: 0,
@@ -252,6 +253,7 @@ export default {
                   color: theme.text
                 }
               },
+              tickInterval: 1,
               opposite: true
             }
           ],

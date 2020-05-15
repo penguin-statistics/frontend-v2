@@ -238,7 +238,6 @@
             <li>{{ $t('rules.rule_2') }}</li>
             <li>{{ $t('rules.rule_3') }}</li>
             <li>{{ $t('rules.rule_4') }}</li>
-            <li>{{ $t('rules.rule_5') }}</li>
           </ol>
         </v-alert>
 
