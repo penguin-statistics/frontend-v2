@@ -50,9 +50,10 @@
         queries: [
           {
             stage: undefined,
-            item: undefined,
+            item: [],
             timeRange: undefined,
             server: undefined,
+            source: "global",
           }
         ]
       }

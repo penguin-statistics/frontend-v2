@@ -1,58 +1,66 @@
 <i18n>
-{
-	"en": {
-		"quickStart": "Quick Start",
-		"subtitle": {
-			"byItem": "Where should I farm for Orirock?",
-			"byStage": "What are the drop rates of this stage?",
-			"planner": "Please gimme some farming advice"
+	{
+		"en": {
+			"quickStart": "Quick Start",
+			"subtitle": {
+				"report": "I want to report drops",
+				"byItem": "Where should I farm for Orirock?",
+				"byStage": "What are the drop rates of this stage?",
+				"planner": "Please gimme some farming advice"
+			},
+			"title": {
+				"report": "Report Drops",
+				"byItem": "Item Drop Rates",
+				"byStage": "Stage Drop Rates",
+				"planner": "Farm Planning"
+			}
 		},
-		"title": {
-			"byItem": "Item Drop Rates",
-			"byStage": "Stage Drop Rates",
-			"planner": "Farm Planning"
-		}
-	},
-	"ja": {
-		"quickStart": "クイックスタート",
-		"subtitle": {
-			"byItem": "Where should I farm for Orirock?",
-			"byStage": "What are the drop rates of this stage?",
-			"planner": "Please gimme some farming advice"
+		"ja": {
+			"quickStart": "クイックスタート",
+			"subtitle": {
+				"report": "I want to report drops",
+				"byItem": "Where should I farm for Orirock?",
+				"byStage": "What are the drop rates of this stage?",
+				"planner": "Please gimme some farming advice"
+			},
+			"title": {
+				"report": "ドロップ報告",
+				"byItem": "素材ドロップ率",
+				"byStage": "作戦ドロップ率",
+				"planner": "周回計画"
+			}
 		},
-		"title": {
-			"byItem": "素材ドロップ率",
-			"byStage": "作戦ドロップ率",
-			"planner": "周回計画"
-		}
-	},
-	"ko": {
-		"quickStart": "빠른 시작",
-		"subtitle": {
-			"byItem": "Where should I farm for Orirock?",
-			"byStage": "What are the drop rates of this stage?",
-			"planner": "Please gimme some farming advice"
+		"ko": {
+			"quickStart": "빠른 시작",
+			"subtitle": {
+				"report": "I want to report drops",
+				"byItem": "Where should I farm for Orirock?",
+				"byStage": "What are the drop rates of this stage?",
+				"planner": "Please gimme some farming advice"
+			},
+			"title": {
+				"report": "Report Drops",
+				"byItem": "Item Drop Rates",
+				"byStage": "Stage Drop Rates",
+				"planner": "Farm Planning"
+			}
 		},
-		"title": {
-			"byItem": "Item Drop Rates",
-			"byStage": "Stage Drop Rates",
-			"planner": "Farm Planning"
-		}
-	},
-	"zh": {
-		"quickStart": "快速上手",
-		"subtitle": {
-			"byItem": "我该去哪刷石头？",
-			"byStage": "这图掉率如何？",
-			"planner": "请给我刷图建议"
-		},
-		"title": {
-			"byItem": "素材掉率",
-			"byStage": "关卡掉率",
-			"planner": "刷图规划"
+		"zh": {
+			"quickStart": "快速上手",
+			"subtitle": {
+				"report": "我要汇报掉落",
+				"byItem": "我该去哪刷石头？",
+				"byStage": "这图掉率如何？",
+				"planner": "请给我刷图建议"
+			},
+			"title": {
+				"report": "掉落汇报",
+				"byItem": "素材掉率",
+				"byStage": "关卡掉率",
+				"planner": "刷图规划"
+			}
 		}
 	}
-}
 </i18n>
 
 <template>
@@ -70,6 +78,15 @@
       {{ $t('quickStart') }}
     </h1>
 
+    <span class="subtitle-2 my-2 d-inline-flex align-center flex-row flex-wrap justify-end">
+      点击左上角 <v-icon
+        small
+        class="mx-1"
+      >
+        mdi-menu
+      </v-icon> 按钮展开菜单以查看更多功能
+    </span>
+
     <v-row
       justify="center"
       align="center"
@@ -77,8 +94,9 @@
       <v-col
         v-for="link in links"
         :key="link.title"
-        cols="12"
-        sm="4"
+        cols="6"
+        sm="6"
+        md="3"
       >
         <BackdropCard
           hover
@@ -97,7 +115,7 @@
             {{ link.icon }}
           </v-icon>
 
-          <h2 class="heading my-1">
+          <h2 :class="{'subtitle-2 font-weight-bold mt-1': $vuetify.breakpoint.xsOnly, 'heading my-1': !$vuetify.breakpoint.xsOnly}">
             {{ renderTranslation(link.title) }}
           </h2>
 
@@ -118,6 +136,12 @@
     data() {
       return {
         links: [
+					{
+						route: "Report",
+						icon: "mdi-upload",
+						title: 'title.report',
+						subtitle: 'subtitle.report'
+					},
           {
             route: "Planner",
             icon: "mdi-directions-fork",
