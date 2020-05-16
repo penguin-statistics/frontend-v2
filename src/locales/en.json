@@ -98,9 +98,11 @@
       "name": "Historical Drop Data",
       "set": {
         "rate": "Drop Rate",
-        "sample": "Samples"
+        "sample": "Samples",
+        "drops": "Drops"
       }
-    }
+    },
+    "lastUpdated": "Last updated at: {date}"
   },
   "contribute": {
     "repo": "Project repositories: ",
@@ -301,5 +303,12 @@
   "notice": {
     "failed": "Failed to load notice: {error}",
     "loading": "Loading Notice..."
+  },
+  "dataSource": {
+    "switch": "Change Data Source",
+    "global": "All",
+    "loginNotice": "Please log in before viewing personal drop data.",
+    "personal": "Personal",
+    "title": "Login Required"
   }
 }

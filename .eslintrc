@@ -1,8 +1,7 @@
 {
   "root": true,
   "globals": {
-    "GIT_COMMIT": true,
-    "workbox": true
+    "GIT_COMMIT": true
   },
   "env": {
     "node": true
@@ -15,7 +14,8 @@
     "no-console": "off",
     "vuetify/no-deprecated-classes": "error",
     "vuetify/grid-unknown-attributes": "error",
-    "vuetify/no-legacy-grid": "error"
+    "vuetify/no-legacy-grid": "error",
+    "vue/no-v-html": "off"
   },
   "parserOptions": {
     "parser": "babel-eslint"

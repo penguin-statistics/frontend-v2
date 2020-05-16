@@ -1,40 +1,3 @@
-<i18n>
-{
-	"en": {
-		"dataSourceToggle": {
-			"all": "All",
-			"loginNotice": "Please log in before viewing personal drop data.",
-			"personal": "Personal",
-			"title": "Login Required"
-		}
-	},
-	"ja": {
-		"dataSourceToggle": {
-			"all": "全体",
-			"loginNotice": "個人のドロップデータを表示するにはログインが必要となります。",
-			"personal": "個人",
-			"title": "ログインが必要です"
-		}
-	},
-	"ko": {
-		"dataSourceToggle": {
-			"all": "전체",
-			"loginNotice": "개인 보고서를 보시려면 로그인해 주세요.",
-			"personal": "개인",
-			"title": "로그인 필요"
-		}
-	},
-	"zh": {
-		"dataSourceToggle": {
-			"all": "全平台",
-			"loginNotice": "查看个人掉落数据前，请先登录",
-			"personal": "个人",
-			"title": "需要登录"
-		}
-	}
-}
-</i18n>
-
 <template>
   <span>
     <v-dialog
@@ -62,10 +25,10 @@
     >
       <v-card>
         <v-card-title class="headline">
-          {{ $t('dataSourceToggle.title') }}
+          {{ $t('dataSource.title') }}
         </v-card-title>
         <v-card-text>
-          {{ $t('dataSourceToggle.loginNotice') }}
+          {{ $t('dataSource.loginNotice') }}
         </v-card-text>
 
         <v-card-actions>
@@ -85,13 +48,13 @@
         small
         value="global"
       >
-        {{ $t('dataSourceToggle.all') }}
+        {{ $t('dataSource.global') }}
       </v-btn>
       <v-btn
         small
         value="personal"
       >
-        {{ $t('dataSourceToggle.personal') }}
+        {{ $t('dataSource.personal') }}
       </v-btn>
     </v-btn-toggle>
   </span>

@@ -8,7 +8,7 @@ const trends = new ObjectManager({
 
     url: '/result/trends',
     extraParams: {
-      "range_day": 30
+      "range_day": 60
     }
   },
   transform: [
