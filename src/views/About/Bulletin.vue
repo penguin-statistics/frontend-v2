@@ -135,7 +135,7 @@
         return notices.filter(notice => {
           const conditions = notice["conditions"]
 
-          if (!conditions["locale"].includes(self.$i18n.locale)) return false;
+          if ("server" in conditions && !conditions["server"].includes(self.$store.getters["dataSource/server"])) return false;
           if (conditions["start"] && Date.now() < conditions["start"]) return false;
           if (conditions["end"] && Date.now() > conditions["end"]) return false;
 
