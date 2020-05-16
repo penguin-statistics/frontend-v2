@@ -201,9 +201,10 @@ export default {
       ],
       links: [
         {
-          url: "/PenguinStats/swagger/swagger-ui.html",
+          url: "https://developer.penguin-stats.io/docs/",
           icon: "mdi-api",
-          title: "link.api"
+          title: "link.api",
+          external: true
         },
         {
           url: "https://developer.penguin-stats.io",

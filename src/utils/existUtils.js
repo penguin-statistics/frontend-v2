@@ -12,7 +12,7 @@ export default {
       //   if (!(ext["closeTime"] < now)) return false
       // }
       const server = store.getters["dataSource/server"]
-      return server in ext && ext["server"]["exist"]
+      return server in ext && ext[server]["exist"]
     }
     return true
   }
