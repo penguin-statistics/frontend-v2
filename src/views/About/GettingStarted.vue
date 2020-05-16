@@ -137,7 +137,7 @@
       return {
         links: [
 					{
-						route: "Report",
+						route: "ReportByZone",
 						icon: "mdi-upload",
 						title: 'title.report',
 						subtitle: 'subtitle.report'
