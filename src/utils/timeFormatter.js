@@ -29,7 +29,10 @@ function needYear(moments) {
 }
 
 export default {
-  dayjs,
+  get dayjs () {
+    dayjs.locale(i18n.locale)
+    return dayjs
+  },
   isOutdated(rangeEnd) {
     return dayjs().isAfter(rangeEnd)
   },
