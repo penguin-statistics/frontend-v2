@@ -98,7 +98,8 @@
       "name": "Historical Drop Data",
       "set": {
         "rate": "Drop Rate",
-        "sample": "Samples"
+        "sample": "Samples",
+        "drops": "Drops"
       }
     },
     "lastUpdated": "Last updated at: {date}"

@@ -15,9 +15,7 @@ import * as Integrations from '@sentry/integrations';
 import { Integrations as ApmIntegrations } from '@sentry/apm';
 import mirror from "@/utils/mirror";
 
-if (!window.Intl) {
-  require("intl-collator")
-}
+if (!window.Intl) require("intl-collator")
 
 const production = process.env.NODE_ENV === 'production';
 

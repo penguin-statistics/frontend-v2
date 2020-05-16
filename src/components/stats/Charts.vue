@@ -33,6 +33,7 @@
       <Chart
         v-if="showDialog"
         :options="chartData"
+        :highcharts="highchartsInst"
         class="charts mt-4"
       />
       <div class="text-center caption">
@@ -48,6 +49,13 @@ import Theme from "@/mixins/Theme";
 import DialogCard from "@/components/global/DialogCard";
 import { Chart } from "highcharts-vue";
 import timeFormatter from "@/utils/timeFormatter";
+
+import Highcharts from 'highcharts'
+import exportingInit from 'highcharts/modules/exporting'
+import exportDataInit from 'highcharts/modules/export-data'
+
+exportingInit(Highcharts)
+exportDataInit(Highcharts)
 
 export default {
   name: "Charts",
@@ -104,6 +112,9 @@ export default {
     };
   },
   computed: {
+    highchartsInst () {
+      return Highcharts
+    },
     gradient() {
       return this.dark ?
         ["rgba(255, 255, 255, .3)", "rgba(255, 255, 255, 1)"] :
@@ -228,29 +239,10 @@ export default {
                 color: theme.text
               }
             },
-            crosshair: {
-              enabled: true
-            }
+            crosshair: true
           },
 
           yAxis: [
-            {
-              min: 0,
-              name: this.$t('stats.trends.set.sample'),
-              title: {
-                style: {
-                  color: theme.text
-                },
-                text: this.$t('stats.trends.set.sample'),
-              },
-              labels: {
-                style: {
-                  color: theme.text
-                }
-              },
-              minTickInterval: 1,
-              opposite: true
-            },
             {
               min: 0,
               name: this.$t('stats.trends.set.rate'),
@@ -266,6 +258,23 @@ export default {
                   color: theme.text
                 }
               },
+              opposite: true
+            },
+            {
+              min: 0,
+              name: this.$t('stats.trends.set.sample'),
+              title: {
+                style: {
+                  color: theme.text
+                },
+                text: this.$t('stats.trends.set.sample'),
+              },
+              labels: {
+                style: {
+                  color: theme.text
+                }
+              },
+              minTickInterval: 1
             }
           ],
 
@@ -273,14 +282,21 @@ export default {
             {
               name: this.$t('stats.trends.set.sample'),
               type: "column",
-              yAxis: 0,
+              yAxis: 1,
               data: this.data["times"],
+              color: theme.accent1
+            },
+            {
+              name: this.$t('stats.trends.set.drops'),
+              type: "column",
+              yAxis: 1,
+              data: this.data["quantity"],
               color: theme.accent2
             },
             {
               name: this.$t('stats.trends.set.rate'),
               type: "spline",
-              yAxis: 1,
+              yAxis: 0,
               data: this.sparklineData,
               tooltip: {
                 valueSuffix: '%',
@@ -323,7 +339,7 @@ export default {
             style: {
               color: theme.text
             },
-            crosshairs: true
+            crosshairs: true,
           },
 
           credits: {
@@ -352,47 +368,13 @@ export default {
 
           plotOptions: {
             column: {
-              grouping: false,
+              grouping: true,
               shadow: false,
               borderWidth: 0
-            },
-            line: {
-              findNearestPointBy: 'x',
             }
-          },
-
-          // layout: {
-          //   // width: "500px",
-          //   // height: "500px",
-          //   yaxis: {
-          //     title: this.$t('stats.trends.set.sample'),
-          //     titlefont: { color: this.$vuetify.theme.currentTheme.accent2 },
-          //     tickfont: { color: this.$vuetify.theme.currentTheme.accent2 }
-          //   },
-          //   yaxis2: {
-          //     title: this.$t('stats.trends.set.rate'),
-          //     titlefont: { color: this.$vuetify.theme.currentTheme.accent3 },
-          //     tickfont: { color: this.$vuetify.theme.currentTheme.accent3 },
-          //     overlaying: "y",
-          //     side: "right"
-          //   },
-          //   paper_bgcolor: this.$vuetify.theme.currentTheme.background,
-          //   plot_bgcolor: this.$vuetify.theme.currentTheme.background,
-          //   font: {
-          //     color: this.$vuetify.theme.currentTheme.text,
-          //   }
-          // },
-          // options: {
-          //   displayLogo: false,
-          //   toImageButtonOptions: {
-          //     format: 'png', // one of png, svg, jpeg, webp
-          //     filename: `penguin-stats_export-${this.chartsId}_time${new Date().getTime()}`,
-          //     height: 1000,
-          //     width: 1400,
-          //     scale: 1 // Multiply title/legend/axis/canvas sizes by this factor
-          //   }
-          // }
+          }
         }
+
       } else {
         return {}
       }
