@@ -2,6 +2,7 @@
   <v-row
     class="fill-height"
     align="start"
+    no-gutters
   >
     <v-col
       cols="12"
@@ -30,7 +31,6 @@
 </template>
 
 <script>
-  import validator from "@/utils/validator";
   import QueryResults from "@/components/advancedQuery/QueryResults";
   import QueryBuilder from "@/components/advancedQuery/QueryBuilder";
 
@@ -52,24 +52,17 @@
             stage: undefined,
             item: [],
             timeRange: undefined,
-            server: undefined,
+            server: this.$store.getters["dataSource/server"],
             source: "global",
           }
         ]
       }
     },
-    computed: {
-      builderProps() {
-        return {
-          queries: this.queries
-        }
-      }
-    },
     created () {
       // rehydrate preset settings
-      if (this.preset && validator.exclusive(this.preset.stage, this.preset.item)) {
-        if (this.preset.stage) return this.queries[0].stage = this.preset.stage
-        if (this.preset.item) return this.queries[0].item = this.preset.item
+      if (this.preset) {
+        if (this.preset.stage) this.queries[0].stage = this.preset.stage
+        if (this.preset.item) this.queries[0].item = this.preset.item
       }
     },
   }

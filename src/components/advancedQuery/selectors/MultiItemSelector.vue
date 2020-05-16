@@ -15,15 +15,20 @@
           class="d-flex flex-column align-center item-list-item-wrapper"
         >
           <v-badge
+            bordered
             bottom
             overlap
-            color="indigo"
-            :icon="states[item.itemId] ? 'mdi-check' : ''"
+
+            :offset-x="16"
+            :offset-y="20"
+            :color="states[item.itemId] ? 'green darken-1' : 'red darken-1'"
+            :icon="states[item.itemId] ? 'mdi-check' : 'mdi-close'"
             :value="states[item.itemId]"
             class="item-list-item-avatar"
           >
             <span
-              class="cursor-pointer"
+              class="transition-all cursor-pointer"
+              :style="{'filter': states[item.itemId] ? 'drop-shadow(0 0 5px rgba(255, 255, 255, .7))' : 'none'}"
               @click.left="select(item.itemId)"
               @click.right.prevent="select(item.itemId, true)"
             >

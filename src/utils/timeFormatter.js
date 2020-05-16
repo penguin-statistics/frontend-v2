@@ -6,6 +6,7 @@ const relativeTime = require('dayjs/plugin/relativeTime')
 import 'dayjs/locale/zh'
 import 'dayjs/locale/ja'
 import 'dayjs/locale/ko'
+import i18n from "@/i18n";
 const isBetween = require('dayjs/plugin/isBetween')
 dayjs.extend(relativeTime)
 dayjs.extend(isBetween)
@@ -43,7 +44,24 @@ export default {
     });
     return times
   },
-  date (date) {
-    return dayjs(date).format(`${FORMATS.MD}`)
+  date (date, detectSameYear=false, includeTime=false) {
+    let template = FORMATS.MD;
+    if (detectSameYear) {
+      const isSameYear = dayjs(date).isSame(dayjs(), 'year')
+      template = isSameYear ? FORMATS.MD : FORMATS.YMD
+    }
+    if (includeTime) template += ` ${FORMATS.HM}`
+    return dayjs(date).format(template)
+  },
+  startEnd (start, end) {
+    if (start && end) {
+      return i18n.t('stats.timeRange.inBetween', this.dates([start, end], false))
+    } else if (start && !end) {
+      return i18n.t('stats.timeRange.toPresent', {date: this.date(start, true)})
+    } else if (!start && end) {
+      return i18n.t('stats.timeRange.endsAt', {date: this.date(end, true)})
+    } else {
+      return i18n.t('stats.timeRange.unknown')
+    }
   }
 }

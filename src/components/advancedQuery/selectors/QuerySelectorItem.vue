@@ -14,7 +14,7 @@
           <template v-slot:activator="{ on }">
             <v-expand-x-transition>
               <v-icon
-                v-if="value"
+                v-if="value.length"
                 v-on="on"
               >
                 mdi-treasure-chest
@@ -33,18 +33,25 @@
           </v-card>
         </v-tooltip>
 
-
         <v-btn
           class="flex-grow-1"
-          :class="{'mx-1': value}"
+          :class="{'mx-1': value.length}"
           large
           :disabled="disabled"
           v-on="on"
         >
+          <v-icon
+            left
+            v-on="on"
+          >
+            mdi-treasure-chest
+          </v-icon>
+          
           {{ $t('query.selector.item.title') }} (selected {{ value.length }})
         </v-btn>
+
         <v-expand-x-transition>
-          <div v-if="value">
+          <div v-if="value.length">
             <v-btn
               icon
               @click="clear"
@@ -109,7 +116,7 @@
     },
     methods: {
       clear () {
-        this.$emit('input', null)
+        this.$emit('input', [])
       }
     }
   }

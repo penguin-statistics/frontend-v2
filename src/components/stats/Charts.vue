@@ -33,8 +33,11 @@
       <Chart
         v-if="showDialog"
         :options="chartData"
-        class="charts my-4"
+        class="charts mt-4"
       />
+      <div class="text-center caption">
+        {{ $t('stats.lastUpdated', {date: lastUpdated}) }}
+      </div>
     </DialogCard>
   </v-dialog>
 </template>
@@ -44,6 +47,7 @@ import formatter from "@/utils/timeFormatter";
 import Theme from "@/mixins/Theme";
 import DialogCard from "@/components/global/DialogCard";
 import { Chart } from "highcharts-vue";
+import timeFormatter from "@/utils/timeFormatter";
 
 export default {
   name: "Charts",
@@ -123,7 +127,7 @@ export default {
       let array = this.data[this.sparklineKey].map((item, index) => {
         return new Date(this.xStart + index * this.interval);
       });
-      return formatter.dates(array);
+      return formatter.dates(array, false);
     },
     yAxis() {
       let yAxis = Object.keys(this.data)
@@ -189,6 +193,10 @@ export default {
         return null;
       }
     },
+    lastUpdated () {
+      const last = this.$store.getters["data/updated"]({id: "trends"})
+      return `${timeFormatter.date(last, true, true)} (${timeFormatter.dayjs(last).fromNow()})`
+    },
     chartData () {
       if (this.showDialog) {
         const theme = this.$vuetify.theme.currentTheme
@@ -219,9 +227,30 @@ export default {
               style: {
                 color: theme.text
               }
+            },
+            crosshair: {
+              enabled: true
             }
           },
+
           yAxis: [
+            {
+              min: 0,
+              name: this.$t('stats.trends.set.sample'),
+              title: {
+                style: {
+                  color: theme.text
+                },
+                text: this.$t('stats.trends.set.sample'),
+              },
+              labels: {
+                style: {
+                  color: theme.text
+                }
+              },
+              minTickInterval: 1,
+              opposite: true
+            },
             {
               min: 0,
               name: this.$t('stats.trends.set.rate'),
@@ -237,23 +266,6 @@ export default {
                   color: theme.text
                 }
               },
-            },
-            {
-              min: 0,
-              name: this.$t('stats.trends.set.sample'),
-              title: {
-                style: {
-                  color: theme.text
-                },
-                text: this.$t('stats.trends.set.sample'),
-              },
-              labels: {
-                style: {
-                  color: theme.text
-                }
-              },
-              tickInterval: 1,
-              opposite: true
             }
           ],
 
@@ -261,17 +273,18 @@ export default {
             {
               name: this.$t('stats.trends.set.sample'),
               type: "column",
-              yAxis: 1,
-              data: this.yAxis[0],
+              yAxis: 0,
+              data: this.data["times"],
               color: theme.accent2
             },
             {
               name: this.$t('stats.trends.set.rate'),
               type: "spline",
-              yAxis: 0,
+              yAxis: 1,
               data: this.sparklineData,
               tooltip: {
-                valueSuffix: '%'
+                valueSuffix: '%',
+                valueDecimals: 2,
               },
               color: theme.accent3,
               marker: {
@@ -283,36 +296,70 @@ export default {
               connectNulls: true
             }
           ],
+
           tooltip: {
-            shared: true
+            shared: true,
+            // formatter: function () {
+            //   console.log("this", this)
+            //   return this.points.reduce(function (s, point, index) {
+            //     console.log("reduce", s, point, index)
+            //     let y = point.y
+            //     if (index === 1) y = `${y.toFixed(2)} %`
+            //     return `${s}<br/>${point.series.name}: ${y}`;
+            //   }, `<b>${this.x}</b>`);
+            // },
+
+            // split: true,
+            backgroundColor: theme.background,
+
+            useHTML: true,
+            headerFormat: '<h4 class="subtitle-1" style="margin-left: 2px">{point.key}</h4><table>',
+            pointFormat: `<tr style="color: ${theme.text}"><td style="color: {series.color}">{series.name}: </td>` +
+              `<td style="text-align: right"><b>{point.y}</b></td></tr>`,
+            footerFormat: '</table>',
+
+            // distance: 8,
+            // padding: 5,
+            style: {
+              color: theme.text
+            },
+            crosshairs: true
           },
+
           credits: {
             enabled: false
           },
+
           legend: {
             itemStyle: {
               color: theme.text
             }
           },
+
           pane: {
             background: {
               backgroundColor: theme.background
             }
           },
+
           chart: {
             backgroundColor: theme.background,
             style: {
+              fontFamily: `"benderregular", SF Mono, "Droid Sans Mono", Ubuntu Mono, Consolas, Courier New, Courier, monospace`,
               color: theme.text
             }
-          }
+          },
 
-          // plotOptions: {
-          //   column: {
-          //     grouping: false,
-          //     shadow: false,
-          //     borderWidth: 0
-          //   }
-          // },
+          plotOptions: {
+            column: {
+              grouping: false,
+              shadow: false,
+              borderWidth: 0
+            },
+            line: {
+              findNearestPointBy: 'x',
+            }
+          },
 
           // layout: {
           //   // width: "500px",
@@ -347,11 +394,7 @@ export default {
           // }
         }
       } else {
-        return {
-          data: [],
-          layout: {},
-          options: {}
-        }
+        return {}
       }
     }
   },

@@ -203,5 +203,11 @@
       "FURN": "가구",
       "MATERIAL": "재료"
     }
+  },
+  "dataSource": {
+    "global": "전체",
+    "loginNotice": "개인 보고서를 보시려면 로그인해 주세요.",
+    "personal": "개인",
+    "title": "로그인 필요"
   }
 }

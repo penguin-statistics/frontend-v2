@@ -2,18 +2,17 @@
   <v-select
     :value="value"
     hide-details
-    prepend-icon="mdi-server"
+    prepend-icon="mdi-database"
 
     :menu-props="{ offsetY: true }"
     filled
     :items="servers"
-    :label="$t('server.switch')"
+    :label="$t('dataSource.switch')"
     transition="slide-y-transition"
-    class="mb-1"
     @input="e => $emit('input', e)"
   >
     <template v-slot:item="{item}">
-      {{ $t('server.servers.' + item) }}
+      {{ $t('dataSource.' + item) }}
       <span class="monospace ml-2">
         {{ item }}
       </span>
@@ -24,16 +23,14 @@
     </template>
 
     <template v-slot:selection="{item}">
-      {{ $t('server.servers.' + item) }}
+      {{ $t('dataSource.' + item) }}
     </template>
   </v-select>
 </template>
 
 <script>
-  import config from "@/config"
-
   export default {
-    name: "QuerySelectorServer",
+    name: "QuerySelectorSource",
     props: {
       value: {
         type: String,
@@ -42,8 +39,8 @@
     },
     data() {
       return {
-        selected: this.$store.getters["dataSource/server"],
-        servers: config.servers
+        selected: this.$store.getters["dataSource/source"],
+        servers: ["global", "personal"]
       }
     }
   }

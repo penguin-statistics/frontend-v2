@@ -203,5 +203,11 @@
       "FURN": "家具",
       "MATERIAL": "素材"
     }
+  },
+  "dataSource": {
+    "global": "全体",
+    "loginNotice": "個人のドロップデータを表示するにはログインが必要となります。",
+    "personal": "個人",
+    "title": "ログインが必要です"
   }
 }

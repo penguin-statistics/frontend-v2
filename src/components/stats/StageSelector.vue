@@ -157,7 +157,7 @@
   import Console from "@/utils/Console";
   import {mapGetters} from "vuex";
   import CDN from "@/mixins/CDN";
-  import timeUtils from "@/utils/timeUtils";
+  import existUtils from "@/utils/existUtils";
 
   export default {
     name: "StageSelector",
@@ -266,7 +266,7 @@
             zones = zones.map(zone => {
               let stages = get.stages.byParentZoneId(zone.zoneId)
               if (this.hideClosed) {
-                stages = stages.filter(stage => timeUtils.existence(stage))
+                stages = stages.filter(stage => existUtils.existence(stage))
               }
               zone.stages = stages
               return zone
