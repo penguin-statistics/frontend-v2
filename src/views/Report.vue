@@ -548,7 +548,6 @@ const categories = [
     id: "EXTRA_DROP",
     colors: ["#9aba3d", "#2a3311"]
   },
-
 ];
 
 export default {
