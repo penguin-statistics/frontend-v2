@@ -89,8 +89,6 @@
 </template>
 
 <script>
-  import ItemSelector from "@/components/stats/ItemSelector";
-  import ItemById from "@/components/global/ItemById";
   import MultiItemSelector from "@/components/advancedQuery/selectors/MultiItemSelector";
   export default {
     name: "QuerySelectorItem",
