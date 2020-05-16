@@ -2,7 +2,7 @@
   <v-dialog
     v-model="showDialog"
     transition="scale-transition"
-    max-width="750px"
+    max-width="850px"
   >
     <template v-slot:activator="{ on }">
       <slot />
