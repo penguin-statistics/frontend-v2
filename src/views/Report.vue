@@ -267,9 +267,15 @@
           fluid
           class="py-0"
         >
-          <v-subheader class="pl-2">
+          <v-subheader
+            class="pl-2"
+            :style="{'color': category.colors[dark ? 0 : 1], 'text-shadow': `0 0 10px ${category.colors[dark ? 0 : 1]}`}"
+          >
             {{ $t('stage.loots.' + category.id) }}
-            <v-divider class="ml-4" />
+            <v-divider
+              class="ml-4"
+              :style="{'border-color': category.colors[dark ? 0 : 1]}"
+            />
           </v-subheader>
           <span
             v-for="item in category.drops"
@@ -526,16 +532,29 @@ import strings from "@/utils/strings";
 import StageSelector from "@/components/stats/StageSelector";
 import snackbar from "@/utils/snackbar";
 import Subheader from "@/components/global/Subheader";
+import Theme from "@/mixins/Theme";
 
+// colors: [dark, light]
 const categories = [
-  "NORMAL_DROP",
-  "EXTRA_DROP",
-  "SPECIAL_DROP",
+  {
+    id: "NORMAL_DROP",
+    colors: ["#cacbcc", "#19191a"]
+  },
+  {
+    id: "SPECIAL_DROP",
+    colors: ["#e26d2c", "#33180a"]
+  },
+  {
+    id: "EXTRA_DROP",
+    colors: ["#9aba3d", "#2a3311"]
+  },
+
 ];
 
 export default {
   name: "Report",
   components: {Subheader, StageSelector, ItemStepper, Item },
+  mixins: [Theme],
   data: () => ({
     snackbar: false,
     submitting: false,
@@ -626,7 +645,8 @@ export default {
 
       const items = [];
 
-      for (const category of categories) {
+      for (const {id, colors} of categories) {
+        const category = id;
         const categoryDrops = [];
 
         for (const itemDropInfo of this.dropInfos.item.filter(v => v["dropType"] === category)) {
@@ -641,6 +661,7 @@ export default {
 
         items.push({
           id: category,
+          colors,
           drops: categoryDrops
         })
       }
@@ -728,7 +749,8 @@ export default {
       }
 
       // loop the type declarations (dropType limitations)
-      for (const dropType of categories) {
+      for (const {id} of categories) {
+        const dropType = id;
         // generate rules
         const {rules, limitation} = this.generateVerificationRule("type", {
           dropType
