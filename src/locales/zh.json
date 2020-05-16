@@ -98,9 +98,11 @@
       "name": "掉落历史趋势",
       "set": {
         "rate": "掉落率",
-        "sample": "当日样本量"
+        "sample": "当日样本量",
+        "drops": "掉落数"
       }
-    }
+    },
+    "lastUpdated": "最后更新：{date}"
   },
   "contribute": {
     "repo": "项目仓库：",
@@ -301,5 +303,12 @@
   "notice": {
     "failed": "获取公告失败：{error}",
     "loading": "正在加载公告"
+  },
+  "dataSource": {
+    "switch": "更换数据源",
+    "global": "全平台",
+    "loginNotice": "查看个人掉落数据前，请先登录",
+    "personal": "个人",
+    "title": "需要登录"
   }
 }

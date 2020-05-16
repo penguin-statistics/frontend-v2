@@ -2,7 +2,7 @@
   <v-dialog
     v-model="showDialog"
     transition="scale-transition"
-    max-width="750px"
+    max-width="850px"
   >
     <template v-slot:activator="{ on }">
       <slot />
@@ -33,8 +33,12 @@
       <Chart
         v-if="showDialog"
         :options="chartData"
-        class="charts my-4"
+        :highcharts="highchartsInst"
+        class="charts mt-4"
       />
+      <div class="text-center caption">
+        {{ $t('stats.lastUpdated', {date: lastUpdated}) }}
+      </div>
     </DialogCard>
   </v-dialog>
 </template>
@@ -44,6 +48,14 @@ import formatter from "@/utils/timeFormatter";
 import Theme from "@/mixins/Theme";
 import DialogCard from "@/components/global/DialogCard";
 import { Chart } from "highcharts-vue";
+import timeFormatter from "@/utils/timeFormatter";
+
+import Highcharts from 'highcharts'
+import exportingInit from 'highcharts/modules/exporting'
+import exportDataInit from 'highcharts/modules/export-data'
+
+exportingInit(Highcharts)
+exportDataInit(Highcharts)
 
 export default {
   name: "Charts",
@@ -100,6 +112,9 @@ export default {
     };
   },
   computed: {
+    highchartsInst () {
+      return Highcharts
+    },
     gradient() {
       return this.dark ?
         ["rgba(255, 255, 255, .3)", "rgba(255, 255, 255, 1)"] :
@@ -123,7 +138,7 @@ export default {
       let array = this.data[this.sparklineKey].map((item, index) => {
         return new Date(this.xStart + index * this.interval);
       });
-      return formatter.dates(array);
+      return formatter.dates(array, false);
     },
     yAxis() {
       let yAxis = Object.keys(this.data)
@@ -189,6 +204,10 @@ export default {
         return null;
       }
     },
+    lastUpdated () {
+      const last = this.$store.getters["data/updated"]({id: "trends"})
+      return `${timeFormatter.date(last, true, true)} (${timeFormatter.dayjs(last).fromNow()})`
+    },
     chartData () {
       if (this.showDialog) {
         const theme = this.$vuetify.theme.currentTheme
@@ -219,8 +238,10 @@ export default {
               style: {
                 color: theme.text
               }
-            }
+            },
+            crosshair: true
           },
+
           yAxis: [
             {
               min: 0,
@@ -237,6 +258,7 @@ export default {
                   color: theme.text
                 }
               },
+              opposite: true
             },
             {
               min: 0,
@@ -252,7 +274,7 @@ export default {
                   color: theme.text
                 }
               },
-              opposite: true
+              minTickInterval: 1
             }
           ],
 
@@ -261,7 +283,14 @@ export default {
               name: this.$t('stats.trends.set.sample'),
               type: "column",
               yAxis: 1,
-              data: this.yAxis[0],
+              data: this.data["times"],
+              color: theme.accent1
+            },
+            {
+              name: this.$t('stats.trends.set.drops'),
+              type: "column",
+              yAxis: 1,
+              data: this.data["quantity"],
               color: theme.accent2
             },
             {
@@ -270,7 +299,8 @@ export default {
               yAxis: 0,
               data: this.sparklineData,
               tooltip: {
-                valueSuffix: '%'
+                valueSuffix: '%',
+                valueDecimals: 2,
               },
               color: theme.accent3,
               marker: {
@@ -282,75 +312,71 @@ export default {
               connectNulls: true
             }
           ],
+
           tooltip: {
-            shared: true
+            shared: true,
+            // formatter: function () {
+            //   console.log("this", this)
+            //   return this.points.reduce(function (s, point, index) {
+            //     console.log("reduce", s, point, index)
+            //     let y = point.y
+            //     if (index === 1) y = `${y.toFixed(2)} %`
+            //     return `${s}<br/>${point.series.name}: ${y}`;
+            //   }, `<b>${this.x}</b>`);
+            // },
+
+            // split: true,
+            backgroundColor: theme.background,
+
+            useHTML: true,
+            headerFormat: '<h4 class="subtitle-1" style="margin-left: 2px">{point.key}</h4><table>',
+            pointFormat: `<tr style="color: ${theme.text}"><td style="color: {series.color}">{series.name}: </td>` +
+              `<td style="text-align: right"><b>{point.y}</b></td></tr>`,
+            footerFormat: '</table>',
+
+            // distance: 8,
+            // padding: 5,
+            style: {
+              color: theme.text
+            },
+            crosshairs: true,
           },
+
           credits: {
             enabled: false
           },
+
           legend: {
             itemStyle: {
               color: theme.text
             }
           },
+
           pane: {
             background: {
               backgroundColor: theme.background
             }
           },
+
           chart: {
             backgroundColor: theme.background,
             style: {
+              fontFamily: `"benderregular", SF Mono, "Droid Sans Mono", Ubuntu Mono, Consolas, Courier New, Courier, monospace`,
               color: theme.text
             }
+          },
+
+          plotOptions: {
+            column: {
+              grouping: true,
+              shadow: false,
+              borderWidth: 0
+            }
           }
-
-          // plotOptions: {
-          //   column: {
-          //     grouping: false,
-          //     shadow: false,
-          //     borderWidth: 0
-          //   }
-          // },
-
-          // layout: {
-          //   // width: "500px",
-          //   // height: "500px",
-          //   yaxis: {
-          //     title: this.$t('stats.trends.set.sample'),
-          //     titlefont: { color: this.$vuetify.theme.currentTheme.accent2 },
-          //     tickfont: { color: this.$vuetify.theme.currentTheme.accent2 }
-          //   },
-          //   yaxis2: {
-          //     title: this.$t('stats.trends.set.rate'),
-          //     titlefont: { color: this.$vuetify.theme.currentTheme.accent3 },
-          //     tickfont: { color: this.$vuetify.theme.currentTheme.accent3 },
-          //     overlaying: "y",
-          //     side: "right"
-          //   },
-          //   paper_bgcolor: this.$vuetify.theme.currentTheme.background,
-          //   plot_bgcolor: this.$vuetify.theme.currentTheme.background,
-          //   font: {
-          //     color: this.$vuetify.theme.currentTheme.text,
-          //   }
-          // },
-          // options: {
-          //   displayLogo: false,
-          //   toImageButtonOptions: {
-          //     format: 'png', // one of png, svg, jpeg, webp
-          //     filename: `penguin-stats_export-${this.chartsId}_time${new Date().getTime()}`,
-          //     height: 1000,
-          //     width: 1400,
-          //     scale: 1 // Multiply title/legend/axis/canvas sizes by this factor
-          //   }
-          // }
         }
+
       } else {
-        return {
-          data: [],
-          layout: {},
-          options: {}
-        }
+        return {}
       }
     }
   },

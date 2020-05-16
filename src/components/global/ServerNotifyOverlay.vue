@@ -1,12 +1,12 @@
 <i18n>
-{
-  "zh": {
-    "switchedTo": "服务器已切换至"
-	},
-	"en": {
-    "switchedTo": "Server switched to"
-	}
-}
+  {
+    "zh": {
+      "switchedTo": "服务器已切换至"
+    },
+    "en": {
+      "switchedTo": "Server switched to"
+    }
+  }
 </i18n>
 
 <template>
@@ -58,6 +58,10 @@
       return {
         serverNotifyOverlay: false
       }
+    },
+
+    computed: {
+      ...mapGetters("dataSource", ["server"]),
     },
 
     watch: {
@@ -117,10 +121,6 @@
           self.serverNotifyOverlay = false
         }, 2500)
       }
-    },
-
-    computed: {
-      ...mapGetters("dataSource", ["server"]),
     },
   }
 </script>

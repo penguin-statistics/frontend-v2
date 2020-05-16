@@ -120,7 +120,7 @@
                     </div>
                     <div class="pt-2">
                       <StageCard
-                        v-for="stage in getStages(zone.zoneId)"
+                        v-for="stage in zone.stages"
                         :key="stage.stageId"
                         :stage="stage"
 
@@ -262,6 +262,15 @@
 
             if (filter) zones = zones.filter(filter);
 
+            zones = zones.map(zone => {
+              let stages = get.stages.byParentZoneId(zone.zoneId)
+              if (this.hideClosed) {
+                stages = stages.filter(stage => !!stage["dropInfos"])
+              }
+              zone.stages = stages
+              return zone
+            })
+
             if (this.lowData) {
               zones = zones.map(el => {
                 el.image = null
@@ -298,9 +307,6 @@
       this.checkRoute()
     },
     methods: {
-      getStages (zoneId) {
-        return get.stages.byParentZoneId(zoneId);
-      },
       selectStage (zone, stage) {
         Console.log("StageSelector", "chose", zone, stage);
         this.selected.zone = zone;

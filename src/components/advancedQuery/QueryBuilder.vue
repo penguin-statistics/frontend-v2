@@ -61,19 +61,14 @@
                 </v-btn>
               </div>
               <div class="flex-column pt-2">
-                <QuerySelectorItem
-                  v-model="query.item"
-                  :disabled="!!query.stage"
-                />
-                <QuerySelectorStage
-                  v-model="query.stage"
-                  :disabled="!!query.item"
-                />
+                <QuerySelectorItem v-model="query.item" />
+                <QuerySelectorStage v-model="query.stage" />
 
                 <v-divider class="my-4" />
 
                 <QuerySelectorTimeRange v-model="query.timeRange" />
-                <!--                <QuerySelectorServer v-model="query.server" />-->
+                <QuerySelectorServer v-model="query.server" />
+                <QuerySelectorSource v-model="query.source" />
               </div>
             </v-card-text>
           </v-window-item>
@@ -114,11 +109,12 @@
   import QuerySelectorStage from "@/components/advancedQuery/selectors/QuerySelectorStage";
   import QuerySelectorTimeRange from "@/components/advancedQuery/selectors/QuerySelectorTimeRange";
   import QuerySelectorServer from "@/components/advancedQuery/selectors/QuerySelectorServer";
+  import QuerySelectorSource from "@/components/advancedQuery/selectors/QuerySelectorSource";
 
   export default {
     name: "QueryBuilder",
     // eslint-disable-next-line vue/no-unused-components
-    components: {QuerySelectorItem, QuerySelectorStage, QuerySelectorTimeRange, QuerySelectorServer},
+    components: {QuerySelectorSource, QuerySelectorItem, QuerySelectorStage, QuerySelectorTimeRange, QuerySelectorServer},
     props: {
       value: {
         type: Array,

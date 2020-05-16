@@ -14,7 +14,7 @@
           <template v-slot:activator="{ on }">
             <v-expand-x-transition>
               <v-icon
-                v-if="value"
+                v-if="value.length"
                 v-on="on"
               >
                 mdi-treasure-chest
@@ -33,31 +33,25 @@
           </v-card>
         </v-tooltip>
 
-
         <v-btn
           class="flex-grow-1"
-          :class="{'mx-1': value}"
+          :class="{'mx-1': value.length}"
           large
           :disabled="disabled"
           v-on="on"
         >
-          <ItemById
-            v-if="value"
-            :id="value"
-            :key="value"
-          />
-          <div
-            v-else
-            class="d-flex align-center"
+          <v-icon
+            left
+            v-on="on"
           >
-            <v-icon left>
-              mdi-treasure-chest
-            </v-icon>
-            {{ $t('query.selector.item.title') }}
-          </div>
+            mdi-treasure-chest
+          </v-icon>
+          
+          {{ $t('query.selector.item.title') }} (selected {{ value.length }})
         </v-btn>
+
         <v-expand-x-transition>
-          <div v-if="value">
+          <div v-if="value.length">
             <v-btn
               icon
               @click="clear"
@@ -75,9 +69,10 @@
       <v-card-title class="title">
         {{ $t('query.selector.item.title') }}
       </v-card-title>
-      <ItemSelector
+      <MultiItemSelector
         class="px-4 pb-4"
-        @select="select"
+        :value="value"
+        @input="e => $emit('input', e)"
       />
       <v-divider />
       <v-card-actions>
@@ -94,16 +89,15 @@
 </template>
 
 <script>
-  import ItemSelector from "@/components/stats/ItemSelector";
-  import ItemById from "@/components/global/ItemById";
+  import MultiItemSelector from "@/components/advancedQuery/selectors/MultiItemSelector";
   export default {
     name: "QuerySelectorItem",
-    components: {ItemSelector, ItemById},
+    components: {MultiItemSelector},
     props: {
       value: {
-        type: String,
+        type: Array,
         default () {
-          return null
+          return []
         }
       },
       disabled: {
@@ -115,17 +109,12 @@
     },
     data() {
       return {
-        search: "",
         dialog: false
       }
     },
     methods: {
-      select (id) {
-        this.$emit('input', id);
-        this.dialog = false;
-      },
       clear () {
-        this.$emit('input', null)
+        this.$emit('input', [])
       }
     }
   }

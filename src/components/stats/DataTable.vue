@@ -403,15 +403,7 @@
         const start = item.start
         const end = item.end
 
-        if (start && end) {
-          return this.$t('stats.timeRange.inBetween', timeFormatter.dates([item.start, item.end], false))
-        } else if (start && !end) {
-          return this.$t('stats.timeRange.toPresent', {date: timeFormatter.date(item.start)})
-        } else if (!start && end) {
-          return this.$t('stats.timeRange.endsAt', {date: timeFormatter.date(item.end)})
-        } else {
-          return this.$t('stats.timeRange.unknown')
-        }
+        return timeFormatter.startEnd(start, end)
       }
     },
   }

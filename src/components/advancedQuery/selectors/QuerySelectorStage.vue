@@ -200,7 +200,7 @@
         }
       },
       selectedStage () {
-        const result = get.zones.byStageId(this.value)
+        const result = get.stages.byStageId(this.value)
         return {
           ...result,
           translatedCode: this.translate(result, "code")
