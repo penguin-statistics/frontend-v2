@@ -258,10 +258,10 @@
         height: calc(336px + env(safe-area-inset-top));
     }
 
-    .x--safe-area {
-        padding-left: calc(max(env(safe-area-inset-left), 12px)) !important;
-        padding-right: calc(max(env(safe-area-inset-right), 12px)) !important;
-    }
+    /*.x--safe-area {*/
+    /*    padding-left: calc(max(env(safe-area-inset-left), 12px)) !important;*/
+    /*    padding-right: calc(max(env(safe-area-inset-right), 12px)) !important;*/
+    /*}*/
 
     .toolbar--safe-area {
         padding-left: calc(max(env(safe-area-inset-left), 16px)) !important;

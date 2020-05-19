@@ -5,6 +5,7 @@
     "name_line2": ""
   },
   "server": {
+    "name": "服务器",
     "switch": "服务器切换",
     "servers": {
       "CN": "国服",
@@ -92,7 +93,8 @@
       "inBetween": "{0} ~ {1}",
       "toPresent": "{date} 至今",
       "endsAt": "{date} 之前",
-      "unknown": "未知"
+      "unknown": "未知",
+      "notSelected": "（暂未选择）"
     },
     "trends": {
       "name": "掉落历史趋势",
@@ -281,15 +283,47 @@
     }
   },
   "query": {
+    "panel": {
+      "builder": "查询编辑器",
+      "results": "查询结果"
+    },
+    "title": {
+      "main": "主查询",
+      "comparison": "对比查询 #{index}"
+    },
+    "type": {
+      "matrix": "统计数据",
+      "trend": "历史趋势"
+    },
     "selector": {
       "item": {
         "title": "选择素材",
-        "subtitle": "用于将查询结果过滤为包含特定素材的所有关卡。当选择任一过滤器后，则在同一查询内不可再选择其他过滤器。若欲过滤其他参数，可通过添加对比查询设置其他过滤参数。"
+        "subtitle": "（至少选择 1 个）用于将查询结果过滤为此关卡内的特定素材。",
+
+        "selected": "素材（已选择 {length} 个）"
       },
       "stage": {
         "title": "选择关卡",
-        "subtitle": "用于将查询结果过滤为一特定关卡内的所有掉落。当选择任一过滤器后，则在同一查询内不可再选择其他过滤器。若欲过滤其他参数，可通过添加对比查询设置其他过滤参数。"
+        "subtitle": "（必填）用于将查询结果过滤为一特定关卡。"
+      },
+      "timeRange": {
+        "title": "时间段",
+        "subtitle": "（必填）用于将查询结果过滤为于一特定时间段内。"
+      },
+      "interval": {
+        "title": "数据粒度",
+        "subtitle": "（必填）用于设置历史趋势的数据粒度。"
       }
+    },
+    "operation": {
+      "add": "添加对比查询",
+      "execute": "执行查询",
+      "inProgress": "正在执行查询"
+    },
+    "result": {
+      "main": "主查询结果",
+      "comparison": "对比查询 #{index} 结果",
+      "empty": "此查询返回了 0 个结果，请检查对应查询条件后重试"
     }
   },
   "version": {
@@ -305,10 +339,18 @@
     "loading": "正在加载公告"
   },
   "dataSource": {
-    "switch": "更换数据源",
+    "switch": "数据源",
     "global": "全平台",
     "loginNotice": "查看个人掉落数据前，请先登录",
     "personal": "个人",
     "title": "需要登录"
+  },
+  "validator": {
+    "required": "必填"
+  },
+  "quotes": {
+    "doYouKnow": [
+      "你知道吗？白面鸮头上的那一撮毛超级可爱！o(*≧▽≦)ツ"
+    ]
   }
 }

@@ -5,6 +5,7 @@
     "name_line2": ""
   },
   "server": {
+    "name": "Server",
     "switch": "Switch Server",
     "servers": {
       "CN": "CN",
@@ -92,7 +93,8 @@
       "inBetween": "{0} to {1}",
       "toPresent": "{date} to Present",
       "endsAt": "Before {date}",
-      "unknown": "Unknown"
+      "unknown": "Unknown",
+      "notSelected": "(not selected)"
     },
     "trends": {
       "name": "Historical Drop Data",
@@ -281,15 +283,44 @@
     }
   },
   "query": {
+    "panel": {
+      "builder": "Query Builder",
+      "results": "Query Results"
+    },
+    "title": {
+      "main": "Main Query",
+      "comparison": "Comparison Query #{index}"
+    },
+    "type": {
+      "matrix": "Statistics",
+      "trend": "Trends"
+    },
     "selector": {
       "item": {
         "title": "Choose Item",
-        "subtitle": "Used to filter the query results by specified materials. When any filter is selected, no other filters can be selected in the same query. If you want to filter other parameters, you can do it by adding a comparison query."
+        "subtitle": "Used to filter the query results by specified materials. When any filter is selected, no other filters can be selected in the same query. If you want to filter other parameters, you can do it by adding a comparison query.",
+
+        "selected": "Item (Selected {length})"
       },
       "stage": {
         "title": "Choose Stage",
         "subtitle": "Used to filter the query results by specified materials. When any filter is selected, no other filters can be selected in the same query. If you want to filter other parameters, you can do it by adding a comparison query."
+      },
+      "timeRange": {
+        "title": "Choose Time Range"
+      },
+      "interval": {
+        "title": "Data Granularity"
       }
+    },
+    "operation": {
+      "add": "Add Comparison Query",
+      "execute": "Execute Query"
+    },
+    "result": {
+      "main": "Main Query Result",
+      "comparison": "Comparison Query #{index} Result",
+      "empty": "This query returned 0 results. Please check your query parameters."
     }
   },
   "version": {
@@ -305,10 +336,13 @@
     "loading": "Loading Notice..."
   },
   "dataSource": {
-    "switch": "Change Data Source",
+    "switch": "Data Source",
     "global": "All",
     "loginNotice": "Please log in before viewing personal drop data.",
     "personal": "Personal",
     "title": "Login Required"
+  },
+  "validator": {
+    "required": "Required"
   }
 }

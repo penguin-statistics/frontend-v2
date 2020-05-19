@@ -10,7 +10,7 @@
     <template v-slot:activator="{ on }">
       <v-text-field
         :value="formattedDate"
-        label="时间段"
+        :label="$t('query.selector.timeRange.title')"
         prepend-icon="mdi-calendar"
         readonly
         filled
@@ -23,9 +23,6 @@
       color="background"
       class="d-flex flex-row"
     >
-      <!--      <v-card-title class="heading">-->
-      <!--        选择时间段-->
-      <!--      </v-card-title>-->
       <v-date-picker
         v-model="date"
         :max="today"
@@ -108,43 +105,48 @@
 
   export default {
     name: "QuerySelectorTimeRange",
+    props: {
+      value: {
+        type: Array,
+        required: true
+      },
+    },
     data() {
       return {
         menu: false,
-        internalDate: [timeFormatter.dayjs().format("YYYY-MM-DD")],
       }
     },
     computed: {
       date: {
         get () {
-          return this.internalDate
+          return this.value
         },
         set (val) {
           let setTo;
           if (val) {
             if (val.length === 0) {
-              this.internalDate = []
+              this.$emit('input', [])
             } else if (val.length === 1) {
-              this.internalDate = val
+              this.$emit('input', val)
             } else if (val.length === 2) {
               const first = new Date(val[0]).getTime()
               const second = new Date(val[1]).getTime()
 
               if (second < first) {
-                this.internalDate = [val[1], val[0]]
+                this.$emit('input', [val[1], val[0]])
               } else {
-                this.internalDate = val
+                this.$emit('input', val)
               }
             }
           } else {
-            this.internalDate = setTo
+            this.$emit('input', setTo)
           }
         }
       },
       formattedDate () {
         const start = this.date[0] ? this.date[0] : null
         const end = this.date[1] ? this.date[1] : null
-        return timeFormatter.startEnd(start, end)
+        return timeFormatter.startEnd(start, end, true)
       },
       today () {
         return timeFormatter.dayjs().format("YYYY-MM-DD")

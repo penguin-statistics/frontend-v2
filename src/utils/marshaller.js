@@ -26,5 +26,29 @@ export default {
     }
 
     return body
+  },
+  advancedQuery(queries) {
+    const marshalled = []
+    for (const query of queries) {
+      let start;
+      let end;
+
+      if (query.timeRange && query.timeRange[0]) start = new Date(query.timeRange[0]).getTime()
+      if (query.timeRange && query.timeRange[1]) end = new Date(query.timeRange[1]).getTime()
+
+      const marshalledQuery = {
+        stageId: query.stage,
+        itemIds: query.item,
+        server: query.server,
+        isPersonal: query.source === "personal",
+        start,
+        end
+      }
+
+      if (query.type === "trend") marshalledQuery["interval"] = query["interval"]
+
+      marshalled.push(marshalledQuery)
+    }
+    return {queries: marshalled}
   }
 }

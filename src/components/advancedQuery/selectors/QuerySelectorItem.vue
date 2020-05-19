@@ -4,7 +4,7 @@
     max-width="590px"
   >
     <template v-slot:activator="{ on }">
-      <div class="d-flex flex-row align-center justify-center">
+      <div class="d-flex flex-row align-center justify-center mt-1">
         <v-tooltip
           content-class="transparent"
           right
@@ -42,12 +42,16 @@
         >
           <v-icon
             left
-            v-on="on"
           >
             mdi-treasure-chest
           </v-icon>
           
-          {{ $t('query.selector.item.title') }} (selected {{ value.length }})
+          <span v-if="value.length">
+            {{ $t('query.selector.item.selected', {length: value.length}) }}
+          </span>
+          <span v-else>
+            {{ $t('query.selector.item.title') }}
+          </span>
         </v-btn>
 
         <v-expand-x-transition>

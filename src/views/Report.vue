@@ -538,15 +538,15 @@ import Theme from "@/mixins/Theme";
 const categories = [
   {
     id: "NORMAL_DROP",
-    colors: ["#cacbcc", "#19191a"]
+    colors: ["#cacbcc", "#4d4d4d"]
   },
   {
     id: "SPECIAL_DROP",
-    colors: ["#e26d2c", "#33180a"]
+    colors: ["#e26d2c", "#b35522"]
   },
   {
     id: "EXTRA_DROP",
-    colors: ["#9aba3d", "#2a3311"]
+    colors: ["#9aba3d", "#8aa637"]
   },
 ];
 

@@ -4,7 +4,7 @@
     max-width="650px"
   >
     <template v-slot:activator="{ on }">
-      <div class="d-flex flex-row align-center justify-center mt-1">
+      <div class="d-flex flex-row align-center justify-center mt-3">
         <v-tooltip
           content-class="transparent"
           right
@@ -34,7 +34,6 @@
           </v-card>
         </v-tooltip>
 
-
         <v-btn
           class="flex-grow-1"
           :class="{'mx-1': value}"
@@ -62,20 +61,21 @@
               mdi-cube
             </v-icon>
             {{ $t('query.selector.stage.title') }}
+            <small class="ml-1">*{{ $t('validator.required') }}</small>
           </div>
         </v-btn>
-        <v-expand-x-transition>
-          <div v-if="value">
-            <v-btn
-              icon
-              @click="clear"
-            >
-              <v-icon>
-                mdi-close
-              </v-icon>
-            </v-btn>
-          </div>
-        </v-expand-x-transition>
+        <!--        <v-expand-x-transition>-->
+        <!--          <div v-if="value">-->
+        <!--            <v-btn-->
+        <!--              icon-->
+        <!--              @click="clear"-->
+        <!--            >-->
+        <!--              <v-icon>-->
+        <!--                mdi-close-->
+        <!--              </v-icon>-->
+        <!--            </v-btn>-->
+        <!--          </div>-->
+        <!--        </v-expand-x-transition>-->
       </div>
     </template>
 

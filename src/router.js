@@ -18,7 +18,7 @@ import AboutContact from './views/About/Contact'
 import AboutDonate from './views/About/Donate'
 import AboutLinks from './views/About/Links'
 import NotFound from "@/views/NotFound";
-// import AdvancedQuery from "@/views/AdvancedQuery";
+import AdvancedQuery from "@/views/AdvancedQuery";
 // import DataDebugger from "@/components/debug/DataDebugger";
 
 const originalPush = Router.prototype.push;
@@ -46,10 +46,6 @@ const router = new Router({
   {
     path: '/report',
     name: 'ReportByZone',
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    // component: () => import(/* webpackChunkName: "about" */ './views/About.vue')
     component: Report,
     meta: {
       icon: 'mdi-upload',
@@ -119,15 +115,15 @@ const router = new Router({
       }
     ]
   },
-  // {
-  //   path: '/advanced',
-  //   name: 'AdvancedQuery',
-  //   component: AdvancedQuery,
-  //   meta: {
-  //     icon: 'mdi-database-search',
-  //     i18n: 'menu.stats.advanced'
-  //   },
-  // },
+  {
+    path: '/advanced',
+    name: 'AdvancedQuery',
+    component: AdvancedQuery,
+    meta: {
+      icon: 'mdi-database-search',
+      i18n: 'menu.stats.advanced'
+    },
+  },
   {
     path: '/planner',
     name: 'Planner',

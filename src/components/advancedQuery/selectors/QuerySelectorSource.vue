@@ -6,7 +6,7 @@
 
     :menu-props="{ offsetY: true }"
     filled
-    :items="servers"
+    :items="sources"
     :label="$t('dataSource.switch')"
     transition="slide-y-transition"
     @input="e => $emit('input', e)"
@@ -40,7 +40,7 @@
     data() {
       return {
         selected: this.$store.getters["dataSource/source"],
-        servers: ["global", "personal"]
+        sources: ["global", "personal"]
       }
     }
   }
