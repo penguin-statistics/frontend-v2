@@ -187,7 +187,8 @@
     "loots": {
       "NORMAL_DROP": "通常ドロップ",
       "EXTRA_DROP": "エクストラドロップ",
-      "SPECIAL_DROP": "スペシャルドロップ"
+      "SPECIAL_DROP": "スペシャルドロップ",
+      "FURNITURE": "家具"
     }
   },
   "planner": {

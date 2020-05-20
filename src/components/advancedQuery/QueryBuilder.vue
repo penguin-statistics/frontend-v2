@@ -56,7 +56,7 @@
             </v-btn>
           </div>
           <div class="flex-column pt-2">
-            <QuerySelectorType v-model="query.type" />
+            <!--            <QuerySelectorType v-model="query.type" />-->
             <QuerySelectorStage v-model="query.stage" />
             <QuerySelectorItem v-model="query.item" />
 
@@ -65,9 +65,10 @@
             <QuerySelectorTimeRange v-model="query.timeRange" />
             <QuerySelectorServer v-model="query.server" />
             <QuerySelectorSource v-model="query.source" />
-            <v-expand-transition v-if="query.type === 'trend'">
-              <QuerySelectorInterval v-model="query.interval" />
-            </v-expand-transition>
+            <QuerySelectorInterval
+              v-model="query.interval"
+              @update:type="e => query.type = e"
+            />
           </div>
         </v-card-text>
       </v-window-item>
@@ -152,14 +153,13 @@
   import QuerySelectorSource from "@/components/advancedQuery/selectors/QuerySelectorSource";
   import query from "@/apis/query";
   import marshaller from "@/utils/marshaller";
-  import QuerySelectorType from "@/components/advancedQuery/selectors/QuerySelectorType";
   import QuerySelectorInterval from "@/components/advancedQuery/selectors/QuerySelectorInterval";
+  import snackbar from "@/utils/snackbar";
 
   export default {
     name: "QueryBuilder",
     components: {
       QuerySelectorInterval,
-      QuerySelectorType,
       QuerySelectorSource, QuerySelectorItem, QuerySelectorStage, QuerySelectorTimeRange, QuerySelectorServer},
     props: {
       value: {
@@ -188,11 +188,15 @@
       valid () {
         for (const query of this.value) {
           if (!query["stage"]) return false
-          if (!query["item"].length) return false
           if (!query["timeRange"].length) return false
-          if (query["type"] === "trend" && !query["interval"]) return false
         }
         return true
+      }
+    },
+    watch: {
+      value: {
+        deep: true,
+        handler () { this.$emit('update') }
       }
     },
     methods: {
@@ -209,19 +213,30 @@
         this.value.splice(i, 1)
       },
       execute () {
+        const start = Date.now()
         this.result.busy = true
         query.advancedQuery(
           marshaller.advancedQuery(this.value)
         )
           .then(({data}) => {
-            console.log(data)
             data = data["advanced_results"]
-            this.$emit("result", data)
+            const elapsed = Date.now() - start
+            if (elapsed < 3500) {
+              // if the user hasn't see the loading screen up to 3.5sec
+              setTimeout(() => {
+                // then we let them see that for just a little longer time
+                // to reduce the "flashy" feeling when netowrk condition is pretty ideal
+                this.$emit("result", data)
+                this.result.busy = false
+              }, Math.random() * 500 + 2000)
+            } else {
+              // the user has see enough loading screen. just forget about it
+              this.$emit("result", data)
+              this.result.busy = false
+            }
           })
-          .catch(err => {
-            console.error(err)
-          })
-          .finally(() => {
+          .catch(() => {
+            snackbar.networkError()
             this.result.busy = false
           })
       },

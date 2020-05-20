@@ -299,6 +299,15 @@
 .v-tabs > .v-tabs-bar, .v-tabs-items {
     background-color: transparent !important;
 }
-.markdown-content strong {
 
+.stat-table {
+    background: transparent !important;
+}
+.stat-table th {
+    padding-left: 8px !important;
+    padding-right: 8px !important;
+}
+
+.background-transparent {
+    backgorund: transparent !important;
 }

@@ -230,7 +230,8 @@
     "loots": {
       "NORMAL_DROP": "常规掉落",
       "EXTRA_DROP": "额外物资",
-      "SPECIAL_DROP": "特殊掉落"
+      "SPECIAL_DROP": "特殊掉落",
+      "FURNITURE": "家具"
     },
     "selector": {
       "plannerExclude": "排除规划关卡",
@@ -298,9 +299,10 @@
     "selector": {
       "item": {
         "title": "选择素材",
-        "subtitle": "（至少选择 1 个）用于将查询结果过滤为此关卡内的特定素材。",
+        "subtitle": "用于将查询结果过滤为此关卡内的特定素材。",
 
-        "selected": "素材（已选择 {length} 个）"
+        "unspecified": "显示关卡全部掉落素材",
+        "selected": "仅查询 {length} 种素材"
       },
       "stage": {
         "title": "选择关卡",
@@ -311,8 +313,10 @@
         "subtitle": "（必填）用于将查询结果过滤为于一特定时间段内。"
       },
       "interval": {
-        "title": "数据粒度",
-        "subtitle": "（必填）用于设置历史趋势的数据粒度。"
+        "title": "分段间隔",
+        "subtitle": "用于设置历史趋势的分段间隔。",
+
+        "unspecified": "不分段"
       }
     },
     "operation": {
@@ -323,7 +327,8 @@
     "result": {
       "main": "主查询结果",
       "comparison": "对比查询 #{index} 结果",
-      "empty": "此查询返回了 0 个结果，请检查对应查询条件后重试"
+      "empty": "此查询返回了 0 个结果，请检查对应查询条件后重试",
+      "hideTime": "隐藏详细时间"
     }
   },
   "version": {

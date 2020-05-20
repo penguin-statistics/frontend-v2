@@ -66,33 +66,6 @@
 
       :class="{'elevation-0 transparentTable stat-table container--fluid px-2': true, 'pt-0': $vuetify.breakpoint.xsOnly}"
     >
-      <!--    <template v-slot:item.stage="{ item }">-->
-      <!--      <v-row-->
-      <!--        align="center"-->
-      <!--        align-content="center"-->
-      <!--        class="pl-2"-->
-      <!--      >-->
-      <!--        <Item-->
-      <!--          :item="item.item"-->
-      <!--          :ratio="0.6"-->
-      <!--          disable-tooltip-->
-      <!--          disable-link-->
-      <!--        />-->
-      <!--        <span-->
-      <!--          class="ml-2"-->
-      <!--        >-->
-      <!--          {{ strings.translate(item.item, "name") }}-->
-      <!--        </span>-->
-      <!--        <v-icon-->
-      <!--          small-->
-      <!--        >-->
-      <!--          mdi-chevron-right-->
-      <!--        </v-icon>-->
-      <!--      </v-row>-->
-      <!--    </template>-->
-      <!--    <template v-slot:item.percentage="{ item }">-->
-      <!--      {{ item.percentageText }}-->
-      <!--    </template>-->
       <template v-slot:item="props">
         <tr>
           <template v-if="type === 'stage'">
@@ -410,21 +383,12 @@
 </script>
 
 <style>
-  .stat-table th {
-    padding-left: 8px;
-    padding-right: 8px;
-  }
-
   .item-name-td-xs {
     min-width: 100px;
   }
 
   .item-name-td-sm {
     min-width: 160px;
-  }
-
-  .stat-table {
-    background: transparent !important;
   }
 
   .charts-data-wrapper {

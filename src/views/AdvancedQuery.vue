@@ -3,7 +3,7 @@
     class="fill-height"
     fluid
   >
-    <QueryMain />
+    <QueryMain cache />
   </v-container>
 </template>
 

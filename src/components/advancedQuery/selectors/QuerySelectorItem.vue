@@ -12,14 +12,12 @@
           transition="slide-x-transition"
         >
           <template v-slot:activator="{ on }">
-            <v-expand-x-transition>
-              <v-icon
-                v-if="value.length"
-                v-on="on"
-              >
-                mdi-treasure-chest
-              </v-icon>
-            </v-expand-x-transition>
+            <v-icon
+              class="mr-2"
+              v-on="on"
+            >
+              mdi-treasure-chest
+            </v-icon>
           </template>
           <v-card
             max-width="400px"
@@ -35,23 +33,24 @@
 
         <v-btn
           class="flex-grow-1"
-          :class="{'mx-1': value.length}"
           large
           :disabled="disabled"
           v-on="on"
         >
-          <v-icon
-            left
-          >
-            mdi-treasure-chest
-          </v-icon>
-          
-          <span v-if="value.length">
+          <template v-if="value.length">
+            <v-icon>
+              mdi-filter
+            </v-icon>
             {{ $t('query.selector.item.selected', {length: value.length}) }}
-          </span>
-          <span v-else>
-            {{ $t('query.selector.item.title') }}
-          </span>
+          </template>
+          <template v-else>
+            <v-icon
+              left
+            >
+              mdi-treasure-chest
+            </v-icon>
+            {{ $t('query.selector.item.unspecified') }}
+          </template>
         </v-btn>
 
         <v-expand-x-transition>

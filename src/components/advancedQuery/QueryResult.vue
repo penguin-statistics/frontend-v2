@@ -4,7 +4,11 @@
       :content="title"
       small
     />
-    <v-card class="pa-2 bkop-light">
+    <v-card
+      class="pa-2"
+      :class="{'bkop-light': !isTrend, 'background-transparent': isTrend}"
+      :outlined="isTrend"
+    >
       <v-card-text v-if="!data">
         <v-alert
           type="info"
@@ -20,11 +24,9 @@
         :items="data"
         type="stage"
       />
-      <DataTable
+      <QueryResultTrend
         v-else-if="type === 'trend'"
-        :items="data.matrix"
-        :trends="data.trends"
-        type="stage"
+        :data="data"
       />
     </v-card>
   </div>
@@ -34,6 +36,7 @@
   import DataTable from "@/components/stats/DataTable";
   import get from "@/utils/getters";
   import OffTitle from "@/components/global/OffTitle";
+  import QueryResultTrend from "@/components/advancedQuery/QueryResultTrend";
 
   const calculateMatrix = el => {
     const stage = get.stages.byStageId(el.stageId);
@@ -51,7 +54,7 @@
 
   export default {
     name: "QueryResult",
-    components: {OffTitle, DataTable},
+    components: {QueryResultTrend, OffTitle, DataTable},
     props: {
       result: {
         type: Object,
@@ -67,32 +70,18 @@
       }
     },
     computed: {
+      isTrend () {
+        return this.type === 'trend'
+      },
       data() {
         if (this.type === "matrix") {
           return this.result.result["matrix"].map(calculateMatrix);
         } else if (this.type === "trend") {
           const stageId = this.result.query.stage;
-
           if (!(this.result.result["trend"] && this.result.result["trend"][stageId])) return null
-
           const data = this.result.result["trend"][stageId];
-          let matrix = [];
-
-          for (const [itemId, result] of Object.entries(data["results"])) {
-            matrix.push({
-              stageId,
-              itemId,
-              quantity: result["quantity"].reduce((a, b) => a + b),
-              times: result["times"].reduce((a, b) => a + b),
-              start: data.startTime,
-              end: Date.now()
-            })
-          }
-
-          matrix = matrix.map(calculateMatrix)
 
           return {
-            matrix,
             trends: data,
             query: this.result.query
           }

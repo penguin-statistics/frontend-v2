@@ -11,8 +11,7 @@ export default {
       icon: "",
       extra: {}
     },
-    outdated: false,
-    notice: null
+    outdated: false
   },
   mutations: {
     setSnackbar (state, {color, timeout, text, icon, extra}) {

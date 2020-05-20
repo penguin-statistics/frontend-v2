@@ -300,7 +300,8 @@
         "title": "Choose Item",
         "subtitle": "Used to filter the query results by specified materials. When any filter is selected, no other filters can be selected in the same query. If you want to filter other parameters, you can do it by adding a comparison query.",
 
-        "selected": "Item (Selected {length})"
+        "unspecified": "Show All Item",
+        "selected": "Only Query Selected ({length})"
       },
       "stage": {
         "title": "Choose Stage",
@@ -310,7 +311,9 @@
         "title": "Choose Time Range"
       },
       "interval": {
-        "title": "Data Granularity"
+        "title": "Segment Interval",
+
+        "unspecified": "No Segment"
       }
     },
     "operation": {
@@ -320,7 +323,8 @@
     "result": {
       "main": "Main Query Result",
       "comparison": "Comparison Query #{index} Result",
-      "empty": "This query returned 0 results. Please check your query parameters."
+      "empty": "This query returned 0 results. Please check your query parameters.",
+      "hideTime": "隐藏详细时间"
     }
   },
   "version": {

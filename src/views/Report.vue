@@ -183,6 +183,7 @@
           z-index="4"
         >
           <v-row
+            v-if="invalidStage"
             align="center"
             justify="center"
             class="fill-height text-center mx-3"
@@ -298,7 +299,7 @@
             v-model="furniture"
             color="primary"
             :label="$t('report.furniture', {state: $t(`meta.hasNorNot.${furniture}`)})"
-            class="mb-5 pb-0"
+            class="mb-5 pb-0 d-inline-flex"
             hide-details
           />
 
@@ -602,6 +603,7 @@ export default {
         return this.furnitureInternal
       },
       set (val) {
+        this.furnitureInternal = val
         if (val === true) {
           this.results.push({
             dropType: "FURNITURE",

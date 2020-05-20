@@ -11,7 +11,7 @@
     transition="slide-y-transition"
     class="mt-1"
 
-    @input="e => $emit('input', e)"
+    @input="update"
   >
     <template v-slot:item="{item}">
       {{ item.text }}
@@ -33,9 +33,11 @@
   export default {
     name: "QuerySelectorInterval",
     props: {
+      // eslint-disable-next-line vue/require-prop-types
       value: {
-        type: Number,
-        required: true
+        default () {
+          return null
+        }
       },
     },
     data() {
@@ -63,6 +65,11 @@
           }
         })
 
+        intervals.unshift({
+          value: null,
+          text: this.$t('query.selector.interval.unspecified')
+        })
+
         return intervals
       },
       // formattedValue () {
@@ -70,6 +77,12 @@
       //   console.log(humanized)
       //   return humanized
       // }
+    },
+    methods: {
+      update(e) {
+        this.$emit('input', e)
+        this.$emit('update:type', e === null ? "matrix" : "trend")
+      }
     },
   }
 </script>

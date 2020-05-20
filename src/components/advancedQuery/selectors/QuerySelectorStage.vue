@@ -15,6 +15,7 @@
             <v-expand-x-transition>
               <v-icon
                 v-if="value"
+                class="mr-2"
                 v-on="on"
               >
                 mdi-cube
@@ -36,7 +37,6 @@
 
         <v-btn
           class="flex-grow-1"
-          :class="{'mx-1': value}"
           large
           :disabled="disabled"
           v-on="on"

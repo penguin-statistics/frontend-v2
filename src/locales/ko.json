@@ -157,7 +157,8 @@
     "loots": {
       "NORMAL_DROP": "일반 드랍",
       "EXTRA_DROP": "추가 드랍",
-      "SPECIAL_DROP": "특수 드랍"
+      "SPECIAL_DROP": "특수 드랍",
+      "FURNITURE": "가구"
     }
   },
   "planner": {

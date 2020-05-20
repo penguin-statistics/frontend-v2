@@ -1,7 +1,7 @@
 <template>
   <v-card
     outlined
-    class="d-flex overflow-y- bkop-light flex-column mx-2"
+    class="d-flex bkop-light flex-column mx-2"
   >
     <template v-if="results">
       <QueryResult
