@@ -1,6 +1,5 @@
 <template>
   <BackdropCard
-    v-if="totalReports"
     :to="{name: 'SiteStats'}"
     hover
     class="bkop-medium pa-0 mt-2"
@@ -12,7 +11,7 @@
     </template>
     <v-card-title class="display-2">
       <span class="monospace">
-        {{ totalReports === null ? "--,---" : totalReports.toLocaleString() }}
+        {{ totalReports === null ? "---" : totalReports.toLocaleString() }}
       </span>
     </v-card-title>
     <v-card-subtitle class="d-flex">
