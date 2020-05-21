@@ -60,7 +60,7 @@
     computed: {
       states () {
         const states = {};
-        for (const item of get.items.all()) {
+        for (const item of get.items.all(false, false)) {
           // have item or not = has been selected or not
           this.$set(states, item.itemId, !!~this.value.indexOf(item.itemId))
         }
@@ -68,7 +68,7 @@
       },
 
       items () {
-        const all = get.items.all();
+        const all = get.items.all(false, false);
         const categories = ["MATERIAL", "CARD_EXP", "FURN", "ACTIVITY_ITEM"];
         const results = {};
         for (const category of categories) {

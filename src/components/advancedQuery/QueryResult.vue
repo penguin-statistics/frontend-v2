@@ -41,9 +41,9 @@
   const calculateMatrix = el => {
     const stage = get.stages.byStageId(el.stageId);
     el.stage = stage;
-    el.zone = get.zones.byZoneId(el.stage.zoneId)
+    el.zone = get.zones.byZoneId(el.stage.zoneId, false)
 
-    el.item = get.items.byItemId(el.itemId);
+    el.item = get.items.byItemId(el.itemId, false, false);
 
     el.percentage = (el.quantity / el.times);
     el.percentageText = `${(el.percentage * 100).toFixed(2)}%`;

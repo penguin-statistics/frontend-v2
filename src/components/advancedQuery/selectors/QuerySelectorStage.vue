@@ -24,7 +24,6 @@
           </template>
           <v-card
             max-width="400px"
-            color="grey darken-4"
           >
             <v-card-title>
               {{ $t('query.selector.stage.title') }}
@@ -81,7 +80,7 @@
 
     <v-card>
       <v-card-title class="title">
-        {{ $t('query.selector.item.title') }}
+        {{ $t('query.selector.stage.title') }}
       </v-card-title>
       <div class="mx-6">
         <template v-for="category in categorizedZones">
@@ -175,11 +174,15 @@
     },
     computed: {
       categorizedZones() {
-        const categories = ["ACTIVITY_OPEN", "MAINLINE", "WEEKLY"];
+        const categories = ["ACTIVITY_OPEN", "MAINLINE", "WEEKLY", "ACTIVITY_CLOSED"];
         const results = [];
         for (const category of categories) {
-          let zones = get.zones.byType(category.startsWith("ACTIVITY") ? "ACTIVITY" : category);
-          if (category === "ACTIVITY_OPEN") zones = zones.filter(zone => !zone.isOutdated);
+          let zones = get.zones.byType(category.startsWith("ACTIVITY") ? "ACTIVITY" : category, false);
+          if (category === "ACTIVITY_OPEN") {
+            zones = zones.filter(zone => !zone.isOutdated);
+          } else if (category === "ACTIVITY_CLOSED") {
+            zones = zones.filter(zone => zone.isOutdated);
+          }
           zones = zones.map(el => {
             el.stages = get.stages.byParentZoneId(el.zoneId)
             return el
@@ -207,7 +210,7 @@
         }
       },
       selectedZone () {
-        const result = get.zones.byZoneId(this.selectedStage.zoneId)
+        const result = get.zones.byZoneId(this.selectedStage.zoneId, false)
         return {
           ...result,
           translatedName: this.translate(result, "zoneName")

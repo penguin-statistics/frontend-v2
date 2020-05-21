@@ -19,6 +19,7 @@ import AboutDonate from './views/About/Donate'
 import AboutLinks from './views/About/Links'
 import NotFound from "@/views/NotFound";
 import AdvancedQuery from "@/views/AdvancedQuery";
+import SiteStats from "@/views/SiteStats";
 // import DataDebugger from "@/components/debug/DataDebugger";
 
 const originalPush = Router.prototype.push;
@@ -114,6 +115,15 @@ const router = new Router({
         },
       }
     ]
+  },
+  {
+    path: '/statistics',
+    name: 'SiteStats',
+    component: SiteStats,
+    meta: {
+      icon: 'mdi-poll-box',
+      i18n: 'menu.siteStats'
+    }
   },
   {
     path: '/advanced',

@@ -33,6 +33,7 @@
       "links": "友情链接",
       "bulletin": "公告"
     },
+    "siteStats": "全站数据一览",
     "planner": "刷图规划器",
     "v1": "访问旧版",
     "refreshData": "刷新数据",
@@ -133,7 +134,9 @@
         "limitations": "汇报数据校验规则",
         "trends": "汇报历史数据",
         "globalMatrix": "全平台掉落数据",
-        "personalMatrix": "个人掉落数据"
+        "personalMatrix": "个人掉落数据",
+        "stats": "全站概览数据",
+        "period": "服务器事件数据"
       }
     }
   },
@@ -368,7 +371,6 @@
   },
   "quotes": {
     "doYouKnow": [
-      "你知道吗？白面鸮头上的那一撮毛超级可爱！o(*≧▽≦)ツ",
       "你知道吗？白面鸮头上的那一撮毛超级可爱！o(*≧▽≦)ツ"
     ]
   }

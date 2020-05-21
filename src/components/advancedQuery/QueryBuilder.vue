@@ -62,11 +62,11 @@
 
             <v-divider class="my-4" />
 
+            <QuerySelectorServer v-model="query.server" />
             <QuerySelectorTimeRange
               v-model="query.timeRange"
               :server="query.server"
             />
-            <QuerySelectorServer v-model="query.server" />
             <QuerySelectorSource v-model="query.source" />
             <QuerySelectorInterval
               v-model="query.interval"

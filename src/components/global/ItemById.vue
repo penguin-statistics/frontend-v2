@@ -28,7 +28,7 @@
     },
     computed: {
       item() {
-        return get.items.byItemId(this.id) || {}
+        return get.items.byItemId(this.id, false, false) || {}
       },
       name () {
         return strings.translate(this.item, "name")

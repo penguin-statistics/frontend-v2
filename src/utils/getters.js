@@ -7,13 +7,15 @@ const Getters = {};
 
 Getters.items = {
   _cache: null,
-  all(map = false) {
+  all(map = false, filter = true) {
     let items = store.getters["data/content"]({id: "items"});
     if (!items) return []
 
-    items = items.filter(item => {
-      return item["existence"][store.getters["dataSource/server"]]["exist"]
-    })
+    if (filter) {
+      items = items.filter(item => {
+        return item["existence"][store.getters["dataSource/server"]]["exist"]
+      })
+    }
 
     if (map) {
       if (!this._cache) this._cache = new Map(items.map(item => [item.itemId, item]))
@@ -22,13 +24,13 @@ Getters.items = {
       return items
     }
   },
-  byItemId(itemId) {
-    const got = this.all();
+  byItemId(itemId, ...options) {
+    const got = this.all(...options);
     if (!got) return {};
     return got.find(el => el.itemId === itemId) || {}
   },
-  byName (name) {
-    const got = this.all();
+  byName (name, ...options) {
+    const got = this.all(...options);
     if (!got) return {};
     return got.find(el => el.name === name) || {}
   },
@@ -83,31 +85,40 @@ Getters.statistics = {
 }
 
 Getters.stages = {
-  all() {
-    const stages = store.getters["data/content"]({id: "stages"})
+  all(filter = true) {
+    let stages;
+    if (filter) {
+      stages = store.getters["data/content"]({id: "stages"})
+    } else {
+      stages = store.getters["data/content"]({id: "stages", server: "CN"})
+    }
+
     if (!stages) return []
     return stages
   },
-  byStageId(stageId) {
-    return this.all().find(el => {
+  byStageId(stageId, ...options) {
+    return this.all(...options).find(el => {
       return el.stageId === stageId
     }) || {}
   },
-  byParentZoneId(zoneId) {
-    return this.all().filter(el => {
+  byParentZoneId(zoneId, ...options) {
+    return this.all(...options).filter(el => {
       return el.zoneId === zoneId
     }) || {}
   },
 }
 
 Getters.zones = {
-  all() {
+  all(filter = true) {
     let zones = store.getters["data/content"]({id: "zones"})
     if (!zones) return []
 
     const server = store.getters["dataSource/server"]
 
-    zones = zones.filter(el => el["existence"][server]["exist"])
+    if (filter) {
+      zones = zones.filter(el => el["existence"][server]["exist"])
+    }
+
     zones = zones.map(el => {
       if (el.isActivity) {
         const existence = el["existence"][server]
@@ -123,13 +134,13 @@ Getters.zones = {
     })
     return zones
   },
-  byZoneId(zoneId) {
-    return this.all().find(el => {
+  byZoneId(zoneId, ...options) {
+    return this.all(...options).find(el => {
       return el.zoneId === zoneId
     })
   },
-  byType(type) {
-    return this.all().filter(el => {
+  byType(type, ...options) {
+    return this.all(...options).filter(el => {
       return el.type === type
     });
   },
