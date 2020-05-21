@@ -40,7 +40,7 @@
         const stats = this.$store.getters["data/content"]({id: "stats"})
         if (!stats || stats.error) return null
         return stats["totalStageTimes_24h"]
-          .map(el => el.quantity)
+          .map(el => el.times)
           .reduce((a, b) => a + b, 0)
       }
     },
