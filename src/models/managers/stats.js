@@ -6,7 +6,7 @@ const items = new ObjectManager({
   api: {
     serverSensitive: true,
 
-    url: "/stats/",
+    url: "/stats",
   },
   transform: [
     (object) => object,
