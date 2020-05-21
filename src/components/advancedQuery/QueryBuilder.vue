@@ -29,18 +29,18 @@
       :value="index"
     >
       <v-window-item
-        v-for="(query, index) in value"
-        :key="index"
-        :value="index"
+        v-for="(query, queryIndex) in value"
+        :key="queryIndex"
+        :value="queryIndex"
       >
         <v-card-text class="pt-0">
           <div class="d-flex align-center">
             <h1 class="heading">
-              <span v-if="index === 0">
+              <span v-if="queryIndex === 0">
                 {{ $t('query.title.main') }}
               </span>
               <span v-else>
-                {{ $t('query.title.comparison', {index}) }}
+                {{ $t('query.title.comparison', {index: queryIndex}) }}
               </span>
             </h1>
             <v-spacer />
@@ -48,7 +48,7 @@
               icon
               color="error"
               :disabled="!removeable"
-              @click="removeQuery(index)"
+              @click="removeQuery(queryIndex)"
             >
               <v-icon>
                 mdi-delete

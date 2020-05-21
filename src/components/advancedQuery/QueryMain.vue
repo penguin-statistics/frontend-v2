@@ -144,7 +144,5 @@
 </script>
 
 <style>
-  html {
-    overscroll-behavior-x: none;
-  }
+
 </style>

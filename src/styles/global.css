@@ -309,5 +309,121 @@
 }
 
 .background-transparent {
-    backgorund: transparent !important;
+    background: transparent !important;
+}
+
+.item-name-td-xs {
+    min-width: 100px;
+}
+
+.item-name-td-sm {
+    min-width: 160px;
+}
+
+.charts-data-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.charts-wrapper {
+    display: flex;
+    align-items: center;
+}
+
+
+.item-name, .item-name--chevron, .item-name--text {
+    transition: text-shadow .1s cubic-bezier(.25,.8,.5,1), filter .1s cubic-bezier(.25,.8,.5,1), transform .225s cubic-bezier(.25,.8,.5,1), opacity .225s cubic-bezier(.25,.8,.5,1) !important;
+}
+.item-name--text {
+    z-index: 0;
+}
+.item-name {
+    text-shadow: none;
+    filter: none;
+}
+.theme--dark .item-name:hover {
+    text-shadow: 0 0 8px rgba(255, 255, 255, .6);
+}
+.theme--light .item-name:hover {
+    text-shadow: 0 0 4px rgba(0, 0, 0, .2);
+}
+
+.item-name:hover .item-name--chevron {
+    transform: translateX(4px) scale(1.3) rotate(-60deg);
+}
+.item-name:active .item-name--chevron {
+    transform: translateX(4px) scale(1.05) rotate(-60deg);
+}
+
+.item-name--line {
+    opacity: 0;
+}
+
+.item-name:hover .item-name--line {
+    opacity: 1;
+}
+
+.scroll-chevron-left {
+    margin-top: -3px;
+    animation: scroll-left 3.5s infinite cubic-bezier(0.455, 0.03, 0.515, 0.955);
+}
+
+.scroll-keyword {
+    animation: scroll-keyword 3.5s infinite cubic-bezier(0.455, 0.03, 0.515, 0.955);
+}
+
+.scroll-chevron-right {
+    margin-top: -3px;
+    animation: scroll-right 3.5s infinite cubic-bezier(0.455, 0.03, 0.515, 0.955);
+}
+
+@keyframes scroll-left {
+    from {
+        transform: translateX(0px);
+        filter: brightness(1);
+    }
+    50% {
+        transform: translateX(-5px);
+        filter: brightness(2);
+    }
+    to {
+        transform: translateX(0px);
+        filter: brightness(1);
+    }
+}
+
+@keyframes scroll-right {
+    from {
+        transform: translateX(0px);
+        filter: brightness(1);
+    }
+    50% {
+        transform: translateX(5px);
+        filter: brightness(2);
+    }
+    to {
+        transform: translateX(0px);
+        filter: brightness(1);
+    }
+}
+
+@keyframes scroll-keyword {
+    from {
+        filter: brightness(1);
+    }
+    30% {
+        filter: brightness(1.5);
+    }
+    to {
+        filter: brightness(1);
+    }
+}
+
+.item-icon {
+    position: absolute;
+    z-index: 4
+}
+.item-icon.item-icon--special {
+    position: absolute !important;
 }

@@ -167,12 +167,10 @@ Getters.trends = {
         }
       });
     }
-    console.log("getting trends byItemId", itemId, ": ", temp)
     return temp;
   },
   byStageId(stageId) {
     // data has been already keyed with stageId. Just get it ;)
-    console.log("getting trends byStageId ", stageId, ": ", this.all()[stageId])
     return this.all() && this.all()[stageId];
   },
   all() {

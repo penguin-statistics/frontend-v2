@@ -33,6 +33,7 @@
       "links": "Link Exchange",
       "bulletin": "Notice"
     },
+    "siteStats": "Statistics at a Glance",
     "planner": "ArkPlanner",
     "v1": "Visit Old Version",
     "refreshData": "Reload",
@@ -84,7 +85,7 @@
       "apCost": "Sanity",
       "item": "Item",
       "times": "Samples",
-      "quantity": "Loot",
+      "quantity": "Loots",
       "percentage": "Percentage",
       "apPPR": "Sanity Required Per Item",
       "timeRange": "Time Range"
@@ -104,7 +105,20 @@
         "drops": "Drops"
       }
     },
-    "lastUpdated": "Last updated at: {date}"
+    "lastUpdated": "Last updated at: {date}",
+    "site": {
+      "viewMore": "Learn More",
+      "total": {
+        "sanity": "Sanity consumed in all reports",
+        "report": "Total Drop Reports",
+        "items": "Total Item Drops"
+      },
+
+      "stages": "Top Upload Stages",
+      "items": "Top Upload Items",
+      "all": "Full Time",
+      "24hr": "Last 24hr"
+    }
   },
   "contribute": {
     "repo": "Project repositories: ",

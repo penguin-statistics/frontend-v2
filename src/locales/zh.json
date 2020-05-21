@@ -105,7 +105,26 @@
         "drops": "掉落数"
       }
     },
-    "lastUpdated": "最后更新：{date}"
+    "lastUpdated": "最后更新：{date}",
+    "site": {
+      "viewMore": "查看全站数据一览",
+      "total": {
+        "sanity": "所有掉落汇报消耗理智",
+        "report": "掉落汇报总数",
+        "items": "物品掉落总数"
+      },
+
+      "stages": "关卡掉落上传排行",
+      "items": "物品掉落上传排行",
+      "all": "全时段",
+      "24hr": "最近 24 小时",
+
+      "generating": {
+        "title": "全站数据一览正在计算中...",
+        "subtitle": "神经网络信息：由于数据量庞大，全站数据一览需要大约 5 分钟进行计算。请稍后再来。",
+        "refresh": "刷新全站数据一览"
+      }
+    }
   },
   "contribute": {
     "repo": "项目仓库：",
