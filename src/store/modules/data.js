@@ -4,6 +4,7 @@ import itemsManager from '@/models/managers/items'
 import stagesManager from '@/models/managers/stages'
 import zonesManager from '@/models/managers/zones'
 import trendsManager from '@/models/managers/trends'
+import periodManager from '@/models/managers/period'
 import globalMatrixManager from '@/models/managers/matrices/globalMatrix'
 import personalMatrixManager from '@/models/managers/matrices/personalMatrix'
 import strings from "@/utils/strings";
@@ -44,6 +45,7 @@ export default {
       globalMatrixManager.refresh(refresh);
       personalMatrixManager.refresh(refresh);
       trendsManager.refresh(refresh);
+      periodManager.refresh(refresh);
     },
     async refreshPersonalMatrix() {
       await personalMatrixManager.refresh(true)

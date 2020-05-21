@@ -18,21 +18,19 @@
         @update="saveCache('queries', queries)"
         @result="updateResult"
       />
-      <div class="d-flex align-center justify-center overline my-2 mx-4">
-        现在显示的查询结果数据为缓存数据，缓存于 2020-05-20 01:48:03 (1分钟前)。若需要获取最新数据，请再次「执行查询」。
+      <div
+        v-if="restored"
+        class="d-flex justify-center overline my-2 mx-4"
+      >
+        {{ $t('query.panel.footer.cache') }}
       </div>
-      <v-divider class="mx-4 my-2" />
-      <div class="d-flex align-center justify-center overline mt-2 mx-4">
-        「高级查询」意在为有更复杂数据分析需求的用户提供更高自由度使用企鹅物流数据统计的可能性。由于本功能所带来的高自由度，在不了解相关统计学学术内容前尝试分析此功能所得出的统计结果可能会存在误导性。企鹅物流数据统计提醒各位二次数据分析的刀客塔：请在分析数据时不要断章取义、故意使用本站数据引导舆论。高级查询功能的受众群体是熟悉统计学等学科的用户，开放后便于他们以更多维度分析数据集。我们欢迎对掉落数据感兴趣并进行客观与科学分析的刀客塔，但我们不欢迎带有个人情绪或既定立场的情况下、尝试错误地从本站数据中得出对任何实体不利结论的用户。
-      </div>
-      <div class="d-flex align-center justify-center overline mt-2 mx-4">
-        「高级查询」功能所产出的所有数据信息均受本站「数据许可协议」保护。转载、公开或以任何形式复制、发行、再传播本站任何内容时，必须注明从企鹅物流数据统计转载，并提供版权标识、许可协议标识、免责标识和作品链接；且未经许可，不得将本站内容或由其衍生作品用于商业目的。
-      </div>
-      <div class="d-flex align-center justify-center overline mt-2 mx-4">
-        本站不对「高级查询」功能所产出的所有数据信息做任何形式的承诺或背书。使用此服务即代表您接受本站的「最终用户许可协议」和「隐私协议」。
-      </div>
-      <div class="d-flex align-center justify-center text-center overline mt-4 mx-4">
-        企鹅物流数据统计 2020
+      <v-divider
+        v-if="restored"
+        class="mx-4 my-2"
+      />
+
+      <div class="d-flex align-center justify-center text-center overline mt-2 mx-4">
+        {{ $t('query.panel.footer.disclaimer') }}
       </div>
     </v-col>
     <v-col
@@ -60,7 +58,6 @@
   import OffTitle from "@/components/global/OffTitle";
 
   const cacheKey = "AdvancedQuery"
-  let restored = null;
 
   export default {
     name: "QueryMain",
@@ -92,7 +89,8 @@
             interval: null,
           }
         ],
-        result: null
+        result: null,
+        restored: null
       }
     },
     watch: {
@@ -105,7 +103,7 @@
         for (const [key, value] of Object.entries(content)) {
           this.$set(this, key, value)
         }
-        restored = Object.assign({}, content)
+        this.restored = Object.assign({}, content)
       }
 
       // rehydrate preset settings
@@ -135,8 +133,7 @@
         } else {
           saving = Object.assign({}, {[key]: data})
         }
-        console.log("saving", key, saving, saving === restored, restored, "curr", current)
-        if (saving === restored) return
+        if (saving === this.restored) return
         this.$store.commit("cache/set", {
           key: cacheKey,
           value: saving

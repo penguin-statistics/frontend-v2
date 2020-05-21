@@ -1,5 +1,6 @@
 import store from '@/store'
 import formatter from "@/utils/timeFormatter";
+import existUtils from "@/utils/existUtils";
 // import Console from "@/utils/Console";
 
 const Getters = {};
@@ -172,6 +173,14 @@ Getters.trends = {
     // otherwise just return it
     return store.getters["data/content"]({id: "trends"}) || {}
   }
+}
+
+Getters.period = {
+  all(server) {
+    const period = store.getters["data/content"]({id: "period"})
+    if (!period) return []
+    return period.filter(el => existUtils.existence(el, false, server))
+  },
 }
 
 export default Getters

@@ -5,12 +5,13 @@
     transition="slide-y-transition"
     offset-y
     min-width="350px"
-    max-width="650px"
+    max-width="700px"
+    max-height="600px"
   >
     <template v-slot:activator="{ on }">
       <v-text-field
         :value="formattedDate"
-        :label="$t('query.selector.timeRange.title')"
+        :label="`${$t('query.selector.timeRange.title')} (*${$t('validator.required')})`"
         prepend-icon="mdi-calendar"
         readonly
         filled
@@ -21,7 +22,8 @@
     </template>
     <v-card
       color="background"
-      class="d-flex flex-row"
+      class="d-flex flex-column"
+      :elevation="12"
     >
       <v-date-picker
         v-model="date"
@@ -37,79 +39,41 @@
 
         :title-date-format="titleDateFormatter"
       />
-      <v-list
-        subheader
-        two-line
-        min-width="170px"
-      >
-        <v-subheader>
-          预设时间
-        </v-subheader>
-        <v-list-item>
-          <v-list-item-content>
-            <v-list-item-title>
-              Item 1
-            </v-list-item-title>
-            <v-list-item-subtitle>
-              19.4.30 - 20.1.1
-            </v-list-item-subtitle>
-          </v-list-item-content>
-
-          <v-list-item-action>
-            <v-icon>
-              mdi-calendar-import
-            </v-icon>
-          </v-list-item-action>
-        </v-list-item>
-
-        <v-list-item>
-          <v-list-item-content>
-            <v-list-item-title>
-              Item 2
-            </v-list-item-title>
-            <v-list-item-subtitle>
-              19.9.1 - 20.4.5
-            </v-list-item-subtitle>
-          </v-list-item-content>
-
-          <v-list-item-action>
-            <v-icon>
-              mdi-calendar-import
-            </v-icon>
-          </v-list-item-action>
-        </v-list-item>
-
-        <v-list-item>
-          <v-list-item-content>
-            <v-list-item-title>
-              Item 3
-            </v-list-item-title>
-            <v-list-item-subtitle>
-              19.8.5 - 20.5.1
-            </v-list-item-subtitle>
-          </v-list-item-content>
-
-          <v-list-item-action>
-            <v-icon>
-              mdi-calendar-import
-            </v-icon>
-          </v-list-item-action>
-        </v-list-item>
-      </v-list>
+      <div class="flex-row flex-wrap ma-2">
+        <Subheader class="mx-2">
+          {{ $t('query.selector.timeRange.presets.title') }}
+        </Subheader>
+        <QuerySelectorTimeRangePresetPeriod
+          v-for="(period, i) in periods"
+          :key="i"
+          :period="period"
+          class="d-inline-flex ma-1"
+          @update:selection="selectPeriod"
+        />
+      </div>
     </v-card>
   </v-menu>
 </template>
 
 <script>
   import timeFormatter from "@/utils/timeFormatter";
+  import QuerySelectorTimeRangePresetPeriod
+    from "@/components/advancedQuery/selectors/QuerySelectorTimeRangePresetPeriod";
+  import get from "@/utils/getters"
+  import Subheader from "@/components/global/Subheader";
 
   export default {
     name: "QuerySelectorTimeRange",
+    components: {Subheader, QuerySelectorTimeRangePresetPeriod},
     props: {
       value: {
         type: Array,
         required: true
       },
+      server: {
+        type: String,
+        required: true
+      }
     },
     data() {
       return {
@@ -150,6 +114,9 @@
       },
       today () {
         return timeFormatter.dayjs().format("YYYY-MM-DD")
+      },
+      periods () {
+        return get.period.all(this.server)
       }
     },
     methods: {
@@ -158,6 +125,14 @@
       },
       titleDateFormatter () {
         return this.formattedDate
+      },
+      selectPeriod (period) {
+        const utcDate = new Date(period).toISOString().substr(0, 10)
+        if (this.date.length < 2) {
+          this.date = [...this.date, utcDate]
+        } else {
+          this.date = [utcDate]
+        }
       }
     }
   }
