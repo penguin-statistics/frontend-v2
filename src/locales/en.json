@@ -302,7 +302,7 @@
       "results": "Query Results",
       "footer": {
         "cache": "The query result data now displaying is cached data. If you need to get the latest data, please \"execute query\" again.",
-        "disclaimer": "All data produced by the \"Advanced Query\" function is protected by the \"Data License Agreement\" of this site. Penguin Statistics does not make any form of commitment or endorsement of all data produced."
+        "disclaimer": "Any data produced by the \"Advanced Query\" function is protected by the \"Data License Agreement\" of this site. Penguin Statistics does not make any form of commitment or endorsement of any data produced."
       }
     },
     "title": {
