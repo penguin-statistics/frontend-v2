@@ -94,7 +94,7 @@
       "responsibilities": {
         "arkplanner": "ArkPlanner 作者",
         "backend": "后端",
-        "bulkupload": "批量上传",
+        "bulkupload": "批量汇报",
         "customersupport": "客服",
         "frontend": "前端",
         "localization_ja": "日语化",
