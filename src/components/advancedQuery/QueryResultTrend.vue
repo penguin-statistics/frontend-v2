@@ -86,8 +86,8 @@
             index = parseInt(index)
             const quantity = data["quantity"][index]
             const times = data["times"][index]
-            const percentage = times / quantity
-            const percentageText = isNaN(percentage) ? "--%" : `${percentage.toFixed(2)}%`
+            const percentage = quantity / times
+            const percentageText = isNaN(percentage) ? "--%" : `${(percentage * 100).toFixed(2)}%`
 
             const start = startTime + (index * interval)
             const end = start + interval
