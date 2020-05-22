@@ -136,7 +136,7 @@ export default {
         {
           active: true,
           version: "v3.1.0",
-          date: "2020-05-22T08:00:00Z",
+          date: "2020-05-22T00:00:00Z",
           changes: [
             "添加：高级查询功能",
             "添加：「理智」图标",
