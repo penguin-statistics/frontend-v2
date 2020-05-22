@@ -14,6 +14,7 @@ import * as Sentry from '@sentry/browser';
 import * as Integrations from '@sentry/integrations';
 import { Integrations as ApmIntegrations } from '@sentry/apm';
 import mirror from "@/utils/mirror";
+import '@/components/functional'
 
 if (!window.Intl) require("intl-collator")
 

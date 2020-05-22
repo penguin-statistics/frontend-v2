@@ -1,5 +1,10 @@
 <template>
-  <QueryMain />
+  <v-container
+    class="fill-height"
+    fluid
+  >
+    <QueryMain cache />
+  </v-container>
 </template>
 
 <script>

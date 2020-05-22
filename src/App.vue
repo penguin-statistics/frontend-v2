@@ -109,7 +109,7 @@
         name="slide-fade"
         mode="out-in"
       >
-        <router-view class="x--safe-area" />
+        <router-view />
       </transition>
       <Footer />
     </v-content>

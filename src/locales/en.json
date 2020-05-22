@@ -5,6 +5,7 @@
     "name_line2": ""
   },
   "server": {
+    "name": "Server",
     "switch": "Switch Server",
     "servers": {
       "CN": "CN",
@@ -32,6 +33,7 @@
       "links": "Link Exchange",
       "bulletin": "Notice"
     },
+    "siteStats": "Statistics at a Glance",
     "planner": "ArkPlanner",
     "v1": "Visit Old Version",
     "refreshData": "Reload",
@@ -83,7 +85,7 @@
       "apCost": "Sanity",
       "item": "Item",
       "times": "Samples",
-      "quantity": "Loot",
+      "quantity": "Loots",
       "percentage": "Percentage",
       "apPPR": "Sanity Required Per Item",
       "timeRange": "Time Range"
@@ -92,7 +94,8 @@
       "inBetween": "{0} to {1}",
       "toPresent": "{date} to Present",
       "endsAt": "Before {date}",
-      "unknown": "Unknown"
+      "unknown": "Unknown",
+      "notSelected": "(not selected)"
     },
     "trends": {
       "name": "Historical Drop Data",
@@ -102,7 +105,20 @@
         "drops": "Drops"
       }
     },
-    "lastUpdated": "Last updated at: {date}"
+    "lastUpdated": "Last updated at: {date}",
+    "site": {
+      "viewMore": "Learn More",
+      "total": {
+        "sanity": "Sanity consumed in all reports",
+        "report": "Total Drop Reports",
+        "items": "Total Item Drops"
+      },
+
+      "stages": "Top Upload Stages",
+      "items": "Top Upload Items",
+      "all": "Full Time",
+      "24hr": "Last 24hr"
+    }
   },
   "contribute": {
     "repo": "Project repositories: ",
@@ -281,15 +297,52 @@
     }
   },
   "query": {
+    "panel": {
+      "builder": "Query Builder",
+      "results": "Query Results",
+      "footer": {
+        "cache": "The query result data now displaying is cached data. If you need to get the latest data, please \"execute query\" again.",
+        "disclaimer": "Any data produced by the \"Advanced Query\" function is protected by the \"Data License Agreement\" of this site. Penguin Statistics does not make any form of commitment or endorsement of any data produced."
+      }
+    },
+    "title": {
+      "main": "Main Query",
+      "comparison": "Comparison Query #{index}"
+    },
+    "type": {
+      "matrix": "Statistics",
+      "trend": "Trends"
+    },
     "selector": {
       "item": {
         "title": "Choose Item",
-        "subtitle": "Used to filter the query results by specified materials. When any filter is selected, no other filters can be selected in the same query. If you want to filter other parameters, you can do it by adding a comparison query."
+        "subtitle": "Used to filter the query results by specified materials. When any filter is selected, no other filters can be selected in the same query. If you want to filter other parameters, you can do it by adding a comparison query.",
+
+        "unspecified": "Show All Item",
+        "selected": "Only Query Selected ({length})"
       },
       "stage": {
         "title": "Choose Stage",
         "subtitle": "Used to filter the query results by specified materials. When any filter is selected, no other filters can be selected in the same query. If you want to filter other parameters, you can do it by adding a comparison query."
+      },
+      "timeRange": {
+        "title": "Choose Time Range"
+      },
+      "interval": {
+        "title": "Segment Interval",
+
+        "unspecified": "No Segment"
       }
+    },
+    "operation": {
+      "add": "Add Comparison Query",
+      "execute": "Execute Query"
+    },
+    "result": {
+      "main": "Main Query Result",
+      "comparison": "Comparison Query #{index} Result",
+      "empty": "This query returned 0 results. Please check your query parameters.",
+      "hideTime": "隐藏详细时间"
     }
   },
   "version": {
@@ -305,10 +358,13 @@
     "loading": "Loading Notice..."
   },
   "dataSource": {
-    "switch": "Change Data Source",
+    "switch": "Data Source",
     "global": "All",
     "loginNotice": "Please log in before viewing personal drop data.",
     "personal": "Personal",
     "title": "Login Required"
+  },
+  "validator": {
+    "required": "Required"
   }
 }

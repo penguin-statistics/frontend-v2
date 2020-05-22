@@ -34,7 +34,8 @@
           class="mr-2"
         >
           mdi-server
-        </v-icon> {{ $t("server.switch") }}
+        </v-icon>
+        {{ $t("server.name") }}
       </v-subheader>
       <v-list-item-group
         v-model="activeServer"

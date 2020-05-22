@@ -4,7 +4,7 @@
     max-width="590px"
   >
     <template v-slot:activator="{ on }">
-      <div class="d-flex flex-row align-center justify-center">
+      <div class="d-flex flex-row align-center justify-center mt-1">
         <v-tooltip
           content-class="transparent"
           right
@@ -12,14 +12,12 @@
           transition="slide-x-transition"
         >
           <template v-slot:activator="{ on }">
-            <v-expand-x-transition>
-              <v-icon
-                v-if="value.length"
-                v-on="on"
-              >
-                mdi-treasure-chest
-              </v-icon>
-            </v-expand-x-transition>
+            <v-icon
+              class="mr-2"
+              v-on="on"
+            >
+              mdi-treasure-chest
+            </v-icon>
           </template>
           <v-card
             max-width="400px"
@@ -35,19 +33,24 @@
 
         <v-btn
           class="flex-grow-1"
-          :class="{'mx-1': value.length}"
           large
           :disabled="disabled"
           v-on="on"
         >
-          <v-icon
-            left
-            v-on="on"
-          >
-            mdi-treasure-chest
-          </v-icon>
-          
-          {{ $t('query.selector.item.title') }} (selected {{ value.length }})
+          <template v-if="value.length">
+            <v-icon>
+              mdi-filter
+            </v-icon>
+            {{ $t('query.selector.item.selected', {length: value.length}) }}
+          </template>
+          <template v-else>
+            <v-icon
+              left
+            >
+              mdi-treasure-chest
+            </v-icon>
+            {{ $t('query.selector.item.unspecified') }}
+          </template>
         </v-btn>
 
         <v-expand-x-transition>

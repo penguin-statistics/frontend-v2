@@ -7,9 +7,10 @@
     :menu-props="{ offsetY: true }"
     filled
     :items="servers"
-    :label="$t('server.switch')"
+    :label="$t('server.name')"
     transition="slide-y-transition"
     class="mb-1"
+
     @input="e => $emit('input', e)"
   >
     <template v-slot:item="{item}">
