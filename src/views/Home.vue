@@ -26,6 +26,7 @@
         <Bulletin
           class="card-translate-up"
         />
+        <SiteStatsOverview class="card-translate-up" />
       </v-col>
 
       <v-col
@@ -90,10 +91,11 @@ import anime from 'animejs/lib/anime.es.js';
 import License from "@/views/About/License";
 import Console from "@/utils/Console";
 import GettingStarted from "@/views/About/GettingStarted";
+import SiteStatsOverview from "@/components/stats/SiteStatsOverview";
 
 export default {
   name: "Home",
-  components: {GettingStarted, License, Contribute, Donate, Intro, Bulletin, Contact },
+  components: {SiteStatsOverview, GettingStarted, License, Contribute, Donate, Intro, Bulletin, Contact },
   data: () => ({}),
   mounted () {
     setTimeout(() => {
@@ -103,15 +105,15 @@ export default {
           translateY: [48, 0],
           opacity: [0, 1],
           duration: 775,
-          delay: (el, i) => i * 175,
+          delay: anime.stagger(175),
           easing: "easeOutQuint"
         });
         anime({
           targets: ['.card-translate-up h1', '.card-translate-up h2', '.card-translate-up p', '.card-translate-up span:not(.v-btn__content)'],
           translateY: [48, 0],
           opacity: [0, 1],
-          duration: 775,
-          delay: (el, i) => i * 55,
+          duration: 725,
+          delay: anime.stagger(55),
           easing: "easeOutQuint"
         })
       } catch (e) {
@@ -155,4 +157,7 @@ export default {
 .home-card {
   height: 100%;
 }
+  .card-translate-up {
+    transition: none
+  }
 </style>

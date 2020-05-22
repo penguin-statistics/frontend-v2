@@ -1,8 +1,8 @@
 <template>
   <v-card
     :hover="hover"
-    class="pa-4 text-center backdrop-card transition-all"
-    :class="{'backdrop-card--hoverable': hover, 'backdrop-card--darken': darken}"
+    class="text-center backdrop-card transition-all"
+    :class="{'backdrop-card--hoverable': hover, 'backdrop-card--darken': darken, 'pa-4': !dense}"
     v-bind="$attrs"
   >
     <div class="backdrop-icon transition-all">
@@ -24,6 +24,12 @@
         }
       },
       darken: {
+        type: Boolean,
+        default () {
+          return false
+        }
+      },
+      dense: {
         type: Boolean,
         default () {
           return false

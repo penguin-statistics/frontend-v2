@@ -2,14 +2,15 @@ import dayjs from 'dayjs'
 import 'dayjs/locale/zh'
 import 'dayjs/locale/ja'
 import 'dayjs/locale/ko'
-const relativeTime = require('dayjs/plugin/relativeTime')
-import 'dayjs/locale/zh'
-import 'dayjs/locale/ja'
-import 'dayjs/locale/ko'
+
 import i18n from "@/i18n";
+
+const relativeTime = require('dayjs/plugin/relativeTime')
 const isBetween = require('dayjs/plugin/isBetween')
+const duration = require('dayjs/plugin/duration')
 dayjs.extend(relativeTime)
 dayjs.extend(isBetween)
+dayjs.extend(duration)
 
 const FORMATS = {
   MD: "M.D",
@@ -56,7 +57,7 @@ export default {
     if (includeTime) template += ` ${FORMATS.HM}`
     return dayjs(date).format(template)
   },
-  startEnd (start, end) {
+  startEnd (start, end, selector=false) {
     if (start && end) {
       return i18n.t('stats.timeRange.inBetween', this.dates([start, end], false))
     } else if (start && !end) {
@@ -64,6 +65,7 @@ export default {
     } else if (!start && end) {
       return i18n.t('stats.timeRange.endsAt', {date: this.date(end, true)})
     } else {
+      if (selector) return i18n.t('stats.timeRange.notSelected')
       return i18n.t('stats.timeRange.unknown')
     }
   }

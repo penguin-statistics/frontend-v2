@@ -5,12 +5,13 @@
     transition="slide-y-transition"
     offset-y
     min-width="350px"
-    max-width="650px"
+    max-width="700px"
+    max-height="600px"
   >
     <template v-slot:activator="{ on }">
       <v-text-field
         :value="formattedDate"
-        label="时间段"
+        :label="`${$t('query.selector.timeRange.title')} (*${$t('validator.required')})`"
         prepend-icon="mdi-calendar"
         readonly
         filled
@@ -21,11 +22,9 @@
     </template>
     <v-card
       color="background"
-      class="d-flex flex-row"
+      class="d-flex flex-column"
+      :elevation="12"
     >
-      <!--      <v-card-title class="heading">-->
-      <!--        选择时间段-->
-      <!--      </v-card-title>-->
       <v-date-picker
         v-model="date"
         :max="today"
@@ -40,114 +39,84 @@
 
         :title-date-format="titleDateFormatter"
       />
-      <v-list
-        subheader
-        two-line
-        min-width="170px"
-      >
-        <v-subheader>
-          预设时间
-        </v-subheader>
-        <v-list-item>
-          <v-list-item-content>
-            <v-list-item-title>
-              Item 1
-            </v-list-item-title>
-            <v-list-item-subtitle>
-              19.4.30 - 20.1.1
-            </v-list-item-subtitle>
-          </v-list-item-content>
-
-          <v-list-item-action>
-            <v-icon>
-              mdi-calendar-import
-            </v-icon>
-          </v-list-item-action>
-        </v-list-item>
-
-        <v-list-item>
-          <v-list-item-content>
-            <v-list-item-title>
-              Item 2
-            </v-list-item-title>
-            <v-list-item-subtitle>
-              19.9.1 - 20.4.5
-            </v-list-item-subtitle>
-          </v-list-item-content>
-
-          <v-list-item-action>
-            <v-icon>
-              mdi-calendar-import
-            </v-icon>
-          </v-list-item-action>
-        </v-list-item>
-
-        <v-list-item>
-          <v-list-item-content>
-            <v-list-item-title>
-              Item 3
-            </v-list-item-title>
-            <v-list-item-subtitle>
-              19.8.5 - 20.5.1
-            </v-list-item-subtitle>
-          </v-list-item-content>
-
-          <v-list-item-action>
-            <v-icon>
-              mdi-calendar-import
-            </v-icon>
-          </v-list-item-action>
-        </v-list-item>
-      </v-list>
+      <div class="flex-row flex-wrap ma-2">
+        <Subheader class="mx-2">
+          {{ $t('query.selector.timeRange.presets.title') }}
+        </Subheader>
+        <QuerySelectorTimeRangePresetPeriod
+          v-for="(period, i) in periods"
+          :key="i"
+          :period="period"
+          class="d-inline-flex ma-1"
+          @update:selection="selectPeriod"
+        />
+      </div>
     </v-card>
   </v-menu>
 </template>
 
 <script>
   import timeFormatter from "@/utils/timeFormatter";
+  import QuerySelectorTimeRangePresetPeriod
+    from "@/components/advancedQuery/selectors/QuerySelectorTimeRangePresetPeriod";
+  import get from "@/utils/getters"
+  import Subheader from "@/components/global/Subheader";
 
   export default {
     name: "QuerySelectorTimeRange",
+    components: {Subheader, QuerySelectorTimeRangePresetPeriod},
+    props: {
+      value: {
+        type: Array,
+        required: true
+      },
+      server: {
+        type: String,
+        required: true
+      }
+    },
     data() {
       return {
         menu: false,
-        internalDate: [timeFormatter.dayjs().format("YYYY-MM-DD")],
       }
     },
     computed: {
       date: {
         get () {
-          return this.internalDate
+          return this.value
         },
         set (val) {
           let setTo;
           if (val) {
             if (val.length === 0) {
-              this.internalDate = []
+              this.$emit('input', [])
             } else if (val.length === 1) {
-              this.internalDate = val
+              this.$emit('input', val)
             } else if (val.length === 2) {
               const first = new Date(val[0]).getTime()
               const second = new Date(val[1]).getTime()
 
               if (second < first) {
-                this.internalDate = [val[1], val[0]]
+                this.$emit('input', [val[1], val[0]])
               } else {
-                this.internalDate = val
+                this.$emit('input', val)
               }
             }
           } else {
-            this.internalDate = setTo
+            this.$emit('input', setTo)
           }
         }
       },
       formattedDate () {
         const start = this.date[0] ? this.date[0] : null
         const end = this.date[1] ? this.date[1] : null
-        return timeFormatter.startEnd(start, end)
+        return timeFormatter.startEnd(start, end, true)
       },
       today () {
         return timeFormatter.dayjs().format("YYYY-MM-DD")
+      },
+      periods () {
+        return get.period.all(this.server)
       }
     },
     methods: {
@@ -156,6 +125,14 @@
       },
       titleDateFormatter () {
         return this.formattedDate
+      },
+      selectPeriod (period) {
+        const utcDate = new Date(period).toISOString().substr(0, 10)
+        if (this.date.length < 2) {
+          this.date = [...this.date, utcDate]
+        } else {
+          this.date = [utcDate]
+        }
       }
     }
   }

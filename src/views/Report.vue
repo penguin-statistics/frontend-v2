@@ -78,7 +78,7 @@
         "furniture": "家具掉落：{state}",
         "name": "上报结果",
         "submit": "提交",
-        "success": "上传成功",
+        "success": "汇报成功",
         "unable": "无法提交：",
         "undo": "撤销",
         "undoSuccess": "撤销成功"
@@ -88,7 +88,7 @@
         "rule_2": "若无素材掉落，请直接点击提交；",
         "rule_3": "请不要汇报首次通关奖励，不要只汇报比较“欧”的掉落；",
         "rule_4": "请保证通关评价是3星；",
-        "rule_5": "请只上传国服的掉落，谢谢。"
+        "rule_5": "请只汇报国服的掉落，谢谢。"
       },
       "usage": "左键增加，右键减少"
     }
@@ -183,6 +183,7 @@
           z-index="4"
         >
           <v-row
+            v-if="invalidStage"
             align="center"
             justify="center"
             class="fill-height text-center mx-3"
@@ -298,7 +299,7 @@
             v-model="furniture"
             color="primary"
             :label="$t('report.furniture', {state: $t(`meta.hasNorNot.${furniture}`)})"
-            class="mb-5 pb-0"
+            class="mb-5 pb-0 d-inline-flex"
             hide-details
           />
 
@@ -538,15 +539,15 @@ import Theme from "@/mixins/Theme";
 const categories = [
   {
     id: "NORMAL_DROP",
-    colors: ["#cacbcc", "#19191a"]
+    colors: ["#cacbcc", "#4d4d4d"]
   },
   {
     id: "SPECIAL_DROP",
-    colors: ["#e26d2c", "#33180a"]
+    colors: ["#e26d2c", "#b35522"]
   },
   {
     id: "EXTRA_DROP",
-    colors: ["#9aba3d", "#2a3311"]
+    colors: ["#9aba3d", "#8aa637"]
   },
 ];
 
@@ -602,6 +603,7 @@ export default {
         return this.furnitureInternal
       },
       set (val) {
+        this.furnitureInternal = val
         if (val === true) {
           this.results.push({
             dropType: "FURNITURE",

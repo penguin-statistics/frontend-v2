@@ -2,6 +2,10 @@
 	{
 		"en": {
 			"quickStart": "Quick Start",
+			"caption": [
+				"Click the",
+				"button to expand menu and see more features"
+			],
 			"subtitle": {
 				"report": "I want to report drops",
 				"byItem": "Where should I farm for Orirock?",
@@ -47,6 +51,10 @@
 		},
 		"zh": {
 			"quickStart": "快速上手",
+			"caption": [
+				"点击左上角",
+				"按钮展开菜单以查看更多功能"
+			],
 			"subtitle": {
 				"report": "我要汇报掉落",
 				"byItem": "我该去哪刷石头？",
@@ -79,12 +87,14 @@
     </h1>
 
     <span class="subtitle-2 my-2 d-inline-flex align-center flex-row flex-wrap justify-end">
-      点击左上角 <v-icon
+      {{ $t('caption')[0] }}
+      <v-icon
         small
         class="mx-1"
       >
         mdi-menu
-      </v-icon> 按钮展开菜单以查看更多功能
+      </v-icon>
+      {{ $t('caption')[1] }}
     </span>
 
     <v-row
@@ -137,7 +147,7 @@
       return {
         links: [
 					{
-						route: "Report",
+						route: "ReportByZone",
 						icon: "mdi-upload",
 						title: 'title.report',
 						subtitle: 'subtitle.report'

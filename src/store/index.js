@@ -5,6 +5,7 @@ import createPersistedState from 'vuex-persistedstate'
 // store file
 import ajax from './modules/ajax';
 import auth from './modules/auth';
+import cache from "./modules/cache";
 import data from './modules/data';
 import dataSource from './modules/dataSource';
 import mirror from './modules/mirror';
@@ -49,11 +50,18 @@ export default new Vuex.Store({
       paths: [
         "mirror"
       ]
-    })
+    }),
+    // createPersistedState({
+    //   key: "penguin-stats-cache",
+    //   paths: [
+    //     "cache"
+    //   ]
+    // }),
   ],
   modules: {
     ajax,
     auth,
+    cache,
     data,
     dataSource,
     settings,
