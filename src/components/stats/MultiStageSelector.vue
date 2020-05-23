@@ -3,6 +3,23 @@
     <v-card-title>
       {{ $t('stage.selector.plannerExclude') }}
     </v-card-title>
+    <v-card-actions class="mx-4">
+      <v-spacer />
+      <v-btn
+        outlined
+        color="error"
+        @click="disableAll"
+      >
+        {{ $t('stage.selector.excludeAll') }}
+      </v-btn>
+      <v-btn
+        outlined
+        color="success"
+        @click="enableAll"
+      >
+        {{ $t('stage.selector.includeAll') }}
+      </v-btn>
+    </v-card-actions>
     <div class="mx-6">
       <template v-for="category in categorizedZones">
         <v-subheader
@@ -18,6 +35,11 @@
             {{ $t(['zone.types', category.id].join('.')) }}
           </span>
           <v-divider class="mx-4" />
+          <v-checkbox
+            v-bind="statuses.category[category.id]"
+
+            @click.self="toggleCategory(category.id, statuses.category[category.id])"
+          />
         </v-subheader>
         <v-row
           v-for="zone in category.zones"
@@ -27,7 +49,14 @@
           <div
             class="d-flex flex-column justify-center align-center text-center zone-title"
           >
-            {{ translate(zone, 'zoneName') }}
+            <v-checkbox
+              v-bind="statuses.zone[zone.zoneId]"
+
+              hide-details
+              :label="translate(zone, 'zoneName')"
+              class="ma-0 pa-0"
+              @click.stop="toggleZone(category.id, zone.zoneId, statuses.zone[zone.zoneId])"
+            />
           </div>
           <v-divider
             vertical
@@ -88,10 +117,10 @@
         const categories = ["ACTIVITY_OPEN", "MAINLINE", "WEEKLY"];
         const results = [];
         for (const category of categories) {
-          let zones = get.zones.byType(category.startsWith("ACTIVITY") ? "ACTIVITY" : category, false);
+          let zones = get.zones.byType(category.startsWith("ACTIVITY") ? "ACTIVITY" : category);
           if (category === "ACTIVITY_OPEN") zones = zones.filter(zone => !zone.isOutdated);
           zones = zones.map(el => {
-            el.stages = get.stages.byParentZoneId(el.zoneId, false)
+            el.stages = get.stages.byParentZoneId(el.zoneId)
             return el
           })
 
