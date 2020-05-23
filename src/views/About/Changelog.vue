@@ -135,6 +135,16 @@ export default {
         },
         {
           active: true,
+          version: "v3.1.1",
+          date: "2020-05-22T00:00:00Z",
+          changes: [
+            "修复：首页页边距细节问题",
+            "修复：Planner 无法排除当前服务器没有的关卡的问题",
+
+            "优化：首页最近 24 小时上传量添加步进动画",
+          ]
+        },
+        {
           version: "v3.1.0",
           date: "2020-05-22T00:00:00Z",
           changes: [

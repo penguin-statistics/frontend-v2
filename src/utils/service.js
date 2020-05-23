@@ -33,16 +33,16 @@ service.interceptors.response.use(function (response) {
 
   return response;
 }, function (error) {
-  // eliminate `user not found` errors (reports 404).
   if (error.response) {
 
-    if ("X-Penguin-Upgrade" in error.response.headers) {
+    if ("x-penguin-upgrade" in error.response.headers) {
       // X-Penguin-Upgrade: Client version outdated
       store.commit("ui/setOutdated", true)
     }
 
+    // eliminate `user not found` errors (reports 404).
     if (error.response.status !== 404) {
-      Console.error("Ajax", "error", error)
+      Console.error("Ajax", "failed", error)
     }
 
     error.errorMessage = `(s=${error.response.status}) ${error.response.data ? error.response.data : error.message}`;
