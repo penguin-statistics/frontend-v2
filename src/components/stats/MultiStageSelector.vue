@@ -88,10 +88,10 @@
         const categories = ["ACTIVITY_OPEN", "MAINLINE", "WEEKLY"];
         const results = [];
         for (const category of categories) {
-          let zones = get.zones.byType(category.startsWith("ACTIVITY") ? "ACTIVITY" : category);
+          let zones = get.zones.byType(category.startsWith("ACTIVITY") ? "ACTIVITY" : category, false);
           if (category === "ACTIVITY_OPEN") zones = zones.filter(zone => !zone.isOutdated);
           zones = zones.map(el => {
-            el.stages = get.stages.byParentZoneId(el.zoneId)
+            el.stages = get.stages.byParentZoneId(el.zoneId, false)
             return el
           })
 
