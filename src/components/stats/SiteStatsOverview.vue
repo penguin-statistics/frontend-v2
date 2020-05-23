@@ -10,7 +10,10 @@
       </v-icon>
     </template>
     <v-card-title class="display-2">
-      <span class="monospace">
+      <span
+        ref="totalReportsNum"
+        class="monospace"
+      >
         {{ totalReports === null ? "---" : totalReports.toLocaleString() }}
       </span>
     </v-card-title>
@@ -31,6 +34,8 @@
 
 <script>
   import BackdropCard from "@/components/global/BackdropCard";
+  import statsManager from "@/models/managers/stats";
+  import anime from "animejs";
   export default {
     name: "SiteStatsOverview",
     components: {BackdropCard},
@@ -41,6 +46,28 @@
         return stats["totalStageTimes_24h"]
           .map(el => el.times)
           .reduce((a, b) => a + b, 0)
+      }
+    },
+    watch: {
+      totalReports(newValue, oldValue) {
+        this.animate(newValue, oldValue)
+      }
+    },
+    created () {
+      statsManager.refresh()
+    },
+    methods: {
+      animate(newValue, oldValue) {
+        const self = this;
+
+        return anime({
+          targets: self.$refs["totalReportsNum"],
+          innerHTML: [oldValue, newValue],
+          duration: 1500,
+          round: 1,
+          easing: 'easeOutQuint',
+          delay: 1500
+        })
       }
     },
   }
