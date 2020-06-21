@@ -537,7 +537,7 @@
                     {{ $t('planner.have') }}
                   </span>
                 </div>
-                <number-input
+                <NumberInput
                   v-model="itemData.have"
                   size="small"
                   center
@@ -602,18 +602,16 @@
     name: "Planner",
     components: {MultiStageSelector, Item, NumberInput},
     data: () => {
-      const items = get.items.all(true);
       return {
         fundDressDialog: false,
         importExportDialog: false,
         importExportDialogTab: null,
         importJson: "",
-        items,
+        items: get.items.all(true),
         itemsData: get.items.all(false)
           .filter(item => item.itemType === "MATERIAL" && item.itemId.length === 5 || item.itemType === "ARKPLANNER")
           .map(item => ({
             id: item.itemId,
-            name: item.name,
             need: 0,
             have: 0,
           })),
@@ -765,7 +763,6 @@
             const item = get.items.byName(itemData.name);
             convertedImported.push({
               id: item.itemId,
-              name: item.name,
               need: itemData.need,
               have: itemData.have
             })

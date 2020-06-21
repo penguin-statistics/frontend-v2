@@ -106,20 +106,24 @@
       <v-row>
         <v-col v-bind="cols.details">
           <SiteStatsStage
+            key="all"
             :data="stats['totalStageTimes']"
             :title="$t('stats.site.all')"
           />
         </v-col>
-
+        
         <v-col v-bind="cols.details">
           <SiteStatsStage
+            key="24h"
             :data="stats['totalStageTimes_24h']"
             :title="$t('stats.site.24hr')"
           />
         </v-col>
 
         <v-col v-bind="cols.details">
-          <SiteStatsItem :data="stats['totalItemQuantities']" />
+          <SiteStatsItem
+            :data="stats['totalItemQuantities']"
+          />
         </v-col>
 
         <v-col
@@ -165,10 +169,11 @@
         return this.stats && this.stats["error"]
       },
       stats () {
+        console.log('stats')
         return this.$store.getters["data/content"]({id: "stats"})
       },
       calculated () {
-        const updatedAt = this.$store.getters["data/updated"]({id: "period"});
+        const updatedAt = this.$store.getters["data/updated"]({id: "stats"});
         return {
           totalDrops: this.stats["totalItemQuantities"].map(el => el.quantity).reduce((a, b) => a + b),
           totalReports: this.stats["totalStageTimes"].map(el => el.times).reduce((a, b) => a + b),

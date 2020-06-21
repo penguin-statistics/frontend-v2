@@ -55,7 +55,6 @@
     </v-data-table>
     <v-pagination
       v-model="page"
-      cir
       :total-visible="7"
       class="mt-1 mb-3"
       :length="Math.ceil(items.length / options.table.itemsPerPage)"
@@ -93,6 +92,7 @@
     },
     computed: {
       items() {
+        console.log('items')
         return this.data.map(el => {
           el.stage = get.stages.byStageId(el.stageId);
           el.zone = get.zones.byZoneId(el.stage.zoneId, false);

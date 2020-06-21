@@ -74,7 +74,8 @@ const router = new Router({
       i18n: 'menu.stats._name',
       active: true
     },
-    children: [{
+    children: [
+      {
         path: 'stage',
         name: 'StatsByStage',
         component: StatsByStage,
@@ -152,16 +153,17 @@ const router = new Router({
       i18n: 'menu.about._name',
       active: true
     },
-    children: [{
-      path: 'members',
-      name: 'AboutMembers',
-      component: AboutMembers,
-      props: true,
-      meta: {
-        icon: 'mdi-account-multiple',
-        i18n: 'menu.about.members'
+    children: [
+      {
+        path: 'members',
+        name: 'AboutMembers',
+        component: AboutMembers,
+        props: true,
+        meta: {
+          icon: 'mdi-account-multiple',
+          i18n: 'menu.about.members'
+        },
       },
-    },
     {
       path: 'contribute',
       name: 'AboutContribute',

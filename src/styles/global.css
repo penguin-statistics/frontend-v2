@@ -15,7 +15,7 @@
 }
 
 .v-navigation-drawer {
-    transition: all .3s cubic-bezier(.25,.8,.5,1) !important;
+    /*transition: all .3s cubic-bezier(.25,.8,.5,1) !important;*/
 }
 
 .drawer-logo {

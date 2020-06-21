@@ -195,6 +195,7 @@
           "act6d5_zone1": this.cdnResource('/backgrounds/zones/act6d5_zone1.jpg'),
           "act7d5_zone1": this.cdnResource('/backgrounds/zones/act7d5_zone1.jpg'),
           "act9d0_zone1": this.cdnResource('/backgrounds/zones/act9d0_zone1.jpg'),
+          "act10d5_zone1": this.cdnResource('/backgrounds/zones/act10d5_zone1.jpg'),
           "A001_zone1": this.cdnResource('/backgrounds/zones/A001_zone1.jpg'),
           "A003_zone1": this.cdnResource('/backgrounds/zones/A003_zone1.jpg'),
           "main_0": this.cdnResource('/backgrounds/zones/main_0.jpg'),
