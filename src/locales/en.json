@@ -264,7 +264,17 @@
       "import": "Import",
       "export": "Export",
       "importExport": "@:(planner.actions.import)/@:(planner.actions.export)",
-      "calculate": "Calculate"
+      "calculate": "Calculate",
+      "link": {
+        "generate": "Generate Share Link",
+        "generating": "Generating...",
+        "share": "Share Link"
+      },
+      "config": {
+        "_name": "Configuration File",
+        "share": "Share Configuration File",
+        "import": "Import from Configuration File"
+      }
     },
     "have": "Have",
     "need": "Need",

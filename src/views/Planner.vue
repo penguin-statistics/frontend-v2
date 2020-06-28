@@ -810,32 +810,32 @@
 </script>
 
 <style scoped>
-  @media (max-width: 380px) {
-    .col-xs-1-2 {
-      -webkit-box-flex: 0;
-      -ms-flex: 0 0 50%;
-      flex: 0 0 50%;
-      max-width: 50%;
-    }
-  }
+  /*@media (max-width: 380px) {*/
+  /*  .col-xs-1-1 {*/
+  /*    -webkit-box-flex: 0;*/
+  /*    -ms-flex: 0 0 100%;*/
+  /*    flex: 0 0 100%;*/
+  /*    max-width: 100%;*/
+  /*  }*/
+  /*}*/
 
-  @media (min-width: 1264px) and (max-width: 1584px) {
-    .col-lg-1-8 {
-      -webkit-box-flex: 0;
-      -ms-flex: 0 0 12.5%;
-      flex: 0 0 12.5%;
-      max-width: 12.5%
-    }
-  }
+  /*@media (min-width: 1264px) and (max-width: 1584px) {*/
+  /*  .col-lg-1-8 {*/
+  /*    -webkit-box-flex: 0;*/
+  /*    -ms-flex: 0 0 12.5%;*/
+  /*    flex: 0 0 12.5%;*/
+  /*    max-width: 12.5%*/
+  /*  }*/
+  /*}*/
 
-  @media (min-width: 1584px) and (max-width: 1904px) {
-    .col-md-1-10 {
-      -webkit-box-flex: 0;
-      -ms-flex: 0 0 10%;
-      flex: 0 0 10%;
-      max-width: 10%
-    }
-  }
+  /*@media (min-width: 1584px) and (max-width: 1904px) {*/
+  /*  .col-md-1-8 {*/
+  /*    -webkit-box-flex: 0;*/
+  /*    -ms-flex: 0 0 12.5%;*/
+  /*    flex: 0 0 12.5%;*/
+  /*    max-width: 12.5%;*/
+  /*  }*/
+  /*}*/
 
   .planner-import-export, ::v-deep .planner-import-export textarea {
     word-break: break-all;
@@ -852,25 +852,25 @@
     height: 100%
   }
 
-  ::v-deep .number-input-theme--dense .number-input__button--minus {
-    border-radius: 15px 0 0 15px !important;
-  }
-  ::v-deep .number-input-theme--dense .number-input__button--plus {
-    border-radius: 0 15px 15px 0 !important;
-  }
-  ::v-deep .number-input-theme--dense .number-input__button::before {
-    width: 14px;
-  }
-  ::v-deep .number-input-theme--dense .number-input__button {
-    width: 24px !important;
-  }
-  ::v-deep .number-input-theme--dense .number-input__button:hover {
-    width: 30px !important;
-  }
-  ::v-deep .number-input-theme--dense .number-input__input {
-    padding-left: 20px !important;
-    padding-right: 20px !important;
-  }
+  /*::v-deep .number-input-theme--dense .number-input__button--minus {*/
+  /*  border-radius: 15px 0 0 15px !important;*/
+  /*}*/
+  /*::v-deep .number-input-theme--dense .number-input__button--plus {*/
+  /*  border-radius: 0 15px 15px 0 !important;*/
+  /*}*/
+  /*::v-deep .number-input-theme--dense .number-input__button::before {*/
+  /*  width: 14px;*/
+  /*}*/
+  /*::v-deep .number-input-theme--dense .number-input__button {*/
+  /*  width: 24px !important;*/
+  /*}*/
+  /*::v-deep .number-input-theme--dense .number-input__button:hover {*/
+  /*  width: 30px !important;*/
+  /*}*/
+  /*::v-deep .number-input-theme--dense .number-input__input {*/
+  /*  padding-left: 20px !important;*/
+  /*  padding-right: 20px !important;*/
+  /*}*/
 
   .field-caption {
     top: -30px;

@@ -31,7 +31,8 @@
       "contact": "联系我们",
       "donate": "捐助",
       "links": "友情链接",
-      "bulletin": "公告"
+      "bulletin": "公告",
+      "attributions": "开源许可"
     },
     "siteStats": "全站数据一览",
     "planner": "刷图规划器",
@@ -273,7 +274,17 @@
       "import": "导入",
       "export": "导出",
       "importExport": "@:(planner.actions.import)/@:(planner.actions.export)",
-      "calculate": "计算规划"
+      "calculate": "计算规划",
+      "link": {
+        "generate": "获取分享链接",
+        "generating": "正在生成",
+        "share": "分享链接"
+      },
+      "config": {
+        "_name": "配置文件",
+        "share": "分享配置文件",
+        "import": "导入配置文件"
+      }
     },
     "have": "已有",
     "need": "需要",

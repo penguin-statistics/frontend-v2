@@ -1,31 +1,54 @@
 import get from "@/utils/getters"
+import store from "@/store";
 
 export default {
-  planner ({items, options, exclude}) {
-    const body = {
-      required: {},
-      owned: {},
-      extra_outc: false,
-      exp_demand: false,
-      gold_demand: false
-    };
+  planner: {
+    config ({items, options, excludes}) {
+      const sanitizedItems = [];
 
-    items.forEach(el => {
-      if (el.need) body.required[el.name] = el.need;
-      if (el.have) body.owned[el.name] = el.have;
-    });
+      for (const item of items.filter(el => el.need || el.have)) {
+        const current = {
+          id: item.id
+        };
+        if (item.have) current.have = item.have
+        if (item.need) current.need = item.need
+        sanitizedItems.push(current)
+      }
 
-    body.extra_outc = options.byProduct;
-    body.exp_demand = options.requireExp;
-    body.gold_demand = options.requireLmb;
-    if (exclude.length > 0) {
-      body["exclude"] = exclude.map(el => {
-        el = get.stages.byStageId(el).code || el
-        return el
-      })
+      return {
+        "@type": "@penguin-statistics/planner/config",
+        items: sanitizedItems,
+        options,
+        excludes
+      }
+    },
+    plan ({items, options, excludes}) {
+      const body = {
+        required: {},
+        owned: {},
+        extra_outc: options.byProduct,
+        exp_demand: options.requireExp,
+        gold_demand: options.requireLmb,
+        store: options.calculateStore,
+        input_lang: "id",
+        output_lang: "id",
+        server: store.getters["dataSource/server"]
+      };
+
+      items.forEach(el => {
+        if (el.need) body.required[el.id] = el.need;
+        if (el.have) body.owned[el.id] = el.have;
+      });
+
+      if (excludes.length > 0) {
+        body["exclude"] = excludes.map(el => {
+          el = get.stages.byStageId(el).code || el
+          return el
+        })
+      }
+
+      return body
     }
-
-    return body
   },
   advancedQuery(queries) {
     const marshalled = []

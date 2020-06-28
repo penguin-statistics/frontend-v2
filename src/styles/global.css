@@ -37,13 +37,13 @@
     line-height: 36px;
     font-size: 24px;
     opacity: 0;
-    transform: scaleX(0.95) scaleY(0.9);
+    transform: translateY(-12px) scaleX(0.95) scaleY(0.8);
     transition: all .5s cubic-bezier(0.19, 1, 0.22, 1);
 }
 
 .drawer-logo:hover > .description {
     opacity: 1;
-    transform: scale(1);
+    transform: translateY(0px) scaleX(1) scaleY(1);
 }
 
 .randomizedLogo > .v-image__image {
@@ -72,6 +72,10 @@
 
 .transparentTable > .v-table__overflow > .v-table {
     background: transparent;
+}
+
+.line-height-wide {
+    line-height: 1.8 !important;
 }
 
 /*.v-navigation-drawer::-webkit-scrollbar-thumb {*/
@@ -217,6 +221,33 @@
             rgba(255, 255, 255, 0.5) 45px,
             rgba(255, 255, 255, 0.5) 90px
     );
+}
+
+@keyframes slash-strip--loading__animation {
+    from {
+        background-position: -135px 0px;
+    }
+
+    to {
+        background-position: 0px 0px;
+    }
+}
+
+.slash-strip--loading {
+    background: repeating-linear-gradient(
+            -45deg,
+            rgba(70, 150, 236, 0.5) -90px,
+            rgba(70, 150, 236, 0.5) -45px,
+            rgba(70, 150, 236, 1) -45px,
+            rgba(70, 150, 236, 1) 0px,
+            rgba(70, 150, 236, 0.5) 0px,
+            rgba(70, 150, 236, 0.5) 45px,
+            rgba(70, 150, 236, 1) 45px,
+            rgba(70, 150, 236, 1) 90px
+    ) ;
+    background-size: 200%;
+    transition: background .225s cubic-bezier(0.165, 0.84, 0.44, 1);
+    animation: slash-strip--loading__animation 2s infinite cubic-bezier(0.05, 0.5, 0.3, 0.8);
 }
 
 .theme--light .slash-strip--danger {
@@ -427,3 +458,29 @@
 .item-icon.item-icon--special {
     position: absolute !important;
 }
+
+@media (max-width: 380px) {
+    .col-xs-1-2 {
+        -webkit-box-flex: 0 !important;
+        -ms-flex: 0 0 50% !important;
+        flex: 0 0 50% !important;
+        max-width: 50% !important;
+    }
+}
+@media (min-width: 1264px) and (max-width: 1584px) {
+    .col-lg-1-8 {
+        -webkit-box-flex: 0 !important;
+        -ms-flex: 0 0 12.5% !important;
+        flex: 0 0 12.5% !important;
+        max-width: 12.5% !important;
+    }
+}
+@media (min-width: 1584px) and (max-width: 1904px) {
+    .col-md-1-10 {
+        -webkit-box-flex: 0 !important;
+        -ms-flex: 0 0 10% !important;
+        flex: 0 0 10% !important;
+        max-width: 10% !important;
+    }
+}
+

@@ -1,5 +1,6 @@
 <template>
   <v-container
+    fluid
     class="fill-height align-center"
   >
     <template v-if="error">
@@ -169,7 +170,6 @@
         return this.stats && this.stats["error"]
       },
       stats () {
-        console.log('stats')
         return this.$store.getters["data/content"]({id: "stats"})
       },
       calculated () {

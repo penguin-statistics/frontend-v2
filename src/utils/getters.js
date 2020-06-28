@@ -119,7 +119,7 @@ Getters.zones = {
       zones = zones.filter(el => el["existence"][server]["exist"])
     }
 
-    zones = zones.sort((a, b) => {
+    zones = zones.slice().sort((a, b) => {
       return a["zoneIndex"] - b["zoneIndex"]
     }).map(el => {
       if (el.isActivity) {
