@@ -1,100 +1,3 @@
-<i18n>
-  {
-    "en": {
-      "gacha": "Multiple results are allowed for the reports of this stage.",
-      "report": {
-        "clear": "Clear",
-        "closedReason": {
-          "INVALID": "Stage Not Found: The stage does not exist in the server you have selected.",
-          "EXPIRED": "Stage Report Closed: This activity stage has already been closed."
-        },
-        "furniture": "Furniture Drop: {state}",
-        "name": "Report",
-        "submit": "Submit",
-        "success": "Successfully submitted",
-        "unable": "Failed to submit: ",
-        "undo": "Recall",
-        "undoSuccess": "Successfully recalled submission"
-      },
-      "rules": {
-        "rule_1": "Report one clear at a time. Please double-check your drop selection.",
-        "rule_2": "If there are no drops, click submit directly without selecting any drops.",
-        "rule_3": "Please do not report the first-clear of a stage, and do not only report the clears where you were lucky - report all clears.",
-        "rule_4": "Please make sure that you refresh a 3-stars clear.",
-        "rule_5": "Please only submit drop data from the CN server."
-      },
-      "usage": "Increase drop amount by left mouse click, decrease by right click"
-    },
-    "ja": {
-      "gacha": "この操作を行うことでデータに複数の結果を反映させることが出来ます。",
-      "report": {
-        "clear": "クリア",
-        "furniture": "家具ドロップ：{state}",
-        "name": "報告",
-        "submit": "送信",
-        "success": "送信成功",
-        "unable": "送信失敗：",
-        "undo": "送信キャンセル",
-        "undoSuccess": "キャンセルしました"
-      },
-      "rules": {
-        "rule_1": "ここに追加する内容は1回でドロップした内容です。",
-        "rule_2": "素材がドロップしなかった場合は直接送信をクリックしてください。",
-        "rule_3": "初クリア時の報酬は報告しないでください。ドロップ結果が極端に良かったものだけを報告するのはご遠慮ください。",
-        "rule_4": "クリア時の評価が☆3である場合のみ報告してください。",
-        "rule_5": "大陸版のドロップデータのみをアップロードして下さい。ご協力ありがとうございます。"
-      },
-      "usage": "左クリックで個数増加、右クリックで個数減少"
-    },
-    "ko": {
-      "gacha": "이 작전지역은 여러 개의 결과를 한 보고서에 제출할 수 있습니다.",
-      "report": {
-        "clear": "초기화",
-        "furniture": "럭키 드랍: {state}",
-        "name": "보고",
-        "submit": "제출",
-        "success": "성공적으로 제출되었습니다",
-        "unable": "제출 실패: ",
-        "undo": "제출 취소",
-        "undoSuccess": "성공적으로 취소되었습니다"
-      },
-      "rules": {
-        "rule_1": "한 번에 하나의 전투에 대한 보고서를 작성하여야 합니다, 제출 전에 입력 내용을 한번 더 확인해 주십시오.",
-        "rule_2": "드랍이 없는 경우에는, 아무것도 누르지 않은 채로 제출을 눌러 주십시오.",
-        "rule_3": "처음으로 클리어한 작전은 보고하지 마시고, 운이 좋았던 작전만 보고하지 마십시오 - 모든 드랍을 보고해 주십시오.",
-        "rule_4": "3성으로 클리어하여 주십시오.",
-        "rule_5": "중국 서버에서의 드랍만 보고하여 주십시오, 감사합니다."
-      },
-      "usage": "왼쪽 클릭시 증가하며, 오른쪽 클릭시 감소합니다"
-    },
-    "zh": {
-      "gacha": "本作战允许在一次汇报内包含多个结果。",
-      "report": {
-        "clear": "清空",
-        "closedReason": {
-          "EXPIRED": "关卡汇报已关闭：活动关卡已结束",
-          "INVALID": "关卡不存在：此关卡未在所选服务器上提供"
-        },
-        "furniture": "家具掉落：{state}",
-        "name": "上报结果",
-        "submit": "提交",
-        "success": "汇报成功",
-        "unable": "无法提交：",
-        "undo": "撤销",
-        "undoSuccess": "撤销成功"
-      },
-      "rules": {
-        "rule_1": "这是单次作战的提交，请注意核对数目；",
-        "rule_2": "若无素材掉落，请直接点击提交；",
-        "rule_3": "请不要汇报首次通关奖励，不要只汇报比较“欧”的掉落；",
-        "rule_4": "请保证通关评价是3星；",
-        "rule_5": "请只汇报国服的掉落，谢谢。"
-      },
-      "usage": "左键增加，右键减少"
-    }
-  }
-</i18n>
-
 <template>
   <v-container
     class="fill-height"
@@ -145,7 +48,7 @@
     </v-snackbar>
 
     <v-snackbar
-      v-model="undoed"
+      v-model="undid"
       color="success"
       :timeout="15000"
       bottom
@@ -157,7 +60,7 @@
       <v-spacer />
       <v-btn
         text
-        @click="undoed = false"
+        @click="undid = false"
       >
         {{ $t('meta.dialog.close') }}
       </v-btn>
@@ -234,11 +137,11 @@
         >
           <ol>
             <li v-if="!isGacha">
-              {{ $t('rules.rule_1') }}
+              {{ $t('report.notices.rule_1') }}
             </li>
-            <li>{{ $t('rules.rule_2') }}</li>
-            <li>{{ $t('rules.rule_3') }}</li>
-            <li>{{ $t('rules.rule_4') }}</li>
+            <li>{{ $t('report.notices.rule_2') }}</li>
+            <li>{{ $t('report.notices.rule_3') }}</li>
+            <li>{{ $t('report.notices.rule_4') }}</li>
           </ol>
         </v-alert>
 
@@ -249,7 +152,7 @@
           dark
           border="left"
         >
-          {{ $t('usage') }}
+          {{ $t('report.usage') }}
         </v-alert>
 
         <v-alert
@@ -259,7 +162,7 @@
           dark
           border="left"
         >
-          {{ $t('gacha') }}
+          {{ $t('report.gacha') }}
         </v-alert>
 
         <v-container
@@ -294,15 +197,122 @@
           </span>
         </v-container>
 
-        <v-col class="pa-6 pt-0">
-          <v-switch
-            v-model="furniture"
-            color="primary"
-            :label="$t('report.furniture', {state: $t(`meta.hasNorNot.${furniture}`)})"
-            class="mb-5 pb-0 d-inline-flex"
-            hide-details
-          />
+        <v-row
+          justify="center"
+          class="mx-2 mb-5"
+          dense
+        >
+          <v-col
+            cols="12"
+            sm="6"
+            md="6"
+            lg="6"
+            xl="6"
+          >
+            <v-switch
+              v-model="furniture"
+              color="primary"
+              class="my-0 pb-0 d-inline-flex"
+              hide-details
+              :disabled="submitting"
+            >
+              <template v-slot:label>
+                <v-slide-x-transition leave-absolute>
+                  <v-badge
+                    v-if="furniture"
+                    icon="mdi-check-circle"
+                    bordered
+                    bottom
+                    overlap
+                    :offset-x="7"
+                    :offset-y="10"
+                    class="mr-3"
+                  >
+                    <ItemIcon
+                      :item="getItem('furni')"
+                      :ratio="0.5"
+                    />
+                  </v-badge>
+                </v-slide-x-transition>
+                <span>
+                  {{ $t('report.furniture', {state: $t(`meta.hasNorNot.${furniture}`)}) }}
+                </span>
+              </template>
+            </v-switch>
+          </v-col>
 
+          <v-col
+            cols="12"
+            sm="6"
+            md="6"
+            lg="6"
+            xl="6"
+          >
+            <v-switch
+              v-model="plannerIntegration.enabled"
+              color="primary"
+              class="my-0 pb-0 d-flex align-center"
+              hide-details
+              :disabled="submitting"
+            >
+              <template v-slot:label>
+                <v-slide-x-transition leave-absolute>
+                  <v-badge
+                    v-if="plannerIntegration.enabled"
+                    icon="mdi-sync"
+                    bordered
+                    bottom
+                    overlap
+                    :offset-x="7"
+                    :offset-y="10"
+                    class="mr-3"
+                  >
+                    <v-icon>
+                      mdi-floor-plan
+                    </v-icon>
+                  </v-badge>
+                </v-slide-x-transition>
+                <span class="mr-2">
+                  同步汇报内容到刷图规划器
+                </span>
+                <v-dialog
+                  v-model="plannerIntegration.dialog"
+                  max-width="450px"
+                >
+                  <template v-slot:activator="{ on }">
+                    <v-btn
+                      icon
+                      v-on="on"
+                    >
+                      <v-icon>
+                        mdi-help-circle
+                      </v-icon>
+                    </v-btn>
+                  </template>
+                  <v-card color="background">
+                    <v-card-title>
+                      同步汇报内容到刷图规划器
+                    </v-card-title>
+                    <v-card-text>
+                      在开启此功能且汇报成功后，会自动将此次获得的物品数量于刷图规划器内对应物品的【已有】栏目进行累加。
+                    </v-card-text>
+                    <v-card-actions>
+                      <v-spacer />
+                      <v-btn
+                        text
+                        @click="plannerIntegration.dialog = false"
+                      >
+                        {{ $t('meta.dialog.close') }}
+                      </v-btn>
+                    </v-card-actions>
+                  </v-card>
+                </v-dialog>
+              </template>
+            </v-switch>
+          </v-col>
+        </v-row>
+
+        <v-col class="px-6 pb-6 pt-0">
           <v-row justify="space-around">
             <v-btn
               large
@@ -534,6 +544,8 @@ import StageSelector from "@/components/stats/StageSelector";
 import snackbar from "@/utils/snackbar";
 import Subheader from "@/components/global/Subheader";
 import Theme from "@/mixins/Theme";
+import ItemById from "@/components/global/ItemById";
+import ItemIcon from "@/components/global/ItemIcon";
 
 // colors: [dark, light]
 const categories = [
@@ -553,19 +565,29 @@ const categories = [
 
 export default {
   name: "Report",
-  components: {Subheader, StageSelector, ItemStepper, Item },
+  components: {ItemIcon, Subheader, StageSelector, ItemStepper, Item },
   mixins: [Theme],
   data: () => ({
     snackbar: false,
+
     submitting: false,
+    submitted: false,
+
     undoing: false,
+    undid: false,
+
     lastSubmissionId: null,
-    undoed: false,
+
     results: [],
     furnitureInternal: false,
-    invalidCount: 0,
+    // invalidCount: 0,
     eventBus: new Vue(),
-    submitted: false,
+
+    plannerIntegration: {
+      enabled: false,
+      dialog: false
+    },
+
     dialogs: {
       first: {
         enabled: false
@@ -574,10 +596,12 @@ export default {
         enabled: false
       }
     },
+
     selected: {
       zone: null,
       stage: null,
     },
+
     routerNames: {
       index: "ReportByZone",
       details: "ReportByZone_Selected"
@@ -825,19 +849,7 @@ export default {
       return false
     }
   },
-  // created () {
-  //   this.validateZone(this.$route.params.zoneId)
-  // },
   methods: {
-    // validateZone (zoneId) {
-    //   if (zoneId) {
-    //     const got = get.zones.byZoneId(zoneId);
-    //     if (!got || got.isOutdated) {
-    //       return this.invalidPath = true;
-    //     }
-    //   }
-    //   return this.invalidPath = false;
-    // },
     goToPage(name) {
       this.$router.push({ name: name })
     },
@@ -896,6 +908,10 @@ export default {
         this.submitted = true;
         this.$ga.event('report', 'submit_single', this.selected.stage, 1)
 
+        if (this.plannerIntegration.enabled) {
+          this.updatePlanner();
+        }
+
         this.lastSubmissionId = data;
       })
       .catch(() => {
@@ -915,7 +931,7 @@ export default {
       await report.recallReport(this.lastSubmissionId);
       this.submitted = false;
       this.undoing = false;
-      this.undoed = true;
+      this.undid = true;
       this.$ga.event('report', 'undo', Cookies.get('userID'), 1)
     },
     closeAllDialogs() {

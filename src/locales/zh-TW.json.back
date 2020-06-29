@@ -1,0 +1,407 @@
+{
+  "app": {
+    "name": "企鵝物流資料統計",
+    "name_line1": "企鵝物流資料統計",
+    "name_line2": ""
+  },
+  "server": {
+    "name": "伺服器",
+    "switch": "伺服器切換",
+    "servers": {
+      "CN": "簡中服",
+      "US": "美服",
+      "JP": "日服",
+      "KR": "韓服"
+    }
+  },
+  "menu": {
+    "home": "首頁",
+    "report": "掉落彙報",
+    "stats": {
+      "_name": "素材掉率",
+      "stage": "按作戰",
+      "item": "按素材",
+      "advanced": "高階查詢"
+    },
+    "about": {
+      "_name": "關於本站",
+      "members": "團隊成員",
+      "contribute": "參與開發",
+      "changelog": "更新記錄",
+      "contact": "聯絡我們",
+      "donate": "捐助",
+      "links": "友情連結",
+      "bulletin": "公告",
+      "attributions": "開源許可"
+    },
+    "siteStats": "全站資料一覽",
+    "planner": "刷圖規劃器",
+    "v1": "訪問舊版",
+    "refreshData": "重新整理資料",
+    "languages": "語言切換",
+    "settings": {
+      "name": "設定",
+      "themes": {
+        "name": "轉換主題",
+        "system": "跟隨系統設定",
+        "dark": "總是使用暗色",
+        "light": "總是使用亮色"
+      }
+    }
+  },
+  "meta": {
+    "details": "詳細資訊",
+    "loading": "正在載入...",
+    "notfound": "？？？",
+    "footer": {
+      "copyright": {
+        "title": "許可協議",
+        "content": "素材掉落統計資料由企鵝物流統計，採用知識共享 署名-非商業性使用 4.0 國際 許可協議進行許可。轉載、公開或以任何形式複製、發行、再傳播本站任何內容時，必須註明從企鵝物流資料統計轉載，並提供版權標識、許可協議標識、免責標識和作品連結；且未經許可，不得將本站內容或由其衍生作品用於商業目的。"
+      },
+      "credit": "企鵝物流資料統計 | {date}"
+    },
+    "separator": "、",
+    "quotation": {
+      "start": "“",
+      "end": "”"
+    },
+    "boolean": {
+      "true": "是",
+      "false": "否"
+    },
+    "hasNorNot": {
+      "true": "有",
+      "false": "無"
+    },
+    "dialog": {
+      "cancel": "取消",
+      "confirm": "確認",
+      "submit": "提交",
+      "close": "關閉"
+    }
+  },
+  "stats": {
+    "headers": {
+      "stage": "關卡",
+      "apCost": "理智",
+      "item": "物品",
+      "times": "樣本數",
+      "quantity": "掉落數",
+      "percentage": "百分比",
+      "apPPR": "單件估算理智",
+      "timeRange": "統計區間"
+    },
+    "timeRange": {
+      "inBetween": "{0} ~ {1}",
+      "toPresent": "{date} 至今",
+      "endsAt": "{date} 之前",
+      "unknown": "未知",
+      "notSelected": "（暫未選擇）"
+    },
+    "trends": {
+      "name": "掉落歷史趨勢",
+      "set": {
+        "rate": "掉落率",
+        "sample": "當日樣本量",
+        "drops": "掉落數"
+      }
+    },
+    "lastUpdated": "最後更新：{date}",
+    "site": {
+      "viewMore": "檢視全站資料一覽",
+      "total": {
+        "sanity": "所有掉落彙報消耗理智",
+        "report": "掉落彙報總數",
+        "items": "物品掉落總數"
+      },
+
+      "stages": "關卡掉落彙報排行",
+      "items": "物品掉落彙報排行",
+      "all": "全時段",
+      "24hr": "最近 24 小時",
+
+      "generating": {
+        "title": "全站資料一覽正在計算中...",
+        "subtitle": "神經網路資訊：由於資料量龐大，全站資料一覽需要大約 5 分鐘進行計算。請稍後再來。",
+        "refresh": "重新整理全站資料一覽"
+      }
+    }
+  },
+  "contribute": {
+    "repo": "專案倉庫：",
+    "frontend": "前端",
+    "backend": "後端",
+    "contribute_0": "如果您有以下一項或多項經驗，願意為企鵝資料貢獻自己的一份力量，請加QQ群：747099627",
+    "contribute_1": "本專案為無償開源專案",
+    "skills": {
+      "frontend": "網站前端開發 Vue.js",
+      "backend": "網站後端開發 Java Spring Boot、MongoDB",
+      "maintenance": "網站運維",
+      "design": "UI/UX設計",
+      "analysis": "資料統計分析",
+      "others": "..."
+    }
+  },
+  "fetch": {
+    "failed": {
+      "title": "神經網路連線異常",
+      "subtitle": "未能與神經網路建立對等連線，部分資源丟失",
+      "retry": "重試",
+      "error": {
+        "zones": "章節元資料",
+        "stages": "關卡元資料",
+        "items": "物品資料",
+        "limitations": "彙報資料校驗規則",
+        "trends": "彙報歷史資料",
+        "globalMatrix": "全平臺掉落資料",
+        "personalMatrix": "個人掉落資料",
+        "stats": "全站概覽資料",
+        "period": "伺服器事件資料"
+      }
+    }
+  },
+  "report": {
+    "alert": {
+      "title": {
+        "first": "檢測到失誤風險",
+        "repeat": "警告"
+      },
+      "continue": {
+        "first": "確定要繼續嗎？",
+        "repeat": "真的確定要繼續嗎？"
+      },
+      "contact": {
+        "before": "如果您認為這是一次誤判，歡迎",
+        "activator": "聯絡作者",
+        "after": "（請附關卡名稱、實際掉落、若有掉落截圖更佳），確認後我們會盡快予以修正。"
+      },
+      "causes": {
+        "noDrop": "尚未選擇任何掉落物品",
+        "limitation": "本次彙報與現有資料差距較大，繼續提交可能導致此次彙報被判定為異常，無法計入全部統計資料中。"
+      }
+    },
+    "rules": {
+      "item": {
+        "_name": "物品項",
+        "now": "已於 “{stage}” 選擇了 {quantity} 個 “{item}”",
+        "gte": "“{stage}” 內的 “{item}” 應至少有 {should} 個",
+        "lte": "“{stage}” 內的 “{item}” 應至多有 {should} 個",
+        "not": "“{stage}” 內的 “{item}” 數量不應等於 {should}"
+      },
+      "type": {
+        "_name": "物品種類",
+        "now": "於 “{stage}” 已選 {quantity} 個物品",
+        "gte": "“{stage}” 內應至少有 {should} 個物品",
+        "lte": "“{stage}” 內應至多有 {should} 個物品",
+        "not": "“{stage}” 內的物品數量應總計不為 {should}"
+      }
+    }
+  },
+  "mirrors": {
+    "global": {
+      "notification": "推薦使用海外映象站 {0}，可以提升訪問速度哦！"
+    },
+    "cn": {
+      "notification": "推薦使用國內映象站 {0}，可以提升訪問速度哦！"
+    },
+    "_notification": {
+      "ignore": {
+        "title": "不再顯示映象提示？",
+        "subtitle": "確定要忽略所有映象提示嗎？網站載入效能可能會受到影響。"
+      }
+    }
+  },
+  "settings": {
+    "category": {
+      "appearance": "外觀",
+      "data": "設定與資料"
+    },
+    "optimization": {
+      "lowData": {
+        "title": "低資料模式",
+        "active": "低資料模式已啟用",
+        "subtitle": "低資料模式將停止載入諸如作戰列表背景圖、全站背景立繪等不必要資源以減少網路資料的使用。"
+      }
+    },
+    "data": {
+      "server": "本地快取資料包含伺服器：",
+      "size": "本地資料大小：",
+      "reset": {
+        "title": "重置本地資料與設定",
+        "subtitle": "將會刪除所有本地資料與設定。刪除後，所有本地設定均會重置至預設值並重新整理頁面，資料將需要重新載入。確定要繼續嗎？"
+      }
+    }
+  },
+  "zone": {
+    "name": "章節",
+    "types": {
+      "MAINLINE": "主線",
+      "WEEKLY": "物資籌備",
+      "ACTIVITY_OPEN": "限時活動（開放中）",
+      "ACTIVITY_CLOSED": "限時活動（已結束）"
+    },
+    "status": {
+      "closed": "已結束",
+      "open": "開放中",
+      "permanentOpen": "常駐開放"
+    },
+    "opensAt": "開放時間：{0} - {1}"
+  },
+  "stage": {
+    "name": "關卡",
+    "apCost": "{apCost} 點理智",
+    "loots": {
+      "NORMAL_DROP": "常規掉落",
+      "EXTRA_DROP": "額外物資",
+      "SPECIAL_DROP": "特殊掉落",
+      "FURNITURE": "傢俱"
+    },
+    "selector": {
+      "plannerExclude": "排除規劃關卡",
+      "excludeAll": "排除全部",
+      "includeAll": "選中全部"
+    }
+  },
+  "planner": {
+    "options": {
+      "_name": "選項",
+      "byProduct": "考慮合成副產物",
+      "requireExp": "大量需求經驗",
+      "requireLmb": "大量需求龍門幣",
+      "excludeStage": "選定計算排除關卡"
+    },
+    "actions": {
+      "import": "匯入",
+      "export": "匯出",
+      "importExport": "@:(planner.actions.import)/@:(planner.actions.export)",
+      "calculate": "計算規劃",
+      "link": {
+        "generate": "獲取分享連結",
+        "generating": "正在生成",
+        "share": "分享連結"
+      },
+      "config": {
+        "_name": "配置檔案",
+        "share": "分享配置檔案",
+        "import": "匯入配置檔案"
+      }
+    },
+    "have": "已有",
+    "need": "需要",
+    "copy": "複製到剪貼簿",
+    "calculation": {
+      "title": "規劃結果",
+      "tabs": {
+        "stages": "關卡列表",
+        "syntheses": "合成列表",
+        "values": "素材價值"
+      },
+      "lmb": "預計龍門幣收益",
+      "sanity": "預計需要理智",
+      "exp": "預計獲得錄影帶經驗",
+      "times": "次",
+      "level": "材料等級",
+      "noStage": "未找到需要進行的作戰。",
+      "noSyntheses": "未找到需要合成的素材。"
+    }
+  },
+  "items": {
+    "choose": {
+      "name": "選擇素材"
+    },
+    "categories": {
+      "ACTIVITY_ITEM": "活動道具",
+      "CARD_EXP": "作戰記錄",
+      "FURN": "傢俱",
+      "MATERIAL": "材料"
+    }
+  },
+  "query": {
+    "panel": {
+      "builder": "查詢編輯器",
+      "results": "查詢結果",
+      "footer": {
+        "cache": "現在顯示的查詢結果資料為快取資料。若需要獲取最新資料，請再次「執行查詢」。",
+        "disclaimer": "「高階查詢」功能所產出的所有資料資訊均受本站「資料許可協議」保護；本站不對「高階查詢」功能所產出的所有資料資訊做任何形式的承諾或背書。"
+      }
+    },
+    "disclaimer": {
+      "title": "使用前必讀",
+      "content": "「高階查詢」意在為有更復雜資料分析需求的使用者提供以更高自由度使用企鵝物流資料統計內相關資料集之可能性。由於本功能的高自由度屬性，在不瞭解統計學等相關學科的學術內容前，嘗試分析此功能的查詢結果可能會存在誤導性。企鵝物流資料統計提醒各位對資料進行二次分析的刀客塔：請在分析時不要斷章取義、故意使用本站資料引導輿論。高階查詢功能的受眾群體是熟悉統計學等學科的使用者，開放後便於他們以更多維度分析資料集。我們歡迎對掉落資料感興趣並進行客觀與科學分析的刀客塔，但我們不歡迎帶有個人情緒或既定立場的情況下、嘗試錯誤地從本站資料中得出對任何實體不利結論的使用者。"
+    },
+    "title": {
+      "main": "主查詢",
+      "comparison": "對比查詢 #{index}"
+    },
+    "type": {
+      "matrix": "統計資料",
+      "trend": "歷史趨勢"
+    },
+    "selector": {
+      "item": {
+        "title": "選擇素材",
+        "subtitle": "用於將查詢結果過濾為此關卡內的特定素材。",
+
+        "unspecified": "顯示關卡全部掉落素材",
+        "selected": "僅查詢 {length} 種素材"
+      },
+      "stage": {
+        "title": "選擇關卡",
+        "subtitle": "（必填）用於將查詢結果過濾為一特定關卡。"
+      },
+      "timeRange": {
+        "title": "時間段",
+        "subtitle": "（必填）用於將查詢結果過濾為於一特定時間段內。",
+        "presets": {
+          "title": "預設時間",
+          "start": "開始",
+          "end": "結束"
+        }
+      },
+      "interval": {
+        "title": "分段間隔",
+        "subtitle": "用於設定歷史趨勢的分段間隔。",
+
+        "unspecified": "不分段"
+      }
+    },
+    "operation": {
+      "add": "新增對比查詢",
+      "execute": "執行查詢",
+      "inProgress": "正在執行查詢"
+    },
+    "result": {
+      "main": "主查詢結果",
+      "comparison": "對比查詢 #{index} 結果",
+      "empty": "此查詢返回了 0 個結果，請檢查對應查詢條件後重試",
+      "hideTime": "隱藏詳細時間"
+    }
+  },
+  "version": {
+    "upgrade": {
+      "title": "版本已過期",
+      "subtitle": "由於介面升級，您現在使用的版本已過期。請在升級後重試",
+      "action": "升級",
+      "unable": "無法升級？"
+    }
+  },
+  "notice": {
+    "failed": "獲取公告失敗：{error}",
+    "loading": "正在載入公告"
+  },
+  "dataSource": {
+    "switch": "資料來源",
+    "global": "全平臺",
+    "loginNotice": "檢視個人掉落資料前，請先登入",
+    "personal": "個人",
+    "title": "需要登入"
+  },
+  "validator": {
+    "required": "必填"
+  },
+  "quotes": {
+    "doYouKnow": [
+      "你知道嗎？白麵鴞頭上的那一撮毛超級可愛！o(*≧▽≦)ツ"
+    ]
+  }
+}

@@ -57,7 +57,7 @@ if (production) {
       //// END
 
       //// Those are our customized ones
-      "QuotaExceededError",
+      // "QuotaExceededError",
       "vivoNewsDetailPage",
       "Request aborted",
       "Cannot read property 'style' of null",

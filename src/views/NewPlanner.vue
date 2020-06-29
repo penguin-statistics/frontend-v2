@@ -207,6 +207,9 @@
       if (this.items.length === 0) {
         this.$store.commit("planner/changeItems", this.getInitialItems())
       }
+      if (this.items.length !== this.getInitialItems().length) {
+        this.updateItemStructure(this.getInitialItems(), this.items)
+      }
     },
 
     methods: {

@@ -31,7 +31,8 @@
       "contact": "Contact us",
       "donate": "Donate",
       "links": "Link Exchange",
-      "bulletin": "Notice"
+      "bulletin": "Notice",
+      "attributions": "Attributions"
     },
     "siteStats": "Statistics at a Glance",
     "planner": "ArkPlanner",
@@ -117,7 +118,13 @@
       "stages": "Top Upload Stages",
       "items": "Top Upload Items",
       "all": "Full Time",
-      "24hr": "Last 24hr"
+      "24hr": "Last 24hr",
+
+      "generating": {
+        "title": "Generating Site Statistics...",
+        "subtitle": "Neural Network Message: Due to high amount of data, site statistics need up to 5 minutes to calculate. Please come back later.",
+        "refresh": "Refresh Site Statistics"
+      }
     }
   },
   "contribute": {
@@ -147,7 +154,9 @@
         "limitations": "Report Validation Rules",
         "trends": "History Report Trends",
         "globalMatrix": "Global Drop Data",
-        "personalMatrix": "Personal Drop Data"
+        "personalMatrix": "Personal Drop Data",
+        "stats": "Site Statistics",
+        "period": "Server Events"
       }
     }
   },
@@ -186,7 +195,28 @@
         "lte": "Should have at maximum {should} items in \"{stage}\"",
         "not": "Should not have exactly {should} items in \"{stage}\""
       }
-    }
+    },
+    "clear": "Clear",
+    "closedReason": {
+      "INVALID": "Stage Not Found: The stage does not exist in the server you have selected.",
+      "EXPIRED": "Stage Report Closed: This activity stage has already been closed."
+    },
+    "furniture": "Furniture Drop: {state}",
+    "name": "Report",
+    "submit": "Submit",
+    "success": "Successfully submitted",
+    "unable": "Failed to submit: ",
+    "undo": "Recall",
+    "undoSuccess": "Successfully recalled submission",
+    "gacha": "Multiple results are allowed for the reports of this stage.",
+    "notices": {
+      "rule_1": "Report one clear at a time. Please double-check your drop selection.",
+      "rule_2": "If there are no drops, click submit directly without selecting any drops.",
+      "rule_3": "Please do not report the first-clear of a stage, and do not only report the clears where you were lucky - report all clears.",
+      "rule_4": "Please make sure that you refresh a 3-stars clear.",
+      "rule_5": "Please only submit drop data from the CN server."
+    },
+    "usage": "Increase drop amount by left mouse click, decrease by right click"
   },
   "mirrors": {
     "global": {
@@ -244,7 +274,8 @@
     "loots": {
       "NORMAL_DROP": "Normal",
       "EXTRA_DROP": "Extra",
-      "SPECIAL_DROP": "Special"
+      "SPECIAL_DROP": "Special",
+      "FURNITURE": "Furniture"
     },
     "selector": {
       "plannerExclude": "Exclude Planning Stages",
@@ -336,23 +367,31 @@
         "subtitle": "Used to filter the query results by specified materials. When any filter is selected, no other filters can be selected in the same query. If you want to filter other parameters, you can do it by adding a comparison query."
       },
       "timeRange": {
-        "title": "Choose Time Range"
+        "title": "Choose Time Range",
+        "subtitle": "(Required) Limit query results in a specific time range.",
+        "presets": {
+          "title": "Presets",
+          "start": "Started",
+          "end": "Ended"
+        }
       },
       "interval": {
         "title": "Segment Interval",
+        "subtitle": "Interval for segmenting historical trends.",
 
         "unspecified": "No Segment"
       }
     },
     "operation": {
       "add": "Add Comparison Query",
-      "execute": "Execute Query"
+      "execute": "Execute Query",
+      "inProgress": "Executing Queries..."
     },
     "result": {
       "main": "Main Query Result",
       "comparison": "Comparison Query #{index} Result",
       "empty": "This query returned 0 results. Please check your query parameters.",
-      "hideTime": "隐藏详细时间"
+      "hideTime": "Hide Detail Time"
     }
   },
   "version": {
@@ -376,5 +415,10 @@
   },
   "validator": {
     "required": "Required"
+  },
+  "quotes": {
+    "doYouKnow": [
+      "Do You Know? Ptilopsis' feather is sooo cute! o(*≧▽≦)ツ"
+    ]
   }
 }

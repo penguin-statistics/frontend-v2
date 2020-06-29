@@ -225,7 +225,7 @@ const router = new Router({
         component: AboutAttributions,
         props: true,
         meta: {
-          icon: 'mdi-link-variant',
+          icon: 'mdi-license',
           i18n: 'menu.about.attributions'
         },
       },
