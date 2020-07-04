@@ -20,7 +20,7 @@
     >
       <v-col
         cols="12"
-        sm="5"
+        sm="4"
         md="4"
         lg="3"
         xl="3"
@@ -127,7 +127,7 @@
       </v-col>
       <v-col
         cols="12"
-        sm="7"
+        sm="8"
         md="8"
         lg="9"
         xl="9"
@@ -224,6 +224,12 @@
       class="pt-2"
       dense
     >
+      <v-col
+        cols="12"
+        class="mb-6"
+      >
+        <v-divider />
+      </v-col>
       <v-col
         v-for="itemData in items"
         :key="itemData.id"
@@ -360,9 +366,11 @@
       },
       reset () {
         this.$store.commit("planner/changeItems", this.getInitialItems())
-        this.$store.commit("planner/changeOptions", Object.keys(this.options).map(el => {
-          return {[el]: false}
-        }))
+        const options = {};
+        Object.keys(this.options).forEach(el => {
+          this.$set(options, el, false)
+        })
+        this.$store.commit("planner/changeOptions", options)
         this.$store.commit("planner/changeExcludes", [])
       },
       calculate() {

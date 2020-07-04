@@ -78,7 +78,8 @@
       "confirm": "Confirm",
       "submit": "Submit",
       "close": "Close"
-    }
+    },
+    "copyWarning": "\n\nData from Penguin Statistics ({site})"
   },
   "stats": {
     "headers": {

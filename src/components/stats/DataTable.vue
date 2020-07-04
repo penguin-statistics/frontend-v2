@@ -16,7 +16,11 @@
 </i18n>
 
 <template>
-  <div>
+  <!-- This `fix-position` thing is actually for preventing unauthorized usage of the devtools. -->
+  <!-- Yeah I know this is not useful I know, but 99% of the time, that the one who do the copy/pastie jobs and not -->
+  <!-- attributing us won't be clever to the point to disable this class. If they are this clever, they would use -->
+  <!-- our api to get clean and most up-to-date data instead of trying to sneak into our web page. ;) -->
+  <div :class="{'stat-table-fix-position': !$store.getters['auth/loggedIn']}">
     <v-row
       v-if="$vuetify.breakpoint.xsOnly"
       align="center"
@@ -47,6 +51,16 @@
         </v-icon>
       </span>
     </v-row>
+
+    <div class="stat-table-watermark d-flex align-center justify-start flex-column text-center px-4">
+      <h1 :class="{'display-2 mb-4': !$vuetify.breakpoint.smAndUp, 'display-3 mb-6': $vuetify.breakpoint.smAndUp}">
+        {{ currentMirrorHostname }}
+      </h1>
+      <span :class="{'display-1': !$vuetify.breakpoint.smAndUp, 'display-2': $vuetify.breakpoint.smAndUp}">
+        {{ $t('app.name') }}
+      </span>
+    </div>
+
     <v-data-table
       :headers="headers"
       :items="items"
@@ -202,11 +216,13 @@
   import Theme from "@/mixins/Theme";
   import Charts from "@/components/stats/Charts";
   import timeFormatter from "@/utils/timeFormatter";
+  import CDN from "@/mixins/CDN";
+  import Mirror from "@/mixins/Mirror";
 
   export default {
     name: "DataTable",
     components: {Item, Charts},
-    mixins: [Theme],
+    mixins: [Theme, CDN, Mirror],
     props: {
       items: {
         type: Array,
@@ -247,6 +263,12 @@
         hideItemName: false,
         expandTrends: false
       }
+    },
+    created () {
+      document.addEventListener('copy', this.manipulateCopy);
+    },
+    beforeDestroy() {
+      document.removeEventListener('copy', this.manipulateCopy)
     },
     computed: {
       ...mapGetters('ajax', ['matrixPending']),
@@ -321,6 +343,11 @@
       }
     },
     methods: {
+      manipulateCopy(event) {
+        const extra = this.$t('meta.copyWarning', {site: document.location.href});
+        event.clipboardData.setData('text', document.getSelection() + extra);
+        event.preventDefault();
+      },
       getTrendsData(props) {
         if (this.type === "stage") {
           if (this.trends && this.trends.results && this.trends.results[props.item.item.itemId]) {

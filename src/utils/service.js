@@ -1,9 +1,10 @@
 import axios from 'axios'
 import Console from "@/utils/Console";
 import store from "@/store";
+import mirror from "@/utils/mirror";
 
 let baseURL;
-if (window.location.hostname === "penguin-stats.io" || window.location.hostname === "penguin-stats.cn") {
+if (mirror.global.isCurrent() || mirror.cn.isCurrent()) {
   // those are official mirrors. just use the relative path.
   baseURL = "https://penguin-stats.io/PenguinStats/api/v2"
 } else if (process.env.NODE_ENV === "development") {

@@ -42,7 +42,7 @@
     computed: {
       totalReports() {
         const stats = this.$store.getters["data/content"]({id: "stats"})
-        if (!stats || stats.error) return null
+        if (!stats || stats.error) return 0
         return stats["totalStageTimes_24h"]
           .map(el => el.times)
           .reduce((a, b) => a + b, 0)

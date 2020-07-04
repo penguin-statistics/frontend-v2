@@ -105,15 +105,7 @@
           <v-icon>{{ t.icon }}</v-icon>
         </v-tab>
         <v-tab-item>
-          <v-alert
-            v-if="!result.stages.length"
-            type="warning"
-            border="left"
-            class="mt-4"
-          >
-            {{ $t('planner.calculation.noStage') }}
-          </v-alert>
-          <div class="d-flex justify-center mt-2">
+          <div class="d-flex justify-center mt-3">
             <v-icon
               small
               color="grey"
@@ -123,6 +115,14 @@
             </v-icon>
             {{ $t('planner.notices.autoExistence') }}
           </div>
+          <v-alert
+            v-if="!result.stages.length"
+            type="warning"
+            border="left"
+            class="mt-4"
+          >
+            {{ $t('planner.calculation.noStage') }}
+          </v-alert>
           <v-row
             align="start"
             justify="start"

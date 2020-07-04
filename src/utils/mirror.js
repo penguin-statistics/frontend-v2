@@ -5,12 +5,20 @@ function isDomain(domain, location = window.location.href) {
 }
 
 export default {
-  cn: {
+  global: {
+    identifier: "penguin-stats.io",
     isCurrent () {
-      return isDomain("penguin-stats.cn")
+      return isDomain(this.identifier)
+    }
+  },
+  cn: {
+    identifier: "penguin-stats.cn",
+    isCurrent () {
+      return isDomain(this.identifier)
     }
   },
   vercel: {
+    identifier: "vercel.app",
     isCurrent () {
       return isDomain("now.sh") || isDomain("vercel.app")
     }

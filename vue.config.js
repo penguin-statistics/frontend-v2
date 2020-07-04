@@ -22,6 +22,7 @@ module.exports = {
     }
   },
   devServer: {
+    disableHostCheck: true,
     proxy: {
       "/PenguinStats": {
         target: "https://penguin-stats.cn"

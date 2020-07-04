@@ -14,6 +14,9 @@ export default {
       } else {
         return "blue darken-3"
       }
+    },
+    currentMirrorHostname () {
+      return mirror.cn.isCurrent() ? mirror.cn.identifier : mirror.global.identifier
     }
   },
 }
