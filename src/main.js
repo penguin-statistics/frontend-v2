@@ -18,7 +18,7 @@ import '@/components/functional'
 
 if (!window.Intl) require("intl-collator")
 
-Vue.config.performance = true;
+Vue.config.productionTip = false;
 
 const production = process.env.NODE_ENV === 'production';
 
@@ -83,6 +83,8 @@ if (production) {
       /metrics\.itunes\.apple\.com\.edgesuite\.net\//i
     ]
   });
+} else {
+  Vue.config.performance = true;
 }
 
 const googleAnalyticsID = mirror.cn.isCurrent() ? 'UA-142226262-4' : 'UA-142226262-1'
@@ -107,8 +109,6 @@ router.beforeEach((to, from, next) => {
   document.title = `${i18n.t(to.meta.i18n)} | ${i18n.t('app.name')}`;
   next();
 });
-
-Vue.config.productionTip = false;
 
 new Vue({
   vuetify,

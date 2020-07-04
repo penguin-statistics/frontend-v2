@@ -1,5 +1,7 @@
 const webpack = require("webpack");
 
+require('events').EventEmitter.defaultMaxListeners = 50;
+
 let commitHash;
 
 try {

@@ -285,7 +285,7 @@
   },
   "planner": {
     "notices": {
-      "autoExistence": "ArkPlanner will be automatically hiding the non-existing stages."
+      "autoExistence": "ArkPlanner will hide non-existing stages automatically now."
     },
     "options": {
       "_name": "Options",
@@ -423,5 +423,14 @@
     "doYouKnow": [
       "Do You Know? Ptilopsis' feather is sooo cute! o(*≧▽≦)ツ"
     ]
+  },
+  "attributions": {
+    "material": {
+      "title": "Content Credits",
+      "content": "Penguin Statistics utilizes (including but not limited to) pictures, animations, audio, original text and other works, its purpose is only to better reflect the corresponding elements in the game, enhance the user experience, the copyright of related works still belongs to Shanghai Yingjiao Network Technology Co., Ltd. and its affiliates, namely the provider of Yingjiao Online Game Software and/or Yingjiao Online Game Service."
+    },
+    "source": {
+      "title": "Open Source Licenses"
+    }
   }
 }

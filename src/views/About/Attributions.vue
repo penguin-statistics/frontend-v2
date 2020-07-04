@@ -8,15 +8,18 @@
       md="6"
     >
       <v-subheader>
-        网站内容声明
+        {{ $t('attributions.material.title') }}
       </v-subheader>
+      <p class="px-4">
+        {{ $t('attributions.material.content') }}
+      </p>
     </v-col>
     <v-col
       cols="12"
       md="6"
     >
       <v-subheader>
-        开源许可列表
+        {{ $t('attributions.source.title') }}
       </v-subheader>
       <v-expansion-panels
         focusable

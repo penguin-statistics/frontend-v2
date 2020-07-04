@@ -47,7 +47,7 @@
           class="d-flex flex-column flex-sm-row mx-2 my-4"
         >
           <div
-            class="d-flex flex-column justify-center align-center text-center zone-title"
+            class="d-flex flex-column justify-center align-start text-center zone-title"
           >
             <v-checkbox
               v-bind="statuses.zone[zone.zoneId]"

@@ -60,11 +60,11 @@
   }
 
   .stage-card--stateless:hover {
-    /*transform: translateY(-0.5px);*/
+    transform: translateY(-0.5px);
   }
 
   .stage-card--stateless:active {
-    /*transform: translateY(0.5px);*/
+    transform: translateY(0.5px);
   }
 
   .stage-card--light {
