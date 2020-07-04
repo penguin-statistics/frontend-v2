@@ -69,6 +69,15 @@
               @close="excludeDialog = false"
             />
           </v-dialog>
+          <v-btn
+            class="mt-2"
+            @click="reset"
+          >
+            <v-icon left>
+              mdi-delete
+            </v-icon>
+            {{ $t('planner.options.reset') }}
+          </v-btn>
         </v-row>
       </v-col>
       <v-col
@@ -105,6 +114,7 @@
             <PlannerIO
               :config="{items, options, excludes}"
               @close="ioDialog = false"
+              @reset="reset"
             />
           </v-dialog>
           <v-btn
@@ -255,6 +265,9 @@
         }
 
         this.$store.commit("planner/changeItems", results)
+      },
+      reset () {
+        this.$store.commit("planner/changeItems", this.getInitialItems())
       },
       calculate() {
         Console.info("Planner", "planning with config", {

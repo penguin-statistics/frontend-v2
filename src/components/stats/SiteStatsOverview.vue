@@ -46,6 +46,7 @@
         return stats["totalStageTimes_24h"]
           .map(el => el.times)
           .reduce((a, b) => a + b, 0)
+          .toLocaleString()
       }
     },
     watch: {

@@ -292,7 +292,8 @@
       "byProduct": "Consider by-products",
       "requireExp": "Large demand for EXP",
       "requireLmb": "Large demand for LMD",
-      "excludeStage": "Exclude Stages"
+      "excludeStage": "Exclude Stages",
+      "reset": "Reset"
     },
     "actions": {
       "import": "Import",

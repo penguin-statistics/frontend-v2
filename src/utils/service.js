@@ -5,7 +5,7 @@ import store from "@/store";
 let baseURL;
 if (window.location.hostname === "penguin-stats.io" || window.location.hostname === "penguin-stats.cn") {
   // those are official mirrors. just use the relative path.
-  baseURL = "/PenguinStats/api/v2"
+  baseURL = "https://penguin-stats.io/PenguinStats/api/v2"
 } else if (process.env.NODE_ENV === "development") {
   // developing at localhost.
   // also use the relative path, but we left the task to WebpackDevServer for proxying local API responses

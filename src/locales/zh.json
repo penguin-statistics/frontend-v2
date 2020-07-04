@@ -292,7 +292,8 @@
       "byProduct": "考虑合成副产物",
       "requireExp": "大量需求经验",
       "requireLmb": "大量需求龙门币",
-      "excludeStage": "选定计算排除关卡"
+      "excludeStage": "选定计算排除关卡",
+      "reset": "重置"
     },
     "actions": {
       "import": "导入",
