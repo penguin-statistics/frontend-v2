@@ -131,7 +131,7 @@ export default {
           ]
         },
         {
-          active: true,
+          future: true,
           version: "v3.2.1",
           date: "2020-07-17T05:00:00Z",
           changes: [
