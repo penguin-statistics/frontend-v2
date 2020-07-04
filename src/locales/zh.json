@@ -292,8 +292,14 @@
       "byProduct": "考虑合成副产物",
       "requireExp": "大量需求经验",
       "requireLmb": "大量需求龙门币",
-      "excludeStage": "选定计算排除关卡",
-      "reset": "重置"
+      "excludeStage": "选定计算排除关卡"
+    },
+    "reset": {
+      "name": "重置",
+      "dialog": {
+        "title": "重置刷图规划器数据",
+        "subtitle": "将会删除所有刷图规划器数据与设置。确定要继续吗？"
+      }
     },
     "actions": {
       "import": "导入",

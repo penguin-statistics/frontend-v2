@@ -184,6 +184,8 @@
 
         this.$emit('reset')
 
+        let importedCounter = 0;
+
         const currentItems = this.$store.getters["planner/config"].items
 
         for (const item of currentItems) {
@@ -191,6 +193,7 @@
           if (toImportItem) {
             item.have = toImportItem.have || 0
             item.need = toImportItem.need || 0
+            importedCounter++
           }
         }
 
@@ -206,7 +209,7 @@
         }
 
         snackbar.launch("success", 5000, "planner.import.success", {
-          amount: unmarshalled.converted.items.length
+          amount: importedCounter
         })
 
         Console.info("PlannerIO", "unmarshalled import config", unmarshalled)

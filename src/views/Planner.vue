@@ -56,6 +56,8 @@
             <template v-slot:activator="{ on }">
               <v-btn
                 class="mt-4"
+                large
+                block
                 v-on="on"
               >
                 <v-icon left>
@@ -69,15 +71,58 @@
               @close="excludeDialog = false"
             />
           </v-dialog>
-          <v-btn
-            class="mt-2"
-            @click="reset"
+          <v-dialog
+            v-model="resetDialog"
+            max-width="350px"
+            persistent
           >
-            <v-icon left>
-              mdi-delete
-            </v-icon>
-            {{ $t('planner.options.reset') }}
-          </v-btn>
+            <template v-slot:activator="{ on }">
+              <v-btn
+                class="mt-2"
+                color="error"
+                block
+                @click="resetDialog = true"
+              >
+                <v-icon left>
+                  mdi-delete
+                </v-icon>
+                {{ $t('planner.reset.name') }}
+              </v-btn>
+            </template>
+            <v-card class="slash-strip--danger">
+              <v-card-title class="headline">
+                <v-icon left>
+                  mdi-alert-circle
+                </v-icon>
+                <v-icon left>
+                  mdi-database-remove
+                </v-icon>
+                {{ $t('planner.reset.dialog.title') }}
+              </v-card-title>
+
+              <v-card-text>
+                {{ $t('planner.reset.dialog.subtitle') }}
+              </v-card-text>
+
+              <v-divider />
+
+              <v-card-actions>
+                <v-btn
+                  text
+                  @click="resetDialog = false"
+                >
+                  {{ $t('meta.dialog.cancel') }}
+                </v-btn>
+                <v-spacer />
+                <v-btn
+                  color="error"
+                  @click="confirmReset"
+                >
+                  {{ $t('meta.dialog.confirm') }}
+                </v-btn>
+              </v-card-actions>
+            </v-card>
+          </v-dialog>
         </v-row>
       </v-col>
       <v-col
@@ -180,7 +225,8 @@
           data: {},
         },
         ioDialog: false,
-        excludeDialog: false
+        excludeDialog: false,
+        resetDialog: false
         // options: {
         //   byProduct: false,
         //   requireExp: false,
@@ -266,8 +312,16 @@
 
         this.$store.commit("planner/changeItems", results)
       },
+      confirmReset () {
+        this.reset()
+        this.resetDialog = false
+      },
       reset () {
         this.$store.commit("planner/changeItems", this.getInitialItems())
+        this.$store.commit("planner/changeOptions", Object.keys(this.options).map(el => {
+          return {[el]: false}
+        }))
+        this.$store.commit("planner/changeExcludes", [])
       },
       calculate() {
         Console.info("Planner", "planning with config", {
