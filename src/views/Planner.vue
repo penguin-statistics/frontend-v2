@@ -145,9 +145,9 @@
           >
             <template v-slot:activator="{ on }">
               <v-btn
-                color="green white--text"
+                color="deep-purple white--text"
                 class="my-1"
-                large
+                x-large
                 v-on="on"
               >
                 <v-icon left>
@@ -163,17 +163,59 @@
             />
           </v-dialog>
           <v-btn
-            color="red white--text"
+            color="indigo white--text"
             class="my-1"
+            x-large
             :loading="calculation.pending"
-            large
             @click="calculate"
           >
             <v-icon left>
               mdi-calculator
             </v-icon>
             {{ $t('planner.actions.calculate') }}
+            <v-icon right>
+              mdi-chevron-right
+            </v-icon>
           </v-btn>
+          <!--          <v-col-->
+          <!--            cols="12"-->
+          <!--            sm="4"-->
+          <!--          >-->
+          <!--            <BackdropCard-->
+          <!--              color="primary"-->
+          <!--              class="py-9"-->
+          <!--              hover-->
+          <!--              @click.native="calculate"-->
+          <!--            >-->
+          <!--              <template v-slot:backdrop>-->
+          <!--                <v-icon>-->
+          <!--                  mdi-calculator-->
+          <!--                </v-icon>-->
+          <!--              </template>-->
+          <!--              <v-overlay-->
+          <!--                v-if="calculation.pending"-->
+          <!--                absolute-->
+          <!--                -->
+          <!--              >-->
+          <!--                <v-row-->
+          <!--                  align="center"-->
+          <!--                  justify="center"-->
+          <!--                  class="fill-height"-->
+          <!--                >-->
+          <!--                  <v-col cols="12">-->
+          <!--                    <v-progress-circular-->
+          <!--                      indeterminate-->
+          <!--                      :size="32"-->
+          <!--                      :width="4"-->
+          <!--                    />-->
+          <!--                  </v-col>-->
+          <!--                </v-row>-->
+          <!--              </v-overlay>-->
+          <!--              <h1 class="display-1">-->
+          <!--                -->
+          <!--              </h1>-->
+          <!--            </BackdropCard>-->
+          <!--          </v-col>-->
         </v-row>
       </v-col>
     </v-row>

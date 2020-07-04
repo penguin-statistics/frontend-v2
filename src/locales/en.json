@@ -292,8 +292,14 @@
       "byProduct": "Consider by-products",
       "requireExp": "Large demand for EXP",
       "requireLmb": "Large demand for LMD",
-      "excludeStage": "Exclude Stages",
-      "reset": "Reset"
+      "excludeStage": "Exclude Stages"
+    },
+    "reset": {
+      "name": "Reset",
+      "dialog": {
+        "title": "Reset Planner",
+        "subtitle": "This operation will reset all planner data and settings you have set. Are you sure to continue?"
+      }
     },
     "actions": {
       "import": "Import",
