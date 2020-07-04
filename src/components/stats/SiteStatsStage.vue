@@ -92,12 +92,7 @@
     },
     computed: {
       items() {
-        console.log('items')
-        return this.data.map(el => {
-          el.stage = get.stages.byStageId(el.stageId);
-          el.zone = get.zones.byZoneId(el.stage.zoneId, false);
-          return el
-        })
+        return this.data
       },
       headers() {
         return [

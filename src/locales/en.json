@@ -284,6 +284,9 @@
     }
   },
   "planner": {
+    "notices": {
+      "autoExistence": "ArkPlanner will be automatically hiding the non-existing stages."
+    },
     "options": {
       "_name": "Options",
       "byProduct": "Consider by-products",

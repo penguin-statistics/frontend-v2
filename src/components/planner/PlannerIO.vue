@@ -187,8 +187,8 @@
         for (const item of currentItems) {
           const toImportItem = unmarshalled.converted.items.find(el => el.id === item.id)
           if (toImportItem) {
-            item.have = toImportItem.have
-            item.need = toImportItem.need
+            item.have = toImportItem.have || 0
+            item.need = toImportItem.need || 0
           }
         }
 

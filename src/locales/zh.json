@@ -284,6 +284,9 @@
     }
   },
   "planner": {
+    "notices": {
+      "autoExistence": "刷图规划器现将会自动隐藏未于已选择服务器出现或开放的关卡"
+    },
     "options": {
       "_name": "选项",
       "byProduct": "考虑合成副产物",

@@ -194,4 +194,17 @@ Getters.period = {
   },
 }
 
+Getters.siteStats = {
+  all () {
+    return store.getters["data/content"]({id: "stats"})
+  },
+  byKey(key) {
+    return this.all()[key].map(el => Object.assign({}, el)).map(el => {
+      el.stage = Getters.stages.byStageId(el.stageId);
+      el.zone = Getters.zones.byZoneId(el.stage.zoneId, false);
+      return el
+    })
+  }
+}
+
 export default Getters

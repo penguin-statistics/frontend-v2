@@ -108,7 +108,7 @@
         <v-col v-bind="cols.details">
           <SiteStatsStage
             key="all"
-            :data="stats['totalStageTimes']"
+            :data="stageStats['totalStageTimes']"
             :title="$t('stats.site.all')"
           />
         </v-col>
@@ -116,7 +116,7 @@
         <v-col v-bind="cols.details">
           <SiteStatsStage
             key="24h"
-            :data="stats['totalStageTimes_24h']"
+            :data="stageStats['totalStageTimes_24h']"
             :title="$t('stats.site.24hr')"
           />
         </v-col>
@@ -145,6 +145,7 @@
   import SiteStatsItem from "@/components/stats/SiteStatsItem";
   import timeFormatter from "@/utils/timeFormatter";
   import {mapGetters} from "vuex";
+  import get from "@/utils/getters";
   export default {
     name: "SiteStats",
     components: {SiteStatsItem, SiteStatsStage, BackdropCard},
@@ -170,7 +171,13 @@
         return this.stats && this.stats["error"]
       },
       stats () {
-        return this.$store.getters["data/content"]({id: "stats"})
+        return this.$store.getters["data/content"]({id: "stats"});
+      },
+      stageStats () {
+        return {
+          totalStageTimes: get.siteStats.byKey("totalStageTimes"),
+          totalStageTimes_24h: get.siteStats.byKey("totalStageTimes_24h"),
+        }
       },
       calculated () {
         const updatedAt = this.$store.getters["data/updated"]({id: "stats"});

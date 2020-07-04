@@ -379,7 +379,7 @@
       -moz-appearance: textfield;
       background: rgba(0, 0, 0, .2) !important;
       display: block;
-      line-height: 22px;
+      line-height: 21px;
       max-width: 100%;
       min-height: 32px;
       min-width: 3rem;
@@ -456,8 +456,8 @@
       }
 
       &.number-input--controls > input {
-        padding-left: 2.5rem;
-        padding-right: 2.5rem;
+        padding-left: 2.1rem;
+        padding-right: 2.1rem;
       }
     }
 

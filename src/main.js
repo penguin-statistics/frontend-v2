@@ -18,6 +18,8 @@ import '@/components/functional'
 
 if (!window.Intl) require("intl-collator")
 
+Vue.config.performance = true;
+
 const production = process.env.NODE_ENV === 'production';
 
 if (production) {

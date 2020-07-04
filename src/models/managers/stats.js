@@ -1,7 +1,7 @@
 import ObjectManager from '@/utils/objectManager'
 import commons from './_common'
 
-const items = new ObjectManager({
+const stats = new ObjectManager({
   name: 'stats',
   api: {
     serverSensitive: true,
@@ -13,6 +13,6 @@ const items = new ObjectManager({
   ],
   ttl: 1000 * 60 * 10, // 10 minutes
   ajaxHooks: commons.defaultAjaxHooks
-});
+})
 
-export default items
+export default stats

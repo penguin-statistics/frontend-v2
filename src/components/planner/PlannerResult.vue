@@ -1,5 +1,5 @@
 <template>
-  <v-card>
+  <v-card color="background">
     <v-card-title
       class="indigo pb-4 elevation-2 white--text"
       style="background: #a14042; line-height: 1.1;"
@@ -38,7 +38,7 @@
             </v-list-item-icon>
             <v-list-item-content>
               <v-list-item-title class="monospace">
-                {{ result.gold.toLocaleString() }}
+                {{ parseAmount(result.gold.toLocaleString()) }}
               </v-list-item-title>
               <v-list-item-subtitle>
                 {{ $t('planner.calculation.lmb') }}
@@ -59,7 +59,7 @@
             </v-list-item-icon>
             <v-list-item-content>
               <v-list-item-title class="monospace">
-                {{ result.cost.toLocaleString() }}
+                {{ parseAmount(result.cost) }}
               </v-list-item-title>
               <v-list-item-subtitle>
                 {{ $t('planner.calculation.sanity') }}
@@ -80,7 +80,7 @@
             </v-list-item-icon>
             <v-list-item-content>
               <v-list-item-title class="monospace">
-                {{ result.exp.toLocaleString() }} EXP
+                {{ parseAmount(result.exp) }} EXP
               </v-list-item-title>
               <v-list-item-subtitle>
                 {{ $t('planner.calculation.exp') }}
@@ -113,7 +113,7 @@
           >
             {{ $t('planner.calculation.noStage') }}
           </v-alert>
-          <div class="d-flex justify-center">
+          <div class="d-flex justify-center mt-2">
             <v-icon
               small
               color="grey"
@@ -121,7 +121,7 @@
             >
               mdi-information
             </v-icon>
-            Planner 现将会自动隐藏未于已选择服务器出现或开放的关卡
+            {{ $t('planner.notices.autoExistence') }}
           </div>
           <v-row
             align="start"
@@ -129,7 +129,7 @@
           >
             <v-col
               v-for="[index, stage] in result.stages.entries()"
-              :key="stage.stage"
+              :key="stage.stage.stageId"
               cols="12"
               sm="6"
               md="4"
@@ -139,12 +139,26 @@
             >
               <v-card class="card-item">
                 <v-card-text>
-                  <div class="title">
-                    <span class="font-weight-bold headline">{{ stage.stage }}</span>
-                    <small class="float-right">#{{ index + 1 }}</small>
+                  <div class="title d-flex justify-center">
+                    <span
+                      v-ripple
+                      class="font-weight-bold headline d-flex align-center cursor-pointer v-btn"
+                      style="margin-left: -8px; margin-top: -8px; padding: 4px 8px; border-radius: 4px;"
+                      @click="redirectStage(stage.stage)"
+                    >
+                      {{ stage.stage.code }}
+                      <v-icon
+                        class="ml-2"
+                        small
+                      >
+                        mdi-link
+                      </v-icon>
+                    </span>
+                    <v-spacer />
+                    <small>#{{ index + 1 }}</small>
                   </div>
                   <div class="display-1 text-center monospace font-weight-bold my-2">
-                    {{ parseInt(stage.count).toLocaleString() }} <small class="title">{{ $t('planner.calculation.times') }}</small>
+                    {{ parseAmount(stage.count) }} <small class="title">{{ $t('planner.calculation.times') }}</small>
                   </div>
                   <div>
                     <div
@@ -209,7 +223,7 @@
                     <span class="font-weight-bold headline">{{ synthesis.target.name }}</span>
                   </div>
                   <div class="display-1 text-center monospace font-weight-bold my-2">
-                    &times;{{ parseInt(synthesis.count).toLocaleString() }}
+                    &times;{{ parseAmount(synthesis.count) }}
                   </div>
                   <div
                     v-for="item in synthesis.items"
@@ -304,8 +318,10 @@
 </template>
 
 <script>
+  import Item from "@/components/global/Item";
   export default {
     name: "PlannerResult",
+    components: {Item},
     props: {
       result: {
         type: Object,
@@ -338,6 +354,18 @@
             itemId
           }
         })
+      },
+      redirectStage(stage) {
+        this.$router.push({
+          name: "StatsByStage_Selected",
+          params: {
+            zoneId: stage.zoneId,
+            stageId: stage.stageId,
+          }
+        })
+      },
+      parseAmount (num) {
+        return Math.ceil(parseFloat(num)).toLocaleString()
       }
     },
   }

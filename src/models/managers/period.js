@@ -1,7 +1,7 @@
 import ObjectManager from '@/utils/objectManager'
 import commons from './_common'
 
-const items = new ObjectManager({
+const period = new ObjectManager({
   name: 'period',
   api: {
     url: "/period",
@@ -13,4 +13,4 @@ const items = new ObjectManager({
   ajaxHooks: commons.defaultAjaxHooks
 });
 
-export default items
+export default period
