@@ -242,9 +242,9 @@
     "name": "Stage",
     "apCost": "{apCost} AP required",
     "loots": {
-      "NORMAL_DROP": "Normal",
-      "EXTRA_DROP": "Extra",
-      "SPECIAL_DROP": "Special"
+      "NORMAL_DROP": "Regular Drops",
+      "EXTRA_DROP": "Extra Drops",
+      "SPECIAL_DROP": "Special Drops"
     },
     "selector": {
       "plannerExclude": "Exclude Planning Stages",
