@@ -183,8 +183,7 @@
       "_name": "설정",
       "byProduct": "부산물 획득 고려",
       "requireExp": "경험치 획득 고려",
-      "requireLmb": "용문폐 획득 고려",
-      "foreignServer": "에피소드 6 제외"
+      "requireLmb": "용문폐 획득 고려"
     },
     "actions": {
       "import": "가져오기",

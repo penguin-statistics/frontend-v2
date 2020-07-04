@@ -8,7 +8,7 @@
 			],
 			"subtitle": {
 				"report": "I want to report drops",
-				"byItem": "Where should I farm for Orirock?",
+				"byItem": "Where should I farm rocks?",
 				"byStage": "What are the drop rates of this stage?",
 				"planner": "Please gimme some farming advice"
 			},
@@ -22,10 +22,10 @@
 		"ja": {
 			"quickStart": "クイックスタート",
 			"subtitle": {
-				"report": "I want to report drops",
-				"byItem": "Where should I farm for Orirock?",
-				"byStage": "What are the drop rates of this stage?",
-				"planner": "Please gimme some farming advice"
+				"report": "ドロップを報告したい",
+				"byItem": "岩はどこのステージが一番効率が良いのか？",
+				"byStage": "このステージでの泥率はどれくらい？",
+				"planner": "ファーミングアドバイスをください"
 			},
 			"title": {
 				"report": "ドロップ報告",
@@ -38,7 +38,7 @@
 			"quickStart": "빠른 시작",
 			"subtitle": {
 				"report": "I want to report drops",
-				"byItem": "Where should I farm for Orirock?",
+				"byItem": "Where should I farm rocks?",
 				"byStage": "What are the drop rates of this stage?",
 				"planner": "Please gimme some farming advice"
 			},

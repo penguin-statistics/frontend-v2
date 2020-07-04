@@ -5,6 +5,9 @@
     },
     "en": {
       "switchedTo": "Server switched to"
+    },
+    "ja": {
+      "switchedTo": "サーバー切り替え中"
     }
   }
 </i18n>
