@@ -540,7 +540,6 @@ import StageSelector from "@/components/stats/StageSelector";
 import snackbar from "@/utils/snackbar";
 import Subheader from "@/components/global/Subheader";
 import Theme from "@/mixins/Theme";
-import ItemById from "@/components/global/ItemById";
 import ItemIcon from "@/components/global/ItemIcon";
 
 // colors: [dark, light]

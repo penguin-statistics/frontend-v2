@@ -21,7 +21,7 @@ import AboutAttributions from './views/About/Attributions'
 import NotFound from "@/views/NotFound";
 import AdvancedQuery from "@/views/AdvancedQuery";
 import SiteStats from "@/views/SiteStats";
-import NewPlanner from "@/views/NewPlanner";
+import Planner from "@/views/Planner";
 // import DataDebugger from "@/components/debug/DataDebugger";
 
 const originalPush = Router.prototype.push;
@@ -140,7 +140,7 @@ const router = new Router({
   {
     path: '/planner',
     name: 'Planner',
-    component: NewPlanner,
+    component: Planner,
     meta: {
       icon: 'mdi-floor-plan',
       i18n: 'menu.planner'

@@ -22,9 +22,6 @@ export default {
     },
     clearExcludes (state) {
       state.excludes = []
-    },
-    addReportDrops (state, drops) {
-
     }
   },
   getters: {
