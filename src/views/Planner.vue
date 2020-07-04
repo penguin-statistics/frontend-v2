@@ -15,209 +15,235 @@
       />
     </v-dialog>
     <v-row
+      class="my-3 mx-6 flex-row"
       align="center"
-      justify="center"
     >
-      <v-col
-        cols="12"
-        sm="4"
-        md="4"
-        lg="3"
-        xl="3"
-        class="px-0"
+      <span class="title">
+        数据
+      </span>
+      <v-divider
+        vertical
+        class="mx-4"
+      />
+      
+      <v-dialog
+        v-model="ioDialog"
+        width="800"
       >
-        <v-row
-          no-gutters
-          class="my-3 mx-6 flex-column"
-          align="start"
-        >
-          <span class="title">
-            {{ $t('planner.options._name') }}
-          </span>
-          <v-switch
-            v-model="options.byProduct"
-            :label="$t('planner.options.byProduct')"
-            hide-details
-          />
-          <v-switch
-            v-model="options.requireExp"
-            :label="$t('planner.options.requireExp')"
-            hide-details
-          />
-          <v-switch
-            v-model="options.requireLmb"
-            :label="$t('planner.options.requireLmb')"
-            hide-details
-          />
-          <v-dialog
-            v-model="excludeDialog"
-            max-width="700px"
-          >
-            <template v-slot:activator="{ on }">
-              <v-btn
-                class="mt-4"
-                large
-                block
-                v-on="on"
-              >
-                <v-icon left>
-                  mdi-cube
-                </v-icon>
-                {{ $t('planner.options.excludeStage') }}{{ excludes.length ? ` (${excludes.length})` : "" }}
-              </v-btn>
-            </template>
-            <MultiStageSelector
-              v-model="excludes"
-              @close="excludeDialog = false"
-            />
-          </v-dialog>
-          <v-dialog
-            v-model="resetDialog"
-            max-width="350px"
-            persistent
-          >
-            <template v-slot:activator="{ on }">
-              <v-btn
-                class="mt-2"
-                color="error"
-                block
-                @click="resetDialog = true"
-              >
-                <v-icon left>
-                  mdi-delete
-                </v-icon>
-                {{ $t('planner.reset.name') }}
-              </v-btn>
-            </template>
-            <v-card class="slash-strip--danger">
-              <v-card-title class="headline">
-                <v-icon left>
-                  mdi-alert-circle
-                </v-icon>
-                <v-icon left>
-                  mdi-database-remove
-                </v-icon>
-                {{ $t('planner.reset.dialog.title') }}
-              </v-card-title>
-
-              <v-card-text>
-                {{ $t('planner.reset.dialog.subtitle') }}
-              </v-card-text>
-
-              <v-divider />
-
-              <v-card-actions>
-                <v-btn
-                  text
-                  @click="resetDialog = false"
-                >
-                  {{ $t('meta.dialog.cancel') }}
-                </v-btn>
-                <v-spacer />
-                <v-btn
-                  color="error"
-                  @click="confirmReset"
-                >
-                  {{ $t('meta.dialog.confirm') }}
-                </v-btn>
-              </v-card-actions>
-            </v-card>
-          </v-dialog>
-        </v-row>
-      </v-col>
-      <v-col
-        cols="12"
-        sm="8"
-        md="8"
-        lg="9"
-        xl="9"
-        class="pt-0 pb-2 px-0"
-      >
-        <v-row
-          no-gutters
-          class="my-3 mx-6"
-          align="center"
-          justify="space-around"
-        >
-          <v-dialog
-            v-model="ioDialog"
-            width="800"
-          >
-            <template v-slot:activator="{ on }">
-              <v-btn
-                color="deep-purple white--text"
-                class="my-1"
-                x-large
-                v-on="on"
-              >
-                <v-icon left>
-                  mdi-file-restore
-                </v-icon>
-                {{ $t('planner.actions.importExport') }}
-              </v-btn>
-            </template>
-            <PlannerIO
-              :config="{items, options, excludes}"
-              @close="ioDialog = false"
-              @reset="reset"
-            />
-          </v-dialog>
+        <template v-slot:activator="{ on }">
           <v-btn
-            color="indigo white--text"
-            class="my-1"
-            x-large
-            :loading="calculation.pending"
-            @click="calculate"
+            color="deep-purple white--text"
+            class="mr-2"
+            v-on="on"
           >
             <v-icon left>
-              mdi-calculator
+              mdi-file-restore
             </v-icon>
-            {{ $t('planner.actions.calculate') }}
-            <v-icon right>
-              mdi-chevron-right
-            </v-icon>
+            {{ $t('planner.actions.importExport') }}
           </v-btn>
-          <!--          <v-col-->
-          <!--            cols="12"-->
-          <!--            sm="4"-->
-          <!--          >-->
-          <!--            <BackdropCard-->
-          <!--              color="primary"-->
-          <!--              class="py-9"-->
-          <!--              hover-->
-          <!--              @click.native="calculate"-->
-          <!--            >-->
-          <!--              <template v-slot:backdrop>-->
-          <!--                <v-icon>-->
-          <!--                  mdi-calculator-->
-          <!--                </v-icon>-->
-          <!--              </template>-->
-          <!--              <v-overlay-->
-          <!--                v-if="calculation.pending"-->
-          <!--                absolute-->
-          <!--                -->
-          <!--              >-->
-          <!--                <v-row-->
-          <!--                  align="center"-->
-          <!--                  justify="center"-->
-          <!--                  class="fill-height"-->
-          <!--                >-->
-          <!--                  <v-col cols="12">-->
-          <!--                    <v-progress-circular-->
-          <!--                      indeterminate-->
-          <!--                      :size="32"-->
-          <!--                      :width="4"-->
-          <!--                    />-->
-          <!--                  </v-col>-->
-          <!--                </v-row>-->
-          <!--              </v-overlay>-->
-          <!--              <h1 class="display-1">-->
-          <!--                -->
-          <!--              </h1>-->
-          <!--            </BackdropCard>-->
-          <!--          </v-col>-->
-        </v-row>
-      </v-col>
+        </template>
+        <PlannerIO
+          :config="{items, options, excludes}"
+          @close="ioDialog = false"
+          @reset="reset"
+        />
+      </v-dialog>
+
+      <v-dialog
+        v-model="resetDialog"
+        max-width="350px"
+        persistent
+      >
+        <template v-slot:activator="{ on }">
+          <v-btn
+            color="error"
+            @click="resetDialog = true"
+          >
+            <v-icon left>
+              mdi-delete
+            </v-icon>
+            {{ $t('planner.reset.name') }}
+          </v-btn>
+        </template>
+        <v-card class="slash-strip--danger">
+          <v-card-title class="headline">
+            <v-icon left>
+              mdi-alert-circle
+            </v-icon>
+            <v-icon left>
+              mdi-database-remove
+            </v-icon>
+            {{ $t('planner.reset.dialog.title') }}
+          </v-card-title>
+
+          <v-card-text>
+            {{ $t('planner.reset.dialog.subtitle') }}
+          </v-card-text>
+
+          <v-divider />
+
+          <v-card-actions>
+            <v-btn
+              text
+              @click="resetDialog = false"
+            >
+              {{ $t('meta.dialog.cancel') }}
+            </v-btn>
+            <v-spacer />
+            <v-btn
+              color="error"
+              @click="confirmReset"
+            >
+              {{ $t('meta.dialog.confirm') }}
+            </v-btn>
+          </v-card-actions>
+        </v-card>
+      </v-dialog>
+
+      <!--          <v-col-->
+      <!--            cols="12"-->
+      <!--            sm="4"-->
+      <!--          >-->
+      <!--            <BackdropCard-->
+      <!--              color="primary"-->
+      <!--              class="py-9"-->
+      <!--              hover-->
+      <!--              @click.native="calculate"-->
+      <!--            >-->
+      <!--              <template v-slot:backdrop>-->
+      <!--                <v-icon>-->
+      <!--                  mdi-calculator-->
+      <!--                </v-icon>-->
+      <!--              </template>-->
+      <!--              <v-overlay-->
+      <!--                v-if="calculation.pending"-->
+      <!--                absolute-->
+      <!--                -->
+      <!--              >-->
+      <!--                <v-row-->
+      <!--                  align="center"-->
+      <!--                  justify="center"-->
+      <!--                  class="fill-height"-->
+      <!--                >-->
+      <!--                  <v-col cols="12">-->
+      <!--                    <v-progress-circular-->
+      <!--                      indeterminate-->
+      <!--                      :size="32"-->
+      <!--                      :width="4"-->
+      <!--                    />-->
+      <!--                  </v-col>-->
+      <!--                </v-row>-->
+      <!--              </v-overlay>-->
+      <!--              <h1 class="display-1">-->
+      <!--                -->
+      <!--              </h1>-->
+      <!--            </BackdropCard>-->
+      <!--          </v-col>-->
+    </v-row>
+    <v-row
+      class="my-3 mx-6 flex-row"
+      align="center"
+    >
+      <span class="title">
+        <!--        {{ $t('planner.options._name') }}-->
+        设置
+      </span>
+      <v-divider
+        vertical
+        class="mx-4"
+      />
+      <div class="d-flex flex-grow-1 flex-column flex-sm-row flex-md-row flex-lg-row flex-xl-row">
+        <v-switch
+          v-model="options.byProduct"
+          :label="$t('planner.options.byProduct')"
+          hide-details
+          class="mt-0 pt-0"
+          :class="{'mr-2': $vuetify.breakpoint.smAndUp}"
+        />
+        <v-switch
+          v-model="options.requireExp"
+          :label="$t('planner.options.requireExp')"
+          hide-details
+          class="pt-0"
+          :class="{'mt-0 mr-2': $vuetify.breakpoint.smAndUp}"
+        />
+        <v-switch
+          v-model="options.requireLmb"
+          :label="$t('planner.options.requireLmb')"
+          hide-details
+          class="pt-0"
+          :class="{'mt-0': $vuetify.breakpoint.smAndUp}"
+        />
+      </div>
+    </v-row>
+
+    <v-row
+      class="my-3 mx-6 flex-row"
+      align="center"
+    >
+      <span class="title">
+        排除
+      </span>
+      <v-divider
+        vertical
+        class="mx-4"
+      />
+      <v-dialog
+        v-model="excludeDialog"
+        max-width="700px"
+      >
+        <template v-slot:activator="{ on }">
+          <v-btn
+            class="mr-2"
+            v-on="on"
+          >
+            <v-icon left>
+              mdi-cube
+            </v-icon>
+            {{ $t('planner.options.excludeStage') }}
+          </v-btn>
+        </template>
+        <MultiStageSelector
+          v-model="excludes"
+          @close="excludeDialog = false"
+        />
+      </v-dialog>
+      <v-chip
+        label
+        class="hidden-xs-only"
+      >
+        <v-icon
+          small
+          class="mr-2"
+        >
+          mdi-cancel
+        </v-icon>
+        <span>
+          {{ `已排除 ${excludes.length} 关` }}
+        </span>
+      </v-chip>
+    </v-row>
+
+    <v-row
+      class="my-3 mx-6 flex-row"
+      align="center"
+    >
+      <v-btn
+        color="indigo white--text"
+        class="my-1"
+        x-large
+        block
+        :loading="calculation.pending"
+        @click="calculate"
+      >
+        <v-icon left>
+          mdi-calculator
+        </v-icon>
+        {{ $t('planner.actions.calculate') }}
+        <v-icon right>
+          mdi-chevron-right
+        </v-icon>
+      </v-btn>
     </v-row>
 
     <v-row
@@ -296,6 +322,15 @@
         set (v) {
           this.$store.commit("planner/changeExcludes", v)
         }
+      },
+      excludeDetails () {
+        return this.excludes.slice(0, 25).map(el => {
+          const stage = get.stages.byStageId(el);
+          return {
+            ...stage,
+            translatedCode: strings.translate(stage, "code")
+          }
+        })
       }
     },
     watch: {
@@ -459,10 +494,5 @@
 
   ::v-deep .planner-import-export textarea {
     padding: 8px 0;
-  }
-
-  .card-item {
-    border: 2px solid #4350b0;
-    height: 100%
   }
 </style>

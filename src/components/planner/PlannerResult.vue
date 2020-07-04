@@ -1,5 +1,5 @@
 <template>
-  <v-card color="background">
+  <v-card color="indigoBackground">
     <v-card-title
       class="indigo pb-4 elevation-2 white--text"
       style="background: #a14042; line-height: 1.1;"
@@ -155,7 +155,7 @@
                       </v-icon>
                     </span>
                     <v-spacer />
-                    <small>#{{ index + 1 }}</small>
+                    <small style="margin-top: -4px">#{{ index + 1 }}</small>
                   </div>
                   <div class="display-1 text-center monospace font-weight-bold my-2">
                     {{ parseAmount(stage.count) }} <small class="title">{{ $t('planner.calculation.times') }}</small>
@@ -203,7 +203,7 @@
           >
             <v-col
               v-for="synthesis in result.syntheses"
-              :key="synthesis.target.itemId"
+              :key="synthesis.target.item.itemId"
               cols="12"
               sm="6"
               md="4"
@@ -213,14 +213,28 @@
             >
               <v-card class="card-item">
                 <v-card-text>
-                  <div class="title d-block">
+                  <div class="title d-flex justify-start">
+                    <span
+                      v-ripple
+                      class="font-weight-bold headline d-flex align-center cursor-pointer v-btn"
+                      style="margin-left: -8px; margin-top: -8px; padding: 4px 8px; border-radius: 4px;"
+                      @click="redirectItem(synthesis.target.item.itemId)"
+                    >
+                      {{ synthesis.target.name }}
+                      <v-icon
+                        class="ml-2"
+                        small
+                      >
+                        mdi-link
+                      </v-icon>
+                    </span>
+                    <v-spacer />
                     <Item
                       :item="synthesis.target.item"
                       disable-tooltip
-                      class="float-right"
                       :ratio="0.5"
+                      style="margin-top: -4px"
                     />
-                    <span class="font-weight-bold headline">{{ synthesis.target.name }}</span>
                   </div>
                   <div class="display-1 text-center monospace font-weight-bold my-2">
                     &times;{{ parseAmount(synthesis.count) }}
@@ -372,5 +386,8 @@
 </script>
 
 <style scoped>
-
+  .card-item {
+    border: 2px solid #4350b0;
+    height: 100%
+  }
 </style>
