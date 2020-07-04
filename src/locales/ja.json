@@ -19,7 +19,8 @@
     "stats": {
       "_name": "ドロップ率",
       "stage": "作戦別",
-      "item": "素材別"
+      "item": "素材別",
+      "advanced": "高度なクエリ"
     },
     "about": {
       "_name": "当サイトについて",
@@ -39,9 +40,9 @@
       "name": "設定",
       "themes": {
         "name": "テーマ変更",
-        "system": "Follow System",
-        "dark": "Always Dark",
-        "light": "Always Light"
+        "system": "システム設定に従う",
+        "dark": "常にダークモード",
+        "light": "常にライトモード"
       }
     }
   },
@@ -185,9 +186,9 @@
     "name": "作戦",
     "apCost": "消費理性：{apCost}",
     "loots": {
-      "NORMAL_DROP": "通常ドロップ",
-      "EXTRA_DROP": "エクストラドロップ",
-      "SPECIAL_DROP": "スペシャルドロップ",
+      "NORMAL_DROP": "通常",
+      "EXTRA_DROP": "その他",
+      "SPECIAL_DROP": "レア",
       "FURNITURE": "家具"
     }
   },
@@ -196,8 +197,7 @@
       "_name": "オプション",
       "byProduct": "加工副産物を考慮する",
       "requireExp": "大量の経験値が必要",
-      "requireLmb": "大量の龍門幣が必要",
-      "foreignServer": "第6章を計算に追加しません"
+      "requireLmb": "大量の龍門幣が必要"
     },
     "actions": {
       "import": "インポート",
