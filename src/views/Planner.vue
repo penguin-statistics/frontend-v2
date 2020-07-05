@@ -69,9 +69,6 @@
             <v-icon left>
               mdi-alert-circle
             </v-icon>
-            <v-icon left>
-              mdi-database-remove
-            </v-icon>
             {{ $t('planner.reset.dialog.title') }}
           </v-card-title>
 
