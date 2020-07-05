@@ -1,5 +1,7 @@
 const webpack = require("webpack");
 
+require('events').EventEmitter.defaultMaxListeners = 50;
+
 let commitHash;
 
 try {
@@ -20,9 +22,10 @@ module.exports = {
     }
   },
   devServer: {
+    disableHostCheck: true,
     proxy: {
       "/PenguinStats": {
-        target: "http://localhost:8081"
+        target: "https://penguin-stats.cn"
       }
     }
   },

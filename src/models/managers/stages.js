@@ -6,10 +6,7 @@ const stages = new ObjectManager({
   api: {
     serverSensitive: true,
 
-    url: '/stages',
-    extraParams: {
-      "show_closed_zones": true
-    }
+    url: '/stages'
   },
   transform: [
     (object) => {

@@ -1,5 +1,6 @@
 <template>
   <v-container
+    fluid
     class="fill-height align-center"
   >
     <template v-if="error">
@@ -106,20 +107,24 @@
       <v-row>
         <v-col v-bind="cols.details">
           <SiteStatsStage
-            :data="stats['totalStageTimes']"
+            key="all"
+            :data="stageStats['totalStageTimes']"
             :title="$t('stats.site.all')"
           />
         </v-col>
-
+        
         <v-col v-bind="cols.details">
           <SiteStatsStage
-            :data="stats['totalStageTimes_24h']"
+            key="24h"
+            :data="stageStats['totalStageTimes_24h']"
             :title="$t('stats.site.24hr')"
           />
         </v-col>
 
         <v-col v-bind="cols.details">
-          <SiteStatsItem :data="stats['totalItemQuantities']" />
+          <SiteStatsItem
+            :data="stats['totalItemQuantities']"
+          />
         </v-col>
 
         <v-col
@@ -140,6 +145,7 @@
   import SiteStatsItem from "@/components/stats/SiteStatsItem";
   import timeFormatter from "@/utils/timeFormatter";
   import {mapGetters} from "vuex";
+  import get from "@/utils/getters";
   export default {
     name: "SiteStats",
     components: {SiteStatsItem, SiteStatsStage, BackdropCard},
@@ -165,10 +171,16 @@
         return this.stats && this.stats["error"]
       },
       stats () {
-        return this.$store.getters["data/content"]({id: "stats"})
+        return this.$store.getters["data/content"]({id: "stats"});
+      },
+      stageStats () {
+        return {
+          totalStageTimes: get.siteStats.byKey("totalStageTimes"),
+          totalStageTimes_24h: get.siteStats.byKey("totalStageTimes_24h"),
+        }
       },
       calculated () {
-        const updatedAt = this.$store.getters["data/updated"]({id: "period"});
+        const updatedAt = this.$store.getters["data/updated"]({id: "stats"});
         return {
           totalDrops: this.stats["totalItemQuantities"].map(el => el.quantity).reduce((a, b) => a + b),
           totalReports: this.stats["totalStageTimes"].map(el => el.times).reduce((a, b) => a + b),

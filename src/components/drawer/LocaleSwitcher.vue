@@ -10,6 +10,13 @@
   >
     <template v-slot:item="{item}">
       {{ item.text }}
+      <v-icon
+        v-if="item.beta"
+        small
+        class="ml-1"
+      >
+        mdi-beta
+      </v-icon>
       <v-spacer />
       <!--      <span class="monospace ml-2">-->
       <!--        {{ item.value }}-->
@@ -42,14 +49,22 @@
         localizations: [
           {
             value: 'zh',
-            text: '中文'
-          }, {
+            text: '简体中文'
+          },
+          // {
+          //   value: 'zh-TW',
+          //   text: '繁体中文',
+          //   beta: true
+          // },
+          {
             value: 'en',
             text: 'English'
-          }, {
+          },
+          {
             value: 'ja',
             text: '日本語'
-          }, {
+          },
+          {
             value: 'ko',
             text: '한국어'
           }

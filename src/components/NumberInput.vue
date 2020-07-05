@@ -6,6 +6,7 @@
       'number-input--center': center,
       'number-input--controls': controls,
       [`number-input--${size}`]: size,
+      'number-input--dense': $vuetify.breakpoint.smAndDown
     }"
     v-on="listeners"
   >
@@ -252,13 +253,33 @@
           this.$refs.input.value = newValue;
         }
 
-        this.$emit('change', newValue, oldValue);
+        this.$emit('change', newValue);
       },
     },
   };
 </script>
 
 <style lang="scss" scoped>
+  ::v-deep .number-input-theme--dense .number-input__button--minus {
+    border-radius: 15px 0 0 15px !important;
+  }
+  ::v-deep .number-input-theme--dense .number-input__button--plus {
+    border-radius: 0 15px 15px 0 !important;
+  }
+  ::v-deep .number-input-theme--dense .number-input__button::before {
+    width: 14px;
+  }
+  ::v-deep .number-input-theme--dense .number-input__button {
+    width: 24px !important;
+  }
+  ::v-deep .number-input-theme--dense .number-input__button:hover {
+    width: 30px !important;
+  }
+  ::v-deep .number-input-theme--dense .number-input__input {
+    padding-left: 20px !important;
+    padding-right: 20px !important;
+  }
+
   .number-input {
     display: block;
     font-size: 0;
@@ -358,7 +379,7 @@
       -moz-appearance: textfield;
       background: rgba(0, 0, 0, .2) !important;
       display: block;
-      line-height: 22px;
+      line-height: 21px;
       max-width: 100%;
       min-height: 32px;
       min-width: 3rem;
@@ -435,8 +456,8 @@
       }
 
       &.number-input--controls > input {
-        padding-left: 2.5rem;
-        padding-right: 2.5rem;
+        padding-left: 2.1rem;
+        padding-right: 2.1rem;
       }
     }
 
@@ -458,6 +479,30 @@
       &.number-input--controls > input {
         padding-left: 4rem;
         padding-right: 4rem;
+      }
+    }
+
+    &--dense {
+      .number-input__input {
+        padding-left: 20px !important;
+        padding-right: 20px !important;
+      }
+      .number-input__button {
+        &--minus {
+          border-radius: 15px 0 0 15px !important;
+        }
+        &--plus {
+          border-radius: 0 15px 15px 0 !important;
+        }
+        &::before {
+          width: 14px;
+        }
+        &:hover {
+          width: 30px !important;
+        }
+        & {
+          width: 24px !important;
+        }
       }
     }
   }

@@ -43,7 +43,7 @@
               :width="2"
             />
             <span class="caption white--text">
-              {{ $t('meta.loading') }}
+              {{ $t('meta.loading') }} ({{ percentage }})
             </span>
           </span>
         </v-fade-transition>
@@ -146,6 +146,11 @@
       },
       show () {
         return (this.haveError && !this.model) || this.pending
+      },
+      percentage() {
+        const states = this.$store.state.ajax.states
+        const pending = states.filter(el => el.pending).length
+        return `${Math.ceil(100 - (pending / states.length) * 100)}%`
       }
     },
     watch: {
@@ -173,7 +178,7 @@
 
 <style>
   .network-state-indicator {
-    position: fixed;
+    position: fixed !important;
     right: 0;
     bottom: 0;
     padding: 4px 8px;

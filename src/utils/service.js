@@ -1,11 +1,12 @@
 import axios from 'axios'
 import Console from "@/utils/Console";
 import store from "@/store";
+import mirror from "@/utils/mirror";
 
 let baseURL;
-if (window.location.hostname === "penguin-stats.io" || window.location.hostname === "penguin-stats.cn") {
+if (mirror.global.isCurrent() || mirror.cn.isCurrent()) {
   // those are official mirrors. just use the relative path.
-  baseURL = "/PenguinStats/api/v2"
+  baseURL = "https://penguin-stats.io/PenguinStats/api/v2"
 } else if (process.env.NODE_ENV === "development") {
   // developing at localhost.
   // also use the relative path, but we left the task to WebpackDevServer for proxying local API responses
@@ -33,16 +34,16 @@ service.interceptors.response.use(function (response) {
 
   return response;
 }, function (error) {
-  // eliminate `user not found` errors (reports 404).
   if (error.response) {
 
-    if ("X-Penguin-Upgrade" in error.response.headers) {
+    if ("x-penguin-upgrade" in error.response.headers) {
       // X-Penguin-Upgrade: Client version outdated
       store.commit("ui/setOutdated", true)
     }
 
+    // eliminate `user not found` errors (reports 404).
     if (error.response.status !== 404) {
-      Console.error("Ajax", "error", error)
+      Console.error("Ajax", "failed", error)
     }
 
     error.errorMessage = `(s=${error.response.status}) ${error.response.data ? error.response.data : error.message}`;

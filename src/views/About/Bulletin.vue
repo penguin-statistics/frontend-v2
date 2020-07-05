@@ -108,9 +108,6 @@
 </script>
 
 <style scoped>
-  .line-height-wide {
-    line-height: 1.8;
-  }
 
   .theme--light .notice-card--informational {
     background: repeating-linear-gradient(

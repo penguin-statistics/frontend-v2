@@ -1,5 +1,5 @@
 <template>
-  <v-subheader class="pl-0">
+  <v-subheader class="px-0">
     <slot />
     <v-divider class="ml-4" />
   </v-subheader>

@@ -31,10 +31,11 @@
       "contact": "Contact us",
       "donate": "Donate",
       "links": "Link Exchange",
-      "bulletin": "Notice"
+      "bulletin": "Notice",
+      "attributions": "Attributions"
     },
     "siteStats": "Statistics at a Glance",
-    "planner": "ArkPlanner",
+    "planner": "Farming Strategy Planner",
     "v1": "Visit Old Version",
     "refreshData": "Reload",
     "languages": "Language",
@@ -46,6 +47,9 @@
         "dark": "Always Dark",
         "light": "Always Light"
       }
+    },
+    "overline": {
+      "planner": "ArkPlanner"
     }
   },
   "meta": {
@@ -77,7 +81,8 @@
       "confirm": "Confirm",
       "submit": "Submit",
       "close": "Close"
-    }
+    },
+    "copyWarning": "\n\nData from Penguin Statistics ({site})"
   },
   "stats": {
     "headers": {
@@ -117,7 +122,13 @@
       "stages": "Top Upload Stages",
       "items": "Top Upload Items",
       "all": "Full Time",
-      "24hr": "Last 24hr"
+      "24hr": "Last 24hr",
+
+      "generating": {
+        "title": "Generating Site Statistics...",
+        "subtitle": "Neural Network Message: Due to high amount of data, site statistics need up to 5 minutes to calculate. Please come back later.",
+        "refresh": "Refresh Site Statistics"
+      }
     }
   },
   "contribute": {
@@ -147,7 +158,9 @@
         "limitations": "Report Validation Rules",
         "trends": "History Report Trends",
         "globalMatrix": "Global Drop Data",
-        "personalMatrix": "Personal Drop Data"
+        "personalMatrix": "Personal Drop Data",
+        "stats": "Site Statistics",
+        "period": "Server Events"
       }
     }
   },
@@ -186,7 +199,28 @@
         "lte": "Should have at maximum {should} items in \"{stage}\"",
         "not": "Should not have exactly {should} items in \"{stage}\""
       }
-    }
+    },
+    "clear": "Clear",
+    "closedReason": {
+      "INVALID": "Stage Not Found: The stage does not exist in the server you have selected.",
+      "EXPIRED": "Stage Report Closed: This activity stage has already been closed."
+    },
+    "furniture": "Furniture Drop: {state}",
+    "name": "Report",
+    "submit": "Submit",
+    "success": "Successfully submitted",
+    "unable": "Failed to submit: ",
+    "undo": "Recall",
+    "undoSuccess": "Successfully recalled submission",
+    "gacha": "Multiple results are allowed for the reports of this stage.",
+    "notices": {
+      "rule_1": "Report one clear at a time. Please double-check your drop selection.",
+      "rule_2": "If there are no drops, click submit directly without selecting any drops.",
+      "rule_3": "Please do not report the first-clear of a stage, and do not only report the clears where you were lucky - report all clears.",
+      "rule_4": "Please make sure that you refresh a 3-stars clear.",
+      "rule_5": "Please only submit drop data from the CN server."
+    },
+    "usage": "Increase drop amount by left mouse click, decrease by right click"
   },
   "mirrors": {
     "global": {
@@ -242,9 +276,10 @@
     "name": "Stage",
     "apCost": "{apCost} AP required",
     "loots": {
-      "NORMAL_DROP": "Regular Drops",
-      "EXTRA_DROP": "Extra Drops",
-      "SPECIAL_DROP": "Special Drops"
+      "NORMAL_DROP": "Normal",
+      "EXTRA_DROP": "Extra",
+      "SPECIAL_DROP": "Special",
+      "FURNITURE": "Furniture"
     },
     "selector": {
       "plannerExclude": "Exclude Planning Stages",
@@ -253,18 +288,43 @@
     }
   },
   "planner": {
+    "notices": {
+      "autoExistence": "ArkPlanner will hide non-existing stages automatically now."
+    },
     "options": {
       "_name": "Options",
       "byProduct": "Consider by-products",
       "requireExp": "Large demand for EXP",
       "requireLmb": "Large demand for LMD",
-      "excludeStage": "Exclude Stages"
+      "excludeStage": {
+        "_name": "Excludes",
+        "title": "Select",
+        "selected": "Excluded {stages} stages"
+      }
+    },
+    "reset": {
+      "name": "Reset",
+      "dialog": {
+        "title": "Reset Planner",
+        "subtitle": "This operation will reset all planner data and settings you have set. Are you sure to continue?"
+      }
     },
     "actions": {
+      "_name": "Data",
       "import": "Import",
       "export": "Export",
       "importExport": "@:(planner.actions.import)/@:(planner.actions.export)",
-      "calculate": "Calculate"
+      "calculate": "Calculate",
+      "link": {
+        "generate": "Generate Share Link",
+        "generating": "Generating...",
+        "share": "Share Link"
+      },
+      "config": {
+        "_name": "Configuration Code",
+        "share": "Share Configuration Code",
+        "import": "Import from Configuration Code"
+      }
     },
     "have": "Have",
     "need": "Need",
@@ -274,7 +334,7 @@
       "tabs": {
         "stages": "Stages",
         "syntheses": "Syntheses",
-        "values": "Values"
+        "values": "Material Sanity Value"
       },
       "lmb": "Estimated LMD income",
       "sanity": "Estimated Sanity required",
@@ -326,23 +386,31 @@
         "subtitle": "Used to filter the query results by specified materials. When any filter is selected, no other filters can be selected in the same query. If you want to filter other parameters, you can do it by adding a comparison query."
       },
       "timeRange": {
-        "title": "Choose Time Range"
+        "title": "Choose Time Range",
+        "subtitle": "(Required) Limit query results in a specific time range.",
+        "presets": {
+          "title": "Presets",
+          "start": "Started",
+          "end": "Ended"
+        }
       },
       "interval": {
         "title": "Segment Interval",
+        "subtitle": "Interval for segmenting historical trends.",
 
         "unspecified": "No Segment"
       }
     },
     "operation": {
       "add": "Add Comparison Query",
-      "execute": "Execute Query"
+      "execute": "Execute Query",
+      "inProgress": "Executing Queries..."
     },
     "result": {
       "main": "Main Query Result",
       "comparison": "Comparison Query #{index} Result",
       "empty": "This query returned 0 results. Please check your query parameters.",
-      "hideTime": "隐藏详细时间"
+      "hideTime": "Hide Detail Time"
     }
   },
   "version": {
@@ -366,5 +434,19 @@
   },
   "validator": {
     "required": "Required"
+  },
+  "quotes": {
+    "doYouKnow": [
+      "Do You Know? Ptilopsis' feather is sooo cute! o(*≧▽≦)ツ"
+    ]
+  },
+  "attributions": {
+    "material": {
+      "title": "Content Credits",
+      "content": "Penguin Statistics utilizes (including but not limited to) pictures, animations, audio, original text and other works for the purpose of better reflecting the corresponding elements in the game and enhance the user experience. The copyright of such works belongs to the provider of the game, Shanghai Hypergryph Network Technology Co., Ltd. and/or its affiliates, including but not limited to YOSTAR (HONG KONG) LIMITED, 株式会社Yostar, YOSTAR LIMITED, 龍成網路, etc,."
+    },
+    "source": {
+      "title": "Open Source Licenses"
+    }
   }
 }

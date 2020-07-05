@@ -7,7 +7,7 @@
 				"button to expand menu and see more features"
 			],
 			"subtitle": {
-				"report": "I want to report drops",
+				"report": "I wanna report drops",
 				"byItem": "Where should I farm rocks?",
 				"byStage": "What are the drop rates of this stage?",
 				"planner": "Please gimme some farming advice"
@@ -16,7 +16,7 @@
 				"report": "Report Drops",
 				"byItem": "Item Drop Rates",
 				"byStage": "Stage Drop Rates",
-				"planner": "Farm Planning"
+				"planner": "Farming Planner"
 			}
 		},
 		"ja": {
@@ -35,19 +35,7 @@
 			}
 		},
 		"ko": {
-			"quickStart": "빠른 시작",
-			"subtitle": {
-				"report": "I want to report drops",
-				"byItem": "Where should I farm rocks?",
-				"byStage": "What are the drop rates of this stage?",
-				"planner": "Please gimme some farming advice"
-			},
-			"title": {
-				"report": "Report Drops",
-				"byItem": "Item Drop Rates",
-				"byStage": "Stage Drop Rates",
-				"planner": "Farm Planning"
-			}
+			"quickStart": "빠른 시작"
 		},
 		"zh": {
 			"quickStart": "快速上手",

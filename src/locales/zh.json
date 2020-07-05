@@ -31,7 +31,8 @@
       "contact": "联系我们",
       "donate": "捐助",
       "links": "友情链接",
-      "bulletin": "公告"
+      "bulletin": "公告",
+      "attributions": "内容来源"
     },
     "siteStats": "全站数据一览",
     "planner": "刷图规划器",
@@ -46,6 +47,9 @@
         "dark": "总是使用暗色",
         "light": "总是使用亮色"
       }
+    },
+    "overline": {
+      "planner": "ArkPlanner"
     }
   },
   "meta": {
@@ -77,7 +81,8 @@
       "confirm": "确认",
       "submit": "提交",
       "close": "关闭"
-    }
+    },
+    "copyWarning": "\n\n以上数据来自企鹅物流数据统计（{site}）"
   },
   "stats": {
     "headers": {
@@ -194,7 +199,28 @@
         "lte": "“{stage}” 内应至多有 {should} 个物品",
         "not": "“{stage}” 内的物品数量应总计不为 {should}"
       }
-    }
+    },
+    "clear": "清空",
+    "closedReason": {
+      "EXPIRED": "关卡汇报已关闭：活动关卡已结束",
+      "INVALID": "关卡不存在：此关卡未在所选服务器上提供"
+    },
+    "furniture": "家具掉落：{state}",
+    "name": "上报结果",
+    "submit": "提交",
+    "success": "汇报成功",
+    "unable": "无法提交：",
+    "undo": "撤销",
+    "undoSuccess": "撤销成功",
+    "gacha": "本作战允许在一次汇报内包含多个结果。",
+    "notices": {
+      "rule_1": "这是单次作战的提交，请注意核对数目；",
+      "rule_2": "若无素材掉落，请直接点击提交；",
+      "rule_3": "请不要汇报首次通关奖励，不要只汇报比较“欧”的掉落；",
+      "rule_4": "请保证通关评价是3星；",
+      "rule_5": "请只汇报国服的掉落，谢谢。"
+    },
+    "usage": "左键增加，右键减少"
   },
   "mirrors": {
     "global": {
@@ -262,18 +288,43 @@
     }
   },
   "planner": {
+    "notices": {
+      "autoExistence": "刷图规划器现将会自动隐藏未于已选择服务器出现或开放的关卡"
+    },
     "options": {
       "_name": "选项",
       "byProduct": "考虑合成副产物",
       "requireExp": "大量需求经验",
       "requireLmb": "大量需求龙门币",
-      "excludeStage": "选定计算排除关卡"
+      "excludeStage": {
+        "_name": "计算排除",
+        "title": "选择",
+        "selected": "已排除 {stages} 关"
+      }
+    },
+    "reset": {
+      "name": "重置",
+      "dialog": {
+        "title": "重置刷图规划器数据",
+        "subtitle": "将会删除所有刷图规划器数据与设置。确定要继续吗？"
+      }
     },
     "actions": {
+      "_name": "数据",
       "import": "导入",
       "export": "导出",
       "importExport": "@:(planner.actions.import)/@:(planner.actions.export)",
-      "calculate": "计算规划"
+      "calculate": "计算规划",
+      "link": {
+        "generate": "获取分享链接",
+        "generating": "正在生成",
+        "share": "分享链接"
+      },
+      "config": {
+        "_name": "配置代码",
+        "share": "分享配置代码",
+        "import": "导入配置代码"
+      }
     },
     "have": "已有",
     "need": "需要",
@@ -283,7 +334,7 @@
       "tabs": {
         "stages": "关卡列表",
         "syntheses": "合成列表",
-        "values": "素材价值"
+        "values": "素材理智价值"
       },
       "lmb": "预计龙门币收益",
       "sanity": "预计需要理智",
@@ -392,5 +443,14 @@
     "doYouKnow": [
       "你知道吗？白面鸮头上的那一撮毛超级可爱！o(*≧▽≦)ツ"
     ]
+  },
+  "attributions": {
+    "material": {
+      "title": "网站内容声明",
+      "content": "企鹅物流数据统计网站内所使用的游戏资源（包括但不限于：游戏图片、动画、音频、文本原文或其转译版本等），其目的仅为更好地反映游戏内对应元素、增强用户体验，相关作品之版权仍属于上海鹰角网络科技有限公司和/或其关联公司，即鹰角网络游戏软件和/或鹰角网络游戏服务的提供方（包括但不限于：YOSTAR (HONG KONG) LIMITED, 株式会社Yostar, YOSTAR LIMITED, 龍成網路 等）。"
+    },
+    "source": {
+      "title": "开源许可列表"
+    }
   }
 }

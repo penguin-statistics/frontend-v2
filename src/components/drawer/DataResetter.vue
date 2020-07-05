@@ -18,7 +18,7 @@
         {{ $t('settings.data.reset.title') }}
       </v-card-title>
 
-      <v-card-text>
+      <v-card-text class="subtitle-1">
         {{ $t('settings.data.reset.subtitle') }}
       </v-card-text>
 

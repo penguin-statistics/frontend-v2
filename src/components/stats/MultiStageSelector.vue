@@ -3,6 +3,23 @@
     <v-card-title>
       {{ $t('stage.selector.plannerExclude') }}
     </v-card-title>
+    <v-card-actions class="mx-4">
+      <v-spacer />
+      <v-btn
+        outlined
+        color="error"
+        @click="disableAll"
+      >
+        {{ $t('stage.selector.excludeAll') }}
+      </v-btn>
+      <v-btn
+        outlined
+        color="success"
+        @click="enableAll"
+      >
+        {{ $t('stage.selector.includeAll') }}
+      </v-btn>
+    </v-card-actions>
     <div class="mx-6">
       <template v-for="category in categorizedZones">
         <v-subheader
@@ -18,6 +35,11 @@
             {{ $t(['zone.types', category.id].join('.')) }}
           </span>
           <v-divider class="mx-4" />
+          <v-checkbox
+            v-bind="statuses.category[category.id]"
+
+            @click.self="toggleCategory(category.id, statuses.category[category.id])"
+          />
         </v-subheader>
         <v-row
           v-for="zone in category.zones"
@@ -25,9 +47,16 @@
           class="d-flex flex-column flex-sm-row mx-2 my-4"
         >
           <div
-            class="d-flex flex-column justify-center align-center text-center zone-title"
+            class="d-flex flex-column justify-center align-start text-center zone-title"
           >
-            {{ translate(zone, 'zoneName') }}
+            <v-checkbox
+              v-bind="statuses.zone[zone.zoneId]"
+
+              hide-details
+              :label="translate(zone, 'zoneName')"
+              class="ma-0 pa-0"
+              @click.stop="toggleZone(category.id, zone.zoneId, statuses.zone[zone.zoneId])"
+            />
           </div>
           <v-divider
             vertical
@@ -80,7 +109,7 @@
     },
     data() {
       return {
-        states: {}
+        // states: {}
       }
     },
     computed: {
@@ -137,14 +166,16 @@
         }
 
         return statuses
-      }
-    },
-    created () {
-      for (const stage of get.stages.all()) {
-        if (stage.isOutdated) continue;
-        // if found, means user has explicitly excluded this stage. set false. otherwise true.
-        // this.value refers to the parent v-model value
-        this.$set(this.states, stage.stageId, !this.value.find(el => el === stage.stageId))
+      },
+      states () {
+        const states = {};
+        for (const stage of get.stages.all()) {
+          if (stage.isOutdated) continue;
+          // if found, means user has explicitly excluded this stage. set false. otherwise true.
+          // this.value refers to the parent v-model value
+          this.$set(states, stage.stageId, !this.value.find(el => el === stage.stageId))
+        }
+        return states
       }
     },
     methods: {

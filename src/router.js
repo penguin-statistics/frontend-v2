@@ -3,7 +3,7 @@ import Router from 'vue-router'
 
 import Home from './views/Home'
 import Report from './views/Report'
-import Planner from './views/Planner'
+// import Planner from './views/Planner'
 
 import StatsLayout from './layouts/StatsLayout'
 import StatsByStage from './views/Stats/Stage'
@@ -17,9 +17,11 @@ import AboutChangelog from './views/About/Changelog'
 import AboutContact from './views/About/Contact'
 import AboutDonate from './views/About/Donate'
 import AboutLinks from './views/About/Links'
+import AboutAttributions from './views/About/Attributions'
 import NotFound from "@/views/NotFound";
 import AdvancedQuery from "@/views/AdvancedQuery";
 import SiteStats from "@/views/SiteStats";
+import Planner from "@/views/Planner";
 // import DataDebugger from "@/components/debug/DataDebugger";
 
 const originalPush = Router.prototype.push;
@@ -74,7 +76,8 @@ const router = new Router({
       i18n: 'menu.stats._name',
       active: true
     },
-    children: [{
+    children: [
+      {
         path: 'stage',
         name: 'StatsByStage',
         component: StatsByStage,
@@ -117,12 +120,13 @@ const router = new Router({
     ]
   },
   {
-    path: '/statistics',
-    name: 'SiteStats',
-    component: SiteStats,
+    path: '/planner',
+    name: 'Planner',
+    component: Planner,
     meta: {
-      icon: 'mdi-poll-box',
-      i18n: 'menu.siteStats'
+      icon: 'mdi-floor-plan',
+      i18n: 'menu.planner',
+      twoLine: 'menu.overline.planner'
     }
   },
   {
@@ -135,12 +139,12 @@ const router = new Router({
     },
   },
   {
-    path: '/planner',
-    name: 'Planner',
-    component: Planner,
+    path: '/statistics',
+    name: 'SiteStats',
+    component: SiteStats,
     meta: {
-      icon: 'mdi-floor-plan',
-      i18n: 'menu.planner'
+      icon: 'mdi-poll-box',
+      i18n: 'menu.siteStats'
     }
   },
   {
@@ -152,69 +156,80 @@ const router = new Router({
       i18n: 'menu.about._name',
       active: true
     },
-    children: [{
-      path: 'members',
-      name: 'AboutMembers',
-      component: AboutMembers,
-      props: true,
-      meta: {
-        icon: 'mdi-account-multiple',
-        i18n: 'menu.about.members'
+    children: [
+      {
+        path: 'members',
+        name: 'AboutMembers',
+        component: AboutMembers,
+        props: true,
+        meta: {
+          icon: 'mdi-account-multiple',
+          i18n: 'menu.about.members'
+        },
       },
-    },
-    {
-      path: 'contribute',
-      name: 'AboutContribute',
-      component: AboutContribute,
-      props: true,
-      meta: {
-        icon: 'mdi-hammer',
-        i18n: 'menu.about.contribute',
-        hide: true
+      {
+        path: 'contribute',
+        name: 'AboutContribute',
+        component: AboutContribute,
+        props: true,
+        meta: {
+          icon: 'mdi-hammer',
+          i18n: 'menu.about.contribute',
+          hide: true
+        },
       },
-    },
-    {
-      path: 'changelog',
-      name: 'AboutChangelog',
-      component: AboutChangelog,
-      props: true,
-      meta: {
-        icon: 'mdi-timeline',
-        i18n: 'menu.about.changelog'
+      {
+        path: 'changelog',
+        name: 'AboutChangelog',
+        component: AboutChangelog,
+        props: true,
+        meta: {
+          icon: 'mdi-timeline',
+          i18n: 'menu.about.changelog'
+        },
       },
-    },
-    {
-      path: 'contact',
-      name: 'AboutContact',
-      component: AboutContact,
-      props: true,
-      meta: {
-        icon: 'mdi-account-card-details',
-        i18n: 'menu.about.contact',
-        hide: true
+      {
+        path: 'contact',
+        name: 'AboutContact',
+        component: AboutContact,
+        props: true,
+        meta: {
+          icon: 'mdi-account-card-details',
+          i18n: 'menu.about.contact',
+          hide: true
+        },
       },
-    },
-    {
-      path: 'donate',
-      name: 'AboutDonate',
-      component: AboutDonate,
-      props: true,
-      meta: {
-        icon: 'mdi-gift',
-        i18n: 'menu.about.donate',
-        hide: true
+      {
+        path: 'donate',
+        name: 'AboutDonate',
+        component: AboutDonate,
+        props: true,
+        meta: {
+          icon: 'mdi-gift',
+          i18n: 'menu.about.donate',
+          hide: true
+        },
       },
-    },
-    {
-      path: 'links',
-      name: 'AboutLinks',
-      component: AboutLinks,
-      props: true,
-      meta: {
-        icon: 'mdi-link-variant',
-        i18n: 'menu.about.links'
+      {
+        path: 'links',
+        name: 'AboutLinks',
+        component: AboutLinks,
+        props: true,
+        meta: {
+          icon: 'mdi-link-variant',
+          i18n: 'menu.about.links'
+        },
       },
-    },
+      {
+        path: 'attributions',
+        name: 'AboutAttributions',
+        component: AboutAttributions,
+        props: true,
+        meta: {
+          icon: 'mdi-license',
+          i18n: 'menu.about.attributions'
+        },
+      },
     ]
   },
   {
