@@ -127,16 +127,16 @@
       "item": {
         "_name": "아이템 수",
         "now": "{item} ×{quantity}개가 선택되었습니다",
-        "gte": "\"{item}\" ≥ {quantity}개 여야 합니다",
-        "lte": "\"{item}\" ≤ {quantity}개 여야 합니다",
-        "not": "\"{item}\" ≠ {quantity}개 여야 합니다"
+        "gte": "\"{item}\" ≥ {should}개 여야 합니다",
+        "lte": "\"{item}\" ≤ {should}개 여야 합니다",
+        "not": "\"{item}\" ≠ {should}개 여야 합니다"
       },
       "type": {
         "_name": "아이템 종류",
         "now": "{quantity}가지의 아이템이 선택되었습니다.",
-        "gte": "최소 {quantity}가지의 아이템이 드랍되어야 합니다",
-        "lte": "최대 {quantity}가지의 아이템만이 드랍될 수 있습니다",
-        "not": "{quantity}가지의 아이템이 드랍될 수 없습니다"
+        "gte": "최소 {should}가지의 아이템이 드랍되어야 합니다",
+        "lte": "최대 {should}가지의 아이템만이 드랍될 수 있습니다",
+        "not": "{should}가지의 아이템이 드랍될 수 없습니다"
       }
     },
     "clear": "초기화",
