@@ -56,7 +56,7 @@
         <template v-slot:activator="{ on }">
           <v-btn
             color="error"
-            @click="resetDialog = true"
+            v-on="on"
           >
             <v-icon left>
               mdi-delete

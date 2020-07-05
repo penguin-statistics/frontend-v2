@@ -120,12 +120,13 @@ const router = new Router({
     ]
   },
   {
-    path: '/statistics',
-    name: 'SiteStats',
-    component: SiteStats,
+    path: '/planner',
+    name: 'Planner',
+    component: Planner,
     meta: {
-      icon: 'mdi-poll-box',
-      i18n: 'menu.siteStats'
+      icon: 'mdi-floor-plan',
+      i18n: 'menu.planner',
+      twoLine: 'menu.overline.planner'
     }
   },
   {
@@ -138,13 +139,12 @@ const router = new Router({
     },
   },
   {
-    path: '/planner',
-    name: 'Planner',
-    component: Planner,
+    path: '/statistics',
+    name: 'SiteStats',
+    component: SiteStats,
     meta: {
-      icon: 'mdi-floor-plan',
-      i18n: 'menu.planner',
-      twoLine: 'menu.overline.planner'
+      icon: 'mdi-poll-box',
+      i18n: 'menu.siteStats'
     }
   },
   {
