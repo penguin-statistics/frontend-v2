@@ -115,7 +115,7 @@
         text
         @click="$emit('close')"
       >
-        关闭
+        {{ $t('meta.dialog.close') }}
       </v-btn>
     </v-card-actions>
   </v-card>

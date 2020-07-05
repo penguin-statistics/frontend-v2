@@ -15,11 +15,6 @@
 				"unrecognized": "Import Failed: Unable to recognize config file",
 				"success": "Successfully imported data for {amount} items"
 			}
-		},
-		"pwaPopup": {
-			"update": {
-				"skipWaitingTimeout": "Failed to apply changes: ServiceWorker timed out. Please refresh page and try again"
-			}
 		}
 	},
 	"ko": {
@@ -35,11 +30,6 @@
 			"import": {
 				"invalidJSON": "가져오지 못했습니다. 데이터 구문 분석 오류입니다. 입력값을 확인해 주세요.",
 				"success": "{amount}개 항목에 대한 데이터를 성공적으로 가져왔습니다."
-			}
-		},
-		"pwaPopup": {
-			"update": {
-				"skipWaitingTimeout": "변경 내용을 적용하지 못했습니다. 서비스가 시간 초과되었습니다. 페이지를 새로 고친 후 다시 시도하세요."
 			}
 		}
 	},
@@ -58,10 +48,22 @@
 				"unrecognized": "导入失败：无法识别此配置文件，请检查后重试",
 				"success": "导入成功：导入了 {amount} 个物品数据"
 			}
+		}
+	},
+	"ja": {
+		"clipboard": {
+			"error": "クリップボードに保存できませんでした。手動でコピーしてください",
+			"success": "クリップボードに保存しました"
 		},
-		"pwaPopup": {
-			"update": {
-				"skipWaitingTimeout": "更新失败：ServiceWorker 超时。请刷新页面重试"
+		"network": {
+			"error": "ネットワークエラー。インターネット接続をご確認の上もう一度お試しください"
+		},
+		"planner": {
+			"calculationError": "計算失敗：{error}",
+			"import": {
+				"invalidJSON": "インポート失敗：無効なJSONです。コードを確認して、もう一度お試しください",
+				"unrecognized": "インポート失敗：このコードは読み取れません。もう一度お試しください。",
+				"success": "インポート成功： {amount} アイテムデータがインポートされます"
 			}
 		}
 	}

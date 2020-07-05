@@ -185,7 +185,11 @@
       "requireExp": "경험치 획득 고려",
       "requireLmb": "용문폐 획득 고려"
     },
+    "reset": {
+      "name": "초기화"
+    },
     "actions": {
+      "_name": "데이터",
       "import": "가져오기",
       "export": "내보내기",
       "importExport": "@:(planner.actions.import)/@:(planner.actions.export)",

@@ -318,9 +318,9 @@
         "share": "Share Link"
       },
       "config": {
-        "_name": "Configuration File",
-        "share": "Share Configuration File",
-        "import": "Import from Configuration File"
+        "_name": "Configuration Code",
+        "share": "Share Configuration Code",
+        "import": "Import from Configuration Code"
       }
     },
     "have": "Have",

@@ -210,17 +210,38 @@
     }
   },
   "planner": {
+    "notices": {
+      "autoExistence": "ArkPlannerは、選択したサーバーで開いていないステージを自動的に非表示にします"
+    },
     "options": {
       "_name": "オプション",
       "byProduct": "加工副産物を考慮する",
       "requireExp": "大量の経験値が必要",
-      "requireLmb": "大量の龍門幣が必要"
+      "requireLmb": "大量の龍門幣が必要",
+      "excludeStage": {
+        "_name": "ステージ除外",
+        "title": "選ぶ",
+        "selected": "{stages} ステージ除外中"
+      }
+    },
+    "reset": {
+      "name": "リセット",
+      "dialog": {
+        "title": "ArkPlannerをリセット",
+        "subtitle": "すべてのデータや設定はリセットされます。続行しますか？"
+      }
     },
     "actions": {
+      "_name": "データ",
       "import": "インポート",
       "export": "エクスポート",
       "importExport": "@:(planner.actions.import)/@:(planner.actions.export)",
-      "calculate": "計算を行う"
+      "calculate": "計算を行う",
+      "config": {
+        "_name": "コンフィグレーション",
+        "share": "エクスポート",
+        "import": "インポート"
+      }
     },
     "have": "所持数",
     "need": "必要数",

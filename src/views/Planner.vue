@@ -52,7 +52,6 @@
       <v-dialog
         v-model="resetDialog"
         max-width="350px"
-        persistent
       >
         <template v-slot:activator="{ on }">
           <v-btn
