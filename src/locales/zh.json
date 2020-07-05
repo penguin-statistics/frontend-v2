@@ -47,6 +47,9 @@
         "dark": "总是使用暗色",
         "light": "总是使用亮色"
       }
+    },
+    "overline": {
+      "planner": "#ArkPlanner"
     }
   },
   "meta": {

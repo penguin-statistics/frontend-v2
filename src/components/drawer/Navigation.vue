@@ -3,6 +3,7 @@
     v-if="!route.children || route.meta.forceSingle"
     :key="route.name"
     :class="route.path === $route.path ? activeClass : ''"
+    :two-line="route.meta.twoLine"
     @click="navigate(route)"
   >
     <v-list-item-icon>
@@ -17,6 +18,12 @@
           mdi-open-in-new
         </v-icon>
       </v-list-item-title>
+      <v-list-item-subtitle
+        v-if="route.meta.twoLine"
+        class="overline"
+      >
+        {{ $t(route.meta.twoLine) }}
+      </v-list-item-subtitle>
     </v-list-item-content>
   </v-list-item>
   <v-list-group
