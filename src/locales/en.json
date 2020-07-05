@@ -47,6 +47,9 @@
         "dark": "Always Dark",
         "light": "Always Light"
       }
+    },
+    "overline": {
+      "planner": "#ArkPlanner"
     }
   },
   "meta": {

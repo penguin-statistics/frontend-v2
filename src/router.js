@@ -143,7 +143,8 @@ const router = new Router({
     component: Planner,
     meta: {
       icon: 'mdi-floor-plan',
-      i18n: 'menu.planner'
+      i18n: 'menu.planner',
+      twoLine: 'menu.overline.planner'
     }
   },
   {
