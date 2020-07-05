@@ -160,6 +160,10 @@ export default {
             "优化：忽略关卡选择器支持按种类、按关卡类别批量复选",
 
             "内部优化：Planner 分离组件、提升可维护性",
+          ],
+          hotfix: [
+            "修复：CN Mirror 继续使用本体服务 API Endpoint",
+            "移除：首页冗余的「API 文档」链接项"
           ]
         },
         {
