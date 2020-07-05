@@ -124,6 +124,7 @@ export default {
           version: "v3.3.0",
           date: "2020-07-31T08:00:00Z",
           changes: [
+            "将添加：掉落汇报自动同步至 Planner 功能",
             "将添加：数据导出功能",
             "将添加：关卡更多统计信息",
             "将添加：关卡更多操作选项",
@@ -131,15 +132,17 @@ export default {
           ]
         },
         {
-          future: true,
+          active: true,
           version: "v3.2.1",
-          date: "2020-07-17T05:00:00Z",
+          date: "2020-07-05T18:00:00Z",
           changes: [
-            "添加：掉落汇报自动同步至 Planner 功能"
+            "修复：CN Mirror 继续使用本体服务 API Endpoint",
+            "修复：部分 Planner 配置文件无法导入的问题",
+            "移除：首页冗余的「API 文档」链接项",
+            "添加：部分缺失的日文翻译",
           ],
         },
         {
-          active: true,
           version: "v3.2.0",
           date: "2020-07-04T05:00:00Z",
           changes: [
@@ -160,12 +163,6 @@ export default {
             "优化：忽略关卡选择器支持按种类、按关卡类别批量复选",
 
             "内部优化：Planner 分离组件、提升可维护性",
-          ],
-          hotfix: [
-            "修复：CN Mirror 继续使用本体服务 API Endpoint",
-            "修复：部分 Planner 配置文件无法导入的问题",
-            "移除：首页冗余的「API 文档」链接项",
-            "添加：全站数据一览的日文翻译"
           ]
         },
         {
