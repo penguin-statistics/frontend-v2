@@ -2,11 +2,11 @@
   <v-container
     fluid
     class="fill-height justify-center"
-    style="max-width: 1785px"
   >
     <v-row
       align="center"
       :dense="$vuetify.breakpoint.mdAndDown"
+      class="mx-0"
     >
       <v-col
         cols="12"
@@ -158,6 +158,6 @@ export default {
   height: 100%;
 }
   .card-translate-up {
-    transition: none
+    transition: box-shadow 225ms ease-out;
   }
 </style>

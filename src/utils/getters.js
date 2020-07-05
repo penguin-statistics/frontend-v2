@@ -119,7 +119,9 @@ Getters.zones = {
       zones = zones.filter(el => el["existence"][server]["exist"])
     }
 
-    zones = zones.map(el => {
+    zones = zones.slice().sort((a, b) => {
+      return a["zoneIndex"] - b["zoneIndex"]
+    }).map(el => {
       if (el.isActivity) {
         const existence = el["existence"][server]
 
@@ -190,6 +192,19 @@ Getters.period = {
     if (!period) return []
     return period.filter(el => existUtils.existence(el, false, server))
   },
+}
+
+Getters.siteStats = {
+  all () {
+    return store.getters["data/content"]({id: "stats"})
+  },
+  byKey(key) {
+    return this.all()[key].map(el => Object.assign({}, el)).map(el => {
+      el.stage = Getters.stages.byStageId(el.stageId);
+      el.zone = Getters.zones.byZoneId(el.stage.zoneId, false);
+      return el
+    })
+  }
 }
 
 export default Getters

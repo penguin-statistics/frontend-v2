@@ -34,6 +34,9 @@
         "dark": "Always Dark",
         "light": "Always Light"
       }
+    },
+    "overline": {
+      "planner": "ArkPlanner"
     }
   },
   "meta": {
@@ -135,7 +138,24 @@
         "lte": "최대 {quantity}가지의 아이템만이 드랍될 수 있습니다",
         "not": "{quantity}가지의 아이템이 드랍될 수 없습니다"
       }
-    }
+    },
+    "clear": "초기화",
+    "furniture": "럭키 드랍: {state}",
+    "name": "보고",
+    "submit": "제출",
+    "success": "성공적으로 제출되었습니다",
+    "unable": "제출 실패: ",
+    "undo": "제출 취소",
+    "undoSuccess": "성공적으로 취소되었습니다",
+    "gacha": "이 작전지역은 여러 개의 결과를 한 보고서에 제출할 수 있습니다.",
+    "notices": {
+      "rule_1": "한 번에 하나의 전투에 대한 보고서를 작성하여야 합니다, 제출 전에 입력 내용을 한번 더 확인해 주십시오.",
+      "rule_2": "드랍이 없는 경우에는, 아무것도 누르지 않은 채로 제출을 눌러 주십시오.",
+      "rule_3": "처음으로 클리어한 작전은 보고하지 마시고, 운이 좋았던 작전만 보고하지 마십시오 - 모든 드랍을 보고해 주십시오.",
+      "rule_4": "3성으로 클리어하여 주십시오.",
+      "rule_5": "중국 서버에서의 드랍만 보고하여 주십시오, 감사합니다."
+    },
+    "usage": "왼쪽 클릭시 증가하며, 오른쪽 클릭시 감소합니다"
   },
   "zone": {
     "name": "에피소드",
@@ -166,10 +186,13 @@
       "_name": "설정",
       "byProduct": "부산물 획득 고려",
       "requireExp": "경험치 획득 고려",
-      "requireLmb": "용문폐 획득 고려",
-      "foreignServer": "에피소드 6 제외"
+      "requireLmb": "용문폐 획득 고려"
+    },
+    "reset": {
+      "name": "초기화"
     },
     "actions": {
+      "_name": "데이터",
       "import": "가져오기",
       "export": "내보내기",
       "importExport": "@:(planner.actions.import)/@:(planner.actions.export)",
@@ -183,7 +206,7 @@
       "tabs": {
         "stages": "작전 지역 기준",
         "syntheses": "재료 가공 기준",
-        "values": "재료 등급 기준"
+        "values": "재료 이성 가치"
       },
       "lmb": "예상 용문폐 획득량",
       "sanity": "예상 이성 필요량",

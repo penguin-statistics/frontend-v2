@@ -5,12 +5,13 @@
     "name_line2": "データ統計処理部門"
   },
   "server": {
+    "name": "サーバー",
     "switch": "ゲームサーバー切替",
     "servers": {
-      "CN": "CN",
-      "US": "US",
-      "JP": "JP",
-      "KR": "KR"
+      "CN": "大陸版",
+      "US": "英語版",
+      "JP": "日本版",
+      "KR": "韓国版"
     }
   },
   "menu": {
@@ -19,7 +20,8 @@
     "stats": {
       "_name": "ドロップ率",
       "stage": "作戦別",
-      "item": "素材別"
+      "item": "素材別",
+      "advanced": "高度なクエリ"
     },
     "about": {
       "_name": "当サイトについて",
@@ -39,10 +41,13 @@
       "name": "設定",
       "themes": {
         "name": "テーマ変更",
-        "system": "Follow System",
-        "dark": "Always Dark",
-        "light": "Always Light"
+        "system": "システム設定に従う",
+        "dark": "常にダークモード",
+        "light": "常にライトモード"
       }
+    },
+    "overline": {
+      "planner": "ArkPlanner"
     }
   },
   "meta": {
@@ -144,7 +149,24 @@
         "lte": "最大 {quantity} 種類のアイテムが必要です",
         "not": "{quantity}種類のアイテムであってはなりません"
       }
-    }
+    },
+    "clear": "クリア",
+    "furniture": "家具ドロップ：{state}",
+    "name": "報告",
+    "submit": "送信",
+    "success": "送信成功",
+    "unable": "送信失敗：",
+    "undo": "送信キャンセル",
+    "undoSuccess": "キャンセルしました",
+    "gacha": "この操作を行うことでデータに複数の結果を反映させることが出来ます。",
+    "notices": {
+      "rule_1": "ここに追加する内容は1回でドロップした内容です。",
+      "rule_2": "素材がドロップしなかった場合は直接送信をクリックしてください。",
+      "rule_3": "初クリア時の報酬は報告しないでください。ドロップ結果が極端に良かったものだけを報告するのはご遠慮ください。",
+      "rule_4": "クリア時の評価が☆3である場合のみ報告してください。",
+      "rule_5": "大陸版のドロップデータのみをアップロードして下さい。ご協力ありがとうございます。"
+    },
+    "usage": "左クリックで個数増加、右クリックで個数減少"
   },
   "settings": {
     "category": {
@@ -185,25 +207,50 @@
     "name": "作戦",
     "apCost": "消費理性：{apCost}",
     "loots": {
-      "NORMAL_DROP": "通常ドロップ",
-      "EXTRA_DROP": "エクストラドロップ",
-      "SPECIAL_DROP": "スペシャルドロップ",
+      "NORMAL_DROP": "通常",
+      "EXTRA_DROP": "その他",
+      "SPECIAL_DROP": "レア",
       "FURNITURE": "家具"
+    },
+    "selector": {
+      "plannerExclude": "ステージ除外設定",
+      "excludeAll": "全て除外",
+      "includeAll": "全て含む"
     }
   },
   "planner": {
+    "notices": {
+      "autoExistence": "ArkPlannerは、選択したサーバーで開いていないステージを自動的に非表示にします"
+    },
     "options": {
       "_name": "オプション",
       "byProduct": "加工副産物を考慮する",
       "requireExp": "大量の経験値が必要",
       "requireLmb": "大量の龍門幣が必要",
-      "foreignServer": "第6章を計算に追加しません"
+      "excludeStage": {
+        "_name": "ステージ除外",
+        "title": "選ぶ",
+        "selected": "{stages} ステージ除外中"
+      }
+    },
+    "reset": {
+      "name": "リセット",
+      "dialog": {
+        "title": "ArkPlannerをリセット",
+        "subtitle": "すべてのデータや設定はリセットされます。続行しますか？"
+      }
     },
     "actions": {
+      "_name": "データ",
       "import": "インポート",
       "export": "エクスポート",
       "importExport": "@:(planner.actions.import)/@:(planner.actions.export)",
-      "calculate": "計算を行う"
+      "calculate": "計算を行う",
+      "config": {
+        "_name": "コンフィグレーション",
+        "share": "エクスポート",
+        "import": "インポート"
+      }
     },
     "have": "所持数",
     "need": "必要数",
@@ -213,7 +260,7 @@
       "tabs": {
         "stages": "ステージ",
         "syntheses": "素材加工",
-        "values": "素材等級"
+        "values": "素材理性価値"
       },
       "lmb": "推定獲得龍門幣",
       "sanity": "推定必要理性",

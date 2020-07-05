@@ -101,6 +101,7 @@
     },
     methods: {
       changeServer(serverId) {
+        this.$store.commit("planner/clearExcludes")
         this.$store.commit("dataSource/changeServer", serverId)
         this.$store.dispatch("data/fetch", false)
       }

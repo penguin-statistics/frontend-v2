@@ -1,6 +1,6 @@
 {
   "name": "penguin-stats-frontend",
-  "version": "3.0.1",
+  "version": "3.2.0",
   "private": true,
   "homepage": "https://github.com/penguin-statistics/frontend-v2#readme",
   "bugs": {
@@ -39,15 +39,17 @@
     "intl-collator": "^0.1.6",
     "js-cookie": "^2.2.1",
     "marked": "^1.0.0",
+    "pinyin-engine": "^1.1.0",
     "vue": "^2.6.10",
     "vue-analytics": "^5.22.1",
     "vue-i18n": "^8.0.0",
     "vue-router": "^3.0.3",
-    "vuetify": "^2.2.15",
+    "vuetify": "2.2.34",
     "vuex": "^3.0.1",
     "vuex-persistedstate": "^2.7.1"
   },
   "devDependencies": {
+    "@intlify/vue-i18n-loader": "^1.0.0",
     "@kazupon/vue-i18n-loader": "^0.3.0",
     "@mdi/font": "4.9.95",
     "@vue/cli-plugin-babel": "^3.9.0",
@@ -60,11 +62,12 @@
     "eslint": "^5.16.0",
     "eslint-plugin-vue": "^5.0.0",
     "eslint-plugin-vuetify": "^1.0.0-beta.5",
+    "husky": "^4.2.5",
     "sass": "^1.25.0",
     "sass-loader": "^8.0.2",
     "stylus": "^0.54.5",
     "stylus-loader": "^3.0.1",
-    "vue-cli-plugin-i18n": "^0.6.1",
+    "vue-cli-plugin-i18n": "^1.0.1",
     "vue-cli-plugin-vuetify": "^2.0.5",
     "vue-svg-inline-loader": "^1.5.0",
     "vue-template-compiler": "^2.6.10",
@@ -86,6 +89,11 @@
   "config": {
     "commitizen": {
       "path": "./node_modules/cz-conventional-changelog"
+    }
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "npm run lint"
     }
   }
 }

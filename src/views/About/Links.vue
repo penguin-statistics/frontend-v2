@@ -17,7 +17,8 @@
 				"materials": "Material Requirement Calculator",
 				"planner": "Planner",
 				"storage": "Inventory Management",
-				"walkthrough": "Walkthrough"
+        "walkthrough": "Walkthrough",
+        "map": "Map"
 			}
 		}
 	},
@@ -38,7 +39,8 @@
 				"materials": "素材必要数計算機",
 				"planner": "周回計画作成ツール",
 				"storage": "素材在庫管理",
-				"walkthrough": "ステージ攻略"
+        "walkthrough": "ステージ攻略",
+        "map": "Map"
 			}
 		}
 	},
@@ -59,7 +61,8 @@
 				"materials": "육성 재료 계산기",
 				"planner": "계획기",
 				"storage": "창고 관리기",
-				"walkthrough": "공략집"
+        "walkthrough": "공략집",
+        "map": "Map"
 			}
 		}
 	},
@@ -80,7 +83,8 @@
 				"materials": "材料需求计算",
 				"planner": "刷图规划",
 				"storage": "库存管理",
-				"walkthrough": "通关攻略"
+        "walkthrough": "通关攻略",
+        "map": "Map"
 			}
 		}
 	}
@@ -97,9 +101,7 @@
       sm="6"
       md="4"
     >
-      <v-card
-        class="link-card bkop-light elevation-0"
-      >
+      <v-card class="link-card bkop-light elevation-0">
         <v-card-title
           v-if="link.title"
           primary-title
@@ -241,6 +243,10 @@ export default {
             {
               name: "storage",
               color: "purple"
+            },
+            {
+              name: "map",
+              color: "teal"
             }
           ],
           url: "https://ark-nights.com"
@@ -262,7 +268,46 @@ export default {
               color: "grey"
             }
           ],
-          url: "https://arkonegraph.herokuapp.com/"
+          url: "https://aog.wiki/"
+        },
+        {
+          title: "PRTS",
+          features: [
+            {
+              name: "cn_wiki",
+              color: "blue-grey"
+            }
+          ],
+          url: "http://ak.mooncell.wiki/id/1"
+        },
+        {
+          title: "Kokodayo Arknights Data",
+          author: "odex",
+          features: [
+            {
+              name: "character",
+              color: "orange"
+            },
+            {
+              name: "enemy",
+              color: "black"
+            },
+            {
+              name: "map",
+              color: "teal"
+            }
+          ],
+          url: "https://ark-nights.com"
+        },
+        {
+          title: "ANWiki",
+          features: [
+            {
+              name: "jp_wiki",
+              color: "blue-grey"
+            }
+          ],
+          url: "https://wiki.gamerclub.jp/anwiki"
         },
         {
           title: "ゲームの果て",
@@ -286,31 +331,11 @@ export default {
             }
           ],
           url: "https://smartgamecap.net"
-        },
-        {
-          title: "PRTS",
-          features: [
-            {
-              name: "cn_wiki",
-              color: "blue-grey"
-            }
-          ],
-          url: "http://ak.mooncell.wiki/id/1"
-        },
-        {
-          title: "ANWiki",
-          features: [
-            {
-              name: "jp_wiki",
-              color: "blue-grey"
-            }
-          ],
-          url: "https://wiki.gamerclub.jp/anwiki"
         }
       ]
     };
   },
-  mounted () {
+  mounted() {
     anime({
       targets: '.link-card',
       translateY: [48, 0],

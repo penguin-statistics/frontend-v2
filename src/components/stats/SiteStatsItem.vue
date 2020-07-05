@@ -93,7 +93,7 @@
     },
     computed: {
       items() {
-        return this.data.map(el => {
+        return this.data.map(el => Object.assign({}, el)).map(el => {
           el.item = get.items.byItemId(el.itemId, false, false);
           return el
         })

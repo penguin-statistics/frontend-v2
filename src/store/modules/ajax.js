@@ -38,15 +38,11 @@ export default {
     }
   },
   getters: {
-    pending: state => {
-      return state.states.some(value => value.pending)
-    },
+    pending: state => state.states.some(value => value.pending),
     // finishedAll: state => {
     //   return state.states.every(value => !value.pending)
     // },
-    errors: state => {
-      return state.states.filter(value => !!value.error)
-    },
+    errors: state => state.states.filter(value => !!value.error),
     matrixPending: state => state.states.some(value => value.pending && value.id.includes("Matrix"))
   }
 };

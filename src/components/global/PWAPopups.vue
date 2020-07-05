@@ -8,14 +8,14 @@
 	},
 	"ja": {
 		"update": {
-			"refresh": "",
-			"success": ""
+			"refresh": "リロード",
+			"success": "Website Updated!"
 		}
 	},
 	"ko": {
 		"update": {
-			"refresh": "",
-			"success": ""
+			"refresh": "Refresh",
+			"success": "Website Updated!"
 		}
 	},
 	"zh": {

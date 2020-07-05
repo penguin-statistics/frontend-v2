@@ -25,6 +25,7 @@ export default new Vuetify({
         accent3: colors.blue.darken4,
 
         background: "#fff",
+        indigoBackground: "#fff",
         text: "#0e0e0e",
         textDarken: colors.grey.darken4
       },
@@ -34,6 +35,7 @@ export default new Vuetify({
         accent3: colors.blue.lighten3,
 
         background: colors.blueGrey.darken4,
+        indigoBackground: "#191d37",
         text: "#f0f0f0",
         textDarken: colors.grey.lighten3
       },

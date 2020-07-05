@@ -1,4 +1,5 @@
 import Console from "@/utils/Console";
+// import I18n from "@/mixins/I18n";
 
 export default {
   created () {
@@ -22,5 +23,16 @@ export default {
 
     // remove deprecated penguin-stats-cacheTTL (cacheUpdatedAt)
     localStorage.removeItem("penguin-stats-cacheTTL")
+
+    let settings = JSON.parse(localStorage.getItem("penguin-stats-settings"))
+    if (settings && settings["settings"] && settings["settings"]["excludedStages"]) {
+      delete settings["settings"]["excludedStages"]
+      localStorage.setItem("penguin-stats-settings", JSON.stringify(settings))
+    }
+
+
+    // if (this.$store.getters["settings/language"] === "zh") {
+    //   this.changeLocale("zh-CN")
+    // }
   }
 }

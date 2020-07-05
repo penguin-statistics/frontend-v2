@@ -1,14 +1,19 @@
 <template>
-  <div class="d-flex align-center">
+  <div
+    class="d-flex align-center planner-item"
+    :class="{'planner-item--dense': $vuetify.breakpoint.smAndDown}"
+  >
     <Item
       :ratio="ratio"
       :item="item"
       v-bind="$props"
-      class="mr-2"
+      class="planner-item__item"
       disable-tooltip
       disable-link
     />
-    {{ name }}
+    <span class="planner-item__name">
+      {{ name }}
+    </span>
   </div>
 </template>
 
@@ -18,7 +23,7 @@
   import Item from "@/components/global/Item";
 
   export default {
-    name: "ItemById",
+    name: "PlannerItem",
     components: {Item},
     props: {
       id: {
@@ -28,7 +33,7 @@
       ratio: {
         type: Number,
         default () {
-          return 0.4
+          return 0.7
         }
       }
     },
@@ -43,6 +48,18 @@
   }
 </script>
 
-<style scoped>
-
+<style scoped lang="scss">
+.planner-item {
+  &--dense {
+    flex-direction: column !important;
+    .planner-item__item {
+      margin-bottom: 4px;
+      margin-right: 0;
+    }
+  }
+  &__item {
+    margin-bottom: 0;
+    margin-right: 8px;
+  }
+}
 </style>

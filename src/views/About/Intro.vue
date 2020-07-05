@@ -84,7 +84,5 @@ export default {
 </script>
 
 <style scoped>
-.line-height-wide {
-  line-height: 1.8;
-}
+
 </style>

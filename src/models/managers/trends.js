@@ -6,10 +6,7 @@ const trends = new ObjectManager({
   api: {
     serverSensitive: true,
 
-    url: '/result/trends',
-    extraParams: {
-      "range_day": 60
-    }
+    url: '/result/trends'
   },
   transform: [
     (object) => {
