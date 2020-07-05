@@ -208,6 +208,11 @@
       "EXTRA_DROP": "その他",
       "SPECIAL_DROP": "レア",
       "FURNITURE": "家具"
+    },
+    "selector": {
+      "plannerExclude": "ステージ除外設定",
+      "excludeAll": "全て除外",
+      "includeAll": "全て含む"
     }
   },
   "planner": {
