@@ -9,8 +9,10 @@
         "qq_group": "QQ Group: "
       },
       "link": {
-        "api": "API Docs",
-        "docs": "Dev. Docs"
+        "docs": {
+          "title": "For Developers",
+          "subtitle": "Contains resources for developing on top of Penguin Statistics' data"
+        }
       }
     },
     "ja": {
@@ -20,6 +22,12 @@
         "contribute_1": "本プロジェクトは無償のオープンソースプロジェクトです",
         "frontend": "フロントエンド",
         "qq_group": "QQグループ："
+      },
+      "link": {
+        "docs": {
+          "title": "開発者向けのリソース",
+          "subtitle": "ドロップデータに基づいて開発するためのAPIドキュメントおよびその他のリソース"
+        }
       }
     },
     "ko": {
@@ -40,8 +48,10 @@
         "qq_group": "QQ群："
       },
       "link": {
-        "api": "API 文档",
-        "docs": "开发者中心"
+        "docs": {
+          "title": "开发者中心",
+          "subtitle": "包含供开发者于企鹅物流数据统计基础上开发更多工具的 API 文档等资源"
+        }
       }
     }
   }
@@ -148,7 +158,7 @@
       <v-col
         v-for="link in links"
         :key="link.title"
-        cols="6"
+        cols="12"
       >
         <BackdropCard
           hover
@@ -169,13 +179,17 @@
           </v-icon>
 
           <h2 class="heading my-1">
-            {{ $t(link.title) }} <v-icon
+            {{ $t(link.title) }}
+            <v-icon
               v-if="link.external"
               small
             >
               mdi-open-in-new
             </v-icon>
           </h2>
+          <h3 class="subtitle-2">
+            {{ $t(link.subtitle) }}
+          </h3>
         </BackdropCard>
       </v-col>
     </v-row>
@@ -200,16 +214,17 @@ export default {
         'analysis'
       ],
       links: [
-        {
-          url: "https://developer.penguin-stats.io/docs/",
-          icon: "mdi-api",
-          title: "link.api",
-          external: true
-        },
+        // {
+        //   url: "https://developer.penguin-stats.io/docs/",
+        //   icon: "mdi-api",
+        //   title: "link.api",
+        //   external: true
+        // },
         {
           url: "https://developer.penguin-stats.io",
           icon: "mdi-dev-to",
-          title: "link.docs",
+          title: "link.docs.title",
+          subtitle: "link.docs.subtitle",
           external: true
         }
       ]

@@ -33,6 +33,7 @@
       "links": "相互リンク",
       "bulletin": "お知らせ"
     },
+    "siteStats": "全サイト統計データ",
     "planner": "周回計画作成ツール",
     "v1": "旧バージョン",
     "refreshData": "データ更新",
@@ -89,7 +90,41 @@
       "times": "サンプル数",
       "quantity": "ドロップ数",
       "percentage": "ドロップ率",
-      "apPPR": "１個あたりの必要期待理性数"
+      "apPPR": "１個あたりの必要期待理性数",
+      "timeRange": "期間"
+    },
+    "timeRange": {
+      "inBetween": "{0} から {1} まで",
+      "toPresent": "{date} から現在まで",
+      "endsAt": "{date} 以前",
+      "unknown": "不明",
+      "notSelected": "（選択されていない）"
+    },
+    "trends": {
+      "name": "歴史ドロップデータ",
+      "set": {
+        "rate": "ドロップ率",
+        "sample": "サンプル数",
+        "drops": "ドロップ数"
+      }
+    },
+    "lastUpdated": "最終更新日時： {date}",
+    "site": {
+      "viewMore": "さらに詳しく",
+      "total": {
+        "sanity": "すべての報告で消費された理性",
+        "report": "総報告数",
+        "items": "総ドロップ数"
+      },
+      "stages": "ステージサンプル数ランキング",
+      "items": "アイテムドロップ数ランキング",
+      "all": "全期間",
+      "24hr": "過去24時間",
+      "generating": {
+        "title": "Generating Site Statistics...",
+        "subtitle": "Neural Network Message: Due to high amount of data, site statistics need up to 5 minutes to calculate. Please come back later.",
+        "refresh": "Refresh Site Statistics"
+      }
     }
   },
   "contribute": {
