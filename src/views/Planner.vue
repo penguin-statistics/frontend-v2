@@ -19,7 +19,7 @@
       align="center"
     >
       <span class="title">
-        数据
+        {{ $t('planner.actions._name') }}
       </span>
       <v-divider
         vertical
@@ -146,7 +146,7 @@
     >
       <span class="title">
         <!--        {{ $t('planner.options._name') }}-->
-        设置
+        {{ $t('planner.options._name') }}
       </span>
       <v-divider
         vertical
@@ -182,7 +182,7 @@
       align="center"
     >
       <span class="title">
-        排除
+        {{ $t('planner.options.excludeStage._name') }}
       </span>
       <v-divider
         vertical
@@ -194,13 +194,16 @@
       >
         <template v-slot:activator="{ on }">
           <v-btn
-            class="mr-2"
+            class="mr-2 align-center"
             v-on="on"
           >
             <v-icon left>
               mdi-cube
             </v-icon>
-            {{ $t('planner.options.excludeStage') }}
+            {{ $t('planner.options.excludeStage.title') }}
+            <small class="hidden-sm-and-up ml-1">
+              {{ excludes.length ? `(&times;${excludes.length})` : "" }}
+            </small>
           </v-btn>
         </template>
         <MultiStageSelector
@@ -219,7 +222,7 @@
           mdi-cancel
         </v-icon>
         <span>
-          {{ `已排除 ${excludes.length} 关` }}
+          {{ $t('planner.options.excludeStage.selected', {stages: excludes.length}) }}
         </span>
       </v-chip>
     </v-row>

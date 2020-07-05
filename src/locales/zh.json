@@ -293,7 +293,11 @@
       "byProduct": "考虑合成副产物",
       "requireExp": "大量需求经验",
       "requireLmb": "大量需求龙门币",
-      "excludeStage": "选定计算排除关卡"
+      "excludeStage": {
+        "_name": "计算排除",
+        "title": "选择",
+        "selected": "已排除 {stages} 关"
+      }
     },
     "reset": {
       "name": "重置",
@@ -303,6 +307,7 @@
       }
     },
     "actions": {
+      "_name": "数据",
       "import": "导入",
       "export": "导出",
       "importExport": "@:(planner.actions.import)/@:(planner.actions.export)",
@@ -439,7 +444,7 @@
   "attributions": {
     "material": {
       "title": "网站内容声明",
-      "content": "企鹅物流数据统计网站内所使用的（包括但不限于）游戏图片、动画、音频、文本原文等作品，其目的仅为更好地反映游戏内对应元素、增强用户体验，相关作品之版权仍属于上海鹰角网络科技有限公司及其关联公司，即鹰角网络游戏软件和/或鹰角网络游戏服务的提供方。"
+      "content": "企鹅物流数据统计网站内所使用的游戏资源（包括但不限于：游戏图片、动画、音频、文本原文或其转译版本等），其目的仅为更好地反映游戏内对应元素、增强用户体验，相关作品之版权仍属于上海鹰角网络科技有限公司和/或其关联公司，即鹰角网络游戏软件和/或鹰角网络游戏服务的提供方（包括但不限于：YOSTAR (HONG KONG) LIMITED, 株式会社Yostar, YOSTAR LIMITED, 龍成網路 等）。"
     },
     "source": {
       "title": "开源许可列表"

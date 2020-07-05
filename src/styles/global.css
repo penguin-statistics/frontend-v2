@@ -481,6 +481,24 @@
     position: absolute !important;
 }
 
+.clickable-hover:before {
+    border-radius: inherit;
+    bottom: 0;
+    color: inherit;
+    content: "";
+    left: 0;
+    opacity: 0;
+    pointer-events: none;
+    position: absolute;
+    right: 0;
+    top: 0;
+    transition: opacity .2s cubic-bezier(.4,0,.6,1);
+    background-color: currentColor;
+}
+.clickable-hover:hover:before {
+    opacity: .08;
+}
+
 @media (max-width: 380px) {
     .col-xs-1-2 {
         -webkit-box-flex: 0 !important;

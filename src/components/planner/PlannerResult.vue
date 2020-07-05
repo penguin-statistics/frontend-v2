@@ -142,7 +142,7 @@
                   <div class="title d-flex justify-center">
                     <span
                       v-ripple
-                      class="font-weight-bold headline d-flex align-center cursor-pointer v-btn"
+                      class="font-weight-bold headline d-flex align-center cursor-pointer card-item-title__clickable clickable-hover"
                       style="margin-left: -8px; margin-top: -8px; padding: 4px 8px; border-radius: 4px;"
                       @click="redirectStage(stage.stage)"
                     >
@@ -216,8 +216,7 @@
                   <div class="title d-flex justify-start">
                     <span
                       v-ripple
-                      class="font-weight-bold headline d-flex align-center cursor-pointer v-btn"
-                      style="margin-left: -8px; margin-top: -8px; padding: 4px 8px; border-radius: 4px;"
+                      class="font-weight-bold headline d-flex align-center cursor-pointer card-item-title__clickable clickable-hover"
                       @click="redirectItem(synthesis.target.item.itemId)"
                     >
                       {{ synthesis.target.name }}
@@ -233,7 +232,7 @@
                       :item="synthesis.target.item"
                       disable-tooltip
                       :ratio="0.5"
-                      style="margin-top: -4px"
+                      style="margin-top: -4px; flex: 0 0 30px"
                     />
                   </div>
                   <div class="display-1 text-center monospace font-weight-bold my-2">
@@ -389,5 +388,14 @@
   .card-item {
     border: 2px solid #4350b0;
     height: 100%
+  }
+  .card-item-title__clickable {
+    margin-left: -8px;
+    margin-top: -8px;
+    padding: 4px 8px;
+    border-radius: 4px;
+    text-transform: initial;
+    flex: inherit;
+    position: relative;
   }
 </style>

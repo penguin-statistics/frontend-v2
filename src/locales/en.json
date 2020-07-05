@@ -293,7 +293,11 @@
       "byProduct": "Consider by-products",
       "requireExp": "Large demand for EXP",
       "requireLmb": "Large demand for LMD",
-      "excludeStage": "Exclude Stages"
+      "excludeStage": {
+        "_name": "Excludes",
+        "title": "Select",
+        "selected": "Excluded {stages} stages"
+      }
     },
     "reset": {
       "name": "Reset",
@@ -303,6 +307,7 @@
       }
     },
     "actions": {
+      "_name": "Data",
       "import": "Import",
       "export": "Export",
       "importExport": "@:(planner.actions.import)/@:(planner.actions.export)",
@@ -435,7 +440,7 @@
   "attributions": {
     "material": {
       "title": "Content Credits",
-      "content": "Penguin Statistics utilizes (including but not limited to) pictures, animations, audio, original text and other works, its purpose is only to better reflect the corresponding elements in the game, enhance the user experience, the copyright of related works still belongs to Shanghai Yingjiao Network Technology Co., Ltd. and its affiliates, namely the provider of Yingjiao Online Game Software and/or Yingjiao Online Game Service."
+      "content": "Penguin Statistics utilizes (including but not limited to) pictures, animations, audio, original text and other works for the purpose of better reflecting the corresponding elements in the game and enhance the user experience. The copyright of such works belongs to the provider of the game, Shanghai Hypergryph Network Technology Co., Ltd. and/or its affiliates, including but not limited to YOSTAR (HONG KONG) LIMITED, 株式会社Yostar, YOSTAR LIMITED, 龍成網路, etc,."
     },
     "source": {
       "title": "Open Source Licenses"
