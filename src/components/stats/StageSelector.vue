@@ -247,8 +247,9 @@
         return this.$vuetify.breakpoint.xsOnly
       },
       categorizedZones() {
-        const categoriesSet = [["ACTIVITY_OPEN", "MAINLINE"], ["WEEKLY"]];
-        if (!this.hideClosed) categoriesSet[1].push("ACTIVITY_CLOSED");
+        const categoriesSet =
+          this.hideClosed ? [["ACTIVITY_OPEN", "MAINLINE"], ["WEEKLY"]]
+                          : [["MAINLINE", "WEEKLY"], ["ACTIVITY_OPEN", "ACTIVITY_CLOSED"]];
         const result = [[], []];
         for (const [index, categories] of categoriesSet.entries()) {
           for (const category of categories) {
