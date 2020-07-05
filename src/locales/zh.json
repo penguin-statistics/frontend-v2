@@ -49,7 +49,7 @@
       }
     },
     "overline": {
-      "planner": "#ArkPlanner"
+      "planner": "ArkPlanner"
     }
   },
   "meta": {
