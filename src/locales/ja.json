@@ -45,6 +45,9 @@
         "dark": "常にダークモード",
         "light": "常にライトモード"
       }
+    },
+    "overline": {
+      "planner": "ArkPlanner"
     }
   },
   "meta": {
@@ -257,7 +260,7 @@
       "tabs": {
         "stages": "ステージ",
         "syntheses": "素材加工",
-        "values": "素材等級"
+        "values": "素材理性価値"
       },
       "lmb": "推定獲得龍門幣",
       "sanity": "推定必要理性",

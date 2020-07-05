@@ -34,6 +34,9 @@
         "dark": "Always Dark",
         "light": "Always Light"
       }
+    },
+    "overline": {
+      "planner": "ArkPlanner"
     }
   },
   "meta": {
@@ -203,7 +206,7 @@
       "tabs": {
         "stages": "작전 지역 기준",
         "syntheses": "재료 가공 기준",
-        "values": "재료 등급 기준"
+        "values": "재료 이성 가치"
       },
       "lmb": "예상 용문폐 획득량",
       "sanity": "예상 이성 필요량",

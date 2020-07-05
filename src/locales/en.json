@@ -35,7 +35,7 @@
       "attributions": "Attributions"
     },
     "siteStats": "Statistics at a Glance",
-    "planner": "ArkPlanner",
+    "planner": "Farming Strategy Planner",
     "v1": "Visit Old Version",
     "refreshData": "Reload",
     "languages": "Language",
@@ -334,7 +334,7 @@
       "tabs": {
         "stages": "Stages",
         "syntheses": "Syntheses",
-        "values": "Values"
+        "values": "Material Sanity Value"
       },
       "lmb": "Estimated LMD income",
       "sanity": "Estimated Sanity required",
