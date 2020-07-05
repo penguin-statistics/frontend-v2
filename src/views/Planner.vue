@@ -64,8 +64,8 @@
             {{ $t('planner.reset.name') }}
           </v-btn>
         </template>
-        <v-card class="slash-strip--danger">
-          <v-card-title class="headline">
+        <v-card>
+          <v-card-title class="headline slash-strip--danger mb-4">
             <v-icon left>
               mdi-alert-circle
             </v-icon>
@@ -75,7 +75,7 @@
             {{ $t('planner.reset.dialog.title') }}
           </v-card-title>
 
-          <v-card-text>
+          <v-card-text class="subtitle-1">
             {{ $t('planner.reset.dialog.subtitle') }}
           </v-card-text>
 
@@ -91,6 +91,7 @@
             <v-spacer />
             <v-btn
               color="error"
+              depressed
               @click="confirmReset"
             >
               {{ $t('meta.dialog.confirm') }}

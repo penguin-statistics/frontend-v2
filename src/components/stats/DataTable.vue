@@ -264,12 +264,6 @@
         expandTrends: false
       }
     },
-    created () {
-      document.addEventListener('copy', this.manipulateCopy);
-    },
-    beforeDestroy() {
-      document.removeEventListener('copy', this.manipulateCopy)
-    },
     computed: {
       ...mapGetters('ajax', ['matrixPending']),
       headers() {
@@ -341,6 +335,12 @@
       strings () {
         return strings
       }
+    },
+    created () {
+      document.addEventListener('copy', this.manipulateCopy);
+    },
+    beforeDestroy() {
+      document.removeEventListener('copy', this.manipulateCopy)
     },
     methods: {
       manipulateCopy(event) {
