@@ -109,7 +109,7 @@
     },
     data() {
       return {
-        states: {}
+        // states: {}
       }
     },
     computed: {
@@ -166,14 +166,16 @@
         }
 
         return statuses
-      }
-    },
-    created () {
-      for (const stage of get.stages.all()) {
-        if (stage.isOutdated) continue;
-        // if found, means user has explicitly excluded this stage. set false. otherwise true.
-        // this.value refers to the parent v-model value
-        this.$set(this.states, stage.stageId, !this.value.find(el => el === stage.stageId))
+      },
+      states () {
+        const states = {};
+        for (const stage of get.stages.all()) {
+          if (stage.isOutdated) continue;
+          // if found, means user has explicitly excluded this stage. set false. otherwise true.
+          // this.value refers to the parent v-model value
+          this.$set(states, stage.stageId, !this.value.find(el => el === stage.stageId))
+        }
+        return states
       }
     },
     methods: {

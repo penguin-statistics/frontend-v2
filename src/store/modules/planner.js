@@ -1,4 +1,6 @@
+import Vue from "vue";
 export default {
+
   namespaced: true,
   state: {
     items: [],
@@ -21,10 +23,11 @@ export default {
       state.excludes = excludes
     },
     clearExcludes (state) {
-      state.excludes = []
+      Vue.set(state, "excludes", [])
     }
   },
   getters: {
-    config: state => state
+    config: state => state,
+    excludes: state => state.excludes
   }
 };

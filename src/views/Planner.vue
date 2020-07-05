@@ -317,7 +317,7 @@
       ...mapGetters("dataSource", ["server"]),
       excludes: {
         get () {
-          return this.$store.getters["planner/config"].excludes
+          return this.$store.getters["planner/excludes"]
         },
         set (v) {
           this.$store.commit("planner/changeExcludes", v)
