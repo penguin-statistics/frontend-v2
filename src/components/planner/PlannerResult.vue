@@ -38,7 +38,7 @@
             </v-list-item-icon>
             <v-list-item-content>
               <v-list-item-title class="monospace">
-                {{ parseAmount(result.gold.toLocaleString()) }}
+                {{ parseTimes(result.gold.toLocaleString()) }}
               </v-list-item-title>
               <v-list-item-subtitle>
                 {{ $t('planner.calculation.lmb') }}
@@ -59,7 +59,7 @@
             </v-list-item-icon>
             <v-list-item-content>
               <v-list-item-title class="monospace">
-                {{ parseAmount(result.cost) }}
+                {{ parseTimes(result.cost) }}
               </v-list-item-title>
               <v-list-item-subtitle>
                 {{ $t('planner.calculation.sanity') }}
@@ -80,7 +80,7 @@
             </v-list-item-icon>
             <v-list-item-content>
               <v-list-item-title class="monospace">
-                {{ parseAmount(result.exp) }} EXP
+                {{ parseTimes(result.exp) }} EXP
               </v-list-item-title>
               <v-list-item-subtitle>
                 {{ $t('planner.calculation.exp') }}
@@ -158,7 +158,7 @@
                     <small style="margin-top: -4px">#{{ index + 1 }}</small>
                   </div>
                   <div class="display-1 text-center monospace font-weight-bold my-2">
-                    {{ parseAmount(stage.count) }} <small class="title">{{ $t('planner.calculation.times') }}</small>
+                    {{ parseTimes(stage.count) }} <small class="title">{{ $t('planner.calculation.times') }}</small>
                   </div>
                   <div>
                     <div
@@ -175,7 +175,7 @@
                         color="indigo"
                         :offset-x="24"
                         :offset-y="20"
-                        :content="`×${material.value}`"
+                        :content="`×${parseAmount(material.value)}`"
                       >
                         <Item
                           :item="material.item"
@@ -236,7 +236,7 @@
                     />
                   </div>
                   <div class="display-1 text-center monospace font-weight-bold my-2">
-                    &times;{{ parseAmount(synthesis.count) }}
+                    &times;{{ parseTimes(synthesis.count) }}
                   </div>
                   <div
                     v-for="item in synthesis.items"
@@ -252,7 +252,7 @@
                       color="secondary"
                       :offset-x="24"
                       :offset-y="20"
-                      :content="`×${item.value}`"
+                      :content="`×${parseAmount(item.value)}`"
                     >
                       <Item
                         :item="item.item"
@@ -298,7 +298,7 @@
                       color="secondary"
                       :offset-x="24"
                       :offset-y="20"
-                      :content="`${item.value}`"
+                      :content="parseAmount(item.value)"
                     >
                       <Item
                         :item="item.item"
@@ -377,8 +377,11 @@
           }
         })
       },
-      parseAmount (num) {
+      parseTimes (num) {
         return Math.ceil(parseFloat(num)).toLocaleString()
+      },
+      parseAmount (num) {
+        return parseFloat(num).toLocaleString()
       }
     },
   }
