@@ -67,11 +67,11 @@ export default {
               Console.info("PlannerImport", "one of the item data is invalid. not importing this and continue to the next one (reason: no id or name): ", index, item)
               continue
             }
-            const item = get.items.byName(item.name);
+            const gotItem = get.items.byName(item.name);
             convertedItems.push({
-              id: item.itemId,
-              need: item.need,
-              have: item.have
+              id: gotItem.itemId,
+              need: gotItem.need,
+              have: gotItem.have
             })
           }
         }
