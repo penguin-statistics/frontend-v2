@@ -164,7 +164,8 @@ export default {
           hotfix: [
             "修复：CN Mirror 继续使用本体服务 API Endpoint",
             "修复：部分 Planner 配置文件无法导入的问题",
-            "移除：首页冗余的「API 文档」链接项"
+            "移除：首页冗余的「API 文档」链接项",
+            "添加：全站数据一览的日文翻译"
           ]
         },
         {
