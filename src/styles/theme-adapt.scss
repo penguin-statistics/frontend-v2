@@ -1,0 +1,78 @@
+
+// Fix the :( scroll bar ONLY on windows.
+
+.platform--windows {
+  &.vuetify-theme--dark {
+    & ::-webkit-scrollbar {
+      background-color: #202324;
+      color: #aba499;
+      width: 6px;
+    }
+    & ::-webkit-scrollbar-thumb {
+      background-color: #5a5e62;
+    }
+    & ::-webkit-scrollbar-thumb:hover {
+      background-color: #626a6e;
+    }
+    & ::-webkit-scrollbar-thumb:active {
+      background-color: #484e51;
+    }
+    & ::-webkit-scrollbar-corner {
+      background-color: #222526;
+    }
+    & * {
+      scrollbar-color: #202324 #454a4d;
+    }
+  }
+
+  &.vuetify-theme--light {
+    & ::-webkit-scrollbar {
+      background-color: #aba499;
+      color: #202324;
+      width: 6px;
+    }
+    & ::-webkit-scrollbar-thumb {
+      background-color: #5a5e62;
+    }
+    & ::-webkit-scrollbar-thumb:hover {
+      background-color: #626a6e;
+    }
+    & ::-webkit-scrollbar-thumb:active {
+      background-color: #484e51;
+    }
+    & ::-webkit-scrollbar-corner {
+      background-color: #222526;
+    }
+    & * {
+      scrollbar-color: #c2cfd6 #ddebf1;
+    }
+  }
+}
+
+.vuetify-theme--dark {
+  input:-webkit-autofill,
+  textarea:-webkit-autofill,
+  select:-webkit-autofill {
+    background-color: #555b00 !important;
+    color: #e8e6e3 !important;
+  }
+  ::selection {
+    background-color: #004daa !important;
+    color: #e8e6e3 !important;
+  }
+  ::-moz-selection {
+    background-color: #004daa !important;
+    color: #e8e6e3 !important;
+  }
+}
+
+.vuetify-theme--light {
+  ::selection {
+    background-color: #b3d4fc !important;
+    color: #000 !important;
+  }
+  ::-moz-selection {
+    background-color: #b3d4fc !important;
+    color: #000 !important;
+  }
+}
