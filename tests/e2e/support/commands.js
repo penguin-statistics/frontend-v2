@@ -10,9 +10,9 @@
 //
 //
 // -- This is a parent command --
-Cypress.Commands.add("navigate", (route) => {
-
-})
+// Cypress.Commands.add("navigate", (route) => {
+//
+// })
 //
 //
 // -- This is a child command --
