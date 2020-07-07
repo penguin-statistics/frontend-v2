@@ -93,6 +93,15 @@ class ObjectManager {
    */
   async refresh(forced = false) {
     const context = this;
+
+    if (this.api.requireAuthorization && !store.getters["auth/loggedIn"]) {
+      return store.commit("data/storeData", {
+        name: context.name,
+        value: [],
+        server: this.api.serverSensitive ? context.server : "_shared"
+      });
+    }
+
     if (!forced && context.cacheValid) {
       // valid cache
       Console.debug("ObjectManager", "cache: valid. id:",

@@ -15,6 +15,7 @@ import * as Integrations from '@sentry/integrations';
 import { Integrations as ApmIntegrations } from '@sentry/apm';
 import mirror from "@/utils/mirror";
 import '@/components/functional'
+import debugConditioner from "@/utils/debugConditioner";
 
 if (!window.Intl) require("intl-collator")
 
@@ -22,7 +23,7 @@ Vue.config.productionTip = false;
 
 const production = process.env.NODE_ENV === 'production';
 
-if (production) {
+if (production && !debugConditioner.disableSentry) {
   Sentry.init({
     dsn: 'https://9636aaa824a744f98a619df0aaabba00@sentry.io/1536764',
     integrations: [
@@ -83,9 +84,10 @@ if (production) {
       /metrics\.itunes\.apple\.com\.edgesuite\.net\//i
     ]
   });
-} else {
-  Vue.config.performance = true;
 }
+
+Vue.config.performance = debugConditioner.performance;
+Vue.config.devtools = debugConditioner.devtools;
 
 const googleAnalyticsID = mirror.cn.isCurrent() ? 'UA-142226262-4' : 'UA-142226262-1'
 
