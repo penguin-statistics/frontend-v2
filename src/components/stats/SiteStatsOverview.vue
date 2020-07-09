@@ -46,7 +46,6 @@
         return stats["totalStageTimes_24h"]
           .map(el => el.times)
           .reduce((a, b) => a + b, 0)
-          .toLocaleString()
       }
     },
     watch: {
@@ -67,7 +66,10 @@
           duration: 1500,
           round: 1,
           easing: 'easeOutQuint',
-          delay: 1500
+          delay: 1500,
+          complete: function () {
+            self.$refs["totalReportsNum"].innerText = newValue.toLocaleString();
+          }
         })
       }
     },
