@@ -168,7 +168,7 @@
     font-family: 'ヒラギノ角ゴ ProN' , 'Hiragino Kaku Gothic ProN' , 'ヒラギノ明朝 ProN', 'ヒラギノ角ゴ Pro W3', 'Hiragino Kaku Gothic Pro', 'Osaka', 'メイリオ', 'Meiryo', 'ＭＳ Ｐゴシック', 'MS PGothic', 'Helvetica Neue', 'Helvetica', Arial, sans-serif;
 }
 .lang-ko .force-lang-font, .lang-ko {
-    font-family: 'Apple SD Gothic Neo', 'NanumBarunGothic', '맑은 고딕', 'Malgun Gothic', '굴림', 'Gulim', '돋움', 'Dotum', 'Helvetica Neue', 'Helvetica', Arial, sans-serif';
+    font-family: 'Apple SD Gothic Neo', 'NanumBarunGothic', '맑은 고딕', 'Malgun Gothic', '굴림', 'Gulim', '돋움', 'Dotum', 'Helvetica Neue', 'Helvetica', Arial, sans-serif;
 }
 .force-not-lang-font {
     font-family: Roboto, sans-serif!important
