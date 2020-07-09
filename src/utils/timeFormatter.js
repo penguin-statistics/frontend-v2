@@ -34,8 +34,13 @@ export default {
     dayjs.locale(i18n.locale)
     return dayjs
   },
-  isOutdated(rangeEnd) {
-    return dayjs().isAfter(rangeEnd)
+  isOutdated(rangeStart, rangeEnd) {
+    return dayjs().isBefore(rangeStart) || dayjs().isAfter(rangeEnd)
+  },
+  checkTimeValid(rangeStart, rangeEnd) {
+    if (dayjs().isBefore(rangeStart)) return -1  // not yet arrived
+    if (dayjs().isAfter(rangeEnd)) return 1  // already outdated
+    return 0 // OK
   },
   dates (times, includeTime=true) {
     times = times.map(ts => {
