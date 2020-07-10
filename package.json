@@ -1,29 +1,19 @@
 {
   "name": "penguin-stats-frontend",
-  "version": "3.2.1",
+  "version": "3.2.2",
   "private": true,
-  "homepage": "https://github.com/penguin-statistics/frontend-v2#readme",
-  "bugs": {
-    "url": "https://github.com/penguin-statistics/frontend-v2/issues"
-  },
-  "license": "MIT",
-  "author": "All Contributors <*@*.*> (https://github.com/*)",
-  "contributors": [
-    "AlvISs_Reimu <alvissreimu@gmail.com> (https://github.com/AlvISsReimu)",
-    "Galvin Gao <me@galvingao.com> (https://github.com/GalvinGao)",
-    "Asahi <asahi@alpgo.cc> (https://github.com/AsahiLuna)",
-    "Blealtan <blealtan@outlook.com> (https://github.com/Blealtan)"
-  ],
+  "author": "Penguin Statistics Contributors <contributors@penguin-stats.io> (https://github.com/orgs/penguin-statistics/people)",
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "npx --max_old_space_size=4096 vue-cli-service build --modern",
-    "build:single": "npx --max_old_space_size=4096 vue-cli-service build",
+    "test:e2e": "vue-cli-service test:e2e",
     "lint": "vue-cli-service lint",
+    "build:single": "npx --max_old_space_size=4096 vue-cli-service build",
     "i18n:report": "vue-cli-service i18n:report --src './src/**/*.?(js|vue)' --locales './src/locales/**/*.json'",
-    "serveDist": "serve -c build/serve.json",
     "preview": "yarn build && yarn serveDist",
     "preview:single": "yarn build:single && yarn serveDist",
-    "release": "standard-version"
+    "release": "standard-version",
+    "serveDist": "serve -c build/serve.json"
   },
   "dependencies": {
     "@babel/plugin-transform-modules-commonjs": "^7.8.3",
@@ -54,7 +44,7 @@
     "@mdi/font": "4.9.95",
     "@vue/cli-plugin-babel": "^3.9.0",
     "@vue/cli-plugin-eslint": "^3.9.0",
-    "@vue/cli-service": "^3.9.0",
+    "@vue/cli-service": "^4.4.6",
     "axios": "^0.19.0",
     "babel-eslint": "^10.0.1",
     "browserslist-ga-export": "^2.0.0",
@@ -86,14 +76,25 @@
     "last 5 versions",
     "defaults"
   ],
+  "bugs": {
+    "url": "https://github.com/penguin-statistics/frontend-v2/issues"
+  },
   "config": {
     "commitizen": {
       "path": "./node_modules/cz-conventional-changelog"
     }
   },
+  "contributors": [
+    "AlvISs_Reimu <alvissreimu@gmail.com> (https://github.com/AlvISsReimu)",
+    "Galvin Gao <me@galvingao.com> (https://github.com/GalvinGao)",
+    "Asahi <asahi@alpgo.cc> (https://github.com/AsahiLuna)",
+    "Blealtan <blealtan@outlook.com> (https://github.com/Blealtan)"
+  ],
+  "homepage": "https://github.com/penguin-statistics/frontend-v2#readme",
   "husky": {
     "hooks": {
       "pre-commit": "npm run lint"
     }
-  }
+  },
+  "license": "MIT"
 }

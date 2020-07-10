@@ -1,4 +1,5 @@
 import * as Sentry from "@sentry/browser";
+import debugConditioner from "@/utils/debugConditioner";
 
 function reportSentry(severity, component, contents) {
   Sentry.withScope(scope => {
@@ -35,13 +36,17 @@ class Console {
    */
   static _render (level, component, ...content) {
     const PROD_IGNORE = ["debug"];
-    if (process.env.NODE_ENV === "production" && (PROD_IGNORE.includes(level))) return;
+    if (
+      process.env.NODE_ENV === "production" &&
+      (PROD_IGNORE.includes(level)) &&
+      !debugConditioner.fullConsole
+    ) return;
     // const now = new Date();
     // const date = `${now.getDate()} ${now.getHours()}:${now.getMinutes()}:${now.getSeconds()}.${now.getMilliseconds()}`;
 
     let prefix;
 
-    if (process.env.NODE_ENV !== "production" || window["__penguin_stats_debug__"]) {
+    if (process.env.NODE_ENV !== "production" || debugConditioner.colorfulConsole) {
       prefix = [
         `%c${level}%c${component}`,
         "background: #FF9800; color: #000; padding: 2px 4px; border-radius: 4px; margin-right: 4px; font-weight: 900; font-size: 10px;",

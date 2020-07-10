@@ -1,4 +1,5 @@
 import store from '@/store'
+import validator from "@/utils/validator";
 
 export default {
   defaultAjaxHooks: {
@@ -15,5 +16,11 @@ export default {
         }
       )
     }
-  }
+  },
+  defaultValidator (data) {
+    return validator.all(
+      validator.isArray(data),
+      validator.notEmptyArray(data)
+    )
+  },
 }

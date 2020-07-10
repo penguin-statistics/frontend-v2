@@ -735,30 +735,34 @@ export default {
       }
 
       // loop the candidate results that user provided
-      for (const result of this.results) {
+      for (const dropInfo of this.dropInfos.item) {
+        const record = this.results.find(el => el.itemId === dropInfo.itemId && el.dropType === dropInfo.dropType) || {...dropInfo, quantity: 0}
+
         // generate rules. rules: Function[]; limitation: the bounds
-        const {rules, limitation} = this.generateVerificationRule("item", result)
+        const {rules, limitation} = this.generateVerificationRule("item", dropInfo)
 
         if (limitation === null) return {
           error: "EMPTY_RULE",
           ...nullValidation
         }
 
-        const quantity = result.quantity;
+        const quantity = record.quantity;
 
         // execute validation rules.
         const [validation, extras] = validate(rules, quantity);
+
+        // console.log("generated & executed", dropInfo, "->", {rules, limitation, validation, extras})
 
         // if validation fails on a rule
         if (validation !== true) {
           // calculate the outlier rate based on the bounds and current value
           // e.g. [0, 3), 6: will get 1 (outlier value 100%)
-          const rate = calculateOutlierRate(limitation, result.quantity);
+          const rate = calculateOutlierRate(limitation, record.quantity);
 
           // store this outlier
           itemOutliers.push({
-            itemId: result.itemId,
-            type: result.dropType,
+            itemId: dropInfo.itemId,
+            type: dropInfo.dropType,
             quantity,
             limitation,
             rate,
@@ -983,6 +987,7 @@ export default {
       // greater than or equal to
       const gte = (value) => {
         return (compare) => {
+          // console.log("executing rule: gte with compare", compare, "should", value)
           const response = { ...verificationResponse, quantity: compare, should: value };
           return compare >= value ? true : [this.$t(`report.rules.${type}.gte`, response), response]
         }
@@ -991,6 +996,7 @@ export default {
       // less than or equal to
       const lte = (value) => {
         return (compare) => {
+          // console.log("executing rule: lte with compare", compare, "should", value)
           const response = { ...verificationResponse, quantity: compare, should: value };
           return compare <= value ? true : [this.$t(`report.rules.${type}.lte`, response), response]
         }
@@ -999,6 +1005,7 @@ export default {
       // not including
       const notIncludes = (values) => {
         return (compare) => {
+          // console.log("executing rule: notIncludes with compare", compare, "should", values)
           const response = { ...verificationResponse, quantity: compare, should: values.join(",") };
           return values.indexOf(compare) === -1 ? true : [this.$t(`report.rules.${type}.not`, response), response]
         }
@@ -1015,6 +1022,8 @@ export default {
 
       // if there's limitation then we also need to verify the notIncludes.
       if (limitation.exceptions) generated.rules.push(notIncludes(limitation.exceptions))
+
+      // console.log("generateVerificationRule", type, query, generated)
 
       return generated
     }

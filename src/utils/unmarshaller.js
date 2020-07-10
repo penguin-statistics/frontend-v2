@@ -70,8 +70,8 @@ export default {
             const gotItem = get.items.byName(item.name);
             convertedItems.push({
               id: gotItem.itemId,
-              need: gotItem.need,
-              have: gotItem.have
+              need: item.need,
+              have: item.have
             })
           }
         }

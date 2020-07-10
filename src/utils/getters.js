@@ -116,7 +116,7 @@ Getters.zones = {
     const server = store.getters["dataSource/server"]
 
     if (filter) {
-      zones = zones.filter(el => el["existence"][server]["exist"])
+      zones = zones.filter(el => existUtils.existence(el, true))
     }
 
     zones = zones.slice().sort((a, b) => {
@@ -129,7 +129,8 @@ Getters.zones = {
           el.isPermanentOpen = true
         } else {
           el.activityActiveTime = formatter.dates([existence["openTime"], existence["closeTime"]]);
-          el.isOutdated = formatter.isOutdated(existence["closeTime"])
+          el.isOutdated = formatter.isOutdated(existence["openTime"], existence["closeTime"])
+          el.timeValid = formatter.checkTimeValid(existence["openTime"], existence["closeTime"])
         }
       }
       return el

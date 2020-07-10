@@ -3,6 +3,20 @@
     fluid
     class="fill-height align-content-center justify-center"
   >
+    <v-btn
+      fab
+      bottom
+      right
+      fixed
+      ripple
+      color="primary"
+      :loading="calculation.pending"
+      @click="calculate"
+    >
+      <v-icon>
+        mdi-calculator
+      </v-icon>
+    </v-btn>
     <v-dialog
       v-model="calculation.done"
       scrollable

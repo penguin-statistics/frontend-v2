@@ -5,6 +5,7 @@ const personalMatrix = new MatrixObjectManager({
   name: 'personalMatrix',
   api: {
     serverSensitive: true,
+    requireAuthorization: true,
 
     url: '/result/matrix',
     extraParams: {

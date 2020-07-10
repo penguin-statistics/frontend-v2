@@ -17,7 +17,7 @@
         >
           mdi-server
         </v-icon>
-        <span class="monospace">
+        <span>
           {{ $t("server.servers." + activeServerId) }}
         </span>
       </v-btn>
@@ -46,7 +46,7 @@
           :key="i"
           :disabled="pending"
         >
-          <v-list-item-title class="mr-2 monospace">
+          <v-list-item-title class="mr-2">
             {{ $t("server.servers." + server) }}
           </v-list-item-title>
           <v-list-item-action v-if="activeServerId === server">

@@ -14,6 +14,7 @@ const items = new ObjectManager({
       return filtered
     },
   ],
+  validator: commons.defaultValidator,
   ttl: 1000 * 60 * 60 * 1, // 1 hour
   ajaxHooks: commons.defaultAjaxHooks
 });
