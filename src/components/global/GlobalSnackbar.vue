@@ -77,7 +77,10 @@
     :timeout="snackbar.timeout"
     :color="snackbar.color"
   >
-    <v-icon class="mr-4">
+    <v-icon
+      class="mr-4"
+      color="white"
+    >
       {{ snackbar.icon }}
     </v-icon>
     {{ $t(snackbar.text, snackbar.extra) }}

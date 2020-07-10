@@ -2,7 +2,7 @@ import ObjectManager from '@/utils/objectManager'
 
 class MatrixObjectManager extends ObjectManager {
   /** Creates a matrix object manager */
-  constructor({ name, api, ttl, ajaxHooks }) {
+  constructor({ name, api, validator, ttl, ajaxHooks }) {
     super({
       name,
       api,
@@ -12,6 +12,7 @@ class MatrixObjectManager extends ObjectManager {
           return object
         },
       ],
+      validator,
       ttl,
       ajaxHooks
     });

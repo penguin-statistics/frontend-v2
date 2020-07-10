@@ -130,6 +130,7 @@
 
   import './styles/global.css'
   import './styles/fonts.css'
+  import './styles/theme-adapt.scss'
   import Footer from "@/components/global/Footer";
   import CDN from "@/mixins/CDN";
   import Mirror from "@/mixins/Mirror";

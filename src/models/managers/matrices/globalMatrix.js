@@ -11,6 +11,7 @@ const globalMatrix = new MatrixObjectManager({
       "show_closed_zones": true
     }
   },
+  validator: commons.defaultValidator,
   ttl: 1000 * 60 * 60 * 1, // 1 hour
   ajaxHooks: commons.defaultAjaxHooks
 });

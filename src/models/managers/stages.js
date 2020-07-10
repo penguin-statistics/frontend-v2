@@ -15,6 +15,7 @@ const stages = new ObjectManager({
       return object
     }
   ],
+  validator: commons.defaultValidator,
   ttl: 1000 * 60 * 60 * 1, // 1 hour
   ajaxHooks: commons.defaultAjaxHooks
 });

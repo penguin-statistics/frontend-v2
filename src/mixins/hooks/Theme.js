@@ -13,10 +13,13 @@ export default {
   },
   methods: {
     themeToggle (isDark) {
+      const windowsIndicator = navigator.platform.indexOf('Win') > -1 ? "platform--windows" : "platform--not-windows";
       this.$vuetify.theme.dark = isDark
       if (isDark) {
+        document.documentElement.classList.add("vuetify-theme--dark", windowsIndicator)
         document.body.style.backgroundColor = "#121212"
       } else {
+        document.documentElement.classList.add("vuetify-theme--light", windowsIndicator)
         document.body.style.backgroundColor = "#ffffff"
       }
     },
