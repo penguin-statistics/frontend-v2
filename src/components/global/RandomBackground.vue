@@ -107,7 +107,9 @@
       async updateBackgroundByUrl(url) {
         const background = this.$refs.background;
         this.lastLoading = true;
-        window.fetch(url)
+        window.fetch(url, {
+          cache: "force-cache"
+        })
           .then((response) => {
             return response.blob();
           })
