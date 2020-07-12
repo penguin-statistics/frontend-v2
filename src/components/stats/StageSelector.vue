@@ -55,6 +55,11 @@
               v-for="category in categories"
               :key="category.id"
             >
+              <!--              <OffTitle-->
+              <!--                :content="$t(['zone.types', category.id].join('.'))"-->
+              <!--                small-->
+              <!--                class="pl-2"-->
+              <!--              />-->
               <v-subheader>
                 <v-icon
                   class="mr-2"
@@ -81,19 +86,30 @@
                   >
                     <v-row align="center">
                       <span
-                        v-if="zone.isActivity && !small"
+                        v-if="zone.isActivity && !small && zone.timeValid !== undefined"
                         :class="{
-                          'red--text': zone.isOutdated,
-                          'green--text': !zone.isOutdated }"
+                          'red--text': zone.timeValid === 1,
+                          'green--text': zone.timeValid === 0,
+                          'grey--text': zone.timeValid === -1
+                        }"
                         class="text--darken-1 font-weight-bold ml-2 mr-1"
                       >
-                        {{ zone.isOutdated ? $t('zone.status.closed') : $t('zone.status.open') }}
+                        {{ $t('zone.status.' + zone.timeValid) }}
+                      </span>
+                      <span
+                        v-if="zone.isPermanentOpen"
+                        class="text--darken-1 font-weight-bold orange--text ml-2 mr-1"
+                      >
+                        常驻开放
                       </span>
 
                       <span
                         class="subtitle-1 pl-2"
-                        :class="{'text--darken-1 font-weight-bold': zone.isActivity && small, 'red--text': zone.isActivity && small && zone.isOutdated,
-                                 'green--text': zone.isActivity && small && !zone.isOutdated}"
+                        :class="{'text--darken-1 font-weight-bold': zone.isActivity && small,
+                                 'red--text': zone.isActivity && small && zone.timeValid === 1,
+                                 'green--text': zone.isActivity && small && zone.timeValid === 0,
+                                 'grey--text': zone.isActivity && small && zone.timeValid === -1
+                        }"
                       >
                         {{ strings.translate(zone, "zoneName") }}
                       </span>
@@ -249,18 +265,33 @@
       },
       categorizedZones() {
         const categoriesSet =
-          this.hideClosed ? [["ACTIVITY_OPEN", "MAINLINE"], ["WEEKLY"]]
-                          : [["MAINLINE", "WEEKLY"], ["ACTIVITY_OPEN", "ACTIVITY_CLOSED"]];
+          this.hideClosed ?
+            // Report
+            [
+              [["ACTIVITY_OPEN", "ACTIVITY_PERMANENT", "MAINLINE"], ["WEEKLY"]], // md, lg & xl
+              [["ACTIVITY_OPEN", "ACTIVITY_PERMANENT", "MAINLINE"], ["WEEKLY"]]  // xs & sm
+            ]
+              :
+            // Show Statistics
+            [
+              [["MAINLINE", "WEEKLY"], ["ACTIVITY_PENDING", "ACTIVITY_OPEN", "ACTIVITY_PERMANENT", "ACTIVITY_CLOSED"]], // md, lg & xl
+              [["ACTIVITY_PENDING", "ACTIVITY_OPEN", "ACTIVITY_PERMANENT", "MAINLINE"], ["WEEKLY", "ACTIVITY_CLOSED"]]  // xs & sm
+            ]
+
         const result = [[], []];
-        for (const [index, categories] of categoriesSet.entries()) {
+        for (const [index, categories] of categoriesSet[this.small ? 1 : 0].entries()) {
           for (const category of categories) {
             let filter;
             let zones = get.zones.byType(category.startsWith("ACTIVITY") ? "ACTIVITY" : category);
 
             if (category === "ACTIVITY_OPEN") {
-              filter = zone => !zone.isOutdated;
+              filter = zone => zone.timeValid === 0;
             } else if (category === "ACTIVITY_CLOSED") {
-              filter = zone => zone.isOutdated;
+              filter = zone => zone.timeValid === 1;
+            } else if (category === "ACTIVITY_PENDING") {
+              filter = zone => zone.timeValid === -1;
+            } else if (category === "ACTIVITY_PERMANENT") {
+              filter = zone => zone.isPermanentOpen;
             }
 
             if (filter) zones = zones.filter(filter);

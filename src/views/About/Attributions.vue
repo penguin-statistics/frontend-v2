@@ -49,7 +49,7 @@
                   </v-icon>
                 </v-list-item-icon>
                 <v-list-item-content>
-                  <v-list-item-title>
+                  <v-list-item-title class="monospace v-list--force-line-break">
                     {{ packageObj.license }}
                   </v-list-item-title>
                   <v-list-item-subtitle>
@@ -65,7 +65,7 @@
                   </v-icon>
                 </v-list-item-icon>
                 <v-list-item-content>
-                  <v-list-item-title class="monospace">
+                  <v-list-item-title class="monospace v-list--force-line-break">
                     {{ packageObj.link }}
                   </v-list-item-title>
                   <v-list-item-subtitle>
@@ -81,7 +81,7 @@
                   </v-icon>
                 </v-list-item-icon>
                 <v-list-item-content>
-                  <v-list-item-title class="monospace">
+                  <v-list-item-title class="monospace v-list--force-line-break">
                     v{{ packageObj.version }}
                   </v-list-item-title>
                   <v-list-item-subtitle>

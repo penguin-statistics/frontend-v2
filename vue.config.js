@@ -29,7 +29,7 @@ module.exports = {
       }
     }
   },
-  integrity: true,
+  integrity: false,
   runtimeCompiler: true,
   transpileDependencies: [
     "vuetify"

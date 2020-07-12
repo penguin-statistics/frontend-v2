@@ -525,3 +525,7 @@
     }
 }
 
+.v-list--force-line-break {
+    white-space: normal;
+}
+

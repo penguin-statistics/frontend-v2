@@ -262,12 +262,15 @@
     "types": {
       "MAINLINE": "主线",
       "WEEKLY": "物资筹备",
-      "ACTIVITY_OPEN": "限时活动（开放中）",
-      "ACTIVITY_CLOSED": "限时活动（已结束）"
+      "ACTIVITY_OPEN": "限时活动 — 开放中",
+      "ACTIVITY_CLOSED": "限时活动 — 已结束",
+      "ACTIVITY_PENDING": "限时活动 — 即将开放",
+      "ACTIVITY_PERMANENT": "常驻兑换"
     },
     "status": {
-      "closed": "已结束",
-      "open": "开放中",
+      "-1": "即将开放",
+      "0": "开放中",
+      "1": "已结束",
       "permanentOpen": "常驻开放"
     },
     "opensAt": "开放时间：{0} - {1}"

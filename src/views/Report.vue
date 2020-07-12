@@ -1043,8 +1043,4 @@ export default {
 .round {
   border-radius: 4px;
 }
-
-  .v-list--force-line-break {
-    white-space: normal;
-  }
 </style>

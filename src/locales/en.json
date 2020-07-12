@@ -266,8 +266,9 @@
       "ACTIVITY_CLOSED": "Event (Closed)"
     },
     "status": {
-      "closed": "Closed",
-      "open": "Open",
+      "-1": "Opening Soon",
+      "1": "Closed",
+      "0": "Open",
       "permanentOpen": "Permanently Opening"
     },
     "opensAt": "Event period: {0} - {1}"
