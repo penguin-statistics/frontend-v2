@@ -160,7 +160,6 @@
           </template>
 
           <img
-            svg-inline
             :src="require('@/assets/qrcodes/alipay-qrcode.svg')"
             :alt="$t('donate.methods.alipay')"
             style="max-height: 128px"
@@ -213,7 +212,6 @@
           </template>
 
           <img
-            svg-inline
             :src="require('@/assets/qrcodes/wechatpay-qrcode.svg')"
             :alt="$t('donate.methods.wechatPay')"
             style="max-height: 128px"

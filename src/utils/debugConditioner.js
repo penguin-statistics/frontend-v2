@@ -16,5 +16,4 @@ export default {
   get devtools() {return boolean("devtools")},
   get colorfulConsole() {return boolean("colorfulConsole")},
   get fullConsole() {return boolean("fullConsole")},
-  get disableSentry() {return boolean("disableSentry")}
 }

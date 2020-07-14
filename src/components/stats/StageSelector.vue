@@ -261,7 +261,7 @@
         return strings
       },
       small () {
-        return this.$vuetify.breakpoint.xsOnly
+        return this.$vuetify.breakpoint.smAndDown
       },
       categorizedZones() {
         const categoriesSet =
