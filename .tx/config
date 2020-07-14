@@ -2,9 +2,9 @@
 host = https://www.transifex.com
 
 [penguin-statistics-website.main]
-file_filter = src/locales/<lang>.json
+file_filter = src/locales/<lang>.yml
 minimum_perc = 0
-source_file = src/locales/zh.json
+source_file = src/locales/zh.yml
 source_lang = zh
-type = KEYVALUEJSON
+type = YAML_GENERIC
 

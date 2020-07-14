@@ -243,13 +243,24 @@
       align="center"
     >
       <v-btn
-        color="indigo white--text"
-        class="my-1"
-        x-large
         block
+        class="my-1"
+        :class="{'indigo white--text': !calculation.pending, 'slash-strip--loading': calculation.pending}"
+        color="indigo white--text"
+        :disabled="calculation.done"
+        x-large
         :loading="calculation.pending"
         @click="calculate"
       >
+        <template v-slot:loader>
+          <v-progress-circular
+            indeterminate
+            :size="16"
+            :width="2"
+            class="mr-2"
+          />
+          {{ $t('planner.actions.calculating') }}
+        </template>
         <v-icon left>
           mdi-calculator
         </v-icon>

@@ -44,5 +44,13 @@ module.exports = {
       //   dontCacheBustURLsMatching: /.[a-f0-9]{8}./
       // })
     ],
+    module: {
+      rules: [
+        {
+          test: /\.ya?ml$/,
+          use : 'js-yaml-loader',
+        }
+      ]
+    }
   }
 };

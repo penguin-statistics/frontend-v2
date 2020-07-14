@@ -55,6 +55,7 @@
     "eslint-plugin-vue": "^5.0.0",
     "eslint-plugin-vuetify": "^1.0.0-beta.5",
     "husky": "^4.2.5",
+    "js-yaml-loader": "^1.2.2",
     "sass": "^1.25.0",
     "sass-loader": "^8.0.2",
     "stylus": "^0.54.5",

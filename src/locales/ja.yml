@@ -1,0 +1,262 @@
+---
+app:
+  name: ペンギン急便データ統計処理部門
+  name_line1: ペンギン急便
+  name_line2: データ統計処理部門
+server:
+  name: サーバー
+  switch: ゲームサーバー切替
+  servers:
+    CN: 大陸版
+    US: 英語版
+    JP: 日本版
+    KR: 韓国版
+menu:
+  home: トップページ
+  report: ドロップ報告
+  stats:
+    _name: ドロップ率
+    stage: 作戦別
+    item: 素材別
+    advanced: 高度なクエリ
+  about:
+    _name: 当サイトについて
+    members: 制作協力者
+    contribute: 開発協力者募集中
+    changelog: 更新履歴
+    contact: 連絡先
+    donate: 寄付について
+    links: 相互リンク
+    bulletin: お知らせ
+  siteStats: 全サイト統計データ
+  planner: 周回計画作成ツール
+  v1: 旧バージョン
+  refreshData: データ更新
+  languages: 言語切替
+  settings:
+    name: 設定
+    themes:
+      name: テーマ変更
+      system: システム設定に従う
+      dark: 常にダークモード
+      light: 常にライトモード
+  overline:
+    planner: ArkPlanner
+meta:
+  details: 詳細を見る
+  loading: 読み込み中...
+  notfound: ここはどこ¿¿¿
+  footer:
+    copyright:
+      title: 利用許諾
+      content: ドロップ統計データはクリエイティブ・コモンズ 表示 - 非営利 4.0 国際 ライセンスの下に提供されています。当サイトのいかなる内容の転載や公開を行う場合は、必ず内容の元となっているページまたはトップページのURLのリンクを行い、データ統計の転載を行ったことを明記しなければなりません。また許可無しに当サイトの内容または派生作品を商業目的で利用することを許可しません。
+    credit: ペンギン急便データ統計処理部門 | {date}
+  separator: "、"
+  quotation:
+    start: "「"
+    end: "」"
+  boolean:
+    'true': はい
+    'false': いいえ
+  hasNorNot:
+    'true': 有り
+    'false': 無し
+  dialog:
+    cancel: いいえ
+    confirm: はい
+    submit: 送信
+    close: 閉じる
+stats:
+  headers:
+    stage: ステージ
+    apCost: 理性
+    item: アイテム
+    times: サンプル数
+    quantity: ドロップ数
+    percentage: ドロップ率
+    apPPR: １個あたりの必要期待理性数
+    timeRange: 期間
+  timeRange:
+    inBetween: "{0} から {1} まで"
+    toPresent: "{date} から現在まで"
+    endsAt: "{date} 以前"
+    unknown: 不明
+    notSelected: "（選択されていない）"
+  trends:
+    name: 歴史ドロップデータ
+    set:
+      rate: ドロップ率
+      sample: サンプル数
+      drops: ドロップ数
+  lastUpdated: 最終更新日時： {date}
+  site:
+    viewMore: さらに詳しく
+    total:
+      sanity: すべての報告で消費された理性
+      report: 総報告数
+      items: 総ドロップ数
+    stages: ステージサンプル数ランキング
+    items: アイテムドロップ数ランキング
+    all: 全期間
+    24hr: 過去24時間
+    generating:
+      title: Generating Site Statistics...
+      subtitle: 'Neural Network Message: Due to high amount of data, site statistics
+        need up to 5 minutes to calculate. Please come back later.'
+      refresh: Refresh Site Statistics
+contribute:
+  repo: プロジェクトリポジトリ：
+  frontend: フロントエンド
+  backend: バックエンド
+  contribute_0: 以下のような開発の経験があるのであれば、Penguin Statistics に自身の力を使ってみませんか？右記のQQグループを追加してください：747099627
+  contribute_1: 本プロジェクトは無償のオープンソースプロジェクトです
+  skills:
+    frontend: フロントエンド開発 Vue.js
+    backend: バックエンド開発 Java Spring Boot、MongoDB
+    maintenance: DevOps
+    design: UI/UXデザイン
+    analysis: データ統計解析
+    others: "..."
+fetch:
+  failed:
+    title: 接続エラー
+    subtitle: ニューラルネットワークとの同期接続を確立できません。部分的なリソースがありません。
+    retry: 再試行
+report:
+  alert:
+    title:
+      first: 障害リスクの検出
+      repeat: 警告
+    continue:
+      first: 本当に送信しますか？
+      repeat: 本当にこのデータを送信しますか？
+    contact:
+      before: 誤った情報であると判断した場合は
+      activator: 管理人に連絡を行ってください
+      after: "（その際はスクリーンショットの添付をお願いいたします）。確認次第速やかに修正を行わせて頂きます。"
+    causes:
+      noDrop: ドロップアイテムが何も選択されていません。送信するデータに問題はありませんか？
+      limitation: 今回報告しようとしている内容は既存のデータとの差が大きくなっており、このまま報告するのであれば今回の報告は異常と判定され、全て統計データに反映されることはありません。
+  rules:
+    item:
+      _name: アイテム数量
+      now: 選択された {item} ×{quantity}
+      gte: 入力をした“{item}”の数がこのステージのドロップ最大数である {should} 個以上に設定されています
+      lte: "“{item}”の数を　{should}　個以下の数値で再入力して下さい"
+      not: "“{item}”はこのステージでは1回のドロップ数が {should} 個になることはありません"
+    type:
+      _name: アイテム種類数
+      now: 選択されたアイテムは {quantity} 種類です
+      gte: 最少 {should} 種類のアイテムが必要です
+      lte: 最大 {should} 種類のアイテムが必要です
+      not: "{should}種類のアイテムであってはなりません"
+  clear: クリア
+  furniture: 家具ドロップ：{state}
+  name: 報告
+  submit: 送信
+  success: 送信成功
+  unable: 送信失敗：
+  undo: 送信キャンセル
+  undoSuccess: キャンセルしました
+  gacha: この操作を行うことでデータに複数の結果を反映させることが出来ます。
+  notices:
+    rule_1: ここに追加する内容は1回でドロップした内容です。
+    rule_2: 素材がドロップしなかった場合は直接送信をクリックしてください。
+    rule_3: 初クリア時の報酬は報告しないでください。ドロップ結果が極端に良かったものだけを報告するのはご遠慮ください。
+    rule_4: クリア時の評価が☆3である場合のみ報告してください。
+    rule_5: 大陸版のドロップデータのみをアップロードして下さい。ご協力ありがとうございます。
+  usage: 左クリックで個数増加、右クリックで個数減少
+settings:
+  category:
+    appearance: スタイル
+    data: 設定とデータ
+  optimization:
+    lowData:
+      title: エコノミーモード
+      active: エコノミーモード有効中
+      subtitle: エコノミーモードは、作戦リストの背景図、全ステーションの背景絵などのリソースのロードないし、ネットワークの使用を低減するのモード。
+  data:
+    server: キャッシュされたのサーバー：
+    size: ローカルデータ：
+    reset:
+      title: ローカルデータと設定初期化
+      subtitle: すべてのローカルデータと設定を削除します。その後ローカル設定はすべて初期化され、ページを刷新します。データを再読み込みする必要があります。本当に続けますか？
+zone:
+  name: 章
+  types:
+    MAINLINE: メインステージ
+    WEEKLY: 物資調達
+    ACTIVITY_OPEN: イベント（開催中）
+    ACTIVITY_CLOSED: イベント（終了）
+  status:
+    '0': 開催中
+    '1': 終了
+  opensAt: 開催期間：{0} - {1}
+stage:
+  name: 作戦
+  apCost: 消費理性：{apCost}
+  loots:
+    NORMAL_DROP: 通常
+    EXTRA_DROP: その他
+    SPECIAL_DROP: レア
+    FURNITURE: 家具
+  selector:
+    plannerExclude: ステージ除外設定
+    excludeAll: 全て除外
+    includeAll: 全て含む
+planner:
+  notices:
+    autoExistence: ArkPlannerは、選択したサーバーで開いていないステージを自動的に非表示にします
+  options:
+    _name: オプション
+    byProduct: 加工副産物を考慮する
+    requireExp: 大量の経験値が必要
+    requireLmb: 大量の龍門幣が必要
+    excludeStage:
+      _name: ステージ除外
+      title: 選ぶ
+      selected: "{stages} ステージ除外中"
+  reset:
+    name: リセット
+    dialog:
+      title: ArkPlannerをリセット
+      subtitle: すべてのデータや設定はリセットされます。続行しますか？
+  actions:
+    _name: データ
+    import: インポート
+    export: エクスポート
+    importExport: "@:(planner.actions.import)/@:(planner.actions.export)"
+    calculate: 計算を行う
+    config:
+      _name: コンフィグレーション
+      share: エクスポート
+      import: インポート
+  have: 所持数
+  need: 必要数
+  copy: クリップボードにコピー
+  calculation:
+    title: 計算結果
+    tabs:
+      stages: ステージ
+      syntheses: 素材加工
+      values: 素材理性価値
+    lmb: 推定獲得龍門幣
+    sanity: 推定必要理性
+    exp: 戦闘で入手出来る経験値の推定
+    times: 回
+    level: 素材レベル
+    noStage: 入力内容に不備があるため結果を表示出来ません。
+    noSyntheses: 入力内容に不備があるため結果を表示出来ません。
+items:
+  choose:
+    name: 素材選択
+  categories:
+    ACTIVITY_ITEM: イベントアイテム
+    CARD_EXP: 作戦記録
+    FURN: 家具
+    MATERIAL: 素材
+dataSource:
+  global: 全体
+  loginNotice: 個人のドロップデータを表示するにはログインが必要となります。
+  personal: 個人
+  title: ログインが必要です
