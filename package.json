@@ -32,6 +32,7 @@
     "marked": "^1.0.0",
     "pinyin-engine": "^1.1.0",
     "regenerator-runtime": "^0.13.5",
+    "uuid": "^8.2.0",
     "vue": "^2.6.10",
     "vue-analytics": "^5.22.1",
     "vue-i18n": "^8.0.0",

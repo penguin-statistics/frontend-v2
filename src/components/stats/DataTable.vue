@@ -252,7 +252,7 @@
       return {
         options: {
           table: {
-            itemsPerPage: 20
+            itemsPerPage: 10
           },
           footer: {
             itemsPerPageOptions: [10, 20, 40, -1],

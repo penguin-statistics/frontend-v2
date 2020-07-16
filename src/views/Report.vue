@@ -111,6 +111,13 @@
           <h1 class="title no-wrap--text">
             <span class="overline">{{ strings.translate(selectedZone, "zoneName") }}</span>
             {{ strings.translate(selectedStage, "code") }}
+            <v-btn
+              icon
+            >
+              <v-icon>
+                mdi-star
+              </v-icon>
+            </v-btn>
           </h1>
           <v-spacer />
           <v-btn
@@ -130,222 +137,242 @@
           </v-btn>
         </v-row>
 
-        <v-alert
-          color="orange darken-3"
-          border="left"
-          class=" mx-2"
-        >
-          <ol>
-            <li v-if="!isGacha">
-              {{ $t('report.notices.rule_1') }}
-            </li>
-            <li>{{ $t('report.notices.rule_2') }}</li>
-            <li>{{ $t('report.notices.rule_3') }}</li>
-            <li>{{ $t('report.notices.rule_4') }}</li>
-          </ol>
-        </v-alert>
-
-        <v-alert
-          v-if="!$vuetify.breakpoint.smAndDown"
-          color="secondary darken-2"
-          class="subtitle-1 pl-6 mb-4 mx-2"
-          dark
-          border="left"
-        >
-          {{ $t('report.usage') }}
-        </v-alert>
-
-        <v-alert
-          v-if="isGacha"
-          color="blue darken-2"
-          class="subtitle-1 pl-6 mb-4 mx-2"
-          dark
-          border="left"
-        >
-          {{ $t('report.gacha') }}
-        </v-alert>
-
-        <v-container
-          v-for="category in stageItems"
-          :key="category.id"
-          fluid
-          class="py-0"
-        >
-          <v-subheader
-            class="pl-2"
-            :style="{'color': category.colors[dark ? 0 : 1], 'text-shadow': `0 0 10px ${category.colors[dark ? 0 : 1]}`}"
-          >
-            {{ $t('stage.loots.' + category.id) }}
-            <v-divider
-              class="ml-4"
-              :style="{'border-color': category.colors[dark ? 0 : 1]}"
-            />
-          </v-subheader>
-          <span
-            v-for="item in category.drops"
-            :key="item.itemId"
-            class="py-1 px-1 d-inline-block"
-          >
-            <!--                  <h5 class="title mb-4">-->
-            <!--                    {{ item.name }}-->
-            <!--                  </h5>-->
-            <ItemStepper
-              :item="item.item"
-              :bus="eventBus"
-              @change="(e) => handleChange(category.id, e)"
-            />
-          </span>
-        </v-container>
-
         <v-row
+          align="start"
           justify="center"
-          class="mx-2 mb-5"
-          dense
         >
           <v-col
             cols="12"
+            sm="12"
+            md="6"
+            lg="6"
+            xl="6"
+            class="order-1 order-sm-1 order-md-0 order-lg-0 order-xl-0"
           >
-            <v-switch
-              v-model="furniture"
-              color="primary"
-              class="my-0 pb-0 d-inline-flex"
-              hide-details
-              :disabled="submitting"
+            <v-alert
+              v-if="!$vuetify.breakpoint.smAndDown"
+              dense
+              color="secondary darken-2"
+              class="subtitle-1 pl-6 mb-4 mx-2"
+              dark
+              border="left"
             >
-              <template v-slot:label>
-                <v-slide-x-transition leave-absolute>
-                  <v-badge
-                    v-if="furniture"
-                    icon="mdi-check-circle"
-                    bordered
-                    bottom
-                    overlap
-                    :offset-x="7"
-                    :offset-y="10"
-                    class="mr-3"
-                  >
-                    <ItemIcon
-                      :item="getItem('furni')"
-                      :ratio="0.5"
-                    />
-                  </v-badge>
-                </v-slide-x-transition>
-                <span>
-                  {{ $t('report.furniture', {state: $t(`meta.hasNorNot.${furniture}`)}) }}
-                </span>
-              </template>
-            </v-switch>
-          </v-col>
-
-          <!--          <v-col-->
-          <!--            cols="12"-->
-          <!--            sm="6"-->
-          <!--            md="6"-->
-          <!--            lg="6"-->
-          <!--            xl="6"-->
-          <!--          >-->
-          <!--            <v-switch-->
-          <!--              v-model="plannerIntegration.enabled"-->
-          <!--              color="primary"-->
-          <!--              class="my-0 pb-0 d-flex align-center"-->
-          <!--              hide-details-->
-          <!--              :disabled="submitting"-->
-          <!--            >-->
-          <!--              <template v-slot:label>-->
-          <!--                <v-slide-x-transition leave-absolute>-->
-          <!--                  <v-badge-->
-          <!--                    v-if="plannerIntegration.enabled"-->
-          <!--                    icon="mdi-sync"-->
-          <!--                    bordered-->
-          <!--                    bottom-->
-          <!--                    overlap-->
-          <!--                    :offset-x="7"-->
-          <!--                    :offset-y="10"-->
-          <!--                    class="mr-3"-->
-          <!--                  >-->
-          <!--                    <v-icon>-->
-          <!--                      mdi-floor-plan-->
-          <!--                    </v-icon>-->
-          <!--                  </v-badge>-->
-          <!--                </v-slide-x-transition>-->
-          <!--                <span class="mr-2">-->
-          <!--                  同步汇报内容到刷图规划器-->
-          <!--                </span>-->
-          <!--                <v-dialog-->
-          <!--                  v-model="plannerIntegration.dialog"-->
-          <!--                  max-width="450px"-->
-          <!--                >-->
-          <!--                  <template v-slot:activator="{ on }">-->
-          <!--                    <v-btn-->
-          <!--                      icon-->
-          <!--                      v-on="on"-->
-          <!--                    >-->
-          <!--                      <v-icon>-->
-          <!--                        mdi-help-circle-->
-          <!--                      </v-icon>-->
-          <!--                    </v-btn>-->
-          <!--                  </template>-->
-          <!--                  <v-card color="background">-->
-          <!--                    <v-card-title>-->
-          <!--                      同步汇报内容到刷图规划器-->
-          <!--                    </v-card-title>-->
-          <!--                    <v-card-text>-->
-          <!--                      在开启此功能且汇报成功后，会自动将此次获得的物品数量于刷图规划器内对应物品的【已有】栏目进行累加。-->
-          <!--                    </v-card-text>-->
-          <!--                    <v-card-actions>-->
-          <!--                      <v-spacer />-->
-          <!--                      <v-btn-->
-          <!--                        text-->
-          <!--                        @click="plannerIntegration.dialog = false"-->
-          <!--                      >-->
-          <!--                        {{ $t('meta.dialog.close') }}-->
-          <!--                      </v-btn>-->
-          <!--                    </v-card-actions>-->
-          <!--                  </v-card>-->
-          <!--                </v-dialog>-->
-          <!--              </template>-->
-          <!--            </v-switch>-->
-          <!--          </v-col>-->
-        </v-row>
-
-        <v-col class="px-6 pb-6 pt-0">
-          <v-row justify="space-around">
-            <v-btn
-              large
-              rounded
-              color="error"
-              class="px-4 py-2"
-              @click="reset"
+              {{ $t('report.usage') }}
+            </v-alert>
+            <v-container
+              v-for="category in stageItems"
+              :key="category.id"
+              fluid
+              class="py-0"
             >
-              {{ $t('report.clear') }}
-            </v-btn>
-
-            <v-btn
-              large
-              rounded
-              color="primary"
-              :loading="submitting"
-              class="px-4 py-2"
-              @click="submit"
-            >
-              <div class="d-inline-flex align-center justify-center">
-                <v-icon small>
-                  mdi-server
-                </v-icon>
-                <span class="caption ml-1">
-                  {{ serverName }}
-                </span>
-              </div>
-              <v-divider
-                vertical
-                class="mx-2"
-              />
-              <span>
-                {{ $t('report.submit') }}
+              <v-subheader
+                class="pl-2"
+                :style="{'color': category.colors[dark ? 0 : 1], 'text-shadow': `0 0 10px ${category.colors[dark ? 0 : 1]}`}"
+              >
+                {{ $t('stage.loots.' + category.id) }}
+                <v-divider
+                  class="ml-2"
+                  :style="{'border-color': category.colors[dark ? 0 : 1]}"
+                />
+              </v-subheader>
+              <span
+                v-for="item in category.drops"
+                :key="item.itemId"
+                class="py-1 px-1 d-inline-block"
+              >
+                <!--                  <h5 class="title mb-4">-->
+                <!--                    {{ item.name }}-->
+                <!--                  </h5>-->
+                <ItemStepper
+                  :item="item.item"
+                  :bus="eventBus"
+                  @change="(e) => handleChange(category.id, e)"
+                />
               </span>
-            </v-btn>
-          </v-row>
-        </v-col>
+            </v-container>
+            
+            <v-row
+              justify="center"
+              class="mx-2 mb-5"
+              dense
+            >
+              <v-col
+                cols="12"
+              >
+                <v-switch
+                  v-model="furniture"
+                  color="primary"
+                  class="my-0 pb-0 d-inline-flex"
+                  hide-details
+                  :disabled="submitting"
+                >
+                  <template v-slot:label>
+                    <v-slide-x-transition leave-absolute>
+                      <v-badge
+                        v-if="furniture"
+                        icon="mdi-check-circle"
+                        bordered
+                        bottom
+                        overlap
+                        :offset-x="7"
+                        :offset-y="10"
+                        class="mr-3"
+                      >
+                        <ItemIcon
+                          :item="getItem('furni')"
+                          :ratio="0.5"
+                        />
+                      </v-badge>
+                    </v-slide-x-transition>
+                    <span>
+                      {{ $t('report.furniture', {state: $t(`meta.hasNorNot.${furniture}`)}) }}
+                    </span>
+                  </template>
+                </v-switch>
+              </v-col>
+
+              <!--          <v-col-->
+              <!--            cols="12"-->
+              <!--            sm="6"-->
+              <!--            md="6"-->
+              <!--            lg="6"-->
+              <!--            xl="6"-->
+              <!--          >-->
+              <!--            <v-switch-->
+              <!--              v-model="plannerIntegration.enabled"-->
+              <!--              color="primary"-->
+              <!--              class="my-0 pb-0 d-flex align-center"-->
+              <!--              hide-details-->
+              <!--              :disabled="submitting"-->
+              <!--            >-->
+              <!--              <template v-slot:label>-->
+              <!--                <v-slide-x-transition leave-absolute>-->
+              <!--                  <v-badge-->
+              <!--                    v-if="plannerIntegration.enabled"-->
+              <!--                    icon="mdi-sync"-->
+              <!--                    bordered-->
+              <!--                    bottom-->
+              <!--                    overlap-->
+              <!--                    :offset-x="7"-->
+              <!--                    :offset-y="10"-->
+              <!--                    class="mr-3"-->
+              <!--                  >-->
+              <!--                    <v-icon>-->
+              <!--                      mdi-floor-plan-->
+              <!--                    </v-icon>-->
+              <!--                  </v-badge>-->
+              <!--                </v-slide-x-transition>-->
+              <!--                <span class="mr-2">-->
+              <!--                  同步汇报内容到刷图规划器-->
+              <!--                </span>-->
+              <!--                <v-dialog-->
+              <!--                  v-model="plannerIntegration.dialog"-->
+              <!--                  max-width="450px"-->
+              <!--                >-->
+              <!--                  <template v-slot:activator="{ on }">-->
+              <!--                    <v-btn-->
+              <!--                      icon-->
+              <!--                      v-on="on"-->
+              <!--                    >-->
+              <!--                      <v-icon>-->
+              <!--                        mdi-help-circle-->
+              <!--                      </v-icon>-->
+              <!--                    </v-btn>-->
+              <!--                  </template>-->
+              <!--                  <v-card color="background">-->
+              <!--                    <v-card-title>-->
+              <!--                      同步汇报内容到刷图规划器-->
+              <!--                    </v-card-title>-->
+              <!--                    <v-card-text>-->
+              <!--                      在开启此功能且汇报成功后，会自动将此次获得的物品数量于刷图规划器内对应物品的【已有】栏目进行累加。-->
+              <!--                    </v-card-text>-->
+              <!--                    <v-card-actions>-->
+              <!--                      <v-spacer />-->
+              <!--                      <v-btn-->
+              <!--                        text-->
+              <!--                        @click="plannerIntegration.dialog = false"-->
+              <!--                      >-->
+              <!--                        {{ $t('meta.dialog.close') }}-->
+              <!--                      </v-btn>-->
+              <!--                    </v-card-actions>-->
+              <!--                  </v-card>-->
+              <!--                </v-dialog>-->
+              <!--              </template>-->
+              <!--            </v-switch>-->
+              <!--          </v-col>-->
+            </v-row>
+
+            <v-row justify="space-around">
+              <v-btn
+                large
+                rounded
+                color="error"
+                class="px-4 py-2"
+                @click="reset"
+              >
+                {{ $t('report.clear') }}
+              </v-btn>
+
+              <v-btn
+                large
+                rounded
+                color="primary"
+                :loading="submitting"
+                class="px-4 py-2"
+                @click="submit"
+              >
+                <div class="d-inline-flex align-center justify-center">
+                  <v-icon small>
+                    mdi-server
+                  </v-icon>
+                  <span class="caption ml-1">
+                    {{ serverName }}
+                  </span>
+                </div>
+                <v-divider
+                  vertical
+                  class="mx-2"
+                />
+                <span>
+                  {{ $t('report.submit') }}
+                </span>
+              </v-btn>
+            </v-row>
+          </v-col>
+          <v-col
+            cols="12"
+            sm="12"
+            md="6"
+            lg="6"
+            xl="6"
+            class="order-0 order-sm-0 order-md-1 order-lg-1 order-xl-1"
+          >
+            <v-alert
+              color="orange darken-3"
+              border="left"
+              class=" mx-2"
+            >
+              <ol>
+                <li v-if="!isGacha">
+                  {{ $t('report.notices.rule_1') }}
+                </li>
+                <li>{{ $t('report.notices.rule_2') }}</li>
+                <li>{{ $t('report.notices.rule_3') }}</li>
+                <li>{{ $t('report.notices.rule_4') }}</li>
+              </ol>
+            </v-alert>
+
+            <v-alert
+              v-if="isGacha"
+              color="blue darken-2"
+              class="subtitle-1 pl-6 mb-4 mx-2"
+              dark
+              border="left"
+            >
+              {{ $t('report.gacha') }}
+            </v-alert>
+          </v-col>
+        </v-row>
       </v-card>
     </StageSelector>
 

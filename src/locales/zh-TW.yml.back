@@ -1,13 +1,13 @@
 ---
 app:
-  name: 企鵝物流資料統計
-  name_line1: 企鵝物流資料統計
+  name: 企鵝物流數據統計
+  name_line1: 企鵝物流數據統計
   name_line2: ''
 server:
   name: 伺服器
   switch: 伺服器切換
   servers:
-    CN: 簡中服
+    CN: 國服
     US: 美服
     JP: 日服
     KR: 韓服
@@ -18,42 +18,44 @@ menu:
     _name: 素材掉率
     stage: 按作戰
     item: 按素材
-    advanced: 高階查詢
+    advanced: 高級查詢
   about:
     _name: 關於本站
     members: 團隊成員
     contribute: 參與開發
     changelog: 更新記錄
-    contact: 聯絡我們
+    contact: 聯繫我們
     donate: 捐助
-    links: 友情連結
+    links: 友情鏈接
     bulletin: 公告
-    attributions: 開源許可
-  siteStats: 全站資料一覽
+    attributions: 內容來源
+  siteStats: 全站數據一覽
   planner: 刷圖規劃器
   v1: 訪問舊版
-  refreshData: 重新整理資料
+  refreshData: 刷新數據
   languages: 語言切換
   settings:
-    name: 設定
+    name: 設置
     themes:
       name: 轉換主題
-      system: 跟隨系統設定
+      system: 跟隨系統設置
       dark: 總是使用暗色
       light: 總是使用亮色
+  overline:
+    planner: ArkPlanner
 meta:
-  details: 詳細資訊
+  details: 詳細信息
   loading: 正在載入...
   notfound: "？？？"
   footer:
     copyright:
       title: 許可協議
-      content: 素材掉落統計資料由企鵝物流統計，採用知識共享 署名-非商業性使用 4.0 國際 許可協議進行許可。轉載、公開或以任何形式複製、發行、再傳播本站任何內容時，必須註明從企鵝物流資料統計轉載，並提供版權標識、許可協議標識、免責標識和作品連結；且未經許可，不得將本站內容或由其衍生作品用於商業目的。
-    credit: 企鵝物流資料統計 | {date}
+      content: 素材掉落統計數據由企鵝物流統計，採用知識共享 署名-非商業性使用 4.0 國際 許可協議進行許可。轉載、公開或以任何形式複製、發行、再傳播本站任何內容時，必須註明從企鵝物流數據統計轉載，並提供版權標識、許可協議標識、免責標識和作品鏈接；且未經許可，不得將本站內容或由其衍生作品用於商業目的。
+    credit: 企鵝物流數據統計 | {date}
   separator: "、"
   quotation:
-    start: "“"
-    end: "”"
+    start: "「"
+    end: "」"
   boolean:
     'true': 是
     'false': 否
@@ -65,6 +67,10 @@ meta:
     confirm: 確認
     submit: 提交
     close: 關閉
+  copyWarning: |2-
+
+
+    以上數據來自企鵝物流數據統計（{site}）
 stats:
   headers:
     stage: 關卡
@@ -89,7 +95,7 @@ stats:
       drops: 掉落數
   lastUpdated: 最後更新：{date}
   site:
-    viewMore: 檢視全站資料一覽
+    viewMore: 查看全站數據一覽
     total:
       sanity: 所有掉落彙報消耗理智
       report: 掉落彙報總數
@@ -99,37 +105,37 @@ stats:
     all: 全時段
     24hr: 最近 24 小時
     generating:
-      title: 全站資料一覽正在計算中...
-      subtitle: 神經網路資訊：由於資料量龐大，全站資料一覽需要大約 5 分鐘進行計算。請稍後再來。
-      refresh: 重新整理全站資料一覽
+      title: 全站數據一覽正在計算中...
+      subtitle: 神經網路信息：由於數據量龐大，全站數據一覽需要大約 5 分鐘進行計算。請稍後再來。
+      refresh: 刷新全站數據一覽
 contribute:
-  repo: 專案倉庫：
+  repo: 項目倉庫：
   frontend: 前端
   backend: 後端
-  contribute_0: 如果您有以下一項或多項經驗，願意為企鵝資料貢獻自己的一份力量，請加QQ群：747099627
-  contribute_1: 本專案為無償開源專案
+  contribute_0: 如果您有以下一項或多項經驗，願意為企鵝數據貢獻自己的一份力量，請加QQ群：747099627
+  contribute_1: 本項目為無償開源項目
   skills:
     frontend: 網站前端開發 Vue.js
     backend: 網站後端開發 Java Spring Boot、MongoDB
     maintenance: 網站運維
     design: UI/UX設計
-    analysis: 資料統計分析
+    analysis: 數據統計分析
     others: "..."
 fetch:
   failed:
-    title: 神經網路連線異常
-    subtitle: 未能與神經網路建立對等連線，部分資源丟失
+    title: 神經網路連接異常
+    subtitle: 未能與神經網路建立對等連接，部分資源丟失
     retry: 重試
     error:
-      zones: 章節元資料
-      stages: 關卡元資料
-      items: 物品資料
-      limitations: 彙報資料校驗規則
-      trends: 彙報歷史資料
-      globalMatrix: 全平臺掉落資料
-      personalMatrix: 個人掉落資料
-      stats: 全站概覽資料
-      period: 伺服器事件資料
+      zones: 章節元數據
+      stages: 關卡元數據
+      items: 物品數據
+      limitations: 彙報數據校驗規則
+      trends: 彙報歷史數據
+      globalMatrix: 全平台掉落數據
+      personalMatrix: 個人掉落數據
+      stats: 全站概覽數據
+      period: 伺服器事件數據
 report:
   alert:
     title:
@@ -140,58 +146,80 @@ report:
       repeat: 真的確定要繼續嗎？
     contact:
       before: 如果您認為這是一次誤判，歡迎
-      activator: 聯絡作者
-      after: "（請附關卡名稱、實際掉落、若有掉落截圖更佳），確認後我們會盡快予以修正。"
+      activator: 聯繫作者
+      after: "（請附關卡名稱、實際掉落、若有掉落截圖更佳），確認後我們會儘快予以修正。"
     causes:
       noDrop: 尚未選擇任何掉落物品
-      limitation: 本次彙報與現有資料差距較大，繼續提交可能導致此次彙報被判定為異常，無法計入全部統計資料中。
+      limitation: 本次彙報與現有數據差距較大，繼續提交可能導致此次彙報被判定為異常，無法計入全部統計數據中。
   rules:
     item:
       _name: 物品項
-      now: 已於 “{stage}” 選擇了 {quantity} 個 “{item}”
-      gte: "“{stage}” 內的 “{item}” 應至少有 {should} 個"
-      lte: "“{stage}” 內的 “{item}” 應至多有 {should} 個"
-      not: "“{stage}” 內的 “{item}” 數量不應等於 {should}"
+      now: 已於 「{stage}」 選擇了 {quantity} 個 「{item}」
+      gte: "「{stage}」 內的 「{item}」 應至少有 {should} 個"
+      lte: "「{stage}」 內的 「{item}」 應至多有 {should} 個"
+      not: "「{stage}」 內的 「{item}」 數量不應等於 {should}"
     type:
       _name: 物品種類
-      now: 於 “{stage}” 已選 {quantity} 個物品
-      gte: "“{stage}” 內應至少有 {should} 個物品"
-      lte: "“{stage}” 內應至多有 {should} 個物品"
-      not: "“{stage}” 內的物品數量應總計不為 {should}"
+      now: 於 「{stage}」 已選 {quantity} 個物品
+      gte: "「{stage}」 內應至少有 {should} 個物品"
+      lte: "「{stage}」 內應至多有 {should} 個物品"
+      not: "「{stage}」 內的物品數量應總計不為 {should}"
+  clear: 清空
+  closedReason:
+    EXPIRED: 關卡彙報已關閉：活動關卡已結束
+    INVALID: 關卡不存在：此關卡未在所選伺服器上提供
+  furniture: 傢具掉落：{state}
+  name: 上報結果
+  submit: 提交
+  success: 彙報成功
+  unable: 無法提交：
+  undo: 撤銷
+  undoSuccess: 撤銷成功
+  gacha: 本作戰允許在一次彙報內包含多個結果。
+  notices:
+    rule_1: 這是單次作戰的提交，請注意核對數目；
+    rule_2: 若無素材掉落，請直接點擊提交；
+    rule_3: 請不要彙報首次通關獎勵，不要只彙報比較「歐」的掉落；
+    rule_4: 請保證通關評價是3星；
+    rule_5: 請只彙報國服的掉落，謝謝。
+  usage: 左鍵增加，右鍵減少
 mirrors:
   global:
-    notification: 推薦使用海外映象站 {0}，可以提升訪問速度哦！
+    notification: 推薦使用海外鏡像站 {0}，可以提升訪問速度哦！
   cn:
-    notification: 推薦使用國內映象站 {0}，可以提升訪問速度哦！
+    notification: 推薦使用國內鏡像站 {0}，可以提升訪問速度哦！
   _notification:
     ignore:
-      title: 不再顯示映象提示？
-      subtitle: 確定要忽略所有映象提示嗎？網站載入效能可能會受到影響。
+      title: 不再顯示鏡像提示？
+      subtitle: 確定要忽略所有鏡像提示嗎？網站載入性能可能會受到影響。
 settings:
   category:
     appearance: 外觀
-    data: 設定與資料
+    data: 設置與數據
   optimization:
     lowData:
-      title: 低資料模式
-      active: 低資料模式已啟用
-      subtitle: 低資料模式將停止載入諸如作戰列表背景圖、全站背景立繪等不必要資源以減少網路資料的使用。
+      title: 低數據模式
+      active: 低數據模式已啟用
+      subtitle: 低數據模式將停止載入諸如作戰列表背景圖、全站背景立繪等不必要資源以減少網路數據的使用。
   data:
-    server: 本地快取資料包含伺服器：
-    size: 本地資料大小：
+    server: 本地緩存數據包含伺服器：
+    size: 本地數據大小：
     reset:
-      title: 重置本地資料與設定
-      subtitle: 將會刪除所有本地資料與設定。刪除後，所有本地設定均會重置至預設值並重新整理頁面，資料將需要重新載入。確定要繼續嗎？
+      title: 重置本地數據與設置
+      subtitle: 將會刪除所有本地數據與設置。刪除後，所有本地設置均會重置至默認值並刷新頁面，數據將需要重新載入。確定要繼續嗎？
 zone:
   name: 章節
   types:
     MAINLINE: 主線
     WEEKLY: 物資籌備
-    ACTIVITY_OPEN: 限時活動（開放中）
-    ACTIVITY_CLOSED: 限時活動（已結束）
+    ACTIVITY_OPEN: 限時活動 — 開放中
+    ACTIVITY_CLOSED: 限時活動 — 已結束
+    ACTIVITY_PENDING: 限時活動 — 即將開放
+    ACTIVITY_PERMANENT: 常駐兌換
   status:
-    closed: 已結束
-    open: 開放中
+    '0': 開放中
+    '1': 已結束
+    "-1": 即將開放
     permanentOpen: 常駐開放
   opensAt: 開放時間：{0} - {1}
 stage:
@@ -201,43 +229,55 @@ stage:
     NORMAL_DROP: 常規掉落
     EXTRA_DROP: 額外物資
     SPECIAL_DROP: 特殊掉落
-    FURNITURE: 傢俱
+    FURNITURE: 傢具
   selector:
     plannerExclude: 排除規劃關卡
     excludeAll: 排除全部
     includeAll: 選中全部
 planner:
+  notices:
+    autoExistence: 刷圖規劃器現將會自動隱藏未於已選擇伺服器出現或開放的關卡
   options:
     _name: 選項
     byProduct: 考慮合成副產物
     requireExp: 大量需求經驗
     requireLmb: 大量需求龍門幣
-    excludeStage: 選定計算排除關卡
+    excludeStage:
+      _name: 計算排除
+      title: 選擇
+      selected: 已排除 {stages} 關
+  reset:
+    name: 重置
+    dialog:
+      title: 重置刷圖規劃器數據
+      subtitle: 將會刪除所有刷圖規劃器數據與設置。確定要繼續嗎？
   actions:
-    import: 匯入
-    export: 匯出
+    _name: 數據
+    import: 導入
+    export: 導出
     importExport: "@:(planner.actions.import)/@:(planner.actions.export)"
     calculate: 計算規劃
+    calculating: 正在計算規劃...
     link:
-      generate: 獲取分享連結
+      generate: 獲取分享鏈接
       generating: 正在生成
-      share: 分享連結
+      share: 分享鏈接
     config:
-      _name: 配置檔案
-      share: 分享配置檔案
-      import: 匯入配置檔案
+      _name: 配置代碼
+      share: 分享配置代碼
+      import: 導入配置代碼
   have: 已有
   need: 需要
-  copy: 複製到剪貼簿
+  copy: 複製到剪貼板
   calculation:
     title: 規劃結果
     tabs:
       stages: 關卡列表
       syntheses: 合成列表
-      values: 素材價值
+      values: 素材理智價值
     lmb: 預計龍門幣收益
     sanity: 預計需要理智
-    exp: 預計獲得錄影帶經驗
+    exp: 預計獲得錄像帶經驗
     times: 次
     level: 材料等級
     noStage: 未找到需要進行的作戰。
@@ -248,23 +288,23 @@ items:
   categories:
     ACTIVITY_ITEM: 活動道具
     CARD_EXP: 作戰記錄
-    FURN: 傢俱
+    FURN: 傢具
     MATERIAL: 材料
 query:
   panel:
     builder: 查詢編輯器
     results: 查詢結果
     footer:
-      cache: 現在顯示的查詢結果資料為快取資料。若需要獲取最新資料，請再次「執行查詢」。
-      disclaimer: "「高階查詢」功能所產出的所有資料資訊均受本站「資料許可協議」保護；本站不對「高階查詢」功能所產出的所有資料資訊做任何形式的承諾或背書。"
+      cache: 現在顯示的查詢結果數據為緩存數據。若需要獲取最新數據，請再次「執行查詢」。
+      disclaimer: "「高級查詢」功能所產出的所有數據信息均受本站「數據許可協議」保護；本站不對「高級查詢」功能所產出的所有數據信息做任何形式的承諾或背書。"
   disclaimer:
     title: 使用前必讀
-    content: "「高階查詢」意在為有更復雜資料分析需求的使用者提供以更高自由度使用企鵝物流資料統計內相關資料集之可能性。由於本功能的高自由度屬性，在不瞭解統計學等相關學科的學術內容前，嘗試分析此功能的查詢結果可能會存在誤導性。企鵝物流資料統計提醒各位對資料進行二次分析的刀客塔：請在分析時不要斷章取義、故意使用本站資料引導輿論。高階查詢功能的受眾群體是熟悉統計學等學科的使用者，開放後便於他們以更多維度分析資料集。我們歡迎對掉落資料感興趣並進行客觀與科學分析的刀客塔，但我們不歡迎帶有個人情緒或既定立場的情況下、嘗試錯誤地從本站資料中得出對任何實體不利結論的使用者。"
+    content: "「高級查詢」意在為有更複雜數據分析需求的用戶提供以更高自由度使用企鵝物流數據統計內相關數據集之可能性。由於本功能的高自由度屬性，在不了解統計學等相關學科的學術內容前，嘗試分析此功能的查詢結果可能會存在誤導性。企鵝物流數據統計提醒各位對數據進行二次分析的刀客塔：請在分析時不要斷章取義、故意使用本站數據引導輿論。高級查詢功能的受眾群體是熟悉統計學等學科的用戶，開放後便於他們以更多維度分析數據集。我們歡迎對掉落數據感興趣並進行客觀與科學分析的刀客塔，但我們不歡迎帶有個人情緒或既定立場的情況下、嘗試錯誤地從本站數據中得出對任何實體不利結論的用戶。"
   title:
     main: 主查詢
     comparison: '對比查詢 #{index}'
   type:
-    matrix: 統計資料
+    matrix: 統計數據
     trend: 歷史趨勢
   selector:
     item:
@@ -284,10 +324,10 @@ query:
         end: 結束
     interval:
       title: 分段間隔
-      subtitle: 用於設定歷史趨勢的分段間隔。
+      subtitle: 用於設置歷史趨勢的分段間隔。
       unspecified: 不分段
   operation:
-    add: 新增對比查詢
+    add: 添加對比查詢
     execute: 執行查詢
     inProgress: 正在執行查詢
   result:
@@ -305,13 +345,20 @@ notice:
   failed: 獲取公告失敗：{error}
   loading: 正在載入公告
 dataSource:
-  switch: 資料來源
-  global: 全平臺
-  loginNotice: 檢視個人掉落資料前，請先登入
+  switch: 數據源
+  global: 全平台
+  loginNotice: 查看個人掉落數據前，請先登錄
   personal: 個人
-  title: 需要登入
+  title: 需要登錄
 validator:
   required: 必填
 quotes:
   doYouKnow:
-    - 你知道嗎？白麵鴞頭上的那一撮毛超級可愛！o(*≧▽≦)ツ
+    - 你知道嗎？白面鴞頭上的那一撮毛超級可愛！o(*≧▽≦)ツ
+attributions:
+  material:
+    title: 網站內容聲明
+    content: 企鵝物流數據統計網站內所使用的遊戲資源（包括但不限於：遊戲圖片、動畫、音頻、文本原文或其轉譯版本等），其目的僅為更好地反映遊戲內對應元素、增強用戶體驗，相關作品之版權仍屬於上海鷹角網路科技有限公司和/或其關聯公司，即鷹角網路遊戲軟體和/或鷹角網路遊戲服務的提供方（包括但不限於：YOSTAR
+      (HONG KONG) LIMITED, 株式會社Yostar, YOSTAR LIMITED, 龍成網路 等）。
+  source:
+    title: 開源許可列表
