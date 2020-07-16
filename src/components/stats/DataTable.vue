@@ -192,6 +192,13 @@
           >
             {{ props.item.apPPR }}
           </td>
+          <template v-if="type === 'item'">
+            <td
+              :class="tableCellClasses"
+            >
+              {{ formatDuration(props.item.stage.minClearTime) }}
+            </td>
+          </template>
           <td
             :class="tableCellClasses"
           >
@@ -328,6 +335,13 @@
               sortable: true,
               width: "70px"
             })
+          headers.splice(6, 0, {
+            text: this.$t("stats.headers.clearTime"),
+            value: "stage.minClearTime",
+            align: "left",
+            sortable: true,
+            width: "100px"
+          })
         }
 
         return headers
@@ -404,6 +418,9 @@
         const end = item.end
 
         return timeFormatter.startEnd(start, end)
+      },
+      formatDuration (duration) {
+        return timeFormatter.duration(duration)
       }
     },
   }
