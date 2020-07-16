@@ -129,8 +129,8 @@ Getters.zones = {
           el.isPermanentOpen = true
         } else {
           el.activityActiveTime = formatter.dates([existence["openTime"], existence["closeTime"]]);
-          el.isOutdated = formatter.isOutdated(existence["openTime"], existence["closeTime"])
           el.timeValid = formatter.checkTimeValid(existence["openTime"], existence["closeTime"])
+          el.isOutdated = el.timeValid !== 0
         }
       }
       return el
