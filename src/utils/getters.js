@@ -67,7 +67,7 @@ Getters.statistics = {
     if (!matrix) return []
 
     return matrix.map(el => {
-      el.zone = Getters.zones.byZoneId(el.stage.zoneId);
+      el.zone = Getters.zones.byZoneId(el.stage.zoneId, false);
       return el
     });
   },

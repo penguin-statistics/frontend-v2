@@ -2,7 +2,7 @@ import store from "@/store"
 
 export default {
   existence (object, parseTime = false, server = store.getters["dataSource/server"]) {
-    const ext = object["existence"]
+    const ext = object["existence"][server]
     if (ext) {
       if (parseTime) {
         const now = Date.now();
@@ -10,8 +10,7 @@ export default {
         if (ext["closeTime"] && ext["closeTime"] < now) return false
       }
 
-      if (!(server in ext)) return true
-      return ext[server]["exist"]
+      return ext["exist"]
     }
     return true
   }

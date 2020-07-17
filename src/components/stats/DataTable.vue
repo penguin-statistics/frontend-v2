@@ -22,6 +22,7 @@
   <!-- our api to get clean and most up-to-date data instead of trying to sneak into our web page. ;) -->
   <div :class="{'stat-table-fix-position': !$store.getters['auth/loggedIn']}">
     <v-expansion-panels
+      v-if="type === 'item'"
       focusable
       popout
     >
@@ -115,7 +116,8 @@
                 striped
                 :value="(filteredData.length / items.length) * 100"
                 height="32"
-                class="mt-1"
+                class="mt-1 elevation-2 font-weight-bold"
+                dark
                 color="blue accent-4"
               >
                 <template v-slot:default>
@@ -280,11 +282,6 @@
                 />
               </v-row>
             </td>
-            <td
-              :class="`${tableCellClasses} yellow--text ${dark ? '' : 'text--darken-3'}`"
-            >
-              {{ props.item.stage.apCost }}
-            </td>
           </template>
           <td
             :class="tableCellClasses"
@@ -325,9 +322,14 @@
           </td>
           <template v-if="type === 'item'">
             <td
+              :class="`${tableCellClasses} ${dark ? 'orange--text text--lighten-1' : 'deep-orange--text text--darken-3 font-weight-bold'}`"
+            >
+              {{ props.item.stage.apCost }}
+            </td>
+            <td
               :class="tableCellClasses"
             >
-              {{ formatDuration(props.item.stage.minClearTime) }}
+              {{ props.item.stage.minClearTime ? formatDuration(props.item.stage.minClearTime) : "N/A" }}
             </td>
           </template>
           <td
@@ -358,6 +360,7 @@
   import Mirror from "@/mixins/Mirror";
   import TitledRow from "@/components/global/TitledRow";
   import existUtils from "@/utils/existUtils";
+  import Console from "@/utils/Console";
 
   export default {
     name: "DataTable",
@@ -401,6 +404,7 @@
         },
         filter: {
           hideMainline: false,
+          hidePermanent: false,
           hideActivity: false,
           onlyOpen: false,
         },
@@ -465,15 +469,14 @@
               align: "left",
               sortable: false,
               width: "230px"
-            },
-            {
-              text: this.$t("stats.headers.apCost"),
-              value: "stage.apCost",
-              align: "left",
-              sortable: true,
-              width: "70px"
             })
-          headers.splice(6, 0, {
+          headers.splice(5, 0, {
+            text: this.$t("stats.headers.apCost"),
+            value: "stage.apCost",
+            align: "left",
+            sortable: true,
+            width: "70px"
+          }, {
             text: this.$t("stats.headers.clearTime"),
             value: "stage.minClearTime",
             align: "left",
@@ -488,21 +491,15 @@
         return strings
       },
       filteredData () {
+        Console.debug("DataTable filter", "started filtering data")
         let data = this.items;
         if (this.type === "item") {
-          if (this.filter.hideMainline) {
-            // console.log("filter hideMainline", data.length, data.filter(el => el.stage.stageType !== "MAIN").length)
-            data = data.filter(el => el.stage.stageType !== "MAIN" && el.stage.stageType !== "SUB" && el.stage.stageType !== "DAILY")
-          }
-          if (this.filter.hideActivity) {
-            // console.log("filter hideActivity", data.length, data.filter(el => el.stage.stageType !== "ACTIVITY").length)
-            data = data.filter(el => el.stage.stageType !== "ACTIVITY")
-          }
-          if (this.filter.onlyOpen) {
-            // console.log("filter onlyOpen", data.length, data.filter(el => existUtils.existence(el.stage, true)).length)
-            data = data.filter(el => existUtils.existence(el.stage, true))
-          }
+          if (this.filter.onlyOpen) data = data.filter(el => existUtils.existence(el.stage, true))
+          if (this.filter.hideMainline) data = data.filter(el => el.stage.stageType !== "MAIN" && el.stage.stageType !== "SUB")
+          if (this.filter.hidePermanent) data = data.filter(el => el.stage.stageType !== "DAILY")
+          if (this.filter.hideActivity) data = data.filter(el => el.stage.stageType !== "ACTIVITY")
         }
+        Console.debug("DataTable filter", "FINISHED ALL as", data)
         return data
       },
       filterCount () {

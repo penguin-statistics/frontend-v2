@@ -43,10 +43,10 @@
         :step="1"
       >
         {{ $t('items.choose.name') }}
-        <!--        <small-->
-        <!--          v-if="step > 1"-->
-        <!--          class="mt-2"-->
-        <!--        >{{ selectedItemName }}</small>-->
+        <small
+          v-if="step > 1"
+          class="mt-2"
+        >{{ selectedItemName }}</small>
       </v-stepper-step>
 
       <v-divider />
@@ -213,7 +213,7 @@ export default {
     storeItemSelection(itemId) {
       this.$router.push({
         name: "StatsByItem_SelectedItem",
-        params: { itemId: itemId }
+        params: { itemId }
       });
     },
     redirectStage({ zone, stage }) {
