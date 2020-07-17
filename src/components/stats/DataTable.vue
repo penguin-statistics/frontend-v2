@@ -359,7 +359,7 @@
   import CDN from "@/mixins/CDN";
   import Mirror from "@/mixins/Mirror";
   import TitledRow from "@/components/global/TitledRow";
-  import existUtils from "@/utils/existUtils";
+  // import existUtils from "@/utils/existUtils";
   import Console from "@/utils/Console";
 
   export default {
@@ -491,15 +491,15 @@
         return strings
       },
       filteredData () {
-        Console.debug("DataTable filter", "started filtering data")
         let data = this.items;
+        Console.debug("DataTable filter", "started filtering data", JSON.stringify(data).length)
         if (this.type === "item") {
-          if (this.filter.onlyOpen) data = data.filter(el => existUtils.existence(el.stage, true))
-          if (this.filter.hideMainline) data = data.filter(el => el.stage.stageType !== "MAIN" && el.stage.stageType !== "SUB")
-          if (this.filter.hidePermanent) data = data.filter(el => el.stage.stageType !== "DAILY")
-          if (this.filter.hideActivity) data = data.filter(el => el.stage.stageType !== "ACTIVITY")
+          // if (this.filter.onlyOpen) data = data.filter(el => existUtils.existence(el.stage, true))
+          // if (this.filter.hideMainline) data = data.filter(el => el.stage.stageType !== "MAIN" && el.stage.stageType !== "SUB")
+          // if (this.filter.hidePermanent) data = data.filter(el => el.stage.stageType !== "DAILY")
+          // if (this.filter.hideActivity) data = data.filter(el => el.stage.stageType !== "ACTIVITY")
         }
-        Console.debug("DataTable filter", "FINISHED ALL as", data)
+        Console.debug("DataTable filter", "FINISHED ALL as", JSON.stringify(data).length)
         return data
       },
       filterCount () {

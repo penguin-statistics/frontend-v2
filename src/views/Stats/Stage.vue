@@ -107,7 +107,9 @@ export default {
   }),
   computed: {
     stats () {
+      console.log("before", window.calc(this.$store.state, 3).data.data.CN.globalMatrix)
       const got = get.statistics.byStageId(this.selected.stage);
+      console.log("after", window.calc(this.$store.state, 3).data.data.CN.globalMatrix)
       if (!got) return [];
       return got
     },

@@ -173,6 +173,7 @@
   import Console from "@/utils/Console";
   import {mapGetters} from "vuex";
   import CDN from "@/mixins/CDN";
+  import existUtils from "@/utils/existUtils";
 
   export default {
     name: "StageSelector",
@@ -282,7 +283,8 @@
         for (const [index, categories] of categoriesSet[this.small ? 1 : 0].entries()) {
           for (const category of categories) {
             let filter;
-            let zones = get.zones.byType(category.startsWith("ACTIVITY") ? "ACTIVITY" : category);
+            let zones = get.zones.byType(category.startsWith("ACTIVITY") ? "ACTIVITY" : category, false);
+            zones = zones.filter(el => existUtils.existence(el, false))
 
             if (category === "ACTIVITY_OPEN") {
               filter = zone => zone.timeValid === 0;

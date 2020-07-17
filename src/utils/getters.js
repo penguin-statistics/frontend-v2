@@ -3,6 +3,32 @@ import formatter from "@/utils/timeFormatter";
 import existUtils from "@/utils/existUtils";
 // import Console from "@/utils/Console";
 
+// eslint-disable-next-line no-unused-vars
+function cloned (o) {
+  let newO
+  let i
+
+  if (typeof o !== 'object') return o
+
+  if (!o) return o
+
+  if (Object.prototype.toString.apply(o) === '[object Array]') {
+    newO = []
+    for (i = 0; i < o.length; i += 1) {
+      newO[i] = cloned(o[i])
+    }
+    return newO
+  }
+
+  newO = {}
+  for (i in o) {
+    if (o.hasOwnProperty(i)) {
+      newO[i] = cloned(o[i])
+    }
+  }
+  return newO
+}
+
 const Getters = {};
 
 Getters.items = {
@@ -51,13 +77,15 @@ Getters.statistics = {
     return matrix
       .filter(filter)
       .map(el => {
-        const stage = Getters.stages.byStageId(el.stageId);
-        el.stage = stage;
-        el.percentage = (el.quantity / el.times);
-        el.percentageText = `${(el.percentage * 100).toFixed(2)}%`;
-
-        el.apPPR = (stage.apCost / el.percentage).toFixed(2)
-        return el
+        const stage = Getters.stages.byStageId(el.stageId, false);
+        const percentage = el.quantity / el.times
+        return {
+          ...el,
+          stage,
+          percentage,
+          percentageText: `${(percentage * 100).toFixed(2)}%`,
+          apPPR: (stage.apCost / percentage).toFixed(2)
+        }
       });
   },
   byItemId(itemId) {
@@ -67,8 +95,10 @@ Getters.statistics = {
     if (!matrix) return []
 
     return matrix.map(el => {
-      el.zone = Getters.zones.byZoneId(el.stage.zoneId, false);
-      return el
+      return {
+        ...el,
+        zone: Getters.zones.byZoneId(el.stage.zoneId, false)
+      }
     });
   },
   byStageId(stageId) {
@@ -78,8 +108,10 @@ Getters.statistics = {
     if (!matrix) return []
 
     return matrix.map(el => {
-      el.item = Getters.items.byItemId(el.itemId);
-      return el
+      return {
+        ...el,
+        item: Getters.items.byItemId(el.itemId)
+      }
     });
   },
 }
