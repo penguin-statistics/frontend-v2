@@ -181,15 +181,6 @@
       </v-chip>
     </v-row>
 
-    <div class="stat-table-watermark d-flex align-center justify-start flex-column text-center px-4">
-      <h1 :class="{'display-2 mb-4': !$vuetify.breakpoint.smAndUp, 'display-3 mb-6': $vuetify.breakpoint.smAndUp}">
-        {{ currentMirrorHostname }}
-      </h1>
-      <span :class="{'display-1': !$vuetify.breakpoint.smAndUp, 'display-2': $vuetify.breakpoint.smAndUp}">
-        {{ $t('app.name') }}
-      </span>
-    </div>
-
     <v-data-table
       :headers="headers"
       :items="filteredData"
@@ -207,8 +198,19 @@
       :mobile-breakpoint="1"
       :loading="matrixPending"
 
-      :class="{'elevation-0 transparentTable stat-table container--fluid px-2': true, 'pt-0': $vuetify.breakpoint.xsOnly}"
+      class="elevation-0 transparentTable stat-table container--fluid px-2 position-relative"
+      :class="{'pt-0': $vuetify.breakpoint.xsOnly}"
     >
+      <template v-slot:header>
+        <div class="stat-table-watermark d-flex align-center justify-start flex-column text-center px-4">
+          <h1 :class="{'display-2 mb-4': !$vuetify.breakpoint.smAndUp, 'display-3 mb-6': $vuetify.breakpoint.smAndUp}">
+            {{ currentMirrorHostname }}
+          </h1>
+          <span :class="{'display-1': !$vuetify.breakpoint.smAndUp, 'display-2': $vuetify.breakpoint.smAndUp}">
+            {{ $t('app.name') }}
+          </span>
+        </div>
+      </template>
       <template v-slot:item="props">
         <tr>
           <template v-if="type === 'stage'">
