@@ -4,7 +4,7 @@
     :class="{'my-3 mx-6': !dense}"
     align="center"
   >
-    <span :class="{'title': !dense, 'subtitle-1': dense}">
+    <span :class="{'title': !dense, 'subtitle-2': dense}">
       <slot name="header" />
     </span>
     <v-divider

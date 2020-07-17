@@ -83,7 +83,28 @@ stats:
     quantity: Loots
     percentage: Percentage
     apPPR: Sanity Required Per Item
+    clearTime: Shortest Clear
     timeRange: Time Range
+  headerDesc:
+    apCost: The Sanity required for the stage
+    quantity: The sum of all drops in this stage
+    times: The sum of the samples in this stage
+    percentage: "Calculated as $\frac{\text{quantity}}{\text{times}}$"
+    apPPR: Expected Sanity required for getting 1x of this item
+    clearTime: "The shortest possible time required to clear this stage, a.k.a. the time duration starting from the beginning of the combat to the appearance of the last enemy. Data source: [PRTS Wiki]({prtsLink})."
+    timeRange: "Due to the change of the drop table of this stage, the data in this row will only contain the data from the last change of the drop table, indicated as \"Time Range\""
+  filter:
+    title: Filter
+    indicator: "No Filter Applied | {count} Filter Applied | {count} Filters Applied"
+    stats: Post-filtered {filtered} / Original {total}
+    overview: Filter Summary
+    type:
+      _name: Stage Type
+      hideMainline: Hide Mainlines
+      hideActivity: Hide Activities
+    status:
+      _name: Stage Status
+      onlyOpen: Only show open stages
   timeRange:
     inBetween: "{0} to {1}"
     toPresent: "{date} to Present"

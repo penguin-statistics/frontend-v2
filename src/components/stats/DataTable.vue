@@ -22,68 +22,108 @@
   <!-- our api to get clean and most up-to-date data instead of trying to sneak into our web page. ;) -->
   <div :class="{'stat-table-fix-position': !$store.getters['auth/loggedIn']}">
     <v-expansion-panels
-      v-model="filter.expanded"
       focusable
+      popout
     >
       <v-expansion-panel>
         <v-expansion-panel-header color="background">
           <template v-slot:default="{ open }">
-            数据过滤
+            <v-icon
+              left
+              class="flex-grow-0"
+            >
+              mdi-filter
+            </v-icon>
+            {{ $t('stats.filter.title') }}
             <v-spacer />
             <v-fade-transition>
               <v-chip
                 v-if="!open"
                 small
-                color="warning"
-                class="flex-grow-0 mr-2"
+                :color="filterCount ? 'warning' : 'secondary'"
+                class="flex-grow-0 font-weight-bold mr-2 px-4"
               >
-                已应用 3 个过滤器
+                {{ $tc('stats.filter.indicator', filterCount) }}
               </v-chip>
             </v-fade-transition>
           </template>
         </v-expansion-panel-header>
         <v-expansion-panel-content color="background">
-          <TitledRow
-            dense
-            class="mt-3 mb-4 mx-0"
-          >
-            <template v-slot:header>
-              关卡类型
-            </template>
-            <template v-slot:content>
-              <v-switch
-                v-model="filter.hideMainline"
-                hide-details
-                label="隐藏主线"
-                class="mt-0 pt-0"
-                :class="{'mr-2': $vuetify.breakpoint.smAndUp}"
-              />
-              <v-switch
-                v-model="filter.hideActivity"
-                hide-details
-                label="隐藏活动"
-                class="pt-0"
-                :class="{'mt-0 mr-2': $vuetify.breakpoint.smAndUp}"
-              />
-            </template>
-          </TitledRow>
-          <TitledRow
-            dense
-            class="mx-0"
-          >
-            <template v-slot:header>
-              关卡状态
-            </template>
-            <template v-slot:content>
-              <v-switch
-                v-model="filter.onlyOpen"
-                hide-details
-                label="仅正在开放"
-                class="mt-0 pt-0"
-                :class="{'mr-2': $vuetify.breakpoint.smAndUp}"
-              />
-            </template>
-          </TitledRow>
+          <v-row>
+            <v-col
+              cols="12"
+              sm="12"
+              md="6"
+              lg="6"
+              xl="6"
+            >
+              <TitledRow
+                dense
+                class="mt-3 mb-4 mx-0"
+              >
+                <template v-slot:header>
+                  {{ $t('stats.filter.type._name') }}
+                </template>
+                <template v-slot:content>
+                  <v-switch
+                    v-model="filter.hideMainline"
+                    hide-details
+                    :label="$t('stats.filter.type.hideMainline')"
+                    class="mt-0 pt-0"
+                    :class="{'mr-2': $vuetify.breakpoint.smAndUp}"
+                  />
+                  <v-switch
+                    v-model="filter.hideActivity"
+                    hide-details
+                    :label="$t('stats.filter.type.hideActivity')"
+                    class="pt-0"
+                    :class="{'mt-0 mr-2': $vuetify.breakpoint.smAndUp}"
+                  />
+                </template>
+              </TitledRow>
+              <TitledRow
+                dense
+                class="mx-0"
+              >
+                <template v-slot:header>
+                  {{ $t('stats.filter.status._name') }}
+                </template>
+                <template v-slot:content>
+                  <v-switch
+                    v-model="filter.onlyOpen"
+                    hide-details
+                    :label="$t('stats.filter.status.onlyOpen')"
+                    class="mt-0 pt-0"
+                    :class="{'mr-2': $vuetify.breakpoint.smAndUp}"
+                  />
+                </template>
+              </TitledRow>
+            </v-col>
+            <v-col
+              cols="12"
+              sm="12"
+              md="6"
+              lg="6"
+              xl="6"
+              :class="{'mt-2': $vuetify.breakpoint.mdAndUp}"
+            >
+              <h2 class="subtitle-1">
+                {{ $t('stats.filter.overview') }}
+              </h2>
+              <v-progress-linear
+                rounded
+                striped
+                :value="(filteredData.length / items.length) * 100"
+                height="32"
+                class="mt-1"
+                color="blue accent-4"
+              >
+                <template v-slot:default>
+                  {{ $t('stats.filter.stats', {filtered: filteredData.length, total: items.length}) }}
+                </template>
+              </v-progress-linear>
+            </v-col>
+          </v-row>
           <!--          <v-row-->
           <!--            align="center"-->
           <!--            justify="start"-->
@@ -111,34 +151,34 @@
     </v-expansion-panels>
     
     <v-row
-      v-if="$vuetify.breakpoint.xsOnly"
       align="center"
       justify="center"
-      class="mt-3 mb-1"
+      class="mt-4 mb-1 hidden-sm-and-up"
     >
-      <span
-        class="caption grey--text"
+      <v-chip
+        label
+        class="d-flex align-center flex-row caption text--text"
       >
         <v-icon
-          small
-          color="grey"
+          :size="20"
+          color="text"
           class="scroll-chevron-left mr-1"
         >
           mdi-chevron-double-left
         </v-icon>
 
         <span
-          class="scroll-keyword"
+          class="scroll-keyword text--text"
         >{{ $t('scroll') }}</span>
 
         <v-icon
-          small
-          color="grey"
+          :size="20"
+          color="text"
           class="scroll-chevron-right ml-1"
         >
           mdi-chevron-double-right
         </v-icon>
-      </span>
+      </v-chip>
     </v-row>
 
     <div class="stat-table-watermark d-flex align-center justify-start flex-column text-center px-4">
@@ -358,7 +398,6 @@
           }
         },
         filter: {
-          expanded: null,
           hideMainline: false,
           hideActivity: false,
           onlyOpen: false,
@@ -437,7 +476,7 @@
             value: "stage.minClearTime",
             align: "left",
             sortable: true,
-            width: "100px"
+            width: "110px"
           })
         }
 
@@ -449,11 +488,23 @@
       filteredData () {
         let data = this.items;
         if (this.type === "item") {
-          if (this.filter.hideMainline) data = data.filter(el => el.stage.stageType !== "MAIN")
-          if (this.filter.hideActivity) data = data.filter(el => el.stage.stageType !== "ACTIVITY")
-          if (this.filter.onlyOpen) data = data.filter(el => existUtils.existence(el.stage, true))
+          if (this.filter.hideMainline) {
+            // console.log("filter hideMainline", data.length, data.filter(el => el.stage.stageType !== "MAIN").length)
+            data = data.filter(el => el.stage.stageType !== "MAIN" && el.stage.stageType !== "SUB" && el.stage.stageType !== "DAILY")
+          }
+          if (this.filter.hideActivity) {
+            // console.log("filter hideActivity", data.length, data.filter(el => el.stage.stageType !== "ACTIVITY").length)
+            data = data.filter(el => el.stage.stageType !== "ACTIVITY")
+          }
+          if (this.filter.onlyOpen) {
+            // console.log("filter onlyOpen", data.length, data.filter(el => existUtils.existence(el.stage, true)).length)
+            data = data.filter(el => existUtils.existence(el.stage, true))
+          }
         }
         return data
+      },
+      filterCount () {
+        return Object.values(this.filter).reduce((prev, item) => prev += item === true, 0)
       }
     },
     created () {

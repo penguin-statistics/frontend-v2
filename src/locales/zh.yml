@@ -90,6 +90,18 @@ stats:
     apPPR: 根据当前的「百分比」项，计算出的在该作战获得「1x对应物品」所需的期望理智
     clearTime: "现「最短通关用时」使用的是来源于 [PRTS Wiki]({prtsLink}) 公布的最短通关用时，即「作战开始直到最后出怪」的时间总长"
     timeRange: 由于存在掉落物列表变动，此行数据将仅包含最后一次变动后直至现在的统计数据，即为「统计区间」
+  filter:
+    title: 数据过滤
+    indicator: 已应用 {count} 个过滤器
+    stats: 过滤后 {filtered} / 过滤前 {total}
+    overview: 过滤概览
+    type:
+      _name: 关卡类型
+      hideMainline: 隐藏主线
+      hideActivity: 隐藏活动
+    status:
+      _name: 关卡状态
+      onlyOpen: 仅正在开放
   timeRange:
     inBetween: "{0} ~ {1}"
     toPresent: "{date} 至今"
