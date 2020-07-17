@@ -5,36 +5,42 @@
     class="transparent elevation-0 full-width pa-4"
   >
     <v-stepper-header
-      class="bkop-light elevation-4"
+      class="d-flex flex-row align-center justify-start bkop-light elevation-4 py-4 px-6"
       style="border-radius: 4px"
     >
-      <v-stepper-step
-        :complete="step > 1"
-        :editable="step > 1"
-        :step="1"
-      >
+      <v-fade-transition leave-absolute>
         <span
-          class="text-center"
-          style="word-break: keep-all"
-        >
-          {{ $t('zone.name') }} & {{ $t('stage.name') }}
-        </span>
-        <small
           v-if="step > 1"
-          class="mt-2"
+          class="d-flex flex-row align-center"
         >
-          {{ strings.translate(selectedStage, "code") }}
-        </small>
-      </v-stepper-step>
-
-      <v-divider />
-
-      <v-stepper-step
-        :complete="step === 2"
-        :step="2"
-      >
-        {{ name }}
-      </v-stepper-step>
+          <v-btn
+            outlined
+            class="text-center"
+            style="word-break: keep-all"
+            @click="step = 1"
+          >
+            <v-icon left>
+              mdi-chevron-left
+            </v-icon>
+            {{ $t('zone.name') }} & {{ $t('stage.name') }}
+          </v-btn>
+          <v-divider
+            vertical
+            class="mx-2"
+          />
+          <span class="title">
+            {{ name }}
+          </span>
+        </span>
+        <span
+          v-else
+          class="d-flex flex-row align-center"
+        >
+          <span class="title">
+            选定关卡
+          </span>
+        </span>
+      </v-fade-transition>
     </v-stepper-header>
     <v-stepper-items class="stepper-overflow-initial">
       <v-stepper-content
