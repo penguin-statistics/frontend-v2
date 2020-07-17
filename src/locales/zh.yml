@@ -80,8 +80,16 @@ stats:
     quantity: 掉落数
     percentage: 百分比
     apPPR: 单件估算理智
-    clearTime: 最短用时
+    clearTime: 最短通关用时
     timeRange: 统计区间
+  headerDesc:
+    apCost: 该作战所需要的理智
+    quantity: 在该作战中，所有提交到企鹅物流数据统计的掉落数之和
+    times: 在该作战中，所有提交到企鹅物流数据统计的样本提交数之和
+    percentage: "计算方式为 $\frac{\text{掉落数}}{\text{样本数}}$"
+    apPPR: 根据当前的「百分比」项，计算出的在该作战获得「1x对应物品」所需的期望理智
+    clearTime: "现「最短通关用时」使用的是来源于 [PRTS Wiki]({prtsLink}) 公布的最短通关用时，即「作战开始直到最后出怪」的时间总长"
+    timeRange: 由于存在掉落物列表变动，此行数据将仅包含最后一次变动后直至现在的统计数据，即为「统计区间」
   timeRange:
     inBetween: "{0} ~ {1}"
     toPresent: "{date} 至今"

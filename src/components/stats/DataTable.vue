@@ -18,14 +18,103 @@
 <template>
   <!-- This `fix-position` thing is actually for preventing unauthorized usage of the devtools. -->
   <!-- Yeah I know this is not useful I know, but 99% of the time, that the one who do the copy/pastie jobs and not -->
-  <!-- attributing us won't be clever to the point to disable this class. If they are this clever, they would use -->
+  <!-- attributing us won't be clever to the point to disable this class. If they are clever like this, they would use -->
   <!-- our api to get clean and most up-to-date data instead of trying to sneak into our web page. ;) -->
   <div :class="{'stat-table-fix-position': !$store.getters['auth/loggedIn']}">
+    <v-expansion-panels
+      v-model="filter.expanded"
+      focusable
+    >
+      <v-expansion-panel>
+        <v-expansion-panel-header color="background">
+          <template v-slot:default="{ open }">
+            数据过滤
+            <v-spacer />
+            <v-fade-transition>
+              <v-chip
+                v-if="!open"
+                small
+                color="warning"
+                class="flex-grow-0 mr-2"
+              >
+                已应用 3 个过滤器
+              </v-chip>
+            </v-fade-transition>
+          </template>
+        </v-expansion-panel-header>
+        <v-expansion-panel-content color="background">
+          <TitledRow
+            dense
+            class="mt-3 mb-4 mx-0"
+          >
+            <template v-slot:header>
+              关卡类型
+            </template>
+            <template v-slot:content>
+              <v-switch
+                v-model="filter.hideMainline"
+                hide-details
+                label="隐藏主线"
+                class="mt-0 pt-0"
+                :class="{'mr-2': $vuetify.breakpoint.smAndUp}"
+              />
+              <v-switch
+                v-model="filter.hideActivity"
+                hide-details
+                label="隐藏活动"
+                class="pt-0"
+                :class="{'mt-0 mr-2': $vuetify.breakpoint.smAndUp}"
+              />
+            </template>
+          </TitledRow>
+          <TitledRow
+            dense
+            class="mx-0"
+          >
+            <template v-slot:header>
+              关卡状态
+            </template>
+            <template v-slot:content>
+              <v-switch
+                v-model="filter.onlyOpen"
+                hide-details
+                label="仅正在开放"
+                class="mt-0 pt-0"
+                :class="{'mr-2': $vuetify.breakpoint.smAndUp}"
+              />
+            </template>
+          </TitledRow>
+          <!--          <v-row-->
+          <!--            align="center"-->
+          <!--            justify="start"-->
+          <!--          >-->
+          <!--            <span class="title">-->
+          <!--              数据-->
+          <!--            </span>-->
+          <!--            <v-divider-->
+          <!--              vertical-->
+          <!--              class="mx-4"-->
+          <!--            />-->
+          <!--            <v-text-field>-->
+          <!--              <template v-slot:append-outer>-->
+          <!--                <v-btn outlined>-->
+          <!--                  <v-icon>-->
+          <!--                    mdi-add-->
+          <!--                  </v-icon>-->
+          <!--                  添加过滤器-->
+          <!--                </v-btn>-->
+          <!--              </template>-->
+          <!--            </v-text-field>-->
+          <!--          </v-row>-->
+        </v-expansion-panel-content>
+      </v-expansion-panel>
+    </v-expansion-panels>
+    
     <v-row
       v-if="$vuetify.breakpoint.xsOnly"
       align="center"
       justify="center"
-      class="mt-1 mb-3"
+      class="mt-3 mb-1"
     >
       <span
         class="caption grey--text"
@@ -63,7 +152,7 @@
 
     <v-data-table
       :headers="headers"
-      :items="items"
+      :items="filteredData"
       :search="search"
       :options="options.table"
       :footer-props="options.footer"
@@ -225,10 +314,12 @@
   import timeFormatter from "@/utils/timeFormatter";
   import CDN from "@/mixins/CDN";
   import Mirror from "@/mixins/Mirror";
+  import TitledRow from "@/components/global/TitledRow";
+  import existUtils from "@/utils/existUtils";
 
   export default {
     name: "DataTable",
-    components: {Item, Charts},
+    components: {TitledRow, Item, Charts},
     mixins: [Theme, CDN, Mirror],
     props: {
       items: {
@@ -265,6 +356,12 @@
             itemsPerPageOptions: [10, 20, 40, -1],
             showCurrentPage: true
           }
+        },
+        filter: {
+          expanded: null,
+          hideMainline: false,
+          hideActivity: false,
+          onlyOpen: false,
         },
         tableCellClasses: "px-2 font-weight-bold monospace",
         hideItemName: false,
@@ -348,6 +445,15 @@
       },
       strings () {
         return strings
+      },
+      filteredData () {
+        let data = this.items;
+        if (this.type === "item") {
+          if (this.filter.hideMainline) data = data.filter(el => el.stage.stageType !== "MAIN")
+          if (this.filter.hideActivity) data = data.filter(el => el.stage.stageType !== "ACTIVITY")
+          if (this.filter.onlyOpen) data = data.filter(el => existUtils.existence(el.stage, true))
+        }
+        return data
       }
     },
     created () {
