@@ -321,14 +321,28 @@
 
             if (filter) zones = zones.filter(filter);
 
-            zones = zones.map(zone => {
-              let stages = get.stages.byParentZoneId(zone.zoneId)
-              if (this.hideClosed) {
-                stages = stages.filter(stage => !!stage["dropInfos"])
-              }
-              zone.stages = stages
-              return zone
-            })
+            zones = zones
+              .map(zone => {
+                let stages = get.stages.byParentZoneId(zone.zoneId)
+                if (this.hideClosed) {
+                  stages = stages.filter(stage => !!stage["dropInfos"])
+                }
+                stages = stages.filter(el => existUtils.existence(el))
+
+                return {
+                  ...zone,
+                  stages
+                }
+              })
+              // filter out empty zones
+              .filter(el => el.stages.length)
+
+            // sort activity zones by its openTime
+            if (category.startsWith("ACTIVITY")) {
+              const server = this.$store.getters["dataSource/server"]
+              zones = zones.slice()
+                .sort((a, b) => a["existence"][server]["openTime"] - b["existence"][server]["openTime"])
+            }
 
             if (this.lowData) {
               zones = zones.map(el => {
@@ -368,9 +382,15 @@
         if (!this.selected.stage) return null;
         const allStagesInZone = get.stages.byParentZoneId(this.selected.zone);
         const stageInZoneIndex = allStagesInZone.indexOf(this.selectedStage);
+
+        function validStage(stage) {
+          console.log(stageInZoneIndex, stage)
+          return existUtils.existence(stage) ? stage : null
+        }
+
         return {
-          prev: stageInZoneIndex >= 0 ? allStagesInZone[stageInZoneIndex - 1] : null,
-          next: stageInZoneIndex < allStagesInZone.length ? allStagesInZone[stageInZoneIndex + 1] : null
+          prev: stageInZoneIndex > 0 ? validStage(allStagesInZone[stageInZoneIndex - 1]) : null,
+          next: stageInZoneIndex < (allStagesInZone.length - 1) ? validStage(allStagesInZone[stageInZoneIndex + 1]) : null
         }
       }
     },

@@ -111,13 +111,13 @@
           <h1 class="title no-wrap--text">
             <span class="overline">{{ strings.translate(selectedZone, "zoneName") }}</span>
             {{ strings.translate(selectedStage, "code") }}
-            <v-btn
-              icon
-            >
-              <v-icon>
-                mdi-star
-              </v-icon>
-            </v-btn>
+            <!--            <v-btn-->
+            <!--              icon-->
+            <!--            >-->
+            <!--              <v-icon>-->
+            <!--                mdi-star-->
+            <!--              </v-icon>-->
+            <!--            </v-btn>-->
           </h1>
           <v-spacer />
           <v-btn
