@@ -55,6 +55,11 @@
               v-for="category in categories"
               :key="category.id"
             >
+              <!--              <OffTitle-->
+              <!--                :content="$t(['zone.types', category.id].join('.'))"-->
+              <!--                small-->
+              <!--                class="pl-2"-->
+              <!--              />-->
               <v-subheader>
                 <v-icon
                   class="mr-2"
@@ -81,19 +86,30 @@
                   >
                     <v-row align="center">
                       <span
-                        v-if="zone.isActivity && !small"
+                        v-if="zone.isActivity && !small && zone.timeValid !== undefined"
                         :class="{
-                          'red--text': zone.isOutdated,
-                          'green--text': !zone.isOutdated }"
+                          'red--text': zone.timeValid === 1,
+                          'green--text': zone.timeValid === 0,
+                          'grey--text': zone.timeValid === -1
+                        }"
                         class="text--darken-1 font-weight-bold ml-2 mr-1"
                       >
-                        {{ zone.isOutdated ? $t('zone.status.closed') : $t('zone.status.open') }}
+                        {{ $t('zone.status.' + zone.timeValid) }}
+                      </span>
+                      <span
+                        v-if="zone.isPermanentOpen"
+                        class="text--darken-1 font-weight-bold orange--text ml-2 mr-1"
+                      >
+                        {{ $t('zone.status.permanentOpen') }}
                       </span>
 
                       <span
                         class="subtitle-1 pl-2"
-                        :class="{'text--darken-1 font-weight-bold': zone.isActivity && small, 'red--text': zone.isActivity && small && zone.isOutdated,
-                                 'green--text': zone.isActivity && small && !zone.isOutdated}"
+                        :class="{'text--darken-1 font-weight-bold': zone.isActivity && small,
+                                 'red--text': zone.isActivity && small && zone.timeValid === 1,
+                                 'green--text': zone.isActivity && small && zone.timeValid === 0,
+                                 'grey--text': zone.isActivity && small && zone.timeValid === -1
+                        }"
                       >
                         {{ strings.translate(zone, "zoneName") }}
                       </span>
@@ -138,6 +154,33 @@
         :step="2"
         class="pa-0 pt-2"
       >
+        <v-expand-transition leave-absolute>
+          <div
+            v-if="selected.stage"
+            class="d-flex flex-row align-center"
+          >
+            <v-fade-transition>
+              <StageCard
+                v-if="relativeStages.prev"
+                left
+                :dense="$vuetify.breakpoint.xsOnly"
+                :stage="relativeStages.prev"
+                @click.native="selectStage(relativeStages.prev.zoneId, relativeStages.prev.stageId, false)"
+              />
+            </v-fade-transition>
+            <v-spacer />
+            <v-fade-transition>
+              <StageCard
+                v-if="relativeStages.next"
+                right
+                :dense="$vuetify.breakpoint.xsOnly"
+                :stage="relativeStages.next"
+                @click.native="selectStage(relativeStages.next.zoneId, relativeStages.next.stageId, false)"
+              />
+            </v-fade-transition>
+          </div>
+        </v-expand-transition>
+        
         <span
           v-if="!$vuetify.breakpoint.xs"
           class="stage-id--background font-weight-black display-4 px-12 py-6"
@@ -157,6 +200,7 @@
   import Console from "@/utils/Console";
   import {mapGetters} from "vuex";
   import CDN from "@/mixins/CDN";
+  import existUtils from "@/utils/existUtils";
 
   export default {
     name: "StageSelector",
@@ -197,8 +241,9 @@
           "act9d0_zone1": this.cdnResource('/backgrounds/zones/act9d0_zone1.jpg'),
           "act10d5_zone1": this.cdnResource('/backgrounds/zones/act10d5_zone1.jpg'),
           "act11d0_zone1": this.cdnResource('/backgrounds/zones/act11d0_zone1.jpg'),
-          "A001_zone1": this.cdnResource('/backgrounds/zones/A001_zone1.jpg'),
-          "A003_zone1": this.cdnResource('/backgrounds/zones/A003_zone1.jpg'),
+          "1stact_zone1": this.cdnResource('/backgrounds/zones/A001_zone1.jpg'),
+          "act3d0_zone1": this.cdnResource('/backgrounds/zones/A003_zone1.jpg'),
+          "act4d0_zone1": this.cdnResource('/backgrounds/zones/main_e0.jpg'),
           "main_0": this.cdnResource('/backgrounds/zones/main_0.jpg'),
           "main_1": this.cdnResource('/backgrounds/zones/main_1.jpg'),
           "main_2": this.cdnResource('/backgrounds/zones/main_2.jpg'),
@@ -207,7 +252,6 @@
           "main_5": this.cdnResource('/backgrounds/zones/main_5.jpg'),
           "main_6": this.cdnResource('/backgrounds/zones/main_6.jpg'),
           "main_7": this.cdnResource('/backgrounds/zones/main_7.jpg'),
-          "main_e0": this.cdnResource('/backgrounds/zones/main_e0.jpg'),
           "gachabox": this.cdnResource('/backgrounds/zones/gachabox.jpg'),
         }
       }
@@ -245,44 +289,82 @@
         return strings
       },
       small () {
-        return this.$vuetify.breakpoint.xsOnly
+        return this.$vuetify.breakpoint.smAndDown
       },
       categorizedZones() {
         const categoriesSet =
-          this.hideClosed ? [["ACTIVITY_OPEN", "MAINLINE"], ["WEEKLY"]]
-                          : [["MAINLINE", "WEEKLY"], ["ACTIVITY_OPEN", "ACTIVITY_CLOSED"]];
+          this.hideClosed ?
+            // Report
+            [
+              [["ACTIVITY_OPEN", "MAINLINE"], ["ACTIVITY_PERMANENT", "WEEKLY"]], // md, lg & xl
+              [["ACTIVITY_OPEN", "MAINLINE"], ["ACTIVITY_PERMANENT", "WEEKLY"]]  // xs & sm
+            ]
+              :
+            // Show Statistics
+            [
+              [["ACTIVITY_OPEN", "MAINLINE", "WEEKLY"], ["ACTIVITY_PERMANENT", "ACTIVITY_PENDING", "ACTIVITY_CLOSED"]], // md, lg & xl
+              [["ACTIVITY_PENDING", "ACTIVITY_OPEN", "MAINLINE"], ["ACTIVITY_PERMANENT", "WEEKLY", "ACTIVITY_CLOSED"]]  // xs & sm
+            ]
+
         const result = [[], []];
-        for (const [index, categories] of categoriesSet.entries()) {
+        for (const [index, categories] of categoriesSet[this.small ? 1 : 0].entries()) {
           for (const category of categories) {
             let filter;
-            let zones = get.zones.byType(category.startsWith("ACTIVITY") ? "ACTIVITY" : category);
+            let zones = get.zones.byType(category.startsWith("ACTIVITY") ? "ACTIVITY" : category, false);
+            zones = zones.filter(el => existUtils.existence(el, false))
 
             if (category === "ACTIVITY_OPEN") {
-              filter = zone => !zone.isOutdated;
+              filter = zone => zone.timeValid === 0;
             } else if (category === "ACTIVITY_CLOSED") {
-              filter = zone => zone.isOutdated;
+              filter = zone => zone.timeValid === 1;
+            } else if (category === "ACTIVITY_PENDING") {
+              filter = zone => zone.timeValid === -1;
+            } else if (category === "ACTIVITY_PERMANENT") {
+              filter = zone => zone.isPermanentOpen;
             }
 
             if (filter) zones = zones.filter(filter);
 
-            zones = zones.map(zone => {
-              let stages = get.stages.byParentZoneId(zone.zoneId)
-              if (this.hideClosed) {
-                stages = stages.filter(stage => !!stage["dropInfos"])
-              }
-              zone.stages = stages
-              return zone
-            })
+            zones = zones
+              .map(zone => {
+                let stages = get.stages.byParentZoneId(zone.zoneId)
+                if (this.hideClosed) {
+                  stages = stages.filter(stage => !!stage["dropInfos"])
+                }
+                stages = stages.filter(el => existUtils.existence(el))
+
+                return {
+                  ...zone,
+                  stages
+                }
+              })
+              // filter out empty zones
+              .filter(el => el.stages.length)
+
+            // sort activity zones by its openTime
+            if (category.startsWith("ACTIVITY")) {
+              const server = this.$store.getters["dataSource/server"]
+              zones = zones.slice()
+                .sort((a, b) => a["existence"][server]["openTime"] - b["existence"][server]["openTime"])
+            }
 
             if (this.lowData) {
               zones = zones.map(el => {
-                el.image = null
-                return el
+                return {
+                  ...el,
+                  image: null
+                }
               })
             } else {
               zones = zones.map(el => {
-                if (el.zoneId in this.stageImages) el.image = this.stageImages[el.zoneId]
-                return el
+                if (el.zoneId in this.stageImages) {
+                  return {
+                    ...el,
+                    image: this.stageImages[el.zoneId]
+                  }
+                } else {
+                  return el
+                }
               })
             }
 
@@ -300,6 +382,21 @@
         if (!this.selected.stage) return {};
         return get.stages.byStageId(this.selected.stage);
       },
+      relativeStages () {
+        if (!this.selected.stage) return null;
+        const allStagesInZone = get.stages.byParentZoneId(this.selected.zone);
+        const stageInZoneIndex = allStagesInZone.indexOf(this.selectedStage);
+
+        function validStage(stage) {
+          // console.log(stageInZoneIndex, stage)
+          return existUtils.existence(stage) ? stage : null
+        }
+
+        return {
+          prev: stageInZoneIndex > 0 ? validStage(allStagesInZone[stageInZoneIndex - 1]) : null,
+          next: stageInZoneIndex < (allStagesInZone.length - 1) ? validStage(allStagesInZone[stageInZoneIndex + 1]) : null
+        }
+      }
     },
     watch: {
       '$route' () {
@@ -310,12 +407,22 @@
       this.checkRoute()
     },
     methods: {
-      selectStage (zone, stage) {
+      selectStage (zone, stage, incrementStep = true) {
         Console.log("StageSelector", "chose", zone, stage);
         this.selected.zone = zone;
         this.selected.stage = stage;
         this.$emit("select", {zone, stage});
-        this.step += 1
+        if (incrementStep) {
+          this.step += 1
+        } else {
+          this.$router.push({
+            name: this.routerNames.details,
+            params: {
+              zoneId: this.selected.zone,
+              stageId: this.selected.stage
+            }
+          })
+        }
       },
       checkRoute () {
         if (!this.bindRouter) return;

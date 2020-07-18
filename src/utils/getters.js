@@ -34,6 +34,12 @@ Getters.items = {
     if (!got) return {};
     return got.find(el => el.name === name) || {}
   },
+  byGroupId (groupId, ...options) {
+    if (!groupId) return []
+    const got = this.all(...options);
+    if (!got) return [];
+    return got.filter(el => el.groupID === groupId) || []
+  }
 }
 
 // Getters.limitations = {
@@ -51,13 +57,15 @@ Getters.statistics = {
     return matrix
       .filter(filter)
       .map(el => {
-        const stage = Getters.stages.byStageId(el.stageId);
-        el.stage = stage;
-        el.percentage = (el.quantity / el.times);
-        el.percentageText = `${(el.percentage * 100).toFixed(2)}%`;
-
-        el.apPPR = (stage.apCost / el.percentage).toFixed(2)
-        return el
+        const stage = Getters.stages.byStageId(el.stageId, false);
+        const percentage = el.quantity / el.times
+        return {
+          ...el,
+          stage,
+          percentage,
+          percentageText: `${(percentage * 100).toFixed(2)}%`,
+          apPPR: (stage.apCost / percentage).toFixed(2)
+        }
       });
   },
   byItemId(itemId) {
@@ -67,8 +75,10 @@ Getters.statistics = {
     if (!matrix) return []
 
     return matrix.map(el => {
-      el.zone = Getters.zones.byZoneId(el.stage.zoneId);
-      return el
+      return {
+        ...el,
+        zone: Getters.zones.byZoneId(el.stage.zoneId, false)
+      }
     });
   },
   byStageId(stageId) {
@@ -78,8 +88,10 @@ Getters.statistics = {
     if (!matrix) return []
 
     return matrix.map(el => {
-      el.item = Getters.items.byItemId(el.itemId);
-      return el
+      return {
+        ...el,
+        item: Getters.items.byItemId(el.itemId)
+      }
     });
   },
 }
@@ -122,18 +134,22 @@ Getters.zones = {
     zones = zones.slice().sort((a, b) => {
       return a["zoneIndex"] - b["zoneIndex"]
     }).map(el => {
+      let toMerge = {}
       if (el.isActivity) {
         const existence = el["existence"][server]
 
         if (!existence["openTime"] && !existence["closeTime"]) {
-          el.isPermanentOpen = true
+          toMerge.isPermanentOpen = true
         } else {
-          el.activityActiveTime = formatter.dates([existence["openTime"], existence["closeTime"]]);
-          el.isOutdated = formatter.isOutdated(existence["openTime"], existence["closeTime"])
-          el.timeValid = formatter.checkTimeValid(existence["openTime"], existence["closeTime"])
+          toMerge.activityActiveTime = formatter.dates([existence["openTime"], existence["closeTime"]]);
+          toMerge.timeValid = formatter.checkTimeValid(existence["openTime"], existence["closeTime"])
+          toMerge.isOutdated = toMerge.timeValid !== 0
         }
       }
-      return el
+      return {
+        ...el,
+        ...toMerge
+      }
     })
     return zones
   },

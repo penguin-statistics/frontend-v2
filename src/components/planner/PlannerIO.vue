@@ -9,46 +9,46 @@
       <!--        短链接-->
       <!--      </Subheader>-->
 
-      <!--      <v-fade-transition leave-absolute>-->
-      <!--        <v-text-field-->
-      <!--          v-if="shortlink.content && !shortlink.generating"-->
-      <!--          id="copy-content"-->
-      <!--          label="分享短链接"-->
-      <!--          :value="shortlink.content"-->
-      <!--          dense-->
-      <!--          outlined-->
-      <!--          placeholder="https://exusi.ai/foobar"-->
+      <!--            <v-fade-transition leave-absolute>-->
+      <!--              <v-text-field-->
+      <!--                v-if="shortlink.content && !shortlink.generating"-->
+      <!--                id="copy-content"-->
+      <!--                label="分享短链接"-->
+      <!--                :value="shortlink.content"-->
+      <!--                dense-->
+      <!--                outlined-->
+      <!--                placeholder="https://exusi.ai/foobar"-->
 
-      <!--          readonly-->
+      <!--                readonly-->
 
-      <!--          append-icon="mdi-content-copy"-->
-      <!--          @click:append="copy(shortlink.content)"-->
-      <!--        />-->
+      <!--                append-icon="mdi-content-copy"-->
+      <!--                @click:append="copy(shortlink.content)"-->
+      <!--              />-->
 
-      <!--        <v-btn-->
-      <!--          v-else-->
-      <!--          block-->
-      <!--          :loading="shortlink.generating"-->
-      <!--          large-->
-      <!--          class="mb-5"-->
-      <!--          :class="{'primary': !shortlink.generating, 'slash-strip&#45;&#45;loading': shortlink.generating}"-->
-      <!--          @click="generateShortlink"-->
-      <!--        >-->
-      <!--          <template v-slot:loader>-->
-      <!--            <v-progress-circular-->
-      <!--              indeterminate-->
-      <!--              :size="16"-->
-      <!--              :width="2"-->
-      <!--              class="mr-2"-->
-      <!--            />-->
-      <!--            正在生成...-->
-      <!--          </template>-->
-      <!--          <v-icon left>-->
-      <!--            mdi-link-box-->
-      <!--          </v-icon>-->
-      <!--          生成短链接-->
-      <!--        </v-btn>-->
-      <!--      </v-fade-transition>-->
+      <!--              <v-btn-->
+      <!--                v-else-->
+      <!--                block-->
+      <!--                :loading="shortlink.generating"-->
+      <!--                large-->
+      <!--                class="mb-5"-->
+      <!--                :class="{'primary': !shortlink.generating, 'slash-strip&#45;&#45;loading': shortlink.generating}"-->
+      <!--                @click="generateShortlink"-->
+      <!--              >-->
+      <!--                <template v-slot:loader>-->
+      <!--                  <v-progress-circular-->
+      <!--                    indeterminate-->
+      <!--                    :size="16"-->
+      <!--                    :width="2"-->
+      <!--                    class="mr-2"-->
+      <!--                  />-->
+      <!--                  正在生成...-->
+      <!--                </template>-->
+      <!--                <v-icon left>-->
+      <!--                  mdi-link-box-->
+      <!--                </v-icon>-->
+      <!--                生成短链接-->
+      <!--              </v-btn>-->
+      <!--            </v-fade-transition>-->
       
 
       <Subheader>

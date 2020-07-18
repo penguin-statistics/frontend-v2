@@ -10,7 +10,6 @@
         {{ $t('meta.footer.copyright.title') }}
       </span>
       <img
-        svg-inline
         :src="require('@/assets/ccIcon/cc-by-nc.svg')"
         class="d-inline align-center ml-1"
         height="24"

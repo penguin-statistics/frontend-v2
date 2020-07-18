@@ -11,6 +11,7 @@
   import SpecialUI from "@/mixins/SpecialUI";
   import CDN from "@/mixins/CDN";
   import {mapGetters} from "vuex";
+  import randomUtils from "@/utils/randomUtils";
 
   export default {
     name: "RandomBackground",
@@ -19,6 +20,8 @@
       interval: {
         type: Number,
         default () {
+          return 5 * 60
+          // eslint-disable-next-line no-unreachable
           if ((typeof window.orientation !== "undefined") || (navigator.userAgent.indexOf('IEMobile') !== -1)) {
             // is mobile device; reduce data usage, use ttl of 30 minutes
             return 30 * 60
@@ -85,17 +88,11 @@
         })
       },
       async getRandomBackgroundUrl() {
-        let current = this.last;
-        // avoid change to the same background than the last one
-        while (current === this.last) {
-          current = Math.floor(Math.random() * this.imageRange)
-        }
-        this.last = current;
         // Console.log(current)
         if (this.webpSupport === null) {
           this.webpSupport = await this.testWebp();
         }
-        return this.getImageUrl(current)
+        return this.getImageUrl(randomUtils.cachedRandom.get())
       },
       async updateBackgroundByRandom(ignoreUrl) {
         // Console.log("check at random", this.isSpecialUrl(this.$route), this.$route)
@@ -107,7 +104,9 @@
       async updateBackgroundByUrl(url) {
         const background = this.$refs.background;
         this.lastLoading = true;
-        window.fetch(url)
+        window.fetch(url, {
+          cache: "force-cache"
+        })
           .then((response) => {
             return response.blob();
           })

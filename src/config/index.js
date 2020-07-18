@@ -1,4 +1,4 @@
-const version = "v3.2.2";
+const version = "v3.3.0";
 
 module.exports = {
   version,
@@ -14,6 +14,10 @@ module.exports = {
   },
   advancedQuery: {
     maxQueries: 5,
+  },
+  randomBackground: {
+    limit: 5,
+    max: 104
   },
   servers: ["CN", "US", "JP", "KR"]
 }

@@ -1,4 +1,6 @@
 import "./workers/register"
+import 'core-js/stable'
+import 'regenerator-runtime/runtime'
 
 import App from './App.vue'
 import Vue from 'vue'

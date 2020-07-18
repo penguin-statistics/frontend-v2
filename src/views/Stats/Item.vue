@@ -59,6 +59,52 @@
       </v-stepper-step>
     </v-stepper-header>
 
+    <v-slide-y-transition leave-absolute>
+      <v-card
+        v-if="isSelectedItem && relatedItems.length"
+        class="bkop-light mt-2 elevation-4 py-2 px-6"
+      >
+        <TitledRow
+          dense
+        >
+          <template v-slot:header>
+            <v-icon>
+              mdi-related
+            </v-icon>
+            {{ $t("items.related") }}
+          </template>
+          <template v-slot:content>
+            <span
+              v-for="item in relatedItems"
+              :key="item.itemId"
+              class="mr-1 cursor-pointer"
+              @click="storeItemSelection(item.itemId)"
+            >
+              <v-badge
+                bordered
+                bottom
+                overlap
+
+                :offset-x="16"
+                :offset-y="20"
+                color="green darken-1"
+                icon="mdi-check"
+                :value="item.itemId === selected.item.itemId"
+                class="d-flex"
+              >
+                <span :style="{'filter': item.itemId === selected.item.itemId ? 'drop-shadow(0 0 3px rgba(255, 255, 255, .6))' : 'none'}">
+                  <Item
+                    :item="item"
+                    :ratio="0.6"
+                  />
+                </span>
+              </v-badge>
+            </span>
+          </template>
+        </TitledRow>
+      </v-card>
+    </v-slide-y-transition>
+
     <v-stepper-items class="stepper-overflow-initial">
       <v-stepper-content
         :step="1"
@@ -87,7 +133,6 @@
               class="px-4 px-sm-4 px-md-6 px-lg-6 px-xl-8 pt-0 pb-4"
             >
               <Item
-                v-if="selected.item"
                 :item="selected.item"
                 :ratio="0.7"
 
@@ -123,10 +168,11 @@ import Console from "@/utils/Console";
 import strings from "@/utils/strings";
 import DataTable from "@/components/stats/DataTable";
 import ItemSelector from "@/components/stats/ItemSelector";
+import TitledRow from "@/components/global/TitledRow";
 
 export default {
   name: "StatsByItem",
-  components: {ItemSelector, DataTable, Item, DataSourceToggle },
+  components: {TitledRow, ItemSelector, DataTable, Item, DataSourceToggle },
   data: () => ({
     expanded: {},
     step: 1,
@@ -137,6 +183,9 @@ export default {
     }
   }),
   computed: {
+    isSelectedItem () {
+      return !!this.$route.params.itemId
+    },
     selected() {
       return {
         item: get.items.byItemId(this.$route.params.itemId)
@@ -152,6 +201,10 @@ export default {
     selectedItemName() {
       if (!this.selected.item) return "";
       return strings.translate(this.selected.item, "name");
+    },
+    relatedItems() {
+      if (!this.selected.item) return "";
+      return get.items.byGroupId(this.selected.item.groupID)
     }
   },
   watch: {
@@ -213,7 +266,7 @@ export default {
     storeItemSelection(itemId) {
       this.$router.push({
         name: "StatsByItem_SelectedItem",
-        params: { itemId: itemId }
+        params: { itemId }
       });
     },
     redirectStage({ zone, stage }) {

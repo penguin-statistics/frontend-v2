@@ -17,7 +17,7 @@ import AboutChangelog from './views/About/Changelog'
 import AboutContact from './views/About/Contact'
 import AboutDonate from './views/About/Donate'
 import AboutLinks from './views/About/Links'
-import AboutAttributions from './views/About/Attributions'
+import AboutCredits from './views/About/Credits'
 import NotFound from "@/views/NotFound";
 import AdvancedQuery from "@/views/AdvancedQuery";
 import SiteStats from "@/views/SiteStats";
@@ -221,33 +221,33 @@ const router = new Router({
         },
       },
       {
-        path: 'attributions',
-        name: 'AboutAttributions',
-        component: AboutAttributions,
+        path: 'credits',
+        name: 'AboutCredits',
+        component: AboutCredits,
         props: true,
         meta: {
           icon: 'mdi-license',
-          i18n: 'menu.about.attributions'
+          i18n: 'menu.about.credits'
         },
       },
     ]
   },
-  {
-    path: '/_redirect/v1',
-    name: 'OldVersion',
-    meta: {
-      ga: {
-        category: 'redirect',
-        action: 'links',
-        label: 'OldVersion',
-        value: 1
-      },
-      link: "https://v1.penguin-stats.io",
-      icon: 'mdi-penguin',
-      i18n: 'menu.v1',
-      externalRedirect: true
-    }
-  },
+  // {
+  //   path: '/_redirect/v1',
+  //   name: 'OldVersion',
+  //   meta: {
+  //     ga: {
+  //       category: 'redirect',
+  //       action: 'links',
+  //       label: 'OldVersion',
+  //       value: 1
+  //     },
+  //     link: "https://v1.penguin-stats.io",
+  //     icon: 'mdi-penguin',
+  //     i18n: 'menu.v1',
+  //     externalRedirect: true
+  //   }
+  // },
   // {
   //   path: '/_internal/debugger/data',
   //   name: 'DataDebugger',
