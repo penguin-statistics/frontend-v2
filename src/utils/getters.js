@@ -3,32 +3,6 @@ import formatter from "@/utils/timeFormatter";
 import existUtils from "@/utils/existUtils";
 // import Console from "@/utils/Console";
 
-// eslint-disable-next-line no-unused-vars
-function cloned (o) {
-  let newO
-  let i
-
-  if (typeof o !== 'object') return o
-
-  if (!o) return o
-
-  if (Object.prototype.toString.apply(o) === '[object Array]') {
-    newO = []
-    for (i = 0; i < o.length; i += 1) {
-      newO[i] = cloned(o[i])
-    }
-    return newO
-  }
-
-  newO = {}
-  for (i in o) {
-    if (o.hasOwnProperty(i)) {
-      newO[i] = cloned(o[i])
-    }
-  }
-  return newO
-}
-
 const Getters = {};
 
 Getters.items = {

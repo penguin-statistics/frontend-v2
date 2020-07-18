@@ -149,16 +149,6 @@
             xl="6"
             class="order-1 order-sm-1 order-md-0 order-lg-0 order-xl-0"
           >
-            <v-alert
-              v-if="!$vuetify.breakpoint.smAndDown"
-              dense
-              color="secondary darken-2"
-              class="subtitle-1 pl-6 mb-4 mx-2"
-              dark
-              border="left"
-            >
-              {{ $t('report.usage') }}
-            </v-alert>
             <v-container
               v-for="category in stageItems"
               :key="category.id"
@@ -347,6 +337,16 @@
             xl="6"
             class="order-0 order-sm-0 order-md-1 order-lg-1 order-xl-1"
           >
+            <v-alert
+              v-if="!$vuetify.breakpoint.smAndDown"
+              dense
+              color="secondary darken-2"
+              class="subtitle-1 pl-6 mb-4 mx-2"
+              dark
+              border="left"
+            >
+              {{ $t('report.usage') }}
+            </v-alert>
             <v-alert
               color="orange darken-3"
               border="left"
