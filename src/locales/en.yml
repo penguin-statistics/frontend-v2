@@ -28,7 +28,7 @@ menu:
     donate: Donate
     links: Link Exchange
     bulletin: Notice
-    attributions: Attributions
+    credits: Credits
   siteStats: Statistics at a Glance
   planner: Farming Strategy Planner
   v1: Visit Old Version
@@ -404,7 +404,7 @@ validator:
 quotes:
   doYouKnow:
     - Do You Know? Ptilopsis' feather is sooo cute! o(*≧▽≦)ツ
-attributions:
+credits:
   material:
     title: Content Credits
     content: Penguin Statistics utilizes (including but not limited to) pictures,
