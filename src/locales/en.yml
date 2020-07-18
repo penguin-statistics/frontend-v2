@@ -255,6 +255,8 @@ zone:
     WEEKLY: Supplies
     ACTIVITY_OPEN: Event (Open)
     ACTIVITY_CLOSED: Event (Closed)
+    ACTIVITY_PENDING: Event (Coming Soon)
+    ACTIVITY_PERMANENT: Supplies Box
   status:
     '0': Open
     '1': Closed

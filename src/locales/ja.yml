@@ -188,6 +188,8 @@ zone:
     WEEKLY: 物資調達
     ACTIVITY_OPEN: イベント（開催中）
     ACTIVITY_CLOSED: イベント（終了）
+    ACTIVITY_PENDING: イベント（近日開催）
+    ACTIVITY_PERMANENT: 補給物資
   status:
     '0': 開催中
     '1': 終了
