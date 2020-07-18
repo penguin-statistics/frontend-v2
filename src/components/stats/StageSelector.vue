@@ -159,21 +159,25 @@
             v-if="selected.stage"
             class="d-flex flex-row align-center"
           >
-            <StageCard
-              v-if="relativeStages.prev"
-              left
-              :dense="$vuetify.breakpoint.xsOnly"
-              :stage="relativeStages.prev"
-              @click.native="selectStage(relativeStages.prev.zoneId, relativeStages.prev.stageId, false)"
-            />
+            <v-fade-transition>
+              <StageCard
+                v-if="relativeStages.prev"
+                left
+                :dense="$vuetify.breakpoint.xsOnly"
+                :stage="relativeStages.prev"
+                @click.native="selectStage(relativeStages.prev.zoneId, relativeStages.prev.stageId, false)"
+              />
+            </v-fade-transition>
             <v-spacer />
-            <StageCard
-              v-if="relativeStages.next"
-              right
-              :dense="$vuetify.breakpoint.xsOnly"
-              :stage="relativeStages.next"
-              @click.native="selectStage(relativeStages.next.zoneId, relativeStages.next.stageId, false)"
-            />
+            <v-fade-transition>
+              <StageCard
+                v-if="relativeStages.next"
+                right
+                :dense="$vuetify.breakpoint.xsOnly"
+                :stage="relativeStages.next"
+                @click.native="selectStage(relativeStages.next.zoneId, relativeStages.next.stageId, false)"
+              />
+            </v-fade-transition>
           </div>
         </v-expand-transition>
         
@@ -384,7 +388,7 @@
         const stageInZoneIndex = allStagesInZone.indexOf(this.selectedStage);
 
         function validStage(stage) {
-          console.log(stageInZoneIndex, stage)
+          // console.log(stageInZoneIndex, stage)
           return existUtils.existence(stage) ? stage : null
         }
 
