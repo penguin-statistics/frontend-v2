@@ -292,14 +292,14 @@
           this.hideClosed ?
             // Report
             [
-              [["ACTIVITY_OPEN", "ACTIVITY_PERMANENT", "MAINLINE"], ["WEEKLY"]], // md, lg & xl
-              [["ACTIVITY_OPEN", "ACTIVITY_PERMANENT", "MAINLINE"], ["WEEKLY"]]  // xs & sm
+              [["ACTIVITY_OPEN", "MAINLINE"], ["ACTIVITY_PERMANENT", "WEEKLY"]], // md, lg & xl
+              [["ACTIVITY_OPEN", "MAINLINE"], ["ACTIVITY_PERMANENT", "WEEKLY"]]  // xs & sm
             ]
               :
             // Show Statistics
             [
-              [["MAINLINE", "WEEKLY"], ["ACTIVITY_PENDING", "ACTIVITY_OPEN", "ACTIVITY_PERMANENT", "ACTIVITY_CLOSED"]], // md, lg & xl
-              [["ACTIVITY_PENDING", "ACTIVITY_OPEN", "ACTIVITY_PERMANENT", "MAINLINE"], ["WEEKLY", "ACTIVITY_CLOSED"]]  // xs & sm
+              [["MAINLINE", "ACTIVITY_PERMANENT", "WEEKLY"], ["ACTIVITY_PENDING", "ACTIVITY_OPEN", "ACTIVITY_CLOSED"]], // md, lg & xl
+              [["ACTIVITY_PENDING", "ACTIVITY_OPEN", "MAINLINE"], ["ACTIVITY_PERMANENT", "WEEKLY", "ACTIVITY_CLOSED"]]  // xs & sm
             ]
 
         const result = [[], []];
