@@ -302,7 +302,7 @@
               :
             // Show Statistics
             [
-              [["MAINLINE", "ACTIVITY_PERMANENT", "WEEKLY"], ["ACTIVITY_PENDING", "ACTIVITY_OPEN", "ACTIVITY_CLOSED"]], // md, lg & xl
+              [["ACTIVITY_OPEN", "MAINLINE", "WEEKLY"], ["ACTIVITY_PERMANENT", "ACTIVITY_PENDING", "ACTIVITY_CLOSED"]], // md, lg & xl
               [["ACTIVITY_PENDING", "ACTIVITY_OPEN", "MAINLINE"], ["ACTIVITY_PERMANENT", "WEEKLY", "ACTIVITY_CLOSED"]]  // xs & sm
             ]
 
