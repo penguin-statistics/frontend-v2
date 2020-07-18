@@ -4,7 +4,6 @@ export default {
   namespaced: true,
   state: {
     dataTable: {
-      showMainline: true,
       showPermanent: true,
       showActivity: true,
       onlyOpen: false,

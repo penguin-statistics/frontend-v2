@@ -67,19 +67,19 @@
                   {{ $t('stats.filter.type._name') }}
                 </template>
                 <template v-slot:content>
-                  <v-checkbox
-                    v-model="dataTable.showMainline"
-                    hide-details
-                    :label="$t('stats.filter.type.showMainline')"
-                    class="mt-0 pt-0"
-                    :class="{'mr-2': $vuetify.breakpoint.smAndUp}"
-                  />
+                  <!--                  <v-checkbox-->
+                  <!--                    v-model="dataTable.showMainline"-->
+                  <!--                    hide-details-->
+                  <!--                    :label="$t('stats.filter.type.showMainline')"-->
+                  <!--                    class="mt-0 pt-0"-->
+                  <!--                    :class="{'mr-2': $vuetify.breakpoint.smAndUp}"-->
+                  <!--                  />-->
                   <v-checkbox
                     v-model="dataTable.showPermanent"
                     hide-details
                     :label="$t('stats.filter.type.showPermanent')"
-                    class="pt-0"
-                    :class="{'mt-0 mr-2': $vuetify.breakpoint.smAndUp}"
+                    class="mt-0 pt-0"
+                    :class="{'mr-2': $vuetify.breakpoint.smAndUp}"
                   />
                   <v-checkbox
                     v-model="dataTable.showActivity"
@@ -523,23 +523,16 @@
         let data = this.items;
         if (this.type === "item") {
           if (this.dataTable.onlyOpen) data = data.filter(el => existUtils.existence(el.stage, true))
-          if (!this.dataTable.showMainline) data = data.filter(el => el.stage.stageType !== "MAIN" && el.stage.stageType !== "SUB")
-          if (!this.dataTable.showPermanent) data = data.filter(el => el.stage.stageType !== "DAILY")
+          if (!this.dataTable.showPermanent) data = data.filter(el => el.stage.stageType !== "MAIN" && el.stage.stageType !== "SUB" && el.stage.stageType !== "DAILY")
           if (!this.dataTable.showActivity) data = data.filter(el => el.stage.stageType !== "ACTIVITY")
         }
         return data
       },
       filterCount () {
-        return Object.keys(this.dataTable)
-          .map(el => {
-            if (~el.indexOf("show")) {
-              return this.dataTable[el] === false
-            } else {
-              return this.dataTable[el]
-            }
-          })
-          .reduce((prev, item) => prev += item === true, 0)
-
+        let counter = 0;
+        if (this.dataTable.onlyOpen) counter++
+        if (!this.dataTable.showPermanent || !this.dataTable.showActivity) counter++
+        return counter
       }
     },
     watch: {
