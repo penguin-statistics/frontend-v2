@@ -62,6 +62,16 @@ export default {
     if (includeTime) template += ` ${FORMATS.HM}`
     return dayjs(date).format(template)
   },
+  /** duration: duration in milliseconds; returns: localized string */
+  duration (duration, unit = "s") {
+    if (!duration) return ""
+    let message = ""
+    const d = dayjs.duration(duration / 1000, unit)
+    if (d.get('minutes') > 0) message += `${d.get('minutes')}'`
+    const ms = d.get('milliseconds') > 0 ? ((d.get('milliseconds') / 1000)).toString().replace("0.", ".") : ""
+    if (d.get('seconds') > 0) message += `${d.get('seconds')}${ms}"`
+    return message
+  },
   startEnd (start, end, selector=false) {
     if (start && end) {
       return i18n.t('stats.timeRange.inBetween', this.dates([start, end], false))

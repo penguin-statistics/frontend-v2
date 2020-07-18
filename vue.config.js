@@ -29,7 +29,7 @@ module.exports = {
       }
     }
   },
-  integrity: true,
+  integrity: false,
   runtimeCompiler: true,
   transpileDependencies: [
     "vuetify"
@@ -44,11 +44,13 @@ module.exports = {
       //   dontCacheBustURLsMatching: /.[a-f0-9]{8}./
       // })
     ],
-  },
-  chainWebpack: config => {
-    config.module
-      .rule("vue")
-      .use("vue-svg-inline-loader")
-      .loader("vue-svg-inline-loader");
+    module: {
+      rules: [
+        {
+          test: /\.ya?ml$/,
+          use : 'js-yaml-loader',
+        }
+      ]
+    }
   }
 };

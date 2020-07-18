@@ -1,5 +1,6 @@
 <template>
   <v-row
+    dense
     align="center"
     justify="center"
     class="pr-1 pb-1"

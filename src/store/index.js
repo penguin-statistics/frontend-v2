@@ -9,6 +9,7 @@ import cache from "./modules/cache";
 import data from './modules/data';
 import dataSource from './modules/dataSource';
 import mirror from './modules/mirror';
+import options from './modules/options';
 import planner from './modules/planner';
 import settings from './modules/settings';
 import ui from './modules/ui';
@@ -38,7 +39,8 @@ export default new Vuex.Store({
       key: "penguin-stats-settings",
       paths: [
         "settings",
-        "planner"
+        "planner",
+        "options"
       ]
     }),
     createPersistedState({
@@ -69,6 +71,7 @@ export default new Vuex.Store({
     settings,
     planner,
     mirror,
+    options,
     ui
   }
 });

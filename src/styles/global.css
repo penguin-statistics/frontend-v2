@@ -351,7 +351,7 @@
     height: 100%;
     width: 100%;
     opacity: 0.025;
-    margin-top: 12em;
+    margin-top: 3em;
 }
 
 .stat-table-fix-position {
@@ -419,7 +419,6 @@
 }
 
 .scroll-chevron-left {
-    margin-top: -3px;
     animation: scroll-left 3.5s infinite cubic-bezier(0.455, 0.03, 0.515, 0.955);
 }
 
@@ -428,49 +427,48 @@
 }
 
 .scroll-chevron-right {
-    margin-top: -3px;
     animation: scroll-right 3.5s infinite cubic-bezier(0.455, 0.03, 0.515, 0.955);
 }
 
 @keyframes scroll-left {
     from {
-        transform: translateX(0px);
-        filter: brightness(1);
+        transform: translate3d(0, 0, 0);
+        opacity: .3
     }
     50% {
-        transform: translateX(-5px);
-        filter: brightness(2);
+        transform: translate3d(-5px, 0, 0) scaleX(0.9);
+        opacity: 1
     }
     to {
-        transform: translateX(0px);
-        filter: brightness(1);
+        transform: translate3d(0, 0, 0);
+        opacity: .3
     }
 }
 
 @keyframes scroll-right {
     from {
-        transform: translateX(0px);
-        filter: brightness(1);
+        transform: translate3d(0, 0, 0);
+        opacity: .3
     }
     50% {
-        transform: translateX(5px);
-        filter: brightness(2);
+        transform: translate3d(5px, 0, 0)  scaleX(0.9);
+        opacity: 1
     }
     to {
-        transform: translateX(0px);
-        filter: brightness(1);
+        transform: translate3d(0, 0, 0);
+        opacity: .3
     }
 }
 
 @keyframes scroll-keyword {
     from {
-        filter: brightness(1);
+        opacity: .6
     }
     30% {
-        filter: brightness(1.5);
+        opacity: 1
     }
     to {
-        filter: brightness(1);
+        opacity: .6
     }
 }
 
@@ -523,5 +521,13 @@
         flex: 0 0 10% !important;
         max-width: 10% !important;
     }
+}
+
+.v-list--force-line-break {
+    white-space: normal;
+}
+
+.position-relative {
+    position: relative !important;
 }
 

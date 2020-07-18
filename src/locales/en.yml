@@ -1,0 +1,419 @@
+---
+app:
+  name: Penguin Statistics
+  name_line1: Penguin Statistics
+  name_line2: ''
+server:
+  name: Server
+  switch: Switch Server
+  servers:
+    CN: CN
+    US: US
+    JP: JP
+    KR: KR
+menu:
+  home: Home
+  report: Report Drops
+  stats:
+    _name: Drop Rates
+    stage: By stage
+    item: By item
+    advanced: Advanced Query
+  about:
+    _name: About Penguin Statistics
+    members: Team Members
+    contribute: Contribute
+    changelog: Change Log
+    contact: Contact us
+    donate: Donate
+    links: Link Exchange
+    bulletin: Notice
+    credits: Credits
+  siteStats: Statistics at a Glance
+  planner: Farming Strategy Planner
+  v1: Visit Old Version
+  refreshData: Reload
+  languages: Language
+  settings:
+    name: Settings
+    themes:
+      name: Change Color Theme
+      system: Follow System
+      dark: Always Dark
+      light: Always Light
+  overline:
+    planner: ArkPlanner
+meta:
+  details: Details
+  loading: Fetching application data...
+  notfound: "???"
+  footer:
+    copyright:
+      title: License
+      content: Data was collected by Penguin Statistics, licensed under a Creative
+        Commons Attribution-NonCommercial 4.0 International License. In case of redistribution
+        and transformation towards the material, you must give appropriate credit,
+        provide a link to the license, indicate if changes were made, and may not
+        use the material for commercial purposes.
+    credit: Penguin Statistics | {date}
+  separator: ", "
+  quotation:
+    start: "\""
+    end: "\""
+  boolean:
+    'true': 'Yes'
+    'false': 'No'
+  hasNorNot:
+    'true': 'Yes'
+    'false': 'No'
+  dialog:
+    cancel: Cancel
+    confirm: Confirm
+    submit: Submit
+    close: Close
+  copyWarning: |2-
+
+    Data from Penguin Statistics ({site})
+stats:
+  headers:
+    stage: Stage
+    apCost: Sanity
+    item: Item
+    times: Samples
+    quantity: Loots
+    percentage: Percentage
+    apPPR: Sanity Required Per Item
+    clearTime: Shortest Clear Time
+    timeRange: Time Range
+  headerDesc:
+    apCost: The Sanity required for the stage
+    quantity: The sum of all drops in this stage
+    times: The sum of the samples in this stage
+    percentage: "Calculated as $\frac{\text{quantity}}{\text{times}}$"
+    apPPR: Expected Sanity required for getting 1x of this item
+    clearTime: "The shortest possible time required to clear this stage, a.k.a. the time duration starting from the beginning of the combat to the appearance of the last enemy. Data source: [PRTS Wiki]({prtsLink})."
+    timeRange: "Due to the change of the drop table of this stage, the data in this row will only contain the data from the last change of the drop table, indicated as \"Time Range\""
+  filter:
+    title: Filter
+    indicator: "No Filter Applied | {count} Filter Applied | {count} Filters Applied"
+    stats: Post-filtered {filtered} / Original {total}
+    overview: Filter Summary
+    type:
+      _name: Stage Type
+      showPermanent: Permanent
+      showActivity: Event
+    status:
+      _name: Stage Status
+      onlyOpen: Only show open stages
+  timeRange:
+    inBetween: "{0} to {1}"
+    toPresent: "{date} to Present"
+    endsAt: Before {date}
+    unknown: Unknown
+    notSelected: "(not selected)"
+  trends:
+    name: Historical Drop Data
+    set:
+      rate: Drop Rate
+      sample: Samples
+      drops: Drops
+  lastUpdated: 'Last updated at: {date}'
+  site:
+    viewMore: Learn More
+    total:
+      sanity: Sanity consumed in all reports
+      report: Total Drop Reports
+      items: Total Item Drops
+    stages: Top Upload Stages
+    items: Top Upload Items
+    all: Full Time
+    24hr: Last 24hr
+    generating:
+      title: Generating Site Statistics...
+      subtitle: 'Neural Network Message: Due to high amount of data, site statistics
+        need up to 5 minutes to calculate. Please come back later.'
+      refresh: Refresh Site Statistics
+contribute:
+  repo: 'Project repositories: '
+  frontend: Front End
+  backend: Back End
+  contribute_0: 'If you have experience with any of the following, and want to contribute
+    to Penguin Statistics, contact us at QQ group: 747099627.'
+  contribute_1: This is a nonprofit and open source project
+  skills:
+    frontend: Front End Development (Vue.js)
+    backend: Back End Development (Java Spring Boot, MongoDB)
+    maintenance: DevOps
+    design: UI/UX Design
+    analysis: Data Analysis
+    others: "..."
+fetch:
+  failed:
+    title: Failed to fetch resources
+    subtitle: Unable to establish synchronized connection with neural network. Missing
+      partial or all resources.
+    retry: Retry
+    error:
+      zones: Zones Data
+      stages: Stages Data
+      items: Items Data
+      limitations: Report Validation Rules
+      trends: History Report Trends
+      globalMatrix: Global Drop Data
+      personalMatrix: Personal Drop Data
+      stats: Site Statistics
+      period: Server Events
+report:
+  alert:
+    title:
+      first: Failure Risk Detected
+      repeat: Warning
+    continue:
+      first: Are you sure you want to submit this record?
+      repeat: Confirm submitting this record?
+    contact:
+      before: 'If you are sure you got this drop in-game, submit this report and '
+      activator: contact us.
+      after: Please indicate the stage name and drops. A screenshot is preferred for
+        verification purposes. Our team will mark your report appropiately after verifying
+        it.
+    causes:
+      noDrop: No items selected.
+      limitation: Your current submission has a large deviation from our existing
+        data. This submission could be marked as a false report, removing it from
+        our data set.
+  rules:
+    item:
+      _name: Item Quantities
+      now: Selected {quantity} {item} in "{stage}"
+      gte: Should have at minimum {should} "{item}" in "{stage}"
+      lte: Should have at maximum {should} "{item}" in "{stage}"
+      not: Should not have exactly {should} "{item}" in "{stage}"
+    type:
+      _name: Items
+      now: Selected {quantity} items in "{stage}"
+      gte: Should have at minimum {should} items in "{stage}"
+      lte: Should have at maximum {should} items in "{stage}"
+      not: Should not have exactly {should} items in "{stage}"
+  clear: Clear
+  closedReason:
+    INVALID: 'Stage Not Found: The stage does not exist in the server you have selected.'
+    EXPIRED: 'Stage Report Closed: This activity stage has already been closed.'
+  furniture: 'Furniture Drop: {state}'
+  name: Report
+  submit: Submit
+  success: Successfully submitted
+  unable: 'Failed to submit: '
+  undo: Recall
+  undoSuccess: Successfully recalled submission
+  gacha: Multiple results are allowed for the reports of this stage.
+  notices:
+    rule_1: Report one clear at a time. Please double-check your drop selection.
+    rule_2: If there are no drops, click submit directly without selecting any drops.
+    rule_3: Please do not report the first-clear of a stage, and do not only report
+      the clears where you were lucky - report all clears.
+    rule_4: Please make sure that you refresh a 3-stars clear.
+    rule_5: Please only submit drop data from the CN server.
+  usage: Increase drop amount by left click, decrease by right click
+mirrors:
+  global:
+    notification: For performance concerns, we recommend you to use the global site
+      {0}.
+  cn:
+    notification: For performance concerns, we recommend you to use the CN mirror
+      site {0}.
+  _notification:
+    ignore:
+      title: Ignore Mirror Notification?
+      subtitle: Are you sure you want to ignore all mirror optimization notifications?
+        Performance issues may occur.
+settings:
+  category:
+    appearance: Appearance
+    data: Data
+  optimization:
+    lowData:
+      title: Low Data Mode
+      active: Low Data Mode is Active
+      subtitle: Low Data Mode will stop fetching nonessential resources, such as the
+        zone backgrounds in stage selector and the website background, to help reduce
+        network data use.
+  data:
+    server: 'Local Data includes servers: '
+    size: 'Local Data size: '
+    reset:
+      title: Reset All
+      subtitle: This operation will delete all local data and settings you have set.
+        After the deletion, all settings will be reset to default, all data needs
+        to be downloaded again, and the web page will be reloaded. Are you sure to
+        continue?
+zone:
+  name: Zone
+  types:
+    MAINLINE: Main Storyline
+    WEEKLY: Supplies
+    ACTIVITY_OPEN: Event (Open)
+    ACTIVITY_CLOSED: Event (Closed)
+    ACTIVITY_PENDING: Event (Opening Soon)
+    ACTIVITY_PERMANENT: Supplies Box
+  status:
+    '0': Open
+    '1': Closed
+    "-1": Opening Soon
+    permanentOpen: Permanent
+  opensAt: 'Event period: {0} - {1}'
+stage:
+  name: Stage
+  apCost: "{apCost} AP required"
+  loots:
+    NORMAL_DROP: Regular
+    EXTRA_DROP: Extra
+    SPECIAL_DROP: Special
+    FURNITURE: Furniture
+  selector:
+    plannerExclude: Exclude Planning Stages
+    excludeAll: Exclude All
+    includeAll: Include All
+planner:
+  notices:
+    autoExistence: ArkPlanner will hide non-existing stages automatically now.
+  options:
+    _name: Options
+    byProduct: Consider by-products
+    requireExp: Large demand for EXP
+    requireLmb: Large demand for LMD
+    excludeStage:
+      _name: Excludes
+      title: Select
+      selected: Excluded {stages} stages
+  reset:
+    name: Reset
+    dialog:
+      title: Reset Planner
+      subtitle: This operation will reset all planner data and settings you have set.
+        Are you sure to continue?
+  actions:
+    _name: Data
+    import: Import
+    export: Export
+    importExport: "@:(planner.actions.import)/@:(planner.actions.export)"
+    calculate: Calculate
+    calculating: Calculating...
+    link:
+      generate: Generate Share Link
+      generating: Generating...
+      share: Share Link
+    config:
+      _name: Configuration Code
+      share: Share Configuration Code
+      import: Import from Configuration Code
+  have: Have
+  need: Need
+  copy: Copy to Clipboard
+  calculation:
+    title: Calculation Result
+    tabs:
+      stages: Stages
+      syntheses: Syntheses
+      values: Material Sanity Value
+    lmb: Estimated LMD income
+    sanity: Estimated Sanity required
+    exp: Estimated EXP from Battle Records
+    times: battles
+    level: Material Level
+    noStage: No stage found.
+    noSyntheses: No syntheses found.
+items:
+  choose:
+    name: Choose Item
+  categories:
+    ACTIVITY_ITEM: Event item
+    CARD_EXP: Battle Records
+    FURN: Furniture
+    MATERIAL: Materials
+  related: Related Items
+query:
+  panel:
+    builder: Query Builder
+    results: Query Results
+    footer:
+      cache: The query result data now displaying is cached data. If you need to get
+        the latest data, please "execute query" again.
+      disclaimer: Any data produced by the "Advanced Query" function is protected
+        by the "Data License Agreement" of this site. Penguin Statistics does not
+        make any form of commitment or endorsement of any data produced.
+  title:
+    main: Main Query
+    comparison: 'Comparison Query #{index}'
+  type:
+    matrix: Statistics
+    trend: Trends
+  selector:
+    item:
+      title: Choose Item
+      subtitle: Used to filter the query results by specified materials. When any
+        filter is selected, no other filters can be selected in the same query. If
+        you want to filter other parameters, you can do it by adding a comparison
+        query.
+      unspecified: Show All Item
+      selected: Only Query Selected ({length})
+    stage:
+      title: Choose Stage
+      subtitle: Used to filter the query results by specified materials. When any
+        filter is selected, no other filters can be selected in the same query. If
+        you want to filter other parameters, you can do it by adding a comparison
+        query.
+    timeRange:
+      title: Choose Time Range
+      subtitle: "(Required) Limit query results in a specific time range."
+      presets:
+        title: Presets
+        start: Started
+        end: Ended
+    interval:
+      title: Segment Interval
+      subtitle: Interval for segmenting historical trends.
+      unspecified: No Segment
+  operation:
+    add: Add Comparison Query
+    execute: Execute Query
+    inProgress: Executing Queries...
+  result:
+    main: Main Query Result
+    comparison: 'Comparison Query #{index} Result'
+    empty: This query returned 0 results. Please check your query parameters.
+    hideTime: Hide Detail Time
+version:
+  upgrade:
+    title: Version Outdated
+    subtitle: The current client version has outdated due to upgrade. Please retry
+      after upgrade
+    action: Upgrade
+    unable: Can't Upgrade?
+notice:
+  failed: 'Failed to load notice: {error}'
+  loading: Loading Notice...
+dataSource:
+  switch: Data Source
+  global: All
+  loginNotice: Please log in before viewing personal drop data.
+  personal: Personal
+  title: Login Required
+validator:
+  required: Required
+quotes:
+  doYouKnow:
+    - Do You Know? Ptilopsis' feather is sooo cute! o(*≧▽≦)ツ
+credits:
+  material:
+    title: Content Credits
+    content: Penguin Statistics utilizes (including but not limited to) pictures,
+      animations, audio, original text and other works for the purpose of better reflecting
+      the corresponding elements in the game and enhance the user experience. The
+      copyright of such works belongs to the provider of the game, Shanghai Hypergryph
+      Network Technology Co., Ltd. and/or its affiliates, including but not limited
+      to YOSTAR (HONG KONG) LIMITED, 株式会社Yostar, YOSTAR LIMITED, 龍成網路, etc,. Penguin Statistics
+      utilizes some assets from PRTS Wiki (http://ak.mooncell.wiki) and has changed some of the assets
+      without modifying its original meaning.
+  source:
+    title: Open Source Licenses

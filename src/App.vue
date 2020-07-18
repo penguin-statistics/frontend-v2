@@ -64,6 +64,7 @@
       </v-list>
     </v-navigation-drawer>
     <v-app-bar
+      elevate-on-scroll
       app
       dark
       :color="primaryColor"
@@ -99,6 +100,15 @@
       <ServerSelector />
 
       <AccountManager />
+
+      <!--      <v-progress-linear-->
+      <!--        :active="pending"-->
+      <!--        :indeterminate="pending"-->
+      <!--        absolute-->
+      <!--        bottom-->
+      <!--        class="width: 100%"-->
+      <!--        color="deep-purple accent-4"-->
+      <!--      />-->
     </v-app-bar>
     <RandomBackground />
     <v-content

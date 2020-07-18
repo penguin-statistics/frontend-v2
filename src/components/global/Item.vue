@@ -2,7 +2,7 @@
   <v-tooltip
     v-if="!disableTooltip"
     transition="slide-y-transition"
-    :open-delay="20"
+    :open-delay="5"
     :nudge-top="tooltipNudge"
 
     bottom

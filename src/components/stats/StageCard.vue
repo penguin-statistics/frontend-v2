@@ -4,7 +4,16 @@
     :ripple="!stateful"
     :class="{'d-inline-flex ma-1 stage-card cursor-pointer': true, 'stage-card--stateless': !stateful, 'stage-card--light': !dark, 'stage-card--dark': dark, 'stage-card--chosen': stateful, 'stage-card--chosen-true': chosen, 'stage-card--chosen-false': !chosen }"
   >
-    <v-card-title class="subtitle-1 py-1 px-3">
+    <v-card-title
+      class="py-1 px-3"
+      :class="{'pl-1 pr-3': left, 'pl-3 pr-1': right, 'subtitle-1': !dense, 'subtitle-2': dense}"
+    >
+      <v-icon
+        v-if="left"
+        :small="dense"
+      >
+        mdi-chevron-left
+      </v-icon>
       <v-icon
         v-if="stateful"
         class="stage-card--chosen-icon"
@@ -13,6 +22,12 @@
         {{ chosen ? 'mdi-check' : 'mdi-close' }}
       </v-icon>
       <StageCode :code="translatedCode" />
+      <v-icon
+        v-if="right"
+        :small="dense"
+      >
+        mdi-chevron-right
+      </v-icon>
     </v-card-title>
   </v-card>
 </template>
@@ -35,6 +50,24 @@
         type: Boolean,
         default () {
           return null
+        }
+      },
+      dense: {
+        type: Boolean,
+        default () {
+          return false
+        }
+      },
+      left: {
+        type: Boolean,
+        default () {
+          return false
+        }
+      },
+      right: {
+        type: Boolean,
+        default () {
+          return false
         }
       }
     },

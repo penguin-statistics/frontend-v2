@@ -85,6 +85,14 @@ class ObjectManager {
     return config
   }
 
+  _updateData (value) {
+    return store.commit("data/storeData", {
+      name: this.name,
+      value: value,
+      server: this.api.serverSensitive ? this.server : "_shared"
+    });
+  }
+
   /**
    * returns local cache if ttl has been fulfilled, and fetches external api when
    * the ttl of local cache is outdated or the local cache is not available
@@ -101,11 +109,7 @@ class ObjectManager {
     if (context.api.requireAuthorization && !store.getters["auth/loggedIn"]) {
       Console.info("ObjectManager",
         `skipped fetching ${context.name} due to requireAuthorization and !authorized.`)
-      return store.commit("data/storeData", {
-        name: context.name,
-        value: [],
-        server: this.api.serverSensitive ? context.server : "_shared"
-      });
+      return this._updateData([])
     }
 
     if (!forced && context.cacheValid) {
@@ -136,26 +140,19 @@ class ObjectManager {
 
             const validatorResponse = context.validator(data);
 
-            console.log(context.name, this.validator, validatorResponse)
-
             if (validatorResponse !== true) {
               return reject({
                 errorMessage: `Invalid structure: ${validatorResponse}`
               })
             }
 
-            store.commit("data/storeData", {
-              name: context.name,
-              value: data,
-              server: this.api.serverSensitive ? context.server : "_shared"
-            });
+            this._updateData(data)
 
             Console.info("ObjectManager", `fetched data "${context.name}" at ${Date.now()} for server "${context.server}"`);
 
             resolve(data)
           })
           .catch((err) => {
-            console.log("ajax failed at service promise")
             reject(err)
           })
       })

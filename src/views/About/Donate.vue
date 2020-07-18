@@ -53,7 +53,7 @@
 			"donate_1": "随着访问量的增加，目前的小水管服务器已经有些不堪重负了。如果各位刀客塔能捐助一些",
 			"donate_2": "服务器费用",
 			"donate_3": "pocky、阿噗噜派也可",
-			"donate_4": "，我们将不胜感激!",
+			"donate_4": "，我们将不胜感激！",
 			"accountBook": "查看收支一览",
 			"methods": {
 				"alipay": "支付宝",
@@ -160,7 +160,6 @@
           </template>
 
           <img
-            svg-inline
             :src="require('@/assets/qrcodes/alipay-qrcode.svg')"
             :alt="$t('donate.methods.alipay')"
             style="max-height: 128px"
@@ -213,7 +212,6 @@
           </template>
 
           <img
-            svg-inline
             :src="require('@/assets/qrcodes/wechatpay-qrcode.svg')"
             :alt="$t('donate.methods.wechatPay')"
             style="max-height: 128px"
