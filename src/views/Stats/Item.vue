@@ -71,7 +71,7 @@
             <v-icon>
               mdi-related
             </v-icon>
-            相关物品
+            {{ $t("items.related") }}
           </template>
           <template v-slot:content>
             <span

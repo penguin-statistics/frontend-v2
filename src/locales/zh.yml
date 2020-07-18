@@ -311,6 +311,7 @@ items:
     CARD_EXP: 作战记录
     FURN: 家具
     MATERIAL: 材料
+  related: 相关物品
 query:
   panel:
     builder: 查询编辑器

@@ -100,7 +100,7 @@
                         v-if="zone.isPermanentOpen"
                         class="text--darken-1 font-weight-bold orange--text ml-2 mr-1"
                       >
-                        常驻开放
+                        {{ $t('zone.status.permanentOpen') }}
                       </span>
 
                       <span

@@ -83,7 +83,7 @@ stats:
     quantity: Loots
     percentage: Percentage
     apPPR: Sanity Required Per Item
-    clearTime: Shortest Clear
+    clearTime: Shortest Clear Time
     timeRange: Time Range
   headerDesc:
     apCost: The Sanity required for the stage
@@ -100,9 +100,8 @@ stats:
     overview: Filter Summary
     type:
       _name: Stage Type
-      hideMainline: Hide Mainlines
-      hidePermanent: Hide Permanents
-      hideActivity: Hide Activities
+      showPermanent: Permanent
+      showActivity: Event
     status:
       _name: Stage Status
       onlyOpen: Only show open stages
@@ -215,7 +214,7 @@ report:
       the clears where you were lucky - report all clears.
     rule_4: Please make sure that you refresh a 3-stars clear.
     rule_5: Please only submit drop data from the CN server.
-  usage: Increase drop amount by left mouse click, decrease by right click
+  usage: Increase drop amount by left click, decrease by right click
 mirrors:
   global:
     notification: For performance concerns, we recommend you to use the global site
@@ -255,19 +254,19 @@ zone:
     WEEKLY: Supplies
     ACTIVITY_OPEN: Event (Open)
     ACTIVITY_CLOSED: Event (Closed)
-    ACTIVITY_PENDING: Event (Coming Soon)
+    ACTIVITY_PENDING: Event (Opening Soon)
     ACTIVITY_PERMANENT: Supplies Box
   status:
     '0': Open
     '1': Closed
     "-1": Opening Soon
-    permanentOpen: Permanently Opening
+    permanentOpen: Permanent
   opensAt: 'Event period: {0} - {1}'
 stage:
   name: Stage
   apCost: "{apCost} AP required"
   loots:
-    NORMAL_DROP: Normal
+    NORMAL_DROP: Regular
     EXTRA_DROP: Extra
     SPECIAL_DROP: Special
     FURNITURE: Furniture
@@ -332,6 +331,7 @@ items:
     CARD_EXP: Battle Records
     FURN: Furniture
     MATERIAL: Materials
+  related: Related Items
 query:
   panel:
     builder: Query Builder

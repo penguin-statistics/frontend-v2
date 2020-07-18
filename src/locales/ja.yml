@@ -75,20 +75,20 @@ stats:
     quantity: ドロップ数
     percentage: ドロップ率
     apPPR: １個あたりの必要期待理性数
+    clearTime: 最速クリアタイム
     timeRange: 期間
   filter:
     title: フィルタ
     indicator: "フィルタ未適用 | {count} フィルタ適用中 | {count} フィルタ適用中"
-    stats: Post-filtered {filtered} / Original {total}
+    stats: フィルタリング後 {filtered} / フィルタリング前 {total}
     overview: フィルタ結果
     type:
-      _name: Stage Type
-      hideMainline: Hide Mainlines
-      hidePermanent: Hide Permanents
-      hideActivity: Hide Activities
+      _name: ステージタイプ
+      showPermanent: 恒常
+      showActivity: イベント
     status:
-      _name: Stage Status
-      onlyOpen: Only show open stages
+      _name: ステージ状態
+      onlyOpen: 開放中ステージのみを表示
   timeRange:
     inBetween: "{0} から {1} まで"
     toPresent: "{date} から現在まで"
@@ -153,15 +153,15 @@ report:
   rules:
     item:
       _name: アイテム数量
-      now: 選択された {item} ×{quantity}
-      gte: 入力をした“{item}”の数がこのステージのドロップ最大数である {should} 個以上に設定されています
-      lte: "“{item}”の数を　{should}　個以下の数値で再入力して下さい"
-      not: "“{item}”はこのステージでは1回のドロップ数が {should} 個になることはありません"
+      now: "{stage}ドロップで選択された {item} ×{quantity}"
+      gte: "@:(meta.quotation.start){item}@:(meta.quotation.end)の数を{should}個以上の数値で再入力して下さい"
+      lte: "@:(meta.quotation.start){item}@:(meta.quotation.end)の数を{should}個以下の数値で再入力して下さい"
+      not: "@:(meta.quotation.start){item}@:(meta.quotation.end)のドロップ数が{should}個になることはありません"
     type:
       _name: アイテム種類数
-      now: 選択されたアイテムは {quantity} 種類です
-      gte: 最少 {should} 種類のアイテムが必要です
-      lte: 最大 {should} 種類のアイテムが必要です
+      now: "{stage}ドロップで選択されたアイテムは{quantity}種類です"
+      gte: 最少{should}種類のアイテムが必要です
+      lte: 最大{should}種類のアイテムが必要です
       not: "{should}種類のアイテムであってはなりません"
   clear: クリア
   furniture: 家具ドロップ：{state}
@@ -272,6 +272,7 @@ items:
     CARD_EXP: 作戦記録
     FURN: 家具
     MATERIAL: 素材
+  related: 関連素材
 dataSource:
   global: 全体
   loginNotice: 個人のドロップデータを表示するにはログインが必要となります。
