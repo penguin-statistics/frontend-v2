@@ -59,6 +59,7 @@
               xl="6"
             >
               <TitledRow
+                reactive
                 dense
                 class="mt-3 mb-4 mx-0"
               >
@@ -74,6 +75,13 @@
                     :class="{'mr-2': $vuetify.breakpoint.smAndUp}"
                   />
                   <v-switch
+                    v-model="filter.hidePermanent"
+                    hide-details
+                    :label="$t('stats.filter.type.hidePermanent')"
+                    class="pt-0"
+                    :class="{'mt-0 mr-2': $vuetify.breakpoint.smAndUp}"
+                  />
+                  <v-switch
                     v-model="filter.hideActivity"
                     hide-details
                     :label="$t('stats.filter.type.hideActivity')"
@@ -83,6 +91,7 @@
                 </template>
               </TitledRow>
               <TitledRow
+                reactive
                 dense
                 class="mx-0"
               >
@@ -297,7 +306,9 @@
             class="d-flex align-center justify-start fill-height"
             :class="tableCellClasses"
           >
-            <span class="mr-2">
+            <span
+              class="mr-2"
+            >
               {{ props.item.percentageText }}
             </span>
 
@@ -316,20 +327,36 @@
             />
           </td>
           <td
-            :class="tableCellClasses"
+            :class="`${tableCellClasses} ${['NaN', 'Infinity'].includes(props.item.apPPR) ? 'grey--text' : ''}`"
           >
             {{ props.item.apPPR }}
           </td>
           <template v-if="type === 'item'">
             <td
+              v-if="props.item.stage.apCost !== 99"
               :class="`${tableCellClasses} ${dark ? 'orange--text text--lighten-1' : 'deep-orange--text text--darken-3 font-weight-bold'}`"
             >
               {{ props.item.stage.apCost }}
             </td>
             <td
+              v-else
+              :class="tableCellClasses"
+              class="grey--text"
+            >
+              --
+            </td>
+            <td
+              v-if="props.item.stage.minClearTime"
               :class="tableCellClasses"
             >
-              {{ props.item.stage.minClearTime ? formatDuration(props.item.stage.minClearTime) : "N/A" }}
+              {{ formatDuration(props.item.stage.minClearTime) }}
+            </td>
+            <td
+              v-else
+              :class="tableCellClasses"
+              class="grey--text"
+            >
+              N/A
             </td>
           </template>
           <td
@@ -359,8 +386,7 @@
   import CDN from "@/mixins/CDN";
   import Mirror from "@/mixins/Mirror";
   import TitledRow from "@/components/global/TitledRow";
-  // import existUtils from "@/utils/existUtils";
-  import Console from "@/utils/Console";
+  import existUtils from "@/utils/existUtils";
 
   export default {
     name: "DataTable",
@@ -492,14 +518,12 @@
       },
       filteredData () {
         let data = this.items;
-        Console.debug("DataTable filter", "started filtering data", JSON.stringify(data).length)
         if (this.type === "item") {
-          // if (this.filter.onlyOpen) data = data.filter(el => existUtils.existence(el.stage, true))
-          // if (this.filter.hideMainline) data = data.filter(el => el.stage.stageType !== "MAIN" && el.stage.stageType !== "SUB")
-          // if (this.filter.hidePermanent) data = data.filter(el => el.stage.stageType !== "DAILY")
-          // if (this.filter.hideActivity) data = data.filter(el => el.stage.stageType !== "ACTIVITY")
+          if (this.filter.onlyOpen) data = data.filter(el => existUtils.existence(el.stage, true))
+          if (this.filter.hideMainline) data = data.filter(el => el.stage.stageType !== "MAIN" && el.stage.stageType !== "SUB")
+          if (this.filter.hidePermanent) data = data.filter(el => el.stage.stageType !== "DAILY")
+          if (this.filter.hideActivity) data = data.filter(el => el.stage.stageType !== "ACTIVITY")
         }
-        Console.debug("DataTable filter", "FINISHED ALL as", JSON.stringify(data).length)
         return data
       },
       filterCount () {

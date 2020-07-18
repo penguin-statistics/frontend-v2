@@ -101,6 +101,7 @@ stats:
     type:
       _name: Stage Type
       hideMainline: Hide Mainlines
+      hidePermanent: Hide Permanents
       hideActivity: Hide Activities
     status:
       _name: Stage Status

@@ -35,7 +35,7 @@ export default {
   },
   methods: {
     crispOpacityChanger (newRoute = this.$route) {
-      Console.info("CrispCustomizer", "customize | changing opacity");
+      // Console.info("CrispCustomizer", "customize | changing opacity");
       try {
         document.querySelector("div.crisp-client").style.setProperty("transition", "all 275ms cubic-bezier(0.165, 0.84, 0.44, 1)", "important");
 

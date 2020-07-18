@@ -1,6 +1,6 @@
 <template>
   <v-container
-    class="fill-height"
+    class="fill-height align-start"
     fluid
   >
     <v-snackbar

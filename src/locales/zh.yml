@@ -98,6 +98,7 @@ stats:
     type:
       _name: 关卡类型
       hideMainline: 隐藏主线
+      hidePermanent: 隐藏常驻
       hideActivity: 隐藏活动
     status:
       _name: 关卡状态

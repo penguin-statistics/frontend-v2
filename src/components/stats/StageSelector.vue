@@ -154,6 +154,29 @@
         :step="2"
         class="pa-0 pt-2"
       >
+        <v-expand-transition leave-absolute>
+          <div
+            v-if="selected.stage"
+            class="d-flex flex-row align-center"
+          >
+            <StageCard
+              v-if="relativeStages.prev"
+              left
+              :dense="$vuetify.breakpoint.xsOnly"
+              :stage="relativeStages.prev"
+              @click.native="selectStage(relativeStages.prev.zoneId, relativeStages.prev.stageId, false)"
+            />
+            <v-spacer />
+            <StageCard
+              v-if="relativeStages.next"
+              right
+              :dense="$vuetify.breakpoint.xsOnly"
+              :stage="relativeStages.next"
+              @click.native="selectStage(relativeStages.next.zoneId, relativeStages.next.stageId, false)"
+            />
+          </div>
+        </v-expand-transition>
+        
         <span
           v-if="!$vuetify.breakpoint.xs"
           class="stage-id--background font-weight-black display-4 px-12 py-6"
@@ -309,13 +332,21 @@
 
             if (this.lowData) {
               zones = zones.map(el => {
-                el.image = null
-                return el
+                return {
+                  ...el,
+                  image: null
+                }
               })
             } else {
               zones = zones.map(el => {
-                if (el.zoneId in this.stageImages) el.image = this.stageImages[el.zoneId]
-                return el
+                if (el.zoneId in this.stageImages) {
+                  return {
+                    ...el,
+                    image: this.stageImages[el.zoneId]
+                  }
+                } else {
+                  return el
+                }
               })
             }
 
@@ -333,6 +364,15 @@
         if (!this.selected.stage) return {};
         return get.stages.byStageId(this.selected.stage);
       },
+      relativeStages () {
+        if (!this.selected.stage) return null;
+        const allStagesInZone = get.stages.byParentZoneId(this.selected.zone);
+        const stageInZoneIndex = allStagesInZone.indexOf(this.selectedStage);
+        return {
+          prev: stageInZoneIndex >= 0 ? allStagesInZone[stageInZoneIndex - 1] : null,
+          next: stageInZoneIndex < allStagesInZone.length ? allStagesInZone[stageInZoneIndex + 1] : null
+        }
+      }
     },
     watch: {
       '$route' () {
@@ -343,12 +383,22 @@
       this.checkRoute()
     },
     methods: {
-      selectStage (zone, stage) {
+      selectStage (zone, stage, incrementStep = true) {
         Console.log("StageSelector", "chose", zone, stage);
         this.selected.zone = zone;
         this.selected.stage = stage;
         this.$emit("select", {zone, stage});
-        this.step += 1
+        if (incrementStep) {
+          this.step += 1
+        } else {
+          this.$router.push({
+            name: this.routerNames.details,
+            params: {
+              zoneId: this.selected.zone,
+              stageId: this.selected.stage
+            }
+          })
+        }
       },
       checkRoute () {
         if (!this.bindRouter) return;

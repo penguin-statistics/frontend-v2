@@ -64,6 +64,7 @@
       </v-list>
     </v-navigation-drawer>
     <v-app-bar
+      elevate-on-scroll
       app
       dark
       :color="primaryColor"

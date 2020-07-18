@@ -60,6 +60,12 @@ Getters.items = {
     if (!got) return {};
     return got.find(el => el.name === name) || {}
   },
+  byGroupId (groupId, ...options) {
+    if (!groupId) return []
+    const got = this.all(...options);
+    if (!got) return [];
+    return got.filter(el => el.groupID === groupId) || []
+  }
 }
 
 // Getters.limitations = {
