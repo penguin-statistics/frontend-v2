@@ -160,18 +160,22 @@ Getters.zones = {
     zones = zones.slice().sort((a, b) => {
       return a["zoneIndex"] - b["zoneIndex"]
     }).map(el => {
+      let toMerge = {}
       if (el.isActivity) {
         const existence = el["existence"][server]
 
         if (!existence["openTime"] && !existence["closeTime"]) {
-          el.isPermanentOpen = true
+          toMerge.isPermanentOpen = true
         } else {
-          el.activityActiveTime = formatter.dates([existence["openTime"], existence["closeTime"]]);
-          el.timeValid = formatter.checkTimeValid(existence["openTime"], existence["closeTime"])
-          el.isOutdated = el.timeValid !== 0
+          toMerge.activityActiveTime = formatter.dates([existence["openTime"], existence["closeTime"]]);
+          toMerge.timeValid = formatter.checkTimeValid(existence["openTime"], existence["closeTime"])
+          toMerge.isOutdated = toMerge.timeValid !== 0
         }
       }
-      return el
+      return {
+        ...el,
+        ...toMerge
+      }
     })
     return zones
   },

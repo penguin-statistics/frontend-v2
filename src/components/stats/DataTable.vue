@@ -67,24 +67,24 @@
                   {{ $t('stats.filter.type._name') }}
                 </template>
                 <template v-slot:content>
-                  <v-switch
-                    v-model="filter.hideMainline"
+                  <v-checkbox
+                    v-model="dataTable.showMainline"
                     hide-details
-                    :label="$t('stats.filter.type.hideMainline')"
+                    :label="$t('stats.filter.type.showMainline')"
                     class="mt-0 pt-0"
                     :class="{'mr-2': $vuetify.breakpoint.smAndUp}"
                   />
-                  <v-switch
-                    v-model="filter.hidePermanent"
+                  <v-checkbox
+                    v-model="dataTable.showPermanent"
                     hide-details
-                    :label="$t('stats.filter.type.hidePermanent')"
+                    :label="$t('stats.filter.type.showPermanent')"
                     class="pt-0"
                     :class="{'mt-0 mr-2': $vuetify.breakpoint.smAndUp}"
                   />
-                  <v-switch
-                    v-model="filter.hideActivity"
+                  <v-checkbox
+                    v-model="dataTable.showActivity"
                     hide-details
-                    :label="$t('stats.filter.type.hideActivity')"
+                    :label="$t('stats.filter.type.showActivity')"
                     class="pt-0"
                     :class="{'mt-0 mr-2': $vuetify.breakpoint.smAndUp}"
                   />
@@ -100,7 +100,7 @@
                 </template>
                 <template v-slot:content>
                   <v-switch
-                    v-model="filter.onlyOpen"
+                    v-model="dataTable.onlyOpen"
                     hide-details
                     :label="$t('stats.filter.status.onlyOpen')"
                     class="mt-0 pt-0"
@@ -327,23 +327,31 @@
             />
           </td>
           <td
-            :class="`${tableCellClasses} ${['NaN', 'Infinity'].includes(props.item.apPPR) ? 'grey--text' : ''}`"
+            v-if="invalidApCost(props.item.stage.apCost) || ['NaN', 'Infinity'].includes(props.item.apPPR)"
+            :class="tableCellClasses"
+            class="grey--text"
+          >
+            --
+          </td>
+          <td
+            v-else
+            :class="tableCellClasses"
           >
             {{ props.item.apPPR }}
           </td>
           <template v-if="type === 'item'">
             <td
-              v-if="props.item.stage.apCost !== 99"
-              :class="`${tableCellClasses} ${dark ? 'orange--text text--lighten-1' : 'deep-orange--text text--darken-3 font-weight-bold'}`"
-            >
-              {{ props.item.stage.apCost }}
-            </td>
-            <td
-              v-else
+              v-if="invalidApCost(props.item.stage.apCost)"
               :class="tableCellClasses"
               class="grey--text"
             >
               --
+            </td>
+            <td
+              v-else
+              :class="`${tableCellClasses} ${dark ? 'orange--text text--lighten-1' : 'deep-orange--text text--darken-3 font-weight-bold'}`"
+            >
+              {{ props.item.stage.apCost }}
             </td>
             <td
               v-if="props.item.stage.minClearTime"
@@ -356,7 +364,7 @@
               :class="tableCellClasses"
               class="grey--text"
             >
-              N/A
+              --
             </td>
           </template>
           <td
@@ -379,7 +387,7 @@
   import strings from "@/utils/strings";
   import get from "@/utils/getters";
   import Item from "@/components/global/Item";
-  import {mapGetters} from "vuex";
+  import {mapGetters, mapState} from "vuex";
   import Theme from "@/mixins/Theme";
   import Charts from "@/components/stats/Charts";
   import timeFormatter from "@/utils/timeFormatter";
@@ -428,12 +436,6 @@
             showCurrentPage: true
           }
         },
-        filter: {
-          hideMainline: false,
-          hidePermanent: false,
-          hideActivity: false,
-          onlyOpen: false,
-        },
         tableCellClasses: "px-2 font-weight-bold monospace",
         hideItemName: false,
         expandTrends: false
@@ -441,6 +443,7 @@
     },
     computed: {
       ...mapGetters('ajax', ['matrixPending']),
+      ...mapState('options', ['dataTable']),
       headers() {
         const headers = [
           {
@@ -519,15 +522,32 @@
       filteredData () {
         let data = this.items;
         if (this.type === "item") {
-          if (this.filter.onlyOpen) data = data.filter(el => existUtils.existence(el.stage, true))
-          if (this.filter.hideMainline) data = data.filter(el => el.stage.stageType !== "MAIN" && el.stage.stageType !== "SUB")
-          if (this.filter.hidePermanent) data = data.filter(el => el.stage.stageType !== "DAILY")
-          if (this.filter.hideActivity) data = data.filter(el => el.stage.stageType !== "ACTIVITY")
+          if (this.dataTable.onlyOpen) data = data.filter(el => existUtils.existence(el.stage, true))
+          if (!this.dataTable.showMainline) data = data.filter(el => el.stage.stageType !== "MAIN" && el.stage.stageType !== "SUB")
+          if (!this.dataTable.showPermanent) data = data.filter(el => el.stage.stageType !== "DAILY")
+          if (!this.dataTable.showActivity) data = data.filter(el => el.stage.stageType !== "ACTIVITY")
         }
         return data
       },
       filterCount () {
-        return Object.values(this.filter).reduce((prev, item) => prev += item === true, 0)
+        return Object.keys(this.dataTable)
+          .map(el => {
+            if (~el.indexOf("show")) {
+              return this.dataTable[el] === false
+            } else {
+              return this.dataTable[el]
+            }
+          })
+          .reduce((prev, item) => prev += item === true, 0)
+
+      }
+    },
+    watch: {
+      dataTable: {
+        handler: function (newValue) {
+          this.$store.commit("options/changeDataTable", newValue)
+        },
+        deep: true
       }
     },
     created () {
@@ -601,6 +621,9 @@
       },
       formatDuration (duration) {
         return timeFormatter.duration(duration)
+      },
+      invalidApCost (apCost) {
+        return apCost === 99 || apCost === null
       }
     },
   }
