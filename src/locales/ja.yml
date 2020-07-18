@@ -76,6 +76,19 @@ stats:
     percentage: ドロップ率
     apPPR: １個あたりの必要期待理性数
     timeRange: 期間
+  filter:
+    title: フィルタ
+    indicator: "フィルタ未適用 | {count} フィルタ適用中 | {count} フィルタ適用中"
+    stats: Post-filtered {filtered} / Original {total}
+    overview: フィルタ結果
+    type:
+      _name: Stage Type
+      hideMainline: Hide Mainlines
+      hidePermanent: Hide Permanents
+      hideActivity: Hide Activities
+    status:
+      _name: Stage Status
+      onlyOpen: Only show open stages
   timeRange:
     inBetween: "{0} から {1} まで"
     toPresent: "{date} から現在まで"
@@ -193,6 +206,8 @@ zone:
   status:
     '0': 開催中
     '1': 終了
+    "-1": 近日開催
+    permanentOpen: 恒常
   opensAt: 開催期間：{0} - {1}
 stage:
   name: 作戦
