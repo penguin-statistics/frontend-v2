@@ -292,7 +292,10 @@
               <!--          </v-col>-->
             </v-row>
 
-            <v-row justify="space-around">
+            <v-row
+              justify="space-around"
+              class="hidden-lg-and-up"
+            >
               <v-btn
                 large
                 rounded
@@ -371,6 +374,46 @@
             >
               {{ $t('report.gacha') }}
             </v-alert>
+
+            <v-row
+              justify="space-around"
+              class="hidden-sm-and-down mt-4"
+            >
+              <v-btn
+                large
+                rounded
+                color="error"
+                class="px-4 py-2"
+                @click="reset"
+              >
+                {{ $t('report.clear') }}
+              </v-btn>
+
+              <v-btn
+                large
+                rounded
+                color="primary"
+                :loading="submitting"
+                class="px-4 py-2"
+                @click="submit"
+              >
+                <div class="d-inline-flex align-center justify-center">
+                  <v-icon small>
+                    mdi-server
+                  </v-icon>
+                  <span class="caption ml-1">
+                    {{ serverName }}
+                  </span>
+                </div>
+                <v-divider
+                  vertical
+                  class="mx-2"
+                />
+                <span>
+                  {{ $t('report.submit') }}
+                </span>
+              </v-btn>
+            </v-row>
           </v-col>
         </v-row>
       </v-card>
