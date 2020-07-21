@@ -288,10 +288,21 @@ planner:
       selected: Excluded {stages} stages
   reset:
     name: Reset
+    success: Successfully resetted chosen planner data
     dialog:
       title: Reset Planner
-      subtitle: This operation will reset all planner data and settings you have set.
+      subtitle: This operation will reset the planner data and settings you choose.
         Are you sure to continue?
+      options:
+        options:
+          name: Planning Options
+          indicator: Will Reset all Options
+        excludes:
+          name: Exclude Stages
+          indicator: Will Reset all Excludes
+        items:
+          name: Item Data
+          indicator: Will Reset all Item Data
   actions:
     _name: Data
     import: Import

@@ -89,7 +89,6 @@
         </v-card-title>
         <v-card-text>
           <v-alert
-            prominent
             type="info"
             border="left"
             class="mt-2 mb-6"
@@ -101,12 +100,24 @@
             :label="`${$t('userId')} *`"
             :error-messages="error"
             required
+            clearable
             outlined
             :hide-details="error === ''"
 
             @keyup.enter.native="login"
             @input="emitError"
-          />
+          >
+            <template v-slot:append-outer>
+              <v-btn
+                icon
+                style="top: -8px"
+              >
+                <v-icon>
+                  mdi-help-circle
+                </v-icon>
+              </v-btn>
+            </template>
+          </v-text-field>
         </v-card-text>
         <v-card-actions class="mx-4 mb-2">
           <v-btn
@@ -213,6 +224,7 @@
         cookies: {
           key: "userID"
         },
+        historyDialog: false,
         error: ""
       }
     },

@@ -269,9 +269,20 @@ planner:
       selected: 已排除 {stages} 关
   reset:
     name: 重置
+    success: 成功重置所选数据项
     dialog:
       title: 重置刷图规划器数据
-      subtitle: 将会删除所有刷图规划器数据与设置。确定要继续吗？
+      subtitle: 将会删除所选部分的相关刷图规划器数据项
+      options:
+        options:
+          name: 规划选项
+          indicator: 将清除所有规划选项
+        excludes:
+          name: 计算排除
+          indicator: 将清除所有排除关卡
+        items:
+          name: 物品数据
+          indicator: 将清除所有物品数据
   actions:
     _name: 数据
     import: 导入

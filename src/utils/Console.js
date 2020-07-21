@@ -1,5 +1,5 @@
 import * as Sentry from "@sentry/browser";
-import debugConditioner from "@/utils/debugConditioner";
+import environment from "@/utils/environment";
 
 function reportSentry(severity, component, contents) {
   Sentry.withScope(scope => {
@@ -39,14 +39,14 @@ class Console {
     if (
       process.env.NODE_ENV === "production" &&
       (PROD_IGNORE.includes(level)) &&
-      !debugConditioner.fullConsole
+      !environment.debug.fullConsole
     ) return;
     // const now = new Date();
     // const date = `${now.getDate()} ${now.getHours()}:${now.getMinutes()}:${now.getSeconds()}.${now.getMilliseconds()}`;
 
     let prefix;
 
-    if (process.env.NODE_ENV !== "production" || debugConditioner.colorfulConsole) {
+    if (process.env.NODE_ENV !== "production" || environment.debug.colorfulConsole) {
       prefix = [
         `%c${level}%c${component}`,
         "background: #FF9800; color: #000; padding: 2px 4px; border-radius: 4px; margin-right: 4px; font-weight: 900; font-size: 10px;",
