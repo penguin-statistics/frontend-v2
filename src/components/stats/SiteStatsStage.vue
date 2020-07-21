@@ -48,7 +48,16 @@
         </v-row>
       </template>
       <template v-slot:item.stage.apCost="{ item }">
-        <span :class="`yellow--text ${dark ? '' : 'text--darken-3'}`">
+        <span
+          v-if="invalidApCost(item.stage.apCost)"
+          class="grey--text"
+        >
+          --
+        </span>
+        <span
+          v-else
+          :class="dark ? 'orange--text text--lighten-1' : 'deep-orange--text text--darken-3 font-weight-bold'"
+        >
           {{ item.stage.apCost }}
         </span>
       </template>
@@ -133,6 +142,10 @@
             stageId
           }
         });
+      },
+
+      invalidApCost (apCost) {
+        return apCost === 99 || apCost === null
       }
     },
   }
