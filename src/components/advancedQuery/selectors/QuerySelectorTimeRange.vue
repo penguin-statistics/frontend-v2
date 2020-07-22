@@ -8,7 +8,7 @@
     max-width="700px"
     max-height="600px"
   >
-    <template v-slot:activator="{ on }">
+    <template v-slot:activator="{ on, attrs }">
       <v-text-field
         :value="formattedDate"
         :label="`${$t('query.selector.timeRange.title')} (*${$t('validator.required')})`"
@@ -17,6 +17,7 @@
         filled
         hide-details
         class="mb-1"
+        v-bind="attrs"
         v-on="on"
       />
     </template>

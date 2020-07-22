@@ -82,9 +82,10 @@
       <div class="subtitle-1">
         {{ $t('donate.donate_1') }}
         <v-tooltip top>
-          <template v-slot:activator="{ on }">
+          <template v-slot:activator="{ on, attrs }">
             <span
               style="border-bottom:1px dashed #ccc;"
+              v-bind="attrs"
               v-on="on"
             >{{ $t('donate.donate_2') }}</span>
           </template>

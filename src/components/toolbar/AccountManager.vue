@@ -108,14 +108,21 @@
             @input="emitError"
           >
             <template v-slot:append-outer>
-              <v-btn
-                icon
-                style="top: -8px"
-              >
-                <v-icon>
-                  mdi-help-circle
-                </v-icon>
-              </v-btn>
+              <v-dialog max-width="450px">
+                <template v-slot:activator="{ on, attrs }">
+                  <v-btn
+                    icon
+                    style="top: -8px"
+                    v-bind="attrs"
+                    v-on="on"
+                  >
+                    <v-icon>
+                      mdi-help-circle
+                    </v-icon>
+                  </v-btn>
+                </template>
+                <ForgotAccount @loggedIn="loggedIn" />
+              </v-dialog>
             </template>
           </v-text-field>
         </v-card-text>
@@ -203,10 +210,11 @@
   import Cookies from 'js-cookie'
   import Console from "@/utils/Console";
   import Subheader from "@/components/global/Subheader";
+  import ForgotAccount from "@/components/toolbar/ForgotAccount";
 
   export default {
     name: "AccountManager",
-    components: {Subheader},
+    components: {ForgotAccount, Subheader},
     data() {
       return {
         auth: {
@@ -235,26 +243,29 @@
     },
     mounted () {
       const userId = Cookies.get(this.cookies.key);
-      if (userId !== this.$store.getters['auth/username']) {
-        this.$store.commit("auth/login", userId);
+      if (userId) {
+        this.$store.dispatch("auth/login", userId);
       }
     },
     methods: {
+      loggedIn() {
+        this.snackbar = {
+          enabled: true,
+          color: "success",
+          text: this.$t('success')
+        };
+        this.auth.dialog = false
+        this.$emit('afterLogin');
+        this.$store.dispatch("data/refreshPersonalMatrix");
+        Cookies.set(this.cookies.key, this.auth.username, {expires: 7, path: "/"});
+        this.$ga.event('account', 'login', 'login_success', 1);
+      },
       login() {
         this.auth.loading = true;
         service.post("/users", this.auth.username, {headers: {'Content-Type': 'text/plain'}})
           .then(() => {
-            this.$store.commit("auth/login", this.auth.username);
-            Cookies.set(this.cookies.key, this.auth.username, {expires: 7, path: "/"});
-            this.$ga.event('account', 'login', 'login_success', 1);
-            this.snackbar = {
-              enabled: true,
-              color: "success",
-              text: this.$t('success')
-            };
-            this.$emit('afterLogin');
-            this.auth.dialog = false
-            this.$store.dispatch("data/refreshPersonalMatrix");
+            this.$store.dispatch("auth/login", this.auth.username);
+            this.loggedIn()
           })
           .catch((err) => {
             Console.info("AccountManager", "auth failed", err)
@@ -270,7 +281,7 @@
       },
       logout() {
         Cookies.remove(this.cookies.key);
-        this.$store.commit("auth/logout");
+        this.$store.dispatch("auth/logout");
         this.snackbar = {
           enabled: true,
           color: "success",

@@ -4,11 +4,18 @@ export default {
     username: null
   },
   mutations: {
-    login(state, username) {
+    changeUsername (state, username) {
       state.username = username
+    }
+  },
+  actions: {
+    login({commit}, username) {
+      commit('changeUsername', username)
+      // only add true login ones
+      if (username) commit('options/addUserIdHistory', username, { root: true })
     },
-    logout(state) {
-      state.username = null
+    logout({commit}) {
+      commit('changeUsername', null)
     }
   },
   getters: {

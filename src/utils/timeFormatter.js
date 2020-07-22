@@ -59,7 +59,7 @@ export default {
       const isSameYear = dayjs(date).isSame(dayjs(), 'year')
       template = isSameYear ? FORMATS.MD : FORMATS.YMD
     }
-    if (includeTime) template += ` ${FORMATS.HM}`
+    if (includeTime) template += ` ${FORMATS.HMS}`
     return dayjs(date).format(template)
   },
   /** duration: duration in milliseconds; returns: localized string */

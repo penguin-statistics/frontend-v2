@@ -45,10 +45,11 @@
         v-model="ioDialog"
         width="800"
       >
-        <template v-slot:activator="{ on }">
+        <template v-slot:activator="{ on, attrs }">
           <v-btn
             color="deep-purple white--text"
             class="mr-2"
+            v-bind="attrs"
             v-on="on"
           >
             <v-icon left>
@@ -68,9 +69,10 @@
         v-model="reset.dialog"
         max-width="400px"
       >
-        <template v-slot:activator="{ on }">
+        <template v-slot:activator="{ on, attrs }">
           <v-btn
             color="error"
+            v-bind="attrs"
             v-on="on"
           >
             <v-icon left>
@@ -263,9 +265,10 @@
         v-model="excludeDialog"
         max-width="700px"
       >
-        <template v-slot:activator="{ on }">
+        <template v-slot:activator="{ on, attrs }">
           <v-btn
             class="mr-2 align-center"
+            v-bind="attrs"
             v-on="on"
           >
             <v-icon left>

@@ -3,12 +3,13 @@
     v-model="active"
     max-width="400px"
   >
-    <template v-slot:activator="{ on }">
+    <template v-slot:activator="{ on, attrs }">
       <v-btn
         ripple
         text
         outlined
         class="flex-grow-1"
+        v-bind="attrs"
         v-on="on"
       >
         <v-icon left>

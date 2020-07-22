@@ -3,7 +3,7 @@
     v-model="dialog"
     max-width="650px"
   >
-    <template v-slot:activator="{ on }">
+    <template v-slot:activator="{ on, attrs }">
       <div class="d-flex flex-row align-center justify-center mt-3">
         <v-tooltip
           content-class="transparent"
@@ -11,11 +11,12 @@
           nudge-right="-16"
           transition="slide-x-transition"
         >
-          <template v-slot:activator="{ on }">
+          <template v-slot:activator="{ on, attrs }">
             <v-expand-x-transition>
               <v-icon
                 v-if="value"
                 class="mr-2"
+                v-bind="attrs"
                 v-on="on"
               >
                 mdi-cube
@@ -38,6 +39,7 @@
           class="flex-grow-1"
           large
           :disabled="disabled"
+          v-bind="attrs"
           v-on="on"
         >
           <span

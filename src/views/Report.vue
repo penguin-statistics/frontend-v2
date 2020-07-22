@@ -259,10 +259,10 @@
               <!--                  v-model="plannerIntegration.dialog"-->
               <!--                  max-width="450px"-->
               <!--                >-->
-              <!--                  <template v-slot:activator="{ on }">-->
+              <!--                  <template v-slot:activator="{ on, attrs }">-->
               <!--                    <v-btn-->
               <!--                      icon-->
-              <!--                      v-on="on"-->
+              <!--                      v-on="on" v-bind="attrs"-->
               <!--                    >-->
               <!--                      <v-icon>-->
               <!--                        mdi-help-circle-->
@@ -972,7 +972,7 @@ export default {
       .then(({data}) => {
         const reportedUserId = Cookies.get('userID');
         if (userId !== reportedUserId) {
-          this.$store.commit("auth/login", reportedUserId);
+          this.$store.dispatch("auth/login", reportedUserId);
         }
         this.reset();
         this.submitted = true;
