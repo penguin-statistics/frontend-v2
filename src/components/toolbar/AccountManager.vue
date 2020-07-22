@@ -257,7 +257,7 @@
         this.auth.dialog = false
         this.$emit('afterLogin');
         this.$store.dispatch("data/refreshPersonalMatrix");
-        Cookies.set(this.cookies.key, this.auth.username, {expires: 7, path: "/"});
+        Cookies.set(this.cookies.key, this.auth.username, {expires: 90, path: "/"});
         this.$ga.event('account', 'login', 'login_success', 1);
       },
       login() {

@@ -16,7 +16,7 @@ module.exports = {
     maxQueries: 5,
   },
   randomBackground: {
-    limit: 5,
+    limit: 3,
     max: 104
   },
   servers: ["CN", "US", "JP", "KR"]
