@@ -40,7 +40,7 @@
     </v-card-subtitle>
     <v-card-text>
       <Subheader>
-        此前登录过的 Penguin ID
+        此前曾登录的 PenguinID
       </Subheader>
       <!--      <v-chip-->
       <!--        v-for="userId in userIds"-->
@@ -63,36 +63,46 @@
             :key="userId.id"
           >
             <v-list-item-content>
-              <v-list-item-title class="monospace">
-                {{ userId.id }}
+              <v-list-item-title>
+                <span class="monospace">
+                  {{ userId.id }}
+                </span>
+                <span class="grey--text">
+                  —
+                </span>
+                <span class="caption">
+                  {{ userId.version }}
+                </span>
               </v-list-item-title>
               <v-list-item-subtitle>
-                {{ userId.formattedTime.exact }} ({{ userId.formattedTime.relative }})
+                最后于 {{ userId.formattedTime.relative }} 在本设备登录
               </v-list-item-subtitle>
             </v-list-item-content>
             <v-list-item-action class="flex-row">
-              <v-btn
+              <TooltipBtn
                 icon
                 color="primary"
                 class="mr-1"
                 :loading="loading === userId.id"
                 :disabled="loading && loading !== userId.id"
+                tip="以此 PenguinID 登录"
                 @click="loginAsUserId(userId.id)"
               >
                 <v-icon>
                   mdi-login-variant
                 </v-icon>
-              </v-btn>
-              <v-btn
+              </TooltipBtn>
+              <TooltipBtn
                 icon
                 color="error"
                 :disabled="loading === userId.id"
+                tip="删除此 PenguinID 登录记录"
                 @click="deleteUserId(userId.id)"
               >
                 <v-icon>
                   mdi-delete
                 </v-icon>
-              </v-btn>
+              </TooltipBtn>
             </v-list-item-action>
           </v-list-item>
         </template>
@@ -101,6 +111,9 @@
             暂无数据
           </v-list-item>
         </template>
+        <v-list-item class="justify-center grey--text py-0 my-0 caption">
+          本功能仅可找回于 v3.3.1 及更新版本客户端所登录的 PenguinID
+        </v-list-item>
       </v-list>
     </v-card-text>
   </v-card>
@@ -112,9 +125,10 @@
   import timeFormatter from "@/utils/timeFormatter";
   import service from "@/utils/service";
   import Console from "@/utils/Console";
+  import TooltipBtn from "@/components/global/TooltipBtn";
   export default {
     name: "ForgotAccount",
-    components: {Subheader},
+    components: {TooltipBtn, Subheader},
     data() {
       return {
         loading: false
@@ -145,8 +159,8 @@
         this.loading = userId
         service.post("/users", userId, {headers: {'Content-Type': 'text/plain'}})
           .then(() => {
+            this.$store.dispatch("auth/login", {userId})
             this.$emit('loggedIn')
-            this.$store.dispatch("auth/login", userId)
           })
           .catch((err) => {
             Console.info("AccountManager", "auth failed", err)

@@ -1,3 +1,6 @@
+import Cookies from "js-cookie";
+import config from "@/config";
+
 export default {
   namespaced: true,
   state: {
@@ -9,10 +12,16 @@ export default {
     }
   },
   actions: {
-    login({commit}, username) {
-      commit('changeUsername', username)
+    login({commit, dispatch}, {userId, prompted = true}) {
+      commit('changeUsername', userId)
+      if (prompted) {
+        Cookies.set(config.authorization.userId.cookieKey, this.auth.username, {expires: 90, path: "/"});
+        dispatch("data/refreshPersonalMatrix", null, { root: true });
+
+        this.$ga.event('account', 'login', 'login_success', 1);
+      }
       // only add true login ones
-      if (username) commit('options/addUserIdHistory', username, { root: true })
+      if (userId) commit('options/addUserIdHistory', userId, { root: true })
     },
     logout({commit}) {
       commit('changeUsername', null)

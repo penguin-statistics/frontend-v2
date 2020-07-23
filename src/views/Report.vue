@@ -612,6 +612,7 @@ import snackbar from "@/utils/snackbar";
 import Subheader from "@/components/global/Subheader";
 import Theme from "@/mixins/Theme";
 import ItemIcon from "@/components/global/ItemIcon";
+import config from "@/config";
 
 // colors: [dark, light]
 const categories = [
@@ -964,15 +965,17 @@ export default {
     async doSubmit() {
       this.submitted = false;
       this.submitting = true;
-      const userId = Cookies.get('userID');
+      const userId = Cookies.get(config.authorization.userId.cookieKey);
       report.submitReport({
         stageId: this.selected.stage,
         drops: this.results,
       })
       .then(({data}) => {
-        const reportedUserId = Cookies.get('userID');
+        const reportedUserId = Cookies.get(config.authorization.userId.cookieKey);
         if (userId !== reportedUserId) {
-          this.$store.dispatch("auth/login", reportedUserId);
+          this.$store.dispatch("auth/login", {
+            userId: reportedUserId
+          });
         }
         this.reset();
         this.submitted = true;
@@ -1002,7 +1005,7 @@ export default {
       this.submitted = false;
       this.undoing = false;
       this.undid = true;
-      this.$ga.event('report', 'undo', Cookies.get('userID'), 1)
+      this.$ga.event('report', 'undo', Cookies.get(config.authorization.userId.cookieKey), 1)
     },
     closeAllDialogs() {
       this.dialogs.first.enabled = false;

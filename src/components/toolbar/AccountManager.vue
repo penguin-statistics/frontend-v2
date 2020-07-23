@@ -108,20 +108,27 @@
             @input="emitError"
           >
             <template v-slot:append-outer>
-              <v-dialog max-width="450px">
+              <v-dialog
+                v-model="historyDialog"
+                max-width="450px"
+              >
                 <template v-slot:activator="{ on, attrs }">
-                  <v-btn
-                    icon
-                    style="top: -8px"
+                  <TooltipBtn
                     v-bind="attrs"
+                    icon
+                    top="-8px"
+                    tip="忘记 PenguinID"
                     v-on="on"
                   >
                     <v-icon>
                       mdi-help-circle
                     </v-icon>
-                  </v-btn>
+                  </TooltipBtn>
                 </template>
-                <ForgotAccount @loggedIn="loggedIn" />
+                <ForgotAccount
+                  v-if="historyDialog"
+                  @loggedIn="loggedIn"
+                />
               </v-dialog>
             </template>
           </v-text-field>
@@ -211,10 +218,12 @@
   import Console from "@/utils/Console";
   import Subheader from "@/components/global/Subheader";
   import ForgotAccount from "@/components/toolbar/ForgotAccount";
+  import TooltipBtn from "@/components/global/TooltipBtn";
+  import config from "@/config"
 
   export default {
     name: "AccountManager",
-    components: {ForgotAccount, Subheader},
+    components: {TooltipBtn, ForgotAccount, Subheader},
     data() {
       return {
         auth: {
@@ -229,9 +238,6 @@
           color: "",
           text: ""
         },
-        cookies: {
-          key: "userID"
-        },
         historyDialog: false,
         error: ""
       }
@@ -241,11 +247,9 @@
         return !!("ontouchstart" in window) || window.navigator.maxTouchPoints > 0;
       }
     },
-    mounted () {
-      const userId = Cookies.get(this.cookies.key);
-      if (userId) {
-        this.$store.dispatch("auth/login", userId);
-      }
+    created () {
+      const userId = Cookies.get(config.authorization.userId.cookieKey);
+      if (userId) this.$store.dispatch("auth/login", {userId, prompted: false});
     },
     methods: {
       loggedIn() {
@@ -256,15 +260,14 @@
         };
         this.auth.dialog = false
         this.$emit('afterLogin');
-        this.$store.dispatch("data/refreshPersonalMatrix");
-        Cookies.set(this.cookies.key, this.auth.username, {expires: 90, path: "/"});
-        this.$ga.event('account', 'login', 'login_success', 1);
       },
       login() {
         this.auth.loading = true;
         service.post("/users", this.auth.username, {headers: {'Content-Type': 'text/plain'}})
           .then(() => {
-            this.$store.dispatch("auth/login", this.auth.username);
+            this.$store.dispatch("auth/login", {
+              userId: this.auth.username
+            });
             this.loggedIn()
           })
           .catch((err) => {
@@ -280,7 +283,7 @@
           })
       },
       logout() {
-        Cookies.remove(this.cookies.key);
+        Cookies.remove(config.authorization.userId.cookieKey);
         this.$store.dispatch("auth/logout");
         this.snackbar = {
           enabled: true,
