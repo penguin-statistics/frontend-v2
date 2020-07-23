@@ -57,7 +57,7 @@ Getters.statistics = {
     return matrix
       .filter(filter)
       .map(el => {
-        const stage = Getters.stages.byStageId(el.stageId, false);
+        const stage = Getters.stages.byStageId(el.stageId);
         const percentage = el.quantity / el.times
         return {
           ...el,
@@ -156,12 +156,12 @@ Getters.zones = {
   byZoneId(zoneId, ...options) {
     return this.all(...options).find(el => {
       return el.zoneId === zoneId
-    })
+    }) || {}
   },
   byType(type, ...options) {
     return this.all(...options).filter(el => {
       return el.type === type
-    });
+    }) || {};
   },
 }
 
