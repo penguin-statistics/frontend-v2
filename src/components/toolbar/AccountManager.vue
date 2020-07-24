@@ -117,7 +117,7 @@
                     v-bind="attrs"
                     icon
                     top="-8px"
-                    tip="忘记 PenguinID"
+                    :tip="$t('auth.forgot.activator')"
                     v-on="on"
                   >
                     <v-icon>

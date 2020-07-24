@@ -33,14 +33,14 @@
       <v-icon class="mr-1">
         mdi-help-circle
       </v-icon>
-      无法登录？
+      {{ $t('auth.forgot.title') }}
     </v-card-title>
     <v-card-subtitle class="mt-0 pb-0">
-      找回登录信息
+      {{ $t('auth.forgot.subtitle') }}
     </v-card-subtitle>
     <v-card-text>
       <Subheader>
-        此前曾登录的 PenguinID
+        {{ $t('auth.forgot.penguinIdHistory.title') }}
       </Subheader>
       <!--      <v-chip-->
       <!--        v-for="userId in userIds"-->
@@ -75,7 +75,7 @@
                 </span>
               </v-list-item-title>
               <v-list-item-subtitle>
-                最后于 {{ userId.formattedTime.relative }} 在本设备登录
+                {{ $t('auth.forgot.penguinIdHistory.lastLoginAt', {time: userId.formattedTime.relative}) }}
               </v-list-item-subtitle>
             </v-list-item-content>
             <v-list-item-action class="flex-row">
@@ -84,8 +84,8 @@
                 color="primary"
                 class="mr-1"
                 :loading="loading === userId.id"
+                :tip="$t('auth.forgot.penguinIdHistory.loginAsUserId')"
                 :disabled="loading && loading !== userId.id"
-                tip="以此 PenguinID 登录"
                 @click="loginAsUserId(userId.id)"
               >
                 <v-icon>
@@ -96,7 +96,7 @@
                 icon
                 color="error"
                 :disabled="loading === userId.id"
-                tip="删除此 PenguinID 登录记录"
+                :tip="$t('auth.forgot.penguinIdHistory.deleteUserId')"
                 @click="deleteUserId(userId.id)"
               >
                 <v-icon>
@@ -108,11 +108,11 @@
         </template>
         <template v-else>
           <v-list-item class="justify-center grey--text py-0">
-            暂无数据
+            {{ $t('auth.forgot.penguinIdHistory.noData') }}
           </v-list-item>
         </template>
         <v-list-item class="justify-center grey--text py-0 my-0 caption">
-          本功能仅可找回于 v3.3.1 及更新版本客户端所登录的 PenguinID
+          {{ $t('auth.forgot.penguinIdHistory.tips') }}
         </v-list-item>
       </v-list>
     </v-card-text>

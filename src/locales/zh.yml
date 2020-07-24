@@ -395,3 +395,15 @@ credits:
             (HONG KONG) LIMITED, 株式会社Yostar, YOSTAR LIMITED, 龍成網路 等）。企鹅物流数据统计网站内所使用的部分资源来源于 PRTS Wiki (http://prts.wiki) 并同时对部分资源进行了非歧义性的更改。
   source:
     title: 开源许可列表
+auth:
+  forgot:
+    activator: 忘记 PenguinID
+    title: 无法登录？
+    subtitle: 找回登录信息
+    penguinIdHistory:
+      title: 此前曾登录的 PenguinID
+      lastLoginAt: 最后于 {time} 在本设备登录
+      loginAsUserId: 以此 PenguinID 登录
+      deleteUserId: 删除此 PenguinID 登录记录
+      noData: 暂无数据
+      tips: 本功能仅可找回于 v3.3.1 及更新版本客户端所登录的 PenguinID
