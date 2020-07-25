@@ -395,6 +395,7 @@
   import Mirror from "@/mixins/Mirror";
   import TitledRow from "@/components/global/TitledRow";
   import existUtils from "@/utils/existUtils";
+  import validator from "@/utils/validator";
 
   export default {
     name: "DataTable",
@@ -564,7 +565,7 @@
             }
           }
         } else {
-          if (this.trends && props.item.stage.stageId in this.trends) {
+          if (this.trends && validator.have(this.trends, props.item.stage.stageId)) {
             return this.trends[props.item.stage.stageId]
           }
         }

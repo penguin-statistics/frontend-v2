@@ -201,6 +201,7 @@
   import {mapGetters} from "vuex";
   import CDN from "@/mixins/CDN";
   import existUtils from "@/utils/existUtils";
+  import validator from "@/utils/validator";
 
   export default {
     name: "StageSelector",
@@ -357,7 +358,7 @@
               })
             } else {
               zones = zones.map(el => {
-                if (el.zoneId in this.stageImages) {
+                if (validator.have(this.stageImages, el.zoneId)) {
                   return {
                     ...el,
                     image: this.stageImages[el.zoneId]

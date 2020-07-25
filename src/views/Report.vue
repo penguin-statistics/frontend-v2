@@ -613,6 +613,7 @@ import Subheader from "@/components/global/Subheader";
 import Theme from "@/mixins/Theme";
 import ItemIcon from "@/components/global/ItemIcon";
 import config from "@/config";
+import validator from "@/utils/validator";
 
 // colors: [dark, light]
 const categories = [
@@ -744,7 +745,13 @@ export default {
         for (const itemDropInfo of this.dropInfos.item.filter(v => v["dropType"] === category)) {
           const dropType = itemDropInfo["dropType"]
           if (dropType === "FURNITURE") continue
-          if (!(dropType in items)) this.$set(items, dropType , [])
+          if (
+            !(
+              validator.have(items, dropType)
+            )
+          ) {
+            this.$set(items, dropType , [])
+          }
 
           categoryDrops.push(itemDropInfo)
         }
