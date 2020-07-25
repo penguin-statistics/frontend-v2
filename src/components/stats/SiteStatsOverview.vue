@@ -14,7 +14,7 @@
         ref="totalReportsNum"
         class="monospace"
       >
-        {{ totalReports === null ? "---" : totalReports.toLocaleString() }}
+        {{ totalReports === null ? "---" : totalReports | thousandSeparator }}
       </span>
     </v-card-title>
     <v-card-subtitle class="d-flex">
@@ -36,6 +36,7 @@
   import BackdropCard from "@/components/global/BackdropCard";
   import statsManager from "@/models/managers/stats";
   import anime from "animejs";
+  import formatter from "@/utils/formatter";
   export default {
     name: "SiteStatsOverview",
     components: {BackdropCard},
@@ -68,7 +69,7 @@
           easing: 'easeOutQuint',
           delay: 1500,
           complete: function () {
-            self.$refs["totalReportsNum"].innerText = newValue.toLocaleString();
+            self.$refs["totalReportsNum"].innerText = formatter.thousandSeparator(newValue)
           }
         })
       }

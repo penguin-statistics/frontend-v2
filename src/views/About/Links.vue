@@ -278,7 +278,7 @@ export default {
               color: "blue-grey"
             }
           ],
-          url: "http://ak.mooncell.wiki/id/1"
+          url: "http://prts.wiki/id/1"
         },
         {
           title: "Kokodayo Arknights Data",

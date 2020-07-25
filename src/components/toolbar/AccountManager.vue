@@ -89,7 +89,6 @@
         </v-card-title>
         <v-card-text>
           <v-alert
-            prominent
             type="info"
             border="left"
             class="mt-2 mb-6"
@@ -101,12 +100,38 @@
             :label="`${$t('userId')} *`"
             :error-messages="error"
             required
+            clearable
             outlined
             :hide-details="error === ''"
 
             @keyup.enter.native="login"
             @input="emitError"
-          />
+          >
+            <template v-slot:append-outer>
+              <v-dialog
+                v-model="historyDialog"
+                max-width="450px"
+              >
+                <template v-slot:activator="{ on, attrs }">
+                  <TooltipBtn
+                    v-bind="attrs"
+                    icon
+                    top="-8px"
+                    :tip="$t('auth.forgot.activator')"
+                    v-on="on"
+                  >
+                    <v-icon>
+                      mdi-help-circle
+                    </v-icon>
+                  </TooltipBtn>
+                </template>
+                <ForgotAccount
+                  v-if="historyDialog"
+                  @loggedIn="loggedIn"
+                />
+              </v-dialog>
+            </template>
+          </v-text-field>
         </v-card-text>
         <v-card-actions class="mx-4 mb-2">
           <v-btn
@@ -192,10 +217,13 @@
   import Cookies from 'js-cookie'
   import Console from "@/utils/Console";
   import Subheader from "@/components/global/Subheader";
+  import ForgotAccount from "@/components/toolbar/ForgotAccount";
+  import TooltipBtn from "@/components/global/TooltipBtn";
+  import config from "@/config"
 
   export default {
     name: "AccountManager",
-    components: {Subheader},
+    components: {TooltipBtn, ForgotAccount, Subheader},
     data() {
       return {
         auth: {
@@ -210,9 +238,7 @@
           color: "",
           text: ""
         },
-        cookies: {
-          key: "userID"
-        },
+        historyDialog: false,
         error: ""
       }
     },
@@ -221,28 +247,30 @@
         return !!("ontouchstart" in window) || window.navigator.maxTouchPoints > 0;
       }
     },
-    mounted () {
-      const userId = Cookies.get(this.cookies.key);
-      if (userId !== this.$store.getters['auth/username']) {
-        this.$store.commit("auth/login", userId);
-      }
+    created () {
+      const userId = Cookies.get(config.authorization.userId.cookieKey);
+      if (userId) this.$store.dispatch("auth/login", {userId, prompted: false});
     },
     methods: {
+      loggedIn() {
+        this.snackbar = {
+          enabled: true,
+          color: "success",
+          text: this.$t('success')
+        };
+        this.auth.dialog = false
+        this.$ga.event('account', 'login', 'login_success', 1);
+        this.$emit('afterLogin');
+      },
       login() {
         this.auth.loading = true;
-        service.post("/users", this.auth.username, {headers: {'Content-Type': 'text/plain'}})
+        const authorizingUserId = this.auth.username
+        service.post("/users", authorizingUserId, {headers: {'Content-Type': 'text/plain'}})
           .then(() => {
-            this.$store.commit("auth/login", this.auth.username);
-            Cookies.set(this.cookies.key, this.auth.username, {expires: 7, path: "/"});
-            this.$ga.event('account', 'login', 'login_success', 1);
-            this.snackbar = {
-              enabled: true,
-              color: "success",
-              text: this.$t('success')
-            };
-            this.$emit('afterLogin');
-            this.auth.dialog = false
-            this.$store.dispatch("data/refreshPersonalMatrix");
+            this.$store.dispatch("auth/login", {
+              userId: authorizingUserId
+            });
+            this.loggedIn()
           })
           .catch((err) => {
             Console.info("AccountManager", "auth failed", err)
@@ -257,8 +285,8 @@
           })
       },
       logout() {
-        Cookies.remove(this.cookies.key);
-        this.$store.commit("auth/logout");
+        Cookies.remove(config.authorization.userId.cookieKey);
+        this.$store.dispatch("auth/logout");
         this.snackbar = {
           enabled: true,
           color: "success",

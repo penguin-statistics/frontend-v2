@@ -11,6 +11,7 @@
       ripple
       color="primary"
       :loading="calculation.pending"
+      style="z-index: 10"
       @click="calculate"
     >
       <v-icon>
@@ -44,10 +45,11 @@
         v-model="ioDialog"
         width="800"
       >
-        <template v-slot:activator="{ on }">
+        <template v-slot:activator="{ on, attrs }">
           <v-btn
             color="deep-purple white--text"
             class="mr-2"
+            v-bind="attrs"
             v-on="on"
           >
             <v-icon left>
@@ -64,18 +66,19 @@
       </v-dialog>
 
       <v-dialog
-        v-model="resetDialog"
-        max-width="350px"
+        v-model="reset.dialog"
+        max-width="400px"
       >
-        <template v-slot:activator="{ on }">
+        <template v-slot:activator="{ on, attrs }">
           <v-btn
             color="error"
+            v-bind="attrs"
             v-on="on"
           >
             <v-icon left>
               mdi-delete
             </v-icon>
-            {{ $t('planner.reset.name') }}
+            {{ $t('planner.reset.name') }}...
           </v-btn>
         </template>
         <v-card>
@@ -86,8 +89,66 @@
             {{ $t('planner.reset.dialog.title') }}
           </v-card-title>
 
-          <v-card-text class="subtitle-1">
-            {{ $t('planner.reset.dialog.subtitle') }}
+          <v-card-text>
+            <h6 class="subtitle-1">
+              {{ $t('planner.reset.dialog.subtitle') }}
+            </h6>
+            <div class="ml-2">
+              <v-checkbox
+                v-model="reset.options.removeOptions"
+                :label="$t('planner.reset.dialog.options.options.name')"
+                hide-details
+                class="mt-1"
+              >
+                <template v-slot:append>
+                  <v-scale-transition origin="center center">
+                    <v-chip
+                      v-if="reset.options.removeOptions"
+                      small
+                      color="orange"
+                    >
+                      {{ $t('planner.reset.dialog.options.options.indicator') }}
+                    </v-chip>
+                  </v-scale-transition>
+                </template>
+              </v-checkbox>
+              <v-checkbox
+                v-model="reset.options.removeExcludes"
+                :label="$t('planner.reset.dialog.options.excludes.name')"
+                hide-details
+                class="mt-1"
+              >
+                <template v-slot:append>
+                  <v-scale-transition origin="center center">
+                    <v-chip
+                      v-if="reset.options.removeExcludes"
+                      small
+                      color="orange"
+                    >
+                      {{ $t('planner.reset.dialog.options.excludes.indicator') }}
+                    </v-chip>
+                  </v-scale-transition>
+                </template>
+              </v-checkbox>
+              <v-checkbox
+                v-model="reset.options.removeItems"
+                :label="$t('planner.reset.dialog.options.items.name')"
+                hide-details
+                class="mt-1"
+              >
+                <template v-slot:append>
+                  <v-scale-transition origin="center center">
+                    <v-chip
+                      v-if="reset.options.removeItems"
+                      small
+                      color="orange"
+                    >
+                      {{ $t('planner.reset.dialog.options.items.indicator') }}
+                    </v-chip>
+                  </v-scale-transition>
+                </template>
+              </v-checkbox>
+            </div>
           </v-card-text>
 
           <v-divider />
@@ -95,12 +156,13 @@
           <v-card-actions>
             <v-btn
               text
-              @click="resetDialog = false"
+              @click="reset.dialog = false"
             >
               {{ $t('meta.dialog.cancel') }}
             </v-btn>
             <v-spacer />
             <v-btn
+              :disabled="resetAmount <= 0"
               color="error"
               depressed
               @click="confirmReset"
@@ -203,9 +265,10 @@
         v-model="excludeDialog"
         max-width="700px"
       >
-        <template v-slot:activator="{ on }">
+        <template v-slot:activator="{ on, attrs }">
           <v-btn
             class="mr-2 align-center"
+            v-bind="attrs"
             v-on="on"
           >
             <v-icon left>
@@ -325,7 +388,14 @@
         },
         ioDialog: false,
         excludeDialog: false,
-        resetDialog: false
+        reset: {
+          dialog: false,
+          options: {
+            removeOptions: false,
+            removeExcludes: false,
+            removeItems: false,
+          }
+        }
         // options: {
         //   byProduct: false,
         //   requireExp: false,
@@ -348,14 +418,9 @@
           this.$store.commit("planner/changeExcludes", v)
         }
       },
-      excludeDetails () {
-        return this.excludes.slice(0, 25).map(el => {
-          const stage = get.stages.byStageId(el);
-          return {
-            ...stage,
-            translatedCode: strings.translate(stage, "code")
-          }
-        })
+      resetAmount () {
+        return Object.values(this.reset.options)
+          .reduce((prev, item) => prev += item === true, 0)
       }
     },
     watch: {
@@ -379,6 +444,9 @@
       },
       server () {
         this.updateItemStructure(this.getInitialItems(), this.items)
+      },
+      'reset.dialog' () {
+        this.clearResetOptions()
       }
     },
 
@@ -421,17 +489,23 @@
         this.$store.commit("planner/changeItems", results)
       },
       confirmReset () {
-        this.reset()
-        this.resetDialog = false
+        this.doReset()
+        this.reset.dialog = false
       },
-      reset () {
-        this.$store.commit("planner/changeItems", this.getInitialItems())
-        const options = {};
-        Object.keys(this.options).forEach(el => {
-          this.$set(options, el, false)
-        })
-        this.$store.commit("planner/changeOptions", options)
-        this.$store.commit("planner/changeExcludes", [])
+      doReset () {
+        if (this.reset.options.removeItems) this.$store.commit("planner/changeItems", this.getInitialItems())
+        if (this.reset.options.removeOptions) {
+          const options = {};
+          Object.keys(this.options).forEach(el => {
+            this.$set(options, el, false)
+          })
+          this.$store.commit("planner/changeOptions", options)
+        }
+        if (this.reset.options.removeExcludes) this.$store.commit("planner/changeExcludes", [])
+        snackbar.launch("success", 7000, "planner.reset.success")
+      },
+      clearResetOptions () {
+        Object.keys(this.reset.options).forEach(key => {this.reset.options[key] = false})
       },
       calculate() {
         Console.info("Planner", "planning with config", {

@@ -121,8 +121,19 @@ export default {
       logs: [
         {
           future: true,
+          version: "v3.5.0",
+          date: "2020-08-31T08:00:00Z",
+          changes: [
+            "将添加：旧 PenguinID 找回功能",
+            "将添加：社交平台账户功能",
+
+            "将内部优化：错误信息报错统一化",
+          ]
+        },
+        {
+          future: true,
           version: "v3.4.0",
-          date: "2020-07-31T08:00:00Z",
+          date: "2020-08-10T08:00:00Z",
           changes: [
             "将添加：掉落汇报自动同步至 Planner 功能",
             "将添加：数据导出功能",
@@ -132,7 +143,15 @@ export default {
           ]
         },
         {
-          active: true,
+          future: true,
+          version: "v3.3.1",
+          date: "2020-07-31T08:00:00Z",
+          changes: [
+            "修复：Planner FAB 与标签层级细节问题",
+            "优化：Planner 数据重置支持重置部分数据",
+          ]
+        },
+        {
           version: "v3.3.0",
           date: "2020-07-18T19:00:00Z",
           changes: [

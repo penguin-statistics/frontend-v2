@@ -12,8 +12,11 @@ function boolean(key) {
 }
 
 export default {
-  get performance() {return boolean("performance")},
-  get devtools() {return boolean("devtools")},
-  get colorfulConsole() {return boolean("colorfulConsole")},
-  get fullConsole() {return boolean("fullConsole")},
+  get production () {return process.env.NODE_ENV === 'production'},
+  debug: {
+    get performance() {return boolean("performance")},
+    get devtools() {return boolean("devtools")},
+    get colorfulConsole() {return boolean("colorfulConsole")},
+    get fullConsole() {return boolean("fullConsole")},
+  }
 }

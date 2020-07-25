@@ -1,4 +1,4 @@
-const version = "v3.3.0";
+const version = "v3.3.1";
 
 module.exports = {
   version,
@@ -6,6 +6,11 @@ module.exports = {
     submitParams: {
       source: "frontend-v2",
       version
+    }
+  },
+  authorization: {
+    userId: {
+      cookieKey: "userID"
     }
   },
   cdn: {
@@ -16,7 +21,7 @@ module.exports = {
     maxQueries: 5,
   },
   randomBackground: {
-    limit: 5,
+    limit: 3,
     max: 104
   },
   servers: ["CN", "US", "JP", "KR"]

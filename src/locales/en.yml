@@ -288,10 +288,21 @@ planner:
       selected: Excluded {stages} stages
   reset:
     name: Reset
+    success: Successfully resetted chosen planner data
     dialog:
       title: Reset Planner
-      subtitle: This operation will reset all planner data and settings you have set.
+      subtitle: This operation will reset the planner data and settings you choose.
         Are you sure to continue?
+      options:
+        options:
+          name: Planning Options
+          indicator: Will Reset all Options
+        excludes:
+          name: Exclude Stages
+          indicator: Will Reset all Excludes
+        items:
+          name: Item Data
+          indicator: Will Reset all Item Data
   actions:
     _name: Data
     import: Import
@@ -413,7 +424,19 @@ credits:
       copyright of such works belongs to the provider of the game, Shanghai Hypergryph
       Network Technology Co., Ltd. and/or its affiliates, including but not limited
       to YOSTAR (HONG KONG) LIMITED, 株式会社Yostar, YOSTAR LIMITED, 龍成網路, etc,. Penguin Statistics
-      utilizes some assets from PRTS Wiki (http://ak.mooncell.wiki) and has changed some of the assets
+      utilizes some assets from PRTS Wiki (http://prts.wiki) and has changed some of the assets
       without modifying its original meaning.
   source:
     title: Open Source Licenses
+auth:
+  forgot:
+    activator: Forgot PenguinID
+    title: Can't Login?
+    subtitle: Let's recover your login information
+    penguinIdHistory:
+      title: Previously used PenguinID
+      lastLoginAt: Last logged in on this device at {time}
+      loginAsUserId: Login as this PenguinID
+      deleteUserId: Delete this PenguinID record
+      noData: No Data
+      tips: Only able to recover PenguinID that are used on client v3.3.1 or newer versions
