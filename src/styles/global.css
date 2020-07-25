@@ -531,3 +531,7 @@
     position: relative !important;
 }
 
+.v-dialog .theme--light.v-list {
+    background: rgb(240, 240, 240) !important;
+}
+

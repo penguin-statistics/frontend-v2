@@ -5,10 +5,11 @@
     open-on-hover
     transition="slide-y-transition"
   >
-    <template v-slot:activator="{ on }">
+    <template v-slot:activator="{ on, attrs }">
       <v-btn
         rounded
         class="mx-1"
+        v-bind="attrs"
         v-on="on"
       >
         <v-icon

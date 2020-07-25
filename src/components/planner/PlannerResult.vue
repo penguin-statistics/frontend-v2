@@ -38,7 +38,7 @@
             </v-list-item-icon>
             <v-list-item-content>
               <v-list-item-title class="monospace">
-                {{ parseTimes(result.gold.toLocaleString()) }}
+                {{ parseTimes(result.gold) || thousandSeparator }}
               </v-list-item-title>
               <v-list-item-subtitle>
                 {{ $t('planner.calculation.lmb') }}
@@ -332,6 +332,7 @@
 
 <script>
   import Item from "@/components/global/Item";
+  import formatter from "@/utils/formatter";
   export default {
     name: "PlannerResult",
     components: {Item},
@@ -378,10 +379,10 @@
         })
       },
       parseTimes (num) {
-        return Math.ceil(parseFloat(num)).toLocaleString()
+        return formatter.thousandSeparator(Math.ceil(parseFloat(num)))
       },
       parseAmount (num) {
-        return parseFloat(num).toLocaleString()
+        return formatter.thousandSeparator(parseFloat(num))
       }
     },
   }

@@ -76,7 +76,7 @@
               </v-icon>
             </template>
             <v-card-title class="display-2">
-              <span class="monospace">{{ calculated.totalReports.toLocaleString() }}</span>
+              <span class="monospace">{{ calculated.totalReports | thousandSeparator }}</span>
             </v-card-title>
             <v-card-subtitle class="subtitle-2 d-flex">
               <span class="subtitle-1">
@@ -94,7 +94,7 @@
               </v-icon>
             </template>
             <v-card-title class="display-2">
-              <span class="monospace">{{ calculated.totalDrops.toLocaleString() }}</span>
+              <span class="monospace">{{ calculated.totalDrops | thousandSeparator }}</span>
             </v-card-title>
             <v-card-subtitle class="subtitle-2 d-flex">
               <span class="subtitle-1">
@@ -146,6 +146,7 @@
   import timeFormatter from "@/utils/timeFormatter";
   import {mapGetters} from "vuex";
   import get from "@/utils/getters";
+  import formatter from "@/utils/formatter";
   export default {
     name: "SiteStats",
     components: {SiteStatsItem, SiteStatsStage, BackdropCard},
@@ -186,7 +187,7 @@
           totalReports: this.stats["totalStageTimes"].map(el => el.times).reduce((a, b) => a + b),
           updatedAt: timeFormatter.date(updatedAt, true, true),
           updatedRelative: timeFormatter.dayjs(updatedAt).fromNow(),
-          totalApCost: this.stats["totalApCost"] && this.stats["totalApCost"].toLocaleString()
+          totalApCost: this.stats["totalApCost"] && formatter.thousandSeparator(this.stats["totalApCost"])
         }
       }
     },

@@ -7,8 +7,11 @@
 
     bottom
   >
-    <template v-slot:activator="{ on }">
-      <span v-on="on">
+    <template v-slot:activator="{ on, attrs }">
+      <span
+        v-bind="attrs"
+        v-on="on"
+      >
         <ItemIcon
           :item="item"
           :ratio="ratio"

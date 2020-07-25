@@ -3,14 +3,11 @@ import Router from 'vue-router'
 
 import Home from './views/Home'
 import Report from './views/Report'
-// import Planner from './views/Planner'
-
 import StatsLayout from './layouts/StatsLayout'
 import StatsByStage from './views/Stats/Stage'
 import StatsByItem from './views/Stats/Item'
 
 import AboutLayout from './layouts/AboutLayout'
-
 import AboutMembers from './views/About/Members'
 import AboutContribute from './views/About/Contribute'
 import AboutChangelog from './views/About/Changelog'
@@ -18,12 +15,17 @@ import AboutContact from './views/About/Contact'
 import AboutDonate from './views/About/Donate'
 import AboutLinks from './views/About/Links'
 import AboutCredits from './views/About/Credits'
+
 import NotFound from "@/views/NotFound";
 import AdvancedQuery from "@/views/AdvancedQuery";
 import SiteStats from "@/views/SiteStats";
 import Planner from "@/views/Planner";
+
+import i18n from "@/i18n";
+
 // import DataDebugger from "@/components/debug/DataDebugger";
 
+// this is to fix error named something like DuplicatedRoute
 const originalPush = Router.prototype.push;
 Router.prototype.push = function push(location, onResolve, onReject) {
   if (onResolve || onReject) return originalPush.call(this, location, onResolve, onReject)
@@ -268,6 +270,11 @@ const router = new Router({
     }
   },
   ]
+});
+
+router.beforeEach((to, from, next) => {
+  document.title = `${i18n.t(to.meta.i18n)} | ${i18n.t('app.name')}`;
+  next();
 });
 
 export default router

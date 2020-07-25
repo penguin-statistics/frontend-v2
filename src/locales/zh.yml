@@ -269,9 +269,20 @@ planner:
       selected: 已排除 {stages} 关
   reset:
     name: 重置
+    success: 成功重置所选数据项
     dialog:
       title: 重置刷图规划器数据
-      subtitle: 将会删除所有刷图规划器数据与设置。确定要继续吗？
+      subtitle: 将会删除所选部分的相关刷图规划器数据项
+      options:
+        options:
+          name: 规划选项
+          indicator: 将清除所有规划选项
+        excludes:
+          name: 计算排除
+          indicator: 将清除所有排除关卡
+        items:
+          name: 物品数据
+          indicator: 将清除所有物品数据
   actions:
     _name: 数据
     import: 导入
@@ -381,6 +392,18 @@ credits:
   material:
     title: 网站内容声明
     content: 企鹅物流数据统计网站内所使用的游戏资源（包括但不限于：游戏图片、动画、音频、文本原文或其转译版本等），其目的仅为更好地反映游戏内对应元素、增强用户体验，相关作品之版权仍属于上海鹰角网络科技有限公司和/或其关联公司，即鹰角网络游戏软件和/或鹰角网络游戏服务的提供方（包括但不限于：YOSTAR
-            (HONG KONG) LIMITED, 株式会社Yostar, YOSTAR LIMITED, 龍成網路 等）。企鹅物流数据统计网站内所使用的部分资源来源于 PRTS Wiki (http://ak.mooncell.wiki) 并同时对部分资源进行了非歧义性的更改。
+            (HONG KONG) LIMITED, 株式会社Yostar, YOSTAR LIMITED, 龍成網路 等）。企鹅物流数据统计网站内所使用的部分资源来源于 PRTS Wiki (http://prts.wiki) 并同时对部分资源进行了非歧义性的更改。
   source:
     title: 开源许可列表
+auth:
+  forgot:
+    activator: 忘记 PenguinID
+    title: 无法登录？
+    subtitle: 找回登录信息
+    penguinIdHistory:
+      title: 此前曾登录的 PenguinID
+      lastLoginAt: 最后于 {time} 在本设备登录
+      loginAsUserId: 以此 PenguinID 登录
+      deleteUserId: 删除此 PenguinID 登录记录
+      noData: 暂无数据
+      tips: 本功能仅可找回于 v3.3.1 及更新版本客户端所登录的 PenguinID

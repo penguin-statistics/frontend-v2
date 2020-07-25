@@ -1,6 +1,6 @@
 {
   "name": "penguin-stats-frontend",
-  "version": "3.3.0",
+  "version": "3.3.1",
   "private": true,
   "author": "Penguin Statistics Contributors <contributors@penguin-stats.io> (https://github.com/orgs/penguin-statistics/people)",
   "scripts": {
@@ -22,6 +22,7 @@
     "@sentry/integrations": "^5.6.1",
     "animejs": "^3.1.0",
     "clipboard-polyfill": "^2.8.6",
+    "comma-number": "^2.0.1",
     "core-js": "^3.6.5",
     "dayjs": "1.8.27",
     "extract-domain": "^2.2.1",
