@@ -10,6 +10,9 @@ export default {
   notEmptyArray (data) {
     return data.length > 0 || "data must be an non-empty array"
   },
+  have (object, key) {
+    return Object.prototype.hasOwnProperty.call(object, key)
+  },
   all (...validators) {
     for (const validator of validators) {
       if (validator !== true) return validator

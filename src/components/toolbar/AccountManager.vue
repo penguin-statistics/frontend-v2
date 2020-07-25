@@ -128,6 +128,7 @@
                 <ForgotAccount
                   v-if="historyDialog"
                   @loggedIn="loggedIn"
+                  @close="historyDialog = false"
                 />
               </v-dialog>
             </template>

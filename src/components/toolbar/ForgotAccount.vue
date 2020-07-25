@@ -119,7 +119,10 @@
     <v-divider />
     <v-card-actions>
       <v-spacer />
-      <v-btn text>
+      <v-btn
+        text
+        @click="$emit('close')"
+      >
         {{ $t('meta.dialog.close') }}
       </v-btn>
     </v-card-actions>

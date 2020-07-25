@@ -1,5 +1,6 @@
 import Console from "@/utils/Console";
 import get from "@/utils/getters";
+import validator from "@/utils/validator";
 
 const errors = {
   planner: {
@@ -30,8 +31,8 @@ export default {
               // and if the config file have any of those param, it should also pass the validation
 
               // valid need OR valid have
-              (item.hasOwnProperty("need") && Number.isInteger(item.need) && item.need >= 0) ||
-              (item.hasOwnProperty("have") && Number.isInteger(item.have) && item.have >= 0)
+              (validator.have(item, "need") && Number.isInteger(item.need) && item.need >= 0) ||
+              (validator.have(item, "have") && Number.isInteger(item.have) && item.have >= 0)
             )
           ) {
             convertionErrors.push({
@@ -40,16 +41,19 @@ export default {
               reason: errors.planner.config.invalidItemSegment
             });
 
-            Console.info("PlannerIO", item.hasOwnProperty("need"), Number.isInteger(item.need), item.need >= 0,
-              item.hasOwnProperty("have"), Number.isInteger(item.have), item.have >= 0)
+            Console.info(
+              "PlannerIO",
+              validator.have(item, "need"), Number.isInteger(item.need), item.need >= 0,
+              validator.have(item, "have"), Number.isInteger(item.have), item.have >= 0
+            )
             Console.info("PlannerImport", "one of the item data is invalid. not importing this and continue to the next one (reason: need or have invalid): ", index, item)
             continue
           }
 
           // item identifier `id` or `name` check
 
-          const haveId = item.hasOwnProperty("id"); // later versions use id to represent item
-          const haveName = item.hasOwnProperty("name"); // older versions use (chinese) name to represent item
+          const haveId = validator.have(item, "id"); // later versions use id to represent item
+          const haveName = validator.have(item, "name"); // older versions use (chinese) name to represent item
           if (haveId) {
             if (haveName) {
               // we don't need the name anymore if the item have an id

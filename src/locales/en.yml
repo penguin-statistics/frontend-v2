@@ -435,8 +435,8 @@ auth:
     subtitle: Let's recover your login information
     penguinIdHistory:
       title: Previously used PenguinID
-      lastLoginAt: Last logged in on this device at {time}
+      lastLoginAt: Last login at {time}
       loginAsUserId: Login as this PenguinID
       deleteUserId: Delete this PenguinID record
       noData: No Data
-      tips: Only able to recover PenguinID that are used on client v3.3.1 or newer versions
+      tips: Only able to recover PenguinID that are used in client v3.3.1 or newer versions
