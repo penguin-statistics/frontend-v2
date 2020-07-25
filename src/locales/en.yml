@@ -296,13 +296,13 @@ planner:
       options:
         options:
           name: Planning Options
-          indicator: Will Reset all Options
+          indicator: Will reset all Options
         excludes:
           name: Exclude Stages
-          indicator: Will Reset all Excludes
+          indicator: Will reset all Excludes
         items:
           name: Item Data
-          indicator: Will Reset all Item Data
+          indicator: Will reset all Item Data
   actions:
     _name: Data
     import: Import

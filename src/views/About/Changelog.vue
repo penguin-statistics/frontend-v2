@@ -143,10 +143,12 @@ export default {
           ]
         },
         {
-          future: true,
+          active: true,
           version: "v3.3.1",
-          date: "2020-07-31T08:00:00Z",
+          date: "2020-07-23T18:00:00Z",
           changes: [
+            "添加：PenguinID 找回功能（仅支持对 v3.3.1 及之后所登录的 PenguinID 进行找回）",
+
             "修复：Planner FAB 与标签层级细节问题",
             "优化：Planner 数据重置支持重置部分数据",
           ],
