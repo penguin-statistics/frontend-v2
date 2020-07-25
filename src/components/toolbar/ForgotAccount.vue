@@ -116,6 +116,13 @@
         </v-list-item>
       </v-list>
     </v-card-text>
+    <v-divider />
+    <v-card-actions>
+      <v-spacer />
+      <v-btn text>
+        {{ $t('meta.dialog.close') }}
+      </v-btn>
+    </v-card-actions>
   </v-card>
 </template>
 
@@ -173,9 +180,6 @@
           .finally(() => {
             this.loading = false
           })
-      },
-      up () {
-        this.$forceUpdate()
       }
     },
   }

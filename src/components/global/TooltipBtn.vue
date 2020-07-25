@@ -1,7 +1,8 @@
 <template>
   <v-tooltip
     bottom
-    :open-delay="5"
+    :open-delay="0"
+    transition="slide-y-transition"
   >
     <template v-slot:activator="{ on, attrs }">
       <v-btn
@@ -31,7 +32,7 @@
       top: {
         type: String,
         default () {
-          return false
+          return ""
         }
       },
     },

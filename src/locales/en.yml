@@ -432,11 +432,11 @@ auth:
   forgot:
     activator: Forgot PenguinID
     title: Can't Login?
-    subtitle: Get back login information
+    subtitle: Let's recover your login information
     penguinIdHistory:
       title: Previously used PenguinID
       lastLoginAt: Last logged in on this device at {time}
       loginAsUserId: Login as this PenguinID
       deleteUserId: Delete this PenguinID record
       noData: No Data
-      tips: Only able to retrieve PenguinID that are logged on client v3.3.1 and later versions
+      tips: Only able to recover PenguinID that are used on client v3.3.1 or newer versions

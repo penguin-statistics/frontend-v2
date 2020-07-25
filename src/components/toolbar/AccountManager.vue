@@ -259,14 +259,16 @@
           text: this.$t('success')
         };
         this.auth.dialog = false
+        this.$ga.event('account', 'login', 'login_success', 1);
         this.$emit('afterLogin');
       },
       login() {
         this.auth.loading = true;
-        service.post("/users", this.auth.username, {headers: {'Content-Type': 'text/plain'}})
+        const authorizingUserId = this.auth.username
+        service.post("/users", authorizingUserId, {headers: {'Content-Type': 'text/plain'}})
           .then(() => {
             this.$store.dispatch("auth/login", {
-              userId: this.auth.username
+              userId: authorizingUserId
             });
             this.loggedIn()
           })
