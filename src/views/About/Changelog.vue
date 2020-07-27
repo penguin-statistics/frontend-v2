@@ -124,7 +124,6 @@ export default {
           version: "v3.5.0",
           date: "2020-08-31T08:00:00Z",
           changes: [
-            "将添加：旧 PenguinID 找回功能",
             "将添加：社交平台账户功能",
 
             "将内部优化：错误信息报错统一化",
