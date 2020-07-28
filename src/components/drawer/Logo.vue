@@ -8,7 +8,7 @@
     }"
   >
     <v-img
-      :src="cdnResource('/logos/penguin_stats_logo.png')"
+      :src="cdnDeliver('/logos/penguin_stats_logo.png')"
       aspect-ratio="1"
       height="192px"
       contain

@@ -45,7 +45,7 @@
         style="word-break:normal"
       >
         <v-img
-          :src="cdnResource('/logos/penguin_stats_logo.png')"
+          :src="cdnDeliver('/logos/penguin_stats_logo.png')"
           aspect-ratio="1"
           height="128px"
           width="128px"

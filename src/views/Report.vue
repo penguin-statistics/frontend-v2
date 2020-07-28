@@ -614,6 +614,7 @@ import Theme from "@/mixins/Theme";
 import ItemIcon from "@/components/global/ItemIcon";
 import config from "@/config";
 import validator from "@/utils/validator";
+import existUtils from "@/utils/existUtils";
 
 // colors: [dark, light]
 const categories = [
@@ -916,11 +917,11 @@ export default {
     invalidStage () {
       if (this.selected.zone && this.selected.stage) {
         const zone = get.zones.byZoneId(this.selected.zone);
-        if (!zone || !zone.zoneId) return "INVALID"
+        if (!existUtils.existence(zone, true)) return "INVALID"
         if (zone.isOutdated) return "EXPIRED"
 
         const stage = get.stages.byStageId(this.selected.stage);
-        if (!stage || !stage.stageId) return "INVALID"
+        if (!existUtils.existence(stage, true)) return "INVALID"
       } else {
         return "INVALID"
       }

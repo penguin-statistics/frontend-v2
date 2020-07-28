@@ -276,9 +276,14 @@
               >
                 <v-icon>{{ props.item.zone.icon }}</v-icon>
                 <span
-                  class="ml-2"
+                  class="d-flex flex-column ml-2"
                 >
-                  {{ strings.translate(props.item.stage, "code") }}
+                  <span class="overline">
+                    {{ getZoneName(props.item.stage) }}
+                  </span>
+                  <span>
+                    {{ strings.translate(props.item.stage, "code") }}
+                  </span>
                 </span>
                 <v-icon
                   x-small
@@ -618,6 +623,9 @@
       },
       invalidApCost (apCost) {
         return apCost === 99 || apCost === null
+      },
+      getZoneName (stage) {
+        return strings.translate(get.zones.byZoneId(stage.zoneId), "zoneName")
       }
     },
   }

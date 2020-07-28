@@ -340,7 +340,7 @@ export default {
             style: {
               color: theme.text
             },
-            crosshairs: true,
+            crosshairs: [true, true]
           },
 
           credits: {

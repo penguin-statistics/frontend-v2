@@ -6,6 +6,7 @@
     :nudge-top="tooltipNudge"
 
     bottom
+    content-class="transparent o-100"
   >
     <template v-slot:activator="{ on, attrs }">
       <span
@@ -20,7 +21,11 @@
         />
       </span>
     </template>
-    <span class="force-lang-font">{{ name }}</span>
+    <!--    <span class="force-lang-font">{{ name }}</span>-->
+    <PreviewItemCard
+      :item-id="item.itemId"
+      :tooltip-nudge="5"
+    />
   </v-tooltip>
   <ItemIcon
     v-else-if="disableTooltip"
@@ -34,9 +39,10 @@
 <script>
   import ItemIcon from "@/components/global/ItemIcon";
   import strings from "@/utils/strings";
+  import PreviewItemCard from "@/components/stats/PreviewItemCard";
   export default {
     name: "Item",
-    components: {ItemIcon},
+    components: {PreviewItemCard, ItemIcon},
     props: {
       item: {
         type: Object,

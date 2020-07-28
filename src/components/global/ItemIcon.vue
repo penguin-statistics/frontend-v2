@@ -75,7 +75,7 @@ export default {
         height: `${this.ratio * this.originalIconSize}px`,
         width: `${this.ratio * this.originalIconSize}px`,
         backgroundSize: `${this.ratio * this.originalSpriteDimensions.x}px ${this.ratio * this.originalSpriteDimensions.y}px`,
-        backgroundImage: `url(${this.cdnResource('/sprite/sprite.202005140304.png')})`
+        backgroundImage: `url(${this.cdnDeliver('/sprite/sprite.202005140304.png')})`
       };
       if (this.item.spriteCoord) {
         style["backgroundPosition"] = this.transformCoordinate(this.item.spriteCoord)

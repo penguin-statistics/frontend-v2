@@ -3,11 +3,11 @@ import mirror from "@/utils/mirror";
 
 export default {
   methods: {
-    cdnResource (path) {
-      if (mirror.cn.isCurrent()) {
-        return config.cdn.cn + path
-      } else {
+    cdnDeliver (path) {
+      if (mirror.global.isCurrent()) {
         return config.cdn.global + path
+      } else {
+        return config.cdn.cn + path
       }
     }
   },

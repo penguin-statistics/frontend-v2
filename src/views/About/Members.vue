@@ -472,7 +472,7 @@
         return translated.join(this.$t('meta.separator'))
       },
       avatar(src) {
-        return this.cdnResource(`/avatars/${src}`)
+        return this.cdnDeliver(`/avatars/${src}`)
       }
     }
   }

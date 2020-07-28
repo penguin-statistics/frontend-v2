@@ -3,6 +3,23 @@ import formatter from "@/utils/timeFormatter";
 import existUtils from "@/utils/existUtils";
 // import Console from "@/utils/Console";
 
+function memorized(func, ctx) {
+  const memo = {};
+  const slice = Array.prototype.slice;
+
+  return function() {
+    const args = slice.call(arguments);
+
+    if (args in memo) {
+      console.log("serving cached copy ", memo[args])
+      return memo[args];
+    } else {
+      console.log("saving NON cached copy ", args)
+      return (memo[args] = func.apply(ctx, args));
+    }
+  }
+}
+
 const Getters = {};
 
 Getters.items = {
@@ -93,11 +110,16 @@ Getters.statistics = {
         item: Getters.items.byItemId(el.itemId)
       }
     });
-  },
+  }
+}
+
+Getters.cachedStatistics = {
+  byItemId: memorized(Getters.statistics.byItemId, Getters.statistics),
+  byStageId: memorized(Getters.statistics.byStageId, Getters.statistics)
 }
 
 Getters.stages = {
-  all(filter = true) {
+  all(filter = false) {
     let stages;
     if (filter) {
       stages = store.getters["data/content"]({id: "stages"})
@@ -121,7 +143,7 @@ Getters.stages = {
 }
 
 Getters.zones = {
-  all(filter = true) {
+  all(filter = false) {
     let zones = store.getters["data/content"]({id: "zones"})
     if (!zones) return []
 
