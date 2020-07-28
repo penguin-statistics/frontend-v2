@@ -198,7 +198,7 @@ report:
   clear: Clear
   closedReason:
     INVALID: 'Stage Not Found: The stage does not exist in the server you have selected.'
-    EXPIRED: 'Stage Report Closed: This activity stage has already been closed.'
+    EXPIRED: 'Stage Report Closed: This activity stage has not yet been opened or has already been closed.'
   furniture: 'Furniture Drop: {state}'
   name: Report
   submit: Submit

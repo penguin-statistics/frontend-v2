@@ -626,7 +626,7 @@
         return apCost === 99 || apCost === null
       },
       getZoneName (stage) {
-        return strings.translate(get.zones.byZoneId(stage.zoneId), "zoneName")
+        return strings.translate(get.zones.byZoneId(stage.zoneId, false), "zoneName")
       }
     },
   }

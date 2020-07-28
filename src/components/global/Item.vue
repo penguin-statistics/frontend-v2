@@ -32,7 +32,6 @@
     v-else-if="disableTooltip"
     :item="item"
     :ratio="ratio"
-    :class="{'sticky-left': sticky === 'left'}"
     :disable-tooltip="disableTooltip"
   />
 </template>

@@ -685,7 +685,7 @@ export default {
     },
     selectedZone () {
       if (!this.selected.zone) return {};
-      return get.zones.byZoneId(this.selected.zone);
+      return get.zones.byZoneId(this.selected.zone, false);
     },
     selectedStage () {
       if (!this.selected.stage) return {};
@@ -916,12 +916,12 @@ export default {
     },
     invalidStage () {
       if (this.selected.zone && this.selected.stage) {
-        const zone = get.zones.byZoneId(this.selected.zone);
-        if (!existUtils.existence(zone, true)) return "INVALID"
+        const zone = get.zones.byZoneId(this.selected.zone, false);
+        if (!zone || !zone.zoneId || !existUtils.existence(zone)) return "INVALID"
         if (zone.isOutdated) return "EXPIRED"
 
         const stage = get.stages.byStageId(this.selected.stage);
-        if (!existUtils.existence(stage, true)) return "INVALID"
+        if (!stage || !stage.stageId || !existUtils.existence(stage)) return "INVALID"
       } else {
         return "INVALID"
       }

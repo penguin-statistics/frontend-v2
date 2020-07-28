@@ -119,31 +119,25 @@ Getters.cachedStatistics = {
 }
 
 Getters.stages = {
-  all(filter = false) {
-    let stages;
-    if (filter) {
-      stages = store.getters["data/content"]({id: "stages"})
-    } else {
-      stages = store.getters["data/content"]({id: "stages", server: "CN"})
-    }
-
+  all() {
+    let stages = store.getters["data/content"]({id: "stages"});
     if (!stages) return []
     return stages
   },
-  byStageId(stageId, ...options) {
-    return this.all(...options).find(el => {
+  byStageId(stageId, options) {
+    return this.all(options).find(el => {
       return el.stageId === stageId
     }) || {}
   },
-  byParentZoneId(zoneId, ...options) {
-    return this.all(...options).filter(el => {
+  byParentZoneId(zoneId, options) {
+    return this.all(options).filter(el => {
       return el.zoneId === zoneId
     }) || {}
   },
 }
 
 Getters.zones = {
-  all(filter = false) {
+  all(filter = true) {
     let zones = store.getters["data/content"]({id: "zones"})
     if (!zones) return []
 
