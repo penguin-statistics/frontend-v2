@@ -1,6 +1,9 @@
 <template>
-  <v-card color="background">
-    <v-card-title class="pb-0">
+  <v-card
+    color="background"
+    elevation="6"
+  >
+    <v-card-title :class="{'pb-0': stats.data.length}">
       <ItemIcon
         :item="item"
         :ratio="0.5"
@@ -9,7 +12,7 @@
         {{ item.name }}
       </span>
     </v-card-title>
-    <v-card-text>
+    <v-card-text v-if="stats.data.length">
       <v-subheader class="ma-0 pa-0">
         数据速览
       </v-subheader>

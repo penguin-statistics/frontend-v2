@@ -473,8 +473,8 @@
 }
 
 .item-icon {
-    position: absolute;
-    z-index: 4
+    position: absolute !important;
+    z-index: 4 !important;
 }
 .item-icon.item-icon--special {
     position: absolute !important;
@@ -531,10 +531,14 @@
     position: relative !important;
 }
 
-.v-dialog .theme--light.v-list {
+.v-dialog .theme--light.v-list, .v-tooltip__content .theme--light.v-data-table {
     background: rgb(240, 240, 240) !important;
 }
 
 .o-100 {
     opacity: 1;
+}
+
+.backdrop-blur {
+    backdrop-filter: blur(5px);
 }

@@ -1,23 +1,24 @@
 <template>
   <v-tooltip
     v-if="!disableTooltip"
-    transition="slide-y-transition"
-    :open-delay="5"
-    :nudge-top="tooltipNudge"
+    :open-delay="2"
 
-    bottom
-    content-class="transparent o-100"
+    :right="right"
+    :bottom="bottom"
+    v-bind="tooltipOptions"
+    content-class="transparent o-100 backdrop-blur pa-0"
   >
-    <template v-slot:activator="{ on, attrs }">
+    <template v-slot:activator="{ on }">
       <span
-        v-bind="attrs"
+        class="d-flex align-center"
         v-on="on"
       >
         <ItemIcon
           :item="item"
           :ratio="ratio"
-          :class="{'sticky-left': sticky === 'left'}"
+          :class="contentClass"
           :disable-tooltip="disableTooltip"
+          v-on="on"
         />
       </span>
     </template>
@@ -60,22 +61,28 @@
           return false;
         }
       },
-      disableLink: {
-        type: Boolean,
-        default() {
-          return false;
-        }
-      },
       tooltipNudge: {
         type: Number,
         default () {
-          return 10
+          return 0
         }
       },
-      sticky: {
+      right: {
+        type: Boolean,
+        default () {
+          return false
+        }
+      },
+      bottom: {
+        type: Boolean,
+        default () {
+          return true
+        }
+      },
+      contentClass: {
         type: String,
         default () {
-          return "";
+          return ""
         }
       }
     },
@@ -87,6 +94,12 @@
     computed: {
       name() {
         return strings.translate(this.item, "name")
+      },
+      tooltipOptions () {
+        return {
+          [this.bottom ? 'nudgeTop' : 'nudgeLeft']: this.tooltipNudge,
+          transition: this.bottom ? "slide-y-transition" : "slide-x-transition"
+        }
       }
     },
   };
@@ -94,8 +107,6 @@
 
 <style scoped>
   .sticky-left {
-    position: -webkit-sticky;
-    position: sticky;
-    left: 0;
+    position: absolute;
   }
 </style>

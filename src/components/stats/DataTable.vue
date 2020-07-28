@@ -239,10 +239,11 @@
                 <Item
                   :item="props.item.item"
                   :ratio="0.6"
-                  disable-tooltip
-                  disable-link
 
-                  class="item-icon"
+                  content-class="item-icon"
+                  right
+                  :bottom="false"
+                  :tooltip-nudge="-40"
                 />
                 <span
                   style="padding-left: 44px"
