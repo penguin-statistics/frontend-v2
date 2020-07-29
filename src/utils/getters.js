@@ -3,23 +3,6 @@ import formatter from "@/utils/timeFormatter";
 import existUtils from "@/utils/existUtils";
 // import Console from "@/utils/Console";
 
-function memorized(func, ctx) {
-  const memo = {};
-  const slice = Array.prototype.slice;
-
-  return function() {
-    const args = slice.call(arguments);
-
-    if (args in memo) {
-      console.log("serving cached copy ", memo[args])
-      return memo[args];
-    } else {
-      console.log("saving NON cached copy ", args)
-      return (memo[args] = func.apply(ctx, args));
-    }
-  }
-}
-
 const Getters = {};
 
 Getters.items = {
@@ -111,11 +94,6 @@ Getters.statistics = {
       }
     });
   }
-}
-
-Getters.cachedStatistics = {
-  byItemId: memorized(Getters.statistics.byItemId, Getters.statistics),
-  byStageId: memorized(Getters.statistics.byStageId, Getters.statistics)
 }
 
 Getters.stages = {

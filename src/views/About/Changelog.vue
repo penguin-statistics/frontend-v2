@@ -143,6 +143,17 @@ export default {
         },
         {
           active: true,
+          version: "v3.3.2",
+          date: "2020-07-29T14:00:00+0800",
+          changes: [
+            "添加：物品数据速览",
+            "添加：按作战查看数据增加 Zone 名称显示",
+
+            "修复：Report 对部分无效关卡的错误禁止上传提示",
+            "优化：部分数据 Existence 判断",
+          ]
+        },
+        {
           version: "v3.3.1",
           date: "2020-07-23T18:00:00Z",
           changes: [

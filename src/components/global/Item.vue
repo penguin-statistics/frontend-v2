@@ -6,7 +6,7 @@
     :right="right"
     :bottom="bottom"
     v-bind="tooltipOptions"
-    content-class="transparent o-100 backdrop-blur pa-0"
+    content-class="transparent backdrop-blur o-100 pa-0"
   >
     <template v-slot:activator="{ on }">
       <span

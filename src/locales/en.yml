@@ -85,6 +85,8 @@ stats:
     apPPR: Sanity Required Per Item
     clearTime: Shortest Clear Time
     timeRange: Time Range
+  preview:
+    title: Drop Rate Preview
   headerDesc:
     apCost: The Sanity required for the stage
     quantity: The sum of all drops in this stage

@@ -1,7 +1,7 @@
 <template>
   <v-card
     color="background"
-    elevation="6"
+    elevation="9"
   >
     <v-card-title :class="{'pb-0': stats.data.length}">
       <ItemIcon
@@ -14,7 +14,7 @@
     </v-card-title>
     <v-card-text v-if="stats.data.length">
       <v-subheader class="ma-0 pa-0">
-        数据速览
+        {{ $t('stats.preview.title') }}
       </v-subheader>
       <v-simple-table dense>
         <table>
@@ -23,8 +23,16 @@
               <th>
                 {{ $t('stats.headers.stage') }}
               </th>
+              <th class="font-weight-bold">
+                {{ $t('stats.headers.percentage') }}
+                <v-icon small>
+                  mdi-sort-descending
+                </v-icon>
+              </th>
               <th>
-                统计数据
+                {{ $t('stats.headers.quantity') }}
+                /
+                {{ $t('stats.headers.times') }}
               </th>
             </tr>
           </thead>
@@ -32,12 +40,32 @@
             <tr
               v-for="stat in stats.data"
               :key="stat.stageId"
+              class="monospace"
+              :class="{'orange--text font-weight-bold': highlight === stat.stageId}"
             >
-              <td>
-                {{ stat.stage.code }}
+              <td class="d-flex align-center">
+                <v-icon
+                  v-if="highlight === stat.stageId"
+                  color="orange"
+                  small
+                  class="mr-1"
+                >
+                  mdi-arrow-right-circle
+                </v-icon>
+                <v-icon
+                  :color="highlight === stat.stageId ? 'orange' : ''"
+                  small
+                  class="mr-1"
+                >
+                  {{ stat.zone.icon }}
+                </v-icon>
+                {{ stat.stageCode }}
               </td>
               <td>
                 {{ stat.percentageText }}
+              </td>
+              <td>
+                {{ stat.quantity }} / {{ stat.times }}
               </td>
             </tr>
             <tr
@@ -63,6 +91,8 @@
 <script>
   import get from '@/utils/getters'
   import ItemIcon from "@/components/global/ItemIcon";
+  import existUtils from "@/utils/existUtils";
+  import strings from "@/utils/strings";
 
   const pagination = 5;
 
@@ -77,16 +107,35 @@
     },
     computed: {
       item() {
-        return get.items.byItemId(this.itemId)
+        const item = get.items.byItemId(this.itemId)
+        return {
+          ...item,
+          name: strings.translate(item, "name")
+        }
       },
       stats () {
         const data = get.statistics.byItemId(this.itemId)
+          // filter out stages that have too less samples
+          .filter(el => el.times > 100)
+          // only open stages
+          .filter(el => existUtils.existence(el, true))
+
+          .sort((a, b) => b.percentage - a.percentage)
+          .slice(0, pagination)
+          .map(el => {
+            return {
+              ...el,
+              stageCode: strings.translate(el.stage, "code")
+            }
+          })
+
         return {
-          data: data
-            .sort((a, b) => b.percentage - a.percentage)
-            .slice(0, pagination),
+          data,
           more: data.length > pagination
         }
+      },
+      highlight () {
+        return this.$route.params.stageId
       }
     },
   }
