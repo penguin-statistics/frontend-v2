@@ -13,9 +13,6 @@
       </span>
     </v-card-title>
     <v-card-text v-if="stats.data.length">
-      <v-subheader class="ma-0 pa-0">
-        {{ $t('stats.preview.title') }}
-      </v-subheader>
       <v-simple-table dense>
         <table>
           <thead>
