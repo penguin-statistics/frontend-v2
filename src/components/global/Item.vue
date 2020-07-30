@@ -1,7 +1,9 @@
 <template>
   <v-tooltip
     v-if="!disableTooltipCalculated"
-    :open-delay="2"
+    allow-overflow
+    offset-overflow
+    :open-delay="-1"
 
     :right="right"
     :bottom="bottom"
@@ -23,10 +25,7 @@
       </span>
     </template>
     <!--    <span class="force-lang-font">{{ name }}</span>-->
-    <PreviewItemCard
-      :item-id="item.itemId"
-      :tooltip-nudge="5"
-    />
+    <PreviewItemCard :item-id="item.itemId" />
   </v-tooltip>
   <ItemIcon
     v-else-if="disableTooltipCalculated"
@@ -100,6 +99,7 @@
       tooltipOptions () {
         return {
           [this.bottom ? 'nudgeTop' : 'nudgeLeft']: this.tooltipNudge,
+          [this.bottom ? 'nudgeBottom' : 'nudgeRight']: this.tooltipNudge,
           transition: this.bottom ? "slide-y-transition" : "slide-x-transition"
         }
       },
