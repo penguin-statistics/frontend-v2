@@ -82,8 +82,6 @@ stats:
     apPPR: 单件估算理智
     clearTime: 最短通关用时
     timeRange: 统计区间
-  preview:
-    title: 数据速览
   headerDesc:
     apCost: 该作战所需要的理智
     quantity: 在该作战中，所有提交到企鹅物流数据统计的掉落数之和
