@@ -113,7 +113,7 @@
           // filter out stages that have too less samples
           .filter(el => el.times > 100)
           // only open stages
-          .filter(el => existUtils.existence(el, true))
+          .filter(el => existUtils.existence(el.stage, true))
 
           .sort((a, b) => b.percentage - a.percentage)
 
@@ -126,7 +126,7 @@
                 stageCode: strings.translate(el.stage, "code")
               }
             }),
-          more: data.length > pagination
+          more: data.length >= pagination
         }
       },
       highlight () {
