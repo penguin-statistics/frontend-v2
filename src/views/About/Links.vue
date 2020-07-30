@@ -297,7 +297,7 @@ export default {
               color: "teal"
             }
           ],
-          url: "https://ark-nights.com"
+          url: "https://kokodayo.fun/"
         },
         {
           title: "ANWiki",
