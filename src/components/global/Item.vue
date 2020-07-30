@@ -1,6 +1,6 @@
 <template>
   <v-tooltip
-    v-if="!disableTooltip"
+    v-if="!disableTooltipCalculated"
     :open-delay="2"
 
     :right="right"
@@ -17,7 +17,7 @@
           :item="item"
           :ratio="ratio"
           :class="contentClass"
-          :disable-tooltip="disableTooltip"
+          :disable-tooltip="disableTooltipCalculated"
           v-on="on"
         />
       </span>
@@ -29,10 +29,12 @@
     />
   </v-tooltip>
   <ItemIcon
-    v-else-if="disableTooltip"
+    v-else-if="disableTooltipCalculated"
+
     :item="item"
     :ratio="ratio"
-    :disable-tooltip="disableTooltip"
+    :class="contentClass"
+    :disable-tooltip="disableTooltipCalculated"
   />
 </template>
 
@@ -40,6 +42,7 @@
   import ItemIcon from "@/components/global/ItemIcon";
   import strings from "@/utils/strings";
   import PreviewItemCard from "@/components/stats/PreviewItemCard";
+  import environment from "@/utils/environment";
   export default {
     name: "Item",
     components: {PreviewItemCard, ItemIcon},
@@ -99,6 +102,10 @@
           [this.bottom ? 'nudgeTop' : 'nudgeLeft']: this.tooltipNudge,
           transition: this.bottom ? "slide-y-transition" : "slide-x-transition"
         }
+      },
+      disableTooltipCalculated () {
+        // always disable tooltip on touch screen
+        return environment.isTouchScreen || this.disableTooltip
       }
     },
   };
