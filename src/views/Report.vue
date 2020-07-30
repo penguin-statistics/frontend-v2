@@ -613,6 +613,8 @@ import Subheader from "@/components/global/Subheader";
 import Theme from "@/mixins/Theme";
 import ItemIcon from "@/components/global/ItemIcon";
 import config from "@/config";
+import validator from "@/utils/validator";
+import existUtils from "@/utils/existUtils";
 
 // colors: [dark, light]
 const categories = [
@@ -683,7 +685,7 @@ export default {
     },
     selectedZone () {
       if (!this.selected.zone) return {};
-      return get.zones.byZoneId(this.selected.zone);
+      return get.zones.byZoneId(this.selected.zone, false);
     },
     selectedStage () {
       if (!this.selected.stage) return {};
@@ -744,7 +746,13 @@ export default {
         for (const itemDropInfo of this.dropInfos.item.filter(v => v["dropType"] === category)) {
           const dropType = itemDropInfo["dropType"]
           if (dropType === "FURNITURE") continue
-          if (!(dropType in items)) this.$set(items, dropType , [])
+          if (
+            !(
+              validator.have(items, dropType)
+            )
+          ) {
+            this.$set(items, dropType , [])
+          }
 
           categoryDrops.push(itemDropInfo)
         }
@@ -908,12 +916,12 @@ export default {
     },
     invalidStage () {
       if (this.selected.zone && this.selected.stage) {
-        const zone = get.zones.byZoneId(this.selected.zone);
-        if (!zone || !zone.zoneId) return "INVALID"
+        const zone = get.zones.byZoneId(this.selected.zone, false);
+        if (!zone || !zone.zoneId || !existUtils.existence(zone)) return "INVALID"
         if (zone.isOutdated) return "EXPIRED"
 
         const stage = get.stages.byStageId(this.selected.stage);
-        if (!stage || !stage.stageId) return "INVALID"
+        if (!stage || !stage.stageId || !existUtils.existence(stage)) return "INVALID"
       } else {
         return "INVALID"
       }

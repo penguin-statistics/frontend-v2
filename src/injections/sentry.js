@@ -11,7 +11,8 @@ if (environment.production) {
     integrations: [
       new Integrations.Vue({
         Vue,
-        attachProps: true
+        attachProps: true,
+        tracing: true
       }),
       new ApmIntegrations.Tracing(),
     ],
@@ -42,12 +43,8 @@ if (environment.production) {
       //// END
 
       //// Those are our customized ones
-      // "QuotaExceededError",
       "vivoNewsDetailPage",
-      "Request aborted",
-      "Cannot read property 'style' of null",
       "removeAD",
-      "querySelectorAll"
     ],
     ignoreUrls: [
       // Facebook flakiness

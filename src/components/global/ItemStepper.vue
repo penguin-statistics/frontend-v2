@@ -37,7 +37,6 @@
             :item="item"
             :ratio="1"
             disable-link
-            tooltip-position="bottom"
             :tooltip-nudge="0"
           />
         </div>

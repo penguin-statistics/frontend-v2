@@ -45,7 +45,7 @@
           <v-img
             style="transform: translateY(.275em)"
             alt="公安网备案图标"
-            :src="cdnResource('/logos/gonganwang.png')"
+            :src="cdnDeliver('/logos/gonganwang.png')"
             class="d-inline-block"
             height="12"
             width="12"

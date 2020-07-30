@@ -201,6 +201,7 @@
   import {mapGetters} from "vuex";
   import CDN from "@/mixins/CDN";
   import existUtils from "@/utils/existUtils";
+  import validator from "@/utils/validator";
 
   export default {
     name: "StageSelector",
@@ -235,24 +236,24 @@
           stage: null
         },
         stageImages: {
-          "act5d0_zone1": this.cdnResource('/backgrounds/zones/act5d0_zone1.jpg'),
-          "act6d5_zone1": this.cdnResource('/backgrounds/zones/act6d5_zone1.jpg'),
-          "act7d5_zone1": this.cdnResource('/backgrounds/zones/act7d5_zone1.jpg'),
-          "act9d0_zone1": this.cdnResource('/backgrounds/zones/act9d0_zone1.jpg'),
-          "act10d5_zone1": this.cdnResource('/backgrounds/zones/act10d5_zone1.jpg'),
-          "act11d0_zone1": this.cdnResource('/backgrounds/zones/act11d0_zone1.jpg'),
-          "1stact_zone1": this.cdnResource('/backgrounds/zones/A001_zone1.jpg'),
-          "act3d0_zone1": this.cdnResource('/backgrounds/zones/A003_zone1.jpg'),
-          "act4d0_zone1": this.cdnResource('/backgrounds/zones/main_e0.jpg'),
-          "main_0": this.cdnResource('/backgrounds/zones/main_0.jpg'),
-          "main_1": this.cdnResource('/backgrounds/zones/main_1.jpg'),
-          "main_2": this.cdnResource('/backgrounds/zones/main_2.jpg'),
-          "main_3": this.cdnResource('/backgrounds/zones/main_3.jpg'),
-          "main_4": this.cdnResource('/backgrounds/zones/main_4.jpg'),
-          "main_5": this.cdnResource('/backgrounds/zones/main_5.jpg'),
-          "main_6": this.cdnResource('/backgrounds/zones/main_6.jpg'),
-          "main_7": this.cdnResource('/backgrounds/zones/main_7.jpg'),
-          "gachabox": this.cdnResource('/backgrounds/zones/gachabox.jpg'),
+          "act5d0_zone1": this.cdnDeliver('/backgrounds/zones/act5d0_zone1.jpg'),
+          "act6d5_zone1": this.cdnDeliver('/backgrounds/zones/act6d5_zone1.jpg'),
+          "act7d5_zone1": this.cdnDeliver('/backgrounds/zones/act7d5_zone1.jpg'),
+          "act9d0_zone1": this.cdnDeliver('/backgrounds/zones/act9d0_zone1.jpg'),
+          "act10d5_zone1": this.cdnDeliver('/backgrounds/zones/act10d5_zone1.jpg'),
+          "act11d0_zone1": this.cdnDeliver('/backgrounds/zones/act11d0_zone1.jpg'),
+          "1stact_zone1": this.cdnDeliver('/backgrounds/zones/A001_zone1.jpg'),
+          "act3d0_zone1": this.cdnDeliver('/backgrounds/zones/A003_zone1.jpg'),
+          "act4d0_zone1": this.cdnDeliver('/backgrounds/zones/main_e0.jpg'),
+          "main_0": this.cdnDeliver('/backgrounds/zones/main_0.jpg'),
+          "main_1": this.cdnDeliver('/backgrounds/zones/main_1.jpg'),
+          "main_2": this.cdnDeliver('/backgrounds/zones/main_2.jpg'),
+          "main_3": this.cdnDeliver('/backgrounds/zones/main_3.jpg'),
+          "main_4": this.cdnDeliver('/backgrounds/zones/main_4.jpg'),
+          "main_5": this.cdnDeliver('/backgrounds/zones/main_5.jpg'),
+          "main_6": this.cdnDeliver('/backgrounds/zones/main_6.jpg'),
+          "main_7": this.cdnDeliver('/backgrounds/zones/main_7.jpg'),
+          "gachabox": this.cdnDeliver('/backgrounds/zones/gachabox.jpg'),
         }
       }
     },
@@ -357,7 +358,7 @@
               })
             } else {
               zones = zones.map(el => {
-                if (el.zoneId in this.stageImages) {
+                if (validator.have(this.stageImages, el.zoneId)) {
                   return {
                     ...el,
                     image: this.stageImages[el.zoneId]

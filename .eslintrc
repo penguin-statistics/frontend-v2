@@ -15,7 +15,8 @@
     "vuetify/no-deprecated-classes": "error",
     "vuetify/grid-unknown-attributes": "error",
     "vuetify/no-legacy-grid": "error",
-    "vue/no-v-html": "off"
+    "vue/no-v-html": "off",
+    "vue/no-template-shadow": "off"
   },
   "parserOptions": {
     "parser": "babel-eslint"

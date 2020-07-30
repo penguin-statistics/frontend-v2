@@ -1,42 +1,50 @@
 <template>
   <v-tooltip
-    v-if="!disableTooltip"
-    transition="slide-y-transition"
-    :open-delay="5"
-    :nudge-top="tooltipNudge"
+    v-if="!disableTooltipCalculated"
+    allow-overflow
+    offset-overflow
+    :open-delay="-1"
 
-    bottom
+    :right="right"
+    :bottom="bottom"
+    v-bind="tooltipOptions"
+    content-class="transparent backdrop-blur o-100 pa-0"
   >
-    <template v-slot:activator="{ on, attrs }">
+    <template v-slot:activator="{ on }">
       <span
-        v-bind="attrs"
+        class="d-flex align-center"
         v-on="on"
       >
         <ItemIcon
           :item="item"
           :ratio="ratio"
-          :class="{'sticky-left': sticky === 'left'}"
-          :disable-tooltip="disableTooltip"
+          :class="contentClass"
+          :disable-tooltip="disableTooltipCalculated"
+          v-on="on"
         />
       </span>
     </template>
-    <span class="force-lang-font">{{ name }}</span>
+    <!--    <span class="force-lang-font">{{ name }}</span>-->
+    <PreviewItemCard :item-id="item.itemId" />
   </v-tooltip>
   <ItemIcon
-    v-else-if="disableTooltip"
+    v-else-if="disableTooltipCalculated"
+
     :item="item"
     :ratio="ratio"
-    :class="{'sticky-left': sticky === 'left'}"
-    :disable-tooltip="disableTooltip"
+    :class="contentClass"
+    :disable-tooltip="disableTooltipCalculated"
   />
 </template>
 
 <script>
   import ItemIcon from "@/components/global/ItemIcon";
   import strings from "@/utils/strings";
+  import PreviewItemCard from "@/components/stats/PreviewItemCard";
+  import environment from "@/utils/environment";
   export default {
     name: "Item",
-    components: {ItemIcon},
+    components: {PreviewItemCard, ItemIcon},
     props: {
       item: {
         type: Object,
@@ -54,22 +62,28 @@
           return false;
         }
       },
-      disableLink: {
-        type: Boolean,
-        default() {
-          return false;
-        }
-      },
       tooltipNudge: {
         type: Number,
         default () {
-          return 10
+          return 0
         }
       },
-      sticky: {
+      right: {
+        type: Boolean,
+        default () {
+          return false
+        }
+      },
+      bottom: {
+        type: Boolean,
+        default () {
+          return true
+        }
+      },
+      contentClass: {
         type: String,
         default () {
-          return "";
+          return ""
         }
       }
     },
@@ -81,6 +95,17 @@
     computed: {
       name() {
         return strings.translate(this.item, "name")
+      },
+      tooltipOptions () {
+        return {
+          [this.bottom ? 'nudgeTop' : 'nudgeLeft']: this.tooltipNudge,
+          [this.bottom ? 'nudgeBottom' : 'nudgeRight']: this.tooltipNudge,
+          transition: this.bottom ? "slide-y-transition" : "slide-x-transition"
+        }
+      },
+      disableTooltipCalculated () {
+        // always disable tooltip on touch screen
+        return environment.isTouchScreen || this.disableTooltip
       }
     },
   };
@@ -88,8 +113,6 @@
 
 <style scoped>
   .sticky-left {
-    position: -webkit-sticky;
-    position: sticky;
-    left: 0;
+    position: absolute;
   }
 </style>

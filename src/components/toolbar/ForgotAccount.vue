@@ -3,7 +3,7 @@
     "en": {
       "failed": {
         "message": "Failed to log in: {message}",
-        "notfound": "This User ID cannot be found. Please not that this is not the ID in the game. You will get one after your first drop report."
+        "notfound": "This User ID cannot be found. Please note that this is not the ID in the game. You will get one after your first drop report."
       }
     },
     "ja": {
@@ -119,7 +119,10 @@
     <v-divider />
     <v-card-actions>
       <v-spacer />
-      <v-btn text>
+      <v-btn
+        text
+        @click="$emit('close')"
+      >
         {{ $t('meta.dialog.close') }}
       </v-btn>
     </v-card-actions>
