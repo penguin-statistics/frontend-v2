@@ -126,7 +126,7 @@
                 stageCode: strings.translate(el.stage, "code")
               }
             }),
-          more: data.length >= pagination
+          more: data.length > pagination
         }
       },
       highlight () {
