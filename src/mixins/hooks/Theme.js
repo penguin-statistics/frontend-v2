@@ -1,5 +1,6 @@
 import {mapGetters} from "vuex";
 import Console from "@/utils/Console";
+import environment from "@/utils/environment";
 
 export default {
   watch: {
@@ -13,7 +14,7 @@ export default {
   },
   methods: {
     themeToggle (isDark) {
-      const windowsIndicator = navigator.platform.indexOf('Win') > -1 ? "platform--windows" : "platform--not-windows";
+      const windowsIndicator = environment.isWindows ? "platform--windows" : "platform--not-windows";
       this.$vuetify.theme.dark = isDark
       if (isDark) {
         document.documentElement.classList.add("vuetify-theme--dark", windowsIndicator)

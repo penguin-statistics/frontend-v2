@@ -239,10 +239,11 @@
                 <Item
                   :item="props.item.item"
                   :ratio="0.6"
-                  disable-tooltip
-                  disable-link
 
-                  class="item-icon"
+                  content-class="item-icon"
+                  right
+                  :bottom="false"
+                  :tooltip-nudge="-40"
                 />
                 <span
                   style="padding-left: 44px"
@@ -276,9 +277,14 @@
               >
                 <v-icon>{{ props.item.zone.icon }}</v-icon>
                 <span
-                  class="ml-2"
+                  class="d-flex flex-column ml-2"
                 >
-                  {{ strings.translate(props.item.stage, "code") }}
+                  <span class="overline">
+                    {{ getZoneName(props.item.stage) }}
+                  </span>
+                  <span>
+                    {{ strings.translate(props.item.stage, "code") }}
+                  </span>
                 </span>
                 <v-icon
                   x-small
@@ -395,6 +401,7 @@
   import Mirror from "@/mixins/Mirror";
   import TitledRow from "@/components/global/TitledRow";
   import existUtils from "@/utils/existUtils";
+  import validator from "@/utils/validator";
 
   export default {
     name: "DataTable",
@@ -564,7 +571,7 @@
             }
           }
         } else {
-          if (this.trends && props.item.stage.stageId in this.trends) {
+          if (this.trends && validator.have(this.trends, props.item.stage.stageId)) {
             return this.trends[props.item.stage.stageId]
           }
         }
@@ -617,6 +624,9 @@
       },
       invalidApCost (apCost) {
         return apCost === 99 || apCost === null
+      },
+      getZoneName (stage) {
+        return strings.translate(get.zones.byZoneId(stage.zoneId, false), "zoneName")
       }
     },
   }

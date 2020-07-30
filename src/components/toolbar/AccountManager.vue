@@ -3,7 +3,7 @@
 	"en": {
 		"failed": {
 			"message": "Failed to log in: {message}",
-			"notfound": "This User ID cannot be found. Please not that this is not the ID in the game. You will get one after your first drop report."
+			"notfound": "This User ID cannot be found. Please note that this is not the ID in the game. You will get one after your first drop report."
 		},
 		"loggedOut": "Logged out",
 		"login": "Login",
@@ -128,6 +128,7 @@
                 <ForgotAccount
                   v-if="historyDialog"
                   @loggedIn="loggedIn"
+                  @close="historyDialog = false"
                 />
               </v-dialog>
             </template>
@@ -220,6 +221,7 @@
   import ForgotAccount from "@/components/toolbar/ForgotAccount";
   import TooltipBtn from "@/components/global/TooltipBtn";
   import config from "@/config"
+  import environment from "@/utils/environment";
 
   export default {
     name: "AccountManager",
@@ -244,7 +246,7 @@
     },
     computed: {
       mobile() {
-        return !!("ontouchstart" in window) || window.navigator.maxTouchPoints > 0;
+        return environment.isTouchScreen
       }
     },
     created () {

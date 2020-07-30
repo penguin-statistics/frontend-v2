@@ -198,7 +198,7 @@ report:
   clear: Clear
   closedReason:
     INVALID: 'Stage Not Found: The stage does not exist in the server you have selected.'
-    EXPIRED: 'Stage Report Closed: This activity stage has already been closed.'
+    EXPIRED: 'Stage Report Closed: This activity stage has not yet been opened or has already been closed.'
   furniture: 'Furniture Drop: {state}'
   name: Report
   submit: Submit
@@ -296,13 +296,13 @@ planner:
       options:
         options:
           name: Planning Options
-          indicator: Will Reset all Options
+          indicator: Will reset all Options
         excludes:
           name: Exclude Stages
-          indicator: Will Reset all Excludes
+          indicator: Will reset all Excludes
         items:
           name: Item Data
-          indicator: Will Reset all Item Data
+          indicator: Will reset all Item Data
   actions:
     _name: Data
     import: Import
@@ -435,8 +435,8 @@ auth:
     subtitle: Let's recover your login information
     penguinIdHistory:
       title: Previously used PenguinID
-      lastLoginAt: Last logged in on this device at {time}
+      lastLoginAt: Last login at {time}
       loginAsUserId: Login as this PenguinID
       deleteUserId: Delete this PenguinID record
       noData: No Data
-      tips: Only able to recover PenguinID that are used on client v3.3.1 or newer versions
+      tips: Only able to recover PenguinID that are used in client v3.3.1 or newer versions

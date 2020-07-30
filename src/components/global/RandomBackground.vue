@@ -72,7 +72,7 @@
     },
     methods: {
       getImageUrl (id) {
-        return this.cdnResource(`/backgrounds/${id}.${this.webpSupport ? 'webp' : 'optimized.png'}`)
+        return this.cdnDeliver(`/backgrounds/${id}.${this.webpSupport ? 'webp' : 'optimized.png'}`)
       },
       setBlur (flag) {
         Console.info("RandomBackground", "setting blur to", flag)
@@ -132,7 +132,7 @@
         if (this.isSpecialUrl(to)) {
           // yes we do have a special image for the CURRENT path. APPLY IT!
           const imageUrl = this.specialImageMap[to.params.stageId]
-          this.updateBackgroundByUrl(this.cdnResource(imageUrl))
+          this.updateBackgroundByUrl(this.cdnDeliver(imageUrl))
         } else if (this.isSpecialUrl(from)) {
           // we do not have a special image for the current path but we DO have a special image for the PREVIOUS path.
           // we need to restore the last background image

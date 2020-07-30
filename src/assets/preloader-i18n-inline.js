@@ -12,7 +12,7 @@ if (!Object.entries)
   };
 
 let _i18n = {
-  getFirstBrowserLanguageWithRegionCode () {
+  languageWithRegion () {
     let nav = window.navigator,
       browserLanguagePropertyKeys = ['language', 'browserLanguage', 'systemLanguage', 'userLanguage'],
       i,
@@ -50,9 +50,20 @@ let _i18n = {
 
     return shortLanguage;
   },
-  getFirstBrowserLanguage () {
-    const language = this.getFirstBrowserLanguageWithRegionCode().replace("_", "-");
-    if (!language) return "zh"; // use default
+  language () {
+    if (localStorage) {
+      const settings = localStorage.getItem("penguin-stats-settings")
+      if (settings) {
+        try {
+          const data = JSON.parse(settings);
+          return data.settings.language
+        } catch (e) {
+          // fallback
+        }
+      }
+    }
+    const language = this.languageWithRegion().replace("_", "-");
+    if (!language) return "en"; // use default
     const languages = language.split("-");
     if (languages.length === 1) {
       return language
@@ -85,7 +96,7 @@ let _i18n = {
   },
   render () {
     document.querySelector("#load_copyright_year--text").textContent = new Date().getFullYear().toString();
-    let language = this.getFirstBrowserLanguage();
+    let language = this.language();
     if (language in this.data && typeof language === "string" && language.length <= 2) {
       let messages = this.data[language];
       for (let [key, value] of Object.entries(messages)) {
