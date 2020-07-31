@@ -615,6 +615,8 @@ import ItemIcon from "@/components/global/ItemIcon";
 import config from "@/config";
 import validator from "@/utils/validator";
 import existUtils from "@/utils/existUtils";
+import performance from "@/utils/performance";
+import Console from "@/utils/Console";
 
 // colors: [dark, light]
 const categories = [
@@ -926,6 +928,9 @@ export default {
         return "INVALID"
       }
       return false
+    },
+    performance () {
+      return performance
     }
   },
   methods: {
@@ -974,32 +979,43 @@ export default {
       this.submitted = false;
       this.submitting = true;
       const userId = Cookies.get(config.authorization.userId.cookieKey);
-      report.submitReport({
-        stageId: this.selected.stage,
-        drops: this.results,
-      })
-      .then(({data}) => {
-        const reportedUserId = Cookies.get(config.authorization.userId.cookieKey);
-        if (userId !== reportedUserId) {
-          this.$store.dispatch("auth/login", {
-            userId: reportedUserId
-          });
-        }
-        this.reset();
-        this.submitted = true;
-        this.$ga.event('report', 'submit_single', this.selected.stage, 1)
+      const timer = performance.timer.ctx(
+        report.submitReport({
+          stageId: this.selected.stage,
+          drops: this.results,
+        })
+          .then(({data}) => {
+            const reportedUserId = Cookies.get(config.authorization.userId.cookieKey);
+            if (userId !== reportedUserId) {
+              this.$store.dispatch("auth/login", {
+                userId: reportedUserId
+              });
+            }
+            this.reset();
+            this.submitted = true;
+            this.$ga.event('report', 'submit_single', this.selected.stage, 1)
 
-        if (this.plannerIntegration.enabled) {
-          this.updatePlanner();
-        }
+            if (this.plannerIntegration.enabled) {
+              this.updatePlanner();
+            }
 
-        this.lastSubmissionId = data;
-      })
-      .catch(() => {
-        snackbar.networkError()
-      })
-      .finally(() => {
-        this.submitting = false;
+            this.lastSubmissionId = data;
+          })
+          .catch(() => {
+            snackbar.networkError()
+          })
+          .finally(() => {
+            this.submitting = false;
+          })
+      )
+      // Console.debug("Report", "report with context: got performance timer promise", timer)
+      timer.then(timeDelta => {
+        Console.info("Report", `ajax request last ${timeDelta}ms`)
+        this.$ga.time({
+          timingCategory: 'report',
+          timingVar: 'submit',
+          timingValue: timeDelta
+        })
       })
     },
     confirmSubmit() {

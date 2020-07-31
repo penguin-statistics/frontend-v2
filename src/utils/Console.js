@@ -8,6 +8,33 @@ function reportSentry(severity, component, contents) {
   })
 }
 
+const styleMap = {
+  debug: {
+    background: "#424242",
+    text: "#fff"
+  },
+  info: {
+    background: "#1976D2",
+    text: "#fff"
+  },
+  warn: {
+    background: "#F57C00",
+    text: "#fff"
+  },
+  error: {
+    background: "#D32F2F",
+    text: "#fff"
+  },
+  fatal: {
+    background: "#FFCCBC",
+    text: "#f00"
+  },
+  log: {
+    background: "#512DA8",
+    text: "#fff"
+  }
+}
+
 class Console {
   static debug (component, ...content) {
     this._render("debug", component, ...content)
@@ -47,9 +74,10 @@ class Console {
     let prefix;
 
     if (process.env.NODE_ENV !== "production" || environment.debug.colorfulConsole) {
+      const styles = styleMap[level]
       prefix = [
         `%c${level}%c${component}`,
-        "background: #FF9800; color: #000; padding: 2px 4px; border-radius: 4px; margin-right: 4px; font-weight: 900; font-size: 10px;",
+        `background: ${styles.background}; color: ${styles.text}; padding: 2px 4px; border-radius: 4px; margin-right: 4px; font-weight: 900; font-size: 10px;`,
         "background: #673AB7; color: #fff; padding: 2px 4px; border-radius: 4px; font-weight: 700; font-size: 10px;"
       ];
     } else {
