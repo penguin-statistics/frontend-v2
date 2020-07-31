@@ -88,8 +88,9 @@
   import ItemIcon from "@/components/global/ItemIcon";
   import existUtils from "@/utils/existUtils";
   import strings from "@/utils/strings";
+  import config from "@/config"
 
-  const pagination = 5;
+  const pagination = config.previewCard.item.pagination;
 
   export default {
     name: "PreviewItemCard",

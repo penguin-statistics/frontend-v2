@@ -995,10 +995,6 @@ export default {
             this.submitted = true;
             this.$ga.event('report', 'submit_single', this.selected.stage, 1)
 
-            if (this.plannerIntegration.enabled) {
-              this.updatePlanner();
-            }
-
             this.lastSubmissionId = data;
           })
           .catch(() => {

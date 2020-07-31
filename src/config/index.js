@@ -24,5 +24,10 @@ module.exports = {
     limit: 3,
     max: 104
   },
+  previewCard: {
+    item: {
+      pagination: 5
+    }
+  },
   servers: ["CN", "US", "JP", "KR"]
 }
