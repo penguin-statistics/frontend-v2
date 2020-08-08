@@ -283,7 +283,7 @@ import Theme from "@/mixins/Theme";
 import config from "@/config";
 import validator from "@/utils/validator";
 import existUtils from "@/utils/existUtils";
-import Recognition from "@/components/stats/Recognition";
+import Recognition from "@/components/global/Recognition";
 // colors: [dark, light]
 const categories = [
   {

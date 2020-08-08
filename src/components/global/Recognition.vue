@@ -41,21 +41,35 @@
     </v-stepper-content>
     <v-stepper-content :step="2">
       <v-form @submit="prepareRecognition">
-        <v-file-input
-          v-model="ImageFiles"
-          accept="image/*"
-          :chips="true"
-          :counter="true"
-          :multiple="true"
-          :placeholder="$t('report.recognition.file')"
-          :rules="[checkType]"
-        />
-        <v-btn
-          type="submit"
-          block
-        >
-          {{ $t("report.recognition.start") }}
-        </v-btn>
+        <v-row style="margin-bottom:15px;">
+          <input
+            ref="fileinput"
+            type="file"
+            multiple
+            style="display: none;"
+            @change="UpdateFile"
+          >
+          <v-btn
+            block
+            @click="fileinput.click()"
+          >
+            {{
+              ImageFiles.length == 0
+                ? $t("report.recognition.file")
+                : $t("report.recognition.chosen") +
+                  ImageFiles.length +
+                  $t("report.recognition.fileunit")
+            }}
+          </v-btn>
+        </v-row>
+        <v-row>
+          <v-btn
+            type="submit"
+            block
+          >
+            {{ $t("report.recognition.start") }}
+          </v-btn>
+        </v-row>
       </v-form>
     </v-stepper-content>
     <v-stepper-content step="3">
@@ -165,7 +179,10 @@
                 <v-row>
                   <template v-for="(ArkItem, idx) of item.Items">
                     <ItemStepper
-                      v-if="!!ArkItem.ItemId && (!!ArkItem.Count||ArkItem.Count == 0)"
+                      v-if="
+                        !!ArkItem.ItemId &&
+                          (!!ArkItem.Count || ArkItem.Count == 0)
+                      "
                       :key="idx"
                       v-model="ArkItem.Count"
                       :item="getItemById(ArkItem.ItemId)"
@@ -215,7 +232,10 @@
                 <v-row>
                   <template v-for="(ArkItem, idx) of item.Items">
                     <ItemStepper
-                      v-if="!!ArkItem.ItemId && (!!ArkItem.Count||ArkItem.Count == 0)"
+                      v-if="
+                        !!ArkItem.ItemId &&
+                          (!!ArkItem.Count || ArkItem.Count == 0)
+                      "
                       :key="idx"
                       v-model="ArkItem.Count"
                       :item="getItemById(ArkItem.ItemId)"
@@ -246,9 +266,7 @@
         :block="true"
         @click="report()"
       >
-        {{
-          $t("report.recognition.submit")
-        }}
+        {{ $t("report.recognition.submit") }}
       </v-btn>
     </v-stepper-content>
   </v-stepper>
@@ -372,6 +390,9 @@ export default {
     strings() {
       return strings;
     },
+    fileinput() {
+      return this.$refs.fileinput;
+    },
   },
   mounted() {
     let stages = {};
@@ -406,6 +427,9 @@ export default {
     },
     report() {
       this.$emit("report", this.TrustData);
+    },
+    UpdateFile() {
+      this.ImageFiles = this.$refs.fileinput.files;
     },
     prepareRecognition(e) {
       e.preventDefault();
@@ -450,7 +474,7 @@ export default {
       if (RecognitionResult.Stage.Confidence < 0.85) {
         return false;
       }
-      if(!(RecognitionResult.Stage.Code in this.Stages)) return false;
+      if (!(RecognitionResult.Stage.Code in this.Stages)) return false;
       return RecognitionResult.Items.every((Item) => {
         if (Item.Confidence) {
           if (Item.Confidence < 0.6) return false;
@@ -475,7 +499,7 @@ export default {
           }
           Result.imgURL = dataURL;
           Result.trust = this.ConfidenceFilter(Result);
-          if(Result.Stage.Code in this.Stages) {
+          if (Result.Stage.Code in this.Stages) {
             Result.zone = this.Stages[Result.Stage.Code].zoneId;
             Result.stageId = this.Stages[Result.Stage.Code].stageId;
           }
