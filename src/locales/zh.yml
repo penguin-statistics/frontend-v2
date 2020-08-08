@@ -14,6 +14,7 @@ server:
 menu:
   home: 首页
   report: 掉落汇报
+  recognitionreport: 图像识别汇报
   stats:
     _name: 素材掉率
     stage: 按作战
@@ -172,6 +173,22 @@ report:
     causes:
       noDrop: 尚未选择任何掉落物品
       limitation: 本次汇报与现有数据差距较大，继续提交可能导致此次汇报被判定为异常，无法计入全部统计数据中。
+  recognition:
+    step:
+      first: 加载识别数据
+      second: 选择掉落截图
+      third: 图像识别
+      fourth: 汇报识别数据
+    file: "点击选择掉落截图"
+    start: "开始识别"
+    error:
+      type: "文件类型错误"
+    function: "功能"
+    showimage: "查看原图"
+    mark:
+      untrust: "标记为不可信"
+      trust: "标记为可信"
+    submit: "确认提交可信的作战记录"
   rules:
     item:
       _name: 物品项

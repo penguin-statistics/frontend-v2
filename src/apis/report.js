@@ -5,12 +5,13 @@ import store from '@/store'
 
 // IdempotencyKey
 export default {
-  async submitReport({stageId, drops}) {
+  async submitReport({stageId, drops},...patch) {
     return service.post("/report", {
       drops,
       stageId,
       server: store.getters["dataSource/server"],
-      ...config.api.submitParams
+      ...config.api.submitParams,
+      ...patch
     })
   },
   async recallReport (submissionId) {

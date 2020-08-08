@@ -45,7 +45,6 @@
       <template v-if="item.itemType === 'ACTIVITY_ITEM_BATCH'">
         <v-row
           class="flex"
-
           align="center"
           justify="center"
         >
@@ -67,77 +66,85 @@
 </template>
 
 <script>
-  import Item from '@/components/global/Item'
+import Item from "@/components/global/Item";
 
-  export default {
-    name: "ItemStepper",
-    components: {
-      Item
+export default {
+  name: "ItemStepper",
+  components: {
+    Item,
+  },
+  model: {
+    prop: "quantity",
+    event: "update",
+  },
+  props: {
+    item: {
+      type: Object,
+      required: true,
     },
-    props: {
-      item: {
-        type: Object,
-        required: true
-      },
-      bus: {
-        type: Object,
-        required: true
-      }
+    bus: {
+      type: Object,
+      required: true,
     },
-    data() {
-      return {
-        quantity: 0
-      }
+    quantity: {
+      type: Number,
+      required: false,
+      default: 0,
     },
-    watch: {
-      quantity: function (newValue, oldValue) {
-        const diff = newValue - oldValue;
-        this.$emit("change", [this.item.itemId, diff])
-      }
+  },
+  data() {
+    return {};
+  },
+  watch: {
+    quantity: function (newValue, oldValue) {
+      const diff = newValue - oldValue;
+      this.$emit("change", [this.item.itemId, diff]);
+      this.$emit("update", newValue);
     },
-    mounted() {
-      this.bus.$on("reset", this.reset)
+  },
+  mounted() {
+    this.bus.$on("reset", this.reset);
+  },
+  methods: {
+    increment() {
+      this.quantity++;
     },
-    methods: {
-      increment() {
-        this.quantity++;
-      },
-      increaseQuantity(quantity) {
-        this.quantity += quantity;
-      },
-      reduction() {
-        // -1 when greater than 0 to avoid negative number
-        // (will not reduce when =0)
-        (this.quantity > 0) && this.quantity --
-      },
-      reset() {
-        this.quantity = 0
-      }
-    }
-  }
+    increaseQuantity(quantity) {
+      this.quantity += quantity;
+    },
+    reduction() {
+      // -1 when greater than 0 to avoid negative number
+      // (will not reduce when =0)
+      this.quantity > 0 && this.quantity--;
+    },
+    reset() {
+      this.quantity = 0;
+    },
+  },
+};
 </script>
 
 <style scoped>
-  .disabled {
-    user-select: none;
-  }
+.disabled {
+  user-select: none;
+}
 
-  .stepper-button {
-    padding: 0;
-    color: black !important;
-    transition: background-color 150ms cubic-bezier(.25,.8,.5,1) !important;
-  }
+.stepper-button {
+  padding: 0;
+  color: black !important;
+  transition: background-color 150ms cubic-bezier(0.25, 0.8, 0.5, 1) !important;
+}
 
-  .cursor-pointer {
-    cursor: pointer;
-  }
+.cursor-pointer {
+  cursor: pointer;
+}
 
-  ::v-deep .add-quantity-btn {
-    margin: 0;
-    min-width: 32px;
-  }
+::v-deep .add-quantity-btn {
+  margin: 0;
+  min-width: 32px;
+}
 
-  /* ::v-deep .reduction-badge span.v-badge__badge.red {
+/* ::v-deep .reduction-badge span.v-badge__badge.red {
     top: -5px;
     right: -5px;
   } */
