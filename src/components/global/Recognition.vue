@@ -33,10 +33,10 @@
     </v-stepper-header>
     <v-stepper-content :step="1">
       <v-progress-linear
-        v-model="ItemImageLoadProgress"
+        :indeterminate="true"
         height="25"
       >
-        <strong>{{ ItemImageLoaded }}/{{ ItemImageCount }}</strong>
+        <strong>正在加载数据</strong>
       </v-progress-linear>
     </v-stepper-content>
     <v-stepper-content :step="2">
@@ -86,7 +86,10 @@
         </v-progress-circular>
       </v-row>
     </v-stepper-content>
-    <v-stepper-content :step="4">
+    <v-stepper-content
+      :step="4"
+      :class="'nopadding'"
+    >
       <v-row justify="center">
         <v-col v-bind="cols.overview">
           <BackdropCard>
@@ -331,10 +334,6 @@ export default {
     small() {
       return this.$vuetify.breakpoint.smAndDown;
     },
-    ItemImageLoadProgress() {
-      if (!this.ItemImageCount) return 0;
-      return (this.ItemImageLoaded / this.ItemImageCount) * 100;
-    },
     totalItemCount() {
       return this.TrustData.reduce((a, b) => {
         if (b.trust) {
@@ -404,15 +403,9 @@ export default {
     this.Stages = stages;
     this.$nextTick(function () {
       axios
-        .get("https://static.bbaasite.cn/akitems/Items.json")
-        .then((data) => {
-          this.ItemImageCount = data.data.length;
-          return this.loadImages(data.data, (Value) => {
-            this.ItemImageLoaded = Value;
-          });
-        })
+        .get("/Items.dHash",{responseType:"blob"})
         .then((Images) => {
-          DropRecognition.init("ItemImage", Images);
+          DropRecognition.init("ItemImage", Images.data);
           this.step = 2;
         });
     });
@@ -544,5 +537,10 @@ export default {
 <style scoped>
 .full-width {
   width: 100%;
+}
+@media screen and (max-width: 700px){
+  .nopadding {
+    padding: 0;
+  }
 }
 </style>
