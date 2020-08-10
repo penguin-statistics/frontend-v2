@@ -404,8 +404,8 @@ export default {
     this.$nextTick(function () {
       axios
         .get("/Items.dHash",{responseType:"blob"})
-        .then((Images) => {
-          DropRecognition.init("ItemImage", Images.data);
+        .then((Hashs) => {
+          DropRecognition.init("ItemHashs", Hashs.data);
           this.step = 2;
         });
     });
