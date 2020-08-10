@@ -180,8 +180,7 @@ report:
       third: 图像识别
       fourth: 汇报识别数据
     file: "点击选择掉落截图"
-    chosen: "已选择"
-    fileunit: "个文件"
+    filechosen: "已选择{count}个图片文件"
     start: "开始识别"
     error:
       type: "文件类型错误"

@@ -41,12 +41,13 @@
     </v-stepper-content>
     <v-stepper-content :step="2">
       <v-form @submit="prepareRecognition">
-        <v-row style="margin-bottom:15px;">
+        <v-row style="margin-bottom: 15px;">
           <input
             ref="fileinput"
             type="file"
             multiple
             style="display: none;"
+            accept="image/png,image/jpeg,image/bmp,image/webp"
             @change="UpdateFile"
           >
           <v-btn
@@ -56,9 +57,9 @@
             {{
               ImageFiles.length == 0
                 ? $t("report.recognition.file")
-                : $t("report.recognition.chosen") +
-                  ImageFiles.length +
-                  $t("report.recognition.fileunit")
+                : $t("report.recognition.filechosen", {
+                  count: ImageFiles.length,
+                })
             }}
           </v-btn>
         </v-row>
@@ -280,7 +281,7 @@ import CDN from "@/mixins/CDN";
 import get from "@/utils/getters";
 import BackdropCard from "@/components/global/BackdropCard";
 import ItemStepper from "@/components/global/ItemStepper";
-import DropRecognition from "@/vendors/DropRecognition";
+import { DropRecognition, FontLoaded } from "@/vendors/DropRecognition";
 import axios from "axios";
 import Vue from "vue";
 import strings from "@/utils/strings";
@@ -324,10 +325,6 @@ export default {
           value: "function",
         },
       ],
-      ImgDialogOpen: {
-        trust: [],
-        untrust: [],
-      },
     };
   },
   computed: {
@@ -401,13 +398,13 @@ export default {
     }
     DropRecognition.init("Stage", stages);
     this.Stages = stages;
-    this.$nextTick(function () {
-      axios
-        .get("/Items.dHash",{responseType:"blob"})
-        .then((Hashs) => {
+    FontLoaded.then(() => {
+      this.$nextTick(function () {
+        axios.get("/Items.dHash", { responseType: "blob" }).then((Hashs) => {
           DropRecognition.init("ItemHashs", Hashs.data);
           this.step = 2;
         });
+      });
     });
   },
   methods: {
@@ -422,7 +419,9 @@ export default {
       this.$emit("report", this.TrustData);
     },
     UpdateFile() {
-      this.ImageFiles = this.$refs.fileinput.files;
+      this.ImageFiles = [...this.$refs.fileinput.files].filter((a) =>
+        /image\/.*/.test(a.type)
+      );
     },
     prepareRecognition(e) {
       e.preventDefault();
@@ -449,12 +448,6 @@ export default {
           this.QueueIndex++;
           if (this.QueueIndex == this.ImageFiles.length) {
             this.step = 4;
-            this.ImgDialogOpen.trust = new Array(this.TrustData.length).fill(
-              false
-            );
-            this.ImgDialogOpen.untrust = new Array(
-              this.UnTrustData.length
-            ).fill(false);
             return;
           }
           this.$nextTick(function () {
@@ -538,7 +531,7 @@ export default {
 .full-width {
   width: 100%;
 }
-@media screen and (max-width: 700px){
+@media screen and (max-width: 700px) {
   .nopadding {
     padding: 0;
   }
