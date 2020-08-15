@@ -69,7 +69,7 @@ export default class RectRecognition {
         DropType.push({
           left: Rect.left,
           right: Rect.right,
-          type: this.CompareType(ImageData[Rect.top][(Rect.left + Rect.right) >> 1])
+          type: this.CompareType(ImageData, Rect)
         });
       }
     }
@@ -85,11 +85,15 @@ export default class RectRecognition {
   RGBDiff(rgb1, rgb2) {
     return rgb1.map((v, i) => Math.abs(v - rgb2[i])).reduce((a, b) => a + b);
   }
-  CompareType(rgb) {
+  CompareType(ImageData, Rect) {
     let Type = Object.entries(RectRecognition.DropTypeColor);
-    for (let [type, color] of Type) {
-      if (color(...rgb)) {
-        return type;
+    let XCenter = (Rect.left + Rect.right) >> 1;
+    for (let y = Rect.top; y <= Rect.bottom; y++) {
+      let rgb = ImageData[y][XCenter];
+      for (let [type, color] of Type) {
+        if (color(...rgb)) {
+          return type;
+        }
       }
     }
     return "ALL_DROP";
