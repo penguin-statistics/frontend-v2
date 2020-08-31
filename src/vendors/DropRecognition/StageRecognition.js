@@ -52,7 +52,7 @@ export default function StageRecognition(ImageMatrix) {
       Confidence.push(NumConf);
     }
   }
-  return [Chars.join(''),Confidence.reduce((a,b)=>a+b)/Confidence.length]
+  return [Chars.join(""), Confidence.reduce((a, b) => a + b) / Confidence.length];
 }
 function getFontSize(CharRect) {
   let Find = false;
@@ -77,7 +77,7 @@ function compareNumber(Matrix, Font) {
   let Confidence = -Infinity;
   let Result;
   for (let Num of Number) {
-    let Conf = compareMatrix(Matrix,Font[Num]);
+    let Conf = compareMatrix(Matrix, Font[Num]);
     if (Conf > Confidence) {
       Confidence = Conf;
       Result = Num;
@@ -117,7 +117,7 @@ function compareChar(Matrix, Font) {
   let Confidence = -Infinity;
   let Result;
   for (let Char of Chars) {
-    let Conf = compareMatrix(Matrix,Font[Char]);
+    let Conf = compareMatrix(Matrix, Font[Char]);
     if (Conf > Confidence) {
       Confidence = Conf;
       Result = Char;
@@ -136,7 +136,7 @@ function compareMatrix(Matrix1, Matrix2) {
       }
     }
   }
-  return Count / (Matrix1[0].length * Matrix1.length);
+  return Count / (Math.max(Matrix1[0].length, Matrix2[0].length)*Math.max(Matrix1.length, Matrix2.length));
 }
 // 生成每个字符数据
 function genFontData(size) {

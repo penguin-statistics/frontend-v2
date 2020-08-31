@@ -644,8 +644,6 @@ export default {
         SubmitState.finally(() => {
           if (RecognitionResult.length > 0) this.dataConvert(RecognitionResult);
         });
-      } else {
-        //fuck eslint
       }
 
     },

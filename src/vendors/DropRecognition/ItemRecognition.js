@@ -314,10 +314,13 @@ export default class ItemRecognition {
     };
   }
   static init(blob) {
-    let Reader = new FileReader();
-    Reader.onload = () => {
-      ItemRecognition.ItemSourceHash = RecognitionData.Decode(new Uint8Array(Reader.result));
-    };
-    Reader.readAsArrayBuffer(blob);
+    return new Promise(resolve => {
+      let Reader = new FileReader();
+      Reader.onload = () => {
+        ItemRecognition.ItemSourceHash = RecognitionData.Decode(new Uint8Array(Reader.result));
+        resolve();
+      };
+      Reader.readAsArrayBuffer(blob);
+    });
   }
 }

@@ -140,13 +140,29 @@ export default class DropsRecognition {
       )
     );
   }
+  static CheckDataComplete(){
+    if(ItemRecognition.ItemSourceHash && DropsRecognition.Stage) {
+      for(let v of Object.values(DropsRecognition.Stage)) {
+        if(v.dropInfos){
+        for (let i of v.dropInfos){
+          if (!(i.ItemId in ItemRecognition.ItemSourceHash)){
+            throw Error() //数据不完整
+          }
+        }
+        }
+      }
+    }
+  }
   static init(dataName, Data) {
     switch (dataName) {
       case "Stage":
-        this.Stage = Data;
+        DropsRecognition.Stage = Data;
+        DropsRecognition.CheckDataComplete();
         break;
       case "ItemHashs":
-        ItemRecognition.init(Data);
+        ItemRecognition.init(Data).then(()=>{
+          DropsRecognition.CheckDataComplete();
+        });
         break;
     }
   }
