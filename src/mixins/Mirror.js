@@ -3,7 +3,7 @@ import mirror from "@/utils/mirror";
 export default {
   computed: {
     isCNMirror () {
-      return mirror.cn.isCurrent() || true
+      return mirror.cn.isCurrent()
     },
     isVercel () {
       return mirror.vercel.isCurrent()
