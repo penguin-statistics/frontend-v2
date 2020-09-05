@@ -29,7 +29,6 @@ export default {
         extra_outc: options.byProduct,
         exp_demand: options.requireExp,
         gold_demand: options.requireLmb,
-        store: options.calculateStore,
         input_lang: "id",
         output_lang: "id",
         server: store.getters["dataSource/server"]
@@ -42,8 +41,7 @@ export default {
 
       if (excludes.length > 0) {
         body["exclude"] = excludes.map(el => {
-          el = get.stages.byStageId(el).code || el
-          return el
+          return get.stages.byStageId(el).code || el
         })
       }
 

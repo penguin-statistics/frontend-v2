@@ -2,8 +2,29 @@
   <v-card
     color="background"
     elevation="9"
+    class="transition-all"
   >
-    <v-card-title>
+    <v-fade-transition>
+      <v-overlay
+        v-if="ctrl"
+        :opacity="0.8"
+        absolute
+        style="border: 3px solid #2196f3"
+      >
+        <v-icon :size="72">
+          mdi-cursor-default-click
+        </v-icon>
+        <v-icon>
+          mdi-arrow-right
+        </v-icon>
+        <v-icon :size="36">
+          mdi-link-box
+        </v-icon>
+      </v-overlay>
+    </v-fade-transition>
+    <v-card-title
+      class="flex-row"
+    >
       <ItemIcon
         :item="item"
         :ratio="0.5"
@@ -11,6 +32,13 @@
       <span class="title ml-2">
         {{ item.name }}
       </span>
+
+      <!--      <span-->
+      <!--        class="ml-1 caption text&#45;&#45;text"-->
+      <!--        :class="{'text-glow': ctrl}"-->
+      <!--      >-->
+      <!--        查看详细数据-->
+      <!--      </span>-->
     </v-card-title>
     <v-card-text v-if="stats.data.length">
       <v-simple-table dense>
@@ -72,7 +100,38 @@
               colspan="3"
               class="text-center"
             >
-              <v-icon color="grey">
+              <v-expand-x-transition>
+                <v-icon
+                  v-if="!ctrl"
+                  small
+                  color="text"
+                  :class="{'text-glow': ctrl}"
+                >
+                  mdi-apple-keyboard-shift
+                </v-icon>
+              </v-expand-x-transition>
+              <v-expand-x-transition>
+                <v-icon
+                  v-if="!ctrl"
+                  x-small
+                  color="text"
+                  :class="{'text-glow': ctrl}"
+                >
+                  mdi-plus
+                </v-icon>
+              </v-expand-x-transition>
+              <v-icon
+                small
+                color="text"
+                :class="{'text-glow': ctrl}"
+              >
+                mdi-cursor-default-click
+              </v-icon>
+              <v-icon
+                color="grey"
+                class="ml-1"
+                :class="{'text-glow': ctrl}"
+              >
                 mdi-dots-horizontal
               </v-icon>
             </td>
@@ -100,6 +159,11 @@
         type: String,
         required: true
       },
+    },
+    data() {
+      return {
+        ctrl: false
+      }
     },
     computed: {
       item() {
@@ -132,6 +196,19 @@
       },
       highlight () {
         return this.$route.params.stageId
+      }
+    },
+    mounted() {
+      document.addEventListener("keydown", this.onShiftKey, {capture: true, passive: true})
+      document.addEventListener("keyup", this.onShiftKey, {capture: true, passive: true})
+    },
+    beforeDestroy() {
+      document.removeEventListener("keydown", this.onShiftKey)
+      document.removeEventListener("keyup", this.onShiftKey)
+    },
+    methods: {
+      onShiftKey (e) {
+        this.ctrl = e.shiftKey
       }
     },
   }

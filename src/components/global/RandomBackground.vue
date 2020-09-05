@@ -40,7 +40,6 @@
         timer: null,
         webpSupport: null,
         blurred: false,
-        // TODO: Update image map.
         // [key] is a special "stageId" to display a special "background image"
         // [value] represents a "background image url" on such route
         specialImageMap: {
