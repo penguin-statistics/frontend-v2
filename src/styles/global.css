@@ -551,3 +551,7 @@
 .theme--dark .text-glow {
     text-shadow: 0 0 15px rgba(255, 255, 255, .7);
 }
+
+.partial-fill-height {
+    height: 90% !important;
+}

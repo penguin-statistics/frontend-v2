@@ -19,15 +19,24 @@
       </v-icon>
     </v-btn>
     <v-dialog
-      v-model="calculation.done"
+      v-model="resultDialog"
       scrollable
       max-width="calc(max(450px, 80vw))"
     >
-      <PlannerResult
-        v-if="calculation.done"
-        :result="calculation.data"
-        @close="calculation.done = false"
-      />
+      <v-fade-transition leave-absolute>
+        <Preloader
+          v-if="calculation.pending"
+          :title="$t('planner.actions.calculating')"
+          overline="Performing ArkPlanner Calculation"
+        />
+      </v-fade-transition>
+      <v-slide-y-transition>
+        <PlannerResult
+          v-if="calculation.done"
+          :result="calculation.data"
+          @close="resultDialog = false"
+        />
+      </v-slide-y-transition>
     </v-dialog>
     <v-row
       class="my-3 mx-6 flex-row"
@@ -375,13 +384,15 @@
   import marshaller from "@/utils/marshaller";
   import snackbar from "@/utils/snackbar";
   import strings from "@/utils/strings";
+  import Preloader from "@/components/global/Preloader";
 
   export default {
     name: "Planner",
-    components: {MultiStageSelector, PlannerResult, PlannerItemStepper, PlannerIO},
+    components: {Preloader, MultiStageSelector, PlannerResult, PlannerItemStepper, PlannerIO},
     data() {
       return {
         calculation: {
+          dialog: false,
           pending: false,
           done: false,
           data: {},
@@ -410,6 +421,15 @@
         "options",
       ]),
       ...mapGetters("dataSource", ["server"]),
+      resultDialog: {
+        get () {
+          return this.calculation.dialog || this.calculation.done || this.calculation.pending
+        },
+        set (v) {
+          this.calculation.dialog = v
+          this.calculation.done = v
+        }
+      },
       excludes: {
         get () {
           return this.$store.getters["planner/excludes"]
