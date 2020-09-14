@@ -1,19 +1,19 @@
 <template>
-  <v-card class="d-flex fill-height breathing-background">
+  <v-card class="d-flex fill-height">
     <v-row
       align="center"
       justify="center"
     >
       <v-col
         cols="12"
-        class="pa-5 py-10 text-center"
+        class="px-6 py-12 text-center"
       >
         <PreloaderInline class="mx-auto mb-6" />
 
         <h1 class="overline">
           {{ overline }}
         </h1>
-        <h1 class="title mb-6">
+        <h1 class="title">
           {{ title }}
         </h1>
       </v-col>

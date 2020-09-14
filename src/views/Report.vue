@@ -1006,7 +1006,7 @@ export default {
       )
       // Console.debug("Report", "report with context: got performance timer promise", timer)
       timer.then(timeDelta => {
-        Console.info("Report", `ajax request last ${timeDelta}ms`)
+        Console.info("Performance", `report submit request last ${timeDelta}ms to complete`)
         this.$ga.time({
           timingCategory: 'report',
           timingVar: 'submit',
