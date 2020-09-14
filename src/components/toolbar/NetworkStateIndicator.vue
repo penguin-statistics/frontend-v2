@@ -8,22 +8,20 @@
       >
         <v-fade-transition>
           <span
-            v-if="haveError && !model"
+            v-if="haveError && !dialog"
+            class="d-flex flex-column"
             style="cursor: pointer"
             @click="openModel"
           >
-            <v-progress-circular
+            <PreloaderInline
               v-if="pending"
-              indeterminate
-              color="white"
-              class="mr-1"
-              :size="16"
-              :width="2"
+              small
+              class="my-2 mx-auto"
             />
             <v-icon
               v-else
-              small
-              class="mr-1"
+              :size="32"
+              class="my-2 mx-auto"
             >
               mdi-alert
             </v-icon>
@@ -34,13 +32,11 @@
           </span>
           <span
             v-else-if="pending"
+            class="d-flex flex-column"
           >
-            <v-progress-circular
-              indeterminate
-              color="white"
-              class="mr-1"
-              :size="16"
-              :width="2"
+            <PreloaderInline
+              small
+              class="my-2 mx-auto"
             />
             <span class="caption white--text">
               {{ $t('meta.loading') }} ({{ percentage }})
@@ -50,7 +46,7 @@
       </v-card>
     </v-slide-x-reverse-transition>
     <v-dialog
-      v-model="model"
+      v-model="dialog"
       width="600"
       :origin="origin"
     >
@@ -130,12 +126,14 @@
 
 <script>
   import {mapGetters} from "vuex";
+  import PreloaderInline from "@/components/global/PreloaderInline";
 
   export default {
     name: "NetworkStateIndicator",
+    components: {PreloaderInline},
     data () {
       return {
-        model: false,
+        dialog: false,
         origin: 'center center'
       }
     },

@@ -261,6 +261,36 @@
     );
 }
 
+@keyframes breathing-background--dark__animation {
+    from {
+        background: #131313;
+    }
+
+    to {
+        background: #262626;
+    }
+}
+
+@keyframes breathing-background--light__animation {
+    from {
+        background: #fff;
+    }
+
+    to {
+        background: #e6e6e6;
+    }
+}
+
+.theme--dark.breathing-background {
+    background: #131313;
+    animation: breathing-background--dark__animation 2s infinite alternate cubic-bezier(0.05, 0.5, 0.3, 0.8);
+}
+
+.theme--light.breathing-background {
+    background: #fff;
+    animation: breathing-background--light__animation 2s infinite alternate cubic-bezier(0.05, 0.5, 0.3, 0.8);
+}
+
 .footer--safe-area {
     padding: 8px;
 }
@@ -554,4 +584,8 @@
 
 .partial-fill-height {
     height: 90% !important;
+}
+
+.v-badge__badge {
+    pointer-events: none !important;
 }

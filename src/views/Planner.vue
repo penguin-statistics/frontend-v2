@@ -22,14 +22,14 @@
       v-model="resultDialog"
       scrollable
       max-width="calc(max(450px, 80vw))"
+      :persistent="calculation.pending"
+      no-click-animation
     >
-      <v-fade-transition leave-absolute>
-        <Preloader
-          v-if="calculation.pending"
-          :title="$t('planner.actions.calculating')"
-          overline="Performing ArkPlanner Calculation"
-        />
-      </v-fade-transition>
+      <PreloaderCard
+        v-if="calculation.pending"
+        :title="$t('planner.actions.calculating')"
+        overline="Performing ArkPlanner Calculation"
+      />
       <v-slide-y-transition>
         <PlannerResult
           v-if="calculation.done"
@@ -70,7 +70,6 @@
         <PlannerIO
           :config="{items, options, excludes}"
           @close="ioDialog = false"
-          @reset="reset"
         />
       </v-dialog>
 
@@ -384,11 +383,11 @@
   import marshaller from "@/utils/marshaller";
   import snackbar from "@/utils/snackbar";
   import strings from "@/utils/strings";
-  import Preloader from "@/components/global/Preloader";
+  import PreloaderCard from "@/components/global/PreloaderCard";
 
   export default {
     name: "Planner",
-    components: {Preloader, MultiStageSelector, PlannerResult, PlannerItemStepper, PlannerIO},
+    components: {PreloaderCard, MultiStageSelector, PlannerResult, PlannerItemStepper, PlannerIO},
     data() {
       return {
         calculation: {
