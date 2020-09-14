@@ -143,6 +143,13 @@ export default {
         },
         {
           active: true,
+          version: "v3.3.4",
+          date: "2020-09-14T23:00:00+0800",
+          changes: [
+            "添加：新加载动画",
+          ]
+        },
+        {
           version: "v3.3.3",
           date: "2020-09-05T23:00:00+0800",
           changes: [
@@ -150,7 +157,6 @@ export default {
           ]
         },
         {
-          active: true,
           version: "v3.3.2",
           date: "2020-07-31T00:00:00+0800",
           changes: [
