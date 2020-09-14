@@ -5,6 +5,7 @@
     :height="size.image"
     :width="size.image"
     contain
+    class="mx-auto"
   >
     <template v-slot:placeholder>
       <div class="d-flex fill-height align-center justify-center">
