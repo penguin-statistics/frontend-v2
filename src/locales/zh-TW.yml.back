@@ -257,7 +257,7 @@ planner:
     export: 導出
     importExport: "@:(planner.actions.import)/@:(planner.actions.export)"
     calculate: 計算規劃
-    calculating: 正在計算規劃...
+    calculating: 正在計算 ArkPlanner 規劃...
     link:
       generate: 獲取分享鏈接
       generating: 正在生成
