@@ -7,6 +7,10 @@ marked.setOptions({
   silent: true
 })
 
+function markdown(content) {
+  return marked(content)
+}
+
 function translateMarkdown (object, key) {
   return marked(translate(object, key).replace(/\\n/gm, "\n"))
 }
@@ -130,4 +134,4 @@ function fileSize(bytes, si) {
   return bytes.toFixed(1)+' '+units[u];
 }
 
-export default {translate, translateMarkdown, getFirstBrowserLanguage, fileSize}
+export default {translate, markdown, translateMarkdown, getFirstBrowserLanguage, fileSize}

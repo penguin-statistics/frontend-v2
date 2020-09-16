@@ -74,14 +74,13 @@
               版本特性一览
             </v-card-subtitle>
 
-            <v-card-text>
+            <v-card-text class="markdown-content">
               <ol>
                 <li
                   v-for="(text, key) in item.changes"
                   :key="key"
-                >
-                  {{ text }}
-                </li>
+                  v-html="text"
+                />
               </ol>
             </v-card-text>
 
@@ -92,14 +91,16 @@
               热修复记录
             </v-card-subtitle>
 
-            <v-card-text v-if="item.hotfix">
+            <v-card-text
+              v-if="item.hotfix"
+              class="markdown-content"
+            >
               <ol>
                 <li
                   v-for="(text, key) in item.hotfix"
                   :key="key"
-                >
-                  {{ text }}
-                </li>
+                  v-html="text"
+                />
               </ol>
             </v-card-text>
           </div>
@@ -112,6 +113,7 @@
 <script>
 import anime from "animejs";
 import timeFormatter from "@/utils/timeFormatter";
+import strings from "@/utils/strings";
 
 export default {
   name: 'Changelog',
@@ -132,7 +134,7 @@ export default {
         {
           future: true,
           version: "v3.4.0",
-          date: "2020-10-01T08:00:00Z",
+          date: "2020-10-15T08:00:00Z",
           changes: [
             "将添加：掉落汇报自动同步至 Planner 功能",
             "将添加：数据导出功能",
@@ -146,14 +148,20 @@ export default {
           version: "v3.3.4",
           date: "2020-09-14T23:00:00+0800",
           changes: [
-            "添加：新加载动画",
+            "添加：更新记录 **Mark**_down_ 支持",
+            "添加：包含「企鹅物流」内四个角色的新的可爱加载动画 o(*≧▽≦)ツ\n- 本动画已应用至**网络状态指示器**与**刷图规划器**\n- 已将可能对移动设备耗电加快的因素纳入考量：使用了纯 CSS3 动画提高渲染效率，移动设备不会因此造成肉眼可见范围内的电池消耗增加，敬请知悉",
+
+            "修复：PenguinID 找回功能中，有时不记录已登录账户的问题",
+
+            "优化：背景立绘不再依赖 `window.fetch`",
+            "内部优化：**汇报掉落**与**刷图规划**将报告「客户端请求与渲染用时」性能指标",
           ]
         },
         {
           version: "v3.3.3",
           date: "2020-09-05T23:00:00+0800",
           changes: [
-            "修改：由于监管要求，将于 CN 镜像暂时关闭首页的相关卡片",
+            "修改：由于监管要求，将于 `CN` 镜像暂时关闭首页的相关卡片",
           ]
         },
         {
@@ -164,7 +172,7 @@ export default {
             "添加：按作战查看数据增加 Zone 名称显示",
 
             "修复：Report 对部分无效关卡的错误禁止上传提示",
-            "修复：友情链接kkdy数据站链接地址错误",
+            "修复：友情链接「kkdy数据站」链接地址错误",
             "修复：英文翻译的若干错误",
             "优化：部分数据 Existence 判断",
           ]
@@ -527,6 +535,9 @@ export default {
           el.value = false
         }
 
+        el.changes = el.changes.map(strings.markdown)
+        if (el.hotfix) el.hotfix = el.hotfix.map(strings.markdown)
+
         return el
       })
     }
@@ -549,5 +560,13 @@ export default {
 }
 </script>
 
-<style scoped>
+<style>
+.markdown-content code {
+  background: transparent !important;
+  color: inherit;
+  box-shadow: none;
+}
+.markdown-content p {
+  margin-bottom: 0;
+}
 </style>
