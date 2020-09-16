@@ -80,10 +80,24 @@ export default {
       }
     }
   },
+  watch: {
+    url (_, oldValue) {
+      this.revoke(oldValue)
+    }
+  },
+  beforeDestroy() {
+    this.revoke(this.url)
+  },
   created() {
     this.update()
   },
   methods: {
+    revoke(url) {
+      if (url !== '') {
+        URL.revokeObjectURL(url)
+        Console.debug("Preloader", "revoked blob with URL", url)
+      }
+    },
     update() {
       this.ready = false
       service.get(this.currentSrc, {
@@ -91,14 +105,11 @@ export default {
         responseType: "blob"
       })
         .then(({data}) => {
-          console.log(data)
-          const url = URL.createObjectURL(data)
-          console.log(url)
           this.ready = true
-          this.url = url
+          this.url = URL.createObjectURL(data)
         })
         .catch((err) => {
-          Console.info("PreloaderInline", "failed to update preloader image: ", err)
+          Console.error("Preloader", "failed to update preloader image:", err)
           // we could do nothing here :(
         })
     }
