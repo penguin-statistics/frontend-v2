@@ -4,7 +4,7 @@
     class="animated-preloader-wrapper"
   >
     <transition
-      mode="out-in"
+      mode="in-out"
       appear
       duration="125"
       name="fade-transition"
@@ -19,7 +19,8 @@
       <div
         v-else
         key="circular"
-        class="d-flex fill-height align-center justify-center"
+        class="d-flex fill-height align-center justify-center v-image__placeholder"
+        style="z-index: 0"
       >
         <v-progress-circular
           indeterminate
@@ -126,6 +127,7 @@ export default {
   animation-timing-function: steps(3, end);
   background-size: var(--size);
   background-repeat: no-repeat;
+  z-index: 1;
 }
 @keyframes preloader {
   from {
@@ -136,6 +138,7 @@ export default {
   }
 }
 .animated-preloader-wrapper {
+  position: relative;
   height: var(--size);
   width: var(--size);
 }

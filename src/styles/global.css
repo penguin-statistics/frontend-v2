@@ -559,3 +559,6 @@
 .v-badge__badge {
     pointer-events: none !important;
 }
+.p-absolute {
+    position: absolute !important;
+}
