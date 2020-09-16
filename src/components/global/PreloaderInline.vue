@@ -51,7 +51,7 @@ export default {
       preloaders: [
         "croissant", "exusiai", "sora", "texas"
       ],
-      ready: true,
+      ready: false,
       url: ''
     }
   },
