@@ -1,4 +1,4 @@
-const version = "v3.3.2";
+const version = "v3.3.4";
 
 module.exports = {
   version,
@@ -23,6 +23,11 @@ module.exports = {
   randomBackground: {
     limit: 3,
     max: 104
+  },
+  previewCard: {
+    item: {
+      pagination: 5
+    }
   },
   servers: ["CN", "US", "JP", "KR"]
 }

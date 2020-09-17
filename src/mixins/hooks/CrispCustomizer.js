@@ -47,7 +47,7 @@ export default {
           // document.querySelector("div.crisp-client").style.setProperty("transform", "translateY(32px)", "important")
         }
       } catch (e) {
-        Console.info("CrispCustomizer", "failed to change crisp opacity", e, "newRoute.name", newRoute.name)
+        Console.warn("CrispCustomizer", "failed to change crisp opacity", e, "newRoute.name", newRoute.name)
       }
     },
   },

@@ -8,24 +8,22 @@
       >
         <v-fade-transition>
           <span
-            v-if="haveError && !model"
+            v-if="haveError && !dialog"
+            class="d-flex flex-column"
             style="cursor: pointer"
-            @click="openModel"
+            @click="openDialog"
           >
-            <v-progress-circular
+            <PreloaderInline
               v-if="pending"
-              indeterminate
-              color="white"
-              class="mr-1"
-              :size="16"
-              :width="2"
+              small
+              class="my-2 mx-auto"
             />
             <v-icon
               v-else
-              small
-              class="mr-1"
+              :size="48"
+              class="my-4 mx-auto"
             >
-              mdi-alert
+              mdi-close-network
             </v-icon>
 
             <span class="caption white--text">
@@ -34,13 +32,11 @@
           </span>
           <span
             v-else-if="pending"
+            class="d-flex flex-column"
           >
-            <v-progress-circular
-              indeterminate
-              color="white"
-              class="mr-1"
-              :size="16"
-              :width="2"
+            <PreloaderInline
+              small
+              class="my-2 mx-auto"
             />
             <span class="caption white--text">
               {{ $t('meta.loading') }} ({{ percentage }})
@@ -50,7 +46,7 @@
       </v-card>
     </v-slide-x-reverse-transition>
     <v-dialog
-      v-model="model"
+      v-model="dialog"
       width="600"
       :origin="origin"
     >
@@ -130,12 +126,14 @@
 
 <script>
   import {mapGetters} from "vuex";
+  import PreloaderInline from "@/components/global/PreloaderInline";
 
   export default {
     name: "NetworkStateIndicator",
+    components: {PreloaderInline},
     data () {
       return {
-        model: false,
+        dialog: false,
         origin: 'center center'
       }
     },
@@ -145,7 +143,7 @@
         return this.errors.length > 0
       },
       show () {
-        return (this.haveError && !this.model) || this.pending
+        return (this.haveError && !this.dialog) || this.pending
       },
       percentage() {
         const states = this.$store.state.ajax.states
@@ -157,10 +155,10 @@
       haveError(newValue, oldValue) {
         if (newValue && !oldValue) {
           // error appeared. force open the window
-          this.model = true
+          this.dialog = true
         } else if (!newValue && oldValue) {
           // error resolved. force close the window
-          this.model = false
+          this.dialog = false
         }
       }
     },
@@ -168,8 +166,8 @@
       async refreshData () {
         await this.$store.dispatch("data/fetch", true);
       },
-      openModel (e) {
-        this.model = true;
+      openDialog (e) {
+        this.dialog = true;
         this.origin = `${e.clientX}px ${e.clientY}px`
       }
     },
@@ -184,6 +182,6 @@
     padding: 4px 8px;
     border-radius: 4px 0 0 4px !important;
     margin-bottom: calc(max(env(safe-area-inset-bottom), 8px)) !important;
-    z-index: 1000001; /* to override crisp */
+    z-index: 1000001; /* to override crisp & stay on top of the server switcher notifier */
   }
 </style>

@@ -60,7 +60,7 @@
         class="align-self-stretch"
       >
         <Donate
-          class="card-translate-up"
+          class="card-translate-up fill-height"
         />
       </v-col>
       <v-col

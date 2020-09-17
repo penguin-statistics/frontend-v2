@@ -39,5 +39,7 @@ export default {
         return got
       }
     }
-  }
+  },
+  randomInt,
+  randomFromArray
 }

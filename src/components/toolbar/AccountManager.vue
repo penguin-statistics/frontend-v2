@@ -221,7 +221,6 @@
   import ForgotAccount from "@/components/toolbar/ForgotAccount";
   import TooltipBtn from "@/components/global/TooltipBtn";
   import config from "@/config"
-  import environment from "@/utils/environment";
 
   export default {
     name: "AccountManager",
@@ -242,11 +241,6 @@
         },
         historyDialog: false,
         error: ""
-      }
-    },
-    computed: {
-      mobile() {
-        return environment.isTouchScreen
       }
     },
     created () {
