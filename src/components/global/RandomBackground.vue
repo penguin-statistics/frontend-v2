@@ -12,6 +12,7 @@
   import CDN from "@/mixins/CDN";
   import {mapGetters} from "vuex";
   import randomUtils from "@/utils/randomUtils";
+  import service from "@/utils/service";
 
   export default {
     name: "RandomBackground",
@@ -40,7 +41,6 @@
         timer: null,
         webpSupport: null,
         blurred: false,
-        // TODO: Update image map.
         // [key] is a special "stageId" to display a special "background image"
         // [value] represents a "background image url" on such route
         specialImageMap: {
@@ -104,14 +104,12 @@
       async updateBackgroundByUrl(url) {
         const background = this.$refs.background;
         this.lastLoading = true;
-        window.fetch(url, {
-          cache: "force-cache"
+        service.get(url, {
+          withCredentials: false,
+          responseType: "blob"
         })
-          .then((response) => {
-            return response.blob();
-          })
-          .then((blob) => {
-            const dataUrl = URL.createObjectURL(blob);
+          .then(({data}) => {
+            const dataUrl = URL.createObjectURL(data);
             background.style.backgroundImage = `url(${dataUrl})`;
             // Console.log(`created ${dataUrl} | revoking ${this.lastUrl}`)
             !this.lastUrl && URL.revokeObjectURL(this.lastUrl);

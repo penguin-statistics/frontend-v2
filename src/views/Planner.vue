@@ -19,15 +19,24 @@
       </v-icon>
     </v-btn>
     <v-dialog
-      v-model="calculation.done"
+      v-model="resultDialog"
       scrollable
       max-width="calc(max(450px, 80vw))"
+      :persistent="calculation.pending"
+      no-click-animation
     >
-      <PlannerResult
-        v-if="calculation.done"
-        :result="calculation.data"
-        @close="calculation.done = false"
+      <PreloaderCard
+        v-if="calculation.pending"
+        :title="$t('planner.actions.calculating')"
+        overline="Performing ArkPlanner Calculation"
       />
+      <v-slide-y-transition>
+        <PlannerResult
+          v-if="calculation.done"
+          :result="calculation.data"
+          @close="resultDialog = false"
+        />
+      </v-slide-y-transition>
     </v-dialog>
     <v-row
       class="my-3 mx-6 flex-row"
@@ -61,7 +70,6 @@
         <PlannerIO
           :config="{items, options, excludes}"
           @close="ioDialog = false"
-          @reset="reset"
         />
       </v-dialog>
 
@@ -375,13 +383,16 @@
   import marshaller from "@/utils/marshaller";
   import snackbar from "@/utils/snackbar";
   import strings from "@/utils/strings";
+  import PreloaderCard from "@/components/global/PreloaderCard";
+  import performance from "@/utils/performance";
 
   export default {
     name: "Planner",
-    components: {MultiStageSelector, PlannerResult, PlannerItemStepper, PlannerIO},
+    components: {PreloaderCard, MultiStageSelector, PlannerResult, PlannerItemStepper, PlannerIO},
     data() {
       return {
         calculation: {
+          dialog: false,
           pending: false,
           done: false,
           data: {},
@@ -410,6 +421,15 @@
         "options",
       ]),
       ...mapGetters("dataSource", ["server"]),
+      resultDialog: {
+        get () {
+          return this.calculation.dialog || this.calculation.done || this.calculation.pending
+        },
+        set (v) {
+          this.calculation.dialog = v
+          this.calculation.done = v
+        }
+      },
       excludes: {
         get () {
           return this.$store.getters["planner/excludes"]
@@ -515,70 +535,80 @@
         })
         this.calculation.pending = true;
 
-        planner.plan(
-          marshaller.planner.plan(this)
-        )
-          .then(({data}) => {
-            if (data.error === true) {
-              return snackbar.launch("error", 15000, "planner.calculationError", {
-                error: data.reason
-              })
-            }
+        const timer = performance.timer.ctx(
+            planner.plan(
+                marshaller.planner.plan(this)
+            )
+                .then(({data}) => {
+                  if (data.error === true) {
+                    return snackbar.launch("error", 15000, "planner.calculationError", {
+                      error: data.reason
+                    })
+                  }
 
-            data.stages = data.stages.map(el => {
-              el.materials = [];
-              el.stage = get.stages.byStageId(el.stage)
-              el.stage.code = strings.translate(el.stage, "code")
-              for (const [id, value] of Object.entries(el.items)) {
-                const item = get.items.byItemId(id);
-                el.materials.push({
-                  name: strings.translate(item, "name"),
-                  item,
-                  value
+                  data.stages = data.stages.map(el => {
+                    el.materials = [];
+                    el.stage = get.stages.byStageId(el.stage)
+                    el.stage.code = strings.translate(el.stage, "code")
+                    for (const [id, value] of Object.entries(el.items)) {
+                      const item = get.items.byItemId(id);
+                      el.materials.push({
+                        name: strings.translate(item, "name"),
+                        item,
+                        value
+                      })
+                    }
+                    return el
+                  });
+                  data.syntheses = data.syntheses.map(el => {
+                    el.target = {
+                      item: get.items.byItemId(el.target)
+                    };
+                    el.target.name = strings.translate(el.target.item, "name");
+                    el.items = [];
+                    for (const [id, value] of Object.entries(el.materials)) {
+                      const item = get.items.byItemId(id);
+                      el.items.push({
+                        name: strings.translate(item, "name"),
+                        item,
+                        value
+                      })
+                    }
+                    return el
+                  });
+                  data.values = data.values.map(el => {
+                    el.materials = [];
+                    for (const {name, value} of el.items) {
+                      if (parseFloat(value) === 0) continue;
+                      const item = get.items.byItemId(name);
+                      el.materials.push({
+                        name: strings.translate(item, "name"),
+                        item,
+                        value
+                      })
+                    }
+                    return el
+                  });
+                  Console.debug("Planner", "received plan", data)
+                  this.$set(this.calculation, "data", data);
+                  this.calculation.done = true
                 })
-              }
-              return el
-            });
-            data.syntheses = data.syntheses.map(el => {
-              el.target = {
-                item: get.items.byItemId(el.target)
-              };
-              el.target.name = strings.translate(el.target.item, "name");
-              el.items = [];
-              for (const [id, value] of Object.entries(el.materials)) {
-                const item = get.items.byItemId(id);
-                el.items.push({
-                  name: strings.translate(item, "name"),
-                  item,
-                  value
+                .catch((err) => {
+                  Console.error("Planner", "failed to refresh plan", err)
+                  snackbar.networkError()
                 })
-              }
-              return el
-            });
-            data.values = data.values.map(el => {
-              el.materials = [];
-              for (const {name, value} of el.items) {
-                if (parseFloat(value) === 0) continue;
-                const item = get.items.byItemId(name);
-                el.materials.push({
-                  name: strings.translate(item, "name"),
-                  item,
-                  value
+                .finally(() => {
+                  this.calculation.pending = false;
                 })
-              }
-              return el
-            });
-            Console.debug("Planner", "received plan", data)
-            this.$set(this.calculation, "data", data);
-            this.calculation.done = true
+        )
+        timer.then(timeDelta => {
+          Console.info("Performance", `planner plan request last ${timeDelta}ms to complete`)
+          this.$ga.time({
+            timingCategory: 'planner',
+            timingVar: 'plan',
+            timingValue: timeDelta
           })
-          .catch((err) => {
-            Console.error("Planner", "failed to refresh plan", err)
-            snackbar.networkError()
-          })
-          .finally(() => {
-            this.calculation.pending = false;
-          })
+        })
       }
     }
   }

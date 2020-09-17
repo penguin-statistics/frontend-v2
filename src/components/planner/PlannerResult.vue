@@ -38,7 +38,7 @@
             </v-list-item-icon>
             <v-list-item-content>
               <v-list-item-title class="monospace">
-                {{ parseTimes(result.gold) || thousandSeparator }}
+                {{ parseTimes(result.gold) | thousandSeparator }}
               </v-list-item-title>
               <v-list-item-subtitle>
                 {{ $t('planner.calculation.lmb') }}

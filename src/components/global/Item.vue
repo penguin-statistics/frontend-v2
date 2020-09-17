@@ -104,8 +104,8 @@
         }
       },
       disableTooltipCalculated () {
-        // always disable tooltip on touch screen
-        return environment.isTouchScreen || this.disableTooltip
+        // always disable tooltip on environment that cannot support hover
+        return !environment.canHover || this.disableTooltip
       }
     },
   };

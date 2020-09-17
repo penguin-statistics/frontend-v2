@@ -17,6 +17,10 @@ export default {
     if (window.matchMedia) return window.matchMedia("(pointer: coarse)").matches
     return "ontouchstart" in window || window.navigator.maxTouchPoints > 0
   },
+  get canHover() {
+    if (window.matchMedia) return window.matchMedia("(any-hover)").matches
+    return !this.isTouchScreen
+  },
   get isWindows () {return navigator.platform.indexOf('Win') > -1},
   debug: {
     get performance() {return boolean("performance")},
