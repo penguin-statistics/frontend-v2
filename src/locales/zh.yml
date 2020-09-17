@@ -289,7 +289,7 @@ planner:
     export: 导出
     importExport: "@:(planner.actions.import)/@:(planner.actions.export)"
     calculate: 计算规划
-    calculating: 正在计算 ArkPlanner 规划...
+    calculating: 少女计算中...
     link:
       generate: 获取分享链接
       generating: 正在生成

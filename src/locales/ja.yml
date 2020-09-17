@@ -245,6 +245,7 @@ planner:
     export: エクスポート
     importExport: "@:(planner.actions.import)/@:(planner.actions.export)"
     calculate: 計算を行う
+    calculating: 少女計算中…
     config:
       _name: コンフィグレーション
       share: エクスポート
