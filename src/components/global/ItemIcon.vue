@@ -81,9 +81,8 @@ export default {
     lowResolution () {
       let lowResolution = true
       if (window.matchMedia) {
-        const pixelRatio = window.devicePixelRatio >= 2
-        const resolution = window.matchMedia("(min-resolution: 192dpi)").matches
-        if (pixelRatio || resolution) lowResolution = false
+        if (window.devicePixelRatio >= 2 || window.matchMedia("(min-resolution: 192dpi)").matches)
+          lowResolution = false
       }
       return lowResolution
     },
