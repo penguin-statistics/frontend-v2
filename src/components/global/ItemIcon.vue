@@ -81,8 +81,8 @@ export default {
     lowResolution () {
       let lowResolution = true
       if (window.matchMedia) {
-        const pixelRatio = window.matchMedia("(-webkit-min-device-pixel-ratio: 2)")
-        const resolution = window.matchMedia("(min-resolution: 192dpi)")
+        const pixelRatio = window.devicePixelRatio >= 2
+        const resolution = window.matchMedia("(min-resolution: 192dpi)").matches
         if (pixelRatio || resolution) lowResolution = false
       }
       return lowResolution
@@ -127,7 +127,6 @@ export default {
   width: 60px;
   display: inline-block;
   overflow: hidden;
-  background-size: 360px 720px;
   transition: transform 150ms cubic-bezier(.25,.8,.5,1);
 }
 
