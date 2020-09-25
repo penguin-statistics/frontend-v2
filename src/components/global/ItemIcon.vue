@@ -49,10 +49,18 @@ export default {
   },
   data() {
     return {
-      originalIconSize: 60,
-      originalSpriteDimensions: {
-        x: 360,
-        y: 720
+      previousIconSize: 60,
+      resolutions: {
+        high: {
+          iconSize: 183,
+          dimensions: [1098, 2562],
+          url: "/sprite/sprite.202009251427.png"
+        },
+        low: {
+          iconSize: 183 / 2,
+          dimensions: [1098 / 2, 2562 / 2],
+          url: "/sprite/sprite.202009251427.small.png"
+        }
       }
     };
   },
@@ -70,12 +78,32 @@ export default {
         return ["pa-6"];
       }
     },
+    lowResolution () {
+      let lowResolution = true
+      if (window.matchMedia) {
+        const pixelRatio = window.matchMedia("(-webkit-min-device-pixel-ratio: 2)")
+        const resolution = window.matchMedia("(min-resolution: 192dpi)")
+        if (pixelRatio || resolution) lowResolution = false
+      }
+      return lowResolution
+    },
+    current () {
+      return this.resolutions[this.lowResolution ? "low" : "high"]
+    },
+    config () {
+      const zoom = this.ratio * (this.previousIconSize / this.current.iconSize)
+      return {
+        iconSize: zoom * this.current.iconSize,
+        url: this.cdnDeliver(this.current.url),
+        zoom
+      }
+    },
     style () {
       const style = {
-        height: `${this.ratio * this.originalIconSize}px`,
-        width: `${this.ratio * this.originalIconSize}px`,
-        backgroundSize: `${this.ratio * this.originalSpriteDimensions.x}px ${this.ratio * this.originalSpriteDimensions.y}px`,
-        backgroundImage: `url(${this.cdnDeliver('/sprite/sprite.202005140304.png')})`
+        height: `${this.config.iconSize}px`,
+        width: `${this.config.iconSize}px`,
+        backgroundSize: `${this.config.zoom * this.current.dimensions[0]}px ${this.config.zoom * this.current.dimensions[1]}px`,
+        backgroundImage: `url(${this.config.url})`
       };
       if (this.item.spriteCoord) {
         style["backgroundPosition"] = this.transformCoordinate(this.item.spriteCoord)
@@ -85,8 +113,8 @@ export default {
   },
   methods: {
     transformCoordinate(coordinate) {
-      const FACTOR = this.ratio * this.originalIconSize;
-      return `-${coordinate[0] * FACTOR}px -${coordinate[1] * FACTOR}px`;
+      const factorized = this.config.iconSize;
+      return `-${coordinate[0] * factorized}px -${coordinate[1] * factorized}px`;
     }
   }
 };
