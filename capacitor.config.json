@@ -1,0 +1,13 @@
+{
+  "appId": "io.penguinstats.app",
+  "appName": "penguin-stats-frontend",
+  "bundledWebRuntime": false,
+  "npmClient": "yarn",
+  "webDir": "dist",
+  "plugins": {
+    "SplashScreen": {
+      "launchShowDuration": 0
+    }
+  },
+  "cordova": {}
+}
