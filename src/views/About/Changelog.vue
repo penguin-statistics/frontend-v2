@@ -114,6 +114,8 @@
 import anime from "animejs";
 import timeFormatter from "@/utils/timeFormatter";
 import strings from "@/utils/strings";
+import semver from "semver";
+import config from "@/config"
 
 export default {
   name: 'Changelog',
@@ -122,7 +124,6 @@ export default {
       index: null,
       logs: [
         {
-          future: true,
           version: "v3.5.0",
           date: "2020-11-15T08:00:00Z",
           changes: [
@@ -132,7 +133,6 @@ export default {
           ]
         },
         {
-          future: true,
           version: "v3.4.0",
           date: "2020-10-15T08:00:00Z",
           changes: [
@@ -144,7 +144,16 @@ export default {
           ]
         },
         {
-          active: true,
+          version: "v3.3.5",
+          date: "2020-09-27T10:00:00+0800",
+          changes: [
+            "添加：自适应清晰度物品图标",
+            "添加：网络状态指示器显示当前正加载的数据项列表",
+
+            "内部优化：添加数据结构版本兼容性检查",
+          ]
+        },
+        {
           version: "v3.3.4",
           date: "2020-09-14T23:00:00+0800",
           changes: [
@@ -521,6 +530,9 @@ export default {
           ]
         }
       ].map((el) => {
+        el.future = semver.gt(el.version, config.version)
+        el.active = semver.eq(el.version, config.version)
+
         if (el.active) {
           el.color = 'green';
           el.icon = 'mdi-check';
