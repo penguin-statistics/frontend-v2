@@ -22,7 +22,7 @@ if (environment.production) {
       new ApmIntegrations.Tracing(),
     ],
     tracesSampleRate: 0.05,
-    release: 'frontend-v2@' + (config.version || 'unknown'),
+    release: (config.project || 'unknown') + '@' + (config.version || 'unknown'),
     ignoreErrors: [
       //// START: those errors are found at https://docs.sentry.io/platforms/javascript/#decluttering-sentry
       'top.GLOBALS',

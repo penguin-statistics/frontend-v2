@@ -91,7 +91,7 @@
           </v-avatar>
         </transition>
         <span class="title force-lang-font">
-          {{ $t($router.currentRoute.meta.i18n) }}
+          {{ $t($route.meta.i18n) }}
         </span>
       </v-toolbar-title>
 

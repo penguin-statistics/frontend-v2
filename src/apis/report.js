@@ -1,4 +1,4 @@
-import service from '@/utils/service'
+import {service} from '@/utils/service'
 import config from '@/config'
 import store from '@/store'
 // import { v4 as uuidv4 } from 'uuid'
