@@ -390,8 +390,11 @@
         const allStagesInZone = get.stages.byParentZoneId(this.selected.zone);
         const stageInZoneIndex = allStagesInZone.indexOf(this.selectedStage);
 
+        const self = this;
+
         function validStage(stage) {
           // console.log(stageInZoneIndex, stage)
+          if (self.hideClosed && (!stage || !stage["dropInfos"])) return null
           return existUtils.existence(stage) ? stage : null
         }
 

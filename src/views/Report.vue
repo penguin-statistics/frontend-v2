@@ -919,13 +919,14 @@ export default {
     invalidStage () {
       if (this.selected.zone && this.selected.stage) {
         const zone = get.zones.byZoneId(this.selected.zone, false);
-        if (!zone || !zone.zoneId || !existUtils.existence(zone)) return "INVALID"
+        if (!zone || !zone.zoneId || !existUtils.existence(zone)) return "NOT_FOUND"
         if (zone.isOutdated) return "EXPIRED"
 
         const stage = get.stages.byStageId(this.selected.stage);
-        if (!stage || !stage.stageId || !existUtils.existence(stage)) return "INVALID"
+        if (!stage || !stage.stageId || !existUtils.existence(stage)) return "NOT_FOUND"
+        if (!stage["dropInfos"]) return "INVALID"
       } else {
-        return "INVALID"
+        return "NOT_FOUND"
       }
       return false
     },

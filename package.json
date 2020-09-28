@@ -27,6 +27,7 @@
     "animejs": "^3.1.0",
     "clipboard-polyfill": "^2.8.6",
     "comma-number": "^2.0.1",
+    "cordova-plugin-photos": "^1.0.9",
     "core-js": "^3.6.5",
     "dayjs": "1.8.27",
     "extract-domain": "^2.2.1",

@@ -2993,6 +2993,11 @@ copy-webpack-plugin@^5.1.1:
     serialize-javascript "^2.1.2"
     webpack-log "^2.0.0"
 
+cordova-plugin-photos@^1.0.9:
+  version "1.0.9"
+  resolved "https://registry.npm.taobao.org/cordova-plugin-photos/download/cordova-plugin-photos-1.0.9.tgz#80bd5acced1a2082e238c6210e70bd907e42fe7c"
+  integrity sha1-gL1azO0aIILiOMYhDnC9kH5C/nw=
+
 core-js-compat@^3.6.2, core-js-compat@^3.6.5:
   version "3.6.5"
   resolved "https://registry.yarnpkg.com/core-js-compat/-/core-js-compat-3.6.5.tgz#2a51d9a4e25dfd6e690251aa81f99e3c05481f1c"

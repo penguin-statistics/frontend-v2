@@ -52,7 +52,7 @@
           </h1>
           <v-spacer />
           <v-btn
-            v-if="!zone.isOutdated"
+            v-if="validStage"
             depressed
             color="primary"
             small
@@ -89,6 +89,7 @@
   import get from "@/utils/getters";
   import DataSourceToggle from "@/components/stats/DataSourceToggle";
   import strings from "@/utils/strings";
+  import existUtils from "@/utils/existUtils";
 
 export default {
   name: "StatsByStage",
@@ -130,6 +131,9 @@ export default {
     trends () {
       return get.trends.byStageId(this.selected.stage)
     },
+    validStage () {
+      return !this.zone.isOutdated && this.stage["dropInfos"] && existUtils.existence(this.stage, true)
+    }
   },
   methods: {
     select({zone, stage}) {

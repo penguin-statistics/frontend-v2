@@ -187,8 +187,9 @@ report:
       not: "“{stage}” 内的物品数量应总计不为 {should}"
   clear: 清空
   closedReason:
-    EXPIRED: 不可进行关卡汇报：活动关卡暂未开启或已结束
-    INVALID: 关卡不存在：此关卡未在所选服务器上提供
+    EXPIRED: 不在可汇报时间区间内：关卡已结束或暂未开启
+    NOT_FOUND: 关卡不存在：于所选服务器未找到此关卡
+    INVALID: 关卡数据异常：此关卡未包含掉落汇报元数据
   furniture: 家具掉落：{state}
   name: 上报结果
   submit: 提交

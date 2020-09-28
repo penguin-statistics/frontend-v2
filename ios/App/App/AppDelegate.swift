@@ -5,12 +5,28 @@ import Capacitor
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
   var window: UIWindow?
-
+  var shortcutItemToProcess: UIApplicationShortcutItem?
 
   func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+    CAPLog.print("application launched with launchOptions")
+    CAPLog.print(launchOptions?[UIApplication.LaunchOptionsKey.shortcutItem] ?? "(launchOptions is empty)")
+    
+    if let shortcutItem = launchOptions?[UIApplication.LaunchOptionsKey.shortcutItem] as? UIApplicationShortcutItem {
+        shortcutItemToProcess = shortcutItem
+    }
+    
+//    CAPBridge.triggerWindowJSEvent(eventName: "applicationDidLaunch", data: json)
+    
     // Override point for customization after application launch.
     return true
   }
+    
+    func application(_ application: UIApplication, performActionFor shortcutItem: UIApplicationShortcutItem, completionHandler: @escaping (Bool) -> Void) {
+        CAPLog.print("application launched with shortcutItem", shortcutItem)
+        // Alternatively, a shortcut item may be passed in through this delegate method if the app was
+        // still in memory when the Home screen quick action was used. Again, store it for processing.
+        shortcutItemToProcess = shortcutItem
+    }
 
   func applicationWillResignActive(_ application: UIApplication) {
     // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
@@ -28,6 +44,21 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
   func applicationDidBecomeActive(_ application: UIApplication) {
     // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
+//    if let shortcutItem = shortcutItemToProcess {
+//            // In this sample an alert is being shown to indicate that the action has been triggered,
+//            // but in real code the functionality for the quick action would be triggered.
+////            let message = "\(shortcutItem.type) triggered"
+////            let alertController = UIAlertController(title: "Quick Action", message: message, preferredStyle: .alert)
+////            alertController.addAction(UIAlertAction(title: "Close", style: .default, handler: nil))
+////            window?.rootViewController?.present(alertController, animated: true, completion: nil)
+//
+//        if shortcutItem.type == "DateAction" {
+//            PenguinPlugin.getBridge().triggerJSEvent(eventName: "navigate", data: "lastEvent")
+//        }
+//
+//            // Reset the shortcut item so it's never processed twice.
+//            shortcutItemToProcess = nil
+//     }
   }
 
   func applicationWillTerminate(_ application: UIApplication) {
@@ -37,6 +68,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
   func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey : Any] = [:]) -> Bool {
     // Called when the app was launched with a url. Feel free to add additional processing here,
     // but if you want the App API to support tracking app url opens, make sure to keep this call
+    CAPLog.print("application launched with url ", url, " and options", options)
+    CAPLog.print(url)
+    CAPLog.print(options)
     return CAPBridge.handleOpenUrl(url, options)
   }
   
@@ -44,6 +78,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     // Called when the app was launched with an activity, including Universal Links.
     // Feel free to add additional processing here, but if you want the App API to support
     // tracking app url opens, make sure to keep this call
+    CAPLog.print("application launched with userActivity ", userActivity)
+    
     return CAPBridge.handleContinueActivity(userActivity, restorationHandler)
   }
 
