@@ -1,12 +1,12 @@
 {
   "appId": "io.penguinstats.app",
-  "appName": "penguin-stats-frontend",
+  "appName": "企鹅物流",
   "bundledWebRuntime": false,
   "npmClient": "yarn",
   "webDir": "dist",
   "plugins": {
     "SplashScreen": {
-      "launchShowDuration": 0
+      "launchShowDuration": 1000
     }
   },
   "cordova": {}

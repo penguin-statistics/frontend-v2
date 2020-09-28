@@ -5,7 +5,7 @@
   "author": "Penguin Statistics Contributors <contributors@penguin-stats.io> (https://github.com/orgs/penguin-statistics/people)",
   "scripts": {
     "serve": "vue-cli-service serve",
-    "build": "npx --max_old_space_size=4096 vue-cli-service build --modern",
+    "build": "npx --max_old_space_size=4096 vue-cli-service build",
     "test:e2e": "vue-cli-service test:e2e",
     "lint": "vue-cli-service lint",
     "build:single": "npx --max_old_space_size=4096 vue-cli-service build",

@@ -22,6 +22,7 @@ import SiteStats from "@/views/SiteStats";
 import Planner from "@/views/Planner";
 
 import i18n from "@/i18n";
+import CapacitorTest from "@/views/CapacitorTest";
 
 // import DataDebugger from "@/components/debug/DataDebugger";
 
@@ -140,15 +141,24 @@ const router = new Router({
       i18n: 'menu.stats.advanced'
     },
   },
-  {
-    path: '/statistics',
-    name: 'SiteStats',
-    component: SiteStats,
-    meta: {
-      icon: 'mdi-poll-box',
-      i18n: 'menu.siteStats'
-    }
-  },
+    {
+      path: '/statistics',
+      name: 'SiteStats',
+      component: SiteStats,
+      meta: {
+        icon: 'mdi-poll-box',
+        i18n: 'menu.siteStats'
+      }
+    },
+    {
+      path: '/test',
+      name: 'CapacitorTest',
+      component: CapacitorTest,
+      meta: {
+        icon: 'mdi-poll-box',
+        i18n: 'menu.siteStats'
+      }
+    },
   {
     path: '/about',
     name: 'About',

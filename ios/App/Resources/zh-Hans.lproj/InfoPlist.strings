@@ -1,0 +1,15 @@
+/* 
+  InfoPlist.strings
+  App
+
+  Created by Galvin Gao on 2020/9/28.
+  
+*/
+
+"CFBundleDisplayName" = "企鹅物流";
+"CFBundleName" = "企鹅物流数据统计";
+
+"SHORTCUT_ITEM_SEARCH_TITLE" = "搜索";
+//"SHORTCUT_ITEM_SEARCH_SUBTITLE" = "Search";
+"SHORTCUT_ITEM_DATE_TITLE" = "活动：踏寻往昔之风";
+"SHORTCUT_ITEM_DATE_SUBTITLE" = "查看相关掉率";
