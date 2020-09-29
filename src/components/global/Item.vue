@@ -99,7 +99,7 @@
       tooltipOptions () {
         return {
           [this.bottom ? 'nudgeTop' : 'nudgeLeft']: this.tooltipNudge,
-          [this.bottom ? 'nudgeBottom' : 'nudgeRight']: this.tooltipNudge,
+          [this.bottom ? 'nudgeBottom' : 'nudgeRight']: this.tooltipNudge ? 0 : false,
           transition: this.bottom ? "slide-y-transition" : "slide-x-transition"
         }
       },
