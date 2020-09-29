@@ -51,7 +51,10 @@ if (environment.production) {
       "vivoNewsDetailPage",
       "removeAD",
 
-      "getBoundingClientRect"
+      "getBoundingClientRect",
+      // ignore native client does not have web implementation error
+      // since there's currently no feature sensitive native client plugin invocations.
+      "does not have web implementation"
     ],
     ignoreUrls: [
       // Facebook flakiness

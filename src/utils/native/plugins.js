@@ -1,2 +1,2 @@
 import { Plugins } from "@capacitor/core"
-export default {...Plugins}
+export default Plugins

@@ -152,6 +152,7 @@
   import UpgradeNotifier from "@/components/global/UpgradeNotifier";
   import ServerSelector from "@/components/toolbar/ServerSelector";
   import ServerNotifyOverlay from "@/components/global/ServerNotifyOverlay";
+  import plugins from "@/utils/native/plugins"
 
 export default {
   name: 'App',
@@ -180,6 +181,9 @@ export default {
   computed: {
     ...mapGetters("settings", ["lowData"]),
     ...mapGetters("ajax", ["pending"]),
+    plugins () {
+      return plugins
+    }
   },
   created () {
     this.routes = this.$router.options.routes.filter(el => !el.meta.hide);
