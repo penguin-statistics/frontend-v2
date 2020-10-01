@@ -163,6 +163,7 @@ planner:
     export: 내보내기
     importExport: "@:(planner.actions.import)/@:(planner.actions.export)"
     calculate: 계산하기
+    calculating: Calculating now...
   have: 보유량
   need: 필요량
   copy: 클립보드에 복사
