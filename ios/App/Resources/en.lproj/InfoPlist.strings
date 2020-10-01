@@ -9,6 +9,8 @@
 "CFBundleDisplayName" = "Penguin Stats";
 "CFBundleName" = "Penguin Statistics";
 
+"SIRI_USAGE_DESCRIPTION" = "Statistical data will be sent to Siri";
+
 "SHORTCUT_ITEM_SEARCH_TITLE" = "Search";
 //"SHORTCUT_ITEM_SEARCH_SUBTITLE" = "Search";
 "SHORTCUT_ITEM_DATE_TITLE" = "Rewinding Breeze";

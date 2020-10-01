@@ -1,4 +1,5 @@
 import UIKit
+import CoreSpotlight
 import Capacitor
 
 @UIApplicationMain
@@ -8,12 +9,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
   var shortcutItemToProcess: UIApplicationShortcutItem?
 
   func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+    
     CAPLog.print("application launched with launchOptions")
     CAPLog.print(launchOptions?[UIApplication.LaunchOptionsKey.shortcutItem] ?? "(launchOptions is empty)")
     
     if let shortcutItem = launchOptions?[UIApplication.LaunchOptionsKey.shortcutItem] as? UIApplicationShortcutItem {
         shortcutItemToProcess = shortcutItem
     }
+    
+    NotificationCenter.default.post(name: NSNotification.Name("PenguinTriggerJSEvent"), object: [], userInfo: ["type": "debug", "value": launchOptions?[UIApplication.LaunchOptionsKey.shortcutItem] ?? "(launchOptions is empty)"])
     
 //    CAPBridge.triggerWindowJSEvent(eventName: "applicationDidLaunch", data: json)
     
@@ -44,21 +48,29 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
   func applicationDidBecomeActive(_ application: UIApplication) {
     // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
-//    if let shortcutItem = shortcutItemToProcess {
-//            // In this sample an alert is being shown to indicate that the action has been triggered,
-//            // but in real code the functionality for the quick action would be triggered.
-////            let message = "\(shortcutItem.type) triggered"
-////            let alertController = UIAlertController(title: "Quick Action", message: message, preferredStyle: .alert)
-////            alertController.addAction(UIAlertAction(title: "Close", style: .default, handler: nil))
-////            window?.rootViewController?.present(alertController, animated: true, completion: nil)
-//
-//        if shortcutItem.type == "DateAction" {
-//            PenguinPlugin.getBridge().triggerJSEvent(eventName: "navigate", data: "lastEvent")
-//        }
-//
-//            // Reset the shortcut item so it's never processed twice.
-//            shortcutItemToProcess = nil
-//     }
+    
+    CAPLog.print("application did become active. shortcutItemToProcess: ", shortcutItemToProcess ?? "")
+    
+    if let shortcutItem = shortcutItemToProcess {
+            // In this sample an alert is being shown to indicate that the action has been triggered,
+            // but in real code the functionality for the quick action would be triggered.
+//            let message = "\(shortcutItem.type) triggered"
+//            let alertController = UIAlertController(title: "Quick Action", message: message, preferredStyle: .alert)
+//            alertController.addAction(UIAlertAction(title: "Close", style: .default, handler: nil))
+//            window?.rootViewController?.present(alertController, animated: true, completion: nil)
+
+        if shortcutItem.type == "DateAction" {
+            let url = "/result/stage/act13d0_zone1/act13d0_01"
+            CAPLog.print("shortcutItem DateAction matched. handling as redirection to url", url)
+//            CAPBridge.handleOpenUrl(URL.init(string: url)!, [:] as [UIApplication.OpenURLOptionsKey :
+            NotificationCenter.default.post(name: NSNotification.Name("PenguinTriggerJSEvent"), object: [], userInfo: ["type": "navigate", "value": url])
+        }
+        
+            // Reset the shortcut item so it's never processed twice.
+            shortcutItemToProcess = nil
+     }
+    
+    
   }
 
   func applicationWillTerminate(_ application: UIApplication) {

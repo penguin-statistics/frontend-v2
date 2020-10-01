@@ -8,5 +8,5 @@
 #import <Capacitor/Capacitor.h>
 
 CAP_PLUGIN(PenguinPlugin, "PenguinPlugin",
-  CAP_PLUGIN_METHOD(echo, CAPPluginReturnPromise);
+  CAP_PLUGIN_METHOD(getLocalizationEnvironment, CAPPluginReturnPromise);
 )

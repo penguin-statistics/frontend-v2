@@ -23,9 +23,6 @@ import Planner from "@/views/Planner";
 
 import i18n from "@/i18n";
 
-import { Plugins } from '@capacitor/core';
-const { App } = Plugins;
-
 // import DataDebugger from "@/components/debug/DataDebugger";
 
 // this is to fix error named something like DuplicatedRoute
@@ -278,21 +275,6 @@ const router = new Router({
 router.beforeEach((to, from, next) => {
   document.title = `${i18n.t(to.meta.i18n)} | ${i18n.t('app.name')}`;
   next();
-});
-
-App.addListener('appUrlOpen', function( data ){
-  // Example url: https://beerswift.app/tabs/tabs2
-  // slug = /tabs/tabs2
-
-  console.log("App URL open fired with", data)
-  const slug = new URL(data.url).pathname.replace(/\/+/g, "/")
-
-  // We only push to the route if there is a slug present
-  if ( slug ){
-    router.push({
-      path: slug
-    });
-  }
 });
 
 export default router
