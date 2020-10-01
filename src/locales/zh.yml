@@ -189,7 +189,7 @@ report:
   closedReason:
     EXPIRED: 不在可汇报时间区间内：关卡已结束或暂未开启
     NOT_FOUND: 关卡不存在：于所选服务器未找到此关卡
-    INVALID: 关卡数据异常：此关卡未包含掉落汇报元数据
+    INVALID: 无法汇报：此关卡未包含掉落汇报元数据
   furniture: 家具掉落：{state}
   name: 上报结果
   submit: 提交

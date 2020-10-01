@@ -197,9 +197,9 @@ report:
       not: Should not have exactly {should} items in "{stage}"
   clear: Clear
   closedReason:
-    INVALID: 'Invalid Level Data: This level does not contain drop reporting metadata.'
+    INVALID: 'Unable to Report: This stage does not contain drop reporting metadata.'
     NOT_FOUND: 'Stage Not Found: The stage does not exist in the server you have selected.'
-    EXPIRED: 'Not within Reportable Time Range: Either has the level already closed or has not yet opened.'
+    EXPIRED: 'Not within Reportable Time Range: Either has the stage already closed or has not yet opened.'
   furniture: 'Furniture Drop: {state}'
   name: Report
   submit: Submit

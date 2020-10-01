@@ -924,7 +924,7 @@ export default {
 
         const stage = get.stages.byStageId(this.selected.stage);
         if (!stage || !stage.stageId || !existUtils.existence(stage)) return "NOT_FOUND"
-        if (!stage["dropInfos"]) return "INVALID"
+        if (!stage["dropInfos"] || !stage["dropInfos"].length) return "INVALID"
       } else {
         return "NOT_FOUND"
       }
