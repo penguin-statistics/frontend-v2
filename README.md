@@ -25,6 +25,7 @@ This frontend project has mainly being maintained by the following contributors 
 ## Supports
 Thanks for the kindness support for this Open Source project from:
 - [![Sentry.io](https://img.shields.io/badge/Sentry.io-DBD3E9?logo=sentry&style=flat&logoColor=DBD3E9&labelColor=16111C&color=9990AB)](https://sentry.io)
+- [![Testing Powered By SauceLabs](https://opensource.saucelabs.com/images/opensauce/powered-by-saucelabs-badge-red.png?sanitize=true "Testing Powered By SauceLabs")](https://saucelabs.com)
 
 ## How to contribute?
 Our contribute guideline can be found at [Penguin Developers](https://developer.penguin-stats.io). PRs are always more than welcome!
