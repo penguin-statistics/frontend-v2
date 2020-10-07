@@ -26,17 +26,5 @@ export default {
 
   vibrate() {
     Haptics.vibrate();
-  },
-
-  selectionStart() {
-    Haptics.selectionStart();
-  },
-
-  selectionChanged() {
-    Haptics.selectionChanged();
-  },
-
-  selectionEnd() {
-    Haptics.selectionEnd();
   }
 }

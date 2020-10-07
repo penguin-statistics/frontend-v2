@@ -1088,19 +1088,7 @@
     estree-walker "^1.0.1"
     picomatch "^2.2.2"
 
-"@sentry/apm@^5.15.4":
-  version "5.19.1"
-  resolved "https://registry.yarnpkg.com/@sentry/apm/-/apm-5.19.1.tgz#cdd1d68075b2c904473d32b8e933ad292c2e3628"
-  integrity sha512-ueW0ulXBIbbVpM6YwUtZKtxvYxoMEYywNbN7hWjECRWBjKSCuIl6sE92uUgv7UvpmBL5f2hE+NufCSvp/RVZjg==
-  dependencies:
-    "@sentry/browser" "5.19.1"
-    "@sentry/hub" "5.19.1"
-    "@sentry/minimal" "5.19.1"
-    "@sentry/types" "5.19.1"
-    "@sentry/utils" "5.19.1"
-    tslib "^1.9.3"
-
-"@sentry/browser@5.19.1", "@sentry/browser@^5.6.2":
+"@sentry/browser@^5.6.2":
   version "5.19.1"
   resolved "https://registry.yarnpkg.com/@sentry/browser/-/browser-5.19.1.tgz#b22f36fc71f36719ad352a54e6b31722622128c0"
   integrity sha512-Aon5Nc2n8sIXKg6Xbr4RM3/Xs7vFpXksL56z3yIuGrmpCM8ToQ25/tQv8h+anYi72x5bn1npzaXB/NwU1Qwfhg==
@@ -2992,11 +2980,6 @@ copy-webpack-plugin@^5.1.1:
     schema-utils "^1.0.0"
     serialize-javascript "^2.1.2"
     webpack-log "^2.0.0"
-
-cordova-plugin-photos@^1.0.9:
-  version "1.0.9"
-  resolved "https://registry.npm.taobao.org/cordova-plugin-photos/download/cordova-plugin-photos-1.0.9.tgz#80bd5acced1a2082e238c6210e70bd907e42fe7c"
-  integrity sha1-gL1azO0aIILiOMYhDnC9kH5C/nw=
 
 core-js-compat@^3.6.2, core-js-compat@^3.6.5:
   version "3.6.5"
@@ -9542,6 +9525,11 @@ vue-analytics@^5.22.1:
   version "5.22.1"
   resolved "https://registry.yarnpkg.com/vue-analytics/-/vue-analytics-5.22.1.tgz#9d6b32da56daee1b9dfb23a267b50349a03f710f"
   integrity sha512-HPKQMN7gfcUqS5SxoO0VxqLRRSPkG1H1FqglsHccz6BatBatNtm/Vyy8brApktZxNCfnAkrSVDpxg3/FNDeOgQ==
+
+vue-async-computed@^3.9.0:
+  version "3.9.0"
+  resolved "https://registry.npm.taobao.org/vue-async-computed/download/vue-async-computed-3.9.0.tgz#af3181c25168bfe9d86d8ffbc7033bf9e484fe84"
+  integrity sha1-rzGBwlFov+nYbY/7xwM7+eSE/oQ=
 
 vue-cli-plugin-i18n@^1.0.1:
   version "1.0.1"

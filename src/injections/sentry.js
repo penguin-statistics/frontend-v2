@@ -1,6 +1,5 @@
 import * as Sentry from "@sentry/browser";
 import * as Integrations from "@sentry/integrations";
-import {Integrations as ApmIntegrations} from "@sentry/apm";
 import config from "@/config";
 import environment from "@/utils/environment";
 import Vue from "vue";
@@ -18,8 +17,7 @@ if (environment.production) {
         Vue,
         attachProps: true,
         tracing: true
-      }),
-      new ApmIntegrations.Tracing(),
+      })
     ],
     tracesSampleRate: 0.05,
     release: (config.project || 'unknown') + '@' + (config.version || 'unknown'),
