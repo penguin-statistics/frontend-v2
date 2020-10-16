@@ -2,7 +2,7 @@
   <v-card
     hover
     :ripple="!stateful"
-    :class="{'d-inline-flex ma-1 stage-card cursor-pointer': true, 'stage-card--stateless': !stateful, 'stage-card--light': !dark, 'stage-card--dark': dark, 'stage-card--chosen': stateful, 'stage-card--chosen-true': chosen, 'stage-card--chosen-false': !chosen }"
+    :class="{'d-inline-flex ma-1 stage-card cursor-pointer': true, 'stage-card--stateless': !stateful, 'stage-card--light': !dark, 'stage-card--dark': dark, 'stage-card--chosen': stateful, 'stage-card--chosen-true': chosen, 'stage-card--chosen-false': !chosen, 'stage-card--transparent': transparent }"
   >
     <v-card-title
       class="py-1 px-3"
@@ -57,6 +57,10 @@
         default () {
           return false
         }
+      },
+      transparent: {
+        type: Boolean,
+        default: () => false
       },
       left: {
         type: Boolean,
@@ -144,5 +148,9 @@
   }
   .theme--dark .stage-card--chosen.stage-card--chosen-false {
     background: rgb(128, 59, 51)
+  }
+
+  .stage-card--transparent {
+    background: transparent !important;
   }
 </style>

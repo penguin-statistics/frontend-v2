@@ -140,15 +140,15 @@ const router = new Router({
       i18n: 'menu.stats.advanced'
     },
   },
-    {
-      path: '/statistics',
-      name: 'SiteStats',
-      component: SiteStats,
-      meta: {
-        icon: 'mdi-poll-box',
-        i18n: 'menu.siteStats'
-      }
-    },
+  {
+    path: '/statistics',
+    name: 'SiteStats',
+    component: SiteStats,
+    meta: {
+      icon: 'mdi-poll-box',
+      i18n: 'menu.siteStats'
+    }
+  },
   {
     path: '/about',
     name: 'About',

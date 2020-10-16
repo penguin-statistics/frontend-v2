@@ -1,40 +1,77 @@
 <template>
   <v-stepper
     v-model="step"
-    :alt-labels="!small"
+    alt-labels
     class="transparent elevation-0 full-width pa-4"
   >
     <v-stepper-header
-      class="bkop-light elevation-4"
+      class="bkop-light elevation-4 py-4 px-5 d-flex flex-row align-start justify-center position-relative stepper-header"
       style="border-radius: 4px"
     >
-      <v-stepper-step
-        :complete="step > 1"
-        :editable="step > 1"
-        :step="1"
-      >
-        <span
-          class="text-center"
-          style="word-break: keep-all"
-        >
-          {{ $t('zone.name') }} & {{ $t('stage.name') }}
-        </span>
-        <small
-          v-if="step > 1"
-          class="mt-2"
-        >
-          {{ strings.translate(selectedStage, "code") }}
-        </small>
-      </v-stepper-step>
+      <v-fade-transition>
+        <v-img
+          v-if="selectedStage.image"
+          :src="selectedStage.image"
+          class="stepper-header--background"
+          gradient="160deg, rgba(0, 0, 0, .95), rgba(0, 0, 0, .4)"
+          style="filter: brightness(0.8)"
+        />
+      </v-fade-transition>
 
-      <v-divider />
+      <BackButton
+        name="关卡选择"
+        :active="step > 1"
 
-      <v-stepper-step
-        :complete="step === 2"
-        :step="2"
-      >
-        {{ name }}
-      </v-stepper-step>
+        @back="step = 1"
+      />
+
+      <v-spacer />
+
+      <v-slide-x-transition>
+        <div
+          v-if="step === 2"
+          class="d-flex flex-row"
+        >
+          <v-slide-x-transition hide-on-leave>
+            <StageCard
+              v-if="relativeStages.prev"
+              key="left"
+
+              left
+              :dense="$vuetify.breakpoint.xsOnly"
+              :stage="relativeStages.prev"
+              @click.native="selectStage(relativeStages.prev.zoneId, relativeStages.prev.stageId, false)"
+            />
+          </v-slide-x-transition>
+
+          <v-slide-x-reverse-transition hide-on-leave>
+            <StageCard
+              v-if="relativeStages.next"
+              key="right"
+
+              right
+              :dense="$vuetify.breakpoint.xsOnly"
+              :stage="relativeStages.next"
+              @click.native="selectStage(relativeStages.next.zoneId, relativeStages.next.stageId, false)"
+            />
+          </v-slide-x-reverse-transition>
+        </div>
+      </v-slide-x-transition>
+
+      <!--      <v-expand-transition>-->
+      <!--        <div-->
+      <!--          v-if="step === 2"-->
+      <!--          class="d-flex flex-column align-start justify-center"-->
+      <!--        >-->
+      <!--          <h2 class="title">-->
+      <!--            {{ name }}-->
+      <!--          </h2>-->
+
+      <!--          <span class="subtitle-1">-->
+      <!--            {{ strings.translate(selectedStage, "code") }}-->
+      <!--          </span>-->
+      <!--        </div>-->
+      <!--      </v-expand-transition>-->
     </v-stepper-header>
     <v-stepper-items class="stepper-overflow-initial">
       <v-stepper-content
@@ -154,39 +191,13 @@
         :step="2"
         class="pa-0 pt-2"
       >
-        <v-expand-transition leave-absolute>
-          <div
-            v-if="selected.stage"
-            class="d-flex flex-row align-center"
-          >
-            <v-fade-transition>
-              <StageCard
-                v-if="relativeStages.prev"
-                left
-                :dense="$vuetify.breakpoint.xsOnly"
-                :stage="relativeStages.prev"
-                @click.native="selectStage(relativeStages.prev.zoneId, relativeStages.prev.stageId, false)"
-              />
-            </v-fade-transition>
-            <v-spacer />
-            <v-fade-transition>
-              <StageCard
-                v-if="relativeStages.next"
-                right
-                :dense="$vuetify.breakpoint.xsOnly"
-                :stage="relativeStages.next"
-                @click.native="selectStage(relativeStages.next.zoneId, relativeStages.next.stageId, false)"
-              />
-            </v-fade-transition>
-          </div>
-        </v-expand-transition>
-        
         <span
           v-if="!$vuetify.breakpoint.xs"
           class="stage-id--background font-weight-black display-4 px-12 py-6"
         >
           {{ strings.translate(selectedStage, "code") }}
         </span>
+        
         <slot />
       </v-stepper-content>
     </v-stepper-items>
@@ -202,10 +213,11 @@
   import CDN from "@/mixins/CDN";
   import existUtils from "@/utils/existUtils";
   import validator from "@/utils/validator";
+  import BackButton from "@/components/stats/BackButton";
 
   export default {
     name: "StageSelector",
-    components: {StageCard},
+    components: {BackButton, StageCard},
     mixins: [CDN],
     props: {
       name: {
@@ -256,6 +268,11 @@
           "gachabox": this.cdnDeliver('/backgrounds/zones/gachabox.jpg'),
           "act12d0_zone1": this.cdnDeliver('/backgrounds/zones/act12d0_zone1.jpg'),
           "act13d0_zone1": this.cdnDeliver('/backgrounds/zones/act13d0_zone1.jpg'),
+          "act13d5_zone1": this.cdnDeliver('/backgrounds/zones/act13d5_zone1.jpg'),
+          // "act13d5_zone1": require("@/assets/zonePageBackgrounds/png/act13d5_zone1.png"),
+
+          // 骑兵与猎人 复刻：复用原活动（1stact_zone1）
+          "act13d2_zone1": this.cdnDeliver('/backgrounds/zones/A001_zone1.jpg'),
         }
       }
     },
@@ -383,12 +400,23 @@
       },
       selectedStage() {
         if (!this.selected.stage) return {};
-        return get.stages.byStageId(this.selected.stage);
+        const stage = get.stages.byStageId(this.selected.stage)
+        if (!this.lowData && validator.have(this.stageImages, stage.zoneId)) {
+          return {
+            ...stage,
+            image: this.stageImages[stage.zoneId]
+          }
+        } else {
+          return {
+            ...stage,
+            image: null
+          }
+        }
       },
       relativeStages () {
         if (!this.selected.stage) return null;
         const allStagesInZone = get.stages.byParentZoneId(this.selected.zone);
-        const stageInZoneIndex = allStagesInZone.indexOf(this.selectedStage);
+        const stageInZoneIndex = allStagesInZone.indexOf(allStagesInZone.find(el => el.stageId === this.selected.stage));
 
         const self = this;
 
@@ -499,5 +527,16 @@
   .theme--dark .stage-card--content {
     background: rgba(0, 0, 0, .8) !important;
     background: linear-gradient(to bottom, rgba(0, 0, 0, 0.85), rgba(0, 0, 0, 0.70)) !important;
+  }
+
+  .stepper-header--background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    
+    border-radius: 4px !important;
+    overflow: hidden;
   }
 </style>
