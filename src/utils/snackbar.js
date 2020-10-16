@@ -19,6 +19,6 @@ export default {
     })
   },
   networkError () {
-    this.launch("error", 10000, "network.error")
+    this.launch("error", 0, "network.error")
   }
 }
