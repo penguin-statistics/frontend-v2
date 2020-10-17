@@ -1,4 +1,4 @@
-import service from './service'
+import {service} from '@/utils/service'
 import store from '@/store'
 import Console from "@/utils/Console";
 /**

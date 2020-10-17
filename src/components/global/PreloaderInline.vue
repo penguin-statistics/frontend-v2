@@ -35,7 +35,7 @@
 <script>
 import randomUtils from "@/utils/randomUtils";
 import CDN from "@/mixins/CDN";
-import service from "@/utils/service";
+import {externalService} from "@/utils/service";
 import Console from "@/utils/Console";
 
 export default {
@@ -101,8 +101,7 @@ export default {
     },
     update() {
       this.ready = false
-      service.get(this.currentSrc, {
-        withCredentials: false,
+      externalService.get(this.currentSrc, {
         responseType: "blob"
       })
         .then(({data}) => {

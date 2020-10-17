@@ -1,9 +1,7 @@
-import service from '@/utils/service'
+import {externalService} from '@/utils/service'
 
 export default {
   geoip () {
-    return service.get("https://api.ip.sb/geoip", {
-      withCredentials: false
-    })
+    return externalService.get("https://api.ip.sb/geoip")
   }
 }

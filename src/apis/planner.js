@@ -1,9 +1,7 @@
-import service from '@/utils/service'
+import {externalService} from '@/utils/service'
 
 export default {
   plan (data) {
-    return service.post("https://planner.penguin-stats.io/plan", data, {
-      withCredentials: false
-    })
+    return externalService.post("https://planner.penguin-stats.io/plan", data)
   }
 }

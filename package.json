@@ -1,6 +1,6 @@
 {
   "name": "penguin-stats-frontend",
-  "version": "3.3.4",
+  "version": "3.3.5",
   "private": true,
   "author": "Penguin Statistics Contributors <contributors@penguin-stats.io> (https://github.com/orgs/penguin-statistics/people)",
   "scripts": {
@@ -33,6 +33,7 @@
     "marked": "^1.0.0",
     "pinyin-engine": "^1.1.0",
     "regenerator-runtime": "^0.13.5",
+    "semver": "^7.3.2",
     "uuid": "^8.2.0",
     "vue": "^2.6.10",
     "vue-analytics": "^5.22.1",

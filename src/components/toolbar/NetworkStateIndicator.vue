@@ -2,10 +2,39 @@
   <div>
     <v-slide-x-reverse-transition>
       <v-card
-        v-if="show"
+        v-if="delayedShow"
         class="network-state-indicator transition-all"
         :class="{'error': haveError, 'blue darken-2': !haveError}"
       >
+        <ul style="list-style: none; padding-left: 0;">
+          <template v-for="state in states">
+            <v-expand-transition :key="state.id">
+              <li
+                v-if="state.pending || state.error"
+                class="d-flex flex-row align-center"
+              >
+                <v-icon
+                  v-if="!state.pending"
+                  small
+                  :color="state.error ? 'error darken-4' : 'success lighten-1'"
+                  :class="{'have-error-state__other': haveError && !state.error, 'have-error-state__self': haveError && state.error}"
+                >
+                  {{ state.error ? "mdi-alert" : "mdi-check-circle" }}
+                </v-icon>
+                <v-progress-circular
+                  v-else
+                  indeterminate
+                  :size="14"
+                  :width="2"
+                  style="margin-left: 1px"
+                />
+                <span class="ml-1 caption">
+                  {{ $t(`fetch.failed.error.${state.id}`) }}
+                </span>
+              </li>
+            </v-expand-transition>
+          </template>
+        </ul>
         <v-fade-transition>
           <span
             v-if="haveError && !dialog"
@@ -125,7 +154,7 @@
 </template>
 
 <script>
-  import {mapGetters} from "vuex";
+  import {mapGetters, mapState} from "vuex";
   import PreloaderInline from "@/components/global/PreloaderInline";
 
   export default {
@@ -134,11 +163,14 @@
     data () {
       return {
         dialog: false,
-        origin: 'center center'
+        origin: 'center center',
+        delayedShow: false,
+        timer: null
       }
     },
     computed: {
       ...mapGetters('ajax', ['pending', 'errors']),
+      ...mapState('ajax', ['states']),
       haveError () {
         return this.errors.length > 0
       },
@@ -149,6 +181,9 @@
         const states = this.$store.state.ajax.states
         const pending = states.filter(el => el.pending).length
         return `${Math.ceil(100 - (pending / states.length) * 100)}%`
+      },
+      ajaxStates () {
+        return this.states
       }
     },
     watch: {
@@ -159,6 +194,27 @@
         } else if (!newValue && oldValue) {
           // error resolved. force close the window
           this.dialog = false
+        }
+      },
+      show(newValue) {
+        let self = this;
+
+        // we only delay (old)true -> (current)false
+
+        // if there's already a timer, cancel it
+        if (this.timer) {
+          clearTimeout(this.timer)
+          this.timer = null
+        }
+
+        // avoid delaying (apply immediately)
+        if (newValue === true) return this.delayedShow = newValue
+
+        // do delay
+        if (newValue === false) {
+          this.timer = setTimeout(function () {
+            self.delayedShow = newValue
+          }, 175)
         }
       }
     },
@@ -183,5 +239,12 @@
     border-radius: 4px 0 0 4px !important;
     margin-bottom: calc(max(env(safe-area-inset-bottom), 8px)) !important;
     z-index: 1000001; /* to override crisp & stay on top of the server switcher notifier */
+  }
+
+  .have-error-state__other {
+    text-shadow: 0 0 3px rgba(0, 0, 0, .5);
+  }
+  .have-error-state__self {
+    text-shadow: 0 0 5px rgba(255, 255, 255, .5);
   }
 </style>
