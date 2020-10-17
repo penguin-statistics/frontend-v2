@@ -85,12 +85,12 @@
     </v-icon>
     {{ $t(snackbar.text, snackbar.extra) }}
     <v-spacer />
-    <!--    <v-btn-->
-    <!--      text-->
-    <!--      @click="snackbar.enabled = false"-->
-    <!--    >-->
-    <!--      {{ $t('meta.dialog.close') }}-->
-    <!--    </v-btn>-->
+    <v-btn
+      text
+      @click="snackbar.enabled = false"
+    >
+      {{ $t('meta.dialog.close') }}
+    </v-btn>
   </v-snackbar>
 </template>
 

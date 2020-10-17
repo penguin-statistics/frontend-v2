@@ -197,8 +197,9 @@ report:
       not: Should not have exactly {should} items in "{stage}"
   clear: Clear
   closedReason:
-    INVALID: 'Stage Not Found: The stage does not exist in the server you have selected.'
-    EXPIRED: 'Stage Report Closed: This activity stage has not yet been opened or has already been closed.'
+    INVALID: 'Unable to Report: This stage does not contain drop reporting metadata.'
+    NOT_FOUND: 'Stage Not Found: The stage does not exist in the server you have selected.'
+    EXPIRED: 'Not within Reportable Time Range: Either has the stage already closed or has not yet opened.'
   furniture: 'Furniture Drop: {state}'
   name: Report
   submit: Submit
@@ -274,6 +275,7 @@ stage:
     plannerExclude: Exclude Planning Stages
     excludeAll: Exclude All
     includeAll: Include All
+    title: Select Stage
 planner:
   notices:
     autoExistence: ArkPlanner will hide non-existing stages automatically now.

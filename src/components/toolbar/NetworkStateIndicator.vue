@@ -6,35 +6,35 @@
         class="network-state-indicator transition-all"
         :class="{'error': haveError, 'blue darken-2': !haveError}"
       >
-        <ul style="list-style: none; padding-left: 0;">
-          <template v-for="state in states">
-            <v-expand-transition :key="state.id">
-              <li
-                v-if="state.pending || state.error"
-                class="d-flex flex-row align-center"
-              >
-                <v-icon
-                  v-if="!state.pending"
-                  small
-                  :color="state.error ? 'error darken-4' : 'success lighten-1'"
-                  :class="{'have-error-state__other': haveError && !state.error, 'have-error-state__self': haveError && state.error}"
-                >
-                  {{ state.error ? "mdi-alert" : "mdi-check-circle" }}
-                </v-icon>
-                <v-progress-circular
-                  v-else
-                  indeterminate
-                  :size="14"
-                  :width="2"
-                  style="margin-left: 1px"
-                />
-                <span class="ml-1 caption">
-                  {{ $t(`fetch.failed.error.${state.id}`) }}
-                </span>
-              </li>
-            </v-expand-transition>
-          </template>
-        </ul>
+        <!--        <ul style="list-style: none; padding-left: 0;">-->
+        <!--          <template v-for="state in states">-->
+        <!--            <v-expand-transition :key="state.id">-->
+        <!--              <li-->
+        <!--                v-if="state.pending || state.error"-->
+        <!--                class="d-flex flex-row align-center"-->
+        <!--              >-->
+        <!--                <v-icon-->
+        <!--                  v-if="!state.pending"-->
+        <!--                  small-->
+        <!--                  :color="state.error ? 'error darken-4' : 'success lighten-1'"-->
+        <!--                  :class="{'have-error-state__other': haveError && !state.error, 'have-error-state__self': haveError && state.error}"-->
+        <!--                >-->
+        <!--                  {{ state.error ? "mdi-alert" : "mdi-check-circle" }}-->
+        <!--                </v-icon>-->
+        <!--                <v-progress-circular-->
+        <!--                  v-else-->
+        <!--                  indeterminate-->
+        <!--                  :size="14"-->
+        <!--                  :width="2"-->
+        <!--                  style="margin-left: 1px"-->
+        <!--                />-->
+        <!--                <span class="ml-1 caption">-->
+        <!--                  {{ $t(`fetch.failed.error.${state.id}`) }}-->
+        <!--                </span>-->
+        <!--              </li>-->
+        <!--            </v-expand-transition>-->
+        <!--          </template>-->
+        <!--        </ul>-->
         <v-fade-transition>
           <span
             v-if="haveError && !dialog"

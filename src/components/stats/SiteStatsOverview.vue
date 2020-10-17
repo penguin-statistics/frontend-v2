@@ -61,17 +61,23 @@
       animate(newValue, oldValue) {
         const self = this;
 
-        return anime({
-          targets: self.$refs["totalReportsNum"],
-          innerHTML: [oldValue, newValue],
-          duration: 1500,
-          round: 1,
-          easing: 'easeOutQuint',
-          delay: 1500,
-          complete: function () {
-            self.$refs["totalReportsNum"].innerText = formatter.thousandSeparator(newValue)
-          }
-        })
+        if (self.$refs["totalReportsNum"]) {
+          return anime({
+            targets: self.$refs["totalReportsNum"],
+            innerHTML: [oldValue, newValue],
+            duration: 1500,
+            round: 1,
+            easing: 'easeOutQuint',
+            delay: 1500,
+            complete: function () {
+              // when completed such element may not exist anymore - if the component
+              // has already been destroyed at such time.
+              if (self && self.$refs["totalReportsNum"]) {
+                self.$refs["totalReportsNum"].innerText = formatter.thousandSeparator(newValue)
+              }
+            }
+          })
+        }
       }
     },
   }

@@ -42,7 +42,7 @@
           class="px-4 px-sm-4 px-md-6 px-lg-6 px-xl-8 pt-0 pb-4"
         >
           <h2
-            class="overline d-block"
+            class="subtitle-2 d-block"
             style="width: 100%"
           >
             {{ strings.translate(zone, "zoneName") }}
@@ -52,7 +52,7 @@
           </h1>
           <v-spacer />
           <v-btn
-            v-if="!zone.isOutdated"
+            v-if="validStage"
             depressed
             color="primary"
             small
@@ -89,6 +89,7 @@
   import get from "@/utils/getters";
   import DataSourceToggle from "@/components/stats/DataSourceToggle";
   import strings from "@/utils/strings";
+  import existUtils from "@/utils/existUtils";
 
 export default {
   name: "StatsByStage",
@@ -130,6 +131,9 @@ export default {
     trends () {
       return get.trends.byStageId(this.selected.stage)
     },
+    validStage () {
+      return !this.zone.isOutdated && this.stage["dropInfos"] && existUtils.existence(this.stage, true)
+    }
   },
   methods: {
     select({zone, stage}) {

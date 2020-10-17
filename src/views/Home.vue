@@ -104,16 +104,16 @@ export default {
           targets: '.card-translate-up',
           translateY: [48, 0],
           opacity: [0, 1],
-          duration: 775,
-          delay: anime.stagger(175),
+          duration: 625,
+          delay: anime.stagger(75),
           easing: "easeOutQuint"
-        });
+        })
         anime({
           targets: ['.card-translate-up h1', '.card-translate-up h2', '.card-translate-up p', '.card-translate-up span:not(.v-btn__content)'],
           translateY: [48, 0],
           opacity: [0, 1],
-          duration: 725,
-          delay: anime.stagger(55),
+          duration: 625,
+          delay: anime.stagger(25),
           easing: "easeOutQuint"
         })
       } catch (e) {
@@ -140,6 +140,7 @@ export default {
             for (const selector of selectors) {
               for (const element of document.querySelectorAll(selector)) {
                 element.style.setProperty("opacity", 1);
+                element.style.setProperty("transform", "none");
               }
             }
           } catch (e) {

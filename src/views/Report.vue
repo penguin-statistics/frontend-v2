@@ -109,7 +109,7 @@
           align="start"
         >
           <h1 class="title no-wrap--text">
-            <span class="overline">{{ strings.translate(selectedZone, "zoneName") }}</span>
+            <span class="subtitle-2">{{ strings.translate(selectedZone, "zoneName") }}</span>
             {{ strings.translate(selectedStage, "code") }}
             <!--            <v-btn-->
             <!--              icon-->
@@ -421,7 +421,7 @@
     </StageSelector>
 
     <v-dialog
-      v-model="dialogs.first.enabled"
+      v-model="dialog.enabled"
       width="500"
     >
       <v-card>
@@ -544,44 +544,7 @@
           <v-btn
             color="primary"
             text
-            @click="dialogs.first.enabled = false"
-          >
-            {{ $t('meta.dialog.cancel') }}
-          </v-btn>
-          <v-spacer />
-          <v-btn
-            color="error"
-            text
-            @click="dialogs.repeat.enabled = true"
-          >
-            {{ $t('meta.dialog.confirm') }}
-          </v-btn>
-        </v-card-actions>
-      </v-card>
-    </v-dialog>
-    <v-dialog
-      v-model="dialogs.repeat.enabled"
-      width="300"
-    >
-      <v-card>
-        <v-card-title class="headline warning pa-5">
-          <v-icon>mdi-alert</v-icon>
-          <span class="ml-2">{{ $t('report.alert.title.repeat') }}</span>
-        </v-card-title>
-
-        <v-card-text class="mt-4">
-          <span class="subtitle-1">
-            {{ $t('report.alert.continue.repeat') }}
-          </span>
-        </v-card-text>
-
-        <v-divider />
-
-        <v-card-actions>
-          <v-btn
-            color="primary"
-            text
-            @click="closeAllDialogs"
+            @click="dialog.enabled = false"
           >
             {{ $t('meta.dialog.cancel') }}
           </v-btn>
@@ -659,13 +622,8 @@ export default {
       dialog: false
     },
 
-    dialogs: {
-      first: {
-        enabled: false
-      },
-      repeat: {
-        enabled: false
-      }
+    dialog: {
+      enabled: false
     },
 
     selected: {
@@ -919,13 +877,14 @@ export default {
     invalidStage () {
       if (this.selected.zone && this.selected.stage) {
         const zone = get.zones.byZoneId(this.selected.zone, false);
-        if (!zone || !zone.zoneId || !existUtils.existence(zone)) return "INVALID"
+        if (!zone || !zone.zoneId || !existUtils.existence(zone)) return "NOT_FOUND"
         if (zone.isOutdated) return "EXPIRED"
 
         const stage = get.stages.byStageId(this.selected.stage);
-        if (!stage || !stage.stageId || !existUtils.existence(stage)) return "INVALID"
+        if (!stage || !stage.stageId || !existUtils.existence(stage)) return "NOT_FOUND"
+        if (!stage["dropInfos"] || !stage["dropInfos"].length) return "INVALID"
       } else {
-        return "INVALID"
+        return "NOT_FOUND"
       }
       return false
     },
@@ -969,7 +928,7 @@ export default {
     },
     submit() {
       if (!this.isGacha && (!this.valid || this.results.length === 0)) {
-        this.dialogs.first.enabled = true;
+        this.dialog.enabled = true;
         this.$ga.event('report', 'show_warning', this.selected.stage, 1)
       } else {
         this.doSubmit()
@@ -1015,7 +974,7 @@ export default {
       })
     },
     confirmSubmit() {
-      this.closeAllDialogs();
+      this.dialog.enabled = false;
       this.$ga.event('report', 'ignore_warning', this.selected.stage, 1);
       this.doSubmit()
     },
@@ -1026,10 +985,6 @@ export default {
       this.undoing = false;
       this.undid = true;
       this.$ga.event('report', 'undo', Cookies.get(config.authorization.userId.cookieKey), 1)
-    },
-    closeAllDialogs() {
-      this.dialogs.first.enabled = false;
-      this.dialogs.repeat.enabled = false
     },
     generateVerificationRule(type, query) {
       if (this.invalidStage || !this.dropInfos) return {

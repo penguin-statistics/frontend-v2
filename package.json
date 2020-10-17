@@ -5,7 +5,7 @@
   "author": "Penguin Statistics Contributors <contributors@penguin-stats.io> (https://github.com/orgs/penguin-statistics/people)",
   "scripts": {
     "serve": "vue-cli-service serve",
-    "build": "npx --max_old_space_size=4096 vue-cli-service build --modern",
+    "build": "npx --max_old_space_size=4096 vue-cli-service build",
     "test:e2e": "vue-cli-service test:e2e",
     "lint": "vue-cli-service lint",
     "build:single": "npx --max_old_space_size=4096 vue-cli-service build",
@@ -17,7 +17,10 @@
   },
   "dependencies": {
     "@babel/plugin-transform-modules-commonjs": "^7.8.3",
-    "@sentry/apm": "^5.15.4",
+    "@capacitor/android": "2.4.2",
+    "@capacitor/cli": "^2.4.2",
+    "@capacitor/core": "^2.4.2",
+    "@capacitor/ios": "2.4.2",
     "@sentry/browser": "^5.6.2",
     "@sentry/integrations": "^5.6.1",
     "animejs": "^3.1.0",
@@ -37,6 +40,7 @@
     "uuid": "^8.2.0",
     "vue": "^2.6.10",
     "vue-analytics": "^5.22.1",
+    "vue-async-computed": "^3.9.0",
     "vue-i18n": "^8.0.0",
     "vue-router": "^3.0.3",
     "vuetify": "2.2.34",
