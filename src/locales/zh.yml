@@ -256,6 +256,7 @@ stage:
     plannerExclude: 排除规划关卡
     excludeAll: 排除全部
     includeAll: 选中全部
+    title: 关卡选择
 planner:
   notices:
     autoExistence: 刷图规划器现将会自动隐藏未于已选择服务器出现或开放的关卡

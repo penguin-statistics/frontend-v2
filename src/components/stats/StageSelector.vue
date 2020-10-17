@@ -34,7 +34,7 @@
       </v-fade-transition>
 
       <BackButton
-        name="关卡选择"
+        :name="$t('stage.selector.title')"
         :active="step > 1"
 
         @back="step = 1"

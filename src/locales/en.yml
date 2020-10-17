@@ -275,6 +275,7 @@ stage:
     plannerExclude: Exclude Planning Stages
     excludeAll: Exclude All
     includeAll: Include All
+    title: Select Stage
 planner:
   notices:
     autoExistence: ArkPlanner will hide non-existing stages automatically now.
