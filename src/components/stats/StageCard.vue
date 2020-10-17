@@ -6,13 +6,15 @@
   >
     <v-card-title
       class="py-1 px-3"
-      :class="{'pl-1 pr-3': left, 'pl-3 pr-1': right, 'subtitle-1': !dense, 'subtitle-2': dense}"
+      :class="{'pl-2 pr-3': left, 'pl-3 pr-2': right, 'subtitle-1': !dense, 'subtitle-2': dense}"
     >
       <v-icon
         v-if="left"
-        :small="dense"
+        small
+        class="mr-1"
+        color="grey"
       >
-        mdi-chevron-left
+        mdi-page-previous
       </v-icon>
       <v-icon
         v-if="stateful"
@@ -24,9 +26,11 @@
       <StageCode :code="translatedCode" />
       <v-icon
         v-if="right"
-        :small="dense"
+        small
+        class="ml-1"
+        color="grey"
       >
-        mdi-chevron-right
+        mdi-page-next
       </v-icon>
     </v-card-title>
   </v-card>

@@ -6,6 +6,7 @@
     <v-row
       align="start"
       no-gutters
+      style="max-width: inherit"
     >
       <v-col>
         <transition

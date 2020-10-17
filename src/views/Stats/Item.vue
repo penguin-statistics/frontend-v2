@@ -105,7 +105,7 @@
       </v-card>
     </v-slide-y-transition>
 
-    <v-stepper-items class="stepper-overflow-initial">
+    <v-stepper-items>
       <v-stepper-content
         :step="1"
         class="bkop-light mt-2 elevation-4"

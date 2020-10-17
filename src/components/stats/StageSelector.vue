@@ -2,20 +2,35 @@
   <v-stepper
     v-model="step"
     alt-labels
-    class="transparent elevation-0 full-width pa-4"
+    class="transparent elevation-0 full-width pa-md-4 pa-lg-4 pa-xl-4"
   >
     <v-stepper-header
-      class="bkop-light elevation-4 py-4 px-5 d-flex flex-row align-start justify-center position-relative stepper-header"
+      class="bkop-light elevation-4 py-4 px-5 d-flex flex-row position-relative align-center"
       style="border-radius: 4px"
     >
       <v-fade-transition>
         <v-img
-          v-if="selectedStage.image"
-          :src="selectedStage.image"
+          v-if="currentStageImage"
+          key="exact"
+          :src="currentStageImage"
           class="stepper-header--background"
           gradient="160deg, rgba(0, 0, 0, .95), rgba(0, 0, 0, .4)"
+
           style="filter: brightness(0.8)"
         />
+
+        <v-img
+          v-else
+          key="default"
+          :src="stageImages._default"
+          class="stepper-header--background stepper-header--background__animated"
+          position=""
+        >
+          <v-overlay
+            absolute
+            style="background: linear-gradient(160deg, rgba(0, 0, 0, .9), rgba(0, 0, 0, 0) 70%)"
+          />
+        </v-img>
       </v-fade-transition>
 
       <BackButton
@@ -73,7 +88,7 @@
       <!--        </div>-->
       <!--      </v-expand-transition>-->
     </v-stepper-header>
-    <v-stepper-items class="stepper-overflow-initial">
+    <v-stepper-items>
       <v-stepper-content
         :step="1"
         :class="{'pa-0': small}"
@@ -273,6 +288,9 @@
 
           // 骑兵与猎人 复刻：复用原活动（1stact_zone1）
           "act13d2_zone1": this.cdnDeliver('/backgrounds/zones/A001_zone1.jpg'),
+
+          // 选择页面背景
+          "_default": require("@/assets/zonePageBackgrounds/default.jpg")
         }
       }
     },
@@ -400,17 +418,16 @@
       },
       selectedStage() {
         if (!this.selected.stage) return {};
-        const stage = get.stages.byStageId(this.selected.stage)
-        if (!this.lowData && validator.have(this.stageImages, stage.zoneId)) {
-          return {
-            ...stage,
-            image: this.stageImages[stage.zoneId]
-          }
+        return get.stages.byStageId(this.selected.stage)
+      },
+      currentStageImage() {
+        const stage = this.selectedStage
+        if (this.lowData) return null
+
+        if (validator.have(this.stageImages, stage.zoneId)) {
+          return this.stageImages[stage.zoneId]
         } else {
-          return {
-            ...stage,
-            image: null
-          }
+          return null
         }
       },
       relativeStages () {
@@ -539,4 +556,21 @@
     border-radius: 4px !important;
     overflow: hidden;
   }
+
+  ::v-deep .stepper-header--background__animated > .v-image__image {
+    background-repeat: repeat;
+    background-size: 600px;
+
+    animation: stepper-header-background-animation 45s infinite linear;
+  }
+
+  @keyframes stepper-header-background-animation {
+    from {
+      background-position: 0% 0%;
+    }
+    to {
+      background-position: 600px 0%;
+    }
+  }
+
 </style>

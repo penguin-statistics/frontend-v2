@@ -109,7 +109,7 @@
           align="start"
         >
           <h1 class="title no-wrap--text">
-            <span class="overline">{{ strings.translate(selectedZone, "zoneName") }}</span>
+            <span class="subtitle-2">{{ strings.translate(selectedZone, "zoneName") }}</span>
             {{ strings.translate(selectedStage, "code") }}
             <!--            <v-btn-->
             <!--              icon-->

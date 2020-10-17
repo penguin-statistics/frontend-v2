@@ -42,7 +42,7 @@
           class="px-4 px-sm-4 px-md-6 px-lg-6 px-xl-8 pt-0 pb-4"
         >
           <h2
-            class="overline d-block"
+            class="subtitle-2 d-block"
             style="width: 100%"
           >
             {{ strings.translate(zone, "zoneName") }}
