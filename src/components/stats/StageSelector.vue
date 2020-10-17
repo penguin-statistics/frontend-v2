@@ -28,7 +28,7 @@
         >
           <v-overlay
             absolute
-            style="background: linear-gradient(to right, rgba(0, 0, 0, .95), rgba(0, 0, 0, 0))"
+            style="background: linear-gradient(150deg, rgba(0, 0, 0, .95), rgba(0, 0, 0, 0))"
           />
         </v-img>
       </v-fade-transition>
