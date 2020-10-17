@@ -28,7 +28,7 @@
         >
           <v-overlay
             absolute
-            style="background: linear-gradient(160deg, rgba(0, 0, 0, .9), rgba(0, 0, 0, 0) 70%)"
+            style="background: linear-gradient(to right, rgba(0, 0, 0, .95), rgba(0, 0, 0, 0))"
           />
         </v-img>
       </v-fade-transition>
@@ -290,7 +290,7 @@
           "act13d2_zone1": this.cdnDeliver('/backgrounds/zones/A001_zone1.jpg'),
 
           // 选择页面背景
-          "_default": require("@/assets/zonePageBackgrounds/default.jpg")
+          "_default": this.cdnDeliver('/backgrounds/zones/default.jpg'),
         }
       }
     },
@@ -561,7 +561,7 @@
     background-repeat: repeat;
     background-size: 600px;
 
-    animation: stepper-header-background-animation 45s infinite linear;
+    animation: stepper-header-background-animation 55s infinite linear;
   }
 
   @keyframes stepper-header-background-animation {
