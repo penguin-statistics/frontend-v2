@@ -12,7 +12,7 @@
   import CDN from "@/mixins/CDN";
   import {mapGetters} from "vuex";
   import randomUtils from "@/utils/randomUtils";
-  import service from "@/utils/service";
+  import {externalService} from "@/utils/service";
 
   export default {
     name: "RandomBackground",
@@ -104,8 +104,7 @@
       async updateBackgroundByUrl(url) {
         const background = this.$refs.background;
         this.lastLoading = true;
-        service.get(url, {
-          withCredentials: false,
+        externalService.get(url, {
           responseType: "blob"
         })
           .then(({data}) => {

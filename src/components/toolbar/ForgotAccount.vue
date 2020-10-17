@@ -133,7 +133,7 @@
   import Subheader from "@/components/global/Subheader";
   import {mapGetters} from "vuex";
   import timeFormatter from "@/utils/timeFormatter";
-  import service from "@/utils/service";
+  import {service} from "@/utils/service";
   import Console from "@/utils/Console";
   import TooltipBtn from "@/components/global/TooltipBtn";
   export default {

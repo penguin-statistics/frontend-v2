@@ -214,7 +214,7 @@
 </template>
 
 <script>
-  import service from '@/utils/service'
+  import {service} from '@/utils/service'
   import Cookies from 'js-cookie'
   import Console from "@/utils/Console";
   import Subheader from "@/components/global/Subheader";

@@ -14,7 +14,10 @@
         "wechatPay": "WeChat Pay"
       },
       "redirectToApp": "Donate with \"{app}\" App",
-      "regulation": "Due to regulation policies by law, this card has been temporary disabled on CN mirror."
+      "regulation": {
+        "cnMirror": "Due to regulation policies by law, this card has been temporary disabled on CN mirror.",
+        "app": "This card is unavailable in the app."
+      }
     }
   },
   "ja": {
@@ -62,7 +65,10 @@
         "wechatPay": "微信支付"
       },
       "redirectToApp": "打开 “{app}” APP 捐助",
-      "regulation": "由于监管要求，此卡片于国内镜像暂时停用"
+      "regulation": {
+        "cnMirror": "由于监管要求，此卡片于国内镜像暂时停用",
+        "app": "此卡片于 App 内不可用"
+      }
     }
   }
 }
@@ -73,7 +79,28 @@
     elevation="5" 
     class="bkop-light pa-6"
   >
-    <template v-if="!isCNMirror">
+    <template v-if="isCNMirror || isIOS">
+      <v-row
+        justify="center"
+        align="center"
+        class="fill-height"
+      >
+        <v-col cols="12">
+          <v-alert
+            icon="mdi-card-bulleted-off"
+            border="left"
+            color="text"
+            outlined
+            colored-border
+            elevation="2"
+            class="mb-0"
+          >
+            {{ $t('donate.regulation.' + (isCNMirror ? 'cnMirror' : 'app')) }}
+          </v-alert>
+        </v-col>
+      </v-row>
+    </template>
+    <template v-else>
       <h1 class="headline">
         {{ $t('menu.about.donate') }}
       </h1>
@@ -250,27 +277,6 @@
             mdi-paypal
           </v-icon> {{ $t('donate.methods.paypal') }}
         </v-btn>
-      </v-row>
-    </template>
-    <template v-else>
-      <v-row
-        justify="center"
-        align="center"
-        class="fill-height"
-      >
-        <v-col cols="12">
-          <v-alert
-            icon="mdi-card-bulleted-off"
-            border="left"
-            color="text"
-            outlined
-            colored-border
-            elevation="2"
-            class="mb-0"
-          >
-            {{ $t('donate.regulation') }}
-          </v-alert>
-        </v-col>
       </v-row>
     </template>
   </v-card>

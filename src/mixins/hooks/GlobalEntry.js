@@ -5,11 +5,13 @@ import Analytics from "@/mixins/hooks/Analytics";
 import Localization from "@/mixins/hooks/Localization";
 import RandomizedLogo from "@/mixins/hooks/RandomizedLogo";
 import StoreUpgrader from "@/mixins/hooks/StoreUpgrader";
+import Native from "@/mixins/hooks/Native";
 
 export default {
   mixins: [
     // top-most priority
     StoreUpgrader,
+    Native,
 
     // first priority
     Theme,

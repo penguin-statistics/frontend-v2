@@ -1,4 +1,3 @@
-import get from "@/utils/getters"
 import store from "@/store";
 
 export default {
@@ -40,9 +39,7 @@ export default {
       });
 
       if (excludes.length > 0) {
-        body["exclude"] = excludes.map(el => {
-          return get.stages.byStageId(el).code || el
-        })
+        body["exclude"] = excludes
       }
 
       return body

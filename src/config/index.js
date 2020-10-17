@@ -1,10 +1,12 @@
-const version = "v3.3.4";
+const version = "v3.3.5";
+const project = "frontend-v2";
 
 module.exports = {
   version,
+  project,
   api: {
     submitParams: {
-      source: "frontend-v2",
+      source: project,
       version
     }
   },

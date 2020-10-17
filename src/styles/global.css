@@ -51,11 +51,11 @@
 }
 
 .theme--light .bkop-light {
-    background: rgba(255, 255, 255, .75) !important;
+    background-color: rgba(255, 255, 255, .75) !important;
 }
 
 .theme--dark .bkop-light {
-    background: rgba(30, 30, 30, .85) !important;
+    background-color: rgba(30, 30, 30, .85) !important;
 }
 
 .theme--light .bkop-medium {
@@ -267,14 +267,6 @@
 
 .safe-area--navigation-drawer {
     width: 300px !important;
-}
-
-.stepper-overflow-initial {
-    overflow: initial;
-}
-
-.stepper-overflow-initial .v-stepper__wrapper {
-    overflow: initial;
 }
 
 @supports(padding: calc(max(1px, 2px))) {
@@ -529,6 +521,10 @@
 
 .position-relative {
     position: relative !important;
+}
+
+.position-absolute {
+    position: absolute !important;
 }
 
 .v-dialog .theme--light.v-list, .v-tooltip__content .theme--light.v-data-table {

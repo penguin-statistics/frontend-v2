@@ -35,19 +35,21 @@ export default {
   },
   methods: {
     crispOpacityChanger (newRoute = this.$route) {
-      // Console.info("CrispCustomizer", "customize | changing opacity");
-      try {
-        document.querySelector("div.crisp-client").style.setProperty("transition", "all 275ms cubic-bezier(0.165, 0.84, 0.44, 1)", "important");
+      if (this.crispLoaded) {
+        // Console.info("CrispCustomizer", "customize | changing opacity");
+        try {
+          document.querySelector("div.crisp-client").style.setProperty("transition", "all 275ms cubic-bezier(0.165, 0.84, 0.44, 1)", "important");
 
-        if (newRoute.name === "home") {
-          document.querySelector("div.crisp-client").style.setProperty("display", "block", "important");
-          // document.querySelector("div.crisp-client").style.setProperty("transform", "translateY(0px)", "important")
-        } else {
-          document.querySelector("div.crisp-client").style.setProperty("display", "none", "important");
-          // document.querySelector("div.crisp-client").style.setProperty("transform", "translateY(32px)", "important")
+          if (newRoute.name === "home") {
+            document.querySelector("div.crisp-client").style.setProperty("display", "block", "important");
+            // document.querySelector("div.crisp-client").style.setProperty("transform", "translateY(0px)", "important")
+          } else {
+            document.querySelector("div.crisp-client").style.setProperty("display", "none", "important");
+            // document.querySelector("div.crisp-client").style.setProperty("transform", "translateY(32px)", "important")
+          }
+        } catch (e) {
+          Console.info("CrispCustomizer", "failed to change crisp opacity", e)
         }
-      } catch (e) {
-        Console.warn("CrispCustomizer", "failed to change crisp opacity", e, "newRoute.name", newRoute.name)
       }
     },
   },

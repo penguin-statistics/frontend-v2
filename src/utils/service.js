@@ -2,6 +2,8 @@ import axios from 'axios'
 import Console from "@/utils/Console";
 import store from "@/store";
 import mirror from "@/utils/mirror";
+import semver from "semver";
+import config from "@/config"
 
 let baseURL;
 if (mirror.global.isCurrent() || mirror.cn.isCurrent()) {
@@ -25,10 +27,34 @@ const service = axios.create({
   timeout: 90 * 1000 // 1.5 minute
 });
 
+function needsUpdate(response) {
+  if ("x-penguin-upgrade" in response.headers) {
+    // X-Penguin-Upgrade: Client version must be outdated due to
+    // API endpoint changes or other changes that must be updated.
+    return true
+  }
+  if ("x-penguin-compatible" in response.headers) {
+    const version = response.headers["x-penguin-compatible"]
+      // replace prefix
+      .replace(new RegExp("^" + config.project + "@"), "")
+
+    const cleaned = semver.clean(version)
+
+    if (cleaned === null) {
+      // if still invalid, assume it is VALID then
+      return false
+    } else {
+      // cleaned successfully
+      // if current one is smaller than expected, then it is INVALID
+      return semver.lt(config.version, cleaned)
+    }
+  }
+  return false
+}
+
 // Add a response interceptor
 service.interceptors.response.use(function (response) {
-  if ("x-penguin-upgrade" in response.headers) {
-    // X-Penguin-Upgrade: Client version outdated
+  if (needsUpdate(response)) {
     store.commit("ui/setOutdated", true)
   }
 
@@ -36,8 +62,7 @@ service.interceptors.response.use(function (response) {
 }, function (error) {
   if (error.response) {
 
-    if ("x-penguin-upgrade" in error.response.headers) {
-      // X-Penguin-Upgrade: Client version outdated
+    if (needsUpdate(error.response)) {
       store.commit("ui/setOutdated", true)
     }
 
@@ -54,4 +79,8 @@ service.interceptors.response.use(function (response) {
   return Promise.reject(error);
 });
 
-export default service
+const externalService = axios.create({
+  withCredentials: false
+})
+
+export {service, externalService}

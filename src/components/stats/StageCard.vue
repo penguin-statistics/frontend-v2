@@ -2,17 +2,19 @@
   <v-card
     hover
     :ripple="!stateful"
-    :class="{'d-inline-flex ma-1 stage-card cursor-pointer': true, 'stage-card--stateless': !stateful, 'stage-card--light': !dark, 'stage-card--dark': dark, 'stage-card--chosen': stateful, 'stage-card--chosen-true': chosen, 'stage-card--chosen-false': !chosen }"
+    :class="{'d-inline-flex ma-1 stage-card cursor-pointer': true, 'stage-card--stateless': !stateful, 'stage-card--light': !dark, 'stage-card--dark': dark, 'stage-card--chosen': stateful, 'stage-card--chosen-true': chosen, 'stage-card--chosen-false': !chosen, 'stage-card--transparent': transparent }"
   >
     <v-card-title
       class="py-1 px-3"
-      :class="{'pl-1 pr-3': left, 'pl-3 pr-1': right, 'subtitle-1': !dense, 'subtitle-2': dense}"
+      :class="{'pl-2 pr-3': left, 'pl-3 pr-2': right, 'subtitle-1': !dense, 'subtitle-2': dense}"
     >
       <v-icon
         v-if="left"
-        :small="dense"
+        small
+        class="mr-1"
+        color="grey"
       >
-        mdi-chevron-left
+        mdi-page-previous
       </v-icon>
       <v-icon
         v-if="stateful"
@@ -24,9 +26,11 @@
       <StageCode :code="translatedCode" />
       <v-icon
         v-if="right"
-        :small="dense"
+        small
+        class="ml-1"
+        color="grey"
       >
-        mdi-chevron-right
+        mdi-page-next
       </v-icon>
     </v-card-title>
   </v-card>
@@ -57,6 +61,10 @@
         default () {
           return false
         }
+      },
+      transparent: {
+        type: Boolean,
+        default: () => false
       },
       left: {
         type: Boolean,
@@ -102,11 +110,11 @@
 
   .stage-card--light {
     background: rgba(224, 224, 224, 0.95);
-    border: 1px solid rgba(32, 32, 32, 0.95);
+    border: 1px solid rgba(32, 32, 32, 0.95) !important;
   }
   .stage-card--dark {
     background: rgba(32, 32, 32, 0.95);
-    border: 1px solid rgba(224, 224, 224, 0.95);
+    border: 1px solid rgba(224, 224, 224, 0.95) !important;
   }
 
   .stage-card--chosen {
@@ -144,5 +152,9 @@
   }
   .theme--dark .stage-card--chosen.stage-card--chosen-false {
     background: rgb(128, 59, 51)
+  }
+
+  .stage-card--transparent {
+    background: transparent !important;
   }
 </style>

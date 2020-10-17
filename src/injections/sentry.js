@@ -1,6 +1,5 @@
 import * as Sentry from "@sentry/browser";
 import * as Integrations from "@sentry/integrations";
-import {Integrations as ApmIntegrations} from "@sentry/apm";
 import config from "@/config";
 import environment from "@/utils/environment";
 import Vue from "vue";
@@ -18,11 +17,10 @@ if (environment.production) {
         Vue,
         attachProps: true,
         tracing: true
-      }),
-      new ApmIntegrations.Tracing(),
+      })
     ],
     tracesSampleRate: 0.05,
-    release: 'frontend-v2@' + (config.version || 'unknown'),
+    release: (config.project || 'unknown') + '@' + (config.version || 'unknown'),
     ignoreErrors: [
       //// START: those errors are found at https://docs.sentry.io/platforms/javascript/#decluttering-sentry
       'top.GLOBALS',
@@ -51,7 +49,10 @@ if (environment.production) {
       "vivoNewsDetailPage",
       "removeAD",
 
-      "getBoundingClientRect"
+      "getBoundingClientRect",
+      // ignore native client does not have web implementation error
+      // since there's currently no feature sensitive native client plugin invocations.
+      "does not have web implementation"
     ],
     ignoreUrls: [
       // Facebook flakiness

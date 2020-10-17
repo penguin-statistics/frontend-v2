@@ -222,6 +222,7 @@ stage:
     plannerExclude: ステージ除外設定
     excludeAll: 全て除外
     includeAll: 全て含む
+    title: ステージ選択
 planner:
   notices:
     autoExistence: ArkPlannerは、選択したサーバーで開いていないステージを自動的に非表示にします

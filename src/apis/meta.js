@@ -1,4 +1,4 @@
-import service from '@/utils/service'
+import {service} from '@/utils/service'
 
 export default {
   getNotice (data) {
