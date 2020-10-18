@@ -59,47 +59,37 @@
       <v-spacer />
 
       <v-slide-x-transition>
-        <TitledRow
+        <div
           v-if="step === 2 && isSelectedItem && relatedItems.length"
-          dense
-          header
-          class="z-index-5"
+          class="z-index-5 d-flex flex-row"
         >
-          <template v-slot:header>
-            <v-icon small>
-              mdi-hexagon
-            </v-icon>
-            {{ $t("items.related") }}
-          </template>
-          <template v-slot:content>
-            <span
-              v-for="item in relatedItems"
-              :key="item.itemId"
-              class="mr-1 cursor-pointer"
-              @click="storeItemSelection(item.itemId)"
-            >
-              <v-badge
-                bordered
-                bottom
-                overlap
+          <span
+            v-for="item in relatedItems"
+            :key="item.itemId"
+            class="mr-1 cursor-pointer"
+            @click="storeItemSelection(item.itemId)"
+          >
+            <v-badge
+              bordered
+              bottom
+              overlap
 
-                :offset-x="16"
-                :offset-y="20"
-                color="green darken-1"
-                icon="mdi-check"
-                :value="item.itemId === selected.item.itemId"
-                class="d-flex"
-              >
-                <span :style="{'filter': item.itemId === selected.item.itemId ? 'drop-shadow(0 0 3px rgba(255, 255, 255, .6))' : 'none'}">
-                  <Item
-                    :item="item"
-                    :ratio="0.6"
-                  />
-                </span>
-              </v-badge>
-            </span>
-          </template>
-        </TitledRow>
+              :offset-x="16"
+              :offset-y="20"
+              color="green darken-1"
+              icon="mdi-check"
+              :value="item.itemId === selected.item.itemId"
+              class="d-flex"
+            >
+              <span :style="{'filter': item.itemId === selected.item.itemId ? (dark ? 'drop-shadow(0 0 3px rgba(0, 0, 0, .6))' : 'drop-shadow(0 0 3px rgba(255, 255, 255, .6))') : 'none'}">
+                <Item
+                  :item="item"
+                  :ratio="0.6"
+                />
+              </span>
+            </v-badge>
+          </span>
+        </div>
       </v-slide-x-transition>
     </v-stepper-header>
 
@@ -166,14 +156,13 @@ import Console from "@/utils/Console";
 import strings from "@/utils/strings";
 import DataTable from "@/components/stats/DataTable";
 import ItemSelector from "@/components/stats/ItemSelector";
-import TitledRow from "@/components/global/TitledRow";
 import BackButton from "@/components/stats/BackButton";
 import CDN from "@/mixins/CDN";
 import Theme from "@/mixins/Theme";
 
 export default {
   name: "StatsByItem",
-  components: {BackButton, TitledRow, ItemSelector, DataTable, Item, DataSourceToggle },
+  components: {BackButton, ItemSelector, DataTable, Item, DataSourceToggle },
   mixins: [CDN, Theme],
   data () {
     return {
