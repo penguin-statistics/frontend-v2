@@ -558,3 +558,34 @@
 .p-absolute {
     position: absolute !important;
 }
+
+.stepper-header--background {
+    position: absolute !important;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+
+    border-radius: 4px !important;
+    overflow: hidden;
+}
+
+.stepper-header--background__animated > .v-image__image {
+    background-repeat: repeat;
+    background-size: 600px;
+
+    animation: stepper-header-background-animation 55s infinite linear;
+}
+
+@keyframes stepper-header-background-animation {
+    from {
+        background-position: 0% 0%;
+    }
+    to {
+        background-position: 600px 0%;
+    }
+}
+
+.z-index-5 {
+    z-index: 5;
+}

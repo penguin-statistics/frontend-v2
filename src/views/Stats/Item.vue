@@ -30,46 +30,44 @@
 <template>
   <v-stepper
     v-model="step"
-    :alt-labels="!$vuetify.breakpoint.xsOnly"
-    class="pa-2 transparent elevation-0 full-width"
+    alt-labels
+    class="transparent elevation-0 full-width pa-md-4 pa-lg-4 pa-xl-4"
   >
     <v-stepper-header
-      class="bkop-light elevation-4"
+      class="bkop-light elevation-4 py-4 pl-5 pr-8 d-flex flex-row position-relative align-center justify-center mx-2"
       style="border-radius: 4px"
     >
-      <v-stepper-step
-        :complete="step > 1"
-        :editable="step > 1"
-        :step="1"
+      <v-img
+        :src="headerImage"
+        class="stepper-header--background stepper-header--background__animated"
+        position=""
       >
-        {{ $t('items.choose.name') }}
-        <small
-          v-if="step > 1"
-          class="mt-2"
-        >{{ selectedItemName }}</small>
-      </v-stepper-step>
+        <v-overlay
+          absolute
+          opacity="0"
+          :style="{'background': dark ? 'linear-gradient(150deg, rgba(0, 0, 0, .95), rgba(0, 0, 0, 0))' : 'linear-gradient(150deg, rgba(255, 255, 255, .95), rgba(255, 255, 255, 0))'}"
+        />
+      </v-img>
 
-      <v-divider />
+      <BackButton
+        :name="$t('items.choose.name')"
+        :active="step > 1"
 
-      <v-stepper-step
-        :complete="step === 2"
-        :step="2"
-      >
-        {{ $t('result.name') }}
-      </v-stepper-step>
-    </v-stepper-header>
+        @back="step = 1"
+      />
 
-    <v-slide-y-transition leave-absolute>
-      <v-card
-        v-if="isSelectedItem && relatedItems.length"
-        class="bkop-light mt-2 elevation-4 py-2 px-6"
-      >
+      <v-spacer />
+
+      <v-slide-x-transition>
         <TitledRow
+          v-if="step === 2 && isSelectedItem && relatedItems.length"
           dense
+          header
+          class="z-index-5"
         >
           <template v-slot:header>
-            <v-icon>
-              mdi-related
+            <v-icon small>
+              mdi-hexagon
             </v-icon>
             {{ $t("items.related") }}
           </template>
@@ -102,13 +100,13 @@
             </span>
           </template>
         </TitledRow>
-      </v-card>
-    </v-slide-y-transition>
+      </v-slide-x-transition>
+    </v-stepper-header>
 
     <v-stepper-items>
       <v-stepper-content
         :step="1"
-        class="bkop-light mt-2 elevation-4"
+        class="bkop-light mt-2"
         style="border-radius: 4px"
       >
         <v-row
@@ -123,7 +121,7 @@
 
       <v-stepper-content
         :step="2"
-        class="pa-0 mt-2 elevation-4"
+        class="pa-0 mt-2"
       >
         <v-card class="bkop-light pt-2">
           <v-card-title class="pb-0">
@@ -169,19 +167,26 @@ import strings from "@/utils/strings";
 import DataTable from "@/components/stats/DataTable";
 import ItemSelector from "@/components/stats/ItemSelector";
 import TitledRow from "@/components/global/TitledRow";
+import BackButton from "@/components/stats/BackButton";
+import CDN from "@/mixins/CDN";
+import Theme from "@/mixins/Theme";
 
 export default {
   name: "StatsByItem",
-  components: {TitledRow, ItemSelector, DataTable, Item, DataSourceToggle },
-  data: () => ({
-    expanded: {},
-    step: 1,
-    tablePagination: {
-      rowsPerPage: -1,
-      sortBy: "percentage",
-      descending: true
+  components: {BackButton, TitledRow, ItemSelector, DataTable, Item, DataSourceToggle },
+  mixins: [CDN, Theme],
+  data () {
+    return {
+      expanded: {},
+      step: 1,
+      tablePagination: {
+        rowsPerPage: -1,
+        sortBy: "percentage",
+        descending: true
+      },
+      headerImage: this.cdnDeliver('/backgrounds/zones/default.jpg'),
     }
-  }),
+  },
   computed: {
     isSelectedItem () {
       return !!this.$route.params.itemId

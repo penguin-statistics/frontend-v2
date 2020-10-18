@@ -318,7 +318,7 @@ planner:
     noSyntheses: 未找到需要合成的素材。
 items:
   choose:
-    name: 选择素材
+    name: 素材选择
   categories:
     ACTIVITY_ITEM: 活动道具
     CARD_EXP: 作战记录
@@ -343,7 +343,7 @@ query:
     trend: 历史趋势
   selector:
     item:
-      title: 选择素材
+      title: 素材选择
       subtitle: 用于将查询结果过滤为此关卡内的特定素材。
       unspecified: 显示关卡全部掉落素材
       selected: 仅查询 {length} 种素材
