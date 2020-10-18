@@ -148,6 +148,7 @@ contribute:
     analysis: Data Analysis
     others: "..."
 fetch:
+  loading: Fetching Latest Data...
   failed:
     title: Failed to fetch resources
     subtitle: Unable to establish synchronized connection with neural network. Missing

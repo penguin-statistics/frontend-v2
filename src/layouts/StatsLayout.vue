@@ -10,8 +10,9 @@
     >
       <v-col>
         <transition
-          name="slide-fade"
-          mode="out-in"
+          name="fade-transition"
+          leave-active-class="position-absolute"
+          :duration="325"
         >
           <router-view />
         </transition>

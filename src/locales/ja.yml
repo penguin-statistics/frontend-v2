@@ -132,6 +132,7 @@ contribute:
     analysis: データ統計解析
     others: "..."
 fetch:
+  loading: 読み込み中...
   failed:
     title: 接続エラー
     subtitle: ニューラルネットワークとの同期接続を確立できません。部分的なリソースがありません。

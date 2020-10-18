@@ -143,6 +143,7 @@ contribute:
     analysis: 数据统计分析
     others: "..."
 fetch:
+  loading: 正在刷新数据...
   failed:
     title: 神经网络连接异常
     subtitle: 未能与神经网络建立对等连接，部分资源丢失

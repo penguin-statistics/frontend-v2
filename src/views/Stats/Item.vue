@@ -123,7 +123,7 @@
         :step="2"
         class="pa-0 mt-2"
       >
-        <v-card class="bkop-light pt-2">
+        <v-card class="bkop-light pt-2 elevation-4 ma-2">
           <v-card-title class="pb-0">
             <v-row
               align="center"

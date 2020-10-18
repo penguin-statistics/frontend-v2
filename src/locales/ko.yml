@@ -80,6 +80,7 @@ contribute:
     analysis: 데이터 분석
     others: "..."
 fetch:
+  loading: 데이터 새로고침 중...
   failed:
     title: 신경 네트워크와 연결할 수 없습니다
     subtitle: 신경 네트워크와의 연결할 수 없습니다. 일부 혹은 모든 정보를 불러올 수 없습니다.
