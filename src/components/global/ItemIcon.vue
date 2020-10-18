@@ -127,6 +127,8 @@ export default {
   display: inline-block;
   overflow: hidden;
   transition: transform 150ms cubic-bezier(.25,.8,.5,1);
+
+  transform-origin: center center;
 }
 
 .item-icon--sprite:hover {

@@ -13,7 +13,6 @@ import options from './modules/options';
 import planner from './modules/planner';
 import settings from './modules/settings';
 import ui from './modules/ui';
-import Console from "@/utils/Console";
 // import compressor from "@/utils/compressor";
 
 Vue.use(Vuex);
@@ -27,20 +26,20 @@ if (previousState) {
   localStorage.setItem("penguin-stats-cacheTTL", {cacheUpdateAt: previousState["cacheUpdateAt"]});
 }
 
-const persistStorage = {
-  getItem: (key) => {
-    Console.debug("VuexPersist", "getting item", key)
-    localStorage.getItem(key)
-  },
-  setItem: (key, value) => {
-    Console.debug("VuexPersist", "setting item", key, `${value.length}`)
-    localStorage.setItem(key, value)
-  },
-  removeItem: (key) => {
-    Console.debug("VuexPersist", "removing item", key)
-    localStorage.removeItem(key)
-  }
-}
+// const persistStorage = {
+//   getItem: (key) => {
+//     Console.debug("VuexPersist", "getting item", key)
+//     localStorage.getItem(key)
+//   },
+//   setItem: (key, value) => {
+//     Console.debug("VuexPersist", "setting item", key, `${value.length}`)
+//     localStorage.setItem(key, value)
+//   },
+//   removeItem: (key) => {
+//     Console.debug("VuexPersist", "removing item", key)
+//     localStorage.removeItem(key)
+//   }
+// }
 
 export default new Vuex.Store({
   plugins: [
@@ -49,8 +48,7 @@ export default new Vuex.Store({
       paths: [
         "data",
         "dataSource"
-      ],
-      storage: persistStorage
+      ]
     }),
     createPersistedState({
       key: "penguin-stats-settings",
@@ -58,22 +56,19 @@ export default new Vuex.Store({
         "settings",
         "planner",
         "options"
-      ],
-      storage: persistStorage
+      ]
     }),
     createPersistedState({
       key: "penguin-stats-auth",
       paths: [
         "auth"
-      ],
-      storage: persistStorage
+      ]
     }),
     createPersistedState({
       key: "penguin-stats-mirror",
       paths: [
         "mirror"
-      ],
-      storage: persistStorage
+      ]
     }),
     // createPersistedState({
     //   key: "penguin-stats-cache",
