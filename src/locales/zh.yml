@@ -323,6 +323,7 @@ items:
   categories:
     ACTIVITY_ITEM: 活动道具
     CARD_EXP: 作战记录
+    CHIP: 芯片
     FURN: 家具
     MATERIAL: 材料
   related: 相关物品
