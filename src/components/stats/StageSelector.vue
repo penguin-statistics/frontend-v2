@@ -352,7 +352,7 @@
           for (const category of categories) {
             let filter;
             let zones = get.zones.byType(category.startsWith("ACTIVITY") ? "ACTIVITY" : category, false);
-            zones = zones.filter(el => existUtils.existence(el, false))
+            zones = zones.filter(el => existUtils.existence(el))
 
             if (category === "ACTIVITY_OPEN") {
               filter = zone => zone.timeValid === 0;

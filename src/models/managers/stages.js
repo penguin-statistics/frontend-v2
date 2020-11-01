@@ -5,6 +5,9 @@ const stages = new ObjectManager({
   name: 'stages',
   api: {
     serverSensitive: true,
+    extraParams: {
+      "show_closed_zones": true
+    },
 
     url: '/stages'
   },
