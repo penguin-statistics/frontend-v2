@@ -282,6 +282,7 @@
           "main_5": this.cdnDeliver('/backgrounds/zones/main_5.jpg'),
           "main_6": this.cdnDeliver('/backgrounds/zones/main_6.jpg'),
           "main_7": this.cdnDeliver('/backgrounds/zones/main_7.jpg'),
+          "main_8": this.cdnDeliver('/backgrounds/zones/main_8.jpg'),
           "gachabox": this.cdnDeliver('/backgrounds/zones/gachabox.jpg'),
           "act12d0_zone1": this.cdnDeliver('/backgrounds/zones/act12d0_zone1.jpg'),
           "act13d0_zone1": this.cdnDeliver('/backgrounds/zones/act13d0_zone1.jpg'),
