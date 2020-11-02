@@ -1,18 +1,19 @@
 <template>
   <v-row
-    class="flex-row"
+    class="d-flex flex-row"
     :class="{'my-3 mx-6': !dense}"
     align="center"
+    :justify="header ? 'end' : ''"
   >
-    <span :class="{'title': !dense, 'subtitle-2': dense}">
+    <div :class="{'title': !dense, 'subtitle-2': dense}">
       <slot name="header" />
-    </span>
+    </div>
     <v-divider
       vertical
-      class="mx-4"
+      :class="header ? 'mx-1' : 'mx-4'"
     />
     <div
-      class="d-flex flex-grow-1 flex-wrap"
+      class="d-flex flex-wrap"
       :class="{'flex-column flex-sm-row flex-md-row flex-lg-row flex-xl-row': reactive}"
     >
       <slot name="content" />
@@ -36,6 +37,10 @@
           return false
         }
       },
+      header: {
+        type: Boolean,
+        default: () => false,
+      }
     },
   }
 </script>

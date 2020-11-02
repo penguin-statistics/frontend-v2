@@ -5,7 +5,7 @@
     class="transparent elevation-0 full-width pa-md-4 pa-lg-4 pa-xl-4"
   >
     <v-stepper-header
-      class="bkop-light elevation-4 py-4 px-5 d-flex flex-row position-relative align-center"
+      class="bkop-light elevation-4 py-4 px-5 d-flex flex-row position-relative align-center mx-2"
       style="border-radius: 4px"
     >
       <v-fade-transition>
@@ -14,7 +14,7 @@
           key="exact"
           :src="currentStageImage"
           class="stepper-header--background"
-          gradient="160deg, rgba(0, 0, 0, .95), rgba(0, 0, 0, .4)"
+          :gradient="dark ? '160deg, rgba(0, 0, 0, .95), rgba(0, 0, 0, .4)' : '160deg, rgba(255, 255, 255, .95), rgba(255, 255, 255, .4)'"
 
           style="filter: brightness(0.8)"
         />
@@ -28,7 +28,8 @@
         >
           <v-overlay
             absolute
-            style="background: linear-gradient(150deg, rgba(0, 0, 0, .95), rgba(0, 0, 0, 0))"
+            opacity="0"
+            :style="{'background': dark ? 'linear-gradient(150deg, rgba(0, 0, 0, .95), rgba(0, 0, 0, 0))' : 'linear-gradient(150deg, rgba(255, 255, 255, .95), rgba(255, 255, 255, 0))'}"
           />
         </v-img>
       </v-fade-transition>
@@ -229,11 +230,12 @@
   import existUtils from "@/utils/existUtils";
   import validator from "@/utils/validator";
   import BackButton from "@/components/stats/BackButton";
+  import Theme from "@/mixins/Theme";
 
   export default {
     name: "StageSelector",
     components: {BackButton, StageCard},
-    mixins: [CDN],
+    mixins: [CDN, Theme],
     props: {
       name: {
         type: String,
@@ -280,6 +282,7 @@
           "main_5": this.cdnDeliver('/backgrounds/zones/main_5.jpg'),
           "main_6": this.cdnDeliver('/backgrounds/zones/main_6.jpg'),
           "main_7": this.cdnDeliver('/backgrounds/zones/main_7.jpg'),
+          "main_8": this.cdnDeliver('/backgrounds/zones/main_8.jpg'),
           "gachabox": this.cdnDeliver('/backgrounds/zones/gachabox.jpg'),
           "act12d0_zone1": this.cdnDeliver('/backgrounds/zones/act12d0_zone1.jpg'),
           "act13d0_zone1": this.cdnDeliver('/backgrounds/zones/act13d0_zone1.jpg'),
@@ -349,7 +352,7 @@
           for (const category of categories) {
             let filter;
             let zones = get.zones.byType(category.startsWith("ACTIVITY") ? "ACTIVITY" : category, false);
-            zones = zones.filter(el => existUtils.existence(el, false))
+            zones = zones.filter(el => existUtils.existence(el))
 
             if (category === "ACTIVITY_OPEN") {
               filter = zone => zone.timeValid === 0;
@@ -544,33 +547,6 @@
   .theme--dark .stage-card--content {
     background: rgba(0, 0, 0, .8) !important;
     background: linear-gradient(to bottom, rgba(0, 0, 0, 0.85), rgba(0, 0, 0, 0.70)) !important;
-  }
-
-  .stepper-header--background {
-    position: absolute;
-    top: 0;
-    left: 0;
-    height: 100%;
-    width: 100%;
-    
-    border-radius: 4px !important;
-    overflow: hidden;
-  }
-
-  ::v-deep .stepper-header--background__animated > .v-image__image {
-    background-repeat: repeat;
-    background-size: 600px;
-
-    animation: stepper-header-background-animation 55s infinite linear;
-  }
-
-  @keyframes stepper-header-background-animation {
-    from {
-      background-position: 0% 0%;
-    }
-    to {
-      background-position: 600px 0%;
-    }
   }
 
 </style>

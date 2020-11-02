@@ -148,6 +148,7 @@ contribute:
     analysis: Data Analysis
     others: "..."
 fetch:
+  loading: Fetching Latest Data...
   failed:
     title: Failed to fetch resources
     subtitle: Unable to establish synchronized connection with neural network. Missing
@@ -340,8 +341,9 @@ items:
   choose:
     name: Choose Item
   categories:
-    ACTIVITY_ITEM: Event item
+    ACTIVITY_ITEM: Event Items
     CARD_EXP: Battle Records
+    CHIP: Chips
     FURN: Furniture
     MATERIAL: Materials
   related: Related Items

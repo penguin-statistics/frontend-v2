@@ -54,12 +54,12 @@ export default {
         high: {
           iconSize: 183,
           dimensions: [1098, 2562],
-          url: "/sprite/sprite.202009251427.png"
+          url: "/sprite/sprite.202011011235.png"
         },
         low: {
           iconSize: 183 / 2,
           dimensions: [1098 / 2, 2562 / 2],
-          url: "/sprite/sprite.202009251427.small.png"
+          url: "/sprite/sprite.202011011235.small.png"
         }
       }
     };
@@ -127,6 +127,8 @@ export default {
   display: inline-block;
   overflow: hidden;
   transition: transform 150ms cubic-bezier(.25,.8,.5,1);
+
+  transform-origin: center center;
 }
 
 .item-icon--sprite:hover {

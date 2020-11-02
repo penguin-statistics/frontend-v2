@@ -68,7 +68,7 @@
               class="my-2 mx-auto"
             />
             <span class="caption white--text">
-              {{ $t('meta.loading') }} ({{ percentage }})
+              {{ $t('fetch.loading') }} ({{ percentage }})
             </span>
           </span>
         </v-fade-transition>
