@@ -274,6 +274,7 @@ items:
   categories:
     ACTIVITY_ITEM: イベントアイテム
     CARD_EXP: 作戦記録
+    CHIP: Soc
     FURN: 家具
     MATERIAL: 素材
   related: 関連素材
