@@ -25,26 +25,23 @@
     transition: all .5s cubic-bezier(0.19, 1, 0.22, 1);
 }
 
-.drawer-logo:hover {
-    height: 304px;
-}
-.drawer-logo--two-line:hover {
-    height: 336px;
+.drawer-logo--two-line {
+    height: 288px;
 }
 .drawer-logo > .description {
     margin-top: 16px;
     text-align: center;
     line-height: 36px;
     font-size: 24px;
-    opacity: 0;
-    transform: translateY(-12px) scaleX(0.95) scaleY(0.8);
+    /*opacity: 0;*/
+    /*transform: translateY(-12px) scaleX(0.95) scaleY(0.8);*/
     transition: all .5s cubic-bezier(0.19, 1, 0.22, 1);
 }
 
-.drawer-logo:hover > .description {
-    opacity: 1;
-    transform: translateY(0px) scaleX(1) scaleY(1);
-}
+/*.drawer-logo:hover > .description {*/
+/*    opacity: 1;*/
+/*    transform: translateY(0px) scaleX(1) scaleY(1);*/
+/*}*/
 
 .randomizedLogo > .v-image__image {
     transition: background .5s cubic-bezier(0.19, 1, 0.22, 1);
@@ -275,11 +272,11 @@
         padding: calc(32px + env(safe-area-inset-top)) 32px 32px 32px;
     }
 
-    .drawer-logo:hover {
-        height: calc(304px + env(safe-area-inset-top));
-    }
-    .drawer-logo--two-line:hover {
-        height: calc(336px + env(safe-area-inset-top));
+    /*.drawer-logo:hover {*/
+    /*    height: calc(304px + env(safe-area-inset-top));*/
+    /*}*/
+    .drawer-logo--two-line {
+        height: calc(288px + env(safe-area-inset-top));
     }
 
     /*.x--safe-area {*/
@@ -574,7 +571,7 @@
     background-repeat: repeat;
     background-size: 500px;
 
-    animation: stepper-header-background-animation 55s infinite linear;
+    /*animation: stepper-header-background-animation 55s infinite linear;*/
 }
 
 @keyframes stepper-header-background-animation {
@@ -588,4 +585,21 @@
 
 .z-index-5 {
     z-index: 5;
+}
+
+.border-white-1 {
+    border: 2px solid white !important;
+    border-color: white !important
+}
+.radius-1 {
+    border-radius: 4px !important;
+}
+.radius-2 {
+    border-radius: 8px !important;
+}
+@media (min-width: 960px) {
+    .md400px {
+        flex: 0 0 400px !important;
+        max-width: 400px !important;
+    }
 }

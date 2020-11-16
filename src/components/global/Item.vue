@@ -25,7 +25,10 @@
       </span>
     </template>
     <!--    <span class="force-lang-font">{{ name }}</span>-->
-    <PreviewItemCard :item-id="item.itemId" />
+    <PreviewItemCard
+      :disabled-overview="disableOverviewCard"
+      :item-id="item.itemId"
+    />
   </v-tooltip>
   <ItemIcon
     v-else-if="disableTooltipCalculated"
@@ -57,6 +60,12 @@
         }
       },
       disableTooltip: {
+        type: Boolean,
+        default() {
+          return false;
+        }
+      },
+      disableOverviewCard: {
         type: Boolean,
         default() {
           return false;

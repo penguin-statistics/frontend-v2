@@ -38,6 +38,8 @@
             :ratio="1"
             disable-link
             :tooltip-nudge="0"
+
+            v-bind="itemOptions"
           />
         </div>
       </v-badge>
@@ -82,6 +84,10 @@
       bus: {
         type: Object,
         required: true
+      },
+      itemOptions: {
+        type: Object,
+        default: () => ({})
       }
     },
     data() {

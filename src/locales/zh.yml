@@ -14,6 +14,7 @@ server:
 menu:
   home: 首页
   report: 掉落汇报
+  search: 全局搜索
   stats:
     _name: 素材掉率
     stage: 按作战
@@ -67,6 +68,9 @@ meta:
     confirm: 确认
     submit: 提交
     close: 关闭
+  time:
+    minute: "{m}分 "
+    second: "{s}秒"
   copyWarning: |2-
 
 
@@ -81,6 +85,7 @@ stats:
     percentage: 百分比
     apPPR: 单件估算理智
     clearTime: 最短通关用时
+    itemPerTime: 单件估算用时
     timeRange: 统计区间
   headerDesc:
     apCost: 该作战所需要的理智
@@ -248,6 +253,11 @@ zone:
 stage:
   name: 关卡
   apCost: "{apCost} 点理智"
+  details:
+    actions:
+      links:
+        "prts-wiki": "PRTS Wiki"
+        "map-arknights-com": "关卡地图"
   loots:
     NORMAL_DROP: 常规掉落
     EXTRA_DROP: 额外物资
@@ -411,3 +421,7 @@ auth:
       deleteUserId: 删除此 PenguinID 登录记录
       noData: 暂无数据
       tips: 本功能仅可找回于 v3.3.1 及更新版本客户端所登录的 PenguinID
+search:
+  placeholder: 搜索...
+  hint: 键入 物品 拼音首字母/英文名称/物品ID 或 关卡 关卡名/关卡ID
+  footer: 由 企鹅物流黑科技 强力驱动

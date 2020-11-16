@@ -9,6 +9,7 @@ import statsManager from '@/models/managers/stats'
 import globalMatrixManager from '@/models/managers/matrices/globalMatrix'
 import personalMatrixManager from '@/models/managers/matrices/personalMatrix'
 import strings from "@/utils/strings";
+import router from "@/router";
 
 export default {
   namespaced: true,
@@ -44,7 +45,7 @@ export default {
       stagesManager.refresh(refresh);
       zonesManager.refresh(refresh);
       globalMatrixManager.refresh(refresh);
-      personalMatrixManager.refresh(refresh);
+      if (router.currentRoute.matched.find(el => el.name === "Stats") && store.getters["dataSource/source"] === "personal") personalMatrixManager.refresh(refresh);
       trendsManager.refresh(refresh);
       periodManager.refresh(refresh);
       statsManager.refresh(refresh);

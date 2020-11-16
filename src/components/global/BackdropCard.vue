@@ -5,7 +5,10 @@
     :class="{'backdrop-card--hoverable': hover, 'backdrop-card--darken': darken, 'pa-4': !dense}"
     v-bind="$attrs"
   >
-    <div class="backdrop-icon transition-all">
+    <div
+      class="backdrop-icon transition-all"
+      :class="{'backdrop-icon--small': small}"
+    >
       <slot name="backdrop" />
     </div>
 
@@ -34,7 +37,14 @@
         default () {
           return false
         }
-      }
+      },
+      small: {
+        type: Boolean,
+        default () {
+          return false
+        }
+      },
+
     },
   }
 </script>
@@ -64,6 +74,16 @@
   }
 
   ::v-deep .backdrop-icon > * {
-    font-size: 8rem;
+    font-size: 8rem !important;
+  }
+
+  ::v-deep .backdrop-icon.backdrop-icon--small > * {
+    font-size: 4rem !important;
+  }
+  .backdrop-icon--small {
+    bottom: -.8rem;
+  }
+  .backdrop-card--hoverable:hover .backdrop-icon.backdrop-icon--small {
+    bottom: -.4rem;
   }
 </style>

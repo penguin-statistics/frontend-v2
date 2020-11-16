@@ -6,7 +6,7 @@
     <v-snackbar
       v-model="submitted"
       color="success"
-      :timeout="0"
+      :timeout="-1"
       bottom
     >
       <v-row
@@ -76,7 +76,7 @@
     >
       <v-card
         v-if="selected.stage"
-        class="bkop-light pa-2"
+        class="bkop-light pa-2 content-card"
       >
         <v-overlay
           :opacity="0.75"
@@ -176,6 +176,8 @@
                 <ItemStepper
                   :item="item.item"
                   :bus="eventBus"
+                  :item-options="{ disableOverviewCard: true }"
+
                   @change="(e) => handleChange(category.id, e)"
                 />
               </span>
@@ -417,6 +419,8 @@
             </v-row>
           </v-col>
         </v-row>
+
+        <BackdropName :content="strings.translate(selectedStage, 'code')" />
       </v-card>
     </StageSelector>
 
@@ -580,6 +584,7 @@ import validator from "@/utils/validator";
 import existUtils from "@/utils/existUtils";
 import performance from "@/utils/performance";
 import Console from "@/utils/Console";
+import BackdropName from "@/components/stats/BackdropName";
 
 // colors: [dark, light]
 const categories = [
@@ -599,7 +604,7 @@ const categories = [
 
 export default {
   name: "Report",
-  components: {ItemIcon, Subheader, StageSelector, ItemStepper, Item },
+  components: {BackdropName, ItemIcon, Subheader, StageSelector, ItemStepper, Item },
   mixins: [Theme],
   data: () => ({
     snackbar: false,

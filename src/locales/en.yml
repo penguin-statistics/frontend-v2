@@ -13,6 +13,7 @@ server:
     KR: KR
 menu:
   home: Home
+  search: Search
   report: Report Drops
   stats:
     _name: Drop Rates
@@ -71,6 +72,9 @@ meta:
     confirm: Confirm
     submit: Submit
     close: Close
+  time:
+    minute: "{m}m"
+    second: "{s}s"
   copyWarning: |2-
 
     Data from Penguin Statistics ({site})

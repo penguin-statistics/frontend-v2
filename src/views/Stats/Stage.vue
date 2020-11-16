@@ -34,7 +34,7 @@
 
     @select="select"
   >
-    <v-card class="bkop-light pt-2 elevation-4 ma-2">
+    <v-card class="bkop-light pt-2 elevation-4 ma-2 content-card">
       <v-card-title class="pb-0 mx-1">
         <v-row
           align="center"
@@ -79,7 +79,15 @@
 
         class="px-3 px-sm-4 px-md-6 px-lg-6 px-xl-8 pt-0 pb-6"
       />
+
+      <BackdropName :content="strings.translate(stage, 'code')" />
     </v-card>
+
+    <StageDetails
+      :stage="stage"
+      :zone="zone"
+      :stats="stats"
+    />
   </StageSelector>
 </template>
 
@@ -90,10 +98,12 @@
   import DataSourceToggle from "@/components/stats/DataSourceToggle";
   import strings from "@/utils/strings";
   import existUtils from "@/utils/existUtils";
+  import BackdropName from "@/components/stats/BackdropName";
+  import StageDetails from "@/components/stats/StageDetails";
 
 export default {
   name: "StatsByStage",
-  components: {DataSourceToggle, DataTable, StageSelector},
+  components: {StageDetails, BackdropName, DataSourceToggle, DataTable, StageSelector},
   data: () => ({
     expanded: {},
     selected: {

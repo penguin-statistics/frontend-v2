@@ -12,7 +12,7 @@
         {{ item.name }}
       </span>
     </v-card-title>
-    <v-card-text v-if="stats.data.length">
+    <v-card-text v-if="stats.data.length && !disabledOverview">
       <v-simple-table dense>
         <thead>
           <tr>
@@ -100,6 +100,10 @@ export default {
       type: String,
       required: true
     },
+    disabledOverview: {
+      type: Boolean,
+      default: () => false
+    }
   },
   computed: {
     item() {

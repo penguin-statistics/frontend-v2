@@ -7226,10 +7226,9 @@ pinkie@^2.0.0:
   resolved "https://registry.yarnpkg.com/pinkie/-/pinkie-2.0.4.tgz#72556b80cfa0d48a974e80e77248e80ed4f7f870"
   integrity sha1-clVrgM+g1IqXToDnckjoDtT3+HA=
 
-pinyin-engine@^1.1.0:
+pinyin-engine@GalvinGao/pinyin-engine#master:
   version "1.1.0"
-  resolved "https://registry.yarnpkg.com/pinyin-engine/-/pinyin-engine-1.1.0.tgz#28cae1ae89e8a4fc64ce9f975852dc13ef58a583"
-  integrity sha512-cu13xtxuz21v5uzPyApsvdCfjXYeIKY9pfzzrcUxxFU4q4d/Ocuyafoc1cS6ND7U4eWPILsyLBpMkqR5ce3sHw==
+  resolved "https://codeload.github.com/GalvinGao/pinyin-engine/tar.gz/03ee1fce74cf2c145e03492df578969f1b454589"
 
 pkg-dir@^1.0.0:
   version "1.0.0"
@@ -9637,10 +9636,10 @@ vuetify-loader@^1.4.3:
     file-loader "^4.0.0"
     loader-utils "^1.2.0"
 
-vuetify@2.2.34:
-  version "2.2.34"
-  resolved "https://registry.yarnpkg.com/vuetify/-/vuetify-2.2.34.tgz#070458a9424a4aa48ca5769cd8837265c90766c3"
-  integrity sha512-YE2gMGs2QvY/HsnVfUtYGoA6Nq7Pt6W7MuToJgSNMFmSHvCcjApZW39mebGKfVY2llLDbmrnL8d2AvOmUk8hcg==
+vuetify@2.3.10:
+  version "2.3.10"
+  resolved "https://registry.npm.taobao.org/vuetify/download/vuetify-2.3.10.tgz#c8cbc77ee1224b5a132f501a3762dee6d8c95a06"
+  integrity sha1-yMvHfuEiS1oTL1AaN2Le5tjJWgY=
 
 vuex-persistedstate@^2.7.1:
   version "2.7.1"

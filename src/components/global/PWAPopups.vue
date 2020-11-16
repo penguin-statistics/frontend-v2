@@ -31,7 +31,7 @@
   <v-snackbar
     v-model="update.enabled"
     color="success"
-    :timeout="0"
+    :timeout="-1"
     bottom
   >
     <v-row

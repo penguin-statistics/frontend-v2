@@ -22,6 +22,7 @@ import SiteStats from "@/views/SiteStats";
 import Planner from "@/views/Planner";
 
 import i18n from "@/i18n";
+import Search from "@/views/Search";
 
 // import DataDebugger from "@/components/debug/DataDebugger";
 
@@ -138,6 +139,17 @@ const router = new Router({
     meta: {
       icon: 'mdi-database-search',
       i18n: 'menu.stats.advanced'
+    },
+  },
+  {
+    path: '/search',
+    name: 'Search',
+    component: Search,
+    props: route => ({ query: route.query.q }),
+    meta: {
+      icon: 'mdi-magnify',
+      i18n: 'menu.search',
+      hide: true
     },
   },
   {

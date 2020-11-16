@@ -19,6 +19,8 @@
         nav
         class="safe-area--navigation"
       >
+        <GlobalSearchNavigation />
+
         <Navigation
           v-for="route in routes"
           :key="route.name"
@@ -111,7 +113,7 @@
       <!--      />-->
     </v-app-bar>
     <RandomBackground />
-    <v-content
+    <v-main
       :style="{'filter': isInSpecialUI ? 'grayscale(1)' : ''}"
       class="safe-area--v-content"
     >
@@ -122,7 +124,7 @@
         <router-view />
       </transition>
       <Footer />
-    </v-content>
+    </v-main>
     <NetworkStateIndicator />
   </v-app>
 </template>
@@ -153,10 +155,12 @@
   import ServerSelector from "@/components/toolbar/ServerSelector";
   import ServerNotifyOverlay from "@/components/global/ServerNotifyOverlay";
   import plugins from "@/utils/native/plugins"
+  import GlobalSearchNavigation from "@/components/search/GlobalSearchNavigation";
 
 export default {
   name: 'App',
   components: {
+    GlobalSearchNavigation,
     ServerNotifyOverlay,
     ServerSelector,
     UpgradeNotifier,

@@ -58,13 +58,14 @@ Getters.statistics = {
       .filter(filter)
       .map(el => {
         const stage = Getters.stages.byStageId(el.stageId);
-        const percentage = el.quantity / el.times
+        const percentage = +(el.quantity / el.times).toFixed(5)
         return {
           ...el,
           stage,
           percentage,
           percentageText: `${(percentage * 100).toFixed(2)}%`,
-          apPPR: (stage.apCost / percentage).toFixed(2)
+          apPPR: (stage.apCost / percentage).toFixed(2),
+          itemPerTime: +(stage.minClearTime / percentage).toFixed(2)
         }
       });
   },

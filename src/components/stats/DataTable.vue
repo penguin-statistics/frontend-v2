@@ -345,6 +345,19 @@
           >
             {{ props.item.apPPR }}
           </td>
+          <td
+            v-if="props.item.itemPerTime"
+            :class="tableCellClasses"
+          >
+            {{ formatDuration(props.item.itemPerTime) }}
+          </td>
+          <td
+            v-else
+            :class="tableCellClasses"
+            class="grey--text"
+          >
+            --
+          </td>
           <template v-if="type === 'item'">
             <td
               v-if="invalidApCost(props.item.stage.apCost)"
@@ -364,6 +377,19 @@
               :class="tableCellClasses"
             >
               {{ formatDuration(props.item.stage.minClearTime) }}
+            </td>
+            <td
+              v-else
+              :class="tableCellClasses"
+              class="grey--text"
+            >
+              --
+            </td>
+            <td
+              v-if="props.item.itemPerTime"
+              :class="tableCellClasses"
+            >
+              {{ formatDuration(props.item.itemPerTime) }}
             </td>
             <td
               v-else
@@ -482,6 +508,13 @@
             width: "110px"
           },
           {
+            text: this.$t("stats.headers.itemPerTime"),
+            value: "perTime",
+            align: "left",
+            sortable: true,
+            width: "110px"
+          },
+          {
             text: this.$t("stats.headers.timeRange"),
             value: "timeRange",
             align: "left",
@@ -515,6 +548,12 @@
           }, {
             text: this.$t("stats.headers.clearTime"),
             value: "stage.minClearTime",
+            align: "left",
+            sortable: true,
+            width: "110px"
+          }, {
+            text: this.$t("stats.headers.itemPerTime"),
+            value: "perTime",
             align: "left",
             sortable: true,
             width: "110px"

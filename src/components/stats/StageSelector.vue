@@ -207,13 +207,6 @@
         :step="2"
         class="pa-0 pt-2"
       >
-        <span
-          v-if="!$vuetify.breakpoint.xs"
-          class="stage-id--background font-weight-black display-4 px-12 py-6"
-        >
-          {{ strings.translate(selectedStage, "code") }}
-        </span>
-        
         <slot />
       </v-stepper-content>
     </v-stepper-items>
@@ -504,23 +497,6 @@
 <style scoped>
   .full-width {
     width: 100%;
-  }
-
-.stage-id--background {
-  position: absolute;
-  bottom: 0;
-  right: 0;
-  color: rgba(255, 255, 255, .45);
-  user-select: none;
-  z-index: 0;
-  letter-spacing: -.10em !important;
-  word-break: break-all;
-  overflow: hidden;
-  pointer-events: none;
-  text-align: right;
-}
-  .theme--light .stage-id--background {
-    color: rgba(0, 0, 0, .3);
   }
 
   .stage-card--background {
