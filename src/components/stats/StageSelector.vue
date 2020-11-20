@@ -95,6 +95,89 @@
         :class="{'pa-0': small}"
       >
         <v-row class="px-1">
+          <v-col cols="12">
+            <v-subheader>
+              <v-icon
+                class="mr-2"
+              >
+                mdi-chevron-double-right
+              </v-icon>
+              <span>
+                快速访问
+              </span>
+            </v-subheader>
+
+            <v-card class="bkop-light">
+              <v-row>
+                <v-col
+                  cols="12"
+                  md="6"
+                >
+                  <v-card-title class="pt-2 subtitle-1">
+                    <v-icon left>
+                      mdi-star
+                    </v-icon>
+                    星标
+                  </v-card-title>
+                  <v-card-text class="pb-2 px-6">
+                    <template v-if="preferencedStages.favorites.length">
+                      <StageCard
+                        v-for="stage in preferencedStages.favorites"
+                        :key="stage.stageId"
+                        :stage="stage"
+
+                        @click.native="selectStage(stage.zoneId, stage.stageId)"
+                      />
+                    </template>
+
+                    <template v-else>
+                      <div class="caption text-center justify-center py-2 grey--text">
+                        暂无星标关卡
+                      </div>
+                    </template>
+                  </v-card-text>
+                </v-col>
+
+                <v-col
+                  cols="12"
+                  md="6"
+                >
+                  <v-card-title class="pt-2 subtitle-1">
+                    <v-icon left>
+                      mdi-history
+                    </v-icon>
+                    最近选择
+                    <v-spacer />
+                    <v-btn
+                      small
+                      text
+                      @click="$store.commit('stagePreferences/clearHistory')"
+                    >
+                      清空
+                    </v-btn>
+                  </v-card-title>
+                  <v-card-text class="pb-2 px-6">
+                    <template v-if="preferencedStages.histories.length">
+                      <div class="history-stage-cards">
+                        <StageCard
+                          v-for="stage in preferencedStages.histories"
+                          :key="stage.stageId"
+                          :stage="stage"
+
+                          @click.native="selectStage(stage.zoneId, stage.stageId)"
+                        />
+                      </div>
+                    </template>
+                    <template v-else>
+                      <div class="caption text-center justify-center py-2 grey--text">
+                        暂无最近选择记录
+                      </div>
+                    </template>
+                  </v-card-text>
+                </v-col>
+              </v-row>
+            </v-card>
+          </v-col>
           <v-col
             v-for="(categories, index) in categorizedZones"
             :key="index"
@@ -443,6 +526,12 @@
           prev: stageInZoneIndex > 0 ? validStage(allStagesInZone[stageInZoneIndex - 1]) : null,
           next: stageInZoneIndex < (allStagesInZone.length - 1) ? validStage(allStagesInZone[stageInZoneIndex + 1]) : null
         }
+      },
+      preferencedStages() {
+        return {
+          favorites: this.$store.getters['stagePreferences/favorites'].map(el => get.stages.byStageId(el)),
+          histories: this.$store.getters['stagePreferences/histories'].map(el => get.stages.byStageId(el)),
+        }
       }
     },
     watch: {
@@ -469,6 +558,9 @@
               stageId: this.selected.stage
             }
           })
+        }
+        if (stage) {
+          this.$store.commit('stagePreferences/addHistory', stage)
         }
       },
       checkRoute () {
@@ -523,6 +615,18 @@
   .theme--dark .stage-card--content {
     background: rgba(0, 0, 0, .8) !important;
     background: linear-gradient(to bottom, rgba(0, 0, 0, 0.85), rgba(0, 0, 0, 0.70)) !important;
+  }
+
+  .history-stage-cards {
+    /* 92px: 2 lines of cardHeight (38px stage card height + 2 * 4px margin) */
+    max-height: 92px;
+    overflow: hidden;
+
+    /* 83(82.8)px: 1.8 * cardHeight */
+    /* 65px: 2 * cardHeight - 4px margin */
+    /*mask: linear-gradient(to right, rgba(0, 0, 0, 1) 90%, transparent);*/
+    /*-webkit-mask: -webkit-gradient(linear, left top, left bottom, from(rgba(0, 0, 0, 1)), color-stop(92), to(rgba(0, 0, 0, 0)));*/
+    /*-webkit-mask: -webkit-gradient(linear, left top, left bottom, from(rgba(0, 0, 0, 1) ), to(rgba(0, 0, 0, 0)));*/
   }
 
 </style>

@@ -256,8 +256,8 @@ stage:
   details:
     actions:
       links:
-        "prts-wiki": "PRTS Wiki"
-        "map-arknights-com": "作战地图"
+        "prts-wiki": Wiki
+        "map-arknights-com": 地图
   loots:
     NORMAL_DROP: 常规掉落
     EXTRA_DROP: 额外物资

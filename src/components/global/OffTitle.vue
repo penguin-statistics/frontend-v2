@@ -45,22 +45,22 @@
 </script>
 
 <style scoped>
-.off-title--wrapper {
+span.off-title--wrapper {
   position: relative;
   letter-spacing: -.1em !important;
   bottom: -20px;
   left: 4px;
   z-index: 4;
 }
-.off-title--ea {
+span.off-title--ea {
   letter-spacing: -.18em !important;
 }
-.off-title--small {
+span.off-title--small {
   bottom: -16px;
   left: -6px;
   letter-spacing: -.08em !important;
 }
-.off-title--small.off-title--ea {
+span.off-title--ea.off-title--small {
   letter-spacing: -.1em !important;
 }
 .off-title--char {

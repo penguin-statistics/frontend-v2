@@ -27,15 +27,15 @@
 </template>
 
 <script>
+/* eslint-disable vue/require-prop-types */
+
 export default {
   name: "FactTableItem",
   props: {
     title: {
-      type: String || null,
       default: () => ""
     },
     content: {
-      type: String || null,
       default: () => ""
     },
     contentClass: {

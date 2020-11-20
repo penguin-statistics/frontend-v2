@@ -136,6 +136,7 @@ const router = new Router({
     path: '/advanced',
     name: 'AdvancedQuery',
     component: AdvancedQuery,
+    props: route => ({ stage: route.query.stage, items: route.query.items }),
     meta: {
       icon: 'mdi-database-search',
       i18n: 'menu.stats.advanced'

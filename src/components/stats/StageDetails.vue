@@ -5,7 +5,11 @@
       align-content="start"
     >
       <v-col
-        class="flex-md-grow-1 flex-lg-grow-1 flex-xl-grow-1"
+        cols="12"
+        sm="7"
+        md="5"
+        lg="6"
+        xl="8"
       >
         <v-card-title class="py-4 pl-0">
           <v-icon left>
@@ -36,7 +40,13 @@
           />
         </FactTable>
       </v-col>
-      <v-col class="md300px flex-md-grow-0 flex-lg-grow-0 flex-xl-grow-0">
+      <v-col
+        cols="12"
+        sm="5"
+        md="4"
+        lg="3"
+        xl="2"
+      >
         <v-card-title class="py-4 pl-0">
           <v-icon left>
             mdi-link
@@ -51,7 +61,7 @@
           hover
           dense
           :href="link.href"
-          class="bkop-medium mb-2 py-2"
+          class="bkop-medium mb-2 py-3"
         >
           <template v-slot:backdrop>
             <v-icon>
@@ -59,17 +69,33 @@
             </v-icon>
           </template>
 
-          <h2 class="heading">
-            {{ $t('stage.details.actions.links.' + link.id) }}
+          <h2 class="heading d-flex flex-row align-center px-6">
+            <span class="text-left text-no-wrap">
+              {{ $t('stage.details.actions.links.' + link.id) }}
+            </span>
+            <v-divider class="flex-grow-1 ml-2 mr-1" />
+            <span class="caption monospace ml-1 flex-shrink-1">
+              <v-icon
+                small
+              >
+                mdi-open-in-new
+              </v-icon>
+              
+              {{ link.hostname }}
+            </span>
           </h2>
         </BackdropCard>
       </v-col>
       <v-col
-        class="md300px lg400px flex-md-grow-0 flex-lg-grow-0 flex-xl-grow-0 flex-fill"
+        cols="12"
+        sm="12"
+        md="3"
+        lg="3"
+        xl="2"
       >
         <v-card-title class="py-4 pl-0">
           <v-icon left>
-            mdi-link
+            mdi-chevron-double-right
           </v-icon>
           快速操作
         </v-card-title>
@@ -139,6 +165,8 @@
           outlined
           :class="{'orange--text text--darken-4': !dark}"
           class="mb-2 black--text"
+
+          :to="{ name: 'AdvancedQuery', query: { stage: stage.stageId } }"
         >
           <v-icon left>
             mdi-database-search
@@ -192,7 +220,12 @@ export default {
             io: `https://map.ark-nights.com/map/${this.stage.stageId}`
           })
         }
-      ]
+      ].map(el => {
+        return {
+          ...el,
+          hostname: new URL(el.href).hostname
+        }
+      })
     },
     isFavorite () {
       return this.$store.getters["stagePreferences/hasFavorite"](this.stage.stageId)
@@ -214,6 +247,6 @@ export default {
   border-color: rgba(0, 0, 0, 1);
   border-width: 0 0 0 2px;
   border-style: solid;
-  padding-left: 10px;
+  padding-left: 12px;
 }
 </style>
