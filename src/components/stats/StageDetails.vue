@@ -1,5 +1,5 @@
 <template>
-  <v-card class="bkop-light pa-8 pt-0 elevation-4 ma-2">
+  <v-card class="bkop-light px-8 elevation-4 ma-2">
     <v-row
       align="start"
       align-content="start"
@@ -36,7 +36,7 @@
           />
         </FactTable>
       </v-col>
-      <v-col class="md400px flex-md-grow-0 flex-lg-grow-0 flex-xl-grow-0">
+      <v-col class="md300px flex-md-grow-0 flex-lg-grow-0 flex-xl-grow-0">
         <v-card-title class="py-4 pl-0">
           <v-icon left>
             mdi-link
@@ -49,8 +49,9 @@
           :key="link.id"
           small
           hover
+          dense
           :href="link.href"
-          class="bkop-medium mb-2"
+          class="bkop-medium mb-2 py-2"
         >
           <template v-slot:backdrop>
             <v-icon>
@@ -58,13 +59,13 @@
             </v-icon>
           </template>
 
-          <h2 class="heading my-1">
+          <h2 class="heading">
             {{ $t('stage.details.actions.links.' + link.id) }}
           </h2>
         </BackdropCard>
       </v-col>
       <v-col
-        class="md400px flex-md-grow-0 flex-lg-grow-0 flex-xl-grow-0"
+        class="md300px lg400px flex-md-grow-0 flex-lg-grow-0 flex-xl-grow-0 flex-fill"
       >
         <v-card-title class="py-4 pl-0">
           <v-icon left>

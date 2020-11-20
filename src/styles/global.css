@@ -599,7 +599,18 @@
 }
 
 @media (min-width: 960px) {
+    .md300px {
+        flex: 0 0 300px !important;
+        max-width: 300px !important;
+    }
     .md400px {
+        flex: 0 0 400px !important;
+        max-width: 400px !important;
+    }
+}
+
+@media (min-width: 1264px) {
+    .lg400px {
         flex: 0 0 400px !important;
         max-width: 400px !important;
     }
@@ -616,3 +627,11 @@
 .katex-html span.text {
     background-color: transparent !important;
 }
+
+@media (max-width: 600px) {
+    .fill-sm-and-down {
+
+    }
+}
+
+
