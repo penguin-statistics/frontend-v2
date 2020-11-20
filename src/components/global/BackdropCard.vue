@@ -53,6 +53,14 @@
   .backdrop-card {
     overflow: hidden;
   }
+
+  .theme--light .backdrop-card--hoverable {
+    background: linear-gradient(to right bottom, rgba(32, 32, 32, .1) 20%, rgba(255, 255, 255, .95) 80%, rgba(255, 255, 255, 1));
+  }
+  .theme--dark .backdrop-card--hoverable {
+    background: linear-gradient(to right bottom, rgba(224, 224, 224, .1) 20%, rgba(18, 18, 18, .95) 80%, rgba(18, 18, 18, 1));
+  }
+
   .backdrop-icon {
     position: absolute;
     bottom: -2rem;

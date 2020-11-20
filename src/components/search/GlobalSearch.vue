@@ -1,10 +1,11 @@
 <template>
   <div
     class="transition-all"
-    :class="{'search__no-input': !search}"
+    :class="{'search__no-input': !search && !pure}"
     style="width: 100%"
   >
     <v-img
+      v-if="!pure"
       :src="cdnDeliver('/logos/penguin_stats_logo.png')"
       aspect-ratio="1"
       height="64px"
@@ -26,61 +27,63 @@
       :class="{'search__no-result': !results.length && search}"
       prepend-inner-icon="mdi-magnify"
     />
-    <v-data-iterator
-      v-show="search"
-      :items="results"
-      :loading="loading"
-      class="mx-2"
-      :page="page"
-    >
-      <template #header="{ pagination }">
-        <div class="d-flex flex-row justify-space-around align-center">
-          <v-btn
-            large
-            :disabled="page <= 1"
-            @click="page -= 1"
-          >
-            <v-icon>
-              mdi-chevron-left
-            </v-icon>
-            上一页
-          </v-btn>
+    <v-slide-y-transition>
+      <v-data-iterator
+        v-show="search"
+        :items="results"
+        :loading="loading"
+        class="mx-2 search-results"
+        :page="page"
+      >
+        <template #header="{ pagination }">
+          <div class="d-flex flex-row justify-space-around align-center">
+            <v-btn
+              large
+              :disabled="page <= 1"
+              @click="page -= 1"
+            >
+              <v-icon>
+                mdi-chevron-left
+              </v-icon>
+              上一页
+            </v-btn>
 
-          <span>
-            页 {{ pagination.page }} / 共 {{ pagination.pageCount }} 页, {{ pagination.itemsLength }} 条目
-          </span>
+            <span>
+              页 {{ pagination.page }} / 共 {{ pagination.pageCount }} 页, {{ pagination.itemsLength }} 条目
+            </span>
 
-          <v-btn
-            large
-            :disabled="page >= pagination.pageCount"
-            @click="page += 1"
-          >
-            <v-icon>
-              mdi-chevron-right
-            </v-icon>
-            下一页
-          </v-btn>
-        </div>
-      </template>
+            <v-btn
+              large
+              :disabled="page >= pagination.pageCount"
+              @click="page += 1"
+            >
+              下一页
+              <v-icon>
+                mdi-chevron-right
+              </v-icon>
+            </v-btn>
+          </div>
+        </template>
 
-      <template #default="{ items }">
-        <v-row>
-          <v-col
-            v-for="item in items"
-            :key="item.id"
-            cols="12"
-            sm="12"
-            md="6"
-            lg="6"
-            xl="6"
-          >
-            <SearchResult
-              :result="item"
-            />
-          </v-col>
-        </v-row>
-      </template>
-    </v-data-iterator>
+        <template #default="{ items }">
+          <v-row>
+            <v-col
+              v-for="item in items"
+              :key="item.id"
+              cols="12"
+              sm="12"
+              md="6"
+              lg="6"
+              xl="6"
+            >
+              <SearchResult
+                :result="item"
+              />
+            </v-col>
+          </v-row>
+        </template>
+      </v-data-iterator>
+    </v-slide-y-transition>
     <!--    <h1 class="d-block mt-12 overline text-center grey&#45;&#45;text">-->
     <!--      {{ $t('search.footer') }}-->
     <!--    </h1>-->
@@ -99,6 +102,10 @@ export default {
       type: String,
       default: () => ""
     },
+    pure: {
+      type: Boolean,
+      default: () => false
+    }
   },
   data() {
     return {
@@ -135,6 +142,12 @@ export default {
     },
     "dependencies.items"(val) {
       this.engine.update("items", val)
+    },
+    search(val) {
+      const url = new URL(window.location.href)
+      url.searchParams.delete("q")
+      if (val) url.searchParams.set("q", val)
+      window.history.replaceState(null, '', url.pathname + url.search)
     }
   },
   created() {
@@ -159,7 +172,7 @@ export default {
 .search-input-bar {
   ::v-deep.v-input__slot {
     transition: all .225s cubic-bezier(0.165, 0.84, 0.44, 1) !important;
-    box-shadow: 0 0 5px rgba(0, 0, 0, .4) !important;
+    box-shadow: 0 0 5px rgba(0, 0, 0, .4), 0 0 0 1px rgba(255, 255, 255, .9) !important;
   }
 
   ::v-deep.v-messages__wrapper {
@@ -169,7 +182,7 @@ export default {
   }
 
   &.v-input--is-focused ::v-deep.v-input__slot {
-    box-shadow: 0 0 0 3px rgba(255, 255, 255, .6) !important
+    box-shadow: 0 0 1px 3px rgba(255, 255, 255, .6), 0 0 0 1px rgba(255, 255, 255, .9) !important
   }
   &.search__no-result ::v-deep.v-input__slot {
     background: rgba(255, 82, 82, .4) !important
@@ -183,6 +196,12 @@ export default {
     &.search-input-bar.v-input--is-focused ::v-deep.v-input__slot {
       box-shadow: 0 0 0 3px rgba(0, 0, 0, .4) !important
     }
+  }
+}
+
+.search-results {
+  ::v-deep .v-data-footer {
+    display: none;
   }
 }
 </style>

@@ -4,7 +4,7 @@ function isDomain(domain, location = window.location.href) {
   return extractDomain(location) === domain
 }
 
-export default {
+const mirror = {
   global: {
     identifier: "penguin-stats.io",
     isCurrent () {
@@ -24,3 +24,10 @@ export default {
     }
   }
 }
+
+mirror.adapter = function ({cn, io}) {
+  if (mirror.cn.isCurrent()) return cn
+  return io
+}
+
+export default mirror

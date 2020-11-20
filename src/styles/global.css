@@ -597,9 +597,22 @@
 .radius-2 {
     border-radius: 8px !important;
 }
+
 @media (min-width: 960px) {
     .md400px {
         flex: 0 0 400px !important;
         max-width: 400px !important;
     }
+}
+
+.align-self-stretch {
+    align-self: stretch;
+}
+
+.no-paragraph-extra-margin p {
+    margin-bottom: 0 !important;
+}
+
+.katex-html span.text {
+    background-color: transparent !important;
 }

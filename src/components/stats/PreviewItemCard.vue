@@ -51,7 +51,6 @@
               <v-icon
                 :color="highlight === stat.stageId ? 'orange' : ''"
                 small
-                class="mr-1"
               >
                 {{ stat.zone.icon }}
               </v-icon>

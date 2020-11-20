@@ -127,7 +127,7 @@ const router = new Router({
     name: 'Planner',
     component: Planner,
     meta: {
-      icon: 'mdi-floor-plan',
+      icon: 'mdi-directions-fork',
       i18n: 'menu.planner',
       twoLine: 'menu.overline.planner'
     }

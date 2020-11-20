@@ -93,7 +93,7 @@ stats:
     apCost: The Sanity required for the stage
     quantity: The sum of all drops in this stage
     times: The sum of the samples in this stage
-    percentage: "Calculated as $\frac{\text{quantity}}{\text{times}}$"
+    percentage: "Calculated as $$\frac{\text{quantity}}{\text{times}}$$"
     apPPR: Expected Sanity required for getting 1x of this item
     clearTime: "The shortest possible time required to clear this stage, a.k.a. the time duration starting from the beginning of the combat to the appearance of the last enemy. Data source: [PRTS Wiki]({prtsLink})."
     timeRange: "Due to the change of the drop table of this stage, the data in this row will only contain the data from the last change of the drop table, indicated as \"Time Range\""

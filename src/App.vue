@@ -113,7 +113,7 @@
       <!--      />-->
     </v-app-bar>
     <RandomBackground />
-    <v-main
+    <v-content
       :style="{'filter': isInSpecialUI ? 'grayscale(1)' : ''}"
       class="safe-area--v-content"
     >
@@ -124,7 +124,7 @@
         <router-view />
       </transition>
       <Footer />
-    </v-main>
+    </v-content>
     <NetworkStateIndicator />
   </v-app>
 </template>

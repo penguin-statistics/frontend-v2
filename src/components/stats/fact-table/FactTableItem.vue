@@ -1,6 +1,6 @@
 <template>
   <div class="d-block mr-5">
-    <div class="subtitle-2 mb-1">
+    <div class="subtitle-2 grey--text mb-1">
       <slot
         v-if="!!$slots.title"
         name="title"
@@ -40,9 +40,6 @@ export default {
       type: String,
       default: () => ""
     }
-  },
-  mounted() {
-    console.log(this.$slots)
   }
 }
 </script>

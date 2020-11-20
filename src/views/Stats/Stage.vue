@@ -34,6 +34,12 @@
 
     @select="select"
   >
+    <StageDetails
+      :stage="stage"
+      :zone="zone"
+      :stats="stats"
+    />
+    
     <v-card class="bkop-light pt-2 elevation-4 ma-2 content-card">
       <v-card-title class="pb-0 mx-1">
         <v-row
@@ -82,12 +88,6 @@
 
       <BackdropName :content="strings.translate(stage, 'code')" />
     </v-card>
-
-    <StageDetails
-      :stage="stage"
-      :zone="zone"
-      :stats="stats"
-    />
   </StageSelector>
 </template>
 
@@ -125,12 +125,18 @@ export default {
     stage () {
       const got = get.stages.byStageId(this.selected.stage);
       if (!got) return { code: "" };
-      return got
+      return {
+        ...got,
+        code: strings.translate(got, "code")
+      }
     },
     zone () {
-      const got = get.zones.byZoneId(this.selected.zone);
+      const got = get.zones.byZoneId(this.selected.zone, false);
       if (!got) return {};
-      return got
+      return {
+        ...got,
+        zoneName: strings.translate(got, "zoneName")
+      }
     },
     strings () {
       return strings

@@ -222,8 +222,51 @@
           </span>
         </div>
       </template>
+
+      <template v-slot:header.stage.apCost="{header}">
+        <HeaderWithTooltip :name="header.text">
+          {{ $t('stats.headerDesc.apCost') }}
+        </HeaderWithTooltip>
+      </template>
+
+      <template v-slot:header.quantity="{header}">
+        <HeaderWithTooltip :name="header.text">
+          {{ $t('stats.headerDesc.quantity') }}
+        </HeaderWithTooltip>
+      </template>
+
+      <template v-slot:header.times="{header}">
+        <HeaderWithTooltip :name="header.text">
+          {{ $t('stats.headerDesc.times') }}
+        </HeaderWithTooltip>
+      </template>
+
+      <template v-slot:header.percentage="{header}">
+        <HeaderWithTooltip :name="header.text">
+          {{ $t('stats.headerDesc.percentage') }}
+        </HeaderWithTooltip>
+      </template>
+
+      <template v-slot:header.apPPR="{header}">
+        <HeaderWithTooltip :name="header.text">
+          {{ $t('stats.headerDesc.apPPR') }}
+        </HeaderWithTooltip>
+      </template>
+
+      <template v-slot:header.stage.minClearTime="{header}">
+        <HeaderWithTooltip :name="header.text">
+          {{ $t('stats.headerDesc.clearTime') }}
+        </HeaderWithTooltip>
+      </template>
+
+      <template v-slot:header.timeRange="{header}">
+        <HeaderWithTooltip :name="header.text">
+          {{ $t('stats.headerDesc.timeRange') }}
+        </HeaderWithTooltip>
+      </template>
+
       <template v-slot:item="props">
-        <tr>
+        <tr :class="{'stat-table__outdated-row': isTimeOutdatedRange(props.item.end)}">
           <template v-if="type === 'stage'">
             <td
               :class="{
@@ -345,19 +388,6 @@
           >
             {{ props.item.apPPR }}
           </td>
-          <td
-            v-if="props.item.itemPerTime"
-            :class="tableCellClasses"
-          >
-            {{ formatDuration(props.item.itemPerTime) }}
-          </td>
-          <td
-            v-else
-            :class="tableCellClasses"
-            class="grey--text"
-          >
-            --
-          </td>
           <template v-if="type === 'item'">
             <td
               v-if="invalidApCost(props.item.stage.apCost)"
@@ -399,6 +429,21 @@
               --
             </td>
           </template>
+          <template v-else>
+            <td
+              v-if="isValidTime(props.item.itemPerTime)"
+              :class="tableCellClasses"
+            >
+              {{ formatDuration(props.item.itemPerTime) }}
+            </td>
+            <td
+              v-else
+              :class="tableCellClasses"
+              class="grey--text"
+            >
+              --
+            </td>
+          </template>
           <td
             :class="tableCellClasses"
           >
@@ -428,10 +473,11 @@
   import TitledRow from "@/components/global/TitledRow";
   import existUtils from "@/utils/existUtils";
   import validator from "@/utils/validator";
+  import HeaderWithTooltip from "@/components/stats/HeaderWithTooltip";
 
   export default {
     name: "DataTable",
-    components: {TitledRow, Item, Charts},
+    components: {HeaderWithTooltip, TitledRow, Item, Charts},
     mixins: [Theme, CDN, Mirror],
     props: {
       items: {
@@ -551,12 +597,6 @@
             align: "left",
             sortable: true,
             width: "110px"
-          }, {
-            text: this.$t("stats.headers.itemPerTime"),
-            value: "perTime",
-            align: "left",
-            sortable: true,
-            width: "110px"
           })
         }
 
@@ -661,6 +701,13 @@
       formatDuration (duration) {
         return timeFormatter.duration(duration)
       },
+      isTimeOutdatedRange (time) {
+        if (!time) return false
+        return time < Date.now()
+      },
+      isValidTime(time) {
+        return Number.isFinite(time) && !Number.isNaN(time)
+      },
       invalidApCost (apCost) {
         return apCost === 99 || apCost === null
       },
@@ -672,5 +719,12 @@
 </script>
 
 <style>
+.stat-table__outdated-row {
+  /*opacity: 0.6;*/
+  transition: opacity .225s cubic-bezier(0.165, 0.84, 0.44, 1);
+}
+.stat-table__outdated-row:hover {
+  opacity: 1
+}
 
 </style>
