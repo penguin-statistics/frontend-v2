@@ -77,7 +77,7 @@ meta:
     以上数据来自企鹅物流数据统计（{site}）
 stats:
   headers:
-    stage: 关卡
+    stage: 作战
     apCost: 理智
     item: 物品
     times: 样本数
@@ -101,11 +101,11 @@ stats:
     stats: 过滤后 {filtered} / 过滤前 {total}
     overview: 过滤概览
     type:
-      _name: 关卡类型
+      _name: 作战类型
       showPermanent: 常驻
       showActivity: 活动
     status:
-      _name: 关卡状态
+      _name: 作战状态
       onlyOpen: 仅正在开放
   timeRange:
     inBetween: "{0} ~ {1}"
@@ -126,7 +126,7 @@ stats:
       sanity: 所有掉落汇报消耗理智
       report: 掉落汇报总数
       items: 物品掉落总数
-    stages: 关卡掉落汇报排行
+    stages: 作战掉落汇报排行
     items: 物品掉落汇报排行
     all: 全时段
     24hr: 最近 24 小时
@@ -155,7 +155,7 @@ fetch:
     retry: 重试
     error:
       zones: 章节元数据
-      stages: 关卡元数据
+      stages: 作战元数据
       items: 物品数据
       limitations: 汇报数据校验规则
       trends: 汇报历史数据
@@ -174,7 +174,7 @@ report:
     contact:
       before: 如果您认为这是一次误判，欢迎
       activator: 联系作者
-      after: "（请附关卡名称、实际掉落、若有掉落截图更佳），确认后我们会尽快予以修正。"
+      after: "（请附作战名称、实际掉落、若有掉落截图更佳），确认后我们会尽快予以修正。"
     causes:
       noDrop: 尚未选择任何掉落物品
       limitation: 本次汇报与现有数据差距较大，继续提交可能导致此次汇报被判定为异常，无法计入全部统计数据中。
@@ -193,9 +193,9 @@ report:
       not: "“{stage}” 内的物品数量应总计不为 {should}"
   clear: 清空
   closedReason:
-    EXPIRED: 不在可汇报时间区间内：关卡已结束或暂未开启
-    NOT_FOUND: 关卡不存在：于所选服务器未找到此关卡
-    INVALID: 无法汇报：此关卡未包含掉落汇报元数据
+    EXPIRED: 不在可汇报时间区间内：作战已结束或暂未开启
+    NOT_FOUND: 作战不存在：于所选服务器未找到此作战
+    INVALID: 无法汇报：此作战未包含掉落汇报元数据
   furniture: 家具掉落：{state}
   name: 上报结果
   submit: 提交
@@ -251,26 +251,26 @@ zone:
     permanentOpen: 常驻开放
   opensAt: 开放时间：{0} - {1}
 stage:
-  name: 关卡
+  name: 作战
   apCost: "{apCost} 点理智"
   details:
     actions:
       links:
         "prts-wiki": "PRTS Wiki"
-        "map-arknights-com": "关卡地图"
+        "map-arknights-com": "作战地图"
   loots:
     NORMAL_DROP: 常规掉落
     EXTRA_DROP: 额外物资
     SPECIAL_DROP: 特殊掉落
     FURNITURE: 家具
   selector:
-    plannerExclude: 排除规划关卡
+    plannerExclude: 排除规划作战
     excludeAll: 排除全部
     includeAll: 选中全部
-    title: 关卡选择
+    title: 作战选择
 planner:
   notices:
-    autoExistence: 刷图规划器现将会自动隐藏未于已选择服务器出现或开放的关卡
+    autoExistence: 刷图规划器现将会自动隐藏未于已选择服务器出现或开放的作战
   options:
     _name: 选项
     byProduct: 考虑合成副产物
@@ -292,7 +292,7 @@ planner:
           indicator: 将清除所有规划选项
         excludes:
           name: 计算排除
-          indicator: 将清除所有排除关卡
+          indicator: 将清除所有排除作战
         items:
           name: 物品数据
           indicator: 将清除所有物品数据
@@ -317,7 +317,7 @@ planner:
   calculation:
     title: 规划结果
     tabs:
-      stages: 关卡列表
+      stages: 作战列表
       syntheses: 合成列表
       values: 素材理智价值
     lmb: 预计龙门币收益
@@ -356,12 +356,12 @@ query:
   selector:
     item:
       title: 素材选择
-      subtitle: 用于将查询结果过滤为此关卡内的特定素材。
-      unspecified: 显示关卡全部掉落素材
+      subtitle: 用于将查询结果过滤为此作战内的特定素材。
+      unspecified: 显示作战全部掉落素材
       selected: 仅查询 {length} 种素材
     stage:
-      title: 选择关卡
-      subtitle: "（必填）用于将查询结果过滤为一特定关卡。"
+      title: 选择作战
+      subtitle: "（必填）用于将查询结果过滤为一特定作战。"
     timeRange:
       title: 时间段
       subtitle: "（必填）用于将查询结果过滤为于一特定时间段内。"
@@ -423,5 +423,5 @@ auth:
       tips: 本功能仅可找回于 v3.3.1 及更新版本客户端所登录的 PenguinID
 search:
   placeholder: 搜索...
-  hint: 键入 物品 拼音首字母/英文名称/物品ID 或 关卡 关卡名/关卡ID
+  hint: 键入 物品 拼音首字母/英文名称/物品ID 或 作战 作战名/作战ID
   footer: 由 企鹅物流黑科技 强力驱动

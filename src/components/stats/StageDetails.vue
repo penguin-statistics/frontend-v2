@@ -20,7 +20,7 @@
             :content="zone.zoneName"
           />
           <FactTableItem
-            title="关卡"
+            title="作战"
             :content="stage.code"
           />
         </FactTable>
@@ -111,7 +111,7 @@
                       <v-icon left>
                         mdi-star
                       </v-icon>
-                      已星标此关卡
+                      已星标此作战
                     </span>
                   </v-scroll-x-transition>
                 </div>
@@ -125,7 +125,7 @@
                   <v-icon left>
                     mdi-star-outline
                   </v-icon>
-                  星标此关卡
+                  星标此作战
                 </span>
               </v-slide-y-reverse-transition>
             </v-btn>
@@ -140,9 +140,9 @@
           class="mb-2 black--text"
         >
           <v-icon left>
-            mdi-magnify
+            mdi-database-search
           </v-icon>
-          对此关卡进行高级查询
+          进行高级查询
         </v-btn>
       </v-col>
     </v-row>

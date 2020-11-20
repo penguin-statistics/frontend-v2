@@ -57,7 +57,7 @@
 			"title": {
 				"report": "掉落汇报",
 				"byItem": "素材掉率",
-				"byStage": "关卡掉率",
+				"byStage": "作战掉率",
         "search": "全局搜索",
 				"planner": "刷图规划"
 			}
