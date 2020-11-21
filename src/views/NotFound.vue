@@ -25,6 +25,7 @@
           >
             <v-icon
               class="float-right"
+              color="white"
               :size="small ? 48 : 64"
               :style="{padding: small ? '8px' : '16px'}"
             >
@@ -33,7 +34,7 @@
           </v-col>
           <v-col style="flex-grow: 0;">
             <div
-              class="display-2 font-weight-medium letter"
+              class="display-2 font-weight-medium letter white--text"
               style="width: 240px; padding: 4px 4px 2px 16px"
             >
               PRTS提示
@@ -51,7 +52,7 @@
           style="height: 48px; background: #20211e"
         >
           <v-col cols="12">
-            <div class="subtitle-1 text-center letter">
+            <div class="subtitle-1 text-center letter white--text">
               {{ small ? "此地" : "未知环境" }}不宜久留 / PRTS请求返回首页
             </div>
           </v-col>
@@ -65,8 +66,11 @@
 </template>
 
 <script>
+import Theme from "@/mixins/Theme";
+
 export default {
   name: "NotFound",
+  mixins: [Theme],
   data: () => ({}),
   computed: {
     small() {
@@ -95,7 +99,6 @@ export default {
   position: absolute;
   bottom: 5vh;
   width: 100%;
-  margin-left: -15px;
 }
 
   .light-shadow {

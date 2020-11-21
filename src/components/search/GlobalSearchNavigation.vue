@@ -30,7 +30,7 @@
       </div>
       <v-slide-x-transition>
         <v-icon
-          v-if="searching"
+          v-show="searching"
           class="ml-2 transition-all"
         >
           mdi-chevron-right

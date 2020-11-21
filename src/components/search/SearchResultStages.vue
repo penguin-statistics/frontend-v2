@@ -1,5 +1,11 @@
 <template>
-  <v-card class="bkop-light radius-2">
+  <v-card
+    class="bkop-light radius-2 cursor-pointer"
+    ripple
+    hover
+
+    :to="{ name: 'StatsByStage_Selected', params: { zoneId: stage.zoneId, stageId: stage.stageId } }"
+  >
     <v-card-text class="d-flex flex-row align-center">
       <div
         class="monospace stage-code-preview"

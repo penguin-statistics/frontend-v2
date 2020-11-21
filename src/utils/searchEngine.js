@@ -21,6 +21,7 @@ class PinyinEngineManagerStages extends PinyinEngineManager {
   constructor(options) { super(options); }
   updateEngine () {
     this.engine = new PinyinEngine(this.data.map(el => ({
+      zoneId: el.zoneId,
       stageId: el.stageId,
       code: strings.translate(el, "code")
     })), [

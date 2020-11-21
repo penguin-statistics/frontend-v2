@@ -27,7 +27,8 @@ Vue.component('SearchResult', {
       component,
       {
         props: ctx.props
-      }
+      },
+      ctx.children
     )
   }
 })

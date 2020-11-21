@@ -1,5 +1,11 @@
 <template>
-  <v-card class="bkop-light radius-2">
+  <v-card
+    class="bkop-light radius-2 cursor-pointer"
+    ripple
+    hover
+
+    :to="{ name: 'StatsByItem_SelectedItem', params: { itemId: item.itemId } }"
+  >
     <v-card-text class="d-flex flex-row align-center">
       <Item
         :item="item"
