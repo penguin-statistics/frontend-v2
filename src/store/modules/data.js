@@ -8,6 +8,8 @@ import periodManager from '@/models/managers/period'
 import statsManager from '@/models/managers/stats'
 import globalMatrixManager from '@/models/managers/matrices/globalMatrix'
 import personalMatrixManager from '@/models/managers/matrices/personalMatrix'
+import globalPatternMatrixManager from '@/models/managers/matrices/globalPatternMatrix'
+import personalPatternMatrixManager from '@/models/managers/matrices/personalPatternMatrix'
 import strings from "@/utils/strings";
 import router from "@/router";
 
@@ -45,13 +47,20 @@ export default {
       stagesManager.refresh(refresh);
       zonesManager.refresh(refresh);
       globalMatrixManager.refresh(refresh);
-      if (router.currentRoute.matched.find(el => el.name === "Stats") && store.getters["dataSource/source"] === "personal") personalMatrixManager.refresh(refresh);
+      globalPatternMatrixManager.refresh(refresh);
+      if (router.currentRoute.matched.find(el => el.name === "Stats") && store.getters["dataSource/source"] === "personal") {
+        personalMatrixManager.refresh(refresh);
+        personalPatternMatrixManager.refresh(refresh);
+      }
       trendsManager.refresh(refresh);
       periodManager.refresh(refresh);
       statsManager.refresh(refresh);
     },
     async refreshPersonalMatrix() {
-      await personalMatrixManager.refresh(true)
+      await Promise.all([
+        personalMatrixManager.refresh(true),
+        personalPatternMatrixManager.refresh(true)
+      ])
     }
   },
   getters: {

@@ -1,6 +1,7 @@
 import {service} from '@/utils/service'
 import store from '@/store'
 import Console from "@/utils/Console";
+
 /**
  * Object Life-cycle manager
  * Automatically fetch data when passed object's TTL
@@ -57,6 +58,8 @@ class ObjectManager {
     })
     Console.debug("ObjectManager", "cache status of id:",
       this.name,
+      "serverSensitive:",
+      this.api.serverSensitive,
       "server:",
       this.server,
       "valid:",
@@ -72,17 +75,22 @@ class ObjectManager {
   }
 
   get apiConfig () {
-    let config = {
+    let url
+    if (typeof this.api.url === 'function') {
+      url = this.api.url.call(null, this.server)
+    } else if (typeof this.api.url === 'string') {
+      url = this.api.url
+    } else {
+      throw new Error(`invalid url type '${typeof this.api.url}' found in apiConfig`)
+    }
+
+    return {
       method: "GET",
-      url: this.api.url,
-      params: {
-        ...this.api.extraParams
-      }
-    };
-
-    if (this.api.serverSensitive) config.params["server"] = this.server
-
-    return config
+      url,
+      // params: {
+      //   ...this.api.extraParams
+      // }
+    }
   }
 
   _updateData (value) {
@@ -104,8 +112,8 @@ class ObjectManager {
   async refresh(forced = false) {
     const context = this;
 
-    Console.debug("ObjectManager",
-      `${context.name}: requireAuthorization ${context.api.requireAuthorization}, authorized ${store.getters["auth/loggedIn"]}`)
+    // Console.debug("ObjectManager",
+    //   `${context.name}: requireAuthorization ${context.api.requireAuthorization}, authorized ${store.getters["auth/loggedIn"]}`)
     if (context.api.requireAuthorization && !store.getters["auth/loggedIn"]) {
       Console.info("ObjectManager",
         `skipped fetching ${context.name} due to requireAuthorization and !authorized.`)
@@ -126,9 +134,9 @@ class ObjectManager {
       Console.debug("ObjectManager", `cache: invalid, fetching api. reason:`,
         forced ? '[Force Refresh]' : '[Cache Outdated]',
         "id:",
-        this.name,
+        context.name,
         "server:",
-        this.server,
+        context.server,
         "apiConfig:",
         context.apiConfig
       );

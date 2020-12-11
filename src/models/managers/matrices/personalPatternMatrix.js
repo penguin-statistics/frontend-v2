@@ -1,8 +1,8 @@
 import MatrixObjectManager from './_base'
 import commons from '../_common'
 
-const personalMatrix = new MatrixObjectManager({
-  name: 'personalMatrix',
+const personalPatternMatrix = new MatrixObjectManager({
+  name: 'personalPatternMatrix',
   api: {
     requireAuthorization: true,
     serverSensitive: true,
@@ -13,4 +13,4 @@ const personalMatrix = new MatrixObjectManager({
   ajaxHooks: commons.defaultAjaxHooks
 });
 
-export default personalMatrix
+export default personalPatternMatrix

@@ -6,7 +6,7 @@ const stats = new ObjectManager({
   api: {
     serverSensitive: true,
 
-    url: "/stats",
+    url: (server) => `/stats?server=${server}`,
   },
   transform: [
     (object) => object,

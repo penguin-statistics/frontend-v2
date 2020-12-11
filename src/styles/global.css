@@ -52,7 +52,7 @@
 }
 
 .theme--dark .bkop-light {
-    background-color: rgba(30, 30, 30, .85) !important;
+    background-color: rgba(30, 30, 30, .9) !important;
 }
 
 .theme--light .bkop-medium {
@@ -60,7 +60,7 @@
 }
 
 .theme--dark .bkop-medium {
-    background: rgba(30, 30, 30, .9) !important;
+    background: rgba(30, 30, 30, .94) !important;
 }
 
 .cursor-pointer {

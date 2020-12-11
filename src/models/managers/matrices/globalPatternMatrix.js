@@ -1,8 +1,8 @@
 import MatrixObjectManager from './_base'
 import commons from '../_common'
 
-const globalMatrix = new MatrixObjectManager({
-  name: 'globalMatrix',
+const globalPatternMatrix = new MatrixObjectManager({
+  name: 'globalPatternMatrix',
   api: {
     serverSensitive: true,
 
@@ -13,4 +13,4 @@ const globalMatrix = new MatrixObjectManager({
   ajaxHooks: commons.defaultAjaxHooks
 });
 
-export default globalMatrix
+export default globalPatternMatrix
