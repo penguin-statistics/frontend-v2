@@ -116,14 +116,14 @@ Getters.stages = {
 }
 
 Getters.zones = {
-  all(filter = true) {
+  all(filter = true, parseTime = true) {
     let zones = store.getters["data/content"]({id: "zones"})
     if (!zones) return []
 
     const server = store.getters["dataSource/server"]
 
     if (filter) {
-      zones = zones.filter(el => existUtils.existence(el, true))
+      zones = zones.filter(el => existUtils.existence(el, parseTime))
     }
 
     zones = zones.slice().sort((a, b) => {

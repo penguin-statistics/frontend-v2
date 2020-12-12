@@ -3,7 +3,7 @@ const MAX_HISTORY_RECORD_LENGTH = 30;
 export default {
   namespaced: true,
   state: {
-    // histories is a FILO stack where the latest record is at the FIRST element of the stack.
+    // histories is a FIFO stack where the latest record is at the FIRST element of the stack.
     histories: [],
     // histories is a stack where the latest record is at the LAST element of the stack.
     favorites: []

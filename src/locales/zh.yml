@@ -254,11 +254,24 @@ zone:
 stage:
   name: 作战
   apCost: "{apCost} 点理智"
-  details:
-    actions:
-      links:
-        "prts-wiki": Wiki
-        "map-arknights-com": 地图
+  actions:
+    _name:
+      selector: 快速访问
+      selectorEmpty: 暂无任何快速访问记录
+    star:
+      name: 星标作战
+      empty:
+        - 暂无已星标的作战
+        - 使用作战详情中的「快速操作」即可星标作战并于此处显示
+    history:
+      name: 最近选择作战
+      empty:
+        - 暂无最近选择作战
+        - 访问任何作战页面后，记录即会于此处显示
+      clear: 清空
+    links:
+      "prts-wiki": Wiki
+      "map-arknights-com": 地图
   loots:
     NORMAL_DROP: 常规掉落
     EXTRA_DROP: 额外物资

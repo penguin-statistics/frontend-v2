@@ -95,19 +95,26 @@
         :class="{'pa-0': small}"
       >
         <v-row class="px-1">
-          <v-col cols="12">
+          <v-col
+            cols="12"
+            :class="{'pb-0': !preferencedStages.haveAny}"
+          >
             <v-subheader>
               <v-icon
                 class="mr-2"
+                :color="preferencedStages.haveAny ? '' : 'grey'"
               >
                 mdi-chevron-double-right
               </v-icon>
               <span>
-                快速访问
+                {{ preferencedStages.haveAny ? $t('stage.actions._name.selector') : $t('stage.actions._name.selectorEmpty') }}
               </span>
             </v-subheader>
 
-            <v-card class="bkop-light">
+            <v-card
+              v-if="preferencedStages.haveAny"
+              class="bkop-light"
+            >
               <v-row>
                 <v-col
                   cols="12"
@@ -117,7 +124,7 @@
                     <v-icon left>
                       mdi-star
                     </v-icon>
-                    星标
+                    {{ $t('stage.actions.star.name') }}
                   </v-card-title>
                   <v-card-text class="pb-2 px-6">
                     <template v-if="preferencedStages.favorites.length">
@@ -131,9 +138,12 @@
                     </template>
 
                     <template v-else>
-                      <div class="caption text-center justify-center py-2 grey--text">
-                        暂无星标关卡
-                      </div>
+                      <div
+                        v-for="text in $t('stage.actions.star.empty')"
+                        :key="text"
+                        class="caption text-left justify-center grey--text"
+                        v-text="text"
+                      />
                     </template>
                   </v-card-text>
                 </v-col>
@@ -146,14 +156,16 @@
                     <v-icon left>
                       mdi-history
                     </v-icon>
-                    最近选择
+                    {{ $t('stage.actions.history.name') }}
+
                     <v-spacer />
                     <v-btn
                       small
                       text
+                      :disabled="!preferencedStages.histories.length"
                       @click="$store.commit('stagePreferences/clearHistory')"
                     >
-                      清空
+                      {{ $t('stage.actions.history.clear') }}
                     </v-btn>
                   </v-card-title>
                   <v-card-text class="pb-2 px-6">
@@ -169,15 +181,21 @@
                       </div>
                     </template>
                     <template v-else>
-                      <div class="caption text-center justify-center py-2 grey--text">
-                        暂无最近选择记录
-                      </div>
+                      <div
+                        v-for="text in $t('stage.actions.history.empty')"
+                        :key="text"
+                        class="caption text-left justify-center grey--text"
+                        v-text="text"
+                      />
                     </template>
                   </v-card-text>
                 </v-col>
               </v-row>
             </v-card>
+
+            <v-divider v-if="!preferencedStages.haveAny" />
           </v-col>
+
           <v-col
             v-for="(categories, index) in categorizedZones"
             :key="index"
@@ -528,9 +546,17 @@
         }
       },
       preferencedStages() {
+        const favorites = this.$store.getters['stagePreferences/favorites']
+            .map(el => get.stages.byStageId(el))
+            .filter(el => get.zones.byZoneId(el.zoneId, true, false))
+        const histories = this.$store.getters['stagePreferences/histories']
+            .map(el => get.stages.byStageId(el))
+            .filter(el => get.zones.byZoneId(el.zoneId, true, false))
+
         return {
-          favorites: this.$store.getters['stagePreferences/favorites'].map(el => get.stages.byStageId(el)),
-          histories: this.$store.getters['stagePreferences/histories'].map(el => get.stages.byStageId(el)),
+          favorites,
+          histories,
+          haveAny: !!favorites.length + histories.length
         }
       }
     },
@@ -558,9 +584,6 @@
               stageId: this.selected.stage
             }
           })
-        }
-        if (stage) {
-          this.$store.commit('stagePreferences/addHistory', stage)
         }
       },
       checkRoute () {

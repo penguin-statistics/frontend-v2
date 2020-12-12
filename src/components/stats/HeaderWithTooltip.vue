@@ -6,7 +6,7 @@
   >
     <template v-slot:activator="{on}">
       <span
-        class="tooltip-header "
+        class="tooltip-header position-relative"
         v-on="on"
       >
         {{ name }}

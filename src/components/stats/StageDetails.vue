@@ -71,7 +71,7 @@
 
           <h2 class="heading d-flex flex-row align-center px-6">
             <span class="text-left text-no-wrap">
-              {{ $t('stage.details.actions.links.' + link.id) }}
+              {{ $t('stage.actions.links.' + link.id) }}
             </span>
             <v-divider class="flex-grow-1 ml-2 mr-1" />
             <span class="caption monospace ml-1 flex-shrink-1">

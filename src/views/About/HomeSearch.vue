@@ -1,19 +1,25 @@
 <template>
   <v-card
     elevation="5"
-    class="d-flex align-center bkop-medium pa-6"
+    class="d-flex flex-column align-center justify-center bkop-medium pa-6"
   >
-    <!--    <h1 class="headline d-flex align-center flex-row mb-4">-->
-    <!--      <v-icon-->
-    <!--        left-->
-    <!--      >-->
-    <!--        mdi-magnify-->
-    <!--      </v-icon>-->
+    <h1
+      v-if="!valid"
+      class="headline d-flex align-center flex-row mb-4"
+    >
+      <v-icon
+        left
+      >
+        mdi-magnify
+      </v-icon>
 
-    <!--      搜索-->
-    <!--    </h1>-->
+      {{ $t('menu.search') }}
+    </h1>
     
-    <GlobalSearch pure />
+    <GlobalSearch
+      pure
+      :valid.sync="valid"
+    />
   </v-card>
 </template>
 
@@ -21,7 +27,12 @@
 import GlobalSearch from "@/components/search/GlobalSearch";
 export default {
   name: "HomeSearch",
-  components: {GlobalSearch}
+  components: {GlobalSearch},
+  data() {
+    return {
+      valid: false
+    }
+  },
 }
 </script>
 

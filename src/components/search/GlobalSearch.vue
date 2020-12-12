@@ -22,7 +22,7 @@
       :hint="$t('search.hint')"
       persistent-hint
       :loading="loading"
-      class="search-input-bar transition-all"
+      class="search-input-bar transition-background"
       :class="{'search__no-result': !results.length && search}"
       prepend-inner-icon="mdi-magnify"
       autocomplete="off"
@@ -44,15 +44,16 @@
     </v-text-field>
     <v-slide-y-transition>
       <recycle-scroller
-        v-show="search && results.length"
+        v-show="valid"
         :items="results"
         :item-size="103"
         class="search-results"
+        :class="{'search-results--dense': pure}"
       >
-        <template #default="{item}">
+        <template #default="{item, active}">
           <SearchResultNormal
             :key="item.id"
-            tabindex="2"
+            :tabindex="active ? 2 : -1"
             :result="item"
           />
         </template>
@@ -168,6 +169,9 @@ export default {
         this.$store.getters["ajax/pendingByKey"]("stages"),
         this.$store.getters["ajax/pendingByKey"]("items"),
       ].some(el => !!el)
+    },
+    valid () {
+      return this.search && this.results.length
     }
   },
   watch: {
@@ -182,6 +186,9 @@ export default {
     },
     search(newValue) {
       this.$emit('update:query', newValue)
+    },
+    valid(newValue) {
+      this.$emit('update:valid', newValue)
     }
   },
   created() {
@@ -251,6 +258,10 @@ export default {
   .theme--dark & {
     border: dashed rgba(255, 255, 255, .4);
     border-width: 0 1px;
+  }
+
+  &--dense {
+    max-height: 60vh !important;
   }
 }
 </style>

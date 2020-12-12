@@ -67,8 +67,10 @@ export default {
     if (!duration) return ""
     let message = ""
     const d = dayjs.duration(duration / 1000, unit)
-    if (d.get('minutes') > 0) message += i18n.t('meta.time.minute', {m: d.get('minutes')})
-    const ms = d.get('milliseconds') > 0 ? ((d.get('milliseconds') / 1000).toFixed(3)).toString().slice(1) : ""
+    let minutes = d.get('minutes')
+    if (d.get('hours') > 0) minutes += 60 * d.get('hours')
+    if (d.get('minutes') > 0) message += i18n.t('meta.time.minute', {m: minutes})
+    const ms = d.get('milliseconds') > 0 ? ((d.get('milliseconds') / 1000).toFixed(1)).slice(1) : ""
     if (d.get('seconds') > 0) message += i18n.t('meta.time.second', {s: `${d.get('seconds')}${ms}`})
     return message
   },

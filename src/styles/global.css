@@ -14,6 +14,10 @@
     transition: all .225s cubic-bezier(0.165, 0.84, 0.44, 1);
 }
 
+.transition-background {
+    transition: background .225s cubic-bezier(0.165, 0.84, 0.44, 1);
+}
+
 .v-navigation-drawer {
     /*transition: all .3s cubic-bezier(.25,.8,.5,1) !important;*/
 }
