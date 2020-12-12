@@ -102,7 +102,7 @@ stats:
       rate: ドロップ率
       sample: サンプル数
       drops: ドロップ数
-  lastUpdated: 最終更新日時： {date}
+  lastUpdated: 最終更新日時：{date}
   site:
     viewMore: さらに詳しく
     total:

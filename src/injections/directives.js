@@ -1,8 +1,17 @@
 import Vue from 'vue';
 import strings from "@/utils/strings";
 
-Vue.directive("marked", {
-  inserted: function (el) {
-    el.innerHTML = strings.markdown(el.innerHTML)
-  }
+Vue.directive("marked", function (el) {
+  el.innerHTML = strings.markdown(el.innerHTML);
+
+  [...el.querySelectorAll('a')].forEach(a => {
+    // avoid interferring with form input tab focus
+    a.setAttribute('tabindex', '-1')
+    const href = a.getAttribute('href')
+    if (href && href.charAt(0) !== '#') {
+      // make external links open in new tab
+      a.setAttribute('target', '_blank')
+      a.setAttribute('rel', 'noreferrer noopener')
+    }
+  })
 })

@@ -164,7 +164,7 @@
     <v-row
       align="center"
       justify="center"
-      class="mt-4 mb-1 hidden-sm-and-up"
+      class="mt-4 mb-1 hidden-lg-and-up"
     >
       <v-chip
         label
@@ -205,7 +205,6 @@
       :locale="$i18n.locale"
       :hide-default-footer="items.length <= 10"
 
-      :calculate-widths="true"
       :mobile-breakpoint="1"
       :loading="matrixPending"
 
@@ -256,6 +255,12 @@
       <template v-slot:header.stage.minClearTime="{header}">
         <HeaderWithTooltip :name="header.text">
           {{ $t('stats.headerDesc.clearTime') }}
+        </HeaderWithTooltip>
+      </template>
+
+      <template v-slot:header.perTime="{header}">
+        <HeaderWithTooltip :name="header.text">
+          {{ $t('stats.headerDesc.itemPerTime') }}
         </HeaderWithTooltip>
       </template>
 
@@ -375,75 +380,28 @@
               :meta="meta(props)"
             />
           </td>
-          <td
-            v-if="invalidApCost(props.item.stage.apCost) || ['NaN', 'Infinity'].includes(props.item.apPPR)"
+          <NullableTableCell
+            :value="props.item.apPPR"
             :class="tableCellClasses"
-            class="grey--text"
-          >
-            --
-          </td>
-          <td
-            v-else
-            :class="tableCellClasses"
-          >
-            {{ props.item.apPPR }}
-          </td>
+          />
+
           <template v-if="type === 'item'">
-            <td
-              v-if="invalidApCost(props.item.stage.apCost)"
-              :class="tableCellClasses"
-              class="grey--text"
-            >
-              --
-            </td>
-            <td
-              v-else
+            <NullableTableCell
+              :value="props.item.stage.apCost"
               :class="`${tableCellClasses} ${dark ? 'orange--text text--lighten-1' : 'deep-orange--text text--darken-3 font-weight-bold'}`"
-            >
-              {{ props.item.stage.apCost }}
-            </td>
-            <td
-              v-if="props.item.stage.minClearTime"
+            />
+            <NullableTableCell
+              :value="props.item.stage.minClearTime"
+              :transformer="formatDuration"
               :class="tableCellClasses"
-            >
-              {{ formatDuration(props.item.stage.minClearTime) }}
-            </td>
-            <td
-              v-else
-              :class="tableCellClasses"
-              class="grey--text"
-            >
-              --
-            </td>
-            <td
-              v-if="props.item.itemPerTime"
-              :class="tableCellClasses"
-            >
-              {{ formatDuration(props.item.itemPerTime) }}
-            </td>
-            <td
-              v-else
-              :class="tableCellClasses"
-              class="grey--text"
-            >
-              --
-            </td>
+            />
           </template>
-          <template v-else>
-            <td
-              v-if="isValidTime(props.item.itemPerTime)"
-              :class="tableCellClasses"
-            >
-              {{ formatDuration(props.item.itemPerTime) }}
-            </td>
-            <td
-              v-else
-              :class="tableCellClasses"
-              class="grey--text"
-            >
-              --
-            </td>
-          </template>
+          <NullableTableCell
+            :value="props.item.itemPerTime"
+            :transformer="formatDuration"
+            :class="tableCellClasses"
+          />
+
           <td
             :class="tableCellClasses"
           >
@@ -474,10 +432,11 @@
   import existUtils from "@/utils/existUtils";
   import validator from "@/utils/validator";
   import HeaderWithTooltip from "@/components/stats/HeaderWithTooltip";
+  import NullableTableCell from "@/components/stats/NullableTableCell";
 
   export default {
     name: "DataTable",
-    components: {HeaderWithTooltip, TitledRow, Item, Charts},
+    components: {NullableTableCell, HeaderWithTooltip, TitledRow, Item, Charts},
     mixins: [Theme, CDN, Mirror],
     props: {
       items: {
@@ -704,12 +663,6 @@
       isTimeOutdatedRange (time) {
         if (!time) return false
         return time < Date.now()
-      },
-      isValidTime(time) {
-        return Number.isFinite(time) && !Number.isNaN(time)
-      },
-      invalidApCost (apCost) {
-        return apCost === 99 || apCost === null
       },
       getZoneName (stage) {
         return strings.translate(get.zones.byZoneId(stage.zoneId, false), "zoneName")

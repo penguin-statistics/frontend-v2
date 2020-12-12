@@ -51,11 +51,11 @@
             value: 'zh',
             text: '简体中文'
           },
-          {
-            value: 'zh-TW',
-            text: '繁体中文',
-            beta: true
-          },
+          // {
+          //   value: 'zh-TW',
+          //   text: '繁体中文',
+          //   beta: true
+          // },
           {
             value: 'en',
             text: 'English'

@@ -328,6 +328,9 @@
 .stat-table {
     background: transparent !important;
 }
+.stat-table table {
+    position: relative !important;
+}
 .stat-table th {
     padding-left: 8px !important;
     padding-right: 8px !important;

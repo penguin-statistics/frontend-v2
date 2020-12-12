@@ -65,7 +65,7 @@ Getters.statistics = {
           percentage,
           percentageText: `${(percentage * 100).toFixed(2)}%`,
           apPPR: (stage.apCost / percentage).toFixed(2),
-          itemPerTime: +(stage.minClearTime / percentage).toFixed(2)
+          itemPerTime: (stage.minClearTime / percentage).toFixed(2)
         }
       });
   },

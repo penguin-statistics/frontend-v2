@@ -10,6 +10,7 @@
         rounded
         class="mx-1"
         v-bind="attrs"
+        large
         v-on="on"
       >
         <v-icon
@@ -18,9 +19,20 @@
         >
           mdi-server
         </v-icon>
-        <span>
-          {{ $t("server.servers." + activeServerId) }}
-        </span>
+        <div class="d-flex flex-column align-start justify-center">
+          <span
+            class="caption"
+            style="line-height: 1rem"
+          >
+            <span class="grey--text">{{ $t('server.selected') }}</span>
+            <span>
+              {{ $t("server.servers." + activeServerId) }}
+            </span>
+          </span>
+          <span class="heading">
+            {{ $t("server.switch") }}
+          </span>
+        </div>
       </v-btn>
     </template>
 

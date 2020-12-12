@@ -201,6 +201,7 @@ export default {
   watch: {
     $route: function(to, from) {
       Console.log("StatsByItem", "step route changed from", from.path, "to", to.path);
+      if (to.name === from.name) return
       if (to.name === "StatsByItem") {
         this.step = 1;
       }
@@ -219,10 +220,12 @@ export default {
         case 2:
           this.selectedItemId = this.$route.params.itemId
           Console.log("StatsByItem", "- [router go] item", this.selectedItem.itemId);
-          this.$router.push({
-            name: "StatsByItem_SelectedItem",
-            params: { itemId: this.selectedItem.itemId }
-          });
+          if (this.$route.name !== "StatsByItem_SelectedItem" && this.$route.params.itemId !== this.selectedItem.itemId) {
+            this.$router.push({
+              name: "StatsByItem_SelectedItem",
+              params: { itemId: this.selectedItem.itemId }
+            });
+          }
           break;
         default:
           Console.warn(

@@ -6,6 +6,7 @@ app:
 server:
   name: 服务器
   switch: 服务器切换
+  selected: 已选择
   servers:
     CN: 国服
     US: 美服
@@ -83,9 +84,9 @@ stats:
     times: 样本数
     quantity: 掉落数
     percentage: 百分比
-    apPPR: 单件估算理智
+    apPPR: 单件期望理智
     clearTime: 最短通关用时
-    itemPerTime: 单件估算用时
+    itemPerTime: 单件期望用时
     timeRange: 统计区间
   headerDesc:
     apCost: 完成单次该作战的所需理智数量
@@ -94,6 +95,7 @@ stats:
     percentage: "期望掉落概率；计算方式为 $$\\frac{\\text{掉落数}}{\\text{样本数}}$$"
     apPPR: "根据当前的「百分比」项，计算出的在该作战获得「1x对应物品」所需的期望理智，即 $$\\frac{\\text{作战理智消耗}}{\\frac{\\text{掉落数}}{\\text{样本数}}}$$"
     clearTime: "来源为 PRTS Wiki 中的「最短通关用时」；其中，PRTS Wiki 对此的计算方法为：由「作战开始」直至「最后出怪」期间，使用 1 倍速的最短所需游戏时间总长"
+    itemPerTime: "根据当前的「百分比」项，计算出的在该作战获得「1x对应物品」所需的期望时间消耗，即 $$\\frac{\\text{作战最短通关用时}}{\\frac{\\text{掉落数}}{\\text{样本数}}}$$"
     timeRange: 由于存在掉落物列表变动故引入的「统计区间」概念。在本表所展示的数据中，其将仅包含已标注时间段内所提交的样本统计数据。若欲查看其它统计区间内的样本统计情况，请使用「高级查询」
   filter:
     title: 数据过滤
@@ -420,7 +422,11 @@ quotes:
 credits:
   material:
     title: 网站内容声明
-    content: 企鹅物流数据统计网站内所使用的游戏资源（包括但不限于：游戏图片、动画、音频、文本原文或其转译版本等），其目的仅为更好地反映游戏内对应元素、增强用户体验，相关作品之版权仍属于上海鹰角网络科技有限公司和/或其关联公司，即鹰角网络游戏软件和/或鹰角网络游戏服务的提供方（包括但不限于：YOSTAR (HONG KONG) LIMITED, 株式会社Yostar, YOSTAR LIMITED, 龍成網路 等）。企鹅物流数据统计网站内所使用的部分资源来源于 PRTS Wiki (http://prts.wiki) 并同时对部分资源进行了非歧义性的更改。企鹅物流数据统计网站内使用了经细微修改的、由 Free Fonts Project 提供的 Bender 字体，该字体特别说明使用者可将相关字体以任何用途、没有任何限制地使用，在此特别表示感谢。
+    # License source: http://jovanny.ru/
+    content:
+      - 企鹅物流数据统计网站内所使用的游戏资源（包括但不限于：游戏图片、动画、音频、文本原文或其转译版本等），其目的仅为更好地反映游戏内对应元素、增强用户体验，相关作品之版权仍属于上海鹰角网络科技有限公司和/或其关联公司，即鹰角网络游戏软件和/或鹰角网络游戏服务的提供方（包括但不限于：YOSTAR (HONG KONG) LIMITED, 株式会社Yostar, YOSTAR LIMITED, 龍成網路 等）
+      - 企鹅物流数据统计网站内所使用的部分资源来源于 PRTS Wiki (http://prts.wiki) 并同时对部分资源进行了非歧义性的更改
+      - 企鹅物流数据统计网站内使用了经细微修改的、由 Free Fonts Project 提供的 Bender 字体，该字体特别说明使用者可将相关字体以任何用途、没有任何限制地使用，在此特别表示感谢。
   source:
     title: 开源许可列表
 auth:
