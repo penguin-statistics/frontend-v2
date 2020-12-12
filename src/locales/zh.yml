@@ -240,6 +240,7 @@ zone:
   types:
     MAINLINE: 主线
     WEEKLY: 物资筹备
+    ACTIVITY: 限时活动
     ACTIVITY_OPEN: 限时活动 — 开放中
     ACTIVITY_CLOSED: 限时活动 — 已结束
     ACTIVITY_PENDING: 限时活动 — 即将开放
@@ -327,7 +328,8 @@ planner:
     level: 材料等级
     noStage: 未找到需要进行的作战。
     noSyntheses: 未找到需要合成的素材。
-items:
+item:
+  name: 素材
   choose:
     name: 素材选择
   categories:

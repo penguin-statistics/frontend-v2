@@ -133,8 +133,7 @@ export default {
         })
         anime({
           targets: ['.card-fade-appear'],
-          scaleY: [1.5, 1],
-          translateY: [48, 0],
+          scaleY: [1.1, 1],
           duration: 325,
           easing: "easeOutQuint"
         })

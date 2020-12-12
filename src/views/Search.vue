@@ -7,7 +7,10 @@
         cols="12"
         class="d-flex flex-column align-center"
       >
-        <GlobalSearch :query="query" />
+        <GlobalSearch
+          :query="query"
+          @update:query="changeUrl"
+        />
       </v-col>
     </v-row>
   </v-container>
@@ -23,6 +26,14 @@ export default {
       type: String,
       default: () => ""
     },
+  },
+  methods: {
+    changeUrl(query) {
+      const url = new URL(window.location.href)
+      url.searchParams.delete("q")
+      if (query) url.searchParams.set("q", query)
+      window.history.replaceState(null, '', url.pathname + url.search)
+    }
   },
 }
 </script>

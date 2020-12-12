@@ -1,22 +1,27 @@
 <template>
   <v-card
-    class="bkop-light radius-2 cursor-pointer"
+    class="orange-card radius-2 cursor-pointer search-result-card transition-all--fast ma-2"
     ripple
     hover
 
     :to="{ name: 'StatsByItem_SelectedItem', params: { itemId: item.itemId } }"
   >
     <v-card-text class="d-flex flex-row align-center">
-      <Item
-        :item="item"
-      />
+      <div
+        class="d-flex justify-center text-center"
+        style="min-width: 48px !important"
+      >
+        <Item
+          :item="item"
+        />
+      </div>
       <div class="ml-4">
+        <span class="monospace grey--text mb-1">
+          {{ $t('item.name') }}
+        </span>
         <h2 class="headline">
           {{ name }}
         </h2>
-        <span class="monospace grey--text mt-1">
-          #{{ item.itemId }}
-        </span>
       </div>
     </v-card-text>
   </v-card>
@@ -28,7 +33,7 @@ import Item from "@/components/global/Item";
 import strings from "@/utils/strings";
 
 export default {
-name: "SearchResultItems",
+  name: "SearchResultItems",
   components: {Item},
   props: {
     result: {
@@ -47,6 +52,14 @@ name: "SearchResultItems",
 }
 </script>
 
-<style scoped>
+<style scoped lang="scss">
+.orange-card {
+  .theme--light & {
+    background: rgb(255, 235, 204);
+  }
 
+  .theme--dark & {
+    background: rgba(77, 47, 31, 0.9)
+  }
+}
 </style>

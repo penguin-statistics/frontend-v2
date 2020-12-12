@@ -628,10 +628,31 @@
     background-color: transparent !important;
 }
 
-@media (max-width: 600px) {
-    .fill-sm-and-down {
-
-    }
+.search-result-card {
+    transition: all .125s cubic-bezier(0.165, 0.84, 0.44, 1) !important;
 }
 
+.search-result-card:focus {
+    box-shadow: 0 0 0 0.3rem rgba(49, 100, 191, 0.8) !important;
+}
+
+.bkop-light.search-result-card:hover {
+    background-color: rgba(78, 78, 78, 0.9) !important;
+}
+
+/*.theme--light .bkop-light {*/
+/*    background-color: rgba(255, 255, 255, .75) !important;*/
+/*}*/
+
+/*.theme--dark .bkop-light {*/
+/*    background-color: rgba(30, 30, 30, .9) !important;*/
+/*}*/
+
+/*.theme--light .bkop-medium {*/
+/*    background: rgba(255, 255, 255, .9) !important;*/
+/*}*/
+
+/*.theme--dark .bkop-medium {*/
+/*    background: rgba(30, 30, 30, .94) !important;*/
+/*}*/
 

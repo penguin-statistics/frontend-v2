@@ -7,3 +7,9 @@ cache:
 script:
   - yarn lint
   - yarn build:single
+notifications:
+  webhooks:
+    urls:
+      - https://open.feishu.cn/officialapp/notify/7acc2a56a36dacb0a47d60c557a7bb469b0eeeb49f433469ccceb2bba0861887
+    on_success: always
+    on_failure: always

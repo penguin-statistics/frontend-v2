@@ -1,6 +1,6 @@
 <template>
   <v-card
-    class="bkop-light radius-2 cursor-pointer"
+    class="purple-card radius-2 cursor-pointer search-result-card ma-2"
     ripple
     hover
 
@@ -8,19 +8,17 @@
   >
     <v-card-text class="d-flex flex-row align-center">
       <div
-        class="monospace stage-code-preview"
+        class="monospace d-inline-flex align-center justify-center stage-code-preview"
       >
-        {{ stageCodePreview.v }}
+        {{ name.preview }}
       </div>
       <div class="ml-4">
-        <h2 class="headline">
-          {{ name.zone }}
-          -
-          {{ name.stage }}
-        </h2>
-        <span class="monospace grey--text mt-1">
-          #{{ stage.stageId }}
+        <span class="monospace grey--text mb-1">
+          {{ name.subtitle }}
         </span>
+        <h2 class="headline">
+          {{ name.title }}
+        </h2>
       </div>
     </v-card-text>
   </v-card>
@@ -31,7 +29,7 @@ import get from "@/utils/getters"
 import strings from "@/utils/strings";
 
 export default {
-  name: "SearchResultItems",
+  name: "SearchResultStages",
   props: {
     result: {
       type: Object,
@@ -40,42 +38,45 @@ export default {
   },
   computed: {
     name() {
+      const zoneName = strings.translate(this.zone, "zoneName")
+      const zoneType = this.$t('zone.types.' + this.zone.type)
+      const stageCode = strings.translate(this.stage, "code")
+
       return {
-        stage: strings.translate(this.stage, "code"),
-        zone: strings.translate(this.zone, "zoneName")
+        title: (zoneName ? zoneName + ' — ' : '') + stageCode,
+        subtitle: this.$t('stage.name') + (zoneType ? ' — ' + zoneType : ''),
+        preview: this.zone.isPermanentOpen ? this.$t('zone.types.ACTIVITY_PERMANENT') : stageCode
       }
     },
     stage() {
-      return get.stages.byStageId(this.result.stageId)
+      return get.stages.byStageId(this.result.stageId, false)
     },
     zone() {
-      return get.zones.byZoneId(this.stage.zoneId)
-    },
-    stageCodePreview() {
-      if (this.stage.isPermanentOpen) {
-        return {
-          v: this.$t('zone.types.ACTIVITY_PERMANENT')
-        }
-      } else if (this.stage.type === "MAINLINE") {
-        return {
-          v: this.name.stage
-        }
-      } else {
-        return {
-          s: true,
-          v: this.name.stage
-        }
-      }
+      return get.zones.byZoneId(this.stage.zoneId, false)
     }
   },
 }
 </script>
 
-<style scoped>
+<style scoped lang="scss">
 .stage-code-preview {
   font-size: 1.7rem;
   letter-spacing: -.05rem;
   word-wrap: break-word;
   max-width: 180px;
+  min-width: 60px;
+  text-align: left;
+  overflow: hidden;
+  white-space: nowrap;
+  min-height: 48px;
+}
+.purple-card {
+  .theme--light & {
+    background: rgba(228, 214, 255, .9);
+  }
+
+  .theme--dark & {
+    background: rgba(51, 31, 77, .9)
+  }
 }
 </style>

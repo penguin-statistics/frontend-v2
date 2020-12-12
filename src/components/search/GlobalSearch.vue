@@ -18,7 +18,6 @@
       full-width
       autofocus
       rounded
-      clearable
       :placeholder="$t('search.placeholder')"
       :hint="$t('search.hint')"
       persistent-hint
@@ -26,63 +25,95 @@
       class="search-input-bar transition-all"
       :class="{'search__no-result': !results.length && search}"
       prepend-inner-icon="mdi-magnify"
-    />
+      autocomplete="off"
+      tabindex="1"
+    >
+      <template #append>
+        <v-btn
+          v-if="search"
+          icon
+          tabindex="100"
+
+          @click="search = ''"
+        >
+          <v-icon>
+            {{ $vuetify.icons.values.clear }}
+          </v-icon>
+        </v-btn>
+      </template>
+    </v-text-field>
     <v-slide-y-transition>
-      <v-data-iterator
-        v-show="search"
+      <recycle-scroller
+        v-show="search && results.length"
         :items="results"
-        :loading="loading"
-        class="mx-2 search-results"
-        :page="page"
+        :item-size="103"
+        class="search-results"
       >
-        <template #header="{ pagination }">
-          <div class="d-flex flex-row justify-space-around align-center">
-            <v-btn
-              large
-              :disabled="page <= 1"
-              @click="page -= 1"
-            >
-              <v-icon>
-                mdi-chevron-left
-              </v-icon>
-              上一页
-            </v-btn>
-
-            <span>
-              页 {{ pagination.page }} / 共 {{ pagination.pageCount }} 页, {{ pagination.itemsLength }} 条目
-            </span>
-
-            <v-btn
-              large
-              :disabled="page >= pagination.pageCount"
-              @click="page += 1"
-            >
-              下一页
-              <v-icon>
-                mdi-chevron-right
-              </v-icon>
-            </v-btn>
-          </div>
+        <template #default="{item}">
+          <SearchResultNormal
+            :key="item.id"
+            tabindex="2"
+            :result="item"
+          />
         </template>
+      </recycle-scroller>
+      <!--      <v-data-iterator-->
+      <!--        v-show="search"-->
+      <!--        :items="results"-->
+      <!--        class="mx-2 search-results"-->
+      <!--        :page="page"-->
+      <!--      >-->
+      <!--        <template #header="{ pagination }">-->
+      <!--          <div class="d-flex flex-row justify-space-around align-center">-->
+      <!--            <v-btn-->
+      <!--              large-->
+      <!--              :disabled="page <= 1"-->
+      <!--              tabindex="101"-->
+      <!--              @click="page -= 1"-->
+      <!--            >-->
+      <!--              <v-icon>-->
+      <!--                mdi-chevron-left-->
+      <!--              </v-icon>-->
+      <!--              上一页-->
+      <!--            </v-btn>-->
 
-        <template #default="{ items }">
-          <v-row>
-            <v-col
-              v-for="item in items"
-              :key="item.id"
-              cols="12"
-              sm="12"
-              md="6"
-              lg="6"
-              xl="6"
-            >
-              <SearchResult
-                :result="item"
-              />
-            </v-col>
-          </v-row>
-        </template>
-      </v-data-iterator>
+      <!--            <span>-->
+      <!--              页 {{ pagination.page }} / 共 {{ pagination.pageCount }} 页, {{ pagination.itemsLength }} 条目-->
+      <!--            </span>-->
+
+      <!--            <v-btn-->
+      <!--              large-->
+      <!--              :disabled="page >= pagination.pageCount"-->
+      <!--              tabindex="102"-->
+      <!--              @click="page += 1"-->
+      <!--            >-->
+      <!--              下一页-->
+      <!--              <v-icon>-->
+      <!--                mdi-chevron-right-->
+      <!--              </v-icon>-->
+      <!--            </v-btn>-->
+      <!--          </div>-->
+      <!--        </template>-->
+
+      <!--        <template #default="{ items }">-->
+      <!--          <v-row>-->
+      <!--            <v-col-->
+      <!--              v-for="item in items"-->
+      <!--              :key="item.id"-->
+      <!--              cols="12"-->
+      <!--              sm="12"-->
+      <!--              md="12"-->
+      <!--              lg="12"-->
+      <!--              xl="12"-->
+      <!--            >-->
+      <!--              <SearchResult-->
+      <!--                tabindex="1"-->
+      <!--                :result="item"-->
+      <!--              />-->
+      <!--            </v-col>-->
+      <!--          </v-row>-->
+      <!--        </template>-->
+      <!--      </v-data-iterator>-->
     </v-slide-y-transition>
     <!--    <h1 class="d-block mt-12 overline text-center grey&#45;&#45;text">-->
     <!--      {{ $t('search.footer') }}-->
@@ -94,8 +125,10 @@
 import SearchEngine from "@/utils/searchEngine";
 import Console from "@/utils/Console";
 import CDN from "@/mixins/CDN";
+import SearchResultNormal from "@/components/search/SearchResultNormal";
 export default {
   name: "GlobalSearch",
+  components: {SearchResultNormal},
   mixins: [CDN],
   props: {
     query: {
@@ -118,6 +151,10 @@ export default {
   computed: {
     results() {
       return this.engine.query(this.search)
+      .map(el => ({
+        ...el,
+        id: `${el.type}_${el.stageId || el.itemId}`,
+      }))
     },
     dependencies() {
       return {
@@ -130,7 +167,7 @@ export default {
       return [
         this.$store.getters["ajax/pendingByKey"]("stages"),
         this.$store.getters["ajax/pendingByKey"]("items"),
-      ].some(el => el)
+      ].some(el => !!el)
     }
   },
   watch: {
@@ -143,11 +180,8 @@ export default {
     "dependencies.items"(val) {
       this.engine.update("items", val)
     },
-    search(val) {
-      const url = new URL(window.location.href)
-      url.searchParams.delete("q")
-      if (val) url.searchParams.set("q", val)
-      window.history.replaceState(null, '', url.pathname + url.search)
+    search(newValue) {
+      this.$emit('update:query', newValue)
     }
   },
   created() {
@@ -202,6 +236,21 @@ export default {
 .search-results {
   ::v-deep .v-data-footer {
     display: none;
+  }
+
+  max-height: 100vh;
+  padding: .5rem 6px;
+  margin: .5rem -8px;
+  box-shadow: inset 0 16px 16px -16px rgba(0, 0, 0, .2);
+
+  .theme--light & {
+    border: dashed rgba(18, 18, 18, .4);
+    border-width: 0 1px;
+  }
+
+  .theme--dark & {
+    border: dashed rgba(255, 255, 255, .4);
+    border-width: 0 1px;
   }
 }
 </style>

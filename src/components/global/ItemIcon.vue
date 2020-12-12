@@ -141,5 +141,6 @@ export default {
 
   .item-icon--special {
     border-radius: 50%;
+    /*margin: 0 .2rem;*/
   }
 </style>
