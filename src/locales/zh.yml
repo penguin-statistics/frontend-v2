@@ -163,6 +163,8 @@ fetch:
       trends: 汇报历史数据
       globalMatrix: 全平台掉落数据
       personalMatrix: 个人掉落数据
+      globalPatternMatrix: 全平台掉落组合数据
+      personalPatternMatrix: 个人掉落组合数据
       stats: 全站概览数据
       period: 服务器事件数据
 report:

@@ -86,9 +86,10 @@
     },
     "zh": {
       "categories": {
+        "owner": "站长",
+        "maintainers": "主要贡献者",
         "developers": "开发者",
         "others": "其他",
-        "owner": "站长",
         "translators": "翻译"
       },
       "responsibilities": {
@@ -116,76 +117,74 @@
 </i18n>
 
 <template>
-  <v-row
-    justify="center"
-  >
-    <v-col
-      cols="12"
-      sm="10"
-      md="8"
-      lg="7"
-      xl="6"
+  <div>
+    <v-row
+      justify="center"
     >
-      <v-list
-        v-for="[key, value] in Object.entries(profiles)"
-        :key="key"
-        class="bkop-light mb-4 members--list"
-        two-line
-        elevation="5"
+      <v-col
+        cols="12"
+        sm="12"
+        md="6"
+        lg="6"
+        xl="4"
       >
-        <v-subheader :key="key">
-          {{ $t(`categories.${key}`) }}
+        <v-subheader>
+          站长
         </v-subheader>
-
-        <v-list-item
-          v-for="profile in value"
-          :key="profile.name"
-          class="grow px-4 members--list-item"
-        >
-          <v-list-item-avatar>
-            <v-img
-              :src="avatar(profile.avatar)"
-            />
-          </v-list-item-avatar>
-
-          <v-list-item-content class="collaborator-profile">
-            <v-list-item-title>
-              {{ profile.name }}
-            </v-list-item-title>
-
-            <v-list-item-subtitle class="mt-1">
-              {{ renderResponsibility(profile.responsibility) }}
-            </v-list-item-subtitle>
-          </v-list-item-content>
-          <v-list-item-action>
-            <v-row
-              class="fill-height"
-              align="center"
-              justify="end"
-            >
-              <v-btn
-                v-for="[id, url] in Object.entries(profile.socials)"
-                :key="`${profile.name}-${id}`"
-                icon
-                :href="url"
-                target="_blank"
-                :title="$t(`socials.${id}`)"
-              >
-                <v-icon>
-                  {{ getSocial(id).icon }}
-                </v-icon>
-              </v-btn>
-            </v-row>
-          </v-list-item-action>
-        </v-list-item>
-      </v-list>
-    </v-col>
-  </v-row>
+        <MaintainerMemberCard :member="profiles.owner" />
+      </v-col>
+      <v-col
+        v-for="maintainer in profiles.maintainers"
+        :key="maintainer.name"
+        cols="12"
+        sm="12"
+        md="6"
+        lg="6"
+        xl="4"
+      >
+        <v-subheader>
+          主要贡献者
+        </v-subheader>
+        <MaintainerMemberCard :member="maintainer" />
+      </v-col>
+    </v-row>
+    <v-row
+      justify="start"
+    >
+      <v-col
+        cols="12"
+        class="pa-0"
+      >
+        <v-subheader>
+          内容贡献者
+        </v-subheader>
+      </v-col>
+      <v-col
+        v-for="contributor in profiles.contributors"
+        :key="contributor.name"
+        xl="1"
+        md="2"
+        sm="3"
+        class="col-xs-1-2 col-md-1-10 col-lg-1-8"
+        cols="4"
+        style="min-width: 220px"
+      >
+        <ContributorMemberCard :member="contributor" />
+      </v-col>
+    </v-row>
+  </div>
 </template>
 
 <script>
   import anime from "animejs";
   import CDN from "@/mixins/CDN";
+  import MaintainerMemberCard from "@/components/members/MaintainerMemberCard";
+  import ContributorMemberCard from "@/components/members/ContributorMemberCard";
+
+  const c = {
+    owner: "owner",
+    maintainer: "maintainer",
+  }
 
   const r = {
     frontend: "frontend",
@@ -204,12 +203,14 @@
   };
   export default {
     name: 'Members',
+    components: {ContributorMemberCard, MaintainerMemberCard},
     mixins: [CDN],
     data() {
       return {
         profiles: {
-          owner: [{
+          owner: {
             name: "AlvISs_红白",
+            role: c.owner,
             responsibility: [
               r.frontend,
               r.backend,
@@ -223,10 +224,11 @@
               qq: "https://wpa.qq.com/msgrd?v=3&uin=498704999&site=qq&menu=yes",
               email: "mailto:alvissreimu@gmail.com"
             }
-          }],
-          developers: [
+          },
+          maintainers: [
             {
               name: "GalvinGao",
+              role: c.maintainer,
               responsibility: [
                 r.frontend
               ],
@@ -237,6 +239,8 @@
                 email: "mailto:me@galvingao.com"
               }
             },
+          ],
+          contributors: [
             {
               name: "YukiC",
               responsibility: [
@@ -346,9 +350,7 @@
               socials: {
                 github: "https://github.com/jdgjxxchy"
               }
-            }
-          ],
-          translators: [
+            },
             {
               name: "Syaro",
               responsibility: [
@@ -378,9 +380,7 @@
               socials: {
                 twitter: "https://twitter.com/Winterer000000"
               }
-            }
-          ],
-          others: [
+            },
             {
               name: "Nemunemu",
               responsibility: [

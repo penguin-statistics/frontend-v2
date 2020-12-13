@@ -11,6 +11,8 @@
 <script>
 export default {
 name: "NullableTableCell",
+  // reason to disable prop type check is that `value` could be any type that's `toString()`-able
+  // eslint-disable-next-line vue/require-prop-types
   props: ['value', 'transformer'],
   computed: {
     cellValue () {

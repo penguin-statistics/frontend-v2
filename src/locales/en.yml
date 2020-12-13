@@ -167,6 +167,8 @@ fetch:
       trends: History Report Trends
       globalMatrix: Global Drop Data
       personalMatrix: Personal Drop Data
+      globalPatternMatrix: Global Drop Pattern Data
+      personalPatternMatrix: Personal Drop Pattern Data
       stats: Site Statistics
       period: Server Events
 report:
