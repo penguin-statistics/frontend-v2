@@ -39,6 +39,9 @@ module.exports = {
       new webpack.DefinePlugin({
         GIT_COMMIT: JSON.stringify(commitHash).trim()
       }),
+      new webpack.optimize.MinChunkSizePlugin({
+        minChunkSize: 10000 // Minimum number of characters
+      })
       // new InjectManifest ({
       //   swSrc: "./src/workers/service-worker.js",
       //   dontCacheBustURLsMatching: /.[a-f0-9]{8}./

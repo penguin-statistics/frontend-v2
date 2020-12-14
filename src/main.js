@@ -6,8 +6,8 @@ import App from './App.vue'
 import Vue from 'vue'
 import vuetify from './plugins/vuetify'
 import 'vuetify/dist/vuetify.min.css'
-import router from './router'
 import store from './store'
+import router from './router'
 import i18n from "@/i18n"
 
 import '@/components/functional'

@@ -336,6 +336,23 @@
     padding-right: 8px !important;
 }
 
+.stat-table th.sortable {
+    transition: background .125s cubic-bezier(0.165, 0.84, 0.44, 1);
+}
+
+.theme--dark .stat-table th.sortable:hover {
+    background-color: rgba(255, 255, 255, .1);
+}
+.theme--dark .stat-table th.sortable:active {
+    background-color: rgba(255, 255, 255, .18);
+}
+.theme--light .stat-table th.sortable:hover {
+    background-color: rgba(0, 0, 0, .1);
+}
+.theme--light .stat-table th.sortable:active {
+    background-color: rgba(0, 0, 0, .18);
+}
+
 .stat-table-watermark {
     position: absolute;
     top: 0;

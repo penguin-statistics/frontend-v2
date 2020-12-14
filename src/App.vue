@@ -3,6 +3,7 @@
     :class="languageFont"
   >
     <ServerNotifyOverlay />
+    <ModuleLoadingOverlay />
     <UpgradeNotifier />
     <GlobalSnackbar />
     <MirrorSelector />
@@ -156,10 +157,12 @@
   import ServerNotifyOverlay from "@/components/global/ServerNotifyOverlay";
   import plugins from "@/utils/native/plugins"
   import GlobalSearchNavigation from "@/components/search/GlobalSearchNavigation";
+  import ModuleLoadingOverlay from "@/components/global/ModuleLoadingOverlay";
 
 export default {
   name: 'App',
   components: {
+    ModuleLoadingOverlay,
     GlobalSearchNavigation,
     ServerNotifyOverlay,
     ServerSelector,

@@ -258,7 +258,7 @@
         </HeaderWithTooltip>
       </template>
 
-      <template v-slot:header.perTime="{header}">
+      <template v-slot:header.itemPerTime="{header}">
         <HeaderWithTooltip :name="header.text">
           {{ $t('stats.headerDesc.itemPerTime') }}
         </HeaderWithTooltip>
@@ -396,6 +396,7 @@
               :class="tableCellClasses"
             />
           </template>
+
           <NullableTableCell
             :value="props.item.itemPerTime"
             :transformer="formatDuration"
@@ -514,7 +515,7 @@
           },
           {
             text: this.$t("stats.headers.itemPerTime"),
-            value: "perTime",
+            value: "itemPerTime",
             align: "left",
             sortable: true,
             width: "110px"

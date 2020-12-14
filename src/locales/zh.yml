@@ -151,10 +151,14 @@ contribute:
     others: "..."
 fetch:
   loading: 正在刷新数据...
+  chunk:
+    title: 正在从扩展神经网络传输数据
+    subtitle: 页面模块项正在加载中，请稍等...
   failed:
     title: 神经网络连接异常
     subtitle: 未能与神经网络建立对等连接，部分资源丢失
     retry: 重试
+    deploying: 新版部署中，最多将持续 5 分钟，请耐心等待
     error:
       zones: 章节元数据
       stages: 作战元数据

@@ -11,7 +11,8 @@ export default {
       icon: "",
       extra: {}
     },
-    outdated: false
+    outdated: false,
+    loadingRoute: ""
   },
   mutations: {
     setSnackbar (state, {color, timeout, text, icon, extra}) {
@@ -28,11 +29,15 @@ export default {
     },
     setNotice (state, value) {
       Vue.set(state, "notice", value)
-    }
+    },
+    setLoadingRoute (state, value) {
+      state.loadingRoute = value
+    },
   },
   getters: {
     snackbar: state => state.snackbar,
     outdated: state => state.outdated,
-    notice: state => state.notice
+    notice: state => state.notice,
+    loadingRoute: state => state.loadingRoute,
   }
 };

@@ -97,6 +97,33 @@ Getters.statistics = {
   }
 }
 
+Getters.patterns = {
+  base (filter) {
+    const matrix = store.getters["data/content"]({id: `${store.getters["dataSource/source"]}PatternMatrix`});
+    if (!matrix) return null;
+    return matrix
+      .filter(filter)
+      .map(el => {
+        const stage = Getters.stages.byStageId(el.stageId);
+        const percentage = +(el.quantity / el.times).toFixed(5)
+        return {
+          ...el,
+          stage,
+          percentage,
+          percentageText: `${(percentage * 100).toFixed(2)}%`,
+        }
+      });
+  },
+  byStageId(stageId) {
+    const matrix = this.base(el => {
+      return el.stageId === stageId
+    })
+    if (!matrix) return []
+
+    return matrix
+  }
+}
+
 Getters.stages = {
   all() {
     let stages = store.getters["data/content"]({id: "stages"});

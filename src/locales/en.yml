@@ -159,6 +159,7 @@ fetch:
     subtitle: Unable to establish synchronized connection with neural network. Missing
       partial or all resources.
     retry: Retry
+    deploying: Deploying latest version. This may last at its longest 5 minutes, please wait patiently.
     error:
       zones: Zones Data
       stages: Stages Data

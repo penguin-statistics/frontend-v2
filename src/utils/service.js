@@ -4,6 +4,7 @@ import store from "@/store";
 import mirror from "@/utils/mirror";
 import semver from "semver";
 import config from "@/config"
+import i18n from "@/i18n";
 
 let baseURL;
 if (mirror.global.isCurrent() || mirror.cn.isCurrent()) {
@@ -26,6 +27,8 @@ const service = axios.create({
   withCredentials: true,
   timeout: 90 * 1000 // 1.5 minute
 });
+
+const deployingFlag = `<meta name="penguin:exception" content="type=deploying">`
 
 function needsUpdate(response) {
   if ("x-penguin-upgrade" in response.headers) {
@@ -71,7 +74,15 @@ service.interceptors.response.use(function (response) {
       Console.error("Ajax", "failed", error)
     }
 
-    error.errorMessage = `(s=${error.response.status}) ${error.response.data ? error.response.data : error.message}`;
+    let message;
+
+    if (error && error.response && error.response.data && error.response.data.indexOf(deployingFlag) >= 0) {
+      message = i18n.t('fetch.failed.deploying')
+    } else {
+      message = error.response.data || error.message
+    }
+
+    error.errorMessage = `(s=${error.response.status}) ${message}`;
   } else {
     error.errorMessage = `(s=-1) ${error.message}`;
   }

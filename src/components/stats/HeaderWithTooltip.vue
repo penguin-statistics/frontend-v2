@@ -38,7 +38,7 @@ export default {
 }
 </script>
 
-<style scoped>
+<style scoped lang="scss">
 .tooltip-header-icon {
   opacity: .2;
   position: absolute !important;
