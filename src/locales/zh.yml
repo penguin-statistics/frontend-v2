@@ -78,6 +78,7 @@ meta:
     以上数据来自企鹅物流数据统计（{site}）
 stats:
   headers:
+    pattern: 组合
     stage: 作战
     apCost: 理智
     item: 物品
@@ -475,6 +476,11 @@ members:
     qq: QQ
     twitter: Twitter
     weibo: 微博
+pattern:
+  view:
+    table: 表格视图
+    pie: 饼图视图
+
 search:
   placeholder: 搜索...
   hint: 键入 物品 拼音首字母/英文名称/物品ID 或 作战 作战名/作战ID

@@ -7,9 +7,18 @@
       <v-col
         cols="12"
         sm="7"
-        md="5"
-        lg="6"
-        xl="8"
+        md="8"
+        lg="9"
+        xl="10"
+      >
+        <StagePattern :stage-id="stage.stageId" />
+      </v-col>
+      <v-col
+        cols="12"
+        sm="5"
+        md="4"
+        lg="3"
+        xl="2"
       >
         <v-card-title class="py-4 pl-0">
           <v-icon left>
@@ -18,16 +27,16 @@
           关于此作战
         </v-card-title>
 
-        <FactTable class="mb-4">
-          <FactTableItem
-            title="章节"
-            :content="zone.zoneName"
-          />
-          <FactTableItem
-            title="作战"
-            :content="stage.code"
-          />
-        </FactTable>
+        <!--        <FactTable class="mb-4">-->
+        <!--          <FactTableItem-->
+        <!--            title="章节"-->
+        <!--            :content="zone.zoneName"-->
+        <!--          />-->
+        <!--          <FactTableItem-->
+        <!--            title="作战"-->
+        <!--            :content="stage.code"-->
+        <!--          />-->
+        <!--        </FactTable>-->
 
         <FactTable class="mb-4">
           <FactTableItem
@@ -39,20 +48,6 @@
             :content="formatDuration(stage.minClearTime)"
           />
         </FactTable>
-      </v-col>
-      <v-col
-        cols="12"
-        sm="5"
-        md="4"
-        lg="3"
-        xl="2"
-      >
-        <v-card-title class="py-4 pl-0">
-          <v-icon left>
-            mdi-link
-          </v-icon>
-          外部链接
-        </v-card-title>
 
         <BackdropCard
           v-for="link in links"
@@ -61,7 +56,7 @@
           hover
           dense
           :href="link.href"
-          class="bkop-medium mb-2 py-3"
+          class="bkop-medium mb-2 py-3 "
         >
           <template v-slot:backdrop>
             <v-icon>
@@ -80,19 +75,12 @@
               >
                 mdi-open-in-new
               </v-icon>
-              
+
               {{ link.hostname }}
             </span>
           </h2>
         </BackdropCard>
-      </v-col>
-      <v-col
-        cols="12"
-        sm="12"
-        md="3"
-        lg="3"
-        xl="2"
-      >
+
         <v-card-title class="py-4 pl-0">
           <v-icon left>
             mdi-chevron-double-right
@@ -185,10 +173,11 @@ import FactTableItem from "@/components/stats/fact-table/FactTableItem";
 import BackdropCard from "@/components/global/BackdropCard";
 import Theme from "@/mixins/Theme";
 import mirror from "@/utils/mirror";
+import StagePattern from "@/components/stats/details/StagePattern";
 
 export default {
   name: "StageDetails",
-  components: {BackdropCard, FactTableItem, FactTable},
+  components: {StagePattern, BackdropCard, FactTableItem, FactTable},
   mixins: [Theme],
   props: {
     stage: {

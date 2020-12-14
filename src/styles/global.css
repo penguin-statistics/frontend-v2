@@ -74,6 +74,9 @@
 .transparentTable > .v-table__overflow > .v-table {
     background: transparent;
 }
+.transparentTable {
+    background: transparent;
+}
 
 .line-height-wide {
     line-height: 1.8 !important;
@@ -679,4 +682,12 @@
 /*.theme--dark .bkop-medium {*/
 /*    background: rgba(30, 30, 30, .94) !important;*/
 /*}*/
+
+.v-data-footer__select .v-input {
+    margin-left: 1rem !important;
+}
+
+.v-data-footer .v-data-footer__pagination {
+    margin-right: .5rem !important;
+}
 

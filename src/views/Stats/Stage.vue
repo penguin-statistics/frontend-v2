@@ -99,7 +99,7 @@
   import strings from "@/utils/strings";
   import existUtils from "@/utils/existUtils";
   import BackdropName from "@/components/stats/BackdropName";
-  import StageDetails from "@/components/stats/StageDetails";
+  import StageDetails from "@/components/stats/details/StageDetails";
 
 export default {
   name: "StatsByStage",
