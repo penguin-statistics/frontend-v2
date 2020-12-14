@@ -13,8 +13,19 @@
       
       {{ member.name }}
     </v-card-title>
-    <v-card-text>
-      desc
+    <v-card-text class="flex-grow-1">
+      <v-list
+        dense
+        subheader
+      >
+        <v-subheader v-text="$t('members.responsibilities._name')" />
+        <MemberResponsibility
+          v-for="responsibility in member.responsibility"
+          :key="member.name + '_' + responsibility.id"
+          dense
+          :responsibility="responsibility"
+        />
+      </v-list>
     </v-card-text>
     <v-card-actions class="d-flex flex-row justify-center">
       <v-btn
@@ -24,7 +35,7 @@
         :href="url"
         target="_blank"
         rel="noreferrer noopener"
-        :title="$t(`socials.${id}`)"
+        :title="$t(`members.socials.${id}`)"
       >
         <v-icon>
           {{ getSocial(id).icon }}
@@ -37,9 +48,11 @@
 <script>
 import CDN from "@/mixins/CDN";
 import members from "@/utils/members";
+import MemberResponsibility from "@/components/members/MemberResponsibility";
 
 export default {
   name: "ContributorMemberCard",
+  components: {MemberResponsibility},
   mixins: [CDN],
   props: {
     member: {

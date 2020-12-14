@@ -424,11 +424,10 @@ quotes:
 credits:
   material:
     title: 网站内容声明
-    # License source: http://jovanny.ru/
     content:
       - 企鹅物流数据统计网站内所使用的游戏资源（包括但不限于：游戏图片、动画、音频、文本原文或其转译版本等），其目的仅为更好地反映游戏内对应元素、增强用户体验，相关作品之版权仍属于上海鹰角网络科技有限公司和/或其关联公司，即鹰角网络游戏软件和/或鹰角网络游戏服务的提供方（包括但不限于：YOSTAR (HONG KONG) LIMITED, 株式会社Yostar, YOSTAR LIMITED, 龍成網路 等）
       - 企鹅物流数据统计网站内所使用的部分资源来源于 PRTS Wiki (http://prts.wiki) 并同时对部分资源进行了非歧义性的更改
-      - 企鹅物流数据统计网站内使用了经细微修改的、由 Free Fonts Project 提供的 Bender 字体，该字体特别说明使用者可将相关字体以任何用途、没有任何限制地使用，在此特别表示感谢。
+      - 企鹅物流数据统计网站内使用了经细微修改的、由 Free Fonts Project 提供的 Bender 字体（http://jovanny.ru），该字体特别说明使用者可将相关字体以任何用途、没有任何限制地使用，在此特别表示感谢。
   source:
     title: 开源许可列表
 auth:
@@ -443,6 +442,35 @@ auth:
       deleteUserId: 删除此 PenguinID 登录记录
       noData: 暂无数据
       tips: 本功能仅可找回于 v3.3.1 及更新版本客户端所登录的 PenguinID
+members:
+  categories:
+    owner: 站长
+    maintainer: 主要贡献者
+    contributors: 内容贡献者
+    others: 其他
+    translators: 翻译
+  responsibilities:
+    _name: 贡献项目
+    arkplanner: ArkPlanner 作者
+    backend: 后端
+    bulkupload: 批量汇报
+    customersupport: 客服
+    v1frontend: v1 前端
+    frontend: 前端
+    localization_en: 英语本地化
+    localization_ja: 日语本地化
+    localization_ko: 韩语本地化
+    logo: Logo 画师
+    maintenance: 运维
+    materials: 素材提供
+    statistics: 统计分析
+    widget: 小组件开发
+  socials:
+    email: Email
+    github: GitHub
+    qq: QQ
+    twitter: Twitter
+    weibo: 微博
 search:
   placeholder: 搜索...
   hint: 键入 物品 拼音首字母/英文名称/物品ID 或 作战 作战名/作战ID

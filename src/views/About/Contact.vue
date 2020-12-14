@@ -66,7 +66,7 @@
         <v-icon
           right
         >
-          mdi-account-multiple
+          mdi-account-group
         </v-icon>
       </v-chip>
       <v-chip

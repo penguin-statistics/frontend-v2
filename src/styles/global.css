@@ -520,7 +520,7 @@
 }
 
 .v-list--force-line-break {
-    white-space: normal;
+    white-space: normal !important;
 }
 
 .position-relative {

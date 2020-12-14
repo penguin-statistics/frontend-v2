@@ -278,6 +278,30 @@ items:
     FURN: 家具
     MATERIAL: 素材
   related: 関連素材
+members:
+  categories:
+    developers: 開発者
+    others: その他
+    owner: 管理人
+    translators: 翻訳者
+  responsibilities:
+    arkplanner: ArkPlannerの著者
+    backend: バックエンド
+    bulkupload: 一括アップロード
+    customersupport: 顧客サービス
+    frontend: フロントエンド
+    localization_ja: 日本語化
+    localization_ko: 韓国語化
+    logo: ロゴデザイナー
+    maintenance: DevOps
+    materials: 材料サプライヤー
+    statistics: データ統計解析
+  socials:
+    email: Email
+    github: GitHub
+    qq: QQ
+    twitter: Twitter
+    weibo: Weibo
 dataSource:
   global: 全体
   loginNotice: 個人のドロップデータを表示するにはログインが必要となります。

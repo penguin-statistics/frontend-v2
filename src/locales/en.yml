@@ -435,6 +435,30 @@ credits:
       - Penguin Statistics used the slightly self-modified version of the Bender font, provided by the Free Fonts Project under a usage basis claimed on the official website of the Project (http://jovanny.ru) of "All fonts from the Free Fonts Project can be used both for commercial and personal purposes without any limitations.". Penguin Statistics hereby specially thanks and appreciates the Bender font for releasing their awesome font under such license.
   source:
     title: Open Source Licenses
+members:
+  categories:
+    developers: Developers
+    others: Others
+    owner: Webmaster
+    translators: Translators
+  responsibilities:
+    arkplanner: Author of ArkPlanner
+    backend: Backend
+    bulkupload: Bulk Upload
+    customersupport: User Support
+    frontend: Frontend
+    localization_ja: Japanese Localization Provider
+    localization_ko: Korean Localization Provider
+    logo: Logo Designer
+    maintenance: DevOps
+    materials: Materials Supplier
+    statistics: Statistics and Analysis
+  socials:
+    email: Email
+    github: GitHub
+    qq: QQ
+    twitter: Twitter
+    weibo: Weibo
 auth:
   forgot:
     activator: Forgot PenguinID

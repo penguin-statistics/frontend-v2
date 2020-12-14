@@ -1,23 +1,37 @@
 <template>
   <v-card class="bkop-light pt-2">
-    <v-list-item>
-      <v-list-item-avatar>
+    <v-list-item
+      class="d-inline-flex mx-auto"
+    >
+      <v-list-item-avatar
+        :size="64"
+      >
         <v-img
           :src="cdnDeliver(`/avatars/${member.avatar}`)"
           aspect-ratio="1"
         />
       </v-list-item-avatar>
       <v-list-item-content>
-        <v-list-item-title>
+        <v-list-item-title class="headline">
           {{ member.name }}
         </v-list-item-title>
-        <v-list-item-title>
-          {{ member.role }}
-        </v-list-item-title>
+        <v-list-item-subtitle class="subtitle-1">
+          {{ $t('members.categories.' + member.role) }}
+        </v-list-item-subtitle>
       </v-list-item-content>
     </v-list-item>
     <v-card-text>
-      desc
+      <v-list
+        subheader
+        class="background"
+      >
+        <v-subheader v-text="$t('members.responsibilities._name')" /> 
+        <MemberResponsibility
+          v-for="responsibility in member.responsibility"
+          :key="member.name + '_' + responsibility.id"
+          :responsibility="responsibility"
+        />
+      </v-list>
     </v-card-text>
     <v-card-actions class="d-flex flex-row justify-center">
       <v-btn
@@ -27,7 +41,7 @@
         :href="url"
         target="_blank"
         rel="noreferrer noopener"
-        :title="$t(`socials.${id}`)"
+        :title="$t(`members.socials.${id}`)"
       >
         <v-icon>
           {{ getSocial(id).icon }}
@@ -40,9 +54,11 @@
 <script>
 import CDN from "@/mixins/CDN";
 import members from "@/utils/members";
+import MemberResponsibility from "@/components/members/MemberResponsibility";
 
 export default {
   name: "MaintainerMemberCard",
+  components: {MemberResponsibility},
   mixins: [CDN],
   props: {
     member: {
