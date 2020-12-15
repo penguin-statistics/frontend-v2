@@ -2,6 +2,7 @@ import store from "@/store"
 import strings from "@/utils/strings"
 import MiniSearch from 'minisearch'
 import i18n from "@/i18n";
+import get from '@/utils/getters'
 
 function arrByLang(object, lang = i18n.locale) {
   return object ? (object[lang] || object[i18n.fallbackLocale] || []) : []
@@ -85,13 +86,15 @@ class ItemSearchEngine extends SearchEngine {
         }
       }
     })
-    const docs = this.data.map(el => ({
-      id: el.itemId,
-      itemId: el.itemId,
-      name: strings.translate(el, "name"),
-      alias: arrByLang(el.alias),
-      pron: processPron(arrByLang(el.pron)),
-    }))
+    const docs = this.data
+      .filter(el => get.items.validItemTypes.includes(el.itemType))
+      .map(el => ({
+        id: el.itemId,
+        itemId: el.itemId,
+        name: strings.translate(el, "name"),
+        alias: arrByLang(el.alias),
+        pron: processPron(arrByLang(el.pron)),
+      }))
     console.log('item docs mapped as', docs)
     this.ready = this.engine.addAllAsync(docs)
       .then(() => {
@@ -128,7 +131,9 @@ class CompactedSearchEngine {
     const results = [];
     const start = Date.now()
     for (const engine of this.engines) {
-      const result = engine.engine.search(query, options).map(el => ({...el, type: engine.name}))
+      const result = engine.engine.search(query, options)
+        .filter(el => el.score > 0.2)
+        .map(el => ({...el, type: engine.name}))
       console.log(result)
       results.push(...result)
     }

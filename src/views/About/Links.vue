@@ -148,6 +148,9 @@
               class="ma-2 force-not-lang-font"
               color="primary"
               text-color="white"
+              :href="link.url"
+              target="_blank"
+              rel="noopener"
               @click="goToHref(link)"
             >
               <v-icon
@@ -348,7 +351,6 @@ export default {
   methods: {
     goToHref(link) {
       this.$ga.event('redirect', 'links', link.title, 1)
-      window.open(link.url);
     }
   },
 };

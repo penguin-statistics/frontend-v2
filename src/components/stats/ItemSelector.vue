@@ -45,7 +45,7 @@
     computed: {
       items () {
         const all = get.items.all();
-        const categories = ["MATERIAL", "CARD_EXP", "CHIP", "FURN", "ACTIVITY_ITEM"];
+        const categories = get.items.validItemTypes;
         const results = {};
         let already = [];
         for (const category of categories) {

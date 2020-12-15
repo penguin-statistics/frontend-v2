@@ -51,7 +51,7 @@
       >
         <ContributorMemberCard
           :member="contributor"
-          class="align-self-stretch fill-height"
+          class="align-self-stretch fill-height members--list-item"
         />
       </v-col>
     </v-row>
@@ -297,34 +297,7 @@
               }
             }
           ]
-        },
-        socials: [
-          {
-            "id": "weibo",
-            "name": "Weibo",
-            "icon": "mdi-sina-weibo"
-          },
-          {
-            "id": "twitter",
-            "name": "Twitter",
-            "icon": "mdi-twitter"
-          },
-          {
-            "id": "github",
-            "name": "GitHub",
-            "icon": "mdi-github-circle"
-          },
-          {
-            "id": "qq",
-            "name": "QQ",
-            "icon": "mdi-qqchat"
-          },
-          {
-            "id": "email",
-            "name": "Email",
-            "icon": "mdi-email"
-          }
-        ]
+        }
       }
     },
     mounted() {
@@ -333,7 +306,7 @@
         translateY: [48, 0],
         opacity: [0, 1],
         duration: 775,
-        delay: (el, i) => i * 75,
+        delay: (el, i) => i * 35,
         easing: "easeOutQuint"
       })
       // anime({
@@ -344,21 +317,6 @@
       //   delay: (el, i) => i * 175,
       //   easing: "easeOutQuint"
       // })
-    },
-    methods: {
-      getSocial(id) {
-        return this.socials.find(v => v.id === id)
-      },
-      renderResponsibility(responsibilities) {
-        const translated = [];
-        for (const responsibility of responsibilities) {
-          translated.push(this.$t(`responsibilities.${responsibility}`))
-        }
-        return translated.join(this.$t('meta.separator'))
-      },
-      avatar(src) {
-        return this.cdnDeliver(`/avatars/${src}`)
-      }
     }
   }
 </script>

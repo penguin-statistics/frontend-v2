@@ -69,15 +69,12 @@ const socials = [
       return paramUrl('https://reddit.com/submit', {title, url})
     }
   },
-  // {
-  //   "id": "email",
-  //   "name": "Email",
-  //   "icon": "mdi-email",
-  //   "canShare": true,
-  //   share({title, url}) {
-  //     return paramUrl('http://service.weibo.com/share/share.php', {title, url})
-  //   }
-  // }
+  {
+    "id": "email",
+    "name": "Email",
+    "icon": "mdi-email",
+    "canShare": false
+  }
 ]
 
 const responsibilities = {

@@ -34,7 +34,7 @@
         icon
         :href="url"
         target="_blank"
-        rel="noreferrer noopener"
+        rel="noopener"
         :title="$t(`members.socials.${id}`)"
       >
         <v-icon>

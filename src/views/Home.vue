@@ -72,6 +72,7 @@
         class="align-self-stretch"
       >
         <Donate
+          hide
           class="card-translate-up fill-height"
         />
       </v-col>

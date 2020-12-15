@@ -98,10 +98,15 @@
             this.loading = false
           })
       },
+      //🎉 12.24 企鹅物流 1.5 周年暨新年贺！
+  //       - 另外，我们有 B 站账号啦！[快来 Roll 大月卡！](http://a.com/)
+  // - 同时，NGA 的抽奖活动与 B 站账号独立哦！[欢迎各位来捧场w](http://nga.com/)
       parseNotices (notices) {
-        return notices.filter(notice => {
-          return existUtils.existence(notice, true)
-        })
+        return [{"severity":2,"existence":{"US":{"exist":true},"JP":{"exist":true},"CN":{"exist":true},"KR":{"exist":true}},"conditions":{"servers":["CN","US","JP","KR"]},"content_i18n":{"zh":"🎉 12.24 企鹅物流 1.5 周年暨新年贺！\n- 我们有 B 站账号啦！[快来 Roll 大月卡！](http://a.com/) \n- 同时，NGA 的抽奖活动与 B 站账号独立哦！[欢迎各位来捧场w](http://nga.com/)"}},
+          ...notices.filter(notice => {
+            return existUtils.existence(notice, true)
+          })
+        ]
       }
     },
   }

@@ -1,5 +1,5 @@
 <template>
-  <v-card class="bkop-light pt-2">
+  <v-card class="bkop-light pt-2 members--list-item">
     <v-list-item
       class="d-inline-flex mx-auto"
     >
@@ -40,7 +40,7 @@
         icon
         :href="url"
         target="_blank"
-        rel="noreferrer noopener"
+        rel="noopener"
         :title="$t(`members.socials.${id}`)"
       >
         <v-icon>
@@ -53,7 +53,7 @@
 
 <script>
 import CDN from "@/mixins/CDN";
-import members from "@/utils/humans";
+import humans from "@/utils/humans";
 import MemberResponsibility from "@/components/members/MemberResponsibility";
 
 export default {
@@ -67,7 +67,7 @@ export default {
     },
   },
   methods: {
-    getSocial: members.getSocial
+    getSocial: humans.getSocial
   },
 }
 </script>

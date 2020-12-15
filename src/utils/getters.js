@@ -7,6 +7,7 @@ const Getters = {};
 
 Getters.items = {
   _cache: null,
+  validItemTypes: ["MATERIAL", "CARD_EXP", "CHIP", "FURN", "ACTIVITY_ITEM"],
   all(map = false, filter = true) {
     let items = store.getters["data/content"]({id: "items"});
     if (!items) return []
