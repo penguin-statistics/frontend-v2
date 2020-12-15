@@ -63,7 +63,7 @@
   import CDN from "@/mixins/CDN";
   import MaintainerMemberCard from "@/components/members/MaintainerMemberCard";
   import ContributorMemberCard from "@/components/members/ContributorMemberCard";
-  import members from "@/utils/members";
+  import members from "@/utils/humans";
 
   const c = {
     owner: "owner",

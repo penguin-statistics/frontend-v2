@@ -47,7 +47,7 @@
 
 <script>
 import CDN from "@/mixins/CDN";
-import members from "@/utils/members";
+import members from "@/utils/humans";
 import MemberResponsibility from "@/components/members/MemberResponsibility";
 
 export default {

@@ -38,7 +38,7 @@
         <!--          />-->
         <!--        </FactTable>-->
 
-        <FactTable class="mb-4">
+        <FactTable class="mb-6">
           <FactTableItem
             title="理智"
             :content="stage.apCost"
@@ -146,6 +146,7 @@
             </v-btn>
           </template>
         </v-hover>
+
         <v-btn
           block
           large
@@ -161,6 +162,8 @@
           </v-icon>
           进行高级查询
         </v-btn>
+
+        <Share :stage="stage" />
       </v-col>
     </v-row>
   </v-card>
@@ -174,10 +177,11 @@ import BackdropCard from "@/components/global/BackdropCard";
 import Theme from "@/mixins/Theme";
 import mirror from "@/utils/mirror";
 import StagePattern from "@/components/stats/details/StagePattern";
+import Share from "@/components/stats/details/Share";
 
 export default {
   name: "StageDetails",
-  components: {StagePattern, BackdropCard, FactTableItem, FactTable},
+  components: {Share, StagePattern, BackdropCard, FactTableItem, FactTable},
   mixins: [Theme],
   props: {
     stage: {

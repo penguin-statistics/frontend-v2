@@ -71,6 +71,14 @@
     cursor: pointer;
 }
 
+.cursor-default {
+    cursor: default;
+}
+
+.font-condensed {
+    font-family: "Roboto Condensed", Roboto, sans-serif!important
+}
+
 .transparentTable > .v-table__overflow > .v-table {
     background: transparent;
 }
@@ -155,7 +163,7 @@
 
 .monospace {
     font-family: "benderregular", SF Mono, "Droid Sans Mono", Ubuntu Mono, Consolas, Courier New, Courier, monospace !important;
-    letter-spacing: .03rem;
+    /*letter-spacing: .03rem;*/
 }
 
 .monospace-pure {

@@ -480,7 +480,9 @@ pattern:
   view:
     table: 表格视图
     pie: 饼图视图
-
+share:
+  text: 查看企鹅物流数据统计中「{name}」的数据
+  success: 分享成功
 search:
   placeholder: 搜索...
   hint: 键入 物品 拼音首字母/英文名称/物品ID 或 作战 作战名/作战ID

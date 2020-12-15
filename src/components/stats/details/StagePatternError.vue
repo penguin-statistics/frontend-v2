@@ -6,7 +6,7 @@
     class="d-flex flex-column align-center justify-center monospace border-light"
   >
     <span class="heading">
-      暂无本关卡
+      暂无本作战
     </span>
     <span class="headline">
       掉落组合数据

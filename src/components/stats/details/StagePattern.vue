@@ -11,7 +11,6 @@
       <v-col
         cols="12"
         md="6"
-        class="d-flex align-center justify-center"
       >
         <StagePatternPieChart
           :patterns="patterns"
@@ -112,7 +111,7 @@ export default {
     timeRange() {
       const patterns = this.patterns
       if (!patterns || !patterns.length || !patterns[0]) return ''
-      return timeFormatter.startEnd(patterns[0].start)
+      return timeFormatter.startEnd(patterns[0].start, patterns[0].end)
     }
   },
 }
