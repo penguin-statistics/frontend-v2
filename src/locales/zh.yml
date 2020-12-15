@@ -485,5 +485,5 @@ share:
   success: 分享成功
 search:
   placeholder: 搜索...
-  hint: 键入 物品 拼音首字母/英文名称/物品ID 或 作战 作战名/作战ID
+  hint: 键入 物品全拼 拼音首字母 作战名 章节名 关卡编号 或 部分关卡/物品昵称
   footer: 由 企鹅物流黑科技 强力驱动

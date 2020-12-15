@@ -123,7 +123,7 @@
 </template>
 
 <script>
-import SearchEngine from "@/utils/searchEngine";
+import CompactedSearchEngine from "@/utils/searchEngine";
 import Console from "@/utils/Console";
 import CDN from "@/mixins/CDN";
 import SearchResultNormal from "@/components/search/SearchResultNormal";
@@ -145,13 +145,14 @@ export default {
     return {
       engine: null,
       search: "",
-      page: 1
+      page: 1,
+      engineLoading: true
     }
   },
 
   computed: {
     results() {
-      return this.engine.query(this.search)
+      return this.engine.search(this.search)
       .map(el => ({
         ...el,
         id: `${el.type}_${el.stageId || el.itemId}`,
@@ -192,14 +193,23 @@ export default {
     }
   },
   created() {
-    this.engine = new SearchEngine()
-    this.search = this.query
+    this.engine = new CompactedSearchEngine()
+    console.log(this.engine)
+
+    const self = this
+    this.engine.ready().then(() => {
+      self.search = self.query
+      self.search = self.search + ' '
+      self.search = self.search.slice(0, -1)
+
+      self.engineLoading = false
+    })
   },
   methods: {
     reset() {
       Console.info("SearchEngine", "search engine has been reinitialized due to change detected in dependency")
       this.search = ""
-      this.engine = new SearchEngine()
+      this.engine = new CompactedSearchEngine()
     }
   },
 }
@@ -245,7 +255,7 @@ export default {
     display: none;
   }
 
-  max-height: 100vh;
+  max-height: 70vh;
   padding: .5rem 6px;
   margin: .5rem -8px;
   box-shadow: inset 0 16px 16px -16px rgba(0, 0, 0, .2);
