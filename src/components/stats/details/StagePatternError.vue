@@ -2,8 +2,8 @@
   <v-card
     color="transparent"
     flat
-    style="height: 300px"
-    class="d-flex flex-column align-center justify-center monospace border-light"
+    style="height: 290px"
+    class="d-flex flex-column align-center justify-center monospace border-light mt-2"
   >
     <span class="heading">
       暂无本作战

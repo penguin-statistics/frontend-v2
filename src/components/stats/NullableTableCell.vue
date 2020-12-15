@@ -9,6 +9,8 @@
 </template>
 
 <script>
+import validator from "@/utils/validator";
+
 export default {
 name: "NullableTableCell",
   // reason to disable prop type check is that `value` could be any type that's `toString()`-able
@@ -16,17 +18,14 @@ name: "NullableTableCell",
   props: ['value', 'transformer'],
   computed: {
     cellValue () {
-      if (
-          !this.transformed ||
-          this.transformed === 99 ||
-          ['NaN', 'Infinity'].includes(this.transformed)
-      ) return {
-        class: 'grey--text',
-        value: '——'
-      }
-      return {
-        value: this.transformed
-      }
+      return validator.isNull(this.transformed)
+          ? {
+            class: 'grey--text',
+            value: '——'
+          }
+          : {
+            value: this.transformed
+          }
     },
     transformed() {
       if (this.transformer) return this.transformer.call(null, this.value)

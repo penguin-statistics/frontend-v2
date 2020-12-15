@@ -40,7 +40,6 @@
               class="monospace-pure my-2"
               append-icon="mdi-content-copy"
               @click:append="copy(link)"
-              @click="this.select()"
             />
           </v-row>
           <v-row class="justify-start mt-4 position-relative flex-nowrap overflow-x-auto">

@@ -6,6 +6,19 @@
       </v-icon>
       掉落组合
     </v-card-title>
+    <div class="d-inline-flex flex-row align-start">
+      <FactTableItem
+        title="统计区间"
+        content-class="monospace"
+        :content="timeRange"
+      />
+      <FactTableItem
+        title="样本数"
+        content-class="monospace"
+        :content="quantity"
+      />
+    </div>
+    
     <StagePatternError v-if="patterns && patterns.length === 0" />
     <v-row v-else>
       <v-col
@@ -27,14 +40,7 @@
         />
       </v-col>
     </v-row>
-    <v-row v-if="timeRange">
-      <v-col
-        cols="12"
-        class="text-center caption mb-4"
-      >
-        以上「掉落组合」数据的统计区间为 {{ timeRange }}
-      </v-col>
-    </v-row>
+
     <!--    <v-tabs-->
     <!--      v-else-->
     <!--      v-model="tab"-->
@@ -75,10 +81,11 @@ import StagePatternTable from "@/components/stats/details/StagePatternTable";
 import StagePatternPieChart from "@/components/stats/details/StagePatternPieChart";
 import StagePatternError from "@/components/stats/details/StagePatternError";
 import timeFormatter from "@/utils/timeFormatter";
+import FactTableItem from "@/components/stats/fact-table/FactTableItem";
 
 export default {
   name: "StagePattern",
-  components: {StagePatternError, StagePatternPieChart, StagePatternTable},
+  components: {FactTableItem, StagePatternError, StagePatternPieChart, StagePatternTable},
   props: {
     stageId: {
       type: String,
@@ -107,6 +114,9 @@ export default {
       return [...get.patterns.byStageId(this.stageId)]
           .sort((a, b) => b.percentage - a.percentage)
           .map((el, i) => ({...el, i: i + 1}))
+    },
+    quantity() {
+      return (this.patterns[0] || {}).times
     },
     timeRange() {
       const patterns = this.patterns

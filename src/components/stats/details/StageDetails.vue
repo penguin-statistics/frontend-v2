@@ -199,26 +199,30 @@ export default {
   },
   computed: {
     links() {
-      return [
+      const links = [
         {
           id: "prts-wiki",
           icon: "mdi-file-document",
           href: `http://prts.wiki/w/${this.stage.code}`
-        },
-        {
+        }
+      ]
+
+      if (!this.stage.isGacha) {
+        links.push({
           id: "map-arknights-com",
           icon: "mdi-map",
           href: mirror.adapter({
             cn: `https://mapcn.ark-nights.com/map/${this.stage.stageId}`,
             io: `https://map.ark-nights.com/map/${this.stage.stageId}`
           })
-        }
-      ].map(el => {
-        return {
+        })
+      }
+
+      return links
+        .map(el => ({
           ...el,
           hostname: new URL(el.href).hostname
-        }
-      })
+        }))
     },
     isFavorite () {
       return this.$store.getters["stagePreferences/hasFavorite"](this.stage.stageId)

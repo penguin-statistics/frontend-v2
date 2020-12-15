@@ -18,9 +18,9 @@
       />
       <span
         v-else
-        :class="contentClass"
+        :class="[...contentClass, validated.class]"
       >
-        {{ content }}
+        {{ validated.value }}
       </span>
     </div>
   </div>
@@ -28,6 +28,8 @@
 
 <script>
 /* eslint-disable vue/require-prop-types */
+
+import validator from "@/utils/validator";
 
 export default {
   name: "FactTableItem",
@@ -42,7 +44,19 @@ export default {
       type: String,
       default: () => ""
     }
-  }
+  },
+  computed: {
+    validated() {
+      return validator.isNull(this.content)
+          ? {
+            class: 'grey--text',
+            value: '—'
+          }
+          : {
+            value: this.content
+          }
+    }
+  },
 }
 </script>
 
