@@ -156,7 +156,7 @@ export default {
           {
             "id": "native",
             "name": "Share",
-            "icon": "mdi-export-varient",
+            "icon": "mdi-share-circle",
             canShare: !!navigator.share,
             share({text, url}) {
               return share({text, url})
