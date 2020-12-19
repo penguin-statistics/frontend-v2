@@ -64,7 +64,7 @@ class Console {
   static _render (level, component, ...content) {
     const PROD_IGNORE = ["debug"];
     if (
-      process.env.NODE_ENV === "production" &&
+      environment.production &&
       (PROD_IGNORE.includes(level)) &&
       !environment.debug.fullConsole
     ) return;
@@ -73,7 +73,7 @@ class Console {
 
     let prefix;
 
-    if (process.env.NODE_ENV !== "production" || environment.debug.colorfulConsole) {
+    if (!environment.production || environment.debug.colorfulConsole) {
       const styles = styleMap[level]
       prefix = [
         `%c${level}%c${component}`,

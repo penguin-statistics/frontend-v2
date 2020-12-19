@@ -3,6 +3,7 @@
     <v-card
       v-for="(card, i) in cards"
       :key="i"
+      v-haptic
       class="d-flex flex-column cursor-pointer time-range-card"
       :elevation="0"
       :class="{'time-range--left': i === 0 && cards.length !== 1, 'time-range--right': i === 1}"

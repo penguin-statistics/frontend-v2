@@ -1,5 +1,6 @@
 import Vue from 'vue';
 import strings from "@/utils/strings";
+import haptics from "@/utils/native/haptics";
 
 Vue.directive("marked", function (el) {
   el.innerHTML = strings.markdown(el.innerHTML);
@@ -13,5 +14,20 @@ Vue.directive("marked", function (el) {
       a.setAttribute('target', '_blank')
       a.setAttribute('rel', 'noreferrer noopener')
     }
+    a.onclick = haptics.light
   })
+})
+
+function useHaptics (el, {arg, modifiers}) {
+  return function () {
+    if (modifiers.notification) return haptics.notification(arg)
+    if (arg) return haptics.impact(arg)
+    return haptics.light()
+  }
+}
+
+Vue.directive("haptic", {
+  bind: (el, bindings) => el.addEventListener("click", useHaptics(el, bindings)),
+  // update: el => el.addEventListener("click", hapticsCb),
+  unbind: (el, bindings) => el.removeEventListener("click", useHaptics(el, bindings))
 })

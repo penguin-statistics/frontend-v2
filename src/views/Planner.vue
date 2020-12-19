@@ -4,6 +4,7 @@
     class="fill-height align-content-center justify-center"
   >
     <v-btn
+      v-haptic
       fab
       bottom
       right
@@ -56,6 +57,7 @@
       >
         <template v-slot:activator="{ on, attrs }">
           <v-btn
+            v-haptic
             color="deep-purple white--text"
             class="mr-2"
             v-bind="attrs"
@@ -79,6 +81,7 @@
       >
         <template v-slot:activator="{ on, attrs }">
           <v-btn
+            v-haptic
             color="error"
             v-bind="attrs"
             v-on="on"
@@ -163,6 +166,7 @@
 
           <v-card-actions>
             <v-btn
+              v-haptic
               text
               @click="reset.dialog = false"
             >
@@ -170,6 +174,7 @@
             </v-btn>
             <v-spacer />
             <v-btn
+              v-haptic
               :disabled="resetAmount <= 0"
               color="error"
               depressed
@@ -314,6 +319,7 @@
       align="center"
     >
       <v-btn
+        v-haptic
         block
         class="my-1"
         :class="{'indigo white--text': !calculation.pending, 'slash-strip--loading': calculation.pending}"

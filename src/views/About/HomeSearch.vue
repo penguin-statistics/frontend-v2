@@ -17,6 +17,7 @@
     </h1>
     
     <GlobalSearch
+      v-bind="$attrs"
       pure
       :valid.sync="valid"
     />

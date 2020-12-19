@@ -17,6 +17,7 @@
           </span>
         </template> -->
       <v-badge
+        v-haptic
         :value="quantity > 0"
         right
         bottom
@@ -53,6 +54,7 @@
         >
           <div class="text-center mt-2">
             <v-btn
+              v-haptic
               small
               class="add-quantity-btn"
               @click="increaseQuantity(10)"

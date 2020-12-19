@@ -7,6 +7,7 @@
   >
     <template v-slot:activator="{ on, attrs }">
       <v-btn
+        v-haptic
         rounded
         class="mx-1"
         v-bind="attrs"
@@ -57,6 +58,7 @@
         <v-list-item
           v-for="(server, i) in servers"
           :key="i"
+          v-haptic
           :disabled="pending"
         >
           <v-list-item-title class="mr-2">

@@ -143,6 +143,7 @@
           </BackdropCard>
 
           <v-btn
+            v-haptic
             color="blue-grey"
             href="https://shimo.im/sheets/GJXgP9XQcPrj6rtg/2fC1m"
             target="_blank"
@@ -188,6 +189,7 @@
           {{ $t('donate.donate_4') }}
         </div>
         <v-btn
+          v-haptic
           color="blue-grey"
           href="https://shimo.im/sheets/GJXgP9XQcPrj6rtg/2fC1m"
           target="_blank"
@@ -277,6 +279,7 @@
             >
               <v-btn
                 v-if="$vuetify.breakpoint.xsOnly"
+                v-haptic
                 text
                 outlined
                 rounded
@@ -333,6 +336,7 @@
         class="pt-5 pb-3"
       >
         <v-btn
+          v-haptic
           rounded
           large
           color="primary"

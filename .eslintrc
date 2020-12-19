@@ -1,7 +1,9 @@
 {
   "root": true,
   "globals": {
-    "GIT_COMMIT": true
+    "GIT_COMMIT": true,
+    "PENGUIN_BUILD": true,
+    "PENGUIN_BUILD_FROM": true
   },
   "env": {
     "node": true

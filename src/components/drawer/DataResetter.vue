@@ -26,6 +26,7 @@
 
       <v-card-actions>
         <v-btn
+          v-haptic
           text
           :disabled="deleting"
           @click="cancel"
@@ -34,6 +35,7 @@
         </v-btn>
         <v-spacer />
         <v-btn
+          v-haptic
           color="error"
           :disabled="countdownNow !== 0"
           :loading="deleting"

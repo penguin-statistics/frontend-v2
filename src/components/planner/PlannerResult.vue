@@ -315,6 +315,7 @@
 
     <v-card-actions class="elevation-4">
       <v-btn
+        v-haptic
         text
         block
         large

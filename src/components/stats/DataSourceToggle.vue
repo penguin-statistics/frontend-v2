@@ -45,12 +45,14 @@
       class="data-source-switch"
     >
       <v-btn
+        v-haptic
         small
         value="global"
       >
         {{ $t('dataSource.global') }}
       </v-btn>
       <v-btn
+        v-haptic
         small
         value="personal"
       >

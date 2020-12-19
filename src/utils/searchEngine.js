@@ -3,6 +3,7 @@ import strings from "@/utils/strings"
 import MiniSearch from 'minisearch'
 import i18n from "@/i18n";
 import get from '@/utils/getters'
+import Console from "@/utils/Console";
 
 function arrByLang(object, lang = i18n.locale) {
   return object ? (object[lang] || object[i18n.fallbackLocale] || []) : []
@@ -62,10 +63,10 @@ class StageSearchEngine extends SearchEngine {
       alias: arrByLang(el.alias),
       pron: processPron(arrByLang(el.pron)),
     }))
-    console.log('stage docs mapped as', docs)
+    // console.log('stage docs mapped as', docs)
     this.ready = this.engine.addAllAsync(docs)
       .then(() => {
-        console.info("StageSearchEngine indexed all documents")
+        Console.info("StageSearchEngine", "indexed all documents")
       })
   }
 }
@@ -95,10 +96,10 @@ class ItemSearchEngine extends SearchEngine {
         alias: arrByLang(el.alias),
         pron: processPron(arrByLang(el.pron)),
       }))
-    console.log('item docs mapped as', docs)
+    // console.log('item docs mapped as', docs)
     this.ready = this.engine.addAllAsync(docs)
       .then(() => {
-        console.info("ItemSearchEngine indexed all documents")
+        Console.info("ItemSearchEngine", "indexed all documents")
       })
   }
 }
@@ -129,15 +130,15 @@ class CompactedSearchEngine {
     if (!query) return []
 
     const results = [];
-    const start = Date.now()
+    // const start = Date.now()
     for (const engine of this.engines) {
       const result = engine.engine.search(query, options)
         .filter(el => el.score > 0.2)
         .map(el => ({...el, type: engine.name}))
-      console.log(result)
+      // console.log(result)
       results.push(...result)
     }
-    console.log(Date.now() - start)
+    // console.log(Date.now() - start)
     return results
   }
 }

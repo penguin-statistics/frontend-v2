@@ -31,6 +31,7 @@
       <v-btn
         v-for="[id, url] in Object.entries(member.socials)"
         :key="`${member.name}-${id}`"
+        v-haptic
         icon
         :href="url"
         target="_blank"

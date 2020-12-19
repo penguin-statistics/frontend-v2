@@ -91,6 +91,7 @@
         <v-hover>
           <template #default="{ hover }">
             <v-btn
+              v-haptic
               large
               block
               color="yellow"
@@ -148,6 +149,7 @@
         </v-hover>
 
         <v-btn
+          v-haptic
           block
           large
           color="orange"

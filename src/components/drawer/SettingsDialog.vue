@@ -5,6 +5,7 @@
   >
     <template v-slot:activator="{ on, attrs }">
       <v-btn
+        v-haptic
         ripple
         text
         outlined
@@ -51,6 +52,7 @@
       <v-card-actions>
         <v-spacer />
         <v-btn
+          v-haptic
           text
           @click="active = false"
         >

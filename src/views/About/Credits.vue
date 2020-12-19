@@ -33,7 +33,7 @@
           v-for="[index, packageObj] in packages.entries()"
           :key="packageObj.name"
         >
-          <v-expansion-panel-header>
+          <v-expansion-panel-header v-haptic>
             <v-icon class="flex-grow-0 mr-2">
               mdi-package-variant-closed
             </v-icon>

@@ -23,6 +23,7 @@
     </p>
 
     <v-btn
+      v-haptic
       text
       outlined
       href="https://creativecommons.org/licenses/by-nc/4.0/"

@@ -619,7 +619,11 @@
 }
 
 .z-index-5 {
-    z-index: 5;
+    z-index: 5 !important;
+}
+
+.z-index-20 {
+    z-index: 20 !important;
 }
 
 .border-white-1 {

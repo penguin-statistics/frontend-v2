@@ -53,6 +53,7 @@
           <v-spacer />
           <v-btn
             v-if="validStage"
+            v-haptic
             depressed
             color="primary"
             small

@@ -16,6 +16,7 @@
     </v-card-text>
 
     <v-btn
+      v-haptic
       outlined
       block
       class="mb-2"
@@ -31,6 +32,7 @@
     <DataResetter>
       <template v-slot:default="{ on }">
         <v-btn
+          v-haptic.notification="'WARNING'"
           depressed
           block
           color="error"

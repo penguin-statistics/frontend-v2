@@ -2,6 +2,7 @@
   <v-list-item
     v-if="!route.children || route.meta.forceSingle"
     :key="route.name"
+    v-haptic
     :class="route.path === $route.path ? activeClass : ''"
     :two-line="!!route.meta.twoLine"
     @click="navigate(route)"
@@ -41,6 +42,7 @@
     <v-list-item
       v-for="child in route.children.filter(el => !el.meta.hide)"
       :key="child.name"
+      v-haptic
       :class="child.path === $route.path.split('/')[2] ? activeClass : ''"
       @click="navigate(child)"
     >

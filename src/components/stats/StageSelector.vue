@@ -5,7 +5,7 @@
     class="transparent elevation-0 full-width pa-md-4 pa-lg-4 pa-xl-4"
   >
     <v-stepper-header
-      class="bkop-light elevation-4 py-4 px-5 d-flex flex-row position-relative align-center mx-2"
+      class="bkop-light elevation-4 py-4 px-5 d-flex flex-row position-relative align-center"
       style="border-radius: 4px"
     >
       <v-fade-transition>
@@ -160,6 +160,7 @@
 
                     <v-spacer />
                     <v-btn
+                      v-haptic.notification="'WARNING'"
                       small
                       text
                       :disabled="!preferencedStages.histories.length"
@@ -231,6 +232,7 @@
                 <v-expansion-panel
                   v-for="zone in category.zones"
                   :key="zone.zoneId"
+                  v-haptic
                   class="bkop-light stage-card--background"
                   :style="{'background-image': zone.image ? `url(${zone.image}) !important` : null}"
                 >

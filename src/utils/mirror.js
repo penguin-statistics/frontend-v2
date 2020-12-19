@@ -14,7 +14,7 @@ const mirror = {
   cn: {
     identifier: "penguin-stats.cn",
     isCurrent () {
-      return true || isDomain(this.identifier)
+      return isDomain(this.identifier)
     }
   },
   vercel: {

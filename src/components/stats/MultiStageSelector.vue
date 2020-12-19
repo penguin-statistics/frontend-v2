@@ -6,6 +6,7 @@
     <v-card-actions class="mx-4">
       <v-spacer />
       <v-btn
+        v-haptic
         outlined
         color="error"
         @click="disableAll"
@@ -13,6 +14,7 @@
         {{ $t('stage.selector.excludeAll') }}
       </v-btn>
       <v-btn
+        v-haptic
         outlined
         color="success"
         @click="enableAll"
@@ -84,6 +86,7 @@
     <v-card-actions>
       <v-spacer />
       <v-btn
+        v-haptic
         text
         @click="$emit('close')"
       >

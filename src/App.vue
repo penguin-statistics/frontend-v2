@@ -3,7 +3,7 @@
     :class="languageFont"
   >
     <ServerNotifyOverlay />
-    <ModuleLoadingOverlay />
+    <ModuleLoadingOverlay v-if="!environment.runtime.isApp" />
     <UpgradeNotifier />
     <GlobalSnackbar />
     <MirrorSelector />
@@ -36,6 +36,7 @@
             justify="space-around"
           >
             <v-btn
+              v-haptic
               outlined
               text
               class="flex-grow-1 mr-1"
@@ -155,9 +156,9 @@
   import UpgradeNotifier from "@/components/global/UpgradeNotifier";
   import ServerSelector from "@/components/toolbar/ServerSelector";
   import ServerNotifyOverlay from "@/components/global/ServerNotifyOverlay";
-  import plugins from "@/utils/native/plugins"
   import GlobalSearchNavigation from "@/components/search/GlobalSearchNavigation";
   import ModuleLoadingOverlay from "@/components/global/ModuleLoadingOverlay";
+  import Environment from "@/mixins/Environment";
 
 export default {
   name: 'App',
@@ -177,7 +178,7 @@ export default {
     RandomBackground,
     AccountManager
   },
-  mixins: [GlobalEntry, CDN, Mirror, SpecialUI],
+  mixins: [GlobalEntry, CDN, Mirror, SpecialUI, Environment],
   data () {
     return {
       routes: [],
@@ -187,10 +188,7 @@ export default {
   },
   computed: {
     ...mapGetters("settings", ["lowData"]),
-    ...mapGetters("ajax", ["pending"]),
-    plugins () {
-      return plugins
-    }
+    ...mapGetters("ajax", ["pending"])
   },
   created () {
     this.routes = this.$router.options.routes.filter(el => !el.meta.hide);

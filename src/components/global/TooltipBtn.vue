@@ -6,6 +6,7 @@
   >
     <template v-slot:activator="{ on, attrs }">
       <v-btn
+        v-haptic
         v-bind="{...$attrs, ...attrs}"
         :style="{'top': top}"
         v-on="{...$listeners, ...on}"

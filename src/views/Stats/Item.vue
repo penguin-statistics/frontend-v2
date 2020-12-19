@@ -201,7 +201,7 @@ export default {
   watch: {
     $route: function(to, from) {
       Console.log("StatsByItem", "step route changed from", from.path, "to", to.path);
-      if (to.name === from.name) return
+      // if (to.name === from.name) return
       if (to.name === "StatsByItem") {
         this.step = 1;
       }

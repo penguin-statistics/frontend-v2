@@ -4,9 +4,11 @@ node_js:
 cache:
   directories:
     - node_modules
+env:
+  - PENGUIN_BUILD_FROM=travis
 script:
   - yarn lint
-  - yarn build:single
+  - yarn build:web
 notifications:
   webhooks:
     urls:

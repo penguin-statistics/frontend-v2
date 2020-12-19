@@ -23,12 +23,14 @@
         <v-card-actions class="mx-4">
           <v-spacer />
           <v-btn
+            v-haptic
             text
             @click="() => {dialog = false; enabled = true}"
           >
             {{ $t('meta.dialog.cancel') }}
           </v-btn>
           <v-btn
+            v-haptic
             color="error"
             @click="ignore"
           >
@@ -66,6 +68,7 @@
           :path="`mirrors.${mirror}.notification`"
         >
           <v-btn
+            v-haptic
             small
             outlined
             class="mx-1"
@@ -88,6 +91,7 @@
         <v-spacer />
 
         <v-btn
+          v-haptic
           icon
           x-small
           class="ml-2"

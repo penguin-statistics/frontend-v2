@@ -16,7 +16,7 @@
       v-model="search"
       solo
       full-width
-      autofocus
+      v-bind="computedBinding"
       rounded
       :placeholder="$t('search.placeholder')"
       :hint="$t('search.hint')"
@@ -31,6 +31,7 @@
       <template #append>
         <v-btn
           v-if="search"
+          v-haptic
           icon
           tabindex="100"
 
@@ -139,6 +140,10 @@ export default {
     pure: {
       type: Boolean,
       default: () => false
+    },
+    autofocus: {
+      type: Boolean,
+      default: () => true
     }
   },
   data() {
@@ -173,6 +178,11 @@ export default {
     },
     valid () {
       return this.search && this.results.length
+    },
+    computedBinding () {
+      const binding = {}
+      if (this.autofocus) binding['autofocus'] = 'autofocus'
+      return binding
     }
   },
   watch: {
@@ -194,7 +204,7 @@ export default {
   },
   created() {
     this.engine = new CompactedSearchEngine()
-    console.log(this.engine)
+    // console.log(this.engine)
 
     const self = this
     this.engine.ready().then(() => {

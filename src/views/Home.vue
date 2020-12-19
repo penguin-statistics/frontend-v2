@@ -35,6 +35,7 @@
         class="align-self-stretch"
       >
         <HomeSearch
+          :autofocus="false"
           class="card-fade-appear align-self-stretch fill-height"
         />
       </v-col>

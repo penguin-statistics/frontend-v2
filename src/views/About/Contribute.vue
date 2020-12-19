@@ -76,6 +76,7 @@
       justify="center"
     >
       <v-btn
+        v-haptic
         href="https://github.com/penguin-statistics/frontend-v2"
         target="_blank"
         rel="noopener"
@@ -94,6 +95,7 @@
       <v-divider vertical />
 
       <v-btn
+        v-haptic
         href="https://github.com/penguin-statistics/backend"
         target="_blank"
         rel="noopener"

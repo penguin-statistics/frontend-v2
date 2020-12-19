@@ -5,6 +5,7 @@
   >
     <template #activator="{ on, attrs }">
       <v-btn
+        v-haptic
         block
         large
         color="blue"
@@ -50,6 +51,7 @@
               style="width: 60px"
             >
               <v-btn
+                v-haptic
                 large
                 icon
                 depressed
@@ -73,6 +75,7 @@
       <v-card-actions>
         <v-spacer />
         <v-btn
+          v-haptic
           text
           @click="active = false"
         >
@@ -89,6 +92,8 @@ import snackbar from "@/utils/snackbar";
 import humans from "@/utils/humans";
 import Console from "@/utils/Console";
 import strings from "@/utils/strings";
+import share from "@/utils/native/share";
+import environment from "@/utils/environment";
 
 export default {
   name: "Share",
@@ -143,28 +148,43 @@ export default {
 
     socials() {
       // const copy = this.copy
-      return [
-        // {
-        //   "id": "copy-link",
-        //   "name": "Copy Link",
-        //   "icon": "mdi-content-copy",
-        //   canShare: true,
-        //   share({url}) {
-        //     return copy(url)
-        //   }
-        // },
-        ...humans.socials,
-        {
-          "id": "native",
-          "name": "More",
-          "icon": "mdi-dots-horizontal",
-          canShare: !!navigator.share,
-          share({text, url}) {
-            return navigator.share({text, url})
+      let socials
+      if (environment.runtime.isApp) {
+        socials = [
+          {
+            "id": "native",
+            "name": "Share",
+            "icon": "mdi-export-varient",
+            canShare: !!navigator.share,
+            share({text, url}) {
+              return share({text, url})
+            }
           }
-        },
-      ]
-        .filter(el => el.canShare)
+        ]
+      } else {
+        socials = [
+          // {
+          //   "id": "copy-link",
+          //   "name": "Copy Link",
+          //   "icon": "mdi-content-copy",
+          //   canShare: true,
+          //   share({url}) {
+          //     return copy(url)
+          //   }
+          // },
+          ...humans.socials,
+          {
+            "id": "native",
+            "name": "More",
+            "icon": "mdi-dots-horizontal",
+            canShare: !!navigator.share,
+            share({text, url}) {
+              return share({text, url})
+            }
+          },
+        ]
+      }
+      return socials.filter(el => el.canShare)
     }
   },
   methods: {

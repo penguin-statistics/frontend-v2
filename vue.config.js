@@ -12,6 +12,12 @@ try {
   commitHash = "unknown"
 }
 
+function envvar(name, fallback) {
+  let content = process.env[name]
+  if (content) content = content.trim()
+  return JSON.stringify(content) || fallback
+}
+
 module.exports = {
   pluginOptions: {
     i18n: {
@@ -37,10 +43,9 @@ module.exports = {
   configureWebpack: {
     plugins: [
       new webpack.DefinePlugin({
-        GIT_COMMIT: JSON.stringify(commitHash).trim()
-      }),
-      new webpack.optimize.MinChunkSizePlugin({
-        minChunkSize: 10000 // Minimum number of characters
+        GIT_COMMIT: JSON.stringify(commitHash).trim(),
+        PENGUIN_BUILD: envvar('PENGUIN_BUILD', 'unspecified'),
+        PENGUIN_BUILD_FROM: envvar('PENGUIN_BUILD_FROM', null),
       })
       // new InjectManifest ({
       //   swSrc: "./src/workers/service-worker.js",

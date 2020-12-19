@@ -22,6 +22,7 @@
         <DataResetter>
           <template v-slot:default="{ on }">
             <v-btn
+              v-haptic
               color="white"
               text
               v-on="on"
@@ -33,6 +34,7 @@
         </DataResetter>
 
         <v-btn
+          v-haptic
           color="primary"
           depressed
           :loading="upgrading"

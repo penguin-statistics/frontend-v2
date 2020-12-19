@@ -45,6 +45,7 @@
             </h1>
             <v-spacer />
             <v-btn
+              v-haptic
               icon
               color="error"
               :disabled="!removeable"
@@ -79,6 +80,7 @@
 
     <div class="pa-4 flex-column">
       <v-btn
+        v-haptic
         block
         outlined
         class="mb-1"
@@ -91,6 +93,7 @@
         {{ $t('query.operation.add') }}
       </v-btn>
       <v-btn
+        v-haptic
         block
         large
         :disabled="!valid"
@@ -134,6 +137,7 @@
               <DoYouKnow />
             </p>
             <v-btn
+              v-haptic
               outlined
               color="error"
               @click="cancel"
