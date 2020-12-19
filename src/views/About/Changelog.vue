@@ -90,7 +90,7 @@
             <v-card-text
               v-else
               v-marked
-              class="markdown-content-raw"
+              class="markdown-content-raw ml-1"
               v-text="item.changes"
             />
 
