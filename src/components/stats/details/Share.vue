@@ -43,7 +43,7 @@
               @click:append="copy(link)"
             />
           </v-row>
-          <v-row class="justify-start mt-4 position-relative flex-nowrap overflow-x-auto">
+          <v-row class="justify-space-around mt-4 position-relative flex-nowrap overflow-x-auto">
             <div
               v-for="social in socials"
               :key="social.id"
@@ -136,12 +136,14 @@ export default {
       }
       return ''
     },
-    name () {
+    text () {
+      let name
       if (this.data.stageId) {
-        return `${this.$t('stage.name')} "${strings.translate(this.data, 'code')}"`
+        name = this.$t('share.text.stage', {name: strings.translate(this.data, 'code')})
       } else {
-        return `${this.$t('item.name')} "${strings.translate(this.data, 'name')}"`
+        name = this.$t('share.text.item', {name: strings.translate(this.data, 'name')})
       }
+      return this.$t('share.text._tmpl', {name})
     },
 
     link() {
@@ -202,7 +204,7 @@ export default {
     shareViaSocial(social) {
       this.busy = social.id
       social.share({
-        text: this.$t('share.text', {name: this.name}),
+        text: this.text,
         url: this.link
       })
       const self = this

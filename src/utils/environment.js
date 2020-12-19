@@ -8,7 +8,7 @@ function boolean(key, rejectApp) {
   // development & in-app: force true
   // otherwise if specifically specified, use that value
   // otherwise fallback to false
-  if (rejectApp) return false
+  if (rejectApp && PENGUIN_BUILD === "app") return false
   return process.env.NODE_ENV !== "production" || getConfig()[key] || false
 }
 

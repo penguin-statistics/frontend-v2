@@ -74,7 +74,10 @@
               版本特性一览
             </v-card-subtitle>
 
-            <v-card-text class="markdown-content">
+            <v-card-text
+              v-if="Array.isArray(item.changes)"
+              class="markdown-content"
+            >
               <ol>
                 <li
                   v-for="(text, key) in item.changes"
@@ -83,6 +86,13 @@
                 />
               </ol>
             </v-card-text>
+
+            <v-card-text
+              v-else
+              v-marked
+              class="markdown-content-raw"
+              v-text="item.changes"
+            />
 
             <v-card-subtitle
               v-if="item.hotfix"
@@ -127,7 +137,7 @@ export default {
           version: "v3.5.0",
           date: "2021-02-15T00:00:00+0800",
           changes: [
-            "将添加：社交平台账户功能",
+            "将添加：图像识别掉落汇报",
 
             "将内部优化：错误信息报错统一化",
           ]
@@ -135,13 +145,63 @@ export default {
         {
           version: "v3.4.0",
           date: "2020-12-15T00:00:00+0800",
-          changes: [
-            "将添加：掉落汇报自动同步至 Planner 功能",
-            "将添加：数据导出功能",
-            "将添加：作战更多统计信息",
-            "将添加：作战更多操作选项",
-            "将添加：作战掉落组合频率查询",
-          ]
+          // changes: [
+          //   "添加：全局搜索功能",
+          //   "添加：「掉落组合」计算与可视化",
+          //   "添加：于作战内的「快速操作」栏",
+          //   "添加：于作战内的「关于作战」信息栏",
+          //   "添加：于作战选择器的「快速访问」栏",
+          //   "添加：于数据表表头的栏信息解释 Tooltip",
+          //   "优化：服务器切换器",
+          //   "优化：「公告」卡片的链接展示效果",
+          //   "优化：多项针对即将上线的 Hybrid App 的优化",
+          //   "优化：「图标背景卡片」的背景渐变微调",
+          //   "优化：部分页面进行分包处理，降低首次加载耗时与减少服务器带宽开销",
+          //   "优化：「捐助」页针对不同渠道限制进行设计调整，在合规性范围内尽量让用户看到捐赠渠道",
+          //
+          //   "性能优化：多处代码进行性能调优",
+          // ],
+          changes: `## 添加
+1. 全局搜索功能
+2. 分包页面加载提示
+3. 「掉落组合」计算与可视化
+4. 干员立绘的版权提示信息
+5. 于**作战数据页面**内的「快速操作」栏
+6. 于**作战数据页面**内的「关于作战」信息栏
+7. 于**作战选择器**的「快速访问」栏
+8. 于**数据表表头**的栏信息解释 Tooltip
+
+## 优化
+1. 服务器切换器
+2. 优化数据表格内容密度
+3. 「公告」卡片的链接展示效果
+4. 优化「友情链接」的部分链接设计
+5. 「图标背景卡片」的背景渐变微调
+6. 多项针对即将上线的 Hybrid App 的优化
+  1. 重新设计了 App Icon 以防止版权纠纷
+  2. 对众多组件增加了 Haptic Feedback
+7. 优化数据表表头 \`:hover\` 效果
+8. 于「内容来源」增加关于 Bender 字体的说明
+9. 增加「正在部署」检测机制，优化网络报错提示
+10. 调整了 Bender 字体的部分字宽，以优化视觉可读性
+11. 于外部链接增加 \`rel="noopener"\` 防止外站链接劫持
+12. 部分页面进行分包处理，降低首次加载耗时与减少服务器带宽开销
+13. 「捐助」页针对不同渠道限制进行设计调整，在合规性范围内尽量让用户看到捐赠渠道
+
+### 内部优化
+1. 统一化非正常数据检测机制
+2. 多处代码进行性能调优，移除了部分无用代码
+
+## 修复
+1. 大于 1h 的时间段解析错误的问题
+2. 相关物品浮动于 App Bar 上方的错误
+3. 修复 404 页面在亮色主题下显示效果不佳的问题
+4. 「按素材」页面重复跳转自身页面导致 \`SearchParams\` 消失的问题
+
+## 重构
+1. 重新设计了「团队成员」页面
+
+`
         },
         {
           version: "v3.3.6",
@@ -572,7 +632,7 @@ export default {
           el.value = false
         }
 
-        el.changes = el.changes.map(strings.markdown)
+        if (Array.isArray(el.changes)) el.changes = el.changes.map(strings.markdown)
         if (el.hotfix) el.hotfix = el.hotfix.map(strings.markdown)
 
         return el
@@ -597,11 +657,20 @@ export default {
 }
 </script>
 
-<style>
-.markdown-content code {
+<style lang="scss">
+.markdown-content code, .markdown-content-raw code {
   background: transparent !important;
   color: inherit;
   box-shadow: none;
+}
+.markdown-content-raw {
+  h1, h2, h3 {
+    margin-top: 1rem;
+    margin-bottom: .5rem;
+    &:first-child {
+      margin-top: 0rem;
+    }
+  }
 }
 .markdown-content p {
   margin-bottom: 0;

@@ -498,7 +498,10 @@ share:
   name: 分享
   shortlink:
     name: 短链接
-  text: 查看企鹅物流数据统计中「{name}」的数据
+  text:
+    _tmpl: 查看企鹅物流数据统计中「{name}」的掉落统计数据
+    stage: 作战 {name}
+    item: 素材 {name}
   success: 分享成功
 search:
   placeholder: 搜索...

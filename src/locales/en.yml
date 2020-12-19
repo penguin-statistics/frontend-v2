@@ -523,7 +523,10 @@ share:
   name: Share
   shortlink:
     name: Short Link
-  text: Checkout statistics of {name} on Penguin Statistics
+  text:
+    _tmpl: "{name} Drop Rates on Penguin Statistics"
+    stage: "Stage \"{name}\""
+    item: "Item \"{name}\""
   success: Successfully shared
 search:
   placeholder: Search...
