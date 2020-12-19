@@ -117,7 +117,7 @@ stats:
       onlyOpen: Only show open stages
   timeRange:
     inBetween: "{0} to {1}"
-    toPresent: "{date} to Present"
+    toPresent: "{date} until now"
     endsAt: Before {date}
     unknown: Unknown
     notSelected: "(not selected)"
@@ -283,7 +283,7 @@ zone:
   opensAt: 'Event period: {0} - {1}'
 stage:
   name: Stage
-  about: About this stage
+  about: About this Stage
   apCost: "{apCost} AP required"
   actions:
     _name:

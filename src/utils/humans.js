@@ -54,10 +54,10 @@ const socials = [
     "name": "QQ",
     "icon": "mdi-qqchat",
     "color": "#51b6ef",
-    "canShare": true,
-    share({url}) {
-      return paramUrl('http://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey', {url})
-    }
+    "canShare": false,
+    // share({url}) {
+    //   return paramUrl('http://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey', {url})
+    // }
   },
   {
     "id": "reddit",

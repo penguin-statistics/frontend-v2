@@ -2,7 +2,7 @@
   <div>
     <v-card-title class="py-4 pl-0">
       <v-icon left>
-        mdi-cube
+        mdi-lock-pattern
       </v-icon>
       {{ $t('pattern.name') }}
     </v-card-title>

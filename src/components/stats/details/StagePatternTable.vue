@@ -14,17 +14,17 @@
     :locale="$i18n.locale"
 
     :mobile-breakpoint="1"
-    class="elevation-0 transparent container--fluid font-weight-bold transition-all"
+    class="elevation-0 stat-table transparent container--fluid font-weight-bold transition-all"
 
     :class="{'pt-0': $vuetify.breakpoint.xsOnly}"
   >
-    <template #header.quantity>
-      <HeaderWithTooltip :name="$t('stats.headers.quantity')">
+    <template #header.quantity="{header}">
+      <HeaderWithTooltip :name="header.text">
         {{ $t('stats.headerDesc.quantity') }}
       </HeaderWithTooltip>
     </template>
-    <template #header.percentage>
-      <HeaderWithTooltip :name="$t('stats.headers.percentage')">
+    <template #header.percentage="{header}">
+      <HeaderWithTooltip :name="header.text">
         {{ $t('stats.headerDesc.patternPercentage') }}
       </HeaderWithTooltip>
     </template>
@@ -33,10 +33,10 @@
         :class="{'table-row-hover': item.i === active}"
         class="monospace"
       >
-        <td class="text-left">
+        <td class="pl-2 text-left">
           {{ item.i }}
         </td>
-        <td class="text-left">
+        <td class="pl-2 text-left">
           <v-row
             v-if="item.pattern.length"
             align="center"
@@ -73,10 +73,10 @@
             {{ $t('pattern.empty') }}
           </div>
         </td>
-        <td class="text-left">
+        <td class="pl-2 text-left">
           {{ item.quantity }}
         </td>
-        <td class="text-left">
+        <td class="pl-2 text-left">
           {{ item.percentageText }}
         </td>
       </tr>
@@ -106,7 +106,7 @@ export default {
   data() {
     return {
       page: 1,
-      itemsPerPage: 10
+      itemsPerPage: this.$vuetify.breakpoint.smAndDown ? 5 : 10
     }
   },
   computed: {

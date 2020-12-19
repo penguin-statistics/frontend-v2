@@ -55,6 +55,7 @@
                 large
                 icon
                 depressed
+                :loading="busy === social.id"
                 class="mb-1"
                 color="white"
                 :style="{'background-color': social.color}"
@@ -109,7 +110,8 @@ export default {
   },
   data() {
     return {
-      active: false
+      active: false,
+      busy: null
     }
   },
   computed: {
@@ -198,12 +200,15 @@ export default {
           })
     },
     shareViaSocial(social) {
+      this.busy = social.id
       social.share({
         text: this.$t('share.text', {name: this.name}),
         url: this.link
       })
+      const self = this
       setTimeout(() => {
         snackbar.launch("success", 5000, "share.success")
+        self.busy = null
       }, 0)
     }
   },

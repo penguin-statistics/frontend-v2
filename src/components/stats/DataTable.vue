@@ -659,7 +659,7 @@
         return timeFormatter.startEnd(start, end)
       },
       formatDuration (duration) {
-        return timeFormatter.duration(duration)
+        return timeFormatter.duration(duration, "s", 0)
       },
       isTimeOutdatedRange (time) {
         if (!time) return false
