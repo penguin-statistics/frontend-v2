@@ -17,7 +17,7 @@
         <v-icon left>
           mdi-share-variant
         </v-icon>
-        分享
+        {{ $t('share.name') }}
       </v-btn>
     </template>
 
@@ -26,7 +26,7 @@
         <v-icon left>
           mdi-share-variant
         </v-icon>
-        分享
+        {{ $t('share.name') }}
       </v-card-title>
 
       <v-card-text class="pb-0">
@@ -36,7 +36,7 @@
               readonly
               hide-details
               outlined
-              label="短链接"
+              :label="$t('share.shortlink.name')"
               :value="link"
               class="monospace-pure my-2"
               append-icon="mdi-content-copy"
@@ -136,9 +136,9 @@ export default {
     },
     name () {
       if (this.data.stageId) {
-        return `${this.$t('stage.name')} ${strings.translate(this.data, 'code')}`
+        return `${this.$t('stage.name')} "${strings.translate(this.data, 'code')}"`
       } else {
-        return `${this.$t('item.name')} ${strings.translate(this.data, 'name')}`
+        return `${this.$t('item.name')} "${strings.translate(this.data, 'name')}"`
       }
     },
 
@@ -200,7 +200,7 @@ export default {
     shareViaSocial(social) {
       social.share({
         text: this.$t('share.text', {name: this.name}),
-        url: window.location.href
+        url: this.link
       })
       setTimeout(() => {
         snackbar.launch("success", 5000, "share.success")

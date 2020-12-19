@@ -6,10 +6,10 @@
     class="d-flex flex-column align-center justify-center monospace border-light mt-2"
   >
     <span class="heading">
-      暂无本作战
+      {{ $t('pattern.error')[0] }}
     </span>
     <span class="headline">
-      掉落组合数据
+      {{ $t('pattern.error')[1] }}
     </span>
   </v-card>
 </template>

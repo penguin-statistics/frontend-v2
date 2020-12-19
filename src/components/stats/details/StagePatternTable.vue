@@ -14,12 +14,25 @@
     :locale="$i18n.locale"
 
     :mobile-breakpoint="1"
-    class="elevation-0 transparent container--fluid font-weight-bold monospace transition-all"
+    class="elevation-0 transparent container--fluid font-weight-bold transition-all"
 
     :class="{'pt-0': $vuetify.breakpoint.xsOnly}"
   >
+    <template #header.quantity>
+      <HeaderWithTooltip :name="$t('stats.headers.quantity')">
+        {{ $t('stats.headerDesc.quantity') }}
+      </HeaderWithTooltip>
+    </template>
+    <template #header.percentage>
+      <HeaderWithTooltip :name="$t('stats.headers.percentage')">
+        {{ $t('stats.headerDesc.patternPercentage') }}
+      </HeaderWithTooltip>
+    </template>
     <template #item="{ item }">
-      <tr :class="{'table-row-hover': item.i === active}">
+      <tr
+        :class="{'table-row-hover': item.i === active}"
+        class="monospace"
+      >
         <td class="text-left">
           {{ item.i }}
         </td>
@@ -52,12 +65,12 @@
           </v-row>
           <div
             v-else
-            class="d-flex align-end justify-left ml-1"
+            class="d-flex align-end justify-left ml-n2"
           >
             <v-icon left>
               mdi-circle-off-outline
             </v-icon>
-            无掉落
+            {{ $t('pattern.empty') }}
           </div>
         </td>
         <td class="text-left">
@@ -75,10 +88,11 @@
 import get from "@/utils/getters";
 import timeFormatter from "@/utils/timeFormatter";
 import Item from "@/components/global/Item";
+import HeaderWithTooltip from "@/components/stats/HeaderWithTooltip";
 
 export default {
   name: "StagePatternTable",
-  components: {Item},
+  components: {HeaderWithTooltip, Item},
   props: {
     patterns: {
       type: Array,
@@ -121,7 +135,7 @@ export default {
           value: "pattern",
           align: "left",
           sortable: false,
-          width: "216px"
+          width: "144px"
         },
         {
           text: this.$t("stats.headers.quantity"),

@@ -76,7 +76,7 @@ export default {
 
               return {
                 i: el.i,
-                name: patterns.join(" + ") || '无掉落',
+                name: patterns.join(" + ") || this.$t('pattern.empty'),
                 y: el.percentage * 100,
                 percentageText: el.percentageText,
                 quantity: el.quantity
@@ -96,7 +96,6 @@ export default {
         ],
 
         tooltip: {
-          shared: true,
           // formatter: function () {
           //   return `<h4 class="subtitle-1">${this.key}</h4><span>掉落数：${this.point.quantity}</span><br /><span>百分比：${this.y.toFixed(2)}%</span>`
           // },
@@ -107,10 +106,10 @@ export default {
           useHTML: true,
           headerFormat: '<h4 class="subtitle-1" style="margin-left: 2px">{point.key}</h4><table>',
           pointFormat: `<tr style="color: ${theme.text}">
-  <td style="color: {series.color}; padding-right: .25rem">掉落数：</td><td style="text-align: right; transform: translateY(1px)"><b>{point.quantity}</b></td>
+  <td style="color: {series.color}; padding-right: .25rem">${this.$t('stats.headers.quantity')}: </td><td style="text-align: right; transform: translateY(1px)"><b>{point.quantity}</b></td>
 </tr>
 <tr style="color: ${theme.text}">
-  <td style="color: {series.color}; padding-right: .25rem">百分比：</td><td style="text-align: right; transform: translateY(1px)"><b>{point.percentageText}</b></td>
+  <td style="color: {series.color}; padding-right: .25rem">${this.$t('stats.headers.percentage')}: </td><td style="text-align: right; transform: translateY(1px)"><b>{point.percentageText}</b></td>
 </tr>`,
           footerFormat: '</table>',
 

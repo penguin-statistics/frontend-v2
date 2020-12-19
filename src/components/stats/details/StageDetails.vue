@@ -24,7 +24,7 @@
           <v-icon left>
             mdi-information
           </v-icon>
-          关于此作战
+          {{ $t('stage.about') }}
         </v-card-title>
 
         <!--        <FactTable class="mb-4">-->
@@ -40,11 +40,11 @@
 
         <FactTable class="mb-6">
           <FactTableItem
-            title="理智"
+            :title="$t('stats.headers.apCost')"
             :content="stage.apCost"
           />
           <FactTableItem
-            title="最短通关时间"
+            :title="$t('stats.headers.clearTime')"
             :content="formatDuration(stage.minClearTime)"
           />
         </FactTable>
@@ -85,7 +85,7 @@
           <v-icon left>
             mdi-chevron-double-right
           </v-icon>
-          快速操作
+          {{ $t('stage.actions._name.panel') }}
         </v-card-title>
 
         <v-hover>
@@ -117,7 +117,7 @@
                       >
                         mdi-star-off
                       </v-icon>
-                      点击以取消
+                      {{ $t('stage.actions.star.deactivate') }}
                     </span>
                     <span
                       v-else
@@ -127,7 +127,7 @@
                       <v-icon left>
                         mdi-star
                       </v-icon>
-                      已星标此作战
+                      {{ $t('stage.actions.star.activated') }}
                     </span>
                   </v-scroll-x-transition>
                 </div>
@@ -141,7 +141,7 @@
                   <v-icon left>
                     mdi-star-outline
                   </v-icon>
-                  星标此作战
+                  {{ $t('stage.actions.star.activate') }}
                 </span>
               </v-slide-y-reverse-transition>
             </v-btn>
@@ -162,7 +162,7 @@
           <v-icon left>
             mdi-database-search
           </v-icon>
-          进行高级查询
+          {{ $t('stage.actions.advanced.activator') }}
         </v-btn>
 
         <Share :stage="stage" />

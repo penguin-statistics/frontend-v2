@@ -4,21 +4,21 @@
       <v-icon left>
         mdi-cube
       </v-icon>
-      掉落组合
+      {{ $t('pattern.name') }}
     </v-card-title>
     <div class="d-inline-flex flex-row align-start">
       <FactTableItem
-        title="统计区间"
+        :title="$t('stats.headers.timeRange')"
         content-class="monospace"
         :content="timeRange"
       />
       <FactTableItem
-        title="样本数"
+        :title="$t('stats.headers.times')"
         content-class="monospace"
-        :content="quantity"
+        :content="times"
       />
     </div>
-    
+
     <StagePatternError v-if="patterns && patterns.length === 0" />
     <v-row v-else>
       <v-col
@@ -95,18 +95,6 @@ export default {
   data() {
     return {
       activeIndex: null,
-      tabs: [
-        {
-          id: "pie",
-          text: 'pattern.view.pie',
-          icon: 'mdi-chart-pie'
-        },
-        {
-          id: "table",
-          text: 'pattern.view.table',
-          icon: 'mdi-table'
-        },
-      ]
     }
   },
   computed: {
@@ -115,7 +103,7 @@ export default {
           .sort((a, b) => b.percentage - a.percentage)
           .map((el, i) => ({...el, i: i + 1}))
     },
-    quantity() {
+    times() {
       return (this.patterns[0] || {}).times
     },
     timeRange() {

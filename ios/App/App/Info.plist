@@ -56,6 +56,11 @@
 	<string>To Pick Photos from Library</string>
 	<key>NSSiriUsageDescription</key>
 	<string>SIRI_USAGE_DESCRIPTION</string>
+	<key>UIApplicationSceneManifest</key>
+	<dict>
+		<key>UIApplicationSupportsMultipleScenes</key>
+		<false/>
+	</dict>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
 	<key>UIMainStoryboardFile</key>
