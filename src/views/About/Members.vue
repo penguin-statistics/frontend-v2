@@ -114,19 +114,6 @@
           },
           contributors: [
             {
-              name: "Kumo ☁️",
-              responsibility: [
-                r.localization.ja
-              ],
-              avatar: "kumo.jpg",
-              socials: {
-                github: "https://github.com/KumoSiunaus",
-                weibo: "https://weibo.com/673465600",
-                twitter: "https://twitter.com/Kumo_Siunaus",
-                email: "kumosiunaus@gmail.com"
-              }
-            },
-            {
               name: "YukiC",
               responsibility: [
                 r.backend
@@ -134,26 +121,6 @@
               avatar: "yukic.jpg",
               socials: {
                 github: "https://github.com/cyj5230"
-              }
-            },
-            {
-              name: "AsahiLuna",
-              responsibility: [
-                r.frontend
-              ],
-              avatar: "luna.png",
-              socials: {
-                github: "https://github.com/AsahiLuna"
-              }
-            },
-            {
-              name: "🦀",
-              responsibility: [
-                r.arkplanner
-              ],
-              avatar: "xie.jpeg",
-              socials: {
-                github: "https://github.com/ycremar"
               }
             },
             {
@@ -167,73 +134,23 @@
               }
             },
             {
-              name: "Einzithy.D",
+              name: "🦀",
               responsibility: [
-                r.statistics
+                r.arkplanner
               ],
-              avatar: "j.png",
+              avatar: "xie.jpeg",
               socials: {
-                github: "https://github.com/Einzithy-D"
+                github: "https://github.com/ycremar"
               }
             },
             {
-              name: "Blealtan",
+              name: "AsahiLuna",
               responsibility: [
                 r.frontend
               ],
-              avatar: "blealtan.png",
+              avatar: "luna.png",
               socials: {
-                github: "https://github.com/Blealtan"
-              }
-            },
-            {
-              name: "ChaosNiku",
-              responsibility: [
-                r.backend
-              ],
-              avatar: "chaosniku.png",
-              socials: {
-                github: "https://github.com/ChaosNiku"
-              }
-            },
-            {
-              name: "darkness",
-              responsibility: [
-                r.maintenance
-              ],
-              avatar: "darkness.jpg",
-              socials: {
-                github: "https://github.com/darknessWONG"
-              }
-            },
-            {
-              name: "SrO²",
-              responsibility: [
-                r.bulkupload
-              ],
-              avatar: "sr.png",
-              socials: {
-                github: "https://github.com/Strontium233"
-              }
-            },
-            {
-              name: "路夏早苗",
-              responsibility: [
-                r.frontend
-              ],
-              avatar: "sanae.jpeg",
-              socials: {
-                github: "https://github.com/RokaSanae"
-              }
-            },
-            {
-              name: "冰糖雪梨橙#9594",
-              responsibility: [
-                r.frontend
-              ],
-              avatar: "wish.png",
-              socials: {
-                github: "https://github.com/jdgjxxchy"
+                github: "https://github.com/AsahiLuna"
               }
             },
             {
@@ -257,23 +174,36 @@
               }
             },
             {
-              name: "ウィン",
+              name: "Kumo ☁️",
               responsibility: [
                 r.localization.ja
               ],
-              avatar: "win.png",
+              avatar: "kumo.jpg",
               socials: {
-                twitter: "https://twitter.com/Winterer000000"
+                github: "https://github.com/KumoSiunaus",
+                weibo: "https://weibo.com/673465600",
+                twitter: "https://twitter.com/Kumo_Siunaus",
+                email: "kumosiunaus@gmail.com"
               }
             },
             {
-              name: "Nemunemu",
+              name: "Einzithy.D",
               responsibility: [
-                r.customersupport
+                r.statistics
               ],
-              avatar: "nemunemu.jpg",
+              avatar: "j.png",
               socials: {
-                weibo: "https://www.weibo.com/nemunemu"
+                github: "https://github.com/Einzithy-D"
+              }
+            },
+            {
+              name: "Blealtan",
+              responsibility: [
+                r.frontend
+              ],
+              avatar: "blealtan.png",
+              socials: {
+                github: "https://github.com/Blealtan"
               }
             },
             {
@@ -284,6 +214,76 @@
               avatar: "xia.png",
               socials: {
                 weibo: "https://www.weibo.com/u/2290638732"
+              }
+            },
+            {
+              name: "ウィン",
+              responsibility: [
+                r.localization.ja
+              ],
+              avatar: "win.png",
+              socials: {
+                twitter: "https://twitter.com/Winterer000000"
+              }
+            },
+            {
+              name: "SrO²",
+              responsibility: [
+                r.bulkupload
+              ],
+              avatar: "sr.png",
+              socials: {
+                github: "https://github.com/Strontium233"
+              }
+            },
+            {
+              name: "冰糖雪梨橙#9594",
+              responsibility: [
+                r.frontend
+              ],
+              avatar: "wish.png",
+              socials: {
+                github: "https://github.com/jdgjxxchy"
+              }
+            },
+            {
+              name: "darkness",
+              responsibility: [
+                r.maintenance
+              ],
+              avatar: "darkness.jpg",
+              socials: {
+                github: "https://github.com/darknessWONG"
+              }
+            },
+            {
+              name: "路夏早苗",
+              responsibility: [
+                r.frontend
+              ],
+              avatar: "sanae.jpeg",
+              socials: {
+                github: "https://github.com/RokaSanae"
+              }
+            },
+            {
+              name: "ChaosNiku",
+              responsibility: [
+                r.backend
+              ],
+              avatar: "chaosniku.png",
+              socials: {
+                github: "https://github.com/ChaosNiku"
+              }
+            },
+            {
+              name: "Nemunemu",
+              responsibility: [
+                r.customersupport
+              ],
+              avatar: "nemunemu.jpg",
+              socials: {
+                weibo: "https://www.weibo.com/nemunemu"
               }
             },
             {
