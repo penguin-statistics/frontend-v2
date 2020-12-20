@@ -181,7 +181,7 @@ planner:
     level: 재료 등급
     noStage: 작전 지역을 찾을 수 없습니다.
     noSyntheses: 가공할 재료를 찾을 수 없습니다.
-items:
+item:
   choose:
     name: 아이템 선택
   categories:

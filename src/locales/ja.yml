@@ -67,6 +67,13 @@ meta:
     confirm: はい
     submit: 送信
     close: 閉じる
+  time:
+    minute: "{m}分"
+    second: "{s}秒"
+  copyWarning: |2-
+
+
+    Data from Penguin Statistics ({site})
 stats:
   headers:
     stage: ステージ
@@ -91,8 +98,8 @@ stats:
       _name: ステージ状態
       onlyOpen: 開放中ステージのみを表示
   timeRange:
-    inBetween: "{0} から {1} まで"
-    toPresent: "{date} から現在まで"
+    inBetween: "{0} ~ {1}"
+    toPresent: "{date} ~ 現在"
     endsAt: "{date} 以前"
     unknown: 不明
     notSelected: "（選択されていない）"
@@ -214,6 +221,30 @@ zone:
 stage:
   name: 作戦
   apCost: 消費理性：{apCost}
+  actions:
+    _name:
+      selector: Quick Access
+      selectorEmpty: No Quick Access available
+      panel: Quick Actions
+    star:
+      name: Starred
+      activate: Star
+      activated: Starred
+      deactivate: Click to Cancel Star
+      empty:
+        - Currently you've not starred any stages
+        - You can star a stage by going to its 'Quick Access' section in its details panel.
+    history:
+      name: Recently Accessed
+      empty:
+        - No recent accessed stages available
+        - After you've visit any stage pages, a record will appear at here.
+      clear: Clear
+    links:
+      "prts-wiki": Wiki
+      "map-arknights-com": Maps
+    advanced:
+      activator: Do Advanced Query
   loots:
     NORMAL_DROP: 通常
     EXTRA_DROP: その他
@@ -268,7 +299,7 @@ planner:
     level: 素材レベル
     noStage: 入力内容に不備があるため結果を表示出来ません。
     noSyntheses: 入力内容に不備があるため結果を表示出来ません。
-items:
+item:
   choose:
     name: 素材選択
   categories:

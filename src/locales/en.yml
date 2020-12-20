@@ -92,7 +92,7 @@ stats:
     apPPR: Sanity Required Per Item
     clearTime: Shortest Clear Time
     timeRange: Time Range
-    itemPerTime: Item Per Time
+    itemPerTime: Time Per Item
   headerDesc:
     apCost: The Sanity required for the stage
     quantity: The sum of all drops in this stage
@@ -379,7 +379,7 @@ planner:
     level: Material Level
     noStage: No stage found.
     noSyntheses: No syntheses found.
-items:
+item:
   name: Item
   choose:
     name: Choose Item
