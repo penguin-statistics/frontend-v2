@@ -18,7 +18,8 @@
 				"planner": "Planner",
 				"storage": "Inventory Management",
         "walkthrough": "Walkthrough",
-        "map": "Map"
+        "map": "Map",
+        "video": "Clear Guide"
 			}
 		}
 	},
@@ -40,7 +41,8 @@
 				"planner": "周回計画作成ツール",
 				"storage": "素材在庫管理",
         "walkthrough": "ステージ攻略",
-        "map": "Map"
+        "map": "マップ",
+        "video": "攻略動画"
 			}
 		}
 	},
@@ -62,7 +64,8 @@
 				"planner": "계획기",
 				"storage": "창고 관리기",
         "walkthrough": "공략집",
-        "map": "Map"
+        "map": "Map",
+        "video": "Clear Guide"
 			}
 		}
 	},
@@ -84,7 +87,8 @@
 				"planner": "刷图规划",
 				"storage": "库存管理",
         "walkthrough": "通关攻略",
-        "map": "Map"
+        "map": "作战地图",
+        "video": "攻略视频"
 			}
 		}
 	}
@@ -310,6 +314,17 @@ export default {
           ],
           url: "https://kokodayo.fun/",
           shorten: "kokodayo.fun"
+        },
+        {
+          title: "源石作战室",
+          features: [
+            {
+              name: "video",
+              color: "indigo darken-4"
+            }
+          ],
+          url: "https://opssr.net/",
+          shorten: "opssr.net"
         },
         {
           title: "ANWiki",
