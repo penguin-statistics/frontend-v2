@@ -1,30 +1,41 @@
 import {
   Plugins,
-  HapticsImpactStyle
+  HapticsImpactStyle, HapticsNotificationType
 } from '@capacitor/core';
 
 const { Haptics } = Plugins;
 
+window.GlobalCapacitorHaptics = Haptics
+
 export default {
-  fire (style = HapticsImpactStyle.Heavy) {
+  light() {
     Haptics.impact({
-      style: style
+      style: HapticsImpactStyle.Heavy
     });
   },
 
-  heavy() {
-    this.fire(HapticsImpactStyle.Heavy);
+  error() {
+    Haptics.notification({
+      type: HapticsNotificationType.ERROR
+    })
   },
 
-  medium() {
-    this.fire(HapticsImpactStyle.Medium);
+  warning() {
+    Haptics.notification({
+      type: HapticsNotificationType.WARNING
+    })
   },
 
-  light() {
-    this.fire(HapticsImpactStyle.Light);
+  success() {
+    Haptics.notification({
+      type: HapticsNotificationType.SUCCESS
+    })
   },
 
-  vibrate() {
-    Haptics.vibrate();
+  notification(type) {
+    Haptics.notification({type})
+  },
+  impact(style) {
+    Haptics.impact({style})
   }
 }

@@ -6,7 +6,7 @@
       class="d-flex flex-column"
     >
       <div class="ml-2 my-2">
-        {{ $t(`items.categories.${name}`) }}
+        {{ $t(`item.categories.${name}`) }}
       </div>
       <div class="d-flex flex-wrap justify-start">
         <div
@@ -45,7 +45,7 @@
     computed: {
       items () {
         const all = get.items.all();
-        const categories = ["MATERIAL", "CARD_EXP", "CHIP", "FURN", "ACTIVITY_ITEM"];
+        const categories = get.items.validItemTypes;
         const results = {};
         let already = [];
         for (const category of categories) {

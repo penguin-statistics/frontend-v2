@@ -164,7 +164,7 @@
     <v-row
       align="center"
       justify="center"
-      class="mt-4 mb-1 hidden-sm-and-up"
+      class="mt-4 mb-1 hidden-lg-and-up"
     >
       <v-chip
         label
@@ -205,7 +205,6 @@
       :locale="$i18n.locale"
       :hide-default-footer="items.length <= 10"
 
-      :calculate-widths="true"
       :mobile-breakpoint="1"
       :loading="matrixPending"
 
@@ -222,8 +221,57 @@
           </span>
         </div>
       </template>
+
+      <template v-slot:header.stage.apCost="{header}">
+        <HeaderWithTooltip :name="header.text">
+          {{ $t('stats.headerDesc.apCost') }}
+        </HeaderWithTooltip>
+      </template>
+
+      <template v-slot:header.quantity="{header}">
+        <HeaderWithTooltip :name="header.text">
+          {{ $t('stats.headerDesc.quantity') }}
+        </HeaderWithTooltip>
+      </template>
+
+      <template v-slot:header.times="{header}">
+        <HeaderWithTooltip :name="header.text">
+          {{ $t('stats.headerDesc.times') }}
+        </HeaderWithTooltip>
+      </template>
+
+      <template v-slot:header.percentage="{header}">
+        <HeaderWithTooltip :name="header.text">
+          {{ $t('stats.headerDesc.percentage') }}
+        </HeaderWithTooltip>
+      </template>
+
+      <template v-slot:header.apPPR="{header}">
+        <HeaderWithTooltip :name="header.text">
+          {{ $t('stats.headerDesc.apPPR') }}
+        </HeaderWithTooltip>
+      </template>
+
+      <template v-slot:header.stage.minClearTime="{header}">
+        <HeaderWithTooltip :name="header.text">
+          {{ $t('stats.headerDesc.clearTime') }}
+        </HeaderWithTooltip>
+      </template>
+
+      <template v-slot:header.itemPerTime="{header}">
+        <HeaderWithTooltip :name="header.text">
+          {{ $t('stats.headerDesc.itemPerTime') }}
+        </HeaderWithTooltip>
+      </template>
+
+      <template v-slot:header.timeRange="{header}">
+        <HeaderWithTooltip :name="header.text">
+          {{ $t('stats.headerDesc.timeRange') }}
+        </HeaderWithTooltip>
+      </template>
+
       <template v-slot:item="props">
-        <tr>
+        <tr :class="{'stat-table__outdated-row': isTimeOutdatedRange(props.item.end)}">
           <template v-if="type === 'stage'">
             <td
               :class="{
@@ -332,47 +380,29 @@
               :meta="meta(props)"
             />
           </td>
-          <td
-            v-if="invalidApCost(props.item.stage.apCost) || ['NaN', 'Infinity'].includes(props.item.apPPR)"
+          <NullableTableCell
+            :value="props.item.apPPR"
             :class="tableCellClasses"
-            class="grey--text"
-          >
-            --
-          </td>
-          <td
-            v-else
-            :class="tableCellClasses"
-          >
-            {{ props.item.apPPR }}
-          </td>
+          />
+
           <template v-if="type === 'item'">
-            <td
-              v-if="invalidApCost(props.item.stage.apCost)"
-              :class="tableCellClasses"
-              class="grey--text"
-            >
-              --
-            </td>
-            <td
-              v-else
+            <NullableTableCell
+              :value="props.item.stage.apCost"
               :class="`${tableCellClasses} ${dark ? 'orange--text text--lighten-1' : 'deep-orange--text text--darken-3 font-weight-bold'}`"
-            >
-              {{ props.item.stage.apCost }}
-            </td>
-            <td
-              v-if="props.item.stage.minClearTime"
+            />
+            <NullableTableCell
+              :value="props.item.stage.minClearTime"
+              :transformer="formatDuration"
               :class="tableCellClasses"
-            >
-              {{ formatDuration(props.item.stage.minClearTime) }}
-            </td>
-            <td
-              v-else
-              :class="tableCellClasses"
-              class="grey--text"
-            >
-              --
-            </td>
+            />
           </template>
+
+          <NullableTableCell
+            :value="props.item.itemPerTime"
+            :transformer="formatDuration"
+            :class="tableCellClasses"
+          />
+
           <td
             :class="tableCellClasses"
           >
@@ -402,10 +432,12 @@
   import TitledRow from "@/components/global/TitledRow";
   import existUtils from "@/utils/existUtils";
   import validator from "@/utils/validator";
+  import HeaderWithTooltip from "@/components/stats/HeaderWithTooltip";
+  import NullableTableCell from "@/components/stats/NullableTableCell";
 
   export default {
     name: "DataTable",
-    components: {TitledRow, Item, Charts},
+    components: {NullableTableCell, HeaderWithTooltip, TitledRow, Item, Charts},
     mixins: [Theme, CDN, Mirror],
     props: {
       items: {
@@ -477,6 +509,13 @@
           {
             text: this.$t("stats.headers.apPPR"),
             value: "apPPR",
+            align: "left",
+            sortable: true,
+            width: "110px"
+          },
+          {
+            text: this.$t("stats.headers.itemPerTime"),
+            value: "itemPerTime",
             align: "left",
             sortable: true,
             width: "110px"
@@ -620,10 +659,11 @@
         return timeFormatter.startEnd(start, end)
       },
       formatDuration (duration) {
-        return timeFormatter.duration(duration)
+        return timeFormatter.duration(duration, "s", 0)
       },
-      invalidApCost (apCost) {
-        return apCost === 99 || apCost === null
+      isTimeOutdatedRange (time) {
+        if (!time) return false
+        return time < Date.now()
       },
       getZoneName (stage) {
         return strings.translate(get.zones.byZoneId(stage.zoneId, false), "zoneName")
@@ -633,5 +673,12 @@
 </script>
 
 <style>
+.stat-table__outdated-row {
+  /*opacity: 0.6;*/
+  transition: opacity .225s cubic-bezier(0.165, 0.84, 0.44, 1);
+}
+.stat-table__outdated-row:hover {
+  opacity: 1
+}
 
 </style>

@@ -6,12 +6,12 @@
     <v-snackbar
       v-model="submitted"
       color="success"
-      :timeout="0"
+      :timeout="-1"
       bottom
     >
       <v-row
         align="center"
-        class="mx-0"
+        class="mx-0 z-index-5"
       >
         <v-icon class="mr-4">
           mdi-check
@@ -22,6 +22,7 @@
         <v-spacer />
 
         <v-btn
+          v-haptic
           :loading="undoing"
           class="ml-sm-4"
           depressed
@@ -38,6 +39,7 @@
         </v-btn>
 
         <v-btn
+          v-haptic
           class="ml-4"
           text
           @click="submitted = false"
@@ -59,6 +61,7 @@
       {{ $t('report.undoSuccess') }}
       <v-spacer />
       <v-btn
+        v-haptic
         text
         @click="undid = false"
       >
@@ -76,7 +79,7 @@
     >
       <v-card
         v-if="selected.stage"
-        class="bkop-light pa-2"
+        class="bkop-light pa-2 content-card"
       >
         <v-overlay
           :opacity="0.75"
@@ -105,7 +108,7 @@
         </v-overlay>
 
         <v-row
-          class="ma-4"
+          class="ma-4 z-index-5"
           align="start"
         >
           <h1 class="title no-wrap--text">
@@ -121,6 +124,7 @@
           </h1>
           <v-spacer />
           <v-btn
+            v-haptic
             depressed
             color="primary"
             small
@@ -176,6 +180,8 @@
                 <ItemStepper
                   :item="item.item"
                   :bus="eventBus"
+                  :item-options="{ disableOverviewCard: true }"
+
                   @change="(e) => handleChange(category.id, e)"
                 />
               </span>
@@ -191,6 +197,7 @@
               >
                 <v-switch
                   v-model="furniture"
+                  v-haptic
                   color="primary"
                   class="my-0 pb-0 d-inline-flex"
                   hide-details
@@ -220,83 +227,14 @@
                   </template>
                 </v-switch>
               </v-col>
-
-              <!--          <v-col-->
-              <!--            cols="12"-->
-              <!--            sm="6"-->
-              <!--            md="6"-->
-              <!--            lg="6"-->
-              <!--            xl="6"-->
-              <!--          >-->
-              <!--            <v-switch-->
-              <!--              v-model="plannerIntegration.enabled"-->
-              <!--              color="primary"-->
-              <!--              class="my-0 pb-0 d-flex align-center"-->
-              <!--              hide-details-->
-              <!--              :disabled="submitting"-->
-              <!--            >-->
-              <!--              <template v-slot:label>-->
-              <!--                <v-slide-x-transition leave-absolute>-->
-              <!--                  <v-badge-->
-              <!--                    v-if="plannerIntegration.enabled"-->
-              <!--                    icon="mdi-sync"-->
-              <!--                    bordered-->
-              <!--                    bottom-->
-              <!--                    overlap-->
-              <!--                    :offset-x="7"-->
-              <!--                    :offset-y="10"-->
-              <!--                    class="mr-3"-->
-              <!--                  >-->
-              <!--                    <v-icon>-->
-              <!--                      mdi-floor-plan-->
-              <!--                    </v-icon>-->
-              <!--                  </v-badge>-->
-              <!--                </v-slide-x-transition>-->
-              <!--                <span class="mr-2">-->
-              <!--                  同步汇报内容到刷图规划器-->
-              <!--                </span>-->
-              <!--                <v-dialog-->
-              <!--                  v-model="plannerIntegration.dialog"-->
-              <!--                  max-width="450px"-->
-              <!--                >-->
-              <!--                  <template v-slot:activator="{ on, attrs }">-->
-              <!--                    <v-btn-->
-              <!--                      icon-->
-              <!--                      v-on="on" v-bind="attrs"-->
-              <!--                    >-->
-              <!--                      <v-icon>-->
-              <!--                        mdi-help-circle-->
-              <!--                      </v-icon>-->
-              <!--                    </v-btn>-->
-              <!--                  </template>-->
-              <!--                  <v-card color="background">-->
-              <!--                    <v-card-title>-->
-              <!--                      同步汇报内容到刷图规划器-->
-              <!--                    </v-card-title>-->
-              <!--                    <v-card-text>-->
-              <!--                      在开启此功能且汇报成功后，会自动将此次获得的物品数量于刷图规划器内对应物品的【已有】栏目进行累加。-->
-              <!--                    </v-card-text>-->
-              <!--                    <v-card-actions>-->
-              <!--                      <v-spacer />-->
-              <!--                      <v-btn-->
-              <!--                        text-->
-              <!--                        @click="plannerIntegration.dialog = false"-->
-              <!--                      >-->
-              <!--                        {{ $t('meta.dialog.close') }}-->
-              <!--                      </v-btn>-->
-              <!--                    </v-card-actions>-->
-              <!--                  </v-card>-->
-              <!--                </v-dialog>-->
-              <!--              </template>-->
-              <!--            </v-switch>-->
-              <!--          </v-col>-->
             </v-row>
 
             <v-row
               v-if="$vuetify.breakpoint.smAndDown"
-              justify="space-around"
+              justify="space-around z-index-5"
             >
               <v-btn
+                v-haptic
                 large
                 rounded
                 color="error"
@@ -307,6 +245,7 @@
               </v-btn>
 
               <v-btn
+                v-haptic
                 large
                 rounded
                 color="primary"
@@ -338,7 +277,7 @@
             md="6"
             lg="6"
             xl="6"
-            class="order-0 order-sm-0 order-md-1 order-lg-1 order-xl-1"
+            class="order-0 order-sm-0 order-md-1 order-lg-1 order-xl-1 z-index-5"
           >
             <v-alert
               v-if="!$vuetify.breakpoint.smAndDown"
@@ -381,6 +320,7 @@
               class="mt-6"
             >
               <v-btn
+                v-haptic
                 large
                 rounded
                 color="error"
@@ -391,6 +331,7 @@
               </v-btn>
 
               <v-btn
+                v-haptic
                 large
                 rounded
                 color="primary"
@@ -417,6 +358,8 @@
             </v-row>
           </v-col>
         </v-row>
+
+        <BackdropName :content="strings.translate(selectedStage, 'code')" />
       </v-card>
     </StageSelector>
 
@@ -520,6 +463,7 @@
             {{ $t('report.alert.contact.before') }}
 
             <v-btn
+              v-haptic
               class="font-weight-bold"
               small
               color="blue"
@@ -542,6 +486,7 @@
 
         <v-card-actions>
           <v-btn
+            v-haptic
             color="primary"
             text
             @click="dialog.enabled = false"
@@ -550,6 +495,7 @@
           </v-btn>
           <v-spacer />
           <v-btn
+            v-haptic
             color="error"
             text
             @click="confirmSubmit"
@@ -580,6 +526,7 @@ import validator from "@/utils/validator";
 import existUtils from "@/utils/existUtils";
 import performance from "@/utils/performance";
 import Console from "@/utils/Console";
+import BackdropName from "@/components/stats/BackdropName";
 
 // colors: [dark, light]
 const categories = [
@@ -599,7 +546,7 @@ const categories = [
 
 export default {
   name: "Report",
-  components: {ItemIcon, Subheader, StageSelector, ItemStepper, Item },
+  components: {BackdropName, ItemIcon, Subheader, StageSelector, ItemStepper, Item },
   mixins: [Theme],
   data: () => ({
     snackbar: false,

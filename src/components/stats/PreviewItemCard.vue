@@ -12,7 +12,7 @@
         {{ item.name }}
       </span>
     </v-card-title>
-    <v-card-text v-if="stats.data.length">
+    <v-card-text v-if="stats.data.length && !disabledOverview">
       <v-simple-table dense>
         <thead>
           <tr>
@@ -51,7 +51,6 @@
               <v-icon
                 :color="highlight === stat.stageId ? 'orange' : ''"
                 small
-                class="mr-1"
               >
                 {{ stat.zone.icon }}
               </v-icon>
@@ -100,6 +99,10 @@ export default {
       type: String,
       required: true
     },
+    disabledOverview: {
+      type: Boolean,
+      default: () => false
+    }
   },
   computed: {
     item() {

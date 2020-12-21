@@ -1,1 +1,2 @@
 import './DoYouKnow'
+import './SearchResult'

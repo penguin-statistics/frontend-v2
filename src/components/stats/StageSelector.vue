@@ -5,7 +5,7 @@
     class="transparent elevation-0 full-width pa-md-4 pa-lg-4 pa-xl-4"
   >
     <v-stepper-header
-      class="bkop-light elevation-4 py-4 px-5 d-flex flex-row position-relative align-center mx-2"
+      class="bkop-light elevation-4 py-4 px-5 d-flex flex-row position-relative align-center"
       style="border-radius: 4px"
     >
       <v-fade-transition>
@@ -96,6 +96,108 @@
       >
         <v-row class="px-1">
           <v-col
+            cols="12"
+            :class="{'pb-0': !preferencedStages.haveAny}"
+          >
+            <v-subheader>
+              <v-icon
+                class="mr-2"
+                :color="preferencedStages.haveAny ? '' : 'grey'"
+              >
+                mdi-chevron-double-right
+              </v-icon>
+              <span>
+                {{ preferencedStages.haveAny ? $t('stage.actions._name.selector') : $t('stage.actions._name.selectorEmpty') }}
+              </span>
+            </v-subheader>
+
+            <v-card
+              v-if="preferencedStages.haveAny"
+              class="bkop-light"
+            >
+              <v-row>
+                <v-col
+                  cols="12"
+                  md="6"
+                >
+                  <v-card-title class="pt-2 subtitle-1">
+                    <v-icon left>
+                      mdi-star
+                    </v-icon>
+                    {{ $t('stage.actions.star.name') }}
+                  </v-card-title>
+                  <v-card-text class="pb-2 px-6">
+                    <template v-if="preferencedStages.favorites.length">
+                      <StageCard
+                        v-for="stage in preferencedStages.favorites"
+                        :key="stage.stageId"
+                        :stage="stage"
+
+                        @click.native="selectStage(stage.zoneId, stage.stageId)"
+                      />
+                    </template>
+
+                    <template v-else>
+                      <div
+                        v-for="text in $t('stage.actions.star.empty')"
+                        :key="text"
+                        class="caption text-left justify-center grey--text"
+                        v-text="text"
+                      />
+                    </template>
+                  </v-card-text>
+                </v-col>
+
+                <v-col
+                  cols="12"
+                  md="6"
+                >
+                  <v-card-title class="pt-2 subtitle-1">
+                    <v-icon left>
+                      mdi-history
+                    </v-icon>
+                    {{ $t('stage.actions.history.name') }}
+
+                    <v-spacer />
+                    <v-btn
+                      v-haptic.notification="'WARNING'"
+                      small
+                      text
+                      :disabled="!preferencedStages.histories.length"
+                      @click="$store.commit('stagePreferences/clearHistory')"
+                    >
+                      {{ $t('stage.actions.history.clear') }}
+                    </v-btn>
+                  </v-card-title>
+                  <v-card-text class="pb-2 px-6">
+                    <template v-if="preferencedStages.histories.length">
+                      <div class="history-stage-cards">
+                        <StageCard
+                          v-for="stage in preferencedStages.histories"
+                          :key="stage.stageId"
+                          :stage="stage"
+
+                          @click.native="selectStage(stage.zoneId, stage.stageId)"
+                        />
+                      </div>
+                    </template>
+                    <template v-else>
+                      <div
+                        v-for="text in $t('stage.actions.history.empty')"
+                        :key="text"
+                        class="caption text-left justify-center grey--text"
+                        v-text="text"
+                      />
+                    </template>
+                  </v-card-text>
+                </v-col>
+              </v-row>
+            </v-card>
+
+            <v-divider v-if="!preferencedStages.haveAny" />
+          </v-col>
+
+          <v-col
             v-for="(categories, index) in categorizedZones"
             :key="index"
             cols="12"
@@ -130,6 +232,7 @@
                 <v-expansion-panel
                   v-for="zone in category.zones"
                   :key="zone.zoneId"
+                  v-haptic
                   class="bkop-light stage-card--background"
                   :style="{'background-image': zone.image ? `url(${zone.image}) !important` : null}"
                 >
@@ -207,13 +310,6 @@
         :step="2"
         class="pa-0 pt-2"
       >
-        <span
-          v-if="!$vuetify.breakpoint.xs"
-          class="stage-id--background font-weight-black display-4 px-12 py-6"
-        >
-          {{ strings.translate(selectedStage, "code") }}
-        </span>
-        
         <slot />
       </v-stepper-content>
     </v-stepper-items>
@@ -287,6 +383,8 @@
           "act12d0_zone1": this.cdnDeliver('/backgrounds/zones/act12d0_zone1.jpg'),
           "act13d0_zone1": this.cdnDeliver('/backgrounds/zones/act13d0_zone1.jpg'),
           "act13d5_zone1": this.cdnDeliver('/backgrounds/zones/act13d5_zone1.jpg'),
+          "act14d7_zone1": this.cdnDeliver('/backgrounds/zones/act5d0_zone1.jpg'),
+          "act15d0_zone1": this.cdnDeliver('/backgrounds/zones/act15d0_zone1.jpg'),
           // "act13d5_zone1": require("@/assets/zonePageBackgrounds/png/act13d5_zone1.png"),
 
           // 骑兵与猎人 复刻：复用原活动（1stact_zone1）
@@ -450,6 +548,20 @@
           prev: stageInZoneIndex > 0 ? validStage(allStagesInZone[stageInZoneIndex - 1]) : null,
           next: stageInZoneIndex < (allStagesInZone.length - 1) ? validStage(allStagesInZone[stageInZoneIndex + 1]) : null
         }
+      },
+      preferencedStages() {
+        const favorites = this.$store.getters['stagePreferences/favorites']
+            .map(el => get.stages.byStageId(el))
+            .filter(el => get.zones.byZoneId(el.zoneId, true, false))
+        const histories = this.$store.getters['stagePreferences/histories']
+            .map(el => get.stages.byStageId(el))
+            .filter(el => get.zones.byZoneId(el.zoneId, true, false))
+
+        return {
+          favorites,
+          histories,
+          haveAny: !!favorites.length + histories.length
+        }
       }
     },
     watch: {
@@ -506,23 +618,6 @@
     width: 100%;
   }
 
-.stage-id--background {
-  position: absolute;
-  bottom: 0;
-  right: 0;
-  color: rgba(255, 255, 255, .45);
-  user-select: none;
-  z-index: 0;
-  letter-spacing: -.10em !important;
-  word-break: break-all;
-  overflow: hidden;
-  pointer-events: none;
-  text-align: right;
-}
-  .theme--light .stage-id--background {
-    color: rgba(0, 0, 0, .3);
-  }
-
   .stage-card--background {
     background-size: cover !important;
     background-repeat: no-repeat !important;
@@ -547,6 +642,18 @@
   .theme--dark .stage-card--content {
     background: rgba(0, 0, 0, .8) !important;
     background: linear-gradient(to bottom, rgba(0, 0, 0, 0.85), rgba(0, 0, 0, 0.70)) !important;
+  }
+
+  .history-stage-cards {
+    /* 92px: 2 lines of cardHeight (38px stage card height + 2 * 4px margin) */
+    max-height: 92px;
+    overflow: hidden;
+
+    /* 83(82.8)px: 1.8 * cardHeight */
+    /* 65px: 2 * cardHeight - 4px margin */
+    /*mask: linear-gradient(to right, rgba(0, 0, 0, 1) 90%, transparent);*/
+    /*-webkit-mask: -webkit-gradient(linear, left top, left bottom, from(rgba(0, 0, 0, 1)), color-stop(92), to(rgba(0, 0, 0, 0)));*/
+    /*-webkit-mask: -webkit-gradient(linear, left top, left bottom, from(rgba(0, 0, 0, 1) ), to(rgba(0, 0, 0, 0)));*/
   }
 
 </style>

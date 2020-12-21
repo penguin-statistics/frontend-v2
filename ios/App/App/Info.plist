@@ -17,7 +17,7 @@
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>
-	<string>1.0</string>
+	<string>$(MARKETING_VERSION)</string>
 	<key>CFBundleURLTypes</key>
 	<array>
 		<dict>
@@ -56,37 +56,11 @@
 	<string>To Pick Photos from Library</string>
 	<key>NSSiriUsageDescription</key>
 	<string>SIRI_USAGE_DESCRIPTION</string>
-	<key>UIApplicationShortcutItems</key>
-	<array>
-		<dict>
-			<key>UIApplicationShortcutItemIconType</key>
-			<string>UIApplicationShortcutIconTypeSearch</string>
-			<key>UIApplicationShortcutItemTitle</key>
-			<string>SHORTCUT_ITEM_SEARCH_TITLE</string>
-			<key>UIApplicationShortcutItemType</key>
-			<string>SearchAction</string>
-		</dict>
-		<dict>
-			<key>UIApplicationShortcutItemIconType</key>
-			<string>UIApplicationShortcutIconTypeDate</string>
-			<key>UIApplicationShortcutItemSubtitle</key>
-			<string>SHORTCUT_ITEM_DATE_SUBTITLE</string>
-			<key>UIApplicationShortcutItemTitle</key>
-			<string>SHORTCUT_ITEM_DATE_TITLE</string>
-			<key>UIApplicationShortcutItemType</key>
-			<string>DateAction</string>
-		</dict>
-		<dict>
-			<key>UIApplicationShortcutItemIconType</key>
-			<string>UIApplicationShortcutIconTypePlay</string>
-			<key>UIApplicationShortcutItemSubtitle</key>
-			<string>SHORTCUT_ITEM_AUTO_SUBTITLE</string>
-			<key>UIApplicationShortcutItemTitle</key>
-			<string>SHORTCUT_ITEM_AUTO_TITLE</string>
-			<key>UIApplicationShortcutItemType</key>
-			<string>AutoAction</string>
-		</dict>
-	</array>
+	<key>UIApplicationSceneManifest</key>
+	<dict>
+		<key>UIApplicationSupportsMultipleScenes</key>
+		<false/>
+	</dict>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
 	<key>UIMainStoryboardFile</key>
@@ -96,7 +70,7 @@
 		<string>armv7</string>
 	</array>
 	<key>UIStatusBarStyle</key>
-	<string>UIStatusBarStyleDefault</string>
+	<string>UIStatusBarStyleLightContent</string>
 	<key>UISupportedInterfaceOrientations</key>
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>

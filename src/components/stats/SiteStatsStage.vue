@@ -17,7 +17,6 @@
       :locale="$i18n.locale"
       hide-default-footer
 
-      :calculate-widths="true"
       :mobile-breakpoint="1"
 
       class="elevation-0 transparentTable container--fluid mx-4 font-weight-bold monospace trend-table"

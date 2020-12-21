@@ -6,10 +6,7 @@ const globalMatrix = new MatrixObjectManager({
   api: {
     serverSensitive: true,
 
-    url: '/result/matrix',
-    extraParams: {
-      "show_closed_zones": true
-    }
+    url: (server) => `/_private/result/matrix/${server}/global`,
   },
   validator: commons.defaultValidator,
   ttl: 1000 * 60 * 60 * 1, // 1 hour

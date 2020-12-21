@@ -17,7 +17,7 @@
     color="rgb(18, 18, 18)"
     :value="serverNotifyOverlay"
     :opacity="0.95"
-    style="z-index: 1000000"
+    style="z-index: 1000001"
   >
     <v-row class="justify-center text-center">
       <v-col

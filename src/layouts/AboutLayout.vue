@@ -1,6 +1,6 @@
 <template>
   <v-container
-    class="fill-height justify-center"
+    class="fill-height justify-center lg-wider-container"
   >
     <v-row align="center">
       <v-col>
@@ -20,3 +20,12 @@
     name: "AboutLayout"
   }
 </script>
+
+<style scoped>
+  @media (min-width: 960px) {
+    .lg-wider-container {
+      max-width: 1255px !important;
+    }
+  }
+
+</style>

@@ -12,6 +12,7 @@ import mirror from './modules/mirror';
 import options from './modules/options';
 import planner from './modules/planner';
 import settings from './modules/settings';
+import stagePreferences from './modules/stagePreferences';
 import ui from './modules/ui';
 // import compressor from "@/utils/compressor";
 
@@ -55,7 +56,8 @@ export default new Vuex.Store({
       paths: [
         "settings",
         "planner",
-        "options"
+        "options",
+        "stagePreferences"
       ]
     }),
     createPersistedState({
@@ -84,6 +86,7 @@ export default new Vuex.Store({
     data,
     dataSource,
     settings,
+    stagePreferences,
     planner,
     mirror,
     options,

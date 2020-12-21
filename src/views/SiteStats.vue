@@ -22,6 +22,7 @@
             {{ $t('stats.site.generating.subtitle') }}
           </h2>
           <v-btn
+            v-haptic
             large
             color="primary"
             :loading="pending"

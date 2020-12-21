@@ -87,6 +87,7 @@
 
       <div class="d-flex justify-end">
         <v-btn
+          v-haptic
           outlined
           block
           large
@@ -112,6 +113,7 @@
     <v-card-actions>
       <v-spacer />
       <v-btn
+        v-haptic
         text
         @click="$emit('close')"
       >

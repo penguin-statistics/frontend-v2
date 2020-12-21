@@ -1,5 +1,6 @@
 <template>
   <v-card
+    v-haptic
     flat
     class="d-inline-flex my-1 back-button"
     :class="{'back-button__active cursor-pointer': active, 'back-button__light': !dark, 'back-button__dark': dark}"

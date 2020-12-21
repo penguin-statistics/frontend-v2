@@ -72,6 +72,7 @@
     >
       {{ snackbar.text }}
       <v-btn
+        v-haptic
         text
         @click="snackbar.enabled = false"
       >
@@ -136,6 +137,7 @@
         </v-card-text>
         <v-card-actions class="mx-4 mb-2">
           <v-btn
+            v-haptic
             :loading="auth.loading"
             :disabled="auth.username === ''"
             color="primary"
@@ -195,6 +197,7 @@
 
     <v-btn
       v-if="$store.getters['auth/loggedIn']"
+      v-haptic
 
       icon
       @click="auth.detailPrompt = true"
@@ -204,6 +207,7 @@
 
     <v-btn
       v-if="!$store.getters['auth/loggedIn']"
+      v-haptic
 
       icon
       @click="auth.dialog = true"

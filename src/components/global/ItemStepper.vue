@@ -17,6 +17,7 @@
           </span>
         </template> -->
       <v-badge
+        v-haptic
         :value="quantity > 0"
         right
         bottom
@@ -38,6 +39,8 @@
             :ratio="1"
             disable-link
             :tooltip-nudge="0"
+
+            v-bind="itemOptions"
           />
         </div>
       </v-badge>
@@ -51,6 +54,7 @@
         >
           <div class="text-center mt-2">
             <v-btn
+              v-haptic
               small
               class="add-quantity-btn"
               @click="increaseQuantity(10)"
@@ -82,6 +86,10 @@
       bus: {
         type: Object,
         required: true
+      },
+      itemOptions: {
+        type: Object,
+        default: () => ({})
       }
     },
     data() {

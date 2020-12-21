@@ -58,6 +58,7 @@
         <v-expand-x-transition>
           <div v-if="value.length">
             <v-btn
+              v-haptic
               icon
               @click="clear"
             >
@@ -83,6 +84,7 @@
       <v-card-actions>
         <v-spacer />
         <v-btn
+          v-haptic
           text
           @click="dialog = false"
         >

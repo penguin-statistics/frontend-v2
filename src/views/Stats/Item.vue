@@ -50,7 +50,7 @@
       </v-img>
 
       <BackButton
-        :name="$t('items.choose.name')"
+        :name="$t('item.choose.name')"
         :active="step > 1"
 
         @back="step = 1"
@@ -61,7 +61,8 @@
       <v-slide-x-transition>
         <div
           v-if="step === 2 && isSelectedItem && relatedItems.length"
-          class="z-index-5 d-flex flex-row"
+          class="d-flex flex-row pb-1"
+          style="overflow-y: visible; overflow-x: scroll; z-index: 4"
         >
           <span
             v-for="item in relatedItems"
@@ -200,6 +201,7 @@ export default {
   watch: {
     $route: function(to, from) {
       Console.log("StatsByItem", "step route changed from", from.path, "to", to.path);
+      // if (to.name === from.name) return
       if (to.name === "StatsByItem") {
         this.step = 1;
       }
@@ -218,10 +220,12 @@ export default {
         case 2:
           this.selectedItemId = this.$route.params.itemId
           Console.log("StatsByItem", "- [router go] item", this.selectedItem.itemId);
-          this.$router.push({
-            name: "StatsByItem_SelectedItem",
-            params: { itemId: this.selectedItem.itemId }
-          });
+          if (this.$route.name !== "StatsByItem_SelectedItem" && this.$route.params.itemId !== this.selectedItem.itemId) {
+            this.$router.push({
+              name: "StatsByItem_SelectedItem",
+              params: { itemId: this.selectedItem.itemId }
+            });
+          }
           break;
         default:
           Console.warn(

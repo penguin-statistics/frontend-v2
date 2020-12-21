@@ -6,7 +6,7 @@
       class="d-flex flex-column"
     >
       <div class="ml-2 my-2">
-        {{ $t(`items.categories.${name}`) }}
+        {{ $t(`item.categories.${name}`) }}
       </div>
       <div class="d-flex flex-wrap justify-start">
         <div

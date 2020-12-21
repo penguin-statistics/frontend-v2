@@ -86,6 +86,7 @@
     {{ $t(snackbar.text, snackbar.extra) }}
     <v-spacer />
     <v-btn
+      v-haptic
       text
       @click="snackbar.enabled = false"
     >

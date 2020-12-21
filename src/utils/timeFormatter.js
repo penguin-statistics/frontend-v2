@@ -63,13 +63,15 @@ export default {
     return dayjs(date).format(template)
   },
   /** duration: duration in milliseconds; returns: localized string */
-  duration (duration, unit = "s") {
+  duration (duration, unit = "s", digits=1) {
     if (!duration) return ""
     let message = ""
     const d = dayjs.duration(duration / 1000, unit)
-    if (d.get('minutes') > 0) message += `${d.get('minutes')}'`
-    const ms = d.get('milliseconds') > 0 ? ((d.get('milliseconds') / 1000)).toString().replace("0.", ".") : ""
-    if (d.get('seconds') > 0) message += `${d.get('seconds')}${ms}"`
+    let minutes = d.get('minutes')
+    if (d.get('hours') > 0) minutes += 60 * d.get('hours')
+    if (d.get('minutes') > 0) message += i18n.t('meta.time.minute', {m: minutes})
+    const ms = d.get('milliseconds') > 0 ? ((d.get('milliseconds') / 1000).toFixed(digits)).slice(1) : ""
+    if (d.get('seconds') > 0) message += i18n.t('meta.time.second', {s: `${d.get('seconds')}${ms}`})
     return message
   },
   startEnd (start, end, selector=false) {

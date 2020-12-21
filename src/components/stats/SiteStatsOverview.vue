@@ -2,7 +2,7 @@
   <BackdropCard
     :to="{name: 'SiteStats'}"
     hover
-    class="bkop-medium pa-0 mt-2"
+    class="pa-0 mt-2"
   >
     <template v-slot:backdrop>
       <v-icon>

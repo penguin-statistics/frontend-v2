@@ -10,7 +10,7 @@
     <v-img
       :src="cdnDeliver('/logos/penguin_stats_logo.png')"
       aspect-ratio="1"
-      height="192px"
+      height="128px"
       contain
     />
     <div class="white--text description">

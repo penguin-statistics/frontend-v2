@@ -9,6 +9,7 @@ class MatrixObjectManager extends ObjectManager {
       transform: [
         (object) => {
           if ("matrix" in object) return object["matrix"]
+          if ("pattern_matrix" in object) return object["pattern_matrix"]
           return object
         },
       ],
