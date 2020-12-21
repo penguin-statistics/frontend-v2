@@ -57,6 +57,9 @@ meta:
     confirm: 확인
     submit: 제출
     close: 닫기
+  time:
+    minute: "{m}분"
+    second: "{s}초"
 stats:
   headers:
     stage: 작전지역
