@@ -14,7 +14,7 @@ export default {
     if (type === "error") haptics.error()
     if (type === "success") haptics.success()
 
-    return store.commit("ui/setSnackbar", {
+    store.commit("ui/setSnackbar", {
       color: type,
       timeout,
       text,

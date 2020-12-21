@@ -48,7 +48,7 @@
       v-if="enabled && mirror"
       v-model="enabled"
       :color="`stripped--${dark ? 'dark' : 'light'}`"
-      :timeout="-1"
+      :timeout="0"
       top
     >
       <v-row
