@@ -26,8 +26,8 @@
             style="line-height: 1rem"
           >
             <!--            <span class="grey&#45;&#45;text">{{ $t('server.selected') }}</span>-->
-            <span>
-              {{ $t("server.switch") }}
+            <span class="grey--text">
+              {{ $t("server.name") }}
             </span>
           </span>
           <span class="heading">
