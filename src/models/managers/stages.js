@@ -6,7 +6,7 @@ const stages = new ObjectManager({
   api: {
     serverSensitive: true,
 
-    url: '/stages'
+    url: (server) => `/stages?server=${server}`,
   },
   transform: [
     (object) => {

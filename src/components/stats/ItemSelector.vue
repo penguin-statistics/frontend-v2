@@ -6,7 +6,7 @@
       class="d-flex flex-column"
     >
       <div class="ml-2 my-2">
-        {{ $t(`items.categories.${name}`) }}
+        {{ $t(`item.categories.${name}`) }}
       </div>
       <div class="d-flex flex-wrap justify-start">
         <div
@@ -45,16 +45,27 @@
     computed: {
       items () {
         const all = get.items.all();
-        const categories = ["MATERIAL", "CARD_EXP", "FURN", "ACTIVITY_ITEM"];
+        const categories = get.items.validItemTypes;
         const results = {};
+        let already = [];
         for (const category of categories) {
-          results[category] = all.filter(el => el.itemType === category);
-          // move 3003 to the last member
-          results[category].sort((a, b) => {
-            if (a.itemId === "3003") return 1;
-            if (b.itemId === "3003") return -1;
-            return a.sortId - b.sortId;
-          });
+          // if (category === "OTHERS") {
+          //   // "others"
+          //   results[category] = all.filter(el => already.find(e => e.itemId === el.itemId));
+          //   results[category].sort((a, b) => {
+          //     return a.sortId - b.sortId
+          //   });
+          // } else {
+            // literal types
+            results[category] = all.filter(el => el.itemType === category);
+            // move 3003 to the last member
+            results[category].sort((a, b) => {
+              if (a.itemId === "3003") return 1;
+              if (b.itemId === "3003") return -1;
+              return a.sortId - b.sortId;
+            });
+            already = [...already, ...results[category]]
+          // }
         }
         return results;
       }

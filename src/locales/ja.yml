@@ -14,6 +14,7 @@ server:
 menu:
   home: トップページ
   report: ドロップ報告
+  search: グローバル検索
   stats:
     _name: ドロップ率
     stage: 作戦別
@@ -67,32 +68,41 @@ meta:
     confirm: はい
     submit: 送信
     close: 閉じる
+  time:
+    minute: "{m}分"
+    second: "{s}秒"
+  copyWarning: |2-
+
+
+    Copyright © 2020 Penguin Statistic（{site}）
 stats:
   headers:
+    pattern: パターン
     stage: ステージ
     apCost: 理性
     item: アイテム
     times: サンプル数
     quantity: ドロップ数
     percentage: ドロップ率
-    apPPR: １個あたりの必要期待理性数
+    apPPR: １個あたりの必要理性期待値
     clearTime: 最速クリアタイム
     timeRange: 期間
+    itemPerTime: 1個あたりの必要時間期待値
   filter:
     title: フィルタ
     indicator: "フィルタ未適用 | {count} フィルタ適用中 | {count} フィルタ適用中"
-    stats: フィルタリング後 {filtered} / フィルタリング前 {total}
+    stats: ﾌｨﾙﾀﾘﾝｸﾞ後 {filtered} / ﾌｨﾙﾀﾘﾝｸﾞ前 {total}
     overview: フィルタ結果
     type:
       _name: ステージタイプ
-      showPermanent: 恒常
+      showPermanent: 恒常a
       showActivity: イベント
     status:
       _name: ステージ状態
       onlyOpen: 開放中ステージのみを表示
   timeRange:
-    inBetween: "{0} から {1} まで"
-    toPresent: "{date} から現在まで"
+    inBetween: "{0} ~ {1}"
+    toPresent: "{date} ~ 現在"
     endsAt: "{date} 以前"
     unknown: 不明
     notSelected: "（選択されていない）"
@@ -102,7 +112,7 @@ stats:
       rate: ドロップ率
       sample: サンプル数
       drops: ドロップ数
-  lastUpdated: 最終更新日時： {date}
+  lastUpdated: 最終更新日時：{date}
   site:
     viewMore: さらに詳しく
     total:
@@ -132,10 +142,28 @@ contribute:
     analysis: データ統計解析
     others: "..."
 fetch:
+  loading: 読み込み中...
+  chunk:
+    title: 拡張ニューラルコネクタにデータが転送されています
+    subtitle: ページモデルを読み込み中、お待ちください…
   failed:
-    title: 接続エラー
-    subtitle: ニューラルネットワークとの同期接続を確立できません。部分的なリソースがありません。
+    title: ニューラルコネクタ接続エラー
+    subtitle: ニューラルコネクタに同期接続できませんでした。一部のリソースロスが発生しました。
     retry: 再試行
+    deploying: 新バージョンは配置しています。最大5分程お待ちください…
+    error:
+      zones: ゾーンデータ
+      stages: 作戦データ
+      items: 素材データ
+      limitations: レポートデータの検証ルール
+      trends: 履歴レポートデータ
+      globalMatrix: 全体ドロップデータ
+      personalMatrix: 個人ドロップデータ
+      globalPatternMatrix: 全体ドロップパターンデータ
+      personalPatternMatrix: 個人ドロップパターンデータ
+      stats: サイト統計データ
+      period: サーバーイベントデータ
+
 report:
   alert:
     title:
@@ -212,7 +240,32 @@ zone:
   opensAt: 開催期間：{0} - {1}
 stage:
   name: 作戦
+  about: この作戦について
   apCost: 消費理性：{apCost}
+  actions:
+    _name:
+      selector: クイックアクセス
+      selectorEmpty: クイックアクセスはありません
+      panel: クイック操作
+    star:
+      name: スター付き作戦
+      activate: 作戦にスターを追加
+      activated: 作戦にスターを追加しました
+      deactivate: クリックしてスターを削除
+      empty:
+        - スター付き作戦はありません
+        - 作戦情報の「クイック操作」で作戦にスターを追加するとここに表示されます
+    history:
+      name: 最近選択した作戦
+      empty:
+        - 最近選択した作戦はありません
+        - 作戦のページをアクセスするとここに表示されます
+      clear: クリア
+    links:
+      "prts-wiki": Wiki
+      "map-arknights-com": マップ
+    advanced:
+      activator: 高度なクエリを実行
   loots:
     NORMAL_DROP: 通常
     EXTRA_DROP: その他
@@ -267,12 +320,13 @@ planner:
     level: 素材レベル
     noStage: 入力内容に不備があるため結果を表示出来ません。
     noSyntheses: 入力内容に不備があるため結果を表示出来ません。
-items:
+item:
   choose:
     name: 素材選択
   categories:
     ACTIVITY_ITEM: イベントアイテム
     CARD_EXP: 作戦記録
+    CHIP: Soc
     FURN: 家具
     MATERIAL: 素材
   related: 関連素材
@@ -281,3 +335,47 @@ dataSource:
   loginNotice: 個人のドロップデータを表示するにはログインが必要となります。
   personal: 個人
   title: ログインが必要です
+members:
+  categories:
+    developers: 開発者
+    others: その他
+    owner: 管理人
+    translators: 翻訳者
+  responsibilities:
+    _name: コントリビューション
+    arkplanner: ArkPlannerの著者
+    backend: バックエンド
+    bulkupload: 一括アップロード
+    customersupport: 顧客サービス
+    frontend: フロントエンド
+    localization_ja: 日本語化
+    localization_ko: 韓国語化
+    logo: ロゴデザイナー
+    maintenance: DevOps
+    materials: 材料サプライヤー
+    statistics: データ統計解析
+  socials:
+    email: Email
+    github: GitHub
+    qq: QQ
+    twitter: Twitter
+    weibo: Weibo
+pattern:
+  name: ドロップパターン
+  empty: ドロップはありません
+  error:
+    # 此值实际展示为 2 行，第二行字比第一行大一些
+    - 本作戦のドロップパターンの
+    - データはありません
+share:
+  name: 共有
+  shortlink:
+    name: 短縮URL
+  text:
+    _tmpl: "Penguin Statisticsで「{name}」のドロップデータを確認"
+    stage: "作戦 {name}"
+    item: "素材 {name}"
+  success: 共有しました
+search:
+  placeholder: 検索...
+  hint:  素材名・作战名・ステージコード・章タイトル・活動名（漢字・ふりがな・カタカナ・ローマ字）で検索

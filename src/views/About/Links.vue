@@ -18,7 +18,8 @@
 				"planner": "Planner",
 				"storage": "Inventory Management",
         "walkthrough": "Walkthrough",
-        "map": "Map"
+        "map": "Map",
+        "video": "Clear Guide"
 			}
 		}
 	},
@@ -40,7 +41,8 @@
 				"planner": "周回計画作成ツール",
 				"storage": "素材在庫管理",
         "walkthrough": "ステージ攻略",
-        "map": "Map"
+        "map": "マップ",
+        "video": "攻略動画"
 			}
 		}
 	},
@@ -62,7 +64,8 @@
 				"planner": "계획기",
 				"storage": "창고 관리기",
         "walkthrough": "공략집",
-        "map": "Map"
+        "map": "Map",
+        "video": "Clear Guide"
 			}
 		}
 	},
@@ -84,7 +87,8 @@
 				"planner": "刷图规划",
 				"storage": "库存管理",
         "walkthrough": "通关攻略",
-        "map": "Map"
+        "map": "作战地图",
+        "video": "攻略视频"
 			}
 		}
 	}
@@ -101,7 +105,9 @@
       sm="6"
       md="4"
     >
-      <v-card class="link-card bkop-light elevation-0">
+      <v-card
+        class="d-flex flex-column link-card bkop-light position-relative"
+      >
         <v-card-title
           v-if="link.title"
           primary-title
@@ -128,39 +134,43 @@
             :key="featIndex"
             :color="feature.color"
             class="ma-1"
-            label
+
             text-color="white"
           >
             {{ $t(`links.tags.${feature.name}`) }}
           </v-chip>
         </v-card-title>
 
-        <div
+        <v-row
           v-if="link.url"
-          class="px-4 pt-2 pb-4"
+          class="flex-grow-1 px-4 pt-2"
+          align="end"
+          justify="center"
         >
-          <v-row
-            class="fill-height"
-            align="center"
-            justify="center"
+          <v-btn
+            v-ripple
+            color="secondary"
+            class="ma-2 mb-4"
+            text-color="white"
+            :href="link.url"
+            target="_blank"
+            rel="noopener"
+            @click="goToHref(link)"
           >
-            <v-chip
-              class="ma-2 force-not-lang-font"
-              color="primary"
-              text-color="white"
-              @click="goToHref(link)"
+            <span
+              class="subtitle-1 "
+              style="text-transform: initial"
             >
-              <v-icon
-                left
-                small
-                style="transform: rotate(-45deg)"
-              >
-                mdi-link
-              </v-icon>
-              {{ link.title }}
-            </v-chip>
-          </v-row>
-        </div>
+              {{ link.shorten }}
+            </span>
+            <v-icon
+              right
+              small
+            >
+              mdi-open-in-new
+            </v-icon>
+          </v-btn>
+        </v-row>
       </v-card>
     </v-col>
   </v-row>
@@ -199,7 +209,8 @@ export default {
               color: "purple"
             }
           ],
-          url: "https://aktools.graueneko.xyz/"
+          url: "https://aktools.graueneko.xyz/",
+          shorten: "aktools.graueneko.xyz"
         },
         {
           title: "ARK TOOLS",
@@ -222,7 +233,8 @@ export default {
               color: "indigo"
             }
           ],
-          url: "https://gachasalt.github.io/ArkToolDemo/#/"
+          url: "https://gachasalt.github.io/ArkToolDemo/#/",
+          shorten: "gachasalt.github.io/ArkToolDemo"
         },
         {
           title: "干员培养表",
@@ -249,7 +261,8 @@ export default {
               color: "teal"
             }
           ],
-          url: "https://ark-nights.com"
+          url: "https://ark-nights.com",
+          shorten: "ark-nights.com"
         },
         {
           title: "刷素材推荐一图流",
@@ -268,7 +281,8 @@ export default {
               color: "grey"
             }
           ],
-          url: "https://aog.wiki/"
+          url: "https://aog.wiki/",
+          shorten: "aog.wiki"
         },
         {
           title: "PRTS",
@@ -278,7 +292,8 @@ export default {
               color: "blue-grey"
             }
           ],
-          url: "http://prts.wiki/id/1"
+          url: "http://prts.wiki/id/1",
+          shorten: "prts.wiki"
         },
         {
           title: "Kokodayo Arknights Data",
@@ -297,7 +312,19 @@ export default {
               color: "teal"
             }
           ],
-          url: "https://kokodayo.fun/"
+          url: "https://kokodayo.fun/",
+          shorten: "kokodayo.fun"
+        },
+        {
+          title: "源石作战室",
+          features: [
+            {
+              name: "video",
+              color: "indigo darken-4"
+            }
+          ],
+          url: "https://opssr.net/",
+          shorten: "opssr.net"
         },
         {
           title: "ANWiki",
@@ -307,7 +334,8 @@ export default {
               color: "blue-grey"
             }
           ],
-          url: "https://wiki.gamerclub.jp/anwiki"
+          url: "https://wiki.gamerclub.jp/anwiki",
+          shorten: "wiki.gamerclub.jp/anwiki"
         },
         {
           title: "ゲームの果て",
@@ -330,7 +358,8 @@ export default {
               color: "blue-grey"
             }
           ],
-          url: "https://smartgamecap.net"
+          url: "https://smartgamecap.net",
+          shorten: "smartgamecap.net"
         }
       ]
     };
@@ -348,7 +377,6 @@ export default {
   methods: {
     goToHref(link) {
       this.$ga.event('redirect', 'links', link.title, 1)
-      window.open(link.url);
     }
   },
 };
@@ -357,9 +385,9 @@ export default {
 <style scoped>
 .link-card {
   width: 100%;
-  border: 1px solid rgba(255, 255, 255, 0.75);
+  /*border: 1px solid rgba(255, 255, 255, 0.75) !important;*/
 }
 .theme--light .link-card {
-  border: 1px solid rgba(0, 0, 0, 0.75);
+  /*border: 1px solid rgba(0, 0, 0, 0.75) !important;*/
 }
 </style>

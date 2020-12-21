@@ -12,6 +12,7 @@ import mirror from './modules/mirror';
 import options from './modules/options';
 import planner from './modules/planner';
 import settings from './modules/settings';
+import stagePreferences from './modules/stagePreferences';
 import ui from './modules/ui';
 // import compressor from "@/utils/compressor";
 
@@ -26,6 +27,21 @@ if (previousState) {
   localStorage.setItem("penguin-stats-cacheTTL", {cacheUpdateAt: previousState["cacheUpdateAt"]});
 }
 
+// const persistStorage = {
+//   getItem: (key) => {
+//     Console.debug("VuexPersist", "getting item", key)
+//     localStorage.getItem(key)
+//   },
+//   setItem: (key, value) => {
+//     Console.debug("VuexPersist", "setting item", key, `${value.length}`)
+//     localStorage.setItem(key, value)
+//   },
+//   removeItem: (key) => {
+//     Console.debug("VuexPersist", "removing item", key)
+//     localStorage.removeItem(key)
+//   }
+// }
+
 export default new Vuex.Store({
   plugins: [
     createPersistedState({
@@ -33,14 +49,15 @@ export default new Vuex.Store({
       paths: [
         "data",
         "dataSource"
-      ],
+      ]
     }),
     createPersistedState({
       key: "penguin-stats-settings",
       paths: [
         "settings",
         "planner",
-        "options"
+        "options",
+        "stagePreferences"
       ]
     }),
     createPersistedState({
@@ -69,6 +86,7 @@ export default new Vuex.Store({
     data,
     dataSource,
     settings,
+    stagePreferences,
     planner,
     mirror,
     options,

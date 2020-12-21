@@ -3,7 +3,13 @@
     ref="background"
     class="random-background"
     :style="{filter: `${blurred ? 'blur(5px)' : 'blur(0px)'} ${isInSpecialUI ? 'grayscale(0.75)' : ''}`}"
-  />
+  >
+    <div class="random-background__copyright">
+      干员立绘
+      <br>
+      &copy; 鹰角网络
+    </div>
+  </div>
 </template>
 
 <script>
@@ -167,9 +173,19 @@
     background-size: contain;
     background-position: bottom right;
     opacity: .75;
-    filter: drop-shadow(0 2px 5px rgba(0, 0, 0, .75));
+    /*for performance reasons drop shadow has been disabled*/
+    /*filter: drop-shadow(0 2px 5px rgba(0, 0, 0, .75));*/
     transition: background-image 1s cubic-bezier(0.165, 0.84, 0.44, 1), filter .225s cubic-bezier(0.165, 0.84, 0.44, 1);
     /*background-image: url("../assets/background/1.jpg");*/
     z-index: 0;
+  }
+  .random-background__copyright {
+    position: absolute;
+    bottom: 2rem;
+    right: 3rem;
+    opacity: 0.35;
+    font-size: 10px !important;
+    font-weight: bolder !important;
+    text-align: right;
   }
 </style>

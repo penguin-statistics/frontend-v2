@@ -7,5 +7,9 @@
 		<string>applinks:penguin-stats.io</string>
 		<string>applinks:penguin-stats.cn</string>
 	</array>
+	<key>com.apple.security.app-sandbox</key>
+	<true/>
+	<key>com.apple.security.network.client</key>
+	<true/>
 </dict>
 </plist>

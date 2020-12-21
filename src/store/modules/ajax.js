@@ -39,6 +39,7 @@ export default {
   },
   getters: {
     pending: state => state.states.some(value => value.pending),
+    pendingByKey: state => key => state.states.some(value => value.pending && value.id === key),
     // finishedAll: state => {
     //   return state.states.every(value => !value.pending)
     // },

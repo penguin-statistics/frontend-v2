@@ -36,6 +36,7 @@
         </v-tooltip>
 
         <v-btn
+          v-haptic
           class="flex-grow-1"
           large
           :disabled="disabled"
@@ -136,6 +137,7 @@
       <v-card-actions>
         <v-spacer />
         <v-btn
+          v-haptic
           text
           @click="dialog = false"
         >

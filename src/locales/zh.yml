@@ -6,6 +6,7 @@ app:
 server:
   name: 服务器
   switch: 服务器切换
+  selected: 已选择
   servers:
     CN: 国服
     US: 美服
@@ -14,6 +15,7 @@ server:
 menu:
   home: 首页
   report: 掉落汇报
+  search: 全局搜索
   stats:
     _name: 素材掉率
     stage: 按作战
@@ -67,40 +69,47 @@ meta:
     confirm: 确认
     submit: 提交
     close: 关闭
+  time:
+    minute: "{m}分 "
+    second: "{s}秒"
   copyWarning: |2-
 
 
     以上数据来自企鹅物流数据统计（{site}）
 stats:
   headers:
-    stage: 关卡
+    pattern: 组合
+    stage: 作战
     apCost: 理智
     item: 物品
     times: 样本数
     quantity: 掉落数
     percentage: 百分比
-    apPPR: 单件估算理智
+    apPPR: 单件期望理智
     clearTime: 最短通关用时
+    itemPerTime: 单件期望用时
     timeRange: 统计区间
   headerDesc:
-    apCost: 该作战所需要的理智
-    quantity: 在该作战中，所有提交到企鹅物流数据统计的掉落数之和
-    times: 在该作战中，所有提交到企鹅物流数据统计的样本提交数之和
-    percentage: "计算方式为 $\frac{\text{掉落数}}{\text{样本数}}$"
-    apPPR: 根据当前的「百分比」项，计算出的在该作战获得「1x对应物品」所需的期望理智
-    clearTime: "现「最短通关用时」使用的是来源于 [PRTS Wiki]({prtsLink}) 公布的最短通关用时，即「作战开始直到最后出怪」的时间总长"
-    timeRange: 由于存在掉落物列表变动，此行数据将仅包含最后一次变动后直至现在的统计数据，即为「统计区间」
+    apCost: 完成单次该作战的所需理智数量
+    quantity: 在该作战中，所有提交到企鹅物流数据统计的样本内，该物品的出现次数
+    times: 在该作战中，所有提交到企鹅物流数据统计的样本提交次数
+    percentage: "期望掉落概率；计算方式为 $$\\frac{\\text{掉落数}}{\\text{样本数}}$$"
+    patternPercentage: "此掉落组合占所有掉落汇报的百分比；计算方式为 $$\\frac{\\text{掉落数}}{\\text{样本数}}$$"
+    apPPR: "根据当前的「百分比」项，计算出的在该作战获得「1x对应物品」所需的期望理智，即 $$\\frac{\\text{作战理智消耗}}{\\frac{\\text{掉落数}}{\\text{样本数}}}$$"
+    clearTime: "来源为 PRTS Wiki 中的「最短通关用时」；其中，PRTS Wiki 对此的计算方法为：由「作战开始」直至「最后出怪」期间，使用 1 倍速的最短所需游戏时间总长"
+    itemPerTime: "根据当前的「百分比」项，计算出的在该作战获得「1x对应物品」所需的期望时间消耗，即 $$\\frac{\\text{作战最短通关用时}}{\\frac{\\text{掉落数}}{\\text{样本数}}}$$"
+    timeRange: 由于存在掉落物列表变动故引入的「统计区间」概念。在本表所展示的数据中，其将仅包含已标注时间段内所提交的样本统计数据。若欲查看其它统计区间内的样本统计情况，请使用「高级查询」
   filter:
     title: 数据过滤
     indicator: 已应用 {count} 个过滤器
     stats: 过滤后 {filtered} / 过滤前 {total}
     overview: 过滤概览
     type:
-      _name: 关卡类型
+      _name: 作战类型
       showPermanent: 常驻
       showActivity: 活动
     status:
-      _name: 关卡状态
+      _name: 作战状态
       onlyOpen: 仅正在开放
   timeRange:
     inBetween: "{0} ~ {1}"
@@ -121,7 +130,7 @@ stats:
       sanity: 所有掉落汇报消耗理智
       report: 掉落汇报总数
       items: 物品掉落总数
-    stages: 关卡掉落汇报排行
+    stages: 作战掉落汇报排行
     items: 物品掉落汇报排行
     all: 全时段
     24hr: 最近 24 小时
@@ -143,18 +152,25 @@ contribute:
     analysis: 数据统计分析
     others: "..."
 fetch:
+  loading: 正在刷新数据...
+  chunk:
+    title: 正在从扩展神经网络传输数据
+    subtitle: 页面模块项正在加载中，请稍等...
   failed:
     title: 神经网络连接异常
     subtitle: 未能与神经网络建立对等连接，部分资源丢失
     retry: 重试
+    deploying: 新版部署中，最多将持续 5 分钟，请耐心等待
     error:
       zones: 章节元数据
-      stages: 关卡元数据
+      stages: 作战元数据
       items: 物品数据
       limitations: 汇报数据校验规则
       trends: 汇报历史数据
       globalMatrix: 全平台掉落数据
       personalMatrix: 个人掉落数据
+      globalPatternMatrix: 全平台掉落组合数据
+      personalPatternMatrix: 个人掉落组合数据
       stats: 全站概览数据
       period: 服务器事件数据
 report:
@@ -168,7 +184,7 @@ report:
     contact:
       before: 如果您认为这是一次误判，欢迎
       activator: 联系作者
-      after: "（请附关卡名称、实际掉落、若有掉落截图更佳），确认后我们会尽快予以修正。"
+      after: "（请附作战名称、实际掉落、若有掉落截图更佳），确认后我们会尽快予以修正。"
     causes:
       noDrop: 尚未选择任何掉落物品
       limitation: 本次汇报与现有数据差距较大，继续提交可能导致此次汇报被判定为异常，无法计入全部统计数据中。
@@ -187,9 +203,9 @@ report:
       not: "“{stage}” 内的物品数量应总计不为 {should}"
   clear: 清空
   closedReason:
-    EXPIRED: 不在可汇报时间区间内：关卡已结束或暂未开启
-    NOT_FOUND: 关卡不存在：于所选服务器未找到此关卡
-    INVALID: 无法汇报：此关卡未包含掉落汇报元数据
+    EXPIRED: 不在可汇报时间区间内：作战已结束或暂未开启
+    NOT_FOUND: 作战不存在：于所选服务器未找到此作战
+    INVALID: 无法汇报：此作战未包含掉落汇报元数据
   furniture: 家具掉落：{state}
   name: 上报结果
   submit: 提交
@@ -234,6 +250,7 @@ zone:
   types:
     MAINLINE: 主线
     WEEKLY: 物资筹备
+    ACTIVITY: 限时活动
     ACTIVITY_OPEN: 限时活动 — 开放中
     ACTIVITY_CLOSED: 限时活动 — 已结束
     ACTIVITY_PENDING: 限时活动 — 即将开放
@@ -245,21 +262,46 @@ zone:
     permanentOpen: 常驻开放
   opensAt: 开放时间：{0} - {1}
 stage:
-  name: 关卡
+  name: 作战
+  about: 关于此作战
   apCost: "{apCost} 点理智"
+  actions:
+    _name:
+      selector: 快速访问
+      selectorEmpty: 暂无任何快速访问记录
+      panel: 快速操作
+    star:
+      name: 星标作战
+      activate: 星标此作战
+      activated: 已星标此作战
+      deactivate: 点击以取消
+      empty:
+        - 暂无已星标的作战
+        - 使用作战详情中的「快速操作」即可星标作战并于此处显示
+    history:
+      name: 最近选择作战
+      empty:
+        - 暂无最近选择作战
+        - 访问任何作战页面后，记录即会于此处显示
+      clear: 清空
+    links:
+      "prts-wiki": Wiki
+      "map-arknights-com": 地图
+    advanced:
+      activator: 进行高级查询
   loots:
     NORMAL_DROP: 常规掉落
     EXTRA_DROP: 额外物资
     SPECIAL_DROP: 特殊掉落
     FURNITURE: 家具
   selector:
-    plannerExclude: 排除规划关卡
+    plannerExclude: 排除规划作战
     excludeAll: 排除全部
     includeAll: 选中全部
-    title: 关卡选择
+    title: 作战选择
 planner:
   notices:
-    autoExistence: 刷图规划器现将会自动隐藏未于已选择服务器出现或开放的关卡
+    autoExistence: 刷图规划器现将会自动隐藏未于已选择服务器出现或开放的作战
   options:
     _name: 选项
     byProduct: 考虑合成副产物
@@ -281,7 +323,7 @@ planner:
           indicator: 将清除所有规划选项
         excludes:
           name: 计算排除
-          indicator: 将清除所有排除关卡
+          indicator: 将清除所有排除作战
         items:
           name: 物品数据
           indicator: 将清除所有物品数据
@@ -306,7 +348,7 @@ planner:
   calculation:
     title: 规划结果
     tabs:
-      stages: 关卡列表
+      stages: 作战列表
       syntheses: 合成列表
       values: 素材理智价值
     lmb: 预计龙门币收益
@@ -316,12 +358,14 @@ planner:
     level: 材料等级
     noStage: 未找到需要进行的作战。
     noSyntheses: 未找到需要合成的素材。
-items:
+item:
+  name: 素材
   choose:
-    name: 选择素材
+    name: 素材选择
   categories:
     ACTIVITY_ITEM: 活动道具
     CARD_EXP: 作战记录
+    CHIP: 芯片
     FURN: 家具
     MATERIAL: 材料
   related: 相关物品
@@ -343,13 +387,13 @@ query:
     trend: 历史趋势
   selector:
     item:
-      title: 选择素材
-      subtitle: 用于将查询结果过滤为此关卡内的特定素材。
-      unspecified: 显示关卡全部掉落素材
+      title: 素材选择
+      subtitle: 用于将查询结果过滤为此作战内的特定素材。
+      unspecified: 显示作战全部掉落素材
       selected: 仅查询 {length} 种素材
     stage:
-      title: 选择关卡
-      subtitle: "（必填）用于将查询结果过滤为一特定关卡。"
+      title: 选择作战
+      subtitle: "（必填）用于将查询结果过滤为一特定作战。"
     timeRange:
       title: 时间段
       subtitle: "（必填）用于将查询结果过滤为于一特定时间段内。"
@@ -393,8 +437,10 @@ quotes:
 credits:
   material:
     title: 网站内容声明
-    content: 企鹅物流数据统计网站内所使用的游戏资源（包括但不限于：游戏图片、动画、音频、文本原文或其转译版本等），其目的仅为更好地反映游戏内对应元素、增强用户体验，相关作品之版权仍属于上海鹰角网络科技有限公司和/或其关联公司，即鹰角网络游戏软件和/或鹰角网络游戏服务的提供方（包括但不限于：YOSTAR
-            (HONG KONG) LIMITED, 株式会社Yostar, YOSTAR LIMITED, 龍成網路 等）。企鹅物流数据统计网站内所使用的部分资源来源于 PRTS Wiki (http://prts.wiki) 并同时对部分资源进行了非歧义性的更改。
+    content:
+      - 企鹅物流数据统计网站内所使用的游戏资源（包括但不限于：游戏图片、动画、音频、文本原文或其转译版本等），其目的仅为更好地反映游戏内对应元素、增强用户体验，相关作品之版权仍属于上海鹰角网络科技有限公司和/或其关联公司，即鹰角网络游戏软件和/或鹰角网络游戏服务的提供方（包括但不限于：YOSTAR (HONG KONG) LIMITED, 株式会社Yostar, YOSTAR LIMITED, 龍成網路 等）
+      - 企鹅物流数据统计网站内所使用的部分资源来源于 PRTS Wiki (http://prts.wiki) 并同时对部分资源进行了非歧义性的更改
+      - 企鹅物流数据统计网站内使用了经细微修改的、由 Free Fonts Project 提供的 Bender 字体（ http://jovanny.ru ），该字体特别说明使用者可将相关字体以任何用途、没有任何限制地使用，在此特别表示感谢。
   source:
     title: 开源许可列表
 auth:
@@ -409,3 +455,54 @@ auth:
       deleteUserId: 删除此 PenguinID 登录记录
       noData: 暂无数据
       tips: 本功能仅可找回于 v3.3.1 及更新版本客户端所登录的 PenguinID
+members:
+  categories:
+    owner: 站长
+    maintainer: 主要贡献者
+    contributors: 内容贡献者
+    others: 其他
+    translators: 翻译
+  responsibilities:
+    _name: 贡献项目
+    arkplanner: ArkPlanner 作者
+    backend: 后端
+    bulkupload: 批量汇报
+    customersupport: 客服
+    v1frontend: v1.0 前端
+    frontend: 前端
+    localization_en: 英语本地化
+    localization_ja: 日语本地化
+    localization_ko: 韩语本地化
+    logo: Logo 画师
+    maintenance: 运维
+    materials: 素材提供
+    statistics: 统计分析
+    widget: 小组件开发
+  socials:
+    email: Email
+    github: GitHub
+    qq: QQ
+    twitter: Twitter
+    weibo: 微博
+pattern:
+  #  view:
+  #    table: 表格视图
+  #    pie: 饼图视图
+  name: 掉落组合
+  empty: 无掉落
+  error:
+    # 此值实际展示为 2 行，第二行字比第一行大一些
+    - 暂无本作战
+    - 掉落组合数据
+share:
+  name: 分享
+  shortlink:
+    name: 短链接
+  text:
+    _tmpl: 查看企鹅物流数据统计中「{name}」的掉落统计数据
+    stage: 作战 {name}
+    item: 素材 {name}
+  success: 分享成功
+search:
+  placeholder: 搜索...
+  hint: 键入 物品全拼 拼音首字母 作战名 章节名 关卡编号 或 部分关卡/物品昵称

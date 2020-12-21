@@ -33,6 +33,14 @@
         mdi-page-next
       </v-icon>
     </v-card-title>
+    <v-icon
+      v-if="favorited"
+      :color="dark ? 'yellow' : 'yellow darken-4'"
+      class="stage-card--star"
+      :size="10"
+    >
+      mdi-star
+    </v-icon>
   </v-card>
 </template>
 
@@ -85,6 +93,9 @@
       },
       translatedCode () {
         return strings.translate(this.stage, "code")
+      },
+      favorited() {
+        return this.$store.getters['stagePreferences/hasFavorite'](this.stage.stageId)
       }
     },
   }
@@ -156,5 +167,19 @@
 
   .stage-card--transparent {
     background: transparent !important;
+  }
+
+  .stage-card--stateless .stage-card--star {
+    transition: all .275s cubic-bezier(0.165, 0.84, 0.44, 1);
+  }
+  .stage-card--stateless:hover .stage-card--star {
+    transform: scale(1.2) rotate(10deg);
+  }
+  .stage-card--star {
+    position: absolute !important;
+    top: 0;
+    right: 0;
+    padding: 1px 3px;
+    text-shadow: 0 0 5px;
   }
 </style>

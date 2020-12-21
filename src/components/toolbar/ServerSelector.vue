@@ -7,9 +7,11 @@
   >
     <template v-slot:activator="{ on, attrs }">
       <v-btn
+        v-haptic
         rounded
         class="mx-1"
         v-bind="attrs"
+        large
         v-on="on"
       >
         <v-icon
@@ -18,9 +20,20 @@
         >
           mdi-server
         </v-icon>
-        <span>
-          {{ $t("server.servers." + activeServerId) }}
-        </span>
+        <div class="d-flex flex-column align-start justify-center">
+          <span
+            class="caption"
+            style="line-height: 1rem"
+          >
+            <!--            <span class="grey&#45;&#45;text">{{ $t('server.selected') }}</span>-->
+            <span class="grey--text">
+              {{ $t("server.name") }}
+            </span>
+          </span>
+          <span class="heading">
+            {{ $t("server.servers." + activeServerId) }}
+          </span>
+        </div>
       </v-btn>
     </template>
 
@@ -45,6 +58,7 @@
         <v-list-item
           v-for="(server, i) in servers"
           :key="i"
+          v-haptic
           :disabled="pending"
         >
           <v-list-item-title class="mr-2">

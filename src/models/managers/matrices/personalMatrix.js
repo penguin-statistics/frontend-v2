@@ -4,14 +4,10 @@ import commons from '../_common'
 const personalMatrix = new MatrixObjectManager({
   name: 'personalMatrix',
   api: {
-    serverSensitive: true,
     requireAuthorization: true,
+    serverSensitive: true,
 
-    url: '/result/matrix',
-    extraParams: {
-      "show_closed_zones": true,
-      "is_personal": true
-    }
+    url: (server) => `/_private/result/matrix/${server}/personal`,
   },
   ttl: 1000 * 60 * 60 * 1, // 1 hour
   ajaxHooks: commons.defaultAjaxHooks

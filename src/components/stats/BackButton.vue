@@ -1,10 +1,11 @@
 <template>
   <v-card
+    v-haptic
     flat
+    class="d-inline-flex my-1 back-button"
+    :class="{'back-button__active cursor-pointer': active, 'back-button__light': !dark, 'back-button__dark': dark}"
     :hover="active"
     :ripple="false"
-    class="d-inline-flex my-1 back-button"
-    :class="{'back-button__active cursor-pointer elevation-4': active, 'back-button__light': !dark, 'back-button__dark': dark}"
 
     @click="$emit('back')"
   >
@@ -73,6 +74,8 @@ name: "BackButton",
 .back-button__active {
   cursor: pointer;
   margin-left: 4px;
+  /*elevation-2*/
+  box-shadow: 0 3px 1px -2px rgba(0,0,0,.2), 0 2px 2px 0 rgba(0,0,0,.14), 0 1px 5px 0 rgba(0,0,0,.12);
 }
 
 /*.back-button__light {*/
@@ -85,6 +88,8 @@ name: "BackButton",
 
 .back-button__active.back-button:hover {
   transform: translateY(-0.5px);
+  /*v-card--hover:hover*/
+  box-shadow: 0 5px 5px -3px rgba(0,0,0,.2), 0 8px 10px 1px rgba(0,0,0,.14), 0 3px 14px 2px rgba(0,0,0,.12)
 }
 
 .back-button__active.back-button:active {
@@ -94,6 +99,9 @@ name: "BackButton",
   background: rgba(255, 255, 255, .15) !important;
 }
 
+.back-button__active.back-button__light {
+  border: 1px solid rgba(32, 32, 32, 0.95) !important;
+}
 .back-button__active.back-button__dark {
   border: 1px solid rgba(224, 224, 224, 0.95) !important;
 }

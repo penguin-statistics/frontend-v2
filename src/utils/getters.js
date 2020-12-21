@@ -7,6 +7,7 @@ const Getters = {};
 
 Getters.items = {
   _cache: null,
+  validItemTypes: ["MATERIAL", "CARD_EXP", "CHIP", "FURN", "ACTIVITY_ITEM"],
   all(map = false, filter = true) {
     let items = store.getters["data/content"]({id: "items"});
     if (!items) return []
@@ -58,13 +59,14 @@ Getters.statistics = {
       .filter(filter)
       .map(el => {
         const stage = Getters.stages.byStageId(el.stageId);
-        const percentage = el.quantity / el.times
+        const percentage = +(el.quantity / el.times).toFixed(5)
         return {
           ...el,
           stage,
           percentage,
           percentageText: `${(percentage * 100).toFixed(2)}%`,
-          apPPR: (stage.apCost / percentage).toFixed(2)
+          apPPR: (stage.apCost / percentage).toFixed(2),
+          itemPerTime: (stage.minClearTime / percentage).toFixed(2)
         }
       });
   },
@@ -96,6 +98,33 @@ Getters.statistics = {
   }
 }
 
+Getters.patterns = {
+  base (filter) {
+    const matrix = store.getters["data/content"]({id: `${store.getters["dataSource/source"]}PatternMatrix`});
+    if (!matrix) return null;
+    return matrix
+      .filter(filter)
+      .map(el => {
+        const stage = Getters.stages.byStageId(el.stageId);
+        const percentage = +(el.quantity / el.times).toFixed(5)
+        return {
+          ...el,
+          stage,
+          percentage,
+          percentageText: `${(percentage * 100).toFixed(2)}%`,
+        }
+      });
+  },
+  byStageId(stageId) {
+    const matrix = this.base(el => {
+      return el.stageId === stageId
+    })
+    if (!matrix) return []
+
+    return matrix
+  }
+}
+
 Getters.stages = {
   all() {
     let stages = store.getters["data/content"]({id: "stages"});
@@ -115,14 +144,14 @@ Getters.stages = {
 }
 
 Getters.zones = {
-  all(filter = true) {
+  all(filter = true, parseTime = true) {
     let zones = store.getters["data/content"]({id: "zones"})
     if (!zones) return []
 
     const server = store.getters["dataSource/server"]
 
     if (filter) {
-      zones = zones.filter(el => existUtils.existence(el, true))
+      zones = zones.filter(el => existUtils.existence(el, parseTime))
     }
 
     zones = zones.slice().sort((a, b) => {

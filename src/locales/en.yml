@@ -6,6 +6,7 @@ app:
 server:
   name: Server
   switch: Switch Server
+  selected: Selected
   servers:
     CN: CN
     US: US
@@ -13,6 +14,7 @@ server:
     KR: KR
 menu:
   home: Home
+  search: Search
   report: Report Drops
   stats:
     _name: Drop Rates
@@ -71,11 +73,16 @@ meta:
     confirm: Confirm
     submit: Submit
     close: Close
+  time:
+    minute: "{m}m"
+    second: "{s}s"
   copyWarning: |2-
+
 
     Data from Penguin Statistics ({site})
 stats:
   headers:
+    pattern: Pattern
     stage: Stage
     apCost: Sanity
     item: Item
@@ -85,13 +92,16 @@ stats:
     apPPR: Sanity Required Per Item
     clearTime: Shortest Clear Time
     timeRange: Time Range
+    itemPerTime: Time Per Item
   headerDesc:
     apCost: The Sanity required for the stage
     quantity: The sum of all drops in this stage
     times: The sum of the samples in this stage
-    percentage: "Calculated as $\frac{\text{quantity}}{\text{times}}$"
+    percentage: "Expected drop rate. Calculated as $$\\frac{\\text{Loots}}{\\text{Samples}}$$"
+    patternPercentage: "Possibility to get this drop pattern. Calculated as $$\\frac{\\text{Loots}}{\\text{Samples}}$$"
     apPPR: Expected Sanity required for getting 1x of this item
     clearTime: "The shortest possible time required to clear this stage, a.k.a. the time duration starting from the beginning of the combat to the appearance of the last enemy. Data source: [PRTS Wiki]({prtsLink})."
+    itemPerTime: "With the \"Percentage\" calculated, the expected amount of time required to acquire 1 item is calculated as $$\\frac{\\text{Clear Time}}{\\frac{\\text{Loots}}{\\text{Samples}}}$$"
     timeRange: "Due to the change of the drop table of this stage, the data in this row will only contain the data from the last change of the drop table, indicated as \"Time Range\""
   filter:
     title: Filter
@@ -107,7 +117,7 @@ stats:
       onlyOpen: Only show open stages
   timeRange:
     inBetween: "{0} to {1}"
-    toPresent: "{date} to Present"
+    toPresent: "{date} until now"
     endsAt: Before {date}
     unknown: Unknown
     notSelected: "(not selected)"
@@ -148,11 +158,16 @@ contribute:
     analysis: Data Analysis
     others: "..."
 fetch:
+  loading: Fetching Latest Data...
+  chunk:
+    title: Establishing connection to Level 2 neural network...
+    subtitle: Fetching page modules and rendering view, please wait...
   failed:
     title: Failed to fetch resources
     subtitle: Unable to establish synchronized connection with neural network. Missing
       partial or all resources.
     retry: Retry
+    deploying: Deploying latest version. This may last at its longest 5 minutes, please wait patiently.
     error:
       zones: Zones Data
       stages: Stages Data
@@ -161,6 +176,8 @@ fetch:
       trends: History Report Trends
       globalMatrix: Global Drop Data
       personalMatrix: Personal Drop Data
+      globalPatternMatrix: Global Drop Pattern Data
+      personalPatternMatrix: Personal Drop Pattern Data
       stats: Site Statistics
       period: Server Events
 report:
@@ -253,6 +270,7 @@ zone:
   types:
     MAINLINE: Main Storyline
     WEEKLY: Supplies
+    ACTIVITY: Event
     ACTIVITY_OPEN: Event (Open)
     ACTIVITY_CLOSED: Event (Closed)
     ACTIVITY_PENDING: Event (Opening Soon)
@@ -265,7 +283,32 @@ zone:
   opensAt: 'Event period: {0} - {1}'
 stage:
   name: Stage
+  about: About this Stage
   apCost: "{apCost} AP required"
+  actions:
+    _name:
+      selector: Quick Access
+      selectorEmpty: No Quick Access available
+      panel: Quick Actions
+    star:
+      name: Starred
+      activate: Star
+      activated: Starred
+      deactivate: Click to Cancel Star
+      empty:
+        - Currently you've not starred any stages
+        - You can star a stage by going to its 'Quick Access' section in its details panel.
+    history:
+      name: Recently Accessed
+      empty:
+        - No recent accessed stages available
+        - After you've visit any stage pages, a record will appear at here.
+      clear: Clear
+    links:
+      "prts-wiki": Wiki
+      "map-arknights-com": Maps
+    advanced:
+      activator: Do Advanced Query
   loots:
     NORMAL_DROP: Regular
     EXTRA_DROP: Extra
@@ -336,12 +379,14 @@ planner:
     level: Material Level
     noStage: No stage found.
     noSyntheses: No syntheses found.
-items:
+item:
+  name: Item
   choose:
     name: Choose Item
   categories:
-    ACTIVITY_ITEM: Event item
+    ACTIVITY_ITEM: Event Items
     CARD_EXP: Battle Records
+    CHIP: Chips
     FURN: Furniture
     MATERIAL: Materials
   related: Related Items
@@ -420,14 +465,10 @@ quotes:
 credits:
   material:
     title: Content Credits
-    content: Penguin Statistics utilizes (including but not limited to) pictures,
-      animations, audio, original text and other works for the purpose of better reflecting
-      the corresponding elements in the game and enhance the user experience. The
-      copyright of such works belongs to the provider of the game, Shanghai Hypergryph
-      Network Technology Co., Ltd. and/or its affiliates, including but not limited
-      to YOSTAR (HONG KONG) LIMITED, 株式会社Yostar, YOSTAR LIMITED, 龍成網路, etc,. Penguin Statistics
-      utilizes some assets from PRTS Wiki (http://prts.wiki) and has changed some of the assets
-      without modifying its original meaning.
+    content:
+      - Penguin Statistics utilizes (including but not limited to) pictures, animations, audio, original text and other works for the purpose of better reflecting the corresponding elements in the game and enhance the user experience. The copyright of such works belongs to the provider of the game, Shanghai Hypergryph Network Technology Co., Ltd. and/or its affiliates, including but not limited to YOSTAR (HONG KONG) LIMITED, 株式会社Yostar, YOSTAR LIMITED, 龍成網路, etc,.
+      - Penguin Statistics utilizes some assets from PRTS Wiki (http://prts.wiki) and has changed some of the assets without modifying its original meaning.
+      - Penguin Statistics used the slightly self-modified version of the Bender font, provided by the Free Fonts Project under a usage basis claimed on the official website of the Project ( http://jovanny.ru ) of "All fonts from the Free Fonts Project can be used both for commercial and personal purposes without any limitations.". Penguin Statistics hereby specially thanks and appreciates the Bender font for releasing their awesome font under such license.
   source:
     title: Open Source Licenses
 auth:
@@ -442,3 +483,51 @@ auth:
       deleteUserId: Delete this PenguinID record
       noData: No Data
       tips: Only able to recover PenguinID that are used in client v3.3.1 or newer versions
+members:
+  categories:
+    owner: Webmaster
+    maintainer: Maintainer
+    contributors: Contributors
+    others: Others
+    translators: Translators
+  responsibilities:
+    _name: Contributions
+    arkplanner: Author of ArkPlanner
+    backend: Backend
+    bulkupload: Bulk Upload
+    customersupport: User Support
+    v1frontend: v1.0 Frontend
+    frontend: Frontend
+    localization_en: English Localization
+    localization_ja: Japanese Localization
+    localization_ko: Korean Localization
+    logo: Logo Designer
+    maintenance: DevOps
+    materials: Materials Supplier
+    statistics: Statistics and Analysis
+    widget: Widget Development
+  socials:
+    email: Email
+    github: GitHub
+    qq: QQ
+    twitter: Twitter
+    weibo: Weibo
+pattern:
+  name: Drop Patterns
+  empty: (No Drops)
+  error:
+    # 此值实际展示为 2 行，第二行字比第一行大一些
+    - Drop Patterns for this Stage
+    - Currently not Available
+share:
+  name: Share
+  shortlink:
+    name: Short Link
+  text:
+    _tmpl: "{name} Drop Rates on Penguin Statistics"
+    stage: "Stage \"{name}\""
+    item: "Item \"{name}\""
+  success: Successfully shared
+search:
+  placeholder: Search...
+  hint: Type in Name for Stage, Zone or Item

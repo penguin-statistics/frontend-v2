@@ -120,6 +120,7 @@
     <v-card-actions>
       <v-spacer />
       <v-btn
+        v-haptic
         text
         @click="$emit('close')"
       >

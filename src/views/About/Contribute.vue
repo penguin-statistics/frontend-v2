@@ -76,8 +76,10 @@
       justify="center"
     >
       <v-btn
+        v-haptic
         href="https://github.com/penguin-statistics/frontend-v2"
         target="_blank"
+        rel="noopener"
         :class="{
           'mx-2': $vuetify.breakpoint.smAndUp,
           'mx-1': $vuetify.breakpoint.xsOnly
@@ -93,8 +95,10 @@
       <v-divider vertical />
 
       <v-btn
+        v-haptic
         href="https://github.com/penguin-statistics/backend"
         target="_blank"
+        rel="noopener"
         :class="{
           'mx-2': $vuetify.breakpoint.smAndUp,
           'mx-1': $vuetify.breakpoint.xsOnly
@@ -127,6 +131,7 @@
           small
           href="https://discord.gg/uEXJcue"
           target="_blank"
+          rel="noopener"
         >
           <v-icon
             left
@@ -164,6 +169,7 @@
           hover
           :href="link.url"
           target="_blank"
+          rel="noopener"
         >
           <template v-slot:backdrop>
             <v-icon>

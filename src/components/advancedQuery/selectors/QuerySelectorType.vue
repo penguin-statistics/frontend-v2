@@ -7,6 +7,7 @@
       @change="e => $emit('input', e)"
     >
       <v-btn
+        v-haptic
         value="matrix"
         small
       >
@@ -20,6 +21,7 @@
       </v-btn>
 
       <v-btn
+        v-haptic
         value="trend"
         small
       >

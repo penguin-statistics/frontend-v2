@@ -8,20 +8,18 @@ import StatsByStage from './views/Stats/Stage'
 import StatsByItem from './views/Stats/Item'
 
 import AboutLayout from './layouts/AboutLayout'
-import AboutMembers from './views/About/Members'
 import AboutContribute from './views/About/Contribute'
-import AboutChangelog from './views/About/Changelog'
 import AboutContact from './views/About/Contact'
 import AboutDonate from './views/About/Donate'
 import AboutLinks from './views/About/Links'
-import AboutCredits from './views/About/Credits'
 
 import NotFound from "@/views/NotFound";
-import AdvancedQuery from "@/views/AdvancedQuery";
 import SiteStats from "@/views/SiteStats";
 import Planner from "@/views/Planner";
 
 import i18n from "@/i18n";
+import Search from "@/views/Search";
+import store from "@/store";
 
 // import DataDebugger from "@/components/debug/DataDebugger";
 
@@ -126,7 +124,7 @@ const router = new Router({
     name: 'Planner',
     component: Planner,
     meta: {
-      icon: 'mdi-floor-plan',
+      icon: 'mdi-directions-fork',
       i18n: 'menu.planner',
       twoLine: 'menu.overline.planner'
     }
@@ -134,10 +132,23 @@ const router = new Router({
   {
     path: '/advanced',
     name: 'AdvancedQuery',
-    component: AdvancedQuery,
+    component: () => import(/* webpackChunkName: "advancedQuery" */ './views/AdvancedQuery'),
+    props: route => ({ stage: route.query.stage, items: route.query.items }),
     meta: {
+      async: true,
       icon: 'mdi-database-search',
       i18n: 'menu.stats.advanced'
+    },
+  },
+  {
+    path: '/search',
+    name: 'Search',
+    component: Search,
+    props: route => ({ query: route.query.q }),
+    meta: {
+      icon: 'mdi-magnify',
+      i18n: 'menu.search',
+      hide: true
     },
   },
   {
@@ -162,9 +173,10 @@ const router = new Router({
       {
         path: 'members',
         name: 'AboutMembers',
-        component: AboutMembers,
+        component: () => import(/* webpackChunkName: "about" */ './views/About/Members'),
         props: true,
         meta: {
+          async: true,
           icon: 'mdi-account-multiple',
           i18n: 'menu.about.members'
         },
@@ -183,9 +195,10 @@ const router = new Router({
       {
         path: 'changelog',
         name: 'AboutChangelog',
-        component: AboutChangelog,
+        component: () => import(/* webpackChunkName: "about" */ './views/About/Changelog'),
         props: true,
         meta: {
+          async: true,
           icon: 'mdi-timeline',
           i18n: 'menu.about.changelog'
         },
@@ -225,9 +238,10 @@ const router = new Router({
       {
         path: 'credits',
         name: 'AboutCredits',
-        component: AboutCredits,
+        component: () => import(/* webpackChunkName: "about" */ './views/About/Credits'),
         props: true,
         meta: {
+          async: true,
           icon: 'mdi-license',
           i18n: 'menu.about.credits'
         },
@@ -273,8 +287,16 @@ const router = new Router({
 });
 
 router.beforeEach((to, from, next) => {
+  // If this isn't an initial page load and is an async route
+  if (to.meta.async && to.name) store.commit('ui/setLoadingRoute', true)
+
   document.title = `${i18n.t(to.meta.i18n)} | ${i18n.t('app.name')}`;
   next();
+});
+
+router.afterEach((to) => {
+  document.title = `${i18n.t(to.meta.i18n)} | ${i18n.t('app.name')}`;
+  store.commit('ui/setLoadingRoute', false)
 });
 
 export default router

@@ -13,6 +13,9 @@ export default {
   have (object, key) {
     return Object.prototype.hasOwnProperty.call(object, key)
   },
+  isNull (value) {
+    return !value || value === 99 || ['NaN', 'Infinity'].includes(value)
+  },
   all (...validators) {
     for (const validator of validators) {
       if (validator !== true) return validator

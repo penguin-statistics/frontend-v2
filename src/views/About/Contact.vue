@@ -66,7 +66,7 @@
         <v-icon
           right
         >
-          mdi-account-multiple
+          mdi-account-group
         </v-icon>
       </v-chip>
       <v-chip
@@ -75,6 +75,7 @@
         text-color="white"
         href="https://github.com/penguin-statistics/frontend-v2/issues"
         target="_blank"
+        rel="noopener"
       >
         {{ $t('contact.github') }}
         <v-icon
@@ -89,6 +90,7 @@
         text-color="white"
         href="https://bbs.nga.cn/read.php?tid=17340880"
         target="_blank"
+        rel="noopener"
       >
         {{ $t('contact.nga') }}
         <v-icon

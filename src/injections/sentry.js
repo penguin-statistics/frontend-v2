@@ -52,7 +52,8 @@ if (environment.production) {
       "getBoundingClientRect",
       // ignore native client does not have web implementation error
       // since there's currently no feature sensitive native client plugin invocations.
-      "does not have web implementation"
+      "does not have web implementation",
+      "GlobalCapacitor"
     ],
     ignoreUrls: [
       // Facebook flakiness

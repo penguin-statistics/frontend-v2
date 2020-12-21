@@ -10,9 +10,13 @@
       <v-subheader>
         {{ $t('credits.material.title') }}
       </v-subheader>
-      <p class="px-4">
-        {{ $t('credits.material.content') }}
-      </p>
+      <p
+        v-for="text in $t('credits.material.content')"
+        :key="text"
+        v-marked
+        class="px-4"
+        v-text="text"
+      />
     </v-col>
     <v-col
       cols="12"
@@ -29,7 +33,7 @@
           v-for="[index, packageObj] in packages.entries()"
           :key="packageObj.name"
         >
-          <v-expansion-panel-header>
+          <v-expansion-panel-header v-haptic>
             <v-icon class="flex-grow-0 mr-2">
               mdi-package-variant-closed
             </v-icon>

@@ -12,6 +12,12 @@ try {
   commitHash = "unknown"
 }
 
+function envvar(name, fallback) {
+  let content = process.env[name]
+  if (content) content = content.trim()
+  return JSON.stringify(content) || fallback
+}
+
 module.exports = {
   pluginOptions: {
     i18n: {
@@ -25,7 +31,7 @@ module.exports = {
     disableHostCheck: true,
     proxy: {
       "/PenguinStats": {
-        target: "https://penguin-stats.cn"
+        target: "https://penguin-stats.io"
       }
     }
   },
@@ -37,8 +43,10 @@ module.exports = {
   configureWebpack: {
     plugins: [
       new webpack.DefinePlugin({
-        GIT_COMMIT: JSON.stringify(commitHash).trim()
-      }),
+        GIT_COMMIT: JSON.stringify(commitHash).trim(),
+        PENGUIN_BUILD: envvar('PENGUIN_BUILD', 'unspecified'),
+        PENGUIN_BUILD_FROM: envvar('PENGUIN_BUILD_FROM', null),
+      })
       // new InjectManifest ({
       //   swSrc: "./src/workers/service-worker.js",
       //   dontCacheBustURLsMatching: /.[a-f0-9]{8}./
@@ -49,6 +57,10 @@ module.exports = {
         {
           test: /\.ya?ml$/,
           use : 'js-yaml-loader',
+        },
+        {
+          test: /\.md$/,
+          use : 'raw-loader',
         }
       ]
     }

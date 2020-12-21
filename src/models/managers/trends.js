@@ -6,7 +6,7 @@ const trends = new ObjectManager({
   api: {
     serverSensitive: true,
 
-    url: '/result/trends'
+    url: (server) => `/_private/result/trend/${server}`,
   },
   transform: [
     (object) => {
