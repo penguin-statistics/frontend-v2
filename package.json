@@ -44,7 +44,6 @@
     "katex": "^0.12.0",
     "marked": "^1.0.0",
     "minisearch": "^3.0.2",
-    "pinyin-engine": "GalvinGao/pinyin-engine#master",
     "qs": "^6.9.4",
     "regenerator-runtime": "^0.13.5",
     "semver": "^7.3.2",

@@ -18,7 +18,7 @@
         dense
         subheader
       >
-        <v-subheader v-text="$t('members.responsibilities._name')" />
+        <!--        <v-subheader v-text="$t('members.responsibilities._name')" />-->
         <MemberResponsibility
           v-for="responsibility in member.responsibility"
           :key="member.name + '_' + responsibility.id"

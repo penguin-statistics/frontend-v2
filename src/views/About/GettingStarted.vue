@@ -79,11 +79,11 @@
       {{ $t('quickStart') }}
     </h1>
 
-    <span class="subtitle-2 my-2 d-inline-flex align-center flex-row flex-wrap justify-end">
+    <span class="subtitle-2 my-2 d-inline-block">
       {{ $t('caption')[0] }}
       <v-icon
         small
-        class="mx-1"
+        class="d-inline-block mt-n1"
       >
         mdi-menu
       </v-icon>

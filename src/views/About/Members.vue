@@ -10,9 +10,9 @@
         lg="6"
         xl="5"
       >
-        <v-subheader>
-          {{ $t('members.categories.owner') }}
-        </v-subheader>
+        <!--        <v-subheader>-->
+        <!--          {{ $t('members.categories.owner') }}-->
+        <!--        </v-subheader>-->
         <MaintainerMemberCard :member="profiles.owner" />
       </v-col>
       <v-col
@@ -22,9 +22,9 @@
         lg="6"
         xl="5"
       >
-        <v-subheader>
-          {{ $t('members.categories.maintainer') }}
-        </v-subheader>
+        <!--        <v-subheader>-->
+        <!--          {{ $t('members.categories.maintainer') }}-->
+        <!--        </v-subheader>-->
         <MaintainerMemberCard :member="profiles.maintainer" />
       </v-col>
     </v-row>
