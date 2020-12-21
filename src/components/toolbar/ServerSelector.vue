@@ -25,13 +25,13 @@
             class="caption"
             style="line-height: 1rem"
           >
-            <span class="grey--text">{{ $t('server.selected') }}</span>
+            <!--            <span class="grey&#45;&#45;text">{{ $t('server.selected') }}</span>-->
             <span>
-              {{ $t("server.servers." + activeServerId) }}
+              {{ $t("server.switch") }}
             </span>
           </span>
           <span class="heading">
-            {{ $t("server.switch") }}
+            {{ $t("server.servers." + activeServerId) }}
           </span>
         </div>
       </v-btn>
