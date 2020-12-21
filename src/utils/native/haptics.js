@@ -10,7 +10,8 @@ window.GlobalCapacitorHaptics = Haptics
 
 function invoke(method, ...args) {
   try {
-    Haptics.prototype.call(method, args)
+    const promise = Haptics.prototype.call(method, args)
+    promise.catch(e => Console.warn('Haptics', 'failed to invoke haptics', e))
   } catch (e) {
     Console.warn('Haptics', 'failed to invoke haptics', e)
   }
