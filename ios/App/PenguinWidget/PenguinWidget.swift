@@ -55,7 +55,11 @@ struct PenguinWidget: Widget {
     let kind: String = "PenguinWidget"
 
     var body: some WidgetConfiguration {
-        IntentConfiguration(kind: kind, intent: ConfigurationIntent.self, provider: Provider()) { entry in
+        IntentConfiguration(
+            kind: kind,
+            intent: ConfigurationIntent.self,
+            provider: Provider()
+        ) { entry in
             PenguinWidgetEntryView(entry: entry)
         }
         .configurationDisplayName("My Widget")
