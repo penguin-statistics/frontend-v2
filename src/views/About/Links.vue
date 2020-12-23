@@ -152,10 +152,8 @@
             color="secondary"
             class="ma-2 mb-4"
             text-color="white"
-            :href="link.url"
-            target="_blank"
             rel="noopener"
-            @click="goToHref(link)"
+            @click="goTo(link.url)"
           >
             <span
               class="subtitle-1 "
@@ -178,9 +176,10 @@
 
 <script>
 import anime from "animejs";
-
+import goTo from "@/mixins/GoTo";
 export default {
   name: "Links",
+  mixins: [goTo],
   data() {
     return {
       links: [
@@ -373,11 +372,6 @@ export default {
       delay: (el, i) => i * 50,
       easing: "easeOutQuint"
     });
-  },
-  methods: {
-    goToHref(link) {
-      this.$ga.event('redirect', 'links', link.title, 1)
-    }
   },
 };
 </script>

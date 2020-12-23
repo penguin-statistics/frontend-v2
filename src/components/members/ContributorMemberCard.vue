@@ -33,10 +33,8 @@
         :key="`${member.name}-${id}`"
         v-haptic
         icon
-        :href="url"
-        target="_blank"
-        rel="noopener"
         :title="$t(`members.socials.${id}`)"
+        @click="goTo(url)"
       >
         <v-icon>
           {{ getSocial(id).icon }}
@@ -48,13 +46,14 @@
 
 <script>
 import CDN from "@/mixins/CDN";
+import GoTo from "@/mixins/GoTo";
 import members from "@/utils/humans";
 import MemberResponsibility from "@/components/members/MemberResponsibility";
 
 export default {
   name: "ContributorMemberCard",
   components: {MemberResponsibility},
-  mixins: [CDN],
+  mixins: [CDN, GoTo],
   props: {
     member: {
       type: Object,

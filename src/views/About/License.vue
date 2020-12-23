@@ -26,9 +26,7 @@
       v-haptic
       text
       outlined
-      href="https://creativecommons.org/licenses/by-nc/4.0/"
-      target="_blank"
-      rel="noopener"
+      @click="goTo('https://creativecommons.org/licenses/by-nc/4.0/')"
     >
       {{ $t('meta.details') }}
       <v-icon
@@ -42,8 +40,10 @@
 </template>
 
 <script>
+  import GoTo from "@/mixins/GoTo";
   export default {
-    name: "License"
+    name: "License",
+    mixins: [GoTo],
   }
 </script>
 
