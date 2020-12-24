@@ -183,7 +183,7 @@
                 github: "https://github.com/KumoSiunaus",
                 weibo: "https://weibo.com/673465600",
                 twitter: "https://twitter.com/Kumo_Siunaus",
-                email: "kumosiunaus@gmail.com"
+                email: "mailto:kumosiunaus@gmail.com"
               }
             },
             {
