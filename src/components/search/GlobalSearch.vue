@@ -130,7 +130,7 @@ export default {
       ].some(el => !!el)
     },
     valid () {
-      return this.search && this.results.length
+      return this.debouncedSearch && this.results.length
     },
     computedBinding () {
       const binding = {}
@@ -161,9 +161,9 @@ export default {
 
     const self = this
     this.engine.ready().then(() => {
-      self.search = self.query
-      self.search = self.search + ' '
-      self.search = self.search.slice(0, -1)
+      self.debouncedSearch = self.query
+      self.debouncedSearch = self.debouncedSearch + ' '
+      self.debouncedSearch = self.debouncedSearch.slice(0, -1)
 
       self.engineLoading = false
     })
@@ -171,7 +171,7 @@ export default {
   methods: {
     reset() {
       Console.info("SearchEngine", "search engine has been reinitialized due to change detected in dependency")
-      this.search = ""
+      this.debouncedSearch = ""
       this.engine = new CompactedSearchEngine()
     }
   },
