@@ -1,0 +1,11 @@
+/* 
+  PenguinWidget.strings
+  App
+
+  Created by Galvin Gao on 2020/12/26.
+  
+*/
+
+"widgetName" = "数据概览";
+"widgetDesc" = "添加数据一览小组件至主屏幕，随时查看最近的数据上传情况概览。";
+"24huploads" = "24h 最多汇报关卡";

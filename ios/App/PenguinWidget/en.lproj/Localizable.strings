@@ -1,0 +1,11 @@
+/* 
+  PenguinWidget.strings
+  App
+
+  Created by Galvin Gao on 2020/12/26.
+  
+*/
+
+"widgetName" = "Statistics Overview";
+"widgetDesc" = "Add the Statistics Overview widget to your home screen to keep track of the overview of site statistics.";
+"24huploads" = "Top Report Stage (24h)";

@@ -12,12 +12,20 @@
 		3A1157AE258F2B5C00F4C6FD /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A00D83325266410007308FB /* SwiftUI.framework */; };
 		3A1157B1258F2B5C00F4C6FD /* PenguinWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A1157B0258F2B5C00F4C6FD /* PenguinWidget.swift */; };
 		3A1157B4258F2B5E00F4C6FD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3A1157B3258F2B5E00F4C6FD /* Assets.xcassets */; };
-		3A1157B6258F2B5E00F4C6FD /* PenguinWidget.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = 3A1157B2258F2B5C00F4C6FD /* PenguinWidget.intentdefinition */; };
-		3A1157B7258F2B5E00F4C6FD /* PenguinWidget.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = 3A1157B2258F2B5C00F4C6FD /* PenguinWidget.intentdefinition */; };
 		3A1157BA258F2B5E00F4C6FD /* PenguinWidgetExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 3A1157AC258F2B5C00F4C6FD /* PenguinWidgetExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		3A5051A925965532004167D3 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 3A5051AC25965532004167D3 /* Localizable.strings */; };
+		3A5051AA25965532004167D3 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 3A5051AC25965532004167D3 /* Localizable.strings */; };
+		3A5051B82596575D004167D3 /* Bender.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3A5051B72596575D004167D3 /* Bender.ttf */; };
+		3A5051C1259666FB004167D3 /* ItemStats.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A5051C0259666FB004167D3 /* ItemStats.swift */; };
+		3A5051C9259669AF004167D3 /* ItemIcons.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3A5051C8259669AF004167D3 /* ItemIcons.xcassets */; };
 		3AA7E33725211FD500387971 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 3AA7E33925211FD500387971 /* InfoPlist.strings */; };
 		3AA7E3422521F6C000387971 /* PenguinPlugin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AA7E3412521F6C000387971 /* PenguinPlugin.swift */; };
 		3AA7E3462521F70B00387971 /* PenguinPlugin.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AA7E3452521F70B00387971 /* PenguinPlugin.m */; };
+		3AD569EA2596387C0060AB83 /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A00D83125266410007308FB /* WidgetKit.framework */; };
+		3AD569EB2596387C0060AB83 /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A00D83325266410007308FB /* SwiftUI.framework */; };
+		3AD569EE2596387C0060AB83 /* PenguinWidgetTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AD569ED2596387C0060AB83 /* PenguinWidgetTest.swift */; };
+		3AD569F02596387E0060AB83 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3AD569EF2596387E0060AB83 /* Assets.xcassets */; };
+		3AD569F42596387E0060AB83 /* PenguinWidgetTestExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 3AD569E92596387C0060AB83 /* PenguinWidgetTestExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		50379B232058CBB4000EE86E /* capacitor.config.json in Resources */ = {isa = PBXBuildFile; fileRef = 50379B222058CBB4000EE86E /* capacitor.config.json */; };
 		504EC3081FED79650016851F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 504EC3071FED79650016851F /* AppDelegate.swift */; };
 		504EC30D1FED79650016851F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 504EC30B1FED79650016851F /* Main.storyboard */; };
@@ -35,6 +43,13 @@
 			remoteGlobalIDString = 3A1157AB258F2B5C00F4C6FD;
 			remoteInfo = PenguinWidgetExtension;
 		};
+		3AD569F22596387E0060AB83 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 504EC2FC1FED79650016851F /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 3AD569E82596387C0060AB83;
+			remoteInfo = PenguinWidgetTestExtension;
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -44,6 +59,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 13;
 			files = (
+				3AD569F42596387E0060AB83 /* PenguinWidgetTestExtension.appex in Embed App Extensions */,
 				3A1157BA258F2B5E00F4C6FD /* PenguinWidgetExtension.appex in Embed App Extensions */,
 			);
 			name = "Embed App Extensions";
@@ -57,9 +73,13 @@
 		3A00D83325266410007308FB /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
 		3A1157AC258F2B5C00F4C6FD /* PenguinWidgetExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = PenguinWidgetExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		3A1157B0258F2B5C00F4C6FD /* PenguinWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PenguinWidget.swift; sourceTree = "<group>"; };
-		3A1157B2258F2B5C00F4C6FD /* PenguinWidget.intentdefinition */ = {isa = PBXFileReference; lastKnownFileType = file.intentdefinition; path = PenguinWidget.intentdefinition; sourceTree = "<group>"; };
 		3A1157B3258F2B5E00F4C6FD /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		3A1157B5258F2B5E00F4C6FD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		3A5051AB25965532004167D3 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
+		3A5051B025965533004167D3 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		3A5051B72596575D004167D3 /* Bender.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = Bender.ttf; path = ../../../src/assets/fonts/Bender.ttf; sourceTree = "<group>"; };
+		3A5051C0259666FB004167D3 /* ItemStats.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemStats.swift; sourceTree = "<group>"; };
+		3A5051C8259669AF004167D3 /* ItemIcons.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = ItemIcons.xcassets; sourceTree = "<group>"; };
 		3AA7E33825211FD500387971 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		3AA7E33B25211FEC00387971 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
 		3AA7E3412521F6C000387971 /* PenguinPlugin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PenguinPlugin.swift; sourceTree = "<group>"; };
@@ -67,6 +87,10 @@
 		3AA7E3452521F70B00387971 /* PenguinPlugin.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PenguinPlugin.m; sourceTree = "<group>"; };
 		3AA7E34B2522510700387971 /* App.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = App.entitlements; sourceTree = "<group>"; };
 		3AA7E3812523664D00387971 /* IntentsUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = IntentsUI.framework; path = System/Library/Frameworks/IntentsUI.framework; sourceTree = SDKROOT; };
+		3AD569E92596387C0060AB83 /* PenguinWidgetTestExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = PenguinWidgetTestExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		3AD569ED2596387C0060AB83 /* PenguinWidgetTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PenguinWidgetTest.swift; sourceTree = "<group>"; };
+		3AD569EF2596387E0060AB83 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		3AD569F12596387E0060AB83 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		50379B222058CBB4000EE86E /* capacitor.config.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = capacitor.config.json; sourceTree = "<group>"; };
 		504EC3041FED79650016851F /* App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = App.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		504EC3071FED79650016851F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -87,6 +111,15 @@
 			files = (
 				3A1157AE258F2B5C00F4C6FD /* SwiftUI.framework in Frameworks */,
 				3A1157AD258F2B5C00F4C6FD /* WidgetKit.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		3AD569E62596387C0060AB83 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3AD569EB2596387C0060AB83 /* SwiftUI.framework in Frameworks */,
+				3AD569EA2596387C0060AB83 /* WidgetKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -115,12 +148,23 @@
 		3A1157AF258F2B5C00F4C6FD /* PenguinWidget */ = {
 			isa = PBXGroup;
 			children = (
+				3A5051BF25966617004167D3 /* Views */,
+				3A5051B72596575D004167D3 /* Bender.ttf */,
 				3A1157B0258F2B5C00F4C6FD /* PenguinWidget.swift */,
-				3A1157B2258F2B5C00F4C6FD /* PenguinWidget.intentdefinition */,
 				3A1157B3258F2B5E00F4C6FD /* Assets.xcassets */,
 				3A1157B5258F2B5E00F4C6FD /* Info.plist */,
+				3A5051AC25965532004167D3 /* Localizable.strings */,
+				3A5051C8259669AF004167D3 /* ItemIcons.xcassets */,
 			);
 			path = PenguinWidget;
+			sourceTree = "<group>";
+		};
+		3A5051BF25966617004167D3 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				3A5051C0259666FB004167D3 /* ItemStats.swift */,
+			);
+			path = Views;
 			sourceTree = "<group>";
 		};
 		3AA7E33225211F9F00387971 /* Resources */ = {
@@ -131,12 +175,23 @@
 			path = Resources;
 			sourceTree = "<group>";
 		};
+		3AD569EC2596387C0060AB83 /* PenguinWidgetTest */ = {
+			isa = PBXGroup;
+			children = (
+				3AD569ED2596387C0060AB83 /* PenguinWidgetTest.swift */,
+				3AD569EF2596387E0060AB83 /* Assets.xcassets */,
+				3AD569F12596387E0060AB83 /* Info.plist */,
+			);
+			path = PenguinWidgetTest;
+			sourceTree = "<group>";
+		};
 		504EC2FB1FED79650016851F = {
 			isa = PBXGroup;
 			children = (
 				3AA7E33225211F9F00387971 /* Resources */,
 				504EC3061FED79650016851F /* App */,
 				3A1157AF258F2B5C00F4C6FD /* PenguinWidget */,
+				3AD569EC2596387C0060AB83 /* PenguinWidgetTest */,
 				504EC3051FED79650016851F /* Products */,
 				7F8756D8B27F46E3366F6CEA /* Pods */,
 				27E2DDA53C4D2A4D1A88CE4A /* Frameworks */,
@@ -148,6 +203,7 @@
 			children = (
 				504EC3041FED79650016851F /* App.app */,
 				3A1157AC258F2B5C00F4C6FD /* PenguinWidgetExtension.appex */,
+				3AD569E92596387C0060AB83 /* PenguinWidgetTestExtension.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -200,6 +256,23 @@
 			productReference = 3A1157AC258F2B5C00F4C6FD /* PenguinWidgetExtension.appex */;
 			productType = "com.apple.product-type.app-extension";
 		};
+		3AD569E82596387C0060AB83 /* PenguinWidgetTestExtension */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 3AD569F52596387E0060AB83 /* Build configuration list for PBXNativeTarget "PenguinWidgetTestExtension" */;
+			buildPhases = (
+				3AD569E52596387C0060AB83 /* Sources */,
+				3AD569E62596387C0060AB83 /* Frameworks */,
+				3AD569E72596387C0060AB83 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = PenguinWidgetTestExtension;
+			productName = PenguinWidgetTestExtension;
+			productReference = 3AD569E92596387C0060AB83 /* PenguinWidgetTestExtension.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
 		504EC3031FED79650016851F /* App */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 504EC3161FED79650016851F /* Build configuration list for PBXNativeTarget "App" */;
@@ -215,6 +288,7 @@
 			);
 			dependencies = (
 				3A1157B9258F2B5E00F4C6FD /* PBXTargetDependency */,
+				3AD569F32596387E0060AB83 /* PBXTargetDependency */,
 			);
 			name = App;
 			productName = App;
@@ -231,6 +305,10 @@
 				LastUpgradeCheck = 0920;
 				TargetAttributes = {
 					3A1157AB258F2B5C00F4C6FD = {
+						CreatedOnToolsVersion = 12.3;
+						ProvisioningStyle = Automatic;
+					};
+					3AD569E82596387C0060AB83 = {
 						CreatedOnToolsVersion = 12.3;
 						ProvisioningStyle = Automatic;
 					};
@@ -259,6 +337,7 @@
 			targets = (
 				504EC3031FED79650016851F /* App */,
 				3A1157AB258F2B5C00F4C6FD /* PenguinWidgetExtension */,
+				3AD569E82596387C0060AB83 /* PenguinWidgetTestExtension */,
 			);
 		};
 /* End PBXProject section */
@@ -269,6 +348,17 @@
 			buildActionMask = 2147483647;
 			files = (
 				3A1157B4258F2B5E00F4C6FD /* Assets.xcassets in Resources */,
+				3A5051C9259669AF004167D3 /* ItemIcons.xcassets in Resources */,
+				3A5051B82596575D004167D3 /* Bender.ttf in Resources */,
+				3A5051AA25965532004167D3 /* Localizable.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		3AD569E72596387C0060AB83 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3AD569F02596387E0060AB83 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -283,6 +373,7 @@
 				50379B232058CBB4000EE86E /* capacitor.config.json in Resources */,
 				504EC30D1FED79650016851F /* Main.storyboard in Resources */,
 				2FAD9763203C412B000D30F8 /* config.xml in Resources */,
+				3A5051A925965532004167D3 /* Localizable.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -329,8 +420,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3A5051C1259666FB004167D3 /* ItemStats.swift in Sources */,
 				3A1157B1258F2B5C00F4C6FD /* PenguinWidget.swift in Sources */,
-				3A1157B6258F2B5E00F4C6FD /* PenguinWidget.intentdefinition in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		3AD569E52596387C0060AB83 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3AD569EE2596387C0060AB83 /* PenguinWidgetTest.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -339,7 +438,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				3AA7E3462521F70B00387971 /* PenguinPlugin.m in Sources */,
-				3A1157B7258F2B5E00F4C6FD /* PenguinWidget.intentdefinition in Sources */,
 				504EC3081FED79650016851F /* AppDelegate.swift in Sources */,
 				3AA7E3422521F6C000387971 /* PenguinPlugin.swift in Sources */,
 			);
@@ -353,9 +451,23 @@
 			target = 3A1157AB258F2B5C00F4C6FD /* PenguinWidgetExtension */;
 			targetProxy = 3A1157B8258F2B5E00F4C6FD /* PBXContainerItemProxy */;
 		};
+		3AD569F32596387E0060AB83 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 3AD569E82596387C0060AB83 /* PenguinWidgetTestExtension */;
+			targetProxy = 3AD569F22596387E0060AB83 /* PBXContainerItemProxy */;
+		};
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
+		3A5051AC25965532004167D3 /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				3A5051AB25965532004167D3 /* zh-Hans */,
+				3A5051B025965533004167D3 /* en */,
+			);
+			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
 		3AA7E33925211FD500387971 /* InfoPlist.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -394,10 +506,12 @@
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 0;
 				DEVELOPMENT_TEAM = SY8Y8N4TPM;
 				INFOPLIST_FILE = PenguinWidget/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				MARKETING_VERSION = 3.4.1;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = io.penguinstats.app.PenguinWidget;
@@ -418,12 +532,61 @@
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 0;
 				DEVELOPMENT_TEAM = SY8Y8N4TPM;
 				INFOPLIST_FILE = PenguinWidget/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				MARKETING_VERSION = 3.4.1;
 				MTL_FAST_MATH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = io.penguinstats.app.PenguinWidget;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		3AD569F62596387E0060AB83 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = SY8Y8N4TPM;
+				INFOPLIST_FILE = PenguinWidgetTest/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = io.penguinstats.app.PenguinWidgetTest;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		3AD569F72596387E0060AB83 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = SY8Y8N4TPM;
+				INFOPLIST_FILE = PenguinWidgetTest/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = io.penguinstats.app.PenguinWidgetTest;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 5.0;
@@ -555,7 +718,7 @@
 				INFOPLIST_FILE = App/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				MARKETING_VERSION = 3.4.0;
+				MARKETING_VERSION = 3.4.1;
 				OTHER_SWIFT_FLAGS = "$(inherited) \"-D\" \"COCOAPODS\" \"-DDEBUG\"";
 				PRODUCT_BUNDLE_IDENTIFIER = io.penguinstats.app;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -583,7 +746,7 @@
 				INFOPLIST_FILE = App/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				MARKETING_VERSION = 3.4.0;
+				MARKETING_VERSION = 3.4.1;
 				PRODUCT_BUNDLE_IDENTIFIER = io.penguinstats.app;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTS_MACCATALYST = NO;
@@ -602,6 +765,15 @@
 			buildConfigurations = (
 				3A1157BB258F2B5E00F4C6FD /* Debug */,
 				3A1157BC258F2B5E00F4C6FD /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		3AD569F52596387E0060AB83 /* Build configuration list for PBXNativeTarget "PenguinWidgetTestExtension" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				3AD569F62596387E0060AB83 /* Debug */,
+				3AD569F72596387E0060AB83 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
