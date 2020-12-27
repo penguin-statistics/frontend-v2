@@ -56,42 +56,46 @@
 	<string>To Pick Photos from Library</string>
 	<key>NSSiriUsageDescription</key>
 	<string>SIRI_USAGE_DESCRIPTION</string>
-	<key>UIApplicationShortcutItems</key>
-    <array>
-        <dict>
-            <key>UIApplicationShortcutItemIconType</key>
-            <string>UIApplicationShortcutIconTypeSearch</string>
-            <key>UIApplicationShortcutItemTitle</key>
-            <string>SHORTCUT_ITEM_SEARCH_TITLE</string>
-            <key>UIApplicationShortcutItemType</key>
-            <string>SearchAction</string>
-        </dict>
-        <dict>
-            <key>UIApplicationShortcutItemIconType</key>
-            <string>UIApplicationShortcutIconTypeDate</string>
-            <key>UIApplicationShortcutItemSubtitle</key>
-            <string>SHORTCUT_ITEM_DATE_SUBTITLE</string>
-            <key>UIApplicationShortcutItemTitle</key>
-            <string>SHORTCUT_ITEM_DATE_TITLE</string>
-            <key>UIApplicationShortcutItemType</key>
-            <string>DateAction</string>
-        </dict>
-        <dict>
-            <key>UIApplicationShortcutItemIconType</key>
-            <string>UIApplicationShortcutIconTypePlay</string>
-            <key>UIApplicationShortcutItemSubtitle</key>
-            <string>SHORTCUT_ITEM_AUTO_SUBTITLE</string>
-            <key>UIApplicationShortcutItemTitle</key>
-            <string>SHORTCUT_ITEM_AUTO_TITLE</string>
-            <key>UIApplicationShortcutItemType</key>
-            <string>AutoAction</string>
-        </dict>
-    </array>
+	<key>NSUserActivityTypes</key>
+	<array>
+		<string>SelectServerIntent</string>
+	</array>
 	<key>UIApplicationSceneManifest</key>
 	<dict>
 		<key>UIApplicationSupportsMultipleScenes</key>
 		<false/>
 	</dict>
+	<key>UIApplicationShortcutItems</key>
+	<array>
+		<dict>
+			<key>UIApplicationShortcutItemIconType</key>
+			<string>UIApplicationShortcutIconTypeSearch</string>
+			<key>UIApplicationShortcutItemTitle</key>
+			<string>SHORTCUT_ITEM_SEARCH_TITLE</string>
+			<key>UIApplicationShortcutItemType</key>
+			<string>SearchAction</string>
+		</dict>
+		<dict>
+			<key>UIApplicationShortcutItemIconType</key>
+			<string>UIApplicationShortcutIconTypeDate</string>
+			<key>UIApplicationShortcutItemSubtitle</key>
+			<string>SHORTCUT_ITEM_DATE_SUBTITLE</string>
+			<key>UIApplicationShortcutItemTitle</key>
+			<string>SHORTCUT_ITEM_DATE_TITLE</string>
+			<key>UIApplicationShortcutItemType</key>
+			<string>DateAction</string>
+		</dict>
+		<dict>
+			<key>UIApplicationShortcutItemIconType</key>
+			<string>UIApplicationShortcutIconTypePlay</string>
+			<key>UIApplicationShortcutItemSubtitle</key>
+			<string>SHORTCUT_ITEM_AUTO_SUBTITLE</string>
+			<key>UIApplicationShortcutItemTitle</key>
+			<string>SHORTCUT_ITEM_AUTO_TITLE</string>
+			<key>UIApplicationShortcutItemType</key>
+			<string>AutoAction</string>
+		</dict>
+	</array>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
 	<key>UIMainStoryboardFile</key>

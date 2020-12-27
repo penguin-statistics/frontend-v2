@@ -6,6 +6,13 @@
   
 */
 
-"widgetName" = "Statistics Overview";
-"widgetDesc" = "Add the Statistics Overview widget to your home screen to keep track of the overview of site statistics.";
-"24huploads" = "Top Report Stage (24h)";
+"SiteStatsWidgetName" = "Statistics Overview";
+"SiteStatsWidgetDesc" = "Keep track of the overview of site statistics";
+"SiteStatsWidgetTitle" = "Top Report Stage (24h)";
+"WidgetViewMore" = "View More";
+
+"ServerNameCN" = "CN";
+"ServerNameUS" = "US";
+"ServerNameJP" = "JP";
+"ServerNameKR" = "KR";
+
