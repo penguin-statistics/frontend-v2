@@ -55,7 +55,6 @@
           small
           hover
           dense
-          :href="link.href"
           class="bkop-medium mb-2 py-3 "
         >
           <template v-slot:backdrop>
@@ -64,7 +63,10 @@
             </v-icon>
           </template>
 
-          <h2 class="heading d-flex flex-row align-center px-6">
+          <h2 
+            class="heading d-flex flex-row align-center px-6"
+            @click="goTo(link.href)"
+          >
             <span class="text-left text-no-wrap">
               {{ $t('stage.actions.links.' + link.id) }}
             </span>
@@ -177,6 +179,7 @@ import FactTable from "@/components/stats/fact-table/FactTable";
 import FactTableItem from "@/components/stats/fact-table/FactTableItem";
 import BackdropCard from "@/components/global/BackdropCard";
 import Theme from "@/mixins/Theme";
+import GoTo from "@/mixins/GoTo";
 import mirror from "@/utils/mirror";
 import StagePattern from "@/components/stats/details/StagePattern";
 import Share from "@/components/stats/details/Share";
@@ -184,7 +187,7 @@ import Share from "@/components/stats/details/Share";
 export default {
   name: "StageDetails",
   components: {Share, StagePattern, BackdropCard, FactTableItem, FactTable},
-  mixins: [Theme],
+  mixins: [Theme, GoTo],
   props: {
     stage: {
       type: Object,

@@ -52,7 +52,6 @@
       <BackButton
         :name="$t('item.choose.name')"
         :active="step > 1"
-
         @back="step = 1"
       />
 

@@ -34,7 +34,6 @@
           v-haptic
           icon
           tabindex="100"
-
           @click="search = ''"
         >
           <v-icon>

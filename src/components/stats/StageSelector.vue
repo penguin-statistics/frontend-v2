@@ -37,7 +37,6 @@
       <BackButton
         :name="$t('stage.selector.title')"
         :active="step > 1"
-
         @back="step = 1"
       />
 

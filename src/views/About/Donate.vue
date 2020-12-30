@@ -145,11 +145,9 @@
           <v-btn
             v-haptic
             color="blue-grey"
-            href="https://shimo.im/sheets/GJXgP9XQcPrj6rtg/2fC1m"
-            target="_blank"
-            rel="noopener"
             large
             class="align-self-center mt-4"
+            @click="goTo('https://shimo.im/sheets/GJXgP9XQcPrj6rtg/2fC1m')"
           >
             <v-icon left>
               mdi-bank-transfer
@@ -191,10 +189,8 @@
         <v-btn
           v-haptic
           color="blue-grey"
-          href="https://shimo.im/sheets/GJXgP9XQcPrj6rtg/2fC1m"
-          target="_blank"
-          rel="noopener"
           class="mt-1"
+          @click="goTo('https://shimo.im/sheets/GJXgP9XQcPrj6rtg/2fC1m')"
         >
           <v-icon left>
             mdi-bank-transfer
@@ -340,9 +336,7 @@
           rounded
           large
           color="primary"
-          :href="qr.paypal"
-          target="_blank"
-          rel="noopener"
+          @click="goTo(qr.paypal)"
         >
           <v-icon left>
             mdi-paypal
@@ -357,11 +351,12 @@
 import Theme from "@/mixins/Theme";
 import BackdropCard from "@/components/global/BackdropCard";
 import Mirror from "@/mixins/Mirror";
+import GoTo from "@/mixins/GoTo";
 
 export default {
   name: "Donate",
   components: {BackdropCard},
-  mixins: [Theme, Mirror],
+  mixins: [Theme, Mirror, GoTo],
   props: {
     hide: {
       type: Boolean,

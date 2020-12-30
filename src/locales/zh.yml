@@ -76,6 +76,9 @@ meta:
 
 
     以上数据来自企鹅物流数据统计（{site}）
+  outSiteDialog:
+    title: 外部链接
+    notice: 你正在离开企鹅物流
 stats:
   headers:
     pattern: 组合

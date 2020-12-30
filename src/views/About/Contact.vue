@@ -73,9 +73,7 @@
         class="mx-2 my-1"
         color="secondary"
         text-color="white"
-        href="https://github.com/penguin-statistics/frontend-v2/issues"
-        target="_blank"
-        rel="noopener"
+        @click="goTo('https://github.com/penguin-statistics/frontend-v2/issues')"
       >
         {{ $t('contact.github') }}
         <v-icon
@@ -88,9 +86,7 @@
         class="mx-2 my-1"
         color="secondary"
         text-color="white"
-        href="https://bbs.nga.cn/read.php?tid=17340880"
-        target="_blank"
-        rel="noopener"
+        @click="goTo('https://bbs.nga.cn/read.php?tid=17340880')"
       >
         {{ $t('contact.nga') }}
         <v-icon
@@ -163,8 +159,10 @@
 </template>
 
 <script>
+import GoTo from "@/mixins/GoTo";
 export default {
   name: 'Contact',
+  mixins: [GoTo],
   methods: {
   }
 }
