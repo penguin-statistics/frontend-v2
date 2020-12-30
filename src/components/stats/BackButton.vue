@@ -6,7 +6,6 @@
     :class="{'back-button__active cursor-pointer': active, 'back-button__light': !dark, 'back-button__dark': dark}"
     :hover="active"
     :ripple="false"
-
     @click="$emit('back')"
   >
     <v-card-title

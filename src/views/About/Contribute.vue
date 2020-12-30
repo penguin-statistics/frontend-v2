@@ -77,14 +77,12 @@
     >
       <v-btn
         v-haptic
-        href="https://github.com/penguin-statistics/frontend-v2"
-        target="_blank"
-        rel="noopener"
         :class="{
           'mx-2': $vuetify.breakpoint.smAndUp,
           'mx-1': $vuetify.breakpoint.xsOnly
         }"
         text
+        @click="goTo('https://github.com/penguin-statistics/frontend-v2')"
       >
         {{ $t('contribute.frontend') }}
         <v-icon right>
@@ -96,14 +94,12 @@
 
       <v-btn
         v-haptic
-        href="https://github.com/penguin-statistics/backend"
-        target="_blank"
-        rel="noopener"
         :class="{
           'mx-2': $vuetify.breakpoint.smAndUp,
           'mx-1': $vuetify.breakpoint.xsOnly
         }"
         text
+        @click="goTo('https://github.com/penguin-statistics/backend')"
       >
         {{ $t('contribute.backend') }}
         <v-icon right>
@@ -129,9 +125,7 @@
         <v-chip
           link
           small
-          href="https://discord.gg/uEXJcue"
-          target="_blank"
-          rel="noopener"
+          @click="goTo('https://discord.gg/uEXJcue')"
         >
           <v-icon
             left
@@ -204,12 +198,13 @@
 
 <script>
 import BackdropCard from "@/components/global/BackdropCard";
-
+import GoTo from "@/mixins/GoTo";
 export default {
   name: 'Contribute',
   components: {
     BackdropCard
   },
+  mixins:[GoTo],
   data() {
     return {
       skills: [

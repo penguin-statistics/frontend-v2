@@ -128,6 +128,7 @@
       <Footer />
     </v-content>
     <NetworkStateIndicator />
+    <OutSiteDialog />
   </v-app>
 </template>
 
@@ -149,8 +150,10 @@
   import CDN from "@/mixins/CDN";
   import Mirror from "@/mixins/Mirror";
   import SpecialUI from "@/mixins/SpecialUI";
+  import GoTo from "@/mixins/GoTo";
   import SettingsDialog from "@/components/drawer/SettingsDialog";
   import MirrorSelector from "@/components/global/MirrorSelector";
+  import OutSiteDialog from "@/components/global/OutSiteDialog"
   import Logo from "@/components/drawer/Logo";
   import {mapGetters} from "vuex";
   import UpgradeNotifier from "@/components/global/UpgradeNotifier";
@@ -176,9 +179,10 @@ export default {
     GlobalSnackbar,
     NetworkStateIndicator,
     RandomBackground,
-    AccountManager
+    AccountManager,
+    OutSiteDialog
   },
-  mixins: [GlobalEntry, CDN, Mirror, SpecialUI, Environment],
+  mixins: [GlobalEntry, CDN, Mirror, SpecialUI, Environment, GoTo],
   data () {
     return {
       routes: [],
