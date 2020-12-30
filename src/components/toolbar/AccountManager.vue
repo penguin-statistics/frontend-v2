@@ -81,7 +81,7 @@
     </v-snackbar>
 
     <v-dialog
-      v-model="auth.dialog"
+      v-model="auth_dialog"
       max-width="550px"
     >
       <v-card class="py-2 px-1">
@@ -152,11 +152,38 @@
             {{ $t('meta.dialog.submit') }}
           </v-btn>
         </v-card-actions>
+
+        <v-divider class="mx-4" />
+
+        <v-card-actions class="mx-4 mb-2">
+          <v-row 
+            align="center" 
+            justify="center" 
+            class="px-3"
+          >
+            <v-btn
+              v-for="(oauth2Endpoint, i) in Object.keys(oauth2Endpoints)"
+              :key="i"
+              v-haptic
+              :href="`/PenguinStats/api/v2/users/oauth/${oauth2Endpoint}/authorize?redirect_uri=${origin}${$route.fullPath}`"
+              :color="oauth2Endpoints[oauth2Endpoint]['color']"
+              large
+              block
+              class="mx-4 my-1"
+            >
+              <v-icon left>
+                {{ oauth2Endpoints[oauth2Endpoint]['icon'] }}
+              </v-icon>
+
+              Login with {{ oauth2Endpoint }}
+            </v-btn>              
+          </v-row>
+        </v-card-actions>
       </v-card>
     </v-dialog>
 
     <v-dialog
-      v-model="auth.detailPrompt"
+      v-model="auth_detailPrompt"
       max-width="450px"
     >
       <v-card class="pa-2">
@@ -183,13 +210,162 @@
             block
             large
             class="mt-6"
-
             @click="logout"
           >
             <v-icon left>
               mdi-logout-variant
             </v-icon>
             {{ $t('logout') }}
+          </v-btn>
+
+          <v-divider class="mt-4 mb-4" />
+
+          <v-list>
+            <v-list-item
+              v-for="(oauth2Endpoint, i) in Object.keys(oauth2Endpoints)"
+              :key="i"
+            >
+              <v-list-item-icon>
+                <v-icon>
+                  {{ oauth2Endpoints[oauth2Endpoint]['icon'] }}
+                </v-icon>
+              </v-list-item-icon>
+
+              <v-list-item-content>
+                <v-list-item-title>
+                  <template v-if="oauth2[oauth2Endpoint] && oauth2[oauth2Endpoint]['username']">
+                    <span class="monospace">
+                      Logged in as
+                    </span>
+                    <span class="grey--text">
+                      —
+                    </span>
+                    <span class="monospace">
+                      {{ oauth2[oauth2Endpoint]['username'] }}
+                    </span>
+                  </template>
+                  <template v-else>
+                    <span class="monospace">
+                      Not logged in.
+                    </span>
+                  </template>
+                </v-list-item-title>
+                <v-list-item-subtitle>
+                  {{ oauth2Endpoint }}
+                </v-list-item-subtitle>
+              </v-list-item-content>
+              <v-list-item-action class="flex-row">
+                <template v-if="oauth2[oauth2Endpoint] && oauth2[oauth2Endpoint]['username']">
+                  <TooltipBtn
+                    icon
+                    color="error"
+                    class="mr-1"
+                    :tip="'Unlink with ' + oauth2Endpoint"
+                    @click="unlinkOauth2(oauth2Endpoint)"
+                  >
+                    <v-icon>
+                      mdi-link-variant-off
+                    </v-icon>
+                  </TooltipBtn>
+                </template>
+                <template v-else>
+                  <TooltipBtn
+                    icon
+                    color="primary"
+                    class="mr-1"
+                    :tip="'Login with ' + oauth2Endpoint"
+                    :href="`/PenguinStats/api/v2/users/oauth/${oauth2Endpoint}/authorize?redirect_uri=${origin}${$route.fullPath}`"
+                  >
+                    <v-icon>
+                      mdi-login-variant
+                    </v-icon>
+                  </TooltipBtn>
+                </template>
+              </v-list-item-action>
+            </v-list-item>
+          </v-list>
+        </v-card-text>
+      </v-card>
+    </v-dialog>
+
+    <v-dialog
+      v-model="auth_loginOrRegister"
+      max-width="450px"
+    >
+      <v-card class="pa-2">
+        <v-card-title>
+          <span class="headline">
+            与之前登陆过的penguin id 绑定 or 注册新的Penguin id
+          </span>
+        </v-card-title>
+        <v-card-text>
+          <Subheader>
+            {{ $t('auth.forgot.penguinIdHistory.title') }}
+          </Subheader>
+
+          <v-list>
+            <template v-if="userIds.length">
+              <v-list-item
+                v-for="userId in userIds"
+                :key="userId.id"
+              >
+                <v-list-item-content>
+                  <v-list-item-title>
+                    <span class="monospace">
+                      {{ userId.id }}
+                    </span>
+                    <span class="grey--text">
+                      —
+                    </span>
+                    <span class="caption">
+                      {{ userId.version }}
+                    </span>
+                  </v-list-item-title>
+                  <v-list-item-subtitle>
+                    {{ $t('auth.forgot.penguinIdHistory.lastLoginAt', {time: userId.formattedTime.relative}) }}
+                  </v-list-item-subtitle>
+                </v-list-item-content>
+                <v-list-item-action class="flex-row">
+                  <TooltipBtn
+                    icon
+                    color="primary"
+                    class="mr-1"
+                    :loading="auth.loading === userId.id"
+                    :tip="$t('auth.forgot.penguinIdHistory.loginAsUserId')"
+                    :disabled="auth.loading && auth.loading !== userId.id"
+                    @click="loginOrRegister(userId.id)"
+                  >
+                    <v-icon>
+                      mdi-login-variant
+                    </v-icon>
+                  </TooltipBtn>
+                </v-list-item-action>
+              </v-list-item>
+            </template>
+            <template v-else>
+              <v-list-item class="justify-center grey--text py-0">
+                {{ $t('auth.forgot.penguinIdHistory.noData') }}
+              </v-list-item>
+            </template>
+            <v-list-item class="justify-center grey--text py-0 my-0 caption">
+              {{ $t('auth.forgot.penguinIdHistory.tips') }}
+            </v-list-item>
+          </v-list>
+
+          <v-divider class="mt-4 mb-4" /> 
+
+          <v-btn
+            color="primary"
+            block
+            large
+            class="mt-6"
+            :loading="auth.loading"
+            @click="loginOrRegister(null)"
+          >
+            <v-icon left>
+              mdi-login-variant
+            </v-icon>
+            注册新的penguin id
           </v-btn>
         </v-card-text>
       </v-card>
@@ -198,9 +374,8 @@
     <v-btn
       v-if="$store.getters['auth/loggedIn']"
       v-haptic
-
       icon
-      @click="auth.detailPrompt = true"
+      @click="auth_detailPrompt = true"
     >
       <v-icon>mdi-account-check</v-icon>
     </v-btn>
@@ -210,7 +385,7 @@
       v-haptic
 
       icon
-      @click="auth.dialog = true"
+      @click="auth_dialog = true"
     >
       <v-icon>mdi-login-variant</v-icon>
     </v-btn>
@@ -219,6 +394,8 @@
 
 <script>
   import {service} from '@/utils/service'
+  import {mapGetters} from "vuex";
+  import timeFormatter from "@/utils/timeFormatter";
   import Cookies from 'js-cookie'
   import Console from "@/utils/Console";
   import Subheader from "@/components/global/Subheader";
@@ -233,10 +410,9 @@
       return {
         auth: {
           buttonHovered: false,
-          dialog: false,
           username: '',
           loading: false,
-          detailPrompt: false
+          dialog: false,
         },
         snackbar: {
           enabled: false,
@@ -244,7 +420,72 @@
           text: ""
         },
         historyDialog: false,
-        error: ""
+        error: "",
+        oauth2Endpoints: config.oauth2Endpoints,
+        oauth2: {}
+      }
+    },
+    computed: {
+      auth_dialog: { 
+        get() {
+          return this.$route.query && this.$route.query.auth == "login"
+        },
+        set(value) {
+          if(value){
+            this.$router.push({ ...this.$route, query: { auth: 'login' } })
+          }else{
+            this.$router.push({...this.$route, query: { } })
+          } 
+        }
+      },
+      auth_detailPrompt: { 
+        get() {
+          var auth_detailPrompt = this.$route.query && this.$route.query.auth == "loggedIn";
+          if(auth_detailPrompt){
+            this.updateUserInfo()
+          }
+          return auth_detailPrompt
+        },
+        set(value) {
+          if(value){
+            this.$router.push({ ...this.$route, query: { auth: 'loggedIn' } })
+          
+          }else{
+            this.$router.push({...this.$route, query: { } })
+          } 
+        }
+      },
+      auth_loginOrRegister: { 
+        get() {
+          var auth_loginOrRegister = this.$route.query && this.$route.query.auth == "loginOrRegister";
+          return auth_loginOrRegister
+        },
+        set(value) {
+          if(value){
+            this.$router.push({ ...this.$route, query: { auth: 'auth_loginOrRegister' } })
+          
+          }else{
+            this.$router.push({...this.$route, query: { } })
+          } 
+        }
+      },
+      origin() {
+        return window.location.origin
+      },
+      ...mapGetters("options", ["userIdHistory"]),
+      userIds() {
+        return this.userIdHistory
+          .slice()
+          .sort((a, b) => b.time - a.time)
+          .map(el => {
+            return {
+              ...el,
+              formattedTime: {
+                exact: timeFormatter.date(el.time, true, true),
+                relative: timeFormatter.dayjs(el.time).fromNow(),
+              }
+            }
+          });
       }
     },
     created () {
@@ -258,7 +499,7 @@
           color: "success",
           text: this.$t('success')
         };
-        this.auth.dialog = false
+        this.auth_dialog = false
         this.$ga.event('account', 'login', 'login_success', 1);
         this.$emit('afterLogin');
       },
@@ -292,8 +533,64 @@
           color: "success",
           text: this.$t('loggedOut')
         };
-        this.auth.detailPrompt = false;
+        this.auth_detailPrompt = false;
         this.$store.commit("dataSource/changeSource", "global");
+      },
+      updateUserInfo(){
+        service.get("/users/oauth2", {headers: {'Content-Type': 'text/plain'}})
+          .then((data) => {
+            this.oauth2 = data.data
+          })
+          .catch((err) => {
+            Console.info("AccountManager", "auth failed", err)
+            if (err.response && err.response.status && err.response.status === 404) {
+              this.error = this.$t('failed.message', {message: this.$t('failed.notfound')})
+            } else {
+              this.error = this.$t('failed.message', {message: err.errorMessage})
+            }
+          })
+          .finally(() => {
+            this.auth.loading = false
+          })
+      },
+      loginOrRegister(userID){
+        this.auth.loading = true;
+        const authorizingUserId = userID
+        service.post("/users/oauth2", authorizingUserId, {headers: {'Content-Type': 'text/plain'}})
+          .then((data) => {
+            this.$store.dispatch("auth/login", {
+              userId: data.data.userID
+            });
+            this.loggedIn()
+          })
+          .catch((err) => {
+            Console.info("AccountManager", "auth failed", err)
+            if (err.response && err.response.status && err.response.status === 404) {
+              this.error = this.$t('failed.message', {message: this.$t('failed.notfound')})
+            } else {
+              this.error = this.$t('failed.message', {message: err.errorMessage})
+            }
+          })
+          .finally(() => {
+            this.auth.loading = false
+          })
+      },
+      unlinkOauth2(platform){
+        service.delete("/users/oauth2", platform, {headers: {'Content-Type': 'text/plain'}})
+          .then(() => {
+            this.updateUserInfo()
+          })
+          .catch((err) => {
+            Console.info("AccountManager", "auth failed", err)
+            if (err.response && err.response.status && err.response.status === 404) {
+              this.error = this.$t('failed.message', {message: this.$t('failed.notfound')})
+            } else {
+              this.error = this.$t('failed.message', {message: err.errorMessage})
+            }
+          })
+          .finally(() => {
+            this.auth.loading = false
+          })
       },
       emitError () {
         this.error = ''
