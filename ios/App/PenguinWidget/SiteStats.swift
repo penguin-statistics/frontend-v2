@@ -8,18 +8,6 @@
 import Foundation
 import SwiftUI
 
-struct ServerDetail {
-    let identifier: String
-    let externalIdentifier: String
-    
-    static let availableServers = [
-        ServerDetail(identifier: "CN", externalIdentifier: "CN"),
-        ServerDetail(identifier: "US", externalIdentifier: "US"),
-        ServerDetail(identifier: "JP", externalIdentifier: "JP"),
-        ServerDetail(identifier: "KR", externalIdentifier: "KR")
-    ]
-}
-
 struct ItemStats {
     let id: String
     let name: String

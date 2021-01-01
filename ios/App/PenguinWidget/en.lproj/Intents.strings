@@ -1,13 +1,39 @@
 "4h1GsM" = "Keep track of the overview of site statistics";
 
+"6u7NWg" = "Servers";
+
 "9aEMGV" = "Server";
 
-"FVUScD" = "There are ${count} options matching ‘${server}’.";
+"FVUScD-Tjrhvh" = "There are ${count} options matching ‘Unknown’.";
+
+"FVUScD-oIKWT9" = "There are ${count} options matching ‘CN’.";
+
+"FVUScD-pVCtB6" = "There are ${count} options matching ‘KR’.";
+
+"FVUScD-tK60Y2" = "There are ${count} options matching ‘JP’.";
+
+"FVUScD-yVJ0lK" = "There are ${count} options matching ‘US’.";
+
+"Tjrhvh" = "Unknown";
 
 "VzpXpK" = "Statistics Overview";
 
-"ZmbtPn" = "Just to confirm, you wanted ‘${server}’?";
+"ZmbtPn-Tjrhvh" = "Just to confirm, you wanted ‘Unknown’?";
 
-"bi8oEU" = "Name";
+"ZmbtPn-oIKWT9" = "Just to confirm, you wanted ‘CN’?";
 
-"ejwHgi" = "Server";
+"ZmbtPn-pVCtB6" = "Just to confirm, you wanted ‘KR’?";
+
+"ZmbtPn-tK60Y2" = "Just to confirm, you wanted ‘JP’?";
+
+"ZmbtPn-yVJ0lK" = "Just to confirm, you wanted ‘US’?";
+
+"oIKWT9" = "CN";
+
+"pVCtB6" = "KR";
+
+"tK60Y2" = "JP";
+
+"wqvlmq" = "View statistics for Server ${server}";
+
+"yVJ0lK" = "US";

@@ -86,7 +86,7 @@
 			<key>INIntentConfigurable</key>
 			<true/>
 			<key>INIntentDescription</key>
-			<string>随时查看最近上传数据概览</string>
+			<string>查看最近上传数据概览</string>
 			<key>INIntentDescriptionID</key>
 			<string>4h1GsM</string>
 			<key>INIntentEligibleForWidgets</key>

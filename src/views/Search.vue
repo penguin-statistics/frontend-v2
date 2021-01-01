@@ -29,7 +29,7 @@ export default {
   },
   methods: {
     changeUrl(query) {
-      console.log(query)
+      // console.log(query)
       const url = new URL(window.location.href)
       if (query === "") url.searchParams.delete("q")
       if (query) url.searchParams.set("q", query)

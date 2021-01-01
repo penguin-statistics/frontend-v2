@@ -20,7 +20,6 @@ struct SiteStatsProvider: IntentTimelineProvider {
 
     func getSnapshot(for configuration: SelectServerIntent, in context: Context, completion: @escaping (WidgetTimelineEntry) -> ()) {
         print("serverSelection snapshot", configuration)
-        print("serverSelection availableServers", ServerDetail.availableServers)
         
         let entry = WidgetTimelineEntry(
             date: Date(),
@@ -31,7 +30,6 @@ struct SiteStatsProvider: IntentTimelineProvider {
 
     func getTimeline(for configuration: SelectServerIntent, in context: Context, completion: @escaping (Timeline<WidgetTimelineEntry>) -> ()) {
         print("serverSelection timeline", configuration)
-        print("serverSelection availableServers", ServerDetail.availableServers)
         
         let entries: [WidgetTimelineEntry] = [
             WidgetTimelineEntry(
@@ -66,7 +64,7 @@ struct WidgetEntry: View {
 //        case .systemLarge:
 //            LargeWidgetView(stats: entry.stats)
         default:
-            MediumWidgetView(stats: entry.stats)
+            fatalError("unrecognized widget family")
         }
     }
 }

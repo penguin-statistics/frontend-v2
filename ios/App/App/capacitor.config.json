@@ -8,6 +8,9 @@
     "SplashScreen": {
       "launchAutoHide": false,
       "showSpinner": true
+    },
+    "PushNotifications": {
+      "presentationOptions": ["badge", "sound", "alert"]
     }
   },
   "cordova": {}

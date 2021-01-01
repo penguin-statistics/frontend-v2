@@ -47,7 +47,7 @@ class StageSearchEngine extends SearchEngine {
       alias: arrByLang(el.alias),
       pron: processPron(arrByLang(el.pron)),
     }))
-    console.log('stage docs mapped as', docs)
+    // console.log('stage docs mapped as', docs)
     this.engine = new Fuse(docs,{
       ...this.engineOptions,
       keys: [
