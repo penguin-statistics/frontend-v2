@@ -68,6 +68,7 @@
           <span
             v-for="item in relatedItems"
             :key="item.itemId"
+            v-haptic
             class="mr-1 cursor-pointer"
             @click="storeItemSelection(item.itemId)"
           >

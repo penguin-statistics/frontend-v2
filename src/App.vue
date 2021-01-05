@@ -1,6 +1,6 @@
 <template>
   <v-app
-    :class="languageFont"
+    :class="appEnvironment"
   >
     <ServerNotifyOverlay />
     <ModuleLoadingOverlay v-if="!environment.runtime.isApp" />
@@ -18,6 +18,7 @@
       <v-list
         dense
         nav
+        expand
         class="safe-area--navigation"
       >
         <GlobalSearchNavigation />
@@ -76,6 +77,7 @@
       class="x--safe-area toolbar--safe-area flex-column"
     >
       <v-app-bar-nav-icon
+        v-haptic
         @click.stop="drawer = !drawer"
       />
 

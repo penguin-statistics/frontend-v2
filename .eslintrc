@@ -18,7 +18,8 @@
     "vuetify/grid-unknown-attributes": "error",
     "vuetify/no-legacy-grid": "error",
     "vue/no-v-html": "off",
-    "vue/no-template-shadow": "off"
+    "vue/no-template-shadow": "off",
+    "vue/valid-template-root": "off"
   },
   "parserOptions": {
     "parser": "babel-eslint"

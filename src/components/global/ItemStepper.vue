@@ -31,6 +31,7 @@
           </span>
         </template>
         <div
+          v-haptic
           @click.left="increment"
           @click.right.prevent="reduction"
         >

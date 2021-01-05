@@ -107,6 +107,7 @@
             <div class="ml-2">
               <v-checkbox
                 v-model="reset.options.removeOptions"
+                v-haptic
                 :label="$t('planner.reset.dialog.options.options.name')"
                 hide-details
                 class="mt-1"
@@ -125,6 +126,7 @@
               </v-checkbox>
               <v-checkbox
                 v-model="reset.options.removeExcludes"
+                v-haptic
                 :label="$t('planner.reset.dialog.options.excludes.name')"
                 hide-details
                 class="mt-1"
@@ -143,6 +145,7 @@
               </v-checkbox>
               <v-checkbox
                 v-model="reset.options.removeItems"
+                v-haptic
                 :label="$t('planner.reset.dialog.options.items.name')"
                 hide-details
                 class="mt-1"
@@ -241,6 +244,7 @@
       <div class="d-flex flex-grow-1 flex-column flex-sm-row flex-md-row flex-lg-row flex-xl-row">
         <v-switch
           v-model="options.byProduct"
+          v-haptic
           :label="$t('planner.options.byProduct')"
           hide-details
           class="mt-0 pt-0"
@@ -248,6 +252,7 @@
         />
         <v-switch
           v-model="options.requireExp"
+          v-haptic
           :label="$t('planner.options.requireExp')"
           hide-details
           class="pt-0"
@@ -255,6 +260,7 @@
         />
         <v-switch
           v-model="options.requireLmb"
+          v-haptic
           :label="$t('planner.options.requireLmb')"
           hide-details
           class="pt-0"

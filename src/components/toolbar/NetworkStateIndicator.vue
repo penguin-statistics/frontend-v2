@@ -156,6 +156,7 @@
 <script>
   import {mapGetters, mapState} from "vuex";
   import PreloaderInline from "@/components/global/PreloaderInline";
+  import haptics from "@/utils/native/haptics";
 
   export default {
     name: "NetworkStateIndicator",
@@ -214,6 +215,7 @@
         if (newValue === false) {
           this.timer = setTimeout(function () {
             self.delayedShow = newValue
+            haptics.success()
           }, 175)
         }
       }

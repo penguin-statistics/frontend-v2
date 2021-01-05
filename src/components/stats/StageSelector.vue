@@ -52,6 +52,7 @@
             <StageCard
               v-if="relativeStages.prev"
               key="left"
+              v-haptic
 
               left
               :dense="$vuetify.breakpoint.xsOnly"
@@ -64,6 +65,7 @@
             <StageCard
               v-if="relativeStages.next"
               key="right"
+              v-haptic
 
               right
               :dense="$vuetify.breakpoint.xsOnly"
@@ -131,6 +133,7 @@
                       <StageCard
                         v-for="stage in preferencedStages.favorites"
                         :key="stage.stageId"
+                        v-haptic
                         :stage="stage"
 
                         @click.native="selectStage(stage.zoneId, stage.stageId)"
@@ -175,6 +178,7 @@
                         <StageCard
                           v-for="stage in preferencedStages.histories"
                           :key="stage.stageId"
+                          v-haptic
                           :stage="stage"
 
                           @click.native="selectStage(stage.zoneId, stage.stageId)"
@@ -232,11 +236,11 @@
                 <v-expansion-panel
                   v-for="zone in category.zones"
                   :key="zone.zoneId"
-                  v-haptic
                   class="bkop-light stage-card--background"
                   :style="{'background-image': zone.image ? `url(${zone.image}) !important` : null}"
                 >
                   <v-expansion-panel-header
+                    v-haptic
                     class="overflow-hidden bkop-medium"
                     :class="{'stage-card--header': !!zone.image}"
                   >
@@ -294,6 +298,7 @@
                       <StageCard
                         v-for="stage in zone.stages"
                         :key="stage.stageId"
+                        v-haptic
                         :stage="stage"
 
                         @click.native="selectStage(zone.zoneId, stage.stageId)"

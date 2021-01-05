@@ -93,6 +93,7 @@
         v-model="tab"
         icons-and-text
         grow
+        :show-arrows="false"
         centered
         class="elevated-tab"
       >
@@ -100,6 +101,7 @@
         <v-tab
           v-for="t in tabs"
           :key="t.id"
+          v-haptic
         >
           {{ $t(t.text) }}
           <v-icon>{{ t.icon }}</v-icon>

@@ -9,6 +9,9 @@
     transform: translateY(1.5vh);
     opacity: 0;
 }
+.theme--light.v-application {
+    background: #fafafa !important;
+}
 
 .transition-all {
     transition: all .225s cubic-bezier(0.165, 0.84, 0.44, 1);
@@ -324,6 +327,10 @@
         /*padding-left: env(safe-area-inset-left) !important;*/
         padding-right: env(safe-area-inset-right) !important;
         padding-bottom: env(safe-area-inset-bottom) !important;
+    }
+
+    .runtime-app .safe-area--v-content > .v-content__wrap {
+        padding-bottom: 80px !important;
     }
 
     .safe-area--navigation {
@@ -724,5 +731,8 @@
     margin-bottom: env(safe-area-inset-bottom) !important;
 }
 
+.v-slide-group__prev, .v-slide-group__next {
+    display: none !important
+}
 
 
