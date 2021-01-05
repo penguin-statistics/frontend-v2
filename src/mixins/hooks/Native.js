@@ -5,7 +5,7 @@ const { SplashScreen, App, PenguinPlugin } = Plugins;
 
 export default {
   created () {
-    Console.info("Build", `Project meta: build:${PENGUIN_BUILD}, buildFrom:${PENGUIN_BUILD_FROM}`)
+    Console.info("Build", `Hello from Penguin Statistics! :D Running platform '${PENGUIN_PLATFORM}'`)
 
     App.addListener('appUrlOpen', function( data ){
       Console.info("NativeBridge:App", "App opened with URL", data)
