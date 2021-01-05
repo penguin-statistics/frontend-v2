@@ -1,4 +1,4 @@
-const version = "v3.4.0";
+const version = "v3.4.1";
 const project = "frontend-v2";
 
 module.exports = {
