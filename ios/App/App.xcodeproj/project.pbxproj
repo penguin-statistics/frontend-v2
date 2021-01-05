@@ -38,7 +38,9 @@
 		3A616168259C698B00FA06A2 /* NotificationPreferences.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A616167259C698B00FA06A2 /* NotificationPreferences.swift */; };
 		3A61616C259C7B8D00FA06A2 /* HapticButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A61616B259C7B8D00FA06A2 /* HapticButton.swift */; };
 		3A679B012599166C00A685E9 /* WelcomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A679B002599166C00A685E9 /* WelcomeView.swift */; };
-		3A8EFF992599BBC100B6A788 /* newCategoryAdded.caf in Resources */ = {isa = PBXBuildFile; fileRef = 3A8EFF982599BBC100B6A788 /* newCategoryAdded.caf */; };
+		3A885ACA25A43F0400247AED /* RxBus in Frameworks */ = {isa = PBXBuildFile; productRef = 3A885AC925A43F0400247AED /* RxBus */; };
+		3A885ACE25A443D600247AED /* EventBus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A885ACD25A443D600247AED /* EventBus.swift */; };
+		3A8EFF992599BBC100B6A788 /* alert1.caf in Resources */ = {isa = PBXBuildFile; fileRef = 3A8EFF982599BBC100B6A788 /* alert1.caf */; };
 		3A8EFFA0259A1BB900B6A788 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 3A8EFF9F259A1BB900B6A788 /* Alamofire */; };
 		3A968BB02597A3D5005266F2 /* TwoColumnStageStats.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A968BAF2597A3D5005266F2 /* TwoColumnStageStats.swift */; };
 		3A968BB52597A54E005266F2 /* LargeWidgetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A968BB42597A54E005266F2 /* LargeWidgetView.swift */; };
@@ -50,7 +52,6 @@
 		504EC3081FED79650016851F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 504EC3071FED79650016851F /* AppDelegate.swift */; };
 		504EC30D1FED79650016851F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 504EC30B1FED79650016851F /* Main.storyboard */; };
 		504EC30F1FED79650016851F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 504EC30E1FED79650016851F /* Assets.xcassets */; };
-		504EC3121FED79650016851F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 504EC3101FED79650016851F /* LaunchScreen.storyboard */; };
 		50B271D11FEDC1A000F3C39B /* public in Resources */ = {isa = PBXBuildFile; fileRef = 50B271D01FEDC1A000F3C39B /* public */; };
 		A084ECDBA7D38E1E42DFC39D /* Pods_App.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AF277DCFFFF123FFC6DF26C7 /* Pods_App.framework */; };
 /* End PBXBuildFile section */
@@ -104,15 +105,16 @@
 		3A5051B72596575D004167D3 /* Bender.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = Bender.ttf; path = ../../../src/assets/fonts/Bender.ttf; sourceTree = "<group>"; };
 		3A5051C0259666FB004167D3 /* ItemStatsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemStatsView.swift; sourceTree = "<group>"; };
 		3A5051C8259669AF004167D3 /* ItemIcons.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = ItemIcons.xcassets; sourceTree = "<group>"; };
-		3A55B6122598D9F500699BBA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.intentdefinition; name = Base; path = Base.lproj/Intents.intentdefinition; sourceTree = "<group>"; };
-		3A55B680259901F700699BBA /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Intents.strings; sourceTree = "<group>"; };
 		3A55B6832599056000699BBA /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		3A616159259B0ED200FA06A2 /* ToggleNotificationPreference.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToggleNotificationPreference.swift; sourceTree = "<group>"; };
 		3A616161259B2D2D00FA06A2 /* Debugger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Debugger.swift; sourceTree = "<group>"; };
 		3A616167259C698B00FA06A2 /* NotificationPreferences.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationPreferences.swift; sourceTree = "<group>"; };
 		3A61616B259C7B8D00FA06A2 /* HapticButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HapticButton.swift; sourceTree = "<group>"; };
 		3A679B002599166C00A685E9 /* WelcomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeView.swift; sourceTree = "<group>"; };
-		3A8EFF982599BBC100B6A788 /* newCategoryAdded.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = newCategoryAdded.caf; sourceTree = "<group>"; };
+		3A885ABF25A0157A00247AED /* en */ = {isa = PBXFileReference; lastKnownFileType = file.intentdefinition; name = en; path = en.lproj/Intents.intentdefinition; sourceTree = "<group>"; };
+		3A885ACD25A443D600247AED /* EventBus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventBus.swift; sourceTree = "<group>"; };
+		3A885AD125A4477600247AED /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		3A8EFF982599BBC100B6A788 /* alert1.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = alert1.caf; sourceTree = "<group>"; };
 		3A968BAF2597A3D5005266F2 /* TwoColumnStageStats.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TwoColumnStageStats.swift; sourceTree = "<group>"; };
 		3A968BB42597A54E005266F2 /* LargeWidgetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LargeWidgetView.swift; sourceTree = "<group>"; };
 		3A968BB92597A738005266F2 /* ExternalService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExternalService.swift; sourceTree = "<group>"; };
@@ -127,9 +129,7 @@
 		50379B222058CBB4000EE86E /* capacitor.config.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = capacitor.config.json; sourceTree = "<group>"; };
 		504EC3041FED79650016851F /* App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = App.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		504EC3071FED79650016851F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		504EC30C1FED79650016851F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		504EC30E1FED79650016851F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		504EC3111FED79650016851F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		504EC3131FED79650016851F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		50B271D01FEDC1A000F3C39B /* public */ = {isa = PBXFileReference; lastKnownFileType = folder; name = public; path = ../public; sourceTree = "<group>"; };
 		AF277DCFFFF123FFC6DF26C7 /* Pods_App.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_App.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -151,6 +151,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3A885ACA25A43F0400247AED /* RxBus in Frameworks */,
 				A084ECDBA7D38E1E42DFC39D /* Pods_App.framework in Frameworks */,
 				3A8EFFA0259A1BB900B6A788 /* Alamofire in Frameworks */,
 			);
@@ -252,7 +253,6 @@
 				3AA7E34B2522510700387971 /* App.entitlements */,
 				504EC3071FED79650016851F /* AppDelegate.swift */,
 				504EC30B1FED79650016851F /* Main.storyboard */,
-				504EC3101FED79650016851F /* LaunchScreen.storyboard */,
 				504EC3131FED79650016851F /* Info.plist */,
 				2FAD9762203C412B000D30F8 /* config.xml */,
 			);
@@ -267,10 +267,18 @@
 			path = Resources;
 			sourceTree = "<group>";
 		};
+		3AF2C843259F544900761B04 /* SoundFX */ = {
+			isa = PBXGroup;
+			children = (
+				3A8EFF982599BBC100B6A788 /* alert1.caf */,
+			);
+			name = SoundFX;
+			sourceTree = "<group>";
+		};
 		504EC2FB1FED79650016851F = {
 			isa = PBXGroup;
 			children = (
-				3A8EFF982599BBC100B6A788 /* newCategoryAdded.caf */,
+				3AF2C843259F544900761B04 /* SoundFX */,
 				3A001AC52599230E0078A265 /* Settings.bundle */,
 				3AA7E33225211F9F00387971 /* Resources */,
 				504EC3061FED79650016851F /* App */,
@@ -300,6 +308,7 @@
 				3A55B6832599056000699BBA /* Constants.swift */,
 				3A8EFFB1259AB67E00B6A788 /* Capacitor */,
 				3A8EFFB2259AB69200B6A788 /* Meta */,
+				3A885ACD25A443D600247AED /* EventBus.swift */,
 			);
 			path = App;
 			sourceTree = "<group>";
@@ -355,6 +364,7 @@
 			name = App;
 			packageProductDependencies = (
 				3A8EFF9F259A1BB900B6A788 /* Alamofire */,
+				3A885AC925A43F0400247AED /* RxBus */,
 			);
 			productName = App;
 			productReference = 504EC3041FED79650016851F /* App.app */;
@@ -386,12 +396,13 @@
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
-				Base,
 				"zh-Hans",
+				Base,
 			);
 			mainGroup = 504EC2FB1FED79650016851F;
 			packageReferences = (
 				3A8EFF9E259A1BB900B6A788 /* XCRemoteSwiftPackageReference "Alamofire" */,
+				3A885AC825A43F0400247AED /* XCRemoteSwiftPackageReference "RxBus-Swift" */,
 			);
 			productRefGroup = 504EC3051FED79650016851F /* Products */;
 			projectDirPath = "";
@@ -419,8 +430,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3A8EFF992599BBC100B6A788 /* newCategoryAdded.caf in Resources */,
-				504EC3121FED79650016851F /* LaunchScreen.storyboard in Resources */,
+				3A8EFF992599BBC100B6A788 /* alert1.caf in Resources */,
 				50B271D11FEDC1A000F3C39B /* public in Resources */,
 				504EC30F1FED79650016851F /* Assets.xcassets in Resources */,
 				3AA7E33725211FD500387971 /* InfoPlist.strings in Resources */,
@@ -516,6 +526,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				3A616168259C698B00FA06A2 /* NotificationPreferences.swift in Sources */,
+				3A885ACE25A443D600247AED /* EventBus.swift in Sources */,
 				3A55B6842599056000699BBA /* Constants.swift in Sources */,
 				3A001AD32599A4A60078A265 /* ConsentView.swift in Sources */,
 				3A001AC225991E2C0078A265 /* WhatsNew.swift in Sources */,
@@ -555,8 +566,7 @@
 		3A55B6132598D9F500699BBA /* Intents.intentdefinition */ = {
 			isa = PBXVariantGroup;
 			children = (
-				3A55B6122598D9F500699BBA /* Base */,
-				3A55B680259901F700699BBA /* en */,
+				3A885ABF25A0157A00247AED /* en */,
 			);
 			name = Intents.intentdefinition;
 			sourceTree = "<group>";
@@ -573,17 +583,9 @@
 		504EC30B1FED79650016851F /* Main.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
-				504EC30C1FED79650016851F /* Base */,
+				3A885AD125A4477600247AED /* Base */,
 			);
 			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
-		504EC3101FED79650016851F /* LaunchScreen.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				504EC3111FED79650016851F /* Base */,
-			);
-			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -857,6 +859,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		3A885AC825A43F0400247AED /* XCRemoteSwiftPackageReference "RxBus-Swift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/ridi/RxBus-Swift";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.3.1;
+			};
+		};
 		3A8EFF9E259A1BB900B6A788 /* XCRemoteSwiftPackageReference "Alamofire" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/Alamofire/Alamofire";
@@ -868,6 +878,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		3A885AC925A43F0400247AED /* RxBus */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 3A885AC825A43F0400247AED /* XCRemoteSwiftPackageReference "RxBus-Swift" */;
+			productName = RxBus;
+		};
 		3A8EFF9F259A1BB900B6A788 /* Alamofire */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 3A8EFF9E259A1BB900B6A788 /* XCRemoteSwiftPackageReference "Alamofire" */;

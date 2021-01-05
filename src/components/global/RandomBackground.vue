@@ -2,13 +2,13 @@
   <div
     ref="background"
     class="random-background"
-    :style="{filter: `${blurred ? 'blur(5px)' : 'blur(0px)'} ${isInSpecialUI ? 'grayscale(0.75)' : ''}`}"
+    :style="{filter: `${blurred ? 'blur(5px)' : null} ${isInSpecialUI ? 'grayscale(0.75)' : ''}`}"
   >
-    <div class="random-background__copyright">
-      干员立绘
-      <br>
-      &copy; 鹰角网络
-    </div>
+    <!--    <div class="random-background__copyright">-->
+    <!--      干员立绘-->
+    <!--      <br>-->
+    <!--      &copy; 鹰角网络-->
+    <!--    </div>-->
   </div>
 </template>
 

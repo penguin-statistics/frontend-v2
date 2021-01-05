@@ -31,10 +31,10 @@
   <v-stepper
     v-model="step"
     alt-labels
-    class="transparent elevation-0 full-width pa-md-4 pa-lg-4 pa-xl-4"
+    class="transparent elevation-0 full-width pa-md-2 pa-lg-4 pa-xl-4"
   >
     <v-stepper-header
-      class="bkop-light elevation-4 py-4 pl-5 pr-8 d-flex flex-row position-relative align-center justify-center mx-2"
+      class="bkop-light elevation-4 py-2 pl-5 pr-8 d-flex flex-row position-relative align-center justify-center"
       style="border-radius: 4px"
     >
       <v-img
@@ -53,6 +53,7 @@
         :name="$t('item.choose.name')"
         :active="step > 1"
 
+        class="my-2"
         @back="step = 1"
       />
 
@@ -61,8 +62,8 @@
       <v-slide-x-transition>
         <div
           v-if="step === 2 && isSelectedItem && relatedItems.length"
-          class="d-flex flex-row pb-1"
-          style="overflow-y: visible; overflow-x: scroll; z-index: 4"
+          class="d-flex flex-row scrollbar-hidden"
+          style="overflow-y: visible; overflow-x: scroll; z-index: 4; padding-bottom: 1px"
         >
           <span
             v-for="item in relatedItems"
@@ -100,7 +101,7 @@
         class="pa-0"
         style="border-radius: 4px"
       >
-        <v-card class="bkop-light elevation-4 ma-2 mt-4 pa-4">
+        <v-card class="bkop-light elevation-4 mt-2 mt-4 pa-4">
           <ItemSelector
             @select="storeItemSelection"
           />
@@ -111,7 +112,7 @@
         :step="2"
         class="pa-0 mt-2"
       >
-        <v-card class="bkop-light pt-2 elevation-4 ma-2">
+        <v-card class="bkop-light pt-2 elevation-4 mt-2">
           <v-card-title class="pb-0">
             <v-row
               align="center"

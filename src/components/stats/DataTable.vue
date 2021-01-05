@@ -42,7 +42,7 @@
                 v-if="!open"
                 small
                 :color="filterCount ? 'warning' : 'secondary'"
-                class="flex-grow-0 font-weight-bold mr-2 px-4"
+                class="flex-grow-0 font-weight-bold mr-2 px-4 hidden-xxs-only"
               >
                 {{ $tc('stats.filter.indicator', filterCount) }}
               </v-chip>

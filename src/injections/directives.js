@@ -22,7 +22,7 @@ function useHaptics (el, {arg, modifiers}) {
   return function () {
     if (modifiers.notification) return haptics.notification(arg)
     if (arg) return haptics.impact(arg)
-    return haptics.light()
+    return haptics.general()
   }
 }
 

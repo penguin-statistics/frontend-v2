@@ -1,0 +1,45 @@
+.markdown-content {
+  &.markdown-content-credits {
+    code {
+      background: rgba(0, 0, 0, .05);
+      color: inherit;
+      box-shadow: none;
+      border-radius: 4px;
+      border: 1px solid #4d535a;
+      margin: .25rem;
+      padding: .2rem;
+      word-break: break-word;
+      //overflow: scroll;
+      backdrop-filter: blur(20px) brightness(1.2);
+    }
+
+    pre > code {
+      background: rgba(0, 0, 0, .025);
+      color: inherit;
+      box-shadow: none;
+      border-radius: 8px;
+      border: 2px solid #4d535a;
+      margin: .5rem 0;
+      padding: .5rem 1rem;
+      font-size: 12px;
+      backdrop-filter: blur(20px) brightness(1.2);
+      &:before {
+        display: none
+      }
+    }
+
+    h2 {
+      margin-bottom: .25rem;
+    }
+    h3 {
+      margin-top: .5rem
+    }
+    ul {
+      margin-left: .25rem
+    }
+  }
+  hr {
+    border: 1px solid #30363d;
+    margin: 2rem .1rem;
+  }
+}

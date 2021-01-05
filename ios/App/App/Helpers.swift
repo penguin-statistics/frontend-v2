@@ -34,6 +34,10 @@ extension Data {
         let format = options.contains(.upperCase) ? "%02hhX" : "%02hhx"
         return map { String(format: format, $0) }.joined()
     }
+    
+    func toString(_ encoding: String.Encoding = .utf8) -> String? {
+        return String(data: self, encoding: encoding)
+    }
 }
 
 @available(iOS 13.0, *)
@@ -50,3 +54,5 @@ struct BlurModifierSimple: ViewModifier {
         .frame(maxWidth: .infinity, maxHeight: .infinity)
     }
 }
+
+

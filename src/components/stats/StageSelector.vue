@@ -2,7 +2,7 @@
   <v-stepper
     v-model="step"
     alt-labels
-    class="transparent elevation-0 full-width pa-md-4 pa-lg-4 pa-xl-4"
+    class="transparent elevation-0 full-width pa-md-2 pa-lg-4 pa-xl-4"
   >
     <v-stepper-header
       class="bkop-light elevation-4 py-4 px-5 d-flex flex-row position-relative align-center"
@@ -92,7 +92,7 @@
     <v-stepper-items>
       <v-stepper-content
         :step="1"
-        :class="{'pa-0': small}"
+        :class="{'pa-0': small, 'pa-2': !small}"
       >
         <v-row class="px-1">
           <v-col
@@ -385,6 +385,7 @@
           "act13d5_zone1": this.cdnDeliver('/backgrounds/zones/act13d5_zone1.jpg'),
           "act14d7_zone1": this.cdnDeliver('/backgrounds/zones/act5d0_zone1.jpg'),
           "act15d0_zone1": this.cdnDeliver('/backgrounds/zones/act15d0_zone1.jpg'),
+          "act15d5_zone1": this.cdnDeliver('/backgrounds/zones/act15d5_zone1.jpg'),
           // "act13d5_zone1": require("@/assets/zonePageBackgrounds/png/act13d5_zone1.png"),
 
           // 骑兵与猎人 复刻：复用原活动（1stact_zone1）

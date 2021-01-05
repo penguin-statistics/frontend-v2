@@ -10,4 +10,5 @@
 CAP_PLUGIN(PenguinPlugin, "PenguinPlugin",
   CAP_PLUGIN_METHOD(getLocalizationEnvironment, CAPPluginReturnPromise);
   CAP_PLUGIN_METHOD(getRegion, CAPPluginReturnPromise);
+  CAP_PLUGIN_METHOD(hapticsGeneral, CAPPluginReturnNone);
 )

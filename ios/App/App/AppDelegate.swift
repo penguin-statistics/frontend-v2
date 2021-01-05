@@ -2,6 +2,10 @@ import UIKit
 import CoreSpotlight
 import Capacitor
 import SwiftUI
+import Network
+
+import RxBus
+import RxSwift
 
 let alreadyLaunchedKey = "alreadyLaunched"
 
@@ -58,10 +62,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         rootView?.scrollView.pinchGestureRecognizer?.isEnabled = false
         
         // disable long-press selection haptic feedback
-        let fakedLongPress: UILongPressGestureRecognizer = UILongPressGestureRecognizer(target: nil, action: nil)
-        fakedLongPress.minimumPressDuration = 0.1
-
-        rootView?.addGestureRecognizer(fakedLongPress)
+//        let fakedLongPress: UILongPressGestureRecognizer = UILongPressGestureRecognizer(target: nil, action: nil)
+//        fakedLongPress.minimumPressDuration = 0.1
+//
+//        rootView?.addGestureRecognizer(fakedLongPress)
         
         // MARK: ask for notifications permission
         let center = UNUserNotificationCenter.current()
@@ -104,6 +108,28 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             root?.view.addSubview(debuggerBtn)
         }
         #endif
+        
+        if #available(iOS 12.0, *) {
+            let monitor = NWPathMonitor()
+            
+            monitor.pathUpdateHandler = { path in
+                print("new network path:", path)
+                var isConstrained = false
+                
+                if #available(iOS 13.0, *) {
+                    isConstrained = path.isConstrained
+                }
+                
+                RxBus.shared.post(event: Events.NetworkPathChanged(
+                    isConstrained: isConstrained,
+                    isIPv4Supported: path.supportsIPv4,
+                    isIPv6Supported: path.supportsIPv6
+                ), sticky: true)
+            }
+
+            monitor.start(queue: DispatchQueue.global(qos: .background))
+        }
+        
         
         return true
     }

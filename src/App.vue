@@ -125,7 +125,7 @@
       >
         <router-view />
       </transition>
-      <Footer />
+      <Footer v-if="!environment.runtime.isApp" />
     </v-content>
     <NetworkStateIndicator />
   </v-app>
@@ -143,6 +143,7 @@
   import GlobalEntry from "@/mixins/hooks/GlobalEntry";
 
   import './styles/global.css'
+  import './styles/modules.scss'
   import './styles/fonts.css'
   import './styles/theme-adapt.scss'
   import Footer from "@/components/global/Footer";

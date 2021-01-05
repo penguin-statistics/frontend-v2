@@ -34,7 +34,7 @@
 
     @select="select"
   >
-    <v-card class="bkop-light pt-2 elevation-4 ma-2 content-card">
+    <v-card class="bkop-light pt-2 elevation-4 mt-2 content-card">
       <v-card-title class="pb-0 mx-1">
         <v-row
           align="center"
