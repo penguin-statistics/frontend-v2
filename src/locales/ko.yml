@@ -77,7 +77,7 @@ contribute:
   contribute_1: 펭귄 물류 데이터 분석 부서는 비영리 오픈소스 프로젝트 입니다
   skills:
     frontend: 프론트엔드 개발 (Vue.js)
-    backend: 백엔드 개발 (Java Spring Boot, MongoDB, Go)
+    backend: 백엔드 개발 (Java Spring Boot, MongoDB, Golang)
     mobile: 모바일 앱 개발 (iOS, Android)
     maintenance: 데브옵스
     design: UI/UX 디자인
