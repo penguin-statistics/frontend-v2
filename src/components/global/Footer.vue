@@ -2,7 +2,7 @@
   <v-footer
     padless
     :color="primaryColor"
-    class="white--text"
+    class="footer-wrapper white--text"
   >
     <v-card
       flat

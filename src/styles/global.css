@@ -314,6 +314,16 @@
         padding-right: 0 !important;
     }
 
+    @media (max-width: 960px) {
+        .footer-wrapper {
+            width: calc(100% - 24px);
+            margin-left: 12px;
+            border-radius: 8px 8px 0 0 !important;
+            overflow: hidden;
+        }
+    }
+
+
     .footer--safe-area {
         padding-top: 8px !important;
         padding-bottom: calc(max(env(safe-area-inset-bottom), 8px)) !important;
@@ -324,7 +334,7 @@
     }
 
     .safe-area--v-content > .v-content__wrap {
-        /*padding-left: env(safe-area-inset-left) !important;*/
+        padding-left: env(safe-area-inset-left) !important;
         padding-right: env(safe-area-inset-right) !important;
         padding-bottom: env(safe-area-inset-bottom) !important;
     }

@@ -39,7 +39,9 @@
     }
   }
   hr {
-    border: 1px solid #30363d;
-    margin: 2rem .1rem;
+    border: none;
+    height: 2px;
+    background: linear-gradient(to right, rgba(200, 200, 200, 0), rgba(200, 200, 200, .8) .5rem, rgba(200, 200, 200, 0));
+    margin: 2rem -.5rem;
   }
 }

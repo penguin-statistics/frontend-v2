@@ -483,12 +483,11 @@
     },
 
     created() {
+      const initialItems = this.getInitialItems()
       if (this.items.length === 0) {
-        this.$store.commit("planner/changeItems", this.getInitialItems())
+        this.$store.commit("planner/changeItems", initialItems)
       }
-      if (this.items.length !== this.getInitialItems().length) {
-        this.updateItemStructure(this.getInitialItems(), this.items)
-      }
+      this.updateItemStructure(initialItems, this.items)
     },
 
     methods: {
@@ -500,6 +499,10 @@
             need: 0,
             have: 0,
           }))
+      },
+      getItems() {
+        return get.items.all(false)
+            .filter(item => item.itemType === "MATERIAL" && item.itemId.length === 5 || item.itemType === "ARKPLANNER")
       },
       updateItemStructure (target, source) {
         const results = [];

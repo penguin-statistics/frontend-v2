@@ -27,15 +27,21 @@
       interval: {
         type: Number,
         default () {
-          return 5 * 60
-          // eslint-disable-next-line no-unreachable
-          if ((typeof window.orientation !== "undefined") || (navigator.userAgent.indexOf('IEMobile') !== -1)) {
-            // is mobile device; reduce data usage, use ttl of 30 minutes
+          // low data. we fetch per 30min
+          if (this.$store.getters["settings/lowData"]) {
             return 30 * 60
           } else {
-            // is not mobile device; use ttl of 20 minutes to show off ;)
-            return 20 * 60
+            // 5min shall be enough
+            return 5 * 60
           }
+          // eslint-disable-next-line no-unreachable
+          // if ((typeof window.orientation !== "undefined") || (navigator.userAgent.indexOf('IEMobile') !== -1)) {
+          //   // is mobile device; reduce data usage, use ttl of 30 minutes
+          //   return 30 * 60
+          // } else {
+          //   // is not mobile device; use ttl of 20 minutes to show off ;)
+          //   return 20 * 60
+          // }
         }
       }
     },
@@ -52,9 +58,7 @@
         specialImageMap: {
           "main_06-14": "/backgrounds/fn_0_1.png", // 6-16
           "main_06-15": "/backgrounds/fn_0_0.png", // 6-17
-        },
-        imageRange: 104 + 1 // if x images use ${x + 1}, because Math.random() generates float in [0, 1) range, so we
-                           // need to +1 in order to refresh the last image also in range
+        }
       }
     },
     computed: {
@@ -97,6 +101,10 @@
         // Console.log(current)
         if (this.webpSupport === null) {
           this.webpSupport = await this.testWebp();
+        }
+        // P(🔪) = 0.2%
+        if (Math.random() < 0.002) {
+          return this.getImageUrl("frstar")
         }
         return this.getImageUrl(randomUtils.cachedRandom.get())
       },
