@@ -23,7 +23,7 @@ module.exports = {
     maxQueries: 5,
   },
   randomBackground: {
-    limit: 446,
+    limit: 3,
     max: 446
   },
   previewCard: {
