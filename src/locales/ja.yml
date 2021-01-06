@@ -95,7 +95,7 @@ stats:
     overview: フィルタ結果
     type:
       _name: ステージタイプ
-      showPermanent: 恒常a
+      showPermanent: 恒常
       showActivity: イベント
     status:
       _name: ステージ状態
