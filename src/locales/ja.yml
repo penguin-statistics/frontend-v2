@@ -136,7 +136,8 @@ contribute:
   contribute_1: 本プロジェクトは無償のオープンソースプロジェクトです
   skills:
     frontend: フロントエンド開発 Vue.js
-    backend: バックエンド開発 Java Spring Boot、MongoDB
+    backend: バックエンド開発 Java Spring Boot、MongoDB、Golang
+    mobile: モバイルアプリ開発 iOS、Android
     maintenance: DevOps
     design: UI/UXデザイン
     analysis: データ統計解析

@@ -215,6 +215,7 @@ export default {
       skills: [
         'frontend',
         'backend',
+        'mobile',
         'maintenance',
         'design',
         'analysis'
