@@ -150,6 +150,13 @@
         :key="key"
         class="subtitle-2"
       >
+        <v-icon
+          v-if="skill === 'mobile'"
+          small
+          style="margin-top: -2px"
+        >
+          mdi-alert-decagram
+        </v-icon>
         {{ $t(`contribute.skills.${skill}`) }}
       </li>
     </ul>
@@ -215,6 +222,7 @@ export default {
       skills: [
         'frontend',
         'backend',
+        'mobile',
         'maintenance',
         'design',
         'analysis'

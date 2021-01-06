@@ -1,6 +1,7 @@
 <template>
   <v-switch
     v-model="lowData"
+    v-haptic
     :label="$t('settings.optimization.lowData.title')"
     persistent-hint
     :hint="$t('settings.optimization.lowData.subtitle')"

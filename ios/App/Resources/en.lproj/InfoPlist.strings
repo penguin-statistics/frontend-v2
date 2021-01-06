@@ -12,8 +12,8 @@
 "SIRI_USAGE_DESCRIPTION" = "Statistical data will be sent to Siri";
 
 "SHORTCUT_ITEM_SEARCH_TITLE" = "Search";
-//"SHORTCUT_ITEM_SEARCH_SUBTITLE" = "Search";
-"SHORTCUT_ITEM_DATE_TITLE" = "Rewinding Breeze";
-"SHORTCUT_ITEM_DATE_SUBTITLE" = "View event data";
-"SHORTCUT_ITEM_AUTO_TITLE" = "Automatic Reporting";
-"SHORTCUT_ITEM_AUTO_SUBTITLE" = "Configurate & Start...";
+"SHORTCUT_ITEM_SEARCH_SUBTITLE" = "Navigate to Search page";
+//"SHORTCUT_ITEM_DATE_TITLE" = "Rewinding Breeze";
+//"SHORTCUT_ITEM_DATE_SUBTITLE" = "View event data";
+//"SHORTCUT_ITEM_AUTO_TITLE" = "Automatic Reporting";
+//"SHORTCUT_ITEM_AUTO_SUBTITLE" = "Configurate & Start...";

@@ -2,7 +2,7 @@
   <v-stepper
     v-model="step"
     alt-labels
-    class="transparent elevation-0 full-width pa-md-4 pa-lg-4 pa-xl-4"
+    class="transparent elevation-0 full-width pa-md-2 pa-lg-4 pa-xl-4"
   >
     <v-stepper-header
       class="bkop-light elevation-4 py-4 px-5 d-flex flex-row position-relative align-center"
@@ -52,6 +52,7 @@
             <StageCard
               v-if="relativeStages.prev"
               key="left"
+              v-haptic
 
               left
               :dense="$vuetify.breakpoint.xsOnly"
@@ -64,6 +65,7 @@
             <StageCard
               v-if="relativeStages.next"
               key="right"
+              v-haptic
 
               right
               :dense="$vuetify.breakpoint.xsOnly"
@@ -92,7 +94,7 @@
     <v-stepper-items>
       <v-stepper-content
         :step="1"
-        :class="{'pa-0': small}"
+        :class="{'pa-0': small, 'pa-2': !small}"
       >
         <v-row class="px-1">
           <v-col
@@ -131,6 +133,7 @@
                       <StageCard
                         v-for="stage in preferencedStages.favorites"
                         :key="stage.stageId"
+                        v-haptic
                         :stage="stage"
 
                         @click.native="selectStage(stage.zoneId, stage.stageId)"
@@ -175,6 +178,7 @@
                         <StageCard
                           v-for="stage in preferencedStages.histories"
                           :key="stage.stageId"
+                          v-haptic
                           :stage="stage"
 
                           @click.native="selectStage(stage.zoneId, stage.stageId)"
@@ -232,11 +236,11 @@
                 <v-expansion-panel
                   v-for="zone in category.zones"
                   :key="zone.zoneId"
-                  v-haptic
                   class="bkop-light stage-card--background"
                   :style="{'background-image': zone.image ? `url(${zone.image}) !important` : null}"
                 >
                   <v-expansion-panel-header
+                    v-haptic
                     class="overflow-hidden bkop-medium"
                     :class="{'stage-card--header': !!zone.image}"
                   >
@@ -294,6 +298,7 @@
                       <StageCard
                         v-for="stage in zone.stages"
                         :key="stage.stageId"
+                        v-haptic
                         :stage="stage"
 
                         @click.native="selectStage(zone.zoneId, stage.stageId)"
@@ -385,6 +390,7 @@
           "act13d5_zone1": this.cdnDeliver('/backgrounds/zones/act13d5_zone1.jpg'),
           "act14d7_zone1": this.cdnDeliver('/backgrounds/zones/act5d0_zone1.jpg'),
           "act15d0_zone1": this.cdnDeliver('/backgrounds/zones/act15d0_zone1.jpg'),
+          "act15d5_zone1": this.cdnDeliver('/backgrounds/zones/act15d5_zone1.jpg'),
           // "act13d5_zone1": require("@/assets/zonePageBackgrounds/png/act13d5_zone1.png"),
 
           // 骑兵与猎人 复刻：复用原活动（1stact_zone1）

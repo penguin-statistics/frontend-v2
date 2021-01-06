@@ -38,6 +38,7 @@
           </span>
           <v-divider class="mx-4" />
           <v-checkbox
+            v-haptic
             v-bind="statuses.category[category.id]"
 
             @click.self="toggleCategory(category.id, statuses.category[category.id])"
@@ -52,6 +53,7 @@
             class="d-flex flex-column justify-center align-start text-center zone-title"
           >
             <v-checkbox
+              v-haptic
               v-bind="statuses.zone[zone.zoneId]"
 
               hide-details

@@ -27,7 +27,10 @@
       popout
     >
       <v-expansion-panel>
-        <v-expansion-panel-header color="background">
+        <v-expansion-panel-header
+          v-haptic
+          color="background"
+        >
           <template v-slot:default="{ open }">
             <v-icon
               left
@@ -42,7 +45,7 @@
                 v-if="!open"
                 small
                 :color="filterCount ? 'warning' : 'secondary'"
-                class="flex-grow-0 font-weight-bold mr-2 px-4"
+                class="flex-grow-0 font-weight-bold mr-2 px-4 hidden-xxs-only"
               >
                 {{ $tc('stats.filter.indicator', filterCount) }}
               </v-chip>
@@ -76,6 +79,7 @@
                   <!--                  />-->
                   <v-checkbox
                     v-model="dataTable.showPermanent"
+                    v-haptic
                     hide-details
                     :label="$t('stats.filter.type.showPermanent')"
                     class="mt-0 pt-0"
@@ -83,6 +87,7 @@
                   />
                   <v-checkbox
                     v-model="dataTable.showActivity"
+                    v-haptic
                     hide-details
                     :label="$t('stats.filter.type.showActivity')"
                     class="pt-0"
@@ -101,6 +106,7 @@
                 <template v-slot:content>
                   <v-switch
                     v-model="dataTable.onlyOpen"
+                    v-haptic
                     hide-details
                     :label="$t('stats.filter.status.onlyOpen')"
                     class="mt-0 pt-0"

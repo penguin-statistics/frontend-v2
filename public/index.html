@@ -3,7 +3,19 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <% if (PENGUIN_PLATFORM === 'app') { %>
+  <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no,viewport-fit=cover">
+  <style>
+    * {
+        -webkit-touch-callout: none !important;
+        -webkit-user-select: none !important;
+        user-select: none !important;
+    }
+  </style>
+  <% } else { %>
   <meta name="viewport" content="width=device-width,initial-scale=1.0,viewport-fit=cover">
+  <% } %>
+
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Condensed:400" crossorigin="anonymous">
   <link rel="icon" href="/favicon.ico">
   <title>企鹅物流数据统计</title>

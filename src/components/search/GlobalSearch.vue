@@ -59,71 +59,12 @@
           />
         </template>
       </recycle-scroller>
-      <!--      <v-data-iterator-->
-      <!--        v-show="search"-->
-      <!--        :items="results"-->
-      <!--        class="mx-2 search-results"-->
-      <!--        :page="page"-->
-      <!--      >-->
-      <!--        <template #header="{ pagination }">-->
-      <!--          <div class="d-flex flex-row justify-space-around align-center">-->
-      <!--            <v-btn-->
-      <!--              large-->
-      <!--              :disabled="page <= 1"-->
-      <!--              tabindex="101"-->
-      <!--              @click="page -= 1"-->
-      <!--            >-->
-      <!--              <v-icon>-->
-      <!--                mdi-chevron-left-->
-      <!--              </v-icon>-->
-      <!--              上一页-->
-      <!--            </v-btn>-->
-
-      <!--            <span>-->
-      <!--              页 {{ pagination.page }} / 共 {{ pagination.pageCount }} 页, {{ pagination.itemsLength }} 条目-->
-      <!--            </span>-->
-
-      <!--            <v-btn-->
-      <!--              large-->
-      <!--              :disabled="page >= pagination.pageCount"-->
-      <!--              tabindex="102"-->
-      <!--              @click="page += 1"-->
-      <!--            >-->
-      <!--              下一页-->
-      <!--              <v-icon>-->
-      <!--                mdi-chevron-right-->
-      <!--              </v-icon>-->
-      <!--            </v-btn>-->
-      <!--          </div>-->
-      <!--        </template>-->
-
-      <!--        <template #default="{ items }">-->
-      <!--          <v-row>-->
-      <!--            <v-col-->
-      <!--              v-for="item in items"-->
-      <!--              :key="item.id"-->
-      <!--              cols="12"-->
-      <!--              sm="12"-->
-      <!--              md="12"-->
-      <!--              lg="12"-->
-      <!--              xl="12"-->
-      <!--            >-->
-      <!--              <SearchResult-->
-      <!--                tabindex="1"-->
-      <!--                :result="item"-->
-      <!--              />-->
-      <!--            </v-col>-->
-      <!--          </v-row>-->
-      <!--        </template>-->
-      <!--      </v-data-iterator>-->
     </v-slide-y-transition>
-    <!--    <h1 class="d-block mt-12 overline text-center grey&#45;&#45;text">-->
-    <!--      {{ $t('search.footer') }}-->
-    <!--    </h1>-->
   </div>
 </template>
 
 <script>
+import debounce from 'lodash/debounce'
 import CompactedSearchEngine from "@/utils/searchEngine";
 import Console from "@/utils/Console";
 import CDN from "@/mixins/CDN";
@@ -149,19 +90,30 @@ export default {
   data() {
     return {
       engine: null,
-      search: "",
-      page: 1,
+      debouncedSearch: "",
       engineLoading: true
     }
   },
 
   computed: {
+    search: {
+      get() {
+        return this.debouncedSearch;
+      },
+      set: debounce(function(newValue) {
+        this.debouncedSearch = newValue;
+      }, 30)
+    },
     results() {
-      return this.engine.search(this.search)
-      .map(el => ({
-        ...el,
-        id: `${el.type}_${el.stageId || el.itemId}`,
-      }))
+      Console.debug('Search', 'performing search with query', this.debouncedSearch)
+      const results = this.engine.search(this.debouncedSearch)
+        .map(el => ({
+          ...el,
+          ...el.item,
+          id: `${el.type}_${el.item.stageId || el.item.itemId}`,
+        }))
+      Console.debug('Search', 'got result', results)
+      return results
     },
     dependencies() {
       return {
@@ -172,12 +124,13 @@ export default {
     },
     loading() {
       return [
+        this.$store.getters["ajax/pendingByKey"]("zones"),
         this.$store.getters["ajax/pendingByKey"]("stages"),
         this.$store.getters["ajax/pendingByKey"]("items"),
       ].some(el => !!el)
     },
     valid () {
-      return this.search && this.results.length
+      return this.debouncedSearch && this.results.length
     },
     computedBinding () {
       const binding = {}
@@ -208,9 +161,9 @@ export default {
 
     const self = this
     this.engine.ready().then(() => {
-      self.search = self.query
-      self.search = self.search + ' '
-      self.search = self.search.slice(0, -1)
+      self.debouncedSearch = self.query
+      self.debouncedSearch = self.debouncedSearch + ' '
+      self.debouncedSearch = self.debouncedSearch.slice(0, -1)
 
       self.engineLoading = false
     })
@@ -218,7 +171,7 @@ export default {
   methods: {
     reset() {
       Console.info("SearchEngine", "search engine has been reinitialized due to change detected in dependency")
-      this.search = ""
+      this.debouncedSearch = ""
       this.engine = new CompactedSearchEngine()
     }
   },

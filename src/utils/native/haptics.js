@@ -1,19 +1,16 @@
 import {
   Plugins,
-  HapticsImpactStyle, HapticsNotificationType
+  HapticsImpactStyle, HapticsNotificationType, Capacitor
 } from '@capacitor/core';
 import Console from "@/utils/Console";
 
-const { Haptics } = Plugins;
-
-window.GlobalCapacitorHaptics = Haptics
+const { Haptics, PenguinPlugin } = Plugins;
 
 function invoke(method, ...args) {
-  try {
-    const promise = Haptics.prototype.call(method, args)
-    promise.catch(e => Console.warn('Haptics', 'failed to invoke haptics', e))
-  } catch (e) {
-    Console.warn('Haptics', 'failed to invoke haptics', e)
+  if (Capacitor.isPluginAvailable('Haptics')) {
+    Console.info('Haptics', 'invoking haptics', method, args)
+    Haptics[method](...args)
+      .catch(e => Console.warn('Haptics', 'failed to invoke haptics', e))
   }
 }
 
@@ -40,6 +37,12 @@ export default {
     invoke('notification', {
       style: HapticsNotificationType.SUCCESS
     })
+  },
+
+  general() {
+    if (Capacitor.isPluginAvailable('PenguinPlugin')) {
+      PenguinPlugin.hapticsGeneral()
+    }
   },
 
   notification(type) {

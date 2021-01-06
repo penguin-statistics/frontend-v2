@@ -1,6 +1,7 @@
 import strings from "@/utils/strings";
 import Console from "@/utils/Console";
 import I18n from "@/mixins/I18n";
+import environment from "@/utils/environment";
 
 export default {
   mixins: [I18n],
@@ -18,8 +19,11 @@ export default {
     }
   },
   computed: {
-    languageFont () {
-      return `lang-${this.$i18n.locale}`
+    appEnvironment () {
+      return [
+        `lang-${this.$i18n.locale}`,
+        environment.runtime.isApp ? 'runtime-app' : 'runtime-web'
+      ]
     },
   },
 }

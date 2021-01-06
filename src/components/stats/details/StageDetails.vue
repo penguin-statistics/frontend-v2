@@ -1,5 +1,5 @@
 <template>
-  <v-card class="bkop-light px-8 elevation-4 ma-2">
+  <v-card class="bkop-light px-8 elevation-4 mt-2">
     <v-row
       align="start"
       align-content="start"

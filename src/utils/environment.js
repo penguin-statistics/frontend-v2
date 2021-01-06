@@ -8,14 +8,14 @@ function boolean(key, rejectApp) {
   // development & in-app: force true
   // otherwise if specifically specified, use that value
   // otherwise fallback to false
-  if (rejectApp && PENGUIN_BUILD === "app") return false
+  if (rejectApp && PENGUIN_PLATFORM === "app") return false
   return process.env.NODE_ENV !== "production" || getConfig()[key] || false
 }
 
 export default {
   get production () {return process.env.NODE_ENV === 'production'},
   runtime: {
-    get isApp () {return PENGUIN_BUILD === "app"},
+    get isApp () {return PENGUIN_PLATFORM === "app"},
   },
   get isTouchScreen () {
     if (window.matchMedia) return window.matchMedia("(pointer: coarse)").matches
