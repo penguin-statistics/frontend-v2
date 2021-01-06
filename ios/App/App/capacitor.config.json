@@ -7,7 +7,12 @@
   "plugins": {
     "SplashScreen": {
       "launchAutoHide": false,
-      "showSpinner": true
+      "backgroundColor": "#000000ff",
+      "showSpinner": true,
+      "spinnerColor": "#fff"
+    },
+    "PushNotifications": {
+      "presentationOptions": ["badge", "sound", "alert"]
     }
   },
   "cordova": {}

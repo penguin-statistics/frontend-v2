@@ -44,8 +44,8 @@ module.exports = {
     plugins: [
       new webpack.DefinePlugin({
         GIT_COMMIT: JSON.stringify(commitHash).trim(),
-        PENGUIN_BUILD: envvar('PENGUIN_BUILD', 'unspecified'),
-        PENGUIN_BUILD_FROM: envvar('PENGUIN_BUILD_FROM', null),
+        PENGUIN_PLATFORM: envvar('PENGUIN_PLATFORM', 'unspecified'),
+        PENGUIN_PLATFORM_FROM: envvar('PENGUIN_PLATFORM_FROM', null),
       })
       // new InjectManifest ({
       //   swSrc: "./src/workers/service-worker.js",

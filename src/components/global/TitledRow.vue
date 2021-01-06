@@ -3,7 +3,7 @@
     class="d-flex flex-row"
     :class="{'my-3 mx-6': !dense}"
     align="center"
-    :justify="header ? 'end' : ''"
+    :justify="header ? 'end' : null"
   >
     <div :class="{'title': !dense, 'subtitle-2': dense}">
       <slot name="header" />

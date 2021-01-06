@@ -30,6 +30,7 @@
   <v-list-group
     v-else
     :key="route.name"
+    v-haptic
     :value="route.meta.active"
     :prepend-icon="route.meta.icon"
     :color="`blue ${dark ? 'lighten-1' : 'darken-2'}`"

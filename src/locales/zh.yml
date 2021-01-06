@@ -125,7 +125,7 @@ stats:
       drops: 掉落数
   lastUpdated: 最后更新：{date}
   site:
-    viewMore: 查看全站数据一览
+    viewMore: 查看更多
     total:
       sanity: 所有掉落汇报消耗理智
       report: 掉落汇报总数
@@ -133,7 +133,7 @@ stats:
     stages: 作战掉落汇报排行
     items: 物品掉落汇报排行
     all: 全时段
-    24hr: 最近 24 小时
+    24hr: 最近 24hr
     generating:
       title: 全站数据一览正在计算中...
       subtitle: 神经网络信息：由于数据量庞大，全站数据一览需要大约 5 分钟进行计算。请稍后再来。
@@ -145,8 +145,9 @@ contribute:
   contribute_0: 如果您有以下一项或多项经验，愿意为企鹅数据贡献自己的一份力量，请加QQ群：747099627
   contribute_1: 本项目为无偿开源项目
   skills:
-    frontend: 网站前端开发 Vue.js
-    backend: 网站后端开发 Java Spring Boot、MongoDB
+    frontend: 网站前端开发（Vue.js）
+    backend: 网站后端开发（Java Spring Boot、MongoDB、Golang）
+    mobile: 移动端 App 开发（iOS、Android）
     maintenance: 网站运维
     design: UI/UX设计
     analysis: 数据统计分析

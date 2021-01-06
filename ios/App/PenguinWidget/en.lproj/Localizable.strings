@@ -1,0 +1,18 @@
+/* 
+  PenguinWidget.strings
+  App
+
+  Created by Galvin Gao on 2020/12/26.
+  
+*/
+
+"SiteStatsWidgetName" = "Statistics Overview";
+"SiteStatsWidgetDesc" = "Keep track of the overview of site statistics";
+"SiteStatsWidgetTitle" = "Top Report Stage (24h)";
+"WidgetViewMore" = "View More";
+
+"ServerNameCN" = "CN";
+"ServerNameUS" = "US";
+"ServerNameJP" = "JP";
+"ServerNameKR" = "KR";
+

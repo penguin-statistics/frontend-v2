@@ -5,7 +5,7 @@ cache:
   directories:
     - node_modules
 env:
-  - PENGUIN_BUILD_FROM=travis
+  - PENGUIN_PLATFORM_FROM=travis
 script:
   - yarn lint
   - yarn build:web

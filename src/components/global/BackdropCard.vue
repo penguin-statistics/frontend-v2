@@ -1,5 +1,6 @@
 <template>
   <v-card
+    v-haptic="hover"
     :hover="hover"
     class="text-center backdrop-card transition-all"
     :class="{'backdrop-card--hoverable': hover, 'backdrop-card--darken': darken, 'pa-4': !dense}"

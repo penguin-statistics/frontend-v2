@@ -102,7 +102,7 @@
   //       - 另外，我们有 B 站账号啦！[快来 Roll 大月卡！](http://a.com/)
   // - 同时，NGA 的抽奖活动与 B 站账号独立哦！[欢迎各位来捧场w](http://nga.com/)
       parseNotices (notices) {
-        // return [{"severity":2,"existence":{"US":{"exist":true},"JP":{"exist":true},"CN":{"exist":true},"KR":{"exist":true}},"conditions":{"servers":["CN","US","JP","KR"]},"content_i18n":{"zh":"🎉 12.24 企鹅物流 1.5 周年暨新年贺！\n- 我们有 B 站账号啦！[快来 Roll 大月卡！](http://a.com/) \n- 同时，NGA 的抽奖活动与 B 站账号独立哦！[欢迎各位来捧场w](http://nga.com/)"}},
+        // return [{"severity":2,"existence":{"US":{"exist":true},"JP":{"exist":true},"CN":{"exist":true},"KR":{"exist":true}},"conditions":{"servers":["CN","US","JP","KR"]},"content_i18n":{"zh":"🎉 12.24 企鹅物流 1.5 周年暨新年贺！\n- 快去围观[纪念视频](https://www.bilibili.com/video/BV1Ja4y1p7wn) \n- [点我参加 NGA 抽奖活动](！nga帖子链接！)\n- 微博抽奖与 NGA 独立哦~ [点我参加微博抽奖活动](！微博帖子链接！)","en":"🎉 Dec. 24th: Penguin Statistics 1.5 Years Anniversary\n- Watch the [Documentary Video](https://www.bilibili.com/video/BV1Ja4y1p7wn)\n- Participate the [Lottery Activity @ NGA](NGALINK)\n- Participate the separated, [Lottery Activity @ Weibo](WEIBOLINK)"}},
         //   ...notices.filter(notice => {
         //     return existUtils.existence(notice, true)
         //   })

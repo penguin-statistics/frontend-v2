@@ -2,6 +2,7 @@
   <div>
     <v-switch
       v-model="hideTime"
+      v-haptic
       dense
       hide-details
       :label="$t('query.result.hideTime')"

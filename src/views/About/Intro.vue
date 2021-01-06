@@ -38,7 +38,8 @@
   >
     <v-row
       align="center"
-      justify="start"
+      justify="center"
+      justify-lg="start"
     >
       <v-card-title
         class="justify-start"

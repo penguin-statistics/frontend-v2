@@ -1,4 +1,4 @@
-const version = "v3.4.0";
+const version = "v3.4.1";
 const project = "frontend-v2";
 
 module.exports = {
@@ -24,7 +24,7 @@ module.exports = {
   },
   randomBackground: {
     limit: 3,
-    max: 104
+    max: 446
   },
   previewCard: {
     item: {

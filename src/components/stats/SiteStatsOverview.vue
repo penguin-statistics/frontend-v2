@@ -9,7 +9,7 @@
         mdi-poll-box
       </v-icon>
     </template>
-    <v-card-title class="display-2">
+    <v-card-title class="display-2 px-3">
       <span
         ref="totalReportsNum"
         class="monospace"
@@ -17,14 +17,14 @@
         {{ totalReports === null ? "---" : totalReports | thousandSeparator }}
       </span>
     </v-card-title>
-    <v-card-subtitle class="d-flex">
+    <v-card-subtitle class="d-flex align-center pl-3">
       <span>
         {{ $t('stats.site.total.report') }} — {{ $t('stats.site.24hr') }}
       </span>
       <v-spacer />
       <span class="d-flex flex-row align-center">
         {{ $t('stats.site.viewMore') }}
-        <v-icon>
+        <v-icon right>
           mdi-chevron-right
         </v-icon>
       </span>

@@ -20,9 +20,11 @@ Vue.directive("marked", function (el) {
 
 function useHaptics (el, {arg, modifiers}) {
   return function () {
+    if (arg === false) return
+
     if (modifiers.notification) return haptics.notification(arg)
     if (arg) return haptics.impact(arg)
-    return haptics.light()
+    return haptics.general()
   }
 }
 
