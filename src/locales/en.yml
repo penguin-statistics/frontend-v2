@@ -152,8 +152,8 @@ contribute:
   contribute_1: This is a nonprofit and open source project
   skills:
     frontend: Front End Development (Vue.js)
-    backend: Back End Development (Java Spring Boot, MongoDB, Golang)
-    mobile: Mobile app Development (iOS, Android)
+    backend: Back End Development (Java Spring Boot, MongoDB, Go)
+    mobile: Mobile App Development (iOS, Android)
     maintenance: DevOps
     design: UI/UX Design
     analysis: Data Analysis
