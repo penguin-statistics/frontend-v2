@@ -38,7 +38,9 @@ module.exports = {
   integrity: false,
   runtimeCompiler: true,
   transpileDependencies: [
-    "vuetify"
+    "vuetify",
+    "fuse.js",
+    "semver",
   ],
   configureWebpack: {
     plugins: [
