@@ -15,7 +15,7 @@ try {
 function envvar(name, fallback) {
   let content = process.env[name]
   if (content) content = content.trim()
-  return JSON.stringify(content) || fallback
+  return JSON.stringify(content || fallback) || `"null"`
 }
 
 module.exports = {
@@ -38,7 +38,9 @@ module.exports = {
   integrity: false,
   runtimeCompiler: true,
   transpileDependencies: [
-    "vuetify"
+    "vuetify",
+    "fuse.js",
+    "semver",
   ],
   configureWebpack: {
     plugins: [

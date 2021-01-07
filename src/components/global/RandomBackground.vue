@@ -19,6 +19,7 @@
   import {mapGetters} from "vuex";
   import randomUtils from "@/utils/randomUtils";
   import {externalService} from "@/utils/service";
+  import environment from "@/utils/environment";
 
   export default {
     name: "RandomBackground",
@@ -103,7 +104,7 @@
           this.webpSupport = await this.testWebp();
         }
         // P(🔪) = 0.2%
-        if (Math.random() < 0.002) {
+        if (environment.debug.frostnova || Math.random() < 0.002) {
           return this.getImageUrl("frstar")
         }
         return this.getImageUrl(randomUtils.cachedRandom.get())

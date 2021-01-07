@@ -31,6 +31,7 @@ export default {
     get devtools() {return boolean("devtools", true)},
     get colorfulConsole() {return boolean("colorfulConsole", true)},
     get fullConsole() {return boolean("fullConsole")},
+    get frostnova() {return boolean("frostnova")}
   },
 
   // native: {
