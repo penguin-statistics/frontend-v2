@@ -220,13 +220,11 @@
               <!--                class="pl-2"-->
               <!--              />-->
               <v-subheader>
-                <v-icon
-                  class="mr-2"
-                >
+                <v-icon class="mr-2">
                   {{ category.zones[0].icon }}
                 </v-icon>
                 <span>
-                  {{ $t(['zone.types', category.id].join('.')) }}
+                  {{ $t(["zone.types", category.id].join(".")) }}
                 </span>
               </v-subheader>
               <v-expansion-panels
@@ -237,12 +235,12 @@
                   v-for="zone in category.zones"
                   :key="zone.zoneId"
                   class="bkop-light stage-card--background"
-                  :style="{'background-image': zone.image ? `url(${zone.image}) !important` : null}"
+                  :style="{ 'background-image': zone.image ? `url(${zone.image}) !important` : null }"
                 >
                   <v-expansion-panel-header
                     v-haptic
                     class="overflow-hidden bkop-medium"
-                    :class="{'stage-card--header': !!zone.image}"
+                    :class="{ 'stage-card--header': !!zone.image }"
                   >
                     <v-row align="center">
                       <span
@@ -254,21 +252,22 @@
                         }"
                         class="text--darken-1 font-weight-bold ml-2 mr-1"
                       >
-                        {{ $t('zone.status.' + zone.timeValid) }}
+                        {{ $t("zone.status." + zone.timeValid) }}
                       </span>
                       <span
                         v-if="zone.isPermanentOpen"
                         class="text--darken-1 font-weight-bold orange--text ml-2 mr-1"
                       >
-                        {{ $t('zone.status.permanentOpen') }}
+                        {{ $t("zone.status.permanentOpen") }}
                       </span>
 
                       <span
                         class="subtitle-1 pl-2"
-                        :class="{'text--darken-1 font-weight-bold': zone.isActivity && small,
-                                 'red--text': zone.isActivity && small && zone.timeValid === 1,
-                                 'green--text': zone.isActivity && small && zone.timeValid === 0,
-                                 'grey--text': zone.isActivity && small && zone.timeValid === -1
+                        :class="{
+                          'text--darken-1 font-weight-bold': zone.isActivity && small,
+                          'red--text': zone.isActivity && small && zone.timeValid === 1,
+                          'green--text': zone.isActivity && small && zone.timeValid === 0,
+                          'grey--text': zone.isActivity && small && zone.timeValid === -1
                         }"
                       >
                         {{ strings.translate(zone, "zoneName") }}
@@ -285,9 +284,7 @@
                       <!--                        </span>-->
                     </v-row>
                   </v-expansion-panel-header>
-                  <v-expansion-panel-content
-                    :class="{'stage-card--content': !!zone.image}"
-                  >
+                  <v-expansion-panel-content :class="{ 'stage-card--content': !!zone.image }">
                     <div
                       v-if="zone.isActivity"
                       class="caption mx-1 mt-3 mb-2"
@@ -300,7 +297,6 @@
                         :key="stage.stageId"
                         v-haptic
                         :stage="stage"
-
                         @click.native="selectStage(zone.zoneId, stage.stageId)"
                       />
                     </div>
@@ -326,7 +322,7 @@
   import strings from "@/utils/strings";
   import StageCard from "@/components/stats/StageCard";
   import Console from "@/utils/Console";
-  import {mapGetters} from "vuex";
+  import { mapGetters } from "vuex";
   import CDN from "@/mixins/CDN";
   import existUtils from "@/utils/existUtils";
   import validator from "@/utils/validator";
@@ -344,17 +340,23 @@
       },
       hideClosed: {
         type: Boolean,
-        default () {
-          return false
+        default() {
+          return false;
         }
       },
       routerNames: {
         type: Object,
-        default () {
+        default() {
           return {
             index: "",
             details: ""
-          }
+          };
+        }
+      },
+      stage: {
+        type: String,
+        default() {
+          return "";
         }
       }
     },
@@ -399,20 +401,20 @@
           // 选择页面背景
           "_default": this.cdnDeliver('/backgrounds/zones/default.jpg'),
         }
-      }
+      };
     },
     computed: {
       ...mapGetters("settings", ["lowData"]),
-      bindRouter () {
-        return this.routerNames.index !== "" && this.routerNames.details !== ""
+      bindRouter() {
+        return this.routerNames.index !== "" && this.routerNames.details !== "";
       },
       step: {
-        get () {
-          return this.internalStep
+        get() {
+          return this.internalStep;
         },
-        set (val) {
+        set(val) {
           this.internalStep = val;
-          if (val === 1) this.$emit("select", {zone: null, stage: null});
+          if (val === 1) this.$emit("select", { zone: null, stage: null });
 
           if (!this.bindRouter) return;
           if (val === 1) {
@@ -426,30 +428,40 @@
                 zoneId: this.selected.zone,
                 stageId: this.selected.stage
               }
-            })
+            });
           }
         }
       },
-      strings () {
-        return strings
+      strings() {
+        return strings;
       },
-      small () {
-        return this.$vuetify.breakpoint.smAndDown
+      small() {
+        return this.$vuetify.breakpoint.smAndDown;
       },
       categorizedZones() {
-        const categoriesSet =
-          this.hideClosed ?
-            // Report
+        const categoriesSet = this.hideClosed
+          ? // Report
             [
-              [["ACTIVITY_OPEN", "MAINLINE"], ["ACTIVITY_PERMANENT", "WEEKLY"]], // md, lg & xl
-              [["ACTIVITY_OPEN", "MAINLINE"], ["ACTIVITY_PERMANENT", "WEEKLY"]]  // xs & sm
+              [
+                ["ACTIVITY_OPEN", "MAINLINE"],
+                ["ACTIVITY_PERMANENT", "WEEKLY"]
+              ], // md, lg & xl
+              [
+                ["ACTIVITY_OPEN", "MAINLINE"],
+                ["ACTIVITY_PERMANENT", "WEEKLY"]
+              ] // xs & sm
             ]
-              :
-            // Show Statistics
+          : // Show Statistics
             [
-              [["ACTIVITY_OPEN", "MAINLINE", "WEEKLY"], ["ACTIVITY_PERMANENT", "ACTIVITY_PENDING", "ACTIVITY_CLOSED"]], // md, lg & xl
-              [["ACTIVITY_PENDING", "ACTIVITY_OPEN", "MAINLINE"], ["ACTIVITY_PERMANENT", "WEEKLY", "ACTIVITY_CLOSED"]]  // xs & sm
-            ]
+              [
+                ["ACTIVITY_OPEN", "MAINLINE", "WEEKLY"],
+                ["ACTIVITY_PERMANENT", "ACTIVITY_PENDING", "ACTIVITY_CLOSED"]
+              ], // md, lg & xl
+              [
+                ["ACTIVITY_PENDING", "ACTIVITY_OPEN", "MAINLINE"],
+                ["ACTIVITY_PERMANENT", "WEEKLY", "ACTIVITY_CLOSED"]
+              ] // xs & sm
+            ];
 
         const result = [[], []];
         for (const [index, categories] of categoriesSet[this.small ? 1 : 0].entries()) {
@@ -472,25 +484,26 @@
 
             zones = zones
               .map(zone => {
-                let stages = get.stages.byParentZoneId(zone.zoneId)
+                let stages = get.stages.byParentZoneId(zone.zoneId);
                 if (this.hideClosed) {
-                  stages = stages.filter(stage => !!stage["dropInfos"])
+                  stages = stages.filter(stage => !!stage["dropInfos"]);
                 }
-                stages = stages.filter(el => existUtils.existence(el))
+                stages = stages.filter(el => existUtils.existence(el));
 
                 return {
                   ...zone,
                   stages
-                }
+                };
               })
               // filter out empty zones
-              .filter(el => el.stages.length)
+              .filter(el => el.stages.length);
 
             // sort activity zones by its openTime
             if (category.startsWith("ACTIVITY")) {
-              const server = this.$store.getters["dataSource/server"]
-              zones = zones.slice()
-                .sort((a, b) => a["existence"][server]["openTime"] - b["existence"][server]["openTime"])
+              const server = this.$store.getters["dataSource/server"];
+              zones = zones
+                .slice()
+                .sort((a, b) => a["existence"][server]["openTime"] - b["existence"][server]["openTime"]);
             }
 
             if (this.lowData) {
@@ -498,26 +511,26 @@
                 return {
                   ...el,
                   image: null
-                }
-              })
+                };
+              });
             } else {
               zones = zones.map(el => {
                 if (validator.have(this.stageImages, el.zoneId)) {
                   return {
                     ...el,
                     image: this.stageImages[el.zoneId]
-                  }
+                  };
                 } else {
-                  return el
+                  return el;
                 }
-              })
+              });
             }
 
             if (zones && zones.length) {
               result[index].push({
                 id: category,
                 zones: zones
-              })
+              });
             }
           }
         }
@@ -537,7 +550,7 @@
           return null
         }
       },
-      relativeStages () {
+      relativeStages() {
         if (!this.selected.stage) return null;
         const allStagesInZone = get.stages.byParentZoneId(this.selected.zone);
         const stageInZoneIndex = allStagesInZone.indexOf(allStagesInZone.find(el => el.stageId === this.selected.stage));
@@ -571,21 +584,29 @@
       }
     },
     watch: {
-      '$route' () {
-        this.checkRoute()
+      $route() {
+        this.checkRoute();
       }
     },
-    beforeMount () {
-      this.checkRoute()
+    beforeMount() {
+      this.checkRoute();
+    },
+    mounted() {
+      if (this.stage) {
+        let Stage = get.stages.byStageCode(this.stage);
+        if (!Stage.notfind) {
+          this.selectStage(Stage.zoneId, Stage.stageId);
+        }
+      }
     },
     methods: {
-      selectStage (zone, stage, incrementStep = true) {
+      selectStage(zone, stage, incrementStep = true) {
         Console.log("StageSelector", "chose", zone, stage);
         this.selected.zone = zone;
         this.selected.stage = stage;
-        this.$emit("select", {zone, stage});
+        this.$emit("select", { zone, stage });
         if (incrementStep) {
-          this.step += 1
+          this.step += 1;
         } else {
           this.$router.push({
             name: this.routerNames.details,
@@ -593,10 +614,10 @@
               zoneId: this.selected.zone,
               stageId: this.selected.stage
             }
-          })
+          });
         }
       },
-      checkRoute () {
+      checkRoute() {
         if (!this.bindRouter) return;
         if (this.$route.name === this.routerNames.details) {
           this.internalStep = 2;
@@ -604,7 +625,7 @@
           const stage = this.$route.params.stageId;
           this.selected.zone = zone;
           this.selected.stage = stage;
-          this.$emit("select", {zone, stage});
+          this.$emit("select", { zone, stage });
         } else if (this.$route.name === this.routerNames.index) {
           this.internalStep = 1;
 
@@ -612,11 +633,13 @@
           this.selected.stage = null;
         }
       },
-      genActivityTime (zone) {
-        return zone.isPermanentOpen ? this.$t('zone.status.permanentOpen') : this.$t('zone.opensAt', zone.activityActiveTime)
+      genActivityTime(zone) {
+        return zone.isPermanentOpen
+          ? this.$t("zone.status.permanentOpen")
+          : this.$t("zone.opensAt", zone.activityActiveTime);
       }
-    },
-  }
+    }
+  };
 </script>
 
 <style scoped>
@@ -631,23 +654,23 @@
   }
 
   .theme--light .stage-card--header {
-    background: rgba(240, 240, 240, .9) !important;
+    background: rgba(240, 240, 240, 0.9) !important;
     background: linear-gradient(to bottom, rgba(240, 240, 240, 0.9), rgba(240, 240, 240, 0.85)) !important;
   }
 
   .theme--light .stage-card--content {
-    background: rgba(255, 255, 255, .85) !important;
+    background: rgba(255, 255, 255, 0.85) !important;
     background: linear-gradient(to bottom, rgba(255, 255, 255, 0.85), rgba(255, 255, 255, 0.7)) !important;
   }
 
   .theme--dark .stage-card--header {
-    background: rgba(30, 30, 30, .9) !important;
+    background: rgba(30, 30, 30, 0.9) !important;
     background: linear-gradient(to bottom, rgba(30, 30, 30, 0.9), rgba(30, 30, 30, 0.85)) !important;
   }
 
   .theme--dark .stage-card--content {
-    background: rgba(0, 0, 0, .8) !important;
-    background: linear-gradient(to bottom, rgba(0, 0, 0, 0.85), rgba(0, 0, 0, 0.70)) !important;
+    background: rgba(0, 0, 0, 0.8) !important;
+    background: linear-gradient(to bottom, rgba(0, 0, 0, 0.85), rgba(0, 0, 0, 0.7)) !important;
   }
 
   .history-stage-cards {

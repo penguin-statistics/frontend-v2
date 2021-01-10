@@ -1,11 +1,13 @@
-import Vue from 'vue'
-import Router from 'vue-router'
+import Vue from "vue";
+import Router from "vue-router";
 
-import Home from './views/Home'
-import Report from './views/Report'
-import StatsLayout from './layouts/StatsLayout'
-import StatsByStage from './views/Stats/Stage'
-import StatsByItem from './views/Stats/Item'
+import Home from "./views/Home";
+import ReportLayout from "./layouts/ReportLayout";
+import RecognitionReport from "./views/Report/RecognitionReport";
+import Report from "./views/Report/Report";
+import StatsLayout from "./layouts/StatsLayout";
+import StatsByStage from "./views/Stats/Stage";
+import StatsByItem from "./views/Stats/Item";
 
 import AboutLayout from './layouts/AboutLayout'
 import AboutContribute from './views/About/Contribute'
@@ -26,12 +28,11 @@ import store from "@/store";
 // this is to fix error named something like DuplicatedRoute
 const originalPush = Router.prototype.push;
 Router.prototype.push = function push(location, onResolve, onReject) {
-  if (onResolve || onReject) return originalPush.call(this, location, onResolve, onReject)
-  return originalPush.call(this, location).catch(err => err)
+  if (onResolve || onReject) return originalPush.call(this, location, onResolve, onReject);
+  return originalPush.call(this, location).catch(err => err);
 };
 
 Vue.use(Router);
-
 const router = new Router({
   mode: 'history',
   scrollBehavior() { // params: (to, from, savedPosition)
@@ -47,23 +48,44 @@ const router = new Router({
     }
   },
   {
-    path: '/report',
-    name: 'ReportByZone',
-    component: Report,
+    path: "/report",
+    name: "Report",
+    component: ReportLayout,
     meta: {
-      icon: 'mdi-upload',
-      i18n: 'menu.report',
-      forceSingle: true
+      icon: "mdi-upload",
+      i18n: "menu.report",
+      active: true
     },
     children: [
       {
-        path: ':zoneId/:stageId',
-        name: 'ReportByZone_Selected',
+        path: "byzone",
+        name: "ReportByZone",
         component: Report,
-        props: true,
         meta: {
-          i18n: 'menu.report'
+          icon: "mdi-upload",
+          i18n: "menu.report"
         },
+        children: [
+          {
+            path: ":zoneId/:stageId",
+            name: "ReportByZone_Selected",
+            component: Report,
+            props: true,
+            meta: {
+              i18n: "menu.report"
+            }
+          }
+        ]
+      },
+      {
+        path: "recognition",
+        name: "RecognitionReport",
+        component: RecognitionReport,
+        meta: {
+          icon: "mdi-magnify",
+          i18n: "menu.recognitionreport",
+          showOnServer:["CN"]
+        }
       }
     ]
   },
@@ -285,6 +307,7 @@ const router = new Router({
   },
   ]
 });
+
 
 router.beforeEach((to, from, next) => {
   // If this isn't an initial page load and is an async route

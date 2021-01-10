@@ -1,0 +1,8 @@
+{
+  "name": "DropRecognition",
+  "version": "1.0.2",
+  "description": "明日方舟关卡结束后掉落截图识别",
+  "main": "main.js",
+  "author": "bbaa_bbaa@qq.com",
+  "license": "MIT"
+}
