@@ -141,6 +141,11 @@ Getters.stages = {
       return el.zoneId === zoneId
     }) || {}
   },
+  byStageCode(StageCode, options){
+    return this.all(options).find(el => {
+      return el.code === StageCode
+    }) || {notfind:true}
+  }
 }
 
 Getters.zones = {

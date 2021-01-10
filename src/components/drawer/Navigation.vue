@@ -41,7 +41,7 @@
     </template>
 
     <v-list-item
-      v-for="child in route.children.filter(el => !el.meta.hide)"
+      v-for="child in route.children.filter(el => !el.meta.hide && ((el.meta.showOnServer && el.meta.showOnServer.includes(server)) || !el.meta.showOnServer) )"
       :key="child.name"
       v-haptic
       :class="child.path === $route.path.split('/')[2] ? activeClass : ''"
@@ -74,7 +74,10 @@
           "v-list-item--active": true,
           "white--text": this.$vuetify.theme.dark
         }
-      }
+      },
+      server() {
+        return this.$store.getters["dataSource/server"];
+      },
     },
     methods: {
       navigate (route) {
