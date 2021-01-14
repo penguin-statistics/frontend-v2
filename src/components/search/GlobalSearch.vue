@@ -51,11 +51,13 @@
         class="search-results"
         :class="{'search-results--dense': pure}"
       >
-        <template #default="{item, active}">
+        <template #default="{item, index, active}">
           <SearchResultNormal
             :key="item.id"
+            :query="debouncedSearch"
             :tabindex="active ? 2 : -1"
             :result="item"
+            :index="index"
           />
         </template>
       </recycle-scroller>
