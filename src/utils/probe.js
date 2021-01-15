@@ -22,7 +22,8 @@ function properlySupportedWebSocket() {
 
   try {
     if (!('WebSocket' in window && window.WebSocket.CLOSING === 2)) return false
-  } catch (e) {return false}
+    // eslint-disable-next-line no-empty
+  } catch (e) {}
 
   const protocol = 'https:' === window.location.protocol ? 'wss' : 'ws'
   let protoBin
@@ -34,7 +35,7 @@ function properlySupportedWebSocket() {
     // eslint-disable-next-line no-empty
   } catch (e) {}
 
-  return false
+  return true
 }
 
 class FakeTransport {
@@ -43,7 +44,6 @@ class FakeTransport {
 
 class PenguinProbe {
   constructor () {
-    console.log(store)
     let probeUid = store.getters['auth/probeUid']
     if (!probeUid.c || (Date.now - probeUid.u) > config.probe.uidExpiration) {
       const gen = randomString(32)
@@ -67,6 +67,7 @@ class PenguinProbe {
     const endpoint = environment.adapter(config.probe.endpoint)
 
     if (!properlySupportedWebSocket()) {
+      Console.info('ProbeTransport', 'client does not support binary websocket. sending pv and quit')
       new Image().src = `${endpoint.legacy}?` + queries + `&l=1`
       this.transport = new FakeTransport()
       return
@@ -80,14 +81,14 @@ class PenguinProbe {
         backoffMax: 5
       },
       {
-        onopen (e) {
-          Console.debug('ProbeTransport', 'websocket connection opened as', e)
+        onopen () {
+          Console.debug('ProbeTransport', 'websocket connection opened')
         },
         onclose (e) {
-          Console.debug('ProbeTransport', 'websocket connection closed as', e)
+          Console.debug('ProbeTransport', 'websocket connection closed with code', e.code, 'reason', e.reason)
         },
         onmessage (e) {
-          Console.debug('ProbeTransport', 'websocket received message as', e)
+          Console.debug('ProbeTransport', 'websocket received message as', e.data)
           try {
             if (e && e.data && e.data.arrayBuffer) {
               const buffer = e.data.arrayBuffer()
@@ -163,6 +164,4 @@ class PenguinProbe {
   }
 }
 
-const probe = new PenguinProbe()
-
-export default probe
+export default PenguinProbe

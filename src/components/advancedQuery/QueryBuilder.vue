@@ -162,7 +162,6 @@
   import marshaller from "@/utils/marshaller";
   import QuerySelectorInterval from "@/components/advancedQuery/selectors/QuerySelectorInterval";
   import snackbar from "@/utils/snackbar";
-  import probe from "@/utils/probe";
 
   export default {
     name: "QueryBuilder",
@@ -248,7 +247,7 @@
             snackbar.networkError()
             this.result.busy = false
           })
-        probe.reportExecutedAdvancedQuery(marshalled)
+        this.$probe.reportExecutedAdvancedQuery(marshalled)
       },
       cancel () {
         this.result.busy = false

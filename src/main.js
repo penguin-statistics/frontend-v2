@@ -15,6 +15,7 @@ import environment from "@/utils/environment";
 const { Device } = Plugins
 
 import './injections'
+import PenguinProbe from "@/utils/probe";
 
 if (!window.Intl) require("intl-collator")
 
@@ -24,11 +25,13 @@ Vue.config.performance = environment.debug.performance
 Vue.config.devtools = environment.debug.devtools
 
 async function bootstrap() {
-  window.$device = {
+  window.$device = Vue.prototype.$device = {
     batteryInfo: await Device.getBatteryInfo(),
     info: await Device.getInfo(),
     languageCode: await Device.getLanguageCode()
   }
+
+  Vue.prototype.$probe = new PenguinProbe()
 
   new Vue({
     vuetify,

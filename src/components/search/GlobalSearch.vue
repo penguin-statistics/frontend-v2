@@ -107,14 +107,14 @@ export default {
       }, 30)
     },
     results() {
-      Console.debug('Search', 'performing search with query', this.debouncedSearch)
+      if (this.debouncedSearch === '') return []
       const results = this.engine.search(this.debouncedSearch)
         .map(el => ({
           ...el,
           ...el.item,
           id: `${el.type}_${el.item.stageId || el.item.itemId}`,
         }))
-      Console.debug('Search', 'got result', results)
+      Console.debug('Search', 'query', this.debouncedSearch, 'got result', results)
       return results
     },
     dependencies() {
