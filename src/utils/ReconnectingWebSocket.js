@@ -15,7 +15,7 @@ export default function (url, protocols, { backoffInitial, backoffMax }, callbac
     if (retryTimes >= backoffMax) {
       return backoffLast
     }
-    backoffLast = backoffLast * 1.5
+    backoffLast = backoffLast * 2
     return backoffLast
   }
 

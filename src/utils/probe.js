@@ -77,7 +77,7 @@ class PenguinProbe {
       `${endpoint.ws}?` + queries,
       [],
       {
-        backoffInitial: 500,
+        backoffInitial: 1000,
         backoffMax: 5
       },
       {
