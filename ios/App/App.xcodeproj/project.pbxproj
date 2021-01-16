@@ -38,10 +38,10 @@
 		3A616168259C698B00FA06A2 /* NotificationPreferences.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A616167259C698B00FA06A2 /* NotificationPreferences.swift */; };
 		3A61616C259C7B8D00FA06A2 /* HapticButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A61616B259C7B8D00FA06A2 /* HapticButton.swift */; };
 		3A679B012599166C00A685E9 /* WelcomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A679B002599166C00A685E9 /* WelcomeView.swift */; };
-		3A885ACA25A43F0400247AED /* RxBus in Frameworks */ = {isa = PBXBuildFile; productRef = 3A885AC925A43F0400247AED /* RxBus */; };
+		3A885ACA25A43F0400247AED /* BuildFile in Frameworks */ = {isa = PBXBuildFile; productRef = 3A885AC925A43F0400247AED /* SwiftPackageProductDependency */; };
 		3A885ACE25A443D600247AED /* EventBus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A885ACD25A443D600247AED /* EventBus.swift */; };
 		3A8EFF992599BBC100B6A788 /* alert1.caf in Resources */ = {isa = PBXBuildFile; fileRef = 3A8EFF982599BBC100B6A788 /* alert1.caf */; };
-		3A8EFFA0259A1BB900B6A788 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 3A8EFF9F259A1BB900B6A788 /* Alamofire */; };
+		3A8EFFA0259A1BB900B6A788 /* BuildFile in Frameworks */ = {isa = PBXBuildFile; productRef = 3A8EFF9F259A1BB900B6A788 /* SwiftPackageProductDependency */; };
 		3A968BB02597A3D5005266F2 /* TwoColumnStageStats.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A968BAF2597A3D5005266F2 /* TwoColumnStageStats.swift */; };
 		3A968BB52597A54E005266F2 /* LargeWidgetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A968BB42597A54E005266F2 /* LargeWidgetView.swift */; };
 		3A968BBA2597A738005266F2 /* ExternalService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A968BB92597A738005266F2 /* ExternalService.swift */; };
@@ -151,9 +151,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3A885ACA25A43F0400247AED /* RxBus in Frameworks */,
+				3A885ACA25A43F0400247AED /* BuildFile in Frameworks */,
 				A084ECDBA7D38E1E42DFC39D /* Pods_App.framework in Frameworks */,
-				3A8EFFA0259A1BB900B6A788 /* Alamofire in Frameworks */,
+				3A8EFFA0259A1BB900B6A788 /* BuildFile in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -338,8 +338,6 @@
 			dependencies = (
 			);
 			name = PenguinWidgetExtension;
-			packageProductDependencies = (
-			);
 			productName = PenguinWidgetExtension;
 			productReference = 3A1157AC258F2B5C00F4C6FD /* PenguinWidgetExtension.appex */;
 			productType = "com.apple.product-type.app-extension";
@@ -363,8 +361,8 @@
 			);
 			name = App;
 			packageProductDependencies = (
-				3A8EFF9F259A1BB900B6A788 /* Alamofire */,
-				3A885AC925A43F0400247AED /* RxBus */,
+				3A8EFF9F259A1BB900B6A788 /* SwiftPackageProductDependency */,
+				3A885AC925A43F0400247AED /* SwiftPackageProductDependency */,
 			);
 			productName = App;
 			productReference = 504EC3041FED79650016851F /* App.app */;
@@ -401,8 +399,8 @@
 			);
 			mainGroup = 504EC2FB1FED79650016851F;
 			packageReferences = (
-				3A8EFF9E259A1BB900B6A788 /* XCRemoteSwiftPackageReference "Alamofire" */,
-				3A885AC825A43F0400247AED /* XCRemoteSwiftPackageReference "RxBus-Swift" */,
+				3A8EFF9E259A1BB900B6A788 /* RemoteSwiftPackageReference */,
+				3A885AC825A43F0400247AED /* RemoteSwiftPackageReference */,
 			);
 			productRefGroup = 504EC3051FED79650016851F /* Products */;
 			projectDirPath = "";
@@ -488,10 +486,10 @@
 			buildActionMask = 2147483647;
 			files = (
 			);
-			inputPaths = (
+			inputFileListPaths = (
 			);
 			name = "[CP] Embed Pods Frameworks";
-			outputPaths = (
+			outputFileListPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -859,7 +857,7 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		3A885AC825A43F0400247AED /* XCRemoteSwiftPackageReference "RxBus-Swift" */ = {
+		3A885AC825A43F0400247AED /* RemoteSwiftPackageReference */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/ridi/RxBus-Swift";
 			requirement = {
@@ -867,7 +865,7 @@
 				minimumVersion = 1.3.1;
 			};
 		};
-		3A8EFF9E259A1BB900B6A788 /* XCRemoteSwiftPackageReference "Alamofire" */ = {
+		3A8EFF9E259A1BB900B6A788 /* RemoteSwiftPackageReference */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/Alamofire/Alamofire";
 			requirement = {
@@ -878,14 +876,14 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		3A885AC925A43F0400247AED /* RxBus */ = {
+		3A885AC925A43F0400247AED /* SwiftPackageProductDependency */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 3A885AC825A43F0400247AED /* XCRemoteSwiftPackageReference "RxBus-Swift" */;
+			package = 3A885AC825A43F0400247AED /* RemoteSwiftPackageReference */;
 			productName = RxBus;
 		};
-		3A8EFF9F259A1BB900B6A788 /* Alamofire */ = {
+		3A8EFF9F259A1BB900B6A788 /* SwiftPackageProductDependency */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 3A8EFF9E259A1BB900B6A788 /* XCRemoteSwiftPackageReference "Alamofire" */;
+			package = 3A8EFF9E259A1BB900B6A788 /* RemoteSwiftPackageReference */;
 			productName = Alamofire;
 		};
 /* End XCSwiftPackageProductDependency section */

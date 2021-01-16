@@ -3220,6 +3220,26 @@ copy-webpack-plugin@^5.1.1:
     serialize-javascript "^2.1.2"
     webpack-log "^2.0.0"
 
+cordova-plugin-appcenter-analytics@^0.5.1:
+  version "0.5.1"
+  resolved "https://registry.yarnpkg.com/cordova-plugin-appcenter-analytics/-/cordova-plugin-appcenter-analytics-0.5.1.tgz#30dc8e43c5a7eeaf76355a2e5dc42ef03c6add37"
+  integrity sha512-at9qN/ogjxe+PtUE93uKJOnHRojazjUm0ncLiGe48SYENOQOyL6nMyLTws+neuDnn9OVYNiPOvPVQuGjvWJYHg==
+
+cordova-plugin-appcenter-crashes@^0.5.1:
+  version "0.5.1"
+  resolved "https://registry.yarnpkg.com/cordova-plugin-appcenter-crashes/-/cordova-plugin-appcenter-crashes-0.5.1.tgz#03c844a06546a03278e74acfcbf00669d9efe650"
+  integrity sha512-PCRCFoR5tUL2NoGRXYpKnJdtKAlRMZava8qOu/hH2uicGg+BHcF3IlZka2TSjJM1Sho3LIWgTgTMSds5i3OqEQ==
+
+cordova-plugin-appcenter-push@^0.5.1:
+  version "0.5.1"
+  resolved "https://registry.yarnpkg.com/cordova-plugin-appcenter-push/-/cordova-plugin-appcenter-push-0.5.1.tgz#05662ed5565b00297b235c7813e95d53b01f421c"
+  integrity sha512-sYGgbSxrp9Qp04a3YcNIDSE0QWs+RaPvhvLgpw/HiAOszUZW5AzQvyquwu/tuREZMVVUyyx49T47m+7d7p/Uzg==
+
+cordova-plugin-appcenter-shared@^0.5.1:
+  version "0.5.1"
+  resolved "https://registry.yarnpkg.com/cordova-plugin-appcenter-shared/-/cordova-plugin-appcenter-shared-0.5.1.tgz#d0638a54f0d885a04859daa7ab7261b3922d3e91"
+  integrity sha512-Kh7Nv6U+oa8rg6lMep8NJIMmmNYFN1aZyF68u9GBI5SG8MeMB2kkPuFc6aSq9KeuV5BTSGyW80xmQX1Mag/n5g==
+
 core-js-compat@^3.6.2, core-js-compat@^3.6.5:
   version "3.6.5"
   resolved "https://registry.yarnpkg.com/core-js-compat/-/core-js-compat-3.6.5.tgz#2a51d9a4e25dfd6e690251aa81f99e3c05481f1c"

@@ -105,21 +105,35 @@
         return shifted
       }
 
+      function expandModal() {
+        document.querySelector(".p-loader__loading-indicators").style.opacity = "0"
+
+        setTimeout(() => {
+          document.querySelector(".p-loader__loading-indicators").style.display = "none"
+          const dialogWrapperEl = document.querySelector(".p-loader__modal-wrapper")
+          const dialogEl = document.querySelector(".p-loader__modal")
+          dialogWrapperEl.style.height = dialogEl.getBoundingClientRect().height + "px"
+          document.querySelector(".p-loader__wrapper").style.cursor = "default"
+        }, 300)
+      }
+
       titleEl.textContent = getTitle()
 
       setInterval(function () {
-        titleEl.style.opacity = 0
+        titleEl.classList.add("p-loader__title--disappear")
         setTimeout(function () {
           titleEl.textContent = getTitle()
-          titleEl.style.opacity = 1
+          titleEl.classList.remove("p-loader__title--disappear")
         }, 500)
-      }, 4000)
+      }, 3500)
 
       let ctr = 0
       setInterval(function () {
-        ctr += 2 + Math.random() * 4
-        document.querySelector(".p-loader__loader-progress").style.width = ctr + "%"
-      }, 500)
+        ctr++
+        // 6.5: the progress bar is *about* to be complete at 6.5s. 6.5s is the data from Google Analytics so that a majority of our users would loaded already
+        const mapped = 1 - Math.exp(-ctr/6.5)
+        document.querySelector(".p-loader__loader-progress").style.width = mapped * 100 + "%"
+      }, 250)
 
       const keyMap = {
         "subtitle": "p-loader__subtitle",
@@ -129,6 +143,10 @@
       for (const [keyMessage, keyElement] of Object.entries(keyMap)) {
         document.getElementById(keyElement).innerHTML = m[keyMessage]
       }
+
+      setTimeout(() => {
+        expandModal()
+      }, 6000)
     }
   };
 

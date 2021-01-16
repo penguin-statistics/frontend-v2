@@ -59,9 +59,38 @@
     text-shadow: 0 0 10px rgba(255, 255, 255, .5);
     margin-bottom: .25rem;
     width: 95%;
+    opacity: 1;
 
     @include flex-center;
-    @include transition(all, 500ms)
+    @include transition(all, 500ms);
+
+    &--disappear {
+      opacity: 0;
+      //transform: rotateX(90deg);
+      letter-spacing: 1px;
+    }
+  }
+  .p-loader__modal-wrapper {
+    height: 0;
+    overflow: hidden;
+    @include transition(all, 300ms);
+    width: 350px;
+    max-width: 350px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, .2);
+    border-radius: 8px;
+    background: rgba(255, 255, 255, .1);
+
+    .p-loader__modal {
+      padding: .5rem 1rem 1rem 1rem;
+
+      h1 {
+        font-size: 1.75rem;
+        margin-bottom: 0;
+      }
+      p {
+        margin: .75rem 0
+      }
+    }
   }
   .p-loader__subtitle {
     //position: relative;
@@ -73,19 +102,27 @@
     font-size: .9rem;
     color: rgba(255, 255, 255, .5)
   }
+  .p-loader__loading-indicators {
+    width: 100%;
+    position: relative;
+    overflow: hidden;
+    @include transition(all, 300ms);
+    @include flex-center
+  }
   .p-loader__loader {
     width: 12rem;
     overflow: hidden;
     position: relative;
     background: rgb(92, 107, 192, .1);
     height: 4px;
+    min-height: 4px;
     border-radius: 2px;
     margin-bottom: 1.5rem;
 
     @include drop-shadow(5px, $color: #5C6BC0);
 
     .p-loader__loader-progress {
-      @include transition;
+      @include transition(all, 250ms);
 
       width: 0;
       position: absolute;

@@ -28,44 +28,67 @@
 <body>
 <noscript>
   <style type="text/css">
-      body {
-          background: #4d2222
-      }
-
       .nojs h1 {
-          font-size: 48px
+          font-size: 48px;
+          margin: 0.2em 0;
       }
 
       .nojs h2 {
           font-size: 36px
       }
+      .nojs p {
+          margin: 0.5em 0;
+      }
 
       .nojs hr {
-          margin: 48px 0;
-          border: 1px solid #000
+          margin: 24px 0;
+          border: 1px solid #212121
       }
 
       .nojs {
+          position: fixed;
+          top: 0;
+          left: 0;
+          height: 100%;
+          width: 100%;
+          z-index: 9999999999;
+          background: #4d2222;
+          background: repeating-linear-gradient(
+                  -45deg,
+                  #3c1b1b,
+                  #3c1b1b 90px,
+                  #1d0d0d 90px,
+                  #1d0d0d 180px
+          );;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+      }
+
+      .nojs-content {
           vertical-align: middle;
-          margin: 32px 13%;
           width: 70%;
           font-weight: 700;
           font-size: 18px;
           font-family: -apple-system, Noto Sans SC, BlinkMacSystemFont, "Segoe UI", Microsoft YaHei UI, Microsoft Yahei, 微软雅黑, Helvetica, Arial, sans-serif;
-          padding: 36px 48px;
-          word-break: break-all;
+          padding: 48px 64px;
+          word-break: break-word;
           text-align: center;
           line-height: 2;
-          border-radius: 8px;
+          border-radius: 16px;
           background: #cc696f;
+          background: rgba(204, 105, 111, .8);
+          backdrop-filter: blur(16px);
+          text-shadow: 0 2px 4px rgba(0, 0, 0, .3);
           border: 4px solid #ff878f;
-          color: #261415
+          color: #261415;
+          box-shadow: 0 0 2rem rgba(0, 0, 0, .5), inset 0 0 2rem rgba(0, 0, 0, .5)
       }
 
-      .nojs a {
+      .nojs .nojs-btn {
           display: inline-block;
           border: 2px solid #000;
-          padding: 16px 24px;
+          padding: 8px 24px;
           margin: 0 8px;
           text-decoration: none;
           background: #3375e0;
@@ -79,44 +102,71 @@
           -moz-appearance: none
       }
 
-      .nojs a:focus, .nojs a:hover {
+      .nojs .nojs-btn:focus, .nojs .nojs-btn:hover {
           background: #368dff;
-          color: #000;
           transform: scale(1.05)
       }
 
-      .nojs a:focus {
+      .nojs .nojs-btn:focus {
           outline: 1px solid #fff;
           outline-offset: -4px
       }
 
-      .nojs a:active {
+      .nojs .nojs-btn:active {
           transform: scale(.99)
       }
 
       .nojs del {
           padding: 4px 8px;
-          background: #000;
-          color: #fff
+          background: #1d1d1d;
+          background: repeating-linear-gradient(
+                  -45deg,
+                  rgb(153, 93, 34),
+                  rgba(153, 93, 34, 1) 15px,
+                  rgba(0, 0, 0, 0.5) 15px,
+                  rgba(0, 0, 0, 0.5) 30px
+          );
+          color: #cbcbcb;
+          border-radius: 4px;
+      }
+
+      .nojs .nojs-link {
+          background: #0d47a1;
+          color: white;
+          border: 2px solid #093777;
+          padding: 4px 6px;
+          text-decoration: none;
+
+          border-radius: 4px;
+      }
+      .nojs .nojs-btn:focus, .nojs .nojs-link:hover {
+          background: #0f5ad6;
+      }
+      .nojs .nojs-link:active {
+          background: #0d4fba;
       }
   </style>
   <div class="nojs">
-    <h1>JavaScript 已被禁用</h1>
-    <p>
-      很抱歉，但企鹅物流数据统计需要您启用
-      <del>等离子发动机（不是）</del>
-      JavaScript 以提供服务。若您确信自己已开启相关技术，那么可能是您的浏览器版本太低了；请点击下方按钮升级浏览器。
-    </p>
-    <hr>
-    <a href="https://www.mozilla.org/zh-CN/firefox/new/" target="_blank"
-       title="使用我们一系列隐私优先产品，得回您应受到的重视。">使用 Mozilla Firefox (推荐)</a>
+    <div class="nojs-content">
+      <h1>⚠️ JavaScript 已被禁用</h1>
+      <p>
+        很抱歉，由于企鹅物流数据统计使用了 Vue.js 这样的 SPA (Single Page Application) Framework，我们在您启用
+        <del>等离子发动机</del>
+        JavaScript 的情况下才能为您提供服务。
+      </p>
+      <p>
+        若您确信自己已开启相关技术，那么可能是您的浏览器版本太低了；请点击下方按钮升级浏览器。
+      </p>
+      <hr>
+      <a class="nojs-btn" href="https://www.mozilla.org/zh-CN/firefox/new/" target="_blank">使用 Mozilla Firefox (推荐)</a>
 
-    <a href="https://www.google.cn/chrome/" target="_blank" title="得益于内置的 Google 智能工具，Chrome 现在更易用、更安全、更快速。">
-      使用 Google Chrome
-    </a>
+      <a class="nojs-btn" href="https://www.google.cn/chrome/" target="_blank">
+        使用 Google Chrome
+      </a>
 
-    <br>
-    <p>&copy; 企鹅物流</p>
+      <br><br>
+      <p>Penguin Statistics | <a class="nojs-link" href="https://github.com/penguin-statistics" target="_blank">GitHub</a></p>
+    </div>
   </div>
 </noscript>
 <main id="app">
@@ -126,16 +176,25 @@
     <img alt="Logo" class="p-loader__logo"
          src="https://penguin.upyun.galvincdn.com/logos/penguin_stats_logo.png"/>
 
-    <div class="p-loader__loader">
-      <div class="p-loader__loader-progress"></div>
+    <div class="p-loader__loading-indicators">
+      <div class="p-loader__loader">
+        <div class="p-loader__loader-progress"></div>
+      </div>
+
+      <div class="p-loader__title p-loader--text">
+        正在加载
+      </div>
+
+      <div class="p-loader__subtitle p-loader--text" id="p-loader__subtitle">
+        首次加载可能较慢，请耐心等待
+      </div>
     </div>
 
-    <div class="p-loader__title p-loader--text">
-      正在加载
-    </div>
-
-    <div class="p-loader__subtitle p-loader--text" id="p-loader__subtitle">
-      首次加载可能较慢，请耐心等待
+    <div class="p-loader__modal-wrapper">
+      <div class="p-loader__modal">
+        <h1>模态框</h1>
+        <p>一堆字一堆字一堆字一堆字一堆字一堆字一堆字一堆字一堆字一堆字</p>
+      </div>
     </div>
 
     <!--    <div class="p-loader__subtitle p-loader&#45;&#45;text">-->
