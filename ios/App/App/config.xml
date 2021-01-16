@@ -2,26 +2,5 @@
 <widget version="1.0.0" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
   <access origin="*" />
   
-  <feature name="AppCenterAnalytics">
-    <param name="ios-package" value="AppCenterAnalyticsPlugin"/>
-    <param name="onload" value="true"/>
-  </feature>
-
-  <feature name="AppCenterCrashes">
-    <param name="ios-package" value="AppCenterCrashesPlugin"/>
-    <param name="onload" value="true"/>
-  </feature>
-
-  <feature name="AppCenterPush">
-    <param name="ios-package" value="AppCenterPushPlugin"/>
-    <param name="onload" value="true"/>
-  </feature>
-
-  <feature name="AppCenterShared">
-    <param name="ios-package" value="AppCenterSharedPlugin"/>
-    <param name="onload" value="true"/>
-  </feature>
-
-  <preference name="APP_SECRET" value="ebe2d0df-8d1a-462d-8a2d-683d74e9dd11" />
   
 </widget>

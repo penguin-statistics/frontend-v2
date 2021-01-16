@@ -10,12 +10,9 @@ android {
 apply from: "../capacitor-cordova-android-plugins/cordova.variables.gradle"
 dependencies {
 
-    implementation "com.microsoft.appcenter:appcenter-analytics:2.4.1"
-    implementation "com.microsoft.appcenter:appcenter-crashes:2.4.1"
-    implementation "com.microsoft.appcenter:appcenter-push:2.4.1"
-    implementation "com.microsoft.appcenter:appcenter:2.4.1"
+
 }
-apply from: "../../node_modules/cordova-plugin-appcenter-push/src/android/AppCenterPush.gradle"
+
 
 if (hasProperty('postBuildExtras')) {
   postBuildExtras()
