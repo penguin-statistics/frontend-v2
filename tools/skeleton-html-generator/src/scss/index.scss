@@ -1,0 +1,129 @@
+@mixin flex-center {
+  display: flex;
+  flex-direction: column;
+
+  justify-content: center;
+  align-items: center;
+}
+
+@mixin drop-shadow($radius: 10px, $color: rgba(255, 255, 255, .1)) {
+  filter: drop-shadow(0 0 $radius $color);
+}
+
+@mixin transition($scope: all, $duration: 225ms) {
+  transition: $scope $duration ease-in-out;
+}
+
+.p-loader--gradient {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  opacity: 0;
+  z-index: -1;
+  @include transition(opacity, 2s);
+
+  background-image: linear-gradient(310deg, #36244d, #412c4d, #4d382f);;
+}
+
+.p-loader__wrapper {
+  font-family: Roboto, -apple-system, Noto Sans SC, BlinkMacSystemFont, "Segoe UI", Microsoft YaHei UI, Microsoft Yahei, 微软雅黑, Helvetica, Arial, sans-serif;
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+  position: relative;
+  user-select: none;
+  cursor: progress;
+  text-align: center;
+
+  color: #fefefe;
+
+  @include flex-center;
+
+  .p-loader__logo {
+    height: 6rem;
+    width: 6rem;
+    margin-bottom: 2rem;
+    @include drop-shadow(10px)
+  }
+  .p-loader--text {
+    font-size: 1rem;
+    line-height: 1.5rem;
+    letter-spacing: .015em;
+  }
+  .p-loader__title {
+    position: relative;
+    z-index: 1;
+    min-height: 2rem;
+    text-shadow: 0 0 10px rgba(255, 255, 255, .5);
+    margin-bottom: .25rem;
+    width: 95%;
+
+    @include flex-center;
+    @include transition(all, 500ms)
+  }
+  .p-loader__subtitle {
+    //position: relative;
+    //z-index: 1;
+    //height: 2rem;
+    //
+    //@include flex-center;
+    //@include full-width;
+    font-size: .9rem;
+    color: rgba(255, 255, 255, .5)
+  }
+  .p-loader__loader {
+    width: 12rem;
+    overflow: hidden;
+    position: relative;
+    background: rgb(92, 107, 192, .1);
+    height: 4px;
+    border-radius: 2px;
+    margin-bottom: 1.5rem;
+
+    @include drop-shadow(5px, $color: #5C6BC0);
+
+    .p-loader__loader-progress {
+      @include transition;
+
+      width: 0;
+      position: absolute;
+      left: 0;
+      top: 0;
+      height: 4px;
+      background: #5C6BC0;
+    }
+  }
+
+  .p-loader__footer {
+    position: absolute;
+    bottom: 0;
+    height: 3rem;
+    line-height: .9rem;
+    width: 100%;
+    font-size: .9rem;
+    color: rgba(255, 255, 255, .35);
+    letter-spacing: .015rem;
+
+    display: flex;
+
+    justify-content: center;
+
+    .p-loader__footer-divider {
+      margin: 0 .35rem;
+    }
+  }
+}
+
+//@keyframes p-loader-gradient {
+//  0% {
+//    background-position: 0% 50%;
+//  }
+//  50% {
+//    background-position: 100% 50%;
+//  }
+//  100% {
+//    background-position: 0% 50%;
+//  }
+//}

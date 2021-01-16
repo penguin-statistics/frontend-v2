@@ -1,4 +1,5 @@
 const webpack = require("webpack");
+const config = require("./src/config/index.js")
 
 require('events').EventEmitter.defaultMaxListeners = 50;
 
@@ -17,6 +18,9 @@ function envvar(name, fallback) {
   if (content) content = content.trim()
   return JSON.stringify(content || fallback) || `"null"`
 }
+
+const noscriptImage = JSON.stringify(`${config.probe.endpoint.prod.legacy}?v=${config.version}&p=web&l=1`)
+console.log("Using probe noscript fallback location", noscriptImage)
 
 module.exports = {
   pluginOptions: {
@@ -41,6 +45,7 @@ module.exports = {
     "vuetify",
     "fuse.js",
     "semver",
+    "protobufjs"
   ],
   configureWebpack: {
     plugins: [
@@ -48,6 +53,7 @@ module.exports = {
         GIT_COMMIT: JSON.stringify(commitHash).trim(),
         PENGUIN_PLATFORM: envvar('PENGUIN_PLATFORM', 'unspecified'),
         PENGUIN_PLATFORM_FROM: envvar('PENGUIN_PLATFORM_FROM', null),
+        PENGUIN_PROBE_NOSCRIPT: noscriptImage
       })
       // new InjectManifest ({
       //   swSrc: "./src/workers/service-worker.js",

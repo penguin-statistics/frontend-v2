@@ -4,11 +4,19 @@ import config from "@/config";
 export default {
   namespaced: true,
   state: {
-    username: null
+    username: null,
+    probeUid: {
+      u: null,
+      c: null
+    }
   },
   mutations: {
     changeUsername (state, username) {
       state.username = username
+    },
+    changeProbeUid (state, uid) {
+      state.probeUid.u = Date.now()
+      state.probeUid.c = uid
     }
   },
   actions: {
@@ -31,6 +39,7 @@ export default {
     },
     username: state => {
       return state.username || ''
-    }
+    },
+    probeUid: state => state.probeUid,
   }
 };

@@ -222,8 +222,9 @@
       execute () {
         const start = Date.now()
         this.result.busy = true
+        const marshalled = marshaller.advancedQuery(this.value)
         query.advancedQuery(
-          marshaller.advancedQuery(this.value)
+          marshalled
         )
           .then(({data}) => {
             data = data["advanced_results"]
@@ -232,7 +233,7 @@
               // if the user hasn't see the loading screen up to 3.5sec
               setTimeout(() => {
                 // then we let them see that for just a little longer time
-                // to reduce the "flashy" feeling when netowrk condition is pretty ideal
+                // to reduce the "flashy" feeling when network condition is pretty ideal
                 this.$emit("result", data)
                 this.result.busy = false
               }, Math.random() * 500 + 2000)
@@ -246,6 +247,7 @@
             snackbar.networkError()
             this.result.busy = false
           })
+        this.$probe.reportExecutedAdvancedQuery(marshalled)
       },
       cancel () {
         this.result.busy = false

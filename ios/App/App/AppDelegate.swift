@@ -75,6 +75,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             }
         }
         
+        
         // MARK: save shortcut to process
         if let shortcutItem = launchOptions?[UIApplication.LaunchOptionsKey.shortcutItem] as? UIApplicationShortcutItem {
             shortcutItemToProcess = shortcutItem
@@ -113,7 +114,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             let monitor = NWPathMonitor()
             
             monitor.pathUpdateHandler = { path in
-                print("new network path:", path)
                 var isConstrained = false
                 
                 if #available(iOS 13.0, *) {
