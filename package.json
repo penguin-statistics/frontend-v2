@@ -1,6 +1,6 @@
 {
   "name": "penguin-stats-frontend",
-  "version": "3.4.1",
+  "version": "3.4.2",
   "private": true,
   "author": "Penguin Statistics Contributors <contributors@penguin-stats.io> (https://github.com/orgs/penguin-statistics/people)",
   "scripts": {
@@ -45,7 +45,7 @@
     "katex": "^0.12.0",
     "lodash": "^4.17.20",
     "marked": "^1.0.0",
-    "minisearch": "^3.0.2",
+    "protobufjs": "^6.10.2",
     "qs": "^6.9.4",
     "regenerator-runtime": "^0.13.5",
     "semver": "^7.3.2",
@@ -100,10 +100,10 @@
     }
   },
   "browserslist": [
-    "> 0.1% in my stats",
-    "> 1% in CN",
+    "> 0.05% in my stats",
+    "> 0.5% in CN",
     "last 5 versions",
-    "since 2010",
+    "since 2013",
     "defaults"
   ],
   "bugs": {
