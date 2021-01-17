@@ -220,6 +220,8 @@
       top: 0;
       height: 4px;
       background: #5C6BC0;
+
+      animation: p-loader__bar 20s
     }
   }
 }
@@ -244,6 +246,30 @@
   .p-loader__footer-divider {
     margin: 0 .35rem;
   }
+}
+
+// 1 - math.Exp(- percent / 10)
+@keyframes p-loader__bar {
+  0% { width: 0.000000% }
+  5% { width: 39.346934% }
+  10% { width: 63.212056% }
+  15% { width: 77.686984% }
+  20% { width: 86.466472% }
+  25% { width: 91.791500% }
+  30% { width: 95.021293% }
+  35% { width: 96.980262% }
+  40% { width: 98.168436% }
+  45% { width: 98.889100% }
+  50% { width: 99.326205% }
+  55% { width: 99.591323% }
+  60% { width: 99.752125% }
+  65% { width: 99.849656% }
+  70% { width: 99.908812% }
+  75% { width: 99.944692% }
+  80% { width: 99.966454% }
+  85% { width: 99.979653% }
+  90% { width: 99.987659% }
+  100% { width: 99.992515% }
 }
 
 //@keyframes p-loader-gradient {

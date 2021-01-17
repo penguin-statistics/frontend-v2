@@ -218,14 +218,16 @@
           }, 500)
         }, 3500))
 
-        let ctr = 0
-        timers.push(setInterval(function () {
-          ctr++
-          // 6.5: the progress bar is *about* to be complete at 6.5s. 6.5s is the data
-          // from Google Analytics so that a majority of our users would loaded the site already
-          const mapped = 1 - Math.exp(-ctr/6.5)
-          qs(".p-loader__loader-progress").style.width = mapped * 100 + "%"
-        }, 250))
+        // used css progress bar animation to avoid blocking main thread
+
+        // let ctr = 0
+        // timers.push(setInterval(function () {
+        //   ctr++
+        //   // 6.5: the progress bar is *about* to be complete at 6.5s. 6.5s is the data
+        //   // from Google Analytics so that a majority of our users would loaded the site already
+        //   const mapped = 1 - Math.exp(-ctr/6.5)
+        //   qs(".p-loader__loader-progress").style.width = mapped * 100 + "%"
+        // }, 250))
 
         const keyMap = {
           "subtitle": "p-loader__subtitle",
