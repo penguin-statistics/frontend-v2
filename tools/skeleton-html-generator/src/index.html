@@ -8,7 +8,6 @@
   <link crossorigin="anonymous"
         href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Condensed:400"
         rel="stylesheet">
-  <link href="/favicon.ico" rel="icon">
   <title>企鹅物流数据统计</title>
   <style>
       #app, body, html {
@@ -171,48 +170,33 @@
 </noscript>
 <main id="app">
   <div id="p-loader--gradientel" class="p-loader--gradient"></div>
+  <div id="p-loader--overlayel" class="p-loader--overlay"></div>
   <div id="p-loader__wrapperel" class="p-loader__wrapper">
-
     <img alt="Logo" class="p-loader__logo"
          src="https://penguin.upyun.galvincdn.com/logos/penguin_stats_logo.png"/>
-
     <div class="p-loader__loading-indicators">
       <div class="p-loader__loader">
         <div class="p-loader__loader-progress"></div>
       </div>
-
       <div class="p-loader__title p-loader--text">
         正在加载
       </div>
-
       <div class="p-loader__subtitle p-loader--text" id="p-loader__subtitle">
         首次加载可能较慢，请耐心等待
       </div>
     </div>
-
     <div class="p-loader__modal-wrapper">
-      <div class="p-loader__modal">
-
-      </div>
+      <div class="p-loader__modal"></div>
     </div>
-
-    <!--    <div class="p-loader__subtitle p-loader&#45;&#45;text">-->
-    <!--      Loading main.js-->
-    <!--    </div>-->
   </div>
   <div class="p-loader__footer">
-      <span id="p-loader__footer-vendor">
-        &copy; 企鹅物流数据统计
-      </span>
-    <span class="p-loader__footer-divider">
-        —
-      </span>
+    <span id="p-loader__footer-vendor">
+      &copy; 企鹅物流数据统计
+    </span><span class="p-loader__footer-divider">—</span>
     <span id="p-loader__footer--year">2021</span>
   </div>
 </main>
-<!--<script src="js/resetter.js" type="text/javascript"></script>-->
-<script src="js/loader.js" type="text/javascript"></script>
-<!--<script src="js/crisp.js" type="text/javascript"></script>-->
+<script src="js/loader.js"></script>
 </body>
 </html>
 

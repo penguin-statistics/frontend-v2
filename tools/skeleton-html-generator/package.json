@@ -4,12 +4,13 @@
   "scripts": {
     "dev": "parcel src/*.html",
     "dev:public": "parcel src/*.html --host 0.0.0.0",
-    "build": "parcel build src/*.html"
+    "build": "parcel build src/*.html --no-source-maps"
   },
   "version": "1.0.0",
   "main": "index.js",
   "license": "MIT",
   "devDependencies": {
+    "@babel/preset-env": "^7.12.11",
     "parcel-bundler": "^1.12.4",
     "parcel-plugin-ejs-template": "^0.2.0",
     "parcel-plugin-inliner": "^1.0.14",
@@ -20,5 +21,6 @@
     "last 5 versions",
     "since 2013",
     "defaults"
-  ]
+  ],
+  "dependencies": {}
 }
