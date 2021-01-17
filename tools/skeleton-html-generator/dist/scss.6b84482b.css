@@ -7,15 +7,18 @@
   width: 100%;
   opacity: 0;
   z-index: -1;
-  transition: opacity 2s ease-in-out;
+  transition: opacity 2s ease-in-out, background-image 1s ease-in-out;
   background-image: linear-gradient(310deg, #36244d, #412c4d, #4d382f);
+}
+.p-loader--gradient-haserror {
+  background-image: linear-gradient(310deg, #6b2525, #4f2020, #4f1c1c);
 }
 
 .p-loader__wrapper {
   font-family: Roboto, -apple-system, Noto Sans SC, BlinkMacSystemFont, "Segoe UI", Microsoft YaHei UI, Microsoft Yahei, 微软雅黑, Helvetica, Arial, sans-serif;
   height: 100%;
   width: 100%;
-  overflow: hidden;
+  overflow: auto;
   position: relative;
   user-select: none;
   cursor: progress;
@@ -25,6 +28,7 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  background: transparent;
 }
 .p-loader__wrapper .p-loader__logo {
   height: 6rem;
@@ -35,7 +39,7 @@
 .p-loader__wrapper .p-loader--text {
   font-size: 1rem;
   line-height: 1.5rem;
-  letter-spacing: 0.015em;
+  letter-spacing: 0.02em;
 }
 .p-loader__wrapper .p-loader__title {
   position: relative;
@@ -59,21 +63,59 @@
   height: 0;
   overflow: hidden;
   transition: all 300ms ease-in-out;
-  width: 350px;
-  max-width: 350px;
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+  max-width: 450px;
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
   border-radius: 8px;
   background: rgba(255, 255, 255, 0.1);
-}
-.p-loader__wrapper .p-loader__modal-wrapper .p-loader__modal {
-  padding: 0.5rem 1rem 1rem 1rem;
+  text-align: left;
 }
 .p-loader__wrapper .p-loader__modal-wrapper .p-loader__modal h1 {
   font-size: 1.75rem;
-  margin-bottom: 0;
+  background: rgba(0, 0, 0, 0.15);
+  margin: 0;
+  padding: 1rem 1.5rem;
 }
-.p-loader__wrapper .p-loader__modal-wrapper .p-loader__modal p {
+.p-loader__wrapper .p-loader__modal-wrapper .p-loader__modal .p-loader__modal-content {
+  padding: 0.5rem 2rem 1rem;
+}
+.p-loader__wrapper .p-loader__modal-wrapper .p-loader__modal .p-loader__modal-content p {
   margin: 0.75rem 0;
+  line-height: 1.5;
+}
+.p-loader__wrapper .p-loader__modal-wrapper .p-loader__modal .p-loader__modal-content ul {
+  padding-left: 1rem;
+}
+.p-loader__wrapper .p-loader__modal-wrapper .p-loader__modal .p-loader__modal-content ul li:not(:last-child) {
+  padding-bottom: 0.5rem;
+}
+.p-loader__wrapper .p-loader__modal-wrapper .p-loader__modal .p-loader__modal-content a, .p-loader__wrapper .p-loader__modal-wrapper .p-loader__modal .p-loader__modal-content button {
+  font-family: Roboto, -apple-system, Noto Sans SC, BlinkMacSystemFont, "Segoe UI", Microsoft YaHei UI, Microsoft Yahei, 微软雅黑, Helvetica, Arial, sans-serif;
+  display: inline-block;
+  padding: 6px 12px;
+  margin: 0 6px;
+  text-decoration: none;
+  background: #3375e0;
+  border: none;
+  color: #fff;
+  font-size: 16px;
+  border-radius: 4px;
+  cursor: pointer;
+  text-align: center;
+  transition: background 50ms ease-out, transform 150ms ease, box-shadow 150ms ease;
+  -webkit-appearance: none;
+  appearance: none;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2), 0 0 0 0 #286cd4;
+  outline: none !important;
+  letter-spacing: 0.015rem;
+}
+.p-loader__wrapper .p-loader__modal-wrapper .p-loader__modal .p-loader__modal-content a:hover, .p-loader__wrapper .p-loader__modal-wrapper .p-loader__modal .p-loader__modal-content button:hover {
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4), 0 0 0 0 #286cd4;
+}
+.p-loader__wrapper .p-loader__modal-wrapper .p-loader__modal .p-loader__modal-content a:active, .p-loader__wrapper .p-loader__modal-wrapper .p-loader__modal .p-loader__modal-content button:active {
+  color: #d0d0d0;
+  background: #285db3;
+  box-shadow: 0 0 0 3px #5798ff;
+  transform: translateY(1px);
 }
 .p-loader__wrapper .p-loader__subtitle {
   font-size: 0.9rem;
@@ -109,7 +151,8 @@
   height: 4px;
   background: #5C6BC0;
 }
-.p-loader__wrapper .p-loader__footer {
+
+.p-loader__footer {
   position: absolute;
   bottom: 0;
   height: 3rem;
@@ -118,10 +161,11 @@
   font-size: 0.9rem;
   color: rgba(255, 255, 255, 0.35);
   letter-spacing: 0.015rem;
+  pointer-events: none;
   display: flex;
   justify-content: center;
 }
-.p-loader__wrapper .p-loader__footer .p-loader__footer-divider {
+.p-loader__footer .p-loader__footer-divider {
   margin: 0 0.35rem;
 }
 

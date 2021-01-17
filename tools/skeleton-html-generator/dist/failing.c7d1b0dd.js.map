@@ -1,0 +1,1 @@
+{"version":3,"sources":["js/failing.js"],"names":["Error"],"mappings":"AAAA,MAAM,IAAIA,KAAJ,CAAU,IAAV,CAAN","file":"failing.c7d1b0dd.js","sourceRoot":"../src","sourcesContent":["throw new Error(\":D\")"]}
