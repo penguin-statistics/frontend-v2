@@ -11,7 +11,7 @@
 }
 
 @mixin transition($scope: all, $duration: 225ms) {
-  transition: $scope $duration ease-in-out;
+  transition: $scope $duration cubic-bezier(0.25, 1, 0.5, 1);
 }
 
 @mixin apply-font-family {
@@ -26,7 +26,7 @@
   width: 100%;
   opacity: 0;
   z-index: -1;
-  transition: opacity 2s ease-in-out, background-image 1s ease-in-out;
+  transition: opacity 2s cubic-bezier(0.25, 1, 0.5, 1), background-image 1s cubic-bezier(0.25, 1, 0.5, 1);
   background-image: linear-gradient(310deg, #36244d, #412c4d, #4d382f);
 
   &-haserror {
@@ -123,7 +123,7 @@
           border-radius: 4px;
           cursor: pointer;
           text-align: center;
-          transition: background 50ms ease-out, transform 150ms ease, box-shadow 150ms ease;
+          transition: background 50ms cubic-bezier(0.25, 1, 0.5, 1), transform 150ms cubic-bezier(0.25, 1, 0.5, 1), box-shadow 200ms cubic-bezier(0.25, 1, 0.5, 1);
           -webkit-appearance: none;
           appearance: none;
           box-shadow: 0 2px 4px rgba(0, 0, 0, .2), 0 0 0 0 #286cd4;
@@ -131,12 +131,12 @@
           letter-spacing: .015rem;
 
           &:hover {
-            box-shadow: 0 2px 8px rgba(0, 0, 0, .4), 0 0 0 0 #286cd4;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, .6), 0 0 0 0 #286cd4;
           }
           &:active {
             color: #d0d0d0;
             background: #285db3;
-            box-shadow: 0 0 0 3px #5798ff;
+            box-shadow: 0 0 0 rgba(0, 0, 0, .4), 0 0 0 3px #5798ff;
             transform: translateY(1px);
           }
         }

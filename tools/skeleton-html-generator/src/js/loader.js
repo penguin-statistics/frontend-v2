@@ -149,11 +149,14 @@ const loader = function () {
           passive: true
         })
 
+        let loadingIndicatorsOpacity = 0
+
         if (type === "slow") {
           dialogWrapperEl.style.marginTop = "32px"
-        } else {
-          document.querySelector(".p-loader__loading-indicators").style.opacity = "0"
+          loadingIndicatorsOpacity = 0.6
         }
+
+        document.querySelector(".p-loader__loading-indicators").style.opacity = loadingIndicatorsOpacity.toString()
         document.querySelector(".p-loader--gradient").classList.add("p-loader--gradient-haserror")
 
         setTimeout(() => {
@@ -161,7 +164,6 @@ const loader = function () {
 
           if (type !== "slow") document.querySelector(".p-loader__loading-indicators").style.display = "none"
           document.querySelector(".p-loader__wrapper").style.cursor = "default"
-
 
           dialogEl.innerHTML = `<h1>${message.title}</h1><div class="p-loader__modal-content">${message.content}</div>`
 

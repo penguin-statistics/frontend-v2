@@ -2,8 +2,9 @@
   "name": "skeleton-html-generator",
   "private": true,
   "scripts": {
-    "dev": "parcel src/index.html",
-    "build": "parcel build src/index.html"
+    "dev": "parcel src/*.html",
+    "dev:public": "parcel src/*.html --host 0.0.0.0",
+    "build": "parcel build src/*.html"
   },
   "version": "1.0.0",
   "main": "index.js",
