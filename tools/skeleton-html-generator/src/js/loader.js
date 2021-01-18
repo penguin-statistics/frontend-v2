@@ -1,6 +1,17 @@
 (function() {
   window.__penguinLoader = {}
 
+  if (!Object.entries)
+    Object.entries = function( obj ){
+      var ownProps = Object.keys( obj ),
+        i = ownProps.length,
+        resArray = new Array(i); // preallocate the Array
+      while (i--)
+        resArray[i] = [ownProps[i], obj[ownProps[i]]];
+
+      return resArray;
+    };
+
   const loader = function () {
     function qs(selector) {
       return document.querySelector(selector) || {style: {}, classList: {}, textContent: "", innerHTML: ""}
@@ -8,7 +19,7 @@
 
     // gradient timeout
     setTimeout(function () {
-      qs("#p-loader--gradientel").style.opacity = 1
+      qs("#peL--gradientel").style.opacity = 1
     }, 750)
 
     let _i18n = {
@@ -148,13 +159,13 @@
         document.getElementById(key).innerHTML = content;
       },
       render () {
-        document.querySelector("#p-loader__footer--year").textContent = new Date().getFullYear().toString();
+        document.querySelector("#peL_footer--year").textContent = new Date().getFullYear().toString();
         const language = this.language() || "en";
         const m = this.data[language]
         const backupM = this.data["en"]
         const timers = []
 
-        const titleEl = qs(".p-loader__title")
+        const titleEl = qs(".peL_title")
 
         function getTitle() {
           const shifted = m.titles.shift()
@@ -165,15 +176,15 @@
         let modalAlreadyExpanded = false
 
         function resizeListener() {
-          qs(".p-loader__modal-wrapper").style.height = "auto"
+          qs(".peL_modal-w").style.height = "auto"
         }
 
         function expandModal(type) {
           if (modalAlreadyExpanded) return
           modalAlreadyExpanded = true
 
-          const dialogWrapperEl = qs(".p-loader__modal-wrapper") || {style: {}}
-          const dialogEl = qs(".p-loader__modal") || {style: {}}
+          const dialogWrapperEl = qs(".peL_modal-w") || {style: {}}
+          const dialogEl = qs(".peL_modal") || {style: {}}
 
           window.addEventListener("resize", resizeListener, {
             passive: true
@@ -186,23 +197,23 @@
             loadingIndicatorsOpacity = 0.6
           }
 
-          qs(".p-loader__loading-indicators").style.opacity = loadingIndicatorsOpacity.toString()
-          qs(".p-loader--gradient").classList.add("p-loader--gradient-haserror")
+          qs(".peL_loInd").style.opacity = loadingIndicatorsOpacity.toString()
+          qs(".peL--gradient").classList.add("peL--gradient-haserror")
 
           setTimeout(() => {
             const message = m.errors[type] || backupM.errors[type]
 
-            if (type !== "slow") qs(".p-loader__loading-indicators").style.display = "none"
-            qs(".p-loader__wrapper").style.cursor = "default"
+            if (type !== "slow") qs(".peL_loInd").style.display = "none"
+            qs(".peL_w").style.cursor = "default"
 
-            dialogEl.innerHTML = `<h1>${message.title}</h1><div class="p-loader__modal-content">${message.content}</div>`
+            dialogEl.innerHTML = `<h1>${message.title}</h1><div class="peL_modal-c">${message.content}</div>`
 
             dialogWrapperEl.style.height = dialogEl.getBoundingClientRect().height + "px"
           }, 300)
         }
 
         function showOverlay(type) {
-          const overlay = qs("#p-loader--overlayel")
+          const overlay = qs("#peL--overlayel")
           overlay.style.pointerEvents = "initial"
           overlay.style.opacity = "1"
           overlay.innerHTML = m.overlay[type] || backupM.overlay[type]
@@ -211,10 +222,10 @@
         titleEl.textContent = getTitle()
 
         timers.push(setInterval(function () {
-          titleEl.classList.add("p-loader__title--disappear")
+          titleEl.classList.add("peL_title-gone")
           setTimeout(function () {
             titleEl.textContent = getTitle()
-            titleEl.classList.remove("p-loader__title--disappear")
+            titleEl.classList.remove("peL_title-gone")
           }, 500)
         }, 3500))
 
@@ -226,12 +237,12 @@
         //   // 6.5: the progress bar is *about* to be complete at 6.5s. 6.5s is the data
         //   // from Google Analytics so that a majority of our users would loaded the site already
         //   const mapped = 1 - Math.exp(-ctr/6.5)
-        //   qs(".p-loader__loader-progress").style.width = mapped * 100 + "%"
+        //   qs(".peL_loader-p").style.width = mapped * 100 + "%"
         // }, 250))
 
         const keyMap = {
-          "subtitle": "p-loader__subtitle",
-          "vendor": "p-loader__footer-vendor"
+          "subtitle": "peL_subtitle",
+          "vendor": "peL_footer-vendor"
         }
 
         for (const [keyMessage, keyElement] of Object.entries(keyMap)) {
@@ -255,7 +266,7 @@
         window.onload = function () {
           window.removeEventListener("resize", resizeListener, {passive: true})
           canceller()
-          if (document.querySelector(".p-loader__wrapper")) {
+          if (document.querySelector(".peL_w")) {
             activateModal("coreExec")
           }
         }
