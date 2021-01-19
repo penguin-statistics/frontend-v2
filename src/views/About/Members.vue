@@ -207,6 +207,16 @@
               }
             },
             {
+              name: "ChoKhoOu",
+              responsibility: [
+                r.backend
+              ],
+              avatar: "chokhoou.jpg",
+              socials: {
+                github: "https://github.com/ChoKhoOu"
+              }
+            },
+            {
               name: "侠",
               responsibility: [
                 r.logo
