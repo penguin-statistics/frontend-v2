@@ -103,7 +103,7 @@
               r.frontend,
               r.maintenance,
               r.widget,
-              r.customersupport
+              r.native
             ],
             avatar: "gg.jpg",
             socials: {

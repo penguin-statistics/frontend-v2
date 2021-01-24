@@ -479,6 +479,7 @@ members:
     materials: 素材提供
     statistics: 统计分析
     widget: 小组件开发
+    native: App 开发
   socials:
     email: Email
     github: GitHub

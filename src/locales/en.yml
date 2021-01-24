@@ -507,6 +507,7 @@ members:
     materials: Materials Supplier
     statistics: Statistics and Analysis
     widget: Widget Development
+    native: App Development
   socials:
     email: Email
     github: GitHub
