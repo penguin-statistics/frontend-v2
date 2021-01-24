@@ -130,6 +130,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             monitor.start(queue: DispatchQueue.global(qos: .background))
         }
         
+        if let options = launchOptions {
+            let notif = options[UIApplication.LaunchOptionsKey.remoteNotification] as? [NSDictionary]
+            print("remote notification launch option", notif ?? "null")
+        }
         
         return true
     }
@@ -159,6 +163,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func applicationDidBecomeActive(_ application: UIApplication) {
         // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
+        UIApplication.shared.applicationIconBadgeNumber = 0
         
         let root = window?.rootViewController
         
@@ -251,6 +256,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: Error) {
         NotificationCenter.default.post(name: Notification.Name(CAPNotifications.DidFailToRegisterForRemoteNotificationsWithError.name()), object: error)
+    }
+    
+    func userNotificationCenter(_ center: UNUserNotificationCenter,
+                             willPresent notification: UNNotification,
+                             withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
+        print("received remote notification", notification)
+        completionHandler(.alert)
     }
     
     #endif
