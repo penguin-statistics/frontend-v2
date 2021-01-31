@@ -333,7 +333,7 @@ item:
   related: 関連素材
 dataSource:
   global: 全体
-  loginNotice: 個人のドロップデータを表示するにはログインが必要となります。
+  loginNotice: 個人所有のドロップデータを閲覧するには、ログインする必要があります。
   personal: 個人
   title: ログインが必要です
 members:
