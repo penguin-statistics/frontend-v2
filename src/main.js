@@ -24,6 +24,7 @@ Vue.config.devtools = environment.debug.devtools
 
 async function bootstrap() {
   Vue.prototype.$probe = new PenguinProbe()
+  Vue.prototype.$env = environment
 
   new Vue({
     vuetify,

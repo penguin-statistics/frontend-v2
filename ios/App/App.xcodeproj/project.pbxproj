@@ -14,24 +14,27 @@
 		3A001AD72599A68A0078A265 /* Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A001AD62599A68A0078A265 /* Helpers.swift */; };
 		3A06C1102597112E00B81F31 /* SiteStats.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A06C10F2597112E00B81F31 /* SiteStats.swift */; };
 		3A06C118259720D600B81F31 /* PenguinWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A06C117259720D600B81F31 /* PenguinWidget.swift */; };
-		3A06C120259743B900B81F31 /* Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A06C11F259743B900B81F31 /* Helpers.swift */; };
 		3A06C1252597447200B81F31 /* StageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A06C1242597447200B81F31 /* StageView.swift */; };
 		3A06C12D2597454600B81F31 /* WidgetFooter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A06C12C2597454600B81F31 /* WidgetFooter.swift */; };
 		3A06C133259766C400B81F31 /* WidgetEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A06C132259766C400B81F31 /* WidgetEntry.swift */; };
 		3A06C13B25976DAF00B81F31 /* MediumWidgetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A06C13A25976DAF00B81F31 /* MediumWidgetView.swift */; };
+		3A0C886325C25E8E008E1F4B /* PushManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A0C886225C25E8E008E1F4B /* PushManager.swift */; };
 		3A1157AD258F2B5C00F4C6FD /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A00D83125266410007308FB /* WidgetKit.framework */; };
 		3A1157AE258F2B5C00F4C6FD /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A00D83325266410007308FB /* SwiftUI.framework */; };
 		3A1157B1258F2B5C00F4C6FD /* SmallWidgetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A1157B0258F2B5C00F4C6FD /* SmallWidgetView.swift */; };
 		3A1157B4258F2B5E00F4C6FD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3A1157B3258F2B5E00F4C6FD /* Assets.xcassets */; };
 		3A1157BA258F2B5E00F4C6FD /* PenguinWidgetExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 3A1157AC258F2B5C00F4C6FD /* PenguinWidgetExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		3A20895A25C26EFB001D7490 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 3A20895925C26EFB001D7490 /* Alamofire */; };
+		3A20895D25C2ACC5001D7490 /* Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A001AD62599A68A0078A265 /* Helpers.swift */; };
+		3A3F034A25C0558200DEED16 /* Intents.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = 3A3F034925C0558200DEED16 /* Intents.intentdefinition */; };
+		3A3F034D25C055CC00DEED16 /* Intents.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = 3A3F034925C0558200DEED16 /* Intents.intentdefinition */; };
+		3A3F035B25C0B3D000DEED16 /* PersistenceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A3F035A25C0B3D000DEED16 /* PersistenceManager.swift */; };
 		3A4D4431259AC0BA000807F8 /* InitialLaunch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A4D4430259AC0BA000807F8 /* InitialLaunch.swift */; };
 		3A5051A925965532004167D3 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 3A5051AC25965532004167D3 /* Localizable.strings */; };
 		3A5051AA25965532004167D3 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 3A5051AC25965532004167D3 /* Localizable.strings */; };
 		3A5051B82596575D004167D3 /* Bender.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3A5051B72596575D004167D3 /* Bender.ttf */; };
 		3A5051C1259666FB004167D3 /* ItemStatsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A5051C0259666FB004167D3 /* ItemStatsView.swift */; };
 		3A5051C9259669AF004167D3 /* ItemIcons.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3A5051C8259669AF004167D3 /* ItemIcons.xcassets */; };
-		3A55B60F2598D9F500699BBA /* Intents.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = 3A55B6132598D9F500699BBA /* Intents.intentdefinition */; };
-		3A55B6102598D9F500699BBA /* Intents.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = 3A55B6132598D9F500699BBA /* Intents.intentdefinition */; };
 		3A55B6842599056000699BBA /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A55B6832599056000699BBA /* Constants.swift */; };
 		3A61615A259B0ED200FA06A2 /* ToggleNotificationPreference.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A616159259B0ED200FA06A2 /* ToggleNotificationPreference.swift */; };
 		3A616162259B2D2D00FA06A2 /* Debugger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A616161259B2D2D00FA06A2 /* Debugger.swift */; };
@@ -90,15 +93,17 @@
 		3A00D83325266410007308FB /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
 		3A06C10F2597112E00B81F31 /* SiteStats.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SiteStats.swift; sourceTree = "<group>"; };
 		3A06C117259720D600B81F31 /* PenguinWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PenguinWidget.swift; sourceTree = "<group>"; };
-		3A06C11F259743B900B81F31 /* Helpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Helpers.swift; sourceTree = "<group>"; };
 		3A06C1242597447200B81F31 /* StageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StageView.swift; sourceTree = "<group>"; };
 		3A06C12C2597454600B81F31 /* WidgetFooter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WidgetFooter.swift; sourceTree = "<group>"; };
 		3A06C132259766C400B81F31 /* WidgetEntry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WidgetEntry.swift; sourceTree = "<group>"; };
 		3A06C13A25976DAF00B81F31 /* MediumWidgetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediumWidgetView.swift; sourceTree = "<group>"; };
+		3A0C886225C25E8E008E1F4B /* PushManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PushManager.swift; sourceTree = "<group>"; };
 		3A1157AC258F2B5C00F4C6FD /* PenguinWidgetExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = PenguinWidgetExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		3A1157B0258F2B5C00F4C6FD /* SmallWidgetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SmallWidgetView.swift; sourceTree = "<group>"; };
 		3A1157B3258F2B5E00F4C6FD /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		3A1157B5258F2B5E00F4C6FD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		3A3F034925C0558200DEED16 /* Intents.intentdefinition */ = {isa = PBXFileReference; lastKnownFileType = file.intentdefinition; path = Intents.intentdefinition; sourceTree = "<group>"; };
+		3A3F035A25C0B3D000DEED16 /* PersistenceManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistenceManager.swift; sourceTree = "<group>"; };
 		3A4D4430259AC0BA000807F8 /* InitialLaunch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitialLaunch.swift; sourceTree = "<group>"; };
 		3A5051AB25965532004167D3 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		3A5051B025965533004167D3 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -111,7 +116,6 @@
 		3A616167259C698B00FA06A2 /* NotificationPreferences.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationPreferences.swift; sourceTree = "<group>"; };
 		3A61616B259C7B8D00FA06A2 /* HapticButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HapticButton.swift; sourceTree = "<group>"; };
 		3A679B002599166C00A685E9 /* WelcomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeView.swift; sourceTree = "<group>"; };
-		3A885ABF25A0157A00247AED /* en */ = {isa = PBXFileReference; lastKnownFileType = file.intentdefinition; name = en; path = en.lproj/Intents.intentdefinition; sourceTree = "<group>"; };
 		3A885ACD25A443D600247AED /* EventBus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventBus.swift; sourceTree = "<group>"; };
 		3A885AD125A4477600247AED /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		3A8EFF982599BBC100B6A788 /* alert1.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = alert1.caf; sourceTree = "<group>"; };
@@ -142,6 +146,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3A20895A25C26EFB001D7490 /* Alamofire in Frameworks */,
 				3A1157AE258F2B5C00F4C6FD /* SwiftUI.framework in Frameworks */,
 				3A1157AD258F2B5C00F4C6FD /* WidgetKit.framework in Frameworks */,
 			);
@@ -194,10 +199,9 @@
 				3A5051C8259669AF004167D3 /* ItemIcons.xcassets */,
 				3A06C10F2597112E00B81F31 /* SiteStats.swift */,
 				3A06C117259720D600B81F31 /* PenguinWidget.swift */,
-				3A06C11F259743B900B81F31 /* Helpers.swift */,
 				3A06C132259766C400B81F31 /* WidgetEntry.swift */,
 				3A968BB92597A738005266F2 /* ExternalService.swift */,
-				3A55B6132598D9F500699BBA /* Intents.intentdefinition */,
+				3A3F034925C0558200DEED16 /* Intents.intentdefinition */,
 			);
 			path = PenguinWidget;
 			sourceTree = "<group>";
@@ -231,6 +235,8 @@
 			isa = PBXGroup;
 			children = (
 				3A616167259C698B00FA06A2 /* NotificationPreferences.swift */,
+				3A3F035A25C0B3D000DEED16 /* PersistenceManager.swift */,
+				3A0C886225C25E8E008E1F4B /* PushManager.swift */,
 			);
 			path = Repositories;
 			sourceTree = "<group>";
@@ -339,6 +345,7 @@
 			);
 			name = PenguinWidgetExtension;
 			packageProductDependencies = (
+				3A20895925C26EFB001D7490 /* Alamofire */,
 			);
 			productName = PenguinWidgetExtension;
 			productReference = 3A1157AC258F2B5C00F4C6FD /* PenguinWidgetExtension.appex */;
@@ -488,10 +495,10 @@
 			buildActionMask = 2147483647;
 			files = (
 			);
-			inputPaths = (
+			inputFileListPaths = (
 			);
 			name = "[CP] Embed Pods Frameworks";
-			outputPaths = (
+			outputFileListPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -506,6 +513,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				3A06C13B25976DAF00B81F31 /* MediumWidgetView.swift in Sources */,
+				3A20895D25C2ACC5001D7490 /* Helpers.swift in Sources */,
 				3A968BB52597A54E005266F2 /* LargeWidgetView.swift in Sources */,
 				3A06C118259720D600B81F31 /* PenguinWidget.swift in Sources */,
 				3A5051C1259666FB004167D3 /* ItemStatsView.swift in Sources */,
@@ -515,8 +523,7 @@
 				3A1157B1258F2B5C00F4C6FD /* SmallWidgetView.swift in Sources */,
 				3A06C12D2597454600B81F31 /* WidgetFooter.swift in Sources */,
 				3A06C1252597447200B81F31 /* StageView.swift in Sources */,
-				3A06C120259743B900B81F31 /* Helpers.swift in Sources */,
-				3A55B6102598D9F500699BBA /* Intents.intentdefinition in Sources */,
+				3A3F034A25C0558200DEED16 /* Intents.intentdefinition in Sources */,
 				3A06C1102597112E00B81F31 /* SiteStats.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -528,6 +535,8 @@
 				3A616168259C698B00FA06A2 /* NotificationPreferences.swift in Sources */,
 				3A885ACE25A443D600247AED /* EventBus.swift in Sources */,
 				3A55B6842599056000699BBA /* Constants.swift in Sources */,
+				3A3F035B25C0B3D000DEED16 /* PersistenceManager.swift in Sources */,
+				3A3F034D25C055CC00DEED16 /* Intents.intentdefinition in Sources */,
 				3A001AD32599A4A60078A265 /* ConsentView.swift in Sources */,
 				3A001AC225991E2C0078A265 /* WhatsNew.swift in Sources */,
 				3A679B012599166C00A685E9 /* WelcomeView.swift in Sources */,
@@ -535,9 +544,9 @@
 				3A61616C259C7B8D00FA06A2 /* HapticButton.swift in Sources */,
 				3A001AD72599A68A0078A265 /* Helpers.swift in Sources */,
 				3AA7E3462521F70B00387971 /* PenguinPlugin.m in Sources */,
+				3A0C886325C25E8E008E1F4B /* PushManager.swift in Sources */,
 				3A4D4431259AC0BA000807F8 /* InitialLaunch.swift in Sources */,
 				504EC3081FED79650016851F /* AppDelegate.swift in Sources */,
-				3A55B60F2598D9F500699BBA /* Intents.intentdefinition in Sources */,
 				3AA7E3422521F6C000387971 /* PenguinPlugin.swift in Sources */,
 				3A616162259B2D2D00FA06A2 /* Debugger.swift in Sources */,
 			);
@@ -561,14 +570,6 @@
 				3A5051B025965533004167D3 /* en */,
 			);
 			name = Localizable.strings;
-			sourceTree = "<group>";
-		};
-		3A55B6132598D9F500699BBA /* Intents.intentdefinition */ = {
-			isa = PBXVariantGroup;
-			children = (
-				3A885ABF25A0157A00247AED /* en */,
-			);
-			name = Intents.intentdefinition;
 			sourceTree = "<group>";
 		};
 		3AA7E33925211FD500387971 /* InfoPlist.strings */ = {
@@ -878,6 +879,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		3A20895925C26EFB001D7490 /* Alamofire */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 3A8EFF9E259A1BB900B6A788 /* XCRemoteSwiftPackageReference "Alamofire" */;
+			productName = Alamofire;
+		};
 		3A885AC925A43F0400247AED /* RxBus */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 3A885AC825A43F0400247AED /* XCRemoteSwiftPackageReference "RxBus-Swift" */;

@@ -1,0 +1,40 @@
+"4h1GsM" = "查看最近上传数据概览";
+
+"6u7NWg" = "Servers";
+
+"9aEMGV" = "服务器";
+
+"FVUScD-Tjrhvh" = "There are ${count} options matching ‘未知’.";
+
+"FVUScD-oIKWT9" = "There are ${count} options matching ‘国服’.";
+
+"FVUScD-pVCtB6" = "There are ${count} options matching ‘韩服’.";
+
+"FVUScD-tK60Y2" = "There are ${count} options matching ‘日服’.";
+
+"FVUScD-yVJ0lK" = "There are ${count} options matching ‘美服’.";
+
+"Tjrhvh" = "未知";
+
+"VzpXpK" = "数据概览";
+
+"ZmbtPn-Tjrhvh" = "Just to confirm, you wanted ‘未知’?";
+
+"ZmbtPn-oIKWT9" = "Just to confirm, you wanted ‘国服’?";
+
+"ZmbtPn-pVCtB6" = "Just to confirm, you wanted ‘韩服’?";
+
+"ZmbtPn-tK60Y2" = "Just to confirm, you wanted ‘日服’?";
+
+"ZmbtPn-yVJ0lK" = "Just to confirm, you wanted ‘美服’?";
+
+"oIKWT9" = "国服";
+
+"pVCtB6" = "韩服";
+
+"tK60Y2" = "日服";
+
+"wqvlmq" = "查看${server}的最近上传数据概览";
+
+"yVJ0lK" = "美服";
+

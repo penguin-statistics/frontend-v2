@@ -1,6 +1,7 @@
 import Console from "@/utils/Console";
 import get from "@/utils/getters";
 import validator from "@/utils/validator";
+import supports from "@/models/supports";
 
 const errors = {
   planner: {
@@ -10,6 +11,10 @@ const errors = {
       unrecognized: "unrecognized"
     }
   }
+}
+
+function unmarshalLocale(s) {
+  return (supports.localizations.find(el => el.push === s) || {}).value
 }
 
 export default {
@@ -125,5 +130,21 @@ export default {
         }
       }
     },
+  },
+  pushPreferences(preferences) {
+    let parsed
+    try {
+      parsed = JSON.parse(preferences)
+    } catch {return []}
+
+    const unmarshalled = []
+    for (const preference of parsed) {
+      unmarshalled.push({
+        ...preference,
+        locale: unmarshalLocale(preference.locale)
+      })
+    }
+
+    return unmarshalled
   }
 }

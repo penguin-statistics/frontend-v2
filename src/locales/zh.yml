@@ -68,6 +68,7 @@ meta:
     cancel: 取消
     confirm: 确认
     submit: 提交
+    save: 保存
     close: 关闭
   time:
     minute: "{m}分 "
@@ -246,6 +247,22 @@ settings:
     reset:
       title: 重置本地数据与设置
       subtitle: 将会删除所有本地数据与设置。删除后，所有本地设置均会重置至默认值并刷新页面，数据将需要重新加载。确定要继续吗？
+  push:
+    language: 消息语言
+    categories:
+      _name: 推送类型
+      NewStage:
+        title: 新章节加入
+        subtitle: 在新章节加入本 App 时通知您
+      ImportantTimePoint:
+        title: 防侠客
+        subtitle: 在活动即将结束时通知您
+      Maintenance:
+        title: 上游闪断更新
+        subtitle: 在新的游戏服务器闪断更新公告发布后通知您
+      ClientUpgrade:
+        title: 客户端强制更新
+        subtitle: 在新的客户端强制更新公告发布后通知您
 zone:
   name: 章节
   types:

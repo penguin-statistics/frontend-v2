@@ -31,7 +31,6 @@ module.exports = {
       pagination: 5
     }
   },
-  servers: ["CN", "US", "JP", "KR"],
   probe: {
     endpoint: {
       prod: {

@@ -1,4 +1,5 @@
 import store from "@/store";
+import supports from "@/models/supports";
 
 export default {
   planner: {
@@ -68,5 +69,15 @@ export default {
       marshalled.push(marshalledQuery)
     }
     return {queries: marshalled}
+  },
+  pushPreferences(preferences) {
+    const marshalled = []
+    for (const preference of preferences) {
+      marshalled.push({
+        ...preference,
+        locale: supports.localizations.find(el => el.value === preference.locale).push
+      })
+    }
+    return marshalled
   }
 }

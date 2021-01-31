@@ -43,7 +43,6 @@ struct ConsentView: View {
                     .padding(.top)
             }
                 .padding()
-                .padding(.top)
             
             List {
                 ToggleNotificationPreference(

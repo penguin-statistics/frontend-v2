@@ -10,7 +10,7 @@
 			<key>Key</key>
 			<string>alwaysShowWhatsNew</string>
 			<key>Title</key>
-			<string>Always show "What's New" on launch</string>
+			<string>Always show &quot;What&apos;s New&quot; on launch</string>
 			<key>Type</key>
 			<string>PSToggleSwitchSpecifier</string>
 		</dict>

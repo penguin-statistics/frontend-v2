@@ -53,6 +53,9 @@ export default {
     }
     return Promise.resolve("web")
   },
+  get isApp() {
+    return PENGUIN_PLATFORM === "app"
+  },
   adapter({ prod, dev }) {
     return this.production ? prod : dev
   }

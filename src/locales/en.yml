@@ -72,6 +72,7 @@ meta:
     cancel: Cancel
     confirm: Confirm
     submit: Submit
+    save: Save
     close: Close
   time:
     minute: "{m}m"

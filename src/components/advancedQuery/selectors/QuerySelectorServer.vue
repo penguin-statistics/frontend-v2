@@ -31,7 +31,7 @@
 </template>
 
 <script>
-  import config from "@/config"
+  import supports from "@/models/supports";
 
   export default {
     name: "QuerySelectorServer",
@@ -44,7 +44,7 @@
     data() {
       return {
         selected: this.$store.getters["dataSource/server"],
-        servers: config.servers
+        servers: supports.servers
       }
     }
   }
