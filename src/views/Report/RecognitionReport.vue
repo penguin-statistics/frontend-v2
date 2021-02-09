@@ -264,22 +264,37 @@
                 </div>
                 <div class="d-flex flex-wrap justify-start">
                   <div
-                    v-for="([ItemId, Count],idx) in Object.entries(Stage.Items)"
-                    :key="idx"
-                    class="d-inline-flex mx-2 my-1"
+                    v-for="(TypeGroup, idx) in Stage.TypeGroups"
+                    :key="'Typegroup' + idx"
+                    
+                    style="border-radius: 5px"
+                    :style="{'background-color':categories[TypeGroup.Type][dark ? 0 : 1]}"
                   >
-                    <v-badge
-                      bottom
-                      overlap
-                      bordered
-                      label
-                      color="indigo"
-                      :offset-x="24"
-                      :offset-y="20"
-                      :content="`×${Count}`"
+                    <div
+                      v-for="(oItem, idx) of TypeGroup.Items"
+                      :key="'item' + idx"
+                      style="height:45px"
+                      class="d-inline-flex mx-2 my-1"
                     >
-                      <Item :item="getItem(ItemId)" />
-                    </v-badge>
+                      <v-badge
+                        bottom
+                        overlap
+                        bordered
+                        label
+                        color="indigo"
+                        :offset-x="24"
+                        :offset-y="20"
+                        :content="`×${oItem.Count}`"
+                      >
+                        <Item :item="getItem(oItem.ItemId)" />
+                      </v-badge>
+                    </div>
+                    <div
+                      style="text-align:center;"
+                      :style="{'color' : dark ? '#000' : '#fff' }"
+                    >
+                      {{ $t("stage.loots." + TypeGroup.Type) }}
+                    </div>
                   </div>
                 </div>
               </v-card-text>
@@ -400,7 +415,9 @@
                 </div>
                 <div class="d-flex flex-wrap justify-start">
                   <div
-                    v-for="([ItemId, Count],idx) in Object.entries(Stage.Items)"
+                    v-for="([ItemId, Count], idx) in Object.entries(
+                      Stage.Items
+                    )"
                     :key="idx"
                     class="d-inline-flex mx-2 my-1"
                   >
@@ -571,7 +588,7 @@
     </v-dialog>
   </v-stepper>
   <v-alert
-    v-else
+    v-else-if="server != 'CN'"
     type="error"
     width="80%"
     class="mx-auto mt-4"
@@ -593,11 +610,18 @@ import Cookies from "js-cookie";
 import report from "@/apis/report";
 import axios from "axios";
 import { DropRecognition, FontLoaded } from "@/vendors/DropRecognition";
+const categories = {
+  NORMAL_DROP: ["#cacbcc", "#4d4d4d"],
+  SPECIAL_DROP: ["#e26d2c", "#b35522"],
+  EXTRA_DROP: ["#9aba3d", "#8aa637"],
+  FURNITURE: ["#e26d2c", "#b35522"],
+};
 export default {
   name: "RecognitionReport",
   components: { Item, ReportEditor, PreloaderInline },
   mixins: [Theme, CDN],
   data: () => ({
+    categories:categories,
     step: 0,
     OriginalRecognitionResult: [],
     QueueIndex: 0,
@@ -639,14 +663,7 @@ export default {
         };
         Ret.Code = Stage.Stage.Code;
         Ret.Index = Stage.idx;
-        for (let Item of Stage.Items) {
-          if (Item.ItemId && Item.Count && Item.Type.Type !== "FIXED_DROP") {
-            if (!Ret.Items[Item.ItemId]) {
-              Ret.Items[Item.ItemId] = 0;
-            }
-            Ret.Items[Item.ItemId] += Item.Count;
-          }
-        }
+        Ret.TypeGroups = Stage.TypeGroups.filter((v) => v.Type != "FIXED_DROP");
         Result.push(Ret);
       }
       return Result;
@@ -787,12 +804,10 @@ export default {
       if (
         RecognitionResult.Items.some((Item) => {
           if (Item.Type.Type == "ALL_DROP") return true;
-          if (!Item.Confidence||Item.Type.Type == "FIXED_DROP") return false;
+          if (!Item.Confidence || Item.Type.Type == "FIXED_DROP") return false;
           if (
             Item.Confidence.ItemId &&
-            Item.Confidence.ItemId < (RecognitionResult.lowwidth
-              ? 0.6
-              : 0.65)
+            Item.Confidence.ItemId < (RecognitionResult.lowwidth ? 0.6 : 0.65)
           )
             return true;
           if (
@@ -808,7 +823,7 @@ export default {
       return true;
     },
     reload() {
-      this.$router.go(0);
+      this.$emit("reload");
     },
     RecognitionOne() {
       this.$nextTick(function () {
@@ -818,7 +833,7 @@ export default {
           this.ImageEle.push(NowImage);
           console.group(`Recognition #${NowIndex + 1}`);
           console.log(`File:${this.ImageFiles[NowIndex].name}`);
-          console.log(`Size:${NowImage.width} x ${NowImage.height}`)
+          console.log(`Size:${NowImage.width} x ${NowImage.height}`);
           console.time("time");
           try {
             let RecognitionInterface = new DropRecognition(NowImage);
@@ -939,7 +954,7 @@ export default {
         this.OriginalRecognitionResult[this.Editor.Index].Items.push({
           ItemId: Item.itemId,
           Count: Item.quantity,
-          Type: {Type:Item.dropType},
+          Type: { Type: Item.dropType },
         });
       }
       this.OriginalRecognitionResult[this.Editor.Index].State = "trusted";
