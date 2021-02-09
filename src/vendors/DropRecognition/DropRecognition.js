@@ -17,23 +17,11 @@ export default class DropRecognition {
     this.ctx.fillStyle = "#00ff00";
     this.ctx.strokeStyle = "#00ff00";
     this.rawImageData = this.ctx.getImageData(0, 0, img.width, img.height);
-    this.matrixImageData = [[]];
     this.BoundData = {};
     this.Stage = {};
     this.Items = [];
     this.TypeGroups = [];
     this.timer = [];
-    for (let index = 0, x = 0, y = 0; index < this.rawImageData.data.length; index += 4) {
-      this.matrixImageData[y][x] = [
-        this.rawImageData.data[index],
-        this.rawImageData.data[index + 1],
-        this.rawImageData.data[index + 2]
-      ];
-      if (++x == img.width) {
-        x = 0;
-        if (++y != img.height) this.matrixImageData.push([]);
-      }
-    }
     try {
       this.time("BoundRecognition");
       this.RectRecognition();
@@ -57,7 +45,7 @@ export default class DropRecognition {
       this.detectItem();
       this.timeEnd("ItemRecognition");
       this.time("DropTypeRecognition");
-      new DropTypeRecognition(this.TypeGroups, this.matrixImageData);
+      new DropTypeRecognition(this.TypeGroups, this.rawImageData);
       this.detectFurniture();
       this.timeEnd("DropTypeRecognition");
       this.time("QuantityRecognition");
@@ -67,12 +55,11 @@ export default class DropRecognition {
       this.timeEnd(true);
       throw e;
     }
-    for(let Item of this.Items){
+    for (let Item of this.Items) {
       Item.deleteUselessData()
     }
     delete this.ctx;
     delete this.Canvas;
-    delete this.matrixImageData;
     delete this.rawImageData;
     delete this.Image;
   }
@@ -97,7 +84,7 @@ export default class DropRecognition {
    * 识别图像边界
    */
   RectRecognition() {
-    this.BoundData = new RectRecognition(this.matrixImageData);
+    this.BoundData = new RectRecognition(this.rawImageData);
   }
   detectFurniture() {
     let DetectType = ["FURNITURE", "SPECIAL_DROP", "ALL_DROP"];
@@ -163,9 +150,10 @@ export default class DropRecognition {
     DropList.push({ ItemId: 4001, Range: {}, Types: ["FIXED_DROP"] });
     DropList.push({ ItemId: "EXP_PLAYER", Range: {}, Types: ["FIXED_DROP"] });
     for (let Rect of this.BoundData.Items) {
-      let NowItem = new ItemRecognition(this.getImageMatrix(Rect.left, Rect.top, Rect.right, Rect.bottom), Rect);
+      let getImageData = this.ctx.getImageData(Rect.left, Rect.top, Rect.width, Rect.height);
+      let NowItem = new ItemRecognition(getImageData, Rect);
       NowItem.Type = this.TypeGroups.find(a => a.inGroup(Rect));
-      if (NowItem.getItem(DropList).Confidence <= 0.63) {
+      if (NowItem.getItem(DropList).Confidence <= 0.60) {
         NowItem.CompareItem(DropRecognition.ActivityItem);
       }
       NowItem.Type.Items.push(NowItem);
@@ -173,22 +161,28 @@ export default class DropRecognition {
     }
   }
   getImageMatrix(x1, y1, x2, y2) {
-    let Matrix = [];
-    for (let y = y1; y <= y2; y++) {
-      let ry = Matrix.push([]) - 1;
-      for (let x = x1, rx = 0; x <= x2; x++, rx++) {
-        Matrix[ry][rx] = [].concat(this.matrixImageData[y][x]);
+    let Matrix = [[]];
+    let IData = this.ctx.getImageData(x1, y1, x2 - x1 + 1, y2 - y1 + 1);
+    for (let index = 0, x = 0, y = 0; index < IData.data.length; index += 4) {
+      Matrix[y][x] = [
+        IData.data[index],
+        IData.data[index + 1],
+        IData.data[index + 2]
+      ];
+      if (++x == IData.width) {
+        x = 0;
+        if (++y != IData.height) Matrix.push([]);
       }
     }
     return Matrix;
   }
   detectStage() {
     [this.Stage.Code, this.Stage.Confidence] = StageRecognition(
-      this.getImageMatrix(
+      this.ctx.getImageData(
         this.BoundData.Stage.left,
         this.BoundData.Stage.top,
-        this.BoundData.Stage.right,
-        this.BoundData.Stage.bottom
+        this.BoundData.Stage.width,
+        this.BoundData.Stage.height
       )
     );
   }

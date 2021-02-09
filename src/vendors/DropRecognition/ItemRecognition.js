@@ -1,3 +1,4 @@
+import rgb2hsv from "./rgb2hsv.js";
 import Rectangle from "./Rectangle";
 import ConnectedAreaRecognition from "./ConnectedAreaRecognition";
 import NumbersHashList from "./Data/NumberHashList.json";
@@ -7,9 +8,9 @@ for (let hash of NumbersHashList) {
   }
 }
 export default class ItemRecognition {
-  constructor(ImageData, Rect) {
-    if (ImageData instanceof Rectangle) {
-      this.Bound = ImageData;
+  constructor(IData, Rect) {
+    if (IData instanceof Rectangle) {
+      this.Bound = IData;
       this.Confidence = {
         ItemId: -Infinity,
         Count: []
@@ -18,14 +19,12 @@ export default class ItemRecognition {
       this.Count = NaN;
       return;
     }
-    this.Matrix = ImageData;
-    this.Width = ImageData[0].length;
-    this.Height = ImageData.length;
-    this.IData = new Array();
+    this.Width = IData.width;
+    this.Height = IData.height;
+    this.IData = IData;
     this.Bound = Rect;
     this._NumberConf = [];
     this.ComparedItems = [];
-    this.prepare();
   }
   deleteUselessData() {
     this.ComparedItems.splice(1);
@@ -34,23 +33,9 @@ export default class ItemRecognition {
     delete this.Width;
     delete this.Matrix;
   }
-  prepare() {
-    let cx = this.Matrix[0].length >> 1;
-    let cy = this.Matrix.length >> 1;
-    let r = (cx + cy) >> 1;
-
-    for (let y = 0; y < this.Height; y++) {
-      for (let x = 0; x < this.Width; x++) {
-        let TempColor = this.Matrix[y][x];
-        if (Math.hypot(x - cx, y - cy) > r) TempColor = [255, 255, 255];
-        this.IData.push(...TempColor, 255);
-      }
-    }
-    this.IData = {
-      data: this.IData,
-      height: this.Height,
-      width: this.Width
-    };
+  Matrix(y,x){
+    let idx=(y*this.Width+x)*4;
+    return [this.IData.data[idx],this.IData.data[idx+1],this.IData.data[idx+2]]
   }
   CompareItem(Items) {
     let ItemSourceHash = [];
@@ -69,19 +54,28 @@ export default class ItemRecognition {
     }
     for (let ItemHash of ItemSourceHash) {
       let Conf = this.CompareItemHash(ItemHash[1], this.getRGBDHash(tempIData));
-      if (!isNaN(Number(ItemHash[0].ItemId)) && Conf > 0.68) {
+      if (!isNaN(Number(ItemHash[0].ItemId)) && Conf > 0.65) {
         let ItemId = Number(ItemHash[0].ItemId);
         let PId = Math.floor(ItemId / 1000);
         let DId = (ItemId % 1000) - 1;
         if (PId == 2) {
           let ColorList = [
-            [215, 240, 9],
-            [10, 175, 241],
-            [242, 217, 11],
-            [255, 249, 225]
+            function(h,s,v){
+              return h>63 && h < 70 && s>80 && v>85
+            },
+            function(h,s,v){
+              return h>195 && h < 202 && s>80 && v>80
+            },
+            function(h,s,v){
+              return h>50 && h < 60 && s>80 && v>70
+            },
+            function(h,s,v){
+              return h>60 && h < 80 && s<20 && v>95
+            },
           ];
-          let dis = this.RGBDiff(this.Matrix[this.Height >> 1][this.Width >> 1], ColorList[DId]);
-          Conf = (Conf + 0.1) * (1 - dis / (255 * 3));
+          let is = ColorList[DId](...rgb2hsv(...this.Matrix(this.Height >> 1,this.Width >> 1)))
+          console.log(ItemId,is)
+          Conf = Math.max(0,Math.min(Conf + (is ? 0.1 : -0.1),1));
         }
       }
       this.ComparedItems.push({ Item: ItemHash[0], Confidence: Conf });
@@ -102,9 +96,6 @@ export default class ItemRecognition {
       ItemId: this.ComparedItems[0].Confidence,
       Count: this._NumberConf
     };
-  }
-  RGBDiff(rgb1, rgb2) {
-    return rgb1.map((v, i) => Math.abs(v - rgb2[i])).reduce((a, b) => a + b);
   }
   CompareItemHash(Hash1, Hash2) {
     let Hash1String = [].concat(...Hash1);
@@ -142,14 +133,13 @@ export default class ItemRecognition {
       XEnd = false;
       EndWait = 0;
       for (let x = this.Width >> 1; x < this.Width; x++) {
-        let [R, G, B] = this.Matrix[y][x];
-        let RGBUp = distance => this.Matrix[y - distance][x];
+        let [R, G, B] = this.Matrix(y,x);
+        let RGBUp = distance => this.Matrix(y - distance,x);
         let GreyUp = distance => RGBUp(distance).reduce((a, b) => a + b) / 3;
         let GreyNow = (R + G + B) / 3;
 
         let SpecialRule = {
-          "3301": () =>
-            Math.max(Math.abs(GreyNow - GreyUp(1)), Math.abs(GreyNow - GreyUp(2)), GreyNow - GreyUp(3)) > 20,
+          
           default: () =>
             (Math.abs(GreyNow - GreyUp(1)) > 15 ||
               Math.abs(R - RGBUp(1)[0]) > 30 ||
@@ -205,23 +195,23 @@ export default class ItemRecognition {
     for (let y = 0; y < NumberRect.height; y++) {
       NumberMartix.push([]);
       for (let x = 0; x < NumberRect.width; x++) {
-        let [R, G, B] = this.Matrix[y + NumberRect.top][x + NumberRect.left];
+        let [R, G, B] = this.Matrix(y + NumberRect.top,x + NumberRect.left);
         let Grey = (R + G + B) / 3;
         if (Grey >= 120) {
           NumberMartix[y][x] = true;
         } else if (Grey < 120 && Grey > 105) {
           let left, right, top, bottom;
           if (x !== 0) {
-            left = this.Matrix[y + NumberRect.top][x + NumberRect.left - 1].reduce((a, b) => a + b) / 3;
+            left = this.Matrix(y + NumberRect.top,x + NumberRect.left - 1).reduce((a, b) => a + b) / 3;
           }
           if (x !== NumberRect.width - 1) {
-            right = this.Matrix[y + NumberRect.top][x + NumberRect.left + 1].reduce((a, b) => a + b) / 3;
+            right = this.Matrix(y + NumberRect.top,x + NumberRect.left + 1).reduce((a, b) => a + b) / 3;
           }
           if (y != 0) {
-            top = this.Matrix[y + NumberRect.top - 1][x + NumberRect.left].reduce((a, b) => a + b) / 3;
+            top = this.Matrix(y + NumberRect.top - 1,x + NumberRect.left).reduce((a, b) => a + b) / 3;
           }
           if (y !== NumberRect.height - 1) {
-            bottom = this.Matrix[y + NumberRect.top + 1][x + NumberRect.left].reduce((a, b) => a + b) / 3;
+            bottom = this.Matrix(y + NumberRect.top + 1,x + NumberRect.left).reduce((a, b) => a + b) / 3;
           }
           if ((left && left > 120) || (right && right > 120) || (top && top > 120) || (bottom && bottom > 120)) {
             NumberMartix[y][x] = true;

@@ -1,6 +1,8 @@
+import rgb2hsv from "./rgb2hsv.js";
 export default class DropTypeRecognition {
   constructor(DropGroups, ImageData) {
     this.DropGroups = DropGroups;
+    this.ImageData = ImageData;
     this.DropTypeList = [
       {
         name: "FIXED_DROP",
@@ -21,7 +23,7 @@ export default class DropTypeRecognition {
       {
         name: "NORMAL_DROP",
         color(H, S) {
-          return H < 5 && S < 5;
+          return S < 10;
         },
         index: 2,
         have: false
@@ -44,17 +46,26 @@ export default class DropTypeRecognition {
       }
     ];
     this.NowIndex = -1;
-    this.getDropType(DropGroups, ImageData);
+    this.getDropType(DropGroups);
     delete this.DropType;
   }
-  get FURNITURE(){
-    return this.DropTypeList.find(a=>a.name=="FURNITURE");
+  Matrix(y, x) {
+    let idx = (y * this.ImageData.width + x) * 4;
+    return [this.ImageData.data[idx], this.ImageData.data[idx + 1], this.ImageData.data[idx + 2]]
   }
-  CompareType(ImageData, Rect, GuessType) {
-    let Type = this.DropTypeList.filter(a => GuessType.includes(a.name));
+  get FURNITURE() {
+    return this.DropTypeList.find(a => a.name == "FURNITURE");
+  }
+  CompareType(Rect, GuessType) {
+    let Type
+    if (GuessType) {
+      Type = this.DropTypeList.filter(a => GuessType.includes(a.name));
+    } else {
+      Type = this.DropTypeList
+    }
     let XCenter = (Rect.left + Rect.right) >> 1;
     for (let y = Rect.top; y <= Rect.bottom; y++) {
-      let rgb = ImageData[y][XCenter];
+      let rgb = this.Matrix(y,XCenter);
       for (let type of Type) {
         if (type.color(...rgb2hsv(...rgb)) && this.checkOrder(type.name)) {
           if (Number.isFinite(type.index)) {
@@ -63,10 +74,10 @@ export default class DropTypeRecognition {
           type.have = true;
           return type.name;
         } else if (Type.length == 1) {
-          if(!this.FURNITURE.have) {
-            if (this.checkOrder("FURNITURE")&&this.FURNITURE.color(...rgb2hsv(...rgb))) {
-              this.FURNITURE.have =true;
-              this.NowIndex=this.FURNITURE.index
+          if (!this.FURNITURE.have) {
+            if (this.checkOrder("FURNITURE") && this.FURNITURE.color(...rgb2hsv(...rgb))) {
+              this.FURNITURE.have = true;
+              this.NowIndex = this.FURNITURE.index
               return "FURNITURE";
             }
           }
@@ -81,9 +92,9 @@ export default class DropTypeRecognition {
       }
     }
     for (let type of this.DropTypeList) {
-      if (this.checkOrder(type.name)&&type.name!=="FURNITURE"&&type.name!=="SPECIAL_DROP") {
+      if (this.checkOrder(type.name) && type.name !== "FURNITURE" && type.name !== "SPECIAL_DROP") {
         for (let y = Rect.top; y <= Rect.bottom; y++) {
-          let rgb = ImageData[y][XCenter];
+          let rgb = this.Matrix(y,XCenter);
           if (type.color(...rgb2hsv(...rgb))) {
             if (Number.isFinite(type.index)) {
               this.NowIndex = type.index;
@@ -103,44 +114,9 @@ export default class DropTypeRecognition {
     }
     return false;
   }
-  getDropType(DropType, ImageData) {
+  getDropType(DropType) {
     for (let Type of DropType) {
-      if(Type.TypeGuessBaseOnItem.length == 1 && Type.TypeGuessBaseOnItem[0]=="ACTIVITY" && Type.Items.length == 1 && Type.Items[0].Confidence.ItemId>0.60) {
-        Type.Type="FIXED_DROP";
-        continue;
-      }
-      Type.Type = this.CompareType(ImageData, Type.Bound, Type.TypeGuessBaseOnItem);
+      Type.Type = this.CompareType(Type.Bound, Type.TypeGuessBaseOnItem());
     }
   }
-}
-function rgb2hsv(r, g, b) {
-  let rabs, gabs, babs, rr, gg, bb, h, s, v, diff, diffc, percentRoundFn;
-  rabs = r / 255;
-  gabs = g / 255;
-  babs = b / 255;
-  (v = Math.max(rabs, gabs, babs)), (diff = v - Math.min(rabs, gabs, babs));
-  diffc = c => (v - c) / 6 / diff + 1 / 2;
-  percentRoundFn = num => Math.round(num * 100) / 100;
-  if (diff == 0) {
-    h = s = 0;
-  } else {
-    s = diff / v;
-    rr = diffc(rabs);
-    gg = diffc(gabs);
-    bb = diffc(babs);
-
-    if (rabs === v) {
-      h = bb - gg;
-    } else if (gabs === v) {
-      h = 1 / 3 + rr - bb;
-    } else if (babs === v) {
-      h = 2 / 3 + gg - rr;
-    }
-    if (h < 0) {
-      h += 1;
-    } else if (h > 1) {
-      h -= 1;
-    }
-  }
-  return [Math.round(h * 360), percentRoundFn(s * 100), percentRoundFn(v * 100)];
 }

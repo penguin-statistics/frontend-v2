@@ -1,15 +1,17 @@
+/* eslint-disable  */
 import FontSizeData from "./Data/StageFontSize.json";
 import ConnectedAreaRecognition from "./ConnectedAreaRecognition";
-
+import DropRecognition from "./DropRecognition";
 let FontCache = {};
-export default function StageRecognition(ImageMatrix) {
+export default function StageRecognition(ImageData) {
   let Matrix = [];
   let Confidence = [];
   let Node = new Set();
-  for (let y = 0; y < ImageMatrix.length; y++) {
+  for (let y = 0; y < ImageData.height; y++) {
     Matrix.push([]);
-    for (let x = 0; x < ImageMatrix[0].length; x++) {
-      let [R, G, B] = ImageMatrix[y][x];
+    for (let x = 0; x < ImageData.width; x++) {
+      let idx = (y * ImageData.width + x) * 4;
+      let [R, G, B] = [ImageData.data[idx], ImageData.data[idx + 1], ImageData.data[idx + 2]];
       Matrix[y][x] = (R + G + B) / 3 > 80;
       if (Matrix[y][x]) {
         Node.add(x * 10000 + y);
@@ -17,13 +19,15 @@ export default function StageRecognition(ImageMatrix) {
     }
   }
   let getConnectedArea = new ConnectedAreaRecognition(Matrix, Node, true);
-  let ConnectedAreas = getConnectedArea.GetAllConnectedArea(a=>{
-    if(a.point>10) {
-      delete a.point;
-      return a;
-    }
-    return false
-  }).sort((a, b) => a.left - b.left);
+  let ConnectedAreas = getConnectedArea
+    .GetAllConnectedArea(a => {
+      if (a.point > 10) {
+        delete a.point;
+        return a;
+      }
+      return false;
+    })
+    .sort((a, b) => a.left - b.left);
   let Chars = [];
   let SplitChar;
   for (let Char of ConnectedAreas) {
@@ -34,6 +38,7 @@ export default function StageRecognition(ImageMatrix) {
       Chars.push("");
     }
   }
+
   let FontSize = getFontSize(SplitChar);
   if (!FontCache[FontSize]) {
     FontCache[FontSize] = genFontData(FontSize);
@@ -58,25 +63,37 @@ export default function StageRecognition(ImageMatrix) {
       Confidence.push(NumConf);
     }
   }
-  return [Chars.join(""), Confidence.reduce((a, b) => a + b) / Confidence.length];
-}
-function getFontSize(CharRect) {
-  let Find = false;
-  let Ret;
-  let Diff = Infinity;
-  for (let [Size, Rect] of Object.entries(FontSizeData)) {
-    let D = Math.abs(Rect.width - CharRect.width) + Math.abs(Rect.height - CharRect.height);
-    if (D <= Diff) {
-      Diff = D;
-      Ret = Size;
-      if (D == 0) {
-        Find = true;
-      }
-    } else if (Find) {
-      break;
+  let StageCode = Chars.join("");
+  if (!DropRecognition.Stage.hasOwnProperty(StageCode)) {
+    let re = new RegExp("^" + StageCode.replace(/[O0]/g, "[O0]") + "$");
+    let StageCodeb = StageCode;
+    StageCode = Object.keys(DropRecognition.Stage).find(a => re.test(a));
+    if (!StageCode) {
+      StageCode = StageCodeb;
+      console.log(StageCode);
     }
   }
-  return Ret;
+
+  return [StageCode, Confidence.reduce((a, b) => a + b) / Confidence.length];
+}
+function getFontSize(CharRect) {
+  let Ret = [];
+  let Diff = Infinity;
+  for (let [Size, Rect] of Object.entries(FontSizeData)) {
+    let D = Math.abs(Rect.width - CharRect.width) + Math.abs(Rect.height - CharRect.height) * 2;
+    if (D <= Diff) {
+      if (D == Diff) {
+        Ret.push(Size);
+      } else {
+        Diff = D;
+        Ret = [Size];
+      }
+      if (D == 0) {
+        break;
+      }
+    }
+  }
+  return Ret[0];
 }
 function compareNumber(Matrix, Font) {
   let Number = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
@@ -142,7 +159,7 @@ function compareMatrix(Matrix1, Matrix2) {
       }
     }
   }
-  return Count / (Math.max(Matrix1[0].length, Matrix2[0].length)*Math.max(Matrix1.length, Matrix2.length));
+  return Count / (Math.max(Matrix1[0].length, Matrix2[0].length) * Math.max(Matrix1.length, Matrix2.length));
 }
 // 生成每个字符数据
 function genFontData(size) {
