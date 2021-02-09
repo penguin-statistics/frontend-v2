@@ -40,7 +40,7 @@ const router = new Router({
   },
   routes: [{
     path: '/',
-    name: 'home',
+    name: 'Home',
     component: Home,
     meta: {
       icon: 'mdi-home',

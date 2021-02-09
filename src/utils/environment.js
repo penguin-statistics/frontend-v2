@@ -31,7 +31,19 @@ export default {
     get devtools() {return boolean("devtools", true)},
     get colorfulConsole() {return boolean("colorfulConsole", true)},
     get fullConsole() {return boolean("fullConsole")},
+    get frostnova() {return boolean("frostnova")}
   },
+  get platform() {
+    if (PENGUIN_PLATFORM === "web") return "web"
+    if (PENGUIN_PLATFORM === "app") {
+      if (window.$device && window.$device.info && window.$device.info.platform) return `app:${window.$device.info.platform}`
+      return "web"
+    }
+    return "web"
+  },
+  adapter({ prod, dev }) {
+    return this.production ? prod : dev
+  }
 
   // native: {
   //   async mirrorAPIEndpoint() {
