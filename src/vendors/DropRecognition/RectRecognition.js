@@ -6,7 +6,7 @@ export default class RectRecognition {
     this.height = ImageData.height;
     this.width = ImageData.width;
     this.ImageData = ImageData.data;
-    this.lowwidth = this.width < 1000;
+    this.lowwh = this.width < 1000 || this.height < 480;
     this.Node = new Set();
     this.SpiltLineSearch();
     let BinarizationMatrix = this.Binarization();
@@ -48,7 +48,7 @@ export default class RectRecognition {
         Rect.width > 50 &&
         Rect.top > this.MiddleLine.top + 20
       ) {
-        if (this.lowwidth) {
+        if (this.lowwh) {
           let w = Math.max(Rect.width, Rect.height) - 1;
           Rect.bottom = Rect.top + w;
           Rect.right = Rect.left + w;
@@ -124,7 +124,7 @@ export default class RectRecognition {
         let [R, G, B] = this.Matrix(y, x);
         this.rawMatrix[ry][x] = [R, G, B];
         if (x > this.MiddleLine.left) {
-          Matrix[ry][x] = (R + G + B) / 3 < (this.lowwidth ? 70 : 75) ? false : true;
+          Matrix[ry][x] = R > 80 || G > 80 || B > 80;
         } else {
           Matrix[ry][x] = (R + G + B) / 3 < 127 ? false : true;
         }
@@ -178,9 +178,9 @@ export default class RectRecognition {
     let Merge = (Rects, q) => {
       for (let a = 0; a < Rects.length; a++) {
         for (let b = a + 1; b < Rects.length; b++) {
-          if (this.lowwidth) {
-            if (Rects[b].width / Rects[b].height > 3) continue;
-            if (Rects[a].width / Rects[a].height > 3) break;
+          if (this.lowwh) {
+            if ((Rects[b].width / Rects[b].height > 3) || (Rects[b].width > 70 && Rects[b].height < 30)) continue;
+            if ((Rects[a].width / Rects[a].height > 3) || (Rects[a].width > 70 && Rects[a].width < 30)) break;
           }
           if (Rects[a].distance(Rects[b]) < q) {
             Rects[a].merge(Rects[b]);

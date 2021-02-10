@@ -74,7 +74,6 @@ export default class ItemRecognition {
             },
           ];
           let is = ColorList[DId](...rgb2hsv(...this.Matrix(this.Height >> 1,this.Width >> 1)))
-          console.log(ItemId,is)
           Conf = Math.max(0,Math.min(Conf + (is ? 0.1 : -0.1),1));
         }
       }
@@ -127,7 +126,7 @@ export default class ItemRecognition {
       YStart = 0,
       Find = false;
     let NumberRect = new Rectangle();
-
+    let Dislimit=0.125*this.Width+5
     for (let y = this.Height >> 1; y < this.Height; y++) {
       XStart = false;
       XEnd = false;
@@ -150,6 +149,7 @@ export default class ItemRecognition {
         if (this.ItemId in SpecialRule ? SpecialRule[this.ItemId]() : SpecialRule.default()) {
           if (!XStart) {
             XStart = x;
+            XEnd = x;
           } else {
             XEnd = x;
             EndWait = 0;
@@ -160,7 +160,7 @@ export default class ItemRecognition {
               continue;
             }
           }
-          if (XEnd - XStart + 1 > 20) {
+          if (XEnd - XStart + 1 > Dislimit) {
             Find = true;
             break;
           } else {
