@@ -7,7 +7,7 @@
     dark
   >
     <v-img
-      :src="require('@/assets/themes/new-year/banner.jpg')"
+      :src="cdnDeliver('/images/themes/new-year/landscape.jpg')"
       width="100%"
       height="100%"
       style="position: absolute; top: 0; left: 0; opacity: 0.3; z-index: 0"
@@ -25,8 +25,11 @@
 </template>
 
 <script>
+import CDN from "@/mixins/CDN";
+
 export default {
-name: "Banner"
+  name: "Banner",
+  mixins: [CDN]
 }
 </script>
 

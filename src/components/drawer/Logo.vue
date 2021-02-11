@@ -9,7 +9,7 @@
     class="position-relative"
   >
     <v-img
-      :src="require('@/assets/themes/new-year/drawer.jpg')"
+      :src="cdnDeliver('/images/themes/new-year/portrait.jpg')"
       style="position: absolute; width: 100%; height: 100%; top: 0; left: 0; opacity: 0.3; z-index: 0"
     />
     <v-img
