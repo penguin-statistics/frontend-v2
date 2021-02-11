@@ -71,7 +71,7 @@
       <v-img
         :src="require('@/assets/themes/new-year/drawer.jpg')"
         style="position: absolute; width: 100%; height: auto; bottom: 0; z-index: -1"
-        :gradient="$vuetify.theme.dark ? 'to bottom, rgba(54, 54, 54, 1), rgba(54, 54, 54, .65)' : 'to bottom, rgba(255, 255, 255, 1), rgba(255, 255, 255, .65)'"
+        :gradient="$vuetify.theme.dark ? 'to bottom, rgba(54, 54, 54, 1), rgba(54, 54, 54, .65)' : 'to bottom, rgba(255, 255, 255, 1), rgba(255, 255, 255, .5)'"
         contain
       />
     </v-navigation-drawer>

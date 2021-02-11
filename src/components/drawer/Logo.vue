@@ -3,7 +3,7 @@
     :class="{
       'drawer-logo primary': true,
       'darken-2': dark,
-      'darken-3': !dark,
+      'darken-1': !dark,
       'drawer-logo--two-line': $t('app.name_line2') !== ''
     }"
     class="position-relative"
