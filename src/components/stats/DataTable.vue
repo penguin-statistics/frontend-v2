@@ -133,7 +133,7 @@
                 height="32"
                 class="mt-1 elevation-2 font-weight-bold"
                 dark
-                color="blue accent-4"
+                color="primary accent-4"
               >
                 <template v-slot:default>
                   {{ $t('stats.filter.stats', {filtered: filteredData.length, total: items.length}) }}

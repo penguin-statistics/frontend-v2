@@ -31,6 +31,12 @@
 
       <v-col
         cols="12"
+      >
+        <Banner class="card-translate-up" />
+      </v-col>
+
+      <v-col
+        cols="12"
         lg="6"
         class="align-self-stretch"
       >
@@ -107,10 +113,12 @@ import Console from "@/utils/Console";
 import GettingStarted from "@/views/About/GettingStarted";
 import SiteStatsOverview from "@/components/stats/SiteStatsOverview";
 import HomeSearch from "@/views/About/HomeSearch";
+import Banner from "@/views/About/Banner";
 
 export default {
   name: "Home",
   components: {
+    Banner,
     HomeSearch,
     SiteStatsOverview, GettingStarted, License, Contribute, Donate, Intro, Bulletin, Contact },
   data: () => ({}),

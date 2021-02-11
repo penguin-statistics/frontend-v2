@@ -1,19 +1,27 @@
 <template>
   <div
     :class="{
-      'drawer-logo blue': true,
-      'darken-4': dark,
+      'drawer-logo primary': true,
+      'darken-2': dark,
       'darken-3': !dark,
       'drawer-logo--two-line': $t('app.name_line2') !== ''
     }"
+    class="position-relative"
   >
+    <v-img
+      :src="require('@/assets/themes/new-year/drawer.jpg')"
+      style="position: absolute; width: 100%; height: 100%; top: 0; left: 0; opacity: 0.3; z-index: 0"
+    />
     <v-img
       :src="cdnDeliver('/logos/penguin_stats_logo.png')"
       aspect-ratio="1"
       height="128px"
       contain
     />
-    <div class="white--text description">
+    <div
+      class="white--text description position-relative"
+      style="z-index: 0"
+    >
       <v-row
         align="center"
         justify="center"

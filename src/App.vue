@@ -67,6 +67,13 @@
           </v-row>
         </v-container>
       </v-list>
+
+      <v-img
+        :src="require('@/assets/themes/new-year/drawer.jpg')"
+        style="position: absolute; width: 100%; height: auto; bottom: 0; z-index: -1"
+        :gradient="$vuetify.theme.dark ? 'to bottom, rgba(54, 54, 54, 1), rgba(54, 54, 54, .65)' : 'to bottom, rgba(255, 255, 255, 1), rgba(255, 255, 255, .65)'"
+        contain
+      />
     </v-navigation-drawer>
     <v-app-bar
       id="penguin-toolbar"
@@ -75,7 +82,7 @@
       dark
       :color="primaryColor"
       :style="{'filter': isInSpecialUI ? 'grayscale(1)' : ''}"
-      class="x--safe-area toolbar--safe-area flex-column transition-all"
+      class="x--safe-area toolbar--safe-area flex-column transition-all overflow-hidden"
     >
       <v-app-bar-nav-icon
         v-haptic
