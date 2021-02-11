@@ -52,7 +52,8 @@
         </Subheader>
 
         <NewPushSubscriptionDialog
-          v-model="addDialog" :preferences="preferences"
+          v-model="addDialog"
+          :preferences="preferences"
           @add="add"
         >
           <template #default="{ on }">
