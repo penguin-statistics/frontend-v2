@@ -10,6 +10,7 @@ import WidgetKit
 
 struct WidgetFooter: View {
     let server: Servers
+    
     var body: some View {
         HStack(spacing: 4) {
             Link(destination: Routes.generate(path: "/statistics")) {
@@ -18,14 +19,14 @@ struct WidgetFooter: View {
                         .bold()
                     Image(systemName: "arrow.up.forward.app")
                 }
-                .font(.caption)
+                .font(.system(size: 11))
                 .foregroundColor(Color("Gray4"))
                 .padding(4)
                 .background(Color.gray.opacity(0.1))
                 .cornerRadius(4.0)
                 .unredacted()
             }
-                
+            
             Spacer()
             Text(server.string())
                 .font(.system(size: 10, design: .monospaced))

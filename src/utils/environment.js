@@ -39,7 +39,7 @@ export default {
   get isWindows () {return navigator.platform.indexOf('Win') > -1},
   debug: {
     get performance() {return boolean("performance")},
-    get devtools() {return boolean("devtools", true)},
+    get devtools() {return boolean("devtools")},
     get colorfulConsole() {return boolean("colorfulConsole", true)},
     get fullConsole() {return boolean("fullConsole")},
     get frostnova() {return boolean("frostnova")}

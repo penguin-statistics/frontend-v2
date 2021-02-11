@@ -126,8 +126,20 @@ Getters.patterns = {
 }
 
 Getters.stages = {
+  _cache: {
+    at: null,
+    c: null
+  },
   all() {
+    const currStateTime = store.getters["data/updated"]({id: "stages"})
+    if (this._cache) {
+      if (this._cache.at === currStateTime) return this._cache.c
+    }
     let stages = store.getters["data/content"]({id: "stages"});
+    this._cache = {
+      at: currStateTime,
+      c: stages
+    }
     if (!stages) return []
     return stages
   },

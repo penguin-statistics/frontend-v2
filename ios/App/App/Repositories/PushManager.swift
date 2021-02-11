@@ -54,6 +54,7 @@ class PushManager {
         let lastToken = UserDefaults.standard.string(forKey: lastSyncedDeviceTokenKey)
         if lastToken == nil {
             self.stalePreferences = preferences
+            return
         }
         self.register(for: lastToken!, with: preferences)
     }
@@ -64,6 +65,8 @@ class PushManager {
         
 //        let jsonString = String(data: jsonData, encoding: .utf8)!
         
+        #if DEBUG
+        
         AF.request("http://10.6.6.150:8105/registration", method: .put, parameters: params.dictionary, encoding: JSONEncoding.default, headers: [HTTPHeader(name: "Content-Type", value: "application/json")]).response { (response) in
             if let error = response.error {
                 print("registration error", error)
@@ -72,6 +75,8 @@ class PushManager {
             print("registered with param", params, "with response", response.data?.toString() ?? "nil")
             self.pushSubscriptionDidSucceeded(for: token, with: pref)
         }
+        
+        #endif
     }
     
     private func revokeToken(for token: String) {
@@ -86,6 +91,8 @@ class PushManager {
         
         print("lastToken", lastToken ?? "nil", "currentToken", currentToken)
         
+        #if DEBUG
+        
         if lastToken != currentToken {
             // token changed. revoke last one if have any, and start registering for new one
             if lastToken != nil {
@@ -94,5 +101,7 @@ class PushManager {
             
             self.register(for: currentToken, with: self.stalePreferences)
         }
+        
+        #endif
     }
 }

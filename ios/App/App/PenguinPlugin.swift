@@ -41,22 +41,14 @@ public class PenguinPlugin: CAPPlugin {
     }
     
     @objc func getLocalizationEnvironment(_ call: CAPPluginCall) {
-        let jsonEncoder = JSONEncoder()
-        let jsonData = try! jsonEncoder.encode(NSLocale.current.identifier)
-        let json = String(data: jsonData, encoding: String.Encoding.utf8)
-        
         call.success([
-            "locale": json!
+            "locale": NSLocale.current.identifier
         ])
     }
     
     @objc func getRegion(_ call: CAPPluginCall) {
-        let jsonEncoder = JSONEncoder()
-        let jsonData = try! jsonEncoder.encode(Locale.current.regionCode)
-        let json = String(data: jsonData, encoding: String.Encoding.utf8)
-        
         call.success([
-            "region": json!
+            "region": Locale.current.regionCode
         ])
     }
     

@@ -342,6 +342,9 @@
     .runtime-app .safe-area--v-content > .v-content__wrap {
         padding-bottom: 80px !important;
     }
+    .crisp-client {
+        height: 90% !important;
+    }
 
     .safe-area--navigation {
         padding-left: calc(max(env(safe-area-inset-left), 8px)) !important;
@@ -744,5 +747,3 @@
 .v-slide-group__prev, .v-slide-group__next {
     display: none !important
 }
-
-

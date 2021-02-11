@@ -69,12 +69,13 @@
       </v-list>
     </v-navigation-drawer>
     <v-app-bar
+      id="penguin-toolbar"
       elevate-on-scroll
       app
       dark
       :color="primaryColor"
       :style="{'filter': isInSpecialUI ? 'grayscale(1)' : ''}"
-      class="x--safe-area toolbar--safe-area flex-column"
+      class="x--safe-area toolbar--safe-area flex-column transition-all"
     >
       <v-app-bar-nav-icon
         v-haptic

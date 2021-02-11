@@ -56,7 +56,7 @@ struct BlurModifierSimple: ViewModifier {
 }
 
 public extension String {
-    public func withBundleIdentifier() -> String {
+    func withBundleIdentifier() -> String {
         return (Bundle.main.bundleIdentifier ?? "io.penguinstats.app") + "." + self
     }
 }

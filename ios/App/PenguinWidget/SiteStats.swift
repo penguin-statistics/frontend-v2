@@ -44,7 +44,6 @@ struct SiteStats {
     let stages: [StageStats]
     let server: Servers
     
-    #if DEBUG
     static func demo(_ type: DemoType) -> SiteStats {
         switch type {
         case .zhRegular:
@@ -152,5 +151,4 @@ struct SiteStats {
             )
         }
     }
-    #endif
 }

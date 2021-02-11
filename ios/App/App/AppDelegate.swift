@@ -87,7 +87,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         if #available(iOS 13.0, *) {
             let debuggerBtn = UIButton(frame: CGRect(
                                         x: UIScreen.main.bounds.maxX - 80 - 18,
-                                        y: UIScreen.main.bounds.maxY - 36 - 72,
+                                        y: UIScreen.main.bounds.maxY - 36 - 108,
                                         width: 80,
                                         height: 36
             ))
@@ -135,7 +135,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             print("remote notification launch option", notif ?? "null")
         }
         
-        
+        #if DEBUG
         
         // MARK: CSSearchableItemAttributeSet for CSSearchableItem
         
@@ -165,7 +165,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             }
         }
         
-        
+        #endif
         
         
         

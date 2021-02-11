@@ -22,7 +22,7 @@
         </Subheader>
 
         <v-row>
-          <v-col cols="6">
+          <v-col cols="5">
             <v-select
               v-model="form.server"
               filled
@@ -33,7 +33,7 @@
               class="mb-1"
             />
           </v-col>
-          <v-col cols="6">
+          <v-col cols="7">
             <v-select
               v-model="form.locale"
               filled
@@ -78,9 +78,10 @@
               <v-btn
                 color="primary"
                 small
+                :disabled="alreadySubs[category]"
                 @click="add(category)"
               >
-                订阅
+                {{ alreadySubs[category] ? "已订阅" : "订阅" }}
               </v-btn>
             </v-list-item-action>
           </v-list-item>
@@ -125,10 +126,13 @@ export default {
       type: Boolean,
       required: true
     },
+    preferences: {
+      type: Array,
+      required: true
+    }
   },
   data() {
     return {
-      valid: false,
       form: {
         locale: null,
         server: null,
@@ -153,10 +157,24 @@ export default {
           value: el
         }
       })
+    },
+    alreadySubs() {
+      const prefs = this.preferences.filter(el => el.locale === this.form.locale && el.server === this.form.server)
+      const statuses = {}
+      for (const pref of prefs) {
+        statuses[pref.category] = true
+      }
+      return statuses
+    }
+  },
+  watch: {
+    value(val) {
+      if (val) this.reset()
     }
   },
   created() {
-    this.reset()
+    this.form.locale = this.$i18n.locale
+    this.form.server = this.$store.getters['dataSource/server']
   },
   methods: {
     close() {
@@ -164,15 +182,11 @@ export default {
       this.reset()
     },
     reset() {
-      this.form = {
-        locale: this.$i18n.locale,
-        server: this.$store.getters["dataSource/server"],
-        category: null
-      }
+      this.form.category = null
     },
     add(category) {
       this.form.category = category
-      this.$emit('add', this.form)
+      this.$emit('add', Object.assign({}, this.form))
       this.close()
     }
   },

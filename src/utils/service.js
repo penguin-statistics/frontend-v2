@@ -36,7 +36,7 @@ const deployingFlag = `<meta name="penguin:exception" content="type=deploying">`
 function needsUpdate(response) {
   if ("x-penguin-upgrade" in response.headers) {
     // X-Penguin-Upgrade: Client version must be outdated due to
-    // API endpoint changes or other changes that must be updated.
+    // API *endpoint* changes or other changes that must be updated.
     return true
   }
   if ("x-penguin-compatible" in response.headers) {

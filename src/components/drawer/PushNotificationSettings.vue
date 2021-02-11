@@ -8,7 +8,10 @@
       <slot v-bind="props" />
     </template>
 
-    <v-dialog v-model="dirtyDialog" max-width="400px">
+    <v-dialog
+      v-model="dirtyDialog"
+      max-width="400px"
+    >
       <v-card>
         <v-card-title>
           未保存
@@ -17,11 +20,17 @@
           您更改了订阅项，但并未保存。丢弃所有修改并退出吗？
         </v-card-text>
         <v-card-actions>
-          <v-btn text @click="dirtyDialog = false">
+          <v-btn
+            text
+            @click="dirtyDialog = false"
+          >
             {{ $t('meta.dialog.cancel') }}
           </v-btn>
           <v-spacer />
-          <v-btn color="error" @click="dirtyDialog = false; close()">
+          <v-btn
+            color="error"
+            @click="dirtyDialog = false; close()"
+          >
             {{ $t('meta.dialog.confirm') }}
           </v-btn>
         </v-card-actions>
@@ -43,16 +52,17 @@
         </Subheader>
 
         <NewPushSubscriptionDialog
-          v-model="addDialog"
+          v-model="addDialog" :preferences="preferences"
           @add="add"
         >
           <template #default="{ on }">
             <v-btn 
+              v-haptic
               block
               depressed
               large
               color="primary"
-              v-on="on" v-haptic
+              v-on="on"
             >
               <v-icon left>
                 mdi-plus-circle
@@ -71,7 +81,10 @@
             订阅列表
           </v-subheader>
 
-          <v-list-item v-if="!preferences.length" class="justify-center grey--text py-0">
+          <v-list-item
+            v-if="!preferences.length"
+            class="justify-center grey--text py-0"
+          >
             无订阅项
           </v-list-item>
 
@@ -180,8 +193,7 @@ export default {
       saving: false,
       debug: false,
       dirty: false,
-      originalPrefs: [{"locale":"zh","server":"CN","category":"NewStage"}],
-      preferenceToSubmit: ""
+      originalPrefs: [],
     }
   },
   computed: {
@@ -239,6 +251,7 @@ export default {
     },
     add(content) {
       const newKey = this.generateKey(content)
+      console.log("adding", JSON.stringify(content), newKey, this.preferences)
       if (this.originalPrefs.find(el => this.generateKey(el) === newKey)) {
         snackbar.launch("warning", 15000, "请不要重复添加：拥有相同订阅参数的订阅已存在于订阅列表内", "")
         return

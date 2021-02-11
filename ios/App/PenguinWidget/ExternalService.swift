@@ -32,7 +32,7 @@ struct StatsResponseStatItem: Decodable {
 }
 
 func getStats(for server: Servers, completion: @escaping (SiteStats?) -> ())  {
-    AF.request("http://10.6.6.150:8010/api/stats/" + server.string(), requestModifier: {
+    AF.request("https://widget.penguin-stats.io/api/stats/" + server.string(), requestModifier: {
         $0.timeoutInterval = TimeInterval(25.0) // system give us 30s. make some room
     }).response {resp in
         guard let data = resp.data else {

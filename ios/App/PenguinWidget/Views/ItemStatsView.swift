@@ -16,17 +16,19 @@ struct ItemStatsView: View {
     var body: some View {
         HStack(alignment: .center, spacing: 4) {
             Link(destination: Routes.generate(itemId: item.id)) {
-                item.image()
-                    .resizable()
-                    .frame(width: 20, height: 20, alignment: .center)
-                
-                if showName {
-                    Text(item.name)
-                        .font(.caption)
-                        .bold()
-                        .lineLimit(2)
-                        .minimumScaleFactor(0.6)
-                        .foregroundColor(Color("Gray5"))
+                Group {
+                    item.image()
+                        .resizable()
+                        .frame(width: 20, height: 20, alignment: .center)
+                    
+                    if showName {
+                        Text(item.name)
+                            .font(.caption)
+                            .bold()
+                            .lineLimit(2)
+                            .minimumScaleFactor(0.6)
+                            .foregroundColor(Color("Gray5"))
+                    }
                 }
             }
             

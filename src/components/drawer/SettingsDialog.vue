@@ -45,7 +45,7 @@
               class="mb-2"
             />
 
-            <PushNotificationSettings>
+            <PushNotificationSettings v-if="false">
               <template #default="{ on }">
                 <v-btn
                   v-if="$env.isApp"
