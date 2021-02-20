@@ -82,7 +82,7 @@
       dark
       :color="primaryColor"
       :style="{'filter': isInSpecialUI ? 'grayscale(1)' : ''}"
-      class="x--safe-area toolbar--safe-area flex-column transition-all"
+      class="x--safe-area toolbar--safe-area flex-column transition-all overflow-hidden"
     >
       <v-app-bar-nav-icon
         v-haptic
