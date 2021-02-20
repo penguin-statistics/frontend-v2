@@ -29,6 +29,12 @@
         <SiteStatsOverview class="card-translate-up" />
       </v-col>
 
+      <!--      <v-col-->
+      <!--        cols="12"-->
+      <!--      >-->
+      <!--        <Banner class="card-translate-up" />-->
+      <!--      </v-col>-->
+
       <v-col
         cols="12"
         lg="6"
