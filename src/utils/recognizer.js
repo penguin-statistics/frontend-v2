@@ -40,7 +40,7 @@ class Recognizer {
   async initialize () {
     this.wasm = {
       recognize: Module.cwrap('recognize', 'string', ['number', 'number']),
-      preload_json: Module.cwrap('preload_json', 'void', ['string', 'string', 'string']),
+      preload_json: Module.cwrap('preload_json', 'void', ['string', 'string', 'string', 'string']),
       preload_tmpl: Module.cwrap('preload_templ', 'void', ['string', 'number'])
       // free_buffer: Module.cwrap('free_buffer', 'void', ['number'])
     }
@@ -50,7 +50,8 @@ class Recognizer {
     this.wasm.preload_json(
       JSON.stringify(preloads.stage),
       JSON.stringify(preloads.item),
-      JSON.stringify(preloads.hash)
+      JSON.stringify(preloads.hash),
+      'zh'
     )
 
     console.log('json preloaded')
