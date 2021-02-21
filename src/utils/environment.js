@@ -1,3 +1,6 @@
+import { Plugins } from '@capacitor/core'
+const { Device } = Plugins
+
 const debugKey = "PENGUIN_STATS_DEBUG";
 
 function getConfig() {
@@ -13,6 +16,14 @@ function boolean(key, rejectApp) {
 }
 
 export default {
+  get device() {
+    return (async () => {
+      return {
+        info: await Device.getInfo(),
+        languageCode: await Device.getLanguageCode()
+      }
+    })()
+  },
   get production () {return process.env.NODE_ENV === 'production'},
   runtime: {
     get isApp () {return PENGUIN_PLATFORM === "app"},
@@ -28,18 +39,22 @@ export default {
   get isWindows () {return navigator.platform.indexOf('Win') > -1},
   debug: {
     get performance() {return boolean("performance")},
-    get devtools() {return boolean("devtools", true)},
+    get devtools() {return boolean("devtools")},
     get colorfulConsole() {return boolean("colorfulConsole", true)},
     get fullConsole() {return boolean("fullConsole")},
     get frostnova() {return boolean("frostnova")}
   },
   get platform() {
-    if (PENGUIN_PLATFORM === "web") return "web"
     if (PENGUIN_PLATFORM === "app") {
-      if (window.$device && window.$device.info && window.$device.info.platform) return `app:${window.$device.info.platform}`
-      return "web"
+      return (async () => {
+        const device = await this.device
+        return `app:${device.info.platform}`
+      })()
     }
-    return "web"
+    return Promise.resolve("web")
+  },
+  get isApp() {
+    return PENGUIN_PLATFORM === "app"
   },
   adapter({ prod, dev }) {
     return this.production ? prod : dev

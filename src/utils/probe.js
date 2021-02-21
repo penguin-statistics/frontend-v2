@@ -51,19 +51,22 @@ class PenguinProbe {
       probeUid = store.getters['auth/probeUid']
     }
 
-    const platform = environment.platform
+    this.initiate(probeUid.c)
+      .catch(err => {
+        Console.warn('Probe', 'failed to initialize transport', err)
+      })
+  }
+
+  async initiate(probeUid) {
+    const platform = await environment.platform
 
     const queries = qs.stringify({
       v: config.version,
       p: platform,
-      u: probeUid.c,
+      u: probeUid,
       r: window.location.pathname
     })
 
-    this.initiate(queries)
-  }
-
-  initiate(queries) {
     const endpoint = environment.adapter(config.probe.endpoint)
 
     if (!properlySupportedWebSocket()) {

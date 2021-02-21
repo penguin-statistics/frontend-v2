@@ -19,7 +19,7 @@
       </v-card-title>
 
       <v-card-text class="subtitle-1">
-        {{ $t('settings.data.reset.subtitle') }}
+        {{ deleted ? "数据与偏好设置已重置。请重启 App" : $t('settings.data.reset.subtitle') }}
       </v-card-text>
 
       <v-divider />
@@ -28,17 +28,16 @@
         <v-btn
           v-haptic
           text
-          :disabled="deleting"
+          :disabled="deleting || deleted"
           @click="cancel"
         >
           {{ $t('meta.dialog.cancel') }}
         </v-btn>
-        <v-spacer />
         <v-btn
           v-haptic
           color="error"
           :disabled="countdownNow !== 0"
-          :loading="deleting"
+          :loading="deleting || deleted"
           @click="reset"
         >
           {{ $t('meta.dialog.confirm') }}{{ countdownNow !== 0 ? ` (${countdownNow})` : "" }}
@@ -62,7 +61,8 @@
         dialog: false,
         countdownNow: 5,
         timer: null,
-        deleting: false
+        deleting: false,
+        deleted: false
       }
     },
     watch: {

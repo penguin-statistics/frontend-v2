@@ -15,6 +15,9 @@ if (mirror.global.isCurrent() || mirror.cn.isCurrent()) {
   // also use the relative path, but we left the task to WebpackDevServer for proxying local API responses
   // so use relative path.
   baseURL = "/PenguinStats/api/v2"
+} else if (~window.location.href.indexOf("penguin-upyun-cdn.test.galvincdn.com")) {
+  // we are just testing the new cdn :D
+  baseURL = "/PenguinStats/api/v2"
 } else {
   // high chance of using a staging environment where api is not available with the frontend deployment.
   // use the absolute endpoint to get the juicy responses :)
@@ -33,7 +36,7 @@ const deployingFlag = `<meta name="penguin:exception" content="type=deploying">`
 function needsUpdate(response) {
   if ("x-penguin-upgrade" in response.headers) {
     // X-Penguin-Upgrade: Client version must be outdated due to
-    // API endpoint changes or other changes that must be updated.
+    // API *endpoint* changes or other changes that must be updated.
     return true
   }
   if ("x-penguin-compatible" in response.headers) {

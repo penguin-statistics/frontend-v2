@@ -103,7 +103,7 @@
               r.frontend,
               r.maintenance,
               r.widget,
-              r.customersupport
+              r.native
             ],
             avatar: "gg.jpg",
             socials: {
@@ -204,6 +204,16 @@
               avatar: "blealtan.png",
               socials: {
                 github: "https://github.com/Blealtan"
+              }
+            },
+            {
+              name: "ChoKhoOu",
+              responsibility: [
+                r.backend
+              ],
+              avatar: "chokhoou.jpg",
+              socials: {
+                github: "https://github.com/ChoKhoOu"
               }
             },
             {

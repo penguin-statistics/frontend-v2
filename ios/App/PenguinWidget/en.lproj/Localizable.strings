@@ -9,7 +9,7 @@
 "SiteStatsWidgetName" = "Statistics Overview";
 "SiteStatsWidgetDesc" = "Keep track of the overview of site statistics";
 "SiteStatsWidgetTitle" = "Top Report Stage (24h)";
-"WidgetViewMore" = "View More";
+"WidgetViewMore" = "More";
 
 "ServerNameCN" = "CN";
 "ServerNameUS" = "US";

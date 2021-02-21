@@ -29,7 +29,7 @@
       {{ $t('menu.refreshData') }}
     </v-btn>
 
-    <DataResetter>
+    <DataResetter v-if="!$env.isApp">
       <template v-slot:default="{ on }">
         <v-btn
           v-haptic.notification="'WARNING'"

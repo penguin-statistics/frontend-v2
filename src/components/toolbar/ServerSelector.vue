@@ -90,14 +90,14 @@
 </template>
 
 <script>
-  import config from "@/config"
   import {mapGetters} from "vuex";
+  import supports from "@/models/supports";
 
   export default {
     name: "ServerSelector",
     data() {
       return {
-        servers: config.servers
+        servers: supports.servers
       }
     },
     computed: {

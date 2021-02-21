@@ -27,8 +27,10 @@ struct ItemStats {
 
 struct StageStats {
     let stageId: String
+    let zoneId: String
     let stageCode: String
     let items: [ItemStats]
+    let recentTimes: Int
 }
 
 enum DemoType {
@@ -40,7 +42,7 @@ enum DemoType {
 
 struct SiteStats {
     let stages: [StageStats]
-    let totalSanity: Int
+    let server: Servers
     
     static func demo(_ type: DemoType) -> SiteStats {
         switch type {
@@ -49,6 +51,7 @@ struct SiteStats {
                 stages: [
                     StageStats(
                         stageId: "main-01_07",
+                        zoneId: "unknown",
                         stageCode: "1-7",
                         items: [
                             ItemStats(
@@ -57,10 +60,12 @@ struct SiteStats {
                                 times: 329752,
                                 quantity: 265096
                             )
-                        ]
+                        ],
+                        recentTimes: 300
                     ),
                     StageStats(
                         stageId: "main-04_0112",
+                        zoneId: "unknown",
                         stageCode: "1-8",
                         items: [
                             ItemStats(
@@ -69,10 +74,12 @@ struct SiteStats {
                                 times: 324534,
                                 quantity: 3425234
                             )
-                        ]
+                        ],
+                        recentTimes: 300
                     ),
                     StageStats(
                         stageId: "main-08_0421",
+                        zoneId: "unknown",
                         stageCode: "4-8",
                         items: [
                             ItemStats(
@@ -81,15 +88,17 @@ struct SiteStats {
                                 times: 454532,
                                 quantity: 462256
                             )
-                        ]
+                        ],
+                        recentTimes: 300
                     )
                 ],
-                totalSanity: 27860888
+                server: .cn
             )
         case .zhExtraLong:
             return SiteStats(
                 stages: Array(repeating: StageStats(
                     stageId: "main-01_07",
+                    zoneId: "unknown",
                     stageCode: "达拉崩吧班得贝迪苏打麻辣香锅卜多比鲁翁",
                     items: [
                         ItemStats(
@@ -98,14 +107,16 @@ struct SiteStats {
                             times: 453234,
                             quantity: 324523
                         )
-                    ]
+                    ],
+                    recentTimes: 300
                 ), count: 3),
-                totalSanity: 27860888
+                server: .cn
             )
         case .enRegular:
             return SiteStats(
                 stages: Array(repeating: StageStats(
                     stageId: "main-01_07",
+                    zoneId: "unknown",
                     stageCode: "4-8",
                     items: [
                         ItemStats(
@@ -114,14 +125,17 @@ struct SiteStats {
                             times: 2343433,
                             quantity: 1234123
                         )
-                    ]
+                    ],
+                    recentTimes: 300
                 ), count: 3),
-                totalSanity: 27860888
+                server: .cn
+                
             )
         case .enExtraLong:
             return SiteStats(
                 stages: Array(repeating: StageStats(
                     stageId: "main-01_07",
+                    zoneId: "unknown",
                     stageCode: "Never gonna give you up",
                     items: [
                         ItemStats(
@@ -130,9 +144,10 @@ struct SiteStats {
                             times: 453234,
                             quantity: 324523
                         )
-                    ]
+                    ],
+                    recentTimes: 300
                 ), count: 3),
-                totalSanity: 27860888
+                server: .cn
             )
         }
     }

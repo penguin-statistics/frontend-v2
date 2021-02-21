@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "200614453783",
+    "project_id": "penguin-statistics",
+    "storage_bucket": "penguin-statistics.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:200614453783:android:be9e2507cdfa945d147252",
+        "android_client_info": {
+          "package_name": "io.penguinstats.app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "200614453783-q3q89lurq4nmm1mn9pnkf3qa1e0k16mi.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCA225z1ov8mJ-oRXOr96fh6jPg_aeI5T4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "200614453783-q3q89lurq4nmm1mn9pnkf3qa1e0k16mi.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

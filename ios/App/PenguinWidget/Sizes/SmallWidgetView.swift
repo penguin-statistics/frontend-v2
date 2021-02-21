@@ -22,10 +22,13 @@ struct SmallWidgetView : View {
             ItemStatsView(item: stats.stages[0].items[0])
 //                .frame(minHeight: 0, maxHeight: 28)
             Spacer()
-            WidgetFooter()
+            WidgetFooter(server: stats.server)
         }
         .padding()
         .background(Color("Background"))
+        .widgetURL(Routes.generate(
+                    zoneId: stats.stages[0].zoneId,
+                    stageId: stats.stages[0].stageId))
     }
 }
 

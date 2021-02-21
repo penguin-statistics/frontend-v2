@@ -113,6 +113,7 @@
   import Console from "@/utils/Console";
   import Mirror from "@/mixins/Mirror";
   import {mapGetters} from "vuex";
+  import environment from "@/utils/environment";
 
   export default {
     name: "MirrorSelector",
@@ -147,7 +148,7 @@
       }
     },
     created () {
-      if (this.ignoreNotification) {
+      if (this.ignoreNotification || environment.isApp) {
         Console.info("MirrorSelector", "ignored notification")
       } else {
         external.geoip()

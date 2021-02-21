@@ -20,3 +20,5 @@ package-lock.json
 *.njsproj
 *.sln
 *.sw?
+/tools/skeleton-html-generator/dist
+/tools/skeleton-html-generator/.cache

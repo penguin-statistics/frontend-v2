@@ -22,7 +22,7 @@ struct LargeWidgetView: View {
                 .padding(.horizontal, 8)
             
             Spacer()
-            WidgetFooter()
+            WidgetFooter(server: stats.server)
         }
         .padding()
         .background(Color("Background"))
