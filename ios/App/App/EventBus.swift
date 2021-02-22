@@ -9,14 +9,6 @@ import Foundation
 import RxBus
 import RxSwift
 
-//protocol MyEncodable: Encodable {
-//    func toJSONData() -> Data
-//}
-//
-//extension MyEncodable {
-//    func toJSONData() -> Data{ try? JSONEncoder().encode(self) }
-//}
-
 struct Events {
     struct NetworkPathChanged: BusEvent, Encodable {
         let isConstrained: Bool

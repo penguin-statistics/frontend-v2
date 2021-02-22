@@ -1,7 +1,7 @@
 <template>
   <v-dialog
     v-model="active"
-    max-width="400px"
+    max-width="500px"
   >
     <template v-slot:activator="{ on, attrs }">
       <v-btn
@@ -35,9 +35,49 @@
             </Subheader>
             <ThemeSwitcher class="mb-2" />
 
-            <LocaleSwitcher class="mb-2" />
+            <LocaleSwitcher
+              v-if="!$env.isApp"
+              class="mb-2"
+            />
 
-            <OptimizationSwitcher class="mb-2" />
+            <OptimizationSwitcher
+              v-if="!$env.isApp"
+              class="mb-2"
+            />
+
+            <PushNotificationSettings v-if="false">
+              <template #default="{ on }">
+                <v-btn
+                  v-if="$env.isApp"
+                  v-haptic
+                  large
+                  block
+                  color="indigo"
+                  class="mb-3"
+                  v-on="on"
+                >
+                  <v-icon left>
+                    mdi-bell
+                  </v-icon>
+                  推送通知设置...
+                </v-btn>
+              </template>
+            </PushNotificationSettings>
+
+            <v-btn
+              v-if="$env.isApp"
+              v-haptic
+              depressed
+
+              block
+              color="primary"
+              @click="openBundleSettings"
+            >
+              <v-icon left>
+                mdi-settings
+              </v-icon>
+              语言与隐私设置
+            </v-btn>
 
             <DataManager
               v-if="active"
@@ -70,14 +110,19 @@
   import OptimizationSwitcher from "@/components/drawer/OptimizationSwitcher";
   import DataManager from "@/components/drawer/DataManager";
   import Subheader from "@/components/global/Subheader";
+  import penguin from "@/utils/native/penguin";
+  import PushNotificationSettings from "@/components/drawer/PushNotificationSettings";
   export default {
     name: "SettingsDialog",
-    components: {Subheader, DataManager, OptimizationSwitcher, LocaleSwitcher, ThemeSwitcher},
+    components: {PushNotificationSettings, Subheader, DataManager, OptimizationSwitcher, LocaleSwitcher, ThemeSwitcher},
     mixins: [Theme],
     data() {
       return {
         active: false
       }
+    },
+    methods: {
+      openBundleSettings: penguin.openBundleSettings
     },
   }
 </script>

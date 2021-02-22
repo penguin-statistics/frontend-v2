@@ -9,10 +9,8 @@ import 'vuetify/dist/vuetify.min.css'
 import store from './store'
 import router from './router'
 import i18n from "@/i18n"
-import {Plugins} from '@capacitor/core'
 import '@/components/functional'
 import environment from "@/utils/environment";
-const { Device } = Plugins
 
 import './injections'
 import PenguinProbe from "@/utils/probe";
@@ -25,13 +23,8 @@ Vue.config.performance = environment.debug.performance
 Vue.config.devtools = environment.debug.devtools
 
 async function bootstrap() {
-  window.$device = Vue.prototype.$device = {
-    batteryInfo: await Device.getBatteryInfo(),
-    info: await Device.getInfo(),
-    languageCode: await Device.getLanguageCode()
-  }
-
   Vue.prototype.$probe = new PenguinProbe()
+  Vue.prototype.$env = environment
 
   new Vue({
     vuetify,

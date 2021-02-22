@@ -8,13 +8,14 @@
 import WidgetKit
 import SwiftUI
 import Intents
+import Alamofire
 
 struct SiteStatsProvider: IntentTimelineProvider {
     func placeholder(in context: Context) -> WidgetTimelineEntry {
-        
+        print("widget placeholder", context)
         return WidgetTimelineEntry(
             date: Date(),
-            stats: SiteStats(stages: [StageStats(stageId: "---", stageCode: "---", items: [ItemStats(id: "---", name: "------", times: 1, quantity: 1)])], totalSanity: 0)
+            stats: SiteStats.demo(.zhRegular)
         )
     }
 
@@ -29,20 +30,30 @@ struct SiteStatsProvider: IntentTimelineProvider {
     }
 
     func getTimeline(for configuration: SelectServerIntent, in context: Context, completion: @escaping (Timeline<WidgetTimelineEntry>) -> ()) {
-        print("serverSelection timeline", configuration)
+        print("serverSelection timeline with configured server:", configuration.server.string())
         
-        let entries: [WidgetTimelineEntry] = [
-            WidgetTimelineEntry(
-                date: Date(),
-                stats: SiteStats.demo(.zhRegular)
-            )
-        ]
-
-        // Generate a timeline consisting of five entries an hour apart, starting from the current date.
+        print("doing network request")
+        getStats(for: configuration.server) { (stats) in
+            
+            if stats != nil {
+                print("got stats", stats ?? "undefined")
+                let entries: [WidgetTimelineEntry] = [
+                    WidgetTimelineEntry(
+                        date: Date(),
+                        stats: stats!
+                    )
+                ]
+                let timeline = Timeline(entries: entries, policy: .atEnd)
+                completion(timeline)
+            } else {
+                // nothing...
+                completion(Timeline(entries: [], policy: .atEnd))
+                return
+            }
+            
+        }
         
-
-        let timeline = Timeline(entries: entries, policy: .atEnd)
-        completion(timeline)
+        
     }
 }
 
@@ -61,10 +72,8 @@ struct WidgetEntry: View {
             SmallWidgetView(stats: entry.stats)
         case .systemMedium:
             MediumWidgetView(stats: entry.stats)
-//        case .systemLarge:
-//            LargeWidgetView(stats: entry.stats)
         default:
-            fatalError("unrecognized widget family")
+            MediumWidgetView(stats: entry.stats)
         }
     }
 }

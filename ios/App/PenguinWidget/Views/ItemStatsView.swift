@@ -11,23 +11,26 @@ import UIKit
 
 struct ItemStatsView: View {
     var item: ItemStats
-    var showName: Bool = true
+    var showName: Bool = false
     
     var body: some View {
         HStack(alignment: .center, spacing: 4) {
-            item.image()
-                .resizable()
-                .frame(width: 20, height: 20, alignment: .center)
-            
-            if showName {
-                Text(item.name)
-                    .font(.caption)
-                    .bold()
-                    .lineLimit(2)
-                    .minimumScaleFactor(0.6)
-                    .foregroundColor(Color("Gray5"))
+            Link(destination: Routes.generate(itemId: item.id)) {
+                Group {
+                    item.image()
+                        .resizable()
+                        .frame(width: 20, height: 20, alignment: .center)
+                    
+                    if showName {
+                        Text(item.name)
+                            .font(.caption)
+                            .bold()
+                            .lineLimit(2)
+                            .minimumScaleFactor(0.6)
+                            .foregroundColor(Color("Gray5"))
+                    }
+                }
             }
-            
             
             Text(item.percentage())
                 .font(.custom("Bender", size: 12, relativeTo: .body))
