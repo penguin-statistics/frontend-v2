@@ -54,12 +54,13 @@
         <v-badge
           class="mx-2"
           bottom
-          color="grey"
-          :content="success"
           offset-x="15"
           offset-y="15"
           style="opacity: 0; animation: postMove 1s ease 2s forwards"
         >
+          <template v-slot:badge>
+            <span class="monospace-pure">{{ success }}</span>
+          </template>
           <v-avatar
             size="64"
             color="success"
@@ -72,12 +73,13 @@
         <v-badge
           :class="{'mx-2': true, 'd-none': warning === 0}"
           bottom
-          color="grey"
-          :content="warning"
           offset-x="15"
           offset-y="15"
           style="opacity: 0; animation: postMove 1s ease 2.5s forwards"
         >
+          <template v-slot:badge>
+            <span class="monospace-pure">{{ warning }}</span>
+          </template>
           <v-avatar
             size="64"
             color="warning"
@@ -90,12 +92,13 @@
         <v-badge
           :class="{'mx-2': true, 'd-none': error === 0}"
           bottom
-          color="grey"
-          :content="error"
           offset-x="15"
           offset-y="15"
           style="opacity: 0; animation: postMove 1s ease 3s forwards"
         >
+          <template v-slot:badge>
+            <span class="monospace-pure">{{ error }}</span>
+          </template>
           <v-avatar
             size="64"
             color="red darken-3"
