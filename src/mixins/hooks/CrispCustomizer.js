@@ -32,6 +32,15 @@ export default {
       } catch (e) {
         Console.error("CrispCustomizer", "failed to initialize custom style:", e)
       }
+
+      if (window.$crisp.is('chat:large')) {
+        window.$crisp.push(['on', 'chat:opened', function () {
+          document.querySelector('#penguin-toolbar').style.transform = 'translateY(calc(-56px - env(safe-area-inset-top)))'
+        }])
+        window.$crisp.push(['on', 'chat:closed', function () {
+          document.querySelector('#penguin-toolbar').style.transform = 'translateY(0px)'
+        }])
+      }
     }]);
   },
   methods: {
@@ -41,7 +50,7 @@ export default {
         try {
           document.querySelector("div.crisp-client").style.setProperty("transition", "all 275ms cubic-bezier(0.165, 0.84, 0.44, 1)", "important");
 
-          if (newRoute.name === "home") {
+          if (newRoute.name === "Home") {
             document.querySelector("div.crisp-client").style.setProperty("display", "block", "important");
             // document.querySelector("div.crisp-client").style.setProperty("transform", "translateY(0px)", "important")
           } else {

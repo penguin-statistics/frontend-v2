@@ -71,7 +71,9 @@ struct Debugger: View {
                     .buttonStyle(GenericButtonStyle())
             }
             .navigationBarTitle("Debugger")
+            
         }
+        .navigationViewStyle(StackNavigationViewStyle())
     }
 }
 

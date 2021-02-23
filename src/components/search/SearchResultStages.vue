@@ -34,7 +34,7 @@ export default {
     result: {
       type: Object,
       required: true
-    },
+    }
   },
   computed: {
     name() {

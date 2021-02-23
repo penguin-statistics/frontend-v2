@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <meta charset="utf-8">
+  <meta content="IE=edge" http-equiv="X-UA-Compatible">
+  <meta content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no,viewport-fit=cover"
+        name="viewport">
+  <link crossorigin="anonymous"
+        href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Condensed:400"
+        rel="stylesheet">
+  <title>企鹅物流数据统计</title>
+  <style>
+      #app, body, html {
+          height: 100%;
+          margin: 0;
+          padding: 0;
+          transition: background .3s cubic-bezier(.25, .8, .5, 1) !important
+      }
+
+      body {
+          background: #121212
+      }
+  </style>
+  <link href="scss/index.scss" rel="stylesheet"/>
+
+</head>
+<body>
+<noscript>
+  <style type="text/css">
+      .nojs h1 {
+          font-size: 48px;
+          margin: 0.2em 0;
+      }
+
+      .nojs h2 {
+          font-size: 36px
+      }
+      .nojs p {
+          margin: 0.5em 0;
+      }
+
+      .nojs hr {
+          margin: 24px 0;
+          border: 1px solid #212121
+      }
+
+      .nojs {
+          position: fixed;
+          top: 0;
+          left: 0;
+          height: 100%;
+          width: 100%;
+          z-index: 9999999999;
+          background: #4d2222;
+          background: repeating-linear-gradient(
+                  -45deg,
+                  #3c1b1b,
+                  #3c1b1b 90px,
+                  #1d0d0d 90px,
+                  #1d0d0d 180px
+          );;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+      }
+
+      .nojs-content {
+          vertical-align: middle;
+          width: 70%;
+          font-weight: 700;
+          font-size: 18px;
+          font-family: -apple-system, Noto Sans SC, BlinkMacSystemFont, "Segoe UI", Microsoft YaHei UI, Microsoft Yahei, 微软雅黑, Helvetica, Arial, sans-serif;
+          padding: 48px 64px;
+          word-break: break-word;
+          text-align: center;
+          line-height: 2;
+          border-radius: 16px;
+          background: #cc696f;
+          background: rgba(204, 105, 111, .8);
+          backdrop-filter: blur(16px);
+          text-shadow: 0 2px 4px rgba(0, 0, 0, .3);
+          border: 4px solid #ff878f;
+          color: #261415;
+          box-shadow: 0 0 2rem rgba(0, 0, 0, .5), inset 0 0 2rem rgba(0, 0, 0, .5)
+      }
+
+      .nojs .nojs-btn {
+          display: inline-block;
+          border: 2px solid #000;
+          padding: 8px 24px;
+          margin: 0 8px;
+          text-decoration: none;
+          background: #3375e0;
+          color: #fff;
+          font-family: sans-serif;
+          font-size: 14px;
+          cursor: pointer;
+          text-align: center;
+          transition: background 50ms ease-out, transform 150ms ease;
+          -webkit-appearance: none;
+          -moz-appearance: none
+      }
+
+      .nojs .nojs-btn:focus, .nojs .nojs-btn:hover {
+          background: #368dff;
+          transform: scale(1.05)
+      }
+
+      .nojs .nojs-btn:focus {
+          outline: 1px solid #fff;
+          outline-offset: -4px
+      }
+
+      .nojs .nojs-btn:active {
+          transform: scale(.99)
+      }
+
+      .nojs del {
+          padding: 4px 8px;
+          background: #1d1d1d;
+          background: repeating-linear-gradient(
+                  -45deg,
+                  rgb(153, 93, 34),
+                  rgba(153, 93, 34, 1) 15px,
+                  rgba(0, 0, 0, 0.5) 15px,
+                  rgba(0, 0, 0, 0.5) 30px
+          );
+          color: #cbcbcb;
+          border-radius: 4px;
+      }
+
+      .nojs .nojs-link {
+          background: #0d47a1;
+          color: white;
+          border: 2px solid #093777;
+          padding: 4px 6px;
+          text-decoration: none;
+
+          border-radius: 4px;
+      }
+      .nojs .nojs-btn:focus, .nojs .nojs-link:hover {
+          background: #0f5ad6;
+      }
+      .nojs .nojs-link:active {
+          background: #0d4fba;
+      }
+  </style>
+  <div class="nojs">
+    <div class="nojs-content">
+      <h1>⚠️ JavaScript 已被禁用</h1>
+      <p>
+        很抱歉，由于企鹅物流数据统计使用了 Vue.js 这样的 SPA (Single Page Application) Framework，我们在您启用
+        <del>等离子发动机</del>
+        JavaScript 的情况下才能为您提供服务。
+      </p>
+      <p>
+        若您确信自己已开启相关技术，那么可能是您的浏览器版本太低了；请点击下方按钮升级浏览器。
+      </p>
+      <hr>
+      <a class="nojs-btn" href="https://www.mozilla.org/zh-CN/firefox/new/" target="_blank">使用 Mozilla Firefox (推荐)</a>
+
+      <a class="nojs-btn" href="https://www.google.cn/chrome/" target="_blank">
+        使用 Google Chrome
+      </a>
+
+      <br><br>
+      <p>Penguin Statistics | <a class="nojs-link" href="https://github.com/penguin-statistics" target="_blank">GitHub</a></p>
+    </div>
+  </div>
+</noscript>
+<main id="app">
+  <div id="peL--gradientel" class="peL--gradient"></div>
+  <div id="peL--overlayel" class="peL--overlay"></div>
+  <div id="peL_wel" class="peL_w">
+    <img alt="Logo" class="peL_logo"
+         src="https://penguin.upyun.galvincdn.com/logos/penguin_stats_logo.png"/>
+    <div class="peL_loInd">
+      <div class="peL_loader">
+        <div class="peL_loader-p"></div>
+      </div>
+      <div class="peL_title peL--text">
+        正在加载
+      </div>
+      <div class="peL_subtitle peL--text" id="peL_subtitle">
+        首次加载可能较慢，请耐心等待
+      </div>
+    </div>
+    <div class="peL_modal-w">
+      <div class="peL_modal"></div>
+    </div>
+  </div>
+  <div class="peL_footer">
+    <span id="peL_footer-vendor">
+      &copy; 企鹅物流数据统计
+    </span><span class="peL_footer-d">—</span>
+    <span id="peL_footer--year">2021</span>
+  </div>
+</main>
+<script src="js/loader.js"></script>
+</body>
+</html>
+

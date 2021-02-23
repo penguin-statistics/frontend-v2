@@ -4,7 +4,7 @@ import config from "@/config"
 export default {
   data() {
     return {
-      randomizedLogo: `${config.cdn.global}/logos/penguin_stats_logo.png`
+      randomizedLogo: `${config.cdn.cn}/logos/penguin_stats_logo.png`
     }
   },
   mixins: [CDN],

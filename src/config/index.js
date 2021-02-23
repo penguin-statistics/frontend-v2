@@ -1,4 +1,4 @@
-const version = "v3.4.1";
+const version = "v3.4.2";
 const project = "frontend-v2";
 
 module.exports = {
@@ -31,5 +31,17 @@ module.exports = {
       pagination: 5
     }
   },
-  servers: ["CN", "US", "JP", "KR"]
+  probe: {
+    endpoint: {
+      prod: {
+        ws: "wss://probe.penguin-stats.io/",
+        legacy: "https://probe.penguin-stats.io/"
+      },
+      dev: {
+        ws: "ws://localhost:8100/",
+        legacy: "http://localhost:8100/"
+      },
+    },
+    uidExpiration: 1000 * 60 * 24 * 180
+  }
 }

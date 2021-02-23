@@ -73,6 +73,7 @@ meta:
     cancel: Cancel
     confirm: Confirm
     submit: Submit
+    save: Save
     close: Close
   time:
     minute: "{m}m"
@@ -540,6 +541,7 @@ members:
     materials: Materials Supplier
     statistics: Statistics and Analysis
     widget: Widget Development
+    native: App Development
   socials:
     email: Email
     github: GitHub

@@ -40,7 +40,7 @@ const router = new Router({
   },
   routes: [{
     path: '/',
-    name: 'home',
+    name: 'Home',
     component: Home,
     meta: {
       icon: 'mdi-home',
@@ -83,8 +83,7 @@ const router = new Router({
         component: RecognitionReport,
         meta: {
           icon: "mdi-magnify",
-          i18n: "menu.recognitionreport",
-          showOnServer:["CN"]
+          i18n: "menu.recognitionreport"
         }
       }
     ]

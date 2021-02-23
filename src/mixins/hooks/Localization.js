@@ -6,9 +6,9 @@ import environment from "@/utils/environment";
 export default {
   mixins: [I18n],
   created () {
-    if (this.language) {
-      this.changeLocale(this.language, false)
-    } else {
+    // if isApp, we then use the "detection" result (but truly in iOS that's the per-app localization settings)
+    // or, if the user has NOT explicitly set the language. in this case we apply it.
+    if (!this.language || environment.isApp) {
       const language = strings.getFirstBrowserLanguage();
       Console.info("i18n", "detected language", language);
       if (language) {
@@ -16,6 +16,8 @@ export default {
         // unless the user manually set one.
         this.changeLocale(language, false)
       }
+    } else {
+      this.changeLocale(this.language, false)
     }
   },
   computed: {

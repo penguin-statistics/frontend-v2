@@ -51,11 +51,13 @@
         class="search-results"
         :class="{'search-results--dense': pure}"
       >
-        <template #default="{item, active}">
+        <template #default="{item, index, active}">
           <SearchResultNormal
             :key="item.id"
+            :query="debouncedSearch"
             :tabindex="active ? 2 : -1"
             :result="item"
+            :index="index"
           />
         </template>
       </recycle-scroller>
@@ -105,14 +107,14 @@ export default {
       }, 30)
     },
     results() {
-      Console.debug('Search', 'performing search with query', this.debouncedSearch)
+      if (this.debouncedSearch === '') return []
       const results = this.engine.search(this.debouncedSearch)
         .map(el => ({
           ...el,
           ...el.item,
           id: `${el.type}_${el.item.stageId || el.item.itemId}`,
         }))
-      Console.debug('Search', 'got result', results)
+      Console.debug('Search', 'query', this.debouncedSearch, 'got result', results)
       return results
     },
     dependencies() {
