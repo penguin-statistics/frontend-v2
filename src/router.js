@@ -58,7 +58,7 @@ const router = new Router({
     },
     children: [
       {
-        path: "byzone",
+        path: "stage",
         name: "ReportByZone",
         component: Report,
         meta: {

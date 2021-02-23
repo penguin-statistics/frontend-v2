@@ -41,7 +41,7 @@
     </template>
 
     <v-list-item
-      v-for="child in route.children.filter(el => !el.meta.hide && ((el.meta.showOnServer && el.meta.showOnServer.includes(server)) || !el.meta.showOnServer) )"
+      v-for="child in route.children.filter(el => !el.meta.hide )"
       :key="child.name"
       v-haptic
       :class="child.path === $route.path.split('/')[2] ? activeClass : ''"
