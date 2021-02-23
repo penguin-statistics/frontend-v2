@@ -42,21 +42,40 @@
           点击此处加入图片
         </v-overlay>
       </template>
-      <template v-slot:selection="{ index, text }">
-        <v-chip
-          v-if="index < 10"
-          small
-          close
-          @click:close="removeFileByIndex(index)"
+      <template
+        v-slot:selection="{ index, text }"
+      >
+        <template
+          v-if="$vuetify.breakpoint.xsOnly"
         >
-          {{ text }}
-        </v-chip>
-        <span
-          v-else-if="index === 10"
-          class="overline mx-2"
+          <template
+            v-if="index === 0"
+          >
+            <span
+              class="overline mx-2"
+            >
+              {{ files.length }} File(s)
+            </span>
+          </template>
+        </template>
+        <template
+          v-else
         >
-          +{{ files.length - 10 }} File(s)
-        </span>
+          <v-chip
+            v-if="index < 10"
+            small
+            close
+            @click:close="removeFileByIndex(index)"
+          >
+            {{ text }}
+          </v-chip>
+          <span
+            v-else-if="index === 10"
+            class="overline mx-2"
+          >
+            +{{ files.length - 10 }} File(s)
+          </span>
+        </template>
       </template>
     </v-file-input>
     <v-snackbar
