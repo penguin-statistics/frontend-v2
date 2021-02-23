@@ -12,7 +12,7 @@
       label="识别图片队列"
       persistent-hint
       class="cursor-pointer my-4"
-      hint="单击或拖拽加入图片，仅支持使用小于 50MB 大小的图片 (image/*)"
+      hint="单击或拖拽加入图片"
       counter
       show-size
       accept="image/*"
@@ -31,6 +31,15 @@
           opacity="0.9"
         >
           将图片拖拽到此处
+        </v-overlay>
+        <v-overlay
+          absolute
+          :value="$vuetify.breakpoint.xsOnly && files.length === 0"
+          color="success"
+          opacity="0.9"
+          @click.native="$refs.fileInput.$refs.input.click()"
+        >
+          点击此处加入图片
         </v-overlay>
       </template>
       <template v-slot:selection="{ index, text }">
@@ -73,7 +82,12 @@
 
 export default {
   name: 'ImageDrop',
-  props: ['value'],
+  props: {
+    value: {
+      type: Array,
+      default () { return [] }
+    }
+  },
   data: () => ({
     rules: [
       files => {
@@ -99,11 +113,12 @@ export default {
   },
   mounted () {
     document.addEventListener('dragenter', (event) => {
+      console.log(this.$refs.fileInput)
       this.$refs.fileInput.focus()
       this.onDrag = true
     }, false)
   },
-  beforeDestroy () {
+  beforeUnmount () {
     document.removeEventListener('dragenter', e => {})
   },
   methods: {
