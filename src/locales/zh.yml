@@ -192,36 +192,36 @@ report:
       limitation: 本次汇报与现有数据差距较大，继续提交可能导致此次汇报被判定为异常，无法计入全部统计数据中。
   recognition:
     step:
-      first: 选择掉落截图
-      second: 图像识别
-      third: 检查识别结果
-      fourth: 数据总览
-    result:
+      input: 输入
+      recognizing: 掉落识别中
+      check: 掉落识别结果与(更正)
+      doreport: 掉落上报
+    allresult:
       stagetime: 进行的关卡数量
       drops: 获得的掉落物总数
       sanity: 共消耗理智
-    recordstate:
-      trust: 此记录会被上报
-      deleted: 该记录不会上报
-      untrust: 识别置信度低，记录不会上报
-    retry: 网络请求失败,正在重试
-    untrusttip: 有低置信度物品未被信任，将不会被上报。点击上方步骤条修改。
-    loading: 正在加载数据，请等待加载完成
-    tip: 支持选择多个文件，若浏览器不支持，请尝试升级或换用Chrome/Safari浏览器
-    tip2: 若掉落超过屏幕边界，请把固定掉落的物品(经验/龙门币)拖到左边再截图识别或手动上报
-    tip3: 识别在本地进行，速度因设备而异，识别过程不消耗流量。
-    checkdata: 检查你的识别结果
-    readyforreport: 准备上报
-    editreport: 修改识别结果
-    showimage: 查看原始图片
-    wip: 正在识别
-    file: 点击选择掉落截图
-    filechosen: 已选择{0}个图片文件
+    tips:
+      filetoobig: 超出大小限制
+      chooseImage: 单击或拖拽加入图片
+      dragImage: 将图片拖拽到此处
+      addImage: 点击此处加入图片
+      copyImage: 右键图片或长按图片可拷贝到剪贴板或保存图片
+      emptyFile: 暂未选定任何图像
+    status:
+      success: 成功
+      warning: 警告
+      error: 错误
+    cost: 耗时
+    filename: 文件名
+    result: 识别结果
+    queue: 识别图片队列
     start: 开始识别
-    edit: 编辑
-    typeerror: 类型识别可能有误,请检查图片后编辑
-    success: 提交完成
-    submit: "确认提交以上数据"
+    progress: 进度
+    initializing: 初始化中...
+    confirm: 确认, 共计 {0} 张
+    submit: 确认提交到企鹅数据
+    submiting: 正在提交记录
+    retry: 提交失败，正在重试
   rules:
     item:
       _name: 物品项

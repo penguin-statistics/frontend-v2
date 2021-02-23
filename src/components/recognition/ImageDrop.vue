@@ -9,10 +9,10 @@
       v-model="files"
       outlined
       multiple
-      label="识别图片队列"
+      :label="$t('report.recognition.queue')"
       persistent-hint
       class="cursor-pointer my-4"
-      hint="单击或拖拽加入图片"
+      :hint="$t('report.recognition.tips.chooseImage')"
       counter
       show-size
       accept="image/*"
@@ -30,7 +30,7 @@
           color="success"
           opacity="0.9"
         >
-          将图片拖拽到此处
+          {{ $t("report.recognition.tips.dragImage") }}
         </v-overlay>
         <v-overlay
           absolute
@@ -39,7 +39,7 @@
           opacity="0.9"
           @click.native="$refs.fileInput.$refs.input.click()"
         >
-          点击此处加入图片
+          {{ $t("report.recognition.tips.addImage") }}
         </v-overlay>
       </template>
       <template
@@ -80,7 +80,7 @@
     </v-file-input>
     <v-snackbar
       v-model="snackbar"
-      timeout="2000"
+      :timeout="2000"
       color="red darken-2"
     >
       {{ snackbarMessage }}
@@ -131,14 +131,14 @@ export default {
     }
   },
   mounted () {
-    document.addEventListener('dragenter', (event) => {
+    document.addEventListener('dragenter', () => {
       console.log(this.$refs.fileInput)
       this.$refs.fileInput.focus()
       this.onDrag = true
     }, false)
   },
   beforeUnmount () {
-    document.removeEventListener('dragenter', e => {})
+    document.removeEventListener('dragenter', () => {})
   },
   methods: {
     removeFileByIndex (index) {

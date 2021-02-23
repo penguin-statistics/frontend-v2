@@ -16,6 +16,7 @@ menu:
   home: Home
   search: Search
   report: Report Drops
+  recognitionreport: Recognition
   stats:
     _name: Drop Rates
     stage: By stage
@@ -200,6 +201,38 @@ report:
       limitation: Your current submission has a large deviation from our existing
         data. This submission could be marked as a false report, removing it from
         our data set.
+  recognition:
+    step:
+      input: Input
+      recognizing: Drop Recognizing
+      check: Drop Recognition Result and (Correction)
+      doreport: Drop Report
+    allresult:
+      stagetime: 进行的关卡数量
+      drops: 获得的掉落物总数
+      sanity: 共消耗理智
+    tips:
+      filetoobig: File too big
+      chooseImage: Click or drag to add an image
+      dragImage: Drag and drop the image here
+      addImage: Click to add an image
+      copyImage: 右键图片或长按图片可拷贝到剪贴板或保存图片
+      emptyFile: emptyFile
+    status:
+      success: Success
+      warning: Warning
+      error: Error
+    cost: Cost
+    filename: Filename
+    result: RESULT
+    queue: Image Queue
+    start: Start
+    progress: PROGRESS
+    initializing: Initializing
+    confirm: 确认, 共计 {0} 张
+    submit: Submit
+    submiting: Submiting
+    retry: 提交失败，正在重试
   rules:
     item:
       _name: Item Quantities

@@ -13,7 +13,7 @@
             cols="4"
             class="text-subtitle-1 text-center"
           >
-            国服
+            {{ $t(`server.servers.${server}`) }}
           </v-col>
           <v-col
             cols="8"
@@ -43,7 +43,7 @@
             cols="12"
             class="text-h4 text-center"
           >
-            识别结果
+            {{ $t("report.recognition.result") }}
           </v-col>
         </v-row>
       </v-col>
@@ -116,10 +116,6 @@
 export default {
   name: 'RecognitionResult',
   props: {
-    server: {
-      type: String,
-      default () { return 'cn' }
-    },
     success: {
       type: Number,
       default () { return 0 }
@@ -155,7 +151,10 @@ export default {
       set (newshouldShowStar) {
         return newshouldShowStar
       }
-    }
+    },
+    server() {
+      return this.$store.getters["dataSource/server"];
+    },
   }
 }
 </script>
