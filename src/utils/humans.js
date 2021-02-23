@@ -136,6 +136,10 @@ const responsibilities = {
     id: "widget",
     icon: "mdi-widgets"
   },
+  native: {
+    id: "native",
+    icon: "mdi-devices"
+  }
 }
 
 export default {

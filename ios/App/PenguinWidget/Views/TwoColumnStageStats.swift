@@ -14,12 +14,12 @@ struct TwoColumnStageStats: View {
     var body: some View {
         VStack(alignment: .leading, spacing: 4) {
             ForEach(stages, id: \.stageId) {stage in
-                HStack(spacing: 16) {
-                    StageView(stage: stage)
-                        .frame(width: 140, alignment: .leading)
+                HStack(alignment: .center, spacing: 16) {
+                    StageView(stage: stage, showRecentTimes: true)
+                        .frame(width: 125, alignment: .leading)
                         .fixedSize(horizontal: true, vertical: false)
                         
-                    ItemStatsView(item: stage.items[0], showName: false)
+                    ItemStatsView(item: stage.items[0], showName: true)
                 }
             }
         }

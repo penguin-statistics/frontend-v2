@@ -29,6 +29,18 @@
         <SiteStatsOverview class="card-translate-up" />
       </v-col>
 
+      <!--      <v-col-->
+      <!--        cols="12"-->
+      <!--      >-->
+      <!--        <Banner class="card-translate-up" />-->
+      <!--      </v-col>-->
+
+      <!--      <v-col-->
+      <!--        cols="12"-->
+      <!--      >-->
+      <!--        <Banner class="card-translate-up" />-->
+      <!--      </v-col>-->
+
       <v-col
         cols="12"
         lg="6"
@@ -50,14 +62,6 @@
         />
       </v-col>
 
-      <!--      <v-flex-->
-      <!--        xs12-->
-      <!--        sm6-->
-      <!--      >-->
-      <!--        <Contact-->
-      <!--          -->
-      <!--        />-->
-      <!--      </v-flex>-->
       <v-col
         cols="12"
         md="6"

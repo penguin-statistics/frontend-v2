@@ -4,6 +4,7 @@
 
   justify-content: center;
   align-items: center;
+
 }
 
 @mixin drop-shadow($radius: 10px, $color: rgba(255, 255, 255, .1)) {
@@ -11,59 +12,179 @@
 }
 
 @mixin transition($scope: all, $duration: 225ms) {
-  transition: $scope $duration ease-in-out;
+  transition: $scope $duration cubic-bezier(0.25, 1, 0.5, 1);
 }
 
-.p-loader--gradient {
+@mixin apply-font-family {
+  font-family: Roboto, -apple-system, Noto Sans SC, BlinkMacSystemFont, "Segoe UI", Microsoft YaHei UI, Microsoft Yahei, 微软雅黑, Helvetica, Arial, sans-serif;
+}
+
+@mixin full-screen($zIndex: 1) {
   position: fixed;
   top: 0;
   left: 0;
   height: 100%;
   width: 100%;
-  opacity: 0;
-  z-index: -1;
-  @include transition(opacity, 2s);
-
-  background-image: linear-gradient(310deg, #36244d, #412c4d, #4d382f);;
+  z-index: $zIndex;
 }
 
-.p-loader__wrapper {
-  font-family: Roboto, -apple-system, Noto Sans SC, BlinkMacSystemFont, "Segoe UI", Microsoft YaHei UI, Microsoft Yahei, 微软雅黑, Helvetica, Arial, sans-serif;
+.peL--gradient {
+  @include full-screen(-1);
+
+  opacity: 0;
+  transition: opacity 2s cubic-bezier(0.25, 1, 0.5, 1), background-image 1s cubic-bezier(0.25, 1, 0.5, 1);
+  background-image: linear-gradient(310deg, #36244d, #412c4d, #4d382f);
+
+  &-haserror {
+    background-image: linear-gradient(310deg, #6b2525, #4f2020, #4f1c1c);
+  }
+}
+
+.peL--overlay {
+  @include apply-font-family;
+  @include full-screen(99999999);
+  @include flex-center;
+  @include transition(opacity, 300ms);
+
+  display: flex;
+  opacity: 0;
+  pointer-events: none;
+  background: rgba(0, 0, 0, .8);
+  color: #efefef;
+  backdrop-filter: saturate(0.5) blur(5px);
+  animation: peL-ob 2s infinite alternate ease-in-out;
+
+  h1 {
+    margin-bottom: 0;
+    text-shadow: 0 0 5px rgba(255, 255, 255, .5);
+  }
+  h3 {
+    color: #aaa
+  }
+}
+
+@keyframes peL-ob {
+  from {
+    background: rgba(0, 0, 0, .7);
+  }
+  to {
+    background: rgba(0, 0, 0, .9);
+  }
+}
+
+.peL_w {
+  * {
+    @include apply-font-family;
+  }
   height: 100%;
   width: 100%;
-  overflow: hidden;
+  overflow: auto;
   position: relative;
   user-select: none;
   cursor: progress;
   text-align: center;
 
-  color: #fefefe;
+  color: #eee;
 
   @include flex-center;
 
-  .p-loader__logo {
+  background: transparent;
+
+  .peL_logo {
     height: 6rem;
     width: 6rem;
     margin-bottom: 2rem;
     @include drop-shadow(10px)
   }
-  .p-loader--text {
+  .peL--text {
     font-size: 1rem;
     line-height: 1.5rem;
-    letter-spacing: .015em;
+    letter-spacing: .02em;
   }
-  .p-loader__title {
+  .peL_title {
     position: relative;
     z-index: 1;
     min-height: 2rem;
     text-shadow: 0 0 10px rgba(255, 255, 255, .5);
     margin-bottom: .25rem;
     width: 95%;
+    opacity: 1;
 
     @include flex-center;
-    @include transition(all, 500ms)
+    @include transition(all, 500ms);
+
+    &-gone {
+      opacity: 0;
+      //transform: rotateX(90deg);
+      letter-spacing: 1px;
+    }
   }
-  .p-loader__subtitle {
+  .peL_modal-w {
+    height: 0;
+    overflow: hidden;
+    @include transition(all, 300ms);
+    max-width: 450px;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, .1);
+    border-radius: 8px;
+    background: rgba(255, 255, 255, .1);
+    text-align: left;
+
+    .peL_modal {
+      h1 {
+        font-size: 1.75rem;
+        background: rgba(0, 0, 0, .15);
+        margin: 0;
+        padding: 1rem 1.5rem
+      }
+      .peL_modal-c {
+        padding: .5rem 2rem 1rem;
+
+        p {
+          margin: .75rem 0;
+          line-height: 1.5;
+        }
+        ul {
+          padding-left: 1rem;
+          li:not(:last-child) {
+            padding-bottom: .5rem;
+          }
+        }
+        a, button {
+          //@include apply-font-family;
+          display: inline-block;
+          padding: 6px 12px;
+          margin: 0 6px;
+          text-decoration: none;
+          background: #3375e0;
+          border: none;
+          color: #fff;
+          font-size: 16px;
+          border-radius: 4px;
+          cursor: pointer;
+          text-align: center;
+          transition: background 50ms cubic-bezier(0.25, 1, 0.5, 1), transform 150ms cubic-bezier(0.25, 1, 0.5, 1), box-shadow 200ms cubic-bezier(0.25, 1, 0.5, 1);
+          -webkit-appearance: none;
+          appearance: none;
+          box-shadow: 0 2px 4px rgba(0, 0, 0, .2), 0 0 0 0 #286cd4;
+          outline: none !important;
+          letter-spacing: .015rem;
+
+          &:hover {
+            box-shadow: 0 4px 8px rgba(0, 0, 0, .6), 0 0 0 0 #286cd4;
+          }
+          &:active {
+            color: #d0d0d0;
+            background: #285db3;
+            box-shadow: 0 0 0 rgba(0, 0, 0, .4), 0 0 0 3px #5798ff;
+            transform: translateY(1px);
+          }
+        }
+      }
+
+
+    }
+  }
+  .peL_subtitle {
     //position: relative;
     //z-index: 1;
     //height: 2rem;
@@ -73,19 +194,27 @@
     font-size: .9rem;
     color: rgba(255, 255, 255, .5)
   }
-  .p-loader__loader {
+  .peL_loInd {
+    width: 100%;
+    position: relative;
+    overflow: hidden;
+    @include transition(all, 300ms);
+    @include flex-center
+  }
+  .peL_loader {
     width: 12rem;
     overflow: hidden;
     position: relative;
     background: rgb(92, 107, 192, .1);
     height: 4px;
+    min-height: 4px;
     border-radius: 2px;
     margin-bottom: 1.5rem;
 
     @include drop-shadow(5px, $color: #5C6BC0);
 
-    .p-loader__loader-progress {
-      @include transition;
+    .peL_loader-p {
+      @include transition(all, 250ms);
 
       width: 0;
       position: absolute;
@@ -93,30 +222,73 @@
       top: 0;
       height: 4px;
       background: #5C6BC0;
-    }
-  }
 
-  .p-loader__footer {
-    position: absolute;
-    bottom: 0;
-    height: 3rem;
-    line-height: .9rem;
-    width: 100%;
-    font-size: .9rem;
-    color: rgba(255, 255, 255, .35);
-    letter-spacing: .015rem;
-
-    display: flex;
-
-    justify-content: center;
-
-    .p-loader__footer-divider {
-      margin: 0 .35rem;
+      animation: peL_bar 10s linear forwards;
     }
   }
 }
 
-//@keyframes p-loader-gradient {
+.peL_footer {
+  @include apply-font-family;
+
+  position: absolute;
+  bottom: 0;
+  height: 3rem;
+  line-height: .9rem;
+  width: 100%;
+  font-size: .9rem;
+  color: rgba(255, 255, 255, .35);
+  letter-spacing: .015rem;
+  pointer-events: none;
+
+  display: flex;
+
+  justify-content: center;
+
+  .peL_footer-d {
+    margin: 0 .35rem;
+  }
+}
+
+// 1 - math.Exp(- percent / 19.5)
+@keyframes peL_bar {
+  0% { width: 0.000% }
+  3% { width: 14.260% }
+  6% { width: 26.486% }
+  9% { width: 36.969% }
+  12% { width: 45.957% }
+  15% { width: 53.663% }
+  18% { width: 60.271% }
+  21% { width: 65.936% }
+  24% { width: 70.793% }
+  27% { width: 74.958% }
+  30% { width: 78.529% }
+  33% { width: 81.591% }
+  36% { width: 84.216% }
+  39% { width: 86.466% }
+  42% { width: 88.396% }
+  45% { width: 90.051% }
+  48% { width: 91.470% }
+  51% { width: 92.686% }
+  54% { width: 93.729% }
+  57% { width: 94.623% }
+  60% { width: 95.390% }
+  63% { width: 96.047% }
+  66% { width: 96.611% }
+  69% { width: 97.094% }
+  72% { width: 97.509% }
+  75% { width: 97.864% }
+  78% { width: 98.168% }
+  81% { width: 98.430% }
+  84% { width: 98.654% }
+  87% { width: 98.846% }
+  90% { width: 99.010% }
+  93% { width: 99.151% }
+  96% { width: 99.272% }
+  100% { width: 99.326% }
+}
+
+//@keyframes peL-gradient {
 //  0% {
 //    background-position: 0% 50%;
 //  }

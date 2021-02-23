@@ -20,6 +20,7 @@ struct InitialLaunch: View {
                 .navigationBarTitle("Welcome")
                 .navigationBarHidden(true)
         }
+        .navigationViewStyle(StackNavigationViewStyle())
     }
 }
 

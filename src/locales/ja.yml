@@ -363,7 +363,7 @@ members:
     weibo: Weibo
 pattern:
   name: ドロップパターン
-  empty: ドロップはありません
+  empty: ドロップなし
   error:
     # 此值实际展示为 2 行，第二行字比第一行大一些
     - 本作戦のドロップパターンの
