@@ -1,0 +1,40 @@
+# This is a basic workflow to help you get started with Actions
+
+name: CI
+
+# Controls when the action will run. 
+on:
+  # Triggers the workflow on push or pull request events but only for the recognition-ui branch
+  push:
+    branches: [ recognition-ui ]
+  pull_request:
+    branches: [ recognition-ui ]
+
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Install Node.js
+      uses: actions/setup-node@v2
+      with:
+        node-version: '14'
+    - name: Install npm dependencies
+      run: yarn
+    - name: Run build task
+      run: npx vue-cli-service build --mode development
+    - name: Deploy file to server
+      uses: wlixcc/SFTP-Deploy-Action@v1.0
+      with:
+        username: 'github'
+        server: '${{ secrets.SERVER_IP }}'
+        ssh_private_key: ${{ secrets.SSH_PRIVATE_KEY }}
+        local_path: './dist/*'
+        remote_path: '/home/bbaa/docker/wwwroot/penguin'
+        args: '-o ConnectTimeout=5'
+       
