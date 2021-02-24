@@ -122,13 +122,29 @@
               <imageDrop v-model="files" />
 
               <v-btn
-                color="primary"
                 large
+                rounded
+                color="primary"
+                class="px-4 py-2 mb-2"
                 :disabled="!files.length"
                 @click="initAndRecognize"
               >
-                {{ $t("report.recognition.start") }}
-                {{ files.length ? "" : `(${$t("report.recognition.tips.emptyFile")})` }}
+                <div class="d-inline-flex align-center justify-center">
+                  <v-icon small>
+                    mdi-server
+                  </v-icon>
+                  <span class="caption ml-1">
+                    {{ server }}
+                  </span>
+                </div>
+                <v-divider
+                  vertical
+                  class="mx-2"
+                />
+                <span>
+                  {{ $t("report.recognition.start") }}
+                  {{ files.length ? "" : `(${$t("report.recognition.tips.emptyFile")})` }}
+                </span>
               </v-btn>
             </v-form>
           </v-stepper-content>

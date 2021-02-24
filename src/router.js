@@ -82,7 +82,7 @@ const router = new Router({
         name: "RecognitionReport",
         component: RecognitionReport,
         meta: {
-          icon: "mdi-magnify",
+          icon: "mdi-image-search",
           i18n: "menu.recognitionreport"
         }
       }
