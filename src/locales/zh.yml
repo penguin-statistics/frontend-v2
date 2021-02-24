@@ -208,10 +208,12 @@ report:
       addImage: 点击此处加入图片
       copyImage: 右键图片或长按图片可拷贝到剪贴板或保存图片
       emptyFile: 暂未选定任何图像
+      changeServer: 不允许在识别过程中修改服务器，请重载
     status:
       success: 成功
       warning: 警告
       error: 错误
+    reload: 重载
     cost: 耗时
     filename: 文件名
     result: 识别结果

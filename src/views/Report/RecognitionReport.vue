@@ -82,11 +82,7 @@
                 @click="initAndRecognize"
               >
                 {{ $t("report.recognition.start") }}
-                {{
-                  files.length
-                    ? ""
-                    : `(${$t("report.recognition.tips.emptyFile")})`
-                }}
+                {{ files.length ? "" : `(${$t("report.recognition.tips.emptyFile")})` }}
               </v-btn>
             </v-form>
           </v-stepper-content>
@@ -117,10 +113,7 @@
               striped
             >
               {{ results.length }} / {{ files.length }} ({{
-                (
-                  (results.length / (files.length === 0 ? 1 : files.length)) *
-                  100
-                ).toFixed(0)
+                ((results.length / (files.length === 0 ? 1 : files.length)) * 100).toFixed(0)
               }}%)
             </v-progress-linear>
           </v-stepper-content>
@@ -140,9 +133,7 @@
               class="mt-0"
               :icon="
                 filterResults(['Warning', 'Error']).length <= 10
-                  ? `mdi-numeric-${
-                    filterResults(['Warning', 'Error']).length
-                  }-box-multiple-outline`
+                  ? `mdi-numeric-${filterResults(['Warning', 'Error']).length}-box-multiple-outline`
                   : 'mdi-content-copy'
               "
             >
@@ -202,14 +193,12 @@
                       :src="result.blobUrl"
                       contain
                       style="cursor: zoom-in"
-                      @click="(e) => enlargeImage(result.blobUrl, e)"
+                      @click="e => enlargeImage(result.blobUrl, e)"
                     />
                     <v-card-title class="d-flex flex-row align-center">
                       <div class="d-flex align-baseline">
                         <small class="mr-2">{{ $t("stage.name") }}</small>
-                        <span class="monospace">{{
-                          getStage(result.result.stageId).code
-                        }}</span>
+                        <span class="monospace">{{ getStage(result.result.stageId).code }}</span>
                       </div>
                       <v-spacer />
                       <v-chip
@@ -221,9 +210,9 @@
                       </v-chip>
                     </v-card-title>
                     <v-card-subtitle>
-                      {{ $t("report.recognition.filename") }}：<span
-                        class="font-weight-bold"
-                      >{{ result.file.name || "(文件名未知)" }}</span>
+                      {{ $t("report.recognition.filename") }}：<span class="font-weight-bold">{{
+                        result.file.name || "(文件名未知)"
+                      }}</span>
                     </v-card-subtitle>
                     <v-card-text>
                       <div
@@ -232,7 +221,7 @@
                         class="d-inline-flex align-center justify-center flex-column pa-2 mr-2"
                         style="border-radius: 4px"
                         :style="{
-                          border: `1px solid ${dark ? '#fff' : '#000'}`,
+                          border: `1px solid ${dark ? '#fff' : '#000'}`
                         }"
                       >
                         <div>
@@ -253,10 +242,7 @@
                         </v-badge>
                       </div>
                       <v-alert
-                        v-if="
-                          result.result.errors.length ||
-                            result.result.warnings.length
-                        "
+                        v-if="result.result.errors.length || result.result.warnings.length"
                         outlined
                         color="white"
                         border="left"
@@ -268,9 +254,7 @@
                             Error: <br><code>{{ result.result.errors }}</code>
                           </li>
                           <li v-if="result.result.warnings.length">
-                            Warning: <br><code>{{
-                              result.result.warnings
-                            }}</code>
+                            Warning: <br><code>{{ result.result.warnings }}</code>
                           </li>
                         </ul>
                       </v-alert>
@@ -294,7 +278,7 @@
               color="primary mt-4"
               @click="step = 4"
             >
-              {{ $t("report.recognition.confirm",[filterResults(["Success"]).length]) }}
+              {{ $t("report.recognition.confirm", [filterResults(["Success"]).length]) }}
               <v-icon
                 right
                 dark
@@ -380,9 +364,7 @@
               justify="start"
             >
               <v-col
-                v-for="([StageCode, Stage], index) in Object.entries(
-                  StageCombineData
-                )"
+                v-for="([StageCode, Stage], index) in Object.entries(StageCombineData)"
                 :key="index"
                 cols="12"
                 sm="6"
@@ -407,19 +389,13 @@
                       <v-spacer />
                       <small>#{{ index + 1 }}</small>
                     </div>
-                    <div
-                      class="display-1 text-center monospace font-weight-bold my-2"
-                    >
+                    <div class="display-1 text-center monospace font-weight-bold my-2">
                       {{ Stage.Time }}
-                      <small class="title">{{
-                        $t("planner.calculation.times")
-                      }}</small>
+                      <small class="title">{{ $t("planner.calculation.times") }}</small>
                     </div>
                     <div class="d-flex flex-wrap justify-start">
                       <div
-                        v-for="([ItemId, Count], idx) in Object.entries(
-                          Stage.Items
-                        )"
+                        v-for="([ItemId, Count], idx) in Object.entries(Stage.Items)"
                         :key="idx"
                         class="d-inline-flex mx-2 my-1"
                       >
@@ -480,9 +456,7 @@
                   <v-row>
                     <v-col>
                       <v-progress-linear
-                        :value="
-                          ((SubmitDialog.now + 1) / allTime) * 100
-                        "
+                        :value="((SubmitDialog.now + 1) / allTime) * 100"
                         height="20"
                         class="mx-auto"
                         style="width: 90%"
@@ -504,7 +478,7 @@
                 type="success"
                 class="mt-4"
               >
-                Finish
+                {{ $t("report.recognition.reload") }}
               </v-alert>
               <v-card-actions class="elevation-4">
                 <v-btn
@@ -523,112 +497,127 @@
             </v-card-text>
           </v-card>
         </v-dialog>
+        <v-snackbar
+          v-model="changeServerTip"
+          bottom
+          :timeout="0"
+          color="info"
+        >
+          {{ $t("report.recognition.tips.changeServer") }}
+          <v-btn
+            v-haptic
+            text
+            @click="reload"
+          >
+            {{ $t("report.recognition.reload") }}
+          </v-btn>
+        </v-snackbar>
       </v-stepper>
     </v-col>
   </v-row>
 </template>
 <script>
-import Item from "@/components/global/Item";
-import Recognizer from "@/utils/recognizer";
-import PreloaderInline from "@/components/global/PreloaderInline";
-import snackbar from "@/utils/snackbar";
-import CDN from "@/mixins/CDN";
-import Theme from "@/mixins/Theme";
-import ImageDrop from "@/components/recognition/ImageDrop";
-import RecognitionResult from "@/components/recognition/RecognitionResult";
-import config from "@/config";
-import get from "@/utils/getters";
-import Cookies from "js-cookie";
-import report from "@/apis/report";
-export default {
-  name: "RecognitionReport",
-  components: { Item, ImageDrop, RecognitionResult, PreloaderInline },
-  mixins: [Theme, CDN],
-  data() {
-    return {
-      recognizer: null,
-      files: [],
-      results: [],
-      rules: [
-        (files) => {
-          for (const file of files) {
-            if (file.size > 50e6)
-              return `"${file.name}" (${(file.size / 1e6).toFixed(
-                1
-              )}MB) ${this.$t("filetoobig")}`;
-          }
-          return true;
-        },
-      ],
-      initializing: false,
-      initialized: false,
-      expandImage: {
-        dialog: false,
-        src: "",
-      },
-      recognition: {
-        busy: false,
-      },
-      dialogOrigin: "",
-      lots: false,
-      step: 1,
-      filterValue: ["Success", "Warning", "Error"],
-      SubmitDialog: {
-      open: false,
-      now: 0,
-      finish: false,
-    },
-    };
-  },
-  computed: {
-    filteredResults() {
-      return this.filterResults(this.filterValue);
-    },
-    filterItems() {
-      return [
-        {
-          text: this.$t("report.recognition.status.success"),
-          value: "Success",
-        },
-        {
-          text: this.$t("report.recognition.status.warning"),
-          value: "Warning",
-        },
-        { text: this.$t("report.recognition.status.error"), value: "Error" },
-      ];
-    },
-    allTime() {
-      return this.TrustedResults.length;
-    },
-    allDropsCount() {
-      return this.TrustedResults.reduce((prev, now) => {
-        return (
-          prev +
-          now.result.drops.reduce((p, n) => {
-            if (n.quantity) {
-              return p + n.quantity;
+  import Item from "@/components/global/Item";
+  import Recognizer from "@/utils/recognizer";
+  import PreloaderInline from "@/components/global/PreloaderInline";
+  import snackbar from "@/utils/snackbar";
+  import CDN from "@/mixins/CDN";
+  import Theme from "@/mixins/Theme";
+  import ImageDrop from "@/components/recognition/ImageDrop";
+  import RecognitionResult from "@/components/recognition/RecognitionResult";
+  import config from "@/config";
+  import get from "@/utils/getters";
+  import Cookies from "js-cookie";
+  import report from "@/apis/report";
+  export default {
+    name: "RecognitionReport",
+    components: { Item, ImageDrop, RecognitionResult, PreloaderInline },
+    mixins: [Theme, CDN],
+    data() {
+      return {
+        recognizer: null,
+        files: [],
+        results: [],
+        rules: [
+          files => {
+            for (const file of files) {
+              if (file.size > 50e6)
+                return `"${file.name}" (${(file.size / 1e6).toFixed(1)}MB) ${this.$t("filetoobig")}`;
             }
-            return p;
-          }, 0)
-        );
-      }, 0);
+            return true;
+          }
+        ],
+        initializing: false,
+        initialized: false,
+        expandImage: {
+          dialog: false,
+          src: ""
+        },
+        recognition: {
+          busy: false,
+          server: ""
+        },
+        dialogOrigin: "",
+        lots: false,
+        step: 1,
+        filterValue: ["Success", "Warning", "Error"],
+        SubmitDialog: {
+          open: false,
+          now: 0,
+          finish: false
+        },
+        changeServerTip: 0
+      };
     },
-    allSanity() {
-      return this.TrustedResults.reduce((prev, now) => {
-        return prev + get.stages.byStageId(now.result.stageId).apCost;
-      }, 0);
-    },
-    StageCombineData() {
-      let Results=this.TrustedResults;
-      let Result = {};
-      for (let RecognitionResult of Results) {
-        let StageCode=get.stages.byStageId(RecognitionResult.result.stageId).code;
-        if (!Result[StageCode]) {
-          Result[StageCode] = {
-            Items: {},
-            Time: 0,
-          };
-        }
+    computed: {
+      filteredResults() {
+        return this.filterResults(this.filterValue);
+      },
+      filterItems() {
+        return [
+          {
+            text: this.$t("report.recognition.status.success"),
+            value: "Success"
+          },
+          {
+            text: this.$t("report.recognition.status.warning"),
+            value: "Warning"
+          },
+          { text: this.$t("report.recognition.status.error"), value: "Error" }
+        ];
+      },
+      allTime() {
+        return this.TrustedResults.length;
+      },
+      allDropsCount() {
+        return this.TrustedResults.reduce((prev, now) => {
+          return (
+            prev +
+            now.result.drops.reduce((p, n) => {
+              if (n.quantity) {
+                return p + n.quantity;
+              }
+              return p;
+            }, 0)
+          );
+        }, 0);
+      },
+      allSanity() {
+        return this.TrustedResults.reduce((prev, now) => {
+          return prev + get.stages.byStageId(now.result.stageId).apCost;
+        }, 0);
+      },
+      StageCombineData() {
+        let Results = this.TrustedResults;
+        let Result = {};
+        for (let RecognitionResult of Results) {
+          let StageCode = get.stages.byStageId(RecognitionResult.result.stageId).code;
+          if (!Result[StageCode]) {
+            Result[StageCode] = {
+              Items: {},
+              Time: 0
+            };
+          }
           Result[StageCode].Time++;
           for (let Item of RecognitionResult.result.drops) {
             if (Item.itemId && Item.quantity) {
@@ -637,249 +626,233 @@ export default {
               }
               Result[StageCode].Items[Item.itemId] += Item.quantity;
             }
+          }
+        }
+        return Result;
+      },
+      TrustedResults() {
+        return this.filterResults(["Success"]);
+      },
+      server() {
+        return this.$store.getters["dataSource/server"];
+      },
+      serverLocked() {
+        return this.$store.getters["dataSource/serverLocked"];
+      }
+    },
+    watch: {
+      serverLocked(newvalue) {
+        if (newvalue == 2) {
+          this.$store.commit("dataSource/lockServer");
+          this.changeServerTip=true;
         }
       }
-      return Result;
     },
-    TrustedResults(){
-      return this.filterResults(["Success"])
-    }
-  },
-  mounted() {
-    const old = window.console.log;
-    const logger = document.getElementById("console");
-    const loggerWrapper = document.getElementsByClassName("console")[0];
-    window.console.log = function (...message) {
-      const item = document.createElement("li");
-      item.innerText = `${new Date().toISOString()} ${message
-        .join(" ")
-        .toString()}`;
-      if (logger) logger.appendChild(item);
-      if (loggerWrapper) loggerWrapper.scrollTop = loggerWrapper.scrollHeight;
-      old(...message);
-    };
-  },
-  methods: {
-    reload() {
-      this.$emit("reload");
+    mounted() {
+      this.$store.commit("dataSource/unlockServer");
     },
-    submit() {
-      this.SubmitDialog.open = true;
-      this.submitOneRecord()
-        .then(() => {
-          if (++this.SubmitDialog.now < this.TrustedResults.length) {
-            this.submit();
-          } else {
-            this.SubmitDialog.finish = true;
-          }
-        })
-        .catch(() => {
-          setTimeout(() => {
-            snackbar.launch("info", 1000, "report.recognition.retry");
-            this.submit();
-          }, 1000);
-        });
+    destroyed() {
+      this.$store.commit("dataSource/unlockServer");
     },
-    submitOneRecord() {
-      const userId = Cookies.get(config.authorization.userId.cookieKey);
-      return report
-        .submitReport(
-          {
-            stageId: this.TrustedResults[this.SubmitDialog.now].result.stageId,
-            drops: this.ConvertData(
-              this.TrustedResults[this.SubmitDialog.now].result.drops
-            ),
-          },
-          { source: "RecognitionReport" }
-        )
-        .then(() => {
-          const reportedUserId = Cookies.get(
-            config.authorization.userId.cookieKey
-          );
-          if (userId !== reportedUserId) {
-            this.$store.dispatch("auth/login", {
-              userId: reportedUserId,
-            });
-          }
-          this.$ga.event(
-            "report",
-            "submit_single",
-            this.TrustedResults[this.SubmitDialog.now].result.stageId,
-            1
-          );
-
-        });
-    },
-     ConvertData(Items) {
-      return Items.map((Item) => {
-        if (
-          !["FURNITURE", "SPECIAL_DROP", "EXTRA_DROP", "NORMAL_DROP"].includes(
-            Item.dropType
-          )
-        )
-          return;
-        return {
-          quantity: Item.quantity,
-          dropType: Item.dropType,
-          itemId: Item.itemId,
-        };
-      }).filter((a) => a);
-    },
-    async init() {
-      this.initializing = true;
-
-      this.recognizer = new Recognizer();
-
-      await this.recognizer
-        .initialize()
-        .then(() => {
-          this.initialized = true;
-          console.log("initialization completed");
-        })
-        .finally(() => {
-          this.initializing = false;
-        });
-    },
-    getItem(ItemId) {
-      return get.items.byItemId(ItemId, false, false) || {};
-    },
-    draw() {
-      for (const file of this.files) {
-        this.drawImageToPreview(file);
-      }
-    },
-    stringify(s) {
-      return JSON.stringify(s, null, 4);
-    },
-    async recognize() {
-      this.results = [];
-      this.recognition.busy = true;
-
-      const typeOrder = ["NORMAL_DROP", "SPECIAL_DROP", "EXTRA_DROP"];
-      typeOrder.reverse();
-
-      if (this.lots) {
-        const repeated = [];
-        for (const file of this.files) {
-          repeated.push(...Array(100).fill(file));
-        }
-        console.log(repeated);
-        this.files = repeated;
-      }
-
-      await this.recognizer.recognize(this.files, (result) => {
-        result.result.drops
-          .map((el) => {
-            el.confidence = parseFloat(el.confidence);
-            el.quantity = parseFloat(el.quantity);
+    methods: {
+      reload() {
+        this.$emit("reload");
+      },
+      submit() {
+        this.SubmitDialog.open = true;
+        this.submitOneRecord()
+          .then(() => {
+            if (++this.SubmitDialog.now < this.TrustedResults.length) {
+              this.submit();
+            } else {
+              this.SubmitDialog.finish = true;
+            }
           })
-          .sort((a, b) => {
-            return (
-              -typeOrder.indexOf(a.dropType) - -typeOrder.indexOf(b.dropType)
-            );
+          .catch(() => {
+            setTimeout(() => {
+              snackbar.launch("info", 1000, "report.recognition.retry");
+              this.submit();
+            }, 1000);
           });
-        this.results.push(result);
-      });
+      },
+      submitOneRecord() {
+        const userId = Cookies.get(config.authorization.userId.cookieKey);
+        return report
+          .submitReport(
+            {
+              stageId: this.TrustedResults[this.SubmitDialog.now].result.stageId,
+              drops: this.ConvertData(this.TrustedResults[this.SubmitDialog.now].result.drops)
+            },
+            { source: "RecognitionReport" }
+          )
+          .then(() => {
+            const reportedUserId = Cookies.get(config.authorization.userId.cookieKey);
+            if (userId !== reportedUserId) {
+              this.$store.dispatch("auth/login", {
+                userId: reportedUserId
+              });
+            }
+            this.$ga.event("report", "submit_single", this.TrustedResults[this.SubmitDialog.now].result.stageId, 1);
+          });
+      },
+      ConvertData(Items) {
+        return Items.map(Item => {
+          if (!["FURNITURE", "SPECIAL_DROP", "EXTRA_DROP", "NORMAL_DROP"].includes(Item.dropType)) return;
+          return {
+            quantity: Item.quantity,
+            dropType: Item.dropType,
+            itemId: Item.itemId
+          };
+        }).filter(a => a);
+      },
+      async init() {
+        this.initializing = true;
 
-      console.log(this.results);
+        this.recognizer = new Recognizer();
 
-      this.recognition.busy = false;
-    },
-    async drawImageToPreview(blob) {
-      const img = document.createElement("img");
-      const c = document.querySelector("#canvases");
-      if (c) c.prepend(img);
-      img.src = URL.createObjectURL(blob);
-
-      return new Promise((resolve) => {
-        img.onload = function () {
-          console.log(
-            this.naturalWidth,
-            this.naturalHeight,
-            img.width,
-            img.height
-          );
-          const canvas = document.createElement("canvas");
-          canvas.width = img.width;
-          canvas.height = img.height;
-          const ctx = canvas.getContext("2d");
-          // ctx.drawImage(img, 0, 0, img.width, img.height)
-          ctx.drawImage(img, 0, 0);
-          // const s = document.getElementById('canvases')
-          // if (s) s.prepend(canvas)
-
-          const image = ctx.getImageData(0, 0, img.width, img.height);
-          console.log(blob.name, image.data.slice(272, 276));
-
-          resolve();
-        };
-      });
-    },
-    clearCanvas() {
-      this.$refs.canvases.innerHTML = "";
-    },
-    clearImages() {
-      this.$refs.images.innerHTML = "";
-    },
-    dropTypeToString(type) {
-      return this.$t(`stage.loots.${type}`, false) || type;
-    },
-    enlargeImage(url, event) {
-      console.log(event);
-      this.dialogOrigin = `${event.clientX}px ${event.clientY}px`;
-      this.$nextTick(() => {
-        this.expandImage.dialog = true;
-        this.expandImage.src = url;
-      });
-    },
-    getStage(stageId) {
-      return get.stages.byStageId(stageId) || { code: "(识别失败)" };
-    },
-    async initAndRecognize() {
-      this.step = 2;
-      await this.init();
-      await this.recognize();
-      console.log(this.results);
-      this.step = 3;
-    },
-    filterResults(filter) {
-      return this.results.filter((result) => {
-        for (var key of filter) {
-          switch (key) {
-            case "Success":
-              if (
-                !(result.result.warnings.length || result.result.errors.length)
-              ) {
-                return true;
-              }
-              break;
-            case "Warning":
-              if (result.result.warnings.length) {
-                return true;
-              }
-              break;
-            case "Error":
-              if (result.result.errors.length) {
-                return true;
-              }
-              break;
-            default:
-              return false;
-          }
+        await this.recognizer
+          .initialize(this.server.toLowerCase())
+          .then(() => {
+            this.$store.commit("dataSource/lockServer");
+            this.initialized = true;
+            this.recognition.server = this.server.toLowerCase();
+            console.log("initialization completed");
+          })
+          .finally(() => {
+            this.initializing = false;
+          });
+      },
+      getItem(ItemId) {
+        return get.items.byItemId(ItemId, false, false) || {};
+      },
+      draw() {
+        for (const file of this.files) {
+          this.drawImageToPreview(file);
         }
-        return false;
-      });
-    },
-  },
-};
+      },
+      stringify(s) {
+        return JSON.stringify(s, null, 4);
+      },
+      async recognize() {
+        this.results = [];
+        this.recognition.busy = true;
+
+        const typeOrder = ["NORMAL_DROP", "SPECIAL_DROP", "EXTRA_DROP"];
+        typeOrder.reverse();
+
+        if (this.lots) {
+          const repeated = [];
+          for (const file of this.files) {
+            repeated.push(...Array(100).fill(file));
+          }
+          console.log(repeated);
+          this.files = repeated;
+        }
+
+        await this.recognizer.recognize(this.files, result => {
+          result.result.drops
+            .map(el => {
+              el.confidence = parseFloat(el.confidence);
+              el.quantity = parseFloat(el.quantity);
+            })
+            .sort((a, b) => {
+              return -typeOrder.indexOf(a.dropType) - -typeOrder.indexOf(b.dropType);
+            });
+          this.results.push(result);
+        });
+
+        console.log(this.results);
+
+        this.recognition.busy = false;
+      },
+      async drawImageToPreview(blob) {
+        const img = document.createElement("img");
+        const c = document.querySelector("#canvases");
+        if (c) c.prepend(img);
+        img.src = URL.createObjectURL(blob);
+
+        return new Promise(resolve => {
+          img.onload = function() {
+            console.log(this.naturalWidth, this.naturalHeight, img.width, img.height);
+            const canvas = document.createElement("canvas");
+            canvas.width = img.width;
+            canvas.height = img.height;
+            const ctx = canvas.getContext("2d");
+            // ctx.drawImage(img, 0, 0, img.width, img.height)
+            ctx.drawImage(img, 0, 0);
+            // const s = document.getElementById('canvases')
+            // if (s) s.prepend(canvas)
+
+            const image = ctx.getImageData(0, 0, img.width, img.height);
+            console.log(blob.name, image.data.slice(272, 276));
+
+            resolve();
+          };
+        });
+      },
+      clearCanvas() {
+        this.$refs.canvases.innerHTML = "";
+      },
+      clearImages() {
+        this.$refs.images.innerHTML = "";
+      },
+      dropTypeToString(type) {
+        return this.$t(`stage.loots.${type}`, false) || type;
+      },
+      enlargeImage(url, event) {
+        console.log(event);
+        this.dialogOrigin = `${event.clientX}px ${event.clientY}px`;
+        this.$nextTick(() => {
+          this.expandImage.dialog = true;
+          this.expandImage.src = url;
+        });
+      },
+      getStage(stageId) {
+        return get.stages.byStageId(stageId) || { code: "(识别失败)" };
+      },
+      async initAndRecognize() {
+        this.step = 2;
+        await this.init();
+        await this.recognize();
+        console.log(this.results);
+        this.step = 3;
+      },
+      filterResults(filter) {
+        return this.results.filter(result => {
+          for (var key of filter) {
+            switch (key) {
+              case "Success":
+                if (!(result.result.warnings.length || result.result.errors.length)) {
+                  return true;
+                }
+                break;
+              case "Warning":
+                if (result.result.warnings.length) {
+                  return true;
+                }
+                break;
+              case "Error":
+                if (result.result.errors.length) {
+                  return true;
+                }
+                break;
+              default:
+                return false;
+            }
+          }
+          return false;
+        });
+      }
+    }
+  };
 </script>
 
 <style scoped>
-.cursor-pointer .v-file-input__text,
-.v-overlay__scrim {
-  cursor: pointer !important;
-}
-/*
+  .cursor-pointer .v-file-input__text,
+  .v-overlay__scrim {
+    cursor: pointer !important;
+  }
+  /*
 .console,
 .monospace-pure,
 .monospace {
@@ -894,7 +867,7 @@ export default {
   border-radius: 4px;
 }
 */
-.quick-transition {
-  transition-duration: 20ms !important;
-}
+  .quick-transition {
+    transition-duration: 20ms !important;
+  }
 </style>

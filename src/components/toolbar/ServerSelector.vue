@@ -97,17 +97,27 @@
     name: "ServerSelector",
     data() {
       return {
-        servers: supports.servers
+        servers: supports.servers,
+        update:false
       }
     },
     computed: {
       ...mapGetters("ajax", ["pending"]),
       activeServer: {
         get () {
-          return this.servers.indexOf(this.servers.find(el => el === this.$store.getters["dataSource/server"]))
+          return this.update||this.servers.indexOf(this.servers.find(el => el === this.$store.getters["dataSource/server"]))
         },
         set (localeIndex) {
-          this.changeServer(this.servers[localeIndex])
+          console.log(localeIndex)
+          if(this.$store.getters["dataSource/serverLocked"]){
+            this.$store.commit("dataSource/changeLockState", 2)
+            this.update = localeIndex;
+            this.$nextTick(function(){
+              this.update=false;
+            })
+          } else {
+            this.changeServer(this.servers[localeIndex]);
+          }
         }
       },
       activeServerId () {

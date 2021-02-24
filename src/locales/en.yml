@@ -219,10 +219,12 @@ report:
       addImage: Click to add an image
       copyImage: 右键图片或长按图片可拷贝到剪贴板或保存图片
       emptyFile: emptyFile
+      changeServer: 不允许在识别过程中修改服务器，请重载
     status:
       success: Success
       warning: Warning
       error: Error
+    reload: Reload
     cost: Cost
     filename: Filename
     result: RESULT

@@ -1,7 +1,7 @@
 export default {
   hash: {
     result: {
-      zh: '3c00bc3f803003c00dc73fb18331870187f70bf20f160f540bd121b92010'
+      cn: '3c00bc3f803003c00dc73fb18331870187f70bf20f160f540bd121b92010'
     },
     stage: {
       A: '3c007e007e007e00ff00ff01ff81e781e783c3c3ffc7ffe7ffe781ef81ff00f',
@@ -43,7 +43,7 @@ export default {
       '-': 'ffffffffffffffffffffffff00000000000000000000'
     },
     droptype: {
-      zh: {
+      cn: {
         NORMAL_DROP: '564e564ffeeffee3fee7fe47fe477cf77cf71067fe6ffe6dd2fdd6ddde97d697',
         SPECIAL_DROP: '4404c4fcdefcfe4fe47fff74df74c2ff7fffffeeffaeda2e4a5f4a5f46d546c4',
         EXTRA_DROP: '40646f64ff74f474fe74fed6fed6eef76ef7fe35be35fe24be64bee4fbc4fbc4',
@@ -51,7 +51,7 @@ export default {
       }
     },
     dropimg: {
-      zh: {
+      cn: {
         1: '3800f800f80018001800180018001800180018001800180018001801ff01ff0',
         2: '7c00fe0187000300030003000300070006000e001c0038007000e001ff81ff8',
         3: '7c00ff00c3000300030003000f003c003f0003000180018001818381ff007e0',
@@ -72,7 +72,7 @@ export default {
         ko: '기초작전기록',
         ja: '入門作戦記録',
         en: 'Drill Battle Record',
-        zh: '基础作战记录'
+        cn: '基础作战记录'
       }
     },
     2002: {
@@ -80,7 +80,7 @@ export default {
         ko: '초급작전기록',
         ja: '初級作戦記録',
         en: 'Frontline Battle Record',
-        zh: '初级作战记录'
+        cn: '初级作战记录'
       }
     },
     2003: {
@@ -88,7 +88,7 @@ export default {
         ko: '중급작전기록',
         ja: '中級作戦記録',
         en: 'Tactical Battle Record',
-        zh: '中级作战记录'
+        cn: '中级作战记录'
       }
     },
     2004: {
@@ -96,7 +96,7 @@ export default {
         ko: '고급작전기록',
         ja: '上級作戦記録',
         en: 'Strategic Battle Record',
-        zh: '高级作战记录'
+        cn: '高级作战记录'
       }
     },
     3003: {
@@ -104,7 +104,7 @@ export default {
         ko: '순금',
         ja: '純金',
         en: 'Pure Gold',
-        zh: '赤金'
+        cn: '赤金'
       }
     },
     30011: {
@@ -112,7 +112,7 @@ export default {
         ko: '원암',
         ja: '源岩鉱',
         en: 'Orirock',
-        zh: '源岩'
+        cn: '源岩'
       }
     },
     30012: {
@@ -120,7 +120,7 @@ export default {
         ko: '원암 큐브',
         ja: '初級源岩',
         en: 'Orirock Cube',
-        zh: '固源岩'
+        cn: '固源岩'
       }
     },
     30013: {
@@ -128,7 +128,7 @@ export default {
         ko: '원암 큐브 번들',
         ja: '中級源岩',
         en: 'Orirock Cluster',
-        zh: '固源岩组'
+        cn: '固源岩组'
       }
     },
     30014: {
@@ -136,7 +136,7 @@ export default {
         ko: '정제 원암',
         ja: '上級源岩',
         en: 'Orriock Concentration',
-        zh: '提纯源岩'
+        cn: '提纯源岩'
       }
     },
     30061: {
@@ -144,7 +144,7 @@ export default {
         ko: '파손된 장치',
         ja: '破損装置',
         en: 'Damaged Device',
-        zh: '破损装置'
+        cn: '破损装置'
       }
     },
     30062: {
@@ -152,7 +152,7 @@ export default {
         ko: '장치',
         ja: '初級装置',
         en: 'Device',
-        zh: '装置'
+        cn: '装置'
       }
     },
     30063: {
@@ -160,7 +160,7 @@ export default {
         ko: '리뉴얼 장치',
         ja: '中級装置',
         en: 'Integrated Device',
-        zh: '全新装置'
+        cn: '全新装置'
       }
     },
     30064: {
@@ -168,7 +168,7 @@ export default {
         ko: '개량 장치',
         ja: '上級装置',
         en: 'Optimized Device',
-        zh: '改量装置'
+        cn: '改量装置'
       }
     },
     30031: {
@@ -176,7 +176,7 @@ export default {
         ko: '에스테르 원료',
         ja: 'エステル原料',
         en: 'Ester',
-        zh: '酯原料'
+        cn: '酯原料'
       }
     },
     30032: {
@@ -184,7 +184,7 @@ export default {
         ko: '폴리에스테르',
         ja: '初級エステル',
         en: 'Polyester',
-        zh: '聚酸酯'
+        cn: '聚酸酯'
       }
     },
     30033: {
@@ -192,7 +192,7 @@ export default {
         ko: '폴리에스테르 번들',
         ja: '中級エステル',
         en: 'Polyester Pack',
-        zh: '聚酸酯组'
+        cn: '聚酸酯组'
       }
     },
     30034: {
@@ -200,7 +200,7 @@ export default {
         ko: '폴리에스테르 팩',
         ja: '上級エステル',
         en: 'Polyester Lump',
-        zh: '聚酸酯块'
+        cn: '聚酸酯块'
       }
     },
     30021: {
@@ -208,7 +208,7 @@ export default {
         ko: '대체당',
         ja: 'ブドウ糖',
         en: 'Sugar Substitute',
-        zh: '代糖'
+        cn: '代糖'
       }
     },
     30022: {
@@ -216,7 +216,7 @@ export default {
         ko: '포도당',
         ja: '初級糖原',
         en: 'Sugar',
-        zh: '糖'
+        cn: '糖'
       }
     },
     30023: {
@@ -224,7 +224,7 @@ export default {
         ko: '포도당 번들',
         ja: '中級糖原',
         en: 'Sugar Pack',
-        zh: '糖组'
+        cn: '糖组'
       }
     },
     30024: {
@@ -232,7 +232,7 @@ export default {
         ko: '포도당 팩',
         ja: '高級糖原',
         en: 'Sugar Lump',
-        zh: '糖聚块'
+        cn: '糖聚块'
       }
     },
     30041: {
@@ -240,7 +240,7 @@ export default {
         ko: '이철 조각',
         ja: '異鉄の欠片',
         en: 'Oriron Shard',
-        zh: '异铁碎片'
+        cn: '异铁碎片'
       }
     },
     30042: {
@@ -248,7 +248,7 @@ export default {
         ko: '이철',
         ja: '初級異鉄',
         en: 'Oriron',
-        zh: '异铁'
+        cn: '异铁'
       }
     },
     30043: {
@@ -256,7 +256,7 @@ export default {
         ko: '이철 번들',
         ja: '中級異鉄',
         en: 'Oriron Cluster',
-        zh: '异铁组'
+        cn: '异铁组'
       }
     },
     30044: {
@@ -264,7 +264,7 @@ export default {
         ko: '이철 팩',
         ja: '高級異鉄',
         en: 'Oriron Block',
-        zh: '异铁块'
+        cn: '异铁块'
       }
     },
     30051: {
@@ -272,7 +272,7 @@ export default {
         ko: '디케톤',
         ja: 'アケトン試剤',
         en: 'Diketon',
-        zh: '双酮'
+        cn: '双酮'
       }
     },
     30052: {
@@ -280,7 +280,7 @@ export default {
         ko: '아케톤 응집체',
         ja: '初級アケトン',
         en: 'Polyketon',
-        zh: '酮凝集'
+        cn: '酮凝集'
       }
     },
     30053: {
@@ -288,7 +288,7 @@ export default {
         ko: '아케톤 응집체 번들',
         ja: '中級アケトン',
         en: 'Aketon',
-        zh: '酮凝集组'
+        cn: '酮凝集组'
       }
     },
     30054: {
@@ -296,7 +296,7 @@ export default {
         ko: '아케톤 팩',
         ja: '高級アケトン',
         en: 'Keton Colloid',
-        zh: '酮阵列'
+        cn: '酮阵列'
       }
     },
     30073: {
@@ -304,7 +304,7 @@ export default {
         ko: '로식 콜',
         ja: '合成コール',
         en: 'Loxic Kohl',
-        zh: '扭转醇'
+        cn: '扭转醇'
       }
     },
     30074: {
@@ -312,7 +312,7 @@ export default {
         ko: '화이트 호스 콜',
         ja: '上級合成コール',
         en: 'White Horse Kohl',
-        zh: '白马醇'
+        cn: '白马醇'
       }
     },
     30083: {
@@ -320,7 +320,7 @@ export default {
         ko: '망간 광석',
         ja: 'マンガン',
         en: 'Manganese Ore',
-        zh: '轻锰矿'
+        cn: '轻锰矿'
       }
     },
     30084: {
@@ -328,7 +328,7 @@ export default {
         ko: '망간 중합체',
         ja: '上級マンガン',
         en: 'Manganese Trihydrate',
-        zh: '三水锰矿'
+        cn: '三水锰矿'
       }
     },
     30093: {
@@ -336,7 +336,7 @@ export default {
         ko: '연마석',
         ja: '砥石',
         en: 'Grindstone',
-        zh: '研磨石'
+        cn: '研磨石'
       }
     },
     30094: {
@@ -344,7 +344,7 @@ export default {
         ko: '고급연마석',
         ja: '上級砥石',
         en: 'Grindstone Pentahydrate',
-        zh: '五水研磨石'
+        cn: '五水研磨石'
       }
     },
     30103: {
@@ -352,7 +352,7 @@ export default {
         ko: 'RMA70-12',
         ja: 'RMA70-12',
         en: 'RMA70-12',
-        zh: 'RMA70-12'
+        cn: 'RMA70-12'
       }
     },
     30104: {
@@ -360,7 +360,7 @@ export default {
         ko: 'RMA70-24',
         ja: 'RMA70-24',
         en: 'RMA70-24',
-        zh: 'RMA70-24'
+        cn: 'RMA70-24'
       }
     },
     3112: {
@@ -368,7 +368,7 @@ export default {
         ko: '카본',
         ja: '初級炭素材',
         en: 'Carbon Stick',
-        zh: '碳'
+        cn: '碳'
       }
     },
     3113: {
@@ -376,7 +376,7 @@ export default {
         ko: '카본 번들',
         ja: '中級炭素材',
         en: 'Carbon Brick',
-        zh: '碳素'
+        cn: '碳素'
       }
     },
     3114: {
@@ -384,7 +384,7 @@ export default {
         ko: '카본 팩',
         ja: '上級炭素材',
         en: 'Carbon Brick',
-        zh: '碳素组'
+        cn: '碳素组'
       }
     },
     3301: {
@@ -392,7 +392,7 @@ export default {
         ko: '스킬개론 제1권',
         ja: 'アーツ学Ⅰ',
         en: 'Skill Summary - 1',
-        zh: '技巧概要·卷1'
+        cn: '技巧概要·卷1'
       }
     },
     3302: {
@@ -400,7 +400,7 @@ export default {
         ko: '스킬개론 제2권',
         ja: 'アーツ学Ⅱ',
         en: 'Skill Summary - 2',
-        zh: '技巧概要·卷2'
+        cn: '技巧概要·卷2'
       }
     },
     3303: {
@@ -408,7 +408,7 @@ export default {
         ko: '스킬개론 제3권',
         ja: 'アーツ学Ⅲ',
         en: 'Skill Summary - 3',
-        zh: '技巧概要·卷3'
+        cn: '技巧概要·卷3'
       }
     },
     31013: {
@@ -416,7 +416,7 @@ export default {
         ko: '젤',
         ja: '人工ゲル',
         en: 'Coagulating Gel',
-        zh: '凝胶'
+        cn: '凝胶'
       }
     },
     31014: {
@@ -424,7 +424,7 @@ export default {
         ko: '중합젤',
         ja: '融合ゲル',
         en: 'Polymerized Gel',
-        zh: '聚合凝胶'
+        cn: '聚合凝胶'
       }
     },
     31023: {
@@ -432,7 +432,7 @@ export default {
         ko: '열합금',
         ja: '熾合金',
         en: 'Incandescent Alloy',
-        zh: '炽合金'
+        cn: '炽合金'
       }
     },
     31024: {
@@ -440,7 +440,7 @@ export default {
         ko: '열합금 팩',
         ja: '上級熾合金',
         en: 'Incandescent Alloy Block',
-        zh: '炽合金块'
+        cn: '炽合金块'
       }
     },
     randomMaterial_1: {
@@ -448,7 +448,7 @@ export default {
         ko: '로도스 아일랜드 보급 물자',
         ja: '補給物資・ロドス',
         en: 'Rhodes Island Supplies',
-        zh: '罗德岛物资补给'
+        cn: '罗德岛物资补给'
       }
     },
     ap_supply_lt_010: {
@@ -456,7 +456,7 @@ export default {
         ko: '응급 이성 샘플',
         ja: '試供理性回復剤',
         en: 'Emergency Sanity Sampler',
-        zh: '应急理智小样'
+        cn: '应急理智小样'
       }
     },
     randomMaterial_2: {
@@ -464,7 +464,7 @@ export default {
         ko: '축제 등불',
         ja: '年関ランタン',
         en: "New Year's Lantern",
-        zh: '岁过华灯'
+        cn: '岁过华灯'
       }
     },
     4005: {
@@ -472,7 +472,7 @@ export default {
         ko: '자격증명서',
         ja: '一般資格証',
         en: 'Commendation Certificate',
-        zh: '资质凭证'
+        cn: '资质凭证'
       }
     },
     30115: {
@@ -480,7 +480,7 @@ export default {
         ko: '중합제',
         ja: '融合剤',
         en: 'Polymerization Preparation',
-        zh: '聚合剂'
+        cn: '聚合剂'
       }
     },
     30125: {
@@ -488,7 +488,7 @@ export default {
         ko: '바이폴라 나노플레이크 칩',
         ja: 'ナノフレーク',
         en: 'Bipolar Nanoflake',
-        zh: '双极纳米片'
+        cn: '双极纳米片'
       }
     },
     30135: {
@@ -496,7 +496,7 @@ export default {
         ko: 'D32강',
         ja: 'D32鋼',
         en: 'D32 Steel',
-        zh: 'D32钢'
+        cn: 'D32钢'
       }
     },
     randomMaterial_3: {
@@ -504,7 +504,7 @@ export default {
         ko: '32h 전략 보급',
         ja: '32h戦略補給',
         en: '32-hour Strategic Ration',
-        zh: '32h战略配给'
+        cn: '32h战略配给'
       }
     },
     randomMaterial_4: {
@@ -512,7 +512,7 @@ export default {
         ko: '感谢庆典物资补给',
         ja: '感谢庆典物资补给',
         en: '感谢庆典物资补给',
-        zh: '感谢庆典物资补给'
+        cn: '感谢庆典物资补给'
       }
     },
     31033: {
@@ -520,7 +520,7 @@ export default {
         ko: '晶体元件',
         ja: '晶体元件',
         en: '晶体元件',
-        zh: '晶体元件'
+        cn: '晶体元件'
       }
     },
     31034: {
@@ -528,7 +528,7 @@ export default {
         ko: '晶体电路',
         ja: '晶体电路',
         en: '晶体电路',
-        zh: '晶体电路'
+        cn: '晶体电路'
       }
     },
     30145: {
@@ -536,7 +536,7 @@ export default {
         ko: '晶体电子单元',
         ja: '晶体电子单元',
         en: '晶体电子单元',
-        zh: '晶体电子单元'
+        cn: '晶体电子单元'
       }
     },
     3211: {
@@ -544,7 +544,7 @@ export default {
         ko: '뱅가드 칩',
         ja: '初級先鋒SoC',
         en: 'Vanguard Chip',
-        zh: '先锋芯片'
+        cn: '先锋芯片'
       }
     },
     3221: {
@@ -552,7 +552,7 @@ export default {
         ko: '가드 칩',
         ja: '初級前衛SoC',
         en: 'Guard Chip',
-        zh: '近卫芯片'
+        cn: '近卫芯片'
       }
     },
     3241: {
@@ -560,7 +560,7 @@ export default {
         ko: '스나이퍼 칩',
         ja: '初級狙撃SoC',
         en: 'Sniper Chip',
-        zh: '狙击芯片'
+        cn: '狙击芯片'
       }
     },
     3231: {
@@ -568,7 +568,7 @@ export default {
         ko: '디펜더 칩',
         ja: '初級重装SoC',
         en: 'Defender Chip',
-        zh: '重装芯片'
+        cn: '重装芯片'
       }
     },
     3261: {
@@ -576,7 +576,7 @@ export default {
         ko: '메딕 칩',
         ja: '初級医療SoC',
         en: 'Medic Chip',
-        zh: '医疗芯片'
+        cn: '医疗芯片'
       }
     },
     3271: {
@@ -584,7 +584,7 @@ export default {
         ko: '서포터 칩',
         ja: '初級補助SoC',
         en: 'Supporter Chip',
-        zh: '辅助芯片'
+        cn: '辅助芯片'
       }
     },
     3251: {
@@ -592,7 +592,7 @@ export default {
         ko: '캐스터 칩',
         ja: '初級術師SoC',
         en: 'Caster Chip',
-        zh: '术师芯片'
+        cn: '术师芯片'
       }
     },
     3281: {
@@ -600,7 +600,7 @@ export default {
         ko: '스페셜리스트 칩',
         ja: '初級特殊SoC',
         en: 'Specialist Chip',
-        zh: '特种芯片'
+        cn: '特种芯片'
       }
     },
     3212: {
@@ -608,7 +608,7 @@ export default {
         ko: '뱅가드 칩셋',
         ja: '中級先鋒SoC',
         en: 'Vanguard Chip Pack',
-        zh: '先锋芯片组'
+        cn: '先锋芯片组'
       }
     },
     3222: {
@@ -616,7 +616,7 @@ export default {
         ko: '가드 칩셋',
         ja: '中級前衛SoC',
         en: 'Guard Chip Pack',
-        zh: '近卫芯片组'
+        cn: '近卫芯片组'
       }
     },
     3242: {
@@ -624,7 +624,7 @@ export default {
         ko: '스나이퍼 칩셋',
         ja: '中級狙撃SoC',
         en: 'Sniper Chip Pack',
-        zh: '狙击芯片组'
+        cn: '狙击芯片组'
       }
     },
     3232: {
@@ -632,7 +632,7 @@ export default {
         ko: '디펜더 칩셋',
         ja: '中級重装SoC',
         en: 'Defender Chip Pack',
-        zh: '重装芯片组'
+        cn: '重装芯片组'
       }
     },
     3262: {
@@ -640,7 +640,7 @@ export default {
         ko: '메딕 칩셋',
         ja: '中級医療SoC',
         en: 'Medic Chip Pack',
-        zh: '医疗芯片组'
+        cn: '医疗芯片组'
       }
     },
     3272: {
@@ -648,7 +648,7 @@ export default {
         ko: '서포터 칩셋',
         ja: '中級補助SoC',
         en: 'Supporter Chip Pack',
-        zh: '辅助芯片组'
+        cn: '辅助芯片组'
       }
     },
     3252: {
@@ -656,7 +656,7 @@ export default {
         ko: '캐스터 칩셋',
         ja: '中級術師SoC',
         en: 'Caster Chip Pack',
-        zh: '术师芯片组'
+        cn: '术师芯片组'
       }
     },
     3282: {
@@ -664,7 +664,7 @@ export default {
         ko: '스페셜리스트 칩셋',
         ja: '中級特殊SoC',
         en: 'Specialist Chip Pack',
-        zh: '特种芯片组'
+        cn: '特种芯片组'
       }
     }
   },

@@ -545,8 +545,8 @@ const categories = [
 ];
 
 export default {
-  name: "ReportByZone",
-  components: {BackdropName, ItemIcon, Subheader, StageSelector, ItemStepper, Item},
+  name: "Report",
+  components: {BackdropName, ItemIcon, Subheader, StageSelector, ItemStepper, Item },
   mixins: [Theme],
   data: () => ({
     snackbar: false,
