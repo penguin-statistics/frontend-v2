@@ -774,7 +774,7 @@
         this.recognizer = new Recognizer();
 
         await this.recognizer
-          .initialize(this.server.toLowerCase())
+          .initialize(this.server)
           .then(() => {
             this.$store.commit("dataSource/lockServer");
             this.initialized = true;
