@@ -32,8 +32,54 @@
           <!--          </v-card-actions>-->
         </v-card>
       </v-dialog>
-      <v-divider class="my-4" />
 
+      <template 
+        v-if="step===1"
+      >
+        <v-alert
+          color="orange darken-3"
+          border="left"
+          class="mx-2"
+        >
+          <v-chip
+            class="ma-2"
+            label
+          >
+            {{ $t('report.recognition.notices.beta') }}
+          </v-chip>
+          <ol>
+            <i18n
+              path="report.recognition.notices.rule_1"
+              tag="li"
+            >
+              <v-btn
+                href="https://webassembly.org/"
+                target="_blank"
+                small
+              >
+                {{ $t('report.recognition.notices.wasm') }}
+                <v-icon
+                  right
+                  dark
+                  small
+                >
+                  mdi-open-in-new
+                </v-icon>
+              </v-btn>
+            </i18n>
+
+            <li>{{ $t('report.recognition.notices.rule_2') }}</li>
+            <li>{{ $t('report.recognition.notices.rule_3') }}</li>
+            <li>{{ $t('report.recognition.notices.rule_4') }}</li>
+            <li>{{ $t('report.recognition.notices.rule_5') }}</li>
+            <li>{{ $t('report.recognition.notices.rule_6') }}</li>
+            <li>{{ $t('report.recognition.notices.rule_7') }}</li>
+            <li>{{ $t('report.recognition.notices.rule_8') }}</li>
+          </ol>
+        </v-alert>
+
+        <v-divider class="my-4" />
+      </template>
       <v-stepper
         v-model="step"
         alt-labels
