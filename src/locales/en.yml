@@ -247,6 +247,7 @@ report:
       rule_6: Please make sure that you refresh a 3-stars clear.
       rule_7: After recognition, "illegal" items will not be reported, like Emergency Sanity Sampler that is not in drop period.
       rule_8: You can click the images to enlarge it for checking, and click again to close it.
+      rule_9: Please double check that you have selected the right server and right images. Your are now currently at {serverName} Server.
   rules:
     item:
       _name: Item Quantities

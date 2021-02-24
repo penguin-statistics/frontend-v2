@@ -75,6 +75,7 @@
             <li>{{ $t('report.recognition.notices.rule_6') }}</li>
             <li>{{ $t('report.recognition.notices.rule_7') }}</li>
             <li>{{ $t('report.recognition.notices.rule_8') }}</li>
+            <li>{{ $t('report.recognition.notices.rule_9', {serverName: $t("server.servers." + this.$store.getters["dataSource/server"])}) }}</li>
           </ol>
         </v-alert>
 
@@ -134,7 +135,7 @@
                     mdi-server
                   </v-icon>
                   <span class="caption ml-1">
-                    {{ server }}
+                    {{ $t("server.servers." + this.$store.getters["dataSource/server"]) }}
                   </span>
                 </div>
                 <v-divider
