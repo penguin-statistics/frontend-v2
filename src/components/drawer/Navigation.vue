@@ -44,7 +44,7 @@
       v-for="child in route.children.filter(el => !el.meta.hide )"
       :key="child.name"
       v-haptic
-      :class="child.path === $route.path.split('/')[2] ? activeClass : ''"
+      :class="route.path + '/' + child.path === $route.path.split('/', 3).join('/') ? activeClass : ''"
       @click="navigate(child)"
     >
       <v-list-item-title>{{ $t(child.meta.i18n) }}</v-list-item-title>
