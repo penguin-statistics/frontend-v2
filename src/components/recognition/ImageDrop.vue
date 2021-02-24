@@ -132,7 +132,6 @@ export default {
   },
   mounted () {
     document.addEventListener('dragenter', () => {
-      console.log(this.$refs.fileInput)
       this.$refs.fileInput.focus()
       this.onDrag = true
     }, false)
@@ -149,19 +148,23 @@ export default {
     },
     drop (event) {
       event.preventDefault()
-
+      var illegalFiles = []
       const imageFilter = (file) => {
         if (file.type.split('/')[0] === 'image') {
           return true
         } else {
-          this.snackbar = true
-          this.snackbarMessage = file.name + ' is not an image file.'
+          illegalFiles.push(file.name)
           return false
         }
       }
-
+      
+      var filteredFiles = [...event.dataTransfer.files].filter(imageFilter)
+      if (illegalFiles.length>0){
+          this.snackbar = true
+          this.snackbarMessage = this.$t('report.recognition.tips.notImageFile',[`${illegalFiles[0]}${illegalFiles.length>1?` +${illegalFiles.length-1} ${this.$t('report.recognition.tips.notImageFileMultiple')}`:''}`])
+      }
       // TODO: Discussion needed. Drag and Drop should keep files that already exist?
-      this.$emit('input', [...this.files, ...[...event.dataTransfer.files].filter(imageFilter)])
+      this.$emit('input', [...this.files, ...filteredFiles])
       this.$refs.fileInput.blur()
     }
   }
