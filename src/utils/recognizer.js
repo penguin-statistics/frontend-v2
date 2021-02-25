@@ -3,6 +3,7 @@ import store from "@/store";
 import JSZip from "jszip";
 import reduce from "lodash/reduce";
 import pick from "lodash/pick";
+import uniq from "lodash/uniq";
 // import Jimp from 'jimp'
 const Module = window.Module;
 
@@ -55,7 +56,6 @@ class Recognizer {
 
     console.log("preloading json");
 
-
     const preloads = {
       stages: reduce(
         store.getters["data/content"]({ id: "stages" }),
@@ -64,16 +64,18 @@ class Recognizer {
             ...obj,
             [item["code"]]: {
               stageId: item["stageId"],
-              drops: reduce(
-                item["dropInfos"],
-                (array, dropInfo) => {
-                  if (dropInfo["itemId"] && dropInfo["itemId"] != "furni") {
-                    return [...array, dropInfo["itemId"]];
-                  } else {
-                    return [...array];
-                  }
-                },
-                []
+              drops: uniq(
+                reduce(
+                  item["dropInfos"],
+                  (array, dropInfo) => {
+                    if (dropInfo["itemId"] && dropInfo["itemId"] != "furni") {
+                      return [...array, dropInfo["itemId"]];
+                    } else {
+                      return [...array];
+                    }
+                  },
+                  item["recognitionOnly"] ? [...item["recognitionOnly"]] : []
+                )
               ),
             },
           };
@@ -88,11 +90,19 @@ class Recognizer {
             [item["itemId"]]: pick(item, ["name_i18n"]),
           };
         },
-        {}
+        {
+          4006: {
+            name_i18n: {
+              ko: "红票",
+              ja: "红票",
+              en: "红票",
+              zh: "红票",
+            },
+          },
+        }
       ),
       hash: recognizer_hash,
     };
-
 
     this.wasm.preload_json(
       JSON.stringify(preloads.stages),
@@ -105,85 +115,6 @@ class Recognizer {
 
     console.log("starting to preload item icons");
 
-    const items = [
-      "2001",
-      "2002",
-      "2003",
-      "2004",
-      "30011",
-      "30012",
-      "30013",
-      "30014",
-      "30021",
-      "30022",
-      "30023",
-      "30024",
-      "3003",
-      "30031",
-      "30032",
-      "30033",
-      "30034",
-      "30041",
-      "30042",
-      "30043",
-      "30044",
-      "30051",
-      "30052",
-      "30053",
-      "30054",
-      "30061",
-      "30062",
-      "30063",
-      "30064",
-      "30073",
-      "30074",
-      "30083",
-      "30084",
-      "30093",
-      "30094",
-      "30103",
-      "30104",
-      "30115",
-      "30125",
-      "30135",
-      "30145",
-      "31013",
-      "31014",
-      "31023",
-      "31024",
-      "31033",
-      "31034",
-      "3112",
-      "3113",
-      "3114",
-      "3211",
-      "3212",
-      "3221",
-      "3222",
-      "3231",
-      "3232",
-      "3241",
-      "3242",
-      "3251",
-      "3252",
-      "3261",
-      "3262",
-      "3271",
-      "3272",
-      "3281",
-      "3282",
-      "3301",
-      "3302",
-      "3303",
-      "4005",
-      "ap_supply_lt_010",
-      "randomMaterial_1",
-      "randomMaterial_2",
-      "randomMaterial_3",
-      "randomMaterial_4",
-    ];
-    const self = this;
-
     await fetch("/items.zip")
       .then((response) => {
         if (response.status >= 200 && response.status < 400) {
@@ -192,18 +123,15 @@ class Recognizer {
           return Promise.reject(new Error(response.statusText));
         }
       })
-      .then(JSZip.loadAsync)
-      .then(async function(zip) {
-        console.log(zip.files);
-        for (const item of items) {
+      .then((zip) => JSZip.loadAsync(zip))
+      .then(async (zip) => {
+        zip.forEach(async (relativePath, file) => {
+          const item = file.name.split(".")[0];
           console.log("adding", item, "to preloaded item icon");
-          const blob = await zip.file("items/" + item + ".jpg").async("blob");
-
-          // console.log('item', item, 'image', image, 'imageData', imageData, 'numBytes', numBytes, 'dataPtr', dataPtr, 'dataOnHeap', dataOnHeap)
-          // console.log('preloading template. itemId:', item)
+          const blob = await file.async("blob");
           const { offset, length } = await image2wasmHeapOffset(blob);
-          self.wasm.preload_tmpl(item, offset, length);
-        }
+          this.wasm.preload_tmpl(item, offset, length);
+        });
       });
 
     return this;
