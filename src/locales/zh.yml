@@ -211,6 +211,7 @@ report:
       changeServer: 不允许在识别过程中修改服务器，请重载
       notImageFile: "{0}不是图片文件，无法上传"
       notImageFileMultiple: "个文件"
+      emptyResult: 无可用识别结果
     status:
       success: 成功
       warning: 警告

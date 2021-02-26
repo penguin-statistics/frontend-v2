@@ -108,7 +108,6 @@
           return this.update||this.servers.indexOf(this.servers.find(el => el === this.$store.getters["dataSource/server"]))
         },
         set (localeIndex) {
-          console.log(localeIndex)
           if(this.$store.getters["dataSource/serverLocked"]){
             this.$store.commit("dataSource/changeLockState", 2)
             this.update = localeIndex;

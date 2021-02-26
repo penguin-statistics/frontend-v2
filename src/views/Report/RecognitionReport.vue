@@ -338,6 +338,7 @@
             </div>
 
             <v-btn
+              v-if="filterResults([`Success`]).length"
               color="primary mt-4"
               @click="step = 4"
             >
@@ -348,6 +349,24 @@
               >
                 mdi-upload
               </v-icon>
+            </v-btn>
+            <v-btn
+              v-else
+              color="error mt-4"
+              @click="reload"
+            >
+              <div class="d-inline-flex align-center justify-center">
+                <span class="caption ml-1">
+                  {{ $t("report.recognition.tips.emptyResult") }}
+                </span>
+              </div>
+              <v-divider
+                vertical
+                class="mx-2"
+              />
+              <span>
+                {{ $t("report.recognition.reload") }}
+              </span>
             </v-btn>
           </v-stepper-content>
 
@@ -483,12 +502,27 @@
             <v-row>
               <v-col>
                 <v-btn
+                  rounded
                   block
                   color="success"
                   :disabled="SubmitDialog.open"
                   @click="submit"
                 >
-                  {{ $t("report.recognition.submit") }} (单次api 仅测试使用 test6 测试帐号)
+                  <div class="d-inline-flex align-center justify-center">
+                    <v-icon small>
+                      mdi-server
+                    </v-icon>
+                    <span class="caption ml-1">
+                      {{ $t("server.servers." + this.$store.getters["dataSource/server"]) }}
+                    </span>
+                  </div>
+                  <v-divider
+                    vertical
+                    class="mx-2"
+                  />
+                  <span>
+                    {{ $t("report.recognition.submit") }} (单次api 仅测试使用 test6 测试帐号)
+                  </span>
                 </v-btn>
               </v-col>
             </v-row>
@@ -541,7 +575,7 @@
                 type="success"
                 class="mt-4"
               >
-                {{ $t("report.recognition.reload") }}
+                Finish
               </v-alert>
               <v-card-actions class="elevation-4">
                 <v-btn
@@ -552,7 +586,7 @@
                 >
                   <v-divider style="opacity: 0.3" />
                   <span class="mx-4 d-flex align-center">
-                    <v-icon left>mdi-close</v-icon>{{ $t("meta.dialog.close") }}
+                    <v-icon left>mdi-close</v-icon>{{ $t("report.recognition.reload") }}
                   </span>
                   <v-divider style="opacity: 0.3" />
                 </v-btn>

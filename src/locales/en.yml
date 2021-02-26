@@ -222,6 +222,7 @@ report:
       changeServer: 不允许在识别过程中修改服务器，请重载
       notImageFile: "{0} are not image files, ignored."
       notImageFileMultiple: "files"
+      emptyResult: No results available
     status:
       success: Success
       warning: Warning

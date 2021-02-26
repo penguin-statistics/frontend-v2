@@ -16,11 +16,11 @@ const Module = window.Module;
 //   if (s) s.prepend(canvas)
 // }
 
-async function image2wasmHeapOffset(blob) {
-  console.time("writeToWasmHeap");
+async function image2wasmHeapOffset(blob,name) {
+  console.time(`writeToWasmHeap_${name}`);
   const imageData = await new Promise((resolve) => {
     const reader = new FileReader();
-    reader.onload = function(event) {
+    reader.onload = function (event) {
       resolve(event.target.result);
     };
     reader.readAsArrayBuffer(blob);
@@ -31,7 +31,7 @@ async function image2wasmHeapOffset(blob) {
   const dataPtr = Module._malloc(numBytes);
   const dataOnHeap = new Uint8Array(Module.HEAPU8.buffer, dataPtr, numBytes);
   dataOnHeap.set(uint8);
-  console.timeEnd("writeToWasmHeap");
+  console.timeEnd(`writeToWasmHeap_${name}`);
 
   return {
     offset: dataOnHeap.byteOffset,
@@ -125,13 +125,18 @@ class Recognizer {
       })
       .then((zip) => JSZip.loadAsync(zip))
       .then(async (zip) => {
-        zip.forEach(async (relativePath, file) => {
-          const item = file.name.split(".")[0];
-          console.log("adding", item, "to preloaded item icon");
-          const blob = await file.async("blob");
-          const { offset, length } = await image2wasmHeapOffset(blob);
-          this.wasm.preload_tmpl(item, offset, length);
+        let ImageBuffer = []
+        zip.forEach((relativePath, file) => {
+          ImageBuffer.push(new Promise((r) => {
+            const item = file.name.split(".")[0];
+            console.log("adding", item, "to preloaded item icon");
+            file.async("blob").then(async (blob) => {
+              const { offset, length } = await image2wasmHeapOffset(blob,file.name);
+              this.wasm.preload_tmpl(item, offset, length);
+            }).then(r);
+          }))
         });
+        return Promise.all(ImageBuffer)
       });
 
     return this;
