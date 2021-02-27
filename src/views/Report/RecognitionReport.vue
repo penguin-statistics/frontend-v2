@@ -33,9 +33,7 @@
         </v-card>
       </v-dialog>
 
-      <template 
-        v-if="step===1"
-      >
+      <template v-if="step === 1">
         <v-alert
           color="orange darken-3"
           border="left"
@@ -45,7 +43,7 @@
             class="ma-2"
             label
           >
-            {{ $t('report.recognition.notices.beta') }}
+            {{ $t("report.recognition.notices.beta") }}
           </v-chip>
           <ol>
             <i18n
@@ -57,7 +55,7 @@
                 target="_blank"
                 small
               >
-                {{ $t('report.recognition.notices.wasm') }}
+                {{ $t("report.recognition.notices.wasm") }}
                 <v-icon
                   right
                   dark
@@ -68,14 +66,20 @@
               </v-btn>
             </i18n>
 
-            <li>{{ $t('report.recognition.notices.rule_2') }}</li>
-            <li>{{ $t('report.recognition.notices.rule_3') }}</li>
-            <li>{{ $t('report.recognition.notices.rule_4') }}</li>
-            <li>{{ $t('report.recognition.notices.rule_5') }}</li>
-            <li>{{ $t('report.recognition.notices.rule_6') }}</li>
-            <li>{{ $t('report.recognition.notices.rule_7') }}</li>
-            <li>{{ $t('report.recognition.notices.rule_8') }}</li>
-            <li>{{ $t('report.recognition.notices.rule_9', {serverName: $t("server.servers." + this.$store.getters["dataSource/server"])}) }}</li>
+            <li>{{ $t("report.recognition.notices.rule_2") }}</li>
+            <li>{{ $t("report.recognition.notices.rule_3") }}</li>
+            <li>{{ $t("report.recognition.notices.rule_4") }}</li>
+            <li>{{ $t("report.recognition.notices.rule_5") }}</li>
+            <li>{{ $t("report.recognition.notices.rule_6") }}</li>
+            <li>{{ $t("report.recognition.notices.rule_7") }}</li>
+            <li>{{ $t("report.recognition.notices.rule_8") }}</li>
+            <li>
+              {{
+                $t("report.recognition.notices.rule_9", {
+                  serverName: $t("server.servers." + this.$store.getters["dataSource/server"])
+                })
+              }}
+            </li>
           </ol>
         </v-alert>
 
@@ -527,9 +531,7 @@
                     vertical
                     class="mx-2"
                   />
-                  <span>
-                    {{ $t("report.recognition.submit") }} (Batch api 无返回 仅测试使用 test6 测试帐号)
-                  </span>
+                  <span> {{ $t("report.recognition.submit") }} (Batch api 无返回 仅测试使用 test6 测试帐号) </span>
                 </v-btn>
               </v-col>
             </v-row>
@@ -574,7 +576,7 @@
             </v-card-text>
           </v-card>
           <v-card
-            v-if="SubmitDialog.finish"
+            v-else
             class="d-flex fill-height"
           >
             <v-card-text>
@@ -740,7 +742,7 @@
       serverLocked(newvalue) {
         if (newvalue == 2) {
           this.$store.commit("dataSource/lockServer");
-          this.changeServerTip=true;
+          this.changeServerTip = true;
         }
       }
     },
@@ -754,33 +756,23 @@
       reload() {
         this.$emit("reload");
       },
-      submit() {
-        var batchDrops= this.formatResults(this.TrustedResults)
+      async doSubmit() {
+        var batchDrops = await this.formatResults(this.TrustedResults);
         const userId = Cookies.get(config.authorization.userId.cookieKey);
-        return report
-          .submitRecognitionReport(
-            batchDrops,
-            { source: "frontend-v2-recognition" }
-          )
-          .then(() => {
-            const reportedUserId = Cookies.get(config.authorization.userId.cookieKey);
-            if (userId !== reportedUserId) {
-              this.$store.dispatch("auth/login", {
-                userId: reportedUserId
-              });
-            }
-            this.$ga.event("report", "submit_single", this.TrustedResults[this.SubmitDialog.now].result.stageId, 1);
-          });      
+        return report.submitRecognitionReport(batchDrops, { source: "frontend-v2-recognition" }).then(() => {
+          const reportedUserId = Cookies.get(config.authorization.userId.cookieKey);
+          if (userId !== reportedUserId) {
+            this.$store.dispatch("auth/login", {
+              userId: reportedUserId
+            });
+          }
+          //this.$ga.event("report", "submit_single", this.TrustedResults[this.SubmitDialog.now].result.stageId, 1);
+        });
       },
-      ConvertData(Items) {
-        return Items.map(Item => {
-          if (!["FURNITURE", "SPECIAL_DROP", "EXTRA_DROP", "NORMAL_DROP"].includes(Item.dropType)) return;
-          return {
-            quantity: Item.quantity,
-            dropType: Item.dropType,
-            itemId: Item.itemId
-          };
-        }).filter(a => a);
+      submit(){
+        this.doSubmit().catch(e=>{
+          console.error(e)
+        })
       },
       async init() {
         this.initializing = true;
@@ -801,11 +793,6 @@
       },
       getItem(ItemId) {
         return get.items.byItemId(ItemId, false, false) || {};
-      },
-      draw() {
-        for (const file of this.files) {
-          this.drawImageToPreview(file);
-        }
       },
       stringify(s) {
         return JSON.stringify(s, null, 4);
@@ -841,31 +828,6 @@
         console.log(this.results);
 
         this.recognition.busy = false;
-      },
-      async drawImageToPreview(blob) {
-        const img = document.createElement("img");
-        const c = document.querySelector("#canvases");
-        if (c) c.prepend(img);
-        img.src = URL.createObjectURL(blob);
-
-        return new Promise(resolve => {
-          img.onload = function() {
-            console.log(this.naturalWidth, this.naturalHeight, img.width, img.height);
-            const canvas = document.createElement("canvas");
-            canvas.width = img.width;
-            canvas.height = img.height;
-            const ctx = canvas.getContext("2d");
-            // ctx.drawImage(img, 0, 0, img.width, img.height)
-            ctx.drawImage(img, 0, 0);
-            // const s = document.getElementById('canvases')
-            // if (s) s.prepend(canvas)
-
-            const image = ctx.getImageData(0, 0, img.width, img.height);
-            console.log(blob.name, image.data.slice(272, 276));
-
-            resolve();
-          };
-        });
       },
       clearCanvas() {
         this.$refs.canvases.innerHTML = "";
@@ -920,12 +882,26 @@
           return false;
         });
       },
-      formatResults(results){
-        return results.map((result)=>{
-          return {
-            drops: result.result.drops.map((drop)=>{
-              delete drop['confidence']
-              return drop
+      async LoadImage(src) {
+        return new Promise((r, e) => {
+          let ImgElement = new Image();
+          ImgElement.onload = () => {
+            r(ImgElement);
+          };
+          ImgElement.onerror = () => {
+            e();
+          };
+          ImgElement.src = src;
+        });
+      },
+      async formatResults(results) {
+        let Return = [];
+        for (let result of results) {
+          let Img = await this.LoadImage(result.blobUrl);
+          Return.push({
+            drops: result.result.drops.map(drop => {
+              delete drop["confidence"];
+              return drop;
             }),
             stageId: result.result.stageId,
             metadata: {
@@ -937,11 +913,12 @@
               // size: result.file.size,
               // type: result.file.type,
               // webkitRelativePath: result.file.webkitRelativePath,
-              width: 0,
-              height: 0
-            },
-          }
-        })
+              width: Img.width,
+              height: Img.height
+            }
+          });
+        }
+        return Return;
       }
     }
   };
