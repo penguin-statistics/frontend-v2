@@ -33,6 +33,10 @@ export default {
       ...config.api.submitParams,
       ...patch,
     };
+    /* 
+      API Not Support
+      RequestData = RecognitionRequestBodyEncrypt(RequestData);
+     */
     console.log(RecognitionRequestBodyEncrypt(RequestData))
     return service.post("/report/recognition", RequestData);
   },

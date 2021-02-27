@@ -7669,9 +7669,9 @@ pbkdf2@^3.0.3:
     safe-buffer "^5.0.1"
     sha.js "^2.4.8"
 
-"penguin-crypto@git+ssh://git@github.com:penguin-statistics/penguin-crypto.git#v1.0.1":
-  version "1.0.1"
-  resolved "git+ssh://git@github.com:penguin-statistics/penguin-crypto.git#032c0c11004bc2e110b8503e5068488eae6e2234"
+"penguin-crypto@git+ssh://git@github.com:penguin-statistics/penguin-crypto.git#v1.0.4":
+  version "1.0.3"
+  resolved "git+ssh://git@github.com:penguin-statistics/penguin-crypto.git#10769ef646d4a48f21557e781ee1441994c4594b"
   dependencies:
     "@babel/runtime" "^7.13.8"
     crypto-js "^4.0.0"
