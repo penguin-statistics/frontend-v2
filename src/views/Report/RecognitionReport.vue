@@ -234,7 +234,7 @@
               v-model="fastTest"
               hide-details
               label="简洁模式：隐藏图片渲染、缩小栏宽度"
-              class="mb-4"
+              class="mx-2 mb-4"
             />
             <div
               class="ml-6"
@@ -257,9 +257,8 @@
                         ? 'rgba(241,97,87,0.5)'
                         : result.result.warnings.length
                           ? 'warning'
-                          : ''
-                    "
-                    style="min-width: 270px"
+                          : ''"
+                    style="width: 100%"
                   >
                     <v-img
                       v-if="!fastTest"
@@ -323,14 +322,37 @@
                         icon="mdi-alert-circle"
                       >
                         识别时有错误发生，无法为您上报该图片
-                        <ul>
-                          <li v-if="result.result.errors.length">
-                            Error: <br><code>{{ result.result.errors }}</code>
-                          </li>
-                          <li v-if="result.result.warnings.length">
-                            Warning: <br><code>{{ result.result.warnings }}</code>
-                          </li>
-                        </ul>
+                        <br>
+                        <template v-if="result.result.errors.length">
+                          <v-chip
+                            v-for="(error, index) in result.result.errors"
+                            :key="index"
+                            class="ma-2"
+                            color="red darken-3"
+                            text-color="white"
+                          >
+                            <v-icon left>
+                              mdi-bug
+                            </v-icon>
+                            {{ error.type }}
+                          </v-chip>
+                          <br>
+                        </template>
+                        <template v-if="result.result.warnings.length">
+                          <v-chip
+                            v-for="(warning, index) in result.result.warnings"
+                            :key="index"
+                            class="ma-2"
+                            color="yellow darken-3"
+                            text-color="white"
+                          >
+                            <v-icon left>
+                              mdi-alert
+                            </v-icon>
+                            {{ warning.type }}
+                          </v-chip>
+                          <br>
+                        </template>
                       </v-alert>
                     </v-card-text>
                   </v-card>
