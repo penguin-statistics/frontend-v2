@@ -42,6 +42,7 @@ async function image2wasmHeapOffset(blob,name) {
 
 class Recognizer {
   async initialize(server) {
+    console.groupCollapsed("Recognition logs for initialization");
     this.wasm = {
       recognize: Module.cwrap("recognize", "string", ["number", "number"]),
       preload_json: Module.cwrap("preload_json", "void", [
@@ -138,7 +139,7 @@ class Recognizer {
         });
         return Promise.all(ImageBuffer)
       });
-
+    console.groupEnd();
     return this;
   }
 

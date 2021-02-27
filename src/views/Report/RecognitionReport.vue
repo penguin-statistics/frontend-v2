@@ -226,6 +226,12 @@
               multiple
               prepend-icon="mdi-filter-variant"
             />
+            <v-switch
+              v-model="fastTest"
+              hide-details
+              label="简洁模式：隐藏图片渲染、缩小栏宽度"
+              class="mb-4"
+            />
             <div
               class="ml-6"
               style="min-height: 100px"
@@ -252,6 +258,7 @@
                     style="min-width: 270px"
                   >
                     <v-img
+                      v-if="!fastTest"
                       v-ripple
                       :src="result.blobUrl"
                       contain
@@ -521,7 +528,7 @@
                     class="mx-2"
                   />
                   <span>
-                    {{ $t("report.recognition.submit") }} (单次api 仅测试使用 test6 测试帐号)
+                    {{ $t("report.recognition.submit") }} (Batch api 无返回 仅测试使用 test6 测试帐号)
                   </span>
                 </v-btn>
               </v-col>
@@ -617,7 +624,7 @@
   import Item from "@/components/global/Item";
   import Recognizer from "@/utils/recognizer";
   import PreloaderInline from "@/components/global/PreloaderInline";
-  import snackbar from "@/utils/snackbar";
+  // import snackbar from "@/utils/snackbar";
   import CDN from "@/mixins/CDN";
   import Theme from "@/mixins/Theme";
   import ImageDrop from "@/components/recognition/ImageDrop";
@@ -635,17 +642,9 @@
         recognizer: null,
         files: [],
         results: [],
-        rules: [
-          files => {
-            for (const file of files) {
-              if (file.size > 50e6)
-                return `"${file.name}" (${(file.size / 1e6).toFixed(1)}MB) ${this.$t("filetoobig")}`;
-            }
-            return true;
-          }
-        ],
         initializing: false,
         initialized: false,
+        fastTest: false,
         expandImage: {
           dialog: false,
           src: ""
@@ -756,31 +755,12 @@
         this.$emit("reload");
       },
       submit() {
-        this.SubmitDialog.open = true;
-        this.submitOneRecord()
-          .then(() => {
-            if (++this.SubmitDialog.now < this.TrustedResults.length) {
-              this.submit();
-            } else {
-              this.SubmitDialog.finish = true;
-            }
-          })
-          .catch(() => {
-            setTimeout(() => {
-              snackbar.launch("info", 1000, "report.recognition.retry");
-              this.submit();
-            }, 1000);
-          });
-      },
-      submitOneRecord() {
+        var batchDrops= this.formatResults(this.TrustedResults)
         const userId = Cookies.get(config.authorization.userId.cookieKey);
         return report
-          .submitReport(
-            {
-              stageId: this.TrustedResults[this.SubmitDialog.now].result.stageId,
-              drops: this.ConvertData(this.TrustedResults[this.SubmitDialog.now].result.drops)
-            },
-            { source: "RecognitionReport" }
+          .submitRecognitionReport(
+            batchDrops,
+            { source: "frontend-v2-recognition" }
           )
           .then(() => {
             const reportedUserId = Cookies.get(config.authorization.userId.cookieKey);
@@ -790,7 +770,7 @@
               });
             }
             this.$ga.event("report", "submit_single", this.TrustedResults[this.SubmitDialog.now].result.stageId, 1);
-          });
+          });      
       },
       ConvertData(Items) {
         return Items.map(Item => {
@@ -939,6 +919,29 @@
           }
           return false;
         });
+      },
+      formatResults(results){
+        return results.map((result)=>{
+          return {
+            drops: result.result.drops.map((drop)=>{
+              delete drop['confidence']
+              return drop
+            }),
+            stageId: result.result.stageId,
+            metadata: {
+              fingerprint: result.result.fingerprint,
+              md5: result.result.md5,
+              fileName: result.file.name,
+              lastModified: result.file.lastModified,
+              // not providing due to backend
+              // size: result.file.size,
+              // type: result.file.type,
+              // webkitRelativePath: result.file.webkitRelativePath,
+              width: 0,
+              height: 0
+            },
+          }
+        })
       }
     }
   };
