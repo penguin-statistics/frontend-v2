@@ -685,7 +685,7 @@
           finish: false
         },
         changeServerTip: 0,
-        isFilesValid: false
+        isFilesValid: true
       };
     },
     computed: {
