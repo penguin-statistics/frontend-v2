@@ -326,7 +326,7 @@
                         <template v-if="result.result.errors.length">
                           <v-chip
                             v-for="(error, index) in result.result.errors"
-                            :key="index"
+                            :key="`error-${index}`"
                             class="ma-2"
                             color="red darken-3"
                             text-color="white"
@@ -341,7 +341,7 @@
                         <template v-if="result.result.warnings.length">
                           <v-chip
                             v-for="(warning, index) in result.result.warnings"
-                            :key="index"
+                            :key="`warning-${index}`"
                             class="ma-2"
                             color="yellow darken-3"
                             text-color="white"

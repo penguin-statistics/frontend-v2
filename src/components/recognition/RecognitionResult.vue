@@ -65,7 +65,10 @@
             size="64"
             color="success"
           >
-            <v-icon size="48">
+            <v-icon
+              size="48"
+              color="white"
+            >
               mdi-check-bold
             </v-icon>
           </v-avatar>
@@ -84,7 +87,10 @@
             size="64"
             color="warning"
           >
-            <v-icon size="48">
+            <v-icon
+              size="48"
+              color="white"
+            >
               mdi-alert
             </v-icon>
           </v-avatar>
@@ -103,7 +109,10 @@
             size="64"
             color="red darken-3"
           >
-            <v-icon size="48">
+            <v-icon
+              size="48"
+              color="white"
+            >
               mdi-bug
             </v-icon>
           </v-avatar>
