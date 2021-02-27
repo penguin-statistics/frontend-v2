@@ -562,13 +562,19 @@
                   <v-row>
                     <v-col>
                       <v-progress-linear
-                        :value="((SubmitDialog.now + 1) / allTime) * 100"
+                        v-if="SubmitDialog.now == allTime"
+                        :value="((SubmitDialog.now) / allTime) * 100"
                         height="20"
                         class="mx-auto"
                         style="width: 90%"
                       >
-                        {{ SubmitDialog.now + 1 }} / {{ allTime }}
+                        {{ SubmitDialog.now }} / {{ allTime }}
                       </v-progress-linear>
+                      <v-progress-linear
+                        :indeterminate="true"
+                        class="mx-auto"
+                        style="width: 90%"
+                      />
                     </v-col>
                   </v-row>
                 </v-col>
@@ -661,8 +667,8 @@
         filterValue: ["Success", "Warning", "Error"],
         SubmitDialog: {
           open: false,
-          now: 0,
-          finish: false
+          finish: false,
+          now: 0
         },
         changeServerTip: 0
       };
@@ -769,10 +775,15 @@
           //this.$ga.event("report", "submit_single", this.TrustedResults[this.SubmitDialog.now].result.stageId, 1);
         });
       },
-      submit(){
-        this.doSubmit().catch(e=>{
-          console.error(e)
-        })
+      submit() {
+        this.SubmitDialog.open = true;
+        this.doSubmit()
+          .catch(e => {
+            console.error(e);
+          })
+          .finally(() => {
+            this.SubmitDialog.finish = true;
+          });
       },
       async init() {
         this.initializing = true;
@@ -886,6 +897,7 @@
         return new Promise((r, e) => {
           let ImgElement = new Image();
           ImgElement.onload = () => {
+            this.SubmitDialog.now++;
             r(ImgElement);
           };
           ImgElement.onerror = () => {
@@ -896,8 +908,14 @@
       },
       async formatResults(results) {
         let Return = [];
-        for (let result of results) {
-          let Img = await this.LoadImage(result.blobUrl);
+        let Promises = [];
+        for (let [index, result] of results.entries()) {
+          Promises[index] = this.LoadImage(result.blobUrl);
+
+          //this.SubmitDialog.now++;
+        }
+        Promise.all(Promises);
+        for (let [index, result] of results.entries()) {
           Return.push({
             drops: result.result.drops.map(drop => {
               delete drop["confidence"];
@@ -913,8 +931,8 @@
               // size: result.file.size,
               // type: result.file.type,
               // webkitRelativePath: result.file.webkitRelativePath,
-              width: Img.width,
-              height: Img.height
+              width: await (Promises[index]).width,
+              height: await (Promises[index]).height
             }
           });
         }
