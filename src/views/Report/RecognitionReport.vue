@@ -124,14 +124,16 @@
         <v-stepper-items>
           <v-stepper-content step="1">
             <v-form class="ml-6">
-              <imageDrop v-model="files" />
-
+              <imageDrop
+                v-model="files"
+                @valid="valid => isFilesValid = valid"
+              />
               <v-btn
                 large
                 rounded
                 color="primary"
                 class="px-4 py-2 mb-2"
-                :disabled="!files.length"
+                :disabled="!files.length || !isFilesValid"
                 @click="initAndRecognize"
               >
                 <div class="d-inline-flex align-center justify-center">
@@ -686,7 +688,8 @@
           now: 0,
           finish: false
         },
-        changeServerTip: 0
+        changeServerTip: 0,
+        isFilesValid: false
       };
     },
     computed: {
