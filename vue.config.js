@@ -48,6 +48,7 @@ module.exports = {
       enableInSFC: true
     }
   },
+  productionSourceMap: false,
   devServer: {
     disableHostCheck: true,
     proxy: {

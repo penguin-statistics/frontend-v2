@@ -562,15 +562,6 @@
                   <v-row>
                     <v-col>
                       <v-progress-linear
-                        v-if="SubmitDialog.now == allTime"
-                        :value="((SubmitDialog.now) / allTime) * 100"
-                        height="20"
-                        class="mx-auto"
-                        style="width: 90%"
-                      >
-                        {{ SubmitDialog.now }} / {{ allTime }}
-                      </v-progress-linear>
-                      <v-progress-linear
                         :indeterminate="true"
                         class="mx-auto"
                         style="width: 90%"
@@ -667,8 +658,7 @@
         filterValue: ["Success", "Warning", "Error"],
         SubmitDialog: {
           open: false,
-          finish: false,
-          now: 0
+          finish: false
         },
         changeServerTip: 0
       };
@@ -897,7 +887,6 @@
         return new Promise((r, e) => {
           let ImgElement = new Image();
           ImgElement.onload = () => {
-            this.SubmitDialog.now++;
             r(ImgElement);
           };
           ImgElement.onerror = () => {
