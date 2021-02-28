@@ -133,9 +133,10 @@
                 rounded
                 color="primary"
                 class="px-4 py-2 mb-2"
-                :disabled="!files.length || !isFilesValid"
+                :disabled="!files.length || (!isFilesValid && false)"
                 @click="initAndRecognize"
               >
+                <!-- 开发中不锁Button -->
                 <div class="d-inline-flex align-center justify-center">
                   <v-icon small>
                     mdi-server
