@@ -2,7 +2,7 @@ import recognizer_hash from "@/models/recognizer_hash";
 import store from "@/store";
 import JSZip from "jszip";
 import reduce from "lodash/reduce";
-import pick from "lodash/pick";
+// import pick from "lodash/pick";
 import uniq from "lodash/uniq";
 // import Jimp from 'jimp'
 const Module = window.Module;
@@ -83,25 +83,19 @@ class Recognizer {
         },
         {}
       ),
-      items: reduce(
-        store.getters["data/content"]({ id: "items" }),
-        (obj, item) => {
-          return {
-            ...obj,
-            [item["itemId"]]: pick(item, ["name_i18n"]),
-          };
-        },
-        {
-          4006: {
-            name_i18n: {
-              ko: "红票",
-              ja: "红票",
-              en: "红票",
-              zh: "红票",
-            },
-          },
-        }
-      ),
+      // items: reduce(
+      //   store.getters["data/content"]({ id: "items" }),
+      //   (obj, item) => {
+      //     return {
+      //       ...obj,
+      //       [item["itemId"]]: {},
+      //     };
+      //   },
+      //   {
+      //     4006: {},
+      //   }
+      // ),
+      items: {}, // TODO: wil be fixed in WASM v3
       hash: recognizer_hash,
     };
 
