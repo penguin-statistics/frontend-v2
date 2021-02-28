@@ -212,12 +212,11 @@
               <br>
               <v-btn
                 color="primary"
-                href="https://shimo.im/forms/D6CK8dqcxvgrHxxC/fill?channel=web"
-                target="_blank"
+                @click="askCrispForHelp()"
               >
-                填写一个十分简短的表单
+                与客服联系
                 <v-icon right>
-                  mdi-open-in-new
+                  mdi-chat
                 </v-icon>
               </v-btn>
               以帮助我们解决你所遇到的问题
@@ -953,6 +952,12 @@
           });
         }
         return Return;
+      },
+      askCrispForHelp(){
+        const $crisp = window.$crisp
+        document.querySelector("div.crisp-client").style.setProperty("display", "block", "important");
+        $crisp.push(["do", "chat:open"])
+        $crisp.push(["do", "message:send", ["text", "掉落识别有问题，我该怎么办？"]])
       }
     }
   };
