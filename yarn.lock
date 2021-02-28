@@ -948,13 +948,6 @@
     "@babel/types" "^7.4.4"
     esutils "^2.0.2"
 
-"@babel/runtime@^7.13.8":
-  version "7.13.8"
-  resolved "https://registry.npm.taobao.org/@babel/runtime/download/@babel/runtime-7.13.8.tgz?cache=0&sync_timestamp=1614383380306&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2F%40babel%2Fruntime%2Fdownload%2F%40babel%2Fruntime-7.13.8.tgz#cc886a85c072df1de23670dc1aa59fc116c4017c"
-  integrity sha1-zIhqhcBy3x3iNnDcGqWfwRbEAXw=
-  dependencies:
-    regenerator-runtime "^0.13.4"
-
 "@babel/runtime@^7.5.5", "@babel/runtime@^7.8.4":
   version "7.10.4"
   resolved "https://registry.yarnpkg.com/@babel/runtime/-/runtime-7.10.4.tgz#a6724f1a6b8d2f6ea5236dbfe58c7d7ea9c5eb99"
@@ -3433,11 +3426,6 @@ crypto-browserify@^3.11.0:
     public-encrypt "^4.0.0"
     randombytes "^2.0.0"
     randomfill "^1.0.3"
-
-crypto-js@^4.0.0:
-  version "4.0.0"
-  resolved "https://registry.npm.taobao.org/crypto-js/download/crypto-js-4.0.0.tgz#2904ab2677a9d042856a2ea2ef80de92e4a36dcc"
-  integrity sha1-KQSrJnep0EKFai6i74DekuSjbcw=
 
 crypto-random-string@^1.0.0:
   version "1.0.0"
@@ -6336,11 +6324,6 @@ jsprim@^1.2.2:
     json-schema "0.2.3"
     verror "1.10.0"
 
-jsrsasign@^10.1.12:
-  version "10.1.12"
-  resolved "https://registry.npm.taobao.org/jsrsasign/download/jsrsasign-10.1.12.tgz#5df3e9198596f44833ae8b7aa1c637b8d449019a"
-  integrity sha1-XfPpGYWW9Egzrot6ocY3uNRJAZo=
-
 jszip@^3.6.0:
   version "3.6.0"
   resolved "https://registry.npm.taobao.org/jszip/download/jszip-3.6.0.tgz#839b72812e3f97819cc13ac4134ffced95dd6af9"
@@ -7668,14 +7651,6 @@ pbkdf2@^3.0.3:
     ripemd160 "^2.0.1"
     safe-buffer "^5.0.1"
     sha.js "^2.4.8"
-
-"penguin-crypto@git+ssh://git@github.com:penguin-statistics/penguin-crypto.git#v1.0.4":
-  version "1.0.3"
-  resolved "git+ssh://git@github.com:penguin-statistics/penguin-crypto.git#10769ef646d4a48f21557e781ee1441994c4594b"
-  dependencies:
-    "@babel/runtime" "^7.13.8"
-    crypto-js "^4.0.0"
-    jsrsasign "^10.1.12"
 
 performance-now@^2.1.0:
   version "2.1.0"
