@@ -136,7 +136,7 @@
                 :disabled="!files.length || (!isFilesValid && false)"
                 @click="initAndRecognize"
               >
-                <!-- 开发中不锁Button -->
+                <!-- TODO: 开发中不锁Button -->
                 <div class="d-inline-flex align-center justify-center">
                   <v-icon small>
                     mdi-server
@@ -323,6 +323,7 @@
                         color="white"
                         border="left"
                         icon="mdi-alert-circle"
+                        class="my-4"
                       >
                         识别时有错误发生，无法为您上报该图片
                         <br>
