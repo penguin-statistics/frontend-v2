@@ -20,7 +20,7 @@
       prepend-icon="mdi-image"
       @blur="onDrag = false"
       @change="Files => $emit('input', Files)"
-      @update:error="e=>$emit('valid', $refs.fileInput.valid)"
+      @update:error="e => $emit('valid', $refs.fileInput.valid)"
     >
       <template
         v-slot:prepend-inner
@@ -112,6 +112,7 @@ export default {
     rules: [
       files => {
         for (const file of files) {
+          if (files.length > 50) return `超出50个文件数量限制`
           if (file.size > 50e6) return `"${file.name}" (${(file.size / 1e6).toFixed(1)}MB) 超出大小限制`
           if (file.lastModified < Date.now() - 1000*3600*36) return `"${file.name}" 超过36h时间限制`
         }
