@@ -3,7 +3,7 @@ import config from "@/config";
 import store from "@/store";
 let RecognitionRequestBodyEncrypt;
 try {
-  RecognitionRequestBodyEncrypt = require("penguin-crypto");
+  RecognitionRequestBodyEncrypt = require("../vendors/penguin-crypto/");
 } catch (e) {
   RecognitionRequestBodyEncrypt = function(d) {
     return d;

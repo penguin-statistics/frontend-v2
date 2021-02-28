@@ -97,9 +97,6 @@
     "webpack-cli": "^3.3.12",
     "workbox-webpack-plugin": "^5.1.2"
   },
-  "optionalDependencies": {
-    "penguin-crypto": "git+ssh://git@github.com:penguin-statistics/penguin-crypto.git#v1.0.4"
-  },
   "postcss": {
     "plugins": {
       "autoprefixer": {}
