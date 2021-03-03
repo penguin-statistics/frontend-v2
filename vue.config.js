@@ -1,31 +1,31 @@
-const webpack = require("webpack");
-const config = require("./src/config/index.js")
-const path = require("path")
+const webpack = require('webpack')
+const config = require('./src/config/index.js')
+const path = require('path')
 const CopyPlugin = require('copy-webpack-plugin')
 
-require('events').EventEmitter.defaultMaxListeners = 50;
+require('events').EventEmitter.defaultMaxListeners = 50
 
-let commitHash;
+let commitHash
 
 try {
   commitHash = require('child_process')
     .execSync('git rev-parse --short HEAD')
-    .toString().trim() || "unknown";
+    .toString().trim() || 'unknown'
 } catch (e) {
-  commitHash = "unknown"
+  commitHash = 'unknown'
 }
 
-function envvar(name, fallback, skipStringify = false) {
+function envvar (name, fallback, skipStringify = false) {
   let content = process.env[name]
   if (content) content = content.trim()
   if (skipStringify) return content || fallback
-  return JSON.stringify(content || fallback) || `"null"`
+  return JSON.stringify(content || fallback) || '"null"'
 }
 
 const noscriptImage = JSON.stringify(`${config.probe.endpoint.prod.legacy}?v=${config.version}&p=web&l=1`)
 
 const templateRoot = path.resolve(__dirname, `./src/templates/${envvar('PENGUIN_PLATFORM', 'web', true)}`)
-const templateFile = path.resolve(templateRoot, "./index.html")
+const templateFile = path.resolve(templateRoot, './index.html')
 
 // 📝📑🛒📋📃
 console.log(`
@@ -52,18 +52,18 @@ module.exports = {
   devServer: {
     disableHostCheck: true,
     proxy: {
-      "/PenguinStats": {
-        target: "https://penguin-stats.io"
+      '/PenguinStats': {
+        target: 'https://penguin.bbaasite.cn'
       }
     }
   },
   integrity: false,
   runtimeCompiler: true,
   transpileDependencies: [
-    "vuetify",
-    "fuse.js",
-    "semver",
-    "protobufjs"
+    'vuetify',
+    'fuse.js',
+    'semver',
+    'protobufjs'
   ],
   configureWebpack: {
     plugins: [
@@ -78,7 +78,7 @@ module.exports = {
           {
             from: templateRoot,
             globOptions: {
-              ignore: ["/index.html"]
+              ignore: ['/index.html']
             }
           }
         ]
@@ -92,16 +92,16 @@ module.exports = {
       rules: [
         {
           test: /\.ya?ml$/,
-          use : 'js-yaml-loader',
+          use: 'js-yaml-loader'
         },
         {
           test: /\.md$/,
-          use : 'raw-loader',
+          use: 'raw-loader'
         }
       ]
     }
   },
-  chainWebpack(config) {
+  chainWebpack (config) {
     config
       .plugin('html')
       .tap(args => {
@@ -109,4 +109,4 @@ module.exports = {
         return args
       })
   }
-};
+}

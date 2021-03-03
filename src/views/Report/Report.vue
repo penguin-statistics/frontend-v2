@@ -186,7 +186,7 @@
                 />
               </span>
             </v-container>
-            
+
             <v-row
               justify="center"
               class="mx-2 mb-5"
@@ -451,7 +451,6 @@
             </v-card>
           </div>
 
-
           <p v-if="!results.length">
             {{ $t('report.alert.causes.noDrop') }}
           </p>
@@ -511,42 +510,42 @@
 <script>
 import get from '@/utils/getters'
 import report from '@/apis/report'
-import Item from "@/components/global/Item";
-import ItemStepper from "@/components/global/ItemStepper";
-import Vue from "vue";
-import Cookies from 'js-cookie';
-import strings from "@/utils/strings";
-import StageSelector from "@/components/stats/StageSelector";
-import snackbar from "@/utils/snackbar";
-import Subheader from "@/components/global/Subheader";
-import Theme from "@/mixins/Theme";
-import ItemIcon from "@/components/global/ItemIcon";
-import config from "@/config";
-import validator from "@/utils/validator";
-import existUtils from "@/utils/existUtils";
-import performance from "@/utils/performance";
-import Console from "@/utils/Console";
-import BackdropName from "@/components/stats/BackdropName";
+import Item from '@/components/global/Item'
+import ItemStepper from '@/components/global/ItemStepper'
+import Vue from 'vue'
+import Cookies from 'js-cookie'
+import strings from '@/utils/strings'
+import StageSelector from '@/components/stats/StageSelector'
+import snackbar from '@/utils/snackbar'
+import Subheader from '@/components/global/Subheader'
+import Theme from '@/mixins/Theme'
+import ItemIcon from '@/components/global/ItemIcon'
+import config from '@/config'
+import validator from '@/utils/validator'
+import existUtils from '@/utils/existUtils'
+import performance from '@/utils/performance'
+import Console from '@/utils/Console'
+import BackdropName from '@/components/stats/BackdropName'
 
 // colors: [dark, light]
 const categories = [
   {
-    id: "NORMAL_DROP",
-    colors: ["#cacbcc", "#4d4d4d"]
+    id: 'NORMAL_DROP',
+    colors: ['#cacbcc', '#4d4d4d']
   },
   {
-    id: "SPECIAL_DROP",
-    colors: ["#e26d2c", "#b35522"]
+    id: 'SPECIAL_DROP',
+    colors: ['#e26d2c', '#b35522']
   },
   {
-    id: "EXTRA_DROP",
-    colors: ["#9aba3d", "#8aa637"]
-  },
-];
+    id: 'EXTRA_DROP',
+    colors: ['#9aba3d', '#8aa637']
+  }
+]
 
 export default {
-  name: "Report",
-  components: {BackdropName, ItemIcon, Subheader, StageSelector, ItemStepper, Item },
+  name: 'Report',
+  components: { BackdropName, ItemIcon, Subheader, StageSelector, ItemStepper, Item },
   mixins: [Theme],
   data: () => ({
     snackbar: false,
@@ -575,28 +574,28 @@ export default {
 
     selected: {
       zone: null,
-      stage: null,
+      stage: null
     },
 
     routerNames: {
-      index: "ReportByZone",
-      details: "ReportByZone_Selected"
+      index: 'ReportByZone',
+      details: 'ReportByZone_Selected'
     }
   }),
   computed: {
-    serverName() {
-      return this.$t('server.servers.' + this.$store.getters["dataSource/server"])
+    serverName () {
+      return this.$t('server.servers.' + this.$store.getters['dataSource/server'])
     },
-    strings() {
+    strings () {
       return strings
     },
     selectedZone () {
-      if (!this.selected.zone) return {};
-      return get.zones.byZoneId(this.selected.zone, false);
+      if (!this.selected.zone) return {}
+      return get.zones.byZoneId(this.selected.zone, false)
     },
     selectedStage () {
-      if (!this.selected.stage) return {};
-      return get.stages.byStageId(this.selected.stage);
+      if (!this.selected.stage) return {}
+      return get.stages.byStageId(this.selected.stage)
     },
     furniture: {
       get () {
@@ -606,29 +605,29 @@ export default {
         this.furnitureInternal = val
         if (val === true) {
           this.results.push({
-            dropType: "FURNITURE",
-            itemId: "furni",
+            dropType: 'FURNITURE',
+            itemId: 'furni',
             quantity: 1
-          });
+          })
         } else if (val === false) {
-          this.results = this.results.filter(el => el.dropType !== "FURNITURE" && el.itemId !== "furni")
+          this.results = this.results.filter(el => el.dropType !== 'FURNITURE' && el.itemId !== 'furni')
         }
       }
     },
-    dropInfos() {
+    dropInfos () {
       const dropInfos = {
         type: [],
         item: []
-      };
+      }
 
-      const stages = this.selectedStage;
-      if (!this.selectedZone || this.invalidStage || !this.selectedZone.zoneId) return null;
+      const stages = this.selectedStage
+      if (!this.selectedZone || this.invalidStage || !this.selectedZone.zoneId) return null
 
-      for (const drop of stages["dropInfos"]) {
-        if (drop["itemId"]) {
+      for (const drop of stages.dropInfos) {
+        if (drop.itemId) {
           dropInfos.item.push({
             ...drop,
-            item: get.items.byItemId(drop["itemId"])
+            item: get.items.byItemId(drop.itemId)
           })
         } else {
           // when an itemId is not presented, a category drop bound is described.
@@ -636,7 +635,7 @@ export default {
         }
       }
 
-      dropInfos.item.sort((a, b) => a.item.sortId - b.item.sortId);
+      dropInfos.item.sort((a, b) => a.item.sortId - b.item.sortId)
 
       return dropInfos
     },
@@ -644,21 +643,21 @@ export default {
     stageItems () {
       if (this.invalidStage) return []
 
-      const items = [];
+      const items = []
 
-      for (const {id, colors} of categories) {
-        const category = id;
-        const categoryDrops = [];
+      for (const { id, colors } of categories) {
+        const category = id
+        const categoryDrops = []
 
-        for (const itemDropInfo of this.dropInfos.item.filter(v => v["dropType"] === category)) {
-          const dropType = itemDropInfo["dropType"]
-          if (dropType === "FURNITURE") continue
+        for (const itemDropInfo of this.dropInfos.item.filter(v => v.dropType === category)) {
+          const dropType = itemDropInfo.dropType
+          if (dropType === 'FURNITURE') continue
           if (
             !(
               validator.have(items, dropType)
             )
           ) {
-            this.$set(items, dropType , [])
+            this.$set(items, dropType, [])
           }
 
           categoryDrops.push(itemDropInfo)
@@ -677,7 +676,7 @@ export default {
     },
 
     isGacha () {
-      return this.selected.stage && this.selectedStage["isGacha"]
+      return this.selected.stage && this.selectedStage.isGacha
     },
 
     /**
@@ -686,24 +685,24 @@ export default {
      * @typedef {{type: string, quantity: number, limitation: Limitation, rate: number, message: string}|null} TypeOutlier
      * @returns {{item: ItemOutlier[], type: TypeOutlier[], rate: number}} returns item data outliers and type data outliers in the whole dataset, respectively
      */
-    validation() {
+    validation () {
       // initiate the array that will be storing every data outlier
       /** @type ItemOutlier[] */
-      const itemOutliers = [];
+      const itemOutliers = []
 
       /** @type TypeOutlier[] */
-      const typeOutliers = [];
+      const typeOutliers = []
 
-      const nullValidation = { item: itemOutliers, type: typeOutliers, rate: 0 };
+      const nullValidation = { item: itemOutliers, type: typeOutliers, rate: 0 }
 
-      if (!this.selectedZone || this.invalidStage) return nullValidation;
+      if (!this.selectedZone || this.invalidStage) return nullValidation
 
       /**
        * validate the quantity using their corresponding rule
        */
-      function validate(rules, quantity) {
+      function validate (rules, quantity) {
         for (const rule of rules) {
-          const evaluation = rule(quantity);
+          const evaluation = rule(quantity)
           if (evaluation !== true) return evaluation
         }
         return [true, {}]
@@ -715,28 +714,30 @@ export default {
        * @param {number} value value to verify with
        * @returns {number} percentage in decimal format (e.g. 150% = 1.5)
        */
-      function calculateOutlierRate(limitation, value) {
-        const upper = (value - limitation.upper) ? Math.max(0, (value - limitation.upper) / limitation.upper) : 0;
-        const lower = (limitation.lower - value) ? Math.max(0, (limitation.lower - value) / limitation.lower) : 0;
-        return upper + lower;
+      function calculateOutlierRate (limitation, value) {
+        const upper = (value - limitation.upper) ? Math.max(0, (value - limitation.upper) / limitation.upper) : 0
+        const lower = (limitation.lower - value) ? Math.max(0, (limitation.lower - value) / limitation.lower) : 0
+        return upper + lower
       }
 
       // loop the candidate results that user provided
       for (const dropInfo of this.dropInfos.item) {
-        const record = this.results.find(el => el.itemId === dropInfo.itemId && el.dropType === dropInfo.dropType) || {...dropInfo, quantity: 0}
+        const record = this.results.find(el => el.itemId === dropInfo.itemId && el.dropType === dropInfo.dropType) || { ...dropInfo, quantity: 0 }
 
         // generate rules. rules: Function[]; limitation: the bounds
-        const {rules, limitation} = this.generateVerificationRule("item", dropInfo)
+        const { rules, limitation } = this.generateVerificationRule('item', dropInfo)
 
-        if (limitation === null) return {
-          error: "EMPTY_RULE",
-          ...nullValidation
+        if (limitation === null) {
+          return {
+            error: 'EMPTY_RULE',
+            ...nullValidation
+          }
         }
 
-        const quantity = record.quantity;
+        const quantity = record.quantity
 
         // execute validation rules.
-        const [validation, extras] = validate(rules, quantity);
+        const [validation, extras] = validate(rules, quantity)
 
         // console.log("generated & executed", dropInfo, "->", {rules, limitation, validation, extras})
 
@@ -744,7 +745,7 @@ export default {
         if (validation !== true) {
           // calculate the outlier rate based on the bounds and current value
           // e.g. [0, 3), 6: will get 1 (outlier value 100%)
-          const rate = calculateOutlierRate(limitation, record.quantity);
+          const rate = calculateOutlierRate(limitation, record.quantity)
 
           // store this outlier
           itemOutliers.push({
@@ -760,30 +761,32 @@ export default {
       }
 
       // loop the type declarations (dropType limitations)
-      for (const {id} of categories) {
-        const dropType = id;
+      for (const { id } of categories) {
+        const dropType = id
         // generate rules
-        const {rules, limitation} = this.generateVerificationRule("type", {
+        const { rules, limitation } = this.generateVerificationRule('type', {
           dropType
         })
 
-        if (limitation === null) return {
-          error: "EMPTY_RULE",
-          ...nullValidation
+        if (limitation === null) {
+          return {
+            error: 'EMPTY_RULE',
+            ...nullValidation
+          }
         }
 
         const quantity = this.results
-          .filter(el => el["dropType"] === dropType)
-          .length;
+          .filter(el => el.dropType === dropType)
+          .length
 
         // execute validation rules.
-        const [validation, extras] = validate(rules, quantity);
+        const [validation, extras] = validate(rules, quantity)
 
         // if validation fails on a rule
         if (validation !== true) {
           // calculate the outlier rate based on the bounds and current value
           // e.g. [0, 3), 6: will get 1 (outlier value 100%)
-          const rate = calculateOutlierRate(limitation, quantity);
+          const rate = calculateOutlierRate(limitation, quantity)
 
           // store this outlier
           typeOutliers.push({
@@ -801,12 +804,12 @@ export default {
       const itemRates = itemOutliers.reduce(
         (accumulator, current) => accumulator + current.rate,
         0
-      );
+      )
       const typeRates = typeOutliers.reduce(
         (accumulator, current) => accumulator + current.rate,
         0
-      );
-      const totalRates = itemRates + typeRates;
+      )
+      const totalRates = itemRates + typeRates
 
       return {
         item: itemOutliers,
@@ -814,24 +817,24 @@ export default {
         rate: totalRates
       }
     },
-    valid() {
-      const { item, type } = this.validation;
+    valid () {
+      const { item, type } = this.validation
       return item.length === 0 && type.length === 0
     },
-    slashStripClasses() {
+    slashStripClasses () {
       return { 'slash-strip--warning': this.validation.rate <= 2, 'slash-strip--danger': this.validation.rate > 2 }
     },
     invalidStage () {
       if (this.selected.zone && this.selected.stage) {
-        const zone = get.zones.byZoneId(this.selected.zone, false);
-        if (!zone || !zone.zoneId || !existUtils.existence(zone)) return "NOT_FOUND"
-        if (zone.isOutdated) return "EXPIRED"
+        const zone = get.zones.byZoneId(this.selected.zone, false)
+        if (!zone || !zone.zoneId || !existUtils.existence(zone)) return 'NOT_FOUND'
+        if (zone.isOutdated) return 'EXPIRED'
 
-        const stage = get.stages.byStageId(this.selected.stage);
-        if (!stage || !stage.stageId || !existUtils.existence(stage)) return "NOT_FOUND"
-        if (!stage["dropInfos"] || !stage["dropInfos"].length) return "INVALID"
+        const stage = get.stages.byStageId(this.selected.stage)
+        if (!stage || !stage.stageId || !existUtils.existence(stage)) return 'NOT_FOUND'
+        if (!stage.dropInfos || !stage.dropInfos.length) return 'INVALID'
       } else {
-        return "NOT_FOUND"
+        return 'NOT_FOUND'
       }
       return false
     },
@@ -840,79 +843,79 @@ export default {
     }
   },
   methods: {
-    goToPage(name) {
+    goToPage (name) {
       this.$router.push({ name: name })
     },
-    select({ zone, stage }) {
-      this.reset();
-      this.selected.zone = zone;
-      this.selected.stage = stage;
+    select ({ zone, stage }) {
+      this.reset()
+      this.selected.zone = zone
+      this.selected.stage = stage
     },
-    getItem(itemId) {
+    getItem (itemId) {
       return get.items.byItemId(itemId)
     },
-    handleChange(dropType, [itemId, diff]) {
-      let item = this.getOrCreateItem(dropType, itemId);
-      item.quantity += diff;
+    handleChange (dropType, [itemId, diff]) {
+      const item = this.getOrCreateItem(dropType, itemId)
+      item.quantity += diff
       item.quantity <= 0 && (this.results.splice(this.results.indexOf(item), 1))
     },
-    getOrCreateItem(dropType, itemId) {
-      const item = this.results.find(v => v.itemId === itemId && v.dropType === dropType);
+    getOrCreateItem (dropType, itemId) {
+      const item = this.results.find(v => v.itemId === itemId && v.dropType === dropType)
       if (item === undefined) {
         const newLength = this.results.push({
           dropType,
           itemId,
           quantity: 0
-        });
-        return this.results[newLength - 1];
+        })
+        return this.results[newLength - 1]
       }
       return item
     },
-    reset() {
-      this.results = [];
-      this.eventBus.$emit("reset");
+    reset () {
+      this.results = []
+      this.eventBus.$emit('reset')
       this.furniture = false
     },
-    submit() {
+    submit () {
       if (!this.isGacha && (!this.valid || this.results.length === 0)) {
-        this.dialog.enabled = true;
+        this.dialog.enabled = true
         this.$ga.event('report', 'show_warning', this.selected.stage, 1)
       } else {
         this.doSubmit()
       }
     },
-    async doSubmit() {
-      this.submitted = false;
-      this.submitting = true;
-      const userId = Cookies.get(config.authorization.userId.cookieKey);
+    async doSubmit () {
+      this.submitted = false
+      this.submitting = true
+      const userId = Cookies.get(config.authorization.userId.cookieKey)
       const timer = performance.timer.ctx(
         report.submitReport({
           stageId: this.selected.stage,
-          drops: this.results,
+          drops: this.results
         })
-          .then(({data}) => {
-            const reportedUserId = Cookies.get(config.authorization.userId.cookieKey);
+          .then(({ data }) => {
+            const reportedUserId = Cookies.get(config.authorization.userId.cookieKey)
             if (userId !== reportedUserId) {
-              this.$store.dispatch("auth/login", {
+              this.$store.dispatch('auth/login', {
                 userId: reportedUserId
-              });
+              })
             }
-            this.reset();
-            this.submitted = true;
+            this.reset()
+            this.submitted = true
             this.$ga.event('report', 'submit_single', this.selected.stage, 1)
 
-            this.lastSubmissionId = data;
+            this.lastSubmissionId = data
           })
           .catch(() => {
             snackbar.networkError()
           })
           .finally(() => {
-            this.submitting = false;
+            this.submitting = false
           })
       )
       // Console.debug("Report", "report with context: got performance timer promise", timer)
       timer.then(timeDelta => {
-        Console.info("Performance", `report submit request last ${timeDelta}ms to complete`)
+        Console.info('Performance', `report submit request last ${timeDelta}ms to complete`)
         this.$ga.time({
           timingCategory: 'report',
           timingVar: 'submit',
@@ -920,63 +923,66 @@ export default {
         })
       })
     },
-    confirmSubmit() {
-      this.dialog.enabled = false;
-      this.$ga.event('report', 'ignore_warning', this.selected.stage, 1);
+    confirmSubmit () {
+      this.dialog.enabled = false
+      this.$ga.event('report', 'ignore_warning', this.selected.stage, 1)
       this.doSubmit()
     },
-    async undo() {
-      this.undoing = true;
-      await report.recallReport(this.lastSubmissionId);
-      this.submitted = false;
-      this.undoing = false;
-      this.undid = true;
+    async undo () {
+      this.undoing = true
+      await report.recallReport(this.lastSubmissionId)
+      this.submitted = false
+      this.undoing = false
+      this.undid = true
       this.$ga.event('report', 'undo', Cookies.get(config.authorization.userId.cookieKey), 1)
     },
-    generateVerificationRule(type, query) {
-      if (this.invalidStage || !this.dropInfos) return {
-        rules: [
-          () => {
-            return () => {
-              return true
+    generateVerificationRule (type, query) {
+      if (this.invalidStage || !this.dropInfos) {
+        return {
+          rules: [
+            () => {
+              return () => {
+                return true
+              }
             }
-          }
-        ],
-        limitation: {}
+          ],
+          limitation: {}
+        }
       }
 
-      let limitation;
+      let limitation
       let verificationResponse = {
-        stage: this.$t(`stage.loots.${query["dropType"]}`)
-      };
+        stage: this.$t(`stage.loots.${query.dropType}`)
+      }
       // console.log("generating verification rule for", type, query)
-      if (type === "item") {
+      if (type === 'item') {
         limitation = this.dropInfos.item
-          .find(v => v["itemId"] === query["itemId"] && v["dropType"] === query["dropType"])["bounds"];
+          .find(v => v.itemId === query.itemId && v.dropType === query.dropType).bounds
 
         verificationResponse = {
           ...verificationResponse,
-          item: strings.translate(this.getItem(query["itemId"]), "name")
+          item: strings.translate(this.getItem(query.itemId), 'name')
         }
-      } else if (type === "type") {
+      } else if (type === 'type') {
         limitation = this.dropInfos.type
-          .find(v => v["dropType"] === query["dropType"])["bounds"]
-
+          .find(v => v.dropType === query.dropType).bounds
       } else {
         throw new TypeError(`generateVerificationRule: Invalid argument ${type}`)
       }
 
       // can't found drop info based on the queries, means it should be zero/not presenting.
-      if (!limitation) return {
-        rules: [
-          () => {
-            return () => {
-              return this.$t(`report.rules.null`, {type})
+      if (!limitation) {
+        return {
+          rules: [
+            () => {
+              return () => {
+                return this.$t('report.rules.null', { type })
+              }
             }
-          }
-        ],
-        limitation
-      };
+          ],
+          limitation
+        }
+      }
 
       // rule declarations
 
@@ -984,34 +990,34 @@ export default {
       const gte = (value) => {
         return (compare) => {
           // console.log("executing rule: gte with compare", compare, "should", value)
-          const response = { ...verificationResponse, quantity: compare, should: value };
+          const response = { ...verificationResponse, quantity: compare, should: value }
           return compare >= value ? true : [this.$t(`report.rules.${type}.gte`, response), response]
         }
-      };
+      }
 
       // less than or equal to
       const lte = (value) => {
         return (compare) => {
           // console.log("executing rule: lte with compare", compare, "should", value)
-          const response = { ...verificationResponse, quantity: compare, should: value };
+          const response = { ...verificationResponse, quantity: compare, should: value }
           return compare <= value ? true : [this.$t(`report.rules.${type}.lte`, response), response]
         }
-      };
+      }
 
       // not including
       const notIncludes = (values) => {
         return (compare) => {
           // console.log("executing rule: notIncludes with compare", compare, "should", values)
-          const response = { ...verificationResponse, quantity: compare, should: values.join(",") };
+          const response = { ...verificationResponse, quantity: compare, should: values.join(',') }
           return values.indexOf(compare) === -1 ? true : [this.$t(`report.rules.${type}.not`, response), response]
         }
-      };
+      }
 
       // compose generation
       const generated = {
         rules: [
           gte(limitation.lower),
-          lte(limitation.upper),
+          lte(limitation.upper)
         ],
         limitation
       }

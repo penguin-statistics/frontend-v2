@@ -32,7 +32,7 @@
 </i18n>
 
 <template>
-  <v-card 
+  <v-card
     elevation="0"
     class="transparent pt-0 my-1"
   >
@@ -76,7 +76,7 @@
 </template>
 
 <script>
-import CDN from "@/mixins/CDN";
+import CDN from '@/mixins/CDN'
 
 export default {
   name: 'Intro',

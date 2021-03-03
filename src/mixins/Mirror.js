@@ -1,5 +1,5 @@
-import mirror from "@/utils/mirror";
-import device from "@/utils/native/device";
+import mirror from '@/utils/mirror'
+import device from '@/utils/native/device'
 
 // function wrapPromise(promise) {
 //   return promise
@@ -21,9 +21,9 @@ export default {
     },
     primaryColor () {
       if (this.isVercel) {
-        return "orange darken-4"
+        return 'orange darken-4'
       } else {
-        return "blue darken-3"
+        return 'blue darken-3'
       }
     },
     currentMirrorHostname () {
@@ -42,6 +42,6 @@ export default {
     },
     isWeb () {
       return device.platform.isWeb()
-    },
+    }
   }
 }

@@ -33,24 +33,24 @@
 </template>
 
 <script>
-import randomUtils from "@/utils/randomUtils";
-import CDN from "@/mixins/CDN";
-import {externalService} from "@/utils/service";
-import Console from "@/utils/Console";
+import randomUtils from '@/utils/randomUtils'
+import CDN from '@/mixins/CDN'
+import { externalService } from '@/utils/service'
+import Console from '@/utils/Console'
 
 export default {
-  name: "PreloaderInline",
+  name: 'PreloaderInline',
   mixins: [CDN],
   props: {
     small: {
       type: Boolean,
       default: false
-    },
+    }
   },
-  data() {
+  data () {
     return {
       preloaders: [
-        "croissant", "exusiai", "sora", "texas"
+        'croissant', 'exusiai', 'sora', 'texas'
       ],
       ready: false,
       url: ''
@@ -60,21 +60,21 @@ export default {
     currentPreloaderIndex () {
       return randomUtils.randomInt(this.preloaders.length - 1)
     },
-    currentSrc() {
+    currentSrc () {
       return this.cdnDeliver(`/images/preloaders/${this.preloaders[this.currentPreloaderIndex]}.png`)
     },
     size () {
       if (this.small) {
         return {
           image: {
-            "--size": "64px"
+            '--size': '64px'
           },
           pending: 32
         }
       } else {
         return {
           image: {
-            "--size": "160px"
+            '--size': '160px'
           },
           pending: 48
         }
@@ -86,30 +86,30 @@ export default {
       this.revoke(oldValue)
     }
   },
-  beforeDestroy() {
+  beforeDestroy () {
     this.revoke(this.url)
   },
-  created() {
+  created () {
     this.update()
   },
   methods: {
-    revoke(url) {
+    revoke (url) {
       if (url !== '') {
         URL.revokeObjectURL(url)
-        Console.debug("Preloader", "revoked blob with URL", url)
+        Console.debug('Preloader', 'revoked blob with URL', url)
       }
     },
-    update() {
+    update () {
       this.ready = false
       externalService.get(this.currentSrc, {
-        responseType: "blob"
+        responseType: 'blob'
       })
-        .then(({data}) => {
+        .then(({ data }) => {
           this.ready = true
           this.url = URL.createObjectURL(data)
         })
         .catch((err) => {
-          Console.error("Preloader", "failed to update preloader image:", err)
+          Console.error('Preloader', 'failed to update preloader image:', err)
           // we could do nothing here :(
         })
     }

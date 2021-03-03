@@ -161,9 +161,9 @@ export default {
         return newshouldShowStar
       }
     },
-    server() {
-      return this.$store.getters["dataSource/server"];
-    },
+    server () {
+      return this.$store.getters['dataSource/server']
+    }
   }
 }
 </script>

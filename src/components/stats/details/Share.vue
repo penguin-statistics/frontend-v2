@@ -88,16 +88,16 @@
 </template>
 
 <script>
-import * as clipboard from "clipboard-polyfill";
-import snackbar from "@/utils/snackbar";
-import humans from "@/utils/humans";
-import Console from "@/utils/Console";
-import strings from "@/utils/strings";
-import share from "@/utils/native/share";
-import environment from "@/utils/environment";
+import * as clipboard from 'clipboard-polyfill'
+import snackbar from '@/utils/snackbar'
+import humans from '@/utils/humans'
+import Console from '@/utils/Console'
+import strings from '@/utils/strings'
+import share from '@/utils/native/share'
+import environment from '@/utils/environment'
 
 export default {
-  name: "Share",
+  name: 'Share',
   props: {
     stage: {
       type: Object,
@@ -106,16 +106,16 @@ export default {
     item: {
       type: Object,
       default: () => {}
-    },
+    }
   },
-  data() {
+  data () {
     return {
       active: false,
       busy: null
     }
   },
   computed: {
-    data() {
+    data () {
       if (this.stage !== {}) {
         return this.stage
       } else if (this.item !== {}) {
@@ -139,29 +139,29 @@ export default {
     text () {
       let name
       if (this.data.stageId) {
-        name = this.$t('share.text.stage', {name: strings.translate(this.data, 'code')})
+        name = this.$t('share.text.stage', { name: strings.translate(this.data, 'code') })
       } else {
-        name = this.$t('share.text.item', {name: strings.translate(this.data, 'name')})
+        name = this.$t('share.text.item', { name: strings.translate(this.data, 'name') })
       }
-      return this.$t('share.text._tmpl', {name})
+      return this.$t('share.text._tmpl', { name })
     },
 
-    link() {
-      return `https://exusi.ai/${this.id}`;
+    link () {
+      return `https://exusi.ai/${this.id}`
     },
 
-    socials() {
+    socials () {
       // const copy = this.copy
       let socials
       if (environment.runtime.isApp) {
         socials = [
           {
-            "id": "native",
-            "name": "Share",
-            "icon": "mdi-share-circle",
+            id: 'native',
+            name: 'Share',
+            icon: 'mdi-share-circle',
             canShare: !!navigator.share,
-            share({text, url}) {
-              return share({text, url})
+            share ({ text, url }) {
+              return share({ text, url })
             }
           }
         ]
@@ -178,30 +178,30 @@ export default {
           // },
           ...humans.socials,
           {
-            "id": "native",
-            "name": "More",
-            "icon": "mdi-dots-horizontal",
+            id: 'native',
+            name: 'More',
+            icon: 'mdi-dots-horizontal',
             canShare: !!navigator.share,
-            share({text, url}) {
-              return share({text, url})
+            share ({ text, url }) {
+              return share({ text, url })
             }
-          },
+          }
         ]
       }
       return socials.filter(el => el.canShare)
     }
   },
   methods: {
-    copy(content) {
+    copy (content) {
       clipboard.writeText(content)
-          .then(() => {
-            snackbar.launch("success", 5000, "clipboard.success")
-          })
-          .catch(() => {
-            snackbar.launch("error", 5000, "clipboard.error")
-          })
+        .then(() => {
+          snackbar.launch('success', 5000, 'clipboard.success')
+        })
+        .catch(() => {
+          snackbar.launch('error', 5000, 'clipboard.error')
+        })
     },
-    shareViaSocial(social) {
+    shareViaSocial (social) {
       this.busy = social.id
       social.share({
         text: this.text,
@@ -209,11 +209,11 @@ export default {
       })
       const self = this
       setTimeout(() => {
-        snackbar.launch("success", 5000, "share.success")
+        snackbar.launch('success', 5000, 'share.success')
         self.busy = null
       }, 0)
     }
-  },
+  }
 }
 </script>
 

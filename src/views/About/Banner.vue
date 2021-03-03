@@ -25,10 +25,10 @@
 </template>
 
 <script>
-import CDN from "@/mixins/CDN";
+import CDN from '@/mixins/CDN'
 
 export default {
-  name: "Banner",
+  name: 'Banner',
   mixins: [CDN]
 }
 </script>

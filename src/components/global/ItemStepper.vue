@@ -72,66 +72,66 @@
 </template>
 
 <script>
-  import Item from '@/components/global/Item'
+import Item from '@/components/global/Item'
 
-  export default {
-    name: "ItemStepper",
-    components: {
-      Item
+export default {
+  name: 'ItemStepper',
+  components: {
+    Item
+  },
+  props: {
+    item: {
+      type: Object,
+      required: true
     },
-    props: {
-      item: {
-        type: Object,
-        required: true
-      },
-      bus: {
-        type: Object,
-        required: true
-      },
-      defaultquantity:{
-        type:Number,
-        required:false,
-        default:0
-      },
-      itemOptions: {
-        type: Object,
-        default: () => ({})
-      }
+    bus: {
+      type: Object,
+      required: true
     },
-    data() {
-      return {
-        quantity: 0
-      }
+    defaultquantity: {
+      type: Number,
+      required: false,
+      default: 0
     },
-    watch: {
-      quantity: function (newValue, oldValue) {
-        const diff = newValue - oldValue;
-        this.$emit("change", [this.item.itemId, diff])
-      }
+    itemOptions: {
+      type: Object,
+      default: () => ({})
+    }
+  },
+  data () {
+    return {
+      quantity: 0
+    }
+  },
+  watch: {
+    quantity: function (newValue, oldValue) {
+      const diff = newValue - oldValue
+      this.$emit('change', [this.item.itemId, diff])
+    }
+  },
+  mounted () {
+    this.bus.$on('reset', this.reset)
+    if (this.defaultquantity !== 0) {
+      this.quantity = this.defaultquantity
+    }
+  },
+  methods: {
+    increment () {
+      this.quantity++
     },
-    mounted() {
-      this.bus.$on("reset", this.reset)
-      if(this.defaultquantity!==0){
-        this.quantity=this.defaultquantity;
-      }
+    increaseQuantity (quantity) {
+      this.quantity += quantity
     },
-    methods: {
-      increment() {
-        this.quantity++;
-      },
-      increaseQuantity(quantity) {
-        this.quantity += quantity;
-      },
-      reduction() {
-        // -1 when greater than 0 to avoid negative number
-        // (will not reduce when =0)
-        (this.quantity > 0) && this.quantity --
-      },
-      reset() {
-        this.quantity = 0
-      }
+    reduction () {
+      // -1 when greater than 0 to avoid negative number
+      // (will not reduce when =0)
+      (this.quantity > 0) && this.quantity--
+    },
+    reset () {
+      this.quantity = 0
     }
   }
+}
 </script>
 
 <style scoped>

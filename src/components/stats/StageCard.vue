@@ -45,60 +45,60 @@
 </template>
 
 <script>
-  import StageCode from "@/components/stats/StageCode";
-  import Theme from "@/mixins/Theme";
-  import strings from "@/utils/strings";
+import StageCode from '@/components/stats/StageCode'
+import Theme from '@/mixins/Theme'
+import strings from '@/utils/strings'
 
-  export default {
-    name: "StageCard",
-    components: {StageCode},
-    mixins: [Theme],
-    props: {
-      stage: {
-        type: Object,
-        required: true
-      },
-      chosen: {
-        type: Boolean,
-        default () {
-          return null
-        }
-      },
-      dense: {
-        type: Boolean,
-        default () {
-          return false
-        }
-      },
-      transparent: {
-        type: Boolean,
-        default: () => false
-      },
-      left: {
-        type: Boolean,
-        default () {
-          return false
-        }
-      },
-      right: {
-        type: Boolean,
-        default () {
-          return false
-        }
+export default {
+  name: 'StageCard',
+  components: { StageCode },
+  mixins: [Theme],
+  props: {
+    stage: {
+      type: Object,
+      required: true
+    },
+    chosen: {
+      type: Boolean,
+      default () {
+        return null
       }
     },
-    computed: {
-      stateful() {
-        return this.chosen !== null;
-      },
-      translatedCode () {
-        return strings.translate(this.stage, "code")
-      },
-      favorited() {
-        return this.$store.getters['stagePreferences/hasFavorite'](this.stage.stageId)
+    dense: {
+      type: Boolean,
+      default () {
+        return false
       }
     },
+    transparent: {
+      type: Boolean,
+      default: () => false
+    },
+    left: {
+      type: Boolean,
+      default () {
+        return false
+      }
+    },
+    right: {
+      type: Boolean,
+      default () {
+        return false
+      }
+    }
+  },
+  computed: {
+    stateful () {
+      return this.chosen !== null
+    },
+    translatedCode () {
+      return strings.translate(this.stage, 'code')
+    },
+    favorited () {
+      return this.$store.getters['stagePreferences/hasFavorite'](this.stage.stageId)
+    }
   }
+}
 </script>
 
 <style scoped>

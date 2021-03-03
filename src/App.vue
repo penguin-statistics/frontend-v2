@@ -142,34 +142,34 @@
 </template>
 
 <script>
-  import RandomBackground from '@/components/global/RandomBackground'
-  import GlobalSnackbar from "@/components/global/GlobalSnackbar";
+import RandomBackground from '@/components/global/RandomBackground'
+import GlobalSnackbar from '@/components/global/GlobalSnackbar'
 
-  import AccountManager from '@/components/toolbar/AccountManager'
-  import NetworkStateIndicator from "@/components/toolbar/NetworkStateIndicator";
+import AccountManager from '@/components/toolbar/AccountManager'
+import NetworkStateIndicator from '@/components/toolbar/NetworkStateIndicator'
 
-  import Navigation from "@/components/drawer/Navigation";
+import Navigation from '@/components/drawer/Navigation'
 
-  import GlobalEntry from "@/mixins/hooks/GlobalEntry";
+import GlobalEntry from '@/mixins/hooks/GlobalEntry'
 
-  import './styles/global.css'
-  import './styles/modules.scss'
-  import './styles/fonts.css'
-  import './styles/theme-adapt.scss'
-  import Footer from "@/components/global/Footer";
-  import CDN from "@/mixins/CDN";
-  import Mirror from "@/mixins/Mirror";
-  import SpecialUI from "@/mixins/SpecialUI";
-  import SettingsDialog from "@/components/drawer/SettingsDialog";
-  import MirrorSelector from "@/components/global/MirrorSelector";
-  import Logo from "@/components/drawer/Logo";
-  import {mapGetters} from "vuex";
-  import UpgradeNotifier from "@/components/global/UpgradeNotifier";
-  import ServerSelector from "@/components/toolbar/ServerSelector";
-  import ServerNotifyOverlay from "@/components/global/ServerNotifyOverlay";
-  import GlobalSearchNavigation from "@/components/search/GlobalSearchNavigation";
-  import ModuleLoadingOverlay from "@/components/global/ModuleLoadingOverlay";
-  import Environment from "@/mixins/Environment";
+import './styles/global.css'
+import './styles/modules.scss'
+import './styles/fonts.css'
+import './styles/theme-adapt.scss'
+import Footer from '@/components/global/Footer'
+import CDN from '@/mixins/CDN'
+import Mirror from '@/mixins/Mirror'
+import SpecialUI from '@/mixins/SpecialUI'
+import SettingsDialog from '@/components/drawer/SettingsDialog'
+import MirrorSelector from '@/components/global/MirrorSelector'
+import Logo from '@/components/drawer/Logo'
+import { mapGetters } from 'vuex'
+import UpgradeNotifier from '@/components/global/UpgradeNotifier'
+import ServerSelector from '@/components/toolbar/ServerSelector'
+import ServerNotifyOverlay from '@/components/global/ServerNotifyOverlay'
+import GlobalSearchNavigation from '@/components/search/GlobalSearchNavigation'
+import ModuleLoadingOverlay from '@/components/global/ModuleLoadingOverlay'
+import Environment from '@/mixins/Environment'
 
 export default {
   name: 'App',
@@ -194,21 +194,21 @@ export default {
     return {
       routes: [],
       drawer: !this.$vuetify.breakpoint.xsOnly,
-      showLicenseDialog: false,
+      showLicenseDialog: false
     }
   },
   computed: {
-    ...mapGetters("settings", ["lowData"]),
-    ...mapGetters("ajax", ["pending"])
+    ...mapGetters('settings', ['lowData']),
+    ...mapGetters('ajax', ['pending'])
   },
   created () {
-    this.routes = this.$router.options.routes.filter(el => !el.meta.hide);
-    this.$store.dispatch("data/fetch", false);
+    this.routes = this.$router.options.routes.filter(el => !el.meta.hide)
+    this.$store.dispatch('data/fetch', false)
   },
   methods: {
     async refreshData () {
-      await this.$store.dispatch("data/fetch", true);
-    },
-  },
+      await this.$store.dispatch('data/fetch', true)
+    }
+  }
 }
 </script>

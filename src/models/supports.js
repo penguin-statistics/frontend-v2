@@ -26,13 +26,13 @@ export default {
       text: '한국어'
     }
   ],
-  servers: ["CN", "US", "JP", "KR"],
+  servers: ['CN', 'US', 'JP', 'KR'],
   push: {
     categories: [
-      "NewStage",
-      "ImportantTimePoint",
-      "Maintenance",
-      "ClientUpgrade"
+      'NewStage',
+      'ImportantTimePoint',
+      'Maintenance',
+      'ClientUpgrade'
     ]
   }
 }

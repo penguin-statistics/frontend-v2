@@ -38,42 +38,42 @@
 </template>
 
 <script>
-  import {mapGetters} from "vuex";
-  import I18n from "@/mixins/I18n";
-  import supports from "@/models/supports";
+import { mapGetters } from 'vuex'
+import I18n from '@/mixins/I18n'
+import supports from '@/models/supports'
 
-  export default {
-    name: "LocaleSwitcher",
-    mixins: [I18n],
-    data() {
-      return {
-        localizations: supports.localizations,
-        busy: null,
-      }
-    },
-    computed: {
-      ...mapGetters('settings', ['language']),
-      activeLocale: {
-        get () {
-          return this.$i18n.locale
-        },
-        set (localeId) {
-          this.busy = localeId
-          setTimeout(() => {
-            this.changeLocale(localeId, true)
-            this.$ga.event(
-              'settings',
-              'language',
-              localeId
-            )
-            this.$nextTick(function () {
-              this.busy = null
-            })
-          })
-        }
+export default {
+  name: 'LocaleSwitcher',
+  mixins: [I18n],
+  data () {
+    return {
+      localizations: supports.localizations,
+      busy: null
+    }
+  },
+  computed: {
+    ...mapGetters('settings', ['language']),
+    activeLocale: {
+      get () {
+        return this.$i18n.locale
       },
-    },
+      set (localeId) {
+        this.busy = localeId
+        setTimeout(() => {
+          this.changeLocale(localeId, true)
+          this.$ga.event(
+            'settings',
+            'language',
+            localeId
+          )
+          this.$nextTick(function () {
+            this.busy = null
+          })
+        })
+      }
+    }
   }
+}
 </script>
 
 <style scoped>

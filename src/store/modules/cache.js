@@ -1,4 +1,4 @@
-import Vue from "vue"
+import Vue from 'vue'
 
 export default {
   namespaced: true,
@@ -6,7 +6,7 @@ export default {
     caches: {}
   },
   mutations: {
-    set (state, {key, value}) {
+    set (state, { key, value }) {
       Vue.set(state.caches, key, value)
     }
   },
@@ -14,4 +14,4 @@ export default {
     content: state => key => state.caches[key],
     have: state => key => key in state.caches
   }
-};
+}

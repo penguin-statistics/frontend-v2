@@ -33,71 +33,71 @@
 </template>
 
 <script>
-  import DataTable from "@/components/stats/DataTable";
-  import get from "@/utils/getters";
-  import OffTitle from "@/components/global/OffTitle";
-  import QueryResultTrend from "@/components/advancedQuery/QueryResultTrend";
+import DataTable from '@/components/stats/DataTable'
+import get from '@/utils/getters'
+import OffTitle from '@/components/global/OffTitle'
+import QueryResultTrend from '@/components/advancedQuery/QueryResultTrend'
 
-  const calculateMatrix = el => {
-    const stage = get.stages.byStageId(el.stageId);
-    el.stage = stage;
-    el.zone = get.zones.byZoneId(el.stage.zoneId, false)
+const calculateMatrix = el => {
+  const stage = get.stages.byStageId(el.stageId)
+  el.stage = stage
+  el.zone = get.zones.byZoneId(el.stage.zoneId, false)
 
-    el.item = get.items.byItemId(el.itemId, false, false);
+  el.item = get.items.byItemId(el.itemId, false, false)
 
-    el.percentage = (el.quantity / el.times);
-    el.percentageText = `${(el.percentage * 100).toFixed(2)}%`;
+  el.percentage = (el.quantity / el.times)
+  el.percentageText = `${(el.percentage * 100).toFixed(2)}%`
 
-    el.apPPR = (stage.apCost / el.percentage).toFixed(2)
-    return el
-  }
+  el.apPPR = (stage.apCost / el.percentage).toFixed(2)
+  return el
+}
 
-  export default {
-    name: "QueryResult",
-    components: {QueryResultTrend, OffTitle, DataTable},
-    props: {
-      result: {
-        type: Object,
-        required: true
-      },
-      type: {
-        type: String,
-        required: true
-      },
-      index: {
-        type: Number,
-        required: true
+export default {
+  name: 'QueryResult',
+  components: { QueryResultTrend, OffTitle, DataTable },
+  props: {
+    result: {
+      type: Object,
+      required: true
+    },
+    type: {
+      type: String,
+      required: true
+    },
+    index: {
+      type: Number,
+      required: true
+    }
+  },
+  computed: {
+    isTrend () {
+      return this.type === 'trend'
+    },
+    data () {
+      if (this.type === 'matrix') {
+        return this.result.result.matrix.map(calculateMatrix)
+      } else if (this.type === 'trend') {
+        const stageId = this.result.query.stage
+        if (!(this.result.result.trend && this.result.result.trend[stageId])) return null
+        const data = this.result.result.trend[stageId]
+
+        return {
+          trends: data,
+          query: this.result.query
+        }
+      } else {
+        return null
       }
     },
-    computed: {
-      isTrend () {
-        return this.type === 'trend'
-      },
-      data() {
-        if (this.type === "matrix") {
-          return this.result.result["matrix"].map(calculateMatrix);
-        } else if (this.type === "trend") {
-          const stageId = this.result.query.stage;
-          if (!(this.result.result["trend"] && this.result.result["trend"][stageId])) return null
-          const data = this.result.result["trend"][stageId];
-
-          return {
-            trends: data,
-            query: this.result.query
-          }
-        } else {
-          return null
-        }
-      },
-      title () {
-        if (this.index === 0) {
-          return this.$t('query.result.main')
-        } else {
-          return this.$t('query.result.comparison', {index: this.index})
-        }
+    title () {
+      if (this.index === 0) {
+        return this.$t('query.result.main')
+      } else {
+        return this.$t('query.result.comparison', { index: this.index })
       }
-    },
+    }
   }
+}
 </script>
 
 <style scoped>

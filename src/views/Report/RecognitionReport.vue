@@ -645,322 +645,322 @@
   </v-row>
 </template>
 <script>
-  import Item from "@/components/global/Item";
-  import Recognizer from "@/utils/recognizer";
-  import PreloaderInline from "@/components/global/PreloaderInline";
-  // import snackbar from "@/utils/snackbar";
-  import CDN from "@/mixins/CDN";
-  import Theme from "@/mixins/Theme";
-  import ImageDrop from "@/components/recognition/ImageDrop";
-  import RecognitionResult from "@/components/recognition/RecognitionResult";
-  import config from "@/config";
-  import get from "@/utils/getters";
-  import Cookies from "js-cookie";
-  import report from "@/apis/report";
-  export default {
-    name: "RecognitionReport",
-    components: { Item, ImageDrop, RecognitionResult, PreloaderInline },
-    mixins: [Theme, CDN],
-    data() {
-      return {
-        recognizer: null,
-        files: [],
-        results: [],
-        initializing: false,
-        initialized: false,
-        fastTest: false,
-        expandImage: {
-          dialog: false,
-          src: ""
-        },
-        recognition: {
-          busy: false,
-          server: ""
-        },
-        dialogOrigin: "",
-        lots: false,
-        step: 1,
-        filterValue: ["Success", "Warning", "Error"],
-        SubmitDialog: {
-          open: false,
-          finish: false
-        },
-        changeServerTip: 0,
-        isFilesValid: true
-      };
+import Item from '@/components/global/Item'
+import Recognizer from '@/utils/recognizer'
+import PreloaderInline from '@/components/global/PreloaderInline'
+// import snackbar from "@/utils/snackbar";
+import CDN from '@/mixins/CDN'
+import Theme from '@/mixins/Theme'
+import ImageDrop from '@/components/recognition/ImageDrop'
+import RecognitionResult from '@/components/recognition/RecognitionResult'
+import config from '@/config'
+import get from '@/utils/getters'
+import Cookies from 'js-cookie'
+import report from '@/apis/report'
+export default {
+  name: 'RecognitionReport',
+  components: { Item, ImageDrop, RecognitionResult, PreloaderInline },
+  mixins: [Theme, CDN],
+  data () {
+    return {
+      recognizer: null,
+      files: [],
+      results: [],
+      initializing: false,
+      initialized: false,
+      fastTest: false,
+      expandImage: {
+        dialog: false,
+        src: ''
+      },
+      recognition: {
+        busy: false,
+        server: ''
+      },
+      dialogOrigin: '',
+      lots: false,
+      step: 1,
+      filterValue: ['Success', 'Warning', 'Error'],
+      SubmitDialog: {
+        open: false,
+        finish: false
+      },
+      changeServerTip: 0,
+      isFilesValid: true
+    }
+  },
+  computed: {
+    filteredResults () {
+      return this.filterResults(this.filterValue)
     },
-    computed: {
-      filteredResults() {
-        return this.filterResults(this.filterValue);
-      },
-      filterItems() {
-        return [
-          {
-            text: this.$t("report.recognition.status.success"),
-            value: "Success"
-          },
-          {
-            text: this.$t("report.recognition.status.warning"),
-            value: "Warning"
-          },
-          { text: this.$t("report.recognition.status.error"), value: "Error" }
-        ];
-      },
-      allTime() {
-        return this.TrustedResults.length;
-      },
-      allDropsCount() {
-        return this.TrustedResults.reduce((prev, now) => {
-          return (
-            prev +
+    filterItems () {
+      return [
+        {
+          text: this.$t('report.recognition.status.success'),
+          value: 'Success'
+        },
+        {
+          text: this.$t('report.recognition.status.warning'),
+          value: 'Warning'
+        },
+        { text: this.$t('report.recognition.status.error'), value: 'Error' }
+      ]
+    },
+    allTime () {
+      return this.TrustedResults.length
+    },
+    allDropsCount () {
+      return this.TrustedResults.reduce((prev, now) => {
+        return (
+          prev +
             now.result.drops.reduce((p, n) => {
               if (n.quantity) {
-                return p + n.quantity;
+                return p + n.quantity
               }
-              return p;
+              return p
             }, 0)
-          );
-        }, 0);
-      },
-      allSanity() {
-        return this.TrustedResults.reduce((prev, now) => {
-          return prev + get.stages.byStageId(now.result.stageId).apCost;
-        }, 0);
-      },
-      StageCombineData() {
-        let Results = this.TrustedResults;
-        let Result = {};
-        for (let RecognitionResult of Results) {
-          let StageCode = get.stages.byStageId(RecognitionResult.result.stageId).code;
-          if (!Result[StageCode]) {
-            Result[StageCode] = {
-              Items: {},
-              Time: 0
-            };
-          }
-          Result[StageCode].Time++;
-          for (let Item of RecognitionResult.result.drops) {
-            if (Item.itemId && Item.quantity) {
-              if (!Result[StageCode].Items[Item.itemId]) {
-                Result[StageCode].Items[Item.itemId] = 0;
-              }
-              Result[StageCode].Items[Item.itemId] += Item.quantity;
-            }
+        )
+      }, 0)
+    },
+    allSanity () {
+      return this.TrustedResults.reduce((prev, now) => {
+        return prev + get.stages.byStageId(now.result.stageId).apCost
+      }, 0)
+    },
+    StageCombineData () {
+      const Results = this.TrustedResults
+      const Result = {}
+      for (const RecognitionResult of Results) {
+        const StageCode = get.stages.byStageId(RecognitionResult.result.stageId).code
+        if (!Result[StageCode]) {
+          Result[StageCode] = {
+            Items: {},
+            Time: 0
           }
         }
-        return Result;
-      },
-      TrustedResults() {
-        return this.filterResults(["Success"]);
-      },
-      server() {
-        return this.$store.getters["dataSource/server"];
-      },
-      serverLocked() {
-        return this.$store.getters["dataSource/serverLocked"];
-      }
-    },
-    watch: {
-      serverLocked(newvalue) {
-        if (newvalue == 2) {
-          this.$store.commit("dataSource/lockServer");
-          this.changeServerTip = true;
+        Result[StageCode].Time++
+        for (const Item of RecognitionResult.result.drops) {
+          if (Item.itemId && Item.quantity) {
+            if (!Result[StageCode].Items[Item.itemId]) {
+              Result[StageCode].Items[Item.itemId] = 0
+            }
+            Result[StageCode].Items[Item.itemId] += Item.quantity
+          }
         }
       }
+      return Result
     },
-    mounted() {
-      this.$store.commit("dataSource/unlockServer");
+    TrustedResults () {
+      return this.filterResults(['Success'])
     },
-    destroyed() {
-      this.$store.commit("dataSource/unlockServer");
+    server () {
+      return this.$store.getters['dataSource/server']
     },
-    methods: {
-      reload() {
-        this.$emit("reload");
-      },
-      async doSubmit() {
-        var batchDrops = await this.formatResults(this.TrustedResults);
-        const userId = Cookies.get(config.authorization.userId.cookieKey);
-        return report.submitRecognitionReport(batchDrops, { source: "frontend-v2-recognition" }).then(() => {
-          const reportedUserId = Cookies.get(config.authorization.userId.cookieKey);
-          if (userId !== reportedUserId) {
-            this.$store.dispatch("auth/login", {
-              userId: reportedUserId
-            });
-          }
-          //this.$ga.event("report", "submit_single", this.TrustedResults[this.SubmitDialog.now].result.stageId, 1);
-        });
-      },
-      submit() {
-        this.SubmitDialog.open = true;
-        this.doSubmit()
-          .catch(e => {
-            console.error(e);
-          })
-          .finally(() => {
-            this.SubmitDialog.finish = true;
-          });
-      },
-      async init() {
-        this.initializing = true;
-
-        this.recognizer = new Recognizer();
-
-        await this.recognizer
-          .initialize(this.server)
-          .then(() => {
-            this.$store.commit("dataSource/lockServer");
-            this.initialized = true;
-            this.recognition.server = this.server.toLowerCase();
-            console.log("initialization completed");
-          })
-          .finally(() => {
-            this.initializing = false;
-          });
-      },
-      getItem(ItemId) {
-        return get.items.byItemId(ItemId, false, false) || {};
-      },
-      stringify(s) {
-        return JSON.stringify(s, null, 4);
-      },
-      async recognize() {
-        this.results = [];
-        this.recognition.busy = true;
-
-        const typeOrder = ["NORMAL_DROP", "SPECIAL_DROP", "EXTRA_DROP"];
-        typeOrder.reverse();
-
-        if (this.lots) {
-          const repeated = [];
-          for (const file of this.files) {
-            repeated.push(...Array(100).fill(file));
-          }
-          console.log(repeated);
-          this.files = repeated;
-        }
-
-        await this.recognizer.recognize(this.files, result => {
-          result.result.drops
-            .map(el => {
-              el.confidence = parseFloat(el.confidence);
-              el.quantity = parseFloat(el.quantity);
-            })
-            .sort((a, b) => {
-              return -typeOrder.indexOf(a.dropType) - -typeOrder.indexOf(b.dropType);
-            });
-          this.results.push(result);
-        });
-
-        console.log(this.results);
-
-        this.recognition.busy = false;
-      },
-      clearCanvas() {
-        this.$refs.canvases.innerHTML = "";
-      },
-      clearImages() {
-        this.$refs.images.innerHTML = "";
-      },
-      dropTypeToString(type) {
-        return this.$t(`stage.loots.${type}`, false) || type;
-      },
-      enlargeImage(url, event) {
-        console.log(event);
-        this.dialogOrigin = `${event.clientX}px ${event.clientY}px`;
-        this.$nextTick(() => {
-          this.expandImage.dialog = true;
-          this.expandImage.src = url;
-        });
-      },
-      getStage(stageId) {
-        return get.stages.byStageId(stageId) || { code: "(识别失败)" };
-      },
-      async initAndRecognize() {
-        this.step = 2;
-        await this.init();
-        await this.recognize();
-        console.log(this.results);
-        this.step = 3;
-      },
-      filterResults(filter) {
-        return this.results.filter(result => {
-          for (var key of filter) {
-            switch (key) {
-              case "Success":
-                if (!(result.result.warnings.length || result.result.errors.length)) {
-                  return true;
-                }
-                break;
-              case "Warning":
-                if (result.result.warnings.length) {
-                  return true;
-                }
-                break;
-              case "Error":
-                if (result.result.errors.length) {
-                  return true;
-                }
-                break;
-              default:
-                return false;
-            }
-          }
-          return false;
-        });
-      },
-      async LoadImage(src) {
-        return new Promise((r, e) => {
-          let ImgElement = new Image();
-          ImgElement.onload = () => {
-            r(ImgElement);
-          };
-          ImgElement.onerror = () => {
-            e();
-          };
-          ImgElement.src = src;
-        });
-      },
-      async formatResults(results) {
-        let Return = [];
-        let Promises = [];
-        for (let [index, result] of results.entries()) {
-          Promises[index] = this.LoadImage(result.blobUrl);
-
-          //this.SubmitDialog.now++;
-        }
-        Promise.all(Promises);
-        for (let [index, result] of results.entries()) {
-          Return.push({
-            drops: result.result.drops.map(drop => {
-              delete drop["confidence"];
-              return drop;
-            }),
-            stageId: result.result.stageId,
-            metadata: {
-              fingerprint: result.result.fingerprint,
-              md5: result.result.md5,
-              fileName: result.file.name,
-              lastModified: result.file.lastModified,
-              // not providing due to backend
-              // size: result.file.size,
-              // type: result.file.type,
-              // webkitRelativePath: result.file.webkitRelativePath,
-              width: await (Promises[index]).width,
-              height: await (Promises[index]).height
-            }
-          });
-        }
-        return Return;
-      },
-      askCrispForHelp(){
-        const $crisp = window.$crisp
-        document.querySelector("div.crisp-client").style.setProperty("display", "block", "important");
-        $crisp.push(["do", "chat:open"])
-        $crisp.push(["do", "message:send", ["text", "掉落识别有问题，我该怎么办？"]])
+    serverLocked () {
+      return this.$store.getters['dataSource/serverLocked']
+    }
+  },
+  watch: {
+    serverLocked (newvalue) {
+      if (newvalue === 2) {
+        this.$store.commit('dataSource/lockServer')
+        this.changeServerTip = true
       }
     }
-  };
+  },
+  mounted () {
+    this.$store.commit('dataSource/unlockServer')
+  },
+  destroyed () {
+    this.$store.commit('dataSource/unlockServer')
+  },
+  methods: {
+    reload () {
+      this.$emit('reload')
+    },
+    async doSubmit () {
+      var batchDrops = await this.formatResults(this.TrustedResults)
+      const userId = Cookies.get(config.authorization.userId.cookieKey)
+      return report.submitRecognitionReport(batchDrops, { source: 'frontend-v2-recognition' }).then(() => {
+        const reportedUserId = Cookies.get(config.authorization.userId.cookieKey)
+        if (userId !== reportedUserId) {
+          this.$store.dispatch('auth/login', {
+            userId: reportedUserId
+          })
+        }
+        // this.$ga.event("report", "submit_single", this.TrustedResults[this.SubmitDialog.now].result.stageId, 1);
+      })
+    },
+    submit () {
+      this.SubmitDialog.open = true
+      this.doSubmit()
+        .catch(e => {
+          console.error(e)
+        })
+        .finally(() => {
+          this.SubmitDialog.finish = true
+        })
+    },
+    async init () {
+      this.initializing = true
+
+      this.recognizer = new Recognizer()
+
+      await this.recognizer
+        .initialize(this.server)
+        .then(() => {
+          this.$store.commit('dataSource/lockServer')
+          this.initialized = true
+          this.recognition.server = this.server.toLowerCase()
+          console.log('initialization completed')
+        })
+        .finally(() => {
+          this.initializing = false
+        })
+    },
+    getItem (ItemId) {
+      return get.items.byItemId(ItemId, false, false) || {}
+    },
+    stringify (s) {
+      return JSON.stringify(s, null, 4)
+    },
+    async recognize () {
+      this.results = []
+      this.recognition.busy = true
+
+      const typeOrder = ['NORMAL_DROP', 'SPECIAL_DROP', 'EXTRA_DROP']
+      typeOrder.reverse()
+
+      if (this.lots) {
+        const repeated = []
+        for (const file of this.files) {
+          repeated.push(...Array(100).fill(file))
+        }
+        console.log(repeated)
+        this.files = repeated
+      }
+
+      await this.recognizer.recognize(this.files, result => {
+        result.result.drops
+          .map(el => {
+            el.confidence = parseFloat(el.confidence)
+            el.quantity = parseFloat(el.quantity)
+          })
+          .sort((a, b) => {
+            return -typeOrder.indexOf(a.dropType) - -typeOrder.indexOf(b.dropType)
+          })
+        this.results.push(result)
+      })
+
+      console.log(this.results)
+
+      this.recognition.busy = false
+    },
+    clearCanvas () {
+      this.$refs.canvases.innerHTML = ''
+    },
+    clearImages () {
+      this.$refs.images.innerHTML = ''
+    },
+    dropTypeToString (type) {
+      return this.$t(`stage.loots.${type}`, false) || type
+    },
+    enlargeImage (url, event) {
+      console.log(event)
+      this.dialogOrigin = `${event.clientX}px ${event.clientY}px`
+      this.$nextTick(() => {
+        this.expandImage.dialog = true
+        this.expandImage.src = url
+      })
+    },
+    getStage (stageId) {
+      return get.stages.byStageId(stageId) || { code: '(识别失败)' }
+    },
+    async initAndRecognize () {
+      this.step = 2
+      await this.init()
+      await this.recognize()
+      console.log(this.results)
+      this.step = 3
+    },
+    filterResults (filter) {
+      return this.results.filter(result => {
+        for (var key of filter) {
+          switch (key) {
+            case 'Success':
+              if (!(result.result.warnings.length || result.result.errors.length)) {
+                return true
+              }
+              break
+            case 'Warning':
+              if (result.result.warnings.length) {
+                return true
+              }
+              break
+            case 'Error':
+              if (result.result.errors.length) {
+                return true
+              }
+              break
+            default:
+              return false
+          }
+        }
+        return false
+      })
+    },
+    async LoadImage (src) {
+      return new Promise((resolve, reject) => {
+        const ImgElement = new Image()
+        ImgElement.onload = () => {
+          resolve(ImgElement)
+        }
+        ImgElement.onerror = (e) => {
+          reject(e)
+        }
+        ImgElement.src = src
+      })
+    },
+    async formatResults (results) {
+      const Return = []
+      const Promises = []
+      for (const [index, result] of results.entries()) {
+        Promises[index] = this.LoadImage(result.blobUrl)
+
+        // this.SubmitDialog.now++;
+      }
+      Promise.all(Promises)
+      for (const [index, result] of results.entries()) {
+        Return.push({
+          drops: result.result.drops.map(drop => {
+            delete drop.confidence
+            return drop
+          }),
+          stageId: result.result.stageId,
+          metadata: {
+            fingerprint: result.result.fingerprint,
+            md5: result.result.md5,
+            fileName: result.file.name,
+            lastModified: result.file.lastModified,
+            // not providing due to backend
+            // size: result.file.size,
+            // type: result.file.type,
+            // webkitRelativePath: result.file.webkitRelativePath,
+            width: await (Promises[index]).width,
+            height: await (Promises[index]).height
+          }
+        })
+      }
+      return Return
+    },
+    askCrispForHelp () {
+      const $crisp = window.$crisp
+      document.querySelector('div.crisp-client').style.setProperty('display', 'block', 'important')
+      $crisp.push(['do', 'chat:open'])
+      $crisp.push(['do', 'message:send', ['text', '掉落识别有问题，我该怎么办？']])
+    }
+  }
+}
 </script>
 
 <style scoped>

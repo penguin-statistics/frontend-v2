@@ -157,53 +157,53 @@
 </template>
 
 <script>
-  import BackdropCard from "@/components/global/BackdropCard";
-  export default {
-    name: "GettingStarted",
-    components: {BackdropCard},
-    data() {
-      return {
-        links: [
-          // {
-          //   route: "Search",
-          //   icon: "mdi-magnify",
-          //   title: 'title.search',
-          //   subtitle: 'subtitle.search',
-          //   wide: true
-          // },
-					{
-						route: "ReportByZone",
-						icon: "mdi-upload",
-						title: 'title.report',
-						subtitle: 'subtitle.report'
-					},
-          {
-            route: "Planner",
-            icon: "mdi-directions-fork",
-            title: 'title.planner',
-            subtitle: 'subtitle.planner'
-          },
-          {
-            route: "StatsByItem",
-            icon: "mdi-treasure-chest",
-            title: 'title.byItem',
-            subtitle: 'subtitle.byItem'
-          },
-          {
-            route: "StatsByStage",
-            icon: "mdi-cube",
-            title: 'title.byStage',
-            subtitle: 'subtitle.byStage'
-          }
-        ]
-      }
-    },
-    methods: {
-      renderTranslation(t) {
-        return this.$t(t);
-      }
+import BackdropCard from '@/components/global/BackdropCard'
+export default {
+  name: 'GettingStarted',
+  components: { BackdropCard },
+  data () {
+    return {
+      links: [
+        // {
+        //   route: "Search",
+        //   icon: "mdi-magnify",
+        //   title: 'title.search',
+        //   subtitle: 'subtitle.search',
+        //   wide: true
+        // },
+        {
+          route: 'ReportByZone',
+          icon: 'mdi-upload',
+          title: 'title.report',
+          subtitle: 'subtitle.report'
+        },
+        {
+          route: 'Planner',
+          icon: 'mdi-directions-fork',
+          title: 'title.planner',
+          subtitle: 'subtitle.planner'
+        },
+        {
+          route: 'StatsByItem',
+          icon: 'mdi-treasure-chest',
+          title: 'title.byItem',
+          subtitle: 'subtitle.byItem'
+        },
+        {
+          route: 'StatsByStage',
+          icon: 'mdi-cube',
+          title: 'title.byStage',
+          subtitle: 'subtitle.byStage'
+        }
+      ]
+    }
+  },
+  methods: {
+    renderTranslation (t) {
+      return this.$t(t)
     }
   }
+}
 </script>
 
 <style scoped>

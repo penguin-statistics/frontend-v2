@@ -1,4 +1,4 @@
-const MAX_HISTORY_RECORD_LENGTH = 30;
+const MAX_HISTORY_RECORD_LENGTH = 30
 
 export default {
   namespaced: true,
@@ -46,4 +46,4 @@ export default {
       return state.favorites.includes(key)
     }
   }
-};
+}

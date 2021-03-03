@@ -66,30 +66,30 @@
 </template>
 
 <script>
-  export default {
-    name: "PWAPopups",
-    data() {
-      return {
-        update: {
-          enabled: false,
-          loading: false,
-        }
+export default {
+  name: 'PWAPopups',
+  data () {
+    return {
+      update: {
+        enabled: false,
+        loading: false
       }
-    },
-    created () {
-      // if (this.$workbox) {
-      //   this.$workbox.addEventListener("waiting", () => {
-      //     this.update.enabled = true;
-      //   });
-      // }
-    },
-    methods: {
-      async refresh() {
-        this.update.loading = true;
-        // await this.$workbox.messageSW({ type: "SKIP_WAITING" });
-      },
-    },
+    }
+  },
+  created () {
+    // if (this.$workbox) {
+    //   this.$workbox.addEventListener("waiting", () => {
+    //     this.update.enabled = true;
+    //   });
+    // }
+  },
+  methods: {
+    async refresh () {
+      this.update.loading = true
+      // await this.$workbox.messageSW({ type: "SKIP_WAITING" });
+    }
   }
+}
 </script>
 
 <style scoped>

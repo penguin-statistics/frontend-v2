@@ -1,6 +1,6 @@
 import '@mdi/font/css/materialdesignicons.min.css'
-import Vue from 'vue';
-import Vuetify from 'vuetify/lib';
+import Vue from 'vue'
+import Vuetify from 'vuetify/lib'
 import colors from 'vuetify/lib/util/colors'
 
 import zhHans from 'vuetify/es5/locale/zh-Hans'
@@ -8,11 +8,11 @@ import ja from 'vuetify/es5/locale/ja'
 import ko from 'vuetify/es5/locale/ko'
 import en from 'vuetify/es5/locale/en'
 
-Vue.use(Vuetify);
+Vue.use(Vuetify)
 
 export default new Vuetify({
   icons: {
-    iconfont: 'mdi',
+    iconfont: 'mdi'
   },
   lang: {
     locales: { zh: zhHans, ja, ko, en }
@@ -28,10 +28,10 @@ export default new Vuetify({
         accent2: colors.orange.darken4,
         accent3: colors.blue.darken4,
 
-        background: "#fff",
-        lightenedBackground: "#d9d9d9",
-        indigoBackground: "#fff",
-        text: "#0e0e0e",
+        background: '#fff',
+        lightenedBackground: '#d9d9d9',
+        indigoBackground: '#fff',
+        text: '#0e0e0e',
         textDarken: colors.grey.darken4
       },
       dark: {
@@ -42,10 +42,10 @@ export default new Vuetify({
 
         background: colors.blueGrey.darken4,
         lightenedBackground: colors.blueGrey.darken3,
-        indigoBackground: "#191d37",
-        text: "#f0f0f0",
+        indigoBackground: '#191d37',
+        text: '#f0f0f0',
         textDarken: colors.grey.lighten3
-      },
-    },
-  },
-});
+      }
+    }
+  }
+})

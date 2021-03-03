@@ -29,34 +29,34 @@
 <script>
 /* eslint-disable vue/require-prop-types */
 
-import validator from "@/utils/validator";
+import validator from '@/utils/validator'
 
 export default {
-  name: "FactTableItem",
+  name: 'FactTableItem',
   props: {
     title: {
-      default: () => ""
+      default: () => ''
     },
     content: {
-      default: () => ""
+      default: () => ''
     },
     contentClass: {
       type: String,
-      default: () => ""
+      default: () => ''
     }
   },
   computed: {
-    validated() {
+    validated () {
       return validator.isNull(this.content)
-          ? {
-            class: 'grey--text',
-            value: '—'
-          }
-          : {
-            value: this.content
-          }
+        ? {
+          class: 'grey--text',
+          value: '—'
+        }
+        : {
+          value: this.content
+        }
     }
-  },
+  }
 }
 </script>
 

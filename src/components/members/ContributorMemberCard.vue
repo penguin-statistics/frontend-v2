@@ -10,7 +10,7 @@
           aspect-ratio="1"
         />
       </v-avatar>
-      
+
       {{ member.name }}
     </v-card-title>
     <v-card-text class="flex-grow-1">
@@ -47,23 +47,23 @@
 </template>
 
 <script>
-import CDN from "@/mixins/CDN";
-import members from "@/utils/humans";
-import MemberResponsibility from "@/components/members/MemberResponsibility";
+import CDN from '@/mixins/CDN'
+import members from '@/utils/humans'
+import MemberResponsibility from '@/components/members/MemberResponsibility'
 
 export default {
-  name: "ContributorMemberCard",
-  components: {MemberResponsibility},
+  name: 'ContributorMemberCard',
+  components: { MemberResponsibility },
   mixins: [CDN],
   props: {
     member: {
       type: Object,
       required: true
-    },
+    }
   },
   methods: {
     getSocial: members.getSocial
-  },
+  }
 }
 </script>
 

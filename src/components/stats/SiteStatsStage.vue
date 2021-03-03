@@ -8,7 +8,7 @@
       :headers="headers"
       :items="items"
       :options="options.table"
-      
+
       :page.sync="page"
 
       must-sort
@@ -71,83 +71,83 @@
 </template>
 
 <script>
-  import Theme from "@/mixins/Theme";
-  import get from "@/utils/getters";
-  import strings from "@/utils/strings";
+import Theme from '@/mixins/Theme'
+import get from '@/utils/getters'
+import strings from '@/utils/strings'
 
-  export default {
-    name: "SiteStatsStage",
-    mixins: [Theme],
-    props: {
-      data: {
-        type: Array,
-        required: true
-      },
-      title: {
-        type: String,
-        required: true
-      }
+export default {
+  name: 'SiteStatsStage',
+  mixins: [Theme],
+  props: {
+    data: {
+      type: Array,
+      required: true
     },
-    data() {
-      return {
-        page: 1,
-        options: {
-          table: {
-            itemsPerPage: 10
-          }
+    title: {
+      type: String,
+      required: true
+    }
+  },
+  data () {
+    return {
+      page: 1,
+      options: {
+        table: {
+          itemsPerPage: 10
         }
       }
+    }
+  },
+  computed: {
+    items () {
+      return this.data
     },
-    computed: {
-      items() {
-        return this.data
-      },
-      headers() {
-        return [
-          {
-            text: this.$t("stats.headers.stage"),
-            value: "stage",
-            align: "left",
-            sortable: false,
-            width: "180px"
-          },
-          {
-            text: this.$t("stats.headers.times"),
-            value: "times",
-            align: "left",
-            sortable: true,
-            width: "100px"
-          },
-          {
-            text: this.$t("stats.headers.apCost"),
-            value: "stage.apCost",
-            align: "left",
-            sortable: true,
-            width: "100px"
-          }
-        ]
-      },
-      strings () {
-        return strings
-      }
+    headers () {
+      return [
+        {
+          text: this.$t('stats.headers.stage'),
+          value: 'stage',
+          align: 'left',
+          sortable: false,
+          width: '180px'
+        },
+        {
+          text: this.$t('stats.headers.times'),
+          value: 'times',
+          align: 'left',
+          sortable: true,
+          width: '100px'
+        },
+        {
+          text: this.$t('stats.headers.apCost'),
+          value: 'stage.apCost',
+          align: 'left',
+          sortable: true,
+          width: '100px'
+        }
+      ]
     },
-    methods: {
-      redirect(stageId) {
-        const got = get.stages.byStageId(stageId);
-        this.$router.push({
-          name: "StatsByStage_Selected",
-          params: {
-            zoneId: got.zoneId,
-            stageId
-          }
-        });
-      },
+    strings () {
+      return strings
+    }
+  },
+  methods: {
+    redirect (stageId) {
+      const got = get.stages.byStageId(stageId)
+      this.$router.push({
+        name: 'StatsByStage_Selected',
+        params: {
+          zoneId: got.zoneId,
+          stageId
+        }
+      })
+    },
 
-      invalidApCost (apCost) {
-        return apCost === 99 || apCost === null
-      }
-    },
+    invalidApCost (apCost) {
+      return apCost === 99 || apCost === null
+    }
   }
+}
 </script>
 
 <style scoped>

@@ -6,7 +6,7 @@
 
 <script>
 export default {
-  name: "FactTable"
+  name: 'FactTable'
 }
 </script>
 

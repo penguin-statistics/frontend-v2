@@ -1,5 +1,5 @@
 import Vue from 'vue'
-import i18n from "@/i18n";
+import i18n from '@/i18n'
 
 Vue.component('DoYouKnow', {
   functional: true,
@@ -14,8 +14,8 @@ Vue.component('DoYouKnow', {
   //   }
   // },
   render: function (createElement) {
-    const quotes = i18n.t('quotes.doYouKnow');
-    const index = Math.floor(Math.random() * quotes.length);
+    const quotes = i18n.t('quotes.doYouKnow')
+    const index = Math.floor(Math.random() * quotes.length)
 
     return createElement(
       'span',

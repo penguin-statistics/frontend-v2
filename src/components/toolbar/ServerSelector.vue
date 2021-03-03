@@ -90,47 +90,47 @@
 </template>
 
 <script>
-  import {mapGetters} from "vuex";
-  import supports from "@/models/supports";
+import { mapGetters } from 'vuex'
+import supports from '@/models/supports'
 
-  export default {
-    name: "ServerSelector",
-    data() {
-      return {
-        servers: supports.servers,
-        update:false
-      }
-    },
-    computed: {
-      ...mapGetters("ajax", ["pending"]),
-      activeServer: {
-        get () {
-          return this.update||this.servers.indexOf(this.servers.find(el => el === this.$store.getters["dataSource/server"]))
-        },
-        set (localeIndex) {
-          if(this.$store.getters["dataSource/serverLocked"]){
-            this.$store.commit("dataSource/changeLockState", 2)
-            this.update = localeIndex;
-            this.$nextTick(function(){
-              this.update=false;
-            })
-          } else {
-            this.changeServer(this.servers[localeIndex]);
-          }
-        }
+export default {
+  name: 'ServerSelector',
+  data () {
+    return {
+      servers: supports.servers,
+      update: false
+    }
+  },
+  computed: {
+    ...mapGetters('ajax', ['pending']),
+    activeServer: {
+      get () {
+        return this.update || this.servers.indexOf(this.servers.find(el => el === this.$store.getters['dataSource/server']))
       },
-      activeServerId () {
-        return this.servers.find(el => el === this.$store.getters["dataSource/server"])
+      set (localeIndex) {
+        if (this.$store.getters['dataSource/serverLocked']) {
+          this.$store.commit('dataSource/changeLockState', 2)
+          this.update = localeIndex
+          this.$nextTick(function () {
+            this.update = false
+          })
+        } else {
+          this.changeServer(this.servers[localeIndex])
+        }
       }
     },
-    methods: {
-      changeServer(serverId) {
-        this.$store.commit("planner/clearExcludes")
-        this.$store.commit("dataSource/changeServer", serverId)
-        this.$store.dispatch("data/fetch", false)
-      }
-    },
+    activeServerId () {
+      return this.servers.find(el => el === this.$store.getters['dataSource/server'])
+    }
+  },
+  methods: {
+    changeServer (serverId) {
+      this.$store.commit('planner/clearExcludes')
+      this.$store.commit('dataSource/changeServer', serverId)
+      this.$store.dispatch('data/fetch', false)
+    }
   }
+}
 </script>
 
 <style scoped>

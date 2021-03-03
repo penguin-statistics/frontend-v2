@@ -104,27 +104,27 @@
 </template>
 
 <script>
-  import ThemeSwitcher from "@/components/drawer/ThemeSwitcher";
-  import LocaleSwitcher from "@/components/drawer/LocaleSwitcher";
-  import Theme from "@/mixins/Theme";
-  import OptimizationSwitcher from "@/components/drawer/OptimizationSwitcher";
-  import DataManager from "@/components/drawer/DataManager";
-  import Subheader from "@/components/global/Subheader";
-  import penguin from "@/utils/native/penguin";
-  import PushNotificationSettings from "@/components/drawer/PushNotificationSettings";
-  export default {
-    name: "SettingsDialog",
-    components: {PushNotificationSettings, Subheader, DataManager, OptimizationSwitcher, LocaleSwitcher, ThemeSwitcher},
-    mixins: [Theme],
-    data() {
-      return {
-        active: false
-      }
-    },
-    methods: {
-      openBundleSettings: penguin.openBundleSettings
-    },
+import ThemeSwitcher from '@/components/drawer/ThemeSwitcher'
+import LocaleSwitcher from '@/components/drawer/LocaleSwitcher'
+import Theme from '@/mixins/Theme'
+import OptimizationSwitcher from '@/components/drawer/OptimizationSwitcher'
+import DataManager from '@/components/drawer/DataManager'
+import Subheader from '@/components/global/Subheader'
+import penguin from '@/utils/native/penguin'
+import PushNotificationSettings from '@/components/drawer/PushNotificationSettings'
+export default {
+  name: 'SettingsDialog',
+  components: { PushNotificationSettings, Subheader, DataManager, OptimizationSwitcher, LocaleSwitcher, ThemeSwitcher },
+  mixins: [Theme],
+  data () {
+    return {
+      active: false
+    }
+  },
+  methods: {
+    openBundleSettings: penguin.openBundleSettings
   }
+}
 </script>
 
 <style scoped>

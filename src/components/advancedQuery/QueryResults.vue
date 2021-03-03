@@ -17,19 +17,19 @@
 </template>
 
 <script>
-  import QueryResult from "@/components/advancedQuery/QueryResult";
-  export default {
-    name: "QueryResults",
-    components: {QueryResult},
-    props: {
-      results: {
-        type: Array,
-        default () {
-          return []
-        }
-      },
-    },
+import QueryResult from '@/components/advancedQuery/QueryResult'
+export default {
+  name: 'QueryResults',
+  components: { QueryResult },
+  props: {
+    results: {
+      type: Array,
+      default () {
+        return []
+      }
+    }
   }
+}
 </script>
 
 <style scoped>

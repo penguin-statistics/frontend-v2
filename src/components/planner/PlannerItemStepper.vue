@@ -80,32 +80,32 @@
 </template>
 
 <script>
-  import get from "@/utils/getters"
-  import Item from "@/components/global/Item";
-  import NumberInput from "@/components/NumberInput";
-  export default {
-    name: "PlannerItemStepper",
-    components: {NumberInput, Item},
-    props: {
-      itemId: {
-        type: String,
-        required: true
-      },
-      need: {
-        type: Number,
-        required: true
-      },
-      have: {
-        type: Number,
-        required: true
-      }
+import get from '@/utils/getters'
+import Item from '@/components/global/Item'
+import NumberInput from '@/components/NumberInput'
+export default {
+  name: 'PlannerItemStepper',
+  components: { NumberInput, Item },
+  props: {
+    itemId: {
+      type: String,
+      required: true
     },
-    computed: {
-      item () {
-        return get.items.byItemId(this.itemId)
-      }
+    need: {
+      type: Number,
+      required: true
+    },
+    have: {
+      type: Number,
+      required: true
+    }
+  },
+  computed: {
+    item () {
+      return get.items.byItemId(this.itemId)
     }
   }
+}
 </script>
 
 <style scoped>

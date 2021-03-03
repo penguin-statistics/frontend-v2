@@ -1,5 +1,5 @@
-const version = "v3.4.2";
-const project = "frontend-v2";
+const version = 'v3.4.2'
+const project = 'frontend-v2'
 
 module.exports = {
   version,
@@ -12,15 +12,15 @@ module.exports = {
   },
   authorization: {
     userId: {
-      cookieKey: "userID"
+      cookieKey: 'userID'
     }
   },
   cdn: {
-    cn: "https://penguin.upyun.galvincdn.com",
-    global: "https://penguin-stats.s3.amazonaws.com"
+    cn: 'https://penguin.upyun.galvincdn.com',
+    global: 'https://penguin-stats.s3.amazonaws.com'
   },
   advancedQuery: {
-    maxQueries: 5,
+    maxQueries: 5
   },
   randomBackground: {
     limit: 3,
@@ -34,13 +34,13 @@ module.exports = {
   probe: {
     endpoint: {
       prod: {
-        ws: "wss://probe.penguin-stats.io/",
-        legacy: "https://probe.penguin-stats.io/"
+        ws: 'wss://probe.penguin-stats.io/',
+        legacy: 'https://probe.penguin-stats.io/'
       },
       dev: {
-        ws: "ws://localhost:8100/",
-        legacy: "http://localhost:8100/"
-      },
+        ws: 'ws://localhost:8100/',
+        legacy: 'http://localhost:8100/'
+      }
     },
     uidExpiration: 1000 * 60 * 24 * 180
   }
