@@ -139,7 +139,7 @@ export default {
       this.onDrag = true
     }, false)
   },
-  beforeUnmount () {
+  beforeDestroy () {
     document.removeEventListener('dragenter', () => {})
   },
   methods: {

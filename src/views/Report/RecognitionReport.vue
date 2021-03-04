@@ -244,8 +244,8 @@
             >
               <v-row v-if="results.length">
                 <v-col
-                  v-for="result in filteredResults"
-                  :key="result.file.name"
+                  v-for="(result, index) in filteredResults"
+                  :key="index"
                   class="d-flex align-self-stretch"
                   cols="12"
                   md="6"
@@ -273,21 +273,32 @@
                     <v-card-title class="d-flex flex-row align-center">
                       <div class="d-flex align-baseline">
                         <small class="mr-2">{{ $t("stage.name") }}</small>
-                        <span class="monospace">{{ getStage(result.result.stageId).code }}</span>
+                        <span class="monospace">{{ result.result.stageId ? getStage(result.result.stageId).code : "无法识别" }}</span>
+                      </div>
+                      <v-spacer />
+                      <v-checkbox
+                        v-model="selectedResultsIndex"
+                        :value="index"
+                        :disabled="resultHasErrorOrWarning[index]"
+                        :off-icon="resultHasErrorOrWarning[index] ? 'mdi-close-box' : '$checkboxOff'"
+                        :label="resultHasErrorOrWarning[index] ? '无法选择有问题的图片' : '是否上传'"
+                      />
+                    </v-card-title>
+                    <v-card-subtitle class="d-flex flex-row align-center">
+                      <div class="d-flex align-baseline">
+                        {{ $t("report.recognition.filename") }}：<span class="font-weight-bold">{{
+                          result.file.name || "(文件名未知)"
+                        }}</span>
                       </div>
                       <v-spacer />
                       <v-chip
                         label
-                        class="subtitle-2"
+                        rounded
+                        small
                       >
                         {{ $t("report.recognition.cost") }}
                         {{ result.duration.toFixed(2) }}ms
                       </v-chip>
-                    </v-card-title>
-                    <v-card-subtitle>
-                      {{ $t("report.recognition.filename") }}：<span class="font-weight-bold">{{
-                        result.file.name || "(文件名未知)"
-                      }}</span>
                     </v-card-subtitle>
                     <v-card-text>
                       <div
@@ -317,7 +328,7 @@
                         </v-badge>
                       </div>
                       <v-alert
-                        v-if="result.result.errors.length || result.result.warnings.length"
+                        v-if="resultHasErrorOrWarning[index]"
                         outlined
                         color="white"
                         border="left"
@@ -372,38 +383,43 @@
                 暂时没有识别结果
               </v-alert>
             </div>
-
-            <v-btn
-              v-if="filterResults([`Success`]).length"
-              color="primary mt-4"
-              @click="step = 4"
-            >
-              {{ $t("report.recognition.confirm", [filterResults(["Success"]).length]) }}
-              <v-icon
-                right
-                dark
+            <div class="mt-4">
+              <v-btn
+                color="primary"
+                class="mr-2"
+                :disabled="!selectedResults.length"
+                @click="step = 4"
               >
-                mdi-upload
-              </v-icon>
-            </v-btn>
-            <v-btn
-              v-else
-              color="error mt-4"
-              @click="reload"
-            >
-              <div class="d-inline-flex align-center justify-center">
-                <span class="caption ml-1">
-                  {{ $t("report.recognition.tips.emptyResult") }}
+                {{ $t("report.recognition.confirm", [selectedResults.length]) }}
+                <v-icon
+                  right
+                  dark
+                >
+                  mdi-upload
+                </v-icon>
+              </v-btn>
+              <v-btn
+                color="error"
+                @click="reload"
+              >
+                <template
+                  v-if="!filterResults([`Success`]).length"
+                >
+                  <div class="d-inline-flex align-center justify-center">
+                    <span class="caption ml-1">
+                      {{ $t("report.recognition.tips.emptyResult") }}
+                    </span>
+                  </div>
+                  <v-divider
+                    vertical
+                    class="mx-2"
+                  />
+                </template>
+                <span>
+                  {{ $t("report.recognition.reload") }}
                 </span>
-              </div>
-              <v-divider
-                vertical
-                class="mx-2"
-              />
-              <span>
-                {{ $t("report.recognition.reload") }}
-              </span>
-            </v-btn>
+              </v-btn>
+            </div>
           </v-stepper-content>
 
           <v-stepper-content step="4">
@@ -657,6 +673,7 @@ import config from '@/config'
 import get from '@/utils/getters'
 import Cookies from 'js-cookie'
 import report from '@/apis/report'
+
 export default {
   name: 'RecognitionReport',
   components: { Item, ImageDrop, RecognitionResult, PreloaderInline },
@@ -686,7 +703,8 @@ export default {
         finish: false
       },
       changeServerTip: 0,
-      isFilesValid: true
+      isFilesValid: true,
+      selectedResultsIndex: []
     }
   },
   computed: {
@@ -707,10 +725,10 @@ export default {
       ]
     },
     allTime () {
-      return this.TrustedResults.length
+      return this.selectedResults.length
     },
     allDropsCount () {
-      return this.TrustedResults.reduce((prev, now) => {
+      return this.selectedResults.reduce((prev, now) => {
         return (
           prev +
             now.result.drops.reduce((p, n) => {
@@ -723,12 +741,12 @@ export default {
       }, 0)
     },
     allSanity () {
-      return this.TrustedResults.reduce((prev, now) => {
+      return this.selectedResults.reduce((prev, now) => {
         return prev + get.stages.byStageId(now.result.stageId).apCost
       }, 0)
     },
     StageCombineData () {
-      const Results = this.TrustedResults
+      const Results = this.selectedResults
       const Result = {}
       for (const RecognitionResult of Results) {
         const StageCode = get.stages.byStageId(RecognitionResult.result.stageId).code
@@ -750,14 +768,21 @@ export default {
       }
       return Result
     },
-    TrustedResults () {
-      return this.filterResults(['Success'])
-    },
     server () {
       return this.$store.getters['dataSource/server']
     },
     serverLocked () {
       return this.$store.getters['dataSource/serverLocked']
+    },
+    selectedResults () {
+      return this.results.filter((result, index) => {
+        return this.selectedResultsIndex.includes(index)
+      })
+    },
+    resultHasErrorOrWarning () {
+      return this.results.map((result) => {
+        return Boolean(result.result.errors.length || result.result.warnings.length)
+      })
     }
   },
   watch: {
@@ -779,7 +804,7 @@ export default {
       this.$emit('reload')
     },
     async doSubmit () {
-      var batchDrops = await this.formatResults(this.TrustedResults)
+      var batchDrops = await this.formatResults(this.selectedResults)
       const userId = Cookies.get(config.authorization.userId.cookieKey)
       return report.submitRecognitionReport(batchDrops, { source: 'frontend-v2-recognition' }).then(() => {
         const reportedUserId = Cookies.get(config.authorization.userId.cookieKey)
@@ -788,7 +813,7 @@ export default {
             userId: reportedUserId
           })
         }
-        // this.$ga.event("report", "submit_single", this.TrustedResults[this.SubmitDialog.now].result.stageId, 1);
+        // this.$ga.event("report", "submit_single", this.selectedResults[this.SubmitDialog.now].result.stageId, 1);
       })
     },
     submit () {
@@ -880,7 +905,14 @@ export default {
       this.step = 2
       await this.init()
       await this.recognize()
-      console.log(this.results)
+      var selectedResultsIndex = []
+      this.results.map((result, index) => {
+        if (!(result.result.warnings.length || result.result.errors.length)) {
+          return selectedResultsIndex.push(index)
+        }
+      })
+      this.selectedResultsIndex = selectedResultsIndex
+      this.applyPostRecognitionRules()
       this.step = 3
     },
     filterResults (filter) {
@@ -958,6 +990,36 @@ export default {
       document.querySelector('div.crisp-client').style.setProperty('display', 'block', 'important')
       $crisp.push(['do', 'chat:open'])
       $crisp.push(['do', 'message:send', ['text', '掉落识别有问题，我该怎么办？']])
+    },
+    applyPostRecognitionRules () {
+      const timestamps = this.results.map(value => {
+        return value.file.lastModified
+      })
+      const fingerprints = this.results.map(value => {
+        return value.result.fingerprint
+      })
+      this.results.forEach((value, index, array) => {
+        // Apply timestamp check, <10s will add warning
+        var closeTimestamps = false
+        timestamps.forEach((timestamp, i) => {
+          if (Math.abs(timestamp - value.file.lastModified) < 10 * 1000 && i !== index) {
+            closeTimestamps = true
+          }
+        })
+        if (closeTimestamps) {
+          value.result.warnings.push({ type: 'FileTimestamp::TooClose' })
+        }
+        // Apply same fingerprint check, same will add warning
+        var sameFingerprint = false
+        fingerprints.forEach((fingerprint, i) => {
+          if (fingerprint === value.result.fingerprint && i !== index) {
+            sameFingerprint = true
+          }
+        })
+        if (sameFingerprint) {
+          value.result.errors.push({ type: 'Fingerprint::Same' })
+        }
+      })
     }
   }
 }
