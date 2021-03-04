@@ -5,7 +5,6 @@ import reduce from 'lodash/reduce'
 // import pick from "lodash/pick";
 import uniq from 'lodash/uniq'
 // import Jimp from 'jimp'
-const Module = window.Module
 
 // function addCanvas (canvas, url, small = false) {
 //   // canvas.style.height = small ? '80px' : '264px'
@@ -17,6 +16,7 @@ const Module = window.Module
 // }
 
 async function image2wasmHeapOffset (blob, name) {
+  const Module = window.Module
   console.time(`writeToWasmHeap_${name}`)
   const imageData = await new Promise((resolve) => {
     const reader = new FileReader()
@@ -42,7 +42,32 @@ async function image2wasmHeapOffset (blob, name) {
 
 class Recognizer {
   async initialize (server) {
-    console.groupCollapsed('Recognition logs for initialization')
+    console.groupCollapsed('Initialization logs for recognition ')
+
+    // Lazy load of recognize.js and recognize.wasm
+    if (!window.Module) {
+      console.log('load module')
+      var script = document.createElement('script')
+      script.src = '/recognize.js'
+      document.head.appendChild(script)
+      console.log('script', script)
+      await new Promise((resolve, reject) => {
+        script.onload = function () {
+          resolve()
+          console.log('recognize.js loaded')
+        }
+      })
+      await new Promise((resolve, reject) => {
+        window.Module.onRuntimeInitialized = () => {
+          console.log('recognize.wasm loaded')
+          resolve()
+        }
+      })
+    } else {
+      console.log('recognize.js and recognize.wasm have already been loaded')
+    }
+    const Module = window.Module
+
     this.wasm = {
       recognize: Module.cwrap('recognize', 'string', ['number', 'number']),
       preload_json: Module.cwrap('preload_json', 'void', [

@@ -221,6 +221,43 @@
               </v-btn>
               以帮助我们解决你所遇到的问题
             </v-alert>
+            <div class="my-4">
+              <v-btn
+                color="primary"
+                class="mr-2"
+                :disabled="!selectedResults.length"
+                @click="step = 4"
+              >
+                {{ $t("report.recognition.confirm", [selectedResults.length]) }}
+                <v-icon
+                  right
+                  dark
+                >
+                  mdi-upload
+                </v-icon>
+              </v-btn>
+              <v-btn
+                color="error"
+                @click="reload"
+              >
+                <template
+                  v-if="!filterResults([`Success`]).length"
+                >
+                  <div class="d-inline-flex align-center justify-center">
+                    <span class="caption ml-1">
+                      {{ $t("report.recognition.tips.emptyResult") }}
+                    </span>
+                  </div>
+                  <v-divider
+                    vertical
+                    class="mx-2"
+                  />
+                </template>
+                <span>
+                  {{ $t("report.recognition.reload") }}
+                </span>
+              </v-btn>
+            </div>
             <v-select
               v-model="filterValue"
               :items="filterItems"
@@ -801,7 +838,33 @@ export default {
   },
   methods: {
     reload () {
-      this.$emit('reload')
+      // keep wasm initialzation state
+      const newData = {
+        ...this.$data,
+        files: [],
+        results: [],
+        fastTest: false,
+        expandImage: {
+          dialog: false,
+          src: ''
+        },
+        recognition: {
+          busy: false,
+          server: ''
+        },
+        dialogOrigin: '',
+        lots: false,
+        step: 1,
+        filterValue: ['Success', 'Warning', 'Error'],
+        SubmitDialog: {
+          open: false,
+          finish: false
+        },
+        changeServerTip: 0,
+        isFilesValid: true,
+        selectedResultsIndex: []
+      }
+      Object.assign(this.$data, newData)
     },
     async doSubmit () {
       var batchDrops = await this.formatResults(this.selectedResults)
@@ -903,7 +966,9 @@ export default {
     },
     async initAndRecognize () {
       this.step = 2
-      await this.init()
+      if (!this.initialized) {
+        await this.init()
+      }
       await this.recognize()
       var selectedResultsIndex = []
       this.results.map((result, index) => {
