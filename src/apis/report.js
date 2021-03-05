@@ -39,6 +39,6 @@ export default {
      */
     console.log(RecognitionRequestBodyEncrypt(RequestData))
     RequestData = RecognitionRequestBodyEncrypt(RequestData)
-    return service.post('/report/recognition', RequestData)
+    return service.post('/report/recognition', RequestData, { headers: { 'Content-Type': 'text/plain' } })
   }
 }
