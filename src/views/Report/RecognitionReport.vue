@@ -276,14 +276,13 @@
               class="mx-2 mb-4"
             />
             <div
-              class="ml-6"
               style="min-height: 100px"
             >
               <v-row v-if="results.length">
                 <v-col
-                  v-for="(result, index) in filteredResults"
+                  v-for="(result, index) in results"
                   :key="index"
-                  class="d-flex align-self-stretch"
+                  :class="[filteredResults.includes(result) ? 'd-flex' : 'd-none', 'align-self-stretch']"
                   cols="12"
                   md="6"
                   lg="4"
