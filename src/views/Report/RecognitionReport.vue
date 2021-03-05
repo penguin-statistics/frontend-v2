@@ -608,7 +608,7 @@
                     vertical
                     class="mx-2"
                   />
-                  <span> {{ $t("report.recognition.submit") }} (Batch api 无返回 仅测试使用 test6 测试帐号) </span>
+                  <span> {{ $t("report.recognition.submit") }} </span>
                 </v-btn>
               </v-col>
             </v-row>
@@ -655,6 +655,14 @@
           >
             <v-card-text>
               <v-alert
+                v-if="SubmitDialog.error"
+                type="error"
+                class="mt-4"
+              >
+                Error
+              </v-alert>
+              <v-alert
+                v-else
                 type="success"
                 class="mt-4"
               >
@@ -700,7 +708,7 @@
 import Item from '@/components/global/Item'
 import Recognizer from '@/utils/recognizer'
 import PreloaderInline from '@/components/global/PreloaderInline'
-// import snackbar from "@/utils/snackbar";
+import snackbar from '@/utils/snackbar'
 import CDN from '@/mixins/CDN'
 import Theme from '@/mixins/Theme'
 import ImageDrop from '@/components/recognition/ImageDrop'
@@ -736,7 +744,8 @@ export default {
       filterValue: ['Success', 'Warning', 'Error'],
       SubmitDialog: {
         open: false,
-        finish: false
+        finish: false,
+        error: false
       },
       changeServerTip: 0,
       isFilesValid: true,
@@ -857,7 +866,8 @@ export default {
         filterValue: ['Success', 'Warning', 'Error'],
         SubmitDialog: {
           open: false,
-          finish: false
+          finish: false,
+          error: false
         },
         changeServerTip: 0,
         isFilesValid: true,
@@ -875,18 +885,19 @@ export default {
             userId: reportedUserId
           })
         }
-        // this.$ga.event("report", "submit_single", this.selectedResults[this.SubmitDialog.now].result.stageId, 1);
+        this.$ga.event('report', 'submit_recognition', this.selectedResults.map((result) => { return result.stageId }), 1)
+      }).finally(() => {
+        this.SubmitDialog.finish = true
+        this.SubmitDialog.error = false
+      }).catch((e) => {
+        console.log(e)
+        snackbar.networkError()
+        this.SubmitDialog.error = true
       })
     },
     submit () {
       this.SubmitDialog.open = true
       this.doSubmit()
-        .catch(e => {
-          console.error(e)
-        })
-        .finally(() => {
-          this.SubmitDialog.finish = true
-        })
     },
     async init () {
       this.initializing = true
