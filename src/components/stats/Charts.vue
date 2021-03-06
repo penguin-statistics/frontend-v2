@@ -45,11 +45,10 @@
 </template>
 
 <script>
-import formatter from "@/utils/timeFormatter";
-import Theme from "@/mixins/Theme";
-import DialogCard from "@/components/global/DialogCard";
-import { Chart } from "highcharts-vue";
-import timeFormatter from "@/utils/timeFormatter";
+import Theme from '@/mixins/Theme'
+import DialogCard from '@/components/global/DialogCard'
+import { Chart } from 'highcharts-vue'
+import timeFormatter from '@/utils/timeFormatter'
 
 import Highcharts from 'highcharts'
 import exportingInit from 'highcharts/modules/exporting'
@@ -59,8 +58,8 @@ exportingInit(Highcharts)
 exportDataInit(Highcharts)
 
 export default {
-  name: "Charts",
-  components: {DialogCard, Chart},
+  name: 'Charts',
+  components: { DialogCard, Chart },
   mixins: [Theme],
   props: {
     xStart: {
@@ -78,13 +77,13 @@ export default {
     data: {
       type: Object,
       default: () => {
-        return {};
+        return {}
       }
     },
     dataKeys: {
       type: Array,
       default: () => {
-        return [];
+        return []
       }
     },
     sparklineKey: {
@@ -102,56 +101,56 @@ export default {
     meta: {
       type: Object,
       default: () => {
-        return {};
+        return {}
       }
     }
   },
-  data() {
+  data () {
     return {
       initAt: Date.now(),
       showDialog: this.value
-    };
+    }
   },
   computed: {
     highchartsInst () {
       return Highcharts
     },
-    gradient() {
-      return this.dark ?
-        ["rgba(255, 255, 255, .3)", "rgba(255, 255, 255, 1)"] :
-        ["rgba(0, 0, 0, .3)", "rgba(0, 0, 0, 1)"]
+    gradient () {
+      return this.dark
+        ? ['rgba(255, 255, 255, .3)', 'rgba(255, 255, 255, 1)']
+        : ['rgba(0, 0, 0, .3)', 'rgba(0, 0, 0, 1)']
     },
-    sparkline() {
+    sparkline () {
       return {
         width: 14,
         radius: 100,
         padding: 8,
-        lineCap: "round",
+        lineCap: 'round',
         gradient: this.gradient,
         value: this.sparklineValue,
-        gradientDirection: "left"
-      };
+        gradientDirection: 'left'
+      }
     },
-    computedChartsId() {
-      return `${this.initAt.toString()}_${this.chartsId}`;
+    computedChartsId () {
+      return `${this.initAt.toString()}_${this.chartsId}`
     },
-    xAxis() {
-      let array = this.data[this.sparklineKey].map((item, index) => {
-        return new Date(this.xStart + index * this.interval);
-      });
-      return formatter.dates(array, false);
+    xAxis () {
+      const array = this.data[this.sparklineKey].map((item, index) => {
+        return new Date(this.xStart + index * this.interval)
+      })
+      return timeFormatter.dates(array, false)
     },
-    yAxis() {
-      let yAxis = Object.keys(this.data)
+    yAxis () {
+      const yAxis = Object.keys(this.data)
         .map(yAxisKey => {
           if (this.dataKeys.indexOf(yAxisKey) > -1) {
-            return this.data[yAxisKey];
+            return this.data[yAxisKey]
           }
         })
-        .filter(data => data != null);
-      return yAxis;
+        .filter(data => data != null)
+      return yAxis
     },
-    sparklineData() {
+    sparklineData () {
       if (
         this.sparklineKey &&
         this.sparklineSubKey &&
@@ -160,7 +159,7 @@ export default {
         this.data[this.sparklineKey].length &&
         this.data[this.sparklineSubKey].length
       ) {
-        let array = [];
+        const array = []
         for (
           let index = 0;
           index < this.data[this.sparklineKey].length;
@@ -169,44 +168,44 @@ export default {
           if (this.data[this.sparklineSubKey][index]) {
             let temp =
               this.data[this.sparklineKey][index] /
-              this.data[this.sparklineSubKey][index];
-            temp *= 100;
-            array.push(temp);
+              this.data[this.sparklineSubKey][index]
+            temp *= 100
+            array.push(temp)
           } else {
-            array.push(null);
+            array.push(null)
           }
         }
-        return array;
+        return array
       }
-      return [];
+      return []
     },
     filterSparklineData () {
       return this.sparklineData.filter(data => data !== null)
     },
-    sparklineValue() {
+    sparklineValue () {
       if (
         this.sparklineKey &&
         this.sparklineSubKey &&
         this.sparklineData.length
       ) {
-        let noZeroArray = this.filterSparklineData.filter(data => data !== 0);
-        let tempArray = [];
+        const noZeroArray = this.filterSparklineData.filter(data => data !== 0)
+        let tempArray = []
         if (noZeroArray.length > 15) {
-          tempArray = noZeroArray.slice(-15);
+          tempArray = noZeroArray.slice(-15)
         } else {
-          tempArray = this.filterSparklineData;
+          tempArray = this.filterSparklineData
         }
         if (tempArray.length > 1) {
-          return tempArray;
+          return tempArray
         } else {
-          return [0, 0];
+          return [0, 0]
         }
       } else {
-        return null;
+        return null
       }
     },
     lastUpdated () {
-      const last = this.$store.getters["data/updated"]({id: "trends"})
+      const last = this.$store.getters['data/updated']({ id: 'trends' })
       return `${timeFormatter.date(last, true, true)} (${timeFormatter.dayjs(last).fromNow()})`
     },
     chartData () {
@@ -251,7 +250,7 @@ export default {
                 style: {
                   color: theme.text
                 },
-                text: this.$t('stats.trends.set.rate'),
+                text: this.$t('stats.trends.set.rate')
               },
               labels: {
                 format: '{value} %',
@@ -268,7 +267,7 @@ export default {
                 style: {
                   color: theme.text
                 },
-                text: this.$t('stats.trends.set.sample'),
+                text: this.$t('stats.trends.set.sample')
               },
               labels: {
                 style: {
@@ -282,26 +281,26 @@ export default {
           series: [
             {
               name: this.$t('stats.trends.set.sample'),
-              type: "column",
+              type: 'column',
               yAxis: 1,
-              data: this.data["times"],
+              data: this.data.times,
               color: theme.accent1
             },
             {
               name: this.$t('stats.trends.set.drops'),
-              type: "column",
+              type: 'column',
               yAxis: 1,
-              data: this.data["quantity"],
+              data: this.data.quantity,
               color: theme.accent2
             },
             {
               name: this.$t('stats.trends.set.rate'),
-              type: "spline",
+              type: 'spline',
               yAxis: 0,
               data: this.sparklineData,
               tooltip: {
                 valueSuffix: '%',
-                valueDecimals: 2,
+                valueDecimals: 2
               },
               color: theme.accent3,
               marker: {
@@ -332,7 +331,7 @@ export default {
             useHTML: true,
             headerFormat: '<h4 class="subtitle-1" style="margin-left: 2px">{point.key}</h4><table>',
             pointFormat: `<tr style="color: ${theme.text}"><td style="color: {series.color}">{series.name}: </td>` +
-              `<td style="text-align: right"><b>{point.y}</b></td></tr>`,
+              '<td style="text-align: right"><b>{point.y}</b></td></tr>',
             footerFormat: '</table>',
 
             // distance: 8,
@@ -362,7 +361,7 @@ export default {
           chart: {
             backgroundColor: theme.background,
             style: {
-              fontFamily: `"benderregular", SF Mono, "Droid Sans Mono", Ubuntu Mono, Consolas, Courier New, Courier, monospace`,
+              fontFamily: '"benderregular", SF Mono, "Droid Sans Mono", Ubuntu Mono, Consolas, Courier New, Courier, monospace',
               color: theme.text
             }
           },
@@ -375,14 +374,13 @@ export default {
             }
           }
         }
-
       } else {
         return {}
       }
     }
   },
   methods: {}
-};
+}
 </script>
 
 <style scoped>

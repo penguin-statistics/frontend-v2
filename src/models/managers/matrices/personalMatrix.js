@@ -7,10 +7,10 @@ const personalMatrix = new MatrixObjectManager({
     requireAuthorization: true,
     serverSensitive: true,
 
-    url: (server) => `/_private/result/matrix/${server}/personal`,
+    url: (server) => `/_private/result/matrix/${server}/personal`
   },
   ttl: 1000 * 60 * 60 * 1, // 1 hour
   ajaxHooks: commons.defaultAjaxHooks
-});
+})
 
 export default personalMatrix

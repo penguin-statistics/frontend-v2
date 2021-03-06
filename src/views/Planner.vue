@@ -50,7 +50,7 @@
         vertical
         class="mx-4"
       />
-      
+
       <v-dialog
         v-model="ioDialog"
         width="800"
@@ -384,249 +384,252 @@
 </template>
 
 <script>
-  import get from "@/utils/getters";
-  import {mapGetters, mapState} from "vuex";
-  import PlannerIO from "@/components/planner/PlannerIO";
-  import PlannerItemStepper from "@/components/planner/PlannerItemStepper";
-  import PlannerResult from "@/components/planner/PlannerResult";
-  import Console from "@/utils/Console";
-  import MultiStageSelector from "@/components/stats/MultiStageSelector";
-  import planner from "@/apis/planner";
-  import marshaller from "@/utils/marshaller";
-  import snackbar from "@/utils/snackbar";
-  import strings from "@/utils/strings";
-  import PreloaderCard from "@/components/global/PreloaderCard";
-  import performance from "@/utils/performance";
+import get from '@/utils/getters'
+import { mapGetters, mapState } from 'vuex'
+import PlannerIO from '@/components/planner/PlannerIO'
+import PlannerItemStepper from '@/components/planner/PlannerItemStepper'
+import PlannerResult from '@/components/planner/PlannerResult'
+import Console from '@/utils/Console'
+import MultiStageSelector from '@/components/stats/MultiStageSelector'
+import planner from '@/apis/planner'
+import marshaller from '@/utils/marshaller'
+import snackbar from '@/utils/snackbar'
+import strings from '@/utils/strings'
+import PreloaderCard from '@/components/global/PreloaderCard'
+import performance from '@/utils/performance'
 
-  export default {
-    name: "Planner",
-    components: {PreloaderCard, MultiStageSelector, PlannerResult, PlannerItemStepper, PlannerIO},
-    data() {
-      return {
-        calculation: {
-          dialog: false,
-          pending: false,
-          done: false,
-          data: {},
-        },
-        ioDialog: false,
-        excludeDialog: false,
-        reset: {
-          dialog: false,
-          options: {
-            removeOptions: false,
-            removeExcludes: false,
-            removeItems: false,
-          }
+export default {
+  name: 'Planner',
+  components: { PreloaderCard, MultiStageSelector, PlannerResult, PlannerItemStepper, PlannerIO },
+  data () {
+    return {
+      calculation: {
+        dialog: false,
+        pending: false,
+        done: false,
+        data: {}
+      },
+      ioDialog: false,
+      excludeDialog: false,
+      reset: {
+        dialog: false,
+        options: {
+          removeOptions: false,
+          removeExcludes: false,
+          removeItems: false
         }
-        // options: {
-        //   byProduct: false,
-        //   requireExp: false,
-        //   requireLmb: false,
-        //   calculateStore: false
-        // },
+      }
+      // options: {
+      //   byProduct: false,
+      //   requireExp: false,
+      //   requireLmb: false,
+      //   calculateStore: false
+      // },
+    }
+  },
+  computed: {
+    ...mapState('planner', [
+      'items',
+      'options'
+    ]),
+    ...mapGetters('dataSource', ['server']),
+    resultDialog: {
+      get () {
+        return this.calculation.dialog || this.calculation.done || this.calculation.pending
+      },
+      set (v) {
+        this.calculation.dialog = v
+        this.calculation.done = v
       }
     },
-    computed: {
-      ...mapState("planner", [
-        "items",
-        "options",
-      ]),
-      ...mapGetters("dataSource", ["server"]),
-      resultDialog: {
-        get () {
-          return this.calculation.dialog || this.calculation.done || this.calculation.pending
-        },
-        set (v) {
-          this.calculation.dialog = v
-          this.calculation.done = v
-        }
+    excludes: {
+      get () {
+        return this.$store.getters['planner/excludes']
       },
-      excludes: {
-        get () {
-          return this.$store.getters["planner/excludes"]
-        },
-        set (v) {
-          this.$store.commit("planner/changeExcludes", v)
-        }
-      },
-      resetAmount () {
-        return Object.values(this.reset.options)
-          .reduce((prev, item) => prev += item === true, 0)
+      set (v) {
+        this.$store.commit('planner/changeExcludes', v)
       }
     },
-    watch: {
-      items: {
-        handler (value) {
-          this.$store.commit("planner/changeItems", value)
-        },
-        deep: true
+    resetAmount () {
+      return Object.values(this.reset.options)
+        .reduce((prev, item) => {
+          prev += item === true
+          return prev
+        }, 0)
+    }
+  },
+  watch: {
+    items: {
+      handler (value) {
+        this.$store.commit('planner/changeItems', value)
       },
-      options: {
-        handler (value) {
-          this.$store.commit("planner/changeOptions", value)
-        },
-        deep: true
-      },
-      excludes: {
-        handler (value) {
-          this.$store.commit("planner/changeExcludes", value)
-        },
-        deep: true
-      },
-      server () {
-        this.updateItemStructure(this.getInitialItems(), this.items)
-      },
-      'reset.dialog' () {
-        this.clearResetOptions()
-      }
+      deep: true
     },
-
-    created() {
-      const initialItems = this.getInitialItems()
-      if (this.items.length === 0) {
-        this.$store.commit("planner/changeItems", initialItems)
-      }
-      this.updateItemStructure(initialItems, this.items)
+    options: {
+      handler (value) {
+        this.$store.commit('planner/changeOptions', value)
+      },
+      deep: true
     },
+    excludes: {
+      handler (value) {
+        this.$store.commit('planner/changeExcludes', value)
+      },
+      deep: true
+    },
+    server () {
+      this.updateItemStructure(this.getInitialItems(), this.items)
+    },
+    'reset.dialog' () {
+      this.clearResetOptions()
+    }
+  },
 
-    methods: {
-      getInitialItems () {
-        return get.items.all(false)
-          .filter(item => item.itemType === "MATERIAL" && item.itemId.length === 5 || item.itemType === "ARKPLANNER")
-          .map(item => ({
-            id: item.itemId,
-            need: 0,
-            have: 0,
-          }))
-      },
-      getItems() {
-        return get.items.all(false)
-            .filter(item => item.itemType === "MATERIAL" && item.itemId.length === 5 || item.itemType === "ARKPLANNER")
-      },
-      updateItemStructure (target, source) {
-        const results = [];
-        const processedItemIds = [];
-        for (const item of source) {
-          if (target.find(el => el.id === item.id)) {
-            // target have this item
-            results.push(item)
-            processedItemIds.push(item.id)
-          }
-        }
-        for (const item of target) {
-          if (!processedItemIds.find(el => el === item.id)) {
-            // source does NOT have this item
-            results.push(item)
-          }
-        }
+  created () {
+    const initialItems = this.getInitialItems()
+    if (this.items.length === 0) {
+      this.$store.commit('planner/changeItems', initialItems)
+    }
+    this.updateItemStructure(initialItems, this.items)
+  },
 
-        this.$store.commit("planner/changeItems", results)
-      },
-      confirmReset () {
-        this.doReset()
-        this.reset.dialog = false
-      },
-      doReset () {
-        if (this.reset.options.removeItems) this.$store.commit("planner/changeItems", this.getInitialItems())
-        if (this.reset.options.removeOptions) {
-          const options = {};
-          Object.keys(this.options).forEach(el => {
-            this.$set(options, el, false)
-          })
-          this.$store.commit("planner/changeOptions", options)
+  methods: {
+    getInitialItems () {
+      return get.items.all(false)
+        .filter(item => (item.itemType === 'MATERIAL' && item.itemId.length === 5) || item.itemType === 'ARKPLANNER')
+        .map(item => ({
+          id: item.itemId,
+          need: 0,
+          have: 0
+        }))
+    },
+    getItems () {
+      return get.items.all(false)
+        .filter(item => (item.itemType === 'MATERIAL' && item.itemId.length === 5) || item.itemType === 'ARKPLANNER')
+    },
+    updateItemStructure (target, source) {
+      const results = []
+      const processedItemIds = []
+      for (const item of source) {
+        if (target.find(el => el.id === item.id)) {
+          // target have this item
+          results.push(item)
+          processedItemIds.push(item.id)
         }
-        if (this.reset.options.removeExcludes) this.$store.commit("planner/changeExcludes", [])
-        snackbar.launch("success", 7000, "planner.reset.success")
-      },
-      clearResetOptions () {
-        Object.keys(this.reset.options).forEach(key => {this.reset.options[key] = false})
-      },
-      calculate() {
-        Console.info("Planner", "planning with config", {
-          items: this.items,
-          options: this.options,
-          excludes: this.excludes
+      }
+      for (const item of target) {
+        if (!processedItemIds.find(el => el === item.id)) {
+          // source does NOT have this item
+          results.push(item)
+        }
+      }
+
+      this.$store.commit('planner/changeItems', results)
+    },
+    confirmReset () {
+      this.doReset()
+      this.reset.dialog = false
+    },
+    doReset () {
+      if (this.reset.options.removeItems) this.$store.commit('planner/changeItems', this.getInitialItems())
+      if (this.reset.options.removeOptions) {
+        const options = {}
+        Object.keys(this.options).forEach(el => {
+          this.$set(options, el, false)
         })
-        this.calculation.pending = true;
+        this.$store.commit('planner/changeOptions', options)
+      }
+      if (this.reset.options.removeExcludes) this.$store.commit('planner/changeExcludes', [])
+      snackbar.launch('success', 7000, 'planner.reset.success')
+    },
+    clearResetOptions () {
+      Object.keys(this.reset.options).forEach(key => { this.reset.options[key] = false })
+    },
+    calculate () {
+      Console.info('Planner', 'planning with config', {
+        items: this.items,
+        options: this.options,
+        excludes: this.excludes
+      })
+      this.calculation.pending = true
 
-        const timer = performance.timer.ctx(
-            planner.plan(
-                marshaller.planner.plan(this)
-            )
-                .then(({data}) => {
-                  if (data.error === true) {
-                    return snackbar.launch("error", 15000, "planner.calculationError", {
-                      error: data.reason
-                    })
-                  }
-
-                  data.stages = data.stages.map(el => {
-                    el.materials = [];
-                    el.stage = get.stages.byStageId(el.stage)
-                    el.stage.code = strings.translate(el.stage, "code")
-                    for (const [id, value] of Object.entries(el.items)) {
-                      const item = get.items.byItemId(id);
-                      el.materials.push({
-                        name: strings.translate(item, "name"),
-                        item,
-                        value
-                      })
-                    }
-                    return el
-                  });
-                  data.syntheses = data.syntheses.map(el => {
-                    el.target = {
-                      item: get.items.byItemId(el.target)
-                    };
-                    el.target.name = strings.translate(el.target.item, "name");
-                    el.items = [];
-                    for (const [id, value] of Object.entries(el.materials)) {
-                      const item = get.items.byItemId(id);
-                      el.items.push({
-                        name: strings.translate(item, "name"),
-                        item,
-                        value
-                      })
-                    }
-                    return el
-                  });
-                  data.values = data.values.map(el => {
-                    el.materials = [];
-                    for (const {name, value} of el.items) {
-                      if (parseFloat(value) === 0) continue;
-                      const item = get.items.byItemId(name);
-                      el.materials.push({
-                        name: strings.translate(item, "name"),
-                        item,
-                        value
-                      })
-                    }
-                    return el
-                  });
-                  Console.debug("Planner", "received plan", data)
-                  this.$set(this.calculation, "data", data);
-                  this.calculation.done = true
-                })
-                .catch((err) => {
-                  Console.error("Planner", "failed to refresh plan", err)
-                  snackbar.networkError()
-                })
-                .finally(() => {
-                  this.calculation.pending = false;
-                })
+      const timer = performance.timer.ctx(
+        planner.plan(
+          marshaller.planner.plan(this)
         )
-        timer.then(timeDelta => {
-          Console.info("Performance", `planner plan request last ${timeDelta}ms to complete`)
-          this.$ga.time({
-            timingCategory: 'planner',
-            timingVar: 'plan',
-            timingValue: timeDelta
+          .then(({ data }) => {
+            if (data.error === true) {
+              return snackbar.launch('error', 15000, 'planner.calculationError', {
+                error: data.reason
+              })
+            }
+
+            data.stages = data.stages.map(el => {
+              el.materials = []
+              el.stage = get.stages.byStageId(el.stage)
+              el.stage.code = strings.translate(el.stage, 'code')
+              for (const [id, value] of Object.entries(el.items)) {
+                const item = get.items.byItemId(id)
+                el.materials.push({
+                  name: strings.translate(item, 'name'),
+                  item,
+                  value
+                })
+              }
+              return el
+            })
+            data.syntheses = data.syntheses.map(el => {
+              el.target = {
+                item: get.items.byItemId(el.target)
+              }
+              el.target.name = strings.translate(el.target.item, 'name')
+              el.items = []
+              for (const [id, value] of Object.entries(el.materials)) {
+                const item = get.items.byItemId(id)
+                el.items.push({
+                  name: strings.translate(item, 'name'),
+                  item,
+                  value
+                })
+              }
+              return el
+            })
+            data.values = data.values.map(el => {
+              el.materials = []
+              for (const { name, value } of el.items) {
+                if (parseFloat(value) === 0) continue
+                const item = get.items.byItemId(name)
+                el.materials.push({
+                  name: strings.translate(item, 'name'),
+                  item,
+                  value
+                })
+              }
+              return el
+            })
+            Console.debug('Planner', 'received plan', data)
+            this.$set(this.calculation, 'data', data)
+            this.calculation.done = true
           })
+          .catch((err) => {
+            Console.error('Planner', 'failed to refresh plan', err)
+            snackbar.networkError()
+          })
+          .finally(() => {
+            this.calculation.pending = false
+          })
+      )
+      timer.then(timeDelta => {
+        Console.info('Performance', `planner plan request last ${timeDelta}ms to complete`)
+        this.$ga.time({
+          timingCategory: 'planner',
+          timingVar: 'plan',
+          timingValue: timeDelta
         })
-      }
+      })
     }
   }
+}
 </script>
 
 <style scoped>

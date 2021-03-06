@@ -63,54 +63,54 @@
 </template>
 
 <script>
-import AccountManager from "@/components/toolbar/AccountManager";
-import {mapGetters} from "vuex";
+import AccountManager from '@/components/toolbar/AccountManager'
+import { mapGetters } from 'vuex'
 export default {
-  name: "DataSourceToggle",
+  name: 'DataSourceToggle',
   components: {
     AccountManager
   },
-  data() {
+  data () {
     return {
       dialog: false,
       prefetchingResources: false,
       dataSourceId: null
-    };
+    }
   },
   computed: {
     ...mapGetters('auth', ['loggedIn']),
     ...mapGetters('dataSource', ['source']),
     dataSource: {
-      get() {
-        return this.source;
+      get () {
+        return this.source
       },
-      async set(value) {
+      async set (value) {
         switch (value) {
-          case "global":
-            break;
-          case "personal":
+          case 'global':
+            break
+          case 'personal':
             // refresh personal data
             if (!this.loggedIn) {
               // please login
-              this.dialog = true;
-              return;
+              this.dialog = true
+              return
             }
             // fetch data
-            this.$store.dispatch("data/refreshPersonalMatrix");
+            this.$store.dispatch('data/refreshPersonalMatrix')
             // change data source after fetch data
-            break;
+            break
         }
-        this.$store.commit("dataSource/changeSource", value);
+        this.$store.commit('dataSource/changeSource', value)
       }
     }
   },
   methods: {
-    afterLogin() {
-      this.dialog = false;
-      this.dataSource = "personal";
+    afterLogin () {
+      this.dialog = false
+      this.dataSource = 'personal'
     }
   }
-};
+}
 </script>
 
 <style scoped>

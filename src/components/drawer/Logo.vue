@@ -31,13 +31,13 @@
 </template>
 
 <script>
-  import Theme from "@/mixins/Theme";
-  import CDN from "@/mixins/CDN";
+import Theme from '@/mixins/Theme'
+import CDN from '@/mixins/CDN'
 
-  export default {
-    name: "Logo",
-    mixins: [Theme, CDN]
-  }
+export default {
+  name: 'Logo',
+  mixins: [Theme, CDN]
+}
 </script>
 
 <style scoped>

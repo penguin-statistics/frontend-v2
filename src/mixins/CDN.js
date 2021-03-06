@@ -1,5 +1,5 @@
-import config from "@/config"
-import mirror from "@/utils/mirror";
+import config from '@/config'
+import mirror from '@/utils/mirror'
 
 export default {
   methods: {
@@ -10,5 +10,5 @@ export default {
         return config.cdn.cn + path
       }
     }
-  },
+  }
 }

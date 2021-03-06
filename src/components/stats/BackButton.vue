@@ -43,10 +43,10 @@
 </template>
 
 <script>
-import Theme from "@/mixins/Theme";
+import Theme from '@/mixins/Theme'
 
 export default {
-name: "BackButton",
+  name: 'BackButton',
   mixins: [Theme],
   props: {
   /** active == true means the component will now display a button style **/
@@ -58,7 +58,7 @@ name: "BackButton",
       type: String,
       required: true
     }
-  },
+  }
 }
 </script>
 

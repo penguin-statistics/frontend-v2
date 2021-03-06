@@ -10,7 +10,8 @@
   },
   "extends": [
     "plugin:vue/recommended",
-    "eslint:recommended"
+    "eslint:recommended",
+    "@vue/standard"
   ],
   "rules": {
     "no-console": "off",
@@ -19,7 +20,13 @@
     "vuetify/no-legacy-grid": "error",
     "vue/no-v-html": "off",
     "vue/no-template-shadow": "off",
-    "vue/valid-template-root": "off"
+    "vue/valid-template-root": "off",
+    "no-tabs": [
+      "error",
+      {
+        "allowIndentationTabs": true
+      }
+    ]
   },
   "parserOptions": {
     "parser": "babel-eslint"

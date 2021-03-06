@@ -14,34 +14,34 @@
 </template>
 
 <script>
-  export default {
-    name: "OffTitle",
-    props: {
-      content: {
-        type: String,
-        required: true
-      },
-      small: {
-        type: Boolean,
-        default () {
-          return false
-        }
-      }
+export default {
+  name: 'OffTitle',
+  props: {
+    content: {
+      type: String,
+      required: true
     },
-    computed: {
-      isEastAsianLang () {
-        return ["zh", "ja", "ko"].includes(this.$i18n.locale)
-      },
-      segments() {
-        if (this.isEastAsianLang) {
-          // East asian languages (kanji)
-          return this.content.split("")
-        } else {
-          return this.content.split(" ")
-        }
+    small: {
+      type: Boolean,
+      default () {
+        return false
       }
+    }
+  },
+  computed: {
+    isEastAsianLang () {
+      return ['zh', 'ja', 'ko'].includes(this.$i18n.locale)
     },
+    segments () {
+      if (this.isEastAsianLang) {
+        // East asian languages (kanji)
+        return this.content.split('')
+      } else {
+        return this.content.split(' ')
+      }
+    }
   }
+}
 </script>
 
 <style scoped>

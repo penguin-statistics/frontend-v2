@@ -43,18 +43,18 @@
 
 <script>
 export default {
-name: "GlobalSearchNavigation",
+  name: 'GlobalSearchNavigation',
   computed: {
-    searching() {
+    searching () {
       return this.$route.name === 'Search'
     },
-    activeClass() {
+    activeClass () {
       return {
-        "white--text": this.$vuetify.theme.dark,
-        "list-active": true
+        'white--text': this.$vuetify.theme.dark,
+        'list-active': true
       }
     }
-  },
+  }
 }
 </script>
 

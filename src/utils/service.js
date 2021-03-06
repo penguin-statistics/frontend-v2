@@ -1,27 +1,32 @@
 import axios from 'axios'
-import Console from "@/utils/Console";
-import store from "@/store";
-import mirror from "@/utils/mirror";
-import semver from "semver";
-import config from "@/config"
-import i18n from "@/i18n";
+import Console from '@/utils/Console'
+import store from '@/store'
+import mirror from '@/utils/mirror'
+import semver from 'semver'
+import config from '@/config'
+import i18n from '@/i18n'
 
-let baseURL;
+let baseURL
 if (mirror.global.isCurrent() || mirror.cn.isCurrent()) {
   // those are official mirrors. just use the relative path.
-  baseURL = "/PenguinStats/api/v2"
-} else if (process.env.NODE_ENV === "development") {
+  baseURL = '/PenguinStats/api/v2'
+} else if (process.env.NODE_ENV === 'development') {
   // developing at localhost.
   // also use the relative path, but we left the task to WebpackDevServer for proxying local API responses
   // so use relative path.
-  baseURL = "/PenguinStats/api/v2"
-} else if (~window.location.href.indexOf("penguin-upyun-cdn.test.galvincdn.com")) {
+  baseURL = '/PenguinStats/api/v2'
+} else if (process.env.VUE_APP_IS_DOCKER === 'true') {
+  // docker build
+  // backend and frontend are on the same server
+  // so use relative path.
+  baseURL = '/PenguinStats/api/v2'
+} else if (~window.location.href.indexOf('penguin-upyun-cdn.test.galvincdn.com')) {
   // we are just testing the new cdn :D
-  baseURL = "/PenguinStats/api/v2"
+  baseURL = '/PenguinStats/api/v2'
 } else {
   // high chance of using a staging environment where api is not available with the frontend deployment.
   // use the absolute endpoint to get the juicy responses :)
-  baseURL = "https://penguin-stats.io/PenguinStats/api/v2"
+  baseURL = 'https://penguin-stats.io/PenguinStats/api/v2'
 }
 
 const service = axios.create({
@@ -29,20 +34,20 @@ const service = axios.create({
   baseURL,
   withCredentials: true,
   timeout: 90 * 1000 // 1.5 minute
-});
+})
 
-const deployingFlag = `<meta name="penguin:exception" content="type=deploying">`
+const deployingFlag = '<meta name="penguin:exception" content="type=deploying">'
 
-function needsUpdate(response) {
-  if ("x-penguin-upgrade" in response.headers) {
+function needsUpdate (response) {
+  if ('x-penguin-upgrade' in response.headers) {
     // X-Penguin-Upgrade: Client version must be outdated due to
     // API *endpoint* changes or other changes that must be updated.
     return true
   }
-  if ("x-penguin-compatible" in response.headers) {
-    const version = response.headers["x-penguin-compatible"]
+  if ('x-penguin-compatible' in response.headers) {
+    const version = response.headers['x-penguin-compatible']
       // replace prefix
-      .replace(new RegExp("^" + config.project + "@"), "")
+      .replace(new RegExp('^' + config.project + '@'), '')
 
     const cleaned = semver.clean(version)
 
@@ -61,23 +66,22 @@ function needsUpdate(response) {
 // Add a response interceptor
 service.interceptors.response.use(function (response) {
   if (needsUpdate(response)) {
-    store.commit("ui/setOutdated", true)
+    store.commit('ui/setOutdated', true)
   }
 
-  return response;
+  return response
 }, function (error) {
   if (error.response) {
-
     if (needsUpdate(error.response)) {
-      store.commit("ui/setOutdated", true)
+      store.commit('ui/setOutdated', true)
     }
 
     // eliminate `user not found` errors (reports 404).
     if (error.response.status !== 404) {
-      Console.error("Ajax", "failed", error)
+      Console.error('Ajax', 'failed', error)
     }
 
-    let message;
+    let message
 
     if (error && error.response && error.response.data && error.response.data.indexOf(deployingFlag) >= 0) {
       message = i18n.t('fetch.failed.deploying')
@@ -85,16 +89,16 @@ service.interceptors.response.use(function (response) {
       message = error.response.data || error.message
     }
 
-    error.errorMessage = `(s=${error.response.status}) ${message}`;
+    error.errorMessage = `(s=${error.response.status}) ${message}`
   } else {
-    error.errorMessage = `(s=-1) ${error.message}`;
+    error.errorMessage = `(s=-1) ${error.message}`
   }
   // Do something with response error
-  return Promise.reject(error);
-});
+  return Promise.reject(error)
+})
 
 const externalService = axios.create({
   withCredentials: false
 })
 
-export {service, externalService}
+export { service, externalService }

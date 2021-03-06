@@ -251,232 +251,232 @@
 </template>
 
 <script>
-  import get from "@/utils/getters";
-  import ItemStepper from "@/components/global/ItemStepper";
-  import Vue from "vue";
-  import strings from "@/utils/strings";
-  import StageSelector from "@/components/stats/StageSelector";
-  import Theme from "@/mixins/Theme";
-  import ItemIcon from "@/components/global/ItemIcon";
-  import validator from "@/utils/validator";
-  import existUtils from "@/utils/existUtils";
+import get from '@/utils/getters'
+import ItemStepper from '@/components/global/ItemStepper'
+import Vue from 'vue'
+import strings from '@/utils/strings'
+import StageSelector from '@/components/stats/StageSelector'
+import Theme from '@/mixins/Theme'
+import ItemIcon from '@/components/global/ItemIcon'
+import validator from '@/utils/validator'
+import existUtils from '@/utils/existUtils'
 
-  // colors: [dark, light]
-  const categories = [
-    {
-      id: "NORMAL_DROP",
-      colors: ["#cacbcc", "#4d4d4d"]
-    },
-    {
-      id: "SPECIAL_DROP",
-      colors: ["#e26d2c", "#b35522"]
-    },
-    {
-      id: "EXTRA_DROP",
-      colors: ["#9aba3d", "#8aa637"]
+// colors: [dark, light]
+const categories = [
+  {
+    id: 'NORMAL_DROP',
+    colors: ['#cacbcc', '#4d4d4d']
+  },
+  {
+    id: 'SPECIAL_DROP',
+    colors: ['#e26d2c', '#b35522']
+  },
+  {
+    id: 'EXTRA_DROP',
+    colors: ['#9aba3d', '#8aa637']
+  }
+]
+
+export default {
+  name: 'ReportEditor',
+  components: { ItemIcon, StageSelector, ItemStepper },
+  mixins: [Theme],
+  props: {
+    reportdata: {
+      type: Object,
+      require: true,
+      default () {
+        return {}
+      }
     }
-  ];
+  },
+  data: () => ({
+    submitting: false,
+    submitted: false,
 
-  export default {
-    name: "ReportEditor",
-    components: { ItemIcon, StageSelector, ItemStepper },
-    mixins: [Theme],
-    props: {
-      reportdata: {
-        type: Object,
-        require: true,
-        default() {
-          return {};
+    undoing: false,
+    undid: false,
+
+    lastSubmissionId: null,
+
+    results: [],
+    furnitureInternal: false,
+    // invalidCount: 0,
+    eventBus: new Vue(),
+
+    selected: {
+      zone: null,
+      stage: null
+    }
+  }),
+  computed: {
+    serverName () {
+      return this.$t('server.servers.' + this.$store.getters['dataSource/server'])
+    },
+    strings () {
+      return strings
+    },
+    selectedZone () {
+      if (!this.selected.zone) return {}
+      return get.zones.byZoneId(this.selected.zone, false)
+    },
+    selectedStage () {
+      if (!this.selected.stage) return {}
+      return get.stages.byStageId(this.selected.stage)
+    },
+    furniture: {
+      get () {
+        return this.furnitureInternal
+      },
+      set (val) {
+        this.furnitureInternal = val
+        if (val === true) {
+          this.results.push({
+            dropType: 'FURNITURE',
+            itemId: 'furni',
+            quantity: 1
+          })
+        } else if (val === false) {
+          this.results = this.results.filter(el => el.dropType !== 'FURNITURE' && el.itemId !== 'furni')
         }
       }
     },
-    data: () => ({
-      submitting: false,
-      submitted: false,
-
-      undoing: false,
-      undid: false,
-
-      lastSubmissionId: null,
-
-      results: [],
-      furnitureInternal: false,
-      // invalidCount: 0,
-      eventBus: new Vue(),
-
-      selected: {
-        zone: null,
-        stage: null
+    dropInfos () {
+      const dropInfos = {
+        type: [],
+        item: []
       }
-    }),
-    computed: {
-      serverName() {
-        return this.$t("server.servers." + this.$store.getters["dataSource/server"]);
-      },
-      strings() {
-        return strings;
-      },
-      selectedZone() {
-        if (!this.selected.zone) return {};
-        return get.zones.byZoneId(this.selected.zone, false);
-      },
-      selectedStage() {
-        if (!this.selected.stage) return {};
-        return get.stages.byStageId(this.selected.stage);
-      },
-      furniture: {
-        get() {
-          return this.furnitureInternal;
-        },
-        set(val) {
-          this.furnitureInternal = val;
-          if (val === true) {
-            this.results.push({
-              dropType: "FURNITURE",
-              itemId: "furni",
-              quantity: 1
-            });
-          } else if (val === false) {
-            this.results = this.results.filter(el => el.dropType !== "FURNITURE" && el.itemId !== "furni");
-          }
-        }
-      },
-      dropInfos() {
-        const dropInfos = {
-          type: [],
-          item: []
-        };
 
-        const stages = this.selectedStage;
-        if (!this.selectedZone || this.invalidStage || !this.selectedZone.zoneId) return null;
+      const stages = this.selectedStage
+      if (!this.selectedZone || this.invalidStage || !this.selectedZone.zoneId) return null
 
-        for (const drop of stages["dropInfos"]) {
-          if (drop["itemId"]) {
-            dropInfos.item.push({
-              ...drop,
-              item: get.items.byItemId(drop["itemId"])
-            });
-          } else {
-            // when an itemId is not presented, a category drop bound is described.
-            dropInfos.type.push(drop);
-          }
-        }
-
-        dropInfos.item.sort((a, b) => a.item.sortId - b.item.sortId);
-
-        return dropInfos;
-      },
-
-      stageItems() {
-        if (this.invalidStage) return [];
-
-        const items = [];
-
-        for (const { id, colors } of categories) {
-          const category = id;
-          const categoryDrops = [];
-
-          for (const itemDropInfo of this.dropInfos.item.filter(v => v["dropType"] === category)) {
-            const dropType = itemDropInfo["dropType"];
-            if (dropType === "FURNITURE") continue;
-            if (!validator.have(items, dropType)) {
-              this.$set(items, dropType, []);
-            }
-
-            categoryDrops.push(itemDropInfo);
-          }
-
-          if (categoryDrops.length === 0) continue;
-
-          items.push({
-            id: category,
-            colors,
-            drops: categoryDrops
-          });
-        }
-
-        return items;
-      },
-
-      isGacha() {
-        return this.selected.stage && this.selectedStage["isGacha"];
-      },
-
-      slashStripClasses() {
-        return { "slash-strip--warning": this.validation.rate <= 2, "slash-strip--danger": this.validation.rate > 2 };
-      },
-      invalidStage() {
-        if (this.selected.zone && this.selected.stage) {
-          const zone = get.zones.byZoneId(this.selected.zone, false);
-          if (!zone || !zone.zoneId || !existUtils.existence(zone)) return "INVALID";
-          if (zone.isOutdated) return "EXPIRED";
-
-          const stage = get.stages.byStageId(this.selected.stage);
-          if (!stage || !stage.stageId || !existUtils.existence(stage)) return "INVALID";
+      for (const drop of stages.dropInfos) {
+        if (drop.itemId) {
+          dropInfos.item.push({
+            ...drop,
+            item: get.items.byItemId(drop.itemId)
+          })
         } else {
-          return "INVALID";
+          // when an itemId is not presented, a category drop bound is described.
+          dropInfos.type.push(drop)
         }
-        return false;
       }
+
+      dropInfos.item.sort((a, b) => a.item.sortId - b.item.sortId)
+
+      return dropInfos
     },
-    mounted() {
-      if(!this.reportdata.Items) return;
-      this.furniture = this.reportdata.Items.some(a => a.ItemId == "furni");
-    },
-    methods: {
-      getItemCount(item, type) {
-        if(!this.reportdata.Items) return;
-        let Itm = 0;
-        for (let Item of this.reportdata.Items) {
-          if (Item.Type.type == type && item.itemId == Item.ItemId) {
-            return Item.Count;
-          } else if (item.itemId == Item.ItemId) {
-            Itm = Item.Count;
+
+    stageItems () {
+      if (this.invalidStage) return []
+
+      const items = []
+
+      for (const { id, colors } of categories) {
+        const category = id
+        const categoryDrops = []
+
+        for (const itemDropInfo of this.dropInfos.item.filter(v => v.dropType === category)) {
+          const dropType = itemDropInfo.dropType
+          if (dropType === 'FURNITURE') continue
+          if (!validator.have(items, dropType)) {
+            this.$set(items, dropType, [])
           }
+
+          categoryDrops.push(itemDropInfo)
         }
-        return Itm;
-      },
-      goToPage(name) {
-        this.$router.push({ name: name });
-      },
-      select({ zone, stage }) {
-        this.reset();
-        this.selected.zone = zone;
-        this.selected.stage = stage;
-      },
-      getItem(itemId) {
-        return get.items.byItemId(itemId);
-      },
-      handleChange(dropType, [itemId, diff]) {
-        let item = this.getOrCreateItem(dropType, itemId);
-        item.quantity += diff;
-        item.quantity <= 0 && this.results.splice(this.results.indexOf(item), 1);
-      },
-      getOrCreateItem(dropType, itemId) {
-        const item = this.results.find(v => v.itemId === itemId && v.dropType === dropType);
-        if (item === undefined) {
-          const newLength = this.results.push({
-            dropType,
-            itemId,
-            quantity: 0
-          });
-          return this.results[newLength - 1];
-        }
-        return item;
-      },
-      reset() {
-        this.results = [];
-        this.eventBus.$emit("reset");
-        this.furniture = false;
-      },
-      submit() {
-        this.$emit("change", {
-          Stage: get.stages.byStageId(this.selected.stage).code,
-          Items: this.results
-        });
+
+        if (categoryDrops.length === 0) continue
+
+        items.push({
+          id: category,
+          colors,
+          drops: categoryDrops
+        })
       }
+
+      return items
+    },
+
+    isGacha () {
+      return this.selected.stage && this.selectedStage.isGacha
+    },
+
+    slashStripClasses () {
+      return { 'slash-strip--warning': this.validation.rate <= 2, 'slash-strip--danger': this.validation.rate > 2 }
+    },
+    invalidStage () {
+      if (this.selected.zone && this.selected.stage) {
+        const zone = get.zones.byZoneId(this.selected.zone, false)
+        if (!zone || !zone.zoneId || !existUtils.existence(zone)) return 'INVALID'
+        if (zone.isOutdated) return 'EXPIRED'
+
+        const stage = get.stages.byStageId(this.selected.stage)
+        if (!stage || !stage.stageId || !existUtils.existence(stage)) return 'INVALID'
+      } else {
+        return 'INVALID'
+      }
+      return false
     }
-  };
+  },
+  mounted () {
+    if (!this.reportdata.Items) return
+    this.furniture = this.reportdata.Items.some(a => a.ItemId === 'furni')
+  },
+  methods: {
+    getItemCount (item, type) {
+      if (!this.reportdata.Items) return
+      let Itm = 0
+      for (const Item of this.reportdata.Items) {
+        if (Item.Type.type === type && item.itemId === Item.ItemId) {
+          return Item.Count
+        } else if (item.itemId === Item.ItemId) {
+          Itm = Item.Count
+        }
+      }
+      return Itm
+    },
+    goToPage (name) {
+      this.$router.push({ name: name })
+    },
+    select ({ zone, stage }) {
+      this.reset()
+      this.selected.zone = zone
+      this.selected.stage = stage
+    },
+    getItem (itemId) {
+      return get.items.byItemId(itemId)
+    },
+    handleChange (dropType, [itemId, diff]) {
+      const item = this.getOrCreateItem(dropType, itemId)
+      item.quantity += diff
+      item.quantity <= 0 && this.results.splice(this.results.indexOf(item), 1)
+    },
+    getOrCreateItem (dropType, itemId) {
+      const item = this.results.find(v => v.itemId === itemId && v.dropType === dropType)
+      if (item === undefined) {
+        const newLength = this.results.push({
+          dropType,
+          itemId,
+          quantity: 0
+        })
+        return this.results[newLength - 1]
+      }
+      return item
+    },
+    reset () {
+      this.results = []
+      this.eventBus.$emit('reset')
+      this.furniture = false
+    },
+    submit () {
+      this.$emit('change', {
+        Stage: get.stages.byStageId(this.selected.stage).code,
+        Items: this.results
+      })
+    }
+  }
+}
 </script>
 
 <style scoped>

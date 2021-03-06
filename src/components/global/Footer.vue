@@ -68,23 +68,23 @@
 </template>
 
 <script>
-  import Mirror from "@/mixins/Mirror";
-  import config from "@/config";
-  import CDN from "@/mixins/CDN";
-  import SpecialUI from "@/mixins/SpecialUI";
+import Mirror from '@/mixins/Mirror'
+import config from '@/config'
+import CDN from '@/mixins/CDN'
+import SpecialUI from '@/mixins/SpecialUI'
 
-  export default {
-    name: "Footer",
-    mixins: [Mirror, CDN, SpecialUI],
-    computed: {
-      version () {
-        return {
-          VERSION: config.version || "v0.0.0",
-          GIT_COMMIT: GIT_COMMIT.trim() || "unknown"
-        }
+export default {
+  name: 'Footer',
+  mixins: [Mirror, CDN, SpecialUI],
+  computed: {
+    version () {
+      return {
+        VERSION: config.version || 'v0.0.0',
+        GIT_COMMIT: GIT_COMMIT.trim() || 'unknown'
       }
-    },
+    }
   }
+}
 </script>
 
 <style scoped>

@@ -11,13 +11,13 @@
         <v-row no-gutters>
           <v-col
             cols="4"
-            class="text-subtitle-1 text-center"
+            class="subtitle-1 text-center"
           >
             {{ $t(`server.servers.${server}`) }}
           </v-col>
           <v-col
             cols="8"
-            class="text-subtitle-1 text-center"
+            class="subtitle-1 text-center"
           >
             <svg
               v-for="index of [1, 2, 3]"
@@ -41,7 +41,7 @@
         <v-row no-gutters>
           <v-col
             cols="12"
-            class="text-h4 text-center"
+            class="display-1 text-center"
           >
             {{ $t("report.recognition.result") }}
           </v-col>
@@ -65,7 +65,10 @@
             size="64"
             color="success"
           >
-            <v-icon size="48">
+            <v-icon
+              size="48"
+              color="white"
+            >
               mdi-check-bold
             </v-icon>
           </v-avatar>
@@ -84,7 +87,10 @@
             size="64"
             color="warning"
           >
-            <v-icon size="48">
+            <v-icon
+              size="48"
+              color="white"
+            >
               mdi-alert
             </v-icon>
           </v-avatar>
@@ -103,7 +109,10 @@
             size="64"
             color="red darken-3"
           >
-            <v-icon size="48">
+            <v-icon
+              size="48"
+              color="white"
+            >
               mdi-bug
             </v-icon>
           </v-avatar>
@@ -152,9 +161,9 @@ export default {
         return newshouldShowStar
       }
     },
-    server() {
-      return this.$store.getters["dataSource/server"];
-    },
+    server () {
+      return this.$store.getters['dataSource/server']
+    }
   }
 }
 </script>

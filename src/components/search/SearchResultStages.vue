@@ -25,11 +25,11 @@
 </template>
 
 <script>
-import get from "@/utils/getters"
-import strings from "@/utils/strings";
+import get from '@/utils/getters'
+import strings from '@/utils/strings'
 
 export default {
-  name: "SearchResultStages",
+  name: 'SearchResultStages',
   props: {
     result: {
       type: Object,
@@ -37,10 +37,10 @@ export default {
     }
   },
   computed: {
-    name() {
-      const zoneName = strings.translate(this.zone, "zoneName")
+    name () {
+      const zoneName = strings.translate(this.zone, 'zoneName')
       const zoneType = this.$t('zone.types.' + this.zone.type)
-      const stageCode = strings.translate(this.stage, "code")
+      const stageCode = strings.translate(this.stage, 'code')
 
       return {
         title: (zoneName ? zoneName + ' — ' : '') + stageCode,
@@ -48,13 +48,13 @@ export default {
         preview: this.zone.isPermanentOpen ? this.$t('zone.types.ACTIVITY_PERMANENT') : stageCode
       }
     },
-    stage() {
+    stage () {
       return get.stages.byStageId(this.result.stageId, false)
     },
-    zone() {
+    zone () {
       return get.zones.byZoneId(this.stage.zoneId, false)
     }
-  },
+  }
 }
 </script>
 

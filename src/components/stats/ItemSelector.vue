@@ -30,47 +30,47 @@
 </template>
 
 <script>
-  import get from "@/utils/getters";
-  import Item from "@/components/global/Item";
+import get from '@/utils/getters'
+import Item from '@/components/global/Item'
 
-  export default {
-    name: "ItemSelector",
-    components: {Item},
-    // props: {
-    //   items: {
-    //     type: Array,
-    //     required: true
-    //   }
-    // },
-    computed: {
-      items () {
-        const all = get.items.all();
-        const categories = get.items.validItemTypes;
-        const results = {};
-        let already = [];
-        for (const category of categories) {
-          // if (category === "OTHERS") {
-          //   // "others"
-          //   results[category] = all.filter(el => already.find(e => e.itemId === el.itemId));
-          //   results[category].sort((a, b) => {
-          //     return a.sortId - b.sortId
-          //   });
-          // } else {
-            // literal types
-            results[category] = all.filter(el => el.itemType === category);
-            // move 3003 to the last member
-            results[category].sort((a, b) => {
-              if (a.itemId === "3003") return 1;
-              if (b.itemId === "3003") return -1;
-              return a.sortId - b.sortId;
-            });
-            already = [...already, ...results[category]]
-          // }
-        }
-        return results;
+export default {
+  name: 'ItemSelector',
+  components: { Item },
+  // props: {
+  //   items: {
+  //     type: Array,
+  //     required: true
+  //   }
+  // },
+  computed: {
+    items () {
+      const all = get.items.all()
+      const categories = get.items.validItemTypes
+      const results = {}
+      let already = []
+      for (const category of categories) {
+        // if (category === "OTHERS") {
+        //   // "others"
+        //   results[category] = all.filter(el => already.find(e => e.itemId === el.itemId));
+        //   results[category].sort((a, b) => {
+        //     return a.sortId - b.sortId
+        //   });
+        // } else {
+        // literal types
+        results[category] = all.filter(el => el.itemType === category)
+        // move 3003 to the last member
+        results[category].sort((a, b) => {
+          if (a.itemId === '3003') return 1
+          if (b.itemId === '3003') return -1
+          return a.sortId - b.sortId
+        })
+        already = [...already, ...results[category]]
+        // }
       }
+      return results
     }
   }
+}
 </script>
 
 <style scoped>

@@ -2,31 +2,31 @@ export default {
   namespaced: true,
   state: {
     /** current data source "global" | "personal" */
-    source: "global",
+    source: 'global',
     /** current data source server "CN" | "US" | ... */
-    server: "CN",
+    server: 'CN',
     serverLocked: 0
   },
   mutations: {
     changeSource: (state, value) => {
-      state.source = value;
+      state.source = value
     },
     changeServer: (state, value) => {
-      state.server = value;
+      state.server = value
     },
-    lockServer(state) {
-      state.serverLocked = 1;
+    lockServer (state) {
+      state.serverLocked = 1
     },
-    unlockServer(state) {
-      state.serverLocked = 0;
+    unlockServer (state) {
+      state.serverLocked = 0
     },
     changeLockState: (state, value) => {
-      state.serverLocked = value;
-    },
+      state.serverLocked = value
+    }
   },
   getters: {
     source: state => state.source,
     server: state => state.server,
     serverLocked: state => state.serverLocked
   }
-};
+}

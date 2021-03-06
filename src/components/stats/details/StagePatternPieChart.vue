@@ -9,15 +9,15 @@
 </template>
 
 <script>
-import get from "@/utils/getters";
+import get from '@/utils/getters'
 
-import { Chart } from "highcharts-vue";
+import { Chart } from 'highcharts-vue'
 
 import Highcharts from 'highcharts'
 
 export default {
-  name: "StagePatternPieChart",
-  components: {Chart},
+  name: 'StagePatternPieChart',
+  components: { Chart },
   props: {
     patterns: {
       type: Array,
@@ -28,19 +28,19 @@ export default {
       default: () => 0
     }
   },
-  data() {
+  data () {
     return {
       hcInst: Highcharts
     }
   },
   computed: {
-    items() {
+    items () {
       return this.patterns.map(el => {
         return {
           ...el,
           pattern: el.pattern.drops.map(ell => ({
             ...ell,
-            item: get.items.byItemId(ell.itemId),
+            item: get.items.byItemId(ell.itemId)
           }))
         }
       })
@@ -53,30 +53,30 @@ export default {
       const config = {
         chart: {
           type: 'pie',
-          backgroundColor: "rgba(0, 0, 0, 0)",
+          backgroundColor: 'rgba(0, 0, 0, 0)',
           style: {
-            fontFamily: `"benderregular", SF Mono, "Droid Sans Mono", Ubuntu Mono, Consolas, Courier New, Courier, monospace`,
+            fontFamily: '"benderregular", SF Mono, "Droid Sans Mono", Ubuntu Mono, Consolas, Courier New, Courier, monospace',
             color: theme.text
-          },
+          }
           // width: 400
         },
 
         title: {
           style: {
-            display: "none"
-          },
+            display: 'none'
+          }
         },
 
         series: [
           {
-            name: "pattern",
+            name: 'pattern',
             data: this.items.map(el => {
               const patterns = []
               for (const pattern of el.pattern) patterns.push(`${pattern.quantity}×${pattern.item.name}`)
 
               return {
                 i: el.i,
-                name: patterns.join(" + ") || this.$t('pattern.empty'),
+                name: patterns.join(' + ') || this.$t('pattern.empty'),
                 y: el.percentage * 100,
                 percentageText: el.percentageText,
                 quantity: el.quantity
@@ -87,7 +87,7 @@ export default {
               formatter: function () {
                 let label = ''
                 if (this.point.i <= 3) label = `${this.key}<br />`
-                return this.point.i <= 10 ? label + `#${this.point.i} — ${this.percentage.toFixed(1)} %` : null;
+                return this.point.i <= 10 ? label + `#${this.point.i} — ${this.percentage.toFixed(1)} %` : null
               },
               distance: -30,
               enabled: true
@@ -139,7 +139,7 @@ export default {
 
         plotOptions: {
           pie: {
-            shadow: false,
+            shadow: false
             // allowPointSelect: true,
             // cursor: 'pointer',
             // dataLabels: {
@@ -150,10 +150,10 @@ export default {
           series: {
             point: {
               events: {
-                mouseOver: function() {
+                mouseOver: function () {
                   self.$emit('update:active', this.options.i)
                 },
-                mouseOut: function() {
+                mouseOut: function () {
                   self.$emit('update:active', 0)
                 }
               }
@@ -161,14 +161,14 @@ export default {
           }
         },
 
-        exporting: { enabled: false },
+        exporting: { enabled: false }
       }
 
       // console.log(config)
 
       return config
     }
-  },
+  }
 }
 </script>
 

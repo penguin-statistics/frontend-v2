@@ -17,14 +17,14 @@
 
 <script>
 export default {
-  name: "NativeDebugger",
-  data() {
+  name: 'NativeDebugger',
+  data () {
     return {
       counter: 0
     }
   },
   methods: {
-    react() {
+    react () {
       this.counter += 1
     }
   }

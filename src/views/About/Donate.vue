@@ -75,8 +75,8 @@
 </i18n>
 
 <template>
-  <v-card 
-    elevation="5" 
+  <v-card
+    elevation="5"
     class="bkop-light pa-6"
   >
     <template v-if="hide && (isCNMirror || isIOS)">
@@ -114,7 +114,7 @@
             </v-tooltip>
             {{ $t('donate.donate_4') }}
           </div>
-          
+
           <BackdropCard
             darken
             hover
@@ -354,30 +354,30 @@
 </template>
 
 <script>
-import Theme from "@/mixins/Theme";
-import BackdropCard from "@/components/global/BackdropCard";
-import Mirror from "@/mixins/Mirror";
+import Theme from '@/mixins/Theme'
+import BackdropCard from '@/components/global/BackdropCard'
+import Mirror from '@/mixins/Mirror'
 
 export default {
-  name: "Donate",
-  components: {BackdropCard},
+  name: 'Donate',
+  components: { BackdropCard },
   mixins: [Theme, Mirror],
   props: {
     hide: {
       type: Boolean,
       default: false
-    },
+    }
   },
-  data() {
+  data () {
     return {
       qr: {
-        alipay: "https://qr.alipay.com/fkx03351nnunmv19b5yavdf",
-        wechatPay: "wxp://f2f0F8Z93ZkS3boz8JY3FwarwyAwcIfXC2CN",
-        paypal: "https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=T9LRK3VEL645J&item_name=Penguin+Statistics+Donation&currency_code=USD&source=url"
+        alipay: 'https://qr.alipay.com/fkx03351nnunmv19b5yavdf',
+        wechatPay: 'wxp://f2f0F8Z93ZkS3boz8JY3FwarwyAwcIfXC2CN',
+        paypal: 'https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=T9LRK3VEL645J&item_name=Penguin+Statistics+Donation&currency_code=USD&source=url'
       }
     }
   }
-};
+}
 </script>
 
 <style>

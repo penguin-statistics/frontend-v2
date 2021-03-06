@@ -46,62 +46,62 @@
 </template>
 
 <script>
-  import strings from "@/utils/strings";
+import strings from '@/utils/strings'
 
-  const severity = {
-    /** 0: Emergency Notice */
-    0: {
-      id: "emergency",
-      icon: "mdi-alert-decagram",
-      cardClass: "slash-strip--danger notice-card--emergency"
+const severity = {
+  /** 0: Emergency Notice */
+  0: {
+    id: 'emergency',
+    icon: 'mdi-alert-decagram',
+    cardClass: 'slash-strip--danger notice-card--emergency'
+  },
+  /** 1: Important Notice */
+  1: {
+    id: 'important',
+    icon: 'mdi-alert-circle',
+    cardClass: 'slash-strip--warning-transparent'
+  },
+  /** 0: Informational Notice */
+  2: {
+    id: 'informational',
+    icon: 'mdi-information',
+    cardClass: 'notice-card--informational'
+  }
+}
+
+export default {
+  name: 'NoticeCard',
+  props: {
+    notice: {
+      type: Object,
+      default () {
+        return null
+      }
     },
-    /** 1: Important Notice */
-    1: {
-      id: "important",
-      icon: "mdi-alert-circle",
-      cardClass: "slash-strip--warning-transparent"
+    error: {
+      type: Error,
+      default () {
+        return null
+      }
     },
-    /** 0: Informational Notice */
-    2: {
-      id: "informational",
-      icon: "mdi-information",
-      cardClass: "notice-card--informational"
+    loading: {
+      type: Boolean,
+      default () {
+        return false
+      }
+    }
+  },
+  computed: {
+    content () {
+      if (!this.notice) return ''
+      return strings.translateMarkdown(this.notice, 'content')
+    },
+    severity () {
+      if (!this.notice) return severity[2]
+      return severity[this.notice.severity]
     }
   }
-
-  export default {
-    name: "NoticeCard",
-    props: {
-      notice: {
-        type: Object,
-        default () {
-          return null
-        }
-      },
-      error: {
-        type: Error,
-        default () {
-          return null
-        }
-      },
-      loading: {
-        type: Boolean,
-        default () {
-          return false
-        }
-      }
-    },
-    computed: {
-      content() {
-        if (!this.notice) return ""
-        return strings.translateMarkdown(this.notice, 'content')
-      },
-      severity () {
-        if (!this.notice) return severity[2]
-        return severity[this.notice["severity"]]
-      }
-    },
-  }
+}
 </script>
 
 <style scoped>

@@ -66,18 +66,18 @@
 </template>
 
 <script>
-import Theme from "@/mixins/Theme";
+import Theme from '@/mixins/Theme'
 
 export default {
-  name: "NotFound",
+  name: 'NotFound',
   mixins: [Theme],
   data: () => ({}),
   computed: {
-    small() {
-      return this.$vuetify.breakpoint.smAndDown;
+    small () {
+      return this.$vuetify.breakpoint.smAndDown
     }
   }
-};
+}
 </script>
 
 <style scoped>

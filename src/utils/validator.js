@@ -5,10 +5,10 @@ export default {
     return false
   },
   isArray (data) {
-    return Array.isArray(data) || "data must be an array"
+    return Array.isArray(data) || 'data must be an array'
   },
   notEmptyArray (data) {
-    return data.length > 0 || "data must be an non-empty array"
+    return data.length > 0 || 'data must be an non-empty array'
   },
   have (object, key) {
     return Object.prototype.hasOwnProperty.call(object, key)

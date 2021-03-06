@@ -22,11 +22,11 @@
 </template>
 
 <script>
-import PreloaderInline from "@/components/global/PreloaderInline";
+import PreloaderInline from '@/components/global/PreloaderInline'
 
 export default {
-  name: "PreloaderCard",
-  components: {PreloaderInline},
+  name: 'PreloaderCard',
+  components: { PreloaderInline },
   props: {
     title: {
       type: String,
@@ -35,7 +35,7 @@ export default {
     overline: {
       type: String,
       required: true
-    },
+    }
   }
 }
 </script>

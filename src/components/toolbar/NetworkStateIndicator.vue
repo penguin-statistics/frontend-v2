@@ -154,82 +154,82 @@
 </template>
 
 <script>
-  import {mapGetters, mapState} from "vuex";
-  import PreloaderInline from "@/components/global/PreloaderInline";
-  import haptics from "@/utils/native/haptics";
+import { mapGetters, mapState } from 'vuex'
+import PreloaderInline from '@/components/global/PreloaderInline'
+import haptics from '@/utils/native/haptics'
 
-  export default {
-    name: "NetworkStateIndicator",
-    components: {PreloaderInline},
-    data () {
-      return {
-        dialog: false,
-        origin: 'center center',
-        delayedShow: false,
-        timer: null
+export default {
+  name: 'NetworkStateIndicator',
+  components: { PreloaderInline },
+  data () {
+    return {
+      dialog: false,
+      origin: 'center center',
+      delayedShow: false,
+      timer: null
+    }
+  },
+  computed: {
+    ...mapGetters('ajax', ['pending', 'errors']),
+    ...mapState('ajax', ['states']),
+    haveError () {
+      return this.errors.length > 0
+    },
+    show () {
+      return (this.haveError && !this.dialog) || this.pending
+    },
+    percentage () {
+      const states = this.$store.state.ajax.states
+      const pending = states.filter(el => el.pending).length
+      return `${Math.ceil(100 - (pending / states.length) * 100)}%`
+    },
+    ajaxStates () {
+      return this.states
+    }
+  },
+  watch: {
+    haveError (newValue, oldValue) {
+      if (newValue && !oldValue) {
+        // error appeared. force open the window
+        this.dialog = true
+      } else if (!newValue && oldValue) {
+        // error resolved. force close the window
+        this.dialog = false
       }
     },
-    computed: {
-      ...mapGetters('ajax', ['pending', 'errors']),
-      ...mapState('ajax', ['states']),
-      haveError () {
-        return this.errors.length > 0
-      },
-      show () {
-        return (this.haveError && !this.dialog) || this.pending
-      },
-      percentage() {
-        const states = this.$store.state.ajax.states
-        const pending = states.filter(el => el.pending).length
-        return `${Math.ceil(100 - (pending / states.length) * 100)}%`
-      },
-      ajaxStates () {
-        return this.states
+    show (newValue) {
+      const self = this
+
+      // we only delay (old)true -> (current)false
+
+      // if there's already a timer, cancel it
+      if (this.timer) {
+        clearTimeout(this.timer)
+        this.timer = null
       }
-    },
-    watch: {
-      haveError(newValue, oldValue) {
-        if (newValue && !oldValue) {
-          // error appeared. force open the window
-          this.dialog = true
-        } else if (!newValue && oldValue) {
-          // error resolved. force close the window
-          this.dialog = false
-        }
-      },
-      show(newValue) {
-        let self = this;
 
-        // we only delay (old)true -> (current)false
+      // avoid delaying (apply immediately)
+      if (newValue === true) this.delayedShow = newValue
 
-        // if there's already a timer, cancel it
-        if (this.timer) {
-          clearTimeout(this.timer)
-          this.timer = null
-        }
-
-        // avoid delaying (apply immediately)
-        if (newValue === true) return this.delayedShow = newValue
-
-        // do delay
-        if (newValue === false) {
-          this.timer = setTimeout(function () {
-            self.delayedShow = newValue
-            haptics.success()
-          }, 175)
-        }
+      // do delay
+      if (newValue === false) {
+        this.timer = setTimeout(function () {
+          self.delayedShow = newValue
+          haptics.success()
+        }, 175)
       }
+    }
+  },
+  methods: {
+    async refreshData () {
+      await this.$store.dispatch('data/fetch', true)
     },
-    methods: {
-      async refreshData () {
-        await this.$store.dispatch("data/fetch", true);
-      },
-      openDialog (e) {
-        this.dialog = true;
-        this.origin = `${e.clientX}px ${e.clientY}px`
-      }
-    },
+    openDialog (e) {
+      this.dialog = true
+      this.origin = `${e.clientX}px ${e.clientY}px`
+    }
   }
+}
 </script>
 
 <style>

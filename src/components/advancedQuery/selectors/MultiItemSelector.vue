@@ -45,54 +45,54 @@
 </template>
 
 <script>
-  import get from "@/utils/getters";
-  import Item from "@/components/global/Item";
+import get from '@/utils/getters'
+import Item from '@/components/global/Item'
 
-  export default {
-    name: "MultiItemSelector",
-    components: {Item},
-    props: {
-      value: {
-        type: Array,
-        required: true
+export default {
+  name: 'MultiItemSelector',
+  components: { Item },
+  props: {
+    value: {
+      type: Array,
+      required: true
+    }
+  },
+  computed: {
+    states () {
+      const states = {}
+      for (const item of get.items.all(false, false)) {
+        // have item or not = has been selected or not
+        this.$set(states, item.itemId, !!~this.value.indexOf(item.itemId))
       }
+      return states
     },
-    computed: {
-      states () {
-        const states = {};
-        for (const item of get.items.all(false, false)) {
-          // have item or not = has been selected or not
-          this.$set(states, item.itemId, !!~this.value.indexOf(item.itemId))
-        }
-        return states
-      },
 
-      items () {
-        const all = get.items.all(false, false);
-        const categories = ["MATERIAL", "CARD_EXP", "FURN", "ACTIVITY_ITEM"];
-        const results = {};
-        for (const category of categories) {
-          results[category] = all.filter(el => el.itemType === category);
-          // move 3003 to the last member
-          results[category].sort((a, b) => {
-            if (a.itemId === "3003") return 1;
-            if (b.itemId === "3003") return -1;
-            return a.sortId - b.sortId;
-          });
-        }
-        return results;
+    items () {
+      const all = get.items.all(false, false)
+      const categories = ['MATERIAL', 'CARD_EXP', 'FURN', 'ACTIVITY_ITEM']
+      const results = {}
+      for (const category of categories) {
+        results[category] = all.filter(el => el.itemType === category)
+        // move 3003 to the last member
+        results[category].sort((a, b) => {
+          if (a.itemId === '3003') return 1
+          if (b.itemId === '3003') return -1
+          return a.sortId - b.sortId
+        })
       }
-    },
-    methods: {
-      select (itemId, forceFalse = false) {
-        if (~this.value.indexOf(itemId) || forceFalse) {
-          this.$emit('input', this.value.filter(el => el !== itemId))
-        } else {
-          this.$emit('input', [...this.value, itemId])
-        }
+      return results
+    }
+  },
+  methods: {
+    select (itemId, forceFalse = false) {
+      if (~this.value.indexOf(itemId) || forceFalse) {
+        this.$emit('input', this.value.filter(el => el !== itemId))
+      } else {
+        this.$emit('input', [...this.value, itemId])
       }
     }
   }
+}
 </script>
 
 <style scoped>

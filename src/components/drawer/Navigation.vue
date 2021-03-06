@@ -57,52 +57,52 @@
 </template>
 
 <script>
-  import Theme from "@/mixins/Theme";
+import Theme from '@/mixins/Theme'
 
-  export default {
-    name: "Navigation",
-    mixins: [Theme],
-    props: {
-      route: {
-        type: Object,
-        required: true
-      },
+export default {
+  name: 'Navigation',
+  mixins: [Theme],
+  props: {
+    route: {
+      type: Object,
+      required: true
+    }
+  },
+  computed: {
+    activeClass () {
+      return {
+        'v-list-item--active': true,
+        'white--text': this.$vuetify.theme.dark
+      }
     },
-    computed: {
-      activeClass() {
-        return {
-          "v-list-item--active": true,
-          "white--text": this.$vuetify.theme.dark
+    server () {
+      return this.$store.getters['dataSource/server']
+    }
+  },
+  methods: {
+    navigate (route) {
+      if (route.meta && route.meta.externalRedirect) {
+        if (route.meta.ga) {
+          const ga = route.meta.ga
+          this.$ga.event(
+            ga.category || 'redirect',
+            ga.action || 'links',
+            ga.label || 'unknown',
+            ga.value || 1,
+            {
+              transport: 'beacon'
+            }
+          )
         }
-      },
-      server() {
-        return this.$store.getters["dataSource/server"];
-      },
-    },
-    methods: {
-      navigate (route) {
-        if (route.meta && route.meta.externalRedirect) {
-          if (route.meta.ga) {
-            let ga = route.meta.ga;
-            this.$ga.event(
-              ga.category || 'redirect',
-              ga.action || 'links',
-              ga.label || 'unknown',
-              ga.value || 1,
-              {
-                transport: 'beacon'
-              }
-            );
-          }
-          if (route.meta.link) {
-            window.open(route.meta.link);
-          }
-        } else {
-          this.$router.push({
-            name: route.name
-          })
+        if (route.meta.link) {
+          window.open(route.meta.link)
         }
-      },
-    },
+      } else {
+        this.$router.push({
+          name: route.name
+        })
+      }
+    }
   }
+}
 </script>

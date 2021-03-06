@@ -66,18 +66,18 @@
 
 <script>
 import debounce from 'lodash/debounce'
-import CompactedSearchEngine from "@/utils/searchEngine";
-import Console from "@/utils/Console";
-import CDN from "@/mixins/CDN";
-import SearchResultNormal from "@/components/search/SearchResultNormal";
+import CompactedSearchEngine from '@/utils/searchEngine'
+import Console from '@/utils/Console'
+import CDN from '@/mixins/CDN'
+import SearchResultNormal from '@/components/search/SearchResultNormal'
 export default {
-  name: "GlobalSearch",
-  components: {SearchResultNormal},
+  name: 'GlobalSearch',
+  components: { SearchResultNormal },
   mixins: [CDN],
   props: {
     query: {
       type: String,
-      default: () => ""
+      default: () => ''
     },
     pure: {
       type: Boolean,
@@ -88,46 +88,46 @@ export default {
       default: () => true
     }
   },
-  data() {
+  data () {
     return {
       engine: null,
-      debouncedSearch: "",
+      debouncedSearch: '',
       engineLoading: true
     }
   },
 
   computed: {
     search: {
-      get() {
-        return this.debouncedSearch;
+      get () {
+        return this.debouncedSearch
       },
-      set: debounce(function(newValue) {
-        this.debouncedSearch = newValue;
+      set: debounce(function (newValue) {
+        this.debouncedSearch = newValue
       }, 30)
     },
-    results() {
+    results () {
       if (this.debouncedSearch === '') return []
       const results = this.engine.search(this.debouncedSearch)
         .map(el => ({
           ...el,
           ...el.item,
-          id: `${el.type}_${el.item.stageId || el.item.itemId}`,
+          id: `${el.type}_${el.item.stageId || el.item.itemId}`
         }))
       Console.debug('Search', 'query', this.debouncedSearch, 'got result', results)
       return results
     },
-    dependencies() {
+    dependencies () {
       return {
         locale: this.$i18n.locale,
-        stages: this.$store.getters["data/content"]({id: "stages"}),
-        items: this.$store.getters["data/content"]({id: "items"}),
+        stages: this.$store.getters['data/content']({ id: 'stages' }),
+        items: this.$store.getters['data/content']({ id: 'items' })
       }
     },
-    loading() {
+    loading () {
       return [
-        this.$store.getters["ajax/pendingByKey"]("zones"),
-        this.$store.getters["ajax/pendingByKey"]("stages"),
-        this.$store.getters["ajax/pendingByKey"]("items"),
+        this.$store.getters['ajax/pendingByKey']('zones'),
+        this.$store.getters['ajax/pendingByKey']('stages'),
+        this.$store.getters['ajax/pendingByKey']('items')
       ].some(el => !!el)
     },
     valid () {
@@ -135,28 +135,28 @@ export default {
     },
     computedBinding () {
       const binding = {}
-      if (this.autofocus) binding['autofocus'] = 'autofocus'
+      if (this.autofocus) binding.autofocus = 'autofocus'
       return binding
     }
   },
   watch: {
-    "dependencies.locale"() {
+    'dependencies.locale' () {
       this.reset()
     },
-    "dependencies.stages"(val) {
-      this.engine.update("stages", val)
+    'dependencies.stages' (val) {
+      this.engine.update('stages', val)
     },
-    "dependencies.items"(val) {
-      this.engine.update("items", val)
+    'dependencies.items' (val) {
+      this.engine.update('items', val)
     },
-    search(newValue) {
+    search (newValue) {
       this.$emit('update:query', newValue)
     },
-    valid(newValue) {
+    valid (newValue) {
       this.$emit('update:valid', newValue)
     }
   },
-  created() {
+  created () {
     this.engine = new CompactedSearchEngine()
     // console.log(this.engine)
 
@@ -170,12 +170,12 @@ export default {
     })
   },
   methods: {
-    reset() {
-      Console.info("SearchEngine", "search engine has been reinitialized due to change detected in dependency")
-      this.debouncedSearch = ""
+    reset () {
+      Console.info('SearchEngine', 'search engine has been reinitialized due to change detected in dependency')
+      this.debouncedSearch = ''
       this.engine = new CompactedSearchEngine()
     }
-  },
+  }
 }
 </script>
 
@@ -202,7 +202,6 @@ export default {
   &.search__no-result ::v-deep.v-input__slot {
     background: rgba(255, 82, 82, .4) !important
   }
-
 
   &.theme--light {
     &.search-input-bar ::v-deep.v-input__slot {

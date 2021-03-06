@@ -17,25 +17,25 @@
 </template>
 
 <script>
-import GlobalSearch from "@/components/search/GlobalSearch";
+import GlobalSearch from '@/components/search/GlobalSearch'
 export default {
-  name: "Search",
-  components: {GlobalSearch},
+  name: 'Search',
+  components: { GlobalSearch },
   props: {
     query: {
       type: String,
-      default: () => ""
-    },
-  },
-  methods: {
-    changeUrl(query) {
-      // console.log(query)
-      const url = new URL(window.location.href)
-      if (query === "") url.searchParams.delete("q")
-      if (query) url.searchParams.set("q", query)
-      window.history.replaceState(null, '', url.pathname + url.search)
+      default: () => ''
     }
   },
+  methods: {
+    changeUrl (query) {
+      // console.log(query)
+      const url = new URL(window.location.href)
+      if (query === '') url.searchParams.delete('q')
+      if (query) url.searchParams.set('q', query)
+      window.history.replaceState(null, '', url.pathname + url.search)
+    }
+  }
 }
 </script>
 

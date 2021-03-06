@@ -96,35 +96,35 @@
 </template>
 
 <script>
-  import MultiItemSelector from "@/components/advancedQuery/selectors/MultiItemSelector";
-  export default {
-    name: "QuerySelectorItem",
-    components: {MultiItemSelector},
-    props: {
-      value: {
-        type: Array,
-        default () {
-          return []
-        }
-      },
-      disabled: {
-        type: Boolean,
-        default () {
-          return false
-        }
+import MultiItemSelector from '@/components/advancedQuery/selectors/MultiItemSelector'
+export default {
+  name: 'QuerySelectorItem',
+  components: { MultiItemSelector },
+  props: {
+    value: {
+      type: Array,
+      default () {
+        return []
       }
     },
-    data() {
-      return {
-        dialog: false
-      }
-    },
-    methods: {
-      clear () {
-        this.$emit('input', [])
+    disabled: {
+      type: Boolean,
+      default () {
+        return false
       }
     }
+  },
+  data () {
+    return {
+      dialog: false
+    }
+  },
+  methods: {
+    clear () {
+      this.$emit('input', [])
+    }
   }
+}
 </script>
 
 <style scoped>

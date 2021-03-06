@@ -1,9 +1,9 @@
-import { Plugins } from '@capacitor/core';
-const { Device } = Plugins;
+import { Plugins } from '@capacitor/core'
+const { Device } = Plugins
 
 let deviceInfoCache = null
 
-function getDeviceInfo() {
+function getDeviceInfo () {
   if (!deviceInfoCache) deviceInfoCache = Device.getInfo()
   return deviceInfoCache
 }
@@ -25,6 +25,6 @@ export default {
     },
     isWeb () {
       return this.is('web')
-    },
+    }
   }
 }

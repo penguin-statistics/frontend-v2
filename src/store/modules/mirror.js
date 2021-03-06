@@ -5,15 +5,15 @@ export default {
     ignoreNotification: false
   },
   mutations: {
-    changePreference(state, newLocale) {
+    changePreference (state, newLocale) {
       state.preference = newLocale
     },
     changeIgnoreNotification (state, newState) {
       state.ignoreNotification = newState
-    },
+    }
   },
   getters: {
     preference: state => state.preference,
-    ignoreNotification: state => state.ignoreNotification,
+    ignoreNotification: state => state.ignoreNotification
   }
-};
+}

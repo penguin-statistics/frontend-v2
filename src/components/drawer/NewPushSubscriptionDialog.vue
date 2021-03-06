@@ -115,12 +115,12 @@
 </template>
 
 <script>
-import supports from "@/models/supports";
-import Subheader from "@/components/global/Subheader";
+import supports from '@/models/supports'
+import Subheader from '@/components/global/Subheader'
 
 export default {
-  name: "NewPushSubscriptionDialog",
-  components: {Subheader},
+  name: 'NewPushSubscriptionDialog',
+  components: { Subheader },
   props: {
     value: {
       type: Boolean,
@@ -131,7 +131,7 @@ export default {
       required: true
     }
   },
-  data() {
+  data () {
     return {
       form: {
         locale: null,
@@ -141,16 +141,16 @@ export default {
     }
   },
   computed: {
-    supports() {
-      return supports;
+    supports () {
+      return supports
     },
-    rules() {
-      return [(v) => v !== null || "isNull"]
+    rules () {
+      return [(v) => v !== null || 'isNull']
     },
-    categories() {
+    categories () {
       return supports.push.categories
     },
-    localizedServers() {
+    localizedServers () {
       return supports.servers.map(el => {
         return {
           text: this.$t('server.servers.' + el),
@@ -158,7 +158,7 @@ export default {
         }
       })
     },
-    alreadySubs() {
+    alreadySubs () {
       const prefs = this.preferences.filter(el => el.locale === this.form.locale && el.server === this.form.server)
       const statuses = {}
       for (const pref of prefs) {
@@ -168,28 +168,28 @@ export default {
     }
   },
   watch: {
-    value(val) {
+    value (val) {
       if (val) this.reset()
     }
   },
-  created() {
+  created () {
     this.form.locale = this.$i18n.locale
     this.form.server = this.$store.getters['dataSource/server']
   },
   methods: {
-    close() {
+    close () {
       this.$emit('input', false)
       this.reset()
     },
-    reset() {
+    reset () {
       this.form.category = null
     },
-    add(category) {
+    add (category) {
       this.form.category = category
       this.$emit('add', Object.assign({}, this.form))
       this.close()
     }
-  },
+  }
 
 }
 </script>

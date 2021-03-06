@@ -84,16 +84,16 @@
 
 <script>
 import get from '@/utils/getters'
-import ItemIcon from "@/components/global/ItemIcon";
-import existUtils from "@/utils/existUtils";
-import strings from "@/utils/strings";
-import config from "@/config"
+import ItemIcon from '@/components/global/ItemIcon'
+import existUtils from '@/utils/existUtils'
+import strings from '@/utils/strings'
+import config from '@/config'
 
-const pagination = config.previewCard.item.pagination;
+const pagination = config.previewCard.item.pagination
 
 export default {
-  name: "PreviewItemCard",
-  components: {ItemIcon},
+  name: 'PreviewItemCard',
+  components: { ItemIcon },
   props: {
     itemId: {
       type: String,
@@ -105,38 +105,38 @@ export default {
     }
   },
   computed: {
-    item() {
+    item () {
       const item = get.items.byItemId(this.itemId)
       return {
         ...item,
-        name: strings.translate(item, "name")
+        name: strings.translate(item, 'name')
       }
     },
     stats () {
       const data = get.statistics.byItemId(this.itemId)
-          // filter out stages that have too less samples
-          .filter(el => el.times > 100)
-          // only open stages
-          .filter(el => existUtils.existence(el.stage, true))
+      // filter out stages that have too less samples
+        .filter(el => el.times > 100)
+      // only open stages
+        .filter(el => existUtils.existence(el.stage, true))
 
-          .sort((a, b) => b.percentage - a.percentage)
+        .sort((a, b) => b.percentage - a.percentage)
 
       return {
         data: data
-            .slice(0, pagination)
-            .map(el => {
-              return {
-                ...el,
-                stageCode: strings.translate(el.stage, "code")
-              }
-            }),
+          .slice(0, pagination)
+          .map(el => {
+            return {
+              ...el,
+              stageCode: strings.translate(el.stage, 'code')
+            }
+          }),
         more: data.length > pagination
       }
     },
     highlight () {
       return this.$route.params.stageId
     }
-  },
+  }
 }
 </script>
 
