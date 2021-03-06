@@ -1,23 +1,11 @@
-import recognizerHash from '@/models/recognizer_hash'
+import charHash from '@/models/recognition/charHash'
 import store from '@/store'
 import JSZip from 'jszip'
 import reduce from 'lodash/reduce'
-// import pick from "lodash/pick";
 import uniq from 'lodash/uniq'
-// import Jimp from 'jimp'
 
-// function addCanvas (canvas, url, small = false) {
-//   // canvas.style.height = small ? '80px' : '264px'
-//   // if (!small) canvas.style.float = 'left'
-//   canvas.setAttribute('data-title', new Date().toLocaleString())
-//   canvas.setAttribute('data-url', url)
-//   const s = document.getElementById('canvases')
-//   if (s) s.prepend(canvas)
-// }
-
-async function image2wasmHeapOffset (blob, name) {
+async function image2wasmHeapOffset (blob) {
   const Module = window.Module
-  console.time(`writeToWasmHeap_${name}`)
   const imageData = await new Promise((resolve) => {
     const reader = new FileReader()
     reader.onload = function (event) {
@@ -31,7 +19,6 @@ async function image2wasmHeapOffset (blob, name) {
   const dataPtr = Module._malloc(numBytes)
   const dataOnHeap = new Uint8Array(Module.HEAPU8.buffer, dataPtr, numBytes)
   dataOnHeap.set(uint8)
-  console.timeEnd(`writeToWasmHeap_${name}`)
 
   return {
     offset: dataOnHeap.byteOffset,
@@ -42,22 +29,21 @@ async function image2wasmHeapOffset (blob, name) {
 
 class Recognizer {
   async initialize (server) {
-    console.groupCollapsed('Initialization logs for recognition ')
+    console.groupCollapsed('Initialization')
 
     // Lazy load of recognize.js and recognize.wasm
     if (!window.Module) {
-      console.log('load module')
       var script = document.createElement('script')
       script.src = '/recognize.js'
       document.head.appendChild(script)
       console.log('script', script)
-      await new Promise((resolve, reject) => {
+      await new Promise(resolve => {
         script.onload = function () {
           resolve()
           console.log('recognize.js loaded')
         }
       })
-      await new Promise((resolve, reject) => {
+      await new Promise(resolve => {
         window.Module.onRuntimeInitialized = () => {
           console.log('recognize.wasm loaded')
           resolve()
@@ -121,7 +107,7 @@ class Recognizer {
       //   }
       // ),
       items: {}, // TODO: wil be fixed in WASM v3
-      hash: recognizerHash
+      hash: charHash
     }
 
     this.wasm.preload_json(
@@ -147,7 +133,7 @@ class Recognizer {
       .then(async (zip) => {
         const ImageBuffer = []
         zip.forEach((relativePath, file) => {
-          ImageBuffer.push(new Promise((resolve, reject) => {
+          ImageBuffer.push(new Promise(resolve => {
             const item = file.name.split('.')[0]
             console.log('adding', item, 'to preloaded item icon')
             file.async('blob').then(async (blob) => {
@@ -164,7 +150,7 @@ class Recognizer {
 
   async recognize (files, resultCb) {
     for (const file of files) {
-      console.groupCollapsed('Recognition logs for', file.name)
+      console.groupCollapsed('Recognition of', file.name)
       console.log('start recognizing file', file.name)
       console.time(file.name)
       const data = await image2wasmHeapOffset(file)

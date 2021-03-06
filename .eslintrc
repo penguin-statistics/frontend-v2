@@ -10,8 +10,7 @@
   },
   "extends": [
     "plugin:vue/recommended",
-    "eslint:recommended",
-    "@vue/standard"
+    "eslint:recommended"
   ],
   "rules": {
     "no-console": "off",

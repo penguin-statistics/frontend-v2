@@ -1,17 +1,13 @@
 import { service } from '@/utils/service'
 import config from '@/config'
 import store from '@/store'
-let RecognitionRequestBodyEncrypt
+let encodeBody
 try {
-  RecognitionRequestBodyEncrypt = require('../vendors/penguin-crypto/')
+  encodeBody = require('../vendors/penguin-crypto/')
 } catch (e) {
-  RecognitionRequestBodyEncrypt = function (d) {
-    return d
-  }
+  encodeBody = body => body
 }
-// import { v4 as uuidv4 } from 'uuid'
 
-// IdempotencyKey
 export default {
   async submitReport ({ stageId, drops }, patch) {
     return service.post('/report', {
@@ -27,7 +23,7 @@ export default {
   },
   async submitRecognitionReport (batchDrops, patch) {
     console.log(batchDrops)
-    let RequestData = {
+    let body = {
       batchDrops,
       server: store.getters['dataSource/server'],
       ...config.api.submitParams,
@@ -35,10 +31,10 @@ export default {
     }
     /*
       API Not Support
-      RequestData = RecognitionRequestBodyEncrypt(RequestData);
+      body = encodeBody(body);
      */
-    console.log(RecognitionRequestBodyEncrypt(RequestData))
-    RequestData = RecognitionRequestBodyEncrypt(RequestData)
-    return service.post('/report/recognition', RequestData, { headers: { 'Content-Type': 'text/plain' } })
+    console.log(encodeBody(body))
+    body = encodeBody(body)
+    return service.post('/report/recognition', body, { headers: { 'Content-Type': 'text/plain' } })
   }
 }
