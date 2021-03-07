@@ -38,6 +38,7 @@ function properlySupportedWebSocket () {
 }
 
 class FakeTransport {
+  constructor() {}
   send () {}
 }
 
@@ -50,10 +51,12 @@ class PenguinProbe {
       probeUid = store.getters['auth/probeUid']
     }
 
-    this.initiate(probeUid.c)
-      .catch(err => {
-        Console.warn('Probe', 'failed to initialize transport', err)
-      })
+    if (environment.production) {
+      this.initiate(probeUid.c)
+        .catch(err => {
+          Console.warn('Probe', 'failed to initialize transport', err)
+        })
+    }
   }
 
   async initiate (probeUid) {

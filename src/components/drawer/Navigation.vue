@@ -74,9 +74,6 @@ export default {
         'v-list-item--active': true,
         'white--text': this.$vuetify.theme.dark
       }
-    },
-    server () {
-      return this.$store.getters['dataSource/server']
     }
   },
   methods: {

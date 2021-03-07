@@ -3,7 +3,7 @@
     <v-row
       justify="center"
       align="center"
-      class="ma-4 fill-height"
+      class="fill-height"
     >
       <v-col cols="12">
         <v-dialog
@@ -92,7 +92,7 @@
           <v-stepper-items>
             <v-stepper-content step="1">
               <v-form class="ml-6">
-                <imageDrop
+                <ImageDrop
                   v-model="files"
                   @valid="valid => isFilesValid = valid"
                 />
@@ -101,10 +101,9 @@
                   rounded
                   color="primary"
                   class="px-4 py-2 mb-2"
-                  :disabled="!files.length || (!isFilesValid && false)"
+                  :disabled="!files.length || !isFilesValid"
                   @click="initAndRecognize"
                 >
-                  <!-- TODO: 开发中不锁Button -->
                   <div class="d-inline-flex align-center justify-center">
                     <v-icon small>
                       mdi-server
@@ -158,36 +157,36 @@
 
             <v-stepper-content step="3">
               <RecognitionResult
-                :success="filterResults(['Success']).length"
-                :warning="filterResults(['Warning']).length"
-                :error="filterResults(['Error']).length"
+                :success="filterResults(['SUCCESS']).length"
+                :warning="filterResults(['WARNING']).length"
+                :error="filterResults(['ERROR']).length"
                 :total="results.length"
               />
               <v-alert
-                v-if="filterResults(['Success']).length !== results.length"
+                v-if="filterResults(['SUCCESS']).length !== results.length"
                 color="warning"
                 prominent
                 border="left"
                 class="mt-0"
                 :icon="
-                  filterResults(['Warning', 'Error']).length <= 10
-                    ? `mdi-numeric-${filterResults(['Warning', 'Error']).length}-box-multiple-outline`
+                  filterResults(['WARNING', 'ERROR']).length <= 10
+                    ? `mdi-numeric-${filterResults(['WARNING', 'ERROR']).length}-box-multiple-outline`
                     : 'mdi-content-copy'
                 "
               >
                 识别结果中存在警报或错误，暂时无法上报这些图片，共计
-                {{ filterResults(["Warning", "Error"]).length }} 张
-                <br>
-                <v-btn
-                  color="primary"
-                  @click="askCrispForHelp()"
-                >
-                  与客服联系
-                  <v-icon right>
-                    mdi-chat
-                  </v-icon>
-                </v-btn>
-                以帮助我们解决你所遇到的问题
+                {{ filterResults(['WARNING', 'ERROR']).length }} 张
+                <!--                <br>-->
+                <!--                <v-btn-->
+                <!--                  color="primary"-->
+                <!--                  @click="askCrispForHelp()"-->
+                <!--                >-->
+                <!--                  与客服联系-->
+                <!--                  <v-icon right>-->
+                <!--                    mdi-chat-->
+                <!--                  </v-icon>-->
+                <!--                </v-btn>-->
+                <!--                以帮助我们解决你所遇到的问题-->
               </v-alert>
               <div class="my-4">
                 <v-btn
@@ -209,7 +208,7 @@
                   @click="reload"
                 >
                   <template
-                    v-if="!filterResults([`Success`]).length"
+                    v-if="!filterResults(['SUCCESS']).length"
                   >
                     <div class="d-inline-flex align-center justify-center">
                       <span class="caption ml-1">
@@ -228,7 +227,7 @@
               </div>
               <v-select
                 v-model="filterValue"
-                :items="filterItems"
+                :items="itemFilters"
                 item-text="text"
                 item-value="value"
                 attach
@@ -237,12 +236,12 @@
                 multiple
                 prepend-icon="mdi-filter-variant"
               />
-              <v-switch
-                v-model="fastTest"
-                hide-details
-                label="简洁模式：隐藏图片渲染、缩小栏宽度"
-                class="mx-2 mb-4"
-              />
+              <!--              <v-switch-->
+              <!--                v-model="fastTest"-->
+              <!--                hide-details-->
+              <!--                label="简洁模式：隐藏图片渲染、缩小栏宽度"-->
+              <!--                class="mx-2 mb-4"-->
+              <!--              />-->
               <div
                 style="min-height: 100px"
               >
@@ -267,7 +266,6 @@
                       style="width: 100%"
                     >
                       <v-img
-                        v-if="!fastTest"
                         v-ripple
                         :src="result.blobUrl"
                         contain
@@ -407,7 +405,7 @@
                   @click="reload"
                 >
                   <template
-                    v-if="!filterResults([`Success`]).length"
+                    v-if="!filterResults([`SUCCESS`]).length"
                   >
                     <div class="d-inline-flex align-center justify-center">
                       <span class="caption ml-1">
@@ -502,7 +500,7 @@
                 justify="start"
               >
                 <v-col
-                  v-for="([StageCode, Stage], index) in Object.entries(StageCombineData)"
+                  v-for="([StageCode, Stage], index) in Object.entries(stageCombineData)"
                   :key="index"
                   cols="12"
                   sm="6"
@@ -561,7 +559,7 @@
                     rounded
                     block
                     color="success"
-                    :disabled="SubmitDialog.open"
+                    :disabled="submitDialog.open"
                     @click="submit"
                   >
                     <div class="d-inline-flex align-center justify-center">
@@ -583,11 +581,11 @@
             </v-stepper-content>
           </v-stepper-items>
           <v-dialog
-            v-model="SubmitDialog.open"
+            v-model="submitDialog.open"
             persistent
           >
             <v-card
-              v-if="!SubmitDialog.finish"
+              v-if="!submitDialog.finish"
               class="d-flex fill-height"
             >
               <v-card-text>
@@ -623,7 +621,7 @@
             >
               <v-card-text>
                 <v-alert
-                  v-if="SubmitDialog.error"
+                  v-if="submitDialog.error"
                   type="error"
                   class="mt-4"
                 >
@@ -698,7 +696,6 @@ export default {
       results: [],
       initializing: false,
       initialized: false,
-      fastTest: false,
       expandImage: {
         dialog: false,
         src: ''
@@ -708,10 +705,9 @@ export default {
         server: ''
       },
       dialogOrigin: '',
-      lots: false,
       step: 1,
-      filterValue: ['Success', 'Warning', 'Error'],
-      SubmitDialog: {
+      filterValue: ['SUCCESS', 'WARNING', 'ERROR'],
+      submitDialog: {
         open: false,
         finish: false,
         error: false
@@ -725,17 +721,20 @@ export default {
     filteredResults () {
       return this.filterResults(this.filterValue)
     },
-    filterItems () {
+    itemFilters () {
       return [
         {
           text: this.$t('report.recognition.status.success'),
-          value: 'Success'
+          value: 'SUCCESS'
         },
         {
           text: this.$t('report.recognition.status.warning'),
-          value: 'Warning'
+          value: 'WARNING'
         },
-        { text: this.$t('report.recognition.status.error'), value: 'Error' }
+        {
+          text: this.$t('report.recognition.status.error'),
+          value: 'ERROR'
+        }
       ]
     },
     allTime () {
@@ -759,28 +758,28 @@ export default {
         return prev + get.stages.byStageId(now.result.stageId).apCost
       }, 0)
     },
-    StageCombineData () {
-      const Results = this.selectedResults
-      const Result = {}
-      for (const RecognitionResult of Results) {
-        const StageCode = get.stages.byStageId(RecognitionResult.result.stageId).code
-        if (!Result[StageCode]) {
-          Result[StageCode] = {
-            Items: {},
-            Time: 0
+    stageCombineData () {
+      const results = this.selectedResults
+      const result = {}
+      for (const recognitionResult of results) {
+        const stageCode = get.stages.byStageId(recognitionResult.result.stageId).code
+        if (!result[stageCode]) {
+          result[stageCode] = {
+            items: {},
+            time: 0
           }
         }
-        Result[StageCode].Time++
-        for (const Item of RecognitionResult.result.drops) {
-          if (Item.itemId && Item.quantity) {
-            if (!Result[StageCode].Items[Item.itemId]) {
-              Result[StageCode].Items[Item.itemId] = 0
+        result[stageCode].time++
+        for (const item of recognitionResult.result.drops) {
+          if (item.itemId && item.quantity) {
+            if (!result[stageCode].items[item.itemId]) {
+              result[stageCode].items[item.itemId] = 0
             }
-            Result[StageCode].Items[Item.itemId] += Item.quantity
+            result[stageCode].items[item.itemId] += item.quantity
           }
         }
       }
-      return Result
+      return result
     },
     server () {
       return this.$store.getters['dataSource/server']
@@ -800,8 +799,8 @@ export default {
     }
   },
   watch: {
-    serverLocked (newvalue) {
-      if (newvalue === 2) {
+    serverLocked (value) {
+      if (value === 2) {
         this.$store.commit('dataSource/lockServer')
         this.changeServerTip = true
       }
@@ -820,7 +819,6 @@ export default {
         ...this.$data,
         files: [],
         results: [],
-        fastTest: false,
         expandImage: {
           dialog: false,
           src: ''
@@ -856,16 +854,16 @@ export default {
         }
         this.$ga.event('report', 'submit_recognition', this.selectedResults.map((result) => { return result.stageId }), 1)
       }).finally(() => {
-        this.SubmitDialog.finish = true
-        this.SubmitDialog.error = false
+        this.submitDialog.finish = true
+        this.submitDialog.error = false
       }).catch((e) => {
         console.log(e)
         snackbar.networkError()
-        this.SubmitDialog.error = true
+        this.submitDialog.error = true
       })
     },
     submit () {
-      this.SubmitDialog.open = true
+      this.submitDialog.open = true
       this.doSubmit()
     },
     async init () {
@@ -878,7 +876,7 @@ export default {
         .then(() => {
           this.$store.commit('dataSource/lockServer')
           this.initialized = true
-          this.recognition.server = this.server.toLowerCase()
+          this.recognition.server = this.server
           console.log('initialization completed')
         })
         .finally(() => {
@@ -897,15 +895,6 @@ export default {
 
       const typeOrder = ['NORMAL_DROP', 'SPECIAL_DROP', 'EXTRA_DROP']
       typeOrder.reverse()
-
-      if (this.lots) {
-        const repeated = []
-        for (const file of this.files) {
-          repeated.push(...Array(100).fill(file))
-        }
-        console.log(repeated)
-        this.files = repeated
-      }
 
       await this.recognizer.recognize(this.files, result => {
         result.result.drops
@@ -1032,7 +1021,7 @@ export default {
       const fingerprints = this.results.map(value => {
         return value.result.fingerprint
       })
-      for (const [index, value] of Object.entries(this.results)) {
+      this.results.forEach((value, index) => {
         // Apply timestamp check, <10s will add warning
         let closeTimestamps = false;
         timestamps.forEach((timestamp, i) => {
@@ -1053,7 +1042,7 @@ export default {
         if (sameFingerprint) {
           value.result.errors.push({ type: 'Fingerprint::Same' })
         }
-      }
+      })
     }
   }
 }

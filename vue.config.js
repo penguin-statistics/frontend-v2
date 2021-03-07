@@ -53,7 +53,7 @@ module.exports = {
     disableHostCheck: true,
     proxy: {
       '/PenguinStats': {
-        target: 'https://penguin.bbaasite.cn'
+        target: 'https://penguin-stats.io'
       }
     }
   },

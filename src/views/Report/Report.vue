@@ -1025,8 +1025,6 @@ export default {
       // if there's limitation then we also need to verify the notIncludes.
       if (limitation.exceptions) generated.rules.push(notIncludes(limitation.exceptions))
 
-      // console.log("generateVerificationRule", type, query, generated)
-
       return generated
     }
   }

@@ -88,7 +88,7 @@ export default {
       type: Object,
       required: true
     },
-    defaultquantity: {
+    defaultQuantity: {
       type: Number,
       required: false,
       default: 0
@@ -111,8 +111,8 @@ export default {
   },
   mounted () {
     this.bus.$on('reset', this.reset)
-    if (this.defaultquantity !== 0) {
-      this.quantity = this.defaultquantity
+    if (this.defaultQuantity !== 0) {
+      this.quantity = this.defaultQuantity
     }
   },
   methods: {

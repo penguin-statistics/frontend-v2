@@ -97,7 +97,7 @@
                 class="py-1 px-1 d-inline-block"
               >
                 <ItemStepper
-                  :defaultquantity="getItemCount(item.item, category.id)"
+                  :default-quantity="getItemCount(item.item, category.id)"
                   :item="item.item"
                   :bus="eventBus"
                   @change="e => handleChange(category.id, e)"

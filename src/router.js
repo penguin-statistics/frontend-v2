@@ -63,7 +63,7 @@ const router = new Router({
         component: Report,
         meta: {
           icon: 'mdi-upload',
-          i18n: 'menu.report'
+          i18n: 'menu.report._name'
         },
         children: [
           {
@@ -72,7 +72,7 @@ const router = new Router({
             component: Report,
             props: true,
             meta: {
-              i18n: 'menu.report'
+              i18n: 'menu.report.stage'
             }
           }
         ]
@@ -83,7 +83,7 @@ const router = new Router({
         component: RecognitionReport,
         meta: {
           icon: 'mdi-image-search',
-          i18n: 'menu.recognitionreport'
+          i18n: 'menu.report.recognition'
         }
       }
     ]

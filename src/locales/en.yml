@@ -15,8 +15,10 @@ server:
 menu:
   home: Home
   search: Search
-  report: Report Drops
-  recognitionreport: Recognition
+  report:
+    _name: Report Drops
+    stage: Select By Stage
+    recognition: Recognition
   stats:
     _name: Drop Rates
     stage: By stage

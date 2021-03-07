@@ -14,8 +14,10 @@ server:
     KR: 韩服
 menu:
   home: 首页
-  report: 掉落汇报
-  recognitionreport: 图像识别汇报
+  report:
+    _name: 掉落汇报
+    stage: 按章节选择
+    recognition: 图像识别汇报
   search: 全局搜索
   stats:
     _name: 素材掉率
@@ -195,6 +197,7 @@ report:
     step:
       select: 选择
       recognize: 识别
+      confirm: 确认
       report: 上报
     allresult:
       stagetime: 进行的关卡数量
@@ -234,6 +237,7 @@ report:
         - 请选择截图时间在 **36 小时内**的**通关评价为 3 星的结算界面**截图，并请注意不要选择重复截图。
         - 请不要选择首次通关奖励的截图，并请如实汇报**所有**发生的掉落情况。
 #        - 截图内识别到「不合法」的物品，整张截图都将不再计入识别结果（如：已过期活动的相关物品掉落）。
+      confirm:
         - 点击图片可以放大（便于核对），再次点击图片即可关闭。
   rules:
     item:

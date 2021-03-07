@@ -590,9 +590,9 @@ export default {
   },
   mounted () {
     if (this.stage) {
-      const Stage = get.stages.byStageCode(this.stage)
-      if (!Stage.notfind) {
-        this.selectStage(Stage.zoneId, Stage.stageId)
+      const stage = get.stages.byStageCode(this.stage)
+      if (!stage.stageId) {
+        this.selectStage(stage.zoneId, stage.stageId)
       }
     }
   },

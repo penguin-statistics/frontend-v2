@@ -135,7 +135,6 @@ export default {
   },
   mounted () {
     document.addEventListener('dragenter', () => {
-      this.$refs.fileInput.focus()
       this.onDrag = true
     }, false)
   },
