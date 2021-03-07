@@ -37,7 +37,7 @@ console.log(`
   @ 🛒 Probe
     - 📑 <noscript> fallback GET endpoint: ${noscriptImage}
 
-  > 📝 Now Starting build...`)
+  > 📝 Initiating vue-cli-service...`)
 
 module.exports = {
   pluginOptions: {
