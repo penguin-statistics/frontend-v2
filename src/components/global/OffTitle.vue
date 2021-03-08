@@ -49,7 +49,7 @@ span.off-title--wrapper {
   position: relative;
   letter-spacing: -.1em !important;
   bottom: -20px;
-  left: 4px;
+  left: 0px;
   z-index: 4;
 }
 span.off-title--ea {

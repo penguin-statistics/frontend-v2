@@ -53,7 +53,7 @@ const router = new Router({
     component: ReportLayout,
     meta: {
       icon: 'mdi-upload',
-      i18n: 'menu.report',
+      i18n: 'menu.report._name',
       active: true
     },
     children: [
@@ -62,8 +62,8 @@ const router = new Router({
         name: 'ReportByZone',
         component: Report,
         meta: {
-          icon: 'mdi-upload',
-          i18n: 'menu.report._name'
+          icon: 'mdi-cursor-default-click',
+          i18n: 'menu.report.stage'
         },
         children: [
           {
@@ -82,8 +82,9 @@ const router = new Router({
         name: 'RecognitionReport',
         component: RecognitionReport,
         meta: {
-          icon: 'mdi-image-search',
-          i18n: 'menu.report.recognition'
+          icon: 'mdi-image-filter-center-focus',
+          i18n: 'menu.report.recognition',
+          beta: true
         }
       }
     ]

@@ -55,7 +55,10 @@ class PenguinProbe {
       this.initiate(probeUid.c)
         .catch(err => {
           Console.warn('Probe', 'failed to initialize transport', err)
+          this.transport = new FakeTransport()
         })
+    } else {
+      this.transport = new FakeTransport()
     }
   }
 

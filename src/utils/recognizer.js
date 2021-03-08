@@ -6,7 +6,7 @@ import uniq from 'lodash/uniq'
 
 async function image2wasmHeapOffset (blob) {
   const Module = window.Module
-  const imageData = await new Promise((resolve) => {
+  const imageData = await new Promise(resolve => {
     const reader = new FileReader()
     reader.onload = function (event) {
       resolve(event.target.result)
@@ -14,7 +14,6 @@ async function image2wasmHeapOffset (blob) {
     reader.readAsArrayBuffer(blob)
   })
   const uint8 = new Uint8Array(imageData)
-
   const numBytes = uint8.length
   const dataPtr = Module._malloc(numBytes)
   const dataOnHeap = new Uint8Array(Module.HEAPU8.buffer, dataPtr, numBytes)
@@ -35,8 +34,7 @@ class Recognizer {
     if (!window.Module) {
       var script = document.createElement('script')
       script.src = '/recognize.js'
-      document.head.appendChild(script)
-      console.log('script', script)
+      document.body.appendChild(script)
       await new Promise(resolve => {
         script.onload = function () {
           resolve()
@@ -106,7 +104,7 @@ class Recognizer {
       //     4006: {},
       //   }
       // ),
-      items: {}, // TODO: wil be fixed in WASM v3
+      items: {}, // TODO: will be fixed in WASM v3
       hash: charHash
     }
 

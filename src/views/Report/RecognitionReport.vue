@@ -33,32 +33,96 @@
             <!--          </v-card-actions>-->
           </v-card>
         </v-dialog>
-
-        <template v-if="step === 1">
-          <v-alert
-            color="orange darken-3"
-            border="left"
-            outlined
-            class="mx-2"
-          >
-            <ol>
-              <li
-                v-for="notice in $t('report.recognition.notices.welcome')"
-                :key="notice"
-                v-marked
-                class="markdown-content-inline"
-                v-text="notice"
-              />
-            </ol>
-          </v-alert>
-
-          <v-divider class="my-4" />
-        </template>
-        <v-stepper
-          v-model="step"
-          class="bkop-light"
+        <v-dialog
+          v-model="submitDialog.open"
+          persistent
         >
-          <v-stepper-header>
+          <v-card
+            v-if="!submitDialog.finish"
+            class="d-flex fill-height"
+          >
+            <v-card-text>
+              <v-row
+                align="center"
+                justify="center"
+              >
+                <v-col
+                  cols="12"
+                  class="px-1 py-12 text-center"
+                  style="width: 100%"
+                >
+                  <PreloaderInline class="mx-auto mb-6" />
+                  <h1 class="title">
+                    {{ $t("report.recognition.submiting") }}
+                  </h1>
+                  <v-row>
+                    <v-col>
+                      <v-progress-linear
+                        :indeterminate="true"
+                        class="mx-auto"
+                        style="width: 90%"
+                      />
+                    </v-col>
+                  </v-row>
+                </v-col>
+              </v-row>
+            </v-card-text>
+          </v-card>
+          <v-card
+            v-else
+            class="d-flex fill-height"
+          >
+            <v-card-text>
+              <v-alert
+                v-if="submitDialog.error"
+                type="error"
+                class="mt-4"
+              >
+                Error
+              </v-alert>
+              <v-alert
+                v-else
+                type="success"
+                class="mt-4"
+              >
+                Finish
+              </v-alert>
+              <v-card-actions class="elevation-4">
+                <v-btn
+                  text
+                  block
+                  large
+                  @click="reload"
+                >
+                  <v-divider style="opacity: 0.3" />
+                  <span class="mx-4 d-flex align-center">
+                    <v-icon left>mdi-close</v-icon>{{ $t("report.recognition.reload") }}
+                  </span>
+                  <v-divider style="opacity: 0.3" />
+                </v-btn>
+              </v-card-actions>
+            </v-card-text>
+          </v-card>
+        </v-dialog>
+
+        <v-card class="bkop-medium">
+          <v-card-title
+            class="px-6 secondary"
+            :class="{'lighten-5': !dark}"
+          >
+            {{ $t('menu.report.recognition') }}
+          </v-card-title>
+          <v-card-subtitle
+            class="px-6 secondary"
+            :class="{'lighten-5': !dark}"
+          >
+            仅需选择结算页面截图即可上传所有掉率，不再需要一次次手动选择。
+          </v-card-subtitle>
+          <v-stepper
+            v-model="step"
+            class="bkop-light pt-2 transparent elevation-0"
+            vertical
+          >
             <v-stepper-step
               :complete="step > 1"
               step="1"
@@ -66,7 +130,39 @@
               {{ $t("report.recognition.step.select") }}
             </v-stepper-step>
 
-            <v-divider />
+            <v-stepper-content step="1">
+              <v-alert
+                color="orange darken-3"
+                border="left"
+                outlined
+                class="mx-2"
+              >
+                <ol>
+                  <li
+                    v-for="notice in $t('report.recognition.notices.welcome')"
+                    :key="notice"
+                    v-marked
+                    class="markdown-content-inline"
+                    v-text="notice"
+                  />
+                </ol>
+              </v-alert>
+              
+              <v-form class="ml-6">
+                <ImageInput
+                  v-model="files"
+                  @valid="valid => isFilesValid = valid"
+                />
+              </v-form>
+
+              <DynamicSizeBtn
+                :loading="step > 1"
+                :reason="files.length ? $t('report.recognition.tips.hasInvalidFile') : $t('report.recognition.tips.emptyFile')"
+                :disabled="!files.length || !isFilesValid"
+                :length="files.length"
+                @click="initAndRecognize"
+              />
+            </v-stepper-content>
 
             <v-stepper-step
               :complete="step > 2"
@@ -74,55 +170,6 @@
             >
               {{ $t("report.recognition.step.recognize") }}
             </v-stepper-step>
-            <v-divider />
-
-            <v-stepper-step
-              :complete="step > 3"
-              step="3"
-            >
-              {{ $t("report.recognition.step.recognize") }}
-            </v-stepper-step>
-
-            <v-divider />
-
-            <v-stepper-step step="4">
-              {{ $t("report.recognition.step.report") }}
-            </v-stepper-step>
-          </v-stepper-header>
-          <v-stepper-items>
-            <v-stepper-content step="1">
-              <v-form class="ml-6">
-                <ImageDrop
-                  v-model="files"
-                  @valid="valid => isFilesValid = valid"
-                />
-                <v-btn
-                  large
-                  rounded
-                  color="primary"
-                  class="px-4 py-2 mb-2"
-                  :disabled="!files.length || !isFilesValid"
-                  @click="initAndRecognize"
-                >
-                  <div class="d-inline-flex align-center justify-center">
-                    <v-icon small>
-                      mdi-server
-                    </v-icon>
-                    <span class="caption ml-1">
-                      {{ $t("server.servers." + this.$store.getters["dataSource/server"]) }}
-                    </span>
-                  </div>
-                  <v-divider
-                    vertical
-                    class="mx-2"
-                  />
-                  <span>
-                    {{ $t("report.recognition.start") }}
-                    {{ files.length ? "" : `(${$t("report.recognition.tips.emptyFile")})` }}
-                  </span>
-                </v-btn>
-              </v-form>
-            </v-stepper-content>
 
             <v-stepper-content step="2">
               <PreloaderInline class="mx-auto mb-6" />
@@ -155,13 +202,34 @@
               </v-progress-linear>
             </v-stepper-content>
 
-            <v-stepper-content step="3">
-              <RecognitionResult
-                :success="filterResults(['SUCCESS']).length"
-                :warning="filterResults(['WARNING']).length"
-                :error="filterResults(['ERROR']).length"
-                :total="results.length"
+            <v-stepper-step
+              :complete="step > 3"
+              step="3"
+            >
+              {{ $t("report.recognition.step.confirm") }}
+            </v-stepper-step>
+
+            <v-stepper-content
+              step="3"
+              class="pt-0"
+            >
+              <OffTitle
+                content="结果概览"
+                small
               />
+
+              <v-card
+                outlined
+                class="pa-6 pt-7 background-transparent"
+              >
+                <RecognitionResultOverview
+                  :success="filterResults(['SUCCESS']).length"
+                  :warning="filterResults(['WARNING']).length"
+                  :error="filterResults(['ERROR']).length"
+                  :total="results.length"
+                />
+              </v-card>
+
               <v-alert
                 v-if="filterResults(['SUCCESS']).length !== results.length"
                 color="warning"
@@ -188,63 +256,29 @@
                 <!--                </v-btn>-->
                 <!--                以帮助我们解决你所遇到的问题-->
               </v-alert>
-              <div class="my-4">
-                <v-btn
-                  color="primary"
-                  class="mr-2"
-                  :disabled="!selectedResults.length"
-                  @click="step = 4"
-                >
-                  {{ $t("report.recognition.confirm", [selectedResults.length]) }}
-                  <v-icon
-                    right
-                    dark
-                  >
-                    mdi-upload
-                  </v-icon>
-                </v-btn>
-                <v-btn
-                  color="error"
-                  @click="reload"
-                >
-                  <template
-                    v-if="!filterResults(['SUCCESS']).length"
-                  >
-                    <div class="d-inline-flex align-center justify-center">
-                      <span class="caption ml-1">
-                        {{ $t("report.recognition.tips.emptyResult") }}
-                      </span>
-                    </div>
-                    <v-divider
-                      vertical
-                      class="mx-2"
-                    />
-                  </template>
-                  <span>
-                    {{ $t("report.recognition.reload") }}
-                  </span>
-                </v-btn>
-              </div>
-              <v-select
-                v-model="filterValue"
-                :items="itemFilters"
-                item-text="text"
-                item-value="value"
-                attach
-                chips
-                label="Filter"
-                multiple
-                prepend-icon="mdi-filter-variant"
+              
+              <OffTitle
+                content="结果详情"
+                small
               />
-              <!--              <v-switch-->
-              <!--                v-model="fastTest"-->
-              <!--                hide-details-->
-              <!--                label="简洁模式：隐藏图片渲染、缩小栏宽度"-->
-              <!--                class="mx-2 mb-4"-->
-              <!--              />-->
-              <div
+              
+              <v-card
+                outlined
+                class="position-relative pt-6 px-4 background-transparent"
                 style="min-height: 100px"
               >
+                <v-select
+                  v-model="filterValue"
+                  :items="itemFilters"
+                  item-text="text"
+                  item-value="value"
+                  attach
+                  chips
+                  label="Filter"
+                  multiple
+                  prepend-icon="mdi-filter-variant"
+                />
+
                 <v-row v-if="results.length">
                   <v-col
                     v-for="(result, index) in results"
@@ -252,7 +286,7 @@
                     :class="[filteredResults.includes(result) ? 'd-flex' : 'd-none', 'align-self-stretch']"
                     cols="12"
                     md="6"
-                    lg="4"
+                    lg="6"
                     xl="4"
                   >
                     <v-card
@@ -384,7 +418,7 @@
                 >
                   暂时没有识别结果
                 </v-alert>
-              </div>
+              </v-card>
               <div class="mt-4">
                 <v-btn
                   color="primary"
@@ -400,29 +434,12 @@
                     mdi-upload
                   </v-icon>
                 </v-btn>
-                <v-btn
-                  color="error"
-                  @click="reload"
-                >
-                  <template
-                    v-if="!filterResults([`SUCCESS`]).length"
-                  >
-                    <div class="d-inline-flex align-center justify-center">
-                      <span class="caption ml-1">
-                        {{ $t("report.recognition.tips.emptyResult") }}
-                      </span>
-                    </div>
-                    <v-divider
-                      vertical
-                      class="mx-2"
-                    />
-                  </template>
-                  <span>
-                    {{ $t("report.recognition.reload") }}
-                  </span>
-                </v-btn>
               </div>
             </v-stepper-content>
+
+            <v-stepper-step step="4">
+              {{ $t("report.recognition.step.report") }}
+            </v-stepper-step>
 
             <v-stepper-content step="4">
               <v-row
@@ -500,7 +517,7 @@
                 justify="start"
               >
                 <v-col
-                  v-for="([StageCode, Stage], index) in Object.entries(stageCombineData)"
+                  v-for="([stageCode, stage], index) in Object.entries(stageCombineData)"
                   :key="index"
                   cols="12"
                   sm="6"
@@ -520,19 +537,19 @@
                           class="font-weight-bold headline d-flex align-center card-item-title__clickable"
                           style="border-radius: 4px"
                         >
-                          {{ StageCode }}
+                          {{ stageCode }}
                         </span>
                         <v-spacer />
                         <small>#{{ index + 1 }}</small>
                       </div>
                       <div class="display-1 text-center monospace font-weight-bold my-2">
-                        {{ Stage.Time }}
+                        {{ stage.Time }}
                         <small class="title">{{ $t("planner.calculation.times") }}</small>
                       </div>
                       <div class="d-flex flex-wrap justify-start">
                         <div
-                          v-for="([ItemId, Count], idx) in Object.entries(Stage.Items)"
-                          :key="idx"
+                          v-for="([itemId, count], itemIndex) in Object.entries(stage.items)"
+                          :key="itemIndex"
                           class="d-inline-flex mx-2 my-1"
                         >
                           <v-badge
@@ -543,9 +560,9 @@
                             color="indigo"
                             :offset-x="24"
                             :offset-y="20"
-                            :content="`×${Count}`"
+                            :content="`×${count}`"
                           >
-                            <Item :item="getItem(ItemId)" />
+                            <Item :item="getItem(itemId)" />
                           </v-badge>
                         </div>
                       </div>
@@ -579,94 +596,8 @@
                 </v-col>
               </v-row>
             </v-stepper-content>
-          </v-stepper-items>
-          <v-dialog
-            v-model="submitDialog.open"
-            persistent
-          >
-            <v-card
-              v-if="!submitDialog.finish"
-              class="d-flex fill-height"
-            >
-              <v-card-text>
-                <v-row
-                  align="center"
-                  justify="center"
-                >
-                  <v-col
-                    cols="12"
-                    class="px-1 py-12 text-center"
-                    style="width: 100%"
-                  >
-                    <PreloaderInline class="mx-auto mb-6" />
-                    <h1 class="title">
-                      {{ $t("report.recognition.submiting") }}
-                    </h1>
-                    <v-row>
-                      <v-col>
-                        <v-progress-linear
-                          :indeterminate="true"
-                          class="mx-auto"
-                          style="width: 90%"
-                        />
-                      </v-col>
-                    </v-row>
-                  </v-col>
-                </v-row>
-              </v-card-text>
-            </v-card>
-            <v-card
-              v-else
-              class="d-flex fill-height"
-            >
-              <v-card-text>
-                <v-alert
-                  v-if="submitDialog.error"
-                  type="error"
-                  class="mt-4"
-                >
-                  Error
-                </v-alert>
-                <v-alert
-                  v-else
-                  type="success"
-                  class="mt-4"
-                >
-                  Finish
-                </v-alert>
-                <v-card-actions class="elevation-4">
-                  <v-btn
-                    text
-                    block
-                    large
-                    @click="reload"
-                  >
-                    <v-divider style="opacity: 0.3" />
-                    <span class="mx-4 d-flex align-center">
-                      <v-icon left>mdi-close</v-icon>{{ $t("report.recognition.reload") }}
-                    </span>
-                    <v-divider style="opacity: 0.3" />
-                  </v-btn>
-                </v-card-actions>
-              </v-card-text>
-            </v-card>
-          </v-dialog>
-          <v-snackbar
-            v-model="changeServerTip"
-            bottom
-            :timeout="0"
-            color="info"
-          >
-            {{ $t("report.recognition.tips.changeServer") }}
-            <v-btn
-              v-haptic
-              text
-              @click="reload"
-            >
-              {{ $t("report.recognition.reload") }}
-            </v-btn>
-          </v-snackbar>
-        </v-stepper>
+          </v-stepper>
+        </v-card>
       </v-col>
     </v-row>
   </v-container>
@@ -678,16 +609,18 @@ import PreloaderInline from '@/components/global/PreloaderInline'
 import snackbar from '@/utils/snackbar'
 import CDN from '@/mixins/CDN'
 import Theme from '@/mixins/Theme'
-import ImageDrop from '@/components/recognition/ImageDrop'
-import RecognitionResult from '@/components/recognition/RecognitionResult'
+import ImageInput from '@/components/recognition/ImageInput'
+import RecognitionResultOverview from '@/components/recognition/RecognitionResultOverview'
 import config from '@/config'
 import get from '@/utils/getters'
 import Cookies from 'js-cookie'
 import report from '@/apis/report'
+import DynamicSizeBtn from "@/components/global/DynamicSizeBtn";
+import OffTitle from "@/components/global/OffTitle";
 
 export default {
   name: 'RecognitionReport',
-  components: { Item, ImageDrop, RecognitionResult, PreloaderInline },
+  components: {OffTitle, DynamicSizeBtn, Item, ImageInput, RecognitionResultOverview, PreloaderInline },
   mixins: [Theme, CDN],
   data () {
     return {
@@ -794,7 +727,7 @@ export default {
     },
     resultHasErrorOrWarning () {
       return this.results.map((result) => {
-        return Boolean(result.result.errors.length || result.result.warnings.length)
+        return !!(result.result.errors.length || result.result.warnings.length)
       })
     }
   },

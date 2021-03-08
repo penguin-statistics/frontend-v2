@@ -47,7 +47,21 @@
       :class="route.path + '/' + child.path === $route.path.split('/', 3).join('/') ? activeClass : ''"
       @click="navigate(child)"
     >
-      <v-list-item-title>{{ $t(child.meta.i18n) }}</v-list-item-title>
+      <v-list-item-title>
+        {{ $t(child.meta.i18n) }}
+        <div
+          v-if="child.meta.beta"
+          class="chip-label ml-1"
+        >
+          <v-icon
+            x-small
+            class="mr-1"
+          >
+            mdi-beta
+          </v-icon>
+          {{ $t('menu._beta') }}
+        </div>
+      </v-list-item-title>
 
       <v-list-item-icon>
         <v-icon v-text="child.meta.icon" />

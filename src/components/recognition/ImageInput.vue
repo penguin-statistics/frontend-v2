@@ -7,11 +7,11 @@
     <v-file-input
       ref="fileInput"
       v-model="files"
-      outlined
       multiple
+      filled
       :label="$t('report.recognition.queue')"
       persistent-hint
-      class="cursor-pointer my-4"
+      class="image-input my-4"
       :hint="$t('report.recognition.tips.chooseImage')"
       counter
       show-size
@@ -19,7 +19,7 @@
       :rules="rules"
       prepend-icon="mdi-image"
       @blur="onDrag = false"
-      @change="Files => $emit('input', Files)"
+      @change="files => $emit('input', files)"
       @update:error="e => $emit('valid', $refs.fileInput.valid)"
     >
       <template
@@ -101,7 +101,7 @@
 <script>
 
 export default {
-  name: 'ImageDrop',
+  name: 'ImageInput',
   props: {
     value: {
       type: Array,
@@ -109,16 +109,6 @@ export default {
     }
   },
   data: () => ({
-    rules: [
-      files => {
-        for (const file of files) {
-          if (files.length > 50) return '超出50个文件数量限制'
-          if (file.size > 50e6) return `"${file.name}" (${(file.size / 1e6).toFixed(1)}MB) 超出大小限制`
-          if (file.lastModified < Date.now() - 1000 * 3600 * 36) return `"${file.name}" 超过36h时间限制`
-        }
-        return true
-      }
-    ],
     onDrag: false,
     snackbar: false,
     snackbarMessage: ''
@@ -131,26 +121,45 @@ export default {
       set (newFiles) {
         return newFiles
       }
+    },
+    rules () {
+      return [
+        files => {
+          for (const file of files) {
+            // if (files.length > 50) return '超出50个文件数量限制'
+            if (file.size > 50e6) return this.$t('report.recognition.tips.fileTooBig', {name: file.name, size: (file.size / 1e6).toFixed(1)})
+            // if (file.lastModified < Date.now() - 1000 * 3600 * 36) return this.$t('report.recognition.tips.fileTooOld', {name: file.name})
+          }
+          return true
+        }
+      ]
     }
   },
   mounted () {
-    document.addEventListener('dragenter', () => {
-      this.onDrag = true
-    }, false)
+    document.addEventListener('dragenter', this.onDragEnter, {
+      passive: true,
+      capture: false
+    })
   },
   beforeDestroy () {
-    document.removeEventListener('dragenter', () => {})
+    document.removeEventListener('dragenter', this.onDragEnter, {
+      passive: true,
+      capture: false
+    })
   },
   methods: {
     removeFileByIndex (index) {
       this.files.splice(index, 1)
+    },
+    onDragEnter () {
+      this.onDrag = true
     },
     dragover (event) {
       event.preventDefault()
     },
     drop (event) {
       event.preventDefault()
-      var illegalFiles = []
+      const illegalFiles = [];
       const imageFilter = (file) => {
         if (file.type.split('/')[0] === 'image') {
           return true
@@ -160,14 +169,13 @@ export default {
         }
       }
 
-      var filteredFiles = [...event.dataTransfer.files].filter(imageFilter)
+      const filteredFiles = [...event.dataTransfer.files].filter(imageFilter);
       if (illegalFiles.length > 0) {
         this.snackbar = true
         this.snackbarMessage = this.$t('report.recognition.tips.notImageFile', [`${illegalFiles[0]}${illegalFiles.length > 1 ? ` +${illegalFiles.length - 1} ${this.$t('report.recognition.tips.notImageFileMultiple')}` : ''}`])
       }
       // TODO: Discussion needed. Drag and Drop should keep files that already exist?
       this.$emit('input', [...this.files, ...filteredFiles])
-      this.$refs.fileInput.blur()
     }
   }
 }
@@ -175,5 +183,14 @@ export default {
 <style scoped>
   .file-input >>> .v-input__slot {
     min-height: 128px !important;
+  }
+
+  .image-input >>> .v-input__slot {
+    cursor: pointer !important;
+  }
+  .image-input >>> .v-file-input__text {
+    padding-top: 26px !important;
+    align-items: start !important;
+    height: 100% !important;
   }
 </style>

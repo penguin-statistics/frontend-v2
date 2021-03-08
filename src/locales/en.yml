@@ -13,6 +13,7 @@ server:
     JP: JP
     KR: KR
 menu:
+  _beta: Beta
   home: Home
   search: Search
   report:
@@ -206,10 +207,10 @@ report:
         our data set.
   recognition:
     step:
-      input: Input
-      recognizing: Drop Recognizing
-      check: Drop Recognition Result and (Correction)
-      doreport: Drop Report
+      select: Select Images
+      recognize: Recognize
+      confirm: Confirm
+      report: Report
     allresult:
       stagetime: 进行的关卡数量
       drops: 获得的掉落物总数
@@ -242,17 +243,17 @@ report:
     submiting: Submiting
     retry: 提交失败，正在重试
     notices:
-      beta: Drop recognition is under beta test
       wasm: WebAssembly
-      rule_1: Image files will be recognized by {0}. We will not upload image files to the server.
-      rule_2: Please use screenshots only and within 36 hours.
-      rule_3: Multiple images are supoorted, but limited to 50 images.
-      rule_4: Duplicate images are not allowed, and there will be a warning message for same and close screenshot timestamp.
-      rule_5: Please do not report the first-clear of a stage, and do not only report the clears where you were lucky - report all clears.
-      rule_6: Please make sure that you refresh a 3-stars clear.
-      rule_7: After recognition, "illegal" items will not be reported, like Emergency Sanity Sampler that is not in drop period.
-      rule_8: You can click the images to enlarge it for checking, and click again to close it.
-      rule_9: Please double check that you have selected the right server and right images. Your are now currently at {serverName} Server.
+      welcome:
+        - Image files will be recognized by {0}. We will not upload image files to the server.
+        - Please use screenshots only and within 36 hours.
+        - Multiple images are supoorted, but limited to 50 images.
+        - Duplicate images are not allowed, and there will be a warning message for same and close screenshot timestamp.
+        - Please do not report the first-clear of a stage, and do not only report the clears where you were lucky - report all clears.
+        - Please make sure that you refresh a 3-stars clear.
+        - After recognition, "illegal" items will not be reported, like Emergency Sanity Sampler that is not in drop period.
+        - You can click the images to enlarge it for checking, and click again to close it.
+        - Please double check that you have selected the right server and right images. Your are now currently at {serverName} Server.
   rules:
     item:
       _name: Item Quantities

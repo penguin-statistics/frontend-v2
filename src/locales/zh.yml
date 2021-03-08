@@ -13,11 +13,12 @@ server:
     JP: 日服
     KR: 韩服
 menu:
+  _beta: 公测
   home: 首页
   report:
     _name: 掉落汇报
-    stage: 按章节选择
-    recognition: 图像识别汇报
+    stage: 按章节汇报
+    recognition: 截图识别汇报
   search: 全局搜索
   stats:
     _name: 素材掉率
@@ -204,12 +205,14 @@ report:
       drops: 获得的掉落物总数
       sanity: 共消耗理智
     tips:
-      filetoobig: 超出大小限制
-      chooseImage: 单击或拖拽加入图片
+      fileTooBig: "\"{name}\" ({size}MB) 超出大小限制"
+      fileTooOld: "\"{name}\" 超过 36h 时间限制"
+      chooseImage: 点击以选择并加入图片、或直接向框内区域拖拽以加入图片
       dragImage: 将图片拖拽到此处
       addImage: 点击此处加入图片
       copyImage: 右键图片或长按图片可拷贝到剪贴板或保存图片
-      emptyFile: 暂未选定任何图像
+      emptyFile: 暂未选择任何图片
+      hasInvalidFile: 含有无效文件
       changeServer: 不允许在识别过程中修改服务器，请重载
       notImageFile: "{0}不是图片文件，无法上传"
       notImageFileMultiple: "个文件"
@@ -223,15 +226,14 @@ report:
     filename: 文件名
     result: 识别结果
     queue: 识别图片队列
-    start: 开始识别
+    start: 开始识别 {amount} 张图片
     progress: 进度
     initializing: 初始化中...
-    confirm: 确认, 共计 {0} 张
+    confirm: 确认上传已勾选的 {0} 次结算记录
     submit: 确认提交到企鹅数据
     submiting: 正在提交记录
     retry: 提交失败，正在重试
     notices:
-      beta: 掉落识别目前处于公测阶段
       welcome:
         - 所提供的文件仅会通过使用 WebAssembly 技术于本地进行识别，不会向服务器上传。
         - 请选择截图时间在 **36 小时内**的**通关评价为 3 星的结算界面**截图，并请注意不要选择重复截图。
