@@ -2,35 +2,34 @@
   <div>
     <FactTable>
       <FactTableItem
-        title="已成功识别共计"
-        :content="success + ' 张截图'"
+        title="成功识别"
+        :content="total + ' 张截图'"
       />
       <FactTableItem
-        title="识别成功率"
-      >
-        <template #content>
-          <span class="monospace">{{ ((success / total) * 100).toFixed(0) + '%' }}</span>
-        </template>
-      </FactTableItem>
-      <v-divider
-        v-if="warning || error"
-        vertical
-        class="ml-2 mr-6"
+        title="通过检测"
+        :content="success + ' 张'"
       />
-      <FactTableItem
-        v-if="warning || error"
-        title="其中，异常截图共计"
-        :content="(warning + error) + ' 个'"
-      />
+      <!--      <FactTableItem-->
+      <!--        title="识别成功率"-->
+      <!--      >-->
+      <!--        <template #content>-->
+      <!--          <span class="monospace">{{ ((success / total) * 100).toFixed(0) + '%' }}</span>-->
+      <!--        </template>-->
+      <!--      </FactTableItem>-->
+      <!--      <v-divider-->
+      <!--        v-if="warning || error"-->
+      <!--        vertical-->
+      <!--        class="ml-2 mr-6"-->
+      <!--      />-->
       <FactTableItem
         v-if="warning"
-        title="警告截图总计"
-        :content="warning + ' 个'"
+        title="识别警告"
+        :content="warning + ' 张'"
       />
       <FactTableItem
         v-if="error"
-        title="拒绝截图总计"
-        :content="error + ' 个'"
+        title="识别异常"
+        :content="error + ' 张'"
       />
 
       <v-divider

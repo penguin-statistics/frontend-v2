@@ -108,6 +108,8 @@ class Recognizer {
       hash: charHash
     }
 
+    console.log("preloading with", preloads)
+
     this.wasm.preload_json(
       JSON.stringify(preloads.stages),
       JSON.stringify(preloads.items),

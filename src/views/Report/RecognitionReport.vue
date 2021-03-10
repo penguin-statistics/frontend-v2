@@ -1,5 +1,8 @@
 <template>
-  <v-container class="fill-height">
+  <v-container
+    class="fill-height"
+    fluid
+  >
     <v-row
       justify="center"
       align="center"
@@ -10,7 +13,6 @@
           v-model="expandImage.dialog"
           :origin="dialogOrigin"
           max-width="1800px"
-          scrollable
           :overlay-opacity="0.8"
           overlay-color="rgba(0, 0, 0, 1)"
         >
@@ -20,8 +22,11 @@
             @click="expandImage.dialog = false"
           >
             <img
+              height="80%"
               :src="expandImage.src"
               alt="enlarged"
+              class="mx-auto d-block"
+              style="max-width: 100%; height: auto;"
             >
             <v-card-subtitle class="text-center mt-4">
               {{ $t("report.recognition.tips.copyImage") }}
@@ -135,7 +140,7 @@
                 color="orange darken-3"
                 border="left"
                 outlined
-                class="mx-2"
+                class="mb-2"
               >
                 <ol>
                   <li
@@ -147,16 +152,14 @@
                   />
                 </ol>
               </v-alert>
-              
-              <v-form class="ml-6">
-                <ImageInput
-                  v-model="files"
-                  @valid="valid => isFilesValid = valid"
-                />
-              </v-form>
+
+              <ImageInput
+                v-model="files"
+                @valid="valid => isFilesValid = valid"
+              />
 
               <DynamicSizeBtn
-                :loading="step > 1"
+                :loading="step === 2"
                 :reason="files.length ? $t('report.recognition.tips.hasInvalidFile') : $t('report.recognition.tips.emptyFile')"
                 :disabled="!files.length || !isFilesValid"
                 :length="files.length"
@@ -172,34 +175,36 @@
             </v-stepper-step>
 
             <v-stepper-content step="2">
-              <PreloaderInline class="mx-auto mb-6" />
-              <h3 class="grey--text my-2">
-                {{ $t("report.recognition.progress") }}
-              </h3>
-              <v-progress-linear
-                v-if="initializing"
-                indeterminate
-                class="quick-transition"
-                stream
-                height="28"
-                striped
-                rounded
-              >
-                {{ $t("report.recognition.initializing") }}
-              </v-progress-linear>
-              <v-progress-linear
-                v-else
-                class="quick-transition"
-                :value="(results.length / files.length) * 100"
-                :buffer-value="((results.length + 1) / files.length) * 100"
-                stream
-                height="28"
-                striped
-              >
-                {{ results.length }} / {{ files.length }} ({{
-                  ((results.length / (files.length === 0 ? 1 : files.length)) * 100).toFixed(0)
-                }}%)
-              </v-progress-linear>
+              <template v-if="step === 2">
+                <PreloaderInline class="mx-auto mb-6" />
+                <h3 class="grey--text my-2">
+                  {{ $t("report.recognition.progress") }}
+                </h3>
+                <v-progress-linear
+                  v-if="initializing"
+                  indeterminate
+                  class="quick-transition"
+                  stream
+                  height="28"
+                  striped
+                  rounded
+                >
+                  {{ $t("report.recognition.initializing") }}
+                </v-progress-linear>
+                <v-progress-linear
+                  v-else
+                  class="quick-transition"
+                  :value="(results.length / files.length) * 100"
+                  :buffer-value="((results.length + 1) / files.length) * 100"
+                  stream
+                  height="28"
+                  striped
+                >
+                  {{ results.length }} / {{ files.length }} ({{
+                    ((results.length / (files.length === 0 ? 1 : files.length)) * 100).toFixed(0)
+                  }}%)
+                </v-progress-linear>
+              </template>
             </v-stepper-content>
 
             <v-stepper-step
@@ -211,7 +216,7 @@
 
             <v-stepper-content
               step="3"
-              class="pt-0"
+              :class="{'pt-0': step === 3}"
             >
               <OffTitle
                 content="结果概览"
@@ -230,31 +235,21 @@
                 />
               </v-card>
 
+              <!--              :icon="-->
+              <!--              filterResults(['WARNING', 'ERROR']).length <= 10-->
+              <!--              ? `mdi-numeric-${filterResults(['WARNING', 'ERROR']).length}-box-multiple-outline`-->
+              <!--              : 'mdi-content-copy'-->
+              <!--              "-->
               <v-alert
                 v-if="filterResults(['SUCCESS']).length !== results.length"
                 color="warning"
-                prominent
+                dense
+                outlined
                 border="left"
-                class="mt-0"
-                :icon="
-                  filterResults(['WARNING', 'ERROR']).length <= 10
-                    ? `mdi-numeric-${filterResults(['WARNING', 'ERROR']).length}-box-multiple-outline`
-                    : 'mdi-content-copy'
-                "
+                class="mt-4"
+                icon="mdi-bug"
               >
-                识别结果中存在警报或错误，暂时无法上报这些图片，共计
-                {{ filterResults(['WARNING', 'ERROR']).length }} 张
-                <!--                <br>-->
-                <!--                <v-btn-->
-                <!--                  color="primary"-->
-                <!--                  @click="askCrispForHelp()"-->
-                <!--                >-->
-                <!--                  与客服联系-->
-                <!--                  <v-icon right>-->
-                <!--                    mdi-chat-->
-                <!--                  </v-icon>-->
-                <!--                </v-btn>-->
-                <!--                以帮助我们解决你所遇到的问题-->
+                您提交识别的截图中有 {{ filterResults(['WARNING', 'ERROR']).length }} 张截图由于未成功通过质量监测（详细原因见下方「结果详情」），被标记为了「汇报排除」，无法上传至本站
               </v-alert>
               
               <OffTitle
@@ -279,15 +274,18 @@
                   prepend-icon="mdi-filter-variant"
                 />
 
-                <v-row v-if="results.length">
+                <v-row
+                  v-if="results.length"
+                >
                   <v-col
                     v-for="(result, index) in results"
                     :key="index"
                     :class="[filteredResults.includes(result) ? 'd-flex' : 'd-none', 'align-self-stretch']"
                     cols="12"
                     md="6"
-                    lg="6"
-                    xl="4"
+                    lg="4"
+                    xl="3"
+                    class="align-self-stretch"
                   >
                     <v-card
                       outlined
@@ -298,113 +296,131 @@
                             ? 'warning'
                             : ''"
                       style="width: 100%"
+                      class="align-self-stretch fill-height d-flex flex-column justify-start"
                     >
-                      <v-img
-                        v-ripple
-                        :src="result.blobUrl"
-                        contain
-                        style="cursor: zoom-in"
-                        @click="e => enlargeImage(result.blobUrl, e)"
-                      />
-                      <v-card-title class="d-flex flex-row align-center">
-                        <div class="d-flex align-baseline">
-                          <small class="mr-2">{{ $t("stage.name") }}</small>
-                          <span class="monospace">{{ result.result.stageId ? getStage(result.result.stageId).code : "无法识别" }}</span>
-                        </div>
-                        <v-spacer />
-                        <v-checkbox
-                          v-model="selectedResultsIndex"
-                          :value="index"
-                          :disabled="resultHasErrorOrWarning[index]"
-                          :off-icon="resultHasErrorOrWarning[index] ? 'mdi-close-box' : '$checkboxOff'"
-                          :label="resultHasErrorOrWarning[index] ? '无法选择有问题的图片' : '是否上传'"
+                      <div style="background: rgba(0, 0, 0, .95)">
+                        <v-img
+                          v-ripple
+                          :src="result.blobUrl"
+                          contain
+                          style="cursor: zoom-in"
+                          max-height="150px"
+                          @click="e => enlargeImage(result.blobUrl, e)"
                         />
-                      </v-card-title>
-                      <v-card-subtitle class="d-flex flex-row align-center">
-                        <div class="d-flex align-baseline">
-                          {{ $t("report.recognition.filename") }}：<span class="font-weight-bold">{{
-                            result.file.name || "(文件名未知)"
-                          }}</span>
-                        </div>
-                        <v-spacer />
-                        <v-chip
-                          label
-                          rounded
-                          small
-                        >
-                          {{ $t("report.recognition.cost") }}
-                          {{ result.duration.toFixed(2) }}ms
-                        </v-chip>
-                      </v-card-subtitle>
-                      <v-card-text>
-                        <div
-                          v-for="item in result.result.drops"
-                          :key="item.itemId"
-                          class="d-inline-flex align-center justify-center flex-column pa-2 mr-2"
-                          style="border-radius: 4px"
-                          :style="{
-                            border: `1px solid ${dark ? '#fff' : '#000'}`
-                          }"
-                        >
-                          <div>
-                            {{ dropTypeToString(item.dropType) }}
-                          </div>
+                      </div>
+                      <v-divider />
 
-                          <v-badge
-                            bottom
-                            overlap
-                            bordered
-                            label
-                            color="indigo"
-                            :offset-x="24"
-                            :offset-y="20"
-                            :content="`×${item.quantity}`"
+                      <v-card-title class="d-flex flex-column align-center justify-center">
+                        <!--                        <div class="d-flex align-baseline">-->
+                        <!--                          <small class="mr-2">{{ $t("stage.name") }}</small>-->
+
+                        <!--                        </div>-->
+
+                        <FactTable style="width: 100%">
+                          <FactTableItem title="作战">
+                            <template #content>
+                              <span class="monospace">{{ result.result.stageId ? getStage(result.result.stageId).code : "无法识别" }}</span>
+                            </template>
+                          </FactTableItem>
+                          <FactTableItem
+                            title="种类"
+                            :content="result.result.drops.length"
+                          />
+                          <FactTableItem
+                            title="数量"
+                            :content="result.result.drops.reduce((prev, curr) => prev + curr.quantity, 0)"
+                          />
+                        </FactTable>
+                      </v-card-title>
+
+                      <v-divider />
+
+                      <v-card-text
+                        class="pt-2"
+                        :class="{'reco-result__wrapper': resultHasErrorOrWarning[index]}"
+                      >
+                        <div
+                          class="reco-result__details"
+                          :class="{'reco-result__details--invalid': resultHasErrorOrWarning[index]}"
+                        >
+                          <div
+                            v-for="item in result.result.drops"
+                            :key="item.itemId"
+                            class="d-inline-flex align-center justify-center flex-column pa-2 mt-2 mr-2"
+                            style="border-radius: 4px"
+                            :style="{
+                              border: `1px solid ${dark ? 'rgba(255, 255, 255, .4)' : '#000'}`
+                            }"
                           >
-                            <Item :item="getItem(item.itemId)" />
-                          </v-badge>
+                            <div>
+                              {{ dropTypeToString(item.dropType) }}
+                            </div>
+
+                            <v-badge
+                              bottom
+                              overlap
+                              bordered
+                              label
+                              color="indigo"
+                              :offset-x="24"
+                              :offset-y="20"
+                              :content="`×${item.quantity}`"
+                            >
+                              <Item :item="getItem(item.itemId)" />
+                            </v-badge>
+                          </div>
                         </div>
                         <v-alert
                           v-if="resultHasErrorOrWarning[index]"
                           outlined
                           color="white"
                           border="left"
-                          icon="mdi-alert-circle"
-                          class="my-4"
+                          class="my-4 reco-result__alert"
+                          type="error"
                         >
-                          识别时有错误发生，无法为您上报该图片
+                          此张图片未通过质量监测
                           <br>
-                          <template v-if="result.result.errors.length">
-                            <v-chip
-                              v-for="(error, index) in result.result.errors"
-                              :key="`error-${index}`"
-                              class="ma-2"
-                              color="red darken-3"
-                              text-color="white"
+                          <v-card
+                            v-for="(error, index) in [...result.result.errors, ...result.result.warnings]"
+                            :key="`error-${index}`"
+                            class="pa-2 red darken-3 mt-2 position-relative overflow-hidden"
+                          >
+                            <v-icon
+                              x-large
+                              style="position: absolute; left: -10px; top: -8px; opacity: .2"
                             >
-                              <v-icon left>
-                                mdi-bug
-                              </v-icon>
-                              {{ error.type }}
-                            </v-chip>
-                            <br>
-                          </template>
-                          <template v-if="result.result.warnings.length">
-                            <v-chip
-                              v-for="(warning, index) in result.result.warnings"
-                              :key="`warning-${index}`"
-                              class="ma-2"
-                              color="yellow darken-3"
-                              text-color="white"
-                            >
-                              <v-icon left>
-                                mdi-alert
-                              </v-icon>
-                              {{ warning.type }}
-                            </v-chip>
-                            <br>
-                          </template>
+                              mdi-alert-circle
+                            </v-icon>
+                            <span class="pl-6">
+                              {{ $t('report.recognition.exceptions.' + error.type) }}
+                            </span>
+                          </v-card>
                         </v-alert>
                       </v-card-text>
+
+                      <v-spacer />
+
+                      <v-divider />
+
+                      <v-card-actions class="pa-2">
+                        <v-card
+                          v-ripple="!resultHasErrorOrWarning[index]"
+                          class="background-transparent elevation-4 pa-2"
+                          :class="`${resultHasErrorOrWarning[index] ? 'transparent elevation-0' : (selectedResultsIndex.includes(index) ? 'success darken-2' : 'warning darken-4')}`"
+                          style="width: 100%"
+                        >
+                          <v-checkbox
+                            v-model="selectedResultsIndex"
+                            color="text"
+                            hide-details
+                            :value="index"
+                            class="pt-0 mt-0"
+                            :disabled="resultHasErrorOrWarning[index]"
+                            :off-icon="resultHasErrorOrWarning[index] ? 'mdi-close-box' : '$checkboxOff'"
+                            :label="resultHasErrorOrWarning[index] ? '无法选择有问题的图片' : (selectedResultsIndex.includes(index) ? '上传本图结果' : '不上传本图结果')"
+                          />
+                        </v-card>
+                      </v-card-actions>
                     </v-card>
                   </v-col>
                 </v-row>
@@ -617,10 +633,14 @@ import Cookies from 'js-cookie'
 import report from '@/apis/report'
 import DynamicSizeBtn from "@/components/global/DynamicSizeBtn";
 import OffTitle from "@/components/global/OffTitle";
+import FactTable from "@/components/stats/fact-table/FactTable";
+import FactTableItem from "@/components/stats/fact-table/FactTableItem";
 
 export default {
   name: 'RecognitionReport',
-  components: {OffTitle, DynamicSizeBtn, Item, ImageInput, RecognitionResultOverview, PreloaderInline },
+  components: {
+    FactTableItem,
+    FactTable, OffTitle, DynamicSizeBtn, Item, ImageInput, RecognitionResultOverview, PreloaderInline },
   mixins: [Theme, CDN],
   data () {
     return {
@@ -865,12 +885,13 @@ export default {
         await this.init()
       }
       await this.recognize()
-      const selectedResultsIndex = [];
+      this.applyPostRecognitionRules(this.results)
+      const selectedResultsIndex = []
       this.results.map((result, index) => {
+        console.log(result, result.result.warnings.length, result.result.errors.length, result.result.warnings.length || result.result.errors.length)
         if (!(result.result.warnings.length || result.result.errors.length)) selectedResultsIndex.push(index)
       })
       this.selectedResultsIndex = selectedResultsIndex
-      this.applyPostRecognitionRules()
       this.step = 3
     },
     filterResults (filter) {
@@ -947,14 +968,14 @@ export default {
     //   $crisp.push(['do', 'chat:open'])
     //   $crisp.push(['do', 'message:send', ['text', '掉落识别有问题，我该怎么办？']])
     // },
-    applyPostRecognitionRules () {
-      const timestamps = this.results.map(value => {
+    applyPostRecognitionRules (results) {
+      const timestamps = results.map(value => {
         return value.file.lastModified
       })
-      const fingerprints = this.results.map(value => {
+      const fingerprints = results.map(value => {
         return value.result.fingerprint
       })
-      this.results.forEach((value, index) => {
+      results.forEach((value, index) => {
         // Apply timestamp check, <10s will add warning
         let closeTimestamps = false;
         timestamps.forEach((timestamp, i) => {
@@ -976,17 +997,48 @@ export default {
           value.result.errors.push({ type: 'Fingerprint::Same' })
         }
       })
+      return results
     }
   }
 }
 </script>
 
-<style scoped>
+<style scoped lang="scss">
   .cursor-pointer .v-file-input__text,
   .v-overlay__scrim {
     cursor: pointer !important;
   }
   .quick-transition {
     transition-duration: 20ms !important;
+  }
+
+  .reco-result {
+    &__wrapper {
+      & .reco-result__details {
+        max-height: 72px;
+        overflow: hidden;
+        opacity: 0.9;
+        transform: scale(0.94);
+      }
+      & .reco-result__alert {
+        margin-top: -54px !important;
+        background: rgba(0, 0, 0, .1) !important;
+        backdrop-filter: blur(10px);
+      }
+    }
+
+    //&__wrapper--active {
+    //  & .reco-result__details {
+    //    max-height: 600px;
+    //    overflow: hidden;
+    //    opacity: 1;
+    //    transform: scale(1);
+    //  }
+    //  & .reco-result__alert {
+    //    margin-top: 16px !important;
+    //    background: rgba(0, 0, 0, .1) !important;
+    //    backdrop-filter: blur(10px);
+    //  }
+    //}
   }
 </style>

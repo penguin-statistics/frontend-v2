@@ -241,6 +241,9 @@ report:
 #        - 截图内识别到「不合法」的物品，整张截图都将不再计入识别结果（如：已过期活动的相关物品掉落）。
       confirm:
         - 点击图片可以放大（便于核对），再次点击图片即可关闭。
+    exceptions:
+      "Fingerprint::Same": 此张图片与其他一张图片的内容完全一致
+      "Drop::IllegalDrop": 识别结果出现了不合法的掉落物
   rules:
     item:
       _name: 物品项
