@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shortcuts xmlns:android="http://schemas.android.com/apk/res/android">
+    <shortcut
+        android:shortcutId="openSearch"
+        android:enabled="true"
+        android:icon="@drawable/search"
+        android:shortcutShortLabel="@string/shortcut_search_label"
+        android:shortcutLongLabel="@string/shortcut_search_label">
+        <intent
+            android:action="android.intent.action.VIEW"
+            android:targetPackage="io.penguinstats.app"
+            android:targetClass="io.penguinstats.app.SearchMetaActivity" />
+    </shortcut>
+</shortcuts>
