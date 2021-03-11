@@ -28,7 +28,7 @@
                 <category android:name="android.intent.category.BROWSABLE" />
                 <data android:scheme="https" android:host="penguin-stats.io" />
                 <data android:scheme="https" android:host="penguin-stats.cn" />
-                <data android:scheme="@string/penguin" android:host="penguin-stats.cn" />
+<!--                <data android:scheme="@string/penguin" android:host="penguin-stats.cn" />-->
             </intent-filter>
 
         </activity>
