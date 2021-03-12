@@ -98,7 +98,6 @@ export default {
   data () {
     return {
       servers: supports.servers,
-      update: false
     }
   },
   computed: {
@@ -108,15 +107,7 @@ export default {
         return this.update || this.servers.indexOf(this.servers.find(el => el === this.$store.getters['dataSource/server']))
       },
       set (localeIndex) {
-        if (this.$store.getters['dataSource/serverLocked']) {
-          this.$store.commit('dataSource/changeLockState', 2)
-          this.update = localeIndex
-          this.$nextTick(function () {
-            this.update = false
-          })
-        } else {
-          this.changeServer(this.servers[localeIndex])
-        }
+        this.changeServer(this.servers[localeIndex])
       }
     },
     activeServerId () {

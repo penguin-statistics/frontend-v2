@@ -4,8 +4,7 @@ export default {
     /** current data source "global" | "personal" */
     source: 'global',
     /** current data source server "CN" | "US" | ... */
-    server: 'CN',
-    serverLocked: 0
+    server: 'CN'
   },
   mutations: {
     changeSource: (state, value) => {
@@ -13,15 +12,6 @@ export default {
     },
     changeServer: (state, value) => {
       state.server = value
-    },
-    lockServer (state) {
-      state.serverLocked = 1
-    },
-    unlockServer (state) {
-      state.serverLocked = 0
-    },
-    changeLockState: (state, value) => {
-      state.serverLocked = value
     }
   },
   getters: {

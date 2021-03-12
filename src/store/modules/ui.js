@@ -12,7 +12,8 @@ export default {
       extra: {}
     },
     outdated: false,
-    loadingRoute: ''
+    loadingRoute: '',
+    serverLocked: false,
   },
   mutations: {
     setSnackbar (state, { color, timeout, text, icon, extra }) {
@@ -34,7 +35,9 @@ export default {
     },
     setLoadingRoute (state, value) {
       state.loadingRoute = value
-    }
+    },
+    lockServer: state => state.serverLocked = true,
+    unlockServer: state => state.serverLocked = false,
   },
   getters: {
     snackbar: state => state.snackbar,

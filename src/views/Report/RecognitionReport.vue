@@ -635,6 +635,7 @@ import DynamicSizeBtn from "@/components/global/DynamicSizeBtn";
 import OffTitle from "@/components/global/OffTitle";
 import FactTable from "@/components/stats/fact-table/FactTable";
 import FactTableItem from "@/components/stats/fact-table/FactTableItem";
+import {mapState} from "vuex";
 
 export default {
   name: 'RecognitionReport',
@@ -671,6 +672,7 @@ export default {
     }
   },
   computed: {
+    ...mapState('ui', ['serverLocked']),
     filteredResults () {
       return this.filterResults(this.filterValue)
     },
@@ -737,9 +739,6 @@ export default {
     server () {
       return this.$store.getters['dataSource/server']
     },
-    serverLocked () {
-      return this.$store.getters['dataSource/serverLocked']
-    },
     selectedResults () {
       return this.results.filter((result, index) => {
         return this.selectedResultsIndex.includes(index)
@@ -751,50 +750,13 @@ export default {
       })
     }
   },
-  watch: {
-    serverLocked (value) {
-      if (value === 2) {
-        this.$store.commit('dataSource/lockServer')
-        this.changeServerTip = true
-      }
-    }
-  },
   mounted () {
-    this.$store.commit('dataSource/unlockServer')
+    this.init()
   },
   destroyed () {
     this.$store.commit('dataSource/unlockServer')
   },
   methods: {
-    reload () {
-      // keep wasm initialzation state
-      const newData = {
-        ...this.$data,
-        files: [],
-        results: [],
-        expandImage: {
-          dialog: false,
-          src: ''
-        },
-        recognition: {
-          busy: false,
-          server: ''
-        },
-        dialogOrigin: '',
-        lots: false,
-        step: 1,
-        filterValue: ['SUCCESS', 'WARNING', 'ERROR'],
-        submitDialog: {
-          open: false,
-          finish: false,
-          error: false
-        },
-        changeServerTip: 0,
-        isFilesValid: true,
-        selectedResultsIndex: []
-      }
-      Object.assign(this.$data, newData)
-    },
     async doSubmit () {
       const batchDrops = await this.formatResults(this.selectedResults);
       const userId = Cookies.get(config.authorization.userId.cookieKey)
@@ -821,13 +783,12 @@ export default {
     },
     async init () {
       this.initializing = true
-
       this.recognizer = new Recognizer()
 
       await this.recognizer
         .initialize(this.server)
         .then(() => {
-          this.$store.commit('dataSource/lockServer')
+          this.serverLocked = true
           this.initialized = true
           this.recognition.server = this.server
           console.log('initialization completed')
@@ -838,9 +799,6 @@ export default {
     },
     getItem (ItemId) {
       return get.items.byItemId(ItemId, false, false) || {}
-    },
-    stringify (s) {
-      return JSON.stringify(s, null, 4)
     },
     async recognize () {
       this.results = []
@@ -866,7 +824,7 @@ export default {
       this.recognition.busy = false
     },
     dropTypeToString (type) {
-      return this.$t(`stage.loots.${type}`, false) || type
+      return this.$t(`stage.loots.${type}`) || type
     },
     enlargeImage (url, event) {
       console.log(event)
@@ -881,9 +839,7 @@ export default {
     },
     async initAndRecognize () {
       this.step = 2
-      if (!this.initialized) {
-        await this.init()
-      }
+      if (!this.initialized) await this.init()
       await this.recognize()
       this.applyPostRecognitionRules(this.results)
       const selectedResultsIndex = []
