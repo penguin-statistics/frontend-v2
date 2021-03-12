@@ -1,7 +1,8 @@
 <template>
   <span
-    class="ml-4 font-weight-bold off-title--wrapper"
-    :class="{'off-title--ea': isEastAsianLang, 'display-1': !small, 'headline off-title--small': small}"
+    class="font-weight-bold off-title--wrapper"
+    :class="{'off-title--ea': isEastAsianLang, 'display-1': !small, 'headline off-title--small': small, 'ml-4': !noGutters}"
+    :style="{'left': noGutters ? '0px' : null}"
   >
     <span
       v-for="(segment, i) in segments"
@@ -22,6 +23,12 @@ export default {
       required: true
     },
     small: {
+      type: Boolean,
+      default () {
+        return false
+      }
+    },
+    noGutters: {
       type: Boolean,
       default () {
         return false
@@ -49,7 +56,7 @@ span.off-title--wrapper {
   position: relative;
   letter-spacing: -.1em !important;
   bottom: -20px;
-  left: 0px;
+  left: 0;
   z-index: 4;
 }
 span.off-title--ea {

@@ -197,32 +197,29 @@ report:
     contact:
       before: 'If you are sure you got this drop in-game, submit this report and '
       activator: contact us.
-      after: Please indicate the stage name and drops. A screenshot is preferred for
-        verification purposes. Our team will mark your report appropiately after verifying
-        it.
+      after: Please indicate the stage name and drops. A screenshot is preferred for verification purposes. Our team will mark your report appropiately after verifying it.
     causes:
       noDrop: No items selected.
-      limitation: Your current submission has a large deviation from our existing
-        data. This submission could be marked as a false report, removing it from
-        our data set.
+      limitation: Your current submission has a large deviation from our existing data. This submission could be marked as a false report, removing it from our data set.
   recognition:
     step:
       select: Select Images
       recognize: Recognize
       confirm: Confirm
       report: Report
-    allresult:
-      stagetime: 进行的关卡数量
+    allResult:
+      stageTime: 进行的关卡数量
       drops: 获得的掉落物总数
       sanity: 共消耗理智
     tips:
-      filetoobig: File too big
+      fileTooBig: "File \"{name}\" with size of {size}MB is too large"
+      fileTooOld: "File \"{name}\" was created before 36hrs ago"
       chooseImage: Click or drag to add an image
       dragImage: Drag and drop the image here
       addImage: Click to add an image
-      copyImage: 右键图片或长按图片可拷贝到剪贴板或保存图片
-      emptyFile: emptyFile
-      changeServer: 不允许在识别过程中修改服务器，请重载
+      copyImage: Right click or long press the image to share it
+      emptyFile: No files selected
+      abnormal: "{count} images have been \"excluded\" because they have either failed to pass legibility test or have failed to be recognized"
       notImageFile: "{0} are not image files, ignored."
       notImageFileMultiple: "files"
       emptyResult: No results available
@@ -230,30 +227,56 @@ report:
       success: Success
       warning: Warning
       error: Error
-    reload: Reload
+    description: "Boost your upload efficiency by simply choosing your drop screenshots and let us handle the rest."
+    confirm:
+      overview: Details
+      details: Overview
+      unknownStage: Failed
+      abnormal:
+        title: This image has failed to pass the legibility test
+        hover: "Hover: see recognition results"
+      cherryPick:
+        disabled: "Unable to upload those results"
+        accepted: "Upload those Results"
+        rejected: "Discard those Results"
+      noResult: No recognition results
+      submit: "Upload Selected (×{count}) Results"
     cost: Cost
     filename: Filename
-    result: RESULT
+    result: Result
     queue: Image Queue
     start: Start
-    progress: PROGRESS
+    progress: Progress
     initializing: Initializing
-    confirm: 确认, 共计 {0} 张
     submit: Submit
-    submiting: Submiting
-    retry: 提交失败，正在重试
+    submitting: Submitting
+    retry: "Failed to submit. Retrying..."
     notices:
       wasm: WebAssembly
       welcome:
-        - Image files will be recognized by {0}. We will not upload image files to the server.
-        - Please use screenshots only and within 36 hours.
-        - Multiple images are supoorted, but limited to 50 images.
-        - Duplicate images are not allowed, and there will be a warning message for same and close screenshot timestamp.
-        - Please do not report the first-clear of a stage, and do not only report the clears where you were lucky - report all clears.
-        - Please make sure that you refresh a 3-stars clear.
-        - After recognition, "illegal" items will not be reported, like Emergency Sanity Sampler that is not in drop period.
-        - You can click the images to enlarge it for checking, and click again to close it.
-        - Please double check that you have selected the right server and right images. Your are now currently at {serverName} Server.
+        - "Image files will be recognized **locally** by using the **WebAssembly** technology. We will not upload any of the screenshots to our server."
+        - "Please use screenshots taken within 36 hours that contains only 3-stars clear. Duplications will be detected and marked as *excluded*."
+        - "Please do not report the first-clear of a stage, and do not only report the clears where you were lucky - report all clears."
+      confirm:
+        - "Click the image to enlarge it for double-checking."
+    exceptions:
+      "3stars::False":
+        title: "Suspected to be a non 3-stars clear"
+        subtitle: Have you wait for the animation to complete before taking the screenshot?
+      "Stage::NotFound": Cannot Found any valid Stage
+      "Fingerprint::Same": Identical Images
+      "FileTimestamp::TooClose":
+        title: Screenshot Interval too close
+        subtitle: Check if you have selected duplicated images
+      "Drop::IllegalDrop":
+        title: Unexpected Drop Item
+        subtitle: Check if you have selected a screenshot in which its content includes an event that has already been closed
+      "Drop::LowConfidence":
+        title: Low Confidence Drop Item
+        subtitle: Check if you have selected a screenshot in which its content includes an event that has already been closed
+      "Result::False":
+        title: Invalid Image
+        subtitle: Check if you have selected a valid screenshot
   rules:
     item:
       _name: Item Quantities

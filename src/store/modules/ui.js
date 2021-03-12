@@ -43,6 +43,7 @@ export default {
     snackbar: state => state.snackbar,
     outdated: state => state.outdated,
     notice: state => state.notice,
-    loadingRoute: state => state.loadingRoute
+    loadingRoute: state => state.loadingRoute,
+    serverLocked: state => state.serverLocked,
   }
 }

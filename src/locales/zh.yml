@@ -200,28 +200,41 @@ report:
       recognize: 识别
       confirm: 确认
       report: 上报
-    allresult:
-      stagetime: 进行的关卡数量
+    allResult:
+      stageTime: 进行的关卡数量
       drops: 获得的掉落物总数
       sanity: 共消耗理智
     tips:
       fileTooBig: "\"{name}\" ({size}MB) 超出大小限制"
-      fileTooOld: "\"{name}\" 超过 36h 时间限制"
+      fileTooOld: "\"{name}\" 的截图时间超过了 36h 内的时间限制"
       chooseImage: 点击以选择并加入图片、或直接向框内区域拖拽以加入图片
       dragImage: 将图片拖拽到此处
       addImage: 点击此处加入图片
       copyImage: 右键图片或长按图片可拷贝到剪贴板或保存图片
       emptyFile: 暂未选择任何图片
       hasInvalidFile: 含有无效文件
-      changeServer: 不允许在识别过程中修改服务器，请重载
-      notImageFile: "{0}不是图片文件，无法上传"
+      abnormal: "您提交识别的截图中有 {count} 张截图由于未成功通过质量监测，被标记为了「汇报排除」并将无法上传至本站"
+      notImageFile: "{0} 不是图片文件，无法使用"
       notImageFileMultiple: "个文件"
       emptyResult: 无可用识别结果
     status:
       success: 成功
       warning: 警告
       error: 错误
-    reload: 重载
+    description: 仅需选择结算页面截图即可上传所有掉率，不再需要一次次手动选择。
+    confirm:
+      overview: 结果概览
+      details: 结果详情
+      unknownStage: 无法识别
+      abnormal:
+        title: 此张图片未通过质量监测
+        hover: 鼠标悬浮以查看识别内容
+      cherryPick:
+        disabled: 无法选择有问题的图片
+        accepted: 上传本图结果
+        rejected: 不上传本图结果
+      noResult: 暂时没有识别结果
+      submit: "确认上传已勾选的 {count} 次结算记录"
     cost: 耗时
     filename: 文件名
     result: 识别结果
@@ -229,9 +242,8 @@ report:
     start: 开始识别 {amount} 张图片
     progress: 进度
     initializing: 初始化中...
-    confirm: 确认上传已勾选的 {0} 次结算记录
     submit: 确认提交到企鹅数据
-    submiting: 正在提交记录
+    submitting: 正在提交记录
     retry: 提交失败，正在重试
     notices:
       welcome:
@@ -242,8 +254,23 @@ report:
       confirm:
         - 点击图片可以放大（便于核对），再次点击图片即可关闭。
     exceptions:
-      "Fingerprint::Same": 此张图片与其他一张图片的内容完全一致
-      "Drop::IllegalDrop": 识别结果出现了不合法的掉落物
+      "3stars::False":
+        title: 疑似并非 3 星通关
+        subtitle: 在物品出现动画播放完毕前就截图可能会导致此问题
+      "Stage::NotFound": 并未识别到已知关卡
+      "Fingerprint::Same": 此图片与另一图片完全一致
+      "FileTimestamp::TooClose":
+        title: 此图片与另一图片的截图相隔时间过短
+        subtitle: 请检查是否选择了重复截图
+      "Drop::IllegalDrop":
+        title: 识别到不合法的掉落物
+        subtitle: 请检查是否选择了已结束活动的结算截图
+      "Drop::LowConfidence":
+        title: 识别到无法确定的掉落物
+        subtitle: 请检查是否选择了已结束活动的结算截图
+      "Result::False":
+        title: 未知图片
+        subtitle: 请确认您的截图包含分辨率正常的全屏结算页面截图
   rules:
     item:
       _name: 物品项
