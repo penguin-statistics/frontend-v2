@@ -318,9 +318,14 @@
                         <!--                        </div>-->
 
                         <FactTable style="width: 100%">
-                          <FactTableItem :title="$t('stage.name')">
+                          <FactTableItem>
+                            <template #title>
+                              <span class="textDarken--text">{{ $t('stage.name') }}</span>
+                            </template>
                             <template #content>
-                              <span class="monospace">{{ result.result.stageId ? getStage(result.result.stageId).code : $t('report.recognition.confirm.unknownStage') }}</span>
+                              <span class="monospace font-weight-bold">
+                                {{ result.result.stageId ? getStage(result.result.stageId).code : $t('report.recognition.confirm.unknownStage') }}
+                              </span>
                             </template>
                           </FactTableItem>
                           <!--                          <FactTableItem-->

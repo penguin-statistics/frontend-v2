@@ -230,7 +230,7 @@ report:
         title: 此张图片未通过质量监测
         hover: 鼠标悬浮以查看识别内容
       cherryPick:
-        disabled: 无法选择有问题的图片
+        disabled: 无法选择异常图片
         accepted: 上传本图结果
         rejected: 不上传本图结果
       noResult: 暂时没有识别结果
@@ -258,7 +258,9 @@ report:
         title: 疑似并非 3 星通关
         subtitle: 在物品出现动画播放完毕前就截图可能会导致此问题
       "Stage::NotFound": 并未识别到已知关卡
-      "Fingerprint::Same": 此图片与另一图片完全一致
+      "Fingerprint::Same":
+        title: 此图片与另一图片完全一致
+        subtitle: 请检查是否选择了重复截图
       "FileTimestamp::TooClose":
         title: 此图片与另一图片的截图相隔时间过短
         subtitle: 请检查是否选择了重复截图

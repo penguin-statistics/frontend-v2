@@ -166,7 +166,7 @@
 
 .monospace {
     font-family: "benderregular", SF Mono, "Droid Sans Mono", Ubuntu Mono, Consolas, Courier New, Courier, monospace !important;
-    /*letter-spacing: .03rem;*/
+    letter-spacing: .03rem;
 }
 
 .monospace-pure {

@@ -236,7 +236,7 @@ report:
         title: This image has failed to pass the legibility test
         hover: "Hover: see recognition results"
       cherryPick:
-        disabled: "Unable to upload those results"
+        disabled: "Unable to upload abnormal results"
         accepted: "Upload those Results"
         rejected: "Discard those Results"
       noResult: No recognition results
@@ -264,7 +264,9 @@ report:
         title: "Suspected to be a non 3-stars clear"
         subtitle: Have you wait for the animation to complete before taking the screenshot?
       "Stage::NotFound": Cannot Found any valid Stage
-      "Fingerprint::Same": Identical Images
+      "Fingerprint::Same":
+        title: Identical Images
+        subtitle: Check if you have selected duplicated images
       "FileTimestamp::TooClose":
         title: Screenshot Interval too close
         subtitle: Check if you have selected duplicated images
