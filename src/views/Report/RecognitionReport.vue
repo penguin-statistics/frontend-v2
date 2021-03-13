@@ -321,7 +321,13 @@
                             max-height="240px"
                             class="unknown-ratio-glow"
                             @click="enlargeImage(result.blobUrl)"
-                          />
+                          >
+                            <template #placeholder>
+                              <div class="d-flex align-center justify-center fill-height caption">
+                                {{ $t('meta.loading') }}
+                              </div>
+                            </template>
+                          </v-img>
                         </div>
                         <v-divider />
 

@@ -51,7 +51,7 @@ menu:
     planner: ArkPlanner
 meta:
   details: Details
-  loading: Fetching application data...
+  loading: Loading...
   notfound: "???"
   footer:
     copyright:

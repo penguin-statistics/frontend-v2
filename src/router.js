@@ -32,6 +32,22 @@ Router.prototype.push = function push (location, onResolve, onReject) {
   return originalPush.call(this, location).catch(err => err)
 }
 
+const routerChildrenNull = {
+  path: '',
+  name: 'RouterChildrenNull',
+  meta: {
+    icon: 'mdi-close',
+    i18n: 'meta.notfound',
+    hide: true
+  },
+  beforeEnter(to, from, next) {
+    return next({
+      name: "Home",
+      replace: true
+    })
+  }
+}
+
 Vue.use(Router)
 const router = new Router({
   mode: 'history',
@@ -57,6 +73,7 @@ const router = new Router({
       active: true
     },
     children: [
+      routerChildrenNull,
       {
         path: 'stage',
         name: 'ReportByZone',
@@ -86,7 +103,30 @@ const router = new Router({
           i18n: 'menu.report.recognition',
           beta: true
         }
-      }
+      },
+      {
+        path: ':zoneId/:stageId',
+        name: 'ReportByZoneLegacy',
+        meta: {
+          hide: true,
+          icon: 'mdi-cursor-default-click',
+          i18n: 'menu.report.stage'
+        },
+        beforeEnter(to, from, next) {
+          if (to.params.zoneId && to.params.stageId) {
+            return next({
+              name: "ReportByZone_Selected",
+              params: to.params,
+              replace: true
+            })
+          } else {
+            return next({
+              name: "ReportByZone",
+              replace: true
+            })
+          }
+        }
+      },
     ]
   },
   {
@@ -99,6 +139,7 @@ const router = new Router({
       active: true
     },
     children: [
+      routerChildrenNull,
       {
         path: 'stage',
         name: 'StatsByStage',
@@ -192,6 +233,7 @@ const router = new Router({
       active: true
     },
     children: [
+      routerChildrenNull,
       {
         path: 'members',
         name: 'AboutMembers',
@@ -270,32 +312,6 @@ const router = new Router({
       }
     ]
   },
-  // {
-  //   path: '/_redirect/v1',
-  //   name: 'OldVersion',
-  //   meta: {
-  //     ga: {
-  //       category: 'redirect',
-  //       action: 'links',
-  //       label: 'OldVersion',
-  //       value: 1
-  //     },
-  //     link: "https://v1.penguin-stats.io",
-  //     icon: 'mdi-penguin',
-  //     i18n: 'menu.v1',
-  //     externalRedirect: true
-  //   }
-  // },
-  // {
-  //   path: '/_internal/debugger/data',
-  //   name: 'DataDebugger',
-  //   component: DataDebugger,
-  //   meta: {
-  //     icon: 'mdi-file',
-  //     i18n: 'meta.notfound',
-  //     hide: true
-  //   }
-  // },
   {
     path: '*',
     name: 'ErrorNotFound',

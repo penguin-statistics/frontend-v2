@@ -10,7 +10,7 @@
         dark
       >
         <v-card-text>
-          {{ $t('meta.loading') }}
+          {{ $t('fetch.loading') }}
           <v-progress-linear
             indeterminate
             color="white"
