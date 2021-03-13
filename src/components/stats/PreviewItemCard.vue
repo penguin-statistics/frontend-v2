@@ -9,7 +9,7 @@
         :ratio="0.5"
       />
       <span class="title ml-2">
-        {{ item.name }}
+        {{ item.name || item.itemId || $t('item.undefined') }}
       </span>
     </v-card-title>
     <v-card-text v-if="stats.data.length && !disabledOverview">

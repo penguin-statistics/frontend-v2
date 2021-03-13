@@ -6,18 +6,33 @@ import uniq from 'lodash/uniq'
 
 async function image2wasmHeapOffset (blob) {
   const Module = window.Module
-  const imageData = await new Promise(resolve => {
-    const reader = new FileReader()
-    reader.onload = function (event) {
-      resolve(event.target.result)
-    }
-    reader.readAsArrayBuffer(blob)
-  })
+  console.log('image2wasmHeapOffset: start reading file')
+  console.time('image2wasmHeapOffset')
+  // const imageData = await new Promise(resolve => {
+  //   const reader = new FileReader()
+  //   reader.onload = function (event) {
+  //     console.log('image2wasmHeapOffset: finished reading file')
+  //     console.timeLog('image2wasmHeapOffset')
+  //     resolve(event.target.result)
+  //   }
+  //   reader.readAsArrayBuffer(blob)
+  // })
+  const imageData = await blob.arrayBuffer()
+  console.log('image2wasmHeapOffset: initializing array')
+  console.timeLog('image2wasmHeapOffset')
   const uint8 = new Uint8Array(imageData)
   const numBytes = uint8.length
+  console.log('image2wasmHeapOffset: initialized array')
+  console.timeLog('image2wasmHeapOffset')
   const dataPtr = Module._malloc(numBytes)
+  console.log('image2wasmHeapOffset: allocated wasm memory')
+  console.timeLog('image2wasmHeapOffset')
   const dataOnHeap = new Uint8Array(Module.HEAPU8.buffer, dataPtr, numBytes)
+  console.log('image2wasmHeapOffset: created Uint8Array on wasm heap')
+  console.timeLog('image2wasmHeapOffset')
   dataOnHeap.set(uint8)
+  console.log('image2wasmHeapOffset: set Uint8Array value on wasm heap')
+  console.timeEnd('image2wasmHeapOffset')
 
   return {
     offset: dataOnHeap.byteOffset,

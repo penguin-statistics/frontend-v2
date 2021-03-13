@@ -19,7 +19,7 @@
     class="blue item-icon--special white--text"
     :size="30 * ratio"
   >
-    mdi-treasure-chest
+    mdi-help
   </v-icon>
 </template>
 

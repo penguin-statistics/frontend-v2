@@ -243,6 +243,7 @@ report:
         rejected: 不上传本图结果
       noResult: 暂时没有识别结果
       submit: "确认上传已勾选的 {count} 次结算记录"
+      itemsTotal: 物品数合计
 
     cost: 耗时
     filename: 文件名
@@ -481,6 +482,7 @@ item:
     FURN: 家具
     MATERIAL: 材料
   related: 相关物品
+  undefined: 未知物品
 query:
   panel:
     builder: 查询编辑器

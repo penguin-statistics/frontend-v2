@@ -28,11 +28,10 @@
         {{ alert.subtitle }}
       </div>
       <div
+        class="monospace-pure degraded-opacity"
         style="font-size: 10px; line-height: 1.5"
       >
-        <span class="monospace-pure degraded-opacity">
-          {{ alert.count > 1 ? Array(alert.count).fill(alert.type).join('; ') : alert.type }}
-        </span>
+        {{ alert.type }}
       </div>
     </v-card>
   </div>

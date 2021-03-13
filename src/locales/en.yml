@@ -251,6 +251,7 @@ report:
         rejected: "Discard those Results"
       noResult: No recognition results
       submit: "Upload Selected (×{count}) Results"
+      itemsTotal: Items
     cost: Cost
     filename: Filename
     result: Result
@@ -275,7 +276,7 @@ report:
       "3stars::False":
         title: "Suspected to be a non 3-stars clear"
         subtitle: Have you wait for the animation to complete before taking the screenshot?
-      "Stage::NotFound": Cannot Found any valid Stage
+      "Stage::NotFound": Cannot found any valid matching stage
       "Fingerprint::Same":
         title: Identical Images
         subtitle: Check if you have selected duplicated images
@@ -482,6 +483,7 @@ item:
     FURN: Furniture
     MATERIAL: Materials
   related: Related Items
+  undefined: Unknown
 query:
   panel:
     builder: Query Builder

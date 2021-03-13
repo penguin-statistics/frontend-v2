@@ -215,291 +215,294 @@
               step="3"
               :class="{'pt-0': step === 3}"
             >
-              <v-alert
-                type="info"
-                border="left"
-                outlined
-                class="mb-2 markdown-content-inline"
-              >
-                <ul>
-                  <li
-                    v-for="(notice, i) in $t('report.recognition.notices.confirm')"
-                    :key="i"
-                    v-marked
-                    v-text="notice"
-                  />
-                </ul>
-              </v-alert>
-
-              <OffTitle
-                :content="$t('report.recognition.confirm.overview._name')"
-                small
-              />
-
-              <v-card
-                outlined
-                class="position-relative pa-6 pt-7 background-transparent overflow-hidden"
-              >
-                <div class="backdrop-icon">
-                  <v-icon :size="60">
-                    mdi-image-multiple
-                  </v-icon>
-                </div>
-
-                <RecognitionResultOverview
-                  :success="filterResults(['SUCCESS']).length"
-                  :error="filterResults(['WARNING', 'ERROR']).length"
-                  :duration="recognition.durationPerImage"
-                  :total="results.length"
-                />
-              </v-card>
-
-              <v-alert
-                v-if="filterResults(['SUCCESS']).length !== results.length"
-                color="warning"
-                dense
-                outlined
-                border="left"
-                class="mt-4"
-                icon="mdi-bug"
-              >
-                {{ $t('report.recognition.tips.abnormal', {count: filterResults(['WARNING', 'ERROR']).length}) }}
-              </v-alert>
-
-              <OffTitle
-                :content="$t('report.recognition.confirm.details')"
-                small
-              />
-
-              <v-card
-                flat
-                class="position-relative pt-6 transparent"
-                style="min-height: 100px"
-              >
-                <v-select
-                  v-model="filterValue"
-                  :items="itemFilters"
-                  item-text="text"
-                  item-value="value"
-                  attach
-                  chips
-                  label="Filter"
-                  multiple
-                  prepend-icon="mdi-filter-variant"
-                />
-
-                <v-row
-                  v-if="results.length"
+              <div v-if="step === 3">
+                <v-alert
+                  type="info"
+                  border="left"
+                  outlined
+                  class="mb-2 markdown-content-inline"
                 >
-                  <v-col
-                    v-for="(result, index) in results"
-                    :key="index"
-                    :class="[filteredResults.includes(result) ? 'd-flex' : 'd-none', 'align-self-stretch']"
-                    cols="12"
-                    md="6"
-                    lg="4"
-                    xl="3"
-                    class="align-self-stretch"
+                  <ul>
+                    <li
+                      v-for="(notice, i) in $t('report.recognition.notices.confirm')"
+                      :key="i"
+                      v-marked
+                      v-text="notice"
+                    />
+                  </ul>
+                </v-alert>
+
+                <OffTitle
+                  :content="$t('report.recognition.confirm.overview._name')"
+                  small
+                />
+
+                <v-card
+                  outlined
+                  class="position-relative pa-6 pt-7 background-transparent overflow-hidden"
+                >
+                  <div class="backdrop-icon">
+                    <v-icon :size="60">
+                      mdi-image-multiple
+                    </v-icon>
+                  </div>
+
+                  <RecognitionResultOverview
+                    :success="filterResults(['SUCCESS']).length"
+                    :error="filterResults(['WARNING', 'ERROR']).length"
+                    :duration="recognition.durationPerImage"
+                    :total="results.length"
+                  />
+                </v-card>
+
+                <v-alert
+                  v-if="filterResults(['SUCCESS']).length !== results.length"
+                  color="warning"
+                  dense
+                  outlined
+                  border="left"
+                  class="mt-4"
+                  icon="mdi-bug"
+                >
+                  {{ $t('report.recognition.tips.abnormal', {count: filterResults(['WARNING', 'ERROR']).length}) }}
+                </v-alert>
+
+                <OffTitle
+                  :content="$t('report.recognition.confirm.details')"
+                  small
+                />
+
+                <v-card
+                  flat
+                  class="position-relative pt-6 transparent"
+                  style="min-height: 100px"
+                >
+                  <v-select
+                    v-model="filterValue"
+                    :items="itemFilters"
+                    item-text="text"
+                    item-value="value"
+                    attach
+                    chips
+                    label="Filter"
+                    multiple
+                    prepend-icon="mdi-filter-variant"
+                  />
+
+                  <v-row
+                    v-if="results.length"
                   >
-                    <v-card
-                      outlined
-                      :color="
-                        resultHasErrorOrWarning[index]
-                          ? (dark ? 'rgba(241,97,87,0.5)' : 'rgba(241,97,87,0.3)')
-                          : ''"
-                      style="width: 100%"
-                      class="align-self-stretch fill-height d-flex flex-column justify-start overflow-hidden"
+                    <v-col
+                      v-for="(result, index) in results"
+                      :key="index"
+                      :class="[filteredResults.includes(result) ? 'd-flex' : 'd-none', 'align-self-stretch']"
+                      cols="12"
+                      md="6"
+                      lg="4"
+                      xl="3"
+                      class="align-self-stretch"
                     >
-                      <div class="bkop-medium">
-                        <v-img
-                          v-ripple
-                          :src="result.blobUrl"
-                          contain
-                          style="cursor: zoom-in"
-                          min-height="120px"
-                          max-height="240px"
-                          class="unknown-ratio-glow"
-                          @click="enlargeImage(result.blobUrl)"
-                        />
-                      </div>
-                      <v-divider />
-
-                      <v-card-title class="d-flex flex-column align-center justify-center">
-                        <!--                        <div class="d-flex align-baseline">-->
-                        <!--                          <small class="mr-2">{{ $t("stage.name") }}</small>-->
-
-                        <!--                        </div>-->
-
-                        <FactTable
-                          v-if="result.result.stageId"
-                          style="width: 100%"
-                        >
-                          <FactTableItem>
-                            <template #title>
-                              <span class="textDarken--text">{{ $t('stage.name') }}</span>
-                            </template>
-                            <template #content>
-                              <span class="monospace font-weight-bold">
-                                {{ getStage(result.result.stageId).code }}
-                              </span>
-                            </template>
-                          </FactTableItem>
-                          <FactTableItem
-                            title="物品数合计"
-                          >
-                            <template #content>
-                              <span class="monospace font-weight-bold">
-                                ×{{ result.result.drops.reduce((prev, curr) => prev + curr.quantity, 0) }}
-                              </span>
-                            </template>
-                          </FactTableItem>
-                        </FactTable>
-
-                        <div
-                          v-else
-                          class="align-self-start"
-                        >
-                          {{ $t('report.recognition.confirm.unknownStage') }}
-                        </div>
-                      </v-card-title>
-
-                      <v-divider />
-
-                      <v-card-text
-                        class="pt-2 transition-all"
-                        :class="{
-                          'reco-result__wrapper--invalid': resultHasErrorOrWarning[index],
-                          'reco-result__wrapper--invalid-no-results': !result.result.drops.length
-                        }"
+                      <v-card
+                        outlined
+                        :color="
+                          resultHasErrorOrWarning[index]
+                            ? (dark ? 'rgba(241,97,87,0.5)' : 'rgba(241,97,87,0.3)')
+                            : ''"
+                        style="width: 100%"
+                        class="align-self-stretch fill-height d-flex flex-column justify-start overflow-hidden"
                       >
-                        <div class="reco-result__details">
+                        <div class="bkop-medium">
+                          <v-img
+                            v-ripple
+                            :src="result.blobUrl"
+                            contain
+                            style="cursor: zoom-in"
+                            min-height="120px"
+                            max-height="240px"
+                            class="unknown-ratio-glow"
+                            @click="enlargeImage(result.blobUrl)"
+                          />
+                        </div>
+                        <v-divider />
+
+                        <v-card-title class="d-flex flex-column align-center justify-center">
+                          <!--                        <div class="d-flex align-baseline">-->
+                          <!--                          <small class="mr-2">{{ $t("stage.name") }}</small>-->
+
+                          <!--                        </div>-->
+
+                          <FactTable
+                            v-if="result.result.stageId"
+                            style="width: 100%"
+                          >
+                            <FactTableItem>
+                              <template #title>
+                                <span class="textDarken--text">{{ $t('stage.name') }}</span>
+                              </template>
+                              <template #content>
+                                <span class="monospace font-weight-bold">
+                                  {{ getStage(result.result.stageId).code }}
+                                </span>
+                              </template>
+                            </FactTableItem>
+                            <FactTableItem>
+                              <template #title>
+                                <span class="textDarken--text">{{ $t('report.recognition.confirm.itemsTotal') }}</span>
+                              </template>
+                              <template #content>
+                                <span class="monospace font-weight-bold">
+                                  ×{{ result.result.drops.reduce((prev, curr) => prev + curr.quantity, 0) }}
+                                </span>
+                              </template>
+                            </FactTableItem>
+                          </FactTable>
+
                           <div
-                            v-for="item in result.result.drops"
-                            :key="item.itemId"
-                            class="d-inline-flex align-center justify-center flex-column pa-2 mt-2 mr-2"
-                            style="border-radius: 4px"
-                            :style="{
-                              border: `1px solid ${dark ? 'rgba(255, 255, 255, .4)' : '#000'}`
-                            }"
+                            v-else
+                            class="align-self-start"
+                          >
+                            {{ $t('report.recognition.confirm.unknownStage') }}
+                          </div>
+                        </v-card-title>
+
+                        <v-divider />
+
+                        <v-card-text
+                          class="pt-2 transition-all"
+                          :class="{
+                            'reco-result__wrapper--invalid': resultHasErrorOrWarning[index],
+                            'reco-result__wrapper--invalid-no-results': !result.result.drops.length
+                          }"
+                        >
+                          <div class="reco-result__details">
+                            <div
+                              v-for="item in result.result.drops"
+                              :key="item.itemId"
+                              class="d-inline-flex align-center justify-center flex-column pa-2 mt-2 mr-2"
+                              style="border-radius: 4px"
+                              :style="{
+                                border: `1px solid ${dark ? 'rgba(255, 255, 255, .4)' : '#000'}`
+                              }"
+                            >
+                              <div>
+                                {{ dropTypeToString(item.dropType) }}
+                              </div>
+
+                              <v-badge
+                                bottom
+                                overlap
+                                bordered
+                                label
+                                color="indigo"
+                                :offset-x="24"
+                                :offset-y="20"
+                                :content="`×${item.quantity}`"
+                              >
+                                <Item
+                                  :item="getItem(item.itemId)"
+                                  disable-overview-card
+                                />
+                              </v-badge>
+                            </div>
+                          </div>
+                          <v-alert
+                            v-if="resultHasErrorOrWarning[index]"
+                            outlined
+                            color="text"
+                            border="left"
+                            class="my-4 reco-result__alert"
+                            type="error"
                           >
                             <div>
-                              {{ dropTypeToString(item.dropType) }}
-                            </div>
+                              <div>{{ $t('report.recognition.confirm.abnormal.' + (result.result.stageId ? 'error' : 'fatal')) }}</div>
 
-                            <v-badge
-                              bottom
-                              overlap
-                              bordered
-                              label
-                              color="indigo"
-                              :offset-x="24"
-                              :offset-y="20"
-                              :content="`×${item.quantity}`"
-                            >
-                              <Item
-                                :item="getItem(item.itemId)"
-                                disable-overview-card
-                              />
-                            </v-badge>
-                          </div>
-                        </div>
-                        <v-alert
-                          v-if="resultHasErrorOrWarning[index]"
-                          outlined
-                          color="text"
-                          border="left"
-                          class="my-4 reco-result__alert"
-                          type="error"
-                        >
-                          <div>
-                            <div>{{ $t('report.recognition.confirm.abnormal.' + (result.result.stageId ? 'error' : 'fatal')) }}</div>
-
-                            <div
-                              v-if="result.result.drops.length"
-                              class="d-inline-flex caption chip-label"
-                            >
-                              <v-icon
-                                left
-                                small
+                              <div
+                                v-if="result.result.drops.length"
+                                class="d-inline-flex caption chip-label"
                               >
-                                mdi-cursor-default-click
-                              </v-icon>
-                              {{ $t('report.recognition.confirm.abnormal.hover') }}
+                                <v-icon
+                                  left
+                                  small
+                                >
+                                  mdi-cursor-default-click
+                                </v-icon>
+                                {{ $t('report.recognition.confirm.abnormal.hover') }}
+                              </div>
                             </div>
-                          </div>
 
-                          <RecognizeResultAlertCard
-                            :alerts="result.result.errors"
-                            color="red darken-3"
-                            icon="mdi-alert-decagram"
-                          />
-                          <RecognizeResultAlertCard
-                            :alerts="result.result.warnings"
-                            color="warning darken-2"
-                            icon="mdi-alert-circle"
-                          />
-                        </v-alert>
-                      </v-card-text>
+                            <RecognizeResultAlertCard
+                              :alerts="result.result.errors"
+                              color="red darken-3"
+                              icon="mdi-alert-decagram"
+                            />
+                            <RecognizeResultAlertCard
+                              :alerts="result.result.warnings"
+                              color="warning darken-2"
+                              icon="mdi-alert-circle"
+                            />
+                          </v-alert>
+                        </v-card-text>
 
-                      <v-spacer />
+                        <v-spacer />
 
-                      <v-divider />
+                        <v-divider />
 
-                      <v-card-actions class="pa-2">
-                        <v-card
-                          v-ripple="!resultHasErrorOrWarning[index]"
-                          class="background-transparent elevation-4 pa-2"
-                          :class="`${resultHasErrorOrWarning[index] ? 'transparent elevation-0' : (selectedResultsIndex.includes(index) ? 'success darken-2' : 'warning darken-4')}`"
-                          style="width: 100%"
-                        >
-                          <v-checkbox
-                            v-model="selectedResultsIndex"
-                            color="text"
-                            hide-details
-                            :value="index"
-                            class="pt-0 mt-0"
-                            :disabled="resultHasErrorOrWarning[index]"
-                            :off-icon="resultHasErrorOrWarning[index] ? 'mdi-close-box' : '$checkboxOff'"
-                            :label="
-                              resultHasErrorOrWarning[index] ?
-                                $t('report.recognition.confirm.cherryPick.disabled') :
-                                (selectedResultsIndex.includes(index) ?
-                                  $t('report.recognition.confirm.cherryPick.accepted') :
-                                  $t('report.recognition.confirm.cherryPick.rejected')
-                                )
-                            "
-                          />
-                        </v-card>
-                      </v-card-actions>
-                    </v-card>
-                  </v-col>
-                </v-row>
-                <v-alert
-                  v-else
-                  color="secondary"
-                  prominent
-                  border="left"
-                  class="mt-0"
-                  icon="mdi-numeric-0-box-multiple-outline"
-                >
-                  {{ $t('report.recognition.confirm.noResult') }}
-                </v-alert>
-              </v-card>
-              <div class="mt-4">
-                <v-btn
-                  color="primary"
-                  class="mr-2"
-                  :disabled="!selectedResults.length"
-                  @click="step = 4"
-                >
-                  {{ $t("report.recognition.confirm.submit", {count: selectedResults.length}) }}
-                  <v-icon
-                    right
-                    dark
+                        <v-card-actions class="pa-2">
+                          <v-card
+                            v-ripple="!resultHasErrorOrWarning[index]"
+                            class="background-transparent elevation-4 pa-2"
+                            :class="`${resultHasErrorOrWarning[index] ? 'transparent elevation-0' : (selectedResultsIndex.includes(index) ? 'success darken-2' : 'warning darken-4')}`"
+                            style="width: 100%"
+                          >
+                            <v-checkbox
+                              v-model="selectedResultsIndex"
+                              color="text"
+                              hide-details
+                              :value="index"
+                              class="pt-0 mt-0"
+                              :disabled="resultHasErrorOrWarning[index]"
+                              :off-icon="resultHasErrorOrWarning[index] ? 'mdi-close-box' : '$checkboxOff'"
+                              :label="
+                                resultHasErrorOrWarning[index] ?
+                                  $t('report.recognition.confirm.cherryPick.disabled') :
+                                  (selectedResultsIndex.includes(index) ?
+                                    $t('report.recognition.confirm.cherryPick.accepted') :
+                                    $t('report.recognition.confirm.cherryPick.rejected')
+                                  )
+                              "
+                            />
+                          </v-card>
+                        </v-card-actions>
+                      </v-card>
+                    </v-col>
+                  </v-row>
+                  <v-alert
+                    v-else
+                    color="secondary"
+                    prominent
+                    border="left"
+                    class="mt-0"
+                    icon="mdi-numeric-0-box-multiple-outline"
                   >
-                    mdi-upload
-                  </v-icon>
-                </v-btn>
+                    {{ $t('report.recognition.confirm.noResult') }}
+                  </v-alert>
+                </v-card>
+                <div class="mt-4">
+                  <v-btn
+                    color="primary"
+                    class="mr-2"
+                    :disabled="!selectedResults.length"
+                    @click="step = 4"
+                  >
+                    {{ $t("report.recognition.confirm.submit", {count: selectedResults.length}) }}
+                    <v-icon
+                      right
+                      dark
+                    >
+                      mdi-upload
+                    </v-icon>
+                  </v-btn>
+                </div>
               </div>
             </v-stepper-content>
 
@@ -806,7 +809,7 @@ export default {
     this.init()
   },
   beforeDestroy () {
-    this.$store.commit('dataSource/unlockServer')
+    this.$store.commit('ui/unlockServer')
   },
   methods: {
     ...mapGetters('ui', ['serverLocked']),
@@ -1049,9 +1052,9 @@ export default {
           pointer-events: none;
           margin-top: -72px !important;
           filter: blur(3px);
-          opacity: 0.15;
+          opacity: 0.12;
           background: rgba(128, 34, 25, .2) !important;
-          transform: scale(1.05);
+          transform: scale(1.047);
         }
       }
     }
