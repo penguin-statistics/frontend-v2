@@ -211,23 +211,31 @@ report:
       dragImage: 将图片拖拽到此处
       addImage: 点击此处加入图片
       copyImage: 右键图片或长按图片可拷贝到剪贴板或保存图片
+      abnormal: "您提交识别的截图中有 {count} 张截图由于未成功通过质量监测，被标记为了「汇报排除」并将无法上传至本站"
+      notImageFile: "{files} 不是图片文件，无法使用"
+      emptyResult: 无可用识别结果
+      unsatisfiedStart: 无法开始识别
       emptyFile: 暂未选择任何图片
       hasInvalidFile: 含有无效文件
-      abnormal: "您提交识别的截图中有 {count} 张截图由于未成功通过质量监测，被标记为了「汇报排除」并将无法上传至本站"
-      notImageFile: "{0} 不是图片文件，无法使用"
-      notImageFileMultiple: "个文件"
-      emptyResult: 无可用识别结果
     status:
       success: 成功
       warning: 警告
       error: 错误
     description: 仅需选择结算页面截图即可上传所有掉率，不再需要一次次手动选择。
     confirm:
-      overview: 结果概览
+      overview:
+        _name: 结果概览
+        total: 共识别了
+        success: 检测通过
+        error: 检测异常
+        count: "{count} 张"
+        server: 数据集服务器
+        duration: 每张图片平均识别用时
       details: 结果详情
       unknownStage: 无法识别
       abnormal:
-        title: 此张图片未通过质量监测
+        error: 此张图片未通过质量监测
+        fatal: 此张图片无法被识别
         hover: 鼠标悬浮以查看识别内容
       cherryPick:
         disabled: 无法选择异常图片
@@ -235,11 +243,12 @@ report:
         rejected: 不上传本图结果
       noResult: 暂时没有识别结果
       submit: "确认上传已勾选的 {count} 次结算记录"
+
     cost: 耗时
     filename: 文件名
     result: 识别结果
     queue: 识别图片队列
-    start: 开始识别 {amount} 张图片
+    start: 开始识别 {count} 张图片
     progress: 进度
     initializing: 初始化中...
     submit: 确认提交到企鹅数据
@@ -252,7 +261,9 @@ report:
         - 请不要选择首次通关奖励的截图，并请如实汇报**所有**发生的掉落情况。
 #        - 截图内识别到「不合法」的物品，整张截图都将不再计入识别结果（如：已过期活动的相关物品掉落）。
       confirm:
-        - 点击图片可以放大（便于核对），再次点击图片即可关闭。
+        - 点击图片可以放大以便于核对；再次点击图片即可关闭
+        - 成功识别的截图已被自动勾选上传
+        - 为本站数据集准确度考虑，您将**不可**点选发生识别错误的截图
     exceptions:
       "3stars::False":
         title: 疑似并非 3 星通关

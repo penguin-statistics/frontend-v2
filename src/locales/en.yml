@@ -81,6 +81,7 @@ meta:
   time:
     minute: "{m}m"
     second: "{s}s"
+  isAre: "is | are"
   copyWarning: |2-
 
 
@@ -218,22 +219,31 @@ report:
       dragImage: Drag and drop the image here
       addImage: Click to add an image
       copyImage: Right click or long press the image to share it
-      emptyFile: No files selected
-      abnormal: "{count} images have been \"excluded\" because they have either failed to pass legibility test or have failed to be recognized"
-      notImageFile: "{0} are not image files, ignored."
-      notImageFileMultiple: "files"
+      abnormal: "{count} image(s) have been \"excluded\" because they have either failed to pass legibility test or have failed to be recognized"
+      notImageFile: "\"{files}\" are not image files, ignored."
       emptyResult: No results available
+      unsatisfiedStart: Unable to Start
+      emptyFile: No files selected
+      hasInvalidFile: Contains invalid file
     status:
       success: Success
       warning: Warning
       error: Error
     description: "Boost your upload efficiency by simply choosing your drop screenshots and let us handle the rest."
     confirm:
-      overview: Details
-      details: Overview
-      unknownStage: Failed
+      overview:
+        _name: Overview
+        total: Recognized
+        success: Passed
+        error: Failed
+        count: "{count}"
+        server: Dataset Server
+        duration: Avg Time Taken
+      details: Details
+      unknownStage: Recognition Failed
       abnormal:
-        title: This image has failed to pass the legibility test
+        error: This image has failed to pass the legibility test
+        fatal: This image has failed to be recognized
         hover: "Hover: see recognition results"
       cherryPick:
         disabled: "Unable to upload abnormal results"
@@ -245,7 +255,7 @@ report:
     filename: Filename
     result: Result
     queue: Image Queue
-    start: Start
+    start: Recognize {count} images
     progress: Progress
     initializing: Initializing
     submit: Submit
@@ -258,7 +268,9 @@ report:
         - "Please use screenshots taken within 36 hours that contains only 3-stars clear. Duplications will be detected and marked as *excluded*."
         - "Please do not report the first-clear of a stage, and do not only report the clears where you were lucky - report all clears."
       confirm:
-        - "Click the image to enlarge it for double-checking."
+        - Click the image to enlarge it for double-checking.
+        - Screenshots in which passed the legibility test have already been checked for upload.
+        - With consideration of dataset accuracy, you are **disallowed** to check a screenshot that failed the legibility test for upload.
     exceptions:
       "3stars::False":
         title: "Suspected to be a non 3-stars clear"

@@ -23,7 +23,7 @@
         class="d-flex align-center btn-content"
       >
         <span class="caption">
-          无法开始识别
+          {{ $t('report.recognition.tips.unsatisfiedStart') }}
         </span>
         <v-divider
           vertical
@@ -51,9 +51,9 @@
           vertical
           class="mx-2"
         />
-        <span>
-          {{ $t("report.recognition.start", {amount: length}) }}
-        </span>
+        <div style="line-height: 2">
+          {{ $t("report.recognition.start", {count: length}) }}
+        </div>
       </div>
     </transition>
   </v-btn>

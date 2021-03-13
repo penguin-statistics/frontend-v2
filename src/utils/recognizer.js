@@ -26,6 +26,14 @@ async function image2wasmHeapOffset (blob) {
   }
 }
 
+function safeParseJson (s) {
+  try {
+    return JSON.parse(s)
+  } catch (e) {
+    return null
+  }
+}
+
 class Recognizer {
   async initialize (server) {
     console.groupCollapsed('Initialization')
@@ -157,11 +165,26 @@ class Recognizer {
       console.log('finished writing file to wasm heap. starting recognition')
       console.timeLog(file.name)
       const start = performance.now()
-      const result = this.wasm.recognize(data.offset, data.length, 0)
+      let result, parsedResult
+      try {
+        result = this.wasm.recognize(data.offset, data.length, 0)
+        parsedResult = safeParseJson(result) || { errors: [], warnings: [], drops: [] }
+      } catch (e) {
+        const duration = performance.now() - start
+        resultCb({
+          file,
+          blobUrl: data.blobUrl,
+          duration,
+          result: {
+            errors: ["Result::False"],
+            warnings: [],
+            drops: []
+          }
+        })
+      }
       const duration = performance.now() - start
       console.log('recognized with result', result, 'executing callback')
       console.timeLog(file.name)
-      const parsedResult = JSON.parse(result) || { errors: [], drops: [] }
       console.debug('recognition result', parsedResult)
       resultCb({
         file,
@@ -169,10 +192,10 @@ class Recognizer {
         duration,
         result: parsedResult
       })
-      console.log('callback executed. freeing buffer with offset', data.offset)
-      console.timeLog(file.name)
+      console.log('callback executed')
+      // console.timeLog(file.name)
       // this.wasm.free_buffer(data.offset)
-      console.log('buffer freed. timer ended')
+      // console.log('buffer freed. timer ended')
       console.timeEnd(file.name)
       console.groupEnd()
     }

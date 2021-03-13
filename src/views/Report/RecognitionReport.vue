@@ -21,7 +21,7 @@
           :src="expandImage.src"
           alt="enlarged"
           class="mx-auto d-block"
-          style="max-width: 100%; height: 80vh;"
+          style="max-width: 100%; max-height: 80vh"
         >
         <v-card-subtitle class="text-center mt-4">
           {{ $t("report.recognition.tips.copyImage") }}
@@ -59,7 +59,7 @@
                   <v-row>
                     <v-col>
                       <v-progress-linear
-                        :indeterminate="true"
+                        indeterminate
                         class="mx-auto"
                         style="width: 90%"
                       />
@@ -215,8 +215,24 @@
               step="3"
               :class="{'pt-0': step === 3}"
             >
+              <v-alert
+                type="info"
+                border="left"
+                outlined
+                class="mb-2 markdown-content-inline"
+              >
+                <ul>
+                  <li
+                    v-for="(notice, i) in $t('report.recognition.notices.confirm')"
+                    :key="i"
+                    v-marked
+                    v-text="notice"
+                  />
+                </ul>
+              </v-alert>
+
               <OffTitle
-                :content="$t('report.recognition.confirm.overview')"
+                :content="$t('report.recognition.confirm.overview._name')"
                 small
               />
 
@@ -232,17 +248,12 @@
 
                 <RecognitionResultOverview
                   :success="filterResults(['SUCCESS']).length"
-                  :warning="filterResults(['WARNING']).length"
-                  :error="filterResults(['ERROR']).length"
+                  :error="filterResults(['WARNING', 'ERROR']).length"
+                  :duration="recognition.durationPerImage"
                   :total="results.length"
                 />
               </v-card>
 
-              <!--              :icon="-->
-              <!--              filterResults(['WARNING', 'ERROR']).length <= 10-->
-              <!--              ? `mdi-numeric-${filterResults(['WARNING', 'ERROR']).length}-box-multiple-outline`-->
-              <!--              : 'mdi-content-copy'-->
-              <!--              "-->
               <v-alert
                 v-if="filterResults(['SUCCESS']).length !== results.length"
                 color="warning"
@@ -297,15 +308,17 @@
                           ? (dark ? 'rgba(241,97,87,0.5)' : 'rgba(241,97,87,0.3)')
                           : ''"
                       style="width: 100%"
-                      class="align-self-stretch fill-height d-flex flex-column justify-start"
+                      class="align-self-stretch fill-height d-flex flex-column justify-start overflow-hidden"
                     >
-                      <div style="background: rgba(0, 0, 0, .95)">
+                      <div class="bkop-medium">
                         <v-img
                           v-ripple
                           :src="result.blobUrl"
                           contain
                           style="cursor: zoom-in"
+                          min-height="120px"
                           max-height="240px"
+                          class="unknown-ratio-glow"
                           @click="enlargeImage(result.blobUrl)"
                         />
                       </div>
@@ -317,26 +330,37 @@
 
                         <!--                        </div>-->
 
-                        <FactTable style="width: 100%">
+                        <FactTable
+                          v-if="result.result.stageId"
+                          style="width: 100%"
+                        >
                           <FactTableItem>
                             <template #title>
                               <span class="textDarken--text">{{ $t('stage.name') }}</span>
                             </template>
                             <template #content>
                               <span class="monospace font-weight-bold">
-                                {{ result.result.stageId ? getStage(result.result.stageId).code : $t('report.recognition.confirm.unknownStage') }}
+                                {{ getStage(result.result.stageId).code }}
                               </span>
                             </template>
                           </FactTableItem>
-                          <!--                          <FactTableItem-->
-                          <!--                            title="种类"-->
-                          <!--                            :content="result.result.drops.length"-->
-                          <!--                          />-->
-                          <!--                          <FactTableItem-->
-                          <!--                            title="数量"-->
-                          <!--                            :content="result.result.drops.reduce((prev, curr) => prev + curr.quantity, 0)"-->
-                          <!--                          />-->
+                          <FactTableItem
+                            title="物品数合计"
+                          >
+                            <template #content>
+                              <span class="monospace font-weight-bold">
+                                ×{{ result.result.drops.reduce((prev, curr) => prev + curr.quantity, 0) }}
+                              </span>
+                            </template>
+                          </FactTableItem>
                         </FactTable>
+
+                        <div
+                          v-else
+                          class="align-self-start"
+                        >
+                          {{ $t('report.recognition.confirm.unknownStage') }}
+                        </div>
                       </v-card-title>
 
                       <v-divider />
@@ -388,7 +412,7 @@
                           type="error"
                         >
                           <div>
-                            <div>{{ $t('report.recognition.confirm.abnormal.title') }}</div>
+                            <div>{{ $t('report.recognition.confirm.abnormal.' + (result.result.stageId ? 'error' : 'fatal')) }}</div>
 
                             <div
                               v-if="result.result.drops.length"
@@ -684,7 +708,8 @@ export default {
       },
       recognition: {
         busy: false,
-        server: ''
+        server: '',
+        durationPerImage: '#'
       },
       dialogOrigin: '',
       step: 1,
@@ -844,10 +869,8 @@ export default {
           .sort((a, b) => {
             return -typeOrder.indexOf(a.dropType) - -typeOrder.indexOf(b.dropType)
           })
-        this.results.push(result)
+        this.results.push(Object.freeze(result))
       })
-
-      console.log(this.results)
 
       this.recognition.busy = false
     },
@@ -868,10 +891,12 @@ export default {
       this.applyPostRecognitionRules(this.results)
       const selectedResultsIndex = []
       this.results.map((result, index) => {
-        console.log(result, result.result.warnings.length, result.result.errors.length, result.result.warnings.length || result.result.errors.length)
         if (!(result.result.warnings.length || result.result.errors.length)) selectedResultsIndex.push(index)
       })
       this.selectedResultsIndex = selectedResultsIndex
+      this.recognition.durationPerImage = (this.results.reduce((prev, curr) => {
+        return prev + (curr.duration || 0)
+      }, 0) / this.results.length).toFixed(2)
       this.step = 3
     },
     filterResults (filter) {

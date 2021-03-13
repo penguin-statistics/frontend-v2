@@ -172,7 +172,7 @@ export default {
       const filteredFiles = [...event.dataTransfer.files].filter(imageFilter);
       if (illegalFiles.length > 0) {
         this.snackbar = true
-        this.snackbarMessage = this.$t('report.recognition.tips.notImageFile', [`${illegalFiles[0]}${illegalFiles.length > 1 ? ` +${illegalFiles.length - 1} ${this.$t('report.recognition.tips.notImageFileMultiple')}` : ''}`])
+        this.snackbarMessage = this.$tc('report.recognition.tips.notImageFile', illegalFiles.length, {files: illegalFiles.join(', ')})
       }
       // TODO: Discussion needed. Drag and Drop should keep files that already exist?
       this.$emit('input', [...this.files, ...filteredFiles])

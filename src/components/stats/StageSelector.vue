@@ -640,10 +640,6 @@ export default {
 </script>
 
 <style scoped>
-  .full-width {
-    width: 100%;
-  }
-
   .stage-card--background {
     background-size: cover !important;
     background-repeat: no-repeat !important;

@@ -3,22 +3,25 @@
     <FactTable class="flex-column flex-md-row flex-lg-row flex-xl-row">
       <div class="d-flex flex-row">
         <FactTableItem
-          title="成功识别"
-          :content="total + ' 张截图'"
+          content-class="monospace"
+          :title="$t('report.recognition.confirm.overview.total')"
+          :content="$t('report.recognition.confirm.overview.count', {count: total})"
         />
         <FactTableItem
-          title="通过检测"
-          :content="success + ' 张'"
+          content-class="monospace"
+          :title="$t('report.recognition.confirm.overview.success')"
+          :content="$t('report.recognition.confirm.overview.count', {count: success})"
         />
-        <FactTableItem
-          v-if="warning"
-          title="识别警告"
-          :content="warning + ' 张'"
-        />
+        <!--        <FactTableItem-->
+        <!--          v-if="warning"-->
+        <!--          title="识别警告"-->
+        <!--          :content="warning + ' 张'"-->
+        <!--        />-->
         <FactTableItem
           v-if="error"
-          title="识别异常"
-          :content="error + ' 张'"
+          :title="$t('report.recognition.confirm.overview.error')"
+          content-class="monospace"
+          :content="$t('report.recognition.confirm.overview.count', {count: error})"
         />
       </div>
 
@@ -29,7 +32,8 @@
 
       <div class="d-flex flex-row mt-4 mt-md-0 mt-lg-0 mt-xl-0">
         <FactTableItem
-          title="数据集服务器"
+          content-class="monospace"
+          :title="$t('report.recognition.confirm.overview.server')"
         >
           <template #content>
             <div class="d-flex align-center">
@@ -44,11 +48,12 @@
           </template>
         </FactTableItem>
         <FactTableItem
-          title="识别用时"
+          content-class="monospace"
+          :title="$t('report.recognition.confirm.overview.duration')"
         >
           <template #content>
             <span class="monospace">
-              517ms
+              {{ duration }}ms
             </span>
           </template>
         </FactTableItem>
@@ -68,10 +73,6 @@ export default {
       type: Number,
       default () { return 0 }
     },
-    warning: {
-      type: Number,
-      default () { return 0 }
-    },
     error: {
       type: Number,
       default () { return 0 }
@@ -79,7 +80,11 @@ export default {
     total: {
       type: Number,
       default () { return 0 }
-    }
+    },
+    duration: {
+      type: String,
+      default () { return "#" }
+    },
   },
   computed: {
     server () {
