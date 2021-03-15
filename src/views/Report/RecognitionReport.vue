@@ -1060,6 +1060,7 @@ export default {
     //   $crisp.push(['do', 'message:send', ['text', '掉落识别有问题，我该怎么办？']])
     // },
     applyPostRecognitionRules (results) {
+      console.time('applying post recognition rules')
       const timestamps = results.map(value => {
         return value.file.lastModified
       })
@@ -1080,7 +1081,7 @@ export default {
         // Apply same fingerprint check, same will add warning
         let sameFingerprint = false;
         fingerprints.forEach((fingerprint, i) => {
-          if (fingerprint === value.result.fingerprint && i !== index) {
+          if (fingerprint !== "" && fingerprint === value.result.fingerprint && i !== index) {
             sameFingerprint = true
           }
         })
@@ -1088,6 +1089,7 @@ export default {
           value.result.errors.push({ type: 'Fingerprint::Same' })
         }
       })
+      console.timeEnd('applying post recognition rules')
       return results
     }
   }

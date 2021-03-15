@@ -42,11 +42,9 @@ async function image2wasmHeapOffset (blob) {
 }
 
 function safeParseJson (s) {
-  try {
-    return JSON.parse(s)
-  } catch (e) {
-    return null
-  }
+  const result = JSON.parse(s)
+  if (result === undefined || result === null || Array.isArray(result)) throw new Error("invalid result type", s)
+  return result
 }
 
 class Recognizer {
@@ -173,7 +171,7 @@ class Recognizer {
 
   async recognize (files, resultCb) {
     for (const file of files) {
-      // console.groupCollapsed('Recognition of', file.name)
+      console.groupCollapsed('Recognition of', file.name)
       // console.log('start recognizing file', file.name)
       // console.time(file.name)
       const data = await image2wasmHeapOffset(file)
@@ -183,24 +181,27 @@ class Recognizer {
       let result, parsedResult
       try {
         result = this.wasm.recognize(data.offset, data.length, 0)
-        parsedResult = safeParseJson(result) || { errors: [], warnings: [], drops: [] }
+        parsedResult = safeParseJson(result)
       } catch (e) {
+        console.log('caught wasm error', e, 'responding with null result')
         const duration = performance.now() - start
         resultCb({
           file,
           blobUrl: data.blobUrl,
           duration,
           result: {
-            errors: ["Result::False"],
+            errors: [{type: "Result::False"}],
             warnings: [],
             drops: []
           }
         })
+        console.groupEnd()
+        continue
       }
       const duration = performance.now() - start
-      // console.log('recognized with result', result, 'executing callback')
+      // console.log('recognized with result', result)
       // console.timeLog(file.name)
-      // console.debug('recognition result', parsedResult)
+      console.debug('recognition result', parsedResult)
       resultCb({
         file,
         blobUrl: data.blobUrl,
@@ -212,7 +213,7 @@ class Recognizer {
       // this.wasm.free_buffer(data.offset)
       // console.log('buffer freed. timer ended')
       // console.timeEnd(file.name)
-      // console.groupEnd()
+      console.groupEnd()
     }
   }
 }
