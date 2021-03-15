@@ -1,6 +1,6 @@
 <template>
   <div
-    :style="size.image"
+    :style="dimensions.image"
     class="animated-preloader-wrapper"
   >
     <transition
@@ -14,7 +14,7 @@
         key="preloader"
         class="animated-preloader mx-auto"
 
-        :style="{...size.image, backgroundImage: `url(${url})`}"
+        :style="{...dimensions.image, backgroundImage: `url(${url})`}"
       />
       <div
         v-else
@@ -24,7 +24,7 @@
       >
         <v-progress-circular
           indeterminate
-          :size="size.pending"
+          :size="dimensions.pending"
           :width="4"
         />
       </div>
@@ -45,6 +45,10 @@ export default {
     small: {
       type: Boolean,
       default: false
+    },
+    size: {
+      type: Number,
+      default: null
     }
   },
   data () {
@@ -63,8 +67,15 @@ export default {
     currentSrc () {
       return this.cdnDeliver(`/images/preloaders/${this.preloaders[this.currentPreloaderIndex]}.png`)
     },
-    size () {
-      if (this.small) {
+    dimensions () {
+      if (this.size) {
+        return {
+          image: {
+            '--size': this.size + 'px'
+          },
+          pending: 32
+        }
+      } else if (this.small) {
         return {
           image: {
             '--size': '64px'

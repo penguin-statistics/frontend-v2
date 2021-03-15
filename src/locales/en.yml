@@ -252,15 +252,17 @@ report:
       noResult: No recognition results
       submit: "Upload Selected (×{count}) Results"
       itemsTotal: Items
+    states:
+      initializing: Initializing...
+      rendering: Rendering content...
+      submitting: Submitting...
     cost: Cost
     filename: Filename
     result: Result
     queue: Image Queue
     start: Recognize {count} images
     progress: Progress
-    initializing: Initializing
     submit: Submit
-    submitting: Submitting
     retry: "Failed to submit. Retrying..."
     notices:
       wasm: WebAssembly

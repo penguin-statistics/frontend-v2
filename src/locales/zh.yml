@@ -244,16 +244,19 @@ report:
       noResult: 暂时没有识别结果
       submit: "确认上传已勾选的 {count} 次结算记录"
       itemsTotal: 物品数合计
+    states:
+      initializing: 初始化中...
+      recognizing: 正在识别...
+      rendering: 渲染确认内容中...
+      submitting: 正在提交记录...
 
     cost: 耗时
     filename: 文件名
     result: 识别结果
     queue: 识别图片队列
-    start: 开始识别 {count} 张图片
+    start: 识别 {count} 张图片
     progress: 进度
-    initializing: 初始化中...
     submit: 确认提交到企鹅数据
-    submitting: 正在提交记录
     retry: 提交失败，正在重试
     notices:
       welcome:

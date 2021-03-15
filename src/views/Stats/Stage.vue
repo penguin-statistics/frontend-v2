@@ -67,7 +67,7 @@
             >
               mdi-upload
             </v-icon>
-            {{ $t('menu.report') }}
+            {{ $t('menu.report._name') }}
           </v-btn>
           <DataSourceToggle />
         </v-row>

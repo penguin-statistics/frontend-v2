@@ -54,7 +54,7 @@
                 >
                   <PreloaderInline class="mx-auto mb-6" />
                   <h1 class="title">
-                    {{ $t("report.recognition.submitting") }}
+                    {{ $t("report.recognition.states.submitting") }}
                   </h1>
                   <v-row>
                     <v-col>
@@ -173,12 +173,48 @@
 
             <v-stepper-content step="2">
               <template v-if="step === 2">
-                <PreloaderInline class="mx-auto mb-6" />
-                <h3 class="grey--text my-2">
-                  {{ $t("report.recognition.progress") }}
-                </h3>
+                <div class="d-flex flex-column py-10">
+                  <div class="d-flex flex-row justify-center align-center mx-auto">
+                    <PreloaderInline :size="120" />
+                    <div class="d-flex flex-column py-4 ml-4">
+                      <h2 class="headline">
+                        {{ $t('report.recognition.states.' + recognition.state) }}
+                      </h2>
+
+                      <span
+                        class="monospace-pure my-2"
+                        style="word-break: keep-all; text-overflow: ellipsis; line-height: 20px; height: 20px; max-width: 50vw; white-space: nowrap"
+                      >
+                        {{ recognition.state === 'rendering' ? $t('report.recognition.states.rendering') : (recognition.current || '暂无文件名') }}
+                      </span>
+
+                      <FactTable>
+                        <FactTableItem
+                          title="识别进度"
+                          content-class="monospace"
+                          :content="results.length + ' / ' + files.length"
+                        />
+                        <FactTableItem
+                          title="已用时间"
+                          :content="recognition.timer.elapsed + 's'"
+                          content-class="monospace"
+                        />
+                        <FactTableItem
+                          title="预计剩余"
+                          :content="recognition.timer.remaining + 's'"
+                          content-class="monospace"
+                        />
+                        <FactTableItem
+                          title="平均速度"
+                          :content="(recognition.timer.imagePerSecond || 0).toFixed(1) + '图/秒'"
+                          content-class="monospace"
+                        />
+                      </FactTable>
+                    </div>
+                  </div>
+                </div>
                 <v-progress-linear
-                  v-if="initializing"
+                  v-if="recognition.state === 'initializing'"
                   indeterminate
                   class="quick-transition"
                   stream
@@ -186,16 +222,16 @@
                   striped
                   rounded
                 >
-                  {{ $t("report.recognition.initializing") }}
+                  {{ $t("report.recognition.states.initializing") }}
                 </v-progress-linear>
                 <v-progress-linear
                   v-else
                   class="quick-transition"
-                  :value="(results.length / files.length) * 100"
-                  :buffer-value="((results.length + 1) / files.length) * 100"
+                  :value="(results.length / (files.length || 1)) * 100"
                   stream
                   height="28"
                   striped
+                  rounded
                 >
                   {{ results.length }} / {{ files.length }} ({{
                     ((results.length / (files.length === 0 ? 1 : files.length)) * 100).toFixed(0)
@@ -709,16 +745,23 @@ export default {
       recognizer: null,
       files: [],
       results: [],
-      initializing: false,
-      initialized: false,
       expandImage: {
         dialog: false,
         src: ''
       },
       recognition: {
+        state: 'PENDING',
         busy: false,
         server: '',
-        durationPerImage: '#'
+        durationPerImage: '#',
+        current: '',
+        timer: {
+          started: -1,
+          elapsed: -1,
+          remaining: -1,
+          imagePerSecond: -1,
+          timer: null
+        }
       },
       dialogOrigin: '',
       step: 1,
@@ -815,10 +858,32 @@ export default {
     this.init()
   },
   beforeDestroy () {
+    this.stopTimer()
     this.$store.commit('ui/unlockServer')
   },
   methods: {
     ...mapGetters('ui', ['serverLocked']),
+    startTimer () {
+      if (this.recognition.timer.timer !== null) return
+      this.recognition.timer.started = Date.now()
+      this.recognition.timer.timer = setInterval(() => {
+        requestAnimationFrame(() => this.updateTimer())
+      }, 1000)
+      this.updateTimer()
+    },
+    updateTimer () {
+      const finished = this.results.length || 0
+      const total = this.files.length || 1
+      const elapsed = (Date.now() - this.recognition.timer.started) / 1000
+      const imagePerSecond = finished / elapsed
+      this.recognition.timer.elapsed = Math.floor(elapsed)
+      this.recognition.timer.imagePerSecond = imagePerSecond
+      this.recognition.timer.remaining = Math.ceil((total - finished) / (imagePerSecond || 1))
+    },
+    stopTimer () {
+      if (this.recognition.timer.timer) clearInterval(this.recognition.timer.timer)
+      this.recognition.timer.remaining = 0
+    },
     async doSubmit () {
       const batchDrops = await this.formatResults(this.selectedResults);
       const userId = Cookies.get(config.authorization.userId.cookieKey)
@@ -844,19 +909,19 @@ export default {
       this.doSubmit()
     },
     async init () {
-      this.initializing = true
+      this.recognition.state = 'initializing'
       this.recognizer = new Recognizer()
 
       await this.recognizer
         .initialize(this.server)
         .then(() => {
           this.$store.commit('ui/lockServer')
-          this.initialized = true
+          this.recognition.state = 'initialized'
           this.recognition.server = this.server
           console.log('initialization completed')
         })
         .finally(() => {
-          this.initializing = false
+          this.recognition.state = 'pending'
         })
     },
     getItem (ItemId) {
@@ -869,7 +934,10 @@ export default {
       const typeOrder = ['NORMAL_DROP', 'SPECIAL_DROP', 'EXTRA_DROP']
       typeOrder.reverse()
 
+      this.startTimer()
+
       await this.recognizer.recognize(this.files, result => {
+        this.recognition.current = result.file.name
         result.result.drops
           .map(el => {
             el.confidence = parseFloat(el.confidence)
@@ -882,6 +950,8 @@ export default {
       })
 
       this.recognition.busy = false
+
+      this.stopTimer()
     },
     dropTypeToString (type) {
       return this.$t(`stage.loots.${type}`) || type
@@ -895,7 +965,8 @@ export default {
     },
     async initAndRecognize () {
       this.step = 2
-      if (!this.initialized) await this.init()
+      if (this.recognition.state !== 'initialized') await this.init()
+      this.recognition.state = 'recognizing'
       await this.recognize()
       this.applyPostRecognitionRules(this.results)
       const selectedResultsIndex = []
@@ -906,7 +977,13 @@ export default {
       this.recognition.durationPerImage = (this.results.reduce((prev, curr) => {
         return prev + (curr.duration || 0)
       }, 0) / this.results.length).toFixed(2)
-      this.step = 3
+      this.recognition.state = 'rendering'
+      console.log(this.recognition.state)
+      setTimeout(() => {
+        this.$nextTick(() => {
+          this.step = 3
+        })
+      }, 0)
     },
     filterResults (filter) {
       return this.results.filter(result => {

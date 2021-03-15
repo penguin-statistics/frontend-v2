@@ -6,8 +6,8 @@ import uniq from 'lodash/uniq'
 
 async function image2wasmHeapOffset (blob) {
   const Module = window.Module
-  console.log('image2wasmHeapOffset: start reading file')
-  console.time('image2wasmHeapOffset')
+  // console.log('image2wasmHeapOffset: start reading file')
+  // console.time('image2wasmHeapOffset')
   // const imageData = await new Promise(resolve => {
   //   const reader = new FileReader()
   //   reader.onload = function (event) {
@@ -18,21 +18,21 @@ async function image2wasmHeapOffset (blob) {
   //   reader.readAsArrayBuffer(blob)
   // })
   const imageData = await blob.arrayBuffer()
-  console.log('image2wasmHeapOffset: initializing array')
-  console.timeLog('image2wasmHeapOffset')
+  // console.log('image2wasmHeapOffset: initializing array')
+  // console.timeLog('image2wasmHeapOffset')
   const uint8 = new Uint8Array(imageData)
   const numBytes = uint8.length
-  console.log('image2wasmHeapOffset: initialized array')
-  console.timeLog('image2wasmHeapOffset')
+  // console.log('image2wasmHeapOffset: initialized array')
+  // console.timeLog('image2wasmHeapOffset')
   const dataPtr = Module._malloc(numBytes)
-  console.log('image2wasmHeapOffset: allocated wasm memory')
-  console.timeLog('image2wasmHeapOffset')
+  // console.log('image2wasmHeapOffset: allocated wasm memory')
+  // console.timeLog('image2wasmHeapOffset')
   const dataOnHeap = new Uint8Array(Module.HEAPU8.buffer, dataPtr, numBytes)
-  console.log('image2wasmHeapOffset: created Uint8Array on wasm heap')
-  console.timeLog('image2wasmHeapOffset')
+  // console.log('image2wasmHeapOffset: created Uint8Array on wasm heap')
+  // console.timeLog('image2wasmHeapOffset')
   dataOnHeap.set(uint8)
-  console.log('image2wasmHeapOffset: set Uint8Array value on wasm heap')
-  console.timeEnd('image2wasmHeapOffset')
+  // console.log('image2wasmHeapOffset: set Uint8Array value on wasm heap')
+  // console.timeEnd('image2wasmHeapOffset')
 
   return {
     offset: dataOnHeap.byteOffset,
@@ -173,12 +173,12 @@ class Recognizer {
 
   async recognize (files, resultCb) {
     for (const file of files) {
-      console.groupCollapsed('Recognition of', file.name)
-      console.log('start recognizing file', file.name)
-      console.time(file.name)
+      // console.groupCollapsed('Recognition of', file.name)
+      // console.log('start recognizing file', file.name)
+      // console.time(file.name)
       const data = await image2wasmHeapOffset(file)
-      console.log('finished writing file to wasm heap. starting recognition')
-      console.timeLog(file.name)
+      // console.log('finished writing file to wasm heap. starting recognition')
+      // console.timeLog(file.name)
       const start = performance.now()
       let result, parsedResult
       try {
@@ -198,21 +198,21 @@ class Recognizer {
         })
       }
       const duration = performance.now() - start
-      console.log('recognized with result', result, 'executing callback')
-      console.timeLog(file.name)
-      console.debug('recognition result', parsedResult)
+      // console.log('recognized with result', result, 'executing callback')
+      // console.timeLog(file.name)
+      // console.debug('recognition result', parsedResult)
       resultCb({
         file,
         blobUrl: data.blobUrl,
         duration,
         result: parsedResult
       })
-      console.log('callback executed')
+      // console.log('callback executed')
       // console.timeLog(file.name)
       // this.wasm.free_buffer(data.offset)
       // console.log('buffer freed. timer ended')
-      console.timeEnd(file.name)
-      console.groupEnd()
+      // console.timeEnd(file.name)
+      // console.groupEnd()
     }
   }
 }
