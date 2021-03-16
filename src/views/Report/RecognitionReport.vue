@@ -307,16 +307,14 @@
                         v-haptic
                         hide-details
                         :label="filter.text + ` (${filterResults([filter.value]).length})`"
-                        class="mt-0 pt-0"
+                        class="mt-0 pt-0 mr-4"
                         :value="filter.value"
                         :class="{'mr-2': $vuetify.breakpoint.smAndUp}"
                       />
                     </template>
                   </TitledRow>
 
-                  <v-row
-                    v-if="results.length"
-                  >
+                  <v-row v-if="results.length">
                     <v-col
                       v-for="(result, index) in results"
                       :key="index"
@@ -352,19 +350,29 @@
                                 {{ $t('meta.loading') }}
                               </div>
                             </template>
+                            <template #default>
+                              <div class="d-flex flex-row full-width justify-end fallthrough">
+                                <span
+                                  class="monospace font-weight-bold bkop-medium text-right border-outlined img-side-tag elevation-4"
+                                >
+                                  {{ result.file.lastModified | timeAbsolute }}
+                                  <span
+                                    class="d-block text-right"
+                                    style="font-size: small; line-height: 1.5em"
+                                  >
+                                    {{ result.file.lastModified | timeRelative }}
+                                  </span>
+                                </span>
+                              </div>
+                            </template>
                           </v-img>
                         </div>
                         <v-divider />
 
-                        <v-card-title class="d-flex flex-column align-center justify-center">
-                          <!--                        <div class="d-flex align-baseline">-->
-                          <!--                          <small class="mr-2">{{ $t("stage.name") }}</small>-->
-
-                          <!--                        </div>-->
-
-                          <FactTable
+                        <v-card-title class="align-start">
+                          <div
                             v-if="result.result.stageId"
-                            style="width: 100%"
+                            class="d-inline-flex flex-row align-start"
                           >
                             <FactTableItem>
                               <template #title>
@@ -386,11 +394,11 @@
                                 </span>
                               </template>
                             </FactTableItem>
-                          </FactTable>
+                          </div>
 
                           <div
                             v-else
-                            class="align-self-start"
+                            class="align-self-start mr-4"
                           >
                             {{ $t('report.recognition.confirm.unknownStage') }}
                           </div>
@@ -478,16 +486,17 @@
                         <v-card-actions class="pa-2">
                           <v-card
                             v-ripple="!resultHasErrorOrWarning[index]"
-                            class="background-transparent elevation-4 pa-2"
-                            :class="`${resultHasErrorOrWarning[index] ? 'transparent elevation-0' : (selectedResultsIndex.includes(index) ? 'success darken-2' : 'warning darken-4')}`"
+                            dark
+                            class="background-transparent font-weight-bold elevation-2 pa-2"
+                            :class="`${resultHasErrorOrWarning[index] ? 'transparent elevation-0' : (selectedResultsIndex.includes(index) ? 'success darken-2' : 'warning darken-3')}`"
                             style="width: 100%"
                           >
                             <v-checkbox
                               v-model="selectedResultsIndex"
-                              color="text"
                               hide-details
+                              color="white"
                               :value="index"
-                              class="pt-0 mt-0"
+                              class="pt-0 mt-0 white--text"
                               :disabled="resultHasErrorOrWarning[index]"
                               :off-icon="resultHasErrorOrWarning[index] ? 'mdi-close-box' : '$checkboxOff'"
                               :label="
@@ -515,7 +524,7 @@
                     {{ $t('report.recognition.confirm.noResult') }}
                   </v-alert>
                 </v-card>
-                <div class="mt-2">
+                <div class="my-2">
                   <v-btn
                     large
                     rounded
@@ -919,8 +928,8 @@ export default {
           this.recognition.state = 'pending'
         })
     },
-    getItem (ItemId) {
-      return get.items.byItemId(ItemId, false, false) || {}
+    getItem (itemId) {
+      return get.items.byItemId(itemId, false, false) || {}
     },
     async recognize () {
       this.results = []
@@ -930,6 +939,8 @@ export default {
       typeOrder.reverse()
 
       this.startTimer()
+
+      this.files.sort((a, b) => a.lastModified - b.lastModified)
 
       await this.recognizer.recognize(this.files, result => {
         this.recognition.current = result.file.name
@@ -1092,17 +1103,18 @@ export default {
     &__wrapper--invalid:not(.reco-result__wrapper--invalid-no-results) {
       position: relative;
       transform-origin: top center;
+      $easing: cubic-bezier(0, 0.55, 0.45, 1);
 
       & .reco-result__details {
-        transition: all .225s cubic-bezier(0.33, 1, 0.68, 1);
+        transition: all .225s $easing;
         max-height: 108px;
         opacity: 0.7;
         transform: scale(0.94);
         filter: brightness(0.8) contrast(0.6);
       }
       & .reco-result__alert {
-        transition: all .225s cubic-bezier(0.33, 1, 0.68, 1);
-        margin-top: -72px !important;
+        transition: all .225s $easing;
+        margin-top: -68px !important;
         background: rgba(128, 34, 25, .85) !important;
         .theme--light & {
           background: rgba(230, 103, 92, .85) !important;
@@ -1118,8 +1130,8 @@ export default {
         }
         & .reco-result__alert {
           pointer-events: none;
-          margin-top: -72px !important;
-          filter: blur(3px);
+          margin-top: -68px !important;
+          filter: blur(5px);
           opacity: 0.12;
           background: rgba(128, 34, 25, .2) !important;
           transform: scale(1.047);
@@ -1159,5 +1171,12 @@ export default {
         display: none !important;
       }
     }
+  }
+
+  .img-side-tag {
+    padding: 3px 9px 2px 8px;
+    border-radius: 0 0 0 8px;
+    border-right-width: 0 !important;
+    border-top-width: 0 !important;
   }
 </style>

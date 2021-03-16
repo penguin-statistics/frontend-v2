@@ -102,9 +102,14 @@
 
 .border-outlined {
   .theme--dark & {
-    border: 1px solid rgba(255, 255, 255, .4)
+    border: thin solid hsla(0,0%,100%,.12)
   }
   .theme--light & {
-    border: 1px solid rgba(0, 0, 0, .4)
+    border: thin solid rgba(0,0,0,.12)
   }
+}
+
+.fallthrough {
+  user-select: none;
+  pointer-events: none;
 }
