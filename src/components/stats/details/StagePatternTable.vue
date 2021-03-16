@@ -13,7 +13,7 @@
 
     :locale="$i18n.locale"
 
-    :mobile-breakpoint="1"
+    :mobile-breakpoint="0"
     class="elevation-0 stat-table transparent container--fluid font-weight-bold transition-all"
 
     :class="{'pt-0': $vuetify.breakpoint.xsOnly}"

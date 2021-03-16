@@ -29,7 +29,7 @@
         :locale="$i18n.locale"
         :hide-default-footer="table.data.length <= 10"
 
-        :mobile-breakpoint="1"
+        :mobile-breakpoint="0"
 
         class="elevation-0 transparentTable container--fluid px-2 font-weight-bold monospace trend-table"
 

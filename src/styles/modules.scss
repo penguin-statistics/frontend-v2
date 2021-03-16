@@ -113,3 +113,25 @@
   user-select: none;
   pointer-events: none;
 }
+
+.table--with-footer tbody {
+  tr:last-child {
+    & td {
+      border-top: thin solid rgba(0,0,0,.12) !important;
+    }
+
+    background: rgba(255, 255, 255, .12);
+    &:hover {
+      background: rgba(255, 255, 255, .12) !important;
+    }
+    .theme--light & {
+      background: rgba(0, 0, 0, .08);
+      &:hover {
+        background: rgba(0, 0, 0, .08) !important;
+      }
+    }
+  }
+  tr:nth-last-child(2) td {
+    border-bottom-width: 0 !important;
+  }
+}

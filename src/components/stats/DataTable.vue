@@ -211,10 +211,10 @@
       :locale="$i18n.locale"
       :hide-default-footer="items.length <= 10"
 
-      :mobile-breakpoint="1"
+      :mobile-breakpoint="0"
       :loading="matrixPending"
 
-      class="elevation-0 transparentTable stat-table container--fluid px-2 position-relative"
+      class="elevation-0 transparentTable stat-table container--fluid position-relative"
       :class="{'pt-0': $vuetify.breakpoint.xsOnly}"
     >
       <template v-slot:header>

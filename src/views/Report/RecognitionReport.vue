@@ -548,159 +548,117 @@
             </v-stepper-step>
 
             <v-stepper-content step="4">
-              <v-row
-                align="center"
-                justify="center"
-                no-gutters
-                class="my-2"
-              >
-                <v-col
-                  cols="12"
-                  sm="4"
-                  md="4"
-                  lg="4"
-                  xl="4"
+              <div v-if="step === 4">
+                <OffTitle
+                  small
+                  content="汇报详情"
+                />
+                <v-data-table
+                  :headers="reportTable.headers"
+                  :items="reportTableData.results"
+                  :options="reportTable.options.table"
+                  :footer-props="reportTable.options.footer"
+
+                  must-sort
+                  sort-by="times"
+                  :sort-desc="true"
+                  :locale="$i18n.locale"
+                  :hide-default-footer="reportTableData.results.length <= 20"
+
+                  :mobile-breakpoint="0"
+
+                  class="elevation-0 table--with-footer transparentTable container--fluid pt-4 position-relative border-outlined mb-8 overflow-hidden"
                 >
-                  <v-list-item>
-                    <v-list-item-icon>
-                      <v-icon>mdi-chess-rook</v-icon>
-                    </v-list-item-icon>
-                    <v-list-item-content>
-                      <v-list-item-title class="monospace">
-                        {{ allTime }}
-                      </v-list-item-title>
-                      <v-list-item-subtitle>
-                        {{ $t("report.recognition.allResult.stageTime") }}
-                      </v-list-item-subtitle>
-                    </v-list-item-content>
-                  </v-list-item>
-                </v-col>
-                <v-col
-                  cols="12"
-                  sm="4"
-                  md="4"
-                  lg="4"
-                  xl="4"
-                >
-                  <v-list-item>
-                    <v-list-item-icon>
-                      <v-icon>mdi-treasure-chest</v-icon>
-                    </v-list-item-icon>
-                    <v-list-item-content>
-                      <v-list-item-title class="monospace">
-                        {{ allDropsCount }}
-                      </v-list-item-title>
-                      <v-list-item-subtitle>
-                        {{ $t("report.recognition.allResult.drops") }}
-                      </v-list-item-subtitle>
-                    </v-list-item-content>
-                  </v-list-item>
-                </v-col>
-                <v-col
-                  cols="12"
-                  sm="4"
-                  md="4"
-                  lg="4"
-                  xl="4"
-                >
-                  <v-list-item>
-                    <v-list-item-icon>
-                      <v-icon>mdi-brain</v-icon>
-                    </v-list-item-icon>
-                    <v-list-item-content>
-                      <v-list-item-title class="monospace">
-                        {{ allSanity }}
-                      </v-list-item-title>
-                      <v-list-item-subtitle>
-                        {{ $t("report.recognition.allResult.sanity") }}
-                      </v-list-item-subtitle>
-                    </v-list-item-content>
-                  </v-list-item>
-                </v-col>
-              </v-row>
-              <v-row
-                align="start"
-                justify="start"
-              >
-                <v-col
-                  v-for="([stageCode, stage], index) in Object.entries(stageCombineData)"
-                  :key="index"
-                  cols="12"
-                  sm="6"
-                  md="4"
-                  lg="3"
-                  xl="2"
-                  class="align-self-stretch"
-                >
-                  <v-card class="card-item">
-                    <v-card-text>
-                      <div
-                        class="title d-flex justify-center"
-                        style="margin-top: -4px"
+                  <template #item="{ item }">
+                    <tr>
+                      <td :class="reportTable.cellClass">
+                        {{ item.stage }}
+                      </td>
+                      <td :class="reportTable.cellClass">
+                        {{ item.times }}
+                      </td>
+                      <td :class="reportTable.cellClass">
+                        {{ item.apCost }}
+                      </td>
+                      <td
+                        :class="reportTable.cellClass"
+                        class="d-flex align-center"
                       >
-                        <span
-                          v-ripple
-                          class="font-weight-bold headline d-flex align-center card-item-title__clickable"
-                          style="border-radius: 4px"
+                        <v-badge
+                          v-for="[itemId, count] in Object.entries(item.items)"
+                          :key="itemId"
+
+                          bottom
+                          overlap
+                          bordered
+                          label
+                          color="secondary"
+                          :offset-x="24"
+                          :offset-y="20"
+                          :content="count"
                         >
-                          {{ stageCode }}
-                        </span>
-                        <v-spacer />
-                        <small>#{{ index + 1 }}</small>
-                      </div>
-                      <div class="display-1 text-center monospace font-weight-bold my-2">
-                        {{ stage.Time }}
-                        <small class="title">{{ $t("planner.calculation.times") }}</small>
-                      </div>
-                      <div class="d-flex flex-wrap justify-start">
-                        <div
-                          v-for="([itemId, count], itemIndex) in Object.entries(stage.items)"
-                          :key="itemIndex"
-                          class="d-inline-flex mx-2 my-1"
-                        >
-                          <v-badge
-                            bottom
-                            overlap
-                            bordered
-                            label
-                            color="indigo"
-                            :offset-x="24"
-                            :offset-y="20"
-                            :content="`×${count}`"
-                          >
-                            <Item :item="getItem(itemId)" />
-                          </v-badge>
-                        </div>
-                      </div>
-                    </v-card-text>
-                  </v-card>
-                </v-col>
-              </v-row>
-              <v-row>
-                <v-col>
-                  <v-btn
-                    rounded
-                    block
-                    color="success"
-                    :disabled="submitDialog.open"
-                    @click="submit"
-                  >
-                    <div class="d-inline-flex align-center justify-center">
-                      <v-icon small>
-                        mdi-server
-                      </v-icon>
-                      <span class="caption ml-1">
-                        {{ $t("server.servers." + this.$store.getters["dataSource/server"]) }}
-                      </span>
-                    </div>
-                    <v-divider
-                      vertical
-                      class="mx-2"
-                    />
-                    <span> {{ $t("report.recognition.submit") }} </span>
-                  </v-btn>
-                </v-col>
-              </v-row>
+                          <Item
+                            disable-overview-card
+                            :ratio="0.65"
+                            :item="getItem(itemId)"
+                          />
+                        </v-badge>
+                      </td>
+                    </tr>
+                  </template>
+                  <template #body.append>
+                    <tr>
+                      <td
+                        :class="reportTable.cellClass"
+                        class="grey--text"
+                      >
+                        总计
+                      </td>
+                      <td :class="reportTable.cellClass">
+                        <v-icon small>
+                          mdi-chess-rook
+                        </v-icon>
+                        × {{ reportTableData.total.times }}
+                      </td>
+                      <td :class="reportTable.cellClass">
+                        <v-icon small>
+                          mdi-brain
+                        </v-icon>
+                        × {{ reportTableData.total.apCost }}
+                      </td>
+                      <td :class="reportTable.cellClass">
+                        <v-icon small>
+                          mdi-treasure-chest
+                        </v-icon>
+
+                        × {{ reportTableData.total.items }}
+                      </td>
+                    </tr>
+                  </template>
+                </v-data-table>
+
+                <v-btn
+                  rounded
+                  x-large
+                  color="primary"
+                  :disabled="submitDialog.open"
+                  @click="submit"
+                >
+                  <div class="d-inline-flex align-center justify-center">
+                    <v-icon small>
+                      mdi-server
+                    </v-icon>
+                    <span class="caption ml-1">
+                      {{ $t("server.servers." + this.$store.getters["dataSource/server"]) }}
+                    </span>
+                  </div>
+                  <v-divider
+                    vertical
+                    class="mx-2"
+                  />
+                  <span> {{ $t("report.recognition.submit") }} </span>
+                </v-btn>
+              </div>
             </v-stepper-content>
           </v-stepper>
         </v-card>
@@ -742,9 +700,11 @@ export default {
   mixins: [Theme, CDN, ConfirmLeave],
   data () {
     return {
+      step: 1,
       recognizer: null,
       files: [],
       results: [],
+      selectedResultsIndex: [],
       expandImage: {
         src: ''
       },
@@ -763,7 +723,6 @@ export default {
         }
       },
       dialogOrigin: '',
-      step: 1,
       filterValue: ['SUCCESS', 'ERROR'],
       submitDialog: {
         open: false,
@@ -772,7 +731,48 @@ export default {
       },
       changeServerTip: 0,
       isFilesValid: true,
-      selectedResultsIndex: []
+      reportTable: {
+        headers: [
+          {
+            text: this.$t('stats.headers.stage'),
+            value: 'stage',
+            align: 'left',
+            sortable: false,
+            width: '55px',
+          },
+          {
+            text: this.$t('stats.headers.times'),
+            value: 'times',
+            align: 'left',
+            sortable: true,
+            width: '100px'
+          },
+          {
+            text: this.$t('stats.headers.apCost'),
+            value: 'apCost',
+            align: 'left',
+            sortable: true,
+            width: '100px'
+          },
+          {
+            text: this.$t('stats.headers.itemDrops'),
+            value: 'items',
+            align: 'left',
+            sortable: false,
+            width: '300px'
+          }
+        ],
+        options: {
+          table: {
+            itemsPerPage: 20
+          },
+          footer: {
+            itemsPerPageOptions: [10, 20, 40, -1],
+            showCurrentPage: true
+          }
+        },
+        cellClass: 'font-weight-bold monospace',
+      },
     }
   },
   computed: {
@@ -795,49 +795,40 @@ export default {
         }
       ]
     },
-    allTime () {
-      return this.selectedResults.length
-    },
-    allDropsCount () {
-      return this.selectedResults.reduce((prev, now) => {
-        return (
-          prev +
-            now.result.drops.reduce((p, n) => {
-              if (n.quantity) {
-                return p + n.quantity
-              }
-              return p
-            }, 0)
-        )
-      }, 0)
-    },
-    allSanity () {
-      return this.selectedResults.reduce((prev, now) => {
-        return prev + get.stages.byStageId(now.result.stageId).apCost
-      }, 0)
-    },
-    stageCombineData () {
-      const results = this.selectedResults
-      const result = {}
-      for (const recognitionResult of results) {
-        const stageCode = get.stages.byStageId(recognitionResult.result.stageId).code
-        if (!result[stageCode]) {
-          result[stageCode] = {
+    reportTableData () {
+      console.time('reportTableData')
+      const map = {}
+      for (const recognitionResult of this.selectedResults) {
+        const stage = get.stages.byStageId(recognitionResult.result.stageId)
+        const stageCode = stage.code
+        if (!map[stageCode]) {
+          map[stageCode] = {
             items: {},
-            time: 0
+            apCost: 0,
+            times: 0
           }
         }
-        result[stageCode].time++
         for (const item of recognitionResult.result.drops) {
           if (item.itemId && item.quantity) {
-            if (!result[stageCode].items[item.itemId]) {
-              result[stageCode].items[item.itemId] = 0
-            }
-            result[stageCode].items[item.itemId] += item.quantity
+            if (!map[stageCode].items[item.itemId]) map[stageCode].items[item.itemId] = 0
+            map[stageCode].items[item.itemId] += item.quantity
           }
         }
+        map[stageCode].times++
+        map[stageCode].apCost = stage.apCost * map[stageCode].times
       }
-      return result
+
+      const results = []
+      for (const [stage, val] of Object.entries(map)) results.push({ stage, ...val })
+      console.timeEnd('reportTableData')
+      return {
+        results,
+        total: {
+          times: results.reduce((prev, curr) => prev + curr.times, 0),
+          apCost: results.reduce((prev, curr) => prev + curr.apCost, 0),
+          items: results.reduce((prev, curr) => prev + Object.values(curr.items).reduce((a, b) => a + b), 0),
+        }
+      }
     },
     server () {
       return this.$store.getters['dataSource/server']
@@ -947,6 +938,7 @@ export default {
         result.result.drops
           .forEach(el => {
             el.quantity = parseInt(el.quantity)
+            if (!el.itemId) el.itemId = `unrecognized_${Math.random()}`
           })
         result.result.drops
           .sort((a, b) => {

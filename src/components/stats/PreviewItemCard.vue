@@ -97,7 +97,7 @@ export default {
   props: {
     itemId: {
       type: String,
-      required: true
+      default: () => ""
     },
     disabledOverview: {
       type: Boolean,

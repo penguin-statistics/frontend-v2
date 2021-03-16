@@ -83,10 +83,10 @@
 }
 
 .transparentTable > .v-table__overflow > .v-table {
-    background: transparent;
+    background: transparent !important;
 }
 .transparentTable {
-    background: transparent;
+    background: transparent !important;
 }
 
 .line-height-wide {

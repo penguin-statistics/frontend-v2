@@ -87,6 +87,7 @@ stats:
     stage: 作战
     apCost: 理智
     item: 物品
+    itemDrops: 掉落情况总计
     times: 样本数
     quantity: 掉落数
     percentage: 百分比
@@ -199,7 +200,7 @@ report:
       select: 选择
       recognize: 识别
       confirm: 确认
-      report: 上报
+      report: 汇报
     allResult:
       stageTime: 进行的关卡数量
       drops: 获得的掉落物总数
@@ -309,7 +310,7 @@ report:
     NOT_FOUND: 作战不存在：于所选服务器未找到此作战
     INVALID: 无法汇报：此作战未包含掉落汇报元数据
   furniture: 家具掉落：{state}
-  name: 上报结果
+  name: 汇报结果
   submit: 提交
   success: 汇报成功
   unable: 无法提交：
