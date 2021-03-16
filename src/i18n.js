@@ -21,37 +21,5 @@ export default new VueI18n({
   fallbackLocale: 'en',
   silentFallbackWarn: true,
   formatFallbackMessages: true,
-  // dateTimeFormats: {
-  //   'en': {
-  //     short: {
-  //       month: 'short', day: 'numeric',
-  //       weekday: 'short', hour: 'numeric', minute: 'numeric'
-  //     },
-  //     long: {
-  //       year: 'numeric', month: 'short', day: 'numeric',
-  //       hour: 'numeric', minute: 'numeric'
-  //     }
-  //   },
-  //   'zh': {
-  //     short: {
-  //       month: 'short', day: 'numeric',
-  //       weekday: 'short', hour: 'numeric', minute: 'numeric'
-  //     },
-  //     long: {
-  //       year: 'numeric', month: 'short', day: 'numeric',
-  //       hour: 'numeric', minute: 'numeric'
-  //     }
-  //   },
-  //   'ja': {
-  //     short: {
-  //       month: 'short', day: 'numeric',
-  //       weekday: 'short', hour: 'numeric', minute: 'numeric'
-  //     },
-  //     long: {
-  //       year: 'numeric', month: 'short', day: 'numeric',
-  //       hour: 'numeric', minute: 'numeric'
-  //     }
-  //   }
-  // },
   messages: loadLocaleMessages()
 })

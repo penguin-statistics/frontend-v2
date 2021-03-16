@@ -99,3 +99,12 @@
     filter: drop-shadow(0 0 8px rgba(0, 0, 0, .12));
   }
 }
+
+.border-outlined {
+  .theme--dark & {
+    border: 1px solid rgba(255, 255, 255, .4)
+  }
+  .theme--light & {
+    border: 1px solid rgba(0, 0, 0, .4)
+  }
+}

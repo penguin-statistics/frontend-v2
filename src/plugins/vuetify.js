@@ -8,9 +8,12 @@ import ja from 'vuetify/es5/locale/ja'
 import ko from 'vuetify/es5/locale/ko'
 import en from 'vuetify/es5/locale/en'
 
+import ConfirmationDialog from './confirmation-dialog'
+import i18n from "@/i18n";
+
 Vue.use(Vuetify)
 
-export default new Vuetify({
+const vuetify = new Vuetify({
   icons: {
     iconfont: 'mdi'
   },
@@ -49,3 +52,7 @@ export default new Vuetify({
     }
   }
 })
+
+Vue.use(ConfirmationDialog, { vuetify, i18n })
+
+export default vuetify

@@ -18,10 +18,9 @@ import AboutLinks from './views/About/Links'
 import NotFound from '@/views/NotFound'
 import SiteStats from '@/views/SiteStats'
 import Planner from '@/views/Planner'
-
-import i18n from '@/i18n'
 import Search from '@/views/Search'
 import store from '@/store'
+import helmet from "@/utils/helmet";
 
 // import DataDebugger from "@/components/debug/DataDebugger";
 
@@ -327,13 +326,11 @@ const router = new Router({
 router.beforeEach((to, from, next) => {
   // If this isn't an initial page load and is an async route
   if (to.meta.async && to.name) store.commit('ui/setLoadingRoute', true)
-
-  document.title = `${i18n.t(to.meta.i18n)} | ${i18n.t('app.name')}`
-  next()
+  return next()
 })
 
 router.afterEach((to) => {
-  document.title = `${i18n.t(to.meta.i18n)} | ${i18n.t('app.name')}`
+  helmet.title.update(to)
   store.commit('ui/setLoadingRoute', false)
 })
 

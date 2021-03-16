@@ -4,30 +4,10 @@
     fluid
     class="fill-height"
   >
-    <v-dialog
-      v-model="expandImage.dialog"
-      :origin="dialogOrigin"
-      max-width="1800px"
-      max-height="80vh"
-      :overlay-opacity="0.8"
-      overlay-color="rgba(0, 0, 0, 1)"
-    >
-      <v-card
-        v-ripple="false"
-        style="cursor: zoom-out"
-        @click="expandImage.dialog = false"
-      >
-        <img
-          :src="expandImage.src"
-          alt="enlarged"
-          class="mx-auto d-block"
-          style="max-width: 100%; max-height: 80vh"
-        >
-        <v-card-subtitle class="text-center mt-4">
-          {{ $t("report.recognition.tips.copyImage") }}
-        </v-card-subtitle>
-      </v-card>
-    </v-dialog>
+    <RecognitionImageDialog
+      :src="expandImage.src"
+    />
+
     <v-row
       justify="center"
       align="center"
@@ -247,10 +227,7 @@
               {{ $t("report.recognition.step.confirm") }}
             </v-stepper-step>
 
-            <v-stepper-content
-              step="3"
-              :class="{'pt-0': step === 3}"
-            >
+            <v-stepper-content step="3">
               <div v-if="step === 3">
                 <v-alert
                   type="info"
@@ -285,7 +262,7 @@
 
                   <RecognitionResultOverview
                     :success="filterResults(['SUCCESS']).length"
-                    :error="filterResults(['WARNING', 'ERROR']).length"
+                    :error="filterResults(['ERROR']).length"
                     :duration="recognition.durationPerImage"
                     :total="results.length"
                   />
@@ -300,7 +277,7 @@
                   class="mt-4"
                   icon="mdi-bug"
                 >
-                  {{ $t('report.recognition.tips.abnormal', {count: filterResults(['WARNING', 'ERROR']).length}) }}
+                  {{ $t('report.recognition.tips.abnormal', {count: filterResults(['ERROR']).length}) }}
                 </v-alert>
 
                 <OffTitle
@@ -313,17 +290,29 @@
                   class="position-relative pt-6 transparent"
                   style="min-height: 100px"
                 >
-                  <v-select
-                    v-model="filterValue"
-                    :items="itemFilters"
-                    item-text="text"
-                    item-value="value"
-                    attach
-                    chips
-                    label="Filter"
-                    multiple
-                    prepend-icon="mdi-filter-variant"
-                  />
+                  <TitledRow
+                    reactive
+                    dense
+                    class="px-4 py-3 mx-0 border-outlined radius-1"
+                  >
+                    <template v-slot:header>
+                      {{ $t('report.recognition.filter') }}
+                    </template>
+                    <template v-slot:content>
+                      <v-checkbox
+                        v-for="filter in itemFilters"
+                        :key="filter.value"
+
+                        v-model="filterValue"
+                        v-haptic
+                        hide-details
+                        :label="filter.text + ` (${filterResults([filter.value]).length})`"
+                        class="mt-0 pt-0"
+                        :value="filter.value"
+                        :class="{'mr-2': $vuetify.breakpoint.smAndUp}"
+                      />
+                    </template>
+                  </TitledRow>
 
                   <v-row
                     v-if="results.length"
@@ -356,7 +345,7 @@
                             min-height="120px"
                             max-height="240px"
                             class="unknown-ratio-glow"
-                            @click="enlargeImage(result.blobUrl)"
+                            @click="expandImage.src = result.blobUrl"
                           >
                             <template #placeholder>
                               <div class="d-flex align-center justify-center fill-height caption">
@@ -420,11 +409,8 @@
                             <div
                               v-for="item in result.result.drops"
                               :key="item.itemId"
-                              class="d-inline-flex align-center justify-center flex-column pa-2 mt-2 mr-2"
+                              class="d-inline-flex align-center justify-center flex-column pa-2 mt-2 mr-2 border-outlined"
                               style="border-radius: 4px"
-                              :style="{
-                                border: `1px solid ${dark ? 'rgba(255, 255, 255, .4)' : '#000'}`
-                              }"
                             >
                               <div>
                                 {{ dropTypeToString(item.dropType) }}
@@ -529,20 +515,20 @@
                     {{ $t('report.recognition.confirm.noResult') }}
                   </v-alert>
                 </v-card>
-                <div class="mt-4">
+                <div class="mt-2">
                   <v-btn
+                    large
+                    rounded
                     color="primary"
-                    class="mr-2"
+                    class="px-6"
+                    :block="$vuetify.breakpoint.xs"
                     :disabled="!selectedResults.length"
                     @click="step = 4"
                   >
-                    {{ $t("report.recognition.confirm.submit", {count: selectedResults.length}) }}
-                    <v-icon
-                      right
-                      dark
-                    >
+                    <v-icon left>
                       mdi-upload
                     </v-icon>
+                    {{ $t("report.recognition.confirm.submit", {count: selectedResults.length}) }}
                   </v-btn>
                 </div>
               </div>
@@ -732,21 +718,25 @@ import FactTable from "@/components/stats/fact-table/FactTable";
 import FactTableItem from "@/components/stats/fact-table/FactTableItem";
 import {mapGetters} from "vuex";
 import RecognizeResultAlertCard from "@/components/recognition/RecognizeResultAlertCard";
+import RecognitionImageDialog from "@/components/recognition/RecognitionImageDialog";
+import TitledRow from "@/components/global/TitledRow";
+import ConfirmLeave from "@/mixins/ConfirmLeave";
 
 export default {
   name: 'RecognitionReport',
   components: {
+    TitledRow,
+    RecognitionImageDialog,
     RecognizeResultAlertCard,
     FactTableItem,
     FactTable, OffTitle, DynamicSizeBtn, Item, ImageInput, RecognitionResultOverview, PreloaderInline },
-  mixins: [Theme, CDN],
+  mixins: [Theme, CDN, ConfirmLeave],
   data () {
     return {
       recognizer: null,
       files: [],
       results: [],
       expandImage: {
-        dialog: false,
         src: ''
       },
       recognition: {
@@ -765,7 +755,7 @@ export default {
       },
       dialogOrigin: '',
       step: 1,
-      filterValue: ['SUCCESS', 'WARNING', 'ERROR'],
+      filterValue: ['SUCCESS', 'ERROR'],
       submitDialog: {
         open: false,
         finish: false,
@@ -786,10 +776,10 @@ export default {
           text: this.$t('report.recognition.status.success'),
           value: 'SUCCESS'
         },
-        {
-          text: this.$t('report.recognition.status.warning'),
-          value: 'WARNING'
-        },
+        // {
+        //   text: this.$t('report.recognition.status.warning'),
+        //   value: 'WARNING'
+        // },
         {
           text: this.$t('report.recognition.status.error'),
           value: 'ERROR'
@@ -852,6 +842,11 @@ export default {
       return this.results.map((result) => {
         return !!(result.result.errors.length || result.result.warnings.length)
       })
+    }
+  },
+  watch: {
+    step(val) {
+      this.confirmLeaveActive = val >= 2
     }
   },
   mounted () {
@@ -939,14 +934,14 @@ export default {
       await this.recognizer.recognize(this.files, result => {
         this.recognition.current = result.file.name
         result.result.drops
-          .map(el => {
-            el.confidence = parseFloat(el.confidence)
-            el.quantity = parseFloat(el.quantity)
+          .forEach(el => {
+            el.quantity = parseInt(el.quantity)
           })
+        result.result.drops
           .sort((a, b) => {
             return -typeOrder.indexOf(a.dropType) - -typeOrder.indexOf(b.dropType)
           })
-        this.results.push(Object.freeze(result))
+        this.results.push(result)
       })
 
       this.recognition.busy = false
@@ -955,10 +950,6 @@ export default {
     },
     dropTypeToString (type) {
       return this.$t(`stage.loots.${type}`) || type
-    },
-    enlargeImage (url) {
-      this.expandImage.dialog = true
-      this.expandImage.src = url
     },
     getStage (stageId) {
       return get.stages.byStageId(stageId) || { code: '(internal error)' }
@@ -970,7 +961,7 @@ export default {
       await this.recognize()
       this.applyPostRecognitionRules(this.results)
       const selectedResultsIndex = []
-      this.results.map((result, index) => {
+      this.results.forEach((result, index) => {
         if (!(result.result.warnings.length || result.result.errors.length)) selectedResultsIndex.push(index)
       })
       this.selectedResultsIndex = selectedResultsIndex
@@ -978,7 +969,6 @@ export default {
         return prev + (curr.duration || 0)
       }, 0) / this.results.length).toFixed(2)
       this.recognition.state = 'rendering'
-      console.log(this.recognition.state)
       setTimeout(() => {
         this.$nextTick(() => {
           this.step = 3
@@ -990,19 +980,13 @@ export default {
         for (let key of filter) {
           switch (key) {
             case 'SUCCESS':
-              if (!(result.result.warnings.length || result.result.errors.length)) {
-                return true
-              }
+              if (!(result.result.warnings.length || result.result.errors.length)) return true
               break
-            case 'WARNING':
-              if (result.result.warnings.length) {
-                return true
-              }
-              break
+            // case 'WARNING':
+            //   if (result.result.warnings.length) return true
+            //   break
             case 'ERROR':
-              if (result.result.errors.length) {
-                return true
-              }
+              if (result.result.warnings.length || result.result.errors.length) return true
               break
             default:
               return false
@@ -1024,18 +1008,16 @@ export default {
       })
     },
     async formatResults (results) {
+      console.time('formatResults')
       const formatted = []
       const images = []
       for (const [index, result] of results.entries()) {
         images[index] = this.loadImage(result.blobUrl)
       }
       await Promise.all(images)
-      for (const [index, result] of results.entries()) {
+      for (const result of results) {
         formatted.push({
-          drops: result.result.drops.map(drop => {
-            delete drop.confidence
-            return drop
-          }),
+          drops: result.result.drops,
           stageId: result.result.stageId,
           metadata: {
             fingerprint: result.result.fingerprint,
@@ -1046,11 +1028,12 @@ export default {
             // size: result.file.size,
             // type: result.file.type,
             // webkitRelativePath: result.file.webkitRelativePath,
-            width: await (images[index]).width,
-            height: await (images[index]).height
+            // width: await (images[index]).width,
+            // height: await (images[index]).height
           }
         })
       }
+      console.timeEnd('formatResults')
       return formatted
     },
     // askCrispForHelp () {
@@ -1090,7 +1073,7 @@ export default {
         }
       })
       console.timeEnd('applying post recognition rules')
-      return results
+      return Object.freeze(results)
     }
   }
 }

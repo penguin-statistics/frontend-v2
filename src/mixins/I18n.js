@@ -1,6 +1,7 @@
 import dayjs from 'dayjs'
 import Console from '@/utils/Console'
 import { mapGetters } from 'vuex'
+import helmet from "@/utils/helmet";
 
 export default {
   methods: {
@@ -10,7 +11,7 @@ export default {
       if (save) this.$store.commit('settings/changeLocale', localeId)
       this.$i18n.locale = localeId
       this.$vuetify.lang.current = localeId
-      document.title = `${this.$t(this.$route.meta.i18n) + ' | ' || ''}${this.$t('app.name')}`
+      helmet.title.update(this.$route)
       document.documentElement.lang = localeId
     }
   },

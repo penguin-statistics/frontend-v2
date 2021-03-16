@@ -220,7 +220,7 @@ report:
     status:
       success: 成功
       warning: 警告
-      error: 错误
+      error: 异常
     description: 仅需选择结算页面截图即可上传所有掉率，不再需要一次次手动选择。
     confirm:
       overview:
@@ -259,6 +259,7 @@ report:
     progress: 进度
     submit: 确认提交到企鹅数据
     retry: 提交失败，正在重试
+    filter: 结果过滤
     notices:
       welcome:
         - 所提供的文件仅会通过使用 WebAssembly 技术于本地进行识别，不会向服务器上传。
