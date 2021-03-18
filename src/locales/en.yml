@@ -209,21 +209,21 @@ report:
       confirm: Confirm
       report: Report
     allResult:
-      stageTime: 进行的关卡数量
-      drops: 获得的掉落物总数
-      sanity: 共消耗理智
+      stageTime: Total Stage Times
+      drops: Total Item Drops
+      sanity: Total AP consumed
     tips:
       fileTooBig: "File \"{name}\" with size of {size}MB is too large"
       fileTooOld: "File \"{name}\" was created before 36hrs ago"
       chooseImage: Click or drag to add an image
-      dragImage: Drag and drop the image here
+      dragImage: Drag an image here
       addImage: Click to add an image
       copyImage: Right click or long press the image to share it
-      abnormal: "{count} image(s) have been \"excluded\" because they have either failed to pass legibility test or have failed to be recognized"
+      abnormal: "{count} image(s) have been \"excluded\" because they either failed to pass legibility test, or failed to be recognized"
       notImageFile: "\"{files}\" are not image files, ignored."
       emptyResult: No results available
       unsatisfiedStart: Unable to Start
-      emptyFile: No files selected
+      emptyFile: No images selected
       hasInvalidFile: Contains invalid file
     status:
       success: Success
@@ -248,13 +248,13 @@ report:
       details: Details
       unknownStage: Recognition Failed
       abnormal:
-        error: This image has failed to pass the legibility test
-        fatal: This image has failed to be recognized
+        error: This image failed to pass the legibility test
+        fatal: This image failed to be recognized
         hover: "Hover: see recognition results"
       cherryPick:
-        disabled: "Unable to upload abnormal results"
-        accepted: "Upload those Results"
-        rejected: "Discard those Results"
+        disabled: "Unable to upload abnormal recognition result"
+        accepted: "Upload this result"
+        rejected: "Discard this result"
       noResult: No recognition results
       submit: "Upload Selected (×{count}) Results"
       itemsTotal: Items
@@ -279,30 +279,30 @@ report:
     filter: Filter
     notices:
       welcome:
-        - "Image files will be recognized **locally** by using the **WebAssembly** technology. We will not upload any of the screenshots to our server."
+        - "Image files will be recognized **locally** using **WebAssembly** technology. We will not upload images to our server."
         - "Please use screenshots taken within 36 hours that contains only 3-stars clear. Duplications will be detected and marked as *excluded*."
         - "Please do not report the first-clear of a stage, and do not only report the clears where you were lucky - report all clears."
       confirm:
         - Click the image to enlarge it for double-checking.
-        - Screenshots in which passed the legibility test have already been checked for upload.
+        - Screenshots which passed the legibility test have already been checked for upload.
         - With consideration of dataset accuracy, you are **disallowed** to check a screenshot that failed the legibility test for upload.
     exceptions:
       "3stars::False":
         title: "Suspected to be a non 3-stars clear"
-        subtitle: Have you wait for the animation to complete before taking the screenshot?
+        subtitle: Did you wait for the animation to complete before taking the screenshot?
       "Stage::NotFound": Cannot found any valid matching stage
       "Fingerprint::Same":
-        title: Identical Images
+        title: Duplicated Images
         subtitle: Check if you have selected duplicated images
       "FileTimestamp::TooClose":
         title: Screenshot Interval too close
         subtitle: Check if you have selected duplicated images
       "Drop::IllegalDrop":
         title: Unexpected Drop Item
-        subtitle: Check if you have selected a screenshot in which its content includes an event that has already been closed
+        subtitle: Check if you have selected a screenshot in which its content includes a closed event
       "Drop::LowConfidence":
         title: Low Confidence Drop Item
-        subtitle: Check if you have selected a screenshot in which its content includes an event that has already been closed
+        subtitle: Check if you have selected a screenshot in which its content includes a closed event
       "Result::False":
         title: Invalid Image
         subtitle: Check if you have selected a valid screenshot
