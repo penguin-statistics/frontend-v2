@@ -11,9 +11,9 @@ export default {
   },
   beforeRouteLeave (to, from, next) {
     if (this.confirmLeaveActive) {
-      this.$confirm('确定要离开此页面吗？', {
-        title: '确定要离开此页面吗？',
-        subtitle: '未保存的更改可能会丢失。',
+      this.$confirm(this.$t('confirmLeave.title'), {
+        title: this.$t('confirmLeave.title'),
+        subtitle: this.$t('confirmLeave.subtitle'),
         color: 'error'
       })
         .then((permit) => {

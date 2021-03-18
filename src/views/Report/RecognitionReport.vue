@@ -4,9 +4,7 @@
     fluid
     class="fill-height"
   >
-    <RecognitionImageDialog
-      :src="expandImage.src"
-    />
+    <RecognitionImageDialog v-model="expandImage.src" />
 
     <v-row
       justify="center"
@@ -18,10 +16,7 @@
           v-model="submitDialog.open"
           persistent
         >
-          <v-card
-            v-if="!submitDialog.finish"
-            class="d-flex fill-height"
-          >
+          <v-card class="d-flex fill-height">
             <v-card-text>
               <v-row
                 align="center"
@@ -47,41 +42,6 @@
                   </v-row>
                 </v-col>
               </v-row>
-            </v-card-text>
-          </v-card>
-          <v-card
-            v-else
-            class="d-flex fill-height"
-          >
-            <v-card-text>
-              <v-alert
-                v-if="submitDialog.error"
-                type="error"
-                class="mt-4"
-              >
-                Error
-              </v-alert>
-              <v-alert
-                v-else
-                type="success"
-                class="mt-4"
-              >
-                Finish
-              </v-alert>
-              <v-card-actions class="elevation-4">
-                <v-btn
-                  text
-                  block
-                  large
-                  @click="reload"
-                >
-                  <v-divider style="opacity: 0.3" />
-                  <span class="mx-4 d-flex align-center">
-                    <v-icon left>mdi-close</v-icon>{{ $t("report.recognition.reload") }}
-                  </span>
-                  <v-divider style="opacity: 0.3" />
-                </v-btn>
-              </v-card-actions>
             </v-card-text>
           </v-card>
         </v-dialog>
@@ -113,35 +73,37 @@
             </v-stepper-step>
 
             <v-stepper-content step="1">
-              <v-alert
-                color="orange darken-3"
-                border="left"
-                outlined
-                class="mb-2"
-              >
-                <ol>
-                  <li
-                    v-for="notice in $t('report.recognition.notices.welcome')"
-                    :key="notice"
-                    v-marked
-                    class="markdown-content-inline"
-                    v-text="notice"
-                  />
-                </ol>
-              </v-alert>
+              <template v-if="step === 1">
+                <v-alert
+                  color="orange darken-3"
+                  border="left"
+                  outlined
+                  class="mb-2"
+                >
+                  <ol>
+                    <li
+                      v-for="notice in $t('report.recognition.notices.welcome')"
+                      :key="notice"
+                      v-marked
+                      class="markdown-content-inline"
+                      v-text="notice"
+                    />
+                  </ol>
+                </v-alert>
 
-              <ImageInput
-                v-model="files"
-                @valid="valid => isFilesValid = valid"
-              />
+                <ImageInput
+                  v-model="files"
+                  @valid="valid => isFilesValid = valid"
+                />
 
-              <DynamicSizeBtn
-                :loading="step === 2"
-                :reason="files.length ? $t('report.recognition.tips.hasInvalidFile') : $t('report.recognition.tips.emptyFile')"
-                :disabled="!files.length || !isFilesValid"
-                :length="files.length"
-                @click="initAndRecognize"
-              />
+                <DynamicSizeBtn
+                  :loading="step === 2"
+                  :reason="files.length ? $t('report.recognition.tips.hasInvalidFile') : $t('report.recognition.tips.emptyFile')"
+                  :disabled="!files.length || !isFilesValid"
+                  :length="files.length"
+                  @click="initAndRecognize"
+                />
+              </template>
             </v-stepper-content>
 
             <v-stepper-step
@@ -154,7 +116,7 @@
             <v-stepper-content step="2">
               <template v-if="step === 2">
                 <div class="d-flex flex-column py-10">
-                  <div class="d-flex flex-row justify-center align-center mx-auto">
+                  <div class="d-flex flex-column flex-md-row flex-lg-row flex-xl-row justify-center align-center mx-auto">
                     <PreloaderInline :size="120" />
                     <div class="d-flex flex-column py-4 ml-4">
                       <h2 class="headline">
@@ -165,28 +127,23 @@
                         class="monospace-pure my-2"
                         style="word-break: keep-all; text-overflow: ellipsis; line-height: 20px; height: 20px; max-width: 50vw; white-space: nowrap"
                       >
-                        {{ recognition.state === 'rendering' ? $t('report.recognition.states.rendering') : (recognition.current || '暂无文件名') }}
+                        {{ recognition.state === 'rendering' ? $t('report.recognition.states.rendering') : (recognition.current || $t('report.recognition.recognize.noFilename')) }}
                       </span>
 
                       <FactTable>
                         <FactTableItem
-                          title="识别进度"
-                          content-class="monospace"
-                          :content="results.length + ' / ' + files.length"
-                        />
-                        <FactTableItem
-                          title="已用时间"
+                          :title="$t('report.recognition.recognize.elapsed')"
                           :content="recognition.timer.elapsed + 's'"
                           content-class="monospace"
                         />
                         <FactTableItem
-                          title="预计剩余"
+                          :title="$t('report.recognition.recognize.remaining')"
                           :content="recognition.timer.remaining + 's'"
                           content-class="monospace"
                         />
                         <FactTableItem
-                          title="平均速度"
-                          :content="(recognition.timer.imagePerSecond || 0).toFixed(1) + '图/秒'"
+                          :title="$t('report.recognition.recognize.speed')"
+                          :content="$t('report.recognition.recognize.imagePerSecond', {count: (recognition.timer.imagePerSecond || 0).toFixed(1)})"
                           content-class="monospace"
                         />
                       </FactTable>
@@ -228,7 +185,7 @@
             </v-stepper-step>
 
             <v-stepper-content step="3">
-              <div v-if="step === 3">
+              <template v-if="step === 3">
                 <v-alert
                   type="info"
                   border="left"
@@ -540,7 +497,7 @@
                     {{ $t("report.recognition.confirm.submit", {count: selectedResults.length}) }}
                   </v-btn>
                 </div>
-              </div>
+              </template>
             </v-stepper-content>
 
             <v-stepper-step step="4">
@@ -548,10 +505,10 @@
             </v-stepper-step>
 
             <v-stepper-content step="4">
-              <div v-if="step === 4">
+              <template v-if="step === 4">
                 <OffTitle
                   small
-                  content="汇报详情"
+                  :content="$t('report.recognition.report.title')"
                 />
                 <v-data-table
                   :headers="reportTable.headers"
@@ -612,7 +569,7 @@
                         :class="reportTable.cellClass"
                         class="grey--text"
                       >
-                        总计
+                        {{ $t('report.recognition.report.total') }}
                       </td>
                       <td :class="reportTable.cellClass">
                         <v-icon small>
@@ -658,7 +615,7 @@
                   />
                   <span> {{ $t("report.recognition.submit") }} </span>
                 </v-btn>
-              </div>
+              </template>
             </v-stepper-content>
           </v-stepper>
         </v-card>
@@ -678,7 +635,6 @@ import RecognitionResultOverview from '@/components/recognition/RecognitionResul
 import config from '@/config'
 import get from '@/utils/getters'
 import Cookies from 'js-cookie'
-import report from '@/apis/report'
 import DynamicSizeBtn from "@/components/global/DynamicSizeBtn";
 import OffTitle from "@/components/global/OffTitle";
 import FactTable from "@/components/stats/fact-table/FactTable";
@@ -688,6 +644,7 @@ import RecognizeResultAlertCard from "@/components/recognition/RecognizeResultAl
 import RecognitionImageDialog from "@/components/recognition/RecognitionImageDialog";
 import TitledRow from "@/components/global/TitledRow";
 import ConfirmLeave from "@/mixins/ConfirmLeave";
+import recognitionSubmitter from "@/utils/vendors/recognitionSubmitter";
 
 export default {
   name: 'RecognitionReport',
@@ -709,7 +666,7 @@ export default {
         src: ''
       },
       recognition: {
-        state: 'PENDING',
+        state: 'pending',
         busy: false,
         server: '',
         durationPerImage: '#',
@@ -738,7 +695,7 @@ export default {
             value: 'stage',
             align: 'left',
             sortable: false,
-            width: '55px',
+            width: '80px',
           },
           {
             text: this.$t('stats.headers.times'),
@@ -845,8 +802,14 @@ export default {
     }
   },
   watch: {
-    step(val) {
-      this.confirmLeaveActive = val >= 2
+    step: {
+      immediate: true,
+      handler (val) {
+        if (val >= 2) {
+          this.confirmLeaveActive = true
+          this.$store.commit('ui/lockServer')
+        }
+      }
     }
   },
   mounted () {
@@ -880,9 +843,8 @@ export default {
       this.recognition.timer.remaining = 0
     },
     async doSubmit () {
-      const batchDrops = await this.formatResults(this.selectedResults);
       const userId = Cookies.get(config.authorization.userId.cookieKey)
-      return report.submitRecognitionReport(batchDrops, { source: 'frontend-v2-recognition' }).then(() => {
+      recognitionSubmitter(this).then(() => {
         const reportedUserId = Cookies.get(config.authorization.userId.cookieKey)
         if (userId !== reportedUserId) {
           this.$store.dispatch('auth/login', {
@@ -901,6 +863,7 @@ export default {
     },
     submit () {
       this.submitDialog.open = true
+      this.recognition.state = 'uploading'
       this.doSubmit()
     },
     async init () {
@@ -910,10 +873,9 @@ export default {
       await this.recognizer
         .initialize(this.server)
         .then(() => {
-          this.$store.commit('ui/lockServer')
           this.recognition.state = 'initialized'
           this.recognition.server = this.server
-          console.log('initialization completed')
+          // console.log('initialization completed')
         })
         .finally(() => {
           this.recognition.state = 'pending'
@@ -924,7 +886,6 @@ export default {
     },
     async recognize () {
       this.results = []
-      this.recognition.busy = true
 
       const typeOrder = ['NORMAL_DROP', 'SPECIAL_DROP', 'EXTRA_DROP']
       typeOrder.reverse()
@@ -946,8 +907,6 @@ export default {
           })
         this.results.push(result)
       })
-
-      this.recognition.busy = false
 
       this.stopTimer()
     },
@@ -998,61 +957,17 @@ export default {
         return false
       })
     },
-    async loadImage (src) {
-      return new Promise((resolve, reject) => {
-        const img = new Image()
-        img.onload = () => {
-          resolve(img)
-        }
-        img.onerror = (e) => {
-          reject(e)
-        }
-        img.src = src
-      })
-    },
-    async formatResults (results) {
-      console.time('formatResults')
-      const formatted = []
-      const images = []
-      for (const [index, result] of results.entries()) {
-        images[index] = this.loadImage(result.blobUrl)
-      }
-      await Promise.all(images)
-      for (const result of results) {
-        formatted.push({
-          drops: result.result.drops,
-          stageId: result.result.stageId,
-          metadata: {
-            fingerprint: result.result.fingerprint,
-            md5: result.result.md5,
-            fileName: result.file.name,
-            lastModified: result.file.lastModified,
-            // not providing due to backend
-            // size: result.file.size,
-            // type: result.file.type,
-            // webkitRelativePath: result.file.webkitRelativePath,
-            // width: await (images[index]).width,
-            // height: await (images[index]).height
-          }
-        })
-      }
-      console.timeEnd('formatResults')
-      return formatted
-    },
-    // askCrispForHelp () {
-    //   const $crisp = window.$crisp
-    //   document.querySelector('div.crisp-client').style.setProperty('display', 'block', 'important')
-    //   $crisp.push(['do', 'chat:open'])
-    //   $crisp.push(['do', 'message:send', ['text', '掉落识别有问题，我该怎么办？']])
-    // },
     applyPostRecognitionRules (results) {
-      console.time('applying post recognition rules')
-      const timestamps = results.map(value => {
-        return value.file.lastModified
-      })
-      const fingerprints = results.map(value => {
-        return value.result.fingerprint
-      })
+      const timestamps = results
+          .map(value => {
+            return value.file.lastModified
+          })
+
+      const fingerprints = results
+          .map(value => {
+            return value.result.fingerprint
+          })
+
       results.forEach((value, index) => {
         // Apply timestamp check, <10s will add warning
         let closeTimestamps = false;
@@ -1067,7 +982,7 @@ export default {
         // Apply same fingerprint check, same will add warning
         let sameFingerprint = false;
         fingerprints.forEach((fingerprint, i) => {
-          if (fingerprint !== "" && fingerprint === value.result.fingerprint && i !== index) {
+          if (fingerprint !== "" && fingerprint !== undefined && fingerprint === value.result.fingerprint && i !== index) {
             sameFingerprint = true
           }
         })
@@ -1075,7 +990,6 @@ export default {
           value.result.errors.push({ type: 'Fingerprint::Same' })
         }
       })
-      console.timeEnd('applying post recognition rules')
       return Object.freeze(results)
     }
   }

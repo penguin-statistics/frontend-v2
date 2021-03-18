@@ -230,6 +230,12 @@ report:
       warning: Warning
       error: Error
     description: "Boost your upload efficiency by simply choosing your drop screenshots and let us handle the rest."
+    recognize:
+      noFilename: No Filename
+      elapsed: Elapsed
+      remaining: Remaining
+      speed: Avg Speed
+      imagePerSecond: "{count} images/sec"
     confirm:
       overview:
         _name: Overview
@@ -252,10 +258,16 @@ report:
       noResult: No recognition results
       submit: "Upload Selected (×{count}) Results"
       itemsTotal: Items
+    report:
+      title: Report Details
+      total: Total
     states:
+      pending: Waiting for initialization...
       initializing: Initializing...
+      recognizing: Recognizing...
       rendering: Rendering content...
       submitting: Submitting...
+
     cost: Cost
     filename: Filename
     result: Result
@@ -264,8 +276,8 @@ report:
     progress: Progress
     submit: Submit
     retry: "Failed to submit. Retrying..."
+    filter: Filter
     notices:
-      wasm: WebAssembly
       welcome:
         - "Image files will be recognized **locally** by using the **WebAssembly** technology. We will not upload any of the screenshots to our server."
         - "Please use screenshots taken within 36 hours that contains only 3-stars clear. Duplications will be detected and marked as *excluded*."
@@ -628,3 +640,6 @@ share:
 search:
   placeholder: Search...
   hint: Type in Name for Stage, Zone or Item
+confirmLeave:
+  title: Are you sure to leave?
+  subtitle: Unsaved changes may lost.

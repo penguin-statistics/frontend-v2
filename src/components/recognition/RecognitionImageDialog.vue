@@ -28,7 +28,7 @@
 export default {
   name: "RecognitionImageDialog",
   props: {
-    src: {
+    value: {
       type: String,
       required: true
     },
@@ -40,7 +40,7 @@ export default {
     }
   },
   watch: {
-    src(val) {
+    value(val) {
       if (val !== '') {
         this.dialog = true
         this.internalSrc = val
@@ -49,7 +49,7 @@ export default {
     dialog(val) {
       if (!val) {
         this.internalSrc = ''
-        this.$emit('close')
+        this.$emit('input', '')
       }
     }
   },

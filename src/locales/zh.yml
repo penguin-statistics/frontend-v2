@@ -223,6 +223,12 @@ report:
       warning: 警告
       error: 异常
     description: 仅需选择结算页面截图即可上传所有掉率，不再需要一次次手动选择。
+    recognize:
+      noFilename: 暂无文件名
+      elapsed: 已用时间
+      remaining: 预计剩余
+      speed: 识别速度
+      imagePerSecond: "{count} 图/秒"
     confirm:
       overview:
         _name: 结果概览
@@ -245,8 +251,11 @@ report:
       noResult: 暂时没有识别结果
       submit: "确认上传已勾选的 {count} 次结算记录"
       itemsTotal: 物品数合计
+    report:
+      title: 汇报详情
+      total: 总计
     states:
-      pending: 正等待初始化
+      pending: 正等待初始化...
       initializing: 初始化中...
       recognizing: 正在识别...
       rendering: 渲染确认内容中...
@@ -628,3 +637,6 @@ share:
 search:
   placeholder: 搜索...
   hint: 键入 物品全拼 拼音首字母 作战名 章节名 关卡编号 或 部分关卡/物品昵称
+confirmLeave:
+  title: 确定要离开此页面吗？
+  subtitle: 未保存的更改可能会丢失

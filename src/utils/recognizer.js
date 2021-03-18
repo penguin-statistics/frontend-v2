@@ -1,8 +1,8 @@
 import charHash from '@/models/recognition/charHash'
 import store from '@/store'
 import JSZip from 'jszip'
-import reduce from 'lodash/reduce'
 import uniq from 'lodash/uniq'
+import Console from "@/utils/Console";
 
 async function image2wasmHeapOffset (blob) {
   const Module = window.Module
@@ -49,98 +49,71 @@ function safeParseJson (s) {
 
 class Recognizer {
   async initialize (server) {
-    console.groupCollapsed('Initialization')
+    // console.groupCollapsed('Initialization')
 
     // Lazy load of recognize.js and recognize.wasm
-    if (!window.Module) {
-      var script = document.createElement('script')
-      script.src = '/recognize.js'
+    if (window.Module) {
+      Console.info('Recognizer', 'init: recognition backend: both js and wasm are already loaded')
+    } else {
+      const script = document.createElement('script')
+      script.src = '/penguin.js'
       document.body.appendChild(script)
       await new Promise(resolve => {
         script.onload = function () {
           resolve()
-          console.log('recognize.js loaded')
+          Console.info('Recognizer', 'init: recognition backend: js loaded')
         }
       })
       await new Promise(resolve => {
         window.Module.onRuntimeInitialized = () => {
-          console.log('recognize.wasm loaded')
+          Console.info('Recognizer', 'init: recognition backend: wasm loaded')
           resolve()
         }
       })
-    } else {
-      console.log('recognize.js and recognize.wasm have already been loaded')
     }
     const Module = window.Module
 
     this.wasm = {
+      load_server: Module.cwrap('load_server', 'void', ['string']),
+      load_tmpl: Module.cwrap('load_templ', 'void', ['string', 'number']),
+      load_json: Module.cwrap('load_json', 'void', ['string', 'string']),
       recognize: Module.cwrap('recognize', 'string', ['number', 'number']),
-      preload_json: Module.cwrap('preload_json', 'void', [
-        'string',
-        'string',
-        'string',
-        'string'
-      ]),
-      preload_tmpl: Module.cwrap('preload_templ', 'void', ['string', 'number'])
       // free_buffer: Module.cwrap('free_buffer', 'void', ['number'])
     }
 
-    console.log('preloading json')
+    Console.info('Recognizer', 'init: load: json: preloading')
 
     const preloads = {
-      stages: reduce(
-        store.getters['data/content']({ id: 'stages' }),
-        (obj, item) => {
-          return {
-            ...obj,
-            [item.code]: {
-              stageId: item.stageId,
-              drops: uniq(
-                reduce(
-                  item.dropInfos,
-                  (array, dropInfo) => {
-                    if (dropInfo.itemId && dropInfo.itemId !== 'furni') {
-                      return [...array, dropInfo.itemId]
-                    } else {
-                      return [...array]
-                    }
-                  },
-                  item.recognitionOnly ? [...item.recognitionOnly] : []
-                )
-              )
+      stages: store.getters['data/content']({ id: 'stages' })
+          .map(stage => {
+            const drops = (stage.dropInfos || []).map(drop => {
+                return drop.itemId === 'furni' ? null : drop.itemId
+              })
+              .filter(el => !!el)
+
+            if (stage.recognitionOnly) drops.concat(stage.recognitionOnly)
+
+            return {
+              [stage.code]: {
+                stageId: stage.stageId,
+                drops: uniq(drops)
+              }
             }
-          }
-        },
-        {}
-      ),
-      // items: reduce(
-      //   store.getters["data/content"]({ id: "items" }),
-      //   (obj, item) => {
-      //     return {
-      //       ...obj,
-      //       [item["itemId"]]: {},
-      //     };
-      //   },
-      //   {
-      //     4006: {},
-      //   }
-      // ),
-      items: {}, // TODO: will be fixed in WASM v3
+          }),
       hash: charHash
     }
 
-    console.log("preloading with", preloads)
+    Console.debug('Recognizer', 'init: load: json: preloading with', preloads)
 
-    this.wasm.preload_json(
+    this.wasm.load_json(
       JSON.stringify(preloads.stages),
-      JSON.stringify(preloads.items),
-      JSON.stringify(preloads.hash),
-      server
+      JSON.stringify(preloads.hash)
     )
+    this.wasm.load_server(server)
 
-    console.log('json preloaded')
+    Console.info('Recognizer', 'init: load: json: preloaded')
 
-    console.log('starting to preload item icons')
+    Console.info('Recognizer', 'init: load: icons: preloading')
 
     await fetch('/items.zip')
       .then((response) => {
@@ -152,38 +125,42 @@ class Recognizer {
       })
       .then((zip) => JSZip.loadAsync(zip))
       .then(async (zip) => {
-        const ImageBuffer = []
+        const imageBuffer = []
         zip.forEach((relativePath, file) => {
-          ImageBuffer.push(new Promise(resolve => {
+          imageBuffer.push(new Promise(resolve => {
             const item = file.name.split('.')[0]
-            console.log('adding', item, 'to preloaded item icon')
+            // console.log('adding', item, 'to preloaded item icon')
             file.async('blob').then(async (blob) => {
               const { offset, length } = await image2wasmHeapOffset(blob, file.name)
-              this.wasm.preload_tmpl(item, offset, length)
+              this.wasm.load_tmpl(item, offset, length)
             }).then(resolve)
           }))
         })
-        return Promise.all(ImageBuffer)
+        return Promise.all(imageBuffer)
       })
-    console.groupEnd()
+
+
+    Console.info('Recognizer', 'init: load: icons: preloaded')
+
     return this
   }
 
   async recognize (files, resultCb) {
     for (const file of files) {
-      console.groupCollapsed('Recognition of', file.name)
+      // console.groupCollapsed('Recognition of', file.name)
       // console.log('start recognizing file', file.name)
       // console.time(file.name)
       const data = await image2wasmHeapOffset(file)
       // console.log('finished writing file to wasm heap. starting recognition')
       // console.timeLog(file.name)
+      Console.info('Recognizer', 'start recognizing file', file.name, 'with wasm heap offset', data.offset, data.length)
       const start = performance.now()
       let result, parsedResult
       try {
         result = this.wasm.recognize(data.offset, data.length, 0)
         parsedResult = safeParseJson(result)
       } catch (e) {
-        console.log('caught wasm error', e, 'responding with null result')
+        Console.error('Recognizer', 'caught wasm error', e, 'responding with null result')
         const duration = performance.now() - start
         resultCb({
           file,
@@ -195,13 +172,12 @@ class Recognizer {
             drops: []
           }
         })
-        console.groupEnd()
         continue
       }
       const duration = performance.now() - start
-      // console.log('recognized with result', result)
-      // console.timeLog(file.name)
-      console.debug('recognition result', parsedResult)
+
+      Console.debug('Recognizer', 'Recognized with result', parsedResult)
+
       resultCb({
         file,
         blobUrl: data.blobUrl,
@@ -213,7 +189,7 @@ class Recognizer {
       // this.wasm.free_buffer(data.offset)
       // console.log('buffer freed. timer ended')
       // console.timeEnd(file.name)
-      console.groupEnd()
+      // console.groupEnd()
     }
   }
 }

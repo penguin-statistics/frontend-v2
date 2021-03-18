@@ -22,61 +22,44 @@
       @change="files => $emit('input', files)"
       @update:error="e => $emit('valid', $refs.fileInput.valid)"
     >
-      <template
-        v-slot:prepend-inner
-      >
-        <v-overlay
-          absolute
-          :value="onDrag"
-          color="success"
-          opacity="0.9"
-        >
-          {{ $t("report.recognition.tips.dragImage") }}
-        </v-overlay>
-        <v-overlay
-          absolute
-          :value="$vuetify.breakpoint.xsOnly && files.length === 0"
-          color="success"
-          opacity="0.9"
-          @click.native="$refs.fileInput.$refs.input.click()"
-        >
-          {{ $t("report.recognition.tips.addImage") }}
-        </v-overlay>
-      </template>
+      <!--      <template-->
+      <!--        v-slot:prepend-inner-->
+      <!--      >-->
+      <!--        <v-overlay-->
+      <!--          absolute-->
+      <!--          :value="onDrag"-->
+      <!--          color="success"-->
+      <!--          opacity="0.9"-->
+      <!--        >-->
+      <!--          {{ $t("report.recognition.tips.dragImage") }}-->
+      <!--        </v-overlay>-->
+      <!--        <v-overlay-->
+      <!--          absolute-->
+      <!--          :value="$vuetify.breakpoint.xsOnly && files.length === 0"-->
+      <!--          color="success"-->
+      <!--          opacity="0.9"-->
+      <!--          @click.native="$refs.fileInput.$refs.input.click()"-->
+      <!--        >-->
+      <!--          {{ $t("report.recognition.tips.addImage") }}-->
+      <!--        </v-overlay>-->
+      <!--      </template>-->
       <template
         v-slot:selection="{ index, text }"
       >
-        <template
-          v-if="$vuetify.breakpoint.xsOnly"
+        <v-chip
+          v-if="index < 8"
+          small
+          close
+          @click:close="removeFileByIndex(index)"
         >
-          <template
-            v-if="index === 0"
-          >
-            <span
-              class="overline mx-2"
-            >
-              {{ files.length }} File(s)
-            </span>
-          </template>
-        </template>
-        <template
-          v-else
+          {{ text }}
+        </v-chip>
+        <span
+          v-else-if="index === 8"
+          class="overline mx-2 py-2"
         >
-          <v-chip
-            v-if="index < 10"
-            small
-            close
-            @click:close="removeFileByIndex(index)"
-          >
-            {{ text }}
-          </v-chip>
-          <span
-            v-else-if="index === 10"
-            class="overline mx-2"
-          >
-            +{{ files.length - 10 }} File(s)
-          </span>
-        </template>
+          +{{ files.length - 8 }} file(s)
+        </span>
       </template>
     </v-file-input>
     <v-snackbar
@@ -99,6 +82,8 @@
   </div>
 </template>
 <script>
+
+import environment from "@/utils/environment";
 
 export default {
   name: 'ImageInput',
@@ -128,7 +113,7 @@ export default {
           for (const file of files) {
             // if (files.length > 50) return '超出50个文件数量限制'
             if (file.size > 50e6) return this.$t('report.recognition.tips.fileTooBig', {name: file.name, size: (file.size / 1e6).toFixed(1)})
-            // if (file.lastModified < Date.now() - 1000 * 3600 * 36) return this.$t('report.recognition.tips.fileTooOld', {name: file.name})
+            if (environment.production && file.lastModified < Date.now() - 1000 * 3600 * 36) return this.$t('report.recognition.tips.fileTooOld', {name: file.name})
           }
           return true
         }
@@ -191,6 +176,7 @@ export default {
   .image-input >>> .v-file-input__text {
     padding-top: 26px !important;
     align-items: start !important;
+    align-content: start !important;
     height: 100% !important;
   }
 </style>
