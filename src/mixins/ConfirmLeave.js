@@ -11,7 +11,7 @@ export default {
   },
   beforeRouteLeave (to, from, next) {
     if (this.confirmLeaveActive) {
-      this.$confirm(this.$t('confirmLeave.title'), {
+      this.$confirm(this.$t('confirmLeave.subtitle'), {
         title: this.$t('confirmLeave.title'),
         subtitle: this.$t('confirmLeave.subtitle'),
         color: 'error'
