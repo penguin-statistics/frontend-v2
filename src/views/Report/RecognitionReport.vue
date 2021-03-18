@@ -644,7 +644,13 @@ import RecognizeResultAlertCard from "@/components/recognition/RecognizeResultAl
 import RecognitionImageDialog from "@/components/recognition/RecognitionImageDialog";
 import TitledRow from "@/components/global/TitledRow";
 import ConfirmLeave from "@/mixins/ConfirmLeave";
-import recognitionSubmitter from "@/utils/vendors/recognitionSubmitter";
+
+let recognitionSubmitter;
+try {
+  recognitionSubmitter = require("../../utils/vendors/recognitionSubmitter");
+} catch(e) {
+  recognitionSubmitter = () => (Promise.reject())
+}
 
 export default {
   name: 'RecognitionReport',

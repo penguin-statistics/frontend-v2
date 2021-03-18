@@ -157,7 +157,7 @@ class Recognizer {
       const start = performance.now()
       let result, parsedResult
       try {
-        result = this.wasm.recognize(data.offset, data.length, 0)
+        result = this.wasm.recognize(data.offset, data.length)
         parsedResult = safeParseJson(result)
       } catch (e) {
         Console.error('Recognizer', 'caught wasm error', e, 'responding with null result')
