@@ -237,6 +237,7 @@ report:
       speed: Avg Speed
       imagePerSecond: "{count} images/sec"
     confirm:
+      loadingImage: Loading Screenshot Preview
       overview:
         _name: Overview
         total: Recognized

@@ -230,6 +230,7 @@ report:
       speed: 识别速度
       imagePerSecond: "{count} 图/秒"
     confirm:
+      loadingImage: 正在加载截图预览
       overview:
         _name: 结果概览
         total: 共识别了
@@ -309,10 +310,10 @@ report:
       not: "“{stage}” 内的 “{item}” 数量不应等于 {should}"
     type:
       _name: 物品种类
-      now: 于 “{stage}” 已选 {quantity} 个物品
-      gte: "“{stage}” 内应至少有 {should} 个物品"
-      lte: "“{stage}” 内应至多有 {should} 个物品"
-      not: "“{stage}” 内的物品数量应总计不为 {should}"
+      now: 于 “{stage}” 已选 {quantity} 种物品
+      gte: "“{stage}” 内应至少有 {should} 种物品"
+      lte: "“{stage}” 内应至多有 {should} 种物品"
+      not: "“{stage}” 内的物品种类数应总计不为 {should}"
   clear: 清空
   closedReason:
     EXPIRED: 不在可汇报时间区间内：作战已结束或暂未开启

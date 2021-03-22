@@ -134,4 +134,8 @@ function fileSize (bytes, si) {
   return bytes.toFixed(1) + ' ' + units[u]
 }
 
-export default { translate, markdown, translateMarkdown, getFirstBrowserLanguage, fileSize }
+function capitalize(string) {
+  return string.charAt(0).toUpperCase() + string.slice(1);
+}
+
+export default { translate, markdown, translateMarkdown, getFirstBrowserLanguage, fileSize, capitalize }

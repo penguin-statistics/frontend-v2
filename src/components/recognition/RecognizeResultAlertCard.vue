@@ -4,7 +4,7 @@
       v-for="(alert, index) in alertsWithMessage"
       :key="`alert-${index}`"
       dark
-      :class="`pa-2 pl-8 ${color} mt-2 position-relative overflow-hidden`"
+      :class="`pa-2 pl-8 ${alert.color} mt-2 position-relative overflow-hidden`"
     >
       <v-icon
         x-large
@@ -31,7 +31,7 @@
         class="monospace-pure degraded-opacity"
         style="font-size: 10px; line-height: 1.5"
       >
-        {{ alert.type }}
+        {{ alert.what }}
       </div>
     </v-card>
   </div>
@@ -45,10 +45,6 @@ export default {
       type: Array,
       default: () => ([])
     },
-    color: {
-      type: String,
-      default: () => ("red darken-3")
-    },
     icon: {
       type: String,
       required: true
@@ -56,14 +52,20 @@ export default {
   },
   computed: {
     alertsWithMessage() {
-      const map = {}
       const deduplicated = []
-      for (const alert of this.alerts) map[alert.type] ? map[alert.type] += 1 : map[alert.type] = 1
-      for (const [type, val] of Object.entries(map)) deduplicated.push({
-        type,
-        count: val
-      })
-      return deduplicated.map(el => ({...el, ...this.message(el.type)}));
+      for (const alert of this.alerts) {
+        const found = deduplicated.find(el => el.what === alert.what)
+        if (found) {
+          found.count += 1
+          continue
+        }
+        deduplicated.push({
+          count: 1,
+          color: alert.type === 'WARNING' ? 'warning darken-2' : 'red darken-3',
+          ...alert
+        })
+      }
+      return deduplicated.map(el => ({...el, ...this.message(el.what)}));
     }
   },
   methods: {

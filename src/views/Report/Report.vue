@@ -231,7 +231,8 @@
 
             <v-row
               v-if="$vuetify.breakpoint.smAndDown"
-              justify="space-around z-index-5"
+              justify="space-around"
+              class="z-index-5"
             >
               <v-btn
                 v-haptic
@@ -277,7 +278,7 @@
             md="6"
             lg="6"
             xl="6"
-            class="order-0 order-sm-0 order-md-1 order-lg-1 order-xl-1 z-index-5"
+            class="order-0 order-sm-0 order-md-1 order-lg-1 order-xl-1"
           >
             <v-alert
               v-if="!$vuetify.breakpoint.smAndDown"
@@ -387,68 +388,7 @@
             <Subheader>
               {{ $t('meta.details') }}
             </Subheader>
-            <v-card class="pa-1">
-              <v-list
-                v-if="validation.type.length"
-                two-line
-                subheader
-              >
-                <v-subheader>
-                  {{ $t('report.rules.type._name') }}
-                </v-subheader>
-
-                <v-list-item
-                  v-for="type in validation.type"
-                  :key="type.type"
-                >
-                  <v-list-item-avatar>
-                    <v-icon>mdi-alert-circle-outline</v-icon>
-                  </v-list-item-avatar>
-                  <v-list-item-content>
-                    <v-list-item-title class="v-list--force-line-break">
-                      {{ $t('report.rules.type.now', type.extras) }}
-                    </v-list-item-title>
-                    <v-list-item-subtitle class="v-list--force-line-break">
-                      {{ type.message }}
-                    </v-list-item-subtitle>
-                  </v-list-item-content>
-                </v-list-item>
-              </v-list>
-              <v-divider
-                v-if="validation.type.length && validation.item.length"
-                class="mx-4"
-              />
-              <v-list
-                v-if="validation.item.length"
-                two-line
-                subheader
-              >
-                <v-subheader>
-                  {{ $t('report.rules.item._name') }}
-                </v-subheader>
-                <v-list-item
-                  v-for="item in validation.item"
-                  :key="`${item.extras.stage}--${item.itemId}`"
-                >
-                  <v-list-item-avatar>
-                    <Item
-                      :item="getItem(item.itemId)"
-                      :ratio="0.5"
-                      disable-tooltip
-                      disable-link
-                    />
-                  </v-list-item-avatar>
-                  <v-list-item-content>
-                    <v-list-item-title class="v-list--force-line-break">
-                      {{ $t('report.rules.item.now', item.extras) }}
-                    </v-list-item-title>
-                    <v-list-item-subtitle class="v-list--force-line-break">
-                      {{ item.message }}
-                    </v-list-item-subtitle>
-                  </v-list-item-content>
-                </v-list-item>
-              </v-list>
-            </v-card>
+            <ReportValidationOutlier :validation="validation" />
           </div>
 
           <p v-if="!results.length">
@@ -510,7 +450,6 @@
 <script>
 import get from '@/utils/getters'
 import report from '@/apis/report'
-import Item from '@/components/global/Item'
 import ItemStepper from '@/components/global/ItemStepper'
 import Vue from 'vue'
 import Cookies from 'js-cookie'
@@ -526,6 +465,8 @@ import existUtils from '@/utils/existUtils'
 import performance from '@/utils/performance'
 import Console from '@/utils/Console'
 import BackdropName from '@/components/stats/BackdropName'
+import ReportValidator from "@/utils/reportValidator";
+import ReportValidationOutlier from "@/components/stats/ReportValidationOutlier";
 
 // colors: [dark, light]
 const categories = [
@@ -545,7 +486,7 @@ const categories = [
 
 export default {
   name: 'Report',
-  components: { BackdropName, ItemIcon, Subheader, StageSelector, ItemStepper, Item },
+  components: {ReportValidationOutlier, BackdropName, ItemIcon, Subheader, StageSelector, ItemStepper },
   mixins: [Theme],
   data: () => ({
     snackbar: false,
@@ -679,144 +620,21 @@ export default {
       return this.selected.stage && this.selectedStage.isGacha
     },
 
-    /**
-     * @typedef {{lower: number, upper: number, exceptions: number[]}} Limitation
-     * @typedef {{itemId: string, type: string, quantity: number, limitation: Limitation, rate: number, message: string}} ItemOutlier
-     * @typedef {{type: string, quantity: number, limitation: Limitation, rate: number, message: string}|null} TypeOutlier
-     * @returns {{item: ItemOutlier[], type: TypeOutlier[], rate: number}} returns item data outliers and type data outliers in the whole dataset, respectively
-     */
     validation () {
-      // initiate the array that will be storing every data outlier
-      /** @type ItemOutlier[] */
-      const itemOutliers = []
+      if (this.invalidStage || !this.selectedStage.dropInfos) return ReportValidator.null()
 
-      /** @type TypeOutlier[] */
-      const typeOutliers = []
-
-      const nullValidation = { item: itemOutliers, type: typeOutliers, rate: 0 }
-
-      if (!this.selectedZone || this.invalidStage) return nullValidation
-
-      /**
-       * validate the quantity using their corresponding rule
-       */
-      function validate (rules, quantity) {
-        for (const rule of rules) {
-          const evaluation = rule(quantity)
-          if (evaluation !== true) return evaluation
-        }
-        return [true, {}]
-      }
-
-      /**
-       * calculate the outlier rate
-       * @param {Limitation} limitation rules to verify with
-       * @param {number} value value to verify with
-       * @returns {number} percentage in decimal format (e.g. 150% = 1.5)
-       */
-      function calculateOutlierRate (limitation, value) {
-        const upper = (value - limitation.upper) ? Math.max(0, (value - limitation.upper) / limitation.upper) : 0
-        const lower = (limitation.lower - value) ? Math.max(0, (limitation.lower - value) / limitation.lower) : 0
-        return upper + lower
-      }
-
-      // loop the candidate results that user provided
-      for (const dropInfo of this.dropInfos.item) {
-        const record = this.results.find(el => el.itemId === dropInfo.itemId && el.dropType === dropInfo.dropType) || { ...dropInfo, quantity: 0 }
-
-        // generate rules. rules: Function[]; limitation: the bounds
-        const { rules, limitation } = this.generateVerificationRule('item', dropInfo)
-
-        if (limitation === null) {
-          return {
-            error: 'EMPTY_RULE',
-            ...nullValidation
-          }
-        }
-
-        const quantity = record.quantity
-
-        // execute validation rules.
-        const [validation, extras] = validate(rules, quantity)
-
-        // console.log("generated & executed", dropInfo, "->", {rules, limitation, validation, extras})
-
-        // if validation fails on a rule
-        if (validation !== true) {
-          // calculate the outlier rate based on the bounds and current value
-          // e.g. [0, 3), 6: will get 1 (outlier value 100%)
-          const rate = calculateOutlierRate(limitation, record.quantity)
-
-          // store this outlier
-          itemOutliers.push({
-            itemId: dropInfo.itemId,
-            type: dropInfo.dropType,
-            quantity,
-            limitation,
-            rate,
-            message: validation,
-            extras
-          })
-        }
-      }
-
-      // loop the type declarations (dropType limitations)
-      for (const { id } of categories) {
-        const dropType = id
-        // generate rules
-        const { rules, limitation } = this.generateVerificationRule('type', {
-          dropType
-        })
-
-        if (limitation === null) {
-          return {
-            error: 'EMPTY_RULE',
-            ...nullValidation
-          }
-        }
-
-        const quantity = this.results
-          .filter(el => el.dropType === dropType)
-          .length
-
-        // execute validation rules.
-        const [validation, extras] = validate(rules, quantity)
-
-        // if validation fails on a rule
-        if (validation !== true) {
-          // calculate the outlier rate based on the bounds and current value
-          // e.g. [0, 3), 6: will get 1 (outlier value 100%)
-          const rate = calculateOutlierRate(limitation, quantity)
-
-          // store this outlier
-          typeOutliers.push({
-            type: dropType,
-            quantity,
-            limitation,
-            rate,
-            message: validation,
-            extras
-          })
-        }
-      }
-
-      // calculate total outlier rate
-      const itemRates = itemOutliers.reduce(
-        (accumulator, current) => accumulator + current.rate,
-        0
+      const validator = new ReportValidator(
+        this.$store.getters['dataSource/server'],
+        this.selectedZone,
+        this.selectedStage,
+        this.results
       )
-      const typeRates = typeOutliers.reduce(
-        (accumulator, current) => accumulator + current.rate,
-        0
-      )
-      const totalRates = itemRates + typeRates
 
-      return {
-        item: itemOutliers,
-        type: typeOutliers,
-        rate: totalRates
-      }
+      Console.info('Report', 'initialized validator as', validator)
+
+      return validator.validate()
     },
+
     valid () {
       const { item, type } = this.validation
       return item.length === 0 && type.length === 0
@@ -935,97 +753,6 @@ export default {
       this.undoing = false
       this.undid = true
       this.$ga.event('report', 'undo', Cookies.get(config.authorization.userId.cookieKey), 1)
-    },
-    generateVerificationRule (type, query) {
-      if (this.invalidStage || !this.dropInfos) {
-        return {
-          rules: [
-            () => {
-              return () => {
-                return true
-              }
-            }
-          ],
-          limitation: {}
-        }
-      }
-
-      let limitation
-      let verificationResponse = {
-        stage: this.$t(`stage.loots.${query.dropType}`)
-      }
-      // console.log("generating verification rule for", type, query)
-      if (type === 'item') {
-        limitation = this.dropInfos.item
-          .find(v => v.itemId === query.itemId && v.dropType === query.dropType).bounds
-
-        verificationResponse = {
-          ...verificationResponse,
-          item: strings.translate(this.getItem(query.itemId), 'name')
-        }
-      } else if (type === 'type') {
-        limitation = this.dropInfos.type
-          .find(v => v.dropType === query.dropType).bounds
-      } else {
-        throw new TypeError(`generateVerificationRule: Invalid argument ${type}`)
-      }
-
-      // can't found drop info based on the queries, means it should be zero/not presenting.
-      if (!limitation) {
-        return {
-          rules: [
-            () => {
-              return () => {
-                return this.$t('report.rules.null', { type })
-              }
-            }
-          ],
-          limitation
-        }
-      }
-
-      // rule declarations
-
-      // greater than or equal to
-      const gte = (value) => {
-        return (compare) => {
-          // console.log("executing rule: gte with compare", compare, "should", value)
-          const response = { ...verificationResponse, quantity: compare, should: value }
-          return compare >= value ? true : [this.$t(`report.rules.${type}.gte`, response), response]
-        }
-      }
-
-      // less than or equal to
-      const lte = (value) => {
-        return (compare) => {
-          // console.log("executing rule: lte with compare", compare, "should", value)
-          const response = { ...verificationResponse, quantity: compare, should: value }
-          return compare <= value ? true : [this.$t(`report.rules.${type}.lte`, response), response]
-        }
-      }
-
-      // not including
-      const notIncludes = (values) => {
-        return (compare) => {
-          // console.log("executing rule: notIncludes with compare", compare, "should", values)
-          const response = { ...verificationResponse, quantity: compare, should: values.join(',') }
-          return values.indexOf(compare) === -1 ? true : [this.$t(`report.rules.${type}.not`, response), response]
-        }
-      }
-
-      // compose generation
-      const generated = {
-        rules: [
-          gte(limitation.lower),
-          lte(limitation.upper)
-        ],
-        limitation
-      }
-
-      // if there's limitation then we also need to verify the notIncludes.
-      if (limitation.exceptions) generated.rules.push(notIncludes(limitation.exceptions))
-
-      return generated
     }
   }
 }

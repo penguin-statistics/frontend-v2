@@ -1,4 +1,3 @@
-<!--suppress NestedConditionalExpressionJS -->
 <template>
   <v-container
     fluid
@@ -6,46 +5,46 @@
   >
     <RecognitionImageDialog v-model="expandImage.src" />
 
+    <v-dialog
+      v-model="submitDialog.open"
+      persistent
+    >
+      <v-card class="d-flex fill-height">
+        <v-card-text>
+          <v-row
+            align="center"
+            justify="center"
+          >
+            <v-col
+              cols="12"
+              class="px-1 py-12 text-center"
+              style="width: 100%"
+            >
+              <PreloaderInline class="mx-auto mb-6" />
+              <h1 class="title">
+                {{ $t("report.recognition.states.submitting") }}
+              </h1>
+              <v-row>
+                <v-col>
+                  <v-progress-linear
+                    indeterminate
+                    class="mx-auto"
+                    style="width: 90%"
+                  />
+                </v-col>
+              </v-row>
+            </v-col>
+          </v-row>
+        </v-card-text>
+      </v-card>
+    </v-dialog>
+
     <v-row
       justify="center"
       align="center"
       class="fill-height"
     >
       <v-col cols="12">
-        <v-dialog
-          v-model="submitDialog.open"
-          persistent
-        >
-          <v-card class="d-flex fill-height">
-            <v-card-text>
-              <v-row
-                align="center"
-                justify="center"
-              >
-                <v-col
-                  cols="12"
-                  class="px-1 py-12 text-center"
-                  style="width: 100%"
-                >
-                  <PreloaderInline class="mx-auto mb-6" />
-                  <h1 class="title">
-                    {{ $t("report.recognition.states.submitting") }}
-                  </h1>
-                  <v-row>
-                    <v-col>
-                      <v-progress-linear
-                        indeterminate
-                        class="mx-auto"
-                        style="width: 90%"
-                      />
-                    </v-col>
-                  </v-row>
-                </v-col>
-              </v-row>
-            </v-card-text>
-          </v-card>
-        </v-dialog>
-
         <v-card class="bkop-medium">
           <v-card-title
             class="px-6"
@@ -59,7 +58,10 @@
           >
             {{ $t('report.recognition.description') }}
           </v-card-subtitle>
+
+          <BrowserDeprecated v-if="recognition.support !== true" />
           <v-stepper
+            v-else
             v-model="step"
             class="bkop-light pt-2 transparent elevation-0"
             :class="{'dense-stepper': $vuetify.breakpoint.xs}"
@@ -143,7 +145,7 @@
                         />
                         <FactTableItem
                           :title="$t('report.recognition.recognize.speed')"
-                          :content="$t('report.recognition.recognize.imagePerSecond', {count: (recognition.timer.imagePerSecond || 0).toFixed(1)})"
+                          :content="$t('report.recognition.recognize.imagePerSecond', {count: recognition.timer.imagePerSecond})"
                           content-class="monospace"
                         />
                       </FactTable>
@@ -304,7 +306,7 @@
                           >
                             <template #placeholder>
                               <div class="d-flex align-center justify-center fill-height caption">
-                                {{ $t('meta.loading') }}
+                                {{ $t('report.recognition.confirm.loadingImage') }}
                               </div>
                             </template>
                             <template #default>
@@ -424,14 +426,8 @@
                             </div>
 
                             <RecognizeResultAlertCard
-                              :alerts="result.result.errors"
-                              color="red darken-3"
+                              :alerts="result.result.exceptions"
                               icon="mdi-alert-decagram"
-                            />
-                            <RecognizeResultAlertCard
-                              :alerts="result.result.warnings"
-                              color="warning darken-2"
-                              icon="mdi-alert-circle"
                             />
                           </v-alert>
                         </v-card-text>
@@ -445,7 +441,14 @@
                             v-ripple="!resultHasErrorOrWarning[index]"
                             dark
                             class="background-transparent font-weight-bold elevation-2 pa-2"
-                            :class="`${resultHasErrorOrWarning[index] ? 'transparent elevation-0' : (selectedResultsIndex.includes(index) ? 'success darken-2' : 'warning darken-3')}`"
+                            :class="
+                              resultHasErrorOrWarning[index] ?
+                                'transparent elevation-0' :
+                                (selectedResultsIndex.includes(index) ?
+                                  'success darken-2' :
+                                  'warning darken-3'
+                                )
+                            "
                             style="width: 100%"
                           >
                             <v-checkbox
@@ -606,7 +609,7 @@
                       mdi-server
                     </v-icon>
                     <span class="caption ml-1">
-                      {{ $t("server.servers." + this.$store.getters["dataSource/server"]) }}
+                      {{ $t("server.servers." + recognition.server) }}
                     </span>
                   </div>
                   <v-divider
@@ -644,6 +647,8 @@ import RecognizeResultAlertCard from "@/components/recognition/RecognizeResultAl
 import RecognitionImageDialog from "@/components/recognition/RecognitionImageDialog";
 import TitledRow from "@/components/global/TitledRow";
 import ConfirmLeave from "@/mixins/ConfirmLeave";
+import environment from "@/utils/environment";
+import BrowserDeprecated from "@/components/global/BrowserDeprecated";
 
 let recognitionSubmitter;
 try {
@@ -655,6 +660,7 @@ try {
 export default {
   name: 'RecognitionReport',
   components: {
+    BrowserDeprecated,
     TitledRow,
     RecognitionImageDialog,
     RecognizeResultAlertCard,
@@ -672,6 +678,7 @@ export default {
         src: ''
       },
       recognition: {
+        support: environment.wasmSupport,
         state: 'pending',
         busy: false,
         server: '',
@@ -793,18 +800,13 @@ export default {
         }
       }
     },
-    server () {
-      return this.$store.getters['dataSource/server']
-    },
     selectedResults () {
       return this.results.filter((result, index) => {
         return this.selectedResultsIndex.includes(index)
       })
     },
     resultHasErrorOrWarning () {
-      return this.results.map((result) => {
-        return !!(result.result.errors.length || result.result.warnings.length)
-      })
+      return this.results.map((result) => !!result.result.exceptions.length)
     }
   },
   watch: {
@@ -839,10 +841,10 @@ export default {
       const finished = this.results.length || 0
       const total = this.files.length || 1
       const elapsed = (Date.now() - this.recognition.timer.started) / 1000
-      const imagePerSecond = finished / elapsed
-      this.recognition.timer.elapsed = Math.floor(elapsed)
-      this.recognition.timer.imagePerSecond = imagePerSecond
-      this.recognition.timer.remaining = Math.ceil((total - finished) / (imagePerSecond || 1))
+      const imagePerSecond = (finished / elapsed || 0)
+      this.recognition.timer.elapsed = elapsed.toFixed(0)
+      this.recognition.timer.imagePerSecond = imagePerSecond.toFixed(0)
+      this.recognition.timer.remaining = ((total - finished) / (imagePerSecond || 1)).toFixed(1)
     },
     stopTimer () {
       if (this.recognition.timer.timer) clearInterval(this.recognition.timer.timer)
@@ -850,22 +852,23 @@ export default {
     },
     async doSubmit () {
       const userId = Cookies.get(config.authorization.userId.cookieKey)
-      recognitionSubmitter(this).then(() => {
-        const reportedUserId = Cookies.get(config.authorization.userId.cookieKey)
-        if (userId !== reportedUserId) {
-          this.$store.dispatch('auth/login', {
-            userId: reportedUserId
-          })
-        }
-        this.$ga.event('report', 'submit_recognition', this.selectedResults.map((result) => { return result.stageId }), 1)
-      }).finally(() => {
-        this.submitDialog.finish = true
-        this.submitDialog.error = false
-      }).catch((e) => {
-        console.log(e)
-        snackbar.networkError()
-        this.submitDialog.error = true
-      })
+      recognitionSubmitter(this)
+        .then(() => {
+          const reportedUserId = Cookies.get(config.authorization.userId.cookieKey)
+          if (userId !== reportedUserId) {
+            this.$store.dispatch('auth/login', {
+              userId: reportedUserId
+            })
+          }
+          this.$ga.event('report', 'submit_recognition', this.selectedResults.map((result) => { return result.stageId }), 1)
+        }).finally(() => {
+          this.submitDialog.finish = true
+          this.submitDialog.error = false
+        }).catch((e) => {
+          console.log(e)
+          snackbar.networkError()
+          this.submitDialog.error = true
+        })
     },
     submit () {
       this.submitDialog.open = true
@@ -875,13 +878,12 @@ export default {
     async init () {
       this.recognition.state = 'initializing'
       this.recognizer = new Recognizer()
+      this.recognition.server = this.$store.getters['dataSource/server']
 
       await this.recognizer
-        .initialize(this.server)
+        .initialize(this.$store.getters['dataSource/server'])
         .then(() => {
           this.recognition.state = 'initialized'
-          this.recognition.server = this.server
-          // console.log('initialization completed')
         })
         .finally(() => {
           this.recognition.state = 'pending'
@@ -930,7 +932,7 @@ export default {
       this.applyPostRecognitionRules(this.results)
       const selectedResultsIndex = []
       this.results.forEach((result, index) => {
-        if (!(result.result.warnings.length || result.result.errors.length)) selectedResultsIndex.push(index)
+        if (!(result.result.exceptions.length)) selectedResultsIndex.push(index)
       })
       this.selectedResultsIndex = selectedResultsIndex
       this.recognition.durationPerImage = (this.results.reduce((prev, curr) => {
@@ -948,13 +950,13 @@ export default {
         for (let key of filter) {
           switch (key) {
             case 'SUCCESS':
-              if (!(result.result.warnings.length || result.result.errors.length)) return true
+              if (!(result.result.exceptions.length)) return true
               break
             // case 'WARNING':
             //   if (result.result.warnings.length) return true
             //   break
             case 'ERROR':
-              if (result.result.warnings.length || result.result.errors.length) return true
+              if (result.result.exceptions.length) return true
               break
             default:
               return false
@@ -964,15 +966,9 @@ export default {
       })
     },
     applyPostRecognitionRules (results) {
-      const timestamps = results
-          .map(value => {
-            return value.file.lastModified
-          })
-
-      const fingerprints = results
-          .map(value => {
-            return value.result.fingerprint
-          })
+      console.time('applyPostRecognitionRules')
+      const timestamps = results.map(value => value.file.lastModified)
+      const fingerprints = results.map(value => value.result.fingerprint)
 
       results.forEach((value, index) => {
         // Apply timestamp check, <10s will add warning
@@ -983,8 +979,10 @@ export default {
           }
         })
         if (closeTimestamps) {
-          value.result.warnings.push({ type: 'FileTimestamp::TooClose' })
+          value.result.exceptions.push({ what: 'FileTimestamp::TooClose' })
         }
+
+
         // Apply same fingerprint check, same will add warning
         let sameFingerprint = false;
         fingerprints.forEach((fingerprint, i) => {
@@ -993,9 +991,10 @@ export default {
           }
         })
         if (sameFingerprint) {
-          value.result.errors.push({ type: 'Fingerprint::Same' })
+          value.result.exceptions.push({ what: 'Fingerprint::Same' })
         }
       })
+      console.timeEnd('applyPostRecognitionRules')
       return Object.freeze(results)
     }
   }

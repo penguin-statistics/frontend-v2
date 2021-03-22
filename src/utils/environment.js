@@ -36,6 +36,24 @@ export default {
     if (window.matchMedia) return window.matchMedia('(any-hover)').matches
     return !this.isTouchScreen
   },
+  get wasmSupport () {
+    // try {
+    //   if (!(typeof WebAssembly === "object" && typeof WebAssembly.instantiate === "function")) return 'environment'
+    //
+    //   const module = new WebAssembly.Module(Uint8Array.of(0x0, 0x61, 0x73, 0x6d, 0x01, 0x00, 0x00, 0x00));
+    //
+    //   if (!(
+    //     module instanceof WebAssembly.Module &&
+    //     new WebAssembly.Instance(module) instanceof WebAssembly.Instance
+    //   )) return 'notExecutable'
+    //
+    //   return true
+    //
+    // } catch (e) {
+    //   return 'notExecutable'
+    // }
+    return true
+  },
   get isWindows () { return navigator.platform.indexOf('Win') > -1 },
   debug: {
     get performance () { return boolean('performance') },

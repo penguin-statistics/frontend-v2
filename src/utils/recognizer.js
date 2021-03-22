@@ -2,7 +2,9 @@ import charHash from '@/models/recognition/charHash'
 import store from '@/store'
 import JSZip from 'jszip'
 import uniq from 'lodash/uniq'
+// import reduce from 'lodash/reduce'
 import Console from "@/utils/Console";
+import strings from "@/utils/strings";
 
 async function image2wasmHeapOffset (blob) {
   const Module = window.Module
@@ -10,11 +12,7 @@ async function image2wasmHeapOffset (blob) {
   // console.time('image2wasmHeapOffset')
   // const imageData = await new Promise(resolve => {
   //   const reader = new FileReader()
-  //   reader.onload = function (event) {
-  //     console.log('image2wasmHeapOffset: finished reading file')
-  //     console.timeLog('image2wasmHeapOffset')
-  //     resolve(event.target.result)
-  //   }
+  //   reader.onload = (event) => resolve(event.target.result)
   //   reader.readAsArrayBuffer(blob)
   // })
   const imageData = await blob.arrayBuffer()
@@ -24,7 +22,7 @@ async function image2wasmHeapOffset (blob) {
   const numBytes = uint8.length
   // console.log('image2wasmHeapOffset: initialized array')
   // console.timeLog('image2wasmHeapOffset')
-  const dataPtr = Module._malloc(numBytes)
+  const dataPtr = Module._malloc(numBytes * Uint8Array.BYTES_PER_ELEMENT)
   // console.log('image2wasmHeapOffset: allocated wasm memory')
   // console.timeLog('image2wasmHeapOffset')
   const dataOnHeap = new Uint8Array(Module.HEAPU8.buffer, dataPtr, numBytes)
@@ -34,8 +32,10 @@ async function image2wasmHeapOffset (blob) {
   // console.log('image2wasmHeapOffset: set Uint8Array value on wasm heap')
   // console.timeEnd('image2wasmHeapOffset')
 
+  console.log(dataPtr, dataOnHeap.byteLength, dataOnHeap.byteOffset, Module.HEAPU8.buffer, uint8)
+
   return {
-    offset: dataOnHeap.byteOffset,
+    offset: dataPtr,
     length: numBytes,
     blobUrl: URL.createObjectURL(blob)
   }
@@ -43,7 +43,7 @@ async function image2wasmHeapOffset (blob) {
 
 function safeParseJson (s) {
   const result = JSON.parse(s)
-  if (result === undefined || result === null || Array.isArray(result)) throw new Error("invalid result type", s)
+  if (result === undefined || result === null || Array.isArray(result)) throw new TypeError("Unexpected result type: " + typeof s)
   return result
 }
 
@@ -81,37 +81,32 @@ class Recognizer {
       // free_buffer: Module.cwrap('free_buffer', 'void', ['number'])
     }
 
-    Console.info('Recognizer', 'init: load: json: preloading')
+    const stages = {}
 
-    const preloads = {
-      stages: store.getters['data/content']({ id: 'stages' })
-          .map(stage => {
-            const drops = (stage.dropInfos || []).map(drop => {
-                return drop.itemId === 'furni' ? null : drop.itemId
-              })
-              .filter(el => !!el)
+    store.getters['data/content']({ id: 'stages' })
+      .forEach((stage) => {
+        const drops = (stage.dropInfos || [])
+          .map(drop => drop.itemId)
+          .filter(drop => !!drop && drop !== 'furni')
 
-            if (stage.recognitionOnly) drops.concat(stage.recognitionOnly)
+        if (stage.recognitionOnly) drops.concat(stage.recognitionOnly)
 
-            return {
-              [stage.code]: {
-                stageId: stage.stageId,
-                drops: uniq(drops)
-              }
-            }
-          }),
-      hash: charHash
-    }
+        stages[stage.code] = {
+          stageId: stage.stageId,
+          drops: uniq(drops)
+        }
+      })
 
-    Console.debug('Recognizer', 'init: load: json: preloading with', preloads)
+    Console.debug('Recognizer', 'init: load: json: preloading with', stages, charHash)
 
     this.wasm.load_json(
-      JSON.stringify(preloads.stages),
-      JSON.stringify(preloads.hash)
+      JSON.stringify(stages),
+      JSON.stringify(charHash)
     )
-    this.wasm.load_server(server)
 
-    Console.info('Recognizer', 'init: load: json: preloaded')
+    Console.debug('Recognizer', 'init: load: server: preloading with', server)
+
+    this.wasm.load_server(server)
 
     Console.info('Recognizer', 'init: load: icons: preloading')
 
@@ -158,6 +153,7 @@ class Recognizer {
       let result, parsedResult
       try {
         result = this.wasm.recognize(data.offset, data.length)
+        Console.debug('Recognizer', 'recognized with raw result', result)
         parsedResult = safeParseJson(result)
       } catch (e) {
         Console.error('Recognizer', 'caught wasm error', e, 'responding with null result')
@@ -167,8 +163,7 @@ class Recognizer {
           blobUrl: data.blobUrl,
           duration,
           result: {
-            errors: [{type: "Result::False"}],
-            warnings: [],
+            exceptions: [{ what: "Result::False" }],
             drops: []
           }
         })
@@ -176,7 +171,12 @@ class Recognizer {
       }
       const duration = performance.now() - start
 
-      Console.debug('Recognizer', 'Recognized with result', parsedResult)
+      Console.debug('Recognizer', 'Recognized. Took', duration + 'ms', 'with result', parsedResult)
+
+      parsedResult.exceptions = parsedResult.exceptions.map(exception => {
+        exception.what = `${strings.capitalize(exception.where.split('.')[0])}::${exception.what}`
+        return exception
+      })
 
       resultCb({
         file,
