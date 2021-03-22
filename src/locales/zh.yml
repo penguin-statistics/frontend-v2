@@ -222,7 +222,7 @@ report:
       success: 成功
       warning: 警告
       error: 异常
-    description: 仅需选择结算页面截图即可上传所有掉率，不再需要一次次手动选择。
+    description: 仅需选择结算页面截图，即可自动识别并上传所有掉落结果。
     recognize:
       noFilename: 暂无文件名
       elapsed: 已用时间
