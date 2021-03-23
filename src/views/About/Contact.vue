@@ -44,8 +44,8 @@
 </i18n>
 
 <template>
-  <v-card 
-    elevation="5" 
+  <v-card
+    elevation="5"
     class="bkop-light pa-6"
     style="height: 100%"
   >

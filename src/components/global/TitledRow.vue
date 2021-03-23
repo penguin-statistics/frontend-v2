@@ -22,27 +22,27 @@
 </template>
 
 <script>
-  export default {
-    name: "TitledRow",
-    props: {
-      dense: {
-        type: Boolean,
-        default () {
-          return false
-        }
-      },
-      reactive: {
-        type: Boolean,
-        default () {
-          return false
-        }
-      },
-      header: {
-        type: Boolean,
-        default: () => false,
+export default {
+  name: 'TitledRow',
+  props: {
+    dense: {
+      type: Boolean,
+      default () {
+        return false
       }
     },
+    reactive: {
+      type: Boolean,
+      default () {
+        return false
+      }
+    },
+    header: {
+      type: Boolean,
+      default: () => false
+    }
   }
+}
 </script>
 
 <style scoped>

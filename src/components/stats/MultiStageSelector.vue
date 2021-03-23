@@ -99,142 +99,142 @@
 </template>
 
 <script>
-  import get from "@/utils/getters";
-  import strings from "@/utils/strings";
-  import StageCard from "@/components/stats/StageCard";
+import get from '@/utils/getters'
+import strings from '@/utils/strings'
+import StageCard from '@/components/stats/StageCard'
 
-  export default {
-    name: "MultiStageSelector",
-    components: {StageCard},
-    props: {
-      value: {
-        type: Array,
-        required: true
-      },
-    },
-    data() {
-      return {
-        // states: {}
-      }
-    },
-    computed: {
-      categorizedZones() {
-        const categories = ["ACTIVITY_OPEN", "MAINLINE", "WEEKLY"];
-        const results = [];
-        for (const category of categories) {
-          let zones = get.zones.byType(category.startsWith("ACTIVITY") ? "ACTIVITY" : category);
-          if (category === "ACTIVITY_OPEN") zones = zones.filter(zone => !zone.isOutdated);
-          zones = zones.map(el => {
-            el.stages = get.stages.byParentZoneId(el.zoneId)
-            return el
+export default {
+  name: 'MultiStageSelector',
+  components: { StageCard },
+  props: {
+    value: {
+      type: Array,
+      required: true
+    }
+  },
+  data () {
+    return {
+      // states: {}
+    }
+  },
+  computed: {
+    categorizedZones () {
+      const categories = ['ACTIVITY_OPEN', 'MAINLINE', 'WEEKLY']
+      const results = []
+      for (const category of categories) {
+        let zones = get.zones.byType(category.startsWith('ACTIVITY') ? 'ACTIVITY' : category)
+        if (category === 'ACTIVITY_OPEN') zones = zones.filter(zone => !zone.isOutdated)
+        zones = zones.map(el => {
+          el.stages = get.stages.byParentZoneId(el.zoneId)
+          return el
+        })
+
+        if (zones && zones.length) {
+          results.push({
+            id: category,
+            zones: zones
           })
-
-          if (zones && zones.length) {
-            results.push({
-              id: category,
-              zones: zones
-            })
-          }
         }
-        return results;
-      },
-      statuses() {
-        const statuses = {
-          category: {},
-          zone: {},
-        }
-        for (const category of this.categorizedZones) {
-          const categoryCount = [0, 0] // [trues, falses]
-          for (const zone of category.zones) {
-            const zoneCount = [0, 0] // [trues, falses]
-
-            for (const stage of zone.stages) {
-              zoneCount[this.states[stage.stageId] ? 0 : 1] += 1
-              categoryCount[this.states[stage.stageId] ? 0 : 1] += 1
-            }
-
-            if (zoneCount[0] === 0) {
-              this.$set(statuses.zone, zone.zoneId, {inputValue: false})
-            } else if (zoneCount[1] === 0) {
-              this.$set(statuses.zone, zone.zoneId, {inputValue: true})
-            } else {
-              this.$set(statuses.zone, zone.zoneId, {indeterminate: true})
-            }
-          }
-          if (categoryCount[0] === 0) {
-            this.$set(statuses.category, category.id, {inputValue: false})
-          } else if (categoryCount[1] === 0) {
-            this.$set(statuses.category, category.id, {inputValue: true})
-          } else {
-            this.$set(statuses.category, category.id, {indeterminate: true})
-          }
-        }
-
-        return statuses
-      },
-      states () {
-        const states = {};
-        for (const stage of get.stages.all()) {
-          if (stage.isOutdated) continue;
-          // if found, means user has explicitly excluded this stage. set false. otherwise true.
-          // this.value refers to the parent v-model value
-          this.$set(states, stage.stageId, !this.value.find(el => el === stage.stageId))
-        }
-        return states
       }
+      return results
     },
-    methods: {
-      translate (object, key) {
-        return strings.translate(object, key)
-      },
-      toggle (stageId) {
-        this.states[stageId] = !this.states[stageId];
-        this.update()
-      },
-      update () {
-        const entries = [];
-        for (const entry of Object.entries(this.states).filter(el => !el[1])) entries.push(entry[0])
-        this.$emit("input", entries)
-      },
-      toggleCategory(categoryId, statuses) {
-        let switchTo = true;
-        if (statuses.inputValue === true) switchTo = false;
+    statuses () {
+      const statuses = {
+        category: {},
+        zone: {}
+      }
+      for (const category of this.categorizedZones) {
+        const categoryCount = [0, 0] // [trues, falses]
+        for (const zone of category.zones) {
+          const zoneCount = [0, 0] // [trues, falses]
 
-        for (const zone of this.categorizedZones.find(el => el.id === categoryId).zones) {
           for (const stage of zone.stages) {
-            this.states[stage.stageId] = switchTo
+            zoneCount[this.states[stage.stageId] ? 0 : 1] += 1
+            categoryCount[this.states[stage.stageId] ? 0 : 1] += 1
+          }
+
+          if (zoneCount[0] === 0) {
+            this.$set(statuses.zone, zone.zoneId, { inputValue: false })
+          } else if (zoneCount[1] === 0) {
+            this.$set(statuses.zone, zone.zoneId, { inputValue: true })
+          } else {
+            this.$set(statuses.zone, zone.zoneId, { indeterminate: true })
           }
         }
+        if (categoryCount[0] === 0) {
+          this.$set(statuses.category, category.id, { inputValue: false })
+        } else if (categoryCount[1] === 0) {
+          this.$set(statuses.category, category.id, { inputValue: true })
+        } else {
+          this.$set(statuses.category, category.id, { indeterminate: true })
+        }
+      }
 
-        this.update()
-      },
-      toggleZone(categoryId, zoneId, statuses) {
-        let switchTo = true;
-        if (statuses.inputValue === true) switchTo = false;
+      return statuses
+    },
+    states () {
+      const states = {}
+      for (const stage of get.stages.all()) {
+        if (stage.isOutdated) continue
+        // if found, means user has explicitly excluded this stage. set false. otherwise true.
+        // this.value refers to the parent v-model value
+        this.$set(states, stage.stageId, !this.value.find(el => el === stage.stageId))
+      }
+      return states
+    }
+  },
+  methods: {
+    translate (object, key) {
+      return strings.translate(object, key)
+    },
+    toggle (stageId) {
+      this.states[stageId] = !this.states[stageId]
+      this.update()
+    },
+    update () {
+      const entries = []
+      for (const entry of Object.entries(this.states).filter(el => !el[1])) entries.push(entry[0])
+      this.$emit('input', entries)
+    },
+    toggleCategory (categoryId, statuses) {
+      let switchTo = true
+      if (statuses.inputValue === true) switchTo = false
 
-        for (const stage of this.categorizedZones
-          .find(el => el.id === categoryId)
-          .zones.find(el => el.zoneId === zoneId)
-          .stages
-        ) {
+      for (const zone of this.categorizedZones.find(el => el.id === categoryId).zones) {
+        for (const stage of zone.stages) {
           this.states[stage.stageId] = switchTo
         }
-
-        this.update()
-      },
-      setAll (state) {
-        for (const key of Object.keys(this.states)) this.states[key] = state
-      },
-      disableAll() {
-        this.setAll(false)
-        this.update()
-      },
-      enableAll () {
-        this.setAll(true)
-        this.update()
       }
+
+      this.update()
     },
+    toggleZone (categoryId, zoneId, statuses) {
+      let switchTo = true
+      if (statuses.inputValue === true) switchTo = false
+
+      for (const stage of this.categorizedZones
+        .find(el => el.id === categoryId)
+        .zones.find(el => el.zoneId === zoneId)
+        .stages
+      ) {
+        this.states[stage.stageId] = switchTo
+      }
+
+      this.update()
+    },
+    setAll (state) {
+      for (const key of Object.keys(this.states)) this.states[key] = state
+    },
+    disableAll () {
+      this.setAll(false)
+      this.update()
+    },
+    enableAll () {
+      this.setAll(true)
+      this.update()
+    }
   }
+}
 </script>
 
 <style scoped>

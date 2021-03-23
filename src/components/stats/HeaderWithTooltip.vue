@@ -28,13 +28,13 @@
 
 <script>
 export default {
-  name: "HeaderWithTooltip",
+  name: 'HeaderWithTooltip',
   props: {
     name: {
       type: String,
       required: true
     }
-  },
+  }
 }
 </script>
 

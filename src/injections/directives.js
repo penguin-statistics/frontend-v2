@@ -1,8 +1,8 @@
-import Vue from 'vue';
-import strings from "@/utils/strings";
-import haptics from "@/utils/native/haptics";
+import Vue from 'vue'
+import strings from '@/utils/strings'
+import haptics from '@/utils/native/haptics'
 
-Vue.directive("marked", function (el) {
+Vue.directive('marked', function (el) {
   el.innerHTML = strings.markdown(el.innerHTML);
 
   [...el.querySelectorAll('a')].forEach(a => {
@@ -18,7 +18,7 @@ Vue.directive("marked", function (el) {
   })
 })
 
-function useHaptics (el, {arg, modifiers}) {
+function useHaptics (el, { arg, modifiers }) {
   return function () {
     if (arg === false) return
 
@@ -28,8 +28,8 @@ function useHaptics (el, {arg, modifiers}) {
   }
 }
 
-Vue.directive("haptic", {
-  bind: (el, bindings) => el.addEventListener("click", useHaptics(el, bindings)),
+Vue.directive('haptic', {
+  bind: (el, bindings) => el.addEventListener('click', useHaptics(el, bindings)),
   // update: el => el.addEventListener("click", hapticsCb),
-  unbind: (el, bindings) => el.removeEventListener("click", useHaptics(el, bindings))
+  unbind: (el, bindings) => el.removeEventListener('click', useHaptics(el, bindings))
 })

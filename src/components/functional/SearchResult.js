@@ -1,6 +1,6 @@
 import Vue from 'vue'
-import SearchResultStages from "@/components/search/SearchResultStages";
-import SearchResultItems from "@/components/search/SearchResultItems";
+import SearchResultStages from '@/components/search/SearchResultStages'
+import SearchResultItems from '@/components/search/SearchResultItems'
 
 Vue.component('SearchResult', {
   functional: true,
@@ -11,16 +11,16 @@ Vue.component('SearchResult', {
     }
   },
   render: function (createElement, ctx) {
-    let component;
+    let component
     switch (ctx.props.result.type) {
-      case "stages":
+      case 'stages':
         component = SearchResultStages
         break
-      case "items":
+      case 'items':
         component = SearchResultItems
         break
       default:
-        throw new Error("unknown search result type " + ctx.props.result.type)
+        throw new Error('unknown search result type ' + ctx.props.result.type)
     }
 
     return createElement(

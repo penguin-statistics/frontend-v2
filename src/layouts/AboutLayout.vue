@@ -16,9 +16,9 @@
 </template>
 
 <script>
-  export default {
-    name: "AboutLayout"
-  }
+export default {
+  name: 'AboutLayout'
+}
 </script>
 
 <style scoped>

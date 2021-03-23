@@ -29,21 +29,21 @@
 </template>
 
 <script>
-  export default {
-    name: "QuerySelectorSource",
-    props: {
-      value: {
-        type: String,
-        required: true
-      },
-    },
-    data() {
-      return {
-        selected: this.$store.getters["dataSource/source"],
-        sources: ["global", "personal"]
-      }
+export default {
+  name: 'QuerySelectorSource',
+  props: {
+    value: {
+      type: String,
+      required: true
+    }
+  },
+  data () {
+    return {
+      selected: this.$store.getters['dataSource/source'],
+      sources: ['global', 'personal']
     }
   }
+}
 </script>
 
 <style scoped>

@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">ﾍﾟﾝ急統計</string>
+    <string name="title_activity_main">ﾍﾟﾝ急統計</string>
+    <string name="shortcut_search_label">検索</string>
+</resources>

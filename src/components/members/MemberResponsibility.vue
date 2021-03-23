@@ -23,10 +23,10 @@
 </template>
 
 <script>
-import CDN from "@/mixins/CDN";
+import CDN from '@/mixins/CDN'
 
 export default {
-  name: "MemberResponsibility",
+  name: 'MemberResponsibility',
   mixins: [CDN],
   props: {
     responsibility: {
@@ -37,7 +37,7 @@ export default {
       type: Boolean,
       default: () => false
     }
-  },
+  }
 
 }
 </script>

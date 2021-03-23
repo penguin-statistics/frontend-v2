@@ -17,11 +17,11 @@
 </template>
 
 <script>
-import SearchResultItems from "@/components/search/SearchResultItems";
-import SearchResultStages from "@/components/search/SearchResultStages";
+import SearchResultItems from '@/components/search/SearchResultItems'
+import SearchResultStages from '@/components/search/SearchResultStages'
 export default {
-  name: "SearchResultNormal",
-  components: {SearchResultItems, SearchResultStages},
+  name: 'SearchResultNormal',
+  components: { SearchResultItems, SearchResultStages },
   props: {
     result: {
       type: Object,
@@ -37,7 +37,7 @@ export default {
     }
   },
   methods: {
-    sendProbe() {
+    sendProbe () {
       this.$probe.reportEnteredSearchResult({
         stageId: this.result.stageId,
         itemId: this.result.itemId,
@@ -45,7 +45,7 @@ export default {
         position: this.index
       })
     }
-  },
+  }
 }
 </script>
 

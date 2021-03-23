@@ -22,40 +22,40 @@
 </template>
 
 <script>
-  import strings from "@/utils/strings";
-  import timeFormatter from "@/utils/timeFormatter";
-  import Theme from "@/mixins/Theme";
+import strings from '@/utils/strings'
+import timeFormatter from '@/utils/timeFormatter'
+import Theme from '@/mixins/Theme'
 
-  export default {
-    name: "QuerySelectorTimeRangePresetPeriod",
-    mixins: [Theme],
-    props: {
-      period: {
-        type: Object,
-        required: true
-      },
-    },
-    computed: {
-      cards () {
-        const period = this.period
-        if (period.start && period.end) {
-          const start = Object.assign({type: "start"}, period)
-          const end = Object.assign({type: "end"}, period)
-          return [start, end]
-        } else {
-          return [Object.assign({type: "start"}, period)]
-        }
+export default {
+  name: 'QuerySelectorTimeRangePresetPeriod',
+  mixins: [Theme],
+  props: {
+    period: {
+      type: Object,
+      required: true
+    }
+  },
+  computed: {
+    cards () {
+      const period = this.period
+      if (period.start && period.end) {
+        const start = Object.assign({ type: 'start' }, period)
+        const end = Object.assign({ type: 'end' }, period)
+        return [start, end]
+      } else {
+        return [Object.assign({ type: 'start' }, period)]
       }
+    }
+  },
+  methods: {
+    label (card) {
+      return strings.translate(card, 'label')
     },
-    methods: {
-      label (card) {
-        return strings.translate(card, "label");
-      },
-      time (card) {
-        return timeFormatter.date(card[card.type], true, false)
-      },
-    },
+    time (card) {
+      return timeFormatter.date(card[card.type], true, false)
+    }
   }
+}
 </script>
 
 <style scoped>

@@ -131,62 +131,62 @@
 </template>
 
 <script>
-  import Subheader from "@/components/global/Subheader";
-  import {mapGetters} from "vuex";
-  import timeFormatter from "@/utils/timeFormatter";
-  import {service} from "@/utils/service";
-  import Console from "@/utils/Console";
-  import TooltipBtn from "@/components/global/TooltipBtn";
-  export default {
-    name: "ForgotAccount",
-    components: {TooltipBtn, Subheader},
-    data() {
-      return {
-        loading: false
-      }
-    },
-    computed: {
-      ...mapGetters("options", ["userIdHistory"]),
-      userIds() {
-        return this.userIdHistory
-          .slice()
-          .sort((a, b) => b.time - a.time)
-          .map(el => {
-            return {
-              ...el,
-              formattedTime: {
-                exact: timeFormatter.date(el.time, true, true),
-                relative: timeFormatter.dayjs(el.time).fromNow(),
-              }
+import Subheader from '@/components/global/Subheader'
+import { mapGetters } from 'vuex'
+import timeFormatter from '@/utils/timeFormatter'
+import { service } from '@/utils/service'
+import Console from '@/utils/Console'
+import TooltipBtn from '@/components/global/TooltipBtn'
+export default {
+  name: 'ForgotAccount',
+  components: { TooltipBtn, Subheader },
+  data () {
+    return {
+      loading: false
+    }
+  },
+  computed: {
+    ...mapGetters('options', ['userIdHistory']),
+    userIds () {
+      return this.userIdHistory
+        .slice()
+        .sort((a, b) => b.time - a.time)
+        .map(el => {
+          return {
+            ...el,
+            formattedTime: {
+              exact: timeFormatter.date(el.time, true, true),
+              relative: timeFormatter.dayjs(el.time).fromNow()
             }
-          });
-      }
+          }
+        })
+    }
+  },
+  methods: {
+    deleteUserId (userId) {
+      this.$store.commit('options/removeUserIdHistory', userId)
     },
-    methods: {
-      deleteUserId(userId) {
-        this.$store.commit("options/removeUserIdHistory", userId)
-      },
-      loginAsUserId(userId) {
-        this.loading = userId
-        service.post("/users", userId, {headers: {'Content-Type': 'text/plain'}})
-          .then(() => {
-            this.$store.dispatch("auth/login", {userId})
-            this.$emit('loggedIn')
-          })
-          .catch((err) => {
-            Console.info("AccountManager", "auth failed", err)
-            if (err.response && err.response.status && err.response.status === 404) {
-              this.error = this.$t('failed.message', {message: this.$t('failed.notfound')})
-            } else {
-              this.error = this.$t('failed.message', {message: err.errorMessage})
-            }
-          })
-          .finally(() => {
-            this.loading = false
-          })
-      }
-    },
+    loginAsUserId (userId) {
+      this.loading = userId
+      service.post('/users', userId, { headers: { 'Content-Type': 'text/plain' } })
+        .then(() => {
+          this.$store.dispatch('auth/login', { userId })
+          this.$emit('loggedIn')
+        })
+        .catch((err) => {
+          Console.info('AccountManager', 'auth failed', err)
+          if (err.response && err.response.status && err.response.status === 404) {
+            this.error = this.$t('failed.message', { message: this.$t('failed.notfound') })
+          } else {
+            this.error = this.$t('failed.message', { message: err.errorMessage })
+          }
+        })
+        .finally(() => {
+          this.loading = false
+        })
+    }
   }
+}
 </script>
 
 <style scoped>

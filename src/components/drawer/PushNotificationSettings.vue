@@ -57,7 +57,7 @@
           @add="add"
         >
           <template #default="{ on }">
-            <v-btn 
+            <v-btn
               v-haptic
               block
               depressed
@@ -175,18 +175,18 @@
 </template>
 
 <script>
-import penguin from "@/utils/native/penguin";
-import Subheader from "@/components/global/Subheader";
-import NewPushSubscriptionDialog from "@/components/drawer/NewPushSubscriptionDialog";
-import supports from "@/models/supports";
-import snackbar from "@/utils/snackbar";
-import unmarshaller from "@/utils/unmarshaller";
-import marshaller from "@/utils/marshaller";
+import penguin from '@/utils/native/penguin'
+import Subheader from '@/components/global/Subheader'
+import NewPushSubscriptionDialog from '@/components/drawer/NewPushSubscriptionDialog'
+import supports from '@/models/supports'
+import snackbar from '@/utils/snackbar'
+import unmarshaller from '@/utils/unmarshaller'
+import marshaller from '@/utils/marshaller'
 
 export default {
-  name: "PushNotificationSettings",
-  components: {NewPushSubscriptionDialog, Subheader},
-  data() {
+  name: 'PushNotificationSettings',
+  components: { NewPushSubscriptionDialog, Subheader },
+  data () {
     return {
       dialog: false,
       addDialog: false,
@@ -194,73 +194,73 @@ export default {
       saving: false,
       debug: false,
       dirty: false,
-      originalPrefs: [],
+      originalPrefs: []
     }
   },
   computed: {
-    preferences() {
+    preferences () {
       return this.originalPrefs.map(el => {
         return {
           ...el,
           key: this.generateKey(el),
-          localizedLocale: (supports.localizations.find(e => e.value === el.locale) || {text: el.locale}).text,
+          localizedLocale: (supports.localizations.find(e => e.value === el.locale) || { text: el.locale }).text,
           localizedServer: this.$t('server.servers.' + el.server),
-          localizedCategory: this.$t('settings.push.categories.' + el.category).title,
+          localizedCategory: this.$t('settings.push.categories.' + el.category).title
         }
       })
     }
   },
   watch: {
-    dialog(value) {
+    dialog (value) {
       if (value) this.update()
     }
   },
   methods: {
-    generateKey({locale, server, category}) {
-      return [locale, server, category].join("_")
+    generateKey ({ locale, server, category }) {
+      return [locale, server, category].join('_')
     },
-    update() {
+    update () {
       penguin.getLastSyncedPushPreferences()
         .then(preferences => {
           console.log(preferences.preferences, typeof preferences.preferences, preferences[0])
           this.originalPrefs = unmarshaller.pushPreferences(preferences.preferences)
         })
     },
-    save() {
+    save () {
       const m = marshaller.pushPreferences(this.originalPrefs)
       console.log(m)
       penguin.submitNewPushPreferences(m)
         .then(() => {
           this.dirty = false
-          snackbar.launch("success", 5000, "成功保存推送设置")
+          snackbar.launch('success', 5000, '成功保存推送设置')
         })
     },
-    remove(i) {
+    remove (i) {
       this.originalPrefs.splice(i, 1)
       this.dirty = true
     },
-    gentleClose() {
+    gentleClose () {
       if (this.dirty) {
         this.dirtyDialog = true
         return
       }
       this.close()
     },
-    close() {
+    close () {
       this.dialog = false
       this.dirty = false
     },
-    add(content) {
+    add (content) {
       const newKey = this.generateKey(content)
-      console.log("adding", JSON.stringify(content), newKey, this.preferences)
+      console.log('adding', JSON.stringify(content), newKey, this.preferences)
       if (this.originalPrefs.find(el => this.generateKey(el) === newKey)) {
-        snackbar.launch("warning", 15000, "请不要重复添加：拥有相同订阅参数的订阅已存在于订阅列表内", "")
+        snackbar.launch('warning', 15000, '请不要重复添加：拥有相同订阅参数的订阅已存在于订阅列表内', '')
         return
       }
       this.originalPrefs.push(content)
       this.dirty = true
     }
-  },
+  }
 }
 </script>
 

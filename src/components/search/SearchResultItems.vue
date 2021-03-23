@@ -28,27 +28,27 @@
 </template>
 
 <script>
-import get from "@/utils/getters"
-import Item from "@/components/global/Item";
-import strings from "@/utils/strings";
+import get from '@/utils/getters'
+import Item from '@/components/global/Item'
+import strings from '@/utils/strings'
 
 export default {
-  name: "SearchResultItems",
-  components: {Item},
+  name: 'SearchResultItems',
+  components: { Item },
   props: {
     result: {
       type: Object,
       required: true
-    },
-  },
-  computed: {
-    name() {
-      return strings.translate(this.item, "name")
-    },
-    item() {
-      return get.items.byItemId(this.result.itemId);
     }
   },
+  computed: {
+    name () {
+      return strings.translate(this.item, 'name')
+    },
+    item () {
+      return get.items.byItemId(this.result.itemId)
+    }
+  }
 }
 </script>
 

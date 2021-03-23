@@ -1,4 +1,4 @@
-import Vue from 'vue';
+import Vue from 'vue'
 import config from '@/config'
 
 export default {
@@ -7,7 +7,7 @@ export default {
     dataTable: {
       showPermanent: true,
       showActivity: true,
-      onlyOpen: false,
+      onlyOpen: false
     },
     randomBackground: Object.assign({}, {
       last: Date.now(),
@@ -17,9 +17,9 @@ export default {
   },
   mutations: {
     changeDataTable (state, value) {
-      Vue.set(state, "dataTable", value)
+      Vue.set(state, 'dataTable', value)
     },
-    changeRandomBackground(state, {last, id}) {
+    changeRandomBackground (state, { last, id }) {
       state.randomBackground.last = last
       state.randomBackground.id = id
     },
@@ -54,4 +54,4 @@ export default {
     randomBackground: state => state.randomBackground,
     userIdHistory: state => state.userIdHistory
   }
-};
+}

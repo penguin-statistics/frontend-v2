@@ -1,7 +1,9 @@
 <?xml version='1.0' encoding='utf-8'?>
 <resources>
-    <string name="app_name">penguin-stats-frontend</string>
-    <string name="title_activity_main">penguin-stats-frontend</string>
-    <string name="package_name">io.penguinstats.app</string>
-    <string name="custom_url_scheme">io.penguinstats.app</string>
+    <string name="app_name">Penguin Stats</string>
+    <string name="title_activity_main">Penguin Stats</string>
+    <string name="package_name" translatable="false">io.penguinstats.app</string>
+    <string name="custom_url_scheme" translatable="false">io.penguinstats.app</string>
+
+    <string name="shortcut_search_label">搜索</string>
 </resources>

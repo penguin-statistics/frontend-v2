@@ -31,23 +31,23 @@
 </template>
 
 <script>
-  import supports from "@/models/supports";
+import supports from '@/models/supports'
 
-  export default {
-    name: "QuerySelectorServer",
-    props: {
-      value: {
-        type: String,
-        required: true
-      },
-    },
-    data() {
-      return {
-        selected: this.$store.getters["dataSource/server"],
-        servers: supports.servers
-      }
+export default {
+  name: 'QuerySelectorServer',
+  props: {
+    value: {
+      type: String,
+      required: true
+    }
+  },
+  data () {
+    return {
+      selected: this.$store.getters['dataSource/server'],
+      servers: supports.servers
     }
   }
+}
 </script>
 
 <style scoped>

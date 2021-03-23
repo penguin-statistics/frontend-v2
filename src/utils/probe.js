@@ -1,23 +1,23 @@
-import ReconnectingWebSocket from "@/utils/ReconnectingWebSocket"
-import config from "@/config";
+import ReconnectingWebSocket from '@/utils/ReconnectingWebSocket'
+import config from '@/config'
 import qs from 'qs'
 import pe from '@/models/probe/probeevents'
-import environment from "@/utils/environment"
-import Console from "@/utils/Console"
+import environment from '@/utils/environment'
+import Console from '@/utils/Console'
 import store from '@/store'
-import i18n from "@/i18n";
+import i18n from '@/i18n'
 
 function randomString (length) {
-  let result = '';
-  const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-  const charactersLength = characters.length;
+  let result = ''
+  const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789'
+  const charactersLength = characters.length
   for (let i = 0; i < length; i++) {
     result += characters.charAt(Math.floor(Math.random() * charactersLength))
   }
   return result
 }
 
-function properlySupportedWebSocket() {
+function properlySupportedWebSocket () {
   if (!('ArrayBuffer' in window)) return false
 
   try {
@@ -25,13 +25,12 @@ function properlySupportedWebSocket() {
     // eslint-disable-next-line no-empty
   } catch (e) {}
 
-  const protocol = 'https:' === window.location.protocol ? 'wss' : 'ws'
-  let protoBin
+  const protocol = window.location.protocol === 'https:' ? 'wss' : 'ws'
 
-  protoBin = 'binaryType' in WebSocket.prototype
+  const protoBin = 'binaryType' in WebSocket.prototype
   if (protoBin) return protoBin
   try {
-    return !!(new WebSocket(protocol + '://.').binaryType);
+    return !!(new WebSocket(protocol + '://.').binaryType)
     // eslint-disable-next-line no-empty
   } catch (e) {}
 
@@ -39,7 +38,8 @@ function properlySupportedWebSocket() {
 }
 
 class FakeTransport {
-  send() {}
+  constructor() {}
+  send () {}
 }
 
 class PenguinProbe {
@@ -51,13 +51,18 @@ class PenguinProbe {
       probeUid = store.getters['auth/probeUid']
     }
 
-    this.initiate(probeUid.c)
-      .catch(err => {
-        Console.warn('Probe', 'failed to initialize transport', err)
-      })
+    if (environment.production) {
+      this.initiate(probeUid.c)
+        .catch(err => {
+          Console.warn('Probe', 'failed to initialize transport', err)
+          this.transport = new FakeTransport()
+        })
+    } else {
+      this.transport = new FakeTransport()
+    }
   }
 
-  async initiate(probeUid) {
+  async initiate (probeUid) {
     const platform = await environment.platform
 
     const queries = qs.stringify({
@@ -71,7 +76,7 @@ class PenguinProbe {
 
     if (!properlySupportedWebSocket()) {
       Console.info('ProbeTransport', 'client does not support binary websocket. sending pv and quit')
-      new Image().src = `${endpoint.legacy}?` + queries + `&l=1`
+      new Image().src = `${endpoint.legacy}?` + queries + '&l=1'
       this.transport = new FakeTransport()
       return
     }
@@ -143,7 +148,7 @@ class PenguinProbe {
     this.transport.send(pe.PenguinProbe.Navigated.encode(message).finish())
   }
 
-  reportEnteredSearchResult ({stageId, itemId, query, position}) {
+  reportEnteredSearchResult ({ stageId, itemId, query, position }) {
     const message = pe.PenguinProbe.EnteredSearchResult.create({
       meta: this.buildMeta(pe.PenguinProbe.MessageType.ENTERED_SEARCH_RESULT),
       stageId,
@@ -154,7 +159,7 @@ class PenguinProbe {
     this.transport.send(pe.PenguinProbe.EnteredSearchResult.encode(message).finish())
   }
 
-  reportExecutedAdvancedQuery ({queries}) {
+  reportExecutedAdvancedQuery ({ queries }) {
     const marshalledQueries = []
     for (const query of queries) {
       marshalledQueries.push(pe.PenguinProbe.ExecutedAdvancedQuery.AdvancedQuery.create(query))

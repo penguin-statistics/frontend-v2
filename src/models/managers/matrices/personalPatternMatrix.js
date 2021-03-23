@@ -7,10 +7,10 @@ const personalPatternMatrix = new MatrixObjectManager({
     requireAuthorization: true,
     serverSensitive: true,
 
-    url: (server) => `/_private/result/pattern/${server}/personal`,
+    url: (server) => `/_private/result/pattern/${server}/personal`
   },
   ttl: 1000 * 60 * 60 * 1, // 1 hour
   ajaxHooks: commons.defaultAjaxHooks
-});
+})
 
 export default personalPatternMatrix

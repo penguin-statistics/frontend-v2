@@ -77,41 +77,41 @@
 
 <script>
 import get from '@/utils/getters'
-import StagePatternTable from "@/components/stats/details/StagePatternTable";
-import StagePatternPieChart from "@/components/stats/details/StagePatternPieChart";
-import StagePatternError from "@/components/stats/details/StagePatternError";
-import timeFormatter from "@/utils/timeFormatter";
-import FactTableItem from "@/components/stats/fact-table/FactTableItem";
+import StagePatternTable from '@/components/stats/details/StagePatternTable'
+import StagePatternPieChart from '@/components/stats/details/StagePatternPieChart'
+import StagePatternError from '@/components/stats/details/StagePatternError'
+import timeFormatter from '@/utils/timeFormatter'
+import FactTableItem from '@/components/stats/fact-table/FactTableItem'
 
 export default {
-  name: "StagePattern",
-  components: {FactTableItem, StagePatternError, StagePatternPieChart, StagePatternTable},
+  name: 'StagePattern',
+  components: { FactTableItem, StagePatternError, StagePatternPieChart, StagePatternTable },
   props: {
     stageId: {
       type: String,
-      default: () => null,
-    },
+      default: () => null
+    }
   },
-  data() {
+  data () {
     return {
-      activeIndex: null,
+      activeIndex: null
     }
   },
   computed: {
-    patterns() {
+    patterns () {
       return [...get.patterns.byStageId(this.stageId)]
-          .sort((a, b) => b.percentage - a.percentage)
-          .map((el, i) => ({...el, i: i + 1}))
+        .sort((a, b) => b.percentage - a.percentage)
+        .map((el, i) => ({ ...el, i: i + 1 }))
     },
-    times() {
+    times () {
       return (this.patterns[0] || {}).times
     },
-    timeRange() {
+    timeRange () {
       const patterns = this.patterns
       if (!patterns || !patterns.length || !patterns[0]) return ''
       return timeFormatter.startEnd(patterns[0].start, patterns[0].end)
     }
-  },
+  }
 }
 </script>
 

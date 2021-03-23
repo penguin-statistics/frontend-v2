@@ -218,88 +218,88 @@
 </template>
 
 <script>
-  import {service} from '@/utils/service'
-  import Cookies from 'js-cookie'
-  import Console from "@/utils/Console";
-  import Subheader from "@/components/global/Subheader";
-  import ForgotAccount from "@/components/toolbar/ForgotAccount";
-  import TooltipBtn from "@/components/global/TooltipBtn";
-  import config from "@/config"
+import { service } from '@/utils/service'
+import Cookies from 'js-cookie'
+import Console from '@/utils/Console'
+import Subheader from '@/components/global/Subheader'
+import ForgotAccount from '@/components/toolbar/ForgotAccount'
+import TooltipBtn from '@/components/global/TooltipBtn'
+import config from '@/config'
 
-  export default {
-    name: "AccountManager",
-    components: {TooltipBtn, ForgotAccount, Subheader},
-    data() {
-      return {
-        auth: {
-          buttonHovered: false,
-          dialog: false,
-          username: '',
-          loading: false,
-          detailPrompt: false
-        },
-        snackbar: {
-          enabled: false,
-          color: "",
-          text: ""
-        },
-        historyDialog: false,
-        error: ""
+export default {
+  name: 'AccountManager',
+  components: { TooltipBtn, ForgotAccount, Subheader },
+  data () {
+    return {
+      auth: {
+        buttonHovered: false,
+        dialog: false,
+        username: '',
+        loading: false,
+        detailPrompt: false
+      },
+      snackbar: {
+        enabled: false,
+        color: '',
+        text: ''
+      },
+      historyDialog: false,
+      error: ''
+    }
+  },
+  created () {
+    const userId = Cookies.get(config.authorization.userId.cookieKey)
+    if (userId) this.$store.dispatch('auth/login', { userId, prompted: false })
+  },
+  methods: {
+    loggedIn () {
+      this.snackbar = {
+        enabled: true,
+        color: 'success',
+        text: this.$t('success')
       }
+      this.auth.dialog = false
+      this.$ga.event('account', 'login', 'login_success', 1)
+      this.$emit('afterLogin')
     },
-    created () {
-      const userId = Cookies.get(config.authorization.userId.cookieKey);
-      if (userId) this.$store.dispatch("auth/login", {userId, prompted: false});
+    login () {
+      this.auth.loading = true
+      const authorizingUserId = this.auth.username
+      service.post('/users', authorizingUserId, { headers: { 'Content-Type': 'text/plain' } })
+        .then(() => {
+          this.$store.dispatch('auth/login', {
+            userId: authorizingUserId
+          })
+          this.loggedIn()
+        })
+        .catch((err) => {
+          Console.info('AccountManager', 'auth failed', err)
+          if (err.response && err.response.status && err.response.status === 404) {
+            this.error = this.$t('failed.message', { message: this.$t('failed.notfound') })
+          } else {
+            this.error = this.$t('failed.message', { message: err.errorMessage })
+          }
+        })
+        .finally(() => {
+          this.auth.loading = false
+        })
     },
-    methods: {
-      loggedIn() {
-        this.snackbar = {
-          enabled: true,
-          color: "success",
-          text: this.$t('success')
-        };
-        this.auth.dialog = false
-        this.$ga.event('account', 'login', 'login_success', 1);
-        this.$emit('afterLogin');
-      },
-      login() {
-        this.auth.loading = true;
-        const authorizingUserId = this.auth.username
-        service.post("/users", authorizingUserId, {headers: {'Content-Type': 'text/plain'}})
-          .then(() => {
-            this.$store.dispatch("auth/login", {
-              userId: authorizingUserId
-            });
-            this.loggedIn()
-          })
-          .catch((err) => {
-            Console.info("AccountManager", "auth failed", err)
-            if (err.response && err.response.status && err.response.status === 404) {
-              this.error = this.$t('failed.message', {message: this.$t('failed.notfound')})
-            } else {
-              this.error = this.$t('failed.message', {message: err.errorMessage})
-            }
-          })
-          .finally(() => {
-            this.auth.loading = false
-          })
-      },
-      logout() {
-        Cookies.remove(config.authorization.userId.cookieKey);
-        this.$store.dispatch("auth/logout");
-        this.snackbar = {
-          enabled: true,
-          color: "success",
-          text: this.$t('loggedOut')
-        };
-        this.auth.detailPrompt = false;
-        this.$store.commit("dataSource/changeSource", "global");
-      },
-      emitError () {
-        this.error = ''
+    logout () {
+      Cookies.remove(config.authorization.userId.cookieKey)
+      this.$store.dispatch('auth/logout')
+      this.snackbar = {
+        enabled: true,
+        color: 'success',
+        text: this.$t('loggedOut')
       }
+      this.auth.detailPrompt = false
+      this.$store.commit('dataSource/changeSource', 'global')
     },
+    emitError () {
+      this.error = ''
+    }
   }
+}
 </script>
 
 <style scoped>

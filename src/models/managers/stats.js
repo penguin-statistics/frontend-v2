@@ -6,10 +6,10 @@ const stats = new ObjectManager({
   api: {
     serverSensitive: true,
 
-    url: (server) => `/stats?server=${server}`,
+    url: (server) => `/stats?server=${server}`
   },
   transform: [
-    (object) => object,
+    (object) => object
   ],
   ttl: 1000 * 60 * 10, // 10 minutes
   ajaxHooks: commons.defaultAjaxHooks

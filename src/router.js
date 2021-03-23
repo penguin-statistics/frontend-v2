@@ -2,7 +2,9 @@ import Vue from 'vue'
 import Router from 'vue-router'
 
 import Home from './views/Home'
-import Report from './views/Report'
+import ReportLayout from './layouts/ReportLayout'
+import RecognitionReport from './views/Report/RecognitionReport'
+import Report from './views/Report/Report'
 import StatsLayout from './layouts/StatsLayout'
 import StatsByStage from './views/Stats/Stage'
 import StatsByItem from './views/Stats/Item'
@@ -13,28 +15,42 @@ import AboutContact from './views/About/Contact'
 import AboutDonate from './views/About/Donate'
 import AboutLinks from './views/About/Links'
 
-import NotFound from "@/views/NotFound";
-import SiteStats from "@/views/SiteStats";
-import Planner from "@/views/Planner";
-
-import i18n from "@/i18n";
-import Search from "@/views/Search";
-import store from "@/store";
+import NotFound from '@/views/NotFound'
+import SiteStats from '@/views/SiteStats'
+import Planner from '@/views/Planner'
+import Search from '@/views/Search'
+import store from '@/store'
+import helmet from "@/utils/helmet";
 
 // import DataDebugger from "@/components/debug/DataDebugger";
 
 // this is to fix error named something like DuplicatedRoute
-const originalPush = Router.prototype.push;
-Router.prototype.push = function push(location, onResolve, onReject) {
+const originalPush = Router.prototype.push
+Router.prototype.push = function push (location, onResolve, onReject) {
   if (onResolve || onReject) return originalPush.call(this, location, onResolve, onReject)
   return originalPush.call(this, location).catch(err => err)
-};
+}
 
-Vue.use(Router);
+const routerChildrenNull = {
+  path: '',
+  name: 'RouterChildrenNull',
+  meta: {
+    icon: 'mdi-close',
+    i18n: 'meta.notfound',
+    hide: true
+  },
+  beforeEnter(to, from, next) {
+    return next({
+      name: "Home",
+      replace: true
+    })
+  }
+}
 
+Vue.use(Router)
 const router = new Router({
   mode: 'history',
-  scrollBehavior() { // params: (to, from, savedPosition)
+  scrollBehavior () { // params: (to, from, savedPosition)
     return { x: 0, y: 0 }
   },
   routes: [{
@@ -48,23 +64,68 @@ const router = new Router({
   },
   {
     path: '/report',
-    name: 'ReportByZone',
-    component: Report,
+    name: 'Report',
+    component: ReportLayout,
     meta: {
       icon: 'mdi-upload',
-      i18n: 'menu.report',
-      forceSingle: true
+      i18n: 'menu.report._name',
+      active: true
     },
     children: [
+      routerChildrenNull,
+      {
+        path: 'stage',
+        name: 'ReportByZone',
+        component: Report,
+        meta: {
+          icon: 'mdi-cursor-default-click',
+          i18n: 'menu.report.stage'
+        },
+        children: [
+          {
+            path: ':zoneId/:stageId',
+            name: 'ReportByZone_Selected',
+            component: Report,
+            props: true,
+            meta: {
+              i18n: 'menu.report.stage'
+            }
+          }
+        ]
+      },
+      {
+        path: 'recognition',
+        name: 'RecognitionReport',
+        component: RecognitionReport,
+        meta: {
+          icon: 'mdi-image-filter-center-focus',
+          i18n: 'menu.report.recognition',
+          beta: true
+        }
+      },
       {
         path: ':zoneId/:stageId',
-        name: 'ReportByZone_Selected',
-        component: Report,
-        props: true,
+        name: 'ReportByZoneLegacy',
         meta: {
-          i18n: 'menu.report'
+          hide: true,
+          icon: 'mdi-cursor-default-click',
+          i18n: 'menu.report.stage'
         },
-      }
+        beforeEnter(to, from, next) {
+          if (to.params.zoneId && to.params.stageId) {
+            return next({
+              name: "ReportByZone_Selected",
+              params: to.params,
+              replace: true
+            })
+          } else {
+            return next({
+              name: "ReportByZone",
+              replace: true
+            })
+          }
+        }
+      },
     ]
   },
   {
@@ -77,6 +138,7 @@ const router = new Router({
       active: true
     },
     children: [
+      routerChildrenNull,
       {
         path: 'stage',
         name: 'StatsByStage',
@@ -85,7 +147,7 @@ const router = new Router({
         meta: {
           icon: 'mdi-cube',
           i18n: 'menu.stats.stage'
-        },
+        }
       },
       {
         path: 'stage/:zoneId/:stageId',
@@ -105,7 +167,7 @@ const router = new Router({
         meta: {
           icon: 'mdi-treasure-chest',
           i18n: 'menu.stats.item'
-        },
+        }
       },
       {
         path: 'item/:itemId',
@@ -115,7 +177,7 @@ const router = new Router({
         meta: {
           hide: true,
           i18n: 'menu.stats.item'
-        },
+        }
       }
     ]
   },
@@ -138,7 +200,7 @@ const router = new Router({
       async: true,
       icon: 'mdi-database-search',
       i18n: 'menu.stats.advanced'
-    },
+    }
   },
   {
     path: '/search',
@@ -149,7 +211,7 @@ const router = new Router({
       icon: 'mdi-magnify',
       i18n: 'menu.search',
       hide: true
-    },
+    }
   },
   {
     path: '/statistics',
@@ -170,6 +232,7 @@ const router = new Router({
       active: true
     },
     children: [
+      routerChildrenNull,
       {
         path: 'members',
         name: 'AboutMembers',
@@ -179,7 +242,7 @@ const router = new Router({
           async: true,
           icon: 'mdi-account-multiple',
           i18n: 'menu.about.members'
-        },
+        }
       },
       {
         path: 'contribute',
@@ -190,7 +253,7 @@ const router = new Router({
           icon: 'mdi-hammer',
           i18n: 'menu.about.contribute',
           hide: true
-        },
+        }
       },
       {
         path: 'changelog',
@@ -201,7 +264,7 @@ const router = new Router({
           async: true,
           icon: 'mdi-timeline',
           i18n: 'menu.about.changelog'
-        },
+        }
       },
       {
         path: 'contact',
@@ -212,7 +275,7 @@ const router = new Router({
           icon: 'mdi-account-card-details',
           i18n: 'menu.about.contact',
           hide: true
-        },
+        }
       },
       {
         path: 'donate',
@@ -223,7 +286,7 @@ const router = new Router({
           icon: 'mdi-gift',
           i18n: 'menu.about.donate',
           hide: true
-        },
+        }
       },
       {
         path: 'links',
@@ -233,7 +296,7 @@ const router = new Router({
         meta: {
           icon: 'mdi-link-variant',
           i18n: 'menu.about.links'
-        },
+        }
       },
       {
         path: 'credits',
@@ -244,36 +307,10 @@ const router = new Router({
           async: true,
           icon: 'mdi-license',
           i18n: 'menu.about.credits'
-        },
-      },
+        }
+      }
     ]
   },
-  // {
-  //   path: '/_redirect/v1',
-  //   name: 'OldVersion',
-  //   meta: {
-  //     ga: {
-  //       category: 'redirect',
-  //       action: 'links',
-  //       label: 'OldVersion',
-  //       value: 1
-  //     },
-  //     link: "https://v1.penguin-stats.io",
-  //     icon: 'mdi-penguin',
-  //     i18n: 'menu.v1',
-  //     externalRedirect: true
-  //   }
-  // },
-  // {
-  //   path: '/_internal/debugger/data',
-  //   name: 'DataDebugger',
-  //   component: DataDebugger,
-  //   meta: {
-  //     icon: 'mdi-file',
-  //     i18n: 'meta.notfound',
-  //     hide: true
-  //   }
-  // },
   {
     path: '*',
     name: 'ErrorNotFound',
@@ -282,21 +319,19 @@ const router = new Router({
       i18n: 'meta.notfound',
       hide: true
     }
-  },
+  }
   ]
-});
+})
 
 router.beforeEach((to, from, next) => {
   // If this isn't an initial page load and is an async route
   if (to.meta.async && to.name) store.commit('ui/setLoadingRoute', true)
-
-  document.title = `${i18n.t(to.meta.i18n)} | ${i18n.t('app.name')}`;
-  next();
-});
+  return next()
+})
 
 router.afterEach((to) => {
-  document.title = `${i18n.t(to.meta.i18n)} | ${i18n.t('app.name')}`;
+  helmet.title.update(to)
   store.commit('ui/setLoadingRoute', false)
-});
+})
 
 export default router

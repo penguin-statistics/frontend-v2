@@ -13,8 +13,12 @@ server:
     JP: 日服
     KR: 韩服
 menu:
+  _beta: 公测
   home: 首页
-  report: 掉落汇报
+  report:
+    _name: 掉落汇报
+    stage: 按章节汇报
+    recognition: 截图识别汇报
   search: 全局搜索
   stats:
     _name: 素材掉率
@@ -83,6 +87,7 @@ stats:
     stage: 作战
     apCost: 理智
     item: 物品
+    itemDrops: 掉落情况总计
     times: 样本数
     quantity: 掉落数
     percentage: 百分比
@@ -190,6 +195,112 @@ report:
     causes:
       noDrop: 尚未选择任何掉落物品
       limitation: 本次汇报与现有数据差距较大，继续提交可能导致此次汇报被判定为异常，无法计入全部统计数据中。
+  recognition:
+    step:
+      select: 选择
+      recognize: 识别
+      confirm: 确认
+      report: 汇报
+    allResult:
+      stageTime: 进行的关卡数量
+      drops: 获得的掉落物总数
+      sanity: 共消耗理智
+    tips:
+      fileTooBig: "\"{name}\" ({size}MB) 超出大小限制"
+      fileTooOld: "\"{name}\" 的截图时间超过了 36h 内的时间限制"
+      chooseImage: 点击以选择并加入图片、或直接向框内区域拖拽以加入图片
+      dragImage: 将图片拖拽到此处
+      addImage: 点击此处加入图片
+      copyImage: 右键图片或长按图片可拷贝到剪贴板或保存图片
+      abnormal: "您提交识别的截图中有 {count} 张截图由于未成功通过质量监测，被标记为了「汇报排除」并将无法上传至本站"
+      notImageFile: "{files} 不是图片文件，无法使用"
+      emptyResult: 无可用识别结果
+      unsatisfiedStart: 无法开始识别
+      emptyFile: 暂未选择任何图片
+      hasInvalidFile: 含有无效文件
+    status:
+      success: 成功
+      warning: 警告
+      error: 异常
+    description: 仅需选择结算页面截图，即可自动识别并上传所有掉落结果。
+    recognize:
+      noFilename: 暂无文件名
+      elapsed: 已用时间
+      remaining: 预计剩余
+      speed: 识别速度
+      imagePerSecond: "{count} 图/秒"
+    confirm:
+      loadingImage: 正在加载截图预览
+      overview:
+        _name: 结果概览
+        total: 共识别了
+        success: 检测通过
+        error: 检测异常
+        count: "{count} 张"
+        server: 数据集服务器
+        duration: 每张图片平均识别用时
+      details: 结果详情
+      unknownStage: 无法识别
+      abnormal:
+        error: 此张图片未通过质量监测
+        fatal: 此张图片无法被识别
+        hover: 鼠标悬浮以查看识别内容
+      cherryPick:
+        disabled: 无法选择异常图片
+        accepted: 上传本图结果
+        rejected: 不上传本图结果
+      noResult: 暂时没有识别结果
+      submit: "确认上传已勾选的 {count} 次结算记录"
+      itemsTotal: 物品数合计
+    report:
+      title: 汇报详情
+      total: 总计
+    states:
+      pending: 正等待初始化...
+      initializing: 初始化中...
+      recognizing: 正在识别...
+      rendering: 渲染确认内容中...
+      submitting: 正在提交记录...
+
+    cost: 耗时
+    filename: 文件名
+    result: 识别结果
+    queue: 识别图片队列
+    start: 识别 {count} 张图片
+    progress: 进度
+    submit: 确认提交到企鹅数据
+    retry: 提交失败，正在重试
+    filter: 结果过滤
+    notices:
+      welcome:
+        - 所提供的文件仅会通过使用 WebAssembly 技术于本地进行识别，不会向服务器上传。
+        - 请选择截图时间在 **36 小时内**的**通关评价为 3 星的结算界面**截图，并请注意不要选择重复截图。
+        - 请不要选择首次通关奖励的截图，并请如实汇报**所有**发生的掉落情况。
+#        - 截图内识别到「不合法」的物品，整张截图都将不再计入识别结果（如：已过期活动的相关物品掉落）。
+      confirm:
+        - 点击图片可以放大以便于核对；再次点击图片即可关闭
+        - 成功识别的截图已被自动勾选上传
+        - 为本站数据集准确度考虑，您将**不可**点选发生识别错误的截图
+    exceptions:
+      "3stars::False":
+        title: 疑似并非 3 星通关
+        subtitle: 在物品出现动画播放完毕前就截图可能会导致此问题
+      "Stage::NotFound": 并未识别到已知关卡
+      "Fingerprint::Same":
+        title: 此图片与另一图片完全一致
+        subtitle: 请检查是否选择了重复截图
+      "FileTimestamp::TooClose":
+        title: 此图片与另一图片的截图相隔时间过短
+        subtitle: 请检查是否选择了重复截图
+      "Drops::NotFound":
+        title: 识别到不合法的掉落物
+        subtitle: 请检查是否选择了已结束活动的结算截图
+      "Drops::LowConfidence":
+        title: 识别到无法确定的掉落物
+        subtitle: 请检查是否选择了已结束活动的结算截图
+      "Result::False":
+        title: 未知图片
+        subtitle: 请确认您的截图包含分辨率正常的全屏结算页面截图
   rules:
     item:
       _name: 物品项
@@ -199,17 +310,17 @@ report:
       not: "“{stage}” 内的 “{item}” 数量不应等于 {should}"
     type:
       _name: 物品种类
-      now: 于 “{stage}” 已选 {quantity} 个物品
-      gte: "“{stage}” 内应至少有 {should} 个物品"
-      lte: "“{stage}” 内应至多有 {should} 个物品"
-      not: "“{stage}” 内的物品数量应总计不为 {should}"
+      now: 于 “{stage}” 已选 {quantity} 种物品
+      gte: "“{stage}” 内应至少有 {should} 种物品"
+      lte: "“{stage}” 内应至多有 {should} 种物品"
+      not: "“{stage}” 内的物品种类数应总计不为 {should}"
   clear: 清空
   closedReason:
     EXPIRED: 不在可汇报时间区间内：作战已结束或暂未开启
     NOT_FOUND: 作战不存在：于所选服务器未找到此作战
     INVALID: 无法汇报：此作战未包含掉落汇报元数据
   furniture: 家具掉落：{state}
-  name: 上报结果
+  name: 汇报结果
   submit: 提交
   success: 汇报成功
   unable: 无法提交：
@@ -387,6 +498,7 @@ item:
     FURN: 家具
     MATERIAL: 材料
   related: 相关物品
+  undefined: 未知物品
 query:
   panel:
     builder: 查询编辑器
@@ -459,6 +571,7 @@ credits:
       - 企鹅物流数据统计网站内所使用的游戏资源（包括但不限于：游戏图片、动画、音频、文本原文或其转译版本等），其目的仅为更好地反映游戏内对应元素、增强用户体验，相关作品之版权仍属于上海鹰角网络科技有限公司和/或其关联公司，即鹰角网络游戏软件和/或鹰角网络游戏服务的提供方（包括但不限于：YOSTAR (HONG KONG) LIMITED, 株式会社Yostar, YOSTAR LIMITED, 龍成網路 等）
       - 企鹅物流数据统计网站内所使用的部分资源来源于 PRTS Wiki (http://prts.wiki) 并同时对部分资源进行了非歧义性的更改
       - 企鹅物流数据统计网站内使用了经细微修改的、由 Free Fonts Project 提供的 Bender 字体（ http://jovanny.ru ），该字体特别说明使用者可将相关字体以任何用途、没有任何限制地使用，在此特别表示感谢。
+      - 企鹅物流数据统计网站内使用了由 Synthview Type Design 提供的 Novecento Sans Bold 字体（ http://typography.synthview.com/novecento-sans-font-family.php ）。
   source:
     title: 开源许可列表
 auth:
@@ -525,3 +638,6 @@ share:
 search:
   placeholder: 搜索...
   hint: 键入 物品全拼 拼音首字母 作战名 章节名 关卡编号 或 部分关卡/物品昵称
+confirmLeave:
+  title: 确定要离开此页面吗？
+  subtitle: 未保存的更改可能会丢失

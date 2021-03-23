@@ -177,209 +177,209 @@
 </template>
 
 <script>
-import anime from "animejs";
+import anime from 'animejs'
 
 export default {
-  name: "Links",
-  data() {
+  name: 'Links',
+  data () {
     return {
       links: [
         {
-          title: "明日方舟工具箱",
-          author: "一只灰喵",
+          title: '明日方舟工具箱',
+          author: '一只灰喵',
           features: [
             {
-              name: "hr",
-              color: "cyan"
+              name: 'hr',
+              color: 'cyan'
             },
             {
-              name: "levelup",
-              color: "green"
+              name: 'levelup',
+              color: 'green'
             },
             {
-              name: "materials",
-              color: "indigo"
+              name: 'materials',
+              color: 'indigo'
             },
             {
-              name: "planner",
-              color: "indigo"
+              name: 'planner',
+              color: 'indigo'
             },
             {
-              name: "storage",
-              color: "purple"
+              name: 'storage',
+              color: 'purple'
             }
           ],
-          url: "https://aktools.graueneko.xyz/",
-          shorten: "aktools.graueneko.xyz"
+          url: 'https://aktools.graueneko.xyz/',
+          shorten: 'aktools.graueneko.xyz'
         },
         {
-          title: "ARK TOOLS",
-          author: "Laplace",
+          title: 'ARK TOOLS',
+          author: 'Laplace',
           features: [
             {
-              name: "character",
-              color: "orange"
+              name: 'character',
+              color: 'orange'
             },
             {
-              name: "enemy",
-              color: "black"
+              name: 'enemy',
+              color: 'black'
             },
             {
-              name: "materials",
-              color: "indigo"
+              name: 'materials',
+              color: 'indigo'
             },
             {
-              name: "planner",
-              color: "indigo"
+              name: 'planner',
+              color: 'indigo'
             }
           ],
-          url: "https://gachasalt.github.io/ArkToolDemo/#/",
-          shorten: "gachasalt.github.io/ArkToolDemo"
+          url: 'https://gachasalt.github.io/ArkToolDemo/#/',
+          shorten: 'gachasalt.github.io/ArkToolDemo'
         },
         {
-          title: "干员培养表",
-          author: "凤瞳",
+          title: '干员培养表',
+          author: '凤瞳',
           features: [
             {
-              name: "character",
-              color: "orange"
+              name: 'character',
+              color: 'orange'
             },
             {
-              name: "materials",
-              color: "indigo"
+              name: 'materials',
+              color: 'indigo'
             },
             {
-              name: "planner",
-              color: "indigo"
+              name: 'planner',
+              color: 'indigo'
             },
             {
-              name: "storage",
-              color: "purple"
+              name: 'storage',
+              color: 'purple'
             },
             {
-              name: "map",
-              color: "teal"
+              name: 'map',
+              color: 'teal'
             }
           ],
-          url: "https://ark-nights.com",
-          shorten: "ark-nights.com"
+          url: 'https://ark-nights.com',
+          shorten: 'ark-nights.com'
         },
         {
-          title: "刷素材推荐一图流",
-          author: "SrO²、根派",
+          title: '刷素材推荐一图流',
+          author: 'SrO²、根派',
           features: [
             {
-              name: "apRanking",
-              color: "grey"
+              name: 'apRanking',
+              color: 'grey'
             },
             {
-              name: "dropRateRanking",
-              color: "grey"
+              name: 'dropRateRanking',
+              color: 'grey'
             },
             {
-              name: "generalRanking",
-              color: "grey"
+              name: 'generalRanking',
+              color: 'grey'
             }
           ],
-          url: "https://aog.wiki/",
-          shorten: "aog.wiki"
+          url: 'https://aog.wiki/',
+          shorten: 'aog.wiki'
         },
         {
-          title: "PRTS",
+          title: 'PRTS',
           features: [
             {
-              name: "cn_wiki",
-              color: "blue-grey"
+              name: 'cn_wiki',
+              color: 'blue-grey'
             }
           ],
-          url: "http://prts.wiki/id/1",
-          shorten: "prts.wiki"
+          url: 'http://prts.wiki/id/1',
+          shorten: 'prts.wiki'
         },
         {
-          title: "Kokodayo Arknights Data",
-          author: "odex",
+          title: 'Kokodayo Arknights Data',
+          author: 'odex',
           features: [
             {
-              name: "character",
-              color: "orange"
+              name: 'character',
+              color: 'orange'
             },
             {
-              name: "enemy",
-              color: "black"
+              name: 'enemy',
+              color: 'black'
             },
             {
-              name: "map",
-              color: "teal"
+              name: 'map',
+              color: 'teal'
             }
           ],
-          url: "https://kokodayo.fun/",
-          shorten: "kokodayo.fun"
+          url: 'https://kokodayo.fun/',
+          shorten: 'kokodayo.fun'
         },
         {
-          title: "源石作战室",
+          title: '源石作战室',
           features: [
             {
-              name: "video",
-              color: "indigo darken-4"
+              name: 'video',
+              color: 'indigo darken-4'
             }
           ],
-          url: "https://opssr.net/",
-          shorten: "opssr.net"
+          url: 'https://opssr.net/',
+          shorten: 'opssr.net'
         },
         {
-          title: "ANWiki",
+          title: 'ANWiki',
           features: [
             {
-              name: "jp_wiki",
-              color: "blue-grey"
+              name: 'jp_wiki',
+              color: 'blue-grey'
             }
           ],
-          url: "https://wiki.gamerclub.jp/anwiki",
-          shorten: "wiki.gamerclub.jp/anwiki"
+          url: 'https://wiki.gamerclub.jp/anwiki',
+          shorten: 'wiki.gamerclub.jp/anwiki'
         },
         {
-          title: "ゲームの果て",
-          author: "方舟航海図",
+          title: 'ゲームの果て',
+          author: '方舟航海図',
           features: [
             {
-              name: "character",
-              color: "orange"
+              name: 'character',
+              color: 'orange'
             },
             {
-              name: "walkthrough",
-              color: "brown"
+              name: 'walkthrough',
+              color: 'brown'
             },
             {
-              name: "experience",
-              color: "brown"
+              name: 'experience',
+              color: 'brown'
             },
             {
-              name: "ja_translation",
-              color: "blue-grey"
+              name: 'ja_translation',
+              color: 'blue-grey'
             }
           ],
-          url: "https://smartgamecap.net",
-          shorten: "smartgamecap.net"
+          url: 'https://smartgamecap.net',
+          shorten: 'smartgamecap.net'
         }
       ]
-    };
+    }
   },
-  mounted() {
+  mounted () {
     anime({
       targets: '.link-card',
       translateY: [48, 0],
       opacity: [0, 1],
       duration: 425,
       delay: (el, i) => i * 50,
-      easing: "easeOutQuint"
-    });
+      easing: 'easeOutQuint'
+    })
   },
   methods: {
-    goToHref(link) {
+    goToHref (link) {
       this.$ga.event('redirect', 'links', link.title, 1)
     }
-  },
-};
+  }
+}
 </script>
 
 <style scoped>

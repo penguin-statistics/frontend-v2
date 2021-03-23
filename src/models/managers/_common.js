@@ -1,18 +1,18 @@
 import store from '@/store'
-import validator from "@/utils/validator";
+import validator from '@/utils/validator'
 
 export default {
   defaultAjaxHooks: {
     request: (id) => {
-      store.dispatch("ajax/started", {id})
+      store.dispatch('ajax/started', { id })
     },
     response: (id, promise) => {
       promise.then(
         () => {
-          store.dispatch("ajax/finished", {id, error: null});
+          store.dispatch('ajax/finished', { id, error: null })
         },
-        ({errorMessage}) => {
-          store.dispatch("ajax/finished", {id, error: errorMessage});
+        ({ errorMessage }) => {
+          store.dispatch('ajax/finished', { id, error: errorMessage })
         }
       )
     }
@@ -22,5 +22,5 @@ export default {
       validator.isArray(data),
       validator.notEmptyArray(data)
     )
-  },
+  }
 }

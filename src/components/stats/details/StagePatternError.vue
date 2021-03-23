@@ -16,7 +16,7 @@
 
 <script>
 export default {
-  name: "StagePatternError",
+  name: 'StagePatternError'
 }
 </script>
 

@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">企鹅物流</string>
+    <string name="title_activity_main">企鹅物流</string>
+    <string name="shortcut_search_label">搜索</string>
+</resources>

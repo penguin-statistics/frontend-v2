@@ -22,3 +22,5 @@ package-lock.json
 *.sw?
 /tools/skeleton-html-generator/dist
 /tools/skeleton-html-generator/.cache
+src/utils/vendors/
+src/vendors/

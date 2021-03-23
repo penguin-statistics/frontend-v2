@@ -18,36 +18,36 @@
 </template>
 
 <script>
-  export default {
-    name: "BackdropCard",
-    props: {
-      hover: {
-        type: Boolean,
-        default () {
-          return false
-        }
-      },
-      darken: {
-        type: Boolean,
-        default () {
-          return false
-        }
-      },
-      dense: {
-        type: Boolean,
-        default () {
-          return false
-        }
-      },
-      small: {
-        type: Boolean,
-        default () {
-          return false
-        }
-      },
-
+export default {
+  name: 'BackdropCard',
+  props: {
+    hover: {
+      type: Boolean,
+      default () {
+        return false
+      }
     },
+    darken: {
+      type: Boolean,
+      default () {
+        return false
+      }
+    },
+    dense: {
+      type: Boolean,
+      default () {
+        return false
+      }
+    },
+    small: {
+      type: Boolean,
+      default () {
+        return false
+      }
+    }
+
   }
+}
 </script>
 
 <style scoped>

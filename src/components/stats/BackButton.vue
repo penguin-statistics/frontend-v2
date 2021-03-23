@@ -6,7 +6,6 @@
     :class="{'back-button__active cursor-pointer': active, 'back-button__light': !dark, 'back-button__dark': dark}"
     :hover="active"
     :ripple="false"
-
     @click="$emit('back')"
   >
     <v-card-title
@@ -44,10 +43,10 @@
 </template>
 
 <script>
-import Theme from "@/mixins/Theme";
+import Theme from '@/mixins/Theme'
 
 export default {
-name: "BackButton",
+  name: 'BackButton',
   mixins: [Theme],
   props: {
   /** active == true means the component will now display a button style **/
@@ -59,7 +58,7 @@ name: "BackButton",
       type: String,
       required: true
     }
-  },
+  }
 }
 </script>
 

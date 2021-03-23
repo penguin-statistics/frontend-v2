@@ -51,81 +51,80 @@
 </template>
 
 <script>
-  import {mapGetters} from "vuex";
-  import anime from "animejs";
+import { mapGetters } from 'vuex'
+import anime from 'animejs'
 
-  export default {
-    name: "ServerNotifyOverlay",
+export default {
+  name: 'ServerNotifyOverlay',
 
-    data() {
-      return {
-        serverNotifyOverlay: false
-      }
-    },
+  data () {
+    return {
+      serverNotifyOverlay: false
+    }
+  },
 
-    computed: {
-      ...mapGetters("dataSource", ["server"]),
-    },
+  computed: {
+    ...mapGetters('dataSource', ['server'])
+  },
 
-    watch: {
-      server() {
-        this.serverNotifyOverlay = true
+  watch: {
+    server () {
+      this.serverNotifyOverlay = true
 
-        const self = this;
+      const self = this
 
-        this.$nextTick(function () {
-          anime.timeline({
-            duration: 1000,
-            easing: "easeOutExpo"
-          })
-            .add({
-              targets: self.$refs["notifyOverlayIcon"]["$el"],
-              opacity: [0, 1],
-              translateY: ["-15px", "0px"],
-            }, 250)
-            .add({
-              targets: self.$refs["notifyOverlayTitle"],
-              opacity: [0, 1],
-              translateY: ["-20px", "0px"],
-            }, 400)
-            .add({
-              targets: self.$refs["notifyOverlayServerName"],
-              opacity: [0, 1],
-              duration: 900,
-              translateY: ["-40px", "0px"],
-            }, 500)
-
-          setTimeout(function () {
-            anime.timeline({
-              duration: 500,
-              easing: "easeInExpo"
-            })
-              .add({
-                targets: self.$refs["notifyOverlayIcon"]["$el"],
-                opacity: [1, 0],
-                translateY: ["0px", "15px"],
-              }, 250)
-              .add({
-                targets: self.$refs["notifyOverlayTitle"],
-                opacity: [1, 0],
-                translateY: ["0px", "20px"],
-              }, 200)
-              .add({
-                targets: self.$refs["notifyOverlayServerName"],
-                opacity: [1, 0],
-                duration: 550,
-                translateY: ["0px", "40px"],
-              }, 125)
-          }, 1500)
-
+      this.$nextTick(function () {
+        anime.timeline({
+          duration: 1000,
+          easing: 'easeOutExpo'
         })
+          .add({
+            targets: self.$refs.notifyOverlayIcon.$el,
+            opacity: [0, 1],
+            translateY: ['-15px', '0px']
+          }, 250)
+          .add({
+            targets: self.$refs.notifyOverlayTitle,
+            opacity: [0, 1],
+            translateY: ['-20px', '0px']
+          }, 400)
+          .add({
+            targets: self.$refs.notifyOverlayServerName,
+            opacity: [0, 1],
+            duration: 900,
+            translateY: ['-40px', '0px']
+          }, 500)
 
         setTimeout(function () {
-          self.serverNotifyOverlay = false
-        }, 2500)
-      }
-    },
+          anime.timeline({
+            duration: 500,
+            easing: 'easeInExpo'
+          })
+            .add({
+              targets: self.$refs.notifyOverlayIcon.$el,
+              opacity: [1, 0],
+              translateY: ['0px', '15px']
+            }, 250)
+            .add({
+              targets: self.$refs.notifyOverlayTitle,
+              opacity: [1, 0],
+              translateY: ['0px', '20px']
+            }, 200)
+            .add({
+              targets: self.$refs.notifyOverlayServerName,
+              opacity: [1, 0],
+              duration: 550,
+              translateY: ['0px', '40px']
+            }, 125)
+        }, 1500)
+      })
+
+      setTimeout(function () {
+        self.serverNotifyOverlay = false
+      }, 2500)
+    }
   }
+}
 </script>
 
 <style scoped>

@@ -1,13 +1,13 @@
 import config from '@/config'
 import store from '@/store'
-import timeFormatter from "@/utils/timeFormatter";
-import Console from "@/utils/Console";
+import timeFormatter from '@/utils/timeFormatter'
+import Console from '@/utils/Console'
 
-function randomInt(max) {
-  return Math.floor(Math.random() * (Math.floor(max) + 1));
+function randomInt (max) {
+  return Math.floor(Math.random() * (Math.floor(max) + 1))
 }
 
-function randomFromArray(arr) {
+function randomFromArray (arr) {
   return arr[randomInt(arr.length - 1)]
 }
 
@@ -18,17 +18,17 @@ export default {
       return randomInt(config.randomBackground.max)
     },
     get () {
-      const already = store.getters["options/randomBackground"];
+      const already = store.getters['options/randomBackground']
 
       // if not current day
-      if (!timeFormatter.dayjs(already.last).isSame(timeFormatter.dayjs(), "day")) {
-        Console.debug("CachedRandom", "time reached. clearing cachedRandom cache")
-        store.commit("options/clearRandomBackground")
+      if (!timeFormatter.dayjs(already.last).isSame(timeFormatter.dayjs(), 'day')) {
+        Console.debug('CachedRandom', 'time reached. clearing cachedRandom cache')
+        store.commit('options/clearRandomBackground')
       }
       if (already.id.length < this.limit) {
         const id = this._getNewId()
-        Console.debug("CachedRandom", "limit NOT reached. new random", id, already.id)
-        store.commit("options/changeRandomBackground", {
+        Console.debug('CachedRandom', 'limit NOT reached. new random', id, already.id)
+        store.commit('options/changeRandomBackground', {
           last: already.last,
           id: [...already.id, id]
         })

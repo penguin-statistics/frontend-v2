@@ -30,15 +30,15 @@
 </template>
 
 <script>
-  export default {
-    name: "ModuleLoadingOverlay",
+export default {
+  name: 'ModuleLoadingOverlay',
 
-    computed: {
-      loadingRoute() {
-        return this.$store.getters['ui/loadingRoute'];
-      }
-    },
+  computed: {
+    loadingRoute () {
+      return this.$store.getters['ui/loadingRoute']
+    }
   }
+}
 </script>
 
 <style scoped>

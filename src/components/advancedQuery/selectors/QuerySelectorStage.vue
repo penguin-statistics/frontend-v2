@@ -149,91 +149,91 @@
 </template>
 
 <script>
-  import get from "@/utils/getters";
-  import strings from "@/utils/strings";
-  import StageCard from "@/components/stats/StageCard";
+import get from '@/utils/getters'
+import strings from '@/utils/strings'
+import StageCard from '@/components/stats/StageCard'
 
-  export default {
-    name: "QuerySelectorStage",
-    components: {StageCard},
-    props: {
-      /** Stage ID */
-      value: {
-        type: String,
-        default () {
-          return undefined
-        }
-      },
-      disabled: {
-        type: Boolean,
-        default () {
-          return false
-        }
+export default {
+  name: 'QuerySelectorStage',
+  components: { StageCard },
+  props: {
+    /** Stage ID */
+    value: {
+      type: String,
+      default () {
+        return undefined
       }
     },
-    data() {
-      return {
-        dialog: false
+    disabled: {
+      type: Boolean,
+      default () {
+        return false
       }
-    },
-    computed: {
-      categorizedZones() {
-        const categories = ["ACTIVITY_OPEN", "MAINLINE", "WEEKLY", "ACTIVITY_CLOSED"];
-        const results = [];
-        for (const category of categories) {
-          let zones = get.zones.byType(category.startsWith("ACTIVITY") ? "ACTIVITY" : category, false);
-          if (category === "ACTIVITY_OPEN") {
-            zones = zones.filter(zone => !zone.isOutdated);
-          } else if (category === "ACTIVITY_CLOSED") {
-            zones = zones.filter(zone => zone.isOutdated);
-          }
-          zones = zones.map(el => {
-            el.stages = get.stages.byParentZoneId(el.zoneId)
-            return el
+    }
+  },
+  data () {
+    return {
+      dialog: false
+    }
+  },
+  computed: {
+    categorizedZones () {
+      const categories = ['ACTIVITY_OPEN', 'MAINLINE', 'WEEKLY', 'ACTIVITY_CLOSED']
+      const results = []
+      for (const category of categories) {
+        let zones = get.zones.byType(category.startsWith('ACTIVITY') ? 'ACTIVITY' : category, false)
+        if (category === 'ACTIVITY_OPEN') {
+          zones = zones.filter(zone => !zone.isOutdated)
+        } else if (category === 'ACTIVITY_CLOSED') {
+          zones = zones.filter(zone => zone.isOutdated)
+        }
+        zones = zones.map(el => {
+          el.stages = get.stages.byParentZoneId(el.zoneId)
+          return el
+        })
+
+        if (zones && zones.length) {
+          results.push({
+            id: category,
+            zones: zones
           })
-
-          if (zones && zones.length) {
-            results.push({
-              id: category,
-              zones: zones
-            })
-          }
-        }
-        return results;
-      },
-      states () {
-        return {
-          [this.value]: true
-        }
-      },
-      selectedStage () {
-        const result = get.stages.byStageId(this.value)
-        return {
-          ...result,
-          translatedCode: this.translate(result, "code")
-        }
-      },
-      selectedZone () {
-        const result = get.zones.byZoneId(this.selectedStage.zoneId, false)
-        return {
-          ...result,
-          translatedName: this.translate(result, "zoneName")
         }
       }
+      return results
     },
-    methods: {
-      translate (object, key) {
-        return strings.translate(object, key)
-      },
-      select (stageId) {
-        this.$emit("input", stageId)
-        this.dialog = false
-      },
-      clear () {
-        this.$emit('input', null)
+    states () {
+      return {
+        [this.value]: true
       }
     },
+    selectedStage () {
+      const result = get.stages.byStageId(this.value)
+      return {
+        ...result,
+        translatedCode: this.translate(result, 'code')
+      }
+    },
+    selectedZone () {
+      const result = get.zones.byZoneId(this.selectedStage.zoneId, false)
+      return {
+        ...result,
+        translatedName: this.translate(result, 'zoneName')
+      }
+    }
+  },
+  methods: {
+    translate (object, key) {
+      return strings.translate(object, key)
+    },
+    select (stageId) {
+      this.$emit('input', stageId)
+      this.dialog = false
+    },
+    clear () {
+      this.$emit('input', null)
+    }
   }
+}
 </script>
 
 <style scoped>

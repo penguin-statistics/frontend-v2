@@ -4,37 +4,37 @@ export default {
     states: []
   },
   mutations: {
-    newState(state, payload) {
-      state.states.push(payload);
+    newState (state, payload) {
+      state.states.push(payload)
     }
   },
   actions: {
-    _getOrCreateState ({commit, state}, id) {
-      let found = state.states.find(value => value.id === id);
+    _getOrCreateState ({ commit, state }, id) {
+      const found = state.states.find(value => value.id === id)
       if (found) {
         return found
       } else {
-        let pushing = Object.create(null);
-        pushing.id = id;
-        pushing.pending = false;
-        pushing.error = null;
+        const pushing = Object.create(null)
+        pushing.id = id
+        pushing.pending = false
+        pushing.error = null
 
-        commit('newState', pushing);
+        commit('newState', pushing)
         return pushing
       }
-    } ,
-    started({dispatch}, {id}) {
+    },
+    started ({ dispatch }, { id }) {
       dispatch('_getOrCreateState', id)
         .then(res => {
           res.pending = true
-        });
+        })
     },
-    finished({dispatch}, {id, error}) {
+    finished ({ dispatch }, { id, error }) {
       dispatch('_getOrCreateState', id)
         .then(res => {
-          res.pending = false;
+          res.pending = false
           res.error = error
-        });
+        })
     }
   },
   getters: {
@@ -44,6 +44,6 @@ export default {
     //   return state.states.every(value => !value.pending)
     // },
     errors: state => state.states.filter(value => !!value.error),
-    matrixPending: state => state.states.some(value => value.pending && value.id.includes("Matrix"))
+    matrixPending: state => state.states.some(value => value.pending && value.id.includes('Matrix'))
   }
-};
+}

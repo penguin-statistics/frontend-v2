@@ -1,7 +1,7 @@
-import {service} from '@/utils/service'
+import { service } from '@/utils/service'
 
 export default {
   getNotice (data) {
-    return service.get("/notice", data)
+    return service.get('/notice', data)
   }
 }
