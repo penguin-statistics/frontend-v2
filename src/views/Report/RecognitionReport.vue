@@ -241,7 +241,7 @@
 
                 <OffTitle
                   :content="$t('report.recognition.confirm.details')"
-                  smallg
+                  small
                 />
 
                 <v-card
