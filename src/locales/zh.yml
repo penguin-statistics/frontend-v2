@@ -292,10 +292,10 @@ report:
       "FileTimestamp::TooClose":
         title: 此图片与另一图片的截图相隔时间过短
         subtitle: 请检查是否选择了重复截图
-      "Drop::IllegalDrop":
+      "Drops::NotFound":
         title: 识别到不合法的掉落物
         subtitle: 请检查是否选择了已结束活动的结算截图
-      "Drop::LowConfidence":
+      "Drops::LowConfidence":
         title: 识别到无法确定的掉落物
         subtitle: 请检查是否选择了已结束活动的结算截图
       "Result::False":

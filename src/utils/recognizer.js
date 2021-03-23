@@ -32,7 +32,7 @@ async function image2wasmHeapOffset (blob) {
   // console.log('image2wasmHeapOffset: set Uint8Array value on wasm heap')
   // console.timeEnd('image2wasmHeapOffset')
 
-  console.log(dataPtr, dataOnHeap.byteLength, dataOnHeap.byteOffset, Module.HEAPU8.buffer, uint8)
+  // console.log(dataPtr, dataOnHeap.byteLength, dataOnHeap.byteOffset, Module.HEAPU8.buffer, uint8)
 
   return {
     offset: dataPtr,

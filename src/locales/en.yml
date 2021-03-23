@@ -298,10 +298,10 @@ report:
       "FileTimestamp::TooClose":
         title: Screenshot Interval too close
         subtitle: Check if you have selected duplicated images
-      "Drop::IllegalDrop":
+      "Drops::NotFound":
         title: Unexpected Drop Item
         subtitle: Check if you have selected a screenshot in which its content includes a closed event
-      "Drop::LowConfidence":
+      "Drops::LowConfidence":
         title: Low Confidence Drop Item
         subtitle: Check if you have selected a screenshot in which its content includes a closed event
       "Result::False":

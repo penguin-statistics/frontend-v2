@@ -843,8 +843,8 @@ export default {
       const elapsed = (Date.now() - this.recognition.timer.started) / 1000
       const imagePerSecond = (finished / elapsed || 0)
       this.recognition.timer.elapsed = elapsed.toFixed(0)
-      this.recognition.timer.imagePerSecond = imagePerSecond.toFixed(0)
-      this.recognition.timer.remaining = ((total - finished) / (imagePerSecond || 1)).toFixed(1)
+      this.recognition.timer.imagePerSecond = imagePerSecond.toFixed(1)
+      this.recognition.timer.remaining = ((total - finished) / (imagePerSecond || 1)).toFixed(0)
     },
     stopTimer () {
       if (this.recognition.timer.timer) clearInterval(this.recognition.timer.timer)
@@ -981,7 +981,6 @@ export default {
         if (closeTimestamps) {
           value.result.exceptions.push({ what: 'FileTimestamp::TooClose' })
         }
-
 
         // Apply same fingerprint check, same will add warning
         let sameFingerprint = false;

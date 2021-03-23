@@ -1,3 +1,0 @@
-[submodule "src/vendors/penguin-crypto"]
-	path = src/vendors/penguin-crypto
-	url = git@github.com:penguin-statistics/penguin-crypto.git
