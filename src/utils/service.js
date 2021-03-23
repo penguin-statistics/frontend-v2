@@ -20,9 +20,6 @@ if (mirror.global.isCurrent() || mirror.cn.isCurrent()) {
   // backend and frontend are on the same server
   // so use relative path.
   baseURL = '/PenguinStats/api/v2'
-} else if (~window.location.href.indexOf('penguin-upyun-cdn.test.galvincdn.com')) {
-  // we are just testing the new cdn :D
-  baseURL = '/PenguinStats/api/v2'
 } else {
   // high chance of using a staging environment where api is not available with the frontend deployment.
   // use the absolute endpoint to get the juicy responses :)
