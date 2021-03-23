@@ -301,6 +301,7 @@ report:
       "Result::False":
         title: 未知图片
         subtitle: 请确认您的截图包含分辨率正常的全屏结算页面截图
+      "DropInfos::Violation": 识别结果验证失败
   rules:
     item:
       _name: 物品项

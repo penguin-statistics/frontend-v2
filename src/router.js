@@ -3,7 +3,6 @@ import Router from 'vue-router'
 
 import Home from './views/Home'
 import ReportLayout from './layouts/ReportLayout'
-import RecognitionReport from './views/Report/RecognitionReport'
 import Report from './views/Report/Report'
 import StatsLayout from './layouts/StatsLayout'
 import StatsByStage from './views/Stats/Stage'
@@ -96,8 +95,9 @@ const router = new Router({
       {
         path: 'recognition',
         name: 'RecognitionReport',
-        component: RecognitionReport,
+        component: () => import(/* webpackChunkName: "recognition" */ './views/Report/RecognitionReport'),
         meta: {
+          async: true,
           icon: 'mdi-image-filter-center-focus',
           i18n: 'menu.report.recognition',
           beta: true

@@ -31,9 +31,9 @@ const vuetify = new Vuetify({
         accent2: colors.orange.darken4,
         accent3: colors.blue.darken4,
 
-        background: '#fff',
+        background: '#eee',
         lightenedBackground: '#d9d9d9',
-        indigoBackground: '#fff',
+        indigoBackground: '#eee',
         text: '#0e0e0e',
         textDarken: colors.grey.darken4
       },
@@ -46,7 +46,7 @@ const vuetify = new Vuetify({
         background: colors.blueGrey.darken4,
         lightenedBackground: colors.blueGrey.darken3,
         indigoBackground: '#191d37',
-        text: '#f0f0f0',
+        text: '#ececec',
         textDarken: colors.grey.lighten3
       }
     }

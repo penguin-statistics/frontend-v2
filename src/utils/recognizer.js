@@ -2,9 +2,10 @@ import charHash from '@/models/recognition/charHash'
 import store from '@/store'
 import JSZip from 'jszip'
 import uniq from 'lodash/uniq'
-// import reduce from 'lodash/reduce'
 import Console from "@/utils/Console";
 import strings from "@/utils/strings";
+import ReportValidator from "@/utils/reportValidator";
+import get from '@/utils/getters'
 
 async function image2wasmHeapOffset (blob) {
   const Module = window.Module
@@ -78,6 +79,7 @@ class Recognizer {
       load_tmpl: Module.cwrap('load_templ', 'void', ['string', 'number']),
       load_json: Module.cwrap('load_json', 'void', ['string', 'string']),
       recognize: Module.cwrap('recognize', 'string', ['number', 'number']),
+      get_info: Module.cwrap('get_info', 'string', []),
       // free_buffer: Module.cwrap('free_buffer', 'void', ['number'])
     }
 
@@ -137,11 +139,21 @@ class Recognizer {
 
     Console.info('Recognizer', 'init: load: icons: preloaded')
 
+    const version = this.wasm.get_info()
+
+    Console.info('Recognizer', 'initialization completed with wasm version', version)
+
+    this.instanceInfo = {
+      server,
+      version
+    }
+
     return this
   }
 
   async recognize (files, resultCb) {
     for (const file of files) {
+      const id = `${Date.now()}_${Math.random()}`
       // console.groupCollapsed('Recognition of', file.name)
       // console.log('start recognizing file', file.name)
       // console.time(file.name)
@@ -159,6 +171,7 @@ class Recognizer {
         Console.error('Recognizer', 'caught wasm error', e, 'responding with null result')
         const duration = performance.now() - start
         resultCb({
+          id,
           file,
           blobUrl: data.blobUrl,
           duration,
@@ -178,7 +191,31 @@ class Recognizer {
         return exception
       })
 
+      if (!parsedResult.exceptions.length && parsedResult.stage.stageCode) {
+        const stage = get.stages.byStageId(parsedResult.stage.stageId)
+        const zone = get.zones.byZoneId(stage.zoneId)
+
+        console.log('validate drops')
+        console.time('validateDrops')
+        const validate = new ReportValidator(
+          this.instanceInfo.server,
+          zone,
+          stage,
+          parsedResult.drops
+        ).validate()
+        console.timeEnd('validateDrops')
+        console.log('validation result', validate)
+
+        if (validate.rate > 0) {
+          parsedResult.exceptions.push({
+            what: "DropInfos::Violation",
+            details: validate
+          })
+        }
+      }
+
       resultCb({
+        id,
         file,
         blobUrl: data.blobUrl,
         duration,

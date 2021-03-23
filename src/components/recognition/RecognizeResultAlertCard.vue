@@ -1,39 +1,45 @@
 <template>
   <div>
-    <v-card
-      v-for="(alert, index) in alertsWithMessage"
-      :key="`alert-${index}`"
-      dark
-      :class="`pa-2 pl-8 ${alert.color} mt-2 position-relative overflow-hidden`"
-    >
-      <v-icon
-        x-large
-        style="position: absolute; left: -10px; top: -6px; opacity: .4"
+    <template v-for="(alert, index) in alertsWithMessage">
+      <!--      <ReportValidationOutlier-->
+      <!--        v-if="alert.what === 'DropInfos::Violation'"-->
+      <!--        :key="`alert-${index}`"-->
+      <!--        :validation="alert.details"-->
+      <!--      />-->
+      <v-card
+        :key="`alert-${index}`"
+        dark
+        :class="`pa-2 pl-8 ${alert.color} mt-2 position-relative overflow-hidden`"
       >
-        {{ icon }}
-      </v-icon>
-      <div class="text-break">
-        {{ alert.title }}
-        <span
-          v-if="alert.count > 1"
-          class="ml-1 font-weight-bold"
+        <v-icon
+          x-large
+          style="position: absolute; left: -10px; top: -6px; opacity: .4"
         >
-          ×{{ alert.count }}
-        </span>
-      </div>
-      <div
-        v-if="alert.subtitle"
-        class="subtitle-2 degraded-opacity"
-      >
-        {{ alert.subtitle }}
-      </div>
-      <div
-        class="monospace-pure degraded-opacity"
-        style="font-size: 10px; line-height: 1.5"
-      >
-        {{ alert.what }}
-      </div>
-    </v-card>
+          {{ icon }}
+        </v-icon>
+        <div class="text-break">
+          {{ alert.title }}
+          <span
+            v-if="alert.count > 1"
+            class="ml-1 font-weight-bold"
+          >
+            ×{{ alert.count }}
+          </span>
+        </div>
+        <div
+          v-if="alert.subtitle"
+          class="subtitle-2 degraded-opacity"
+        >
+          {{ alert.subtitle }}
+        </div>
+        <div
+          class="monospace-pure degraded-opacity"
+          style="font-size: 10px; line-height: 1.5"
+        >
+          {{ alert.what }}
+        </div>
+      </v-card>
+    </template>
   </div>
 </template>
 

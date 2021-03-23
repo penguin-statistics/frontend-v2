@@ -21,7 +21,7 @@ export default {
         document.body.style.backgroundColor = '#121212'
       } else {
         document.documentElement.classList.add('vuetify-theme--light', windowsIndicator)
-        document.body.style.backgroundColor = '#fafafa'
+        document.body.style.backgroundColor = '#eee'
       }
     },
     onDarkChange (newValue) {
