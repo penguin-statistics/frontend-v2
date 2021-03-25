@@ -5,39 +5,39 @@
   >
     <RecognitionImageDialog v-model="expandImage.src" />
 
-    <v-dialog
-      v-model="submitDialog.open"
-      persistent
-    >
-      <v-card class="d-flex fill-height">
-        <v-card-text>
-          <v-row
-            align="center"
-            justify="center"
-          >
-            <v-col
-              cols="12"
-              class="px-1 py-12 text-center"
-              style="width: 100%"
-            >
-              <PreloaderInline class="mx-auto mb-6" />
-              <h1 class="title">
-                {{ $t("report.recognition.states.submitting") }}
-              </h1>
-              <v-row>
-                <v-col>
-                  <v-progress-linear
-                    indeterminate
-                    class="mx-auto"
-                    style="width: 90%"
-                  />
-                </v-col>
-              </v-row>
-            </v-col>
-          </v-row>
-        </v-card-text>
-      </v-card>
-    </v-dialog>
+    <!--    <v-dialog-->
+    <!--      v-model="submitDialog.open"-->
+    <!--      persistent-->
+    <!--    >-->
+    <!--      <v-card class="d-flex fill-height">-->
+    <!--        <v-card-text>-->
+    <!--          <v-row-->
+    <!--            align="center"-->
+    <!--            justify="center"-->
+    <!--          >-->
+    <!--            <v-col-->
+    <!--              cols="12"-->
+    <!--              class="px-1 py-12 text-center"-->
+    <!--              style="width: 100%"-->
+    <!--            >-->
+    <!--              <PreloaderInline class="mx-auto mb-6" />-->
+    <!--              <h1 class="title">-->
+    <!--                {{ $t("report.recognition.states.submitting") }}-->
+    <!--              </h1>-->
+    <!--              <v-row>-->
+    <!--                <v-col>-->
+    <!--                  <v-progress-linear-->
+    <!--                    indeterminate-->
+    <!--                    class="mx-auto"-->
+    <!--                    style="width: 90%"-->
+    <!--                  />-->
+    <!--                </v-col>-->
+    <!--              </v-row>-->
+    <!--            </v-col>-->
+    <!--          </v-row>-->
+    <!--        </v-card-text>-->
+    <!--      </v-card>-->
+    <!--    </v-dialog>-->
 
     <v-row
       justify="center"
@@ -51,6 +51,18 @@
             :class="{'grey lighten-3': !dark, 'secondary': dark}"
           >
             {{ $t('menu.report.recognition') }}
+
+            <div
+              class="chip-label ml-1"
+            >
+              <v-icon
+                x-small
+                class="mr-1"
+              >
+                mdi-beta
+              </v-icon>
+              {{ $t('menu._beta') }}
+            </div>
           </v-card-title>
           <v-card-subtitle
             class="px-6"
@@ -59,7 +71,10 @@
             {{ $t('report.recognition.description') }}
           </v-card-subtitle>
 
-          <BrowserDeprecated v-if="recognition.support !== true" />
+          <BrowserDeprecated
+            v-if="recognition.support !== true"
+            :reason="recognition.support"
+          />
           <v-stepper
             v-else
             v-model="step"
@@ -415,29 +430,42 @@
                   </template>
                 </v-data-table>
 
-                <v-btn
-                  rounded
-                  x-large
-                  color="primary"
-                  :block="$vuetify.breakpoint.xs"
-                  :disabled="submitDialog.open"
-                  class="mb-4"
-                  @click="submit"
-                >
-                  <div class="d-inline-flex align-center justify-center">
-                    <v-icon small>
-                      mdi-server
-                    </v-icon>
-                    <span class="caption ml-1">
-                      {{ $t("server.servers." + recognition.server) }}
-                    </span>
-                  </div>
-                  <v-divider
-                    vertical
-                    class="mx-2"
+                <v-expand-transition>
+                  <v-btn
+                    v-if="submission.state !== 'uploaded'"
+                    rounded
+                    x-large
+                    color="primary"
+                    :block="$vuetify.breakpoint.xs"
+                    :loading="submission.state === 'uploading'"
+                    :disabled="submission.state !== 'pending'"
+                    class="mb-4"
+                    @click="submit"
+                  >
+                    <div class="d-inline-flex align-center justify-center">
+                      <v-icon small>
+                        mdi-server
+                      </v-icon>
+                      <span class="caption ml-1">
+                        {{ $t("server.servers." + recognition.server) }}
+                      </span>
+                    </div>
+                    <v-divider
+                      vertical
+                      class="mx-2"
+                    />
+                    <span> {{ $t("report.recognition.submit") }} </span>
+                  </v-btn>
+                </v-expand-transition>
+
+                <v-expand-transition>
+                  <RecognitionSubmitVisualizer
+                    v-if="submission.state !== 'pending'"
+                    :state="submission.state"
+                    :total="submission.total"
+                    :submitted="submission.submitted"
                   />
-                  <span> {{ $t("report.recognition.submit") }} </span>
-                </v-btn>
+                </v-expand-transition>
               </template>
             </v-stepper-content>
           </v-stepper>
@@ -469,6 +497,7 @@ import ConfirmLeave from "@/mixins/ConfirmLeave";
 import environment from "@/utils/environment";
 import BrowserDeprecated from "@/components/global/BrowserDeprecated";
 import RecognitionResultCard from "@/components/recognition/RecognitionResultCard";
+import RecognitionSubmitVisualizer from "@/components/recognition/RecognitionSubmitVisualizer";
 
 let recognitionSubmitter;
 try {
@@ -480,6 +509,7 @@ try {
 export default {
   name: 'RecognitionReport',
   components: {
+    RecognitionSubmitVisualizer,
     RecognitionResultCard,
     BrowserDeprecated,
     TitledRow,
@@ -511,6 +541,11 @@ export default {
           imagePerSecond: -1,
           timer: null
         }
+      },
+      submission: {
+        state: 'pending',
+        submitted: [],
+        total: -1
       },
       dialogOrigin: '',
       filterValue: ['SUCCESS', 'ERROR'],
@@ -667,30 +702,31 @@ export default {
       if (this.recognition.timer.timer) clearInterval(this.recognition.timer.timer)
       this.recognition.timer.remaining = 0
     },
-    async doSubmit () {
+    async submit () {
+      this.recognition.state = 'uploading'
+      this.submission.state = 'uploading'
+      this.submission.total = this.selectedResults.length
+
       const userId = Cookies.get(config.authorization.userId.cookieKey)
-      recognitionSubmitter(this)
-        .then(() => {
+      await recognitionSubmitter(this, (state, chunk) => {
+        if (state === 'succeeded') {
           const reportedUserId = Cookies.get(config.authorization.userId.cookieKey)
           if (userId !== reportedUserId) {
             this.$store.dispatch('auth/login', {
               userId: reportedUserId
             })
           }
-          this.$ga.event('report', 'submit_recognition', this.selectedResults.map((result) => { return result.stageId }), 1)
-        }).finally(() => {
-          this.submitDialog.finish = true
-          this.submitDialog.error = false
-        }).catch((e) => {
-          console.log(e)
+          this.submission.submitted.push(chunk)
+          this.$ga.event('report', 'submit_batch', 'submit_batch', this.selectedResults.length)
+        } else if (state === 'failed') {
+          this.submission.submitted.push(chunk)
           snackbar.networkError()
-          this.submitDialog.error = true
-        })
-    },
-    submit () {
-      this.submitDialog.open = true
-      this.recognition.state = 'uploading'
-      this.doSubmit()
+        }
+      })
+
+      this.recognition.state = 'uploaded'
+      this.submission.state = 'uploaded'
+      this.confirmLeaveDestroy()
     },
     async init () {
       this.recognition.state = 'initializing'

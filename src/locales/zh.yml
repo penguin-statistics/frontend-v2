@@ -201,10 +201,6 @@ report:
       recognize: 识别
       confirm: 确认
       report: 汇报
-    allResult:
-      stageTime: 进行的关卡数量
-      drops: 获得的掉落物总数
-      sanity: 共消耗理智
     tips:
       fileTooBig: "\"{name}\" ({size}MB) 超出大小限制"
       fileTooOld: "\"{name}\" 的截图时间超过了 36h 内的时间限制"
@@ -255,6 +251,9 @@ report:
     report:
       title: 汇报详情
       total: 总计
+      reporting: 正在批量上传掉落数据...
+      stats: "已成功上传 {count} 条掉落数据"
+      caption: 由于缓存原因，您上传的数据可能需要最多 20 分钟才能于全站数据集反映。感谢您的掉落汇报。
     states:
       pending: 正等待初始化...
       initializing: 初始化中...

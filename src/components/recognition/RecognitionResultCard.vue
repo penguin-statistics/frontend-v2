@@ -153,7 +153,7 @@
 
     <v-divider />
 
-    <v-card-actions class="pa-2 z-index-5">
+    <v-card-actions class="pa-2">
       <v-card
         v-ripple="!hasException"
         class="background-transparent font-weight-bold elevation-2 pa-2"

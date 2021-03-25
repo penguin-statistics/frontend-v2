@@ -31,7 +31,7 @@ const vuetify = new Vuetify({
         accent2: colors.orange.darken4,
         accent3: colors.blue.darken4,
 
-        background: '#eee',
+        background: '#f5f5f5',
         lightenedBackground: '#d9d9d9',
         indigoBackground: '#eee',
         text: '#0e0e0e',
