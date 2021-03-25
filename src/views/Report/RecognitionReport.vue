@@ -454,7 +454,7 @@
                       vertical
                       class="mx-2"
                     />
-                    <span> {{ $t("report.recognition.submit") }} </span>
+                    <span> {{ $t("report.recognition.report.submit", {count: selectedResults.length}) }} </span>
                   </v-btn>
                 </v-expand-transition>
 
@@ -478,7 +478,6 @@
 import Item from '@/components/global/Item'
 import Recognizer from '@/utils/recognizer'
 import PreloaderInline from '@/components/global/PreloaderInline'
-import snackbar from '@/utils/snackbar'
 import CDN from '@/mixins/CDN'
 import Theme from '@/mixins/Theme'
 import ImageInput from '@/components/recognition/ImageInput'
@@ -709,7 +708,7 @@ export default {
 
       const userId = Cookies.get(config.authorization.userId.cookieKey)
       await recognitionSubmitter(this, (state, chunk) => {
-        if (state === 'succeeded') {
+        if (state === 'resolve') {
           const reportedUserId = Cookies.get(config.authorization.userId.cookieKey)
           if (userId !== reportedUserId) {
             this.$store.dispatch('auth/login', {
@@ -718,9 +717,8 @@ export default {
           }
           this.submission.submitted.push(chunk)
           this.$ga.event('report', 'submit_batch', 'submit_batch', this.selectedResults.length)
-        } else if (state === 'failed') {
-          this.submission.submitted.push(chunk)
-          snackbar.networkError()
+        } else if (state === 'reject') {
+          this.submission.submitted.push(- chunk)
         }
       })
 
