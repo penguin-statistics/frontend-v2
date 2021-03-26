@@ -6,6 +6,7 @@ import Console from "@/utils/Console";
 import strings from "@/utils/strings";
 import ReportValidator from "@/utils/reportValidator";
 import get from '@/utils/getters'
+import existUtils from "@/utils/existUtils";
 
 async function image2wasmHeapOffset (blob) {
   const Module = window.Module
@@ -95,9 +96,11 @@ class Recognizer {
 
         stages[stage.code] = {
           stageId: stage.stageId,
-          drops: uniq(drops)
+          drops: uniq(drops),
+          existence: existUtils.existence(stage, true)
         }
       })
+
 
     Console.debug('Recognizer', 'init: load: json: preloading with', stages, charHash)
 
