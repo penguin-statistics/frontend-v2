@@ -4,7 +4,7 @@
     :open-delay="0"
     transition="slide-y-transition"
   >
-    <template v-slot:activator="{ on, attrs }">
+    <template #activator="{ on, attrs }">
       <v-btn
         v-haptic
         v-bind="{...$attrs, ...attrs}"

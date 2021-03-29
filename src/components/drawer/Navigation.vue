@@ -36,7 +36,7 @@
     :color="`blue ${dark ? 'lighten-1' : 'darken-2'}`"
     no-action
   >
-    <template v-slot:activator>
+    <template #activator>
       <v-list-item-title>{{ $t(route.meta.i18n) }}</v-list-item-title>
     </template>
 

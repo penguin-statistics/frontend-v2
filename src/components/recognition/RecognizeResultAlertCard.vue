@@ -1,59 +1,65 @@
 <template>
   <div>
-    <template v-for="(alert, index) in alertsWithMessage">
-      <!--      <ReportValidationOutlier-->
-      <!--        v-if="alert.what === 'DropInfos::Violation'"-->
-      <!--        :key="`alert-${index}`"-->
-      <!--        :validation="alert.details"-->
-      <!--      />-->
-      <v-card
-        :key="`alert-${index}`"
-        dark
-        :class="`pa-2 pl-8 ${alert.color} mt-2 position-relative overflow-hidden`"
-      >
-        <v-icon
-          x-large
-          style="position: absolute; left: -10px; top: -6px; opacity: .4"
-        >
-          {{ icon }}
-        </v-icon>
-        <div class="text-break">
-          {{ alert.title }}
-          <span
-            v-if="alert.count > 1"
-            class="ml-1 font-weight-bold"
+    <v-dialog
+      v-model="expanded"
+      :overlay-opacity="0.8"
+      max-width="600px"
+      content-class="elevation-0"
+    >
+      <div v-if="expanded">
+        <div class="d-flex">
+          <h2
+            class="title"
+            v-text="$t('report.recognition.confirm.abnormal.details')"
+          />
+          <v-spacer />
+          <v-btn
+            icon
+            @click="expanded = false"
           >
-            ×{{ alert.count }}
-          </span>
+            <v-icon>
+              mdi-close
+            </v-icon>
+          </v-btn>
         </div>
-        <div
-          v-if="alert.subtitle"
-          class="subtitle-2 degraded-opacity"
-        >
-          {{ alert.subtitle }}
-        </div>
-        <div
-          class="monospace-pure degraded-opacity"
-          style="font-size: 10px; line-height: 1.5"
-        >
-          {{ alert.what }}
-        </div>
-      </v-card>
-    </template>
+
+        <RecognizeResultAlertCardMono
+          v-for="(alert, index) in alertsWithMessage"
+          :key="index"
+          :alert="alert"
+          expanded
+        />
+      </div>
+    </v-dialog>
+
+    <div
+      v-ripple
+      class="cursor-pointer"
+      @click="expanded = true"
+    >
+      <RecognizeResultAlertCardMono
+        v-for="(alert, index) in alertsWithMessage"
+        :key="index"
+        :alert="alert"
+      />
+    </div>
   </div>
 </template>
 
 <script>
+import RecognizeResultAlertCardMono from "@/components/recognition/RecognizeResultAlertCardMono";
 export default {
   name: "RecognizeResultAlertCard",
+  components: {RecognizeResultAlertCardMono},
   props: {
     alerts: {
       type: Array,
       default: () => ([])
     },
-    icon: {
-      type: String,
-      required: true
+  },
+  data() {
+    return {
+      expanded: false
     }
   },
   computed: {

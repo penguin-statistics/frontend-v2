@@ -47,7 +47,7 @@
     <v-card-title class="align-start">
       <div
         v-if="result.result.stage.stageId"
-        class="d-inline-flex flex-row align-start"
+        class="d-flex flex-row align-start flex-wrap"
       >
         <FactTableItem>
           <template #title>
@@ -59,43 +59,20 @@
             </span>
           </template>
         </FactTableItem>
-        <FactTableItem>
-          <template #title>
-            <span class="textDarken--text">{{ $t('report.recognition.confirm.itemsTotal') }}</span>
-          </template>
-          <template #content>
-            <span class="monospace font-weight-bold">
-              ×{{ result.result.drops.reduce((prev, curr) => prev + curr.quantity, 0) }}
-            </span>
-          </template>
-        </FactTableItem>
-      </div>
 
-      <div
-        v-else
-        class="align-self-start mr-4"
-      >
-        {{ $t('report.recognition.confirm.unknownStage') }}
-      </div>
-    </v-card-title>
+        <v-divider
+          v-if="result.result.drops.length"
+          vertical
+          class="mr-2"
+        />
 
-    <v-divider />
-
-    <v-card-text
-      class="pt-2 transition-all position-relative"
-      :class="{
-        'reco-result__wrapper--invalid': hasException,
-        'reco-result__wrapper--invalid-no-results': !result.result.drops.length
-      }"
-    >
-      <div class="reco-result__details">
         <div
           v-for="item in result.result.drops"
           :key="item.itemId"
-          class="d-inline-flex align-center justify-center flex-column pa-2 mt-2 mr-2 border-outlined"
+          class="d-inline-flex align-center justify-center flex-column mr-2"
           style="border-radius: 4px"
         >
-          <div>
+          <div class="caption">
             {{ $t(`stage.loots.${item.dropType}`) || item.dropType }}
           </div>
 
@@ -117,9 +94,28 @@
           </v-badge>
         </div>
       </div>
+
+      <div
+        v-else
+        class="align-self-start mr-4"
+      >
+        {{ $t('report.recognition.confirm.unknownStage') }}
+      </div>
+    </v-card-title>
+
+    <v-divider />
+
+    <v-card-text
+      v-if="hasException"
+      class="pt-2 transition-all position-relative"
+      :class="{
+        'reco-result__wrapper--invalid': hasException,
+        'reco-result__wrapper--invalid-no-results': !result.result.drops.length
+      }"
+    >
       <v-alert
-        v-if="hasException"
         outlined
+        dense
         color="text"
         border="left"
         class="my-4 reco-result__alert"
@@ -128,30 +124,27 @@
         <div>
           <div>{{ $t('report.recognition.confirm.abnormal.' + (result.result.stage.stageCode ? 'error' : 'fatal')) }}</div>
 
-          <div
-            v-if="result.result.drops.length"
-            class="d-inline-flex caption chip-label"
-          >
-            <v-icon
-              left
-              small
-            >
-              mdi-cursor-default-click
-            </v-icon>
-            {{ $t('report.recognition.confirm.abnormal.hover') }}
-          </div>
+          <!--          <div-->
+          <!--            v-if="result.result.drops.length"-->
+          <!--            class="d-inline-flex caption chip-label"-->
+          <!--          >-->
+          <!--            <v-icon-->
+          <!--              left-->
+          <!--              small-->
+          <!--            >-->
+          <!--              mdi-cursor-default-click-->
+          <!--            </v-icon>-->
+          <!--            {{ $t('report.recognition.confirm.abnormal.hover') }}-->
+          <!--          </div>-->
         </div>
 
-        <RecognizeResultAlertCard
-          :alerts="result.result.exceptions"
-          icon="mdi-alert-decagram"
-        />
+        <RecognizeResultAlertCard :alerts="result.result.exceptions" />
       </v-alert>
     </v-card-text>
 
     <v-spacer />
 
-    <v-divider />
+    <v-divider v-if="hasException" />
 
     <v-card-actions class="pa-2">
       <v-card
@@ -239,44 +232,44 @@ export default {
 }
 
 .reco-result {
-  &__wrapper--invalid:not(.reco-result__wrapper--invalid-no-results) {
-    position: relative;
-    transform-origin: top center;
-    $easing: cubic-bezier(0, 0.55, 0.45, 1);
-
-    & .reco-result__details {
-      transition: all .225s $easing;
-      max-height: 108px;
-      opacity: 0.7;
-      transform: scale(0.94);
-      filter: brightness(0.8) contrast(0.6);
-    }
-    & .reco-result__alert {
-      transition: all .225s $easing;
-      margin-top: -68px !important;
-      background: rgba(128, 34, 25, .85) !important;
-      .theme--light & {
-        background: rgba(230, 103, 92, .85) !important;
-      }
-    }
-
-    &:hover {
-      & .reco-result__details {
-        max-height: 600px;
-        opacity: 1;
-        transform: scale(1);
-        filter: brightness(1);
-      }
-      & .reco-result__alert {
-        pointer-events: none;
-        margin-top: -68px !important;
-        filter: blur(5px);
-        opacity: 0.12;
-        background: rgba(128, 34, 25, .2) !important;
-        transform: scale(1.047);
-      }
-    }
-  }
+  //&__wrapper--invalid:not(.reco-result__wrapper--invalid-no-results) {
+  //  position: relative;
+  //  transform-origin: top center;
+  //  $easing: cubic-bezier(0, 0.55, 0.45, 1);
+  //
+  //  //& .reco-result__details {
+  //  //  transition: all .225s $easing;
+  //  //  max-height: 108px;
+  //  //  opacity: 0.7;
+  //  //  transform: scale(0.94);
+  //  //  filter: brightness(0.8) contrast(0.6);
+  //  //}
+  //  & .reco-result__alert {
+  //    transition: all .225s $easing;
+  //    //margin-top: -68px !important;
+  //    background: rgba(128, 34, 25, .85) !important;
+  //    .theme--light & {
+  //      background: rgba(230, 103, 92, .85) !important;
+  //    }
+  //  }
+  //
+  //  //&:hover {
+  //  //  & .reco-result__details {
+  //  //    max-height: 600px;
+  //  //    opacity: 1;
+  //  //    transform: scale(1);
+  //  //    filter: brightness(1);
+  //  //  }
+  //  //  & .reco-result__alert {
+  //  //    pointer-events: none;
+  //  //    margin-top: -68px !important;
+  //  //    filter: blur(5px);
+  //  //    opacity: 0.12;
+  //  //    background: rgba(128, 34, 25, .2) !important;
+  //  //    transform: scale(1.047);
+  //  //  }
+  //  //}
+  //}
 }
 
 .input-white--text ::v-deep  {

@@ -22,7 +22,7 @@
 
       :class="{'pt-0': $vuetify.breakpoint.xsOnly}"
     >
-      <template v-slot:item.item="{ item }">
+      <template #item.item="{ item }">
         <v-row
           align="center"
           class="cursor-pointer item-name pl-1"

@@ -4,7 +4,7 @@
     max-width="350px"
     persistent
   >
-    <template v-slot:activator="props">
+    <template #activator="props">
       <slot v-bind="props" />
     </template>
     <v-card class="slash-strip--danger">

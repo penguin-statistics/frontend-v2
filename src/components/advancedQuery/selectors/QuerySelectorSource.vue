@@ -11,7 +11,7 @@
     transition="slide-y-transition"
     @input="e => $emit('input', e)"
   >
-    <template v-slot:item="{item}">
+    <template #item="{item}">
       {{ $t('dataSource.' + item) }}
       <span class="monospace ml-2">
         {{ item }}
@@ -22,7 +22,7 @@
       </v-icon>
     </template>
 
-    <template v-slot:selection="{item}">
+    <template #selection="{item}">
       {{ $t('dataSource.' + item) }}
     </template>
   </v-select>

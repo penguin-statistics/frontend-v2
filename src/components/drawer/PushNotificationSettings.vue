@@ -4,7 +4,7 @@
     max-width="475px"
     :persistent="dirty"
   >
-    <template v-slot:activator="props">
+    <template #activator="props">
       <slot v-bind="props" />
     </template>
 

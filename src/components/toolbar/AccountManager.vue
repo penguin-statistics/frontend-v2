@@ -108,12 +108,12 @@
             @keyup.enter.native="login"
             @input="emitError"
           >
-            <template v-slot:append-outer>
+            <template #append-outer>
               <v-dialog
                 v-model="historyDialog"
                 max-width="450px"
               >
-                <template v-slot:activator="{ on, attrs }">
+                <template #activator="{ on, attrs }">
                   <TooltipBtn
                     v-bind="attrs"
                     icon

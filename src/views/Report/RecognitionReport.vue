@@ -269,10 +269,10 @@
                     dense
                     class="px-4 py-3 mx-0 border-outlined radius-1"
                   >
-                    <template v-slot:header>
+                    <template #header>
                       {{ $t('report.recognition.filter') }}
                     </template>
-                    <template v-slot:content>
+                    <template #content>
                       <v-checkbox
                         v-for="filter in itemFilters"
                         :key="filter.value"

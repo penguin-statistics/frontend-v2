@@ -240,6 +240,7 @@ report:
       abnormal:
         error: 此张图片未通过质量监测
         fatal: 此张图片无法被识别
+        details: 详细异常列表
         hover: 鼠标悬浮以查看识别内容
       cherryPick:
         disabled: 无法选择异常图片

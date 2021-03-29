@@ -71,7 +71,21 @@ const router = new Router({
       active: true
     },
     children: [
-      routerChildrenNull,
+      {
+        path: '',
+        name: 'RouterChildrenNull',
+        meta: {
+          icon: 'mdi-close',
+          i18n: 'meta.notfound',
+          hide: true
+        },
+        beforeEnter(to, from, next) {
+          return next({
+            name: "ReportByZone",
+            replace: true
+          })
+        }
+      },
       {
         path: 'stage',
         name: 'ReportByZone',

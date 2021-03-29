@@ -5,7 +5,7 @@
     open-on-hover
     transition="slide-y-transition"
   >
-    <template v-slot:activator="{ on, attrs }">
+    <template #activator="{ on, attrs }">
       <v-btn
         v-haptic
         rounded
@@ -103,6 +103,7 @@
 <script>
 import { mapGetters } from 'vuex'
 import supports from '@/models/supports'
+import snackbar from "@/utils/snackbar";
 
 export default {
   name: 'ServerSelector',
@@ -131,6 +132,11 @@ export default {
       this.$store.commit('planner/clearExcludes')
       this.$store.commit('dataSource/changeServer', serverId)
       this.$store.dispatch('data/fetch', false)
+    },
+    notify () {
+      if (this.serverLocked) {
+        snackbar.launch('info', 10000, '进行掉落识别时不可切换服务器。若需切换，请先退出掉落识别页面')
+      }
     }
   }
 }

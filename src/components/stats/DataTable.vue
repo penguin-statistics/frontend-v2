@@ -31,7 +31,7 @@
           v-haptic
           color="background"
         >
-          <template v-slot:default="{ open }">
+          <template #default="{ open }">
             <v-icon
               left
               class="flex-grow-0"
@@ -66,10 +66,10 @@
                 dense
                 class="mt-3 mb-4 mx-0"
               >
-                <template v-slot:header>
+                <template #header>
                   {{ $t('stats.filter.type._name') }}
                 </template>
-                <template v-slot:content>
+                <template #content>
                   <!--                  <v-checkbox-->
                   <!--                    v-model="dataTable.showMainline"-->
                   <!--                    hide-details-->
@@ -100,10 +100,10 @@
                 dense
                 class="mx-0"
               >
-                <template v-slot:header>
+                <template #header>
                   {{ $t('stats.filter.status._name') }}
                 </template>
-                <template v-slot:content>
+                <template #content>
                   <v-switch
                     v-model="dataTable.onlyOpen"
                     v-haptic
@@ -135,7 +135,7 @@
                 dark
                 color="blue accent-4"
               >
-                <template v-slot:default>
+                <template #default>
                   {{ $t('stats.filter.stats', {filtered: filteredData.length, total: items.length}) }}
                 </template>
               </v-progress-linear>
@@ -153,7 +153,7 @@
           <!--              class="mx-4"-->
           <!--            />-->
           <!--            <v-text-field>-->
-          <!--              <template v-slot:append-outer>-->
+          <!--              <template #append-outer>-->
           <!--                <v-btn outlined>-->
           <!--                  <v-icon>-->
           <!--                    mdi-add-->
@@ -217,7 +217,7 @@
       class="elevation-0 transparentTable stat-table container--fluid position-relative"
       :class="{'pt-0': $vuetify.breakpoint.xsOnly}"
     >
-      <template v-slot:header>
+      <template #header>
         <div class="stat-table-watermark d-flex align-center justify-start flex-column text-center px-4">
           <h1 :class="{'display-2 mb-4': !$vuetify.breakpoint.smAndUp, 'display-3 mb-6': $vuetify.breakpoint.smAndUp}">
             {{ currentMirrorHostname }}
@@ -228,55 +228,55 @@
         </div>
       </template>
 
-      <template v-slot:header.stage.apCost="{header}">
+      <template #header.stage.apCost="{header}">
         <HeaderWithTooltip :name="header.text">
           {{ $t('stats.headerDesc.apCost') }}
         </HeaderWithTooltip>
       </template>
 
-      <template v-slot:header.quantity="{header}">
+      <template #header.quantity="{header}">
         <HeaderWithTooltip :name="header.text">
           {{ $t('stats.headerDesc.quantity') }}
         </HeaderWithTooltip>
       </template>
 
-      <template v-slot:header.times="{header}">
+      <template #header.times="{header}">
         <HeaderWithTooltip :name="header.text">
           {{ $t('stats.headerDesc.times') }}
         </HeaderWithTooltip>
       </template>
 
-      <template v-slot:header.percentage="{header}">
+      <template #header.percentage="{header}">
         <HeaderWithTooltip :name="header.text">
           {{ $t('stats.headerDesc.percentage') }}
         </HeaderWithTooltip>
       </template>
 
-      <template v-slot:header.apPPR="{header}">
+      <template #header.apPPR="{header}">
         <HeaderWithTooltip :name="header.text">
           {{ $t('stats.headerDesc.apPPR') }}
         </HeaderWithTooltip>
       </template>
 
-      <template v-slot:header.stage.minClearTime="{header}">
+      <template #header.stage.minClearTime="{header}">
         <HeaderWithTooltip :name="header.text">
           {{ $t('stats.headerDesc.clearTime') }}
         </HeaderWithTooltip>
       </template>
 
-      <template v-slot:header.itemPerTime="{header}">
+      <template #header.itemPerTime="{header}">
         <HeaderWithTooltip :name="header.text">
           {{ $t('stats.headerDesc.itemPerTime') }}
         </HeaderWithTooltip>
       </template>
 
-      <template v-slot:header.timeRange="{header}">
+      <template #header.timeRange="{header}">
         <HeaderWithTooltip :name="header.text">
           {{ $t('stats.headerDesc.timeRange') }}
         </HeaderWithTooltip>
       </template>
 
-      <template v-slot:item="props">
+      <template #item="props">
         <tr :class="{'stat-table__outdated-row': isTimeOutdatedRange(props.item.end)}">
           <template v-if="type === 'stage'">
             <td
@@ -416,7 +416,7 @@
           </td>
         </tr>
       </template>
-      <!--          <template v-slot:item.percentage="{item}">-->
+      <!--          <template #item.percentage="{item}">-->
       <!--            <span class="px-0">-->
       <!--              {{ item.percentageText }}-->
       <!--            </span>-->

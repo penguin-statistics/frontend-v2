@@ -10,9 +10,10 @@
     v-bind="tooltipOptions"
     content-class="transparent backdrop-blur o-100 pa-0"
   >
-    <template v-slot:activator="{ on }">
+    <template #activator="{ on, attrs }">
       <span
         class="d-flex align-center"
+        v-bind="attrs"
         v-on="on"
       >
         <ItemIcon

@@ -20,7 +20,7 @@
 
       <v-card-actions>
         <DataResetter>
-          <template v-slot:default="{ on }">
+          <template #default="{ on }">
             <v-btn
               v-haptic
               color="white"
