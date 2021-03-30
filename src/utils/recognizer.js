@@ -9,35 +9,16 @@ import get from '@/utils/getters'
 import existUtils from "@/utils/existUtils";
 import mirror from "@/utils/mirror";
 
-const recognizerVersion = 'v3.2.2'
+const recognizerVersion = 'v3.2.2-1'
 
 async function image2wasmHeapOffset (blob) {
   const Module = window.Module
-  // console.log('image2wasmHeapOffset: start reading file')
-  // console.time('image2wasmHeapOffset')
-  // const imageData = await new Promise(resolve => {
-  //   const reader = new FileReader()
-  //   reader.onload = (event) => resolve(event.target.result)
-  //   reader.readAsArrayBuffer(blob)
-  // })
   const imageData = await blob.arrayBuffer()
-  // console.log('image2wasmHeapOffset: initializing array')
-  // console.timeLog('image2wasmHeapOffset')
   const uint8 = new Uint8Array(imageData)
   const numBytes = uint8.length
-  // console.log('image2wasmHeapOffset: initialized array')
-  // console.timeLog('image2wasmHeapOffset')
   const dataPtr = Module._malloc(numBytes * Uint8Array.BYTES_PER_ELEMENT)
-  // console.log('image2wasmHeapOffset: allocated wasm memory')
-  // console.timeLog('image2wasmHeapOffset')
   const dataOnHeap = new Uint8Array(Module.HEAPU8.buffer, dataPtr, numBytes)
-  // console.log('image2wasmHeapOffset: created Uint8Array on wasm heap')
-  // console.timeLog('image2wasmHeapOffset')
   dataOnHeap.set(uint8)
-  // console.log('image2wasmHeapOffset: set Uint8Array value on wasm heap')
-  // console.timeEnd('image2wasmHeapOffset')
-
-  // console.log(dataPtr, dataOnHeap.byteLength, dataOnHeap.byteOffset, Module.HEAPU8.buffer, uint8)
 
   return {
     offset: dataPtr,
@@ -62,6 +43,7 @@ class Recognizer {
     } else {
       const script = document.createElement('script')
       script.src = mirror.deliver(`/recognition/${recognizerVersion}/penguin.js`)
+      // script.src = "/penguin.js"
       document.body.appendChild(script)
       await new Promise(resolve => {
         script.onload = function () {
@@ -105,20 +87,21 @@ class Recognizer {
       })
 
 
-    Console.debug('Recognizer', 'init: load: json: preloading with', stages, charHash)
+    Console.debug('Recognizer', 'init: preload json: preloading with', stages, charHash)
 
     this.wasm.load_json(
       JSON.stringify(stages),
       JSON.stringify(charHash)
     )
 
-    Console.debug('Recognizer', 'init: load: server: preloading with', server)
+    Console.debug('Recognizer', 'init: preload server: preloading with', server)
 
     this.wasm.load_server(server)
 
-    Console.info('Recognizer', 'init: load: icons: preloading')
+    Console.info('Recognizer', 'init: preload icons: preloading')
 
     await fetch(mirror.deliver(`/recognition/${recognizerVersion}/items.zip`))
+    // await fetch("/items.zip")
       .then((response) => {
         if (response.status >= 200 && response.status < 400) {
           return Promise.resolve(response.blob())
@@ -132,7 +115,7 @@ class Recognizer {
         zip.forEach((relativePath, file) => {
           imageBuffer.push(new Promise(resolve => {
             const item = file.name.split('.')[0]
-            // console.log('adding', item, 'to preloaded item icon')
+            Console.debug('Recognizer', 'init: preload icons: adding', item, 'to preloaded item icon')
             file.async('blob').then(async (blob) => {
               const { offset, length } = await image2wasmHeapOffset(blob, file.name)
               this.wasm.load_tmpl(item, offset, length)
@@ -143,7 +126,7 @@ class Recognizer {
       })
 
 
-    Console.info('Recognizer', 'init: load: icons: preloaded')
+    Console.info('Recognizer', 'init: preload icons: preloaded')
 
     const version = this.wasm.get_info()
 
@@ -209,16 +192,14 @@ class Recognizer {
         const stage = get.stages.byStageId(parsedResult.stage.stageId)
         const zone = get.zones.byZoneId(stage.zoneId)
 
-        console.log('validate drops')
-        console.time('validateDrops')
+        Console.debug('Recognizer', 'validating drops', parsedResult)
         const validate = new ReportValidator(
           this.instanceInfo.server,
           zone,
           stage,
           parsedResult.drops
         ).validate()
-        console.timeEnd('validateDrops')
-        console.log('validation result', validate)
+        Console.debug('Recognizer', 'validated with result', validate)
 
         if (validate.rate > 0) {
           parsedResult.exceptions.push({

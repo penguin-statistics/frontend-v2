@@ -620,7 +620,6 @@ export default {
       ]
     },
     reportTableData () {
-      console.time('reportTableData')
       const map = {}
       for (const recognitionResult of this.selectedResults) {
         const stage = get.stages.byStageId(recognitionResult.result.stage.stageId)
@@ -644,7 +643,6 @@ export default {
 
       const results = []
       for (const [stage, val] of Object.entries(map)) results.push({ stage, ...val })
-      console.timeEnd('reportTableData')
       return {
         results,
         total: {
@@ -812,7 +810,6 @@ export default {
       })
     },
     applyPostRecognitionRules (results) {
-      console.time('applyPostRecognitionRules')
       const timestamps = results.map(value => value.file.lastModified)
       const fingerprints = results.map(value => value.result.fingerprint)
 
@@ -839,7 +836,6 @@ export default {
           value.result.exceptions.push({ what: 'Fingerprint::Same' })
         }
       })
-      console.timeEnd('applyPostRecognitionRules')
       return Object.freeze(results)
     }
   }
