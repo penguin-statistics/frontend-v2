@@ -16,13 +16,13 @@
       :locale="$i18n.locale"
       hide-default-footer
 
-      :mobile-breakpoint="1"
+      :mobile-breakpoint="0"
 
       class="elevation-0 transparentTable container--fluid mx-4 font-weight-bold monospace trend-table"
 
       :class="{'pt-0': $vuetify.breakpoint.xsOnly}"
     >
-      <template v-slot:item.item="{ item }">
+      <template #item.item="{ item }">
         <v-row
           align="center"
           class="cursor-pointer item-name pl-1"
@@ -65,71 +65,71 @@
 </template>
 
 <script>
-  import Theme from "@/mixins/Theme";
-  import get from "@/utils/getters";
-  import strings from "@/utils/strings";
-  import Item from "@/components/global/Item";
+import Theme from '@/mixins/Theme'
+import get from '@/utils/getters'
+import strings from '@/utils/strings'
+import Item from '@/components/global/Item'
 
-  export default {
-    name: "SiteStatsItem",
-    components: {Item},
-    mixins: [Theme],
-    props: {
-      data: {
-        type: Array,
-        required: true
-      },
-    },
-    data() {
-      return {
-        page: 1,
-        options: {
-          table: {
-            itemsPerPage: 10
-          }
+export default {
+  name: 'SiteStatsItem',
+  components: { Item },
+  mixins: [Theme],
+  props: {
+    data: {
+      type: Array,
+      required: true
+    }
+  },
+  data () {
+    return {
+      page: 1,
+      options: {
+        table: {
+          itemsPerPage: 10
         }
       }
+    }
+  },
+  computed: {
+    items () {
+      return this.data.map(el => Object.assign({}, el)).map(el => {
+        el.item = get.items.byItemId(el.itemId, false, false)
+        return el
+      })
     },
-    computed: {
-      items() {
-        return this.data.map(el => Object.assign({}, el)).map(el => {
-          el.item = get.items.byItemId(el.itemId, false, false);
-          return el
-        })
-      },
-      headers() {
-        return [
-          {
-            text: this.$t("stats.headers.item"),
-            value: "item",
-            align: "left",
-            sortable: false,
-            width: "250px"
-          },
-          {
-            text: this.$t("stats.headers.quantity"),
-            value: "quantity",
-            align: "left",
-            sortable: true,
-            width: "100px"
-          }
-        ]
-      },
-      strings () {
-        return strings
-      }
+    headers () {
+      return [
+        {
+          text: this.$t('stats.headers.item'),
+          value: 'item',
+          align: 'left',
+          sortable: false,
+          width: '250px'
+        },
+        {
+          text: this.$t('stats.headers.quantity'),
+          value: 'quantity',
+          align: 'left',
+          sortable: true,
+          width: '100px'
+        }
+      ]
     },
-    methods: {
-      redirect(itemId) {
-        this.$router.push({
-          name: "StatsByItem_SelectedItem",
-          params: {
-            itemId
-          }
-        });
-      },
-    },
+    strings () {
+      return strings
+    }
+  },
+  methods: {
+    redirect (itemId) {
+      this.$router.push({
+        name: 'StatsByItem_SelectedItem',
+        params: {
+          itemId
+        }
+      })
+    }
   }
+}
 </script>
 
 <style scoped>

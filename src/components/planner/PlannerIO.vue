@@ -34,7 +34,7 @@
       <!--                :class="{'primary': !shortlink.generating, 'slash-strip&#45;&#45;loading': shortlink.generating}"-->
       <!--                @click="generateShortlink"-->
       <!--              >-->
-      <!--                <template v-slot:loader>-->
+      <!--                <template #loader>-->
       <!--                  <v-progress-circular-->
       <!--                    indeterminate-->
       <!--                    :size="16"-->
@@ -49,7 +49,6 @@
       <!--                生成短链接-->
       <!--              </v-btn>-->
       <!--            </v-fade-transition>-->
-      
 
       <Subheader>
         {{ $t('planner.actions.config._name') }}
@@ -109,7 +108,7 @@
     </v-card-text>
 
     <v-divider />
-    
+
     <v-card-actions>
       <v-spacer />
       <v-btn
@@ -124,98 +123,98 @@
 </template>
 
 <script>
-  import * as clipboard from "clipboard-polyfill";
-  import Subheader from "@/components/global/Subheader";
-  import snackbar from "@/utils/snackbar";
-  import marshaller from "@/utils/marshaller";
-  import unmarshaller from "@/utils/unmarshaller";
-  import Console from "@/utils/Console";
-  export default {
-    name: "PlannerIO",
-    components: {Subheader},
-    props: {
-      config: {
-        type: Object,
-        required: true
-      }
-    },
-    data() {
+import * as clipboard from 'clipboard-polyfill'
+import Subheader from '@/components/global/Subheader'
+import snackbar from '@/utils/snackbar'
+import marshaller from '@/utils/marshaller'
+import unmarshaller from '@/utils/unmarshaller'
+import Console from '@/utils/Console'
+export default {
+  name: 'PlannerIO',
+  components: { Subheader },
+  props: {
+    config: {
+      type: Object,
+      required: true
+    }
+  },
+  data () {
+    return {
+      shortlink: {
+        generating: false,
+        content: null
+      },
+      importConfig: ''
+    }
+  },
+  computed: {
+    rendered () {
       return {
-        shortlink: {
-          generating: false,
-          content: null
-        },
-        importConfig: ""
+        config: JSON.stringify(marshaller.planner.config(this.config))
       }
+    }
+  },
+  watch: {
+    config () {
+      this.shortlink.content = null
+    }
+  },
+  methods: {
+    generateShortlink () {
+      this.shortlink.generating = true
+      setTimeout(() => {
+        this.shortlink.generating = false
+        this.shortlink.content = 'https://exusi.ai/foobar'
+      }, 3000)
     },
-    computed: {
-      rendered() {
-        return {
-          config: JSON.stringify(marshaller.planner.config(this.config))
-        }
-      }
-    },
-    watch: {
-      config () {
-        this.shortlink.content = null
-      }
-    },
-    methods: {
-      generateShortlink() {
-        this.shortlink.generating = true
-        setTimeout(() => {
-          this.shortlink.generating = false
-          this.shortlink.content = "https://exusi.ai/foobar"
-        }, 3000)
-      },
-      copy (content) {
-        clipboard.writeText(content)
-          .then(() => {
-            snackbar.launch("success", 5000, "clipboard.success")
-          })
-          .catch(() => {
-            snackbar.launch("error", 5000, "clipboard.error")
-          })
-      },
-      doImport() {
-        const unmarshalled = unmarshaller.planner.config.auto(this.importConfig)
-
-        if (unmarshalled.exception) {
-          return snackbar.launch("error", 5000, `planner.import.${unmarshalled.exception}`)
-        }
-
-        let importedCounter = 0;
-
-        const currentItems = this.$store.getters["planner/config"].items
-
-        for (const item of currentItems) {
-          const toImportItem = unmarshalled.converted.items.find(el => el.id === item.id)
-          if (toImportItem) {
-            item.have = toImportItem.have || 0
-            item.need = toImportItem.need || 0
-            importedCounter++
-          }
-        }
-
-        this.$store.commit("planner/changeItems", currentItems)
-
-        if (unmarshalled.converted.options) {
-          const options = Object.assign(this.config.options, unmarshalled.converted.options);
-          this.$store.commit("planner/changeOptions", options)
-        }
-
-        if (unmarshalled.converted.excludes) {
-          this.$store.commit("planner/changeExcludes", unmarshalled.converted.excludes)
-        }
-
-        snackbar.launch("success", 5000, "planner.import.success", {
-          amount: importedCounter
+    copy (content) {
+      clipboard.writeText(content)
+        .then(() => {
+          snackbar.launch('success', 5000, 'clipboard.success')
         })
-
-        Console.info("PlannerIO", "unmarshalled import config", unmarshalled)
-      }
+        .catch(() => {
+          snackbar.launch('error', 5000, 'clipboard.error')
+        })
     },
+    doImport () {
+      const unmarshalled = unmarshaller.planner.config.auto(this.importConfig)
+
+      if (unmarshalled.exception) {
+        return snackbar.launch('error', 5000, `planner.import.${unmarshalled.exception}`)
+      }
+
+      let importedCounter = 0
+
+      const currentItems = this.$store.getters['planner/config'].items
+
+      for (const item of currentItems) {
+        const toImportItem = unmarshalled.converted.items.find(el => el.id === item.id)
+        if (toImportItem) {
+          item.have = toImportItem.have || 0
+          item.need = toImportItem.need || 0
+          importedCounter++
+        }
+      }
+
+      this.$store.commit('planner/changeItems', currentItems)
+
+      if (unmarshalled.converted.options) {
+        const options = Object.assign(this.config.options, unmarshalled.converted.options)
+        this.$store.commit('planner/changeOptions', options)
+      }
+
+      if (unmarshalled.converted.excludes) {
+        this.$store.commit('planner/changeExcludes', unmarshalled.converted.excludes)
+      }
+
+      snackbar.launch('success', 5000, 'planner.import.success', {
+        amount: importedCounter
+      })
+
+      Console.info('PlannerIO', 'unmarshalled import config', unmarshalled)
+    }
   }
+}
 </script>
 
 <style scoped>

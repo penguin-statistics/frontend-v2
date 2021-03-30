@@ -6,15 +6,15 @@ const trends = new ObjectManager({
   api: {
     serverSensitive: true,
 
-    url: (server) => `/_private/result/trend/${server}`,
+    url: (server) => `/_private/result/trend/${server}`
   },
   transform: [
     (object) => {
-      return object["trend"]
-    },
+      return object.trend
+    }
   ],
   ttl: 1000 * 60 * 60 * 24, // 24 hours
   ajaxHooks: commons.defaultAjaxHooks
-});
+})
 
 export default trends

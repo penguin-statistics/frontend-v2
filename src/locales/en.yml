@@ -13,9 +13,13 @@ server:
     JP: JP
     KR: KR
 menu:
+  _beta: Beta
   home: Home
   search: Search
-  report: Report Drops
+  report:
+    _name: Report Drops
+    stage: Select By Stage
+    recognition: Recognition
   stats:
     _name: Drop Rates
     stage: By stage
@@ -47,7 +51,7 @@ menu:
     planner: ArkPlanner
 meta:
   details: Details
-  loading: Fetching application data...
+  loading: Loading...
   notfound: "???"
   footer:
     copyright:
@@ -72,10 +76,12 @@ meta:
     cancel: Cancel
     confirm: Confirm
     submit: Submit
+    save: Save
     close: Close
   time:
     minute: "{m}m"
     second: "{s}s"
+  isAre: "is | are"
   copyWarning: |2-
 
 
@@ -86,6 +92,7 @@ stats:
     stage: Stage
     apCost: Sanity
     item: Item
+    itemDrops: Aggregated Item Drops
     times: Samples
     quantity: Loots
     percentage: Percentage
@@ -192,14 +199,140 @@ report:
     contact:
       before: 'If you are sure you got this drop in-game, submit this report and '
       activator: contact us.
-      after: Please indicate the stage name and drops. A screenshot is preferred for
-        verification purposes. Our team will mark your report appropiately after verifying
-        it.
+      after: Please indicate the stage name and drops. A screenshot is preferred for verification purposes. Our team will mark your report appropiately after verifying it.
     causes:
       noDrop: No items selected.
-      limitation: Your current submission has a large deviation from our existing
-        data. This submission could be marked as a false report, removing it from
-        our data set.
+      limitation: Your current submission has a large deviation from our existing data. This submission could be marked as a false report, removing it from our data set.
+  recognition:
+    step:
+      select: Select Images
+      recognize: Recognize
+      confirm: Confirm
+      report: Report
+    tips:
+      fileTooBig: "File \"{name}\" with size of {size}MB is too large"
+      fileTooOld: "File \"{name}\" was created before 36hrs ago"
+      chooseImage: Click or drag to add an image
+      dragImage: Drag an image here
+      addImage: Click to add an image
+      copyImage: Right click or long press the image to share it
+      abnormal: "{count} image(s) have been \"excluded\" because they either failed to pass legibility test, or failed to be recognized"
+      notImageFile: "\"{files}\" are not image files, ignored."
+      emptyResult: No results available
+      unsatisfiedStart: Unable to Start
+      emptyFile: No images selected
+      hasInvalidFile: Contains invalid file
+    status:
+      success: Success
+      warning: Warning
+      error: Error
+    description: "Boost your upload efficiency by simply choosing your drop screenshots and let us handle the rest."
+    recognize:
+      noFilename: No Filename
+      elapsed: Elapsed
+      remaining: Remaining
+      speed: Avg Speed
+      imagePerSecond: "{count} images/sec"
+    confirm:
+      loadingImage: Loading Screenshot Preview
+      overview:
+        _name: Overview
+        total: Recognized
+        success: Passed
+        error: Failed
+        count: "{count}"
+        server: Dataset Server
+        duration: Avg Time Taken
+      details: Details
+      unknownStage: Recognition Failed
+      abnormal:
+        error: This image failed to pass the legibility test
+        fatal: This image failed to be recognized
+        details: List of Errors
+        hover: "Hover: see recognition results"
+      cherryPick:
+        disabled: "Unable to upload abnormal recognition result"
+        accepted: "Upload this result"
+        rejected: "Discard this result"
+      noResult: No recognition results
+      submit: "Upload Selected (×{count}) Results"
+      itemsTotal: Items
+    report:
+      title: Report Details
+      total: Total
+      submit: Report {count} battle results
+      reporting: Reporting in bulk...
+      allSucceeded: "{count} battle results successfully reported"
+      partialSucceeded: "Only {count} battle results successfully reported"
+      partialFailed: "{count} failed battle result reports. Please follow the troubleshooting steps below"
+      partialFailedDesc:
+        - "Check your network connection: The upload may be failed if the network connection is poor."
+        - "In order to ensure that the entire site data set is not affected by external attacks, if you still cannot upload after multiple retries, your submission volume may have triggered the reporting limit. Please try again after 24 hours to upload the remaining drop reports."
+        - "Your IP may be shared with others, because individuals cannot be located due to the nature of IP. In this case, please try to switch your mobile network or WiFi to retry recognition, or you can retry uploading after 24 hours."
+        - "To prevent retransmission attacks, we will attach a timestamp to your request; if the time of your device is too far from the standard time, the upload may fail. Please try to calibrate the device time and try again."
+      caption: "Thanks for reporting. Your data will be revealed in the global dataset of website in 20 minutes at most because of cache."
+    states:
+      pending: Waiting for initialization...
+      initializing: Initializing...
+      recognizing: Recognizing...
+      rendering: Rendering content...
+      submitting: Submitting...
+
+    cost: Cost
+    filename: Filename
+    result: Result
+    queue: Image Queue
+    start: Recognize {count} images
+    progress: Progress
+    submit: Submit
+    retry: "Failed to submit. Retrying..."
+    filter: Filter
+    notices:
+      welcome:
+        - "Image files will be recognized **locally** using **WebAssembly** technology. We will not upload images to our server."
+        - "Please use screenshots taken within 36 hours that contains only 3-stars clear. Duplications will be detected and marked as *excluded*."
+        - "Please do not report the first-clear of a stage, and do not only report the clears where you were lucky - report all clears."
+      confirm:
+        - Click the image to enlarge it for double-checking.
+        - Screenshots which passed the legibility test have already been checked for upload.
+        - With consideration of dataset accuracy, you are **disallowed** to check a screenshot that failed the legibility test for upload.
+    exceptions:
+      "Fingerprint::Same":
+        title: Duplicated Images
+        subtitle: Check if you have selected duplicated images
+      "FileTimestamp::TooClose":
+        title: Screenshot Interval too close
+        subtitle: Check if you have selected duplicated images
+      "DropInfos::Violation": Failed to pass result validation
+      "StageChar::LowConfidence":
+        title: Error in stage recognition
+        subtitle: Low confidence in the recognition result. Please check if the result is consistent with the screenshot.
+      "DropQuantityChar::LowConfidence":
+        title: Error in item quantity recognition
+        subtitle: Low confidence in the recognition result. Please check if the result is consistent with the screenshot.
+      "DropQuantity::NotFound":
+        title: Failed to recognize the drop quantity
+        subtitle: Pictures with poor resolution or quality may cause this problem. Please check if the image is compressed
+      "Drops::LowConfidence":
+        title: Low Confidence Drop Item
+        subtitle: Check if you have selected a screenshot in which its content includes a closed event
+      "Drops::Illeagal":
+        title: Illegal drops found
+        subtitle: There should be no drop in this stage, but there are some in the screenshot. This is usually caused by event drop during non-event period
+      "Result::False":
+        title: Not a battle result screenshot
+        subtitle: If this is a battle result screenshot, please make sure the server you select is correct
+      "Stage::NotFound":
+        title: Cannot found any valid matching stage
+        subtitle: Error in stage recognition, or we do not count drop for this stage
+      "Stage::Illeagal":
+        title: Illegal stage
+        subtitle: This stage is not opening now
+      "3stars::False": Suspected to be a non 3-stars clear
+      "DropType::Illeagal":
+        title: Illegal drop type
+        subtitle: There are illegal drop types in the screenshot, like first-clear or return AP
+      "DropType::NotFound": Failed to find any drop type
   rules:
     item:
       _name: Item Quantities
@@ -391,6 +524,7 @@ item:
     FURN: Furniture
     MATERIAL: Materials
   related: Related Items
+  undefined: Unknown
 query:
   panel:
     builder: Query Builder
@@ -507,6 +641,8 @@ members:
     materials: Materials Supplier
     statistics: Statistics and Analysis
     widget: Widget Development
+    native: App Development
+    recognition: Screenshot Recognition
   socials:
     email: Email
     github: GitHub
@@ -532,3 +668,6 @@ share:
 search:
   placeholder: Search...
   hint: Type in Name for Stage, Zone or Item
+confirmLeave:
+  title: Are you sure to leave?
+  subtitle: Unsaved changes may lost.

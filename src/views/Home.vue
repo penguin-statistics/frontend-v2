@@ -29,6 +29,18 @@
         <SiteStatsOverview class="card-translate-up" />
       </v-col>
 
+      <!--      <v-col-->
+      <!--        cols="12"-->
+      <!--      >-->
+      <!--        <Banner class="card-translate-up" />-->
+      <!--      </v-col>-->
+
+      <!--      <v-col-->
+      <!--        cols="12"-->
+      <!--      >-->
+      <!--        <Banner class="card-translate-up" />-->
+      <!--      </v-col>-->
+
       <v-col
         cols="12"
         lg="6"
@@ -50,14 +62,6 @@
         />
       </v-col>
 
-      <!--      <v-flex-->
-      <!--        xs12-->
-      <!--        sm6-->
-      <!--      >-->
-      <!--        <Contact-->
-      <!--          -->
-      <!--        />-->
-      <!--      </v-flex>-->
       <v-col
         cols="12"
         md="6"
@@ -96,23 +100,31 @@
 </template>
 
 <script>
-import Contribute from "@/views/About/Contribute";
-import Donate from "@/views/About/Donate";
-import Intro from "@/views/About/Intro";
-import Bulletin from "@/views/About/Bulletin";
-import Contact from "@/views/About/Contact";
-import anime from 'animejs';
-import License from "@/views/About/License";
-import Console from "@/utils/Console";
-import GettingStarted from "@/views/About/GettingStarted";
-import SiteStatsOverview from "@/components/stats/SiteStatsOverview";
-import HomeSearch from "@/views/About/HomeSearch";
+import Contribute from '@/views/About/Contribute'
+import Donate from '@/views/About/Donate'
+import Intro from '@/views/About/Intro'
+import Bulletin from '@/views/About/Bulletin'
+import Contact from '@/views/About/Contact'
+import anime from 'animejs'
+import License from '@/views/About/License'
+import Console from '@/utils/Console'
+import GettingStarted from '@/views/About/GettingStarted'
+import SiteStatsOverview from '@/components/stats/SiteStatsOverview'
+import HomeSearch from '@/views/About/HomeSearch'
 
 export default {
-  name: "Home",
+  name: 'Home',
   components: {
     HomeSearch,
-    SiteStatsOverview, GettingStarted, License, Contribute, Donate, Intro, Bulletin, Contact },
+    SiteStatsOverview,
+    GettingStarted,
+    License,
+    Contribute,
+    Donate,
+    Intro,
+    Bulletin,
+    Contact
+  },
   data: () => ({}),
   mounted () {
     setTimeout(() => {
@@ -123,7 +135,7 @@ export default {
           opacity: [0, 1],
           duration: 625,
           delay: anime.stagger(75),
-          easing: "easeOutQuint"
+          easing: 'easeOutQuint'
         })
         anime({
           targets: ['.card-translate-up h1', '.card-translate-up h2', '.card-translate-up p', '.card-translate-up span:not(.v-btn__content)'],
@@ -131,18 +143,18 @@ export default {
           opacity: [0, 1],
           duration: 625,
           delay: anime.stagger(25),
-          easing: "easeOutQuint"
+          easing: 'easeOutQuint'
         })
         anime({
           targets: ['.card-fade-appear'],
           scaleY: [1.1, 1],
           duration: 325,
-          easing: "easeOutQuint"
+          easing: 'easeOutQuint'
         })
       } catch (e) {
-        Console.warn("HomeAnimation", "error when animating home entry animation", e)
+        Console.warn('HomeAnimation', 'error when animating home entry animation', e)
       }
-    }, 0);
+    }, 0)
 
     // this.$nextTick(() => {
     //   setTimeout(() => {
@@ -173,8 +185,8 @@ export default {
     //   }, 5000)
     //
     // })
-  },
-};
+  }
+}
 </script>
 
 <style scoped>

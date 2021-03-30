@@ -10,9 +10,10 @@
     v-bind="tooltipOptions"
     content-class="transparent backdrop-blur o-100 pa-0"
   >
-    <template v-slot:activator="{ on }">
+    <template #activator="{ on, attrs }">
       <span
         class="d-flex align-center"
+        v-bind="attrs"
         v-on="on"
       >
         <ItemIcon
@@ -41,83 +42,83 @@
 </template>
 
 <script>
-  import ItemIcon from "@/components/global/ItemIcon";
-  import strings from "@/utils/strings";
-  import PreviewItemCard from "@/components/stats/PreviewItemCard";
-  import environment from "@/utils/environment";
-  export default {
-    name: "Item",
-    components: {PreviewItemCard, ItemIcon},
-    props: {
-      item: {
-        type: Object,
-        required: true
-      },
-      ratio: {
-        type: Number,
-        default() {
-          return 0.75;
-        }
-      },
-      disableTooltip: {
-        type: Boolean,
-        default() {
-          return false;
-        }
-      },
-      disableOverviewCard: {
-        type: Boolean,
-        default() {
-          return false;
-        }
-      },
-      tooltipNudge: {
-        type: Number,
-        default () {
-          return 0
-        }
-      },
-      right: {
-        type: Boolean,
-        default () {
-          return false
-        }
-      },
-      bottom: {
-        type: Boolean,
-        default () {
-          return true
-        }
-      },
-      contentClass: {
-        type: String,
-        default () {
-          return ""
-        }
+import ItemIcon from '@/components/global/ItemIcon'
+import strings from '@/utils/strings'
+import PreviewItemCard from '@/components/stats/PreviewItemCard'
+import environment from '@/utils/environment'
+export default {
+  name: 'Item',
+  components: { PreviewItemCard, ItemIcon },
+  props: {
+    item: {
+      type: Object,
+      required: true
+    },
+    ratio: {
+      type: Number,
+      default () {
+        return 0.75
       }
     },
-    data() {
+    disableTooltip: {
+      type: Boolean,
+      default () {
+        return false
+      }
+    },
+    disableOverviewCard: {
+      type: Boolean,
+      default () {
+        return false
+      }
+    },
+    tooltipNudge: {
+      type: Number,
+      default () {
+        return 0
+      }
+    },
+    right: {
+      type: Boolean,
+      default () {
+        return false
+      }
+    },
+    bottom: {
+      type: Boolean,
+      default () {
+        return true
+      }
+    },
+    contentClass: {
+      type: String,
+      default () {
+        return ''
+      }
+    }
+  },
+  data () {
+    return {
+      showTooltip: false
+    }
+  },
+  computed: {
+    name () {
+      return strings.translate(this.item, 'name')
+    },
+    tooltipOptions () {
       return {
-        showTooltip: false
-      };
-    },
-    computed: {
-      name() {
-        return strings.translate(this.item, "name")
-      },
-      tooltipOptions () {
-        return {
-          [this.bottom ? 'nudgeTop' : 'nudgeLeft']: this.tooltipNudge,
-          [this.bottom ? 'nudgeBottom' : 'null']: this.tooltipNudge,
-          transition: this.bottom ? "slide-y-transition" : "slide-x-transition"
-        }
-      },
-      disableTooltipCalculated () {
-        // always disable tooltip on environment that cannot support hover
-        return !environment.canHover || this.disableTooltip
+        [this.bottom ? 'nudgeTop' : 'nudgeLeft']: this.tooltipNudge,
+        [this.bottom ? 'nudgeBottom' : 'null']: this.tooltipNudge,
+        transition: this.bottom ? 'slide-y-transition' : 'slide-x-transition'
       }
     },
-  };
+    disableTooltipCalculated () {
+      // always disable tooltip on environment that cannot support hover
+      return !environment.canHover || this.disableTooltip
+    }
+  }
+}
 </script>
 
 <style scoped>

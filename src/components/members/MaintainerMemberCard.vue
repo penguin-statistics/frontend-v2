@@ -53,23 +53,23 @@
 </template>
 
 <script>
-import CDN from "@/mixins/CDN";
-import humans from "@/utils/humans";
-import MemberResponsibility from "@/components/members/MemberResponsibility";
+import CDN from '@/mixins/CDN'
+import humans from '@/utils/humans'
+import MemberResponsibility from '@/components/members/MemberResponsibility'
 
 export default {
-  name: "MaintainerMemberCard",
-  components: {MemberResponsibility},
+  name: 'MaintainerMemberCard',
+  components: { MemberResponsibility },
   mixins: [CDN],
   props: {
     member: {
       type: Object,
       required: true
-    },
+    }
   },
   methods: {
     getSocial: humans.getSocial
-  },
+  }
 }
 </script>
 

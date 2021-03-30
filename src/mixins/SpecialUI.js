@@ -17,5 +17,5 @@ export default {
       // return time && this.$i18n.locale === "zh"
       return false
     }
-  },
+  }
 }

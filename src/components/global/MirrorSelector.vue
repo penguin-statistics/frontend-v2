@@ -108,108 +108,109 @@
 </template>
 
 <script>
-  import Theme from "@/mixins/Theme";
-  import external from "@/apis/external";
-  import Console from "@/utils/Console";
-  import Mirror from "@/mixins/Mirror";
-  import {mapGetters} from "vuex";
+import Theme from '@/mixins/Theme'
+import external from '@/apis/external'
+import Console from '@/utils/Console'
+import Mirror from '@/mixins/Mirror'
+import { mapGetters } from 'vuex'
+import environment from '@/utils/environment'
 
-  export default {
-    name: "MirrorSelector",
-    mixins: [Theme, Mirror],
-    data() {
-      return {
-        enabled: false,
-        mirror: null, // must be "cn" or "global"
-        dialog: false,
-        busy: false
-      }
+export default {
+  name: 'MirrorSelector',
+  mixins: [Theme, Mirror],
+  data () {
+    return {
+      enabled: false,
+      mirror: null, // must be "cn" or "global"
+      dialog: false,
+      busy: false
+    }
+  },
+  computed: {
+    ...mapGetters('mirror', ['ignoreNotification']),
+    color () {
+      return this.dark ? 'white' : 'black'
     },
-    computed: {
-      ...mapGetters("mirror", ["ignoreNotification"]),
-      color() {
-        return this.dark ? "white" : "black";
-      },
-      link () {
-        if (this.mirror === "cn") {
-          return {
-            t: "penguin-stats.cn",
-            v: "https://penguin-stats.cn/?utm_source=penguin-stats&utm_medium=mirror-notification"
-          }
-        } else if (this.mirror === "global") {
-          return {
-            t: "penguin-stats.io",
-            v: "https://penguin-stats.io/?utm_source=penguin-stats&utm_medium=mirror-notification"
-          }
-        } else {
-          return null
+    link () {
+      if (this.mirror === 'cn') {
+        return {
+          t: 'penguin-stats.cn',
+          v: 'https://penguin-stats.cn/?utm_source=penguin-stats&utm_medium=mirror-notification'
         }
-      }
-    },
-    created () {
-      if (this.ignoreNotification) {
-        Console.info("MirrorSelector", "ignored notification")
+      } else if (this.mirror === 'global') {
+        return {
+          t: 'penguin-stats.io',
+          v: 'https://penguin-stats.io/?utm_source=penguin-stats&utm_medium=mirror-notification'
+        }
       } else {
-        external.geoip()
-          .then(({data}) => {
-            Console.info("MirrorSelector", "successfully retrived geoip info", data)
-            if (data["country_code"] === "CN") {
-              this.mirror = "cn"
-            } else {
-              this.mirror = "global"
-            }
-            if (
-              (this.isCNMirror && this.mirror === "global") ||
-              (!this.isCNMirror && this.mirror === "cn")
-            ) {
-              this.enabled = true
-              this.$ga.event(
-                'mirror',
-                'notification',
-                'opened',
-                this.mirror
-              )
-            }
-            Console.info("MirrorSelector", "current mirror:", this.mirror, "| popup?", this.enabled)
-          })
-          .catch((err) => {
+        return null
+      }
+    }
+  },
+  created () {
+    if (this.ignoreNotification || environment.isApp) {
+      Console.info('MirrorSelector', 'ignored notification')
+    } else {
+      external.geoip()
+        .then(({ data }) => {
+          Console.info('MirrorSelector', 'successfully retrived geoip info', data)
+          if (data.country_code === 'CN') {
+            this.mirror = 'cn'
+          } else {
+            this.mirror = 'global'
+          }
+          if (
+            (this.isCNMirror && this.mirror === 'global') ||
+              (!this.isCNMirror && this.mirror === 'cn')
+          ) {
+            this.enabled = true
             this.$ga.event(
               'mirror',
               'notification',
-              'get_ip_failed'
+              'opened',
+              this.mirror
             )
-            Console.warn("MirrorSelector", "failed to refresh geoip information", err)
-          })
-      }
-    },
-    methods: {
-      ignore() {
-        this.enabled = false;
-        this.$store.commit("mirror/changeIgnoreNotification", true)
-        this.dialog = false;
-        this.$ga.event(
-          'mirror',
-          'notification',
-          'ignored',
-          this.mirror
-        )
-      },
-      redirect(link) {
-        this.$store.commit("mirror/changePreference", this.mirror)
-        this.busy = true
-        this.$ga.event(
-          'mirror',
-          'notification',
-          'redirected',
-          this.mirror,
-          {
-            transport: 'beacon'
           }
-        )
-        window.location = link;
-      }
+          Console.info('MirrorSelector', 'current mirror:', this.mirror, '| popup?', this.enabled)
+        })
+        .catch((err) => {
+          this.$ga.event(
+            'mirror',
+            'notification',
+            'get_ip_failed'
+          )
+          Console.warn('MirrorSelector', 'failed to refresh geoip information', err)
+        })
+    }
+  },
+  methods: {
+    ignore () {
+      this.enabled = false
+      this.$store.commit('mirror/changeIgnoreNotification', true)
+      this.dialog = false
+      this.$ga.event(
+        'mirror',
+        'notification',
+        'ignored',
+        this.mirror
+      )
     },
+    redirect (link) {
+      this.$store.commit('mirror/changePreference', this.mirror)
+      this.busy = true
+      this.$ga.event(
+        'mirror',
+        'notification',
+        'redirected',
+        this.mirror,
+        {
+          transport: 'beacon'
+        }
+      )
+      window.location = link
+    }
   }
+}
 </script>
 
 <style>

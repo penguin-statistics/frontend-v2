@@ -8,7 +8,7 @@
     :label="$t('menu.settings.themes.name')"
     transition="slide-y-transition"
   >
-    <template v-slot:item="{ item }">
+    <template #item="{ item }">
       <v-icon
         left
       >
@@ -20,7 +20,7 @@
         mdi-check
       </v-icon>
     </template>
-    <template v-slot:selection="{item}">
+    <template #selection="{item}">
       <v-icon
         small
         left
@@ -33,46 +33,46 @@
 </template>
 
 <script>
-  import {mapGetters} from "vuex";
+import { mapGetters } from 'vuex'
 
-  export default {
-    name: "ThemeSwitcher",
-    computed: {
-      ...mapGetters('settings', ['dark']),
-      appDark: {
-        get () {
-          return this.dark
-        },
-        set (value) {
-          this.$store.commit('settings/switchDark', value)
-          this.$ga.event(
-            'settings',
-            'theme',
-            value
-          )
-        }
+export default {
+  name: 'ThemeSwitcher',
+  computed: {
+    ...mapGetters('settings', ['dark']),
+    appDark: {
+      get () {
+        return this.dark
       },
-      themes () {
-        return [
-          {
-            icon: "mdi-brightness-auto",
-            text: this.$t('menu.settings.themes.system'),
-            value: "system"
-          },
-          {
-            icon: "mdi-brightness-2",
-            text: this.$t('menu.settings.themes.dark'),
-            value: "dark"
-          },
-          {
-            icon: "mdi-brightness-7",
-            text: this.$t('menu.settings.themes.light'),
-            value: "light"
-          }
-        ]
+      set (value) {
+        this.$store.commit('settings/switchDark', value)
+        this.$ga.event(
+          'settings',
+          'theme',
+          value
+        )
       }
     },
+    themes () {
+      return [
+        {
+          icon: 'mdi-brightness-auto',
+          text: this.$t('menu.settings.themes.system'),
+          value: 'system'
+        },
+        {
+          icon: 'mdi-brightness-2',
+          text: this.$t('menu.settings.themes.dark'),
+          value: 'dark'
+        },
+        {
+          icon: 'mdi-brightness-7',
+          text: this.$t('menu.settings.themes.light'),
+          value: 'light'
+        }
+      ]
+    }
   }
+}
 </script>
 
 <style scoped>

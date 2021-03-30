@@ -55,4 +55,86 @@ struct BlurModifierSimple: ViewModifier {
     }
 }
 
+public extension String {
+    func withBundleIdentifier() -> String {
+        return (Bundle.main.bundleIdentifier ?? "io.penguinstats.app") + "." + self
+    }
+}
 
+public class Routes {
+    public static let defaultBaseString = "https://penguin-stats.io/"
+    public static let defaultBaseURL = URL(string: defaultBaseString)!
+//    public static let defaultBaseURLComponent = URLComponents(string: defaultBaseString)!
+    
+    public static func generate(zoneId: String, stageId: String) -> URL {
+        guard var component = URLComponents(string: defaultBaseString) else { return defaultBaseURL }
+        component.path = "/result/stage/\(zoneId)/\(stageId)"
+        print(component.url ?? defaultBaseURL)
+        return component.url ?? defaultBaseURL
+    }
+    
+    public static func generate(itemId: String) -> URL {
+        guard var component = URLComponents(string: defaultBaseString) else { return defaultBaseURL }
+        component.path = "/result/item/\(itemId)"
+        
+        return component.url ?? defaultBaseURL
+    }
+    
+    public static func generate(path: String) -> URL {
+        guard var component = URLComponents(string: defaultBaseString) else { return defaultBaseURL }
+        component.path = path
+        
+        return component.url ?? defaultBaseURL
+    }
+}
+
+@available(iOS 13.0, *)
+public extension View {
+    func Print(_ vars: Any...) -> some View {
+        for v in vars { print(v) }
+        return EmptyView()
+    }
+}
+
+@available(iOS 12.0, *)
+public extension Servers {
+    func string() -> String {
+        switch self {
+        case .cn:
+            return "CN"
+        case .us:
+            return "US"
+        case .jp:
+            return "JP"
+        case .kr:
+            return "KR"
+        default:
+            return "CN"
+        }
+    }
+}
+
+public class Localizer {
+    static let currentLocale = String(Bundle.main.preferredLocalizations.first?.split(separator: "-")[0] ?? "")
+    static let defaultLocale = "en"
+    
+    public static func localized(from i18nMessage: [String: String]) -> String? {
+        if i18nMessage[currentLocale] != nil {
+            return i18nMessage[currentLocale]
+        } else {
+            return i18nMessage[defaultLocale]
+        }
+    }
+}
+
+struct JSON {
+    static let encoder = JSONEncoder()
+}
+extension Encodable {
+    subscript(key: String) -> Any? {
+        return dictionary[key]
+    }
+    var dictionary: [String: Any] {
+        return (try? JSONSerialization.jsonObject(with: JSON.encoder.encode(self))) as? [String: Any] ?? [:]
+    }
+}

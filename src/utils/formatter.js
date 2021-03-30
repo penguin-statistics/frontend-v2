@@ -1,4 +1,4 @@
-import commaNumber from "comma-number";
+import commaNumber from 'comma-number'
 
 export default {
   thousandSeparator (value) {

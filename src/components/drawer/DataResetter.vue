@@ -4,7 +4,7 @@
     max-width="350px"
     persistent
   >
-    <template v-slot:activator="props">
+    <template #activator="props">
       <slot v-bind="props" />
     </template>
     <v-card class="slash-strip--danger">
@@ -19,7 +19,7 @@
       </v-card-title>
 
       <v-card-text class="subtitle-1">
-        {{ $t('settings.data.reset.subtitle') }}
+        {{ deleted ? "数据与偏好设置已重置。请重启 App" : $t('settings.data.reset.subtitle') }}
       </v-card-text>
 
       <v-divider />
@@ -28,17 +28,16 @@
         <v-btn
           v-haptic
           text
-          :disabled="deleting"
+          :disabled="deleting || deleted"
           @click="cancel"
         >
           {{ $t('meta.dialog.cancel') }}
         </v-btn>
-        <v-spacer />
         <v-btn
           v-haptic
           color="error"
           :disabled="countdownNow !== 0"
-          :loading="deleting"
+          :loading="deleting || deleted"
           @click="reset"
         >
           {{ $t('meta.dialog.confirm') }}{{ countdownNow !== 0 ? ` (${countdownNow})` : "" }}
@@ -49,70 +48,71 @@
 </template>
 
 <script>
-  export default {
-    name: "DataResetter",
-    props: {
-      enable: {
-        type: Boolean,
-        default: false
-      },
-    },
-    data() {
-      return {
-        dialog: false,
-        countdownNow: 5,
-        timer: null,
-        deleting: false
+export default {
+  name: 'DataResetter',
+  props: {
+    enable: {
+      type: Boolean,
+      default: false
+    }
+  },
+  data () {
+    return {
+      dialog: false,
+      countdownNow: 5,
+      timer: null,
+      deleting: false,
+      deleted: false
+    }
+  },
+  watch: {
+    dialog (newValue) {
+      if (newValue) {
+        this.countdownNow = 5
+        this.startCountdown()
+      } else {
+        this.stopCountdown()
       }
-    },
-    watch: {
-      dialog (newValue) {
-        if (newValue) {
-          this.countdownNow = 5;
-          this.startCountdown();
-        } else {
-          this.stopCountdown();
-        }
-      }
-    },
-    created () {
-      this.dialog = this.enable
-    },
-    destroyed () {
+    }
+  },
+  created () {
+    this.dialog = this.enable
+  },
+  destroyed () {
+    this.stopCountdown()
+  },
+  methods: {
+    cancel () {
       this.stopCountdown()
+      this.dialog = false
     },
-    methods: {
-      cancel () {
-        this.stopCountdown();
-        this.dialog = false
-      },
-      reset() {
-        this.deleting = true;
+    reset () {
+      this.deleting = true
 
-        setTimeout(function () {
-          navigator.serviceWorker.getRegistrations().then(function (registrations) {
-            for (let registration of registrations) {
-              registration.unregister()
-            }
-          });
-          caches.keys().then(keys => {
-            for (const key of keys) caches.delete(key)
-          });
-          localStorage.clear()
-          window.location.reload()
-        }, 1000)
-      },
-      startCountdown () {
-        this.timer = setInterval(() => {
-          this.countdownNow -= 1
-          if (this.countdownNow === 0) this.stopCountdown()
-        }, 1000)
-      },
-      stopCountdown () {
-        clearInterval(this.timer)
-      }
+      setTimeout(function () {
+        navigator.serviceWorker.getRegistrations().then(function (registrations) {
+          for (const registration of registrations) {
+            registration.unregister()
+          }
+        })
+        caches.keys().then(keys => {
+          for (const key of keys) caches.delete(key)
+        })
+        localStorage.clear()
+        window.location.reload()
+      }, 1000)
     },
+    startCountdown () {
+      this.timer = setInterval(() => {
+        this.countdownNow -= 1
+        if (this.countdownNow === 0) this.stopCountdown()
+      }, 1000)
+    },
+    stopCountdown () {
+      clearInterval(this.timer)
+    }
   }
+}
 </script>
 
 <style scoped>

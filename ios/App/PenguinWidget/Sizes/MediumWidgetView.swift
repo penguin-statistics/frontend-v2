@@ -21,9 +21,8 @@ struct MediumWidgetView: View {
             TwoColumnStageStats(stages: stats.stages)
                 .padding(.horizontal, 8)
             
-            
             Spacer()
-            WidgetFooter()
+            WidgetFooter(server: stats.server)
         }
         .padding()
         .background(Color("Background"))

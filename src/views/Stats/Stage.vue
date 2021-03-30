@@ -67,7 +67,7 @@
             >
               mdi-upload
             </v-icon>
-            {{ $t('menu.report') }}
+            {{ $t('menu.report._name') }}
           </v-btn>
           <DataSourceToggle />
         </v-row>
@@ -93,50 +93,50 @@
 </template>
 
 <script>
-  import StageSelector from "@/components/stats/StageSelector";
-  import DataTable from "@/components/stats/DataTable";
-  import get from "@/utils/getters";
-  import DataSourceToggle from "@/components/stats/DataSourceToggle";
-  import strings from "@/utils/strings";
-  import existUtils from "@/utils/existUtils";
-  import BackdropName from "@/components/stats/BackdropName";
-  import StageDetails from "@/components/stats/details/StageDetails";
+import StageSelector from '@/components/stats/StageSelector'
+import DataTable from '@/components/stats/DataTable'
+import get from '@/utils/getters'
+import DataSourceToggle from '@/components/stats/DataSourceToggle'
+import strings from '@/utils/strings'
+import existUtils from '@/utils/existUtils'
+import BackdropName from '@/components/stats/BackdropName'
+import StageDetails from '@/components/stats/details/StageDetails'
 
 export default {
-  name: "StatsByStage",
-  components: {StageDetails, BackdropName, DataSourceToggle, DataTable, StageSelector},
+  name: 'StatsByStage',
+  components: { StageDetails, BackdropName, DataSourceToggle, DataTable, StageSelector },
   data: () => ({
     expanded: {},
     selected: {
       zone: null,
-      stage: null,
+      stage: null
     },
-    search: "",
+    search: '',
     routerNames: {
-      index: "StatsByStage",
-      details: "StatsByStage_Selected"
+      index: 'StatsByStage',
+      details: 'StatsByStage_Selected'
     }
   }),
   computed: {
     stats () {
-      const got = get.statistics.byStageId(this.selected.stage);
-      if (!got) return [];
+      const got = get.statistics.byStageId(this.selected.stage)
+      if (!got) return []
       return got
     },
     stage () {
-      const got = get.stages.byStageId(this.selected.stage);
-      if (!got) return { code: "" };
+      const got = get.stages.byStageId(this.selected.stage)
+      if (!got) return { code: '' }
       return {
         ...got,
-        code: strings.translate(got, "code")
+        code: strings.translate(got, 'code')
       }
     },
     zone () {
-      const got = get.zones.byZoneId(this.selected.zone, false);
-      if (!got) return {};
+      const got = get.zones.byZoneId(this.selected.zone, false)
+      if (!got) return {}
       return {
         ...got,
-        zoneName: strings.translate(got, "zoneName")
+        zoneName: strings.translate(got, 'zoneName')
       }
     },
     strings () {
@@ -149,16 +149,16 @@ export default {
       return get.trends.byStageId(this.selected.stage)
     },
     validStage () {
-      return !this.zone.isOutdated && this.stage["dropInfos"] && existUtils.existence(this.stage, true)
+      return !this.zone.isOutdated && this.stage.dropInfos && existUtils.existence(this.stage, true)
     }
   },
   methods: {
-    select({zone, stage}) {
-      this.selected.zone = zone;
-      this.selected.stage = stage;
-    },
-  },
-};
+    select ({ zone, stage }) {
+      this.selected.zone = zone
+      this.selected.stage = stage
+    }
+  }
+}
 </script>
 
 <style scoped>

@@ -9,13 +9,13 @@
 
 <script>
 export default {
-  name: "BackdropName",
+  name: 'BackdropName',
   props: {
     content: {
       type: String,
       required: true
-    },
-  },
+    }
+  }
 }
 </script>
 

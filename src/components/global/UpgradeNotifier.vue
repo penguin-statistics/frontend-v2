@@ -20,7 +20,7 @@
 
       <v-card-actions>
         <DataResetter>
-          <template v-slot:default="{ on }">
+          <template #default="{ on }">
             <v-btn
               v-haptic
               color="white"
@@ -48,24 +48,24 @@
 </template>
 
 <script>
-  import DataResetter from "@/components/drawer/DataResetter";
-  export default {
-    name: "UpgradeNotifier",
-    components: {DataResetter},
-    data() {
-      return {
-        upgrading: false,
-      }
-    },
-    methods: {
-      upgrade() {
-        this.upgrading = true;
-        setTimeout(function () {
-          window.location.reload()
-        }, 1000)
-      }
+import DataResetter from '@/components/drawer/DataResetter'
+export default {
+  name: 'UpgradeNotifier',
+  components: { DataResetter },
+  data () {
+    return {
+      upgrading: false
+    }
+  },
+  methods: {
+    upgrade () {
+      this.upgrading = true
+      setTimeout(function () {
+        window.location.reload()
+      }, 1000)
     }
   }
+}
 </script>
 
 <style scoped>

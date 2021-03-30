@@ -17,5 +17,7 @@ public class MainActivity extends BridgeActivity {
       // Additional plugins you've installed go here
       // Ex: add(TotallyAwesomePlugin.class);
     }});
+
+    this.getBridge().logToJs("MainActivity--onCreate: launching app with savedInstanceState " + savedInstanceState);
   }
 }

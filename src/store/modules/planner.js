@@ -1,4 +1,4 @@
-import Vue from "vue";
+import Vue from 'vue'
 export default {
 
   namespaced: true,
@@ -7,13 +7,13 @@ export default {
     options: {
       byProduct: false,
       requireExp: false,
-      requireLmb: false,
+      requireLmb: false
       // calculateStore: false
     },
     excludes: []
   },
   mutations: {
-    changeItems(state, items) {
+    changeItems (state, items) {
       state.items = items
     },
     changeOptions (state, options) {
@@ -23,11 +23,11 @@ export default {
       state.excludes = excludes
     },
     clearExcludes (state) {
-      Vue.set(state, "excludes", [])
+      Vue.set(state, 'excludes', [])
     }
   },
   getters: {
     config: state => state,
     excludes: state => state.excludes
   }
-};
+}

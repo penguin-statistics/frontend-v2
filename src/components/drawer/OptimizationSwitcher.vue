@@ -9,22 +9,22 @@
 </template>
 
 <script>
-  export default {
-    name: "OptimizationSwitcher",
-    computed: {
-      lowData: {
-        get () {
-          return this.$store.getters["settings/lowData"]
-        },
-        set (value) {
-          this.$store.commit("settings/changeOptimization", {
-            type: "lowData",
-            value: value
-          })
-        }
+export default {
+  name: 'OptimizationSwitcher',
+  computed: {
+    lowData: {
+      get () {
+        return this.$store.getters['settings/lowData']
+      },
+      set (value) {
+        this.$store.commit('settings/changeOptimization', {
+          type: 'lowData',
+          value: value
+        })
       }
-    },
+    }
   }
+}
 </script>
 
 <style scoped>

@@ -58,7 +58,7 @@
           :href="link.href"
           class="bkop-medium mb-2 py-3 "
         >
-          <template v-slot:backdrop>
+          <template #backdrop>
             <v-icon>
               {{ link.icon }}
             </v-icon>
@@ -172,18 +172,18 @@
 </template>
 
 <script>
-import timeFormatter from "@/utils/timeFormatter";
-import FactTable from "@/components/stats/fact-table/FactTable";
-import FactTableItem from "@/components/stats/fact-table/FactTableItem";
-import BackdropCard from "@/components/global/BackdropCard";
-import Theme from "@/mixins/Theme";
-import mirror from "@/utils/mirror";
-import StagePattern from "@/components/stats/details/StagePattern";
-import Share from "@/components/stats/details/Share";
+import timeFormatter from '@/utils/timeFormatter'
+import FactTable from '@/components/stats/fact-table/FactTable'
+import FactTableItem from '@/components/stats/fact-table/FactTableItem'
+import BackdropCard from '@/components/global/BackdropCard'
+import Theme from '@/mixins/Theme'
+import mirror from '@/utils/mirror'
+import StagePattern from '@/components/stats/details/StagePattern'
+import Share from '@/components/stats/details/Share'
 
 export default {
-  name: "StageDetails",
-  components: {Share, StagePattern, BackdropCard, FactTableItem, FactTable},
+  name: 'StageDetails',
+  components: { Share, StagePattern, BackdropCard, FactTableItem, FactTable },
   mixins: [Theme],
   props: {
     stage: {
@@ -197,22 +197,22 @@ export default {
     stats: {
       type: Array,
       required: true
-    },
+    }
   },
   computed: {
-    links() {
+    links () {
       const links = [
         {
-          id: "prts-wiki",
-          icon: "mdi-file-document",
+          id: 'prts-wiki',
+          icon: 'mdi-file-document',
           href: `http://prts.wiki/w/${this.stage.code}`
         }
       ]
 
       if (!this.stage.isGacha) {
         links.push({
-          id: "map-arknights-com",
-          icon: "mdi-map",
+          id: 'map-arknights-com',
+          icon: 'mdi-map',
           href: mirror.adapter({
             cn: `https://mapcn.ark-nights.com/map/${this.stage.stageId}`,
             io: `https://map.ark-nights.com/map/${this.stage.stageId}`
@@ -227,17 +227,17 @@ export default {
         }))
     },
     isFavorite () {
-      return this.$store.getters["stagePreferences/hasFavorite"](this.stage.stageId)
+      return this.$store.getters['stagePreferences/hasFavorite'](this.stage.stageId)
     }
   },
   methods: {
-    formatDuration(s) {
+    formatDuration (s) {
       return timeFormatter.duration(s)
     },
-    toggleFavorite() {
-      this.$store.commit("stagePreferences/toggleFavorite", this.stage.stageId)
+    toggleFavorite () {
+      this.$store.commit('stagePreferences/toggleFavorite', this.stage.stageId)
     }
-  },
+  }
 }
 </script>
 

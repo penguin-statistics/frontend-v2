@@ -6,6 +6,7 @@ import Network
 
 import RxBus
 import RxSwift
+import os
 
 let alreadyLaunchedKey = "alreadyLaunched"
 
@@ -23,7 +24,6 @@ class SheetDismisserProtocol: ObservableObject {
 class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
     var shortcutItemToProcess: UIApplicationShortcutItem?
-//    var db: SQLite.Connection?
     
     func navigateTo(_ path: String) {
         guard var components = URLComponents(string: "https://penguin-stats.io/") else { return }
@@ -87,7 +87,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         if #available(iOS 13.0, *) {
             let debuggerBtn = UIButton(frame: CGRect(
                                         x: UIScreen.main.bounds.maxX - 80 - 18,
-                                        y: UIScreen.main.bounds.maxY - 36 - 72,
+                                        y: UIScreen.main.bounds.maxY - 36 - 108,
                                         width: 80,
                                         height: 36
             ))
@@ -102,10 +102,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             debuggerBtn.layer.shadowOpacity = 0.8
             debuggerBtn.layer.shouldRasterize = true
             debuggerBtn.layer.rasterizationScale = UIScreen.main.scale
-            
+
             let gesture = UITapGestureRecognizer(target: self, action: #selector(self.openDebugger))
             debuggerBtn.addGestureRecognizer(gesture)
-            
+
             root?.view.addSubview(debuggerBtn)
         }
         #endif
@@ -129,6 +129,46 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
             monitor.start(queue: DispatchQueue.global(qos: .background))
         }
+        
+        if let options = launchOptions {
+            let notif = options[UIApplication.LaunchOptionsKey.remoteNotification] as? [NSDictionary]
+            print("remote notification launch option", notif ?? "null")
+        }
+        
+        #if DEBUG
+        
+        // MARK: CSSearchableItemAttributeSet for CSSearchableItem
+        
+        var searchableItemAttributeSet: CSSearchableItemAttributeSet
+        if #available(iOS 14.0, *) {
+            searchableItemAttributeSet = CSSearchableItemAttributeSet(contentType: .url)
+        } else {
+            searchableItemAttributeSet = CSSearchableItemAttributeSet()
+        }
+        
+        
+        let url = URL(string: "https://penguin-stats.io/report")
+        searchableItemAttributeSet.url = url
+        searchableItemAttributeSet.title = "PenguinTestReport"
+        searchableItemAttributeSet.contentDescription = "Penguin Test Report!"
+        
+        // MARK: CSSearchableItem
+        
+        let item = CSSearchableItem(uniqueIdentifier: "PenguinTest", domainIdentifier: "io.penguinstats.app.PenguinTest", attributeSet: searchableItemAttributeSet)
+        
+        CSSearchableIndex.default().deleteAllSearchableItems()
+        CSSearchableIndex.default().indexSearchableItems([item]) { error in
+            if let error = error {
+                print("Indexing error: \(error.localizedDescription)")
+            } else {
+                print("Search item successfully indexed!")
+            }
+        }
+        
+        #endif
+        
+        
+        
         
         
         return true
@@ -159,6 +199,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func applicationDidBecomeActive(_ application: UIApplication) {
         // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
+        UIApplication.shared.applicationIconBadgeNumber = 0
         
         let root = window?.rootViewController
         
@@ -183,29 +224,28 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             if #available(iOS 13.0, *) {
                 let delegate = SheetDismisserProtocol()
                 let welcomeView = InitialLaunch(delegate: delegate)
-                
+
                 let host = UIHostingController(rootView: AnyView(welcomeView))
                 host.isModalInPresentation = true
-                
+
                 delegate.host = host
-                
+
                 root?.present(host, animated: true, completion: nil)
             } else {
                 let alertController = UIAlertController(
-                    title: NSLocalizedString("Deprecated iOS", comment: "Title for alerting user their iOS support is deprecated"),
-                    message: NSLocalizedString("Your iOS version is already deprecated and thus may experience problems when using this App.", comment: "Content for alerting user their iOS support is deprecated and may expericence problems"),
+                    title: NSLocalizedString("welcomeDeprecatedTitle", value: "Deprecated iOS", comment: "Title for alerting user their iOS support is deprecated"),
+                    message: NSLocalizedString("welcomeDeprecatedSubtitle", value: "Your iOS version is already deprecated and thus may experience problems when using this App.", comment: "Content for alerting user their iOS support is deprecated and may expericence problems"),
                     preferredStyle: .alert
                 )
                 
                 let okAction = UIAlertAction(
-                    title: NSLocalizedString("OK", comment: "Button for OK - dismissing dialog"), style: .default) { _ in
+                    title: NSLocalizedString("welcomeDeprecatedConfirm", value: "OK", comment: "Button for OK - dismissing dialog"), style: .default) { _ in
                     UserDefaults.standard.set(true, forKey: alreadyLaunchedKey)
                 }
                 alertController.addAction(okAction)
                 root?.present(alertController, animated: true, completion: nil)
             }
         }
-        
     }
     
     func applicationWillTerminate(_ application: UIApplication) {
@@ -225,9 +265,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Called when the app was launched with an activity, including Universal Links.
         // Feel free to add additional processing here, but if you want the App API to support
         // tracking app url opens, make sure to keep this call
-        CAPLog.print("application launched with userActivity ", userActivity)
+        print("application launched with userActivity.debugDesc", userActivity.debugDescription, "type", userActivity.activityType, "contentAttributeSet", userActivity.userInfo, "userInfo", userActivity.userInfo)
+        print("got userinfo", userActivity.userInfo)
         
-        return CAPBridge.handleContinueActivity(userActivity, restorationHandler)
+        let options: [UIApplication.OpenURLOptionsKey : Any] = [:]
+        if userActivity.activityType == CSSearchableItemActionType && (userActivity.webpageURL != nil) {
+            return CAPBridge.handleOpenUrl(userActivity.webpageURL!, options)
+        } else if userActivity.contentAttributeSet?.url != nil {
+            return CAPBridge.handleOpenUrl((userActivity.contentAttributeSet?.url)!, options)
+        } else {
+            return CAPBridge.handleContinueActivity(userActivity, restorationHandler)
+        }
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -246,11 +294,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
         CAPLog.print("registered device with deviceToken", deviceToken.hexEncodedString())
         NotificationCenter.default.post(name: Notification.Name(CAPNotifications.DidRegisterForRemoteNotificationsWithDeviceToken.name()), object: deviceToken)
-        UserDefaults.standard.set(deviceToken.hexEncodedString(), forKey: "apfsToken")
+        PushManager.shared.didRegisterForRemoteNotificationsWithDeviceToken(deviceToken: deviceToken)
     }
 
     func application(_ application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: Error) {
         NotificationCenter.default.post(name: Notification.Name(CAPNotifications.DidFailToRegisterForRemoteNotificationsWithError.name()), object: error)
+    }
+    
+    func userNotificationCenter(_ center: UNUserNotificationCenter,
+                             willPresent notification: UNNotification,
+                             withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
+        print("received remote notification", notification)
+        completionHandler(.alert)
     }
     
     #endif

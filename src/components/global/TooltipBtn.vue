@@ -4,7 +4,7 @@
     :open-delay="0"
     transition="slide-y-transition"
   >
-    <template v-slot:activator="{ on, attrs }">
+    <template #activator="{ on, attrs }">
       <v-btn
         v-haptic
         v-bind="{...$attrs, ...attrs}"
@@ -21,23 +21,23 @@
 </template>
 
 <script>
-  export default {
-    name: "TooltipBtn",
-    props: {
-      tip: {
-        type: String,
-        default () {
-          return ""
-        }
-      },
-      top: {
-        type: String,
-        default () {
-          return ""
-        }
-      },
+export default {
+  name: 'TooltipBtn',
+  props: {
+    tip: {
+      type: String,
+      default () {
+        return ''
+      }
     },
+    top: {
+      type: String,
+      default () {
+        return ''
+      }
+    }
   }
+}
 </script>
 
 <style scoped>

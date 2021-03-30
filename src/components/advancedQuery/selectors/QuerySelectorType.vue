@@ -38,15 +38,15 @@
 </template>
 
 <script>
-  export default {
-    name: "QuerySelectorType",
-    props: {
-      value: {
-        type: String,
-        required: true
-      },
-    },
+export default {
+  name: 'QuerySelectorType',
+  props: {
+    value: {
+      type: String,
+      required: true
+    }
   }
+}
 </script>
 
 <style scoped>

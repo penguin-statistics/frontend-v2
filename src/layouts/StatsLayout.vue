@@ -22,7 +22,7 @@
 </template>
 
 <script>
-  export default {
-    name: "StatsLayout"
-  }
+export default {
+  name: 'StatsLayout'
+}
 </script>

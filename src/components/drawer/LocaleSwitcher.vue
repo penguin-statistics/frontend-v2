@@ -8,7 +8,7 @@
     :label="$t('menu.languages')"
     transition="slide-y-transition"
   >
-    <template v-slot:item="{item}">
+    <template #item="{item}">
       {{ item.text }}
       <v-icon
         v-if="item.beta"
@@ -38,63 +38,42 @@
 </template>
 
 <script>
-  import {mapGetters} from "vuex";
-  import I18n from "@/mixins/I18n";
+import { mapGetters } from 'vuex'
+import I18n from '@/mixins/I18n'
+import supports from '@/models/supports'
 
-  export default {
-    name: "LocaleSwitcher",
-    mixins: [I18n],
-    data() {
-      return {
-        localizations: [
-          {
-            value: 'zh',
-            text: '简体中文'
-          },
-          // {
-          //   value: 'zh-TW',
-          //   text: '繁体中文',
-          //   beta: true
-          // },
-          {
-            value: 'en',
-            text: 'English'
-          },
-          {
-            value: 'ja',
-            text: '日本語'
-          },
-          {
-            value: 'ko',
-            text: '한국어'
-          }
-        ],
-        busy: null,
-      }
-    },
-    computed: {
-      ...mapGetters('settings', ['language']),
-      activeLocale: {
-        get () {
-          return this.$i18n.locale
-        },
-        set (localeId) {
-          this.busy = localeId
-          setTimeout(() => {
-            this.changeLocale(localeId, true)
-            this.$ga.event(
-              'settings',
-              'language',
-              localeId
-            )
-            this.$nextTick(function () {
-              this.busy = null
-            })
-          })
-        }
+export default {
+  name: 'LocaleSwitcher',
+  mixins: [I18n],
+  data () {
+    return {
+      localizations: supports.localizations,
+      busy: null
+    }
+  },
+  computed: {
+    ...mapGetters('settings', ['language']),
+    activeLocale: {
+      get () {
+        return this.$i18n.locale
       },
-    },
+      set (localeId) {
+        this.busy = localeId
+        setTimeout(() => {
+          this.changeLocale(localeId, true)
+          this.$ga.event(
+            'settings',
+            'language',
+            localeId
+          )
+          this.$nextTick(function () {
+            this.busy = null
+          })
+        })
+      }
+    }
   }
+}
 </script>
 
 <style scoped>

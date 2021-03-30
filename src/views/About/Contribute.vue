@@ -178,7 +178,7 @@
           target="_blank"
           rel="noopener"
         >
-          <template v-slot:backdrop>
+          <template #backdrop>
             <v-icon>
               {{ link.icon }}
             </v-icon>
@@ -210,14 +210,14 @@
 </template>
 
 <script>
-import BackdropCard from "@/components/global/BackdropCard";
+import BackdropCard from '@/components/global/BackdropCard'
 
 export default {
   name: 'Contribute',
   components: {
     BackdropCard
   },
-  data() {
+  data () {
     return {
       skills: [
         'frontend',
@@ -235,10 +235,10 @@ export default {
         //   external: true
         // },
         {
-          url: "https://developer.penguin-stats.io",
-          icon: "mdi-dev-to",
-          title: "link.docs.title",
-          subtitle: "link.docs.subtitle",
+          url: 'https://developer.penguin-stats.io',
+          icon: 'mdi-dev-to',
+          title: 'link.docs.title',
+          subtitle: 'link.docs.subtitle',
           external: true
         }
       ]

@@ -31,7 +31,7 @@
           v-haptic
           color="background"
         >
-          <template v-slot:default="{ open }">
+          <template #default="{ open }">
             <v-icon
               left
               class="flex-grow-0"
@@ -66,10 +66,10 @@
                 dense
                 class="mt-3 mb-4 mx-0"
               >
-                <template v-slot:header>
+                <template #header>
                   {{ $t('stats.filter.type._name') }}
                 </template>
-                <template v-slot:content>
+                <template #content>
                   <!--                  <v-checkbox-->
                   <!--                    v-model="dataTable.showMainline"-->
                   <!--                    hide-details-->
@@ -100,10 +100,10 @@
                 dense
                 class="mx-0"
               >
-                <template v-slot:header>
+                <template #header>
                   {{ $t('stats.filter.status._name') }}
                 </template>
-                <template v-slot:content>
+                <template #content>
                   <v-switch
                     v-model="dataTable.onlyOpen"
                     v-haptic
@@ -135,7 +135,7 @@
                 dark
                 color="blue accent-4"
               >
-                <template v-slot:default>
+                <template #default>
                   {{ $t('stats.filter.stats', {filtered: filteredData.length, total: items.length}) }}
                 </template>
               </v-progress-linear>
@@ -153,7 +153,7 @@
           <!--              class="mx-4"-->
           <!--            />-->
           <!--            <v-text-field>-->
-          <!--              <template v-slot:append-outer>-->
+          <!--              <template #append-outer>-->
           <!--                <v-btn outlined>-->
           <!--                  <v-icon>-->
           <!--                    mdi-add-->
@@ -166,7 +166,7 @@
         </v-expansion-panel-content>
       </v-expansion-panel>
     </v-expansion-panels>
-    
+
     <v-row
       align="center"
       justify="center"
@@ -211,13 +211,13 @@
       :locale="$i18n.locale"
       :hide-default-footer="items.length <= 10"
 
-      :mobile-breakpoint="1"
+      :mobile-breakpoint="0"
       :loading="matrixPending"
 
-      class="elevation-0 transparentTable stat-table container--fluid px-2 position-relative"
+      class="elevation-0 transparentTable stat-table container--fluid position-relative"
       :class="{'pt-0': $vuetify.breakpoint.xsOnly}"
     >
-      <template v-slot:header>
+      <template #header>
         <div class="stat-table-watermark d-flex align-center justify-start flex-column text-center px-4">
           <h1 :class="{'display-2 mb-4': !$vuetify.breakpoint.smAndUp, 'display-3 mb-6': $vuetify.breakpoint.smAndUp}">
             {{ currentMirrorHostname }}
@@ -228,55 +228,55 @@
         </div>
       </template>
 
-      <template v-slot:header.stage.apCost="{header}">
+      <template #header.stage.apCost="{header}">
         <HeaderWithTooltip :name="header.text">
           {{ $t('stats.headerDesc.apCost') }}
         </HeaderWithTooltip>
       </template>
 
-      <template v-slot:header.quantity="{header}">
+      <template #header.quantity="{header}">
         <HeaderWithTooltip :name="header.text">
           {{ $t('stats.headerDesc.quantity') }}
         </HeaderWithTooltip>
       </template>
 
-      <template v-slot:header.times="{header}">
+      <template #header.times="{header}">
         <HeaderWithTooltip :name="header.text">
           {{ $t('stats.headerDesc.times') }}
         </HeaderWithTooltip>
       </template>
 
-      <template v-slot:header.percentage="{header}">
+      <template #header.percentage="{header}">
         <HeaderWithTooltip :name="header.text">
           {{ $t('stats.headerDesc.percentage') }}
         </HeaderWithTooltip>
       </template>
 
-      <template v-slot:header.apPPR="{header}">
+      <template #header.apPPR="{header}">
         <HeaderWithTooltip :name="header.text">
           {{ $t('stats.headerDesc.apPPR') }}
         </HeaderWithTooltip>
       </template>
 
-      <template v-slot:header.stage.minClearTime="{header}">
+      <template #header.stage.minClearTime="{header}">
         <HeaderWithTooltip :name="header.text">
           {{ $t('stats.headerDesc.clearTime') }}
         </HeaderWithTooltip>
       </template>
 
-      <template v-slot:header.itemPerTime="{header}">
+      <template #header.itemPerTime="{header}">
         <HeaderWithTooltip :name="header.text">
           {{ $t('stats.headerDesc.itemPerTime') }}
         </HeaderWithTooltip>
       </template>
 
-      <template v-slot:header.timeRange="{header}">
+      <template #header.timeRange="{header}">
         <HeaderWithTooltip :name="header.text">
           {{ $t('stats.headerDesc.timeRange') }}
         </HeaderWithTooltip>
       </template>
 
-      <template v-slot:item="props">
+      <template #item="props">
         <tr :class="{'stat-table__outdated-row': isTimeOutdatedRange(props.item.end)}">
           <template v-if="type === 'stage'">
             <td
@@ -416,7 +416,7 @@
           </td>
         </tr>
       </template>
-      <!--          <template v-slot:item.percentage="{item}">-->
+      <!--          <template #item.percentage="{item}">-->
       <!--            <span class="px-0">-->
       <!--              {{ item.percentageText }}-->
       <!--            </span>-->
@@ -426,256 +426,256 @@
 </template>
 
 <script>
-  import strings from "@/utils/strings";
-  import get from "@/utils/getters";
-  import Item from "@/components/global/Item";
-  import {mapGetters, mapState} from "vuex";
-  import Theme from "@/mixins/Theme";
-  import Charts from "@/components/stats/Charts";
-  import timeFormatter from "@/utils/timeFormatter";
-  import CDN from "@/mixins/CDN";
-  import Mirror from "@/mixins/Mirror";
-  import TitledRow from "@/components/global/TitledRow";
-  import existUtils from "@/utils/existUtils";
-  import validator from "@/utils/validator";
-  import HeaderWithTooltip from "@/components/stats/HeaderWithTooltip";
-  import NullableTableCell from "@/components/stats/NullableTableCell";
+import strings from '@/utils/strings'
+import get from '@/utils/getters'
+import Item from '@/components/global/Item'
+import { mapGetters, mapState } from 'vuex'
+import Theme from '@/mixins/Theme'
+import Charts from '@/components/stats/Charts'
+import timeFormatter from '@/utils/timeFormatter'
+import CDN from '@/mixins/CDN'
+import Mirror from '@/mixins/Mirror'
+import TitledRow from '@/components/global/TitledRow'
+import existUtils from '@/utils/existUtils'
+import validator from '@/utils/validator'
+import HeaderWithTooltip from '@/components/stats/HeaderWithTooltip'
+import NullableTableCell from '@/components/stats/NullableTableCell'
 
-  export default {
-    name: "DataTable",
-    components: {NullableTableCell, HeaderWithTooltip, TitledRow, Item, Charts},
-    mixins: [Theme, CDN, Mirror],
-    props: {
-      items: {
-        type: Array,
-        required: true
-      },
-      search: {
-        type: String,
-        default () {
-          return ""
-        }
-      },
-      type: {
-        type: String,
-        required: true,
-        validator (val) {
-          return ['item', 'stage'].includes(val)
-        }
-      },
-      trends: {
-        type: Object,
-        default () {
-          return null
-        }
+export default {
+  name: 'DataTable',
+  components: { NullableTableCell, HeaderWithTooltip, TitledRow, Item, Charts },
+  mixins: [Theme, CDN, Mirror],
+  props: {
+    items: {
+      type: Array,
+      required: true
+    },
+    search: {
+      type: String,
+      default () {
+        return ''
       }
     },
-    data() {
-      return {
-        options: {
-          table: {
-            itemsPerPage: 10
-          },
-          footer: {
-            itemsPerPageOptions: [10, 20, 40, -1],
-            showCurrentPage: true
-          }
+    type: {
+      type: String,
+      required: true,
+      validator (val) {
+        return ['item', 'stage'].includes(val)
+      }
+    },
+    trends: {
+      type: Object,
+      default () {
+        return null
+      }
+    }
+  },
+  data () {
+    return {
+      options: {
+        table: {
+          itemsPerPage: 10
         },
-        tableCellClasses: "px-2 font-weight-bold monospace",
-        hideItemName: false,
-        expandTrends: false
-      }
-    },
-    computed: {
-      ...mapGetters('ajax', ['matrixPending']),
-      ...mapState('options', ['dataTable']),
-      headers() {
-        const headers = [
-          {
-            text: this.$t("stats.headers.quantity"),
-            value: "quantity",
-            align: "left",
-            sortable: true,
-            width: "85px"
-          },
-          {
-            text: this.$t("stats.headers.times"),
-            value: "times",
-            align: "left",
-            sortable: true,
-            width: "85px"
-          },
-          {
-            text: this.$t("stats.headers.percentage"),
-            value: "percentage",
-            align: "left",
-            sortable: true,
-            width: "100px"
-          },
-          {
-            text: this.$t("stats.headers.apPPR"),
-            value: "apPPR",
-            align: "left",
-            sortable: true,
-            width: "110px"
-          },
-          {
-            text: this.$t("stats.headers.itemPerTime"),
-            value: "itemPerTime",
-            align: "left",
-            sortable: true,
-            width: "110px"
-          },
-          {
-            text: this.$t("stats.headers.timeRange"),
-            value: "timeRange",
-            align: "left",
-            sortable: false,
-            width: "140px"
-          }
-        ];
-
-        if (this.type === "stage") {
-          headers.unshift({
-            text: this.$t("stats.headers.item"),
-            value: "icon",
-            align: "left",
-            sortable: false,
-            width: "250px"
-          });
-        } else {
-          headers.unshift({
-              text: this.$t("stats.headers.stage"),
-              value: "stage",
-              align: "left",
-              sortable: false,
-              width: "230px"
-            })
-          headers.splice(5, 0, {
-            text: this.$t("stats.headers.apCost"),
-            value: "stage.apCost",
-            align: "left",
-            sortable: true,
-            width: "70px"
-          }, {
-            text: this.$t("stats.headers.clearTime"),
-            value: "stage.minClearTime",
-            align: "left",
-            sortable: true,
-            width: "110px"
-          })
+        footer: {
+          itemsPerPageOptions: [10, 20, 40, -1],
+          showCurrentPage: true
         }
-
-        return headers
       },
-      strings () {
-        return strings
-      },
-      filteredData () {
-        let data = this.items;
-        if (this.type === "item") {
-          if (this.dataTable.onlyOpen) data = data.filter(el => existUtils.existence(el.stage, true))
-          if (!this.dataTable.showPermanent) data = data.filter(el => el.stage.stageType !== "MAIN" && el.stage.stageType !== "SUB" && el.stage.stageType !== "DAILY")
-          if (!this.dataTable.showActivity) data = data.filter(el => el.stage.stageType !== "ACTIVITY")
-        }
-        return data
-      },
-      filterCount () {
-        let counter = 0;
-        if (this.dataTable.onlyOpen) counter++
-        if (!this.dataTable.showPermanent || !this.dataTable.showActivity) counter++
-        return counter
-      }
-    },
-    watch: {
-      dataTable: {
-        handler: function (newValue) {
-          this.$store.commit("options/changeDataTable", newValue)
+      tableCellClasses: 'px-2 font-weight-bold monospace',
+      hideItemName: false,
+      expandTrends: false
+    }
+  },
+  computed: {
+    ...mapGetters('ajax', ['matrixPending']),
+    ...mapState('options', ['dataTable']),
+    headers () {
+      const headers = [
+        {
+          text: this.$t('stats.headers.quantity'),
+          value: 'quantity',
+          align: 'left',
+          sortable: true,
+          width: '85px'
         },
-        deep: true
-      }
-    },
-    created () {
-      document.addEventListener('copy', this.manipulateCopy);
-    },
-    beforeDestroy() {
-      document.removeEventListener('copy', this.manipulateCopy)
-    },
-    methods: {
-      manipulateCopy(event) {
-        const extra = this.$t('meta.copyWarning', {site: document.location.href});
-        event.clipboardData.setData('text', document.getSelection() + extra);
-        event.preventDefault();
-      },
-      getTrendsData(props) {
-        if (this.type === "stage") {
-          if (this.trends && this.trends.results && this.trends.results[props.item.item.itemId]) {
-            return {
-              results: this.trends.results[props.item.item.itemId],
-              startTime: this.trends.startTime
-            }
-          }
-        } else {
-          if (this.trends && validator.have(this.trends, props.item.stage.stageId)) {
-            return this.trends[props.item.stage.stageId]
-          }
+        {
+          text: this.$t('stats.headers.times'),
+          value: 'times',
+          align: 'left',
+          sortable: true,
+          width: '85px'
+        },
+        {
+          text: this.$t('stats.headers.percentage'),
+          value: 'percentage',
+          align: 'left',
+          sortable: true,
+          width: '100px'
+        },
+        {
+          text: this.$t('stats.headers.apPPR'),
+          value: 'apPPR',
+          align: 'left',
+          sortable: true,
+          width: '110px'
+        },
+        {
+          text: this.$t('stats.headers.itemPerTime'),
+          value: 'itemPerTime',
+          align: 'left',
+          sortable: true,
+          width: '110px'
+        },
+        {
+          text: this.$t('stats.headers.timeRange'),
+          value: 'timeRange',
+          align: 'left',
+          sortable: false,
+          width: '140px'
         }
-        return false
-      },
-      redirectItem(itemId) {
-        this.$router.push({
-          name: "StatsByItem_SelectedItem",
-          params: {
-            itemId
-          }
-        });
-      },
-      redirectStage(stageId) {
-        const got = get.stages.byStageId(stageId);
-        this.$router.push({
-          name: "StatsByStage_Selected",
-          params: {
-            zoneId: got.zoneId,
-            stageId
-          }
-        });
-      },
-      chartId (rowProps) {
-        if (this.type === "stage") {
-          return rowProps.item.item.itemId
-        } else {
-          return rowProps.item.stage.stageId
-        }
-      },
-      meta (rowProps) {
-        if (this.type === "stage") {
-          return {
-            name: strings.translate(rowProps.item.item, "name")
-          }
-        } else {
-          return {
-            name: strings.translate(rowProps.item.stage, "code")
-          }
-        }
-      },
-      formatDate (item) {
-        const start = item.start
-        const end = item.end
+      ]
 
-        return timeFormatter.startEnd(start, end)
+      if (this.type === 'stage') {
+        headers.unshift({
+          text: this.$t('stats.headers.item'),
+          value: 'icon',
+          align: 'left',
+          sortable: false,
+          width: '250px'
+        })
+      } else {
+        headers.unshift({
+          text: this.$t('stats.headers.stage'),
+          value: 'stage',
+          align: 'left',
+          sortable: false,
+          width: '230px'
+        })
+        headers.splice(5, 0, {
+          text: this.$t('stats.headers.apCost'),
+          value: 'stage.apCost',
+          align: 'left',
+          sortable: true,
+          width: '70px'
+        }, {
+          text: this.$t('stats.headers.clearTime'),
+          value: 'stage.minClearTime',
+          align: 'left',
+          sortable: true,
+          width: '110px'
+        })
+      }
+
+      return headers
+    },
+    strings () {
+      return strings
+    },
+    filteredData () {
+      let data = this.items
+      if (this.type === 'item') {
+        if (this.dataTable.onlyOpen) data = data.filter(el => existUtils.existence(el.stage, true))
+        if (!this.dataTable.showPermanent) data = data.filter(el => el.stage.stageType !== 'MAIN' && el.stage.stageType !== 'SUB' && el.stage.stageType !== 'DAILY')
+        if (!this.dataTable.showActivity) data = data.filter(el => el.stage.stageType !== 'ACTIVITY')
+      }
+      return data
+    },
+    filterCount () {
+      let counter = 0
+      if (this.dataTable.onlyOpen) counter++
+      if (!this.dataTable.showPermanent || !this.dataTable.showActivity) counter++
+      return counter
+    }
+  },
+  watch: {
+    dataTable: {
+      handler: function (newValue) {
+        this.$store.commit('options/changeDataTable', newValue)
       },
-      formatDuration (duration) {
-        return timeFormatter.duration(duration, "s", 0)
-      },
-      isTimeOutdatedRange (time) {
-        if (!time) return false
-        return time < Date.now()
-      },
-      getZoneName (stage) {
-        return strings.translate(get.zones.byZoneId(stage.zoneId, false), "zoneName")
+      deep: true
+    }
+  },
+  created () {
+    document.addEventListener('copy', this.manipulateCopy)
+  },
+  beforeDestroy () {
+    document.removeEventListener('copy', this.manipulateCopy)
+  },
+  methods: {
+    manipulateCopy (event) {
+      const extra = this.$t('meta.copyWarning', { site: document.location.href })
+      event.clipboardData.setData('text', document.getSelection() + extra)
+      event.preventDefault()
+    },
+    getTrendsData (props) {
+      if (this.type === 'stage') {
+        if (this.trends && this.trends.results && this.trends.results[props.item.item.itemId]) {
+          return {
+            results: this.trends.results[props.item.item.itemId],
+            startTime: this.trends.startTime
+          }
+        }
+      } else {
+        if (this.trends && validator.have(this.trends, props.item.stage.stageId)) {
+          return this.trends[props.item.stage.stageId]
+        }
+      }
+      return false
+    },
+    redirectItem (itemId) {
+      this.$router.push({
+        name: 'StatsByItem_SelectedItem',
+        params: {
+          itemId
+        }
+      })
+    },
+    redirectStage (stageId) {
+      const got = get.stages.byStageId(stageId)
+      this.$router.push({
+        name: 'StatsByStage_Selected',
+        params: {
+          zoneId: got.zoneId,
+          stageId
+        }
+      })
+    },
+    chartId (rowProps) {
+      if (this.type === 'stage') {
+        return rowProps.item.item.itemId
+      } else {
+        return rowProps.item.stage.stageId
       }
     },
+    meta (rowProps) {
+      if (this.type === 'stage') {
+        return {
+          name: strings.translate(rowProps.item.item, 'name')
+        }
+      } else {
+        return {
+          name: strings.translate(rowProps.item.stage, 'code')
+        }
+      }
+    },
+    formatDate (item) {
+      const start = item.start
+      const end = item.end
+
+      return timeFormatter.startEnd(start, end)
+    },
+    formatDuration (duration) {
+      return timeFormatter.duration(duration, 's', 0)
+    },
+    isTimeOutdatedRange (time) {
+      if (!time) return false
+      return time < Date.now()
+    },
+    getZoneName (stage) {
+      return strings.translate(get.zones.byZoneId(stage.zoneId, false), 'zoneName')
+    }
   }
+}
 </script>
 
 <style>

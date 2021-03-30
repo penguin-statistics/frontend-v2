@@ -8,7 +8,7 @@
     max-width="700px"
     max-height="600px"
   >
-    <template v-slot:activator="{ on, attrs }">
+    <template #activator="{ on, attrs }">
       <v-text-field
         :value="formattedDate"
         :label="`${$t('query.selector.timeRange.title')} (*${$t('validator.required')})`"
@@ -57,86 +57,86 @@
 </template>
 
 <script>
-  import timeFormatter from "@/utils/timeFormatter";
-  import QuerySelectorTimeRangePresetPeriod
-    from "@/components/advancedQuery/selectors/QuerySelectorTimeRangePresetPeriod";
-  import get from "@/utils/getters"
-  import Subheader from "@/components/global/Subheader";
+import timeFormatter from '@/utils/timeFormatter'
+import QuerySelectorTimeRangePresetPeriod
+  from '@/components/advancedQuery/selectors/QuerySelectorTimeRangePresetPeriod'
+import get from '@/utils/getters'
+import Subheader from '@/components/global/Subheader'
 
-  export default {
-    name: "QuerySelectorTimeRange",
-    components: {Subheader, QuerySelectorTimeRangePresetPeriod},
-    props: {
-      value: {
-        type: Array,
-        required: true
+export default {
+  name: 'QuerySelectorTimeRange',
+  components: { Subheader, QuerySelectorTimeRangePresetPeriod },
+  props: {
+    value: {
+      type: Array,
+      required: true
+    },
+    server: {
+      type: String,
+      required: true
+    }
+  },
+  data () {
+    return {
+      menu: false
+    }
+  },
+  computed: {
+    date: {
+      get () {
+        return this.value
       },
-      server: {
-        type: String,
-        required: true
-      }
-    },
-    data() {
-      return {
-        menu: false,
-      }
-    },
-    computed: {
-      date: {
-        get () {
-          return this.value
-        },
-        set (val) {
-          let setTo;
-          if (val) {
-            if (val.length === 0) {
-              this.$emit('input', [])
-            } else if (val.length === 1) {
+      set (val) {
+        let setTo
+        if (val) {
+          if (val.length === 0) {
+            this.$emit('input', [])
+          } else if (val.length === 1) {
+            this.$emit('input', val)
+          } else if (val.length === 2) {
+            const first = new Date(val[0]).getTime()
+            const second = new Date(val[1]).getTime()
+
+            if (second < first) {
+              this.$emit('input', [val[1], val[0]])
+            } else {
               this.$emit('input', val)
-            } else if (val.length === 2) {
-              const first = new Date(val[0]).getTime()
-              const second = new Date(val[1]).getTime()
-
-              if (second < first) {
-                this.$emit('input', [val[1], val[0]])
-              } else {
-                this.$emit('input', val)
-              }
             }
-          } else {
-            this.$emit('input', setTo)
           }
+        } else {
+          this.$emit('input', setTo)
         }
-      },
-      formattedDate () {
-        const start = this.date[0] ? this.date[0] : null
-        const end = this.date[1] ? this.date[1] : null
-        return timeFormatter.startEnd(start, end, true)
-      },
-      today () {
-        return timeFormatter.dayjs().format("YYYY-MM-DD")
-      },
-      periods () {
-        return get.period.all(this.server)
       }
     },
-    methods: {
-      dayFormatter (val) {
-        return val.split("-")[2]
-      },
-      titleDateFormatter () {
-        return this.formattedDate
-      },
-      selectPeriod (period) {
-        const utcDate = new Date(period).toISOString().substr(0, 10)
-        if (this.date.length < 2) {
-          this.date = [...this.date, utcDate]
-        } else {
-          this.date = [utcDate]
-        }
+    formattedDate () {
+      const start = this.date[0] ? this.date[0] : null
+      const end = this.date[1] ? this.date[1] : null
+      return timeFormatter.startEnd(start, end, true)
+    },
+    today () {
+      return timeFormatter.dayjs().format('YYYY-MM-DD')
+    },
+    periods () {
+      return get.period.all(this.server)
+    }
+  },
+  methods: {
+    dayFormatter (val) {
+      return val.split('-')[2]
+    },
+    titleDateFormatter () {
+      return this.formattedDate
+    },
+    selectPeriod (period) {
+      const utcDate = new Date(period).toISOString().substr(0, 10)
+      if (this.date.length < 2) {
+        this.date = [...this.date, utcDate]
+      } else {
+        this.date = [utcDate]
       }
     }
   }
+}
 </script>
 
 <style scoped>

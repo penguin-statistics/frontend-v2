@@ -10,11 +10,18 @@
     opacity: 0;
 }
 .theme--light.v-application {
-    background: #fafafa !important;
+    background: #f5f5f5 !important;
 }
 
 .transition-all {
     transition: all .225s cubic-bezier(0.165, 0.84, 0.44, 1);
+}
+
+.opacity-hide {
+    opacity: 0;
+}
+.opacity-show {
+    opacity: 1;
 }
 
 .transition-background {
@@ -71,7 +78,7 @@
 }
 
 .cursor-pointer {
-    cursor: pointer;
+    cursor: pointer !important;
 }
 
 .cursor-default {
@@ -83,10 +90,10 @@
 }
 
 .transparentTable > .v-table__overflow > .v-table {
-    background: transparent;
+    background: transparent !important;
 }
 .transparentTable {
-    background: transparent;
+    background: transparent !important;
 }
 
 .line-height-wide {
@@ -166,7 +173,7 @@
 
 .monospace {
     font-family: "benderregular", SF Mono, "Droid Sans Mono", Ubuntu Mono, Consolas, Courier New, Courier, monospace !important;
-    /*letter-spacing: .03rem;*/
+    letter-spacing: .03rem;
 }
 
 .monospace-pure {
@@ -745,4 +752,6 @@
     display: none !important
 }
 
-
+.full-width {
+    width: 100%;
+}

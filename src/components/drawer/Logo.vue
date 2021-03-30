@@ -7,6 +7,10 @@
       'drawer-logo--two-line': $t('app.name_line2') !== ''
     }"
   >
+    <!--    <v-img-->
+    <!--      :src="cdnDeliver('/images/themes/new-year/portrait.jpg')"-->
+    <!--      style="position: absolute; width: 100%; height: 100%; top: 0; left: 0; opacity: 0.3; z-index: 0"-->
+    <!--    />-->
     <v-img
       :src="cdnDeliver('/logos/penguin_stats_logo.png')"
       aspect-ratio="1"
@@ -27,13 +31,13 @@
 </template>
 
 <script>
-  import Theme from "@/mixins/Theme";
-  import CDN from "@/mixins/CDN";
+import Theme from '@/mixins/Theme'
+import CDN from '@/mixins/CDN'
 
-  export default {
-    name: "Logo",
-    mixins: [Theme, CDN]
-  }
+export default {
+  name: 'Logo',
+  mixins: [Theme, CDN]
+}
 </script>
 
 <style scoped>

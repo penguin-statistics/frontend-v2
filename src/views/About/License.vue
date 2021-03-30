@@ -42,9 +42,9 @@
 </template>
 
 <script>
-  export default {
-    name: "License"
-  }
+export default {
+  name: 'License'
+}
 </script>
 
 <style scoped>

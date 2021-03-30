@@ -13,7 +13,7 @@
 
     :locale="$i18n.locale"
 
-    :mobile-breakpoint="1"
+    :mobile-breakpoint="0"
     class="elevation-0 stat-table transparent container--fluid font-weight-bold transition-all"
 
     :class="{'pt-0': $vuetify.breakpoint.xsOnly}"
@@ -85,14 +85,14 @@
 </template>
 
 <script>
-import get from "@/utils/getters";
-import timeFormatter from "@/utils/timeFormatter";
-import Item from "@/components/global/Item";
-import HeaderWithTooltip from "@/components/stats/HeaderWithTooltip";
+import get from '@/utils/getters'
+import timeFormatter from '@/utils/timeFormatter'
+import Item from '@/components/global/Item'
+import HeaderWithTooltip from '@/components/stats/HeaderWithTooltip'
 
 export default {
-  name: "StagePatternTable",
-  components: {HeaderWithTooltip, Item},
+  name: 'StagePatternTable',
+  components: { HeaderWithTooltip, Item },
   props: {
     patterns: {
       type: Array,
@@ -103,14 +103,14 @@ export default {
       default: () => 0
     }
   },
-  data() {
+  data () {
     return {
       page: 1,
       itemsPerPage: this.$vuetify.breakpoint.smAndDown ? 5 : 10
     }
   },
   computed: {
-    items() {
+    items () {
       return this.patterns.map(el => {
         return {
           ...el,
@@ -121,42 +121,42 @@ export default {
         }
       })
     },
-    headers() {
+    headers () {
       return [
         {
           text: '#',
-          value: "i",
-          align: "left",
+          value: 'i',
+          align: 'left',
           sortable: false,
-          width: "10px"
+          width: '10px'
         },
         {
-          text: this.$t("stats.headers.pattern"),
-          value: "pattern",
-          align: "left",
+          text: this.$t('stats.headers.pattern'),
+          value: 'pattern',
+          align: 'left',
           sortable: false,
-          width: "144px"
+          width: '144px'
         },
         {
-          text: this.$t("stats.headers.quantity"),
-          value: "quantity",
-          align: "left",
+          text: this.$t('stats.headers.quantity'),
+          value: 'quantity',
+          align: 'left',
           sortable: true,
-          width: "90px"
+          width: '90px'
         },
         {
-          text: this.$t("stats.headers.percentage"),
-          value: "percentage",
-          align: "left",
+          text: this.$t('stats.headers.percentage'),
+          value: 'percentage',
+          align: 'left',
           sortable: true,
-          width: "90px"
+          width: '90px'
         }
       ]
     },
     timeRange () {
-      return timeFormatter.dates([this.patterns.start, this.patterns.end]).join(" ~ ")
+      return timeFormatter.dates([this.patterns.start, this.patterns.end]).join(' ~ ')
     }
-  },
+  }
   // watch: {
   //   active(newValue) {
   //     // this.page = Math.ceil(newValue / this.itemsPerPage)

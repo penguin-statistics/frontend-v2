@@ -1,7 +1,7 @@
-import {service} from "@/utils/service";
+import { service } from '@/utils/service'
 
 export default {
   advancedQuery (queries) {
-    return service.post("/result/advanced", queries)
+    return service.post('/result/advanced', queries)
   }
 }

@@ -1,7 +1,7 @@
 {
   "appId": "io.penguinstats.app",
   "appName": "企鹅物流",
-  "bundledWebRuntime": false,
+  "bundledWebRuntime": true,
   "npmClient": "yarn",
   "webDir": "dist",
   "plugins": {
@@ -9,7 +9,8 @@
       "launchAutoHide": false,
       "backgroundColor": "#000000ff",
       "showSpinner": true,
-      "spinnerColor": "#fff"
+      "spinnerColor": "#fff",
+      "splashFullScreen": true
     },
     "PushNotifications": {
       "presentationOptions": ["badge", "sound", "alert"]

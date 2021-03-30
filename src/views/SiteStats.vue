@@ -42,7 +42,7 @@
       >
         <v-col v-bind="cols.overview">
           <BackdropCard>
-            <template v-slot:backdrop>
+            <template #backdrop>
               <svg
                 height="128"
                 width="128"
@@ -71,7 +71,7 @@
 
         <v-col v-bind="cols.overview">
           <BackdropCard>
-            <template v-slot:backdrop>
+            <template #backdrop>
               <v-icon>
                 mdi-treasure-chest
               </v-icon>
@@ -89,7 +89,7 @@
 
         <v-col v-bind="cols.overview">
           <BackdropCard>
-            <template v-slot:backdrop>
+            <template #backdrop>
               <v-icon>
                 mdi-cube
               </v-icon>
@@ -113,7 +113,7 @@
             :title="$t('stats.site.all')"
           />
         </v-col>
-        
+
         <v-col v-bind="cols.details">
           <SiteStatsStage
             key="24h"
@@ -140,67 +140,67 @@
 </template>
 
 <script>
-  import statsManager from '@/models/managers/stats'
-  import BackdropCard from "@/components/global/BackdropCard";
-  import SiteStatsStage from "@/components/stats/SiteStatsStage";
-  import SiteStatsItem from "@/components/stats/SiteStatsItem";
-  import timeFormatter from "@/utils/timeFormatter";
-  import {mapGetters} from "vuex";
-  import get from "@/utils/getters";
-  import formatter from "@/utils/formatter";
-  export default {
-    name: "SiteStats",
-    components: {SiteStatsItem, SiteStatsStage, BackdropCard},
-    data() {
+import statsManager from '@/models/managers/stats'
+import BackdropCard from '@/components/global/BackdropCard'
+import SiteStatsStage from '@/components/stats/SiteStatsStage'
+import SiteStatsItem from '@/components/stats/SiteStatsItem'
+import timeFormatter from '@/utils/timeFormatter'
+import { mapGetters } from 'vuex'
+import get from '@/utils/getters'
+import formatter from '@/utils/formatter'
+export default {
+  name: 'SiteStats',
+  components: { SiteStatsItem, SiteStatsStage, BackdropCard },
+  data () {
+    return {
+      cols: {
+        overview: {
+          cols: 12,
+          sm: 6,
+          md: 4
+        },
+        details: {
+          cols: 12,
+          sm: 6,
+          md: 4
+        }
+      }
+    }
+  },
+  computed: {
+    ...mapGetters('ajax', ['pending']),
+    error () {
+      return this.stats && this.stats.error
+    },
+    stats () {
+      return this.$store.getters['data/content']({ id: 'stats' })
+    },
+    stageStats () {
       return {
-        cols: {
-          overview: {
-            cols: 12,
-            sm: 6,
-            md: 4,
-          },
-          details: {
-            cols: 12,
-            sm: 6,
-            md: 4,
-          }
-        }
+        totalStageTimes: get.siteStats.byKey('totalStageTimes'),
+        totalStageTimes_24h: get.siteStats.byKey('totalStageTimes_24h')
       }
     },
-    computed: {
-      ...mapGetters("ajax", ["pending"]),
-      error () {
-        return this.stats && this.stats["error"]
-      },
-      stats () {
-        return this.$store.getters["data/content"]({id: "stats"});
-      },
-      stageStats () {
-        return {
-          totalStageTimes: get.siteStats.byKey("totalStageTimes"),
-          totalStageTimes_24h: get.siteStats.byKey("totalStageTimes_24h"),
-        }
-      },
-      calculated () {
-        const updatedAt = this.$store.getters["data/updated"]({id: "stats"});
-        return {
-          totalDrops: this.stats["totalItemQuantities"].map(el => el.quantity).reduce((a, b) => a + b),
-          totalReports: this.stats["totalStageTimes"].map(el => el.times).reduce((a, b) => a + b),
-          updatedAt: timeFormatter.date(updatedAt, true, true),
-          updatedRelative: timeFormatter.dayjs(updatedAt).fromNow(),
-          totalApCost: this.stats["totalApCost"] && formatter.thousandSeparator(this.stats["totalApCost"])
-        }
+    calculated () {
+      const updatedAt = this.$store.getters['data/updated']({ id: 'stats' })
+      return {
+        totalDrops: this.stats.totalItemQuantities.map(el => el.quantity).reduce((a, b) => a + b),
+        totalReports: this.stats.totalStageTimes.map(el => el.times).reduce((a, b) => a + b),
+        updatedAt: timeFormatter.date(updatedAt, true, true),
+        updatedRelative: timeFormatter.dayjs(updatedAt).fromNow(),
+        totalApCost: this.stats.totalApCost && formatter.thousandSeparator(this.stats.totalApCost)
       }
-    },
-    created () {
-      statsManager.refresh()
-    },
-    methods: {
-      refresh() {
-        statsManager.refresh(true)
-      }
-    },
+    }
+  },
+  created () {
+    statsManager.refresh()
+  },
+  methods: {
+    refresh () {
+      statsManager.refresh(true)
+    }
   }
+}
 </script>
 
 <style scoped>

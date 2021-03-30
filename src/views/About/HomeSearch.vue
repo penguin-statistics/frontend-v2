@@ -15,7 +15,7 @@
 
       {{ $t('menu.search') }}
     </h1>
-    
+
     <GlobalSearch
       v-bind="$attrs"
       pure
@@ -25,15 +25,15 @@
 </template>
 
 <script>
-import GlobalSearch from "@/components/search/GlobalSearch";
+import GlobalSearch from '@/components/search/GlobalSearch'
 export default {
-  name: "HomeSearch",
-  components: {GlobalSearch},
-  data() {
+  name: 'HomeSearch',
+  components: { GlobalSearch },
+  data () {
     return {
       valid: false
     }
-  },
+  }
 }
 </script>
 

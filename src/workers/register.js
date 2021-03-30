@@ -1,12 +1,12 @@
-import Console from "@/utils/Console";
-import environment from "@/utils/environment";
+import Console from '@/utils/Console'
+import environment from '@/utils/environment'
 
-if (environment.production && "serviceWorker" in navigator) {
+if (environment.production && 'serviceWorker' in navigator) {
   navigator.serviceWorker.register(`${process.env.BASE_URL}service-worker.js`)
-    .then (result => {
-      Console.log("ServiceWorker", "successfully replaced to a no-op SW", result)
+    .then(result => {
+      Console.log('ServiceWorker', 'successfully replaced to a no-op SW', result)
     })
-    .catch (error => {
-      Console.error("ServiceWorker", "failed to replace to a no-op SW", error)
+    .catch(error => {
+      Console.error('ServiceWorker', 'failed to replace to a no-op SW', error)
     })
 }

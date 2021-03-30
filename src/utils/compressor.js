@@ -1,10 +1,10 @@
-const pako = require("pako");
+const pako = require('pako')
 
 export default {
   compress (jsonData) {
     return pako.deflate(
       JSON.stringify(jsonData),
-      {to: 'string'}
+      { to: 'string' }
     )
   },
   decompress (compressed) {

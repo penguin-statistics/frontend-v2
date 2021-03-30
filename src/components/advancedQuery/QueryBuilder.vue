@@ -152,108 +152,113 @@
 </template>
 
 <script>
-  import config from "@/config"
-  import QuerySelectorItem from "@/components/advancedQuery/selectors/QuerySelectorItem";
-  import QuerySelectorStage from "@/components/advancedQuery/selectors/QuerySelectorStage";
-  import QuerySelectorTimeRange from "@/components/advancedQuery/selectors/QuerySelectorTimeRange";
-  import QuerySelectorServer from "@/components/advancedQuery/selectors/QuerySelectorServer";
-  import QuerySelectorSource from "@/components/advancedQuery/selectors/QuerySelectorSource";
-  import query from "@/apis/query";
-  import marshaller from "@/utils/marshaller";
-  import QuerySelectorInterval from "@/components/advancedQuery/selectors/QuerySelectorInterval";
-  import snackbar from "@/utils/snackbar";
+import config from '@/config'
+import QuerySelectorItem from '@/components/advancedQuery/selectors/QuerySelectorItem'
+import QuerySelectorStage from '@/components/advancedQuery/selectors/QuerySelectorStage'
+import QuerySelectorTimeRange from '@/components/advancedQuery/selectors/QuerySelectorTimeRange'
+import QuerySelectorServer from '@/components/advancedQuery/selectors/QuerySelectorServer'
+import QuerySelectorSource from '@/components/advancedQuery/selectors/QuerySelectorSource'
+import query from '@/apis/query'
+import marshaller from '@/utils/marshaller'
+import QuerySelectorInterval from '@/components/advancedQuery/selectors/QuerySelectorInterval'
+import snackbar from '@/utils/snackbar'
 
-  export default {
-    name: "QueryBuilder",
-    components: {
-      QuerySelectorInterval,
-      QuerySelectorSource, QuerySelectorItem, QuerySelectorStage, QuerySelectorTimeRange, QuerySelectorServer},
-    props: {
-      value: {
-        type: Array,
-        required: true
+export default {
+  name: 'QueryBuilder',
+  components: {
+    QuerySelectorInterval,
+    QuerySelectorSource,
+    QuerySelectorItem,
+    QuerySelectorStage,
+    QuerySelectorTimeRange,
+    QuerySelectorServer
+  },
+  props: {
+    value: {
+      type: Array,
+      required: true
+    }
+  },
+  data () {
+    return {
+      index: 0,
+      result: {
+        busy: false
       }
+    }
+  },
+  computed: {
+    current () {
+      return this.value[this.index]
     },
-    data() {
-      return {
-        index: 0,
-        result: {
-          busy: false
-        }
+    addable () {
+      return this.value.length < config.advancedQuery.maxQueries
+    },
+    removeable () {
+      return this.value.length > 1
+    },
+    valid () {
+      for (const query of this.value) {
+        if (!query.stage) return false
+        if (!query.timeRange.length) return false
       }
+      return true
+    }
+  },
+  watch: {
+    value: {
+      deep: true,
+      handler () { this.$emit('update') }
+    }
+  },
+  methods: {
+    addQuery () {
+      this.$emit('input', [...this.value, Object.assign({}, this.current)])
+      this.$nextTick(function () {
+        this.index = this.value.length - 1
+      })
     },
-    computed: {
-      current() {
-        return this.value[this.index];
-      },
-      addable() {
-        return this.value.length < config.advancedQuery.maxQueries
-      },
-      removeable () {
-        return this.value.length > 1
-      },
-      valid () {
-        for (const query of this.value) {
-          if (!query["stage"]) return false
-          if (!query["timeRange"].length) return false
-        }
-        return true
+    removeQuery (i) {
+      if (i === this.index) {
+        this.index = this.index - 1
       }
+      this.value.splice(i, 1)
     },
-    watch: {
-      value: {
-        deep: true,
-        handler () { this.$emit('update') }
-      }
-    },
-    methods: {
-      addQuery() {
-        this.$emit('input', [...this.value, Object.assign({}, this.current)])
-        this.$nextTick(function () {
-          this.index = this.value.length - 1
-        })
-      },
-      removeQuery (i) {
-        if (i === this.index) {
-          this.index = this.index - 1
-        }
-        this.value.splice(i, 1)
-      },
-      execute () {
-        const start = Date.now()
-        this.result.busy = true
-        const marshalled = marshaller.advancedQuery(this.value)
-        query.advancedQuery(
-          marshalled
-        )
-          .then(({data}) => {
-            data = data["advanced_results"]
-            const elapsed = Date.now() - start
-            if (elapsed < 3500) {
-              // if the user hasn't see the loading screen up to 3.5sec
-              setTimeout(() => {
-                // then we let them see that for just a little longer time
-                // to reduce the "flashy" feeling when network condition is pretty ideal
-                this.$emit("result", data)
-                this.result.busy = false
-              }, Math.random() * 500 + 2000)
-            } else {
-              // the user has see enough loading screen. just forget about it
-              this.$emit("result", data)
+    execute () {
+      const start = Date.now()
+      this.result.busy = true
+      const marshalled = marshaller.advancedQuery(this.value)
+      query.advancedQuery(
+        marshalled
+      )
+        .then(({ data }) => {
+          data = data.advanced_results
+          const elapsed = Date.now() - start
+          if (elapsed < 3500) {
+            // if the user hasn't see the loading screen up to 3.5sec
+            setTimeout(() => {
+              // then we let them see that for just a little longer time
+              // to reduce the "flashy" feeling when network condition is pretty ideal
+              this.$emit('result', data)
               this.result.busy = false
-            }
-          })
-          .catch(() => {
-            snackbar.networkError()
+            }, Math.random() * 500 + 2000)
+          } else {
+            // the user has see enough loading screen. just forget about it
+            this.$emit('result', data)
             this.result.busy = false
-          })
-        this.$probe.reportExecutedAdvancedQuery(marshalled)
-      },
-      cancel () {
-        this.result.busy = false
-      }
+          }
+        })
+        .catch(() => {
+          snackbar.networkError()
+          this.result.busy = false
+        })
+      this.$probe.reportExecutedAdvancedQuery(marshalled)
     },
+    cancel () {
+      this.result.busy = false
+    }
   }
+}
 </script>
 
 <style scoped>

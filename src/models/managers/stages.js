@@ -6,7 +6,7 @@ const stages = new ObjectManager({
   api: {
     serverSensitive: true,
 
-    url: (server) => `/stages?server=${server}`,
+    url: (server) => `/stages?server=${server}`
   },
   transform: [
     (object) => {
@@ -23,6 +23,6 @@ const stages = new ObjectManager({
   validator: commons.defaultValidator,
   ttl: 1000 * 60 * 60 * 1, // 1 hour
   ajaxHooks: commons.defaultAjaxHooks
-});
+})
 
 export default stages

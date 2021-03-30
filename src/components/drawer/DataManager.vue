@@ -29,8 +29,8 @@
       {{ $t('menu.refreshData') }}
     </v-btn>
 
-    <DataResetter>
-      <template v-slot:default="{ on }">
+    <DataResetter v-if="!$env.isApp">
+      <template #default="{ on }">
         <v-btn
           v-haptic.notification="'WARNING'"
           depressed
@@ -49,24 +49,24 @@
 </template>
 
 <script>
-  import Subheader from "@/components/global/Subheader";
-  import DataResetter from "@/components/drawer/DataResetter";
-  import {mapGetters} from "vuex";
-  export default {
-    name: "DataManager",
-    components: {DataResetter, Subheader},
-    computed: {
-      ...mapGetters("ajax", ["pending"]),
-      dataStats() {
-        return this.$store.getters["data/stats"];
-      }
-    },
-    methods: {
-      async refreshData () {
-        await this.$store.dispatch("data/fetch", true);
-      },
-    },
+import Subheader from '@/components/global/Subheader'
+import DataResetter from '@/components/drawer/DataResetter'
+import { mapGetters } from 'vuex'
+export default {
+  name: 'DataManager',
+  components: { DataResetter, Subheader },
+  computed: {
+    ...mapGetters('ajax', ['pending']),
+    dataStats () {
+      return this.$store.getters['data/stats']
+    }
+  },
+  methods: {
+    async refreshData () {
+      await this.$store.dispatch('data/fetch', true)
+    }
   }
+}
 </script>
 
 <style scoped>

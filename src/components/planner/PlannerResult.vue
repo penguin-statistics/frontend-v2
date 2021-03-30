@@ -334,61 +334,61 @@
 </template>
 
 <script>
-  import Item from "@/components/global/Item";
-  import formatter from "@/utils/formatter";
-  export default {
-    name: "PlannerResult",
-    components: {Item},
-    props: {
-      result: {
-        type: Object,
-        required: true
-      },
+import Item from '@/components/global/Item'
+import formatter from '@/utils/formatter'
+export default {
+  name: 'PlannerResult',
+  components: { Item },
+  props: {
+    result: {
+      type: Object,
+      required: true
+    }
+  },
+  data () {
+    return {
+      tab: null,
+      tabs: [{
+        id: 'stages',
+        icon: 'mdi-cube',
+        text: 'planner.calculation.tabs.stages'
+      }, {
+        id: 'syntheses',
+        icon: 'mdi-treasure-chest',
+        text: 'planner.calculation.tabs.syntheses'
+      }, {
+        id: 'values',
+        icon: 'mdi-cash-usd',
+        text: 'planner.calculation.tabs.values'
+      }]
+    }
+  },
+  methods: {
+    redirectItem (itemId) {
+      this.$router.push({
+        name: 'StatsByItem_SelectedItem',
+        params: {
+          itemId
+        }
+      })
     },
-    data() {
-      return {
-        tab: null,
-        tabs: [{
-          id: "stages",
-          icon: "mdi-cube",
-          text: "planner.calculation.tabs.stages"
-        }, {
-          id: "syntheses",
-          icon: "mdi-treasure-chest",
-          text: "planner.calculation.tabs.syntheses"
-        }, {
-          id: "values",
-          icon: "mdi-cash-usd",
-          text: "planner.calculation.tabs.values"
-        }]
-      }
+    redirectStage (stage) {
+      this.$router.push({
+        name: 'StatsByStage_Selected',
+        params: {
+          zoneId: stage.zoneId,
+          stageId: stage.stageId
+        }
+      })
     },
-    methods: {
-      redirectItem(itemId) {
-        this.$router.push({
-          name: "StatsByItem_SelectedItem",
-          params: {
-            itemId
-          }
-        })
-      },
-      redirectStage(stage) {
-        this.$router.push({
-          name: "StatsByStage_Selected",
-          params: {
-            zoneId: stage.zoneId,
-            stageId: stage.stageId,
-          }
-        })
-      },
-      parseTimes (num) {
-        return formatter.thousandSeparator(Math.ceil(parseFloat(num)))
-      },
-      parseAmount (num) {
-        return formatter.thousandSeparator(parseFloat(num))
-      }
+    parseTimes (num) {
+      return formatter.thousandSeparator(Math.ceil(parseFloat(num)))
     },
+    parseAmount (num) {
+      return formatter.thousandSeparator(parseFloat(num))
+    }
   }
+}
 </script>
 
 <style scoped>

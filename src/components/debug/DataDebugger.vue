@@ -155,18 +155,18 @@
 </template>
 
 <script>
-  import getter from "@/utils/getters"
-  export default {
-    name: "DataDebugger",
-    computed: {
-      store() {
-        return this.$store;
-      },
-      getter() {
-        return getter
-      }
+import getter from '@/utils/getters'
+export default {
+  name: 'DataDebugger',
+  computed: {
+    store () {
+      return this.$store
     },
+    getter () {
+      return getter
+    }
   }
+}
 </script>
 
 <style scoped>

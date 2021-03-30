@@ -75,8 +75,8 @@
 </i18n>
 
 <template>
-  <v-card 
-    elevation="5" 
+  <v-card
+    elevation="5"
     class="bkop-light pa-6"
   >
     <template v-if="hide && (isCNMirror || isIOS)">
@@ -103,7 +103,7 @@
           <div class="subtitle-1">
             {{ $t('donate.donate_1') }}
             <v-tooltip top>
-              <template v-slot:activator="{ on, attrs }">
+              <template #activator="{ on, attrs }">
                 <span
                   style="border-bottom:1px dashed #ccc;"
                   v-bind="attrs"
@@ -114,7 +114,7 @@
             </v-tooltip>
             {{ $t('donate.donate_4') }}
           </div>
-          
+
           <BackdropCard
             darken
             hover
@@ -122,7 +122,7 @@
             class="bkop-light px-12 py-6 my-6 elevation-3"
             style="height: 192px; width: 100%"
           >
-            <template v-slot:backdrop>
+            <template #backdrop>
               <v-icon>
                 mdi-handshake
               </v-icon>
@@ -177,7 +177,7 @@
         <div class="subtitle-1">
           {{ $t('donate.donate_1') }}
           <v-tooltip top>
-            <template v-slot:activator="{ on, attrs }">
+            <template #activator="{ on, attrs }">
               <span
                 style="border-bottom:1px dashed #ccc;"
                 v-bind="attrs"
@@ -248,7 +248,7 @@
             darken
             class="bkop-light pt-6 pb-4 elevation-3"
           >
-            <template v-slot:backdrop>
+            <template #backdrop>
               <svg
                 :alt="$t('donate.methods.alipay')"
                 style="height: 96px; width: 96px; color: inherit"
@@ -302,7 +302,7 @@
             darken
             class="bkop-light pt-6 pb-4 elevation-3"
           >
-            <template v-slot:backdrop>
+            <template #backdrop>
               <svg
                 :alt="$t('donate.methods.wechatPay')"
                 style="height: 96px; width: 96px; color: inherit"
@@ -354,30 +354,30 @@
 </template>
 
 <script>
-import Theme from "@/mixins/Theme";
-import BackdropCard from "@/components/global/BackdropCard";
-import Mirror from "@/mixins/Mirror";
+import Theme from '@/mixins/Theme'
+import BackdropCard from '@/components/global/BackdropCard'
+import Mirror from '@/mixins/Mirror'
 
 export default {
-  name: "Donate",
-  components: {BackdropCard},
+  name: 'Donate',
+  components: { BackdropCard },
   mixins: [Theme, Mirror],
   props: {
     hide: {
       type: Boolean,
       default: false
-    },
+    }
   },
-  data() {
+  data () {
     return {
       qr: {
-        alipay: "https://qr.alipay.com/fkx03351nnunmv19b5yavdf",
-        wechatPay: "wxp://f2f0F8Z93ZkS3boz8JY3FwarwyAwcIfXC2CN",
-        paypal: "https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=T9LRK3VEL645J&item_name=Penguin+Statistics+Donation&currency_code=USD&source=url"
+        alipay: 'https://qr.alipay.com/fkx03351nnunmv19b5yavdf',
+        wechatPay: 'wxp://f2f0F8Z93ZkS3boz8JY3FwarwyAwcIfXC2CN',
+        paypal: 'https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=T9LRK3VEL645J&item_name=Penguin+Statistics+Donation&currency_code=USD&source=url'
       }
     }
   }
-};
+}
 </script>
 
 <style>
