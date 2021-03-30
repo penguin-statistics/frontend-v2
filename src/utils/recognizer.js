@@ -190,7 +190,15 @@ class Recognizer {
       Console.debug('Recognizer', 'Recognized. Took', duration + 'ms', 'with result', parsedResult)
 
       parsedResult.exceptions = parsedResult.exceptions.map(exception => {
-        exception.what = `${strings.capitalize(exception.where.split('.')[0])}::${exception.what}`
+        exception.what = `${
+          strings.capitalize(
+            exception.where
+              .split('.')
+              .filter(el => !el.match(/^-?\d+$/))
+              .map(strings.capitalize)
+              .join('')
+          )
+        }::${exception.what}`
         return exception
       })
 
