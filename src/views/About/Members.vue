@@ -114,6 +114,21 @@ export default {
         },
         contributors: [
           {
+            name: 'Kumo ☁️',
+            responsibility: [
+              r.recognition,
+              r.localization.ja,
+              r.customersupport
+            ],
+            avatar: 'kumo.jpg',
+            socials: {
+              github: 'https://github.com/KumoSiunaus',
+              weibo: 'https://weibo.com/673465600',
+              twitter: 'https://twitter.com/Kumo_Siunaus',
+              email: 'mailto:kumosiunaus@gmail.com'
+            }
+          },
+          {
             name: 'YukiC',
             responsibility: [
               r.backend
@@ -144,6 +159,27 @@ export default {
             }
           },
           {
+            name: 'Martin Wang',
+            responsibility: [
+              r.frontend,
+              r.backend
+            ],
+            avatar: 'martin.png',
+            socials: {
+              github: 'https://github.com/martinwang2002'
+            }
+          },
+          {
+            name: 'bbaa',
+            responsibility: [
+              r.recognition
+            ],
+            avatar: 'bbaa.png',
+            socials: {
+              github: 'https://github.com/bbaa-bbaa'
+            }
+          },
+          {
             name: 'AsahiLuna',
             responsibility: [
               r.frontend
@@ -171,19 +207,6 @@ export default {
             avatar: 'koukaizu.jpg',
             socials: {
               twitter: 'https://twitter.com/Arkn1ghts'
-            }
-          },
-          {
-            name: 'Kumo ☁️',
-            responsibility: [
-              r.localization.ja
-            ],
-            avatar: 'kumo.jpg',
-            socials: {
-              github: 'https://github.com/KumoSiunaus',
-              weibo: 'https://weibo.com/673465600',
-              twitter: 'https://twitter.com/Kumo_Siunaus',
-              email: 'mailto:kumosiunaus@gmail.com'
             }
           },
           {

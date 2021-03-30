@@ -13,7 +13,10 @@ server:
     KR: 韓国版
 menu:
   home: トップページ
-  report: ドロップ報告
+  report:
+    _name: ドロップ報告
+    stage: 章别
+    recognition: スクショ認識
   search: グローバル検索
   stats:
     _name: ドロップ率
@@ -483,6 +486,9 @@ members:
     maintenance: DevOps
     materials: 素材提供
     statistics: データ統計解析
+    widget: ウィジェット
+    native: アプリ開発
+    recognition: スクショ認識
   socials:
     email: Email
     github: GitHub

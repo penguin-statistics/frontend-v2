@@ -641,6 +641,7 @@ members:
     statistics: Statistics and Analysis
     widget: Widget Development
     native: App Development
+    recognition: Screenshot Recognition
   socials:
     email: Email
     github: GitHub

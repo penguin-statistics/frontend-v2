@@ -17,8 +17,8 @@ menu:
   home: 首页
   report:
     _name: 掉落汇报
-    stage: 按章节汇报
-    recognition: 截图识别汇报
+    stage: 按章节
+    recognition: 截图识别
   search: 全局搜索
   stats:
     _name: 素材掉率
@@ -634,6 +634,7 @@ members:
     statistics: 统计分析
     widget: 小组件开发
     native: App 开发
+    recognition: 截图识别
   socials:
     email: Email
     github: GitHub
