@@ -283,7 +283,7 @@
                       <!--                        </span>-->
                     </v-row>
                   </v-expansion-panel-header>
-                  <v-expansion-panel-content :class="{ 'stage-card--content': !!zone.image }">
+                  <v-expansion-panel-content :class="{ 'stage-card--content': !!zone.background }">
                     <div
                       v-if="zone.isActivity"
                       class="caption mx-1 mt-3 mb-2"
