@@ -92,6 +92,7 @@ stats:
     stage: Stage
     apCost: Sanity
     item: Item
+    itemDrops: Aggregated Item Drops
     times: Samples
     quantity: Loots
     percentage: Percentage
