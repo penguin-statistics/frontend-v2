@@ -290,10 +290,10 @@ report:
         - 为保证本站数据集准确度，您将**不可**选中发生识别错误的截图
     exceptions:
       "Fingerprint::Same":
-        title: 此图片与另一图片完全一致
-        subtitle: 请检查是否选择了重复截图
+        title: 存在完全一致的图片
+        subtitle: 请检查是否选择了重复的截图
       "FileTimestamp::TooClose":
-        title: 此图片与另一图片的截图相隔时间过短
+        title: 存在截图相隔时间过短的图片
         subtitle: 请检查是否选择了重复截图
       "DropInfos::Violation": 识别结果验证失败
       "StageChar::LowConfidence":

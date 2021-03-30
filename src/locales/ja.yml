@@ -276,12 +276,12 @@ report:
           - 本サイトのデータの正確度のため、エラーのある画像はご選択できません
       exceptions:
         "Fingerprint::Same":
-          title: 此图片与另一图片完全一致
-          subtitle: 请检查是否选择了重复截图
+          title: 完全一致の画像が存在
+          subtitle: 重複的なスクリーンショットを選択しましたかご確認ください
         "FileTimestamp::TooClose":
-          title: 此图片与另一图片的截图相隔时间过短
-          subtitle: 请检查是否选择了重复截图
-        "DropInfos::Violation": 识别结果验证失败
+          title: 作成時間間隔が短すぎる画像が存在
+          subtitle: 重複的なスクリーンショットを選択しましたかご確認ください
+        "DropInfos::Violation": 認識結果が検証失敗
         "StageChar::LowConfidence":
           title: ステージ認識異常の可能性がある
           subtitle: 認識の信頼性が低い、認識結果を画像と照合してください
@@ -289,13 +289,13 @@ report:
           title: アイテム数量認識異常の可能性がある
           subtitle: 認識の信頼性が低い、認識結果を画像と照合してください
         "DropQuantity::NotFound":
-          title: 数量検出失敗のドロップがある
+          title: 数量検出失敗のドロップが存在
           subtitle: 解像度・品質の低い画像はこの問題を引き起こす可能性があります。画像は圧縮処理されましたかご確認ください
         "Drop::LowConfidence":
-          title: 未知のドロップが存在する
+          title: 未知のドロップが存在
           subtitle: この問題は通常、イベント期間外のイベントドロップによるものです
         "Drop::Illeagal":
-          title: 非合法ドロップが存在する
+          title: 非合法ドロップが存在
           subtitle: このステージには今、可能のドロップが存在していませんが、検出されました。これは通常、イベント期間外のイベントドロップによるものです
         "ResultLabel::False":
           title: 作戦成果のスクリーンショットではない
@@ -309,7 +309,7 @@ report:
         "3stars::False": 星3評価ではない
         "DropType::Illeagal":
           title: 非合法のドロップタイプ
-          subtitle: スクリーンショットには初回、理性返却などの非合法なドロップタイプ、又は認識できないドロップタイプが存在しています。
+          subtitle: スクリーンショットには初回、理性返却などの非合法なドロップタイプ、又は認識できないドロップタイプが存在しています
         "DropType::NotFound": ドロップタイプ未検出
   rules:
     item:
