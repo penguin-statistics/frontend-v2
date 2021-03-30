@@ -203,7 +203,7 @@
                   hide-details
                   :disabled="submitting"
                 >
-                  <template v-slot:label>
+                  <template #label>
                     <v-slide-x-transition leave-absolute>
                       <v-badge
                         v-if="furniture"

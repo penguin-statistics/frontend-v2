@@ -5,39 +5,39 @@
   >
     <RecognitionImageDialog v-model="expandImage.src" />
 
-    <v-dialog
-      v-model="submitDialog.open"
-      persistent
-    >
-      <v-card class="d-flex fill-height">
-        <v-card-text>
-          <v-row
-            align="center"
-            justify="center"
-          >
-            <v-col
-              cols="12"
-              class="px-1 py-12 text-center"
-              style="width: 100%"
-            >
-              <PreloaderInline class="mx-auto mb-6" />
-              <h1 class="title">
-                {{ $t("report.recognition.states.submitting") }}
-              </h1>
-              <v-row>
-                <v-col>
-                  <v-progress-linear
-                    indeterminate
-                    class="mx-auto"
-                    style="width: 90%"
-                  />
-                </v-col>
-              </v-row>
-            </v-col>
-          </v-row>
-        </v-card-text>
-      </v-card>
-    </v-dialog>
+    <!--    <v-dialog-->
+    <!--      v-model="submitDialog.open"-->
+    <!--      persistent-->
+    <!--    >-->
+    <!--      <v-card class="d-flex fill-height">-->
+    <!--        <v-card-text>-->
+    <!--          <v-row-->
+    <!--            align="center"-->
+    <!--            justify="center"-->
+    <!--          >-->
+    <!--            <v-col-->
+    <!--              cols="12"-->
+    <!--              class="px-1 py-12 text-center"-->
+    <!--              style="width: 100%"-->
+    <!--            >-->
+    <!--              <PreloaderInline class="mx-auto mb-6" />-->
+    <!--              <h1 class="title">-->
+    <!--                {{ $t("report.recognition.states.submitting") }}-->
+    <!--              </h1>-->
+    <!--              <v-row>-->
+    <!--                <v-col>-->
+    <!--                  <v-progress-linear-->
+    <!--                    indeterminate-->
+    <!--                    class="mx-auto"-->
+    <!--                    style="width: 90%"-->
+    <!--                  />-->
+    <!--                </v-col>-->
+    <!--              </v-row>-->
+    <!--            </v-col>-->
+    <!--          </v-row>-->
+    <!--        </v-card-text>-->
+    <!--      </v-card>-->
+    <!--    </v-dialog>-->
 
     <v-row
       justify="center"
@@ -51,6 +51,18 @@
             :class="{'grey lighten-3': !dark, 'secondary': dark}"
           >
             {{ $t('menu.report.recognition') }}
+
+            <div
+              class="chip-label ml-1"
+            >
+              <v-icon
+                x-small
+                class="mr-1"
+              >
+                mdi-beta
+              </v-icon>
+              {{ $t('menu._beta') }}
+            </div>
           </v-card-title>
           <v-card-subtitle
             class="px-6"
@@ -59,7 +71,10 @@
             {{ $t('report.recognition.description') }}
           </v-card-subtitle>
 
-          <BrowserDeprecated v-if="recognition.support !== true" />
+          <BrowserDeprecated
+            v-if="recognition.support !== true"
+            :reason="recognition.support"
+          />
           <v-stepper
             v-else
             v-model="step"
@@ -254,10 +269,10 @@
                     dense
                     class="px-4 py-3 mx-0 border-outlined radius-1"
                   >
-                    <template v-slot:header>
+                    <template #header>
                       {{ $t('report.recognition.filter') }}
                     </template>
-                    <template v-slot:content>
+                    <template #content>
                       <v-checkbox
                         v-for="filter in itemFilters"
                         :key="filter.value"
@@ -275,202 +290,20 @@
 
                   <v-row v-if="results.length">
                     <v-col
-                      v-for="(result, index) in results"
-                      :key="index"
-                      :class="[filteredResults.includes(result) ? 'd-flex' : 'd-none', 'align-self-stretch']"
+                      v-for="result in filteredResults"
+                      :key="result.id"
                       cols="12"
                       md="6"
                       lg="4"
                       xl="3"
                       class="align-self-stretch"
                     >
-                      <v-card
-                        outlined
-                        :color="
-                          resultHasErrorOrWarning[index]
-                            ? (dark ? 'rgba(241,97,87,0.5)' : 'rgba(241,97,87,0.3)')
-                            : ''"
-                        style="width: 100%"
-                        class="align-self-stretch fill-height d-flex flex-column justify-start overflow-hidden"
-                      >
-                        <div class="bkop-medium">
-                          <v-img
-                            v-ripple
-                            :src="result.blobUrl"
-                            contain
-                            style="cursor: zoom-in"
-                            min-height="120px"
-                            max-height="240px"
-                            class="unknown-ratio-glow"
-                            @click="expandImage.src = result.blobUrl"
-                          >
-                            <template #placeholder>
-                              <div class="d-flex align-center justify-center fill-height caption">
-                                {{ $t('report.recognition.confirm.loadingImage') }}
-                              </div>
-                            </template>
-                            <template #default>
-                              <div class="d-flex flex-row full-width justify-end fallthrough">
-                                <span
-                                  class="monospace font-weight-bold bkop-medium text-right border-outlined img-side-tag elevation-4"
-                                >
-                                  {{ result.file.lastModified | timeAbsolute }}
-                                  <span
-                                    class="d-block text-right"
-                                    style="font-size: small; line-height: 1.5em"
-                                  >
-                                    {{ result.file.lastModified | timeRelative }}
-                                  </span>
-                                </span>
-                              </div>
-                            </template>
-                          </v-img>
-                        </div>
-                        <v-divider />
-
-                        <v-card-title class="align-start">
-                          <div
-                            v-if="result.result.stageId"
-                            class="d-inline-flex flex-row align-start"
-                          >
-                            <FactTableItem>
-                              <template #title>
-                                <span class="textDarken--text">{{ $t('stage.name') }}</span>
-                              </template>
-                              <template #content>
-                                <span class="monospace font-weight-bold">
-                                  {{ getStage(result.result.stageId).code }}
-                                </span>
-                              </template>
-                            </FactTableItem>
-                            <FactTableItem>
-                              <template #title>
-                                <span class="textDarken--text">{{ $t('report.recognition.confirm.itemsTotal') }}</span>
-                              </template>
-                              <template #content>
-                                <span class="monospace font-weight-bold">
-                                  ×{{ result.result.drops.reduce((prev, curr) => prev + curr.quantity, 0) }}
-                                </span>
-                              </template>
-                            </FactTableItem>
-                          </div>
-
-                          <div
-                            v-else
-                            class="align-self-start mr-4"
-                          >
-                            {{ $t('report.recognition.confirm.unknownStage') }}
-                          </div>
-                        </v-card-title>
-
-                        <v-divider />
-
-                        <v-card-text
-                          class="pt-2 transition-all"
-                          :class="{
-                            'reco-result__wrapper--invalid': resultHasErrorOrWarning[index],
-                            'reco-result__wrapper--invalid-no-results': !result.result.drops.length
-                          }"
-                        >
-                          <div class="reco-result__details">
-                            <div
-                              v-for="item in result.result.drops"
-                              :key="item.itemId"
-                              class="d-inline-flex align-center justify-center flex-column pa-2 mt-2 mr-2 border-outlined"
-                              style="border-radius: 4px"
-                            >
-                              <div>
-                                {{ dropTypeToString(item.dropType) }}
-                              </div>
-
-                              <v-badge
-                                bottom
-                                overlap
-                                bordered
-                                label
-                                color="indigo"
-                                :offset-x="24"
-                                :offset-y="20"
-                                :content="`×${item.quantity}`"
-                              >
-                                <Item
-                                  :item="getItem(item.itemId)"
-                                  disable-overview-card
-                                />
-                              </v-badge>
-                            </div>
-                          </div>
-                          <v-alert
-                            v-if="resultHasErrorOrWarning[index]"
-                            outlined
-                            color="text"
-                            border="left"
-                            class="my-4 reco-result__alert"
-                            type="error"
-                          >
-                            <div>
-                              <div>{{ $t('report.recognition.confirm.abnormal.' + (result.result.stageId ? 'error' : 'fatal')) }}</div>
-
-                              <div
-                                v-if="result.result.drops.length"
-                                class="d-inline-flex caption chip-label"
-                              >
-                                <v-icon
-                                  left
-                                  small
-                                >
-                                  mdi-cursor-default-click
-                                </v-icon>
-                                {{ $t('report.recognition.confirm.abnormal.hover') }}
-                              </div>
-                            </div>
-
-                            <RecognizeResultAlertCard
-                              :alerts="result.result.exceptions"
-                              icon="mdi-alert-decagram"
-                            />
-                          </v-alert>
-                        </v-card-text>
-
-                        <v-spacer />
-
-                        <v-divider />
-
-                        <v-card-actions class="pa-2">
-                          <v-card
-                            v-ripple="!resultHasErrorOrWarning[index]"
-                            dark
-                            class="background-transparent font-weight-bold elevation-2 pa-2"
-                            :class="
-                              resultHasErrorOrWarning[index] ?
-                                'transparent elevation-0' :
-                                (selectedResultsIndex.includes(index) ?
-                                  'success darken-2' :
-                                  'warning darken-3'
-                                )
-                            "
-                            style="width: 100%"
-                          >
-                            <v-checkbox
-                              v-model="selectedResultsIndex"
-                              hide-details
-                              color="white"
-                              :value="index"
-                              class="pt-0 mt-0 white--text"
-                              :disabled="resultHasErrorOrWarning[index]"
-                              :off-icon="resultHasErrorOrWarning[index] ? 'mdi-close-box' : '$checkboxOff'"
-                              :label="
-                                resultHasErrorOrWarning[index] ?
-                                  $t('report.recognition.confirm.cherryPick.disabled') :
-                                  (selectedResultsIndex.includes(index) ?
-                                    $t('report.recognition.confirm.cherryPick.accepted') :
-                                    $t('report.recognition.confirm.cherryPick.rejected')
-                                  )
-                              "
-                            />
-                          </v-card>
-                        </v-card-actions>
-                      </v-card>
+                      <RecognitionResultCard
+                        v-model="selectedResultsIndex"
+                        :result="result"
+                        :index="result.id"
+                        @popup="e => expandImage.src = e"
+                      />
                     </v-col>
                   </v-row>
                   <v-alert
@@ -597,27 +430,42 @@
                   </template>
                 </v-data-table>
 
-                <v-btn
-                  rounded
-                  x-large
-                  color="primary"
-                  :disabled="submitDialog.open"
-                  @click="submit"
-                >
-                  <div class="d-inline-flex align-center justify-center">
-                    <v-icon small>
-                      mdi-server
-                    </v-icon>
-                    <span class="caption ml-1">
-                      {{ $t("server.servers." + recognition.server) }}
-                    </span>
-                  </div>
-                  <v-divider
-                    vertical
-                    class="mx-2"
+                <v-expand-transition>
+                  <v-btn
+                    v-if="submission.state !== 'uploaded'"
+                    rounded
+                    x-large
+                    color="primary"
+                    :block="$vuetify.breakpoint.xs"
+                    :loading="submission.state === 'uploading'"
+                    :disabled="submission.state !== 'pending'"
+                    class="mb-4"
+                    @click="submit"
+                  >
+                    <div class="d-inline-flex align-center justify-center">
+                      <v-icon small>
+                        mdi-server
+                      </v-icon>
+                      <span class="caption ml-1">
+                        {{ $t("server.servers." + recognition.server) }}
+                      </span>
+                    </div>
+                    <v-divider
+                      vertical
+                      class="mx-2"
+                    />
+                    <span> {{ $t("report.recognition.report.submit", {count: selectedResults.length}) }} </span>
+                  </v-btn>
+                </v-expand-transition>
+
+                <v-expand-transition>
+                  <RecognitionSubmitVisualizer
+                    v-if="submission.state !== 'pending'"
+                    :state="submission.state"
+                    :total="submission.total"
+                    :submitted="submission.submitted"
                   />
-                  <span> {{ $t("report.recognition.submit") }} </span>
-                </v-btn>
+                </v-expand-transition>
               </template>
             </v-stepper-content>
           </v-stepper>
@@ -630,7 +478,6 @@
 import Item from '@/components/global/Item'
 import Recognizer from '@/utils/recognizer'
 import PreloaderInline from '@/components/global/PreloaderInline'
-import snackbar from '@/utils/snackbar'
 import CDN from '@/mixins/CDN'
 import Theme from '@/mixins/Theme'
 import ImageInput from '@/components/recognition/ImageInput'
@@ -643,12 +490,13 @@ import OffTitle from "@/components/global/OffTitle";
 import FactTable from "@/components/stats/fact-table/FactTable";
 import FactTableItem from "@/components/stats/fact-table/FactTableItem";
 import {mapGetters} from "vuex";
-import RecognizeResultAlertCard from "@/components/recognition/RecognizeResultAlertCard";
 import RecognitionImageDialog from "@/components/recognition/RecognitionImageDialog";
 import TitledRow from "@/components/global/TitledRow";
 import ConfirmLeave from "@/mixins/ConfirmLeave";
 import environment from "@/utils/environment";
 import BrowserDeprecated from "@/components/global/BrowserDeprecated";
+import RecognitionResultCard from "@/components/recognition/RecognitionResultCard";
+import RecognitionSubmitVisualizer from "@/components/recognition/RecognitionSubmitVisualizer";
 
 let recognitionSubmitter;
 try {
@@ -660,10 +508,11 @@ try {
 export default {
   name: 'RecognitionReport',
   components: {
+    RecognitionSubmitVisualizer,
+    RecognitionResultCard,
     BrowserDeprecated,
     TitledRow,
     RecognitionImageDialog,
-    RecognizeResultAlertCard,
     FactTableItem,
     FactTable, OffTitle, DynamicSizeBtn, Item, ImageInput, RecognitionResultOverview, PreloaderInline },
   mixins: [Theme, CDN, ConfirmLeave],
@@ -691,6 +540,11 @@ export default {
           imagePerSecond: -1,
           timer: null
         }
+      },
+      submission: {
+        state: 'pending',
+        submitted: [],
+        total: -1
       },
       dialogOrigin: '',
       filterValue: ['SUCCESS', 'ERROR'],
@@ -766,10 +620,9 @@ export default {
       ]
     },
     reportTableData () {
-      console.time('reportTableData')
       const map = {}
       for (const recognitionResult of this.selectedResults) {
-        const stage = get.stages.byStageId(recognitionResult.result.stageId)
+        const stage = get.stages.byStageId(recognitionResult.result.stage.stageId)
         const stageCode = stage.code
         if (!map[stageCode]) {
           map[stageCode] = {
@@ -790,7 +643,6 @@ export default {
 
       const results = []
       for (const [stage, val] of Object.entries(map)) results.push({ stage, ...val })
-      console.timeEnd('reportTableData')
       return {
         results,
         total: {
@@ -801,12 +653,9 @@ export default {
       }
     },
     selectedResults () {
-      return this.results.filter((result, index) => {
-        return this.selectedResultsIndex.includes(index)
+      return this.results.filter(result => {
+        return this.selectedResultsIndex.includes(result.id)
       })
-    },
-    resultHasErrorOrWarning () {
-      return this.results.map((result) => !!result.result.exceptions.length)
     }
   },
   watch: {
@@ -850,30 +699,30 @@ export default {
       if (this.recognition.timer.timer) clearInterval(this.recognition.timer.timer)
       this.recognition.timer.remaining = 0
     },
-    async doSubmit () {
+    async submit () {
+      this.recognition.state = 'uploading'
+      this.submission.state = 'uploading'
+      this.submission.total = this.selectedResults.length
+
       const userId = Cookies.get(config.authorization.userId.cookieKey)
-      recognitionSubmitter(this)
-        .then(() => {
+      await recognitionSubmitter(this, (state, chunk) => {
+        if (state === 'resolve') {
           const reportedUserId = Cookies.get(config.authorization.userId.cookieKey)
           if (userId !== reportedUserId) {
             this.$store.dispatch('auth/login', {
               userId: reportedUserId
             })
           }
-          this.$ga.event('report', 'submit_recognition', this.selectedResults.map((result) => { return result.stageId }), 1)
-        }).finally(() => {
-          this.submitDialog.finish = true
-          this.submitDialog.error = false
-        }).catch((e) => {
-          console.log(e)
-          snackbar.networkError()
-          this.submitDialog.error = true
-        })
-    },
-    submit () {
-      this.submitDialog.open = true
-      this.recognition.state = 'uploading'
-      this.doSubmit()
+          this.submission.submitted.push(chunk)
+          this.$ga.event('report', 'submit_batch', 'submit_batch', this.selectedResults.length)
+        } else if (state === 'reject') {
+          this.submission.submitted.push(- chunk)
+        }
+      })
+
+      this.recognition.state = 'uploaded'
+      this.submission.state = 'uploaded'
+      this.confirmLeaveDestroy()
     },
     async init () {
       this.recognition.state = 'initializing'
@@ -918,9 +767,6 @@ export default {
 
       this.stopTimer()
     },
-    dropTypeToString (type) {
-      return this.$t(`stage.loots.${type}`) || type
-    },
     getStage (stageId) {
       return get.stages.byStageId(stageId) || { code: '(internal error)' }
     },
@@ -931,9 +777,7 @@ export default {
       await this.recognize()
       this.applyPostRecognitionRules(this.results)
       const selectedResultsIndex = []
-      this.results.forEach((result, index) => {
-        if (!(result.result.exceptions.length)) selectedResultsIndex.push(index)
-      })
+      for (const result of this.results) if (!(result.result.exceptions.length)) selectedResultsIndex.push(result.id)
       this.selectedResultsIndex = selectedResultsIndex
       this.recognition.durationPerImage = (this.results.reduce((prev, curr) => {
         return prev + (curr.duration || 0)
@@ -966,7 +810,6 @@ export default {
       })
     },
     applyPostRecognitionRules (results) {
-      console.time('applyPostRecognitionRules')
       const timestamps = results.map(value => value.file.lastModified)
       const fingerprints = results.map(value => value.result.fingerprint)
 
@@ -993,7 +836,6 @@ export default {
           value.result.exceptions.push({ what: 'Fingerprint::Same' })
         }
       })
-      console.timeEnd('applyPostRecognitionRules')
       return Object.freeze(results)
     }
   }
@@ -1007,47 +849,6 @@ export default {
   }
   .quick-transition {
     transition-duration: 20ms !important;
-  }
-
-  .reco-result {
-    &__wrapper--invalid:not(.reco-result__wrapper--invalid-no-results) {
-      position: relative;
-      transform-origin: top center;
-      $easing: cubic-bezier(0, 0.55, 0.45, 1);
-
-      & .reco-result__details {
-        transition: all .225s $easing;
-        max-height: 108px;
-        opacity: 0.7;
-        transform: scale(0.94);
-        filter: brightness(0.8) contrast(0.6);
-      }
-      & .reco-result__alert {
-        transition: all .225s $easing;
-        margin-top: -68px !important;
-        background: rgba(128, 34, 25, .85) !important;
-        .theme--light & {
-          background: rgba(230, 103, 92, .85) !important;
-        }
-      }
-
-      &:hover {
-        & .reco-result__details {
-          max-height: 600px;
-          opacity: 1;
-          transform: scale(1);
-          filter: brightness(1);
-        }
-        & .reco-result__alert {
-          pointer-events: none;
-          margin-top: -68px !important;
-          filter: blur(5px);
-          opacity: 0.12;
-          background: rgba(128, 34, 25, .2) !important;
-          transform: scale(1.047);
-        }
-      }
-    }
   }
 
   .backdrop-icon {
@@ -1081,12 +882,5 @@ export default {
         display: none !important;
       }
     }
-  }
-
-  .img-side-tag {
-    padding: 3px 9px 2px 8px;
-    border-radius: 0 0 0 8px;
-    border-right-width: 0 !important;
-    border-top-width: 0 !important;
   }
 </style>

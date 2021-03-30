@@ -8,7 +8,7 @@
     :label="$t('menu.settings.themes.name')"
     transition="slide-y-transition"
   >
-    <template v-slot:item="{ item }">
+    <template #item="{ item }">
       <v-icon
         left
       >
@@ -20,7 +20,7 @@
         mdi-check
       </v-icon>
     </template>
-    <template v-slot:selection="{item}">
+    <template #selection="{item}">
       <v-icon
         small
         left

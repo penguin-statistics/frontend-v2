@@ -4,7 +4,7 @@
     hover
     class="pa-0 mt-2"
   >
-    <template v-slot:backdrop>
+    <template #backdrop>
       <v-icon>
         mdi-poll-box
       </v-icon>

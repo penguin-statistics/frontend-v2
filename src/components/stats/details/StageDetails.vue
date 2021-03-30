@@ -58,7 +58,7 @@
           :href="link.href"
           class="bkop-medium mb-2 py-3 "
         >
-          <template v-slot:backdrop>
+          <template #backdrop>
             <v-icon>
               {{ link.icon }}
             </v-icon>

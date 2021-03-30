@@ -13,7 +13,7 @@
 
     @input="update"
   >
-    <template v-slot:item="{item}">
+    <template #item="{item}">
       {{ item.text }}
       <v-spacer />
       <v-icon v-if="item.value === value">
@@ -21,7 +21,7 @@
       </v-icon>
     </template>
 
-    <template v-slot:selection="{item}">
+    <template #selection="{item}">
       {{ item.text }}
     </template>
   </v-select>

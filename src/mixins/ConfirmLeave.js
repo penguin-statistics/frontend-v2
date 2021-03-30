@@ -48,6 +48,7 @@ export default {
       }
     },
     confirmLeaveDestroy () {
+      this.confirmLeaveActive = false
       window.onbeforeunload = null
     }
   }

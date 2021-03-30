@@ -68,7 +68,7 @@
       color="red darken-2"
     >
       {{ snackbarMessage }}
-      <template v-slot:action="{ attrs }">
+      <template #action="{ attrs }">
         <v-btn
           text
           v-bind="attrs"

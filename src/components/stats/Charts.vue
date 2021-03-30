@@ -4,7 +4,7 @@
     transition="scale-transition"
     max-width="850px"
   >
-    <template v-slot:activator="{ on, attrs }">
+    <template #activator="{ on, attrs }">
       <slot />
       <div
         class="sparkline cursor-pointer"

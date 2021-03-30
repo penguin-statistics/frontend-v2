@@ -34,7 +34,7 @@
       <!--                :class="{'primary': !shortlink.generating, 'slash-strip&#45;&#45;loading': shortlink.generating}"-->
       <!--                @click="generateShortlink"-->
       <!--              >-->
-      <!--                <template v-slot:loader>-->
+      <!--                <template #loader>-->
       <!--                  <v-progress-circular-->
       <!--                    indeterminate-->
       <!--                    :size="16"-->

@@ -4,7 +4,7 @@
     max-width="475px"
     :persistent="dirty"
   >
-    <template v-slot:activator="props">
+    <template #activator="props">
       <slot v-bind="props" />
     </template>
 
@@ -222,13 +222,13 @@ export default {
     update () {
       penguin.getLastSyncedPushPreferences()
         .then(preferences => {
-          console.log(preferences.preferences, typeof preferences.preferences, preferences[0])
+          // console.log(preferences.preferences, typeof preferences.preferences, preferences[0])
           this.originalPrefs = unmarshaller.pushPreferences(preferences.preferences)
         })
     },
     save () {
       const m = marshaller.pushPreferences(this.originalPrefs)
-      console.log(m)
+      // console.log(m)
       penguin.submitNewPushPreferences(m)
         .then(() => {
           this.dirty = false
@@ -252,7 +252,7 @@ export default {
     },
     add (content) {
       const newKey = this.generateKey(content)
-      console.log('adding', JSON.stringify(content), newKey, this.preferences)
+      // console.log('adding', JSON.stringify(content), newKey, this.preferences)
       if (this.originalPrefs.find(el => this.generateKey(el) === newKey)) {
         snackbar.launch('warning', 15000, '请不要重复添加：拥有相同订阅参数的订阅已存在于订阅列表内', '')
         return

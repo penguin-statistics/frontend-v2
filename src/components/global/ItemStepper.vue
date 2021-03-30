@@ -11,7 +11,7 @@
         :value="quantity > 0"
         class="cursor-pointer reduction-badge"
       >
-        <template v-slot:badge>
+        <template #badge>
           <span @click="reduction">
             <v-icon>mdi-minus</v-icon>
           </span>
@@ -25,7 +25,7 @@
         overlap
         class="cursor-pointer monospace"
       >
-        <template v-slot:badge>
+        <template #badge>
           <span class="disabled">
             {{ quantity }}
           </span>

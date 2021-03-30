@@ -178,7 +178,7 @@
           target="_blank"
           rel="noopener"
         >
-          <template v-slot:backdrop>
+          <template #backdrop>
             <v-icon>
               {{ link.icon }}
             </v-icon>

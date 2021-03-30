@@ -103,7 +103,7 @@
           <div class="subtitle-1">
             {{ $t('donate.donate_1') }}
             <v-tooltip top>
-              <template v-slot:activator="{ on, attrs }">
+              <template #activator="{ on, attrs }">
                 <span
                   style="border-bottom:1px dashed #ccc;"
                   v-bind="attrs"
@@ -122,7 +122,7 @@
             class="bkop-light px-12 py-6 my-6 elevation-3"
             style="height: 192px; width: 100%"
           >
-            <template v-slot:backdrop>
+            <template #backdrop>
               <v-icon>
                 mdi-handshake
               </v-icon>
@@ -177,7 +177,7 @@
         <div class="subtitle-1">
           {{ $t('donate.donate_1') }}
           <v-tooltip top>
-            <template v-slot:activator="{ on, attrs }">
+            <template #activator="{ on, attrs }">
               <span
                 style="border-bottom:1px dashed #ccc;"
                 v-bind="attrs"
@@ -248,7 +248,7 @@
             darken
             class="bkop-light pt-6 pb-4 elevation-3"
           >
-            <template v-slot:backdrop>
+            <template #backdrop>
               <svg
                 :alt="$t('donate.methods.alipay')"
                 style="height: 96px; width: 96px; color: inherit"
@@ -302,7 +302,7 @@
             darken
             class="bkop-light pt-6 pb-4 elevation-3"
           >
-            <template v-slot:backdrop>
+            <template #backdrop>
               <svg
                 :alt="$t('donate.methods.wechatPay')"
                 style="height: 96px; width: 96px; color: inherit"

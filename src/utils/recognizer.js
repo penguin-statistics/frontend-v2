@@ -2,37 +2,23 @@ import charHash from '@/models/recognition/charHash'
 import store from '@/store'
 import JSZip from 'jszip'
 import uniq from 'lodash/uniq'
-// import reduce from 'lodash/reduce'
 import Console from "@/utils/Console";
 import strings from "@/utils/strings";
+import ReportValidator from "@/utils/reportValidator";
+import get from '@/utils/getters'
+import existUtils from "@/utils/existUtils";
+import mirror from "@/utils/mirror";
+
+const recognizerVersion = 'v3.2.2-1'
 
 async function image2wasmHeapOffset (blob) {
   const Module = window.Module
-  // console.log('image2wasmHeapOffset: start reading file')
-  // console.time('image2wasmHeapOffset')
-  // const imageData = await new Promise(resolve => {
-  //   const reader = new FileReader()
-  //   reader.onload = (event) => resolve(event.target.result)
-  //   reader.readAsArrayBuffer(blob)
-  // })
   const imageData = await blob.arrayBuffer()
-  // console.log('image2wasmHeapOffset: initializing array')
-  // console.timeLog('image2wasmHeapOffset')
   const uint8 = new Uint8Array(imageData)
   const numBytes = uint8.length
-  // console.log('image2wasmHeapOffset: initialized array')
-  // console.timeLog('image2wasmHeapOffset')
   const dataPtr = Module._malloc(numBytes * Uint8Array.BYTES_PER_ELEMENT)
-  // console.log('image2wasmHeapOffset: allocated wasm memory')
-  // console.timeLog('image2wasmHeapOffset')
   const dataOnHeap = new Uint8Array(Module.HEAPU8.buffer, dataPtr, numBytes)
-  // console.log('image2wasmHeapOffset: created Uint8Array on wasm heap')
-  // console.timeLog('image2wasmHeapOffset')
   dataOnHeap.set(uint8)
-  // console.log('image2wasmHeapOffset: set Uint8Array value on wasm heap')
-  // console.timeEnd('image2wasmHeapOffset')
-
-  // console.log(dataPtr, dataOnHeap.byteLength, dataOnHeap.byteOffset, Module.HEAPU8.buffer, uint8)
 
   return {
     offset: dataPtr,
@@ -56,7 +42,8 @@ class Recognizer {
       Console.info('Recognizer', 'init: recognition backend: both js and wasm are already loaded')
     } else {
       const script = document.createElement('script')
-      script.src = '/penguin.js'
+      script.src = mirror.deliver(`/recognition/${recognizerVersion}/penguin.js`)
+      // script.src = "/penguin.js"
       document.body.appendChild(script)
       await new Promise(resolve => {
         script.onload = function () {
@@ -78,6 +65,7 @@ class Recognizer {
       load_tmpl: Module.cwrap('load_templ', 'void', ['string', 'number']),
       load_json: Module.cwrap('load_json', 'void', ['string', 'string']),
       recognize: Module.cwrap('recognize', 'string', ['number', 'number']),
+      get_info: Module.cwrap('get_info', 'string', []),
       // free_buffer: Module.cwrap('free_buffer', 'void', ['number'])
     }
 
@@ -85,32 +73,35 @@ class Recognizer {
 
     store.getters['data/content']({ id: 'stages' })
       .forEach((stage) => {
-        const drops = (stage.dropInfos || [])
+        let drops = (stage.dropInfos || [])
           .map(drop => drop.itemId)
           .filter(drop => !!drop && drop !== 'furni')
 
-        if (stage.recognitionOnly) drops.concat(stage.recognitionOnly)
+        if (stage.recognitionOnly) drops = [...drops, ...stage.recognitionOnly]
 
         stages[stage.code] = {
           stageId: stage.stageId,
-          drops: uniq(drops)
+          drops: uniq(drops),
+          existence: existUtils.existence(stage, true)
         }
       })
 
-    Console.debug('Recognizer', 'init: load: json: preloading with', stages, charHash)
+
+    Console.debug('Recognizer', 'init: preload json: preloading with', stages, charHash)
 
     this.wasm.load_json(
       JSON.stringify(stages),
       JSON.stringify(charHash)
     )
 
-    Console.debug('Recognizer', 'init: load: server: preloading with', server)
+    Console.debug('Recognizer', 'init: preload server: preloading with', server)
 
     this.wasm.load_server(server)
 
-    Console.info('Recognizer', 'init: load: icons: preloading')
+    Console.info('Recognizer', 'init: preload icons: preloading')
 
-    await fetch('/items.zip')
+    // await fetch(mirror.deliver(`/recognition/${recognizerVersion}/items.zip`))
+    await fetch("/items.zip")
       .then((response) => {
         if (response.status >= 200 && response.status < 400) {
           return Promise.resolve(response.blob())
@@ -124,7 +115,7 @@ class Recognizer {
         zip.forEach((relativePath, file) => {
           imageBuffer.push(new Promise(resolve => {
             const item = file.name.split('.')[0]
-            // console.log('adding', item, 'to preloaded item icon')
+            Console.debug('Recognizer', 'init: preload icons: adding', item, 'to preloaded item icon')
             file.async('blob').then(async (blob) => {
               const { offset, length } = await image2wasmHeapOffset(blob, file.name)
               this.wasm.load_tmpl(item, offset, length)
@@ -135,13 +126,23 @@ class Recognizer {
       })
 
 
-    Console.info('Recognizer', 'init: load: icons: preloaded')
+    Console.info('Recognizer', 'init: preload icons: preloaded')
+
+    const version = this.wasm.get_info()
+
+    Console.info('Recognizer', 'initialization completed with wasm version', version)
+
+    this.instanceInfo = {
+      server,
+      version
+    }
 
     return this
   }
 
   async recognize (files, resultCb) {
     for (const file of files) {
+      const id = `${Date.now()}_${Math.random()}`
       // console.groupCollapsed('Recognition of', file.name)
       // console.log('start recognizing file', file.name)
       // console.time(file.name)
@@ -159,6 +160,7 @@ class Recognizer {
         Console.error('Recognizer', 'caught wasm error', e, 'responding with null result')
         const duration = performance.now() - start
         resultCb({
+          id,
           file,
           blobUrl: data.blobUrl,
           duration,
@@ -174,11 +176,48 @@ class Recognizer {
       Console.debug('Recognizer', 'Recognized. Took', duration + 'ms', 'with result', parsedResult)
 
       parsedResult.exceptions = parsedResult.exceptions.map(exception => {
-        exception.what = `${strings.capitalize(exception.where.split('.')[0])}::${exception.what}`
+        exception.what = `${
+          strings.capitalize(
+            exception.where
+              .split('.')
+              .filter(el => !el.match(/^-?\d+$/))
+              .map(strings.capitalize)
+              .join('')
+          )
+        }::${exception.what}`
         return exception
       })
 
+      if (parsedResult.stage.stageCode) {
+        const stage = get.stages.byStageId(parsedResult.stage.stageId)
+
+        if (Array.isArray(stage.recognitionOnly)) {
+          parsedResult.drops = parsedResult.drops.filter(el => !stage.recognitionOnly.includes(el.itemId))
+        }
+
+        if (!parsedResult.exceptions.length) {
+          const zone = get.zones.byZoneId(stage.zoneId)
+
+          Console.debug('Recognizer', 'validating drops', parsedResult)
+          const validate = new ReportValidator(
+            this.instanceInfo.server,
+            zone,
+            stage,
+            parsedResult.drops
+          ).validate()
+          Console.debug('Recognizer', 'validated with result', validate)
+
+          if (validate.rate > 0) {
+            parsedResult.exceptions.push({
+              what: "DropInfos::Violation",
+              details: validate
+            })
+          }
+        }
+      }
+
       resultCb({
+        id,
         file,
         blobUrl: data.blobUrl,
         duration,

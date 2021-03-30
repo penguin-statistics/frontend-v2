@@ -42,7 +42,7 @@
       >
         <v-col v-bind="cols.overview">
           <BackdropCard>
-            <template v-slot:backdrop>
+            <template #backdrop>
               <svg
                 height="128"
                 width="128"
@@ -71,7 +71,7 @@
 
         <v-col v-bind="cols.overview">
           <BackdropCard>
-            <template v-slot:backdrop>
+            <template #backdrop>
               <v-icon>
                 mdi-treasure-chest
               </v-icon>
@@ -89,7 +89,7 @@
 
         <v-col v-bind="cols.overview">
           <BackdropCard>
-            <template v-slot:backdrop>
+            <template #backdrop>
               <v-icon>
                 mdi-cube
               </v-icon>

@@ -55,7 +55,7 @@
         v-model="ioDialog"
         width="800"
       >
-        <template v-slot:activator="{ on, attrs }">
+        <template #activator="{ on, attrs }">
           <v-btn
             v-haptic
             color="deep-purple white--text"
@@ -79,7 +79,7 @@
         v-model="reset.dialog"
         max-width="400px"
       >
-        <template v-slot:activator="{ on, attrs }">
+        <template #activator="{ on, attrs }">
           <v-btn
             v-haptic
             color="error"
@@ -112,7 +112,7 @@
                 hide-details
                 class="mt-1"
               >
-                <template v-slot:append>
+                <template #append>
                   <v-scale-transition origin="center center">
                     <v-chip
                       v-if="reset.options.removeOptions"
@@ -131,7 +131,7 @@
                 hide-details
                 class="mt-1"
               >
-                <template v-slot:append>
+                <template #append>
                   <v-scale-transition origin="center center">
                     <v-chip
                       v-if="reset.options.removeExcludes"
@@ -150,7 +150,7 @@
                 hide-details
                 class="mt-1"
               >
-                <template v-slot:append>
+                <template #append>
                   <v-scale-transition origin="center center">
                     <v-chip
                       v-if="reset.options.removeItems"
@@ -199,7 +199,7 @@
       <!--              hover-->
       <!--              @click.native="calculate"-->
       <!--            >-->
-      <!--              <template v-slot:backdrop>-->
+      <!--              <template #backdrop>-->
       <!--                <v-icon>-->
       <!--                  mdi-calculator-->
       <!--                </v-icon>-->
@@ -284,7 +284,7 @@
         v-model="excludeDialog"
         max-width="700px"
       >
-        <template v-slot:activator="{ on, attrs }">
+        <template #activator="{ on, attrs }">
           <v-btn
             class="mr-2 align-center"
             v-bind="attrs"
@@ -335,7 +335,7 @@
         :loading="calculation.pending"
         @click="calculate"
       >
-        <template v-slot:loader>
+        <template #loader>
           <v-progress-circular
             indeterminate
             :size="16"

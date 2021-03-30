@@ -92,6 +92,7 @@ stats:
     stage: Stage
     apCost: Sanity
     item: Item
+    itemDrops: Aggregated Item Drops
     times: Samples
     quantity: Loots
     percentage: Percentage
@@ -208,10 +209,6 @@ report:
       recognize: Recognize
       confirm: Confirm
       report: Report
-    allResult:
-      stageTime: Total Stage Times
-      drops: Total Item Drops
-      sanity: Total AP consumed
     tips:
       fileTooBig: "File \"{name}\" with size of {size}MB is too large"
       fileTooOld: "File \"{name}\" was created before 36hrs ago"
@@ -251,6 +248,7 @@ report:
       abnormal:
         error: This image failed to pass the legibility test
         fatal: This image failed to be recognized
+        details: List of Errors
         hover: "Hover: see recognition results"
       cherryPick:
         disabled: "Unable to upload abnormal recognition result"
@@ -262,6 +260,17 @@ report:
     report:
       title: Report Details
       total: Total
+      submit: Report {count} battle results
+      reporting: Reporting in bulk...
+      allSucceeded: "{count} battle results successfully reported"
+      partialSucceeded: "Only {count} battle results successfully reported"
+      partialFailed: "{count} failed battle result reports. Please follow the troubleshooting steps below"
+      partialFailedDesc:
+        - "Check your network connection: The upload may be failed if the network connection is poor."
+        - "In order to ensure that the entire site data set is not affected by external attacks, if you still cannot upload after multiple retries, your submission volume may have triggered the reporting limit. Please try again after 24 hours to upload the remaining drop reports."
+        - "Your IP may be shared with others, because individuals cannot be located due to the nature of IP. In this case, please try to switch your mobile network or WiFi to retry recognition, or you can retry uploading after 24 hours."
+        - "To prevent retransmission attacks, we will attach a timestamp to your request; if the time of your device is too far from the standard time, the upload may fail. Please try to calibrate the device time and try again."
+      caption: "Thanks for reporting. Your data will be revealed in the global dataset of website in 20 minutes at most because of cache."
     states:
       pending: Waiting for initialization...
       initializing: Initializing...
@@ -288,25 +297,42 @@ report:
         - Screenshots which passed the legibility test have already been checked for upload.
         - With consideration of dataset accuracy, you are **disallowed** to check a screenshot that failed the legibility test for upload.
     exceptions:
-      "3stars::False":
-        title: "Suspected to be a non 3-stars clear"
-        subtitle: Did you wait for the animation to complete before taking the screenshot?
-      "Stage::NotFound": Cannot found any valid matching stage
       "Fingerprint::Same":
         title: Duplicated Images
         subtitle: Check if you have selected duplicated images
       "FileTimestamp::TooClose":
         title: Screenshot Interval too close
         subtitle: Check if you have selected duplicated images
-      "Drops::NotFound":
-        title: Unexpected Drop Item
-        subtitle: Check if you have selected a screenshot in which its content includes a closed event
+      "DropInfos::Violation": Failed to pass result validation
+      "StageChar::LowConfidence":
+        title: Error in stage recognition
+        subtitle: Low confidence in the recognition result. Please check if the result is consistent with the screenshot.
+      "DropQuantityChar::LowConfidence":
+        title: Error in item quantity recognition
+        subtitle: Low confidence in the recognition result. Please check if the result is consistent with the screenshot.
+      "DropQuantity::NotFound":
+        title: Failed to recognize the drop quantity
+        subtitle: Pictures with poor resolution or quality may cause this problem. Please check if the image is compressed
       "Drops::LowConfidence":
         title: Low Confidence Drop Item
         subtitle: Check if you have selected a screenshot in which its content includes a closed event
+      "Drops::Illeagal":
+        title: Illegal drops found
+        subtitle: There should be no drop in this stage, but there are some in the screenshot. This is usually caused by event drop during non-event period
       "Result::False":
-        title: Invalid Image
-        subtitle: Check if you have selected a valid screenshot
+        title: Not a battle result screenshot
+        subtitle: If this is a battle result screenshot, please make sure the server you select is correct
+      "Stage::NotFound":
+        title: Cannot found any valid matching stage
+        subtitle: Error in stage recognition, or we do not count drop for this stage
+      "Stage::Illeagal":
+        title: Illegal stage
+        subtitle: This stage is not opening now
+      "3stars::False": Suspected to be a non 3-stars clear
+      "DropType::Illeagal":
+        title: Illegal drop type
+        subtitle: There are illegal drop types in the screenshot, like first-clear or return AP
+      "DropType::NotFound": Failed to find any drop type
   rules:
     item:
       _name: Item Quantities
@@ -616,6 +642,7 @@ members:
     statistics: Statistics and Analysis
     widget: Widget Development
     native: App Development
+    recognition: Screenshot Recognition
   socials:
     email: Email
     github: GitHub

@@ -234,12 +234,12 @@
                   v-for="zone in category.zones"
                   :key="zone.zoneId"
                   class="bkop-light stage-card--background"
-                  :style="{ 'background-image': zone.image ? `url(${zone.image}) !important` : null }"
+                  :style="{ 'background-image': zone.background ? `url(${cdnDeliver(zone.background)}) !important` : null }"
                 >
                   <v-expansion-panel-header
                     v-haptic
                     class="overflow-hidden bkop-medium"
-                    :class="{ 'stage-card--header': !!zone.image }"
+                    :class="{ 'stage-card--header': !!zone.background }"
                   >
                     <v-row align="center">
                       <span
@@ -283,7 +283,7 @@
                       <!--                        </span>-->
                     </v-row>
                   </v-expansion-panel-header>
-                  <v-expansion-panel-content :class="{ 'stage-card--content': !!zone.image }">
+                  <v-expansion-panel-content :class="{ 'stage-card--content': !!zone.background }">
                     <div
                       v-if="zone.isActivity"
                       class="caption mx-1 mt-3 mb-2"
@@ -324,7 +324,6 @@ import Console from '@/utils/Console'
 import { mapGetters } from 'vuex'
 import CDN from '@/mixins/CDN'
 import existUtils from '@/utils/existUtils'
-import validator from '@/utils/validator'
 import BackButton from '@/components/stats/BackButton'
 import Theme from '@/mixins/Theme'
 
@@ -367,37 +366,37 @@ export default {
         stage: null
       },
       stageImages: {
-        act5d0_zone1: this.cdnDeliver('/backgrounds/zones/act5d0_zone1.jpg'),
-        act6d5_zone1: this.cdnDeliver('/backgrounds/zones/act6d5_zone1.jpg'),
-        act7d5_zone1: this.cdnDeliver('/backgrounds/zones/act7d5_zone1.jpg'),
-        act9d0_zone1: this.cdnDeliver('/backgrounds/zones/act9d0_zone1.jpg'),
-        act10d5_zone1: this.cdnDeliver('/backgrounds/zones/act10d5_zone1.jpg'),
-        act11d0_zone1: this.cdnDeliver('/backgrounds/zones/act11d0_zone1.jpg'),
-        '1stact_zone1': this.cdnDeliver('/backgrounds/zones/A001_zone1.jpg'),
-        act3d0_zone1: this.cdnDeliver('/backgrounds/zones/A003_zone1.jpg'),
-        act4d0_zone1: this.cdnDeliver('/backgrounds/zones/main_e0.jpg'),
-        main_0: this.cdnDeliver('/backgrounds/zones/main_0.jpg'),
-        main_1: this.cdnDeliver('/backgrounds/zones/main_1.jpg'),
-        main_2: this.cdnDeliver('/backgrounds/zones/main_2.jpg'),
-        main_3: this.cdnDeliver('/backgrounds/zones/main_3.jpg'),
-        main_4: this.cdnDeliver('/backgrounds/zones/main_4.jpg'),
-        main_5: this.cdnDeliver('/backgrounds/zones/main_5.jpg'),
-        main_6: this.cdnDeliver('/backgrounds/zones/main_6.jpg'),
-        main_7: this.cdnDeliver('/backgrounds/zones/main_7.jpg'),
-        main_8: this.cdnDeliver('/backgrounds/zones/main_8.jpg'),
-        gachabox: this.cdnDeliver('/backgrounds/zones/gachabox.jpg'),
-        act12d0_zone1: this.cdnDeliver('/backgrounds/zones/act12d0_zone1.jpg'),
-        act13d0_zone1: this.cdnDeliver('/backgrounds/zones/act13d0_zone1.jpg'),
-        act13d5_zone1: this.cdnDeliver('/backgrounds/zones/act13d5_zone1.jpg'),
-        act14d7_zone1: this.cdnDeliver('/backgrounds/zones/act5d0_zone1.jpg'),
-        act15d0_zone1: this.cdnDeliver('/backgrounds/zones/act15d0_zone1.jpg'),
-        act15d5_zone1: this.cdnDeliver('/backgrounds/zones/act15d5_zone1.jpg'),
-        // "act13d5_zone1": require("@/assets/zonePageBackgrounds/png/act13d5_zone1.png"),
-
-        // 骑兵与猎人 复刻：复用原活动（1stact_zone1）
-        act13d2_zone1: this.cdnDeliver('/backgrounds/zones/A001_zone1.jpg'),
-
-        // 选择页面背景
+      //   act5d0_zone1: this.cdnDeliver('/backgrounds/zones/act5d0_zone1.jpg'),
+      //   act6d5_zone1: this.cdnDeliver('/backgrounds/zones/act6d5_zone1.jpg'),
+      //   act7d5_zone1: this.cdnDeliver('/backgrounds/zones/act7d5_zone1.jpg'),
+      //   act9d0_zone1: this.cdnDeliver('/backgrounds/zones/act9d0_zone1.jpg'),
+      //   act10d5_zone1: this.cdnDeliver('/backgrounds/zones/act10d5_zone1.jpg'),
+      //   act11d0_zone1: this.cdnDeliver('/backgrounds/zones/act11d0_zone1.jpg'),
+      //   '1stact_zone1': this.cdnDeliver('/backgrounds/zones/A001_zone1.jpg'),
+      //   act3d0_zone1: this.cdnDeliver('/backgrounds/zones/A003_zone1.jpg'),
+      //   act4d0_zone1: this.cdnDeliver('/backgrounds/zones/main_e0.jpg'),
+      //   main_0: this.cdnDeliver('/backgrounds/zones/main_0.jpg'),
+      //   main_1: this.cdnDeliver('/backgrounds/zones/main_1.jpg'),
+      //   main_2: this.cdnDeliver('/backgrounds/zones/main_2.jpg'),
+      //   main_3: this.cdnDeliver('/backgrounds/zones/main_3.jpg'),
+      //   main_4: this.cdnDeliver('/backgrounds/zones/main_4.jpg'),
+      //   main_5: this.cdnDeliver('/backgrounds/zones/main_5.jpg'),
+      //   main_6: this.cdnDeliver('/backgrounds/zones/main_6.jpg'),
+      //   main_7: this.cdnDeliver('/backgrounds/zones/main_7.jpg'),
+      //   main_8: this.cdnDeliver('/backgrounds/zones/main_8.jpg'),
+      //   gachabox: this.cdnDeliver('/backgrounds/zones/gachabox.jpg'),
+      //   act12d0_zone1: this.cdnDeliver('/backgrounds/zones/act12d0_zone1.jpg'),
+      //   act13d0_zone1: this.cdnDeliver('/backgrounds/zones/act13d0_zone1.jpg'),
+      //   act13d5_zone1: this.cdnDeliver('/backgrounds/zones/act13d5_zone1.jpg'),
+      //   act14d7_zone1: this.cdnDeliver('/backgrounds/zones/act5d0_zone1.jpg'),
+      //   act15d0_zone1: this.cdnDeliver('/backgrounds/zones/act15d0_zone1.jpg'),
+      //   act15d5_zone1: this.cdnDeliver('/backgrounds/zones/act15d5_zone1.jpg'),
+      //   // "act13d5_zone1": require("@/assets/zonePageBackgrounds/png/act13d5_zone1.png"),
+      //
+      //   // 骑兵与猎人 复刻：复用原活动（1stact_zone1）
+      //   act13d2_zone1: this.cdnDeliver('/backgrounds/zones/A001_zone1.jpg'),
+      //
+      //   // 选择页面背景
         _default: this.cdnDeliver('/backgrounds/zones/default.jpg')
       }
     }
@@ -507,18 +506,7 @@ export default {
             zones = zones.map(el => {
               return {
                 ...el,
-                image: null
-              }
-            })
-          } else {
-            zones = zones.map(el => {
-              if (validator.have(this.stageImages, el.zoneId)) {
-                return {
-                  ...el,
-                  image: this.stageImages[el.zoneId]
-                }
-              } else {
-                return el
+                background: null
               }
             })
           }
@@ -533,19 +521,20 @@ export default {
       }
       return result
     },
+    selectedZone () {
+      if (!this.selected.zone) return {}
+      return get.zones.byZoneId(this.selected.zone)
+    },
     selectedStage () {
       if (!this.selected.stage) return {}
       return get.stages.byStageId(this.selected.stage)
     },
     currentStageImage () {
-      const stage = this.selectedStage
+      const zone = this.selectedZone
       if (this.lowData) return null
 
-      if (validator.have(this.stageImages, stage.zoneId)) {
-        return this.stageImages[stage.zoneId]
-      } else {
-        return null
-      }
+      if (zone.background) return this.cdnDeliver(zone.background)
+      return null
     },
     relativeStages () {
       if (!this.selected.stage) return null
