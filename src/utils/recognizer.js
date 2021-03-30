@@ -73,11 +73,11 @@ class Recognizer {
 
     store.getters['data/content']({ id: 'stages' })
       .forEach((stage) => {
-        const drops = (stage.dropInfos || [])
+        let drops = (stage.dropInfos || [])
           .map(drop => drop.itemId)
           .filter(drop => !!drop && drop !== 'furni')
 
-        if (stage.recognitionOnly) drops.concat(stage.recognitionOnly)
+        if (stage.recognitionOnly) drops = [...drops, ...stage.recognitionOnly]
 
         stages[stage.code] = {
           stageId: stage.stageId,
@@ -100,8 +100,8 @@ class Recognizer {
 
     Console.info('Recognizer', 'init: preload icons: preloading')
 
-    await fetch(mirror.deliver(`/recognition/${recognizerVersion}/items.zip`))
-    // await fetch("/items.zip")
+    // await fetch(mirror.deliver(`/recognition/${recognizerVersion}/items.zip`))
+    await fetch("/items.zip")
       .then((response) => {
         if (response.status >= 200 && response.status < 400) {
           return Promise.resolve(response.blob())
@@ -188,24 +188,31 @@ class Recognizer {
         return exception
       })
 
-      if (!parsedResult.exceptions.length && parsedResult.stage.stageCode) {
+      if (parsedResult.stage.stageCode) {
         const stage = get.stages.byStageId(parsedResult.stage.stageId)
-        const zone = get.zones.byZoneId(stage.zoneId)
 
-        Console.debug('Recognizer', 'validating drops', parsedResult)
-        const validate = new ReportValidator(
-          this.instanceInfo.server,
-          zone,
-          stage,
-          parsedResult.drops
-        ).validate()
-        Console.debug('Recognizer', 'validated with result', validate)
+        if (Array.isArray(stage.recognitionOnly)) {
+          parsedResult.drops = parsedResult.drops.filter(el => !stage.recognitionOnly.includes(el.itemId))
+        }
 
-        if (validate.rate > 0) {
-          parsedResult.exceptions.push({
-            what: "DropInfos::Violation",
-            details: validate
-          })
+        if (!parsedResult.exceptions.length) {
+          const zone = get.zones.byZoneId(stage.zoneId)
+
+          Console.debug('Recognizer', 'validating drops', parsedResult)
+          const validate = new ReportValidator(
+            this.instanceInfo.server,
+            zone,
+            stage,
+            parsedResult.drops
+          ).validate()
+          Console.debug('Recognizer', 'validated with result', validate)
+
+          if (validate.rate > 0) {
+            parsedResult.exceptions.push({
+              what: "DropInfos::Violation",
+              details: validate
+            })
+          }
         }
       }
 
