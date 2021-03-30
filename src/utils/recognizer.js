@@ -7,6 +7,9 @@ import strings from "@/utils/strings";
 import ReportValidator from "@/utils/reportValidator";
 import get from '@/utils/getters'
 import existUtils from "@/utils/existUtils";
+import mirror from "@/utils/mirror";
+
+const recognizerVersion = 'v3.2.2'
 
 async function image2wasmHeapOffset (blob) {
   const Module = window.Module
@@ -58,7 +61,7 @@ class Recognizer {
       Console.info('Recognizer', 'init: recognition backend: both js and wasm are already loaded')
     } else {
       const script = document.createElement('script')
-      script.src = '/penguin.js'
+      script.src = mirror.deliver(`/recognition/${recognizerVersion}/penguin.js`)
       document.body.appendChild(script)
       await new Promise(resolve => {
         script.onload = function () {
@@ -115,7 +118,7 @@ class Recognizer {
 
     Console.info('Recognizer', 'init: load: icons: preloading')
 
-    await fetch('/items.zip')
+    await fetch(mirror.deliver(`/recognition/${recognizerVersion}/items.zip`))
       .then((response) => {
         if (response.status >= 200 && response.status < 400) {
           return Promise.resolve(response.blob())
