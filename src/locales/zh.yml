@@ -258,9 +258,9 @@ report:
       partialSucceeded: "仅成功上传共 {count} 次的部分结算记录"
       partialFailed: "共计 {count} 次结算记录上传失败。请依照下方步骤排查可能出现的错误原因"
       partialFailedDesc:
-        - 检查您的网络连接：质量较差的网络连接或网络中断可能造成上传失败。若您断言您的网络连接并无问题，
-        - 为保证全站数据集免受外部攻击的影响，若您在多次重试后依然无法上传，则可能您的提交量已触发汇报上限、请于 24 小时后再重试上传剩余的掉落汇报。若您并未进行任何汇报
-        - 由于 IP 性质并不能定位到您个体，在宽带热门区域，您的 IP 有可能与他人共享使用。此种情况下，请尝试切换您的移动网络或 WiFi 重试识别，亦或您可以于 24 小时后重试上传。若您确信您的 IP 并未与他人共享
+        - 检查您的网络连接：质量较差的网络连接或网络中断可能造成上传失败。
+        - 为保证全站数据集免受外部攻击的影响，若您在多次重试后依然无法上传，则可能您的提交量已触发汇报上限、请于 24 小时后再重试上传剩余的掉落汇报。
+        - 由于 IP 性质并不能定位到您个体，在宽带热门区域，您的 IP 有可能与他人共享使用。此种情况下，请尝试切换您的移动网络或 WiFi 重试识别，亦或您可以于 24 小时后重试上传。
         - 为防止重传攻击，我们会对您的请求附加时间戳；若您的设备的时间与正常时间差距过大，则可能导致上传失败，请尝试校准设备时间后重试。
       caption: 感谢您的掉落汇报；由于缓存原因，您汇报的数据可能需要最多 20 分钟即可于全站数据集生效
     states:
@@ -289,26 +289,42 @@ report:
         - 成功识别的截图已被自动选中上传
         - 为保证本站数据集准确度，您将**不可**选中发生识别错误的截图
     exceptions:
-      "3stars::False":
-        title: 疑似并非 3 星通关
-        subtitle: 在物品出现动画播放完毕前就截图可能会导致此问题
-      "Stage::NotFound": 并未识别到已知关卡
       "Fingerprint::Same":
         title: 此图片与另一图片完全一致
         subtitle: 请检查是否选择了重复截图
       "FileTimestamp::TooClose":
         title: 此图片与另一图片的截图相隔时间过短
         subtitle: 请检查是否选择了重复截图
-      "Drops::NotFound":
-        title: 识别到不合法的掉落物
-        subtitle: 请检查是否选择了已结束活动的结算截图
-      "Drops::LowConfidence":
-        title: 识别到无法确定的掉落物
-        subtitle: 请检查是否选择了已结束活动的结算截图
-      "Result::False":
-        title: 未知图片
-        subtitle: 请确认您的截图包含分辨率正常的全屏结算页面截图
       "DropInfos::Violation": 识别结果验证失败
+      "StageChar::LowConfidence":
+        title: 关卡识别可能存在错误
+        subtitle: 识别置信度低，请核对识别结果是否与图片一致
+      "DropQuantityChar::LowConfidence":
+        title: 物品数量识别可能存在错误
+        subtitle: 识别置信度低，请核对识别结果是否与图片一致
+      "DropQuantity::NotFound":
+        title: 存在未识别到数量的掉落
+        subtitle: 分辨率或质量较差的图片可能会导致此问题。请检查图片是否经过压缩处理
+      "Drop::LowConfidence":
+        title: 存在未知掉落
+        subtitle: 此问题通常是由于非活动期间的活动掉落的导致的。
+      "Drop::Illeagal":
+        title: 存在非法掉落
+        subtitle: 此关卡目前不应存在任何掉落，但图片中存在。这通常是由于非活动期间的活动掉落的导致的。
+      "ResultLabel::False":
+        title: 非结算页面截图
+        subtitle: 若这确实是一张结算页面截图，请检查您是否选择了正确的服务器
+      "Stage::NotFound":
+        title: 未知关卡
+        subtitle: 这可能是关卡识别出现了错误，或此关卡不被收录（如剿灭作战、绝境作战等）
+      "Stage::Illeagal":
+        title: 非法关卡
+        subtitle: 此关卡目前不开放
+      "3stars::False": 非三星评价
+      "DropType::Illeagal":
+        title: 非法掉落类型
+        subtitle: 截图中存在首次掉落、理智返还等非法掉落类型，或存在识别失败的掉落类型
+      "DropType::NotFound": 未找到任何掉落类型
   rules:
     item:
       _name: 物品项

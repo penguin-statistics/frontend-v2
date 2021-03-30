@@ -164,7 +164,6 @@ fetch:
       personalPatternMatrix: 個人ドロップパターンデータ
       stats: サイト統計データ
       period: サーバーイベントデータ
-
 report:
   alert:
     title:
@@ -180,6 +179,135 @@ report:
     causes:
       noDrop: ドロップアイテムが何も選択されていません。送信するデータに問題はありませんか？
       limitation: 今回報告しようとしている内容は既存のデータとの差が大きくなっており、このまま報告するのであれば今回の報告は異常と判定され、全て統計データに反映されることはできません。
+  recognition:
+      step:
+        select: 選択
+        recognize: 認識
+        confirm: 確認
+        report: レポート
+      tips:
+        fileTooBig: "\"{name}\" ({size}MB) はサイズの制限を超過しています"
+        fileTooOld: "\"{name}\" のスクリーンショットの作成時刻は36時間以内の制限を超過しています"
+        chooseImage: クリックして画像を選択、もしくはボックスに画像をドロップ
+        dragImage: ここに画像をドラッグ＆ドロップ
+        addImage: ここにクリックして画像を選択
+        copyImage: 画像を右クリック、もしくは長押しすると、画像をクリップボードにコピー・保存ができます
+        abnormal: "クオリティモニタリング（品質監査）により、ご提出いただいたスクリーンショットのうち、 {count} 枚が基準を満たしていないとして、当該スクリーンショットを「却下」し、サーバーへのレポートはしません"
+        notImageFile: "{files} は画像ファイルではないので、ご提出できません"
+        emptyResult: 認識結果はありません
+        unsatisfiedStart: 認識をスタートできません
+        emptyFile: 選択された画像はありません
+        hasInvalidFile: 無効のファイルが含まれています
+      status:
+        success: 成功
+        warning: 警告
+        error: エラー
+      description: 「作戦成果」画面のスクリーンショットを自動認識で、ドロップ報告は楽で簡単にする！
+      recognize:
+        noFilename: ファイル名なし
+        elapsed: 経過時間
+        remaining: 推定残り時間
+        speed: 認識速度
+        imagePerSecond: "{count} 枚/秒"
+      confirm:
+        loadingImage: スクリーンショットのプレビューを読み込み中
+        overview:
+          _name: 結果概要
+          total: 総計
+          success: 成功
+          error: 異常
+          count: "{count} 枚"
+          server: データサーバー
+          duration: 1画像の平均認識時間
+        details: 結果詳細
+        unknownStage: 認識できません
+        abnormal:
+          error: この画像は却下されます
+          fatal: この画像は認識できません
+          details: 異常リスト
+          hover: マウスオーバーで認識内容表示
+        cherryPick:
+          disabled: 異常なので選択不可
+          accepted: この結果をアップロード
+          rejected: この結果を破棄
+        noResult: 認識結果はありません
+        submit: "選択した {count} 件の認識結果をアップロード"
+        itemsTotal: アイテム合計
+      report:
+        title: レポート詳細
+        total: 総計
+        submit: "選択した {count} 件の認識結果をアップロード"
+        reporting: 結果をアップロード中...
+        allSucceeded: "{count} 件の認識結果がアップロード成功"
+        partialSucceeded: "{count} 件の認識結果のみアップロード成功"
+        partialFailed: "{count} 件の認識結果がアップロード失敗しました。以下のチェックリストをしたがって、問題を解決してみてください。"
+        partialFailedDesc:
+          - ●　ネットワーク接続の状況を確認：接続不安定・接続中断でアップロード失敗が発生します。
+          - ●　大量のレポートしましたか：データベースを外部の攻撃から守るために、一日のレポート数には上限があります。何度も試してもアップロードできない場合、上限に達した可能性がありますので、24時間後に再試行してください。
+          - ●　共有IPアドレスを使用していますか：一部の地域には、ご使用のIPアドレスは他人と共有している可能性があります。この場合、ネット環境の切り替え（ルーター再起動、WiFi・4Gの切り替え）をしてから再試行してください。また、24時間後に再試行してください。
+          - ●　デバイスの時刻を確認：重複レポ攻撃を防止対策として、端末からのリクエストにはタイムスタンプを付与します。ご使用のデバイスの時刻が正確な時刻と大きく異なる場合、アップロード失敗が発生しますので、デバイスの時刻を調整してください。
+        caption: レポートありがとうございます。キャッシュの原因で、レポートしたデータが反映するまで、20分程度の時間がかかる可能性があります。
+      states:
+        pending: 初期化準備中...
+        initializing: 初期化中...
+        recognizing: 認識中...
+        rendering: 結果をレンダリング中...
+        submitting: 結果をアップロード中...
+
+      cost: 時間コスト
+      filename: ファイル名
+      result: 認識結果
+      queue: 画像リスト
+      start:  {count} 枚画像を認識
+      progress: 進捗状況
+      retry: 送信失敗、リトライ中
+      filter: 結果フィルター
+      notices:
+        welcome:
+          - ご提供の画像はWebAssembly技術でローカルにて認識しますので、認識段階でサーバーへのデーター送信はございません。
+          - スクリーンショットは、作成時刻が**36 時間内**、またクリア評価が**星3**のものをご選択ください。
+          - 初回クリアのスクリーンショットの選択はご遠慮ください。**偏向的に**一部だけのスクリーンショット（極端にいい・悪いケース）でのレポートはご遠慮ください。
+        confirm:
+          - 画像をクリックしたら拡大できます、もう一回クリックしたら元に戻せます
+          - 認識成功のスクリーンショットは自動的にチェックを入れています
+          - 本サイトのデータの正確度のため、エラーのある画像はご選択できません
+      exceptions:
+        "Fingerprint::Same":
+          title: 此图片与另一图片完全一致
+          subtitle: 请检查是否选择了重复截图
+        "FileTimestamp::TooClose":
+          title: 此图片与另一图片的截图相隔时间过短
+          subtitle: 请检查是否选择了重复截图
+        "DropInfos::Violation": 识别结果验证失败
+        "StageChar::LowConfidence":
+          title: ステージ認識異常の可能性がある
+          subtitle: 認識の信頼性が低い、認識結果を画像と照合してください
+        "DropQuantityChar::LowConfidence":
+          title: アイテム数量認識異常の可能性がある
+          subtitle: 認識の信頼性が低い、認識結果を画像と照合してください
+        "DropQuantity::NotFound":
+          title: 数量検出失敗のドロップがある
+          subtitle: 解像度・品質の低い画像はこの問題を引き起こす可能性があります。画像は圧縮処理されましたかご確認ください
+        "Drop::LowConfidence":
+          title: 未知のドロップが存在する
+          subtitle: この問題は通常、イベント期間外のイベントドロップによるものです
+        "Drop::Illeagal":
+          title: 非合法ドロップが存在する
+          subtitle: このステージには今、可能のドロップが存在していませんが、検出されました。これは通常、イベント期間外のイベントドロップによるものです
+        "ResultLabel::False":
+          title: 作戦成果のスクリーンショットではない
+          subtitle: もしこれは確かに作戦成果のスクリーンショットであれば、ご選択のサーバーは間違いないかご確認ください
+        "Stage::NotFound":
+          title: 未知のステージ
+          subtitle: これはステージ認識にはエラーが発生しましたか、又はこのステージは記録されていません（殲滅作戦、絶境作戦など）
+        "Stage::Illeagal":
+          title: 非合法ステージ
+          subtitle: このステージただ今有効していません
+        "3stars::False": 星3評価ではない
+        "DropType::Illeagal":
+          title: 非合法のドロップタイプ
+          subtitle: スクリーンショットには初回、理性返却などの非合法なドロップタイプ、又は認識できないドロップタイプが存在しています。
+        "DropType::NotFound": ドロップタイプ未検出
   rules:
     item:
       _name: アイテム数量
