@@ -312,13 +312,13 @@ report:
       "DropQuantity::NotFound":
         title: Failed to recognize the drop quantity
         subtitle: Pictures with poor resolution or quality may cause this problem. Please check if the image is compressed
-      "Drop::LowConfidence":
+      "Drops::LowConfidence":
         title: Low Confidence Drop Item
         subtitle: Check if you have selected a screenshot in which its content includes a closed event
-      "Drop::Illeagal":
+      "Drops::Illeagal":
         title: Illegal drops found
         subtitle: There should be no drop in this stage, but there are some in the screenshot. This is usually caused by event drop during non-event period
-      "ResultLabel::False":
+      "Result::False":
         title: Not a battle result screenshot
         subtitle: If this is a battle result screenshot, please make sure the server you select is correct
       "Stage::NotFound":

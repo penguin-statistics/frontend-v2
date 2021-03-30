@@ -291,13 +291,13 @@ report:
       "DropQuantity::NotFound":
         title: 数量検出失敗のドロップが存在
         subtitle: 解像度・品質の低い画像はこの問題を引き起こす可能性があります。画像は圧縮処理されましたかご確認ください
-      "Drop::LowConfidence":
+      "Drops::LowConfidence":
         title: 未知のドロップが存在
         subtitle: この問題は通常、イベント期間外のイベントドロップによるものです
-      "Drop::Illeagal":
+      "Drops::Illeagal":
         title: 非合法ドロップが存在
         subtitle: このステージには今、可能のドロップが存在していませんが、検出されました。これは通常、イベント期間外のイベントドロップによるものです
-      "ResultLabel::False":
+      "Result::False":
         title: 作戦成果のスクリーンショットではない
         subtitle: もしこれは確かに作戦成果のスクリーンショットであれば、ご選択のサーバーは間違いないかご確認ください
       "Stage::NotFound":

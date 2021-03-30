@@ -305,13 +305,13 @@ report:
       "DropQuantity::NotFound":
         title: 存在未识别到数量的掉落
         subtitle: 分辨率或质量较差的图片可能会导致此问题。请检查图片是否经过压缩处理
-      "Drop::LowConfidence":
+      "Drops::LowConfidence":
         title: 存在未知掉落
         subtitle: 此问题通常是由于非活动期间的活动掉落的导致的。
-      "Drop::Illeagal":
+      "Drops::Illeagal":
         title: 存在非法掉落
         subtitle: 此关卡目前不应存在任何掉落，但图片中存在。这通常是由于非活动期间的活动掉落的导致的。
-      "ResultLabel::False":
+      "Result::False":
         title: 非结算页面截图
         subtitle: 若这确实是一张结算页面截图，请检查您是否选择了正确的服务器
       "Stage::NotFound":
