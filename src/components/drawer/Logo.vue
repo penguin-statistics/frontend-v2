@@ -25,12 +25,13 @@
         <span>{{ $t('app.name_line1') }}</span>
         <span>{{ $t('app.name_line2') }}</span>
         <v-btn
+          dark
           outlined
           class="mt-4"
           text
           @click="switchAprilFools"
         >
-          {{ $store.getters['ui/aprilFools'] ? '点燃光明' : '踏寻苦难' }}
+          {{ $store.getters['ui/aprilFools'] ? $t('aprilFools.switcher.current') : $t('aprilFools.switcher.past') }}
         </v-btn>
       </v-row>
     </div>
@@ -56,9 +57,9 @@ export default {
       if (aprilFoolsState) {
         this.$store.commit('ui/setAprilFools', false)
       } else {
-        this.$confirm('请确认您已完成「主线 第八章」的相关剧情内容。若您并未完成相关内容，继续前进将可能会有剧透风险。', {
-          title: '确认',
-          subtitle: '请确认您已完成「主线 第八章」的相关剧情内容。若您并未完成相关内容，继续前进将可能会有剧透风险。',
+        this.$confirm(this.$t('aprilFools.confirm.subtitle'), {
+          title: this.$t('aprilFools.confirm.title'),
+          subtitle: this.$t('aprilFools.confirm.subtitle'),
           color: 'warning'
         })
             .then((permit) => {

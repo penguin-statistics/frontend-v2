@@ -666,3 +666,10 @@ search:
 confirmLeave:
   title: 确定要离开此页面吗？
   subtitle: 未保存的更改可能会丢失
+aprilFools:
+  confirm:
+    title: 确认
+    subtitle: "请确认您已完成「主线 第八章」的相关剧情内容。若您并未完成相关内容，继续前进将可能会有剧透风险。"
+  switcher:
+    past: 踏寻苦难
+    current: 点燃光明

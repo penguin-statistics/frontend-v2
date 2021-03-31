@@ -61,7 +61,8 @@ export default {
     }
   },
   computed: {
-    ...mapGetters('settings', ['lowData'])
+    ...mapGetters('settings', ['lowData']),
+    ...mapGetters('ui', ['aprilFools']),
   },
   watch: {
     $route: ['checkSpecialImage', 'checkBlur'],
@@ -71,6 +72,9 @@ export default {
       } else {
         this.bootup()
       }
+    },
+    aprilFools () {
+      this.updateBackgroundByRandom(false)
     }
   },
   mounted () {
