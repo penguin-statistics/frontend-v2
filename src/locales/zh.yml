@@ -27,7 +27,7 @@ menu:
     advanced: 高级查询
   about:
     _name: 关于本站
-    members: 团队成员
+    members: 整合数据部门
     contribute: 参与开发
     changelog: 更新记录
     contact: 联系我们
@@ -612,9 +612,9 @@ auth:
       tips: 本功能仅可找回于 v3.3.1 及更新版本客户端所登录的 PenguinID
 members:
   categories:
-    owner: 站长
-    maintainer: 主要贡献者
-    contributors: 内容贡献者
+    owner: 狂暴开发组长
+    maintainer: 源石虫·₲
+    contributors: 整合数据部门组员
     others: 其他
     translators: 翻译
   responsibilities:
@@ -668,8 +668,8 @@ confirmLeave:
   subtitle: 未保存的更改可能会丢失
 aprilFools:
   confirm:
-    title: 确认
-    subtitle: "请确认您已完成「主线 第八章」的相关剧情内容。若您并未完成相关内容，继续前进将可能会有剧透风险。"
+    title: 剧透风险提示
+    subtitle: "请确认您已完成**「主线 第八章」**的相关剧情内容。若您并未完成相关内容，继续前进将可能会有剧透风险。"
   switcher:
     past: 踏寻苦难
     current: 点燃光明

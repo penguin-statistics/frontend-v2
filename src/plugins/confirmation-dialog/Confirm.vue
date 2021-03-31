@@ -26,6 +26,7 @@
         />
       </v-toolbar>
       <v-card-text
+        v-marked
         class="body-1 py-3"
         v-text="message"
       />

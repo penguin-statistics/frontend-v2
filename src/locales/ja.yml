@@ -12,7 +12,7 @@ server:
     JP: 日本版
     KR: 韓国版
 menu:
-  home: トップページ
+  home: キャンプ
   report:
     _name: ドロップ報告
     stage: 章别
@@ -25,7 +25,7 @@ menu:
     advanced: 高度なクエリ
   about:
     _name: 当サイトについて
-    members: 制作協力者
+    members: レユニオンデータ部門
     contribute: 開発協力者募集中
     changelog: 更新履歴
     contact: 連絡先
@@ -471,8 +471,10 @@ members:
   categories:
     developers: 開発者
     others: その他
-    owner: 管理人
+    owner: 狂化開発隊長
     translators: 翻訳者
+    contributors: レユニオンデータ部門メンバー
+    maintainer: オリジムシ·₲
   responsibilities:
     _name: コントリビューション
     arkplanner: ArkPlannerの著者
@@ -514,3 +516,10 @@ share:
 search:
   placeholder: 検索...
   hint:  素材名・作战名・ステージコード・章タイトル・イベント名（漢字・ふりがな・カタカナ・ローマ字）で検索
+aprilFools:
+  confirm:
+    title: "⚠※ネタバレ注意※⚠"
+    subtitle: "これからの内容にはネタバレが含めているのでご注意ください。**第八章**までの全てのストーリーを読み終わることを推奨します。"
+  switcher:
+    past: 苦難を歩む
+    current: 光をともす
