@@ -7,6 +7,7 @@ import RandomizedLogo from '@/mixins/hooks/RandomizedLogo'
 import StoreUpgrader from '@/mixins/hooks/StoreUpgrader'
 import Native from '@/mixins/hooks/Native'
 import Probe from '@/mixins/hooks/Probe'
+import Ticker from "@/mixins/hooks/Ticker";
 
 export default {
   mixins: [
@@ -25,6 +26,9 @@ export default {
     Probe,
 
     // last priority
-    CrispCustomizer
+    CrispCustomizer,
+
+    // special themes
+    Ticker,
   ]
 }

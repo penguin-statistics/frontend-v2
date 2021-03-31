@@ -46,7 +46,7 @@
         style="word-break:normal"
       >
         <v-img
-          :src="cdnDeliver('/logos/penguin_stats_logo.png')"
+          :src="cdnDeliver($store.getters['ui/aprilFools'] ? '/logos/20210401/reunion_past.png' : '/logos/20210401/reunion_future.png')"
           aspect-ratio="1"
           height="128px"
           width="128px"

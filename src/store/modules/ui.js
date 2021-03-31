@@ -14,6 +14,7 @@ export default {
     outdated: false,
     loadingRoute: '',
     serverLocked: false,
+    aprilFools: false,
   },
   mutations: {
     setSnackbar (state, { color, timeout, text, icon, extra }) {
@@ -38,6 +39,7 @@ export default {
     },
     lockServer: state => state.serverLocked = true,
     unlockServer: state => state.serverLocked = false,
+    setAprilFools: state => state.aprilFools = state
   },
   getters: {
     snackbar: state => state.snackbar,
@@ -45,5 +47,6 @@ export default {
     notice: state => state.notice,
     loadingRoute: state => state.loadingRoute,
     serverLocked: state => state.serverLocked,
+    aprilFools: state => state.aprilFools,
   }
 }
