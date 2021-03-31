@@ -2,16 +2,16 @@
 {
 	"en": {
 		"intro": {
-			"intro_0": "Welcome to Penguin Statistics!",
-			"intro_1": "Penguin Statistics is the Department of Data Analysis of Penguin Logistics. We devote ourselves to item drop analysis.",
-			"intro_2": "Item drop data are submitted by the players. Our team conduct comprehensive review on the submitted data to reduce the impact of false reports."
+			"intro_0": "Welcome to Reunion Statistics!",
+			"intro_1": "Reunion Statistics is the Department of Data Analysis of Reunion Movement. We devote ourselves to item inventory statistics.",
+			"intro_2": "Item drop data are submitted by reunion members. Our leader will conduct comprehensive review on the submitted data to reduce the impact of false reports."
 		}
 	},
 	"ja": {
 		"intro": {
-			"intro_0": "ペンギン急便データ統計処理部門へようこそ！",
-			"intro_1": "Penguin Statisticsはペンギン急便のデータ処理部門であり(嘘)、各作戦での素材ドロップの統計分析を行っています。",
-			"intro_2": "現在ほとんどのデータはユーザーの手によって手動でアップロードされており、誤った情報による影響を最小限に抑えるため、アップロードされた情報について多角的に審査しています。"
+			"intro_0": "レユニオンデータ統計処理部門へようこそ！",
+			"intro_1": "Reunion Statisticsはレユニオン・ムーブメントのデータ処理部門であり、各素材の在庫状況の統計を行っています。",
+			"intro_2": "現在ほとんどのデータはレユニオンのメンバーたちの手によって手動でアップロードされており、誤った情報による影響を最小限に抑えるため、アップロードされた情報について多角的に審査しています。"
 		}
 	},
 	"ko": {
@@ -23,9 +23,9 @@
 	},
 	"zh": {
 		"intro": {
-			"intro_0": "欢迎来到企鹅物流数据统计！",
-			"intro_1": "企鹅物流数据统计（Penguin Statistics）是企鹅物流旗下数据处理部门（误），致力于明日方舟各素材的掉率统计。",
-			"intro_2": "目前绝大部分数据由玩家手动汇报，为了尽量减少谎报、误报对结果的影响，企鹅数据团队会对掉落进行多方位的审查。"
+			"intro_0": "欢迎来到整合运动数据统计！",
+			"intro_1": "整合运动数据统计（Reunion Statistics）是整合运动旗下数据处理部门，致力于各素材的库存统计。",
+			"intro_2": "目前绝大部分数据由整合运动成员手动汇报，为了尽量减少谎报、误报对结果的影响，组长们会对掉落进行多方位的审查。"
 		}
 	}
 }
