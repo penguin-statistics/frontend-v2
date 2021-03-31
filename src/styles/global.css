@@ -10,11 +10,18 @@
     opacity: 0;
 }
 .theme--light.v-application {
-    background: #fafafa !important;
+    background: #f5f5f5 !important;
 }
 
 .transition-all {
     transition: all .225s cubic-bezier(0.165, 0.84, 0.44, 1);
+}
+
+.opacity-hide {
+    opacity: 0;
+}
+.opacity-show {
+    opacity: 1;
 }
 
 .transition-background {

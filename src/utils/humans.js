@@ -139,6 +139,10 @@ const responsibilities = {
   native: {
     id: 'native',
     icon: 'mdi-devices'
+  },
+  recognition: {
+    id: 'recognition',
+    icon: 'mdi-image-filter-center-focus'
   }
 }
 

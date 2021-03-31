@@ -30,7 +30,7 @@
     </v-btn>
 
     <DataResetter v-if="!$env.isApp">
-      <template v-slot:default="{ on }">
+      <template #default="{ on }">
         <v-btn
           v-haptic.notification="'WARNING'"
           depressed

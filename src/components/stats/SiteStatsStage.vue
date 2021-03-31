@@ -23,7 +23,7 @@
 
       :class="{'pt-0': $vuetify.breakpoint.xsOnly}"
     >
-      <template v-slot:item.stage="{ item }">
+      <template #item.stage="{ item }">
         <v-row
           align="center"
           class="cursor-pointer item-name pl-2"
@@ -46,7 +46,7 @@
           />
         </v-row>
       </template>
-      <template v-slot:item.stage.apCost="{ item }">
+      <template #item.stage.apCost="{ item }">
         <span
           v-if="invalidApCost(item.stage.apCost)"
           class="grey--text"

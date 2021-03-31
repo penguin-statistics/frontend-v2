@@ -109,7 +109,7 @@
           :to="{name: link.route}"
           :class="{'d-flex flex-row align-center justify-center fill-height': link.wide}"
         >
-          <template v-slot:backdrop>
+          <template #backdrop>
             <v-icon>
               {{ link.icon }}
             </v-icon>

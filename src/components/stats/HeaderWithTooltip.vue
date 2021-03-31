@@ -4,9 +4,10 @@
     top
     transition="slide-y-reverse-transition"
   >
-    <template v-slot:activator="{on}">
+    <template #activator="{ on, attrs }">
       <span
         class="tooltip-header position-relative"
+        v-bind="attrs"
         v-on="on"
       >
         {{ name }}

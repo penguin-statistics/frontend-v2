@@ -3,7 +3,7 @@
     v-model="dialog"
     max-width="590px"
   >
-    <template v-slot:activator="{ on, attrs }">
+    <template #activator="{ on, attrs }">
       <div class="d-flex flex-row align-center justify-center mt-1">
         <v-tooltip
           content-class="transparent"
@@ -11,7 +11,7 @@
           nudge-right="-16"
           transition="slide-x-transition"
         >
-          <template v-slot:activator="{ on, attrs }">
+          <template #activator="{ on, attrs }">
             <v-icon
               class="mr-2"
               v-bind="attrs"

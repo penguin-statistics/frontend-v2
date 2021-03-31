@@ -35,10 +35,10 @@
 
         :class="{'pt-0': $vuetify.breakpoint.xsOnly}"
       >
-        <template v-slot:item.start="{ item }">
+        <template #item.start="{ item }">
           {{ item.timeRange }}
         </template>
-        <template v-slot:item.percentage="{ item }">
+        <template #item.percentage="{ item }">
           {{ item.percentageText }}
         </template>
       </v-data-table>

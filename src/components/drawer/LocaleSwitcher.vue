@@ -8,7 +8,7 @@
     :label="$t('menu.languages')"
     transition="slide-y-transition"
   >
-    <template v-slot:item="{item}">
+    <template #item="{item}">
       {{ item.text }}
       <v-icon
         v-if="item.beta"
