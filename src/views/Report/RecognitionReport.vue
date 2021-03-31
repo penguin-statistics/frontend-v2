@@ -705,20 +705,24 @@ export default {
       this.submission.total = this.selectedResults.length
 
       const userId = Cookies.get(config.authorization.userId.cookieKey)
-      await recognitionSubmitter(this, (state, chunk) => {
-        if (state === 'resolve') {
-          const reportedUserId = Cookies.get(config.authorization.userId.cookieKey)
-          if (userId !== reportedUserId) {
-            this.$store.dispatch('auth/login', {
-              userId: reportedUserId
-            })
+      try {
+        await recognitionSubmitter(this, (state, chunk) => {
+          if (state === 'resolve') {
+            const reportedUserId = Cookies.get(config.authorization.userId.cookieKey)
+            if (userId !== reportedUserId) {
+              this.$store.dispatch('auth/login', {
+                userId: reportedUserId
+              })
+            }
+            this.submission.submitted.push(chunk)
+            this.$ga.event('report', 'submit_batch', 'submit_batch', this.selectedResults.length)
+          } else if (state === 'reject') {
+            this.submission.submitted.push(- chunk)
           }
-          this.submission.submitted.push(chunk)
-          this.$ga.event('report', 'submit_batch', 'submit_batch', this.selectedResults.length)
-        } else if (state === 'reject') {
-          this.submission.submitted.push(- chunk)
-        }
-      })
+        })
+      } catch (e) {
+        this.submission.submitted.push(- this.selectedResults.length)
+      }
 
       this.recognition.state = 'uploaded'
       this.submission.state = 'uploaded'
