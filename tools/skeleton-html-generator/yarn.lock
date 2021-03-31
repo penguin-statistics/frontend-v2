@@ -3614,8 +3614,8 @@ parcel-bundler@^1.12.4:
 
 parcel-plugin-ejs-template@^0.2.0:
   version "0.2.0"
-  resolved "https://registry.yarnpkg.com/parcel-plugin-ejs-template/-/parcel-plugin-ejs-template-0.2.0.tgz#15ae28f42a0920dc0ad18fb8f45c0fd16bc05a81"
-  integrity sha512-5H9t5BbkpVNYvnHPDtf1ZTC86/gVNUPIZ68922X2L02Gy/temPD3JSn7iPKUY8VE/uEzenSlhDBfCXaKn8ibNQ==
+  resolved "https://registry.npm.taobao.org/parcel-plugin-ejs-template/download/parcel-plugin-ejs-template-0.2.0.tgz#15ae28f42a0920dc0ad18fb8f45c0fd16bc05a81"
+  integrity sha1-Fa4o9CoJINwK0Y+49FwP0WvAWoE=
   dependencies:
     ejs "^3.0.2"
     parcel-bundler "^1.12.4"

@@ -14,7 +14,7 @@ server:
     KR: 韩服
 menu:
   _beta: 公测
-  home: 首页
+  home: 营地
   report:
     _name: 掉落汇报
     stage: 按章节
