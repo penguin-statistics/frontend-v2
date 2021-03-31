@@ -6,7 +6,7 @@
   >
     <v-img
       v-if="!pure"
-      :src="cdnDeliver($store.getters['ui/aprilFools'] ? '/logos/20210401/reunion_past.png' : '/logos/20210401/reunion_future.png')"
+      :src="cdnDeliver($store.getters['ui/aprilFools'] ? '/logos/20210401/reunion_logo.png' : '/logos/20210401/reunion_future.png')"
       aspect-ratio="1"
       height="64px"
       contain

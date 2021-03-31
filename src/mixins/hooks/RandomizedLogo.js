@@ -19,18 +19,17 @@ export default {
   },
   methods: {
     randomizeLogo () {
-      let base = '/logos'
-      let candidates = ['exia', 'texas', 'sora', 'croissant']
+      const base = `/images/themes/2021-april-fools/${this.aprilFools ? 'past' : 'current'}`
+      let candidates = ['crownslayer', 'faustus', 'frostnova', 'mephisto', 'patriot', 'skullshatterer', 'talulah']
 
       const imageUrl = character => {
-        return this.cdnDeliver(base + `/penguin_stats_logo_${character}.png`)
+        return this.cdnDeliver(base + `/logo_${character}.png`)
       }
 
       const rand = items => items[items.length * Math.random() | 0];
 
       if (this.aprilFools) {
-        base = '/logos/20210401'
-        candidates = ['exia', 'texas', 'sora', 'croissant']
+        candidates = ['alina', 'faustus', 'frostnova', 'mephisto']
       }
 
       this.randomizedLogo = imageUrl(rand(candidates))

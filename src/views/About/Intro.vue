@@ -46,13 +46,14 @@
         style="word-break:normal"
       >
         <v-img
-          :src="cdnDeliver($store.getters['ui/aprilFools'] ? '/logos/20210401/reunion_past.png' : '/logos/20210401/reunion_future.png')"
+          :src="cdnDeliver($store.getters['ui/aprilFools'] ? '/logos/20210401/reunion_logo.png' : '/logos/20210401/reunion_future.png')"
           aspect-ratio="1"
           height="128px"
           width="128px"
           contain
           :position="$vuetify.breakpoint.mdAndDown ? 'center center' : 'left center'"
           class="my-6"
+          :style="{'filter': (!$store.getters['ui/aprilFools'] && !dark) ? 'invert(1)' : null }"
         />
         <v-col cols="12">
           <h1
@@ -77,10 +78,11 @@
 
 <script>
 import CDN from '@/mixins/CDN'
+import Theme from "@/mixins/Theme";
 
 export default {
   name: 'Intro',
-  mixins: [CDN]
+  mixins: [CDN, Theme]
 }
 </script>
 

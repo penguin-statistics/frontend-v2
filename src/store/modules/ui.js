@@ -39,7 +39,7 @@ export default {
     },
     lockServer: state => state.serverLocked = true,
     unlockServer: state => state.serverLocked = false,
-    setAprilFools: state => state.aprilFools = state
+    setAprilFools: (state, value) => state.aprilFools = value
   },
   getters: {
     snackbar: state => state.snackbar,

@@ -26,14 +26,14 @@
 }
 
 .drawer-logo {
-    height: 256px;
+    height: 288px;
     padding: 32px;
     overflow: hidden;
     transition: all .5s cubic-bezier(0.19, 1, 0.22, 1);
 }
 
 .drawer-logo--two-line {
-    height: 288px;
+    height: 320px;
 }
 .drawer-logo > .description {
     margin-top: 16px;
@@ -286,7 +286,7 @@
 
 @supports(padding: calc(max(1px, 2px))) {
     .drawer-logo {
-        height: calc(256px + env(safe-area-inset-top));
+        height: calc(288px + env(safe-area-inset-top));
         padding: calc(32px + env(safe-area-inset-top)) 32px 32px 32px;
     }
 
@@ -294,7 +294,7 @@
     /*    height: calc(304px + env(safe-area-inset-top));*/
     /*}*/
     .drawer-logo--two-line {
-        height: calc(288px + env(safe-area-inset-top));
+        height: calc(320px + env(safe-area-inset-top));
     }
 
     /*.x--safe-area {*/

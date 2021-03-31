@@ -17,9 +17,7 @@ import Console from '@/utils/Console'
 import SpecialUI from '@/mixins/SpecialUI'
 import CDN from '@/mixins/CDN'
 import { mapGetters } from 'vuex'
-import randomUtils from '@/utils/randomUtils'
 import { externalService } from '@/utils/service'
-import environment from '@/utils/environment'
 
 export default {
   name: 'RandomBackground',
@@ -83,7 +81,7 @@ export default {
   },
   methods: {
     getImageUrl (id) {
-      return this.cdnDeliver(`/backgrounds/${id}.${this.webpSupport ? 'webp' : 'optimized.png'}`)
+      return this.cdnDeliver(`/images/themes/2021-april-fools/${this.$store.getters['ui/aprilFools'] ? 'past' : 'current'}/bg_${id}.png`)
     },
     setBlur (flag) {
       Console.info('RandomBackground', 'setting blur to', flag)
@@ -104,10 +102,17 @@ export default {
         this.webpSupport = await this.testWebp()
       }
       // P(🔪) = 0.2%
-      if (environment.debug.frostnova || Math.random() < 0.002) {
-        return this.getImageUrl('frstar')
+      // if (environment.debug.frostnova || Math.random() < 0.002) {
+      //   return this.getImageUrl('frstar')
+      // }
+
+      if (this.$store.getters['ui/aprilFools']) {
+        return this.getImageUrl(Math.floor(Math.random() * 8))
+      } else {
+        return this.getImageUrl(Math.floor(Math.random() * 7))
       }
-      return this.getImageUrl(randomUtils.cachedRandom.get())
+
+      // return this.getImageUrl(randomUtils.cachedRandom.get())
     },
     async updateBackgroundByRandom (ignoreUrl) {
       // Console.log("check at random", this.isSpecialUrl(this.$route), this.$route)
