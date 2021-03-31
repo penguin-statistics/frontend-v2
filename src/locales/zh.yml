@@ -4,8 +4,8 @@ app:
   name_line1: 整合运动数据统计
   name_line2: ''
 server:
-  name: 服务器
-  switch: 服务器切换
+  name: 基地
+  switch: 基地切换
   selected: 已选择
   servers:
     CN: 国服
@@ -14,7 +14,7 @@ server:
     KR: 韩服
 menu:
   _beta: 公测
-  home: 首页
+  home: 基地
   report:
     _name: 掉落汇报
     stage: 按章节

@@ -1,7 +1,7 @@
 ---
 app:
-  name: Reunion Statistics
-  name_line1: Reunion Statistics
+  name: ℝeunion Statistics
+  name_line1: ℝeunion Statistics
   name_line2: ''
 server:
   name: Server
@@ -14,7 +14,7 @@ server:
     KR: KR
 menu:
   _beta: Beta
-  home: Home
+  home: Bootcamp
   search: Search
   report:
     _name: Report Drops

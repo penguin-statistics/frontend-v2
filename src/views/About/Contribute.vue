@@ -3,7 +3,7 @@
     "en": {
       "contribute": {
         "backend": "Backend",
-        "contribute_0": "If you have experience with any of the following skills, and want to contribute to Reunion Statistics, please feel free to contact us.",
+        "contribute_0": "If you have experience with any of the following skills, and want to contribute to ℝeunion Statistics, please feel free to contact us.",
         "contribute_1": "This is a nonprofit and open source project",
         "frontend": "Frontend",
         "qq_group": "QQ Group: "
@@ -11,7 +11,7 @@
       "link": {
         "docs": {
           "title": "For Developers",
-          "subtitle": "Contains resources for developing on top of Reunion Statistics' data"
+          "subtitle": "Contains resources for developing on top of ℝeunion Statistics' data"
         }
       }
     },
