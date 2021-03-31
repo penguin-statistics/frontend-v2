@@ -1,7 +1,7 @@
 ---
 app:
-  name: 企鹅物流数据统计
-  name_line1: 企鹅物流数据统计
+  name: 整合运动数据统计
+  name_line1: 整合运动数据统计
   name_line2: ''
 server:
   name: 服务器
@@ -97,8 +97,8 @@ stats:
     timeRange: 统计区间
   headerDesc:
     apCost: 完成单次该作战的所需理智数量
-    quantity: 在该作战中，所有提交到企鹅物流数据统计的样本内，该物品的出现次数
-    times: 在该作战中，所有提交到企鹅物流数据统计的样本提交次数
+    quantity: 在该作战中，所有提交到整合运动数据统计的样本内，该物品的出现次数
+    times: 在该作战中，所有提交到整合运动数据统计的样本提交次数
     percentage: "期望掉落概率；计算方式为 $$\\frac{\\text{掉落数}}{\\text{样本数}}$$"
     patternPercentage: "此掉落组合占所有掉落汇报的百分比；计算方式为 $$\\frac{\\text{掉落数}}{\\text{样本数}}$$"
     apPPR: "根据当前的「百分比」项，计算出的在该作战获得「1x对应物品」所需的期望理智，即 $$\\frac{\\text{作战理智消耗}}{\\frac{\\text{掉落数}}{\\text{样本数}}}$$"
@@ -148,7 +148,7 @@ contribute:
   repo: 项目仓库：
   frontend: 前端
   backend: 后端
-  contribute_0: 如果您有以下一项或多项经验，愿意为企鹅数据贡献自己的一份力量，请加QQ群：747099627
+  contribute_0: 如果您有以下一项或多项经验，愿意为整合数据贡献自己的一份力量，请加QQ群：747099627
   contribute_1: 本项目为无偿开源项目
   skills:
     frontend: 网站前端开发（Vue.js）
@@ -656,7 +656,7 @@ share:
   shortlink:
     name: 短链接
   text:
-    _tmpl: 查看企鹅物流数据统计中「{name}」的掉落统计数据
+    _tmpl: 查看整合运动数据统计中「{name}」的掉落统计数据
     stage: 作战 {name}
     item: 素材 {name}
   success: 分享成功

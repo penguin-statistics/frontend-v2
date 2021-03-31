@@ -3,7 +3,7 @@
     "en": {
       "contribute": {
         "backend": "Backend",
-        "contribute_0": "If you have experience with any of the following skills, and want to contribute to Penguin Statistics, please feel free to contact us.",
+        "contribute_0": "If you have experience with any of the following skills, and want to contribute to Reunion Statistics, please feel free to contact us.",
         "contribute_1": "This is a nonprofit and open source project",
         "frontend": "Frontend",
         "qq_group": "QQ Group: "
@@ -11,14 +11,14 @@
       "link": {
         "docs": {
           "title": "For Developers",
-          "subtitle": "Contains resources for developing on top of Penguin Statistics' data"
+          "subtitle": "Contains resources for developing on top of Reunion Statistics' data"
         }
       }
     },
     "ja": {
       "contribute": {
         "backend": "バックエンド",
-        "contribute_0": "以下のような開発の経験があるのであれば、Penguin Statisticsに自身の力を使ってみませんか？",
+        "contribute_0": "以下のような開発の経験があるのであれば、レユニオン・ムーブメントに自身の力を使ってみませんか？",
         "contribute_1": "本プロジェクトは無償のオープンソースプロジェクトです",
         "frontend": "フロントエンド",
         "qq_group": "QQグループ："
@@ -42,7 +42,7 @@
     "zh": {
       "contribute": {
         "backend": "后端",
-        "contribute_0": "如果您有以下一项或多项经验，愿意为企鹅数据贡献自己的一份力量，欢迎联系我们。",
+        "contribute_0": "如果您有以下一项或多项经验，愿意为整合数据贡献自己的一份力量，欢迎联系我们。",
         "contribute_1": "本项目为无偿开源项目",
         "frontend": "前端",
         "qq_group": "QQ群："
@@ -50,7 +50,7 @@
       "link": {
         "docs": {
           "title": "开发者中心",
-          "subtitle": "在企鹅物流数据统计基础上开发用的 API 文档等资源"
+          "subtitle": "在整合运动数据统计基础上开发用的 API 文档等资源"
         }
       }
     }
