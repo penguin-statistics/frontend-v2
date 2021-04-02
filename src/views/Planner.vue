@@ -52,6 +52,30 @@
       />
 
       <v-dialog
+        v-model="recoDialog"
+        width="800"
+      >
+        <template #activator="{ on, attrs }">
+          <v-btn
+            v-haptic
+            color="cyan white--text"
+            class="mr-2"
+            v-bind="attrs"
+            v-on="on"
+          >
+            <v-icon left>
+              mdi-image-filter
+            </v-icon>
+            使用仓库截图导入
+          </v-btn>
+        </template>
+        <PlannerRecognitionIO
+          :config="{items, options, excludes}"
+          @close="recoDialog = false"
+        />
+      </v-dialog>
+
+      <v-dialog
         v-model="ioDialog"
         width="800"
       >
@@ -387,6 +411,7 @@
 import get from '@/utils/getters'
 import { mapGetters, mapState } from 'vuex'
 import PlannerIO from '@/components/planner/PlannerIO'
+import PlannerRecognitionIO from '@/components/planner/PlannerRecognitionIO'
 import PlannerItemStepper from '@/components/planner/PlannerItemStepper'
 import PlannerResult from '@/components/planner/PlannerResult'
 import Console from '@/utils/Console'
@@ -400,7 +425,7 @@ import performance from '@/utils/performance'
 
 export default {
   name: 'Planner',
-  components: { PreloaderCard, MultiStageSelector, PlannerResult, PlannerItemStepper, PlannerIO },
+  components: { PreloaderCard, MultiStageSelector, PlannerResult, PlannerItemStepper, PlannerIO, PlannerRecognitionIO },
   data () {
     return {
       calculation: {
@@ -409,6 +434,7 @@ export default {
         done: false,
         data: {}
       },
+      recoDialog: false,
       ioDialog: false,
       excludeDialog: false,
       reset: {
@@ -418,7 +444,7 @@ export default {
           removeExcludes: false,
           removeItems: false
         }
-      }
+      },
       // options: {
       //   byProduct: false,
       //   requireExp: false,
