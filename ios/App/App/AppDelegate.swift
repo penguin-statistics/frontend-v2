@@ -68,12 +68,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 //        rootView?.addGestureRecognizer(fakedLongPress)
         
         // MARK: ask for notifications permission
-        let center = UNUserNotificationCenter.current()
-        center.requestAuthorization(options: [.alert, .sound, .badge]) { granted, error in
-            if granted {
-                DispatchQueue.main.async(execute: UIApplication.shared.registerForRemoteNotifications)
-            }
-        }
+//        let center = UNUserNotificationCenter.current()
+//        center.requestAuthorization(options: [.alert, .sound, .badge]) { granted, error in
+//            if granted {
+//                DispatchQueue.main.async(execute: UIApplication.shared.registerForRemoteNotifications)
+//            }
+//        }
         
         
         // MARK: save shortcut to process
