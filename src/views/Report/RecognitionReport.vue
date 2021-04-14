@@ -52,17 +52,17 @@
           >
             {{ $t('menu.report.recognition') }}
 
-            <div
-              class="chip-label ml-1"
-            >
-              <v-icon
-                x-small
-                class="mr-1"
-              >
-                mdi-beta
-              </v-icon>
-              {{ $t('menu._beta') }}
-            </div>
+            <!--            <div-->
+            <!--              class="chip-label ml-1"-->
+            <!--            >-->
+            <!--              <v-icon-->
+            <!--                x-small-->
+            <!--                class="mr-1"-->
+            <!--              >-->
+            <!--                mdi-beta-->
+            <!--              </v-icon>-->
+            <!--              {{ $t('menu._beta') }}-->
+            <!--            </div>-->
           </v-card-title>
           <v-card-subtitle
             class="px-6"
