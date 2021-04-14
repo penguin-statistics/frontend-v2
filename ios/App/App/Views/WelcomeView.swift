@@ -68,7 +68,7 @@ struct WelcomeView: View {
             
             HapticButton(action: {
                 withAnimation {
-                    self.route = "consent"
+                    self.delegate.dismiss()
                 }
             }) {
                 HStack {

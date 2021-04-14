@@ -648,7 +648,7 @@ export default {
         total: {
           times: results.reduce((prev, curr) => prev + curr.times, 0),
           apCost: results.reduce((prev, curr) => prev + curr.apCost, 0),
-          items: results.reduce((prev, curr) => prev + Object.values(curr.items).reduce((a, b) => a + b), 0),
+          items: results.reduce((prev, curr) => prev + Object.values(curr.items).reduce((a, b) => a + b, 0), 0),
         }
       }
     },
