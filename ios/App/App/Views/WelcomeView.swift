@@ -14,23 +14,27 @@ struct WelcomeView: View {
     @Binding var notificationPreferences: NotificationPreferences
     
     let features = [
-        WhatsNew(icon: "apps.iphone.badge.plus", title: "Widgets", subtitle: "Add widgets to your home screen to get instant overview of statistics"),
-        WhatsNew(icon: "hand.tap", title: "Haptics Feedback", subtitle: "Interact with components and get haptical feedback"),
-        WhatsNew(icon: "bolt", title: "Performance", subtitle: "Get your desired data without the frustration of page buffering")
+        WhatsNew(
+            icon: "apps.iphone.badge.plus",
+            title: NSLocalizedString("feature.widget.title", comment: ""),
+            subtitle: NSLocalizedString("feature.widget.subtitle", comment: "")),
+        WhatsNew(icon: "hand.tap", title: NSLocalizedString("feature.haptics.title", comment: ""), subtitle: NSLocalizedString("feature.haptics.subtitle", comment: "")),
+        WhatsNew(icon: "bolt", title: NSLocalizedString("feature.performance.title", comment: ""), subtitle: NSLocalizedString("feature.performance.subtitle", comment: ""))
     ]
     
     var body: some View {
         VStack {
             Spacer()
             VStack(alignment: .leading) {
-                Text("Welcome to")
-                    .font(.system(size: 32, weight: .black))
+                Text(NSLocalizedString("welcome.title", comment: ""))
+                    .font(.system(size: 28, weight: .black))
+                    .padding(.bottom, 0)
                 
-                Text("Penguin Statistics")
+                Text(NSLocalizedString("welcome.subtitle", comment: ""))
                     .font(.system(size: 32, weight: .black))
                     .foregroundColor(.blue)
             }
-                .padding()
+            .padding()
             
             ForEach(features, id: \.self) { feature in
                 WhatsNewView(info: feature)
@@ -68,7 +72,7 @@ struct WelcomeView: View {
             
             HapticButton(action: {
                 withAnimation {
-                    self.route = "consent"
+                    self.delegate.dismiss()
                 }
             }) {
                 HStack {

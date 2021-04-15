@@ -1,0 +1,16 @@
+/* 
+  Localizable.strings
+  App
+
+  Created by Galvin Gao on 2021/4/14.
+  
+*/
+
+"feature.widget.title" = "小组件";
+"feature.widget.subtitle" = "将小组件添加至主屏幕以获取即时全服掉落概览";
+"feature.haptics.title" = "触感反馈";
+"feature.haptics.subtitle" = "与应用组件交互时将附有触感反馈";
+"feature.performance.title" = "快速响应";
+"feature.performance.subtitle" = "快速获得所需数据而无需等待网页缓冲";
+"welcome.title" = "欢迎使用";
+"welcome.subtitle" = "企鹅物流 App";

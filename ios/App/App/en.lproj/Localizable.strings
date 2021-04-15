@@ -1,0 +1,16 @@
+/* 
+  Localizable.strings
+  App
+
+  Created by Galvin Gao on 2021/4/14.
+  
+*/
+
+"feature.widget.title" = "Widget";
+"feature.widget.subtitle" = "Add widgets to your home screen to get instant overview of statistics";
+"feature.haptics.title" = "Haptics Feedback";
+"feature.haptics.subtitle" = "Interact with components and get haptical feedback";
+"feature.performance.title" = "Performance";
+"feature.performance.subtitle" = "Get your desired data without the frustration of page buffering";
+"welcome.title" = "Welcome to";
+"welcome.subtitle" = "Penguin Statistics";

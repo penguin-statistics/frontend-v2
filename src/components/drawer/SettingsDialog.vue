@@ -83,6 +83,18 @@
               v-if="active"
               class="mt-2"
             />
+
+            <template v-if="$env.isApp">
+              <Subheader>
+                {{ $t('settings.category.about') }}
+              </Subheader>
+              <div class="ml-4">
+                <strong>Penguin Statistics</strong>
+                —
+                <strong>{{ version.VERSION }}</strong>
+                <span class="overline monospace condensed ml-1">{{ version.GIT_COMMIT }}</span>
+              </div>
+            </template>
           </v-row>
         </v-container>
       </v-card-text>
@@ -112,6 +124,7 @@ import DataManager from '@/components/drawer/DataManager'
 import Subheader from '@/components/global/Subheader'
 import penguin from '@/utils/native/penguin'
 import PushNotificationSettings from '@/components/drawer/PushNotificationSettings'
+import config from "@/config";
 export default {
   name: 'SettingsDialog',
   components: { PushNotificationSettings, Subheader, DataManager, OptimizationSwitcher, LocaleSwitcher, ThemeSwitcher },
@@ -119,6 +132,14 @@ export default {
   data () {
     return {
       active: false
+    }
+  },
+  computed: {
+    version () {
+      return {
+        VERSION: config.version || 'v0.0.0',
+        GIT_COMMIT: GIT_COMMIT.trim() || 'unknown'
+      }
     }
   },
   methods: {

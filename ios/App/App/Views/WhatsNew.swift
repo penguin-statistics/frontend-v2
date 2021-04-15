@@ -26,6 +26,7 @@ struct WhatsNewView: View {
             VStack(alignment: .leading) {
                 Text(info.title)
                     .bold()
+                    .padding(.bottom, 0)
                 
                 Text(info.subtitle)
                     .foregroundColor(.secondary)

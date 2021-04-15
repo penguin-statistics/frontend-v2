@@ -134,6 +134,16 @@ export default {
       index: null,
       logs: [
         {
+          version: 'v3.5.1',
+          date: '2021-04-15T16:00:00+0800',
+          changes: `## 修复
+1. 截图识别掉落汇报可能存在无法上传的问题
+
+## 优化
+1. iOS 客户端体验
+          `
+        },
+        {
           version: 'v3.5.0',
           date: '2021-03-26T00:00:00+0800',
           changes: `## 添加

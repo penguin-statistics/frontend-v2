@@ -52,17 +52,17 @@
           >
             {{ $t('menu.report.recognition') }}
 
-            <div
-              class="chip-label ml-1"
-            >
-              <v-icon
-                x-small
-                class="mr-1"
-              >
-                mdi-beta
-              </v-icon>
-              {{ $t('menu._beta') }}
-            </div>
+            <!--            <div-->
+            <!--              class="chip-label ml-1"-->
+            <!--            >-->
+            <!--              <v-icon-->
+            <!--                x-small-->
+            <!--                class="mr-1"-->
+            <!--              >-->
+            <!--                mdi-beta-->
+            <!--              </v-icon>-->
+            <!--              {{ $t('menu._beta') }}-->
+            <!--            </div>-->
           </v-card-title>
           <v-card-subtitle
             class="px-6"
@@ -648,7 +648,7 @@ export default {
         total: {
           times: results.reduce((prev, curr) => prev + curr.times, 0),
           apCost: results.reduce((prev, curr) => prev + curr.apCost, 0),
-          items: results.reduce((prev, curr) => prev + Object.values(curr.items).reduce((a, b) => a + b), 0),
+          items: results.reduce((prev, curr) => prev + Object.values(curr.items).reduce((a, b) => a + b, 0), 0),
         }
       }
     },
