@@ -383,6 +383,7 @@ settings:
   category:
     appearance: Appearance
     data: Data
+    about: About
   optimization:
     lowData:
       title: Low Data Mode

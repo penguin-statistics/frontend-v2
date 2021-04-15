@@ -6,17 +6,7 @@
 	<array>
 		<dict>
 			<key>DefaultValue</key>
-			<false/>
-			<key>Key</key>
-			<string>alwaysShowWhatsNew</string>
-			<key>Title</key>
-			<string>Always show "What's New" on launch</string>
-			<key>Type</key>
-			<string>PSToggleSwitchSpecifier</string>
-		</dict>
-		<dict>
-			<key>DefaultValue</key>
-			<string>3.4.2 (3)</string>
+			<string>3.5.0 (1)</string>
 			<key>Key</key>
 			<string>version</string>
 			<key>Title</key>

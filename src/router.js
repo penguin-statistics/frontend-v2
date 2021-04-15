@@ -114,7 +114,7 @@ const router = new Router({
           async: true,
           icon: 'mdi-image-filter-center-focus',
           i18n: 'menu.report.recognition',
-          beta: true
+          // beta: true
         }
       },
       {
