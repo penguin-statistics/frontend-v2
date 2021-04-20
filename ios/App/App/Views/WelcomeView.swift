@@ -76,11 +76,12 @@ struct WelcomeView: View {
                 }
             }) {
                 HStack {
-                    Text("Get Started")
+                    Image(systemName: "checkmark.circle.fill")
+                        .imageScale(.medium)
+                    
+                    Text(NSLocalizedString("done", comment: ""))
                         .font(.system(size: 20))
                         .bold()
-                        
-                    Image(systemName: "chevron.right")
                 }
                 .foregroundColor(.white)
                 .padding()

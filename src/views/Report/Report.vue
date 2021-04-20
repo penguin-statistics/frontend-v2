@@ -705,19 +705,12 @@ export default {
     async doSubmit () {
       this.submitted = false
       this.submitting = true
-      const userId = Cookies.get(config.authorization.userId.cookieKey)
       const timer = performance.timer.ctx(
         report.submitReport({
           stageId: this.selected.stage,
           drops: this.results
         })
           .then(({ data }) => {
-            const reportedUserId = Cookies.get(config.authorization.userId.cookieKey)
-            if (userId !== reportedUserId) {
-              this.$store.dispatch('auth/login', {
-                userId: reportedUserId
-              })
-            }
             this.reset()
             this.submitted = true
             this.$ga.event('report', 'submit_single', this.selected.stage, 1)

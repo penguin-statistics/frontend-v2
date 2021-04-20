@@ -134,6 +134,20 @@ export default {
       index: null,
       logs: [
         {
+          version: 'v3.6.0',
+          date: '2021-05-05T00:00:00+0800',
+          changes: `## 重构
+1. 关卡选择器：适配上游新版终端 UI
+          `
+        },
+        {
+          version: 'v3.5.2',
+          date: '2021-04-20T13:00:00+0800',
+          changes: `## 优化
+1. 关卡选择器加入常驻关类别
+          `
+        },
+        {
           version: 'v3.5.1',
           date: '2021-04-15T16:00:00+0800',
           changes: `## 修复

@@ -96,10 +96,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             debuggerBtn.setTitleColor(UIColor.blue, for: .normal)
             debuggerBtn.titleLabel?.font = UIFont.boldSystemFont(ofSize: 12.0)
             debuggerBtn.layer.cornerRadius = 4
-            debuggerBtn.layer.shadowRadius = 4
+            debuggerBtn.layer.shadowRadius = 8
             debuggerBtn.layer.shadowOffset = CGSize(width: 0, height: 0)
             debuggerBtn.layer.shadowColor = CGColor.init(gray: 0.0, alpha: 1.0)
-            debuggerBtn.layer.shadowOpacity = 0.8
+            debuggerBtn.layer.shadowOpacity = 0.6
             debuggerBtn.layer.shouldRasterize = true
             debuggerBtn.layer.rasterizationScale = UIScreen.main.scale
 
@@ -108,6 +108,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
             root?.view.addSubview(debuggerBtn)
         }
+        
         #endif
         
         if #available(iOS 12.0, *) {
@@ -139,31 +140,31 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         // MARK: CSSearchableItemAttributeSet for CSSearchableItem
         
-        var searchableItemAttributeSet: CSSearchableItemAttributeSet
-        if #available(iOS 14.0, *) {
-            searchableItemAttributeSet = CSSearchableItemAttributeSet(contentType: .url)
-        } else {
-            searchableItemAttributeSet = CSSearchableItemAttributeSet()
-        }
-        
-        
-        let url = URL(string: "https://penguin-stats.io/report")
-        searchableItemAttributeSet.url = url
-        searchableItemAttributeSet.title = "PenguinTestReport"
-        searchableItemAttributeSet.contentDescription = "Penguin Test Report!"
-        
-        // MARK: CSSearchableItem
-        
-        let item = CSSearchableItem(uniqueIdentifier: "PenguinTest", domainIdentifier: "io.penguinstats.app.PenguinTest", attributeSet: searchableItemAttributeSet)
-        
-        CSSearchableIndex.default().deleteAllSearchableItems()
-        CSSearchableIndex.default().indexSearchableItems([item]) { error in
-            if let error = error {
-                print("Indexing error: \(error.localizedDescription)")
-            } else {
-                print("Search item successfully indexed!")
-            }
-        }
+//        var searchableItemAttributeSet: CSSearchableItemAttributeSet
+//        if #available(iOS 14.0, *) {
+//            searchableItemAttributeSet = CSSearchableItemAttributeSet(contentType: .url)
+//        } else {
+//            searchableItemAttributeSet = CSSearchableItemAttributeSet()
+//        }
+//
+//
+//        let url = URL(string: "https://penguin-stats.io/report")
+//        searchableItemAttributeSet.url = url
+//        searchableItemAttributeSet.title = "PenguinTestReport"
+//        searchableItemAttributeSet.contentDescription = "Penguin Test Report!"
+//
+//        // MARK: CSSearchableItem
+//
+//        let item = CSSearchableItem(uniqueIdentifier: "PenguinTest", domainIdentifier: "io.penguinstats.app.PenguinTest", attributeSet: searchableItemAttributeSet)
+//
+//        CSSearchableIndex.default().deleteAllSearchableItems()
+//        CSSearchableIndex.default().indexSearchableItems([item]) { error in
+//            if let error = error {
+//                print("Indexing error: \(error.localizedDescription)")
+//            } else {
+//                print("Search item successfully indexed!")
+//            }
+//        }
         
         #endif
         

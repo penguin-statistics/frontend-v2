@@ -402,13 +402,14 @@ settings:
 zone:
   name: 章节
   types:
-    MAINLINE: 主线
+    MAINLINE: 主题曲
     WEEKLY: 物资筹备
     ACTIVITY: 限时活动
     ACTIVITY_OPEN: 限时活动 — 开放中
     ACTIVITY_CLOSED: 限时活动 — 已结束
     ACTIVITY_PENDING: 限时活动 — 即将开放
     ACTIVITY_PERMANENT: 物资补给箱
+    PERMANENT: 常驻
   status:
     '0': 开放中
     '1': 已结束

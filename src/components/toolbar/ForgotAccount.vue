@@ -170,7 +170,6 @@ export default {
       this.loading = userId
       service.post('/users', userId, { headers: { 'Content-Type': 'text/plain' } })
         .then(() => {
-          this.$store.dispatch('auth/login', { userId })
           this.$emit('loggedIn')
         })
         .catch((err) => {

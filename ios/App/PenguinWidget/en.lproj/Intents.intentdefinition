@@ -8,7 +8,7 @@
 			<key>INEnumDisplayName</key>
 			<string>Servers</string>
 			<key>INEnumDisplayNameID</key>
-			<string>52E7Hb</string>
+			<string>IGb6i4</string>
 			<key>INEnumGeneratesHeader</key>
 			<true/>
 			<key>INEnumName</key>
@@ -19,9 +19,9 @@
 			<array>
 				<dict>
 					<key>INEnumValueDisplayName</key>
-					<string>未选定</string>
+					<string>unknown</string>
 					<key>INEnumValueDisplayNameID</key>
-					<string>XOt22U</string>
+					<string>zu5ZX5</string>
 					<key>INEnumValueName</key>
 					<string>unknown</string>
 				</dict>
@@ -29,125 +29,41 @@
 					<key>INEnumValueDisplayName</key>
 					<string>CN</string>
 					<key>INEnumValueDisplayNameID</key>
-					<string>9d0RSG</string>
+					<string>IVWGR6</string>
 					<key>INEnumValueIndex</key>
 					<integer>1</integer>
 					<key>INEnumValueName</key>
 					<string>cn</string>
-					<key>INEnumValueSynonyms</key>
-					<array>
-						<dict>
-							<key>INEnumValueSynonymSynonym</key>
-							<string>官服</string>
-							<key>INEnumValueSynonymSynonymID</key>
-							<string>wz6Ksv</string>
-						</dict>
-						<dict>
-							<key>INEnumValueSynonymSynonym</key>
-							<string>B服</string>
-							<key>INEnumValueSynonymSynonymID</key>
-							<string>nX6Phw</string>
-						</dict>
-						<dict>
-							<key>INEnumValueSynonymSynonym</key>
-							<string>中国服务器</string>
-							<key>INEnumValueSynonymSynonymID</key>
-							<string>TDXoqS</string>
-						</dict>
-						<dict>
-							<key>INEnumValueSynonymSynonym</key>
-							<string>China Mainland</string>
-							<key>INEnumValueSynonymSynonymID</key>
-							<string>bAzUxC</string>
-						</dict>
-						<dict>
-							<key>INEnumValueSynonymSynonym</key>
-							<string>PRC</string>
-							<key>INEnumValueSynonymSynonymID</key>
-							<string>dtIn76</string>
-						</dict>
-					</array>
 				</dict>
 				<dict>
 					<key>INEnumValueDisplayName</key>
 					<string>US</string>
 					<key>INEnumValueDisplayNameID</key>
-					<string>lWYm9I</string>
+					<string>hRdAmy</string>
 					<key>INEnumValueIndex</key>
 					<integer>2</integer>
 					<key>INEnumValueName</key>
 					<string>us</string>
-					<key>INEnumValueSynonyms</key>
-					<array>
-						<dict>
-							<key>INEnumValueSynonymSynonym</key>
-							<string>美国服务器</string>
-							<key>INEnumValueSynonymSynonymID</key>
-							<string>3oZzZR</string>
-						</dict>
-						<dict>
-							<key>INEnumValueSynonymSynonym</key>
-							<string>United States</string>
-							<key>INEnumValueSynonymSynonymID</key>
-							<string>ucZOUF</string>
-						</dict>
-						<dict>
-							<key>INEnumValueSynonymSynonym</key>
-							<string>USA</string>
-							<key>INEnumValueSynonymSynonymID</key>
-							<string>X0MOCd</string>
-						</dict>
-					</array>
 				</dict>
 				<dict>
 					<key>INEnumValueDisplayName</key>
 					<string>JP</string>
 					<key>INEnumValueDisplayNameID</key>
-					<string>4a3hjt</string>
+					<string>z06YbB</string>
 					<key>INEnumValueIndex</key>
 					<integer>3</integer>
 					<key>INEnumValueName</key>
 					<string>jp</string>
-					<key>INEnumValueSynonyms</key>
-					<array>
-						<dict>
-							<key>INEnumValueSynonymSynonym</key>
-							<string>日本服务器</string>
-							<key>INEnumValueSynonymSynonymID</key>
-							<string>Room6v</string>
-						</dict>
-						<dict>
-							<key>INEnumValueSynonymSynonym</key>
-							<string>Japan</string>
-							<key>INEnumValueSynonymSynonymID</key>
-							<string>NRPXVk</string>
-						</dict>
-					</array>
 				</dict>
 				<dict>
 					<key>INEnumValueDisplayName</key>
 					<string>KR</string>
 					<key>INEnumValueDisplayNameID</key>
-					<string>rcOAZO</string>
+					<string>valxsU</string>
 					<key>INEnumValueIndex</key>
 					<integer>4</integer>
 					<key>INEnumValueName</key>
 					<string>kr</string>
-					<key>INEnumValueSynonyms</key>
-					<array>
-						<dict>
-							<key>INEnumValueSynonymSynonym</key>
-							<string>韩国服务器</string>
-							<key>INEnumValueSynonymSynonymID</key>
-							<string>d2cdqi</string>
-						</dict>
-						<dict>
-							<key>INEnumValueSynonymSynonym</key>
-							<string>Korea</string>
-							<key>INEnumValueSynonymSynonymID</key>
-							<string>GXoUkl</string>
-						</dict>
-					</array>
 				</dict>
 			</array>
 		</dict>
@@ -155,9 +71,9 @@
 	<key>INIntentDefinitionModelVersion</key>
 	<string>1.2</string>
 	<key>INIntentDefinitionNamespace</key>
-	<string>plOCob</string>
+	<string>ZSA94M</string>
 	<key>INIntentDefinitionSystemVersion</key>
-	<string>20C69</string>
+	<string>20D74</string>
 	<key>INIntentDefinitionToolsBuildVersion</key>
 	<string>12C33</string>
 	<key>INIntentDefinitionToolsVersion</key>
@@ -167,10 +83,14 @@
 		<dict>
 			<key>INIntentCategory</key>
 			<string>information</string>
+			<key>INIntentConfigurable</key>
+			<true/>
+			<key>INIntentDefaultImageName</key>
+			<string>Logo</string>
 			<key>INIntentDescription</key>
 			<string>View the Statistics Overview</string>
 			<key>INIntentDescriptionID</key>
-			<string>rSZt9G</string>
+			<string>2SWQYn</string>
 			<key>INIntentEligibleForWidgets</key>
 			<true/>
 			<key>INIntentIneligibleForSuggestions</key>
@@ -179,8 +99,22 @@
 			<string>server</string>
 			<key>INIntentLastParameterTag</key>
 			<integer>2</integer>
+			<key>INIntentManagedParameterCombinations</key>
+			<dict>
+				<key>server</key>
+				<dict>
+					<key>INIntentParameterCombinationSupportsBackgroundExecution</key>
+					<true/>
+					<key>INIntentParameterCombinationTitle</key>
+					<string>View Statistics Overview of ${server}</string>
+					<key>INIntentParameterCombinationTitleID</key>
+					<string>dW9aMP</string>
+					<key>INIntentParameterCombinationUpdatesLinked</key>
+					<true/>
+				</dict>
+			</dict>
 			<key>INIntentName</key>
-			<string>SelectServer</string>
+			<string>StatisticsOverview</string>
 			<key>INIntentParameters</key>
 			<array>
 				<dict>
@@ -189,13 +123,13 @@
 					<key>INIntentParameterDisplayName</key>
 					<string>Server</string>
 					<key>INIntentParameterDisplayNameID</key>
-					<string>438Dca</string>
+					<string>Yb45to</string>
 					<key>INIntentParameterDisplayPriority</key>
 					<integer>1</integer>
 					<key>INIntentParameterEnumType</key>
 					<string>Servers</string>
 					<key>INIntentParameterEnumTypeNamespace</key>
-					<string>plOCob</string>
+					<string>ZSA94M</string>
 					<key>INIntentParameterMetadata</key>
 					<dict>
 						<key>INIntentParameterMetadataDefaultValue</key>
@@ -221,9 +155,9 @@
 							<key>INIntentParameterPromptDialogCustom</key>
 							<true/>
 							<key>INIntentParameterPromptDialogFormatString</key>
-							<string>Other ${count} also looks like ‘${server}’</string>
+							<string>There are ${count} options matching ‘${server}’.</string>
 							<key>INIntentParameterPromptDialogFormatStringID</key>
-							<string>KwfSyY</string>
+							<string>5Lp0W0</string>
 							<key>INIntentParameterPromptDialogType</key>
 							<string>DisambiguationIntroduction</string>
 						</dict>
@@ -231,29 +165,9 @@
 							<key>INIntentParameterPromptDialogCustom</key>
 							<true/>
 							<key>INIntentParameterPromptDialogFormatString</key>
-							<string>Which one do you mean?</string>
+							<string>Just to confirm, you wanted ‘${server}’?</string>
 							<key>INIntentParameterPromptDialogFormatStringID</key>
-							<string>zgN72s</string>
-							<key>INIntentParameterPromptDialogType</key>
-							<string>DisambiguationSelection</string>
-						</dict>
-						<dict>
-							<key>INIntentParameterPromptDialogCustom</key>
-							<true/>
-							<key>INIntentParameterPromptDialogFormatString</key>
-							<string>and</string>
-							<key>INIntentParameterPromptDialogFormatStringID</key>
-							<string>uDltiy</string>
-							<key>INIntentParameterPromptDialogType</key>
-							<string>SubsequentIntroduction</string>
-						</dict>
-						<dict>
-							<key>INIntentParameterPromptDialogCustom</key>
-							<true/>
-							<key>INIntentParameterPromptDialogFormatString</key>
-							<string>请确认你要查询的是 ‘${server}’？</string>
-							<key>INIntentParameterPromptDialogFormatStringID</key>
-							<string>M0nUbM</string>
+							<string>4eICjs</string>
 							<key>INIntentParameterPromptDialogType</key>
 							<string>Confirmation</string>
 						</dict>
@@ -283,7 +197,7 @@
 			<key>INIntentTitle</key>
 			<string>Statistics Overview</string>
 			<key>INIntentTitleID</key>
-			<string>vD918a</string>
+			<string>xSMBZF</string>
 			<key>INIntentType</key>
 			<string>Custom</string>
 			<key>INIntentVerb</key>

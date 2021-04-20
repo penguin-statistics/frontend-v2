@@ -1,42 +1,42 @@
-"438Dca" = "服务器";
+"2SWQYn" = "查看数据概览";
 
-"4a3hjt" = "日服";
+"4eICjs-IVWGR6" = "Just to confirm, you wanted ‘CN’?";
 
-"52E7Hb" = "服务器";
+"4eICjs-hRdAmy" = "Just to confirm, you wanted ‘US’?";
 
-"9d0RSG" = "国服";
+"4eICjs-valxsU" = "Just to confirm, you wanted ‘KR’?";
 
-"KwfSyY-4a3hjt" = "有其他${count}个选项与 ‘日服’ 匹配相近";
+"4eICjs-z06YbB" = "Just to confirm, you wanted ‘JP’?";
 
-"KwfSyY-9d0RSG" = "有其他${count}个选项与 ‘国服’ 匹配相近";
+"5Lp0W0-IVWGR6" = "There are ${count} options matching ‘CN’.";
 
-"KwfSyY-XOt22U" = "有其他${count}个选项与 ‘未选定’ 匹配相近";
+"5Lp0W0-hRdAmy" = "There are ${count} options matching ‘US’.";
 
-"KwfSyY-lWYm9I" = "有其他${count}个选项与 ‘美服’ 匹配相近";
+"5Lp0W0-valxsU" = "There are ${count} options matching ‘KR’.";
 
-"KwfSyY-rcOAZO" = "有其他${count}个选项与 ‘韩服’ 匹配相近";
+"5Lp0W0-z06YbB" = "There are ${count} options matching ‘JP’.";
 
-"M0nUbM-4a3hjt" = "请确认你要查询的是 ‘日服’？";
+"BhJuaY-IVWGR6" = "View Statistics Overview of CN";
 
-"M0nUbM-9d0RSG" = "请确认你要查询的是 ‘国服’？";
+"BhJuaY-hRdAmy" = "View Statistics Overview of US";
 
-"M0nUbM-XOt22U" = "请确认你要查询的是 ‘未选定’？";
+"BhJuaY-valxsU" = "View Statistics Overview of KR";
 
-"M0nUbM-lWYm9I" = "请确认你要查询的是 ‘美服’？";
+"BhJuaY-z06YbB" = "View Statistics Overview of JP";
 
-"M0nUbM-rcOAZO" = "请确认你要查询的是 ‘韩服’？";
+"IGb6i4" = "服务器";
 
-"XOt22U" = "未选定";
+"IVWGR6" = "国服";
 
-"lWYm9I" = "美服";
+"Yb45to" = "服务器";
 
-"rSZt9G" = "查看数据概览";
+"dW9aMP" = "查看数据概览";
 
-"rcOAZO" = "韩服";
+"hRdAmy" = "美服";
 
-"uDltiy" = "还有";
+"valxsU" = "韩服";
 
-"vD918a" = "数据概览";
+"xSMBZF" = "数据概览";
 
-"zgN72s" = "请问是哪一个？";
+"z06YbB" = "日服";
 

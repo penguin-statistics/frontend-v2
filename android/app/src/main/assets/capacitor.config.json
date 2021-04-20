@@ -16,5 +16,8 @@
       "presentationOptions": ["badge", "sound", "alert"]
     }
   },
-  "cordova": {}
+  "cordova": {},
+  "server": {
+    "hostname": "penguin-stats.io"
+  }
 }

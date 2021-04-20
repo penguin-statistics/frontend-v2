@@ -66,6 +66,12 @@ service.interceptors.response.use(function (response) {
     store.commit('ui/setOutdated', true)
   }
 
+  if ('x-penguin-set-penguinid' in response.headers){
+    const penguinId = response.headers['x-penguin-set-penguinid']
+
+    store.dispatch('auth/login', penguinId)
+  }
+
   return response
 }, function (error) {
   if (error.response) {
