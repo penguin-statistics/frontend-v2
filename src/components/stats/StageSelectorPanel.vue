@@ -44,6 +44,17 @@
           >
             {{ strings.translate(zone, "zoneName") }}
           </span>
+
+          <v-spacer />
+
+          <v-chip
+            v-if="zone.isActivity"
+            small
+            disabled
+            class="mr-8"
+          >
+            {{ zone.activityActiveTime[0] }}
+          </v-chip>
         </v-row>
       </v-expansion-panel-header>
       <v-expansion-panel-content :class="{ 'stage-card--content': !!zone.background }">
