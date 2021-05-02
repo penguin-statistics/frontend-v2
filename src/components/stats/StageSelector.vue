@@ -208,6 +208,7 @@
             md="6"
             lg="6"
             xl="6"
+            class="mt-n4"
           >
             <StageSelectorCategory
               v-for="category in categories"

@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="mt-4">
     <v-subheader>
       <v-icon class="mr-2">
         {{ category.zones[0].icon }}
@@ -11,6 +11,7 @@
     <template v-if="tabs.needTabs">
       <v-tabs
         v-model="tab"
+        v-haptic
         right
         class="mt-n12"
       >
