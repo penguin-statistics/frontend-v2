@@ -405,7 +405,7 @@ zone:
   name: 章节
   types:
     MAINLINE: 主题曲
-    WEEKLY: 物资筹备
+    WEEKLY: 资源收集
     ACTIVITY: 限时活动
     ACTIVITY_OPEN: 限时活动 — 开放中
     ACTIVITY_CLOSED: 限时活动 — 已结束
