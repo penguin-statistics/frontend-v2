@@ -37,6 +37,9 @@ export default {
     },
     clearData: (state) => {
       Vue.set(state, 'data', {})
+    },
+    clearServerData: (state, server) => {
+      Vue.delete(state.data, server)
     }
   },
   actions: {
@@ -61,6 +64,9 @@ export default {
         personalMatrixManager.refresh(true),
         personalPatternMatrixManager.refresh(true)
       ])
+    },
+    async clean ({commit}, server) {
+      commit('clearServerData', server)
     }
   },
   getters: {
