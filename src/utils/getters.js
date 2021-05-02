@@ -171,26 +171,30 @@ Getters.zones = {
       zones = zones.filter(el => existUtils.existence(el, parseTime))
     }
 
-    zones = zones.slice().sort((a, b) => {
-      return a.zoneIndex - b.zoneIndex
-    }).map(el => {
-      const toMerge = {}
-      if (el.isActivity) {
-        const existence = el.existence[server]
+    zones = zones.slice()
+      .sort((a, b) => {
+        return a.zoneIndex - b.zoneIndex
+      })
+      .map(el => {
+        const toMerge = {}
+        if (el.isActivity) {
+          const existence = el.existence[server]
 
-        if (!existence.openTime && !existence.closeTime) {
-          toMerge.isPermanentOpen = true
-        } else {
-          toMerge.activityActiveTime = formatter.dates([existence.openTime, existence.closeTime])
-          toMerge.timeValid = formatter.checkTimeValid(existence.openTime, existence.closeTime)
-          toMerge.isOutdated = toMerge.timeValid !== 0
+          if (!existence.openTime && !existence.closeTime) {
+            toMerge.isPermanentOpen = true
+          } else {
+            toMerge.activityActiveTime = formatter.dates([existence.openTime, existence.closeTime])
+            toMerge.timeValid = formatter.checkTimeValid(existence.openTime, existence.closeTime)
+            toMerge.isOutdated = toMerge.timeValid !== 0
+          }
+        }
+        return {
+          ...el,
+          ...toMerge
         }
       }
-      return {
-        ...el,
-        ...toMerge
-      }
-    })
+    )
+
     return zones
   },
   byZoneId (zoneId, ...options) {

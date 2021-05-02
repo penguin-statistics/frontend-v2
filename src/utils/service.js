@@ -68,7 +68,7 @@ service.interceptors.response.use(function (response) {
 
   if ('x-penguin-set-penguinid' in response.headers){
     const penguinId = response.headers['x-penguin-set-penguinid']
-
+    Console.info('Account', 'received set-penguinid header. setting active user as', penguinId)
     store.dispatch('auth/login', penguinId)
   }
 
@@ -86,7 +86,7 @@ service.interceptors.response.use(function (response) {
 
     let message
 
-    if (error && error.response && error.response.data && error.response.data.indexOf(deployingFlag) >= 0) {
+    if (error && error.response && error.response.data && deployingFlag in error.response.data) {
       message = i18n.t('fetch.failed.deploying')
     } else {
       message = error.response.data || error.message

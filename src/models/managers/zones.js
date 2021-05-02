@@ -3,10 +3,11 @@ import commons from './_common'
 
 function getIcon (key) {
   const ICON_MAP = {
-    MAINLINE: 'mdi-checkerboard',
-    WEEKLY: 'mdi-treasure-chest',
+    MAINLINE: 'mdi-chess-queen',
+    WEEKLY: 'mdi-puzzle',
     ACTIVITY: 'mdi-sack',
-    PERMANENT: 'mdi-puzzle'
+    ACTIVITY_PERMANENT: 'mdi-chess-pawn',
+    GACHABOX: 'mdi-treasure-chest'
   }
   return ICON_MAP[key]
 }
