@@ -205,7 +205,7 @@ export default {
         {
           id: 'prts-wiki',
           icon: 'mdi-file-document',
-          href: `http://prts.wiki/w/${this.stage.code}`
+          href: `http://prts.wiki/w/${this.stage.stageId}`
         }
       ]
 
