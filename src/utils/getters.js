@@ -184,6 +184,7 @@ Getters.zones = {
             toMerge.isPermanentOpen = true
           } else {
             toMerge.activityActiveTime = formatter.dates([existence.openTime, existence.closeTime])
+            toMerge.activityStartDate = formatter.date(existence.openTime, true)
             toMerge.timeValid = formatter.checkTimeValid(existence.openTime, existence.closeTime)
             toMerge.isOutdated = toMerge.timeValid !== 0
           }

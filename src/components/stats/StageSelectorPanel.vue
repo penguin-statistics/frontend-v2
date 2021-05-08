@@ -53,7 +53,7 @@
             disabled
             class="mr-8"
           >
-            {{ zone.activityActiveTime[0] }}
+            {{ zone.activityStartDate }}
           </v-chip>
         </v-row>
       </v-expansion-panel-header>

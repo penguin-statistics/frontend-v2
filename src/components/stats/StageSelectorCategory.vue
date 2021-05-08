@@ -13,7 +13,8 @@
         v-model="tab"
         v-haptic
         right
-        class="mt-n12"
+        show-arrows
+        class="mt-0 mt-md-n12"
       >
         <v-tab
           v-for="[key,] in tabs.entries"
@@ -49,6 +50,7 @@
     <StageSelectorPanel
       v-else
       :zones="tabs.entries"
+      @select="e => $emit('select', e)"
     />
   </div>
 </template>
@@ -57,7 +59,7 @@
 import StageSelectorPanel from "@/components/stats/StageSelectorPanel";
 import timeFormatter from "@/utils/timeFormatter";
 export default {
-name: "StageSelectorCategory",
+  name: "StageSelectorCategory",
   components: {StageSelectorPanel},
   props: {
     category: {
