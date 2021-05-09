@@ -117,6 +117,8 @@ stats:
     status:
       _name: 作战状态
       onlyOpen: 仅正在开放
+  itemPreview:
+    more: 共 {count} 个作战含有此掉落
   timeRange:
     inBetween: "{0} ~ {1}"
     toPresent: "{date} 至今"
@@ -402,13 +404,26 @@ settings:
 zone:
   name: 章节
   types:
-    MAINLINE: 主线
-    WEEKLY: 物资筹备
+    MAINLINE: 主题曲
+    WEEKLY: 资源收集
     ACTIVITY: 限时活动
     ACTIVITY_OPEN: 限时活动 — 开放中
     ACTIVITY_CLOSED: 限时活动 — 已结束
     ACTIVITY_PENDING: 限时活动 — 即将开放
-    ACTIVITY_PERMANENT: 物资补给箱
+    ACTIVITY_PERMANENT: "插曲 & 别传"
+    GACHABOX: 物资补给箱
+  subTypes:
+    AWAKENING_HOUR:
+      title: 觉醒
+      subtitle: "0~3 章"
+    VISION_SHATTER:
+      title: 幻灭
+      subtitle: "4~8 章"
+    INTERLUDE: 插曲
+    SIDESTORY: 别传
+    2019: "2019"
+    2020: "2020"
+    2021: "2021"
   status:
     '0': 开放中
     '1': 已结束
@@ -594,9 +609,9 @@ credits:
     title: 网站内容声明
     content:
       - 企鹅物流数据统计网站内所使用的游戏资源（包括但不限于：游戏图片、动画、音频、文本原文或其转译版本等），其目的仅为更好地反映游戏内对应元素、增强用户体验，相关作品之版权仍属于上海鹰角网络科技有限公司和/或其关联公司，即鹰角网络游戏软件和/或鹰角网络游戏服务的提供方（包括但不限于：YOSTAR (HONG KONG) LIMITED, 株式会社Yostar, YOSTAR LIMITED, 龍成網路 等）
-      - 企鹅物流数据统计网站内所使用的部分资源来源于 PRTS Wiki (http://prts.wiki) 并同时对部分资源进行了非歧义性的更改
-      - 企鹅物流数据统计网站内使用了经细微修改的、由 Free Fonts Project 提供的 Bender 字体（ http://jovanny.ru ），该字体特别说明使用者可将相关字体以任何用途、没有任何限制地使用，在此特别表示感谢。
-      - 企鹅物流数据统计网站内使用了由 Synthview Type Design 提供的 Novecento Sans Bold 字体（ http://typography.synthview.com/novecento-sans-font-family.php ）。
+      - 企鹅物流数据统计网站内所使用的部分资源来源于 PRTS Wiki ([http://prts.wiki](http://prts.wiki)) 并同时对部分资源进行了非歧义性的更改
+      - 企鹅物流数据统计网站内使用了经细微修改的、由 Free Fonts Project 提供的 Bender 字体（[http://jovanny.ru](http://jovanny.ru)），该字体特别说明使用者可将相关字体以任何用途、没有任何限制地使用，在此特别表示感谢。
+      - 企鹅物流数据统计网站的「掉落识别」功能中，嵌入了经格式转换的、由 Synthview Type Design 提供的 Novecento Sans Bold 字体（[http://typography.synthview.com/novecento-sans-font-family.php](http://typography.synthview.com/novecento-sans-font-family.php)），以供非展示性用途的模板匹配使用。
   source:
     title: 开源许可列表
 auth:

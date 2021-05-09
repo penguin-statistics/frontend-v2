@@ -22,7 +22,7 @@ struct HapticButton<Content: View> : View {
     
     var body: some View {
         Button(action: {
-            UIImpactFeedbackGenerator.init(style: .soft).impactOccurred()
+            UIImpactFeedbackGenerator.init(style: .rigid).impactOccurred()
             self.action()
         }) {
             content()

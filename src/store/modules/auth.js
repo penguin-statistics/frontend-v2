@@ -1,6 +1,3 @@
-import Cookies from 'js-cookie'
-import config from '@/config'
-
 export default {
   namespaced: true,
   state: {
@@ -20,12 +17,8 @@ export default {
     }
   },
   actions: {
-    login ({ commit, dispatch }, { userId, prompted = true }) {
+    login ({ commit }, userId) {
       commit('changeUsername', userId)
-      if (prompted) {
-        Cookies.set(config.authorization.userId.cookieKey, userId, { expires: 90, path: '/' })
-        dispatch('data/refreshPersonalMatrix', null, { root: true })
-      }
       // only add true login ones
       if (userId) commit('options/addUserIdHistory', userId, { root: true })
     },

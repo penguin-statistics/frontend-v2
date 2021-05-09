@@ -17,7 +17,7 @@ struct PenguinWidget: Widget {
     var body: some WidgetConfiguration {
         IntentConfiguration(
             kind: kind,
-            intent: SelectServerIntent.self,
+            intent: StatisticsOverviewIntent.self,
             provider: SiteStatsProvider()
         ) { entry in
             WidgetEntry(entry: entry)

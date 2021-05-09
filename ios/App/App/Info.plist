@@ -63,6 +63,7 @@
 	<key>NSUserActivityTypes</key>
 	<array>
 		<string>SelectServerIntent</string>
+		<string>StatisticsOverviewIntent</string>
 	</array>
 	<key>UIApplicationSceneManifest</key>
 	<dict>

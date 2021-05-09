@@ -9,8 +9,11 @@ const { Haptics, PenguinPlugin } = Plugins
 function invoke (method, ...args) {
   if (Capacitor.isPluginAvailable('Haptics')) {
     Console.info('Haptics', 'invoking haptics', method, args)
-    Haptics[method](...args)
-      .catch(e => Console.warn('Haptics', 'failed to invoke haptics', e))
+    try {
+      Haptics[method](...args)
+    } catch (e) {
+      Console.warn('Haptics', 'failed to invoke haptics', e)
+    }
   }
 }
 

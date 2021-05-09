@@ -60,10 +60,25 @@ function needsUpdate (response) {
   return false
 }
 
+service.interceptors.request.use(function (config){
+  if (["/report", "/report/recall", "personal"].some(el => config.url.includes(el))) {
+    if (store.getters['auth/loggedIn']) config.headers["Authorization"] = `PenguinID ${store.getters['auth/username']}`
+  }
+  return config
+}, function(error) {
+  return Promise.reject(error)
+})
+
 // Add a response interceptor
 service.interceptors.response.use(function (response) {
   if (needsUpdate(response)) {
     store.commit('ui/setOutdated', true)
+  }
+
+  if ('x-penguin-set-penguinid' in response.headers){
+    const penguinId = response.headers['x-penguin-set-penguinid']
+    Console.info('Account', 'received set-penguinid header. setting active user as', penguinId)
+    store.dispatch('auth/login', penguinId)
   }
 
   return response
@@ -80,7 +95,7 @@ service.interceptors.response.use(function (response) {
 
     let message
 
-    if (error && error.response && error.response.data && error.response.data.indexOf(deployingFlag) >= 0) {
+    if (error && error.response && error.response.data && deployingFlag in error.response.data) {
       message = i18n.t('fetch.failed.deploying')
     } else {
       message = error.response.data || error.message

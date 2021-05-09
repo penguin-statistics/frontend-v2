@@ -847,6 +847,20 @@
     lodash "^4.17.19"
     to-fast-properties "^2.0.0"
 
+"@capacitor-community/http@^0.3.0":
+  version "0.3.0"
+  resolved "https://registry.npmjs.org/@capacitor-community/http/-/http-0.3.0.tgz#f42a8504a053ecf5888f580e3fd528ac4e8d35a2"
+  integrity sha512-0Cn0iyXNF5iNydivkGmQ5Plfn6epAMfO8ew8cthmnLlS8kXWQOGPvQrSYgNBd87l1ViPGznz4mN29TT4wJA2Ag==
+  dependencies:
+    "@capacitor/core" latest
+
+"@capacitor/core@latest":
+  version "2.4.7"
+  resolved "https://registry.npmjs.org/@capacitor/core/-/core-2.4.7.tgz#f3b4d5728db7e764c1153da5e67d369bda35b772"
+  integrity sha512-ZPzXXQ4EPwR/ZhNDkmlxyzw4FvquIl/ROj8HMMM0MEd4xZfM8ulNGPIL6br9TWdlFLGBKq40eymPZjKaivGnig==
+  dependencies:
+    tslib "^1.9.0"
+
 "@iarna/toml@^2.2.0":
   version "2.2.5"
   resolved "https://registry.yarnpkg.com/@iarna/toml/-/toml-2.2.5.tgz#b32366c89b43c6f8cefbdefac778b9c828e3ba8c"
@@ -4939,6 +4953,11 @@ tr46@^1.0.1:
   integrity sha1-qLE/1r/SSJUZZ0zN5VujaTtwbQk=
   dependencies:
     punycode "^2.1.0"
+
+tslib@^1.9.0:
+  version "1.14.1"
+  resolved "https://registry.npmjs.org/tslib/-/tslib-1.14.1.tgz#cf2d38bdc34a134bcaf1091c41f6619e2f672d00"
+  integrity sha512-Xni35NKzjgMrwevysHTCArtLDpPvye8zV/0E4EyYn43P7/7qvQwPh9BGkHewbMulVntbigmcT7rdX3BNo9wRJg==
 
 tty-browserify@0.0.0:
   version "0.0.0"

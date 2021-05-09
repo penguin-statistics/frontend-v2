@@ -208,101 +208,14 @@
             md="6"
             lg="6"
             xl="6"
+            class="mt-n4"
           >
-            <div
+            <StageSelectorCategory
               v-for="category in categories"
               :key="category.id"
-            >
-              <!--              <OffTitle-->
-              <!--                :content="$t(['zone.types', category.id].join('.'))"-->
-              <!--                small-->
-              <!--                class="pl-2"-->
-              <!--              />-->
-              <v-subheader>
-                <v-icon class="mr-2">
-                  {{ category.zones[0].icon }}
-                </v-icon>
-                <span>
-                  {{ $t(["zone.types", category.id].join(".")) }}
-                </span>
-              </v-subheader>
-              <v-expansion-panels
-                hover
-                class="mb-2"
-              >
-                <v-expansion-panel
-                  v-for="zone in category.zones"
-                  :key="zone.zoneId"
-                  class="bkop-light stage-card--background"
-                  :style="{ 'background-image': zone.background ? `url(${cdnDeliver(zone.background)}) !important` : null }"
-                >
-                  <v-expansion-panel-header
-                    v-haptic
-                    class="overflow-hidden bkop-medium"
-                    :class="{ 'stage-card--header': !!zone.background }"
-                  >
-                    <v-row align="center">
-                      <span
-                        v-if="zone.isActivity && !small && zone.timeValid !== undefined"
-                        :class="{
-                          'red--text': zone.timeValid === 1,
-                          'green--text': zone.timeValid === 0,
-                          'grey--text': zone.timeValid === -1
-                        }"
-                        class="text--darken-1 font-weight-bold ml-2 mr-1"
-                      >
-                        {{ $t("zone.status." + zone.timeValid) }}
-                      </span>
-                      <span
-                        v-if="zone.isPermanentOpen"
-                        class="text--darken-1 font-weight-bold orange--text ml-2 mr-1"
-                      >
-                        {{ $t("zone.status.permanentOpen") }}
-                      </span>
-
-                      <span
-                        class="subtitle-1 pl-2"
-                        :class="{
-                          'text--darken-1 font-weight-bold': zone.isActivity && small,
-                          'red--text': zone.isActivity && small && zone.timeValid === 1,
-                          'green--text': zone.isActivity && small && zone.timeValid === 0,
-                          'grey--text': zone.isActivity && small && zone.timeValid === -1
-                        }"
-                      >
-                        {{ strings.translate(zone, "zoneName") }}
-                      </span>
-
-                      <!--                        <v-spacer />-->
-
-                      <!--                        <span class="font-weight-bold monospace mr-6">-->
-                      <!--                          <v-badge-->
-                      <!--                            inline-->
-                      <!--                            color="black"-->
-                      <!--                            :content="zone.stages.length"-->
-                      <!--                          />-->
-                      <!--                        </span>-->
-                    </v-row>
-                  </v-expansion-panel-header>
-                  <v-expansion-panel-content :class="{ 'stage-card--content': !!zone.background }">
-                    <div
-                      v-if="zone.isActivity"
-                      class="caption mx-1 mt-3 mb-2"
-                    >
-                      {{ genActivityTime(zone) }}
-                    </div>
-                    <div class="pt-2">
-                      <StageCard
-                        v-for="stage in zone.stages"
-                        :key="stage.stageId"
-                        v-haptic
-                        :stage="stage"
-                        @click.native="selectStage(zone.zoneId, stage.stageId)"
-                      />
-                    </div>
-                  </v-expansion-panel-content>
-                </v-expansion-panel>
-              </v-expansion-panels>
-            </div>
+              :category="category"
+              @select="e => selectStage(e.zoneId, e.stageId)"
+            />
           </v-col>
         </v-row>
       </v-stepper-content>
@@ -326,10 +239,11 @@ import CDN from '@/mixins/CDN'
 import existUtils from '@/utils/existUtils'
 import BackButton from '@/components/stats/BackButton'
 import Theme from '@/mixins/Theme'
+import StageSelectorCategory from "@/components/stats/StageSelectorCategory";
 
 export default {
   name: 'StageSelector',
-  components: { BackButton, StageCard },
+  components: {StageSelectorCategory, BackButton, StageCard },
   mixins: [CDN, Theme],
   props: {
     name: {
@@ -366,39 +280,10 @@ export default {
         stage: null
       },
       stageImages: {
-      //   act5d0_zone1: this.cdnDeliver('/backgrounds/zones/act5d0_zone1.jpg'),
-      //   act6d5_zone1: this.cdnDeliver('/backgrounds/zones/act6d5_zone1.jpg'),
-      //   act7d5_zone1: this.cdnDeliver('/backgrounds/zones/act7d5_zone1.jpg'),
-      //   act9d0_zone1: this.cdnDeliver('/backgrounds/zones/act9d0_zone1.jpg'),
-      //   act10d5_zone1: this.cdnDeliver('/backgrounds/zones/act10d5_zone1.jpg'),
-      //   act11d0_zone1: this.cdnDeliver('/backgrounds/zones/act11d0_zone1.jpg'),
-      //   '1stact_zone1': this.cdnDeliver('/backgrounds/zones/A001_zone1.jpg'),
-      //   act3d0_zone1: this.cdnDeliver('/backgrounds/zones/A003_zone1.jpg'),
-      //   act4d0_zone1: this.cdnDeliver('/backgrounds/zones/main_e0.jpg'),
-      //   main_0: this.cdnDeliver('/backgrounds/zones/main_0.jpg'),
-      //   main_1: this.cdnDeliver('/backgrounds/zones/main_1.jpg'),
-      //   main_2: this.cdnDeliver('/backgrounds/zones/main_2.jpg'),
-      //   main_3: this.cdnDeliver('/backgrounds/zones/main_3.jpg'),
-      //   main_4: this.cdnDeliver('/backgrounds/zones/main_4.jpg'),
-      //   main_5: this.cdnDeliver('/backgrounds/zones/main_5.jpg'),
-      //   main_6: this.cdnDeliver('/backgrounds/zones/main_6.jpg'),
-      //   main_7: this.cdnDeliver('/backgrounds/zones/main_7.jpg'),
-      //   main_8: this.cdnDeliver('/backgrounds/zones/main_8.jpg'),
-      //   gachabox: this.cdnDeliver('/backgrounds/zones/gachabox.jpg'),
-      //   act12d0_zone1: this.cdnDeliver('/backgrounds/zones/act12d0_zone1.jpg'),
-      //   act13d0_zone1: this.cdnDeliver('/backgrounds/zones/act13d0_zone1.jpg'),
-      //   act13d5_zone1: this.cdnDeliver('/backgrounds/zones/act13d5_zone1.jpg'),
-      //   act14d7_zone1: this.cdnDeliver('/backgrounds/zones/act5d0_zone1.jpg'),
-      //   act15d0_zone1: this.cdnDeliver('/backgrounds/zones/act15d0_zone1.jpg'),
-      //   act15d5_zone1: this.cdnDeliver('/backgrounds/zones/act15d5_zone1.jpg'),
-      //   // "act13d5_zone1": require("@/assets/zonePageBackgrounds/png/act13d5_zone1.png"),
-      //
-      //   // 骑兵与猎人 复刻：复用原活动（1stact_zone1）
-      //   act13d2_zone1: this.cdnDeliver('/backgrounds/zones/A001_zone1.jpg'),
-      //
-      //   // 选择页面背景
+        // 选择页面背景
         _default: this.cdnDeliver('/backgrounds/zones/default.jpg')
-      }
+      },
+      activeTabs: {}
     }
   },
   computed: {
@@ -440,22 +325,22 @@ export default {
       const categoriesSet = this.hideClosed
         ? [ // Report
           [
-            ['ACTIVITY_OPEN', 'MAINLINE'],
-            ['ACTIVITY_PERMANENT', 'WEEKLY']
+            ['ACTIVITY_OPEN', 'ACTIVITY_PENDING', 'MAINLINE', 'ACTIVITY_PERMANENT'],
+            ['GACHABOX', 'WEEKLY']
           ], // md, lg & xl
           [
-            ['ACTIVITY_OPEN', 'MAINLINE'],
-            ['ACTIVITY_PERMANENT', 'WEEKLY']
+            ['ACTIVITY_OPEN', 'ACTIVITY_PENDING', 'MAINLINE', 'ACTIVITY_PERMANENT'],
+            ['GACHABOX', 'WEEKLY']
           ] // xs & sm
         ]
         : [ // Show Statistics
           [
-            ['ACTIVITY_OPEN', 'MAINLINE', 'WEEKLY'],
-            ['ACTIVITY_PERMANENT', 'ACTIVITY_PENDING', 'ACTIVITY_CLOSED']
+            ['ACTIVITY_OPEN', 'ACTIVITY_PENDING', 'MAINLINE', 'ACTIVITY_PERMANENT'],
+            ['GACHABOX', 'ACTIVITY_CLOSED', 'WEEKLY']
           ], // md, lg & xl
           [
-            ['ACTIVITY_PENDING', 'ACTIVITY_OPEN', 'MAINLINE'],
-            ['ACTIVITY_PERMANENT', 'WEEKLY', 'ACTIVITY_CLOSED']
+            ['ACTIVITY_OPEN', 'ACTIVITY_PENDING', 'MAINLINE', 'ACTIVITY_PERMANENT'],
+            ['GACHABOX', 'ACTIVITY_CLOSED', 'WEEKLY']
           ] // xs & sm
         ]
 
@@ -463,7 +348,7 @@ export default {
       for (const [index, categories] of categoriesSet[this.small ? 1 : 0].entries()) {
         for (const category of categories) {
           let filter
-          let zones = get.zones.byType(category.startsWith('ACTIVITY') ? 'ACTIVITY' : category, false)
+          let zones = get.zones.byType((category.startsWith('ACTIVITY') && category !== 'ACTIVITY_PERMANENT') ? 'ACTIVITY' : category, false)
           zones = zones.filter(el => existUtils.existence(el))
 
           if (category === 'ACTIVITY_OPEN') {
@@ -472,8 +357,6 @@ export default {
             filter = zone => zone.timeValid === 1
           } else if (category === 'ACTIVITY_PENDING') {
             filter = zone => zone.timeValid === -1
-          } else if (category === 'ACTIVITY_PERMANENT') {
-            filter = zone => zone.isPermanentOpen
           }
 
           if (filter) zones = zones.filter(filter)
@@ -495,7 +378,7 @@ export default {
             .filter(el => el.stages.length)
 
           // sort activity zones by its openTime
-          if (category.startsWith('ACTIVITY')) {
+          if (category.startsWith('ACTIVITY') && category !== 'ACTIVITY_PERMANENT') {
             const server = this.$store.getters['dataSource/server']
             zones = zones
               .slice()
@@ -618,42 +501,12 @@ export default {
         this.selected.zone = null
         this.selected.stage = null
       }
-    },
-    genActivityTime (zone) {
-      return zone.isPermanentOpen
-        ? this.$t('zone.status.permanentOpen')
-        : this.$t('zone.opensAt', zone.activityActiveTime)
     }
   }
 }
 </script>
 
 <style scoped>
-  .stage-card--background {
-    background-size: cover !important;
-    background-repeat: no-repeat !important;
-    background-position: center center !important;
-  }
-
-  .theme--light .stage-card--header {
-    background: rgba(240, 240, 240, 0.9) !important;
-    background: linear-gradient(to bottom, rgba(240, 240, 240, 0.9), rgba(240, 240, 240, 0.85)) !important;
-  }
-
-  .theme--light .stage-card--content {
-    background: rgba(255, 255, 255, 0.85) !important;
-    background: linear-gradient(to bottom, rgba(255, 255, 255, 0.85), rgba(255, 255, 255, 0.7)) !important;
-  }
-
-  .theme--dark .stage-card--header {
-    background: rgba(30, 30, 30, 0.9) !important;
-    background: linear-gradient(to bottom, rgba(30, 30, 30, 0.9), rgba(30, 30, 30, 0.85)) !important;
-  }
-
-  .theme--dark .stage-card--content {
-    background: rgba(0, 0, 0, 0.8) !important;
-    background: linear-gradient(to bottom, rgba(0, 0, 0, 0.85), rgba(0, 0, 0, 0.7)) !important;
-  }
 
   .history-stage-cards {
     /* 92px: 2 lines of cardHeight (38px stage card height + 2 * 4px margin) */

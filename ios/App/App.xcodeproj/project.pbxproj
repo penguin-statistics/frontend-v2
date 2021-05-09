@@ -12,6 +12,8 @@
 		3A001AC62599230E0078A265 /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 3A001AC52599230E0078A265 /* Settings.bundle */; };
 		3A001AD32599A4A60078A265 /* ConsentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A001AD22599A4A50078A265 /* ConsentView.swift */; };
 		3A001AD72599A68A0078A265 /* Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A001AD62599A68A0078A265 /* Helpers.swift */; };
+		3A06777F26281BB600C9CB98 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3A06777D26281BB600C9CB98 /* Main.storyboard */; };
+		3A06778026281BB600C9CB98 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3A06777E26281BB600C9CB98 /* LaunchScreen.storyboard */; };
 		3A06C1102597112E00B81F31 /* SiteStats.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A06C10F2597112E00B81F31 /* SiteStats.swift */; };
 		3A06C118259720D600B81F31 /* PenguinWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A06C117259720D600B81F31 /* PenguinWidget.swift */; };
 		3A06C1252597447200B81F31 /* StageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A06C1242597447200B81F31 /* StageView.swift */; };
@@ -26,8 +28,6 @@
 		3A1157BA258F2B5E00F4C6FD /* PenguinWidgetExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 3A1157AC258F2B5C00F4C6FD /* PenguinWidgetExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		3A20895A25C26EFB001D7490 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 3A20895925C26EFB001D7490 /* Alamofire */; };
 		3A20895D25C2ACC5001D7490 /* Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A001AD62599A68A0078A265 /* Helpers.swift */; };
-		3A33A3D825D3DA96001867F0 /* Intents.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = 3A33A3DB25D3DA96001867F0 /* Intents.intentdefinition */; };
-		3A33A3D925D3DA96001867F0 /* Intents.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = 3A33A3DB25D3DA96001867F0 /* Intents.intentdefinition */; };
 		3A3F035B25C0B3D000DEED16 /* PersistenceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A3F035A25C0B3D000DEED16 /* PersistenceManager.swift */; };
 		3A4D4431259AC0BA000807F8 /* InitialLaunch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A4D4430259AC0BA000807F8 /* InitialLaunch.swift */; };
 		3A4FAF192626B189001C9907 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 3A4FAF1B2626B189001C9907 /* Localizable.strings */; };
@@ -40,12 +40,13 @@
 		3A616162259B2D2D00FA06A2 /* Debugger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A616161259B2D2D00FA06A2 /* Debugger.swift */; };
 		3A616168259C698B00FA06A2 /* NotificationPreferences.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A616167259C698B00FA06A2 /* NotificationPreferences.swift */; };
 		3A61616C259C7B8D00FA06A2 /* HapticButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A61616B259C7B8D00FA06A2 /* HapticButton.swift */; };
-		3A65B09725C662EE00E1AE2A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3A65B09525C662EE00E1AE2A /* LaunchScreen.storyboard */; };
 		3A679B012599166C00A685E9 /* WelcomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A679B002599166C00A685E9 /* WelcomeView.swift */; };
 		3A885ACA25A43F0400247AED /* RxBus in Frameworks */ = {isa = PBXBuildFile; productRef = 3A885AC925A43F0400247AED /* RxBus */; };
 		3A885ACE25A443D600247AED /* EventBus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A885ACD25A443D600247AED /* EventBus.swift */; };
 		3A8EFF992599BBC100B6A788 /* alert1.caf in Resources */ = {isa = PBXBuildFile; fileRef = 3A8EFF982599BBC100B6A788 /* alert1.caf */; };
 		3A8EFFA0259A1BB900B6A788 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 3A8EFF9F259A1BB900B6A788 /* Alamofire */; };
+		3A9323B62626C5A700E42CA4 /* Intents.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = 3A9323B92626C5A700E42CA4 /* Intents.intentdefinition */; };
+		3A9323B72626C5A700E42CA4 /* Intents.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = 3A9323B92626C5A700E42CA4 /* Intents.intentdefinition */; };
 		3A968BB02597A3D5005266F2 /* TwoColumnStageStats.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A968BAF2597A3D5005266F2 /* TwoColumnStageStats.swift */; };
 		3A968BB52597A54E005266F2 /* LargeWidgetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A968BB42597A54E005266F2 /* LargeWidgetView.swift */; };
 		3A968BBA2597A738005266F2 /* ExternalService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A968BB92597A738005266F2 /* ExternalService.swift */; };
@@ -54,7 +55,6 @@
 		3AA7E3462521F70B00387971 /* PenguinPlugin.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AA7E3452521F70B00387971 /* PenguinPlugin.m */; };
 		50379B232058CBB4000EE86E /* capacitor.config.json in Resources */ = {isa = PBXBuildFile; fileRef = 50379B222058CBB4000EE86E /* capacitor.config.json */; };
 		504EC3081FED79650016851F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 504EC3071FED79650016851F /* AppDelegate.swift */; };
-		504EC30D1FED79650016851F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 504EC30B1FED79650016851F /* Main.storyboard */; };
 		504EC30F1FED79650016851F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 504EC30E1FED79650016851F /* Assets.xcassets */; };
 		50B271D11FEDC1A000F3C39B /* public in Resources */ = {isa = PBXBuildFile; fileRef = 50B271D01FEDC1A000F3C39B /* public */; };
 		A084ECDBA7D38E1E42DFC39D /* Pods_App.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AF277DCFFFF123FFC6DF26C7 /* Pods_App.framework */; };
@@ -92,6 +92,8 @@
 		3A001AD62599A68A0078A265 /* Helpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Helpers.swift; sourceTree = "<group>"; };
 		3A00D83125266410007308FB /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = System/Library/Frameworks/WidgetKit.framework; sourceTree = SDKROOT; };
 		3A00D83325266410007308FB /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
+		3A06777D26281BB600C9CB98 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
+		3A06777E26281BB600C9CB98 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 		3A06C10F2597112E00B81F31 /* SiteStats.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SiteStats.swift; sourceTree = "<group>"; };
 		3A06C117259720D600B81F31 /* PenguinWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PenguinWidget.swift; sourceTree = "<group>"; };
 		3A06C1242597447200B81F31 /* StageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StageView.swift; sourceTree = "<group>"; };
@@ -103,8 +105,6 @@
 		3A1157B0258F2B5C00F4C6FD /* SmallWidgetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SmallWidgetView.swift; sourceTree = "<group>"; };
 		3A1157B3258F2B5E00F4C6FD /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		3A1157B5258F2B5E00F4C6FD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		3A33A3DA25D3DA96001867F0 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.intentdefinition; name = en; path = en.lproj/Intents.intentdefinition; sourceTree = "<group>"; };
-		3A33A3DF25D3DAA2001867F0 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Intents.strings"; sourceTree = "<group>"; };
 		3A3F035A25C0B3D000DEED16 /* PersistenceManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistenceManager.swift; sourceTree = "<group>"; };
 		3A4D4430259AC0BA000807F8 /* InitialLaunch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitialLaunch.swift; sourceTree = "<group>"; };
 		3A4FAF1A2626B189001C9907 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
@@ -119,11 +119,10 @@
 		3A616161259B2D2D00FA06A2 /* Debugger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Debugger.swift; sourceTree = "<group>"; };
 		3A616167259C698B00FA06A2 /* NotificationPreferences.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationPreferences.swift; sourceTree = "<group>"; };
 		3A61616B259C7B8D00FA06A2 /* HapticButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HapticButton.swift; sourceTree = "<group>"; };
-		3A65B09625C662EE00E1AE2A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		3A679B002599166C00A685E9 /* WelcomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeView.swift; sourceTree = "<group>"; };
 		3A885ACD25A443D600247AED /* EventBus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventBus.swift; sourceTree = "<group>"; };
-		3A885AD125A4477600247AED /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		3A8EFF982599BBC100B6A788 /* alert1.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = alert1.caf; sourceTree = "<group>"; };
+		3A9323B82626C5A700E42CA4 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.intentdefinition; name = en; path = en.lproj/Intents.intentdefinition; sourceTree = "<group>"; };
 		3A968BAF2597A3D5005266F2 /* TwoColumnStageStats.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TwoColumnStageStats.swift; sourceTree = "<group>"; };
 		3A968BB42597A54E005266F2 /* LargeWidgetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LargeWidgetView.swift; sourceTree = "<group>"; };
 		3A968BB92597A738005266F2 /* ExternalService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExternalService.swift; sourceTree = "<group>"; };
@@ -206,7 +205,7 @@
 				3A06C117259720D600B81F31 /* PenguinWidget.swift */,
 				3A06C132259766C400B81F31 /* WidgetEntry.swift */,
 				3A968BB92597A738005266F2 /* ExternalService.swift */,
-				3A33A3DB25D3DA96001867F0 /* Intents.intentdefinition */,
+				3A9323B92626C5A700E42CA4 /* Intents.intentdefinition */,
 			);
 			path = PenguinWidget;
 			sourceTree = "<group>";
@@ -261,10 +260,10 @@
 		3A8EFFB2259AB69200B6A788 /* Meta */ = {
 			isa = PBXGroup;
 			children = (
+				3A06777E26281BB600C9CB98 /* LaunchScreen.storyboard */,
+				3A06777D26281BB600C9CB98 /* Main.storyboard */,
 				3AA7E34B2522510700387971 /* App.entitlements */,
 				504EC3071FED79650016851F /* AppDelegate.swift */,
-				504EC30B1FED79650016851F /* Main.storyboard */,
-				3A65B09525C662EE00E1AE2A /* LaunchScreen.storyboard */,
 				504EC3131FED79650016851F /* Info.plist */,
 				2FAD9762203C412B000D30F8 /* config.xml */,
 			);
@@ -411,7 +410,6 @@
 			knownRegions = (
 				en,
 				"zh-Hans",
-				Base,
 			);
 			mainGroup = 504EC2FB1FED79650016851F;
 			packageReferences = (
@@ -445,14 +443,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				3A8EFF992599BBC100B6A788 /* alert1.caf in Resources */,
+				3A06777F26281BB600C9CB98 /* Main.storyboard in Resources */,
 				50B271D11FEDC1A000F3C39B /* public in Resources */,
 				3A4FAF192626B189001C9907 /* Localizable.strings in Resources */,
 				504EC30F1FED79650016851F /* Assets.xcassets in Resources */,
-				3A65B09725C662EE00E1AE2A /* LaunchScreen.storyboard in Resources */,
 				3AA7E33725211FD500387971 /* InfoPlist.strings in Resources */,
 				50379B232058CBB4000EE86E /* capacitor.config.json in Resources */,
-				504EC30D1FED79650016851F /* Main.storyboard in Resources */,
 				2FAD9763203C412B000D30F8 /* config.xml in Resources */,
+				3A06778026281BB600C9CB98 /* LaunchScreen.storyboard in Resources */,
 				3A001AC62599230E0078A265 /* Settings.bundle in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -478,7 +476,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 1;
 			shellPath = /bin/sh;
-			shellScript = "#buildNumber=$(/usr/libexec/PlistBuddy -c \"Print CFBundleVersion\" \"${PROJECT_DIR}/${INFOPLIST_FILE}\")\n#buildNumber=$(($buildNumber + 1))\n#/usr/libexec/PlistBuddy -c \"Set :CFBundleVersion $buildNumber\" \"${PROJECT_DIR}/${INFOPLIST_FILE}\"\n\n# Adds the current version to Settings.bundle\nversion=\"$MARKETING_VERSION\"\nbuild=\"$CURRENT_PROJECT_VERSION\"\n/usr/libexec/PlistBuddy -c \"Set PreferenceSpecifiers:1:DefaultValue $version ($build)\" \"$SRCROOT/Settings.bundle/Root.plist\"\n";
+			shellScript = "#buildNumber=$(/usr/libexec/PlistBuddy -c \"Print CFBundleVersion\" \"${PROJECT_DIR}/${INFOPLIST_FILE}\")\n#buildNumber=$(($buildNumber + 1))\n#/usr/libexec/PlistBuddy -c \"Set :CFBundleVersion $buildNumber\" \"${PROJECT_DIR}/${INFOPLIST_FILE}\"\n\n# Adds the current version to Settings.bundle\nversion=\"$MARKETING_VERSION\"\nbuild=\"$CURRENT_PROJECT_VERSION\"\n/usr/libexec/PlistBuddy -c \"Set PreferenceSpecifiers:0:DefaultValue $version ($build)\" \"$SRCROOT/Settings.bundle/Root.plist\"\n";
 		};
 		6634F4EFEBD30273BCE97C65 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -531,7 +529,7 @@
 				3A1157B1258F2B5C00F4C6FD /* SmallWidgetView.swift in Sources */,
 				3A06C12D2597454600B81F31 /* WidgetFooter.swift in Sources */,
 				3A06C1252597447200B81F31 /* StageView.swift in Sources */,
-				3A33A3D925D3DA96001867F0 /* Intents.intentdefinition in Sources */,
+				3A9323B72626C5A700E42CA4 /* Intents.intentdefinition in Sources */,
 				3A06C1102597112E00B81F31 /* SiteStats.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -544,10 +542,10 @@
 				3A885ACE25A443D600247AED /* EventBus.swift in Sources */,
 				3A55B6842599056000699BBA /* Constants.swift in Sources */,
 				3A3F035B25C0B3D000DEED16 /* PersistenceManager.swift in Sources */,
-				3A33A3D825D3DA96001867F0 /* Intents.intentdefinition in Sources */,
 				3A001AD32599A4A60078A265 /* ConsentView.swift in Sources */,
 				3A001AC225991E2C0078A265 /* WhatsNew.swift in Sources */,
 				3A679B012599166C00A685E9 /* WelcomeView.swift in Sources */,
+				3A9323B62626C5A700E42CA4 /* Intents.intentdefinition in Sources */,
 				3A61615A259B0ED200FA06A2 /* ToggleNotificationPreference.swift in Sources */,
 				3A61616C259C7B8D00FA06A2 /* HapticButton.swift in Sources */,
 				3A001AD72599A68A0078A265 /* Helpers.swift in Sources */,
@@ -571,15 +569,6 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
-		3A33A3DB25D3DA96001867F0 /* Intents.intentdefinition */ = {
-			isa = PBXVariantGroup;
-			children = (
-				3A33A3DA25D3DA96001867F0 /* en */,
-				3A33A3DF25D3DAA2001867F0 /* zh-Hans */,
-			);
-			name = Intents.intentdefinition;
-			sourceTree = "<group>";
-		};
 		3A4FAF1B2626B189001C9907 /* Localizable.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -598,12 +587,12 @@
 			name = Localizable.strings;
 			sourceTree = "<group>";
 		};
-		3A65B09525C662EE00E1AE2A /* LaunchScreen.storyboard */ = {
+		3A9323B92626C5A700E42CA4 /* Intents.intentdefinition */ = {
 			isa = PBXVariantGroup;
 			children = (
-				3A65B09625C662EE00E1AE2A /* Base */,
+				3A9323B82626C5A700E42CA4 /* en */,
 			);
-			name = LaunchScreen.storyboard;
+			name = Intents.intentdefinition;
 			sourceTree = "<group>";
 		};
 		3AA7E33925211FD500387971 /* InfoPlist.strings */ = {
@@ -613,14 +602,6 @@
 				3AA7E33B25211FEC00387971 /* zh-Hans */,
 			);
 			name = InfoPlist.strings;
-			sourceTree = "<group>";
-		};
-		504EC30B1FED79650016851F /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				3A885AD125A4477600247AED /* Base */,
-			);
-			name = Main.storyboard;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -637,7 +618,7 @@
 				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CODE_SIGN_ENTITLEMENTS = PenguinWidgetExtension.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 2;
+				CURRENT_PROJECT_VERSION = 0;
 				DEVELOPMENT_TEAM = SY8Y8N4TPM;
 				INFOPLIST_FILE = PenguinWidget/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
@@ -646,7 +627,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 3.5.0;
+				MARKETING_VERSION = 3.5.2;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = io.penguinstats.app.PenguinWidget;
@@ -669,7 +650,7 @@
 				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CODE_SIGN_ENTITLEMENTS = PenguinWidgetExtension.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 2;
+				CURRENT_PROJECT_VERSION = 0;
 				DEVELOPMENT_TEAM = SY8Y8N4TPM;
 				INFOPLIST_FILE = PenguinWidget/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
@@ -678,7 +659,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 3.5.0;
+				MARKETING_VERSION = 3.5.2;
 				MTL_FAST_MATH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = io.penguinstats.app.PenguinWidget;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -808,7 +789,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = App/App.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 3;
+				CURRENT_PROJECT_VERSION = 0;
 				DEVELOPMENT_TEAM = SY8Y8N4TPM;
 				"ENABLE_HARDENED_RUNTIME[sdk=macosx*]" = YES;
 				INFOPLIST_FILE = App/Info.plist;
@@ -817,7 +798,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 3.5.0;
+				MARKETING_VERSION = 3.5.2;
 				OTHER_SWIFT_FLAGS = "$(inherited) \"-D\" \"COCOAPODS\" \"-DDEBUG\"";
 				PRODUCT_BUNDLE_IDENTIFIER = io.penguinstats.app;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -840,7 +821,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = App/App.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 3;
+				CURRENT_PROJECT_VERSION = 0;
 				DEVELOPMENT_TEAM = SY8Y8N4TPM;
 				"ENABLE_HARDENED_RUNTIME[sdk=macosx*]" = YES;
 				INFOPLIST_FILE = App/Info.plist;
@@ -849,7 +830,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 3.5.0;
+				MARKETING_VERSION = 3.5.2;
 				PRODUCT_BUNDLE_IDENTIFIER = io.penguinstats.app;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTS_MACCATALYST = NO;

@@ -364,7 +364,20 @@ zone:
     ACTIVITY_OPEN: イベント（開催中）
     ACTIVITY_CLOSED: イベント（終了）
     ACTIVITY_PENDING: イベント（近日開催）
-    ACTIVITY_PERMANENT: 補給物資
+    ACTIVITY_PERMANENT: "幕間 & 逸話"
+    GACHABOX: 補給物資
+  subTypes:
+    AWAKENING_HOUR:
+      title: 覚醒
+      subtitle: "0~3 章"
+    VISION_SHATTER:
+      title: 幻滅
+      subtitle: "4~8 章"
+    INTERLUDE: 幕間
+    SIDESTORY: 逸話
+    2019: "2019"
+    2020: "2020"
+    2021: "2021"
   status:
     '0': 開催中
     '1': 終了
