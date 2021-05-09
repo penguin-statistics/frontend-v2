@@ -29,7 +29,6 @@ struct StageView: View {
                         .frame(minHeight: 0, maxHeight: 36)
                         .minimumScaleFactor(0.3)
                         .lineLimit(3)
-                        .unredacted()
                     
                     if showRecentTimes {
                         Text("× " + String(stage.recentTimes))

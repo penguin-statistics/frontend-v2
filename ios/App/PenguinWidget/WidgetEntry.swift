@@ -19,7 +19,7 @@ struct SiteStatsProvider: IntentTimelineProvider {
         )
     }
 
-    func getSnapshot(for configuration: SelectServerIntent, in context: Context, completion: @escaping (WidgetTimelineEntry) -> ()) {
+    func getSnapshot(for configuration: StatisticsOverviewIntent, in context: Context, completion: @escaping (WidgetTimelineEntry) -> ()) {
         print("serverSelection snapshot", configuration)
         
         let entry = WidgetTimelineEntry(
@@ -29,7 +29,7 @@ struct SiteStatsProvider: IntentTimelineProvider {
         completion(entry)
     }
 
-    func getTimeline(for configuration: SelectServerIntent, in context: Context, completion: @escaping (Timeline<WidgetTimelineEntry>) -> ()) {
+    func getTimeline(for configuration: StatisticsOverviewIntent, in context: Context, completion: @escaping (Timeline<WidgetTimelineEntry>) -> ()) {
         print("serverSelection timeline with configured server:", configuration.server.string())
         
         print("doing network request")

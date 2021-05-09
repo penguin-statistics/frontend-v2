@@ -22,5 +22,7 @@
     "since 2013",
     "defaults"
   ],
-  "dependencies": {}
+  "dependencies": {
+    "@capacitor-community/http": "^0.3.0"
+  }
 }

@@ -482,9 +482,7 @@ import CDN from '@/mixins/CDN'
 import Theme from '@/mixins/Theme'
 import ImageInput from '@/components/recognition/ImageInput'
 import RecognitionResultOverview from '@/components/recognition/RecognitionResultOverview'
-import config from '@/config'
 import get from '@/utils/getters'
-import Cookies from 'js-cookie'
 import DynamicSizeBtn from "@/components/global/DynamicSizeBtn";
 import OffTitle from "@/components/global/OffTitle";
 import FactTable from "@/components/stats/fact-table/FactTable";
@@ -704,16 +702,9 @@ export default {
       this.submission.state = 'uploading'
       this.submission.total = this.selectedResults.length
 
-      const userId = Cookies.get(config.authorization.userId.cookieKey)
       try {
         await recognitionSubmitter(this, (state, chunk) => {
           if (state === 'resolve') {
-            const reportedUserId = Cookies.get(config.authorization.userId.cookieKey)
-            if (userId !== reportedUserId) {
-              this.$store.dispatch('auth/login', {
-                userId: reportedUserId
-              })
-            }
             this.submission.submitted.push(chunk)
             this.$ga.event('report', 'submit_batch', 'submit_batch', this.selectedResults.length)
           } else if (state === 'reject') {

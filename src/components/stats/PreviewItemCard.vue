@@ -26,9 +26,11 @@
               </v-icon>
             </th>
             <th>
-              {{ $t('stats.headers.quantity') }}
-              /
-              {{ $t('stats.headers.times') }}
+              {{ $t('stats.headers.apPPR') }}
+            </th>
+            <th>
+              <small>{{ $t('stats.headers.quantity') }}</small>
+              / {{ $t('stats.headers.times') }}
             </th>
           </tr>
         </thead>
@@ -60,20 +62,27 @@
               {{ stat.percentageText }}
             </td>
             <td>
-              {{ stat.quantity }} / {{ stat.times }}
+              {{ stat.apPPR }}
+            </td>
+            <td>
+              <small>{{ stat.quantity | thousandSeparator }}</small> / {{ stat.times | thousandSeparator }}
             </td>
           </tr>
           <tr
-            v-if="stats.more"
+            v-if="stats.more > 0"
             style="background: inherit !important;"
           >
             <td
-              colspan="3"
+              colspan="4"
               class="text-center"
             >
               <v-icon color="grey">
                 mdi-dots-horizontal
               </v-icon>
+
+              <span class="degraded-opacity caption">
+                {{ $t('stats.itemPreview.more', { count: stats.more }) }}
+              </span>
             </td>
           </tr>
         </tbody>
@@ -130,7 +139,7 @@ export default {
               stageCode: strings.translate(el.stage, 'code')
             }
           }),
-        more: data.length > pagination
+        more: data.length - pagination
       }
     },
     highlight () {

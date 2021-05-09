@@ -3,9 +3,11 @@ import commons from './_common'
 
 function getIcon (key) {
   const ICON_MAP = {
-    MAINLINE: 'mdi-checkerboard',
-    WEEKLY: 'mdi-treasure-chest',
-    ACTIVITY: 'mdi-sack'
+    MAINLINE: 'mdi-chess-queen',
+    WEEKLY: 'mdi-puzzle',
+    ACTIVITY: 'mdi-sack',
+    ACTIVITY_PERMANENT: 'mdi-chess-pawn',
+    GACHABOX: 'mdi-treasure-chest'
   }
   return ICON_MAP[key]
 }
@@ -20,7 +22,7 @@ const zones = new ObjectManager({
       // object.push({
       //   "zoneId": "test01",
       //   "zoneIndex": 0,
-      //   "type": "ACTIVITY",
+      //   "type": "PERMANENT",
       //   "zoneName": "测试活动",
       //   "zoneName_i18n": {"ja": "测试活动 ja", "ko": "测试活动 ko", "en": "测试活动 en", "zh": "测试活动 zh"},
       //   "existence": {
@@ -34,7 +36,7 @@ const zones = new ObjectManager({
       // object.push({
       //   "zoneId": "test02",
       //   "zoneIndex": 0,
-      //   "type": "ACTIVITY",
+      //   "type": "PERMANENT",
       //   "zoneName": "测试活动",
       //   "zoneName_i18n": {"ja": "测试活动 ja", "ko": "测试活动 ko", "en": "测试活动 en", "zh": "测试活动 2 全无dropInfos"},
       //   "existence": {

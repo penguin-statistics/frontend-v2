@@ -219,12 +219,10 @@
 
 <script>
 import { service } from '@/utils/service'
-import Cookies from 'js-cookie'
 import Console from '@/utils/Console'
 import Subheader from '@/components/global/Subheader'
 import ForgotAccount from '@/components/toolbar/ForgotAccount'
 import TooltipBtn from '@/components/global/TooltipBtn'
-import config from '@/config'
 
 export default {
   name: 'AccountManager',
@@ -247,10 +245,6 @@ export default {
       error: ''
     }
   },
-  created () {
-    const userId = Cookies.get(config.authorization.userId.cookieKey)
-    if (userId) this.$store.dispatch('auth/login', { userId, prompted: false })
-  },
   methods: {
     loggedIn () {
       this.snackbar = {
@@ -267,9 +261,6 @@ export default {
       const authorizingUserId = this.auth.username
       service.post('/users', authorizingUserId, { headers: { 'Content-Type': 'text/plain' } })
         .then(() => {
-          this.$store.dispatch('auth/login', {
-            userId: authorizingUserId
-          })
           this.loggedIn()
         })
         .catch((err) => {
@@ -285,7 +276,6 @@ export default {
         })
     },
     logout () {
-      Cookies.remove(config.authorization.userId.cookieKey)
       this.$store.dispatch('auth/logout')
       this.snackbar = {
         enabled: true,

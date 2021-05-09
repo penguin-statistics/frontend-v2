@@ -129,9 +129,11 @@ export default {
   },
   methods: {
     changeServer (serverId) {
+      const oldServerId = this.$store.getters['dataSource/server']
       this.$store.commit('planner/clearExcludes')
       this.$store.commit('dataSource/changeServer', serverId)
       this.$store.dispatch('data/fetch', false)
+      this.$store.dispatch('data/clean', oldServerId)
     },
     notify () {
       if (this.serverLocked) {
