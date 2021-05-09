@@ -133,7 +133,7 @@ Getters.stages = {
   all () {
     const currStateTime = store.getters['data/updated']({ id: 'stages' })
     if (this._cache) {
-      if (this._cache.at === currStateTime) return this._cache.c
+      if (this._cache.at === currStateTime) return this._cache.c || []
     }
     const stages = store.getters['data/content']({ id: 'stages' })
     this._cache = {

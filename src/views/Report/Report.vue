@@ -452,14 +452,12 @@ import get from '@/utils/getters'
 import report from '@/apis/report'
 import ItemStepper from '@/components/global/ItemStepper'
 import Vue from 'vue'
-import Cookies from 'js-cookie'
 import strings from '@/utils/strings'
 import StageSelector from '@/components/stats/StageSelector'
 import snackbar from '@/utils/snackbar'
 import Subheader from '@/components/global/Subheader'
 import Theme from '@/mixins/Theme'
 import ItemIcon from '@/components/global/ItemIcon'
-import config from '@/config'
 import validator from '@/utils/validator'
 import existUtils from '@/utils/existUtils'
 import performance from '@/utils/performance'
@@ -745,7 +743,7 @@ export default {
       this.submitted = false
       this.undoing = false
       this.undid = true
-      this.$ga.event('report', 'undo', Cookies.get(config.authorization.userId.cookieKey), 1)
+      this.$ga.event('report', 'undo', this.$store.getters['auth/loggedIn'], 1)
     }
   }
 }

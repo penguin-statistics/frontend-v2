@@ -51,7 +51,10 @@ export default {
       zonesManager.refresh(refresh)
       globalMatrixManager.refresh(refresh)
       globalPatternMatrixManager.refresh(refresh)
-      if (router.currentRoute.matched.find(el => el.name === 'Stats') && store.getters['dataSource/source'] === 'personal') {
+      if (
+        (router.currentRoute.matched.find(el => el.name === 'Stats') && store.getters['dataSource/source'] === 'personal')
+        || refresh
+      ) {
         personalMatrixManager.refresh(refresh)
         personalPatternMatrixManager.refresh(refresh)
       }

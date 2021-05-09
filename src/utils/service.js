@@ -60,6 +60,15 @@ function needsUpdate (response) {
   return false
 }
 
+service.interceptors.request.use(function (config){
+  if (["/report", "/report/recall", "personal"].some(el => config.url.includes(el))) {
+    if (store.getters['auth/loggedIn']) config.headers["Authorization"] = `PenguinID ${store.getters['auth/username']}`
+  }
+  return config
+}, function(error) {
+  return Promise.reject(error)
+})
+
 // Add a response interceptor
 service.interceptors.response.use(function (response) {
   if (needsUpdate(response)) {
