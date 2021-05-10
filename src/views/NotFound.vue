@@ -4,7 +4,7 @@
     class="fill-height"
     fluid
     style="cursor: pointer; padding: 0;"
-    @click="$router.push({name: 'home'})"
+    @click="$router.push({path: '/'})"
   >
     <v-row
       align="center"
