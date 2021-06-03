@@ -116,7 +116,7 @@ export default {
   },
   methods: {
     report(name) {
-      this.$probe.reportNavigated(`/_/sponsor-analytics/xacademy/${name}`)
+      this.$probe.reportNavigated(`/_event/sponsor/xacademy/${name}`)
     }
   },
 }
