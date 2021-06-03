@@ -19,7 +19,6 @@ import CDN from '@/mixins/CDN'
 import { mapGetters } from 'vuex'
 import randomUtils from '@/utils/randomUtils'
 import { externalService } from '@/utils/service'
-import environment from '@/utils/environment'
 
 export default {
   name: 'RandomBackground',
@@ -58,7 +57,8 @@ export default {
       // [value] represents a "background image url" on such route
       specialImageMap: {
         'main_06-14': '/backgrounds/fn_0_1.png', // 6-16
-        'main_06-15': '/backgrounds/fn_0_0.png' // 6-17
+        'main_06-15': '/backgrounds/fn_0_0.png', // 6-17
+        'main_08-10': '/backgrounds/sp_main_08-10.png' // 8-10
       }
     }
   },
@@ -104,7 +104,7 @@ export default {
         this.webpSupport = await this.testWebp()
       }
       // P(🔪) = 0.2%
-      if (environment.debug.frostnova || Math.random() < 0.002) {
+      if (Math.random() < 0.002) {
         return this.getImageUrl('frstar')
       }
       return this.getImageUrl(randomUtils.cachedRandom.get())

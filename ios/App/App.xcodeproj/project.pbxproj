@@ -21,14 +21,14 @@
 		3A06C133259766C400B81F31 /* WidgetEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A06C132259766C400B81F31 /* WidgetEntry.swift */; };
 		3A06C13B25976DAF00B81F31 /* MediumWidgetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A06C13A25976DAF00B81F31 /* MediumWidgetView.swift */; };
 		3A0C886325C25E8E008E1F4B /* PushManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A0C886225C25E8E008E1F4B /* PushManager.swift */; };
-		3A1157AD258F2B5C00F4C6FD /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A00D83125266410007308FB /* WidgetKit.framework */; };
-		3A1157AE258F2B5C00F4C6FD /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A00D83325266410007308FB /* SwiftUI.framework */; };
 		3A1157B1258F2B5C00F4C6FD /* SmallWidgetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A1157B0258F2B5C00F4C6FD /* SmallWidgetView.swift */; };
 		3A1157B4258F2B5E00F4C6FD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3A1157B3258F2B5E00F4C6FD /* Assets.xcassets */; };
 		3A1157BA258F2B5E00F4C6FD /* PenguinWidgetExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 3A1157AC258F2B5C00F4C6FD /* PenguinWidgetExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		3A20895A25C26EFB001D7490 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 3A20895925C26EFB001D7490 /* Alamofire */; };
 		3A20895D25C2ACC5001D7490 /* Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A001AD62599A68A0078A265 /* Helpers.swift */; };
 		3A3F035B25C0B3D000DEED16 /* PersistenceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A3F035A25C0B3D000DEED16 /* PersistenceManager.swift */; };
+		3A41DF5B2647C99100531A1B /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A00D83325266410007308FB /* SwiftUI.framework */; };
+		3A41DF5E2647C99300531A1B /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A00D83125266410007308FB /* WidgetKit.framework */; };
 		3A4D4431259AC0BA000807F8 /* InitialLaunch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A4D4430259AC0BA000807F8 /* InitialLaunch.swift */; };
 		3A4FAF192626B189001C9907 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 3A4FAF1B2626B189001C9907 /* Localizable.strings */; };
 		3A5051AA25965532004167D3 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 3A5051AC25965532004167D3 /* Localizable.strings */; };
@@ -151,8 +151,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				3A20895A25C26EFB001D7490 /* Alamofire in Frameworks */,
-				3A1157AE258F2B5C00F4C6FD /* SwiftUI.framework in Frameworks */,
-				3A1157AD258F2B5C00F4C6FD /* WidgetKit.framework in Frameworks */,
+				3A41DF5B2647C99100531A1B /* SwiftUI.framework in Frameworks */,
+				3A41DF5E2647C99300531A1B /* WidgetKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -627,7 +627,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 3.5.2;
+				MARKETING_VERSION = 3.5.4;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = io.penguinstats.app.PenguinWidget;
@@ -659,7 +659,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 3.5.2;
+				MARKETING_VERSION = 3.5.4;
 				MTL_FAST_MATH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = io.penguinstats.app.PenguinWidget;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -798,7 +798,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 3.5.2;
+				MARKETING_VERSION = 3.5.4;
 				OTHER_SWIFT_FLAGS = "$(inherited) \"-D\" \"COCOAPODS\" \"-DDEBUG\"";
 				PRODUCT_BUNDLE_IDENTIFIER = io.penguinstats.app;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -830,7 +830,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 3.5.2;
+				MARKETING_VERSION = 3.5.4;
 				PRODUCT_BUNDLE_IDENTIFIER = io.penguinstats.app;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTS_MACCATALYST = NO;

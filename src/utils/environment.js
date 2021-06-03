@@ -58,8 +58,7 @@ export default {
     get performance () { return boolean('performance') },
     get devtools () { return boolean('devtools') },
     get colorfulConsole () { return boolean('colorfulConsole', true) },
-    get fullConsole () { return boolean('fullConsole') },
-    get frostnova () { return boolean('frostnova') }
+    get fullConsole () { return boolean('fullConsole') }
   },
   get platform () {
     if (PENGUIN_PLATFORM === 'app') {

@@ -685,3 +685,11 @@ search:
 confirmLeave:
   title: Are you sure to leave?
   subtitle: Unsaved changes may lost.
+sponsor:
+  meta:
+    providedBy: Provided by Sponsor
+  xacademy:
+    headline_1: 科技予人
+    headline_2: 神之力
+    subtitle: X Academy 2021 暑期项目
+    more: 轻点以了解更多

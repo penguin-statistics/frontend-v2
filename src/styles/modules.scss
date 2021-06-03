@@ -46,6 +46,15 @@
   }
 }
 
+.backdrop-blur-dialog {
+  background: rgba(30, 30, 30, .4) !important;
+  .theme--light & {
+    background: rgba(240, 240, 240, .4) !important;
+  }
+  -webkit-backdrop-filter: blur(30px);
+  backdrop-filter: blur(30px);
+}
+
 .markdown-content-inline {
   p {
     margin-bottom: 0 !important;
