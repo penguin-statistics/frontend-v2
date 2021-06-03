@@ -100,8 +100,8 @@ class Recognizer {
 
     Console.info('Recognizer', 'init: preload icons: preloading')
 
-    // await fetch(mirror.deliver(`/recognition/${recognizerVersion}/items.zip`))
-    await fetch("/items.zip")
+    await fetch(mirror.deliver(`/recognition/${recognizerVersion}/items.zip`))
+    // await fetch("/items.zip")
       .then((response) => {
         if (response.status >= 200 && response.status < 400) {
           return Promise.resolve(response.blob())

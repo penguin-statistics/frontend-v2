@@ -7,7 +7,7 @@
     <v-img
       gradient="to bottom right, rgba(0, 0, 0, .2), rgba(0, 0, 0, .7)"
       src="https://portal.xastatic.com/common/background.jpg"
-      max-height="160px"
+      height="160px"
       class="overflow-hidden"
     >
       <div class="d-flex align-center justify-center fill-height display-1 text-enlarged-effect--effector no-pointer-events">
