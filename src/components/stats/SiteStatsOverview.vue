@@ -1,8 +1,8 @@
 <template>
   <BackdropCard
-    :to="{name: 'SiteStats'}"
     hover
-    class="pa-0 mt-2"
+    :to="{name: 'SiteStats'}"
+    class="elevation-5 pa-0 mt-2 mb-2"
   >
     <template #backdrop>
       <v-icon>
