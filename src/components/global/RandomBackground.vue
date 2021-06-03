@@ -19,7 +19,6 @@ import CDN from '@/mixins/CDN'
 import { mapGetters } from 'vuex'
 import randomUtils from '@/utils/randomUtils'
 import { externalService } from '@/utils/service'
-import environment from '@/utils/environment'
 
 export default {
   name: 'RandomBackground',
