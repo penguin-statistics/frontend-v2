@@ -178,10 +178,10 @@ export default {
   },
   computed: {
     categorizedZones () {
-      const categories = ['ACTIVITY_OPEN', 'MAINLINE', 'WEEKLY', 'ACTIVITY_CLOSED']
+      const categories = ['ACTIVITY_OPEN', 'MAINLINE', 'ACTIVITY_PERMANENT', 'WEEKLY', 'ACTIVITY_CLOSED']
       const results = []
       for (const category of categories) {
-        let zones = get.zones.byType(category.startsWith('ACTIVITY') ? 'ACTIVITY' : category, false)
+        let zones = get.zones.byType(category.startsWith('ACTIVITY') && category !== 'ACTIVITY_PERMANENT' ? 'ACTIVITY' : category, false)
         if (category === 'ACTIVITY_OPEN') {
           zones = zones.filter(zone => !zone.isOutdated)
         } else if (category === 'ACTIVITY_CLOSED') {
