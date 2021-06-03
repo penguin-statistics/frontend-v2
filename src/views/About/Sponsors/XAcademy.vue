@@ -66,6 +66,7 @@
           <v-icon
             :size="16"
             right
+            color="white"
           >
             mdi-chevron-right
           </v-icon>
