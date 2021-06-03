@@ -2,7 +2,7 @@
   <BackdropCard
     :to="{name: 'SiteStats'}"
     hover
-    class="pa-0 mt-2"
+    class="pa-0 mt-2 mb-2"
   >
     <template #backdrop>
       <v-icon>
