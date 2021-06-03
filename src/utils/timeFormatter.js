@@ -72,7 +72,6 @@ export default {
     if (minutes > 0) message += i18n.t('meta.time.minute', { m: minutes })
     const ms = d.get('milliseconds') > 0 ? ((d.get('milliseconds') / 1000).toFixed(digits)).slice(1) : ''
     if (d.get('seconds') > 0) message += i18n.t('meta.time.second', { s: `${d.get('seconds')}${ms}` })
-    console.log('duration', duration, typeof duration, message, d)
     return message
   },
   startEnd (start, end, selector = false) {
