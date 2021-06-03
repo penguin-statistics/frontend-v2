@@ -27,7 +27,7 @@
           class="card-translate-up"
         />
         <SiteStatsOverview class="card-translate-up" />
-        <!--        <XAcademy class="card-translate-up" />-->
+        <XAcademy class="card-translate-up" />
       </v-col>
 
       <!--      <v-col-->
@@ -112,10 +112,12 @@ import Console from '@/utils/Console'
 import GettingStarted from '@/views/About/GettingStarted'
 import SiteStatsOverview from '@/components/stats/SiteStatsOverview'
 import HomeSearch from '@/views/About/HomeSearch'
+import XAcademy from "@/views/About/Sponsors/XAcademy";
 
 export default {
   name: 'Home',
   components: {
+    XAcademy,
     HomeSearch,
     SiteStatsOverview,
     GettingStarted,
