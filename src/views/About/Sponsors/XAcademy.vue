@@ -6,6 +6,8 @@
     :ripple="false"
     href="https://mp.weixin.qq.com/s/w6oivoT_G1tChEhQFs_6lw"
     target="_blank"
+    @click="report('click')"
+    @mouseenter="report('mouseenter')"
   >
     <v-dialog
       v-model="helpDialog"
@@ -109,7 +111,12 @@ export default {
 上海得斯教育科技有限公司
 
 ### 现活跃的赞助商内容投放期限
-2021.06.04 00:00:00 (UTC+8) ~ 2021.06.24 23:59:59 (UTC+8)`
+2021.06.04 00:00:00 (UTC+8) ~ 2021.06.10 23:59:59 (UTC+8)`
+    }
+  },
+  methods: {
+    report(name) {
+      this.$probe.reportNavigated(`/_/sponsor-analytics/xacademy/${name}`)
     }
   },
 }
