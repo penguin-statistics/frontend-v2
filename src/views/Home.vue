@@ -27,7 +27,10 @@
           class="card-translate-up"
         />
         <SiteStatsOverview class="card-translate-up" />
-        <XAcademy class="card-translate-up" />
+        <XAcademy
+          v-if="sponsorAvailable"
+          class="card-translate-up"
+        />
       </v-col>
 
       <!--      <v-col-->
@@ -129,6 +132,11 @@ export default {
     Contact
   },
   data: () => ({}),
+  computed: {
+    sponsorAvailable() {
+      return Date.now() < 1626278400000;
+    }
+  },
   mounted () {
     setTimeout(() => {
       try {

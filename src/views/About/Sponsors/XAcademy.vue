@@ -50,6 +50,7 @@
       gradient="to bottom right, rgba(0, 0, 0, 0), rgba(0, 0, 0, .5)"
       src="https://portal.xastatic.com/common/background.jpg"
       height="180px"
+      :aspect-ratio="1.3913"
       class="overflow-hidden enlarged-effect"
     >
       <div class="d-flex flex-column align-start pa-6 justify-start fill-height display-1 enlarged-effect--text transition-all white--text no-pointer-events bordered">
