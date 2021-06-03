@@ -119,6 +119,15 @@ export default {
   methods: {
     report(name) {
       this.$probe.reportNavigated(`/_event/sponsor/xacademy/${name}`)
+      this.$ga.event(
+          'sponsors',
+          'xacademy',
+          name,
+          1,
+          {
+            transport: 'beacon'
+          }
+      )
     }
   },
 }
