@@ -134,10 +134,10 @@ export default {
       index: null,
       logs: [
         {
-          version: 'v3.6.0',
-          date: '2021-05-05T00:00:00+0800',
-          changes: `## 重构
-1. 关卡选择器：适配上游新版终端 UI
+          version: 'v3.5.5',
+          date: '2021-06-10T16:00:00+0800',
+          changes: `## 移除
+1. 赞助商内容
           `
         },
         {
