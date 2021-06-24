@@ -134,6 +134,13 @@ export default {
       index: null,
       logs: [
         {
+          version: 'v3.5.6',
+          date: '2021-06-24T18:00:00+0800',
+          changes: `## 添加
+1. 新的赞助商内容
+          `
+        },
+        {
           version: 'v3.5.5',
           date: '2021-06-10T16:00:00+0800',
           changes: `## 移除
