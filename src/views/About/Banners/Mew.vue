@@ -1,8 +1,8 @@
 <template>
   <v-card
     elevation="5"
-    class="overflow-hidden"
-    height="180px"
+    class="overflow-hidden black"
+    height="190px"
     :ripple="false"
     href="https://mew.fun/n/Arknights"
     target="_blank"
@@ -49,7 +49,7 @@
     <v-img
       gradient="to bottom right, rgba(0, 0, 0, 0), rgba(0, 0, 0, .5)"
       :src="cdnDeliver('/images/sponsors/mew/background.jpg')"
-      height="180px"
+      height="190px"
       :aspect-ratio="3.6"
       class="overflow-hidden enlarged-effect"
     >
@@ -80,11 +80,11 @@
               />
             </svg>
             <div class="tr-el tr-el-x-2">
-              {{ $t('sponsor.mew.heading') }}
+              {{ $t('banner.mew.heading') }}
             </div>
           </div>
           <v-icon
-            class="tr-el tr-el-x-1 overflow-visible text-shadow-apply"
+            class="tr-el tr-el-x-1 overflow-visible text-shadow-apply glow-effect"
             large
             right
             color="white"
@@ -94,7 +94,7 @@
         </div>
         <div
           class="text-right d-flex flex-column align-end justify-center fill-height"
-          style="position: absolute; left: 2rem; top: 0; line-height: 1.8"
+          style="position: absolute; left: 2vw; top: 0; line-height: 1.8"
         >
           <div
             class="text-center tr-el-shallow tr-el-xl-4 mr-3 text-mask-left"
@@ -124,7 +124,7 @@
         </div>
         <div
           class="text-start d-flex flex-column align-start justify-center fill-height"
-          style="position: absolute; right: 3rem; top: 0; line-height: 1.8"
+          style="position: absolute; right: 3vw; top: 0; line-height: 1.8"
         >
           <div
             class="text-center tr-el-shallow tr-el-xr-4 ml-4 text-mask-right"
@@ -157,7 +157,7 @@
       </div>
     </v-img>
 
-    <div class="d-flex align-center sponsor-label caption pa-2 white--text">
+    <div class="d-flex align-center banner-label caption pa-2 white--text">
       <v-btn
         right
         icon
@@ -188,9 +188,6 @@ export default {
 ### 什么是赞助商
 由于本站开销已接近入不敷出，为保证服务长期可用，我们将添加非侵入式、具有友好体验和设计的部分合作赞助商广告。在添加广告前，我们将审核赞助商的社会责任性与其广告内容质量，较低的广告内容质量将不会被投放至本站。
 
-### 透明性
-赞助商所投放广告的收入（及包括所有收入）均会透明公开至本站的收支一览中。
-
 ### 现活跃的赞助商信息
 Mew 社区
 
@@ -200,9 +197,9 @@ Mew 社区
   },
   methods: {
     report(name) {
-      this.$probe.reportNavigated(`/_event/sponsor/mew/${name}`)
+      this.$probe.reportNavigated(`/_event/banners/mew/${name}`)
       this.$ga.event(
-          'sponsors',
+          'banners',
           'mew',
           name,
           1,
@@ -216,7 +213,7 @@ Mew 社区
 </script>
 
 <style lang="scss">
-.sponsor-label {
+.banner-label {
   position: absolute;
   bottom: 0;
   right: 0;
@@ -241,9 +238,10 @@ Mew 社区
   }
 
   &:hover > .v-image__image {
-    transition-duration: 1.3s !important;
+    transition-property: all !important;
+    transition-duration: .8s !important;
     transform: scale(1.15);
-    filter: saturate(0.8) brightness(0.4) blur(15px);
+    filter: saturate(0.8) brightness(0.4) blur(10px);
   }
 
   &:active > .v-image__image {
@@ -283,12 +281,14 @@ Mew 社区
   }
 
   &:hover .tr-el { opacity: 1; transform: translate(0, 0); }
-  &:hover .tr-el-shallow { opacity: 0.75; transform: translate(0, 0); }
+  &:hover .tr-el-shallow { opacity: 0.8; transform: translate(0, 0); }
+  @media (max-width: 960px) {
+    &:hover .tr-el-shallow { opacity: 0.3; transform: translate(0, 0); }
+  }
 
   &:active span, &:active .text-shadow-apply {
     overflow: visible;
     text-shadow: 0 0 5px rgba(255, 255, 255, .7);
-    overflow: visible;
   }
 
   .text-mask-left {
@@ -298,6 +298,15 @@ Mew 社区
   .text-mask-right {
     overflow: visible;
     mask: linear-gradient(to left, rgba(0, 0, 0, 1), rgba(0, 0, 0, 1) 20%, rgba(0, 0, 0, 0));
+  }
+
+  .glow-effect {
+    animation: iconGlow 1.5s alternate-reverse infinite ease-in-out;
+  }
+
+  @keyframes iconGlow {
+    from { text-shadow: 0 0 8px rgba(255, 255, 255, .85) }
+    to { text-shadow: 0 0 0 rgba(255, 255, 255, .85) }
   }
 }
 
