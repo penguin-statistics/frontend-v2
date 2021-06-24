@@ -27,6 +27,7 @@
           class="card-translate-up"
         />
         <SiteStatsOverview class="card-translate-up" />
+        <Mew class="card-translate-up" />
       </v-col>
 
       <!--      <v-col-->
@@ -111,10 +112,12 @@ import Console from '@/utils/Console'
 import GettingStarted from '@/views/About/GettingStarted'
 import SiteStatsOverview from '@/components/stats/SiteStatsOverview'
 import HomeSearch from '@/views/About/HomeSearch'
+import Mew from "@/views/About/Sponsors/Mew";
 
 export default {
   name: 'Home',
   components: {
+    Mew,
     HomeSearch,
     SiteStatsOverview,
     GettingStarted,
@@ -138,7 +141,7 @@ export default {
           easing: 'easeOutQuint'
         })
         anime({
-          targets: ['.card-translate-up h1', '.card-translate-up h2', '.card-translate-up p', '.card-translate-up span:not(.v-btn__content)'],
+          targets: ['.card-translate-up h1', '.card-translate-up h2', '.card-translate-up p'],
           translateY: [48, 0],
           opacity: [0, 1],
           duration: 625,
