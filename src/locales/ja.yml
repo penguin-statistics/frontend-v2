@@ -375,15 +375,9 @@ zone:
       subtitle: "4~8 章"
     INTERLUDE: 幕間
     SIDESTORY: 逸話
-    2019:
-      title: "2019"
-      subtitle: "Start Time"
-    2020:
-      title: "2020"
-      subtitle: "Start Time"
-    2021:
-      title: "2021"
-      subtitle: "Start Time"
+    2019: "2019"
+    2020: "2020"
+    2021: "2021"
   status:
     '0': 開催中
     '1': 終了

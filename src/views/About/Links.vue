@@ -360,6 +360,18 @@ export default {
           ],
           url: 'https://smartgamecap.net',
           shorten: 'smartgamecap.net'
+        },
+        {
+          title: '最佳招聘网站',
+          author: 'Koke_Cacao',
+          features: [
+            {
+              name: 'hr',
+              color: 'cyan'
+            }
+          ],
+          url: 'https://github.kokecacao.me/arknights.html',
+          shorten: 'github.kokecacao.me/arknights.html'
         }
       ]
     }
