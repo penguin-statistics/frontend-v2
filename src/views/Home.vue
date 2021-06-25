@@ -27,10 +27,7 @@
           class="card-translate-up"
         />
         <SiteStatsOverview class="card-translate-up" />
-        <XAcademy
-          v-if="sponsorAvailable"
-          class="card-translate-up"
-        />
+        <Mew class="card-translate-up" />
       </v-col>
 
       <!--      <v-col-->
@@ -115,12 +112,12 @@ import Console from '@/utils/Console'
 import GettingStarted from '@/views/About/GettingStarted'
 import SiteStatsOverview from '@/components/stats/SiteStatsOverview'
 import HomeSearch from '@/views/About/HomeSearch'
-import XAcademy from "@/views/About/Sponsors/XAcademy";
+import Mew from "@/views/About/Banners/Mew";
 
 export default {
   name: 'Home',
   components: {
-    XAcademy,
+    Mew,
     HomeSearch,
     SiteStatsOverview,
     GettingStarted,
@@ -132,11 +129,6 @@ export default {
     Contact
   },
   data: () => ({}),
-  computed: {
-    sponsorAvailable() {
-      return Date.now() < 1626278400000;
-    }
-  },
   mounted () {
     setTimeout(() => {
       try {
@@ -149,7 +141,7 @@ export default {
           easing: 'easeOutQuint'
         })
         anime({
-          targets: ['.card-translate-up h1', '.card-translate-up h2', '.card-translate-up p', '.card-translate-up span:not(.v-btn__content)'],
+          targets: ['.card-translate-up h1', '.card-translate-up h2', '.card-translate-up p'],
           translateY: [48, 0],
           opacity: [0, 1],
           duration: 625,
