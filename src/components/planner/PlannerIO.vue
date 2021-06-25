@@ -183,6 +183,7 @@ export default {
         return snackbar.launch('error', 5000, `planner.import.${unmarshalled.exception}`)
       }
 
+      // TODO:
       let importedCounter = 0
 
       const currentItems = this.$store.getters['planner/config'].items

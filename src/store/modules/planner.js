@@ -16,6 +16,15 @@ export default {
     changeItems (state, items) {
       state.items = items
     },
+    // TODO:
+    changeCraftedItemNum (state, itemId, num) {
+      for (let item in state.items) {
+        if (item.itemId == itemId) {
+          item.need -= num
+          item.have += num
+        }
+      }
+    },
     changeOptions (state, options) {
       state.options = options
     },

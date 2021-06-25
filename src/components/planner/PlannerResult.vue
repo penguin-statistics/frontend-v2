@@ -261,6 +261,19 @@
                       />
                     </v-badge>
                   </div>
+                  <!-- TODO: -->
+                  <v-btn
+                    v-haptic
+                    text
+                    block
+                    large
+                  >
+                    <v-divider style="opacity: 0.3" />
+                    <span class="mx-4 d-flex align-center">
+                      {{ $t('planner.actions.done') }}
+                    </span>
+                    <v-divider style="opacity: 0.3" />
+                  </v-btn>
                 </v-card-text>
               </v-card>
             </v-col>
@@ -387,6 +400,10 @@ export default {
     parseAmount (num) {
       return formatter.thousandSeparator(parseFloat(num))
     }
+    // TODO:
+    // craftItems (itemId, num) {
+      
+    // }
   }
 }
 </script>

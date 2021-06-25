@@ -511,6 +511,7 @@ planner:
       _name: 配置代码
       share: 分享配置代码
       import: 导入配置代码
+    done: 合成完成
   have: 已有
   need: 需要
   copy: 复制到剪贴板
