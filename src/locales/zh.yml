@@ -682,11 +682,8 @@ search:
 confirmLeave:
   title: 确定要离开此页面吗？
   subtitle: 未保存的更改可能会丢失
-sponsor:
+banner:
   meta:
     providedBy: 本内容由赞助商提供
-  xacademy:
-    headline_1: 科技予人
-    headline_2: 神之力
-    subtitle: X Academy 2021 暑期项目
-    more: 轻点以了解更多
+  mew:
+    heading: 这座城市，春天照常会来
