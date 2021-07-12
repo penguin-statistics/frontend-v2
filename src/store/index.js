@@ -25,6 +25,7 @@ if (previousState) {
   localStorage.setItem('penguin-stats-settings', { settings: previousState.settings })
   localStorage.setItem('penguin-stats-auth', { auth: previousState.auth })
   localStorage.setItem('penguin-stats-cacheTTL', { cacheUpdateAt: previousState.cacheUpdateAt })
+  localStorage.setItem('penguin-stats-planner', { planner: previousState.planner, options: previousState.options, stagePreferences: previousState.stagePreferences })
 }
 
 export default new Vuex.Store({
@@ -40,7 +41,6 @@ export default new Vuex.Store({
       key: 'penguin-stats-settings',
       paths: [
         'settings',
-        'planner',
         'options',
         'stagePreferences'
       ]
@@ -61,6 +61,12 @@ export default new Vuex.Store({
       key: 'penguin-stats-cache',
       paths: [
         'cache'
+      ]
+    }),
+    createPersistedState({
+      key: 'penguin-stats-planner',
+      paths: [
+        'planner' 
       ]
     })
   ],
