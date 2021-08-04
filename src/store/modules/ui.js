@@ -14,6 +14,7 @@ export default {
     outdated: false,
     loadingRoute: '',
     serverLocked: false,
+    specialSideStoryDialogRead: false
   },
   mutations: {
     setSnackbar (state, { color, timeout, text, icon, extra }) {
@@ -38,6 +39,7 @@ export default {
     },
     lockServer: state => state.serverLocked = true,
     unlockServer: state => state.serverLocked = false,
+    setSpecialSideStoryDialogRead: (state, value) => state.specialSideStoryDialogRead = value
   },
   getters: {
     snackbar: state => state.snackbar,
@@ -45,5 +47,6 @@ export default {
     notice: state => state.notice,
     loadingRoute: state => state.loadingRoute,
     serverLocked: state => state.serverLocked,
+    specialSideStoryDialogRead: state => state.specialSideStoryDialogRead
   }
 }

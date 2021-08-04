@@ -53,13 +53,13 @@ export default {
       resolutions: {
         high: {
           iconSize: 183,
-          dimensions: [1098, 2562],
-          url: '/sprite/sprite.202011011235.png'
+          dimensions: [1098, 2745],
+          url: '/sprite/sprite.202108050453.png'
         },
         low: {
           iconSize: 183 / 2,
-          dimensions: [1098 / 2, 2562 / 2],
-          url: '/sprite/sprite.202011011235.small.png'
+          dimensions: [1098 / 2, 2745 / 2],
+          url: '/sprite/sprite.202108050453.small.png'
         }
       }
     }
