@@ -27,7 +27,7 @@
           class="card-translate-up"
         />
         <SiteStatsOverview class="card-translate-up" />
-        <Mew class="card-translate-up" />
+        <!--        <Mew class="card-translate-up" />-->
       </v-col>
 
       <!--      <v-col-->
@@ -112,12 +112,10 @@ import Console from '@/utils/Console'
 import GettingStarted from '@/views/About/GettingStarted'
 import SiteStatsOverview from '@/components/stats/SiteStatsOverview'
 import HomeSearch from '@/views/About/HomeSearch'
-import Mew from "@/views/About/Banners/Mew";
 
 export default {
   name: 'Home',
   components: {
-    Mew,
     HomeSearch,
     SiteStatsOverview,
     GettingStarted,
