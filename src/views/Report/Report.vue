@@ -69,6 +69,12 @@
       </v-btn>
     </v-snackbar>
 
+    <SpecialStageDialog
+      v-model="specialStageDialog"
+      @confirm="dialogRead"
+      @cancel="specialStageDialog = false"
+    />
+
     <StageSelector
       :name="$t('report.name')"
       :router-names="routerNames"
@@ -315,6 +321,16 @@
               {{ $t('report.gacha') }}
             </v-alert>
 
+            <v-alert
+              v-if="isSpecialSideStory"
+              v-marked
+              color="blue darken-2"
+              class="subtitle-1 pl-6 mb-4 mx-2 markdown-content-inline"
+              dark
+              border="left"
+              v-html="$t('report.isSpecialSideStory')"
+            />
+
             <v-row
               v-if="!$vuetify.breakpoint.smAndDown"
               justify="space-around"
@@ -465,6 +481,7 @@ import Console from '@/utils/Console'
 import BackdropName from '@/components/stats/BackdropName'
 import ReportValidator from "@/utils/reportValidator";
 import ReportValidationOutlier from "@/components/stats/ReportValidationOutlier";
+import SpecialStageDialog from "@/components/report/SpecialStageDialog";
 
 // colors: [dark, light]
 const categories = [
@@ -484,7 +501,9 @@ const categories = [
 
 export default {
   name: 'Report',
-  components: {ReportValidationOutlier, BackdropName, ItemIcon, Subheader, StageSelector, ItemStepper },
+  components: {
+    SpecialStageDialog,
+    ReportValidationOutlier, BackdropName, ItemIcon, Subheader, StageSelector, ItemStepper },
   mixins: [Theme],
   data: () => ({
     snackbar: false,
@@ -519,7 +538,9 @@ export default {
     routerNames: {
       index: 'ReportByZone',
       details: 'ReportByZone_Selected'
-    }
+    },
+
+    specialStageDialog: false
   }),
   computed: {
     serverName () {
@@ -656,6 +677,9 @@ export default {
     },
     performance () {
       return performance
+    },
+    isSpecialSideStory() {
+      return (this.selectedStage || {}).zoneId === 'act12side_zone1'
     }
   },
   methods: {
@@ -670,7 +694,18 @@ export default {
     getItem (itemId) {
       return get.items.byItemId(itemId)
     },
+    touchDialog () {
+      const read = this.$store.getters['ui/specialSideStoryDialogRead']
+      if (!read && this.isSpecialSideStory) {
+        this.specialStageDialog = true
+      }
+    },
+    dialogRead() {
+      this.$store.commit('ui/setSpecialSideStoryDialogRead', true)
+      this.specialStageDialog = false
+    },
     handleChange (dropType, [itemId, diff]) {
+      this.touchDialog()
       const item = this.getOrCreateItem(dropType, itemId)
       item.quantity += diff
       item.quantity <= 0 && (this.results.splice(this.results.indexOf(item), 1))

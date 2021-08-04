@@ -19,20 +19,20 @@ const zones = new ObjectManager({
   },
   transform: [
     (object) => {
-      // object.push({
-      //   "zoneId": "test01",
-      //   "zoneIndex": 0,
-      //   "type": "PERMANENT",
-      //   "zoneName": "测试活动",
-      //   "zoneName_i18n": {"ja": "测试活动 ja", "ko": "测试活动 ko", "en": "测试活动 en", "zh": "测试活动 zh"},
-      //   "existence": {
-      //     "US": {"exist": true, "openTime": Date.now() + 10000, "closeTime": 1800000000000},
-      //     "JP": {"exist": false},
-      //     "CN": {"exist": true},
-      //     "KR": {"exist": false}
-      //   },
-      //   "stages": ["test01_001", "test01_002", "test01_003"]
-      // })
+      object.push({
+        "zoneId": "act12side_zone1",
+        "zoneIndex": 0,
+        "type": "ACTIVITY",
+        "zoneName": "测试活动",
+        "zoneName_i18n": {"ja": "测试活动 ja", "ko": "测试活动 ko", "en": "测试活动 en", "zh": "测试活动 zh"},
+        "existence": {
+          "US": {"exist": true},
+          "JP": {"exist": true},
+          "CN": {"exist": true},
+          "KR": {"exist": true}
+        },
+        "stages": ["act12side_zone1_001"]
+      })
       // object.push({
       //   "zoneId": "test02",
       //   "zoneIndex": 0,

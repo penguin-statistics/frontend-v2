@@ -197,6 +197,16 @@ report:
     causes:
       noDrop: 尚未选择任何掉落物品
       limitation: 本次汇报与现有数据差距较大，继续提交可能导致此次汇报被判定为异常，无法计入全部统计数据中。
+  isSpecialSideStory: |2-
+    **请集齐所有标志物后，再来汇报！**
+    （由于未集齐时，我们推测掉率是*动态变化*的，因此只收集*集齐标志物*后的数据）
+  specialSideStory:
+    dialog:
+      title: 多索雷斯假日 活动特殊掉落汇报策略提示
+      cancel: 关闭
+      confirmTimerPending: 我已知晓并继续 ({timer})
+      confirmTimerDone: 我已知晓并继续
+
   recognition:
     step:
       select: 选择
