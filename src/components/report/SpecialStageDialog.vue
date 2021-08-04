@@ -6,7 +6,7 @@
     @input="e => $emit('input', e)"
   >
     <v-card>
-      <v-card-title class="title pa-4 slash-strip--warning">
+      <v-card-title class="title pa-4 slash-strip--warning-transparent d-flex flex-column text-left align-start">
         <v-icon>mdi-alert</v-icon>
         <span class="mt-2">{{ $t('report.specialSideStory.dialog.title') }}</span>
       </v-card-title>

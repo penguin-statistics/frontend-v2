@@ -323,13 +323,18 @@
 
             <v-alert
               v-if="isSpecialSideStory"
-              v-marked
               color="blue darken-2"
               class="subtitle-1 pl-6 mb-4 mx-2 markdown-content-inline"
               dark
               border="left"
-              v-html="$t('report.isSpecialSideStory')"
-            />
+            >
+              <h3 class="subtitle-1 mb-2">
+                请<strong class="text-glow">确保集齐所有标志物</strong>后再进行汇报
+              </h3>
+              <p class="subtitle-2">
+                根据初步数据统计推测，标志物掉率计算事件可能不满足独立前提。因此，我们决定仅收集集齐所有标志物后的掉率数据
+              </p>
+            </v-alert>
 
             <v-row
               v-if="!$vuetify.breakpoint.smAndDown"
