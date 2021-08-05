@@ -700,13 +700,13 @@ export default {
       return get.items.byItemId(itemId)
     },
     touchDialog () {
-      const read = this.$store.getters['ui/specialSideStoryDialogRead']
+      const read = this.$store.getters['options/specialSideStoryDialogRead']
       if (!read && this.isSpecialSideStory) {
         this.specialStageDialog = true
       }
     },
     dialogRead() {
-      this.$store.commit('ui/setSpecialSideStoryDialogRead', true)
+      this.$store.commit('options/setSpecialSideStoryDialogRead', true)
       this.specialStageDialog = false
     },
     handleChange (dropType, [itemId, diff]) {
