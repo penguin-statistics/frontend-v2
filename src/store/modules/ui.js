@@ -13,8 +13,7 @@ export default {
     },
     outdated: false,
     loadingRoute: '',
-    serverLocked: false,
-    specialSideStoryDialogRead: false
+    serverLocked: false
   },
   mutations: {
     setSnackbar (state, { color, timeout, text, icon, extra }) {
@@ -38,15 +37,13 @@ export default {
       state.loadingRoute = value
     },
     lockServer: state => state.serverLocked = true,
-    unlockServer: state => state.serverLocked = false,
-    setSpecialSideStoryDialogRead: (state, value) => state.specialSideStoryDialogRead = value
+    unlockServer: state => state.serverLocked = false
   },
   getters: {
     snackbar: state => state.snackbar,
     outdated: state => state.outdated,
     notice: state => state.notice,
     loadingRoute: state => state.loadingRoute,
-    serverLocked: state => state.serverLocked,
-    specialSideStoryDialogRead: state => state.specialSideStoryDialogRead
+    serverLocked: state => state.serverLocked
   }
 }
