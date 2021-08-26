@@ -109,7 +109,7 @@
       elevate-on-scroll
       app
       dark
-      :color="primaryColor"
+      color="primary"
       :style="{'filter': isInSpecialUI ? 'grayscale(1)' : ''}"
       class="x--safe-area toolbar--safe-area flex-column transition-all overflow-hidden"
     >
