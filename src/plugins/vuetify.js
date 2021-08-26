@@ -26,7 +26,7 @@ const vuetify = new Vuetify({
     },
     themes: {
       light: {
-        // primary: '#C03443',
+        primary: '#39C5BB',
         accent1: colors.indigo.darken4,
         accent2: colors.orange.darken4,
         accent3: colors.blue.darken4,
@@ -38,7 +38,7 @@ const vuetify = new Vuetify({
         textDarken: colors.grey.darken4
       },
       dark: {
-        // primary: '#C03443',
+        primary: '#39C5BB',
         accent1: colors.indigo.lighten3,
         accent2: colors.orange.lighten3,
         accent3: colors.blue.lighten3,

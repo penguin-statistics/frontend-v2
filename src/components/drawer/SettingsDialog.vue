@@ -19,7 +19,7 @@
         {{ $t('menu.settings.name') }}
       </v-btn>
     </template>
-    <v-card :color="`${dark ? 'blue-grey darken-3' : 'white'}`">
+    <v-card :color="`${dark ? 'primary darken-1' : 'primary lighten-5'}`">
       <v-card-title class="headline">
         <v-icon left>
           mdi-settings

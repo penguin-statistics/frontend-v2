@@ -31,8 +31,7 @@
 
         <v-divider class="mt-2 mb-1" />
 
-        <!-- This is to fix that s**tty Safari doesn't allow me to scroll down as I want. 128px is just the right amount-->
-        <v-container style="margin-bottom: 120px">
+        <v-container style="margin-bottom: 360px">
           <v-row
             justify="space-around"
           >
@@ -68,12 +67,41 @@
         </v-container>
       </v-list>
 
-      <!--      <v-img-->
-      <!--        :src="cdnDeliver('/images/themes/new-year/portrait.jpg')"-->
-      <!--        style="position: absolute; width: 100%; height: auto; bottom: 0; z-index: -1"-->
-      <!--        :gradient="$vuetify.theme.dark ? 'to bottom, rgba(54, 54, 54, 1), rgba(54, 54, 54, .65)' : 'to bottom, rgba(255, 255, 255, 1), rgba(255, 255, 255, .5)'"-->
-      <!--        contain-->
-      <!--      />-->
+      <v-img
+        :src="require('@/assets/themes/miku-14/portrait.png')"
+        style="position: absolute; width: 100%; bottom: 0; z-index: 0"
+        position="bottom right"
+        height="calc(250px + 10vh)"
+        :aspect-ratio="1"
+        class="v-image--fade-down fallthrough"
+      />
+
+      <v-theme-provider dark>
+        <v-hover>
+          <template #default="{ hover }">
+            <div
+              style="position: absolute; width: 100%; height: 48px; bottom: 0; right: 0; z-index: 0; user-select: none; background: linear-gradient(to top, #39c5bb, rgba(57,197,187, 0)); text-shadow: 0 0 4px rgba(0, 0, 0, .5)"
+              class="d-flex align-center justify-center text-center overline cursor-default"
+            >
+              <span class="d-flex flex-row align-center justify-center white--text pt-1">
+                <v-slide-x-reverse-transition>
+                  <span
+                    v-if="hover"
+                    class="degraded-opacity"
+                  >❤</span>
+                </v-slide-x-reverse-transition>
+                <span class="mx-1">{{ $t('specials.mikubirthday2021.caption') }}</span>
+                <v-slide-x-transition>
+                  <span
+                    v-if="hover"
+                    class="degraded-opacity"
+                  >❤</span>
+                </v-slide-x-transition>
+              </span>
+            </div>
+          </template>
+        </v-hover>
+      </v-theme-provider>
     </v-navigation-drawer>
     <v-app-bar
       id="penguin-toolbar"

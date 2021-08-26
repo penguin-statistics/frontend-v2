@@ -23,7 +23,7 @@ export default {
       if (this.isVercel) {
         return 'orange darken-4'
       } else {
-        return 'blue darken-3'
+        return 'primary'
       }
     },
     currentMirrorHostname () {

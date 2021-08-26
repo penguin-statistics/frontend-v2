@@ -19,15 +19,21 @@ export default {
       this.crispLoaded = true
       // resolve safe-area
       Console.info('CrispCustomizer', 'triggered | chat:loaded')
-      try {
-        document.querySelector('div.crisp-client > div#crisp-chatbox > div > a').style.setProperty('bottom', 'calc(max(env(safe-area-inset-bottom), 14px))', 'important')
+      const isInSpecialUI = this.isInSpecialUI
+
+      const applyStyles = () => {
+        document.querySelector('div.crisp-client > div#crisp-chatbox > div > a').style.setProperty('bottom', 'calc(max(env(safe-area-inset-bottom), 20px))', 'important')
         document.querySelector('div.crisp-client > div#crisp-chatbox').style.setProperty('display', 'block', 'important')
         document.querySelector('div.crisp-client > div#crisp-chatbox > div > a > span:nth-child(2)').style.setProperty('box-shadow', '0 0 5px rgba(0, 0, 0, .4)', 'important')
+        document.querySelector('div.crisp-client > div#crisp-chatbox > div > a > span:nth-child(2)').style.setProperty('background-color', this.$vuetify.theme.currentTheme.primary, 'important')
 
-        if (this.isInSpecialUI) {
+        if (isInSpecialUI) {
           document.querySelector('div.crisp-client > div#crisp-chatbox > div > a > span:nth-child(2)').style.setProperty('filter', 'grayscale(1)', 'important')
         }
+      }
 
+      try {
+        applyStyles()
         this.crispOpacityChanger()
       } catch (e) {
         Console.error('CrispCustomizer', 'failed to initialize custom style:', e)
@@ -38,6 +44,9 @@ export default {
           document.querySelector('#penguin-toolbar').style.transform = 'translateY(calc(-56px - env(safe-area-inset-top)))'
         }])
         window.$crisp.push(['on', 'chat:closed', function () {
+          setTimeout(() => {
+            applyStyles()
+          }, 0)
           document.querySelector('#penguin-toolbar').style.transform = 'translateY(0px)'
         }])
       }
