@@ -68,10 +68,11 @@
       </v-list>
 
       <v-img
-        :src="require('@/assets/themes/miku-14/portrait.png')"
-        style="position: absolute; width: 100%; bottom: 0; z-index: 0"
+        :src="cdnDeliver('/images/themes/miku2021/portrait.png')"
+        style="position: absolute; bottom: 0; z-index: 0"
         position="bottom right"
         height="calc(250px + 10vh)"
+        width="100%"
         :aspect-ratio="1"
         class="v-image--fade-down fallthrough"
       />
