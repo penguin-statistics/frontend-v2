@@ -19,7 +19,7 @@
         {{ $t('menu.settings.name') }}
       </v-btn>
     </template>
-    <v-card :color="`${dark ? 'primary darken-1' : 'primary lighten-5'}`">
+    <v-card :color="`${dark ? 'primary darken-3' : 'primary lighten-5'}`">
       <v-card-title class="headline">
         <v-icon left>
           mdi-settings
@@ -33,7 +33,10 @@
             <Subheader>
               {{ $t('settings.category.appearance') }}
             </Subheader>
-            <ThemeSwitcher class="mb-2" />
+
+            <ThemeStyleSwitcher class="mb-2" />
+
+            <AppearanceSwitcher class="mb-2" />
 
             <LocaleSwitcher
               v-if="!$env.isApp"
@@ -45,24 +48,24 @@
               class="mb-2"
             />
 
-            <PushNotificationSettings v-if="false">
-              <template #default="{ on }">
-                <v-btn
-                  v-if="$env.isApp"
-                  v-haptic
-                  large
-                  block
-                  color="indigo"
-                  class="mb-3"
-                  v-on="on"
-                >
-                  <v-icon left>
-                    mdi-bell
-                  </v-icon>
-                  推送通知设置...
-                </v-btn>
-              </template>
-            </PushNotificationSettings>
+            <!--            <PushNotificationSettings v-if="false">-->
+            <!--              <template #default="{ on }">-->
+            <!--                <v-btn-->
+            <!--                  v-if="$env.isApp"-->
+            <!--                  v-haptic-->
+            <!--                  large-->
+            <!--                  block-->
+            <!--                  color="indigo"-->
+            <!--                  class="mb-3"-->
+            <!--                  v-on="on"-->
+            <!--                >-->
+            <!--                  <v-icon left>-->
+            <!--                    mdi-bell-->
+            <!--                  </v-icon>-->
+            <!--                  推送通知设置...-->
+            <!--                </v-btn>-->
+            <!--              </template>-->
+            <!--            </PushNotificationSettings>-->
 
             <v-btn
               v-if="$env.isApp"
@@ -116,18 +119,18 @@
 </template>
 
 <script>
-import ThemeSwitcher from '@/components/drawer/ThemeSwitcher'
+import AppearanceSwitcher from '@/components/drawer/AppearanceSwitcher'
 import LocaleSwitcher from '@/components/drawer/LocaleSwitcher'
 import Theme from '@/mixins/Theme'
 import OptimizationSwitcher from '@/components/drawer/OptimizationSwitcher'
 import DataManager from '@/components/drawer/DataManager'
 import Subheader from '@/components/global/Subheader'
 import penguin from '@/utils/native/penguin'
-import PushNotificationSettings from '@/components/drawer/PushNotificationSettings'
 import config from "@/config";
+import ThemeStyleSwitcher from "@/components/drawer/ThemeStyleSwitcher";
 export default {
   name: 'SettingsDialog',
-  components: { PushNotificationSettings, Subheader, DataManager, OptimizationSwitcher, LocaleSwitcher, ThemeSwitcher },
+  components: {ThemeStyleSwitcher, Subheader, DataManager, OptimizationSwitcher, LocaleSwitcher, AppearanceSwitcher },
   mixins: [Theme],
   data () {
     return {

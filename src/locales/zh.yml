@@ -42,8 +42,13 @@ menu:
   languages: 语言切换
   settings:
     name: 设置
-    themes:
-      name: 转换主题
+    themeStyles:
+      name: 切换主题
+      disabled: (已禁用：活跃的特殊主题)
+      default: 默认主题
+      miku2021: 初音未来 2021 生日特别主题
+    appearances:
+      name: 切换外观
       system: 跟随系统设置
       dark: 总是使用暗色
       light: 总是使用亮色
@@ -699,4 +704,4 @@ banner:
     heading: 这座城市，春天照常会来
 specials:
   mikubirthday2021:
-    caption: Miku 生日快乐
+    caption: 祝公主殿下生日快乐

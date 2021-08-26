@@ -1,8 +1,10 @@
 import { mapGetters } from 'vuex'
 import Console from '@/utils/Console'
 import environment from '@/utils/environment'
+import ThemeStyle from "@/mixins/ThemeStyle";
 
 export default {
+  mixins: [ThemeStyle],
   watch: {
     dark: ['onDarkChange']
   },
@@ -23,6 +25,8 @@ export default {
         document.documentElement.classList.add('vuetify-theme--light', windowsIndicator)
         document.body.style.backgroundColor = '#f5f5f5'
       }
+
+      this.triggerThemeUpdate()
     },
     onDarkChange (newValue) {
       Console.info('Theme', 'setting to', newValue)

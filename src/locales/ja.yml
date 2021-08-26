@@ -40,7 +40,7 @@ menu:
   languages: 言語切替
   settings:
     name: 設定
-    themes:
+    appearances:
       name: テーマ変更
       system: システム設定に従う
       dark: 常にダークモード

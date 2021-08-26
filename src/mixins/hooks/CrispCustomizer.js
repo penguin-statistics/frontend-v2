@@ -3,9 +3,8 @@ import SpecialUI from '@/mixins/SpecialUI'
 
 export default {
   watch: {
-    $route: [
-      'crispOpacityChanger'
-    ]
+    $route: ['crispOpacityChanger'],
+    '$store.state.ui.activeThemeStyle': ['applyStyles']
   },
   data () {
     return {
@@ -19,18 +18,8 @@ export default {
       this.crispLoaded = true
       // resolve safe-area
       Console.info('CrispCustomizer', 'triggered | chat:loaded')
-      const isInSpecialUI = this.isInSpecialUI
 
-      const applyStyles = () => {
-        document.querySelector('div.crisp-client > div#crisp-chatbox > div > a').style.setProperty('bottom', 'calc(max(env(safe-area-inset-bottom), 20px))', 'important')
-        document.querySelector('div.crisp-client > div#crisp-chatbox').style.setProperty('display', 'block', 'important')
-        document.querySelector('div.crisp-client > div#crisp-chatbox > div > a > span:nth-child(2)').style.setProperty('box-shadow', '0 0 5px rgba(0, 0, 0, .4)', 'important')
-        document.querySelector('div.crisp-client > div#crisp-chatbox > div > a > span:nth-child(2)').style.setProperty('background-color', this.$vuetify.theme.currentTheme.primary, 'important')
-
-        if (isInSpecialUI) {
-          document.querySelector('div.crisp-client > div#crisp-chatbox > div > a > span:nth-child(2)').style.setProperty('filter', 'grayscale(1)', 'important')
-        }
-      }
+      const applyStyles = this.applyStyles.bind(this)
 
       try {
         applyStyles()
@@ -53,6 +42,16 @@ export default {
     }])
   },
   methods: {
+    applyStyles () {
+      document.querySelector('div.crisp-client > div#crisp-chatbox > div > a').style.setProperty('bottom', 'calc(max(env(safe-area-inset-bottom), 20px))', 'important')
+      document.querySelector('div.crisp-client > div#crisp-chatbox').style.setProperty('display', 'block', 'important')
+      document.querySelector('div.crisp-client > div#crisp-chatbox > div > a > span:nth-child(2)').style.setProperty('box-shadow', '0 0 5px rgba(0, 0, 0, .4)', 'important')
+      document.querySelector('div.crisp-client > div#crisp-chatbox > div > a > span:nth-child(2)').style.setProperty('background-color', this.$vuetify.theme.currentTheme.primary, 'important')
+
+      if (this.isInSpecialUI) {
+        document.querySelector('div.crisp-client > div#crisp-chatbox > div > a > span:nth-child(2)').style.setProperty('filter', 'grayscale(1)', 'important')
+      }
+    },
     crispOpacityChanger (newRoute = this.$route) {
       if (this.crispLoaded) {
         // Console.info("CrispCustomizer", "customize | changing opacity");
