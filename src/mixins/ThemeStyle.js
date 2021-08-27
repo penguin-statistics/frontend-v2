@@ -3,10 +3,12 @@ import Console from '@/utils/Console'
 const themes = {
   default: {
     light: {
-      primary: '#1976D2'
+      primary: '#1976D2',
+      primaryDarken1: '#005eb6'
     },
     dark: {
-      primary: '#2196F3'
+      primary: '#2196F3',
+      primaryDarken1: '#007cd6'
     }
   },
   miku2021: {
@@ -34,10 +36,10 @@ export default {
 
       if (primary) this.$vuetify.theme.currentTheme.primary = primary
 
+      this.$store.state.ui.activeThemeStyle = themeId
+
       document.querySelector("meta[name=theme-color]")
         .setAttribute("content", theme.primaryDarken1);
-
-      this.$store.state.ui.activeThemeStyle = themeId
     }
   }
 }
