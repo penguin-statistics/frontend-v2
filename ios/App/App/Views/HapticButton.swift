@@ -13,8 +13,6 @@ struct HapticButton<Content: View> : View {
     let content : ()-> Content
     let action: () -> Void
     
-    @State private var engine: CHHapticEngine?
-    
     init(action: @escaping () -> Void, @ViewBuilder content: @escaping () -> Content) {
         self.content = content
         self.action = action

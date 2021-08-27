@@ -610,6 +610,14 @@
     text-shadow: 0 0 15px rgba(255, 255, 255, .7);
 }
 
+.theme--dark .text-glow--flipped{
+    text-shadow: 0 0 5px rgba(0, 0, 0, .5);
+}
+
+.theme--light .text-glow--flipped{
+    text-shadow: 0 0 5px rgba(255, 255, 255, .5);
+}
+
 .partial-fill-height {
     height: 90% !important;
 }
@@ -760,3 +768,11 @@
     border-radius: 4px;
     overflow: hidden;
 }
+
+.v-image--fade-down {
+    mask: linear-gradient(to bottom, transparent, rgba(0, 0, 0, 1) 15%, #000);
+}
+
+.theme--dark .v-image--fade-down > .v-image__image {
+}
+

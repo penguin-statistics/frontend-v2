@@ -1,9 +1,9 @@
 <template>
   <div
     :class="{
-      'drawer-logo blue': true,
-      'darken-4': dark,
-      'darken-3': !dark,
+      'drawer-logo primary': true,
+      '': dark,
+      '': !dark,
       'drawer-logo--two-line': $t('app.name_line2') !== ''
     }"
   >
@@ -21,7 +21,7 @@
       <v-row
         align="center"
         justify="center"
-        class="flex-column"
+        class="flex-column font-weight-bold text-glow--flipped"
       >
         <span>{{ $t('app.name_line1') }}</span>
         <span>{{ $t('app.name_line2') }}</span>

@@ -40,8 +40,13 @@ menu:
   languages: 言語切替
   settings:
     name: 設定
-    themes:
-      name: テーマ変更
+    themeStyles:
+      name: テーマ切替
+      disabled: "(無効：アクティブな特殊テーマ)"
+      default: デフォルトテーマ
+      miku2021: 初音ミク2021誕生日特別テーマ
+    appearances:
+      name: 外観モード切替
       system: システム設定に従う
       dark: 常にダークモード
       light: 常にライトモード

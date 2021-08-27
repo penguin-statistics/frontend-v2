@@ -13,7 +13,8 @@ export default {
       last: Date.now(),
       id: []
     }),
-    userIdHistory: []
+    userIdHistory: [],
+    specialSideStoryDialogRead: false
   },
   mutations: {
     changeDataTable (state, value) {
@@ -47,11 +48,13 @@ export default {
     },
     clearUserIdHistory (state) {
       state.userIdHistory = []
-    }
+    },
+    setSpecialSideStoryDialogRead: (state, value) => state.specialSideStoryDialogRead = value
   },
   getters: {
     dataTable: state => state.dataTable,
     randomBackground: state => state.randomBackground,
-    userIdHistory: state => state.userIdHistory
+    userIdHistory: state => state.userIdHistory,
+    specialSideStoryDialogRead: state => state.specialSideStoryDialogRead
   }
 }
