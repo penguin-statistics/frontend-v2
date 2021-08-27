@@ -13,6 +13,31 @@ import i18n from "@/i18n";
 
 Vue.use(Vuetify)
 
+const themes = {
+  light: {
+    accent1: colors.indigo.darken4,
+    accent2: colors.orange.darken4,
+    accent3: colors.blue.darken4,
+
+    background: '#f5f5f5',
+    lightenedBackground: '#d9d9d9',
+    indigoBackground: '#eee',
+    text: '#0e0e0e',
+    textDarken: colors.grey.darken4
+  },
+  dark: {
+    accent1: colors.indigo.lighten3,
+    accent2: colors.orange.lighten3,
+    accent3: colors.blue.lighten3,
+
+    background: colors.blueGrey.darken4,
+    lightenedBackground: colors.blueGrey.darken3,
+    indigoBackground: '#191d37',
+    text: '#ececec',
+    textDarken: colors.grey.lighten3
+  }
+}
+
 const vuetify = new Vuetify({
   icons: {
     iconfont: 'mdi'
@@ -24,32 +49,7 @@ const vuetify = new Vuetify({
     options: {
       customProperties: true
     },
-    themes: {
-      light: {
-        // primary: '#C03443',
-        accent1: colors.indigo.darken4,
-        accent2: colors.orange.darken4,
-        accent3: colors.blue.darken4,
-
-        background: '#f5f5f5',
-        lightenedBackground: '#d9d9d9',
-        indigoBackground: '#eee',
-        text: '#0e0e0e',
-        textDarken: colors.grey.darken4
-      },
-      dark: {
-        // primary: '#C03443',
-        accent1: colors.indigo.lighten3,
-        accent2: colors.orange.lighten3,
-        accent3: colors.blue.lighten3,
-
-        background: colors.blueGrey.darken4,
-        lightenedBackground: colors.blueGrey.darken3,
-        indigoBackground: '#191d37',
-        text: '#ececec',
-        textDarken: colors.grey.lighten3
-      }
-    }
+    themes
   }
 })
 

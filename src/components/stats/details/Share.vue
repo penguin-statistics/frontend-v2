@@ -8,7 +8,7 @@
         v-haptic
         block
         large
-        color="blue"
+        color="primary"
         outlined
         class="mb-2 black--text"
         v-bind="attrs"

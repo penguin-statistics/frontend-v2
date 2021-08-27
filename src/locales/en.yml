@@ -42,8 +42,13 @@ menu:
   languages: Language
   settings:
     name: Settings
-    themes:
-      name: Change Color Theme
+    themeStyles:
+      name: Change Themes
+      disabled: "(Disabled: Active Special Theme)"
+      default: "Default Theme"
+      miku2021: "Hatsune Miku 2021 Birthday Theme"
+    appearances:
+      name: Change Color Appearance
       system: Follow System
       dark: Always Dark
       light: Always Light
@@ -688,3 +693,6 @@ confirmLeave:
 banner:
   mew:
     heading: 这座城市，春天照常会来
+specials:
+  mikubirthday2021:
+    caption: Happy Birthday Hatsune Miku

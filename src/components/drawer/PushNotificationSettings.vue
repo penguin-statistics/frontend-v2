@@ -142,7 +142,8 @@
             >
               更新
             </v-btn>
-            已订阅项目表 <pre>{{ preferences }}</pre>
+            已订阅项目表
+            <pre>{{ preferences }}</pre>
           </p>
         </v-card-text>
       </v-expand-transition>

@@ -13,7 +13,8 @@ export default {
     },
     outdated: false,
     loadingRoute: '',
-    serverLocked: false
+    serverLocked: false,
+    activeThemeStyle: 'default'
   },
   mutations: {
     setSnackbar (state, { color, timeout, text, icon, extra }) {

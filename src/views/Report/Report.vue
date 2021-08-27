@@ -313,7 +313,7 @@
 
             <v-alert
               v-if="isGacha"
-              color="blue darken-2"
+              color="primary darken-2"
               class="subtitle-1 pl-6 mb-4 mx-2"
               dark
               border="left"
@@ -323,7 +323,7 @@
 
             <v-alert
               v-if="isSpecialSideStory"
-              color="blue darken-2"
+              color="primary darken-2"
               class="subtitle-1 pl-6 mb-4 mx-2 markdown-content-inline"
               dark
               border="left"
@@ -426,7 +426,7 @@
               v-haptic
               class="font-weight-bold"
               small
-              color="blue"
+              color="primary"
               rounded
               outlined
               :to="{name: 'AboutContact'}"

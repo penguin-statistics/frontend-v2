@@ -16,7 +16,7 @@
   <v-icon
     v-else-if="item.itemId !== 'furni' && !item.spriteCoord"
     :class="furniturePadding"
-    class="blue item-icon--special white--text"
+    class="primary item-icon--special white--text"
     :size="30 * ratio"
   >
     mdi-help

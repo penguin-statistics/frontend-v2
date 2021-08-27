@@ -1,14 +1,14 @@
 <template>
   <v-footer
     padless
-    :color="primaryColor"
+    color="primary"
     class="footer-wrapper white--text"
   >
     <v-card
       flat
       tile
       width="100%"
-      :color="primaryColor"
+      color="primary"
       class="text-center footer--safe-area mt-1 mb-2"
     >
       <v-card-text class="white--text d-inline">
