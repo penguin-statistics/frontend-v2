@@ -181,17 +181,6 @@ export default {
             shorten: 'kokodayo.fun'
           },
           {
-            title: '源石作战室',
-            features: [
-              {
-                name: 'video',
-                color: 'indigo darken-4'
-              }
-            ],
-            url: 'https://opssr.net/',
-            shorten: 'opssr.net'
-          },
-          {
             title: 'ANWiki',
             features: [
               {
