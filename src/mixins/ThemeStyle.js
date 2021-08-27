@@ -11,10 +11,12 @@ const themes = {
   },
   miku2021: {
     light: {
-      primary: '#39C5BB'
+      primary: '#39C5BB',
+      primaryDarken1: '#00a9a0'
     },
     dark: {
-      primary: '#39C5BB'
+      primary: '#39C5BB',
+      primaryDarken1: '#00a9a0'
     }
   }
 }
@@ -27,12 +29,13 @@ export default {
       this.triggerThemeUpdate(themeId)
     },
     triggerThemeUpdate (themeId = this.$store.getters['settings/themeStyle']) {
-      const primary = themes[themeId][this.$vuetify.theme.dark ? 'dark' : 'light'].primary
+      const theme = themes[themeId][this.$vuetify.theme.dark ? 'dark' : 'light']
+      const primary = theme.primary
 
       if (primary) this.$vuetify.theme.currentTheme.primary = primary
 
       document.querySelector("meta[name=theme-color]")
-        .setAttribute("content", primary);
+        .setAttribute("content", theme.primaryDarken1);
 
       this.$store.state.ui.activeThemeStyle = themeId
     }
