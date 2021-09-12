@@ -2,12 +2,14 @@ import charHash from '@/models/recognition/charHash'
 import store from '@/store'
 import JSZip from 'jszip'
 import uniq from 'lodash/uniq'
+
 import Console from "@/utils/Console";
 import strings from "@/utils/strings";
 import ReportValidator from "@/utils/reportValidator";
 import get from '@/utils/getters'
 import existUtils from "@/utils/existUtils";
 import mirror from "@/utils/mirror";
+import {findDuplicates} from "@/utils/arrayUtils";
 
 const recognizerVersion = 'v3.2.2-1'
 
@@ -69,17 +71,31 @@ class Recognizer {
       // free_buffer: Module.cwrap('free_buffer', 'void', ['number'])
     }
 
-    const stages = {}
+    const transformedStages = {}
 
-    store.getters['data/content']({ id: 'stages' })
+    const stages = store.getters['data/content']({ id: 'stages' })
+
+    const duplicatedStageIds = findDuplicates(stages.map(el => el.code))
+    console.log('duplicates', duplicatedStageIds)
+
+    stages
       .forEach((stage) => {
+        // skip stages with duplicated code and is non-existent in the current server
+        if (
+          ~duplicatedStageIds.indexOf(stage.code) &&
+          !existUtils.existence(stage, true)
+        ) {
+          console.log('skipping', stage.code, stage.stageId)
+          return
+        }
+
         let drops = (stage.dropInfos || [])
           .map(drop => drop.itemId)
           .filter(drop => !!drop && drop !== 'furni')
 
         if (stage.recognitionOnly) drops = [...drops, ...stage.recognitionOnly]
 
-        stages[stage.code] = {
+        transformedStages[stage.code] = {
           stageId: stage.stageId,
           drops: uniq(drops),
           existence: existUtils.existence(stage, true)
@@ -87,10 +103,10 @@ class Recognizer {
       })
 
 
-    Console.debug('Recognizer', 'init: preload json: preloading with', stages, charHash)
+    Console.debug('Recognizer', 'init: preload json: preloading with', transformedStages, charHash)
 
     this.wasm.load_json(
-      JSON.stringify(stages),
+      JSON.stringify(transformedStages),
       JSON.stringify(charHash)
     )
 

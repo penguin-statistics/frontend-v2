@@ -134,6 +134,13 @@ export default {
       index: null,
       logs: [
         {
+          version: 'v3.6.1',
+          date: '2021-09-12T15:00:00+0800',
+          changes: `## 修复
+1. 由于重复的关卡名称而导致的部分关卡于截图识别的判断错误问题
+          `
+        },
+        {
           version: 'v3.5.6',
           date: '2021-06-24T18:00:00+0800',
           changes: `## 添加
