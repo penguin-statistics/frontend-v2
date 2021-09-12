@@ -168,8 +168,30 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         #endif
         
+        var blurStyle = UIBlurEffect.Style.dark
         
+        if #available(iOS 13.0, *) {
+            blurStyle = UIBlurEffect.Style.systemMaterialDark
+        }
         
+        let blurEffect = UIBlurEffect(style: blurStyle)
+
+        let blurEffectView = UIVisualEffectView(effect: blurEffect)
+        blurEffectView.translatesAutoresizingMaskIntoConstraints = false
+        rootView?.addSubview(blurEffectView)
+
+        guard let leadingAnchor = rootView?.leadingAnchor,
+              let widthAnchor   = rootView?.widthAnchor,
+              let topAnchor     = rootView?.topAnchor,
+              let bottomAnchor  = rootView?.safeAreaLayoutGuide.topAnchor
+        else {
+            return true
+        }
+
+        blurEffectView.leadingAnchor.constraint(equalTo: leadingAnchor).isActive = true
+        blurEffectView.widthAnchor.constraint(equalTo: widthAnchor).isActive = true
+        blurEffectView.topAnchor.constraint(equalTo: topAnchor).isActive = true
+        blurEffectView.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
         
         
         return true
