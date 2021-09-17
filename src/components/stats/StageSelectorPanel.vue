@@ -1,7 +1,9 @@
 <template>
   <v-expansion-panels
-    hover
+    v-model="panels"
+    :hover="!large"
     class="mb-2"
+    :readonly="large"
   >
     <v-expansion-panel
       v-for="zone in zones"
@@ -11,8 +13,9 @@
     >
       <v-expansion-panel-header
         v-haptic
+        :hide-actions="large"
         class="overflow-hidden bkop-medium"
-        :class="{ 'stage-card--header': !!zone.background }"
+        :class="{ 'stage-card--header': !!zone.background, 'stage-card--transparent': large }"
       >
         <v-row align="center">
           <span
@@ -57,7 +60,7 @@
           </v-chip>
         </v-row>
       </v-expansion-panel-header>
-      <v-expansion-panel-content :class="{ 'stage-card--content': !!zone.background }">
+      <v-expansion-panel-content :class="{ 'stage-card--content': !!zone.background, 'stage-card--large-content': large }">
         <div
           v-if="zone.isActivity"
           class="caption mx-1 mt-3 mb-2"
@@ -93,6 +96,15 @@ name: "StageSelectorPanel",
       type: Array,
       required: true
     },
+    large: {
+      type: Boolean,
+      default: () => false
+    }
+  },
+  data() {
+    return {
+      internalPanels: []
+    }
   },
   computed: {
     strings() {
@@ -101,6 +113,14 @@ name: "StageSelectorPanel",
     small () {
       return this.$vuetify.breakpoint.smAndDown
     },
+    panels: {
+      get () {
+        return this.large ? 0 : this.internalPanels
+      },
+      set (val) {
+        this.internalPanels = val
+      }
+    }
   },
   methods: {
     genActivityTime (zone) {
@@ -137,5 +157,17 @@ name: "StageSelectorPanel",
 .theme--dark .stage-card--content {
   background: rgba(0, 0, 0, 0.8) !important;
   background: linear-gradient(to bottom, rgba(0, 0, 0, 0.85), rgba(0, 0, 0, 0.7)) !important;
+}
+
+.theme--light .stage-card--transparent,
+.theme--dark .stage-card--transparent {
+  background: rgba(0, 0, 0, 0.85) !important;
+  cursor: default !important;
+  border-radius: 4px 4px 0 0 !important;
+}
+
+.theme--light .stage-card--large-content,
+.theme--dark .stage-card--large-content {
+  border-radius: 0 0 4px 4px !important;
 }
 </style>
