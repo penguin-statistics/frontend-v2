@@ -134,6 +134,13 @@ export default {
       index: null,
       logs: [
         {
+          version: 'v3.6.2',
+          date: '2021-09-17T16:20:00+0800',
+          changes: `## 添加
+1. 添加新物品与主线支持
+          `
+        },
+        {
           version: 'v3.6.1',
           date: '2021-09-12T15:00:00+0800',
           changes: `## 修复
