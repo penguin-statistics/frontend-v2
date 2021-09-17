@@ -419,10 +419,13 @@ zone:
   subTypes:
     AWAKENING_HOUR:
       title: Hour of an Awakening
-      subtitle: "Episode 0-3"
+      subtitle: "Episode 0~3"
     VISION_SHATTER:
       title: Shatter of a Vision
-      subtitle: "Episode 4-8"
+      subtitle: "Episode 4~8"
+    DYING_SUN:
+      title: Shadow of a Dying Sun
+      subtitle: "Episode 9"
     INTERLUDE: Interlude
     SIDESTORY: Sidestory
     2019: "2019"

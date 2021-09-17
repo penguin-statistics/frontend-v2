@@ -434,6 +434,9 @@ zone:
     VISION_SHATTER:
       title: 幻灭
       subtitle: "4~8 章"
+    DYING_SUN:
+      title: 残阳
+      subtitle: "第 9 章"
     INTERLUDE: 插曲
     SIDESTORY: 别传
     2019: "2019"
