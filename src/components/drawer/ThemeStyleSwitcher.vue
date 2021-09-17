@@ -2,7 +2,6 @@
   <v-select
     v-model="themeStyle"
     hide-details
-    :menu-props="{ offsetY: true }"
     filled
     :items="themes"
     :label="$t('menu.settings.themeStyles.name')"

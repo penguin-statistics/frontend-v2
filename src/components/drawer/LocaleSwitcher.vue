@@ -2,7 +2,6 @@
   <v-select
     v-model="activeLocale"
     hide-details
-    :menu-props="{ offsetY: true }"
     filled
     :items="localizations"
     :label="$t('menu.languages')"

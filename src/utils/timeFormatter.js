@@ -20,11 +20,18 @@ const FORMATS = {
 }
 
 function needYear (moments) {
-  for (const index in moments) {
-    if (index === '0') continue
-    if (!dayjs().isSame(moments[index], 'year') || !(moments[index].isSame(moments[index], [moments[index - 1], 'year']))) {
-      return true
-    }
+  // for (const index in moments) {
+  //   // console.log('needYear:', index, moments[index], dayjs())
+  //   if (index === '0') continue
+  //   if (!dayjs().isSame(moments[index], 'year') || !(moments[index].isSame(moments[index], [moments[index - 1], 'year']))) {
+  //     return true
+  //   }
+  // }
+  const years = moments.map(el => el.get('year'))
+  let last = null
+  for (const year of years) {
+    if (!last) last = year
+    else if (year !== last) return true
   }
   return false
 }
@@ -46,7 +53,7 @@ export default {
     times = times.map(ts => {
       return dayjs(ts)
     })
-    const needsYear = needYear(times)
+    const needsYear = needYear([...times, dayjs()])
     times = times.map(time => {
       if (includeTime) return time.format(`${needsYear ? FORMATS.YMD : FORMATS.MD} ${FORMATS.HM}`)
       return time.format(`${needsYear ? FORMATS.YMD : FORMATS.MD}`)
