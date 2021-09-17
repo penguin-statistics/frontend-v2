@@ -159,7 +159,12 @@ name: "StageSelectorPanel",
   background: linear-gradient(to bottom, rgba(0, 0, 0, 0.85), rgba(0, 0, 0, 0.7)) !important;
 }
 
-.theme--light .stage-card--transparent,
+.theme--light .stage-card--transparent {
+  background: rgba(255, 255, 255, 0.85) !important;
+  cursor: default !important;
+  border-radius: 4px 4px 0 0 !important;
+}
+
 .theme--dark .stage-card--transparent {
   background: rgba(0, 0, 0, 0.85) !important;
   cursor: default !important;
