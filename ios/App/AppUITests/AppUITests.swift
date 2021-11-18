@@ -41,13 +41,24 @@ class AppUITests: XCTestCase {
         
         XCTAssert(app.wait(for: .runningForeground, timeout: 5))
         
+        sleep(5)
+        
         snapshot("00Welcome")
 
         // Dismiss "What's New" if needed
-        let continueButton = app.buttons["Done"]
+        var continueButton = app.buttons["Done"]
         if continueButton.exists {
             continueButton.tap()
         }
+        
+        continueButton = app.buttons["开始使用"]
+        if continueButton.exists {
+            continueButton.tap()
+        }
+//
+//        let overlayDoesNotExistPredicate = NSPredicate(format: "UIDropShadowView.exists == FALSE")
+//        self.expectation(for: overlayDoesNotExistPredicate, evaluatedWith: app, handler: nil)
+//        self.waitForExpectations(timeout: 5, handler: nil)
         
         sleep(2)
         
@@ -56,10 +67,18 @@ class AppUITests: XCTestCase {
         let webViewsQuery = app.webViews.webViews.webViews
         webViewsQuery/*@START_MENU_TOKEN@*/.otherElements["banner"]/*[[".otherElements[\"By stage ‹ Drop Rates │ Penguin Statistics\"].otherElements[\"banner\"]",".otherElements[\"banner\"]"],[[[-1,1],[-1,0]]],[0]]@END_MENU_TOKEN@*/.children(matching: .button).element(boundBy: 0).tap()
         webViewsQuery/*@START_MENU_TOKEN@*/.staticTexts["Select By Stage"]/*[[".otherElements[\"By stage ‹ Drop Rates │ Penguin Statistics\"]",".otherElements[\"navigation\"].staticTexts[\"Select By Stage\"]",".staticTexts[\"Select By Stage\"]"],[[[-1,2],[-1,1],[-1,0,1]],[[-1,2],[-1,1]]],[0]]@END_MENU_TOKEN@*/.tap()
+        webViewsQuery.staticTexts["按作战"].tap()
+        webViewsQuery.staticTexts["作戦別"].tap()
         
         sleep(2)
         
         snapshot("02Stage")
+        
+        let webViewsQuery2 = app.webViews.webViews.webViews
+        webViewsQuery2/*@START_MENU_TOKEN@*/.otherElements["banner"]/*[[".otherElements[\"By stage ‹ Drop Rates │ Penguin Statistics\"].otherElements[\"banner\"]",".otherElements[\"banner\"]"],[[[-1,1],[-1,0]]],[0]]@END_MENU_TOKEN@*/.children(matching: .button).element(boundBy: 0).tap()
+        webViewsQuery2.staticTexts["Select By Item"].tap()
+        webViewsQuery2.staticTexts["按素材"].tap()
+        webViewsQuery2.staticTexts["素材別"].tap()
     }
 
 //    func testLaunchPerformance() throws {

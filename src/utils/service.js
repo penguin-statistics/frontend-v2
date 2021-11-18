@@ -95,7 +95,7 @@ service.interceptors.response.use(function (response) {
 
     let message
 
-    if (error && error.response && error.response.data && deployingFlag in error.response.data) {
+    if (error && error.response && error.response.data && !!~error.response.data.indexOf(deployingFlag)) {
       message = i18n.t('fetch.failed.deploying')
     } else {
       message = error.response.data || error.message
