@@ -260,7 +260,7 @@ report:
     report:
       title: 보고서 세부 정보
       total: 총합
-      submit: {count}개의 작전 결과 제출
+      submit: "{count}개의 작전 결과 제출"
       reporting: 보고서를 제출하는 중...
       allSucceeded: "{count}개의 작전 결과가 성공적으로 제출되었습니다."
       partialSucceeded: "{count}개의 작전 결과만이 성공적으로 제출되었습니다."
@@ -282,7 +282,7 @@ report:
     filename: 파일 이름
     result: 결과
     queue: 대기열
-    start: {count}개의 이미지 식별
+    start: "{count}개의 이미지 식별"
     progress: 진행도
     submit: 제출
     retry: "제출에 실패했습니다. 다시 시도하는 중..."
@@ -472,7 +472,7 @@ planner:
     excludeStage:
       _name: 제외
       title: 선택
-      selected: {stages}개의 스테이지 제외됨
+      selected: "{stages}개의 스테이지 제외됨"
   reset:
     name: 초기화
     success: 성공적으로 플래너 데이터를 초기화했습니다.
@@ -550,7 +550,7 @@ query:
       title: 아이템 선택
       subtitle: 선택된 아이템으로 쿼리 결과를 필터링합니다.
       unspecified: 모든 아이템 표시
-      selected: {length}개의 아이템 쿼리
+      selected: "{length}개의 아이템 쿼리"
     stage:
       title: 스테이지 선택
       subtitle: "(필수) 선택된 스테이지로 쿼리 결과를 필터링합니다."
@@ -610,7 +610,7 @@ auth:
     subtitle: 로그인 정보를 복원합니다
     penguinIdHistory:
       title: 기존에 사용한 PenguinID
-      lastLoginAt: 마지막 로그인: {time}
+      lastLoginAt: "마지막 로그인: {time}"
       loginAsUserId: 이 PenguinID로 로그인
       deleteUserId: 이 PenguinID 기록 제거
       noData: 데이터 없음
