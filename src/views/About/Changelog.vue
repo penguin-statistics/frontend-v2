@@ -134,7 +134,7 @@ export default {
       index: null,
       logs: [
         {
-          version: 'v3.6.2',
+          version: 'v3.6.3',
           date: '2021-12-15T01:20:00+0800',
           changes: `## 修复
 1. 后端错误检测
