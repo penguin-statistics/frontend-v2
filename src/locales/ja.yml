@@ -444,6 +444,16 @@ planner:
     dialog:
       title: ArkPlannerをリセット
       subtitle: すべてのデータや設定はリセットされます。続行しますか？
+      options:
+        options:
+          name: オプション
+          indicator: 全てのオプションをオフにします
+        excludes:
+          name: ステージ除外
+          indicator: 全ての除外をオフにします
+        items:
+          name: 素材データ
+          indicator: 全ての素材個数をリセットします
   actions:
     _name: データ
     import: インポート
