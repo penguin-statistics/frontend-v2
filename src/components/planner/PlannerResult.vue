@@ -261,6 +261,19 @@
                       />
                     </v-badge>
                   </div>
+                  <v-btn
+                    v-haptic
+                    text
+                    block
+                    large
+                    @click="craftItem(synthesis)"
+                  >
+                    <v-divider style="opacity: 0.3" />
+                    <span class="mx-4 d-flex align-center">
+                      {{ $t('planner.actions.done') }}
+                    </span>
+                    <v-divider style="opacity: 0.3" />
+                  </v-btn>
                 </v-card-text>
               </v-card>
             </v-col>
@@ -386,7 +399,51 @@ export default {
     },
     parseAmount (num) {
       return formatter.thousandSeparator(parseFloat(num))
-    }
+    },
+    printSyn (syn){
+      console.log(syn)
+    },
+    craftCheck (synthesis) {
+      let psp = JSON.parse(localStorage.getItem("penguin-stats-planner"))
+      let items = psp["planner"]["items"]
+      for (let key in synthesis.materials) {
+        for (let item in items) {
+          if (items[item]["id"] == key) {
+            if (items[item]["have"] < synthesis.materials[key]) {
+              return false
+            }
+          }
+        }
+      }
+      return true
+    },
+    craftItem (synthesis) {
+      let psp = JSON.parse(localStorage.getItem("penguin-stats-planner"))
+      let items = psp["planner"]["items"]
+      if (this.craftCheck(synthesis)) {
+        for (let key in synthesis.materials) {
+          for (let item in items) {
+            if (items[item]["id"] == key) {
+              items[item]["have"] -= synthesis.materials[key]
+            }
+          }
+        }
+        for (let item in items) {
+          if (items[item]["id"] == synthesis.target.item.itemId) {
+            console.log("Target match!")
+            items[item]["have"] += parseInt(synthesis.count)
+          }
+        }
+        console.log("Synthesis success!")
+      } else { // TODO: Alert for failure
+        console.log("Synthesis fail!")
+      }
+      psp["planner"]["items"] = items
+      psp = JSON.stringify(psp)
+      localStorage.setItem("penguin-stats-planner", psp)
+      window.location.reload()
+    } // TODO: Undo craft (disscussion needed)
+
   }
 }
 </script>
