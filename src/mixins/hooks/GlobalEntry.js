@@ -7,6 +7,7 @@ import RandomizedLogo from '@/mixins/hooks/RandomizedLogo'
 import StoreUpgrader from '@/mixins/hooks/StoreUpgrader'
 import Native from '@/mixins/hooks/Native'
 import Probe from '@/mixins/hooks/Probe'
+import ThemeStyle from "@/mixins/hooks/ThemeStyle";
 
 export default {
   mixins: [
@@ -16,6 +17,7 @@ export default {
 
     // first priority
     Theme,
+    ThemeStyle,
     Localization,
 
     // secondary priority

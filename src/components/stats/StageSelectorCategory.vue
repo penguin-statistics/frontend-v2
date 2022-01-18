@@ -17,7 +17,7 @@
         class="mt-0 mt-md-n12"
       >
         <v-tab
-          v-for="[key,] in tabs.entries"
+          v-for="[key, value] in tabs.entries"
           :key="key"
         >
           <div
@@ -42,6 +42,7 @@
         >
           <StageSelectorPanel
             :zones="value"
+            :large="value.length === 1"
             @select="e => $emit('select', e)"
           />
         </v-tab-item>

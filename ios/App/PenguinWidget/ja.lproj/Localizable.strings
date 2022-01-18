@@ -1,0 +1,17 @@
+/* 
+  PenguinWidget.strings
+  App
+
+  Created by Galvin Gao on 2020/12/26.
+  
+*/
+
+"SiteStatsWidgetName" = "データ概要";
+"SiteStatsWidgetDesc" = "最近のデータ概要を随時確認";
+"SiteStatsWidgetTitle" = "24時間最多レポートのステージ";
+"WidgetViewMore" = "詳しく見る";
+
+"ServerNameCN" = "CN";
+"ServerNameUS" = "US";
+"ServerNameJP" = "JP";
+"ServerNameKR" = "KR";

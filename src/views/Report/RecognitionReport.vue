@@ -805,32 +805,32 @@ export default {
       })
     },
     applyPostRecognitionRules (results) {
-      const timestamps = results.map(value => value.file.lastModified)
-      const fingerprints = results.map(value => value.result.fingerprint)
-
-      results.forEach((value, index) => {
-        // Apply timestamp check, <10s will add warning
-        let closeTimestamps = false;
-        timestamps.forEach((timestamp, i) => {
-          if (Math.abs(timestamp - value.file.lastModified) < 10 * 1000 && i !== index) {
-            closeTimestamps = true
-          }
-        })
-        if (closeTimestamps) {
-          value.result.exceptions.push({ what: 'FileTimestamp::TooClose' })
-        }
-
-        // Apply same fingerprint check, same will add warning
-        let sameFingerprint = false;
-        fingerprints.forEach((fingerprint, i) => {
-          if (fingerprint !== "" && fingerprint !== undefined && fingerprint === value.result.fingerprint && i !== index) {
-            sameFingerprint = true
-          }
-        })
-        if (sameFingerprint) {
-          value.result.exceptions.push({ what: 'Fingerprint::Same' })
-        }
-      })
+      // const timestamps = results.map(value => value.file.lastModified)
+      // const fingerprints = results.map(value => value.result.fingerprint)
+      //
+      // results.forEach((value, index) => {
+      //   // Apply timestamp check, <10s will add warning
+      //   let closeTimestamps = false;
+      //   timestamps.forEach((timestamp, i) => {
+      //     if (Math.abs(timestamp - value.file.lastModified) < 10 * 1000 && i !== index) {
+      //       closeTimestamps = true
+      //     }
+      //   })
+      //   if (closeTimestamps) {
+      //     value.result.exceptions.push({ what: 'FileTimestamp::TooClose' })
+      //   }
+      //
+      //   // Apply same fingerprint check, same will add warning
+      //   let sameFingerprint = false;
+      //   fingerprints.forEach((fingerprint, i) => {
+      //     if (fingerprint !== "" && fingerprint !== undefined && fingerprint === value.result.fingerprint && i !== index) {
+      //       sameFingerprint = true
+      //     }
+      //   })
+      //   if (sameFingerprint) {
+      //     value.result.exceptions.push({ what: 'Fingerprint::Same' })
+      //   }
+      // })
       return Object.freeze(results)
     }
   }

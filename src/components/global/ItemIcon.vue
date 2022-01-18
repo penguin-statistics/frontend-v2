@@ -16,7 +16,7 @@
   <v-icon
     v-else-if="item.itemId !== 'furni' && !item.spriteCoord"
     :class="furniturePadding"
-    class="blue item-icon--special white--text"
+    class="primary item-icon--special white--text"
     :size="30 * ratio"
   >
     mdi-help
@@ -53,13 +53,13 @@ export default {
       resolutions: {
         high: {
           iconSize: 183,
-          dimensions: [1098, 2562],
-          url: '/sprite/sprite.202011011235.png'
+          dimensions: [1098, 2928],
+          url: '/sprite/sprite.202109171627.png'
         },
         low: {
           iconSize: 183 / 2,
-          dimensions: [1098 / 2, 2562 / 2],
-          url: '/sprite/sprite.202011011235.small.png'
+          dimensions: [1098 / 2, 2928 / 2],
+          url: '/sprite/sprite.202109171627.small.png'
         }
       }
     }

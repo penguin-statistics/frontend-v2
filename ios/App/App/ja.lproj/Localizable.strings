@@ -1,0 +1,17 @@
+/* 
+  Localizable.strings
+  App
+
+  Created by Galvin Gao on 2021/4/14.
+  
+*/
+
+"feature.widget.title" = "ウィジェット";
+"feature.widget.subtitle" = "ウィジェットをホーム画面に追加しリアルタイムなドロップ情報を入手";
+"feature.haptics.title" = "触覚フィードバック";
+"feature.haptics.subtitle" = "アプリとのインタラクションから触覚フィードバックをもらえる";
+"feature.performance.title" = "パフォーマンス";
+"feature.performance.subtitle" = "ページの読み込みを待たずに必要なデータを獲得";
+"welcome.title" = "ようこそ";
+"welcome.subtitle" = "Penguin Statistics";
+"done" = "スタート";

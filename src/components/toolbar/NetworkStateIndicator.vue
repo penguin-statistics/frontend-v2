@@ -4,7 +4,7 @@
       <v-card
         v-if="delayedShow"
         class="network-state-indicator transition-all"
-        :class="{'error': haveError, 'blue darken-2': !haveError}"
+        :class="{'error': haveError, 'primary darken-2': !haveError}"
       >
         <!--        <ul style="list-style: none; padding-left: 0;">-->
         <!--          <template v-for="state in states">-->

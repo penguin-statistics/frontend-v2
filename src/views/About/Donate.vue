@@ -144,7 +144,8 @@
 
           <v-btn
             v-haptic
-            color="blue-grey"
+            text
+            outlined
             href="https://shimo.im/sheets/GJXgP9XQcPrj6rtg/2fC1m"
             target="_blank"
             rel="noopener"
@@ -190,10 +191,11 @@
         </div>
         <v-btn
           v-haptic
-          color="blue-grey"
           href="https://shimo.im/sheets/GJXgP9XQcPrj6rtg/2fC1m"
           target="_blank"
           rel="noopener"
+          outlined
+          text
           class="mt-1"
         >
           <v-icon left>

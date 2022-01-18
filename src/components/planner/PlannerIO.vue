@@ -90,7 +90,7 @@
           outlined
           block
           large
-          color="blue-grey"
+          color="primary"
           class="d-flex"
           style="border-radius: 0 0 4px 4px; margin-top: -1px"
           @click="doImport"

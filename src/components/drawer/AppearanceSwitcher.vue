@@ -2,10 +2,9 @@
   <v-select
     v-model="appDark"
     hide-details
-    :menu-props="{ offsetY: true }"
     filled
     :items="themes"
-    :label="$t('menu.settings.themes.name')"
+    :label="$t('menu.settings.appearances.name')"
     transition="slide-y-transition"
   >
     <template #item="{ item }">
@@ -36,7 +35,7 @@
 import { mapGetters } from 'vuex'
 
 export default {
-  name: 'ThemeSwitcher',
+  name: 'AppearanceSwitcher',
   computed: {
     ...mapGetters('settings', ['dark']),
     appDark: {
@@ -56,17 +55,17 @@ export default {
       return [
         {
           icon: 'mdi-brightness-auto',
-          text: this.$t('menu.settings.themes.system'),
+          text: this.$t('menu.settings.appearances.system'),
           value: 'system'
         },
         {
           icon: 'mdi-brightness-2',
-          text: this.$t('menu.settings.themes.dark'),
+          text: this.$t('menu.settings.appearances.dark'),
           value: 'dark'
         },
         {
           icon: 'mdi-brightness-7',
-          text: this.$t('menu.settings.themes.light'),
+          text: this.$t('menu.settings.appearances.light'),
           value: 'light'
         }
       ]

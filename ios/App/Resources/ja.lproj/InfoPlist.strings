@@ -1,0 +1,19 @@
+/* 
+  InfoPlist.strings
+  App
+
+  Created by Galvin Gao on 2020/9/28.
+  
+*/
+
+"CFBundleDisplayName" = "ペンギン急便"; # App 在主屏幕上的名称，尽量简短
+"CFBundleName" = "ペンギン急便データ統計処理部門"; # App 在 App Store 的名称，可以稍微长一些
+
+"SIRI_USAGE_DESCRIPTION" = "データはSiriに送りします"; # Apple 要这个，就按这个意思写一下就行，用户看不到
+
+"SHORTCUT_ITEM_SEARCH_TITLE" = "検索"; # 快速搜索的快捷方式栏，见下图
+"SHORTCUT_ITEM_SEARCH_SUBTITLE" = "グローバル検索へ";
+//"SHORTCUT_ITEM_DATE_TITLE" = "活动：踏寻往昔之风";
+//"SHORTCUT_ITEM_DATE_SUBTITLE" = "查看相关掉率";
+//"SHORTCUT_ITEM_AUTO_TITLE" = "自动掉落汇报";
+//"SHORTCUT_ITEM_AUTO_SUBTITLE" = "设置策略并开始...";
