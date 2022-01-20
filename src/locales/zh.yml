@@ -531,8 +531,16 @@ planner:
       _name: 配置代码
       share: 分享配置代码
       import: 导入配置代码
-    done: 合成完成
-    undo: 合成撤销
+  craft: 
+    do: 合成
+    unable: 无法合成
+    errors:
+      title: "合成缺少所需物品"
+      notEnough: "需要 {need} 个「{item}」以合成，但仅已有 {have} 个"
+    plans:
+      title: "合成规划"
+      plan: "将使用 {cost} 个「{item}」合成并剩余 {remain} 个"
+    success: "已使用 {sourceItems} 合成 {amount} 个 {productItem}"
   have: 已有
   need: 需要
   copy: 复制到剪贴板

@@ -333,7 +333,9 @@
                   <strong class="text-glow">{{ $t('report.dossolesHoliday.title.inner') }}</strong>
                 </i18n>
               </h3>
-              <p class="subtitle-2">{{ $t('report.dossolesHoliday.content') }}</p>
+              <p class="subtitle-2">
+                {{ $t('report.dossolesHoliday.content') }}
+              </p>
             </v-alert>
 
             <v-row
