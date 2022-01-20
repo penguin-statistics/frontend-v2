@@ -214,7 +214,7 @@
               class="align-self-stretch"
             >
               <v-card class="card-item">
-                <v-card-text>
+                <v-card-text class="d-flex flex-column fill-height">
                   <div class="title d-flex justify-start">
                     <span
                       v-ripple
@@ -240,28 +240,31 @@
                   <div class="display-1 text-center monospace font-weight-bold my-2">
                     &times;{{ parseTimes(synthesis.count) }}
                   </div>
-                  <div
-                    v-for="item in synthesis.items"
-                    :key="item.name"
-                    class="d-inline-flex mx-2 my-1 cursor-pointer"
-                    @click="redirectItem(item.item.itemId)"
-                  >
-                    <v-badge
-                      bottom
-                      overlap
-                      bordered
-                      label
-                      color="secondary"
-                      :offset-x="24"
-                      :offset-y="20"
-                      :content="`×${parseAmount(item.value)}`"
+                  <div class="d-flex flex-wrap">
+                    <div
+                      v-for="item in synthesis.items"
+                      :key="item.name"
+                      class="d-inline-flex mx-2 my-1 cursor-pointer"
+                      @click="redirectItem(item.item.itemId)"
                     >
-                      <Item
-                        :item="item.item"
-                      />
-                    </v-badge>
+                      <v-badge
+                        bottom
+                        overlap
+                        bordered
+                        label
+                        color="secondary"
+                        :offset-x="24"
+                        :offset-y="20"
+                        :content="`×${parseAmount(item.value)}`"
+                      >
+                        <Item
+                          :item="item.item"
+                        />
+                      </v-badge>
+                    </div>
                   </div>
-                  <div class="flex align-end mt-2">
+                  <v-spacer />
+                  <div class="d-flex justify-center mt-2">
                     <v-tooltip
                       v-if="synthesis.craftPlan.plans"
                       content-class="transparent"
@@ -288,7 +291,7 @@
                         </v-btn>
                       </template>
                       <v-card
-                        max-width="300px"
+                        max-width="350px"
                         color="background"
                       >
                         <v-card-title class="flex align-center"> 
@@ -337,7 +340,7 @@
                         </v-chip>
                       </template>
                       <v-card
-                        max-width="300px"
+                        max-width="350px"
                         color="background"
                       >
                         <v-card-title class="flex">
@@ -562,10 +565,12 @@ export default {
 
       // 已使用 {sourceItems} 合成 {amount} 个 {productItem}
       snackbar.launch('success', 3000, 'planner.craft.success', {
-        sourceItems: synthesis.craftPlan.plans.map(el => el.item).join(this.$t('meta.separator')),
+        sourceItems: synthesis.craftPlan.plans.map(el => `${el.cost}×${el.item}`).join(this.$t('meta.separator')),
         amount: count,
         productItem: strings.translate(synthesis.target.item, "name")
       })
+
+      this.$emit('recalculate')
     }
 
   }

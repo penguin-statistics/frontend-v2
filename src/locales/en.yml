@@ -516,9 +516,19 @@ planner:
       generating: Generating...
       share: Share Link
     config:
-      _name: Configuration Code
-      share: Share Configuration Code
-      import: Import from Configuration Code
+      _name: Configuration Profile
+      share: Share Configuration Profile
+      import: Import from Configuration Profile
+  craft: 
+    do: Synthesize
+    unable: Missing Mat.
+    errors:
+      title: "Missing Required Materials to Synthesize"
+      notEnough: "Required {need}×\"{item}\" to synthesize, but only have {have}"
+    plans:
+      title: "Synthesize Plans"
+      plan: "Using {cost}×\"{item}\" to synthesize, remaining {remain}"
+    success: "Used {sourceItems} to synthesize {amount} {productItem}"
   have: Have
   need: Need
   copy: Copy to Clipboard
