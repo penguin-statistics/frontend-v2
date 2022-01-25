@@ -187,6 +187,13 @@ report:
     causes:
       noDrop: ドロップアイテムが何も選択されていません。送信するデータに問題はありませんか？
       limitation: 今回報告しようとしている内容は既存のデータとの差が大きくなっており、このまま報告するのであれば今回の報告は異常と判定され、全て統計データに反映されることはできません。
+  specialSideStory:
+    dialog:
+      title: 「ドッソレスホリデー」のラベルドロップについて
+      cancel: 閉じる
+      confirmTimerPending: わかりました ({timer})
+      confirmTimerDone: わかりました
+
   recognition:
     step:
       select: 選択
@@ -344,6 +351,11 @@ report:
     rule_3: 初回クリア時の報酬を報告しないでください。また、極端なロップ結果（極めてよかった・悪かったなど）を報告しないでください。
     rule_4: 星３クリアした時の結果のみを報告してください。
     rule_5: 大陸版以外のドロップデータをアップロードしないよう、ご協力をお願いいたします。
+  dossolesHoliday:
+    title:
+      inner: 全種類のラノベを獲得してから
+      tmpl: "{0}ご報告ください"
+    content: これまでのデータに基づいて、ラノベのドロップ事件は統計的な独立性を満たしていないと推測されます。全種類のラノベを獲得していないなら、そのドロップ率が動態的に変化し、本来のドロップ率とは異なる可能性があります。本来のドロップ率を正確に計算するため、全種類のラノベを獲得してからご報告ください。
   usage: 左クリックで個数を増やし、右クリックで個数を減らす
 settings:
   category:
@@ -383,6 +395,7 @@ zone:
     2019: "2019"
     2020: "2020"
     2021: "2021"
+    2022: "2022"
   status:
     '0': 開催中
     '1': 終了
@@ -444,6 +457,16 @@ planner:
     dialog:
       title: ArkPlannerをリセット
       subtitle: すべてのデータや設定はリセットされます。続行しますか？
+      options:
+        options:
+          name: オプション
+          indicator: 全てのオプションをオフにします
+        excludes:
+          name: ステージ除外
+          indicator: 全ての除外をオフにします
+        items:
+          name: 素材データ
+          indicator: 全ての素材個数をリセットします
   actions:
     _name: データ
     import: インポート
@@ -458,6 +481,16 @@ planner:
   have: 所持数
   need: 必要数
   copy: クリップボードにコピー
+  craft: 
+    do: 加工
+    unable: 加工できません
+    errors:
+      title: "加工には必要な素材が欠けています"
+      notEnough: "加工には {need} 個の「{item}」が必要ですが、 {have} 個しか保有していません"
+    plans:
+      title: "加工プラン"
+      plan: "加工には {cost} 個の「{item}」を消耗して、 残り{remain} 個あります"
+    success: " {sourceItems} を使って {amount} 個の {productItem} に加工しました"
   calculation:
     title: 計算結果
     tabs:

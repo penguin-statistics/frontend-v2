@@ -776,3 +776,6 @@
 .theme--dark .v-image--fade-down > .v-image__image {
 }
 
+.lang-en .v-card__title {
+    word-break: normal !important;
+}

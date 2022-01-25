@@ -7,8 +7,8 @@
 
 import Capacitor
 import CoreSpotlight
-import RxBus
-import RxSwift
+//import RxBus
+//import RxSwift
 import CoreHaptics
 
 @objc(PenguinPlugin)
@@ -16,11 +16,11 @@ public class PenguinPlugin: CAPPlugin {
     let currentUserActivityKey = "CurrentUserActivity"
     
     @objc func listenerReady(_ call: CAPPluginCall) {
-        RxBus.shared.asObservable(event: Events.NetworkPathChanged.self, sticky: true).subscribe { event in
-            print("got NetworkPathChanged event", event)
-            let jsonData = try! JSONEncoder().encode(event.element!)
-            self.emitPenguinEvent(on: "networkPathChanged", with: jsonData.toString())
-        }
+//        RxBus.shared.asObservable(event: Events.NetworkPathChanged.self, sticky: true).subscribe { event in
+//            print("got NetworkPathChanged event", event)
+//            let jsonData = try! JSONEncoder().encode(event.element!)
+//            self.emitPenguinEvent(on: "networkPathChanged", with: jsonData.toString())
+//        }
     }
     
     @objc func emitPenguinEvent(on listener: String, with content: String?) {

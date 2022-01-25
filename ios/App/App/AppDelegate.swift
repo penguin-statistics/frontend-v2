@@ -4,8 +4,8 @@ import Capacitor
 import SwiftUI
 import Network
 
-import RxBus
-import RxSwift
+//import RxBus
+//import RxSwift
 import os
 
 let alreadyLaunchedKey = "alreadyLaunched"
@@ -121,11 +121,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                     isConstrained = path.isConstrained
                 }
                 
-                RxBus.shared.post(event: Events.NetworkPathChanged(
-                    isConstrained: isConstrained,
-                    isIPv4Supported: path.supportsIPv4,
-                    isIPv6Supported: path.supportsIPv6
-                ), sticky: true)
+//                RxBus.shared.post(event: Events.NetworkPathChanged(
+//                    isConstrained: isConstrained,
+//                    isIPv4Supported: path.supportsIPv4,
+//                    isIPv6Supported: path.supportsIPv6
+//                ), sticky: true)
             }
 
             monitor.start(queue: DispatchQueue.global(qos: .background))

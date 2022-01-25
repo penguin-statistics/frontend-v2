@@ -6,13 +6,13 @@
 //
 
 import Foundation
-import RxBus
-import RxSwift
+//import RxBus
+//import RxSwift
 
-struct Events {
-    struct NetworkPathChanged: BusEvent, Encodable {
-        let isConstrained: Bool
-        let isIPv4Supported: Bool
-        let isIPv6Supported: Bool
-    }
-}
+//struct Events {
+//    struct NetworkPathChanged: BusEvent, Encodable {
+//        let isConstrained: Bool
+//        let isIPv4Supported: Bool
+//        let isIPv6Supported: Bool
+//    }
+//}

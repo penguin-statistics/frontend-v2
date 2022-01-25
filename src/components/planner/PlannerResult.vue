@@ -204,7 +204,7 @@
             justify="start"
           >
             <v-col
-              v-for="synthesis in result.syntheses"
+              v-for="synthesis in craftChecked.syntheses"
               :key="synthesis.target.item.itemId"
               cols="12"
               sm="6"
@@ -214,7 +214,7 @@
               class="align-self-stretch"
             >
               <v-card class="card-item">
-                <v-card-text>
+                <v-card-text class="d-flex flex-column fill-height">
                   <div class="title d-flex justify-start">
                     <span
                       v-ripple
@@ -240,26 +240,130 @@
                   <div class="display-1 text-center monospace font-weight-bold my-2">
                     &times;{{ parseTimes(synthesis.count) }}
                   </div>
-                  <div
-                    v-for="item in synthesis.items"
-                    :key="item.name"
-                    class="d-inline-flex mx-2 my-1 cursor-pointer"
-                    @click="redirectItem(item.item.itemId)"
-                  >
-                    <v-badge
-                      bottom
-                      overlap
-                      bordered
-                      label
-                      color="secondary"
-                      :offset-x="24"
-                      :offset-y="20"
-                      :content="`×${parseAmount(item.value)}`"
+                  <div class="d-flex flex-wrap">
+                    <div
+                      v-for="item in synthesis.items"
+                      :key="item.name"
+                      class="d-inline-flex mx-2 my-1 cursor-pointer"
+                      @click="redirectItem(item.item.itemId)"
                     >
-                      <Item
-                        :item="item.item"
-                      />
-                    </v-badge>
+                      <v-badge
+                        bottom
+                        overlap
+                        bordered
+                        label
+                        color="secondary"
+                        :offset-x="24"
+                        :offset-y="20"
+                        :content="`×${parseAmount(item.value)}`"
+                      >
+                        <Item
+                          :item="item.item"
+                        />
+                      </v-badge>
+                    </div>
+                  </div>
+                  <v-spacer />
+                  <div class="d-flex justify-center mt-2">
+                    <v-tooltip
+                      v-if="synthesis.craftPlan.plans"
+                      content-class="transparent"
+                      bottom
+                      transition="slide-y-transition"
+                    >
+                      <template #activator="{ on, attrs }">
+                        <v-btn
+                          v-haptic
+                          text
+                          outlined
+                          rounded
+                          v-bind="attrs"
+                          v-on="on"
+                          @click="craftItem(synthesis)"
+                        >
+                          <v-icon
+                            small
+                            left
+                          >
+                            mdi-cube-send
+                          </v-icon>
+                          {{ $t('planner.craft.do') }}
+                        </v-btn>
+                      </template>
+                      <v-card
+                        max-width="350px"
+                        color="background"
+                      >
+                        <v-card-title class="flex align-center"> 
+                          <v-icon
+                            class="mr-2"
+                          >
+                            mdi-cube-send
+                          </v-icon>
+
+                          {{ $t('planner.craft.plans.title') }}
+                        </v-card-title>
+                        <v-card-text>
+                          <ul>
+                            <li
+                              v-for="plan in synthesis.craftPlan.plans"
+                              :key="plan.itemId"
+                            >
+                              {{ $t('planner.craft.plans.plan', plan) }}
+                            </li>
+                          </ul>
+                        </v-card-text>
+                      </v-card>
+                    </v-tooltip>
+
+                    <v-tooltip
+                      v-else
+                      content-class="transparent"
+                      bottom
+                      transition="slide-y-transition"
+                    >
+                      <template #activator="{ on, attrs }">
+                        <v-chip
+                          v-haptic
+                          label
+                          class="unable-craft-label border-outlined"
+                          v-bind="attrs"
+                          v-on="on"
+                        >
+                          <v-icon
+                            small
+                            left
+                          >
+                            mdi-cancel
+                          </v-icon>
+                          {{ $t('planner.craft.unable') }}
+                        </v-chip>
+                      </template>
+                      <v-card
+                        max-width="350px"
+                        color="background"
+                      >
+                        <v-card-title class="flex">
+                          <v-icon
+                            class="mr-2"
+                          >
+                            mdi-cancel
+                          </v-icon>
+
+                          {{ $t('planner.craft.errors.title') }}
+                        </v-card-title>
+                        <v-card-text>
+                          <ul>
+                            <li
+                              v-for="error in synthesis.craftPlan.errors"
+                              :key="error"
+                            >
+                              {{ error }}
+                            </li>
+                          </ul>
+                        </v-card-text>
+                      </v-card>
+                    </v-tooltip>
                   </div>
                 </v-card-text>
               </v-card>
@@ -336,6 +440,9 @@
 <script>
 import Item from '@/components/global/Item'
 import formatter from '@/utils/formatter'
+import get from '@/utils/getters';
+import strings from '@/utils/strings';
+import snackbar from '@/utils/snackbar';
 export default {
   name: 'PlannerResult',
   components: { Item },
@@ -363,6 +470,17 @@ export default {
       }]
     }
   },
+  computed: {
+    craftChecked() {
+      return {
+        ...this.result,
+        syntheses: this.result.syntheses.map(el => ({
+          ...el,
+          craftPlan: this.craftCheck(el)
+        }))
+      }
+    }
+  },
   methods: {
     redirectItem (itemId) {
       this.$router.push({
@@ -386,7 +504,75 @@ export default {
     },
     parseAmount (num) {
       return formatter.thousandSeparator(parseFloat(num))
+    },
+    printSyn (syn){
+      console.log(syn)
+    },
+    craftCheck (synthesis) {
+      const errors = []
+      const candidatePlan = []
+      let planner = this.$store.state.planner
+
+      const check = (plannerItem, amount) => {
+        if (!plannerItem) return false
+        return plannerItem.have >= amount
+      }
+
+      for (const [itemId, amountString] of Object.entries(synthesis.materials)) {
+        const plannerItem = planner.items.find(el => el.id === itemId) || {}
+        const amount = (() => {
+          try {
+            return parseFloat(amountString)
+          } catch (e) {
+            return 0
+          }
+        })()
+
+        const itemName = strings.translate(get.items.byItemId(itemId), "name")
+        if (!check(plannerItem, amount)) {
+          errors.push(this.$t('planner.craft.errors.notEnough', {
+            itemId,
+            item: itemName,
+            need: amount,
+            have: plannerItem.have || 0
+          }))
+        } else {
+          const cost = Math.ceil(amount)
+          candidatePlan.push({
+            itemId,
+            item: itemName,
+            need: amount,
+            cost,
+            remain: plannerItem.have - cost
+          })
+        }
+      }
+
+      if (errors.length === 0) return { plans: candidatePlan }
+      else return { errors }
+    },
+    craftItem (synthesis) {
+      let items = this.$store.state.planner.items
+      // subtract cost item
+      for (let plan of synthesis.craftPlan.plans) {
+        const costItem = items.findIndex(el => el.id === plan.itemId)
+        items[costItem]["have"] -= plan.cost
+      }
+      // and add product item
+      const count = parseInt(synthesis.count)
+      const productItem = items.findIndex(el => el.id === synthesis.target.item.itemId)
+      items[productItem]["have"] += count
+
+      // 已使用 {sourceItems} 合成 {amount} 个 {productItem}
+      snackbar.launch('success', 3000, 'planner.craft.success', {
+        sourceItems: synthesis.craftPlan.plans.map(el => `${el.cost}×${el.item}`).join(this.$t('meta.separator')),
+        amount: count,
+        productItem: strings.translate(synthesis.target.item, "name")
+      })
+
+      this.$emit('recalculate')
     }
+
   }
 }
 </script>
@@ -404,5 +590,18 @@ export default {
     text-transform: initial;
     flex: inherit;
     position: relative;
+  }
+  .unable-craft-label {
+    height: 36px !important;
+    min-width: 64px !important;
+    padding: 0 16px !important;
+    line-height: 22px !important;
+    font-size: 0.875rem !important;
+    text-indent: .0892857143em !important;
+    letter-spacing: .0892857143em !important;
+    text-transform: uppercase;
+    background: transparent !important;
+    border-radius: 28px !important;
+    opacity: 0.5;
   }
 </style>

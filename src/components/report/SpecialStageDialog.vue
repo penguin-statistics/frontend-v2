@@ -13,9 +13,11 @@
 
       <v-card-text class="pt-4">
         <h3 class="title mb-2">
-          请<strong class="text-glow">确保集齐所有标志物</strong>后再进行汇报
+          <i18n path="report.dossolesHoliday.title.tmpl">
+            <strong class="text-glow">{{ $t('report.dossolesHoliday.title.inner') }}</strong>
+          </i18n>
         </h3>
-        <p>根据初步数据统计推测，标志物掉率计算事件可能不满足独立前提，即：在所有标志物被集齐前、其掉率可能会产生动态变化。因此，我们决定仅收集集齐所有标志物后的掉率数据</p>
+        <p>{{ $t('report.dossolesHoliday.content') }}</p>
       </v-card-text>
 
       <v-divider />

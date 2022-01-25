@@ -25,17 +25,19 @@
       max-width="calc(max(450px, 80vw))"
       :persistent="calculation.pending"
       no-click-animation
+      class="position-relative"
     >
-      <PreloaderCard
-        v-if="calculation.pending"
-        :title="$t('planner.actions.calculating')"
-        overline="Performing ArkPlanner Calculation"
-      />
-      <v-slide-y-transition>
+      <v-slide-y-transition mode="out-in">
+        <PreloaderCard
+          v-if="calculation.pending"
+          :title="$t('planner.actions.calculating')"
+          overline="Performing ArkPlanner Calculation"
+        />
         <PlannerResult
-          v-if="calculation.done"
+          v-if="!calculation.pending && calculation.done"
           :result="calculation.data"
           @close="resultDialog = false"
+          @recalculate="resultDialog = false; calculate()"
         />
       </v-slide-y-transition>
     </v-dialog>
