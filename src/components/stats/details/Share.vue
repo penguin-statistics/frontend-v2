@@ -153,7 +153,7 @@ export default {
     socials () {
       // const copy = this.copy
       let socials
-      if (environment.runtime.isApp) {
+      if (environment.isApp) {
         socials = [
           {
             id: 'native',

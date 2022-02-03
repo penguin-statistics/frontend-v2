@@ -106,7 +106,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             let gesture = UITapGestureRecognizer(target: self, action: #selector(self.openDebugger))
             debuggerBtn.addGestureRecognizer(gesture)
 
-            root?.view.addSubview(debuggerBtn)
+//            root?.view.addSubview(debuggerBtn)
         }
         
         #endif

@@ -15,6 +15,13 @@ function boolean (key, rejectApp) {
   return process.env.NODE_ENV !== 'production' || getConfig()[key] || false
 }
 
+
+const isIOS = (/iPad|iPhone|iPod/.test(navigator.platform) ||
+(navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1)) &&
+!window.MSStream
+
+const isAndroid = navigator.userAgent.toLowerCase().indexOf('android') > -1
+
 export default {
   get device () {
     return (async () => {
@@ -25,9 +32,6 @@ export default {
     })()
   },
   get production () { return process.env.NODE_ENV === 'production' },
-  runtime: {
-    get isApp () { return PENGUIN_PLATFORM === 'app' }
-  },
   get isTouchScreen () {
     if (window.matchMedia) return window.matchMedia('(pointer: coarse)').matches
     return 'ontouchstart' in window || window.navigator.maxTouchPoints > 0
@@ -72,6 +76,10 @@ export default {
   get isApp () {
     return PENGUIN_PLATFORM === 'app'
   },
+  isIOS,
+  isAndroid,
+  isAppIOS: PENGUIN_PLATFORM === 'app' && isIOS,
+  isAppAndroid: PENGUIN_PLATFORM === 'app' && isAndroid,
   adapter ({ prod, dev }) {
     return this.production ? prod : dev
   }

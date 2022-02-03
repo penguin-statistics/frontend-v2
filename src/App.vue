@@ -3,7 +3,7 @@
     :class="appEnvironment"
   >
     <ServerNotifyOverlay />
-    <ModuleLoadingOverlay v-if="!environment.runtime.isApp" />
+    <ModuleLoadingOverlay v-if="!environment.isApp" />
     <UpgradeNotifier />
     <GlobalSnackbar />
     <MirrorSelector />
@@ -166,7 +166,7 @@
       >
         <router-view />
       </transition>
-      <Footer v-if="!environment.runtime.isApp" />
+      <Footer v-if="!environment.isApp" />
     </v-content>
     <NetworkStateIndicator />
   </v-app>

@@ -2,6 +2,7 @@ import { mapGetters } from 'vuex'
 import Console from '@/utils/Console'
 import environment from '@/utils/environment'
 import ThemeStyle from "@/mixins/ThemeStyle";
+import { Plugin } from '@capacitor/core';
 
 export default {
   mixins: [ThemeStyle],
@@ -13,6 +14,11 @@ export default {
   },
   created () {
     this.onDarkChange(this.dark)
+  },
+  data () {
+    return {
+      ignoreAutoDetection: false
+    }
   },
   methods: {
     themeToggle (isDark) {
@@ -32,25 +38,44 @@ export default {
       Console.info('Theme', 'setting to', newValue)
       if (newValue === 'dark') {
         this.themeToggle(true)
+
       } else if (newValue === 'light') {
         this.themeToggle(false)
+
       } else if (newValue === 'system') {
-        const self = this
-        if (window.matchMedia) {
-          // if support we then apply the current settings
-          const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)')
-          this.themeToggle(mediaQuery.matches)
-          // and we listen for any additional changes being applied
-          // using deprecated `addListener` instead of `addEventListener`: iOS 13.4 doesn't support `addEventListener`
-          // so the former one has been used. More at https://codepen.io/galvingao/pen/zYvoZeM.
-          mediaQuery.addListener(function (e) {
-            if (self.dark === 'system') self.themeToggle(e.matches)
-          })
-        } else {
-          // if the system doesn't support matchMedia, we then fallback to dark mode
-          this.themeToggle(true)
-        }
+        this.initiateAutoDetection()
       }
+    },
+    async initiateAutoDetection () {
+      const self = this
+      if (window.matchMedia && !environment.isAppAndroid) {
+        // if support we then apply the current settings
+        const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)')
+        this.themeToggle(mediaQuery.matches)
+        // and we listen for any additional changes being applied
+        // using deprecated `addListener` instead of `addEventListener`: iOS 13.4 doesn't support `addEventListener`
+        // so the former one has been used. More at https://codepen.io/galvingao/pen/zYvoZeM.
+        mediaQuery.addListener(function (e) {
+          if (self.dark === 'system' && self.ignoreAutoDetection === false) {
+            self.themeToggle(e.matches)
+          }
+        })
+      } else if (environment.isAppAndroid) {
+        const isDark = await Plugin.PenguinPlugin.isDarkMode()
+        this.themeToggle(isDark)
+
+        Plugin.PenguinPlugin.addListener('onDarkModeChange', (isDark) => {
+          if (self.dark === 'system' && self.ignoreAutoDetection === false) {
+            self.themeToggle(isDark)
+          }
+        })
+      } else {
+        // if the system doesn't support matchMedia, we then fallback to dark mode
+        this.themeToggle(true)
+      }
+    },
+    terminateAutoDetection() {
+      this.ignoreAutoDetection = true
     }
   }
 }
