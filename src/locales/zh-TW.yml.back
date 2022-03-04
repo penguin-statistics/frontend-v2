@@ -141,8 +141,8 @@ contribute:
   contribute_0: 如果您有以下一項或多項經驗，願意為企鵝數據貢獻自己的一份力量，請加QQ群：747099627
   contribute_1: 本項目為無償開源項目
   skills:
-    frontend: 網站前端開發 Vue.js
-    backend: 網站後端開發 Java Spring Boot、MongoDB
+    frontend: 網站前端開發 React
+    backend: 網站後端開發 Go, PostgreSQL
     maintenance: 網站運維
     design: UI/UX設計
     analysis: 數據統計分析

@@ -163,8 +163,8 @@ contribute:
     to Penguin Statistics, contact us at QQ group: 747099627.'
   contribute_1: This is a nonprofit and open source project
   skills:
-    frontend: Front End Development (Vue.js)
-    backend: Back End Development (Java Spring Boot, MongoDB, Golang)
+    frontend: Frontend Development (React)
+    backend: Backend Development (Go, PostgreSQL)
     mobile: Mobile App Development (iOS, Android)
     maintenance: DevOps
     design: UI/UX Design

@@ -64,10 +64,10 @@
     style="height: 100%"
   >
     <h1 class="headline">
-      {{ $t('menu.about.contribute') }}
+      {{ $t("menu.about.contribute") }}
     </h1>
     <div class="caption my-2">
-      * {{ $t('contribute.contribute_1') }}
+      * {{ $t("contribute.contribute_1") }}
     </div>
 
     <v-row
@@ -82,11 +82,11 @@
         rel="noopener"
         :class="{
           'mx-2': $vuetify.breakpoint.smAndUp,
-          'mx-1': $vuetify.breakpoint.xsOnly
+          'mx-1': $vuetify.breakpoint.xsOnly,
         }"
         text
       >
-        {{ $t('contribute.frontend') }}
+        {{ $t("contribute.frontend") }}
         <v-icon right>
           mdi-github-circle
         </v-icon>
@@ -96,16 +96,16 @@
 
       <v-btn
         v-haptic
-        href="https://github.com/penguin-statistics/backend"
+        href="https://github.com/penguin-statistics/backend-next"
         target="_blank"
         rel="noopener"
         :class="{
           'mx-2': $vuetify.breakpoint.smAndUp,
-          'mx-1': $vuetify.breakpoint.xsOnly
+          'mx-1': $vuetify.breakpoint.xsOnly,
         }"
         text
       >
-        {{ $t('contribute.backend') }}
+        {{ $t("contribute.backend") }}
         <v-icon right>
           mdi-github-circle
         </v-icon>
@@ -113,17 +113,15 @@
     </v-row>
 
     <p class="subtitle-1 pl-0 mt-2">
-      {{ $t('contribute.contribute_0') }}
+      {{ $t("contribute.contribute_0") }}
     </p>
 
     <ul class="ml-2 mb-2">
       <li>
-        <v-icon
-          small
-        >
+        <v-icon small>
           mdi-penguin
         </v-icon>
-        {{ $t('contribute.qq_group') }}747099627
+        {{ $t("contribute.qq_group") }}747099627
       </li>
       <li>
         <v-chip
@@ -210,22 +208,22 @@
 </template>
 
 <script>
-import BackdropCard from '@/components/global/BackdropCard'
+import BackdropCard from "@/components/global/BackdropCard";
 
 export default {
-  name: 'Contribute',
+  name: "Contribute",
   components: {
-    BackdropCard
+    BackdropCard,
   },
-  data () {
+  data() {
     return {
       skills: [
-        'frontend',
-        'backend',
-        'mobile',
-        'maintenance',
-        'design',
-        'analysis'
+        "frontend",
+        "backend",
+        "mobile",
+        "maintenance",
+        "design",
+        "analysis",
       ],
       links: [
         // {
@@ -235,21 +233,21 @@ export default {
         //   external: true
         // },
         {
-          url: 'https://developer.penguin-stats.io',
-          icon: 'mdi-dev-to',
-          title: 'link.docs.title',
-          subtitle: 'link.docs.subtitle',
-          external: true
-        }
-      ]
-    }
-  }
-}
+          url: "https://developer.penguin-stats.io",
+          icon: "mdi-dev-to",
+          title: "link.docs.title",
+          subtitle: "link.docs.subtitle",
+          external: true,
+        },
+      ],
+    };
+  },
+};
 </script>
 
 <style scoped>
-  .outline {
-    box-shadow: 0 0 0 2px rgba(0,0,0,0.54) !important;
-    border-radius: 4px
-  }
+.outline {
+  box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.54) !important;
+  border-radius: 4px;
+}
 </style>

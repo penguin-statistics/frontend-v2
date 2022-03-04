@@ -158,8 +158,8 @@ contribute:
   contribute_0: 如果您有以下一项或多项经验，愿意为企鹅数据贡献自己的一份力量，请加QQ群：747099627
   contribute_1: 本项目为无偿开源项目
   skills:
-    frontend: 网站前端开发（Vue.js）
-    backend: 网站后端开发（Java Spring Boot、MongoDB、Golang）
+    frontend: 网站前端开发（React）
+    backend: 网站后端开发（Go, PostgreSQL）
     mobile: 移动端 App 开发（iOS、Android）
     maintenance: 网站运维
     design: UI/UX设计
