@@ -1,16 +1,26 @@
 <template>
   <v-card class="bkop-light mx-4 pt-4">
-    <v-item-group v-model="index" class="text-center py-2" mandatory>
+    <v-item-group
+      v-model="index"
+      class="text-center py-2"
+      mandatory
+    >
       <v-item
         v-for="n in value.length"
         :key="`btn-${n}`"
         v-slot:default="{ active, toggle }"
       >
-        <v-btn :input-value="active" icon @click="toggle">
+        <v-btn
+          :input-value="active"
+          icon
+          @click="toggle"
+        >
           <v-icon v-if="n === 1">
             mdi-poll-box
           </v-icon>
-          <v-icon v-else> mdi-numeric-{{ n - 1 }}-box </v-icon>
+          <v-icon v-else>
+            mdi-numeric-{{ n - 1 }}-box
+          </v-icon>
         </v-btn>
       </v-item>
     </v-item-group>
@@ -103,7 +113,10 @@
     >
       <v-card class="pa-5 py-10">
         <v-row justify="center">
-          <v-col cols="12" class="text-center">
+          <v-col
+            cols="12"
+            class="text-center"
+          >
             <v-progress-circular
               indeterminate
               :size="32"
@@ -119,7 +132,12 @@
             <p class="subtitle-1 mb-4">
               <DoYouKnow />
             </p>
-            <v-btn v-haptic outlined color="error" @click="cancel">
+            <v-btn
+              v-haptic
+              outlined
+              color="error"
+              @click="cancel"
+            >
               取消查询
             </v-btn>
           </v-col>
