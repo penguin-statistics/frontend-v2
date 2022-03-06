@@ -129,8 +129,17 @@ export default {
       index: null,
       logs: [
         {
+          version: "v3.6.7",
+          date: "2021-03-07T03:21:00+0800",
+          changes: `## 新增
+1. Sentry 多端统一性能跟踪
+
+## 修复
+1. 多处由于升级 Capacitor v3 造成的错误`,
+        },
+        {
           version: "v3.6.6",
-          date: "2021-01-25T11:30:00+0800",
+          date: "2021-03-05T03:50:00+0800",
           changes: `## 新增
 1. 重新开放个人掉率查询
 
