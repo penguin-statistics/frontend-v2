@@ -1106,6 +1106,11 @@
   resolved "https://registry.npmmirror.com/@capacitor/ios/download/@capacitor/ios-2.5.0.tgz#867b155c4a827631ab0884319e33f8dad15bc781"
   integrity sha1-hnsVXEqCdjGrCIQxnjP42tFbx4E=
 
+"@capacitor/share@^1.1.2":
+  version "1.1.2"
+  resolved "https://registry.npmmirror.com/@capacitor/share/-/share-1.1.2.tgz#7e35c2c3bccc9955e852d3dd401afe7bd5a69b7e"
+  integrity sha512-FUTdjA7MAiD1tkGVZ+C3gs7a4fyEhXojDO2HkZ954oupG1cQ51dEJ1xTNnR9BAmCwUJO4sa91cxy7SMyCDPuGg==
+
 "@capacitor/splash-screen@^1.2.2":
   version "1.2.2"
   resolved "https://registry.npmmirror.com/@capacitor/splash-screen/-/splash-screen-1.2.2.tgz#fabd52ffbb922c38e2b3ef605332f29c830bd508"

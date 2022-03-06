@@ -17,7 +17,7 @@ Sentry.init({
   integrations: [
     new BrowserTracing({
       routingInstrumentation: Sentry.vueRouterInstrumentation(router),
-      tracingOrigins: ["penguin-stats.cn", "penguin-stats.io"],
+      tracingOrigins: ["penguin-stats.cn", "penguin-stats.io", /^\//],
     }),
   ],
   trackComponents: [
@@ -28,7 +28,7 @@ Sentry.init({
     "StatsByItem",
     "StageSelector",
   ],
-  tracesSampleRate: environment.production ? 0.005 : 1.0,
+  tracesSampleRate: environment.production ? 0.05 : 1.0,
   release: (config.project || "unknown") + "@" + (config.version || "unknown"),
   ignoreErrors: [
     /// / START: those errors are found at https://docs.sentry.io/platforms/javascript/#decluttering-sentry
