@@ -1,7 +1,18 @@
 <template>
-  <v-container class="fill-height align-start" fluid>
-    <v-snackbar v-model="submitted" color="success" :timeout="0" bottom>
-      <v-row align="center" class="mx-0 z-index-5">
+  <v-container
+    class="fill-height align-start"
+    fluid
+  >
+    <v-snackbar
+      v-model="submitted"
+      color="success"
+      :timeout="0"
+      bottom
+    >
+      <v-row
+        align="center"
+        class="mx-0 z-index-5"
+      >
         <v-icon class="mr-4">
           mdi-check
         </v-icon>
@@ -18,25 +29,42 @@
           ripple
           @click="undo"
         >
-          <v-icon small class="mr-1">
+          <v-icon
+            small
+            class="mr-1"
+          >
             mdi-undo
           </v-icon>
           {{ $t("report.undo") }}
         </v-btn>
 
-        <v-btn v-haptic class="ml-4" text @click="submitted = false">
+        <v-btn
+          v-haptic
+          class="ml-4"
+          text
+          @click="submitted = false"
+        >
           {{ $t("meta.dialog.close") }}
         </v-btn>
       </v-row>
     </v-snackbar>
 
-    <v-snackbar v-model="undid" color="success" :timeout="15000" bottom>
+    <v-snackbar
+      v-model="undid"
+      color="success"
+      :timeout="15000"
+      bottom
+    >
       <v-icon class="mr-4">
         mdi-check-all
       </v-icon>
       {{ $t("report.undoSuccess") }}
       <v-spacer />
-      <v-btn v-haptic text @click="undid = false">
+      <v-btn
+        v-haptic
+        text
+        @click="undid = false"
+      >
         {{ $t("meta.dialog.close") }}
       </v-btn>
     </v-snackbar>
@@ -54,7 +82,10 @@
       class="pa-3"
       @select="select"
     >
-      <v-card v-if="selected.stage" class="bkop-light pa-2 content-card">
+      <v-card
+        v-if="selected.stage"
+        class="bkop-light pa-2 content-card"
+      >
         <v-overlay
           :opacity="0.75"
           absolute
@@ -68,7 +99,11 @@
             justify="center"
             class="fill-height text-center mx-3"
           >
-            <v-icon large class="d-block mb-3" style="width: 100%">
+            <v-icon
+              large
+              class="d-block mb-3"
+              style="width: 100%"
+            >
               mdi-cancel
             </v-icon>
             <span class="title">
@@ -77,7 +112,10 @@
           </v-row>
         </v-overlay>
 
-        <v-row class="ma-4 z-index-5" align="start">
+        <v-row
+          class="ma-4 z-index-5"
+          align="start"
+        >
           <h1 class="title no-wrap--text">
             <span class="subtitle-2">{{
               strings.translate(selectedZone, "zoneName")
@@ -103,14 +141,20 @@
               params: { zoneId: selected.zone, stageId: selected.stage },
             }"
           >
-            <v-icon left small>
+            <v-icon
+              left
+              small
+            >
               mdi-chart-pie
             </v-icon>
             {{ $t("menu.stats._name") }}
           </v-btn>
         </v-row>
 
-        <v-row align="start" justify="center">
+        <v-row
+          align="start"
+          justify="center"
+        >
           <v-col
             cols="12"
             sm="12"
@@ -155,7 +199,11 @@
               </span>
             </v-container>
 
-            <v-row justify="center" class="mx-2 mb-5" dense>
+            <v-row
+              justify="center"
+              class="mx-2 mb-5"
+              dense
+            >
               <v-col cols="12">
                 <v-switch
                   v-model="furniture"
@@ -177,7 +225,10 @@
                         :offset-y="10"
                         class="mr-3"
                       >
-                        <ItemIcon :item="getItem('furni')" :ratio="0.5" />
+                        <ItemIcon
+                          :item="getItem('furni')"
+                          :ratio="0.5"
+                        />
                       </v-badge>
                     </v-slide-x-transition>
                     <span>
@@ -225,7 +276,10 @@
                     {{ serverName }}
                   </span>
                 </div>
-                <v-divider vertical class="mx-2" />
+                <v-divider
+                  vertical
+                  class="mx-2"
+                />
                 <span>
                   {{ $t("report.submit") }}
                 </span>
@@ -250,7 +304,11 @@
             >
               {{ $t("report.usage") }}
             </v-alert>
-            <v-alert color="orange darken-3" border="left" class=" mx-2">
+            <v-alert
+              color="orange darken-3"
+              border="left"
+              class=" mx-2"
+            >
               <ol>
                 <li v-if="!isGacha">
                   {{ $t("report.notices.rule_1") }}
@@ -323,7 +381,10 @@
                     {{ serverName }}
                   </span>
                 </div>
-                <v-divider vertical class="mx-2" />
+                <v-divider
+                  vertical
+                  class="mx-2"
+                />
                 <span>
                   {{ $t("report.submit") }}
                 </span>
@@ -336,15 +397,24 @@
       </v-card>
     </StageSelector>
 
-    <v-dialog v-model="dialog.enabled" width="500">
+    <v-dialog
+      v-model="dialog.enabled"
+      width="500"
+    >
       <v-card>
-        <v-card-title class="headline pa-5" :class="slashStripClasses">
+        <v-card-title
+          class="headline pa-5"
+          :class="slashStripClasses"
+        >
           <v-icon>mdi-alert</v-icon>
           <span class="pl-2">{{ $t("report.alert.title.first") }}</span>
         </v-card-title>
 
         <v-card-text class="mt-4">
-          <div v-if="results.length" class="d-flex flex-column">
+          <div
+            v-if="results.length"
+            class="d-flex flex-column"
+          >
             <span>
               {{ $t("report.alert.causes.limitation") }}
             </span>
@@ -358,7 +428,10 @@
             {{ $t("report.alert.causes.noDrop") }}
           </p>
 
-          <p v-if="results.length" class="subtitle-1 mt-4">
+          <p
+            v-if="results.length"
+            class="subtitle-1 mt-4"
+          >
             {{ $t("report.alert.contact.before") }}
 
             <v-btn
@@ -384,11 +457,21 @@
         <v-divider />
 
         <v-card-actions>
-          <v-btn v-haptic color="primary" text @click="dialog.enabled = false">
+          <v-btn
+            v-haptic
+            color="primary"
+            text
+            @click="dialog.enabled = false"
+          >
             {{ $t("meta.dialog.cancel") }}
           </v-btn>
           <v-spacer />
-          <v-btn v-haptic color="error" text @click="confirmSubmit">
+          <v-btn
+            v-haptic
+            color="error"
+            text
+            @click="confirmSubmit"
+          >
             {{ $t("meta.dialog.confirm") }}
           </v-btn>
         </v-card-actions>

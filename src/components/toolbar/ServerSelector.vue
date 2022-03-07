@@ -1,5 +1,10 @@
 <template>
-  <v-menu bottom left open-on-hover transition="slide-y-transition">
+  <v-menu
+    bottom
+    left
+    open-on-hover
+    transition="slide-y-transition"
+  >
     <template #activator="{ on, attrs }">
       <v-btn
         v-haptic
@@ -10,11 +15,17 @@
         :disabled="serverLocked"
         v-on="on"
       >
-        <v-icon left small>
+        <v-icon
+          left
+          small
+        >
           {{ serverLocked ? "mdi-server-security" : "mdi-server" }}
         </v-icon>
         <div class="d-flex flex-column align-start justify-center">
-          <span class="caption" style="line-height: 1rem">
+          <span
+            class="caption"
+            style="line-height: 1rem"
+          >
             <span class="degraded-opacity">
               {{ $t("server.name") }}
             </span>
@@ -24,7 +35,11 @@
           </span>
         </div>
         <v-scale-transition origin="center center">
-          <v-icon v-if="serverLocked" right small>
+          <v-icon
+            v-if="serverLocked"
+            right
+            small
+          >
             mdi-lock
           </v-icon>
         </v-scale-transition>
@@ -32,13 +47,23 @@
     </template>
 
     <v-list>
-      <v-subheader style="height: 36px;" class="mb-1">
-        <v-icon small color="grey lighten-1" class="mr-2">
+      <v-subheader
+        style="height: 36px;"
+        class="mb-1"
+      >
+        <v-icon
+          small
+          color="grey lighten-1"
+          class="mr-2"
+        >
           mdi-server
         </v-icon>
         {{ $t("server.name") }}
       </v-subheader>
-      <v-list-item-group v-model="activeServer" mandatory>
+      <v-list-item-group
+        v-model="activeServer"
+        mandatory
+      >
         <v-list-item
           v-for="(server, i) in servers"
           :key="i"
@@ -55,7 +80,10 @@
               :width="2"
               :size="16"
             />
-            <v-icon v-else small>
+            <v-icon
+              v-else
+              small
+            >
               mdi-check
             </v-icon>
           </v-list-item-action>

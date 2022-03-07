@@ -1,5 +1,8 @@
 <template>
-  <v-container fluid class="fill-height">
+  <v-container
+    fluid
+    class="fill-height"
+  >
     <RecognitionImageDialog v-model="expandImage.src" />
 
     <!--    <v-dialog-->
@@ -36,7 +39,11 @@
     <!--      </v-card>-->
     <!--    </v-dialog>-->
 
-    <v-row justify="center" align="center" class="fill-height">
+    <v-row
+      justify="center"
+      align="center"
+      class="fill-height"
+    >
       <v-col cols="12">
         <v-card class="bkop-medium">
           <v-card-title
@@ -75,7 +82,10 @@
             :class="{ 'dense-stepper': $vuetify.breakpoint.xs }"
             vertical
           >
-            <v-stepper-step :complete="step > 1" step="1">
+            <v-stepper-step
+              :complete="step > 1"
+              step="1"
+            >
               {{ $t("report.recognition.step.select") }}
             </v-stepper-step>
 
@@ -117,7 +127,10 @@
               </template>
             </v-stepper-content>
 
-            <v-stepper-step :complete="step > 2" step="2">
+            <v-stepper-step
+              :complete="step > 2"
+              step="2"
+            >
               {{ $t("report.recognition.step.recognize") }}
             </v-stepper-step>
 
@@ -202,7 +215,10 @@
               </template>
             </v-stepper-content>
 
-            <v-stepper-step :complete="step > 3" step="3">
+            <v-stepper-step
+              :complete="step > 3"
+              step="3"
+            >
               {{ $t("report.recognition.step.confirm") }}
             </v-stepper-step>
 
@@ -414,7 +430,10 @@
                   </template>
                   <template #body.append>
                     <tr>
-                      <td :class="reportTable.cellClass" class="grey--text">
+                      <td
+                        :class="reportTable.cellClass"
+                        class="grey--text"
+                      >
                         {{ $t("report.recognition.report.total") }}
                       </td>
                       <td :class="reportTable.cellClass">
@@ -460,7 +479,10 @@
                         {{ $t("server.servers." + recognition.server) }}
                       </span>
                     </div>
-                    <v-divider vertical class="mx-2" />
+                    <v-divider
+                      vertical
+                      class="mx-2"
+                    />
                     <span>
                       {{
                         $t("report.recognition.report.submit", {
