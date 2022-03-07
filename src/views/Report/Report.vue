@@ -688,15 +688,15 @@ export default {
       }
     },
     async doSubmit() {
-      const tx = Sentry.startTransaction({ name: "reportSingle" })
-      Sentry.getCurrentHub().configureScope(scope => scope.setSpan(tx))
+      const tx = Sentry.startTransaction({ name: "Event_ReportSingle" });
+      Sentry.getCurrentHub().configureScope((scope) => scope.setSpan(tx));
 
       const span = tx.startChild({
         data: {
           stageId: this.selected.stage,
         },
-        op: 'task',
-      })
+        op: "network.submit",
+      });
 
       this.submitted = false;
       this.submitting = true;
@@ -707,7 +707,7 @@ export default {
             drops: this.results,
           })
           .then(({ data }) => {
-            span.setStatus("ok")
+            span.setStatus("ok");
 
             this.reset();
             this.submitted = true;
@@ -716,14 +716,14 @@ export default {
             this.lastSubmissionId = data;
           })
           .catch(() => {
-            span.setStatus("unknown_error")
+            span.setStatus("unknown_error");
             snackbar.networkError();
           })
           .finally(() => {
             this.submitting = false;
 
-            span.finish()
-            tx.finish()
+            span.finish();
+            tx.finish();
           })
       );
       // Console.debug("Report", "report with context: got performance timer promise", timer)
