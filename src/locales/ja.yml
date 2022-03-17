@@ -381,7 +381,7 @@ zone:
     ACTIVITY_OPEN: イベント（開催中）
     ACTIVITY_CLOSED: イベント（終了）
     ACTIVITY_PENDING: イベント（近日開催）
-    ACTIVITY_PERMANENT: "幕間 & 逸話"
+    ACTIVITY_PERMANENT: "エピソード & サイドストーリー"
     GACHABOX: 補給物資
   subTypes:
     AWAKENING_HOUR:
@@ -393,8 +393,8 @@ zone:
     DYING_SUN:
       title: 残映
       subtitle: "9 章"
-    INTERLUDE: 幕間
-    SIDESTORY: 逸話
+    INTERLUDE: エピソード
+    SIDESTORY: サイドストーリー
     2019: "2019"
     2020: "2020"
     2021: "2021"
