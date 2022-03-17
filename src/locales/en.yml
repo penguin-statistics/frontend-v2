@@ -414,7 +414,7 @@ zone:
     ACTIVITY_OPEN: Event (Open)
     ACTIVITY_CLOSED: Event (Closed)
     ACTIVITY_PENDING: Event (Opening Soon)
-    ACTIVITY_PERMANENT: "Interlude & Sidestory"
+    ACTIVITY_PERMANENT: "Intermezzi & Side Story"
     GACHABOX: Gachabox
   subTypes:
     AWAKENING_HOUR:
@@ -426,8 +426,8 @@ zone:
     DYING_SUN:
       title: Shadow of a Dying Sun
       subtitle: "Episode 9"
-    INTERLUDE: Interlude
-    SIDESTORY: Sidestory
+    INTERLUDE: Intermezzi
+    SIDESTORY: Side Story
     2019: "2019"
     2020: "2020"
     2021: "2021"
