@@ -390,6 +390,9 @@ zone:
     VISION_SHATTER:
       title: 幻滅
       subtitle: "4~8 章"
+    DYING_SUN:
+      title: 夕日
+      subtitle: "9 章"
     INTERLUDE: 幕間
     SIDESTORY: 逸話
     2019: "2019"
