@@ -37,20 +37,6 @@ if (previousState) {
   });
 }
 
-try {
-  // try to use localStorage
-  const localStorage = window.localStorage;
-  localStorage.setItem("test", "test");
-  localStorage.removeItem("test");
-  // use localStorage
-} catch (e) {
-  console.warn(
-    "Storage: localStorage not available: do cleanup for previous cache entries"
-  );
-  localStorage.removeItem("penguin-stats-data");
-  localStorage.removeItem("penguin-stats-cache");
-}
-
 let notifiedStorageIssue = false;
 
 const notifyStorageIssueOnce = () => {
@@ -80,8 +66,20 @@ const inMemoryStorage = {
   },
 };
 
+const isSafari = navigator.userAgent.indexOf("Safari") > -1;
+
+if (isSafari) {
+  // cleanup previous cache before enter when safari
+  localStorage.removeItem("penguin-stats-data");
+  localStorage.removeItem("penguin-stats-cache");
+}
+
 const fullStorages = [localStorage, sessionStorage, inMemoryStorage];
-const partialStorages = [sessionStorage, inMemoryStorage];
+const partialStorages = [
+  ...[isSafari ? [] : localStorage],
+  ...[isSafari ? [] : sessionStorage],
+  inMemoryStorage,
+];
 
 const fallbackedStorage = (storages) => {
   return {
@@ -103,7 +101,7 @@ const fallbackedStorage = (storages) => {
           storage.setItem(key, value);
           return;
         } catch (e) {
-          // ignore error
+          // ignore error but notify once
           notifyStorageIssueOnce();
         }
       }
@@ -115,7 +113,7 @@ const fallbackedStorage = (storages) => {
           storage.removeItem(key);
           return;
         } catch (e) {
-          // ignore error
+          // ignore error but notify once
           notifyStorageIssueOnce();
         }
       }
