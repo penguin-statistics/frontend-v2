@@ -91,9 +91,9 @@ const fallbackedStorage = (storages) => {
           // ignore error but notify once
         }
       }
+      notifyStorageIssueOnce();
       console.warn("Storage: no storage available with getItem for key", key);
       return null;
-      notifyStorageIssueOnce();
     },
     setItem: (key, value) => {
       for (const storage of storages) {
