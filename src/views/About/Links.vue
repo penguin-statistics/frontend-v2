@@ -114,8 +114,8 @@ export default {
                 color: 'grey'
               }
             ],
-            url: 'https://arkonegraph.herokuapp.com/',
-            shorten: 'arkonegraph.herokuapp.com'
+            url: 'https://aog.wiki/',
+            shorten: 'aog.wiki'
           },
           {
             title: 'PRTS',
