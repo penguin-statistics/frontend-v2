@@ -22,6 +22,26 @@
     </v-row>
     <v-row class="full-width">
       <v-col
+        v-for="(link, index) in links.deprecated"
+        :key="index"
+        class="d-flex"
+        cols="12"
+        sm="6"
+        md="4"
+      >
+        <LinkCard
+          :link="link"
+          @navigate="goToHref"
+        />
+      </v-col>
+    </v-row> 
+    <v-row class="full-width">
+      <v-col cols="12">
+        <v-divider />
+      </v-col>
+    </v-row>
+    <v-row class="full-width">
+      <v-col
         v-for="(link, index) in links.misc"
         :key="index"
         class="d-flex"
@@ -49,58 +69,6 @@ export default {
     return {
       links: {
         ark: [
-          {
-            title: '明日方舟工具箱',
-            author: '一只灰喵',
-            features: [
-              {
-                name: 'hr',
-                color: 'cyan'
-              },
-              {
-                name: 'levelup',
-                color: 'green'
-              },
-              {
-                name: 'materials',
-                color: 'indigo'
-              },
-              {
-                name: 'planner',
-                color: 'indigo'
-              },
-              {
-                name: 'storage',
-                color: 'purple'
-              }
-            ],
-            url: 'https://aktools.graueneko.xyz/',
-            shorten: 'aktools.graueneko.xyz'
-          },
-          {
-            title: 'ARK TOOLS',
-            author: 'Laplace',
-            features: [
-              {
-                name: 'character',
-                color: 'orange'
-              },
-              {
-                name: 'enemy',
-                color: 'black'
-              },
-              {
-                name: 'materials',
-                color: 'indigo'
-              },
-              {
-                name: 'planner',
-                color: 'indigo'
-              }
-            ],
-            url: 'https://gachasalt.github.io/ArkToolDemo/#/',
-            shorten: 'gachasalt.github.io/ArkToolDemo'
-          },
           {
             title: '干员培养表',
             author: '凤瞳',
@@ -214,6 +182,60 @@ export default {
             ],
             url: 'https://smartgamecap.net',
             shorten: 'smartgamecap.net'
+          }
+        ],
+        deprecated: [
+          {
+            title: '明日方舟工具箱',
+            author: '一只灰喵',
+            features: [
+              {
+                name: 'hr',
+                color: 'cyan'
+              },
+              {
+                name: 'levelup',
+                color: 'green'
+              },
+              {
+                name: 'materials',
+                color: 'indigo'
+              },
+              {
+                name: 'planner',
+                color: 'indigo'
+              },
+              {
+                name: 'storage',
+                color: 'purple'
+              }
+            ],
+            url: 'https://aktools.graueneko.xyz/',
+            shorten: 'aktools.graueneko.xyz'
+          },
+          {
+            title: 'ARK TOOLS',
+            author: 'Laplace',
+            features: [
+              {
+                name: 'character',
+                color: 'orange'
+              },
+              {
+                name: 'enemy',
+                color: 'black'
+              },
+              {
+                name: 'materials',
+                color: 'indigo'
+              },
+              {
+                name: 'planner',
+                color: 'indigo'
+              }
+            ],
+            url: 'https://gachasalt.github.io/ArkToolDemo/#/',
+            shorten: 'gachasalt.github.io/ArkToolDemo'
           },
           {
             title: '最佳招聘网站',

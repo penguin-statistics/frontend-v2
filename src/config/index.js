@@ -1,4 +1,4 @@
-const version = "v3.6.7";
+const version = (() => NPM_PACKAGE_VERSION)();
 const project = "frontend-v2";
 
 module.exports = {

@@ -2,7 +2,7 @@
 app:
   name: Penguin Statistics
   name_line1: Penguin Statistics
-  name_line2: ''
+  name_line2: ""
 server:
   name: Server
   switch: Switch Server
@@ -61,7 +61,8 @@ meta:
   footer:
     copyright:
       title: License
-      content: Data was collected by Penguin Statistics, licensed under a Creative
+      content:
+        Data was collected by Penguin Statistics, licensed under a Creative
         Commons Attribution-NonCommercial 4.0 International License. In case of redistribution
         and transformation towards the material, you must give appropriate credit,
         provide a link to the license, indicate if changes were made, and may not
@@ -69,14 +70,14 @@ meta:
     credit: Penguin Statistics | {date}
   separator: ", "
   quotation:
-    start: "\""
-    end: "\""
+    start: '"'
+    end: '"'
   boolean:
-    'true': 'Yes'
-    'false': 'No'
+    "true": "Yes"
+    "false": "No"
   hasNorNot:
-    'true': 'Yes'
-    'false': 'No'
+    "true": "Yes"
+    "false": "No"
   dialog:
     cancel: Cancel
     confirm: Confirm
@@ -114,7 +115,7 @@ stats:
     apPPR: Expected Sanity required for getting 1x of this item
     clearTime: "The shortest possible time required to clear this stage, a.k.a. the time duration starting from the beginning of the combat to the appearance of the last enemy. Data source: [PRTS Wiki]({prtsLink})."
     itemPerTime: "With the \"Percentage\" calculated, the expected amount of time required to acquire 1 item is calculated as $$\\frac{\\text{Clear Time}}{\\frac{\\text{Loots}}{\\text{Samples}}}$$"
-    timeRange: "Due to the change of the drop table of this stage, the data in this row will only contain the data from the last change of the drop table, indicated as \"Time Range\""
+    timeRange: 'Due to the change of the drop table of this stage, the data in this row will only contain the data from the last change of the drop table, indicated as "Time Range"'
   filter:
     title: Filter
     indicator: "No Filter Applied | {count} Filter Applied | {count} Filters Applied"
@@ -139,7 +140,7 @@ stats:
       rate: Drop Rate
       sample: Samples
       drops: Drops
-  lastUpdated: 'Last updated at: {date}'
+  lastUpdated: "Last updated at: {date}"
   site:
     viewMore: Learn More
     total:
@@ -152,15 +153,17 @@ stats:
     24hr: Last 24hr
     generating:
       title: Generating Site Statistics...
-      subtitle: 'Neural Network Message: Due to high amount of data, site statistics
-        need up to 5 minutes to calculate. Please come back later.'
+      subtitle:
+        "Neural Network Message: Due to high amount of data, site statistics
+        need up to 5 minutes to calculate. Please come back later."
       refresh: Refresh Site Statistics
 contribute:
-  repo: 'Project repositories: '
+  repo: "Project repositories: "
   frontend: Front End
   backend: Back End
-  contribute_0: 'If you have experience with any of the following, and want to contribute
-    to Penguin Statistics, contact us at QQ group: 747099627.'
+  contribute_0:
+    "If you have experience with any of the following, and want to contribute
+    to Penguin Statistics, contact us at QQ group: 747099627."
   contribute_1: This is a nonprofit and open source project
   skills:
     frontend: Frontend Development (React)
@@ -177,7 +180,8 @@ fetch:
     subtitle: Fetching page modules and rendering view, please wait...
   failed:
     title: Failed to fetch resources
-    subtitle: Unable to establish synchronized connection with neural network. Missing
+    subtitle:
+      Unable to establish synchronized connection with neural network. Missing
       partial or all resources.
     retry: Retry
     deploying: Deploying latest version. This may last at its longest 5 minutes, please wait patiently.
@@ -202,7 +206,7 @@ report:
       first: Are you sure you want to submit this record?
       repeat: Confirm submitting this record?
     contact:
-      before: 'If you are sure you got this drop in-game, submit this report and '
+      before: "If you are sure you got this drop in-game, submit this report and "
       activator: contact us.
       after: Please indicate the stage name and drops. A screenshot is preferred for verification purposes. Our team will mark your report appropiately after verifying it.
     causes:
@@ -215,14 +219,14 @@ report:
       confirm: Confirm
       report: Report
     tips:
-      fileTooBig: "File \"{name}\" with size of {size}MB is too large"
-      fileTooOld: "File \"{name}\" was created before 36hrs ago"
+      fileTooBig: 'File "{name}" with size of {size}MB is too large'
+      fileTooOld: 'File "{name}" was created before 36hrs ago'
       chooseImage: Click or drag to add an image
       dragImage: Drag an image here
       addImage: Click to add an image
       copyImage: Right click or long press the image to share it
-      abnormal: "{count} image(s) have been \"excluded\" because they either failed to pass legibility test, or failed to be recognized"
-      notImageFile: "\"{files}\" are not image files, ignored."
+      abnormal: '{count} image(s) have been "excluded" because they either failed to pass legibility test, or failed to be recognized'
+      notImageFile: '"{files}" are not image files, ignored.'
       emptyResult: No results available
       unsatisfiedStart: Unable to Start
       emptyFile: No images selected
@@ -353,38 +357,43 @@ report:
       not: Should not have exactly {should} items in "{stage}"
   clear: Clear
   closedReason:
-    INVALID: 'Unable to Report: This stage does not contain drop reporting metadata.'
-    NOT_FOUND: 'Stage Not Found: The stage does not exist in the server you have selected.'
-    EXPIRED: 'Not within Reportable Time Range: Either has the stage already closed or has not yet opened.'
-  furniture: 'Furniture Drop: {state}'
+    INVALID: "Unable to Report: This stage does not contain drop reporting metadata."
+    NOT_FOUND: "Stage Not Found: The stage does not exist in the server you have selected."
+    EXPIRED: "Not within Reportable Time Range: Either has the stage already closed or has not yet opened."
+  furniture: "Furniture Drop: {state}"
   name: Report
   submit: Submit
   success: Successfully submitted
-  unable: 'Failed to submit: '
+  unable: "Failed to submit: "
   undo: Recall
   undoSuccess: Successfully recalled submission
   gacha: Multiple results are allowed for the reports of this stage.
   notices:
     rule_1: Report one clear at a time. Please double-check your drop selection.
     rule_2: If there are no drops, click submit directly without selecting any drops.
-    rule_3: Please do not report the first-clear of a stage, and do not only report
+    rule_3:
+      Please do not report the first-clear of a stage, and do not only report
       the clears where you were lucky - report all clears.
     rule_4: Please make sure that you refresh a 3-stars clear.
     rule_5: Please only submit drop data from the CN server.
   usage: Increase drop amount by left click, decrease by right click
 mirrors:
   global:
-    notification: For performance concerns, we recommend you to use the global site
+    notification:
+      For performance concerns, we recommend you to use the global site
       {0}.
   cn:
-    notification: For performance concerns, we recommend you to use the CN mirror
+    notification:
+      For performance concerns, we recommend you to use the CN mirror
       site {0}.
   _notification:
     ignore:
       title: Ignore Mirror Notification?
-      subtitle: Are you sure you want to ignore all mirror optimization notifications?
+      subtitle:
+        Are you sure you want to ignore all mirror optimization notifications?
         Performance issues may occur.
 settings:
+  storageIssue: Storage issues detected. Application may malfunction. If this warning keeps showing, try to clear local storage by using "Reset All" under the "Settings" dialog in the menu.
   category:
     appearance: Appearance
     data: Data
@@ -393,15 +402,17 @@ settings:
     lowData:
       title: Low Data Mode
       active: Low Data Mode is Active
-      subtitle: Low Data Mode will stop fetching nonessential resources, such as the
+      subtitle:
+        Low Data Mode will stop fetching nonessential resources, such as the
         zone backgrounds in stage selector and the website background, to help reduce
         network data use.
   data:
-    server: 'Local Data includes servers: '
-    size: 'Local Data size: '
+    server: "Local Data includes servers: "
+    size: "Local Data size: "
     reset:
       title: Reset All
-      subtitle: This operation will delete all local data and settings you have set.
+      subtitle:
+        This operation will delete all local data and settings you have set.
         After the deletion, all settings will be reset to default, all data needs
         to be downloaded again, and the web page will be reloaded. Are you sure to
         continue?
@@ -414,7 +425,7 @@ zone:
     ACTIVITY_OPEN: Event (Open)
     ACTIVITY_CLOSED: Event (Closed)
     ACTIVITY_PENDING: Event (Opening Soon)
-    ACTIVITY_PERMANENT: "Interlude & Sidestory"
+    ACTIVITY_PERMANENT: "Intermezzi & Side Story"
     GACHABOX: Gachabox
   subTypes:
     AWAKENING_HOUR:
@@ -426,18 +437,18 @@ zone:
     DYING_SUN:
       title: Shadow of a Dying Sun
       subtitle: "Episode 9"
-    INTERLUDE: Interlude
-    SIDESTORY: Sidestory
+    INTERLUDE: Intermezzi
+    SIDESTORY: Side Story
     2019: "2019"
     2020: "2020"
     2021: "2021"
     2022: "2022"
   status:
-    '0': Open
-    '1': Closed
+    "0": Open
+    "1": Closed
     "-1": Opening Soon
     permanentOpen: Permanent
-  opensAt: 'Event period: {0} - {1}'
+  opensAt: "Event period: {0} - {1}"
 stage:
   name: Stage
   about: About this Stage
@@ -493,7 +504,8 @@ planner:
     success: Successfully resetted chosen planner data
     dialog:
       title: Reset Planner
-      subtitle: This operation will reset the planner data and settings you choose.
+      subtitle:
+        This operation will reset the planner data and settings you choose.
         Are you sure to continue?
       options:
         options:
@@ -520,15 +532,15 @@ planner:
       _name: Configuration Profile
       share: Share Configuration Profile
       import: Import from Configuration Profile
-  craft: 
+  craft:
     do: Synthesize
     unable: Missing Mat.
     errors:
       title: "Missing Required Materials to Synthesize"
-      notEnough: "Required {need}×\"{item}\" to synthesize, but only have {have}"
+      notEnough: 'Required {need}×"{item}" to synthesize, but only have {have}'
     plans:
       title: "Synthesize Plans"
-      plan: "Using {cost}×\"{item}\" to synthesize, remaining {remain}"
+      plan: 'Using {cost}×"{item}" to synthesize, remaining {remain}'
     success: "Used {sourceItems} to synthesize {amount} {productItem}"
   have: Have
   need: Need
@@ -563,21 +575,24 @@ query:
     builder: Query Builder
     results: Query Results
     footer:
-      cache: The query result data now displaying is cached data. If you need to get
+      cache:
+        The query result data now displaying is cached data. If you need to get
         the latest data, please "execute query" again.
-      disclaimer: Any data produced by the "Advanced Query" function is protected
+      disclaimer:
+        Any data produced by the "Advanced Query" function is protected
         by the "Data License Agreement" of this site. Penguin Statistics does not
         make any form of commitment or endorsement of any data produced.
   title:
     main: Main Query
-    comparison: 'Comparison Query #{index}'
+    comparison: "Comparison Query #{index}"
   type:
     matrix: Statistics
     trend: Trends
   selector:
     item:
       title: Choose Item
-      subtitle: Used to filter the query results by specified materials. When any
+      subtitle:
+        Used to filter the query results by specified materials. When any
         filter is selected, no other filters can be selected in the same query. If
         you want to filter other parameters, you can do it by adding a comparison
         query.
@@ -585,7 +600,8 @@ query:
       selected: Only Query Selected ({length})
     stage:
       title: Choose Stage
-      subtitle: Used to filter the query results by specified materials. When any
+      subtitle:
+        Used to filter the query results by specified materials. When any
         filter is selected, no other filters can be selected in the same query. If
         you want to filter other parameters, you can do it by adding a comparison
         query.
@@ -606,18 +622,19 @@ query:
     inProgress: Executing Queries...
   result:
     main: Main Query Result
-    comparison: 'Comparison Query #{index} Result'
+    comparison: "Comparison Query #{index} Result"
     empty: This query returned 0 results. Please check your query parameters.
     hideTime: Hide Detail Time
 version:
   upgrade:
     title: Version Outdated
-    subtitle: The current client version has outdated due to upgrade. Please retry
+    subtitle:
+      The current client version has outdated due to upgrade. Please retry
       after upgrade
     action: Upgrade
     unable: Can't Upgrade?
 notice:
-  failed: 'Failed to load notice: {error}'
+  failed: "Failed to load notice: {error}"
   loading: Loading Notice...
 dataSource:
   switch: Data Source
@@ -695,8 +712,8 @@ share:
     name: Short Link
   text:
     _tmpl: "{name} Drop Rates on Penguin Statistics"
-    stage: "Stage \"{name}\""
-    item: "Item \"{name}\""
+    stage: 'Stage "{name}"'
+    item: 'Item "{name}"'
   success: Successfully shared
 search:
   placeholder: Search...

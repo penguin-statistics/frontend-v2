@@ -2,7 +2,7 @@
 app:
   name: 企鹅物流数据统计
   name_line1: 企鹅物流数据统计
-  name_line2: ''
+  name_line2: ""
 server:
   name: 服务器
   switch: 服务器切换
@@ -68,11 +68,11 @@ meta:
     start: "“"
     end: "”"
   boolean:
-    'true': 是
-    'false': 否
+    "true": 是
+    "false": 否
   hasNorNot:
-    'true': 有
-    'false': 无
+    "true": 有
+    "false": 无
   dialog:
     cancel: 取消
     confirm: 确认
@@ -216,8 +216,8 @@ report:
       confirm: 确认
       report: 汇报
     tips:
-      fileTooBig: "\"{name}\" ({size}MB) 超出大小限制"
-      fileTooOld: "\"{name}\" 的截图时间超过了 36h 内的时间限制"
+      fileTooBig: '"{name}" ({size}MB) 超出大小限制'
+      fileTooOld: '"{name}" 的截图时间超过了 36h 内的时间限制'
       chooseImage: 点击以选择并加入图片、或直接向框内区域拖拽以加入图片
       dragImage: 将图片拖拽到此处
       addImage: 点击此处加入图片
@@ -297,7 +297,7 @@ report:
         - 您所有提供的图片均仅会通过使用 WebAssembly 技术于您的浏览器**本地**进行识别、不会向服务器上传，因此不产生额外流量开销。
         - 为保证本站数据集准确度，请仅选择**截图时间在 36 小时内**、通关评价为 **3 星**的**结算界面**截图。
         - 请**不要**选择首次通关截图，并请如实汇报**所有**发生的掉落情况。
-#        - 截图内识别到「不合法」的物品，整张截图都将不再计入识别结果（如：已过期活动的相关物品掉落）。
+      #        - 截图内识别到「不合法」的物品，整张截图都将不再计入识别结果（如：已过期活动的相关物品掉落）。
       confirm:
         - 点击图片可以放大以便于核对；再次点击图片即可关闭
         - 成功识别的截图已被自动选中上传
@@ -387,6 +387,7 @@ mirrors:
       title: 不再显示镜像提示？
       subtitle: 确定要忽略所有镜像提示吗？网站加载性能可能会受到影响。
 settings:
+  storageIssue: 本地缓存存储出现问题，应用可能不稳定；若持续出现此警告，请尝试通过「菜单 - 设置 - 重置本地数据与设置」清空缓存以修复
   category:
     appearance: 外观
     data: 设置与数据
@@ -446,8 +447,8 @@ zone:
     2021: "2021"
     2022: "2022"
   status:
-    '0': 开放中
-    '1': 已结束
+    "0": 开放中
+    "1": 已结束
     "-1": 即将开放
     permanentOpen: 常驻开放
   opensAt: 开放时间：{0} - {1}
@@ -532,7 +533,7 @@ planner:
       _name: 配置代码
       share: 分享配置代码
       import: 导入配置代码
-  craft: 
+  craft:
     do: 合成
     unable: 无法合成
     errors:
@@ -582,7 +583,7 @@ query:
     content: "「高级查询」意在为有更复杂数据分析需求的用户提供以更高自由度使用企鹅物流数据统计内相关数据集之可能性。由于本功能的高自由度属性，在不了解统计学等相关学科的学术内容前，尝试分析此功能的查询结果可能会存在误导性。企鹅物流数据统计提醒各位对数据进行二次分析的刀客塔：请在分析时不要断章取义、故意使用本站数据引导舆论。高级查询功能的受众群体是熟悉统计学等学科的用户，开放后便于他们以更多维度分析数据集。我们欢迎对掉落数据感兴趣并进行客观与科学分析的刀客塔，但我们不欢迎带有个人情绪或既定立场的情况下、尝试错误地从本站数据中得出对任何实体不利结论的用户。"
   title:
     main: 主查询
-    comparison: '对比查询 #{index}'
+    comparison: "对比查询 #{index}"
   type:
     matrix: 统计数据
     trend: 历史趋势
@@ -612,7 +613,7 @@ query:
     inProgress: 正在执行查询
   result:
     main: 主查询结果
-    comparison: '对比查询 #{index} 结果'
+    comparison: "对比查询 #{index} 结果"
     empty: 此查询返回了 0 个结果，请检查对应查询条件后重试
     hideTime: 隐藏详细时间
 version:
