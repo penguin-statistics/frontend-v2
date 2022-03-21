@@ -89,11 +89,11 @@ const fallbackedStorage = (storages) => {
           return storage.getItem(key);
         } catch (e) {
           // ignore error but notify once
-          notifyStorageIssueOnce();
         }
       }
       console.warn("Storage: no storage available with getItem for key", key);
       return null;
+      notifyStorageIssueOnce();
     },
     setItem: (key, value) => {
       for (const storage of storages) {
@@ -102,9 +102,9 @@ const fallbackedStorage = (storages) => {
           return;
         } catch (e) {
           // ignore error but notify once
-          notifyStorageIssueOnce();
         }
       }
+      notifyStorageIssueOnce();
       console.warn("Storage: no storage available with setItem for key", key);
     },
     removeItem: (key) => {
@@ -114,9 +114,9 @@ const fallbackedStorage = (storages) => {
           return;
         } catch (e) {
           // ignore error but notify once
-          notifyStorageIssueOnce();
         }
       }
+      notifyStorageIssueOnce();
       console.warn(
         "Storage: no storage available with removeItem for key",
         key
