@@ -81,7 +81,10 @@ Sentry.init({
     /metrics\.itunes\.apple\.com\.edgesuite\.net\//i,
   ],
   beforeSend(event) {
-    if (!environment.production) return null;
+    if (!environment.production) {
+      console.log("Sentry: non-production, dropping sentry event", event);
+      return null;
+    }
 
     const { message } = event;
     if (message in sentEvents) {
@@ -93,6 +96,8 @@ Sentry.init({
         sentEvents[message] = counts + 1;
         // report event
         return event;
+      } else {
+        console.log("Sentry: ignored event, already sent", event);
       }
     } else {
       // this has not yet been sent; init var and send it

@@ -1,9 +1,10 @@
 const webpack = require("webpack");
-const config = require("./src/config/index.js");
 const path = require("path");
 const CopyPlugin = require("copy-webpack-plugin");
 
 require("events").EventEmitter.defaultMaxListeners = 50;
+
+const packageVersion = `"v${envvar("npm_package_version", "0.0.0", true)}"`;
 
 let commitHash;
 
@@ -25,7 +26,7 @@ function envvar(name, fallback, skipStringify = false) {
 }
 
 const noscriptImage = JSON.stringify(
-  `${config.probe.endpoint.prod.legacy}?v=${config.version}&p=web&l=1`
+  `https://probe.penguin-stats.io/?v=${packageVersion}&p=web&l=1`
 );
 
 const templateRoot = path.resolve(
@@ -43,6 +44,7 @@ console.log(`
     true
   )}
   - 📊 Build Hash (from cmd:'git rev-parse --short HEAD'): ${commitHash}
+  - 📋 Build Version (from env:'npm_package_version'): ${packageVersion}
   - 📋 Template Root: ${templateRoot}
   - 📃 Using Template File: ${templateFile}
   @ 🛒 Probe
@@ -78,6 +80,7 @@ module.exports = {
         PENGUIN_PLATFORM: envvar("PENGUIN_PLATFORM", "unspecified"),
         PENGUIN_PLATFORM_FROM: envvar("PENGUIN_PLATFORM_FROM", null),
         PENGUIN_PROBE_NOSCRIPT: noscriptImage,
+        NPM_PACKAGE_VERSION: packageVersion,
       }),
       new CopyPlugin({
         patterns: [
