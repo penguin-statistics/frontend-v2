@@ -129,8 +129,13 @@ export default new Vuex.Store({
   plugins: [
     createPersistedState({
       key: "penguin-stats-data",
-      paths: ["data", "dataSource"],
+      paths: ["data"],
       storage: fallbackedStorage(partialStorages),
+    }),
+    createPersistedState({
+      key: "penguin-stats-data-source",
+      paths: ["dataSource"],
+      storage: fallbackedStorage(fullStorages),
     }),
     createPersistedState({
       key: "penguin-stats-settings",
