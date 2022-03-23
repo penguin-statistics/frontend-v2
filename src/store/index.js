@@ -76,7 +76,7 @@ if (isSafari) {
 
 const storages = [
   ...[isSafari ? [] : localStorage],
-  ...[isSafari ? [] : localStorage],
+  ...[isSafari ? [] : sessionStorage],
   inMemoryStorage,
 ];
 
