@@ -74,10 +74,9 @@ if (isSafari) {
   localStorage.removeItem("penguin-stats-cache");
 }
 
-const fullStorages = [localStorage, sessionStorage, inMemoryStorage];
-const partialStorages = [
+const storages = [
   ...[isSafari ? [] : localStorage],
-  ...[isSafari ? [] : sessionStorage],
+  ...[isSafari ? [] : localStorage],
   inMemoryStorage,
 ];
 
@@ -130,37 +129,37 @@ export default new Vuex.Store({
     createPersistedState({
       key: "penguin-stats-data",
       paths: ["data"],
-      storage: fallbackedStorage(partialStorages),
+      storage: fallbackedStorage(storages),
     }),
     createPersistedState({
       key: "penguin-stats-data-source",
       paths: ["dataSource"],
-      storage: fallbackedStorage(fullStorages),
+      storage: fallbackedStorage(storages),
     }),
     createPersistedState({
       key: "penguin-stats-settings",
       paths: ["settings", "options", "stagePreferences"],
-      storage: fallbackedStorage(fullStorages),
+      storage: fallbackedStorage(storages),
     }),
     createPersistedState({
       key: "penguin-stats-auth",
       paths: ["auth"],
-      storage: fallbackedStorage(fullStorages),
+      storage: fallbackedStorage(storages),
     }),
     createPersistedState({
       key: "penguin-stats-mirror",
       paths: ["mirror"],
-      storage: fallbackedStorage(fullStorages),
+      storage: fallbackedStorage(storages),
     }),
     createPersistedState({
       key: "penguin-stats-cache",
       paths: ["cache"],
-      storage: fallbackedStorage(partialStorages),
+      storage: fallbackedStorage(storages),
     }),
     createPersistedState({
       key: "penguin-stats-planner",
       paths: ["planner"],
-      storage: fallbackedStorage(fullStorages),
+      storage: fallbackedStorage(storages),
     }),
   ],
   modules: {
