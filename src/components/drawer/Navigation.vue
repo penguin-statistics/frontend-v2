@@ -5,6 +5,7 @@
     v-haptic
     :class="route.path === $route.path ? activeClass : ''"
     :two-line="!!route.meta.twoLine"
+    :color="`primary ${dark ? 'lighten-1' : 'darken-2'}`"
     @click="navigate(route)"
   >
     <v-list-item-icon>
@@ -45,6 +46,7 @@
       :key="child.name"
       v-haptic
       :class="route.path + '/' + child.path === $route.path.split('/', 3).join('/') ? activeClass : ''"
+      :color="`primary ${dark ? 'lighten-1' : 'darken-2'}`"
       @click="navigate(child)"
     >
       <v-list-item-title>
