@@ -4,7 +4,7 @@ const CopyPlugin = require("copy-webpack-plugin");
 
 require("events").EventEmitter.defaultMaxListeners = 50;
 
-const packageVersion = `"v${envvar("npm_package_version", "0.0.0", true)}"`;
+const packageVersion = `v${envvar("npm_package_version", "0.0.0", true)}`;
 
 let commitHash;
 
@@ -80,7 +80,7 @@ module.exports = {
         PENGUIN_PLATFORM: envvar("PENGUIN_PLATFORM", "unspecified"),
         PENGUIN_PLATFORM_FROM: envvar("PENGUIN_PLATFORM_FROM", null),
         PENGUIN_PROBE_NOSCRIPT: noscriptImage,
-        NPM_PACKAGE_VERSION: packageVersion,
+        NPM_PACKAGE_VERSION: JSON.stringify(packageVersion), // stringify
       }),
       new CopyPlugin({
         patterns: [

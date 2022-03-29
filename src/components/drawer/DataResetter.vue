@@ -15,11 +15,15 @@
         <v-icon left>
           mdi-database-remove
         </v-icon>
-        {{ $t('settings.data.reset.title') }}
+        {{ $t("settings.data.reset.title") }}
       </v-card-title>
 
       <v-card-text class="subtitle-1">
-        {{ deleted ? "数据与偏好设置已重置。请重启 App" : $t('settings.data.reset.subtitle') }}
+        {{
+          deleted
+            ? "数据与偏好设置已重置。请重启 App"
+            : $t("settings.data.reset.subtitle")
+        }}
       </v-card-text>
 
       <v-divider />
@@ -31,7 +35,7 @@
           :disabled="deleting || deleted"
           @click="cancel"
         >
-          {{ $t('meta.dialog.cancel') }}
+          {{ $t("meta.dialog.cancel") }}
         </v-btn>
         <v-btn
           v-haptic
@@ -40,7 +44,8 @@
           :loading="deleting || deleted"
           @click="reset"
         >
-          {{ $t('meta.dialog.confirm') }}{{ countdownNow !== 0 ? ` (${countdownNow})` : "" }}
+          {{ $t("meta.dialog.confirm")
+          }}{{ countdownNow !== 0 ? ` (${countdownNow})` : "" }}
         </v-btn>
       </v-card-actions>
     </v-card>
@@ -49,72 +54,84 @@
 
 <script>
 export default {
-  name: 'DataResetter',
+  name: "DataResetter",
   props: {
     enable: {
       type: Boolean,
-      default: false
-    }
+      default: false,
+    },
   },
-  data () {
+  data() {
     return {
       dialog: false,
       countdownNow: 5,
       timer: null,
       deleting: false,
-      deleted: false
-    }
+      deleted: false,
+    };
   },
   watch: {
-    dialog (newValue) {
+    dialog(newValue) {
       if (newValue) {
-        this.countdownNow = 5
-        this.startCountdown()
+        this.countdownNow = 5;
+        this.startCountdown();
       } else {
-        this.stopCountdown()
+        this.stopCountdown();
       }
-    }
+    },
   },
-  created () {
-    this.dialog = this.enable
+  created() {
+    this.dialog = this.enable;
   },
-  destroyed () {
-    this.stopCountdown()
+  destroyed() {
+    this.stopCountdown();
   },
   methods: {
-    cancel () {
-      this.stopCountdown()
-      this.dialog = false
+    cancel() {
+      this.stopCountdown();
+      this.dialog = false;
     },
-    reset () {
-      this.deleting = true
+    reset() {
+      this.deleting = true;
 
-      setTimeout(function () {
-        navigator.serviceWorker.getRegistrations().then(function (registrations) {
-          for (const registration of registrations) {
-            registration.unregister()
-          }
-        })
-        caches.keys().then(keys => {
-          for (const key of keys) caches.delete(key)
-        })
-        localStorage.clear()
-        window.location.reload()
-      }, 1000)
+      setTimeout(function() {
+        try {
+          navigator.serviceWorker
+            .getRegistrations()
+            .then(function(registrations) {
+              for (const registration of registrations) {
+                registration.unregister();
+              }
+            });
+        } catch (e) {
+          // service worker unregistration failed: fuck you safari: why is navigator.serviceWorker undefined?
+        }
+        try {
+          caches.keys().then((keys) => {
+            for (const key of keys) caches.delete(key);
+          });
+        } catch (e) {
+          // i could imagine some random error here
+        }
+        try {
+          localStorage.clear();
+        } catch (e) {
+          // and it is you again safari who doesnt have localStorage in private mode :)
+        }
+        window.location.reload();
+      }, 1000);
     },
-    startCountdown () {
+    startCountdown() {
       this.timer = setInterval(() => {
-        this.countdownNow -= 1
-        if (this.countdownNow === 0) this.stopCountdown()
-      }, 1000)
+        this.countdownNow -= 1;
+        if (this.countdownNow === 0) this.stopCountdown();
+      }, 1000);
     },
-    stopCountdown () {
-      clearInterval(this.timer)
-    }
-  }
-}
+    stopCountdown() {
+      clearInterval(this.timer);
+    },
+  },
+};
 </script>
 
-<style scoped>
-
-</style>
+<style scoped></style>

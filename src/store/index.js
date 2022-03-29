@@ -37,20 +37,6 @@ if (previousState) {
   });
 }
 
-try {
-  // try to use localStorage
-  const localStorage = window.localStorage;
-  localStorage.setItem("test", "test");
-  localStorage.removeItem("test");
-  // use localStorage
-} catch (e) {
-  console.warn(
-    "Storage: localStorage not available: do cleanup for previous cache entries"
-  );
-  localStorage.removeItem("penguin-stats-data");
-  localStorage.removeItem("penguin-stats-cache");
-}
-
 let notifiedStorageIssue = false;
 
 const notifyStorageIssueOnce = () => {
@@ -80,8 +66,19 @@ const inMemoryStorage = {
   },
 };
 
-const fullStorages = [localStorage, sessionStorage, inMemoryStorage];
-const partialStorages = [sessionStorage, inMemoryStorage];
+const isSafari = navigator.userAgent.indexOf("Safari") > -1;
+
+if (isSafari) {
+  // cleanup previous cache before enter when safari
+  localStorage.removeItem("penguin-stats-data");
+  localStorage.removeItem("penguin-stats-cache");
+}
+
+const storages = [
+  ...[isSafari ? [] : localStorage],
+  ...[isSafari ? [] : sessionStorage],
+  inMemoryStorage,
+];
 
 const fallbackedStorage = (storages) => {
   return {
@@ -91,9 +88,9 @@ const fallbackedStorage = (storages) => {
           return storage.getItem(key);
         } catch (e) {
           // ignore error but notify once
-          notifyStorageIssueOnce();
         }
       }
+      notifyStorageIssueOnce();
       console.warn("Storage: no storage available with getItem for key", key);
       return null;
     },
@@ -103,10 +100,10 @@ const fallbackedStorage = (storages) => {
           storage.setItem(key, value);
           return;
         } catch (e) {
-          // ignore error
-          notifyStorageIssueOnce();
+          // ignore error but notify once
         }
       }
+      notifyStorageIssueOnce();
       console.warn("Storage: no storage available with setItem for key", key);
     },
     removeItem: (key) => {
@@ -115,10 +112,10 @@ const fallbackedStorage = (storages) => {
           storage.removeItem(key);
           return;
         } catch (e) {
-          // ignore error
-          notifyStorageIssueOnce();
+          // ignore error but notify once
         }
       }
+      notifyStorageIssueOnce();
       console.warn(
         "Storage: no storage available with removeItem for key",
         key
@@ -131,33 +128,38 @@ export default new Vuex.Store({
   plugins: [
     createPersistedState({
       key: "penguin-stats-data",
-      paths: ["data", "dataSource"],
-      storage: fallbackedStorage(partialStorages),
+      paths: ["data"],
+      storage: fallbackedStorage(storages),
+    }),
+    createPersistedState({
+      key: "penguin-stats-data-source",
+      paths: ["dataSource"],
+      storage: fallbackedStorage(storages),
     }),
     createPersistedState({
       key: "penguin-stats-settings",
       paths: ["settings", "options", "stagePreferences"],
-      storage: fallbackedStorage(fullStorages),
+      storage: fallbackedStorage(storages),
     }),
     createPersistedState({
       key: "penguin-stats-auth",
       paths: ["auth"],
-      storage: fallbackedStorage(fullStorages),
+      storage: fallbackedStorage(storages),
     }),
     createPersistedState({
       key: "penguin-stats-mirror",
       paths: ["mirror"],
-      storage: fallbackedStorage(fullStorages),
+      storage: fallbackedStorage(storages),
     }),
     createPersistedState({
       key: "penguin-stats-cache",
       paths: ["cache"],
-      storage: fallbackedStorage(partialStorages),
+      storage: fallbackedStorage(storages),
     }),
     createPersistedState({
       key: "penguin-stats-planner",
       paths: ["planner"],
-      storage: fallbackedStorage(fullStorages),
+      storage: fallbackedStorage(storages),
     }),
   ],
   modules: {
