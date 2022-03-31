@@ -16,7 +16,7 @@
         <v-icon left>
           mdi-settings
         </v-icon>
-        {{ $t('menu.settings.name') }}
+        {{ $t("menu.settings.name") }}
       </v-btn>
     </template>
     <v-card :color="`${dark ? 'primary darken-3' : 'primary lighten-5'}`">
@@ -24,14 +24,14 @@
         <v-icon left>
           mdi-settings
         </v-icon>
-        {{ $t('menu.settings.name') }}
+        {{ $t("menu.settings.name") }}
       </v-card-title>
 
       <v-card-text>
         <v-container class="pt-0">
           <v-row class="flex-column">
             <Subheader>
-              {{ $t('settings.category.appearance') }}
+              {{ $t("settings.category.appearance") }}
             </Subheader>
 
             <ThemeStyleSwitcher class="mb-2" />
@@ -71,7 +71,6 @@
               v-if="$env.isAppIOS"
               v-haptic
               depressed
-
               block
               color="primary"
               @click="openBundleSettings"
@@ -89,13 +88,15 @@
 
             <template v-if="$env.isApp">
               <Subheader>
-                {{ $t('settings.category.about') }}
+                {{ $t("settings.category.about") }}
               </Subheader>
               <div class="ml-4">
-                <strong>Penguin Statistics</strong>
+                <strong>Reunion Statistics</strong>
                 —
                 <strong>{{ version.VERSION }}</strong>
-                <span class="overline monospace condensed ml-1">{{ version.GIT_COMMIT }}</span>
+                <span class="overline monospace condensed ml-1">{{
+                  version.GIT_COMMIT
+                }}</span>
               </div>
             </template>
           </v-row>
@@ -111,7 +112,7 @@
           text
           @click="active = false"
         >
-          {{ $t('meta.dialog.close') }}
+          {{ $t("meta.dialog.close") }}
         </v-btn>
       </v-card-actions>
     </v-card>
@@ -119,38 +120,43 @@
 </template>
 
 <script>
-import AppearanceSwitcher from '@/components/drawer/AppearanceSwitcher'
-import LocaleSwitcher from '@/components/drawer/LocaleSwitcher'
-import Theme from '@/mixins/Theme'
-import OptimizationSwitcher from '@/components/drawer/OptimizationSwitcher'
-import DataManager from '@/components/drawer/DataManager'
-import Subheader from '@/components/global/Subheader'
-import penguin from '@/utils/native/penguin'
+import AppearanceSwitcher from "@/components/drawer/AppearanceSwitcher";
+import LocaleSwitcher from "@/components/drawer/LocaleSwitcher";
+import Theme from "@/mixins/Theme";
+import OptimizationSwitcher from "@/components/drawer/OptimizationSwitcher";
+import DataManager from "@/components/drawer/DataManager";
+import Subheader from "@/components/global/Subheader";
+import penguin from "@/utils/native/penguin";
 import config from "@/config";
 import ThemeStyleSwitcher from "@/components/drawer/ThemeStyleSwitcher";
 export default {
-  name: 'SettingsDialog',
-  components: {ThemeStyleSwitcher, Subheader, DataManager, OptimizationSwitcher, LocaleSwitcher, AppearanceSwitcher },
+  name: "SettingsDialog",
+  components: {
+    ThemeStyleSwitcher,
+    Subheader,
+    DataManager,
+    OptimizationSwitcher,
+    LocaleSwitcher,
+    AppearanceSwitcher,
+  },
   mixins: [Theme],
-  data () {
+  data() {
     return {
-      active: false
-    }
+      active: false,
+    };
   },
   computed: {
-    version () {
+    version() {
       return {
-        VERSION: config.version || 'v0.0.0',
-        GIT_COMMIT: GIT_COMMIT.trim() || 'unknown'
-      }
-    }
+        VERSION: config.version || "v0.0.0",
+        GIT_COMMIT: GIT_COMMIT.trim() || "unknown",
+      };
+    },
   },
   methods: {
-    openBundleSettings: penguin.openBundleSettings
-  }
-}
+    openBundleSettings: penguin.openBundleSettings,
+  },
+};
 </script>
 
-<style scoped>
-
-</style>
+<style scoped></style>
