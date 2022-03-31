@@ -80,19 +80,30 @@ if (isSafari) {
 }
 
 const storages = [
-  ...[isSafari ? [] : localStorage],
-  ...[isSafari ? [] : sessionStorage],
+  ...(isSafari ? [] : [localStorage]),
+  ...(isSafari ? [] : [sessionStorage]),
   inMemoryStorage,
 ];
+
+let currentStorage = storages[0];
 
 const fallbackedStorage = (storages) => {
   return {
     getItem: (key) => {
-      for (const storage of storages) {
-        try {
-          return storage.getItem(key);
-        } catch (e) {
-          // ignore error but notify once
+      console.groupCollapsed("Storage: getItem", key);
+      console.groupEnd();
+
+      try {
+        return currentStorage.getItem(key);
+      } catch (e) {
+        for (const storage of storages) {
+          try {
+            currentStorage = storage;
+            return storage.getItem(key);
+          } catch (e) {
+            console.warn("Storage: getItem failed: ", e);
+            // ignore error but notify once
+          }
         }
       }
       notifyStorageIssueOnce();
@@ -100,24 +111,44 @@ const fallbackedStorage = (storages) => {
       return null;
     },
     setItem: (key, value) => {
-      for (const storage of storages) {
-        try {
-          storage.setItem(key, value);
-          return;
-        } catch (e) {
-          // ignore error but notify once
+      console.groupCollapsed("Storage: setItem", key);
+      console.trace(value);
+      console.groupEnd();
+      try {
+        currentStorage.setItem(key, value);
+        return;
+      } catch (e) {
+        for (const storage of storages) {
+          try {
+            currentStorage = storage;
+            storage.setItem(key, value);
+            return;
+          } catch (e) {
+            console.warn("Storage: setItem failed: ", e);
+            // ignore error but notify once
+          }
         }
       }
       notifyStorageIssueOnce();
       console.warn("Storage: no storage available with setItem for key", key);
     },
     removeItem: (key) => {
-      for (const storage of storages) {
-        try {
-          storage.removeItem(key);
-          return;
-        } catch (e) {
-          // ignore error but notify once
+      console.groupCollapsed("Storage: removeItem", key);
+      console.groupEnd();
+
+      try {
+        currentStorage.removeItem(key);
+        return;
+      } catch (e) {
+        for (const storage of storages) {
+          try {
+            currentStorage = storage;
+            storage.removeItem(key);
+            return;
+          } catch (e) {
+            console.warn("Storage: removeItem failed: ", e);
+            // ignore error but notify once
+          }
         }
       }
       notifyStorageIssueOnce();
@@ -150,6 +181,7 @@ export default new Vuex.Store({
       key: "penguin-stats-auth",
       paths: ["auth"],
       storage: fallbackedStorage(storages),
+      fetchBeforeUse: true,
     }),
     createPersistedState({
       key: "penguin-stats-mirror",
