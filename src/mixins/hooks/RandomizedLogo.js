@@ -1,5 +1,6 @@
 import CDN from '@/mixins/CDN'
 import config from '@/config'
+import {mapGetters} from "vuex";
 
 export default {
   data () {
@@ -11,19 +12,30 @@ export default {
   watch: {
     $route: [
       'randomizeLogo'
+    ],
+    aprilFools: [
+      'randomizeLogo'
     ]
   },
   methods: {
     randomizeLogo () {
-      const random = Math.random()
-      const self = this
-      function imageUrl (character) {
-        return self.cdnDeliver(`/logos/penguin_stats_logo_${character}.png`)
+      const base = `/images/themes/2021-april-fools/${this.aprilFools ? 'past' : 'current'}`
+      let candidates = ['crownslayer', 'faustus', 'frostnova', 'mephisto', 'patriot', 'skullshatterer', 'talulah']
+
+      const imageUrl = character => {
+        return this.cdnDeliver(base + `/logo_${character}.png`)
       }
-      this.randomizedLogo = random < 0.25 ? imageUrl('exia')
-        : random < 0.5 ? imageUrl('texas')
-          : random < 0.75 ? imageUrl('sora')
-            : imageUrl('croissant')
+
+      const rand = items => items[items.length * Math.random() | 0];
+
+      if (this.aprilFools) {
+        candidates = ['alina', 'faustus', 'frostnova', 'mephisto']
+      }
+
+      this.randomizedLogo = imageUrl(rand(candidates))
     }
-  }
+  },
+  computed: {
+    ...mapGetters('ui', ['aprilFools'])
+  },
 }

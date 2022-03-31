@@ -1,5 +1,5 @@
-import mirror from '@/utils/mirror'
-import device from '@/utils/native/device'
+import mirror from "@/utils/mirror";
+import device from "@/utils/native/device";
 
 // function wrapPromise(promise) {
 //   return promise
@@ -13,28 +13,37 @@ import device from '@/utils/native/device'
 
 export default {
   computed: {
-    isCNMirror () {
+    isCNMirror() {
+      return mirror.cn.isCurrent();
+    },
+    isVercel() {
+      return mirror.vercel.isCurrent();
+    },
+    primaryColor() {
+      if (this.isVercel) {
+        return "orange darken-4";
+      } else {
+        return "primary darken-1";
+      }
+    },
+    currentMirrorHostname() {
       return mirror.cn.isCurrent()
+        ? mirror.cn.identifier
+        : mirror.global.identifier;
     },
-    isVercel () {
-      return mirror.vercel.isCurrent()
-    },
-    currentMirrorHostname () {
-      return mirror.cn.isCurrent() ? mirror.cn.identifier : mirror.global.identifier
-    }
   },
   asyncComputed: {
-    isIOS () {
-      return device.platform.isIOS()
+    isIOS() {
+      return device.platform.isIOS();
     },
-    isAndroid () {
-      return device.platform.isAndroid()
+    isAndroid() {
+      return device.platform.isAndroid();
     },
-    isElectron () {
-      return device.platform.isElectron()
+    isElectron() {
+      return device.platform.isElectron();
     },
-    isWeb () {
-      return device.platform.isWeb()
-    }
-  }
-}
+    isWeb() {
+      return device.platform.isWeb();
+    },
+  },
+};

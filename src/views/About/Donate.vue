@@ -2,10 +2,10 @@
 {
   "en": {
     "donate": {
-      "donate_0": "Increasing number of users and server fees are putting Penguin Statistics into crisis. In order to protect our beloved Penguin Statistics, the webmaster decided to...",
-      "donate_1": "The number of users is increasing. The server is becoming overwhelmed. We will appreciate it a lot if Doctors can donate some",
+      "donate_0": "Increasing number of Reunion members meals expenses are putting Reunion Movement into crisis. In order to protect our beloved Reunion Movement, the webmaster decided to...",
+      "donate_1": "The number of users is increasing. The server is becoming overwhelmed. We will appreciate it a lot if Reunion members can donate some",
       "donate_2": "server fee.",
-      "donate_3": "pocky or apple pie are also accepted",
+      "donate_3": "spicy candy is also accepted",
       "donate_4": ". We greatly appreciate your support!",
       "accountBook": "Account Book",
       "methods": {
@@ -22,10 +22,10 @@
   },
   "ja": {
     "donate": {
-      "donate_0": "ユーザー数が急増し、サーバーの月額は上昇、企鹅数据の運営は危機的状況に...。管理人の紅白は大好きな企鹅数据を守るため、自分に出来ることは何か？紅白が悩んで見つけ出した答えは「アイドルになること」！？",
+      "donate_0": "メンバー数が急増し、食費は上昇、レユニオン・ムーブメントの運営は危機的状況に...。狂化開発隊長の紅白は大好きなレユニオン・ムーブメントを守るため、自分に出来ることは何か？紅白が悩んで見つけ出した答えは「アイドルになること」！？",
       "donate_1": "アクセス数が増加し、サーバーが負荷に耐えることが出来なくなっています。サーバーの",
       "donate_2": "運営費用",
-      "donate_3": "ポッキーやアップルパイでも可",
+      "donate_3": "辛い飴でも可",
       "donate_4": "を寄付頂けると非常にありがたいです。",
       "accountBook": "帐簿",
       "methods": {
@@ -53,10 +53,10 @@
   },
   "zh": {
     "donate": {
-      "donate_0": "用户量激增，服务器月费上涨，企鹅数据的运营陷入了危机。站长红白为了保护喜爱的企鹅数据而决定...",
-      "donate_1": "随着访问量的增加，目前的小水管服务器已经有些不堪重负了。如果各位刀客塔能捐助一些",
+      "donate_0": "整合成员数量激增，伙食费上涨，整合运动的运营陷入了危机。狂暴开发组长红白为了保护喜爱的整合运动而决定...",
+      "donate_1": "随着访问量的增加，目前的小水管服务器已经有些不堪重负了。如果各位整合成员能捐助一些",
       "donate_2": "服务器费用",
-      "donate_3": "pocky、阿噗噜派也可",
+      "donate_3": "辣味糖也可",
       "donate_4": "，我们将不胜感激！",
       "accountBook": "查看收支一览",
       "methods": {

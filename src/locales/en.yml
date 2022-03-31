@@ -1,7 +1,7 @@
 ---
 app:
-  name: Penguin Statistics
-  name_line1: Penguin Statistics
+  name: Reunion Statistics
+  name_line1: Reunion Statistics
   name_line2: ""
 server:
   name: Server
@@ -14,7 +14,7 @@ server:
     KR: KR
 menu:
   _beta: Beta
-  home: Home
+  home: Camp
   search: Search
   report:
     _name: Report Drops
@@ -26,8 +26,8 @@ menu:
     item: By item
     advanced: Advanced Query
   about:
-    _name: About Penguin Statistics
-    members: Team Members
+    _name: About Reunion Statistics
+    members: Reunion Data Dept.
     contribute: Contribute
     changelog: Change Log
     contact: Contact us
@@ -163,7 +163,7 @@ contribute:
   backend: Back End
   contribute_0:
     "If you have experience with any of the following, and want to contribute
-    to Penguin Statistics, contact us at QQ group: 747099627."
+    to Reunion Statistics, contact us at QQ group: 747099627."
   contribute_1: This is a nonprofit and open source project
   skills:
     frontend: Frontend Development (React)
@@ -670,9 +670,9 @@ auth:
       tips: Only able to recover PenguinID that are used in client v3.3.1 or newer versions
 members:
   categories:
-    owner: Webmaster
-    maintainer: Maintainer
-    contributors: Contributors
+    owner: Enraged Development Leader
+    maintainer: Originium Slug ₲
+    contributors: Reunion Data Dept. Members
     others: Others
     translators: Translators
   responsibilities:
@@ -721,9 +721,13 @@ search:
 confirmLeave:
   title: Are you sure to leave?
   subtitle: Unsaved changes may lost.
-banner:
-  mew:
-    heading: 这座城市，春天照常会来
 specials:
   mikubirthday2021:
     caption: Happy Birthday Hatsune Miku
+aprilFools:
+  confirm:
+    title: Warning of Spoiling
+    subtitle: "Please make sure you have viewed all the stories in **Chapter 8**, otherwise there may be a risk of spoiling."
+  switcher:
+    past: Experience the Tragedy
+    current: Ignite the Light
