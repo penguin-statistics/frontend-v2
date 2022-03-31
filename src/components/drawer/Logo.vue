@@ -30,7 +30,13 @@
       >
         <span>{{ $t("app.name_line1") }}</span>
         <span>{{ $t("app.name_line2") }}</span>
-        <v-btn dark outlined class="mt-4" text @click="switchAprilFools">
+        <v-btn
+          dark
+          outlined
+          class="mt-4"
+          text
+          @click="switchAprilFools"
+        >
           {{
             $store.getters["ui/aprilFools"]
               ? $t("aprilFools.switcher.current")
