@@ -129,6 +129,12 @@ export default {
       index: null,
       logs: [
         {
+          version: "v3.6.10",
+          date: "2022-04-04T14:00:00+0800",
+          changes: `## 修复
+1. 再次修复由存储使用而带来的一些问题`,
+        },
+        {
           version: "v3.6.9",
           date: "2022-03-21T10:00:00+0800",
           changes: `## 修复
