@@ -23,19 +23,19 @@ export default {
 
   error() {
     invoke("notification", {
-      style: NotificationType.ERROR,
+      style: NotificationType.Error,
     });
   },
 
   warning() {
     invoke("notification", {
-      style: NotificationType.WARNING,
+      style: NotificationType.Warning,
     });
   },
 
   success() {
     invoke("notification", {
-      style: NotificationType.SUCCESS,
+      style: NotificationType.Success,
     });
   },
 

@@ -68,26 +68,69 @@ const inMemoryStorage = {
 
 const isSafari = navigator.userAgent.indexOf("Safari") > -1;
 
-if (isSafari) {
-  // cleanup previous cache before enter when safari
-  localStorage.removeItem("penguin-stats-data");
-  localStorage.removeItem("penguin-stats-cache");
-}
-
-const storages = [
-  ...[isSafari ? [] : localStorage],
-  ...[isSafari ? [] : sessionStorage],
+const ephemeralStorages = [
+  ...(isSafari ? [] : [localStorage]),
+  ...(isSafari ? [] : [sessionStorage]),
   inMemoryStorage,
 ];
 
-const fallbackedStorage = (storages) => {
+const persistedStorages = [
+  localStorage,
+  sessionStorage,
+  inMemoryStorage
+]
+
+// delete cache before entry
+for (const storage of persistedStorages) {
+  storage.removeItem("penguin-stats-data");
+  storage.removeItem("penguin-stats-cache");
+}
+
+let currentephemeralStorage = ephemeralStorages[0]
+let currentPersistedStorage = persistedStorages[0]
+
+const getCurrentStorage = (mode) => {
+  switch (mode) {
+    case 'ephemeral':
+      return currentephemeralStorage
+    case 'persisted':
+      return currentPersistedStorage
+    default:
+      console.warn('getStorage got unexpected mode:', mode)
+  }
+}
+
+const setCurrentStorage = (newStorage, mode) => {
+  switch (mode) {
+    case "ephemeral":
+      currentephemeralStorage = newStorage
+      break
+    case "persisted":
+      currentPersistedStorage = newStorage
+      break
+    default:
+      console.warn("getStorage got unexpected mode:", mode);
+  }
+}
+
+const fallbackedStorage = (storages, mode) => {
   return {
     getItem: (key) => {
-      for (const storage of storages) {
-        try {
-          return storage.getItem(key);
-        } catch (e) {
-          // ignore error but notify once
+      console.groupCollapsed("Storage: getItem", key);
+      console.groupEnd();
+
+      try {
+        const current = getCurrentStorage(mode)
+        return current.getItem(key);
+      } catch (e) {
+        for (const storage of storages) {
+          try {
+            setCurrentStorage(storage, mode)
+            return storage.getItem(key);
+          } catch (e) {
+            console.warn("Storage: getItem failed: ", e);
+            // ignore error but notify once
+          }
         }
       }
       notifyStorageIssueOnce();
@@ -95,24 +138,44 @@ const fallbackedStorage = (storages) => {
       return null;
     },
     setItem: (key, value) => {
-      for (const storage of storages) {
-        try {
-          storage.setItem(key, value);
-          return;
-        } catch (e) {
-          // ignore error but notify once
+      console.groupCollapsed("Storage: setItem", key);
+      console.trace(value);
+      console.groupEnd();
+      try {
+        getCurrentStorage(mode).setItem(key, value);
+        return;
+      } catch (e) {
+        for (const storage of storages) {
+          try {
+            setCurrentStorage(storage, mode);
+            storage.setItem(key, value);
+            return;
+          } catch (e) {
+            console.warn("Storage: setItem failed: ", e);
+            // ignore error but notify once
+          }
         }
       }
       notifyStorageIssueOnce();
       console.warn("Storage: no storage available with setItem for key", key);
     },
     removeItem: (key) => {
-      for (const storage of storages) {
-        try {
-          storage.removeItem(key);
-          return;
-        } catch (e) {
-          // ignore error but notify once
+      console.groupCollapsed("Storage: removeItem", key);
+      console.groupEnd();
+
+      try {
+        getCurrentStorage(mode).removeItem(key);
+        return;
+      } catch (e) {
+        for (const storage of storages) {
+          try {
+            setCurrentStorage(storage, mode);
+            storage.removeItem(key);
+            return;
+          } catch (e) {
+            console.warn("Storage: removeItem failed: ", e);
+            // ignore error but notify once
+          }
         }
       }
       notifyStorageIssueOnce();
@@ -129,37 +192,37 @@ export default new Vuex.Store({
     createPersistedState({
       key: "penguin-stats-data",
       paths: ["data"],
-      storage: fallbackedStorage(storages),
-    }),
-    createPersistedState({
-      key: "penguin-stats-data-source",
-      paths: ["dataSource"],
-      storage: fallbackedStorage(storages),
-    }),
-    createPersistedState({
-      key: "penguin-stats-settings",
-      paths: ["settings", "options", "stagePreferences"],
-      storage: fallbackedStorage(storages),
-    }),
-    createPersistedState({
-      key: "penguin-stats-auth",
-      paths: ["auth"],
-      storage: fallbackedStorage(storages),
-    }),
-    createPersistedState({
-      key: "penguin-stats-mirror",
-      paths: ["mirror"],
-      storage: fallbackedStorage(storages),
+      storage: fallbackedStorage(ephemeralStorages, "ephemeral"),
     }),
     createPersistedState({
       key: "penguin-stats-cache",
       paths: ["cache"],
-      storage: fallbackedStorage(storages),
+      storage: fallbackedStorage(ephemeralStorages, "ephemeral"),
+    }),
+    createPersistedState({
+      key: "penguin-stats-data-source",
+      paths: ["dataSource"],
+      storage: fallbackedStorage(persistedStorages, "persisted"),
+    }),
+    createPersistedState({
+      key: "penguin-stats-settings",
+      paths: ["settings", "options", "stagePreferences"],
+      storage: fallbackedStorage(persistedStorages, "persisted"),
+    }),
+    createPersistedState({
+      key: "penguin-stats-auth",
+      paths: ["auth"],
+      storage: fallbackedStorage(persistedStorages, "persisted"),
+    }),
+    createPersistedState({
+      key: "penguin-stats-mirror",
+      paths: ["mirror"],
+      storage: fallbackedStorage(persistedStorages, "persisted"),
     }),
     createPersistedState({
       key: "penguin-stats-planner",
       paths: ["planner"],
-      storage: fallbackedStorage(storages),
+      storage: fallbackedStorage(persistedStorages, "persisted"),
     }),
   ],
   modules: {
