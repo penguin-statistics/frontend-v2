@@ -201,6 +201,7 @@ import ServerNotifyOverlay from '@/components/global/ServerNotifyOverlay'
 import GlobalSearchNavigation from '@/components/search/GlobalSearchNavigation'
 import ModuleLoadingOverlay from '@/components/global/ModuleLoadingOverlay'
 import Environment from '@/mixins/Environment'
+import Cookies from 'js-cookie'
 
 export default {
   name: 'App',
@@ -235,6 +236,10 @@ export default {
   created () {
     this.routes = this.$router.options.routes.filter(el => !el.meta.hide)
     this.$store.dispatch('data/fetch', false)
+    if (Cookies.get('userID')) {
+      this.$store.dispatch('user/login', Cookies.get('userID'))
+      Cookies.remove('userID')
+    }
   },
   methods: {
     async refreshData () {

@@ -86,13 +86,13 @@ for (const storage of persistedStorages) {
   storage.removeItem("penguin-stats-cache");
 }
 
-let currentephemeralStorage = ephemeralStorages[0]
+let currentEphemeralStorage = ephemeralStorages[0]
 let currentPersistedStorage = persistedStorages[0]
 
 const getCurrentStorage = (mode) => {
   switch (mode) {
     case 'ephemeral':
-      return currentephemeralStorage
+      return currentEphemeralStorage
     case 'persisted':
       return currentPersistedStorage
     default:
@@ -103,7 +103,7 @@ const getCurrentStorage = (mode) => {
 const setCurrentStorage = (newStorage, mode) => {
   switch (mode) {
     case "ephemeral":
-      currentephemeralStorage = newStorage
+      currentEphemeralStorage = newStorage
       break
     case "persisted":
       currentPersistedStorage = newStorage
