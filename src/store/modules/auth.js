@@ -1,3 +1,5 @@
+import Cookies from 'js-cookie'
+
 export default {
   namespaced: true,
   state: {
@@ -24,6 +26,7 @@ export default {
     },
     logout ({ commit }) {
       commit('changeUsername', null)
+      Cookies.remove('userID')
     }
   },
   getters: {
