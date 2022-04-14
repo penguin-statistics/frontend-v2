@@ -3,7 +3,7 @@
     :class="appEnvironment"
   >
     <ServerNotifyOverlay />
-    <ModuleLoadingOverlay v-if="!environment.runtime.isApp" />
+    <ModuleLoadingOverlay v-if="!environment.isApp" />
     <UpgradeNotifier />
     <GlobalSnackbar />
     <MirrorSelector />
@@ -166,7 +166,7 @@
       >
         <router-view />
       </transition>
-      <Footer v-if="!environment.runtime.isApp" />
+      <Footer v-if="!environment.isApp" />
     </v-content>
     <NetworkStateIndicator />
   </v-app>
@@ -201,6 +201,7 @@ import ServerNotifyOverlay from '@/components/global/ServerNotifyOverlay'
 import GlobalSearchNavigation from '@/components/search/GlobalSearchNavigation'
 import ModuleLoadingOverlay from '@/components/global/ModuleLoadingOverlay'
 import Environment from '@/mixins/Environment'
+import Cookies from 'js-cookie'
 
 export default {
   name: 'App',
@@ -235,6 +236,10 @@ export default {
   created () {
     this.routes = this.$router.options.routes.filter(el => !el.meta.hide)
     this.$store.dispatch('data/fetch', false)
+    if (Cookies.get('userID')) {
+      this.$store.dispatch('user/login', Cookies.get('userID'))
+      Cookies.remove('userID')
+    }
   },
   methods: {
     async refreshData () {

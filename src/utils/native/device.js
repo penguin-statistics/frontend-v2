@@ -1,30 +1,29 @@
-import { Plugins } from '@capacitor/core'
-const { Device } = Plugins
+import { Device } from "@capacitor/device";
 
-let deviceInfoCache = null
+let deviceInfoCache = null;
 
-function getDeviceInfo () {
-  if (!deviceInfoCache) deviceInfoCache = Device.getInfo()
-  return deviceInfoCache
+function getDeviceInfo() {
+  if (!deviceInfoCache) deviceInfoCache = Device.getInfo();
+  return deviceInfoCache;
 }
 
 export default {
   platform: {
-    async is (id) {
-      const info = getDeviceInfo()
-      return (await info).platform === id || false
+    async is(id) {
+      const info = getDeviceInfo();
+      return (await info).platform === id || false;
     },
-    isIOS () {
-      return this.is('ios')
+    isIOS() {
+      return this.is("ios");
     },
-    isAndroid () {
-      return this.is('android')
+    isAndroid() {
+      return this.is("android");
     },
-    isElectron () {
-      return this.is('electron')
+    isElectron() {
+      return this.is("electron");
     },
-    isWeb () {
-      return this.is('web')
-    }
-  }
-}
+    isWeb() {
+      return this.is("web");
+    },
+  },
+};

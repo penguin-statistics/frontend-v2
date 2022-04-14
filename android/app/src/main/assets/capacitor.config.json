@@ -1,20 +1,24 @@
 {
-  "appId": "io.penguinstats.app",
-  "appName": "企鹅物流",
-  "bundledWebRuntime": true,
-  "npmClient": "yarn",
-  "webDir": "dist",
-  "plugins": {
-    "SplashScreen": {
-      "launchAutoHide": false,
-      "backgroundColor": "#000000ff",
-      "showSpinner": true,
-      "spinnerColor": "#fff",
-      "splashFullScreen": true
-    },
-    "PushNotifications": {
-      "presentationOptions": ["badge", "sound", "alert"]
-    }
-  },
-  "cordova": {}
+	"appId": "io.penguinstats.app",
+	"appName": "企鹅物流",
+	"bundledWebRuntime": true,
+	"npmClient": "yarn",
+	"webDir": "dist",
+	"plugins": {
+		"SplashScreen": {
+			"launchAutoHide": false,
+			"backgroundColor": "#000000ff",
+			"showSpinner": true,
+			"spinnerColor": "#fff",
+			"splashFullScreen": true
+		},
+		"PushNotifications": {
+			"presentationOptions": [
+				"badge",
+				"sound",
+				"alert"
+			]
+		}
+	},
+	"cordova": {}
 }

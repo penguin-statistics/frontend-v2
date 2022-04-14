@@ -1,6 +1,5 @@
-import { Plugins } from '@capacitor/core'
-const { Share } = Plugins
+import { Share } from "@capacitor/share";
 
-export default function (content) {
-  return Share.share(content)
+export default function(content) {
+  return Share.share(content);
 }

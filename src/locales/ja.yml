@@ -143,8 +143,8 @@ contribute:
   contribute_0: 下記の開発経験お持ちの方を募集しています。Penguin Statisticsに自らの力を貢献してみませんか？ご興味のある方は、ぜひこのQQグループにご参加ください：747099627
   contribute_1: 本プロジェクトは無償のオープンソースプロジェクトです
   skills:
-    frontend: フロントエンド開発 Vue.js
-    backend: バックエンド開発 Java Spring Boot、MongoDB、Golang
+    frontend: フロントエンド開発 React
+    backend: バックエンド開発 Go, PostgreSQL
     mobile: モバイルアプリ開発 iOS、Android
     maintenance: DevOps
     design: UI/UXデザイン
@@ -381,7 +381,7 @@ zone:
     ACTIVITY_OPEN: イベント（開催中）
     ACTIVITY_CLOSED: イベント（終了）
     ACTIVITY_PENDING: イベント（近日開催）
-    ACTIVITY_PERMANENT: "幕間 & 逸話"
+    ACTIVITY_PERMANENT: "エピソード & サイドストーリー"
     GACHABOX: 補給物資
   subTypes:
     AWAKENING_HOUR:
@@ -390,8 +390,11 @@ zone:
     VISION_SHATTER:
       title: 幻滅
       subtitle: "4~8 章"
-    INTERLUDE: 幕間
-    SIDESTORY: 逸話
+    DYING_SUN:
+      title: 残映
+      subtitle: "9 章"
+    INTERLUDE: エピソード
+    SIDESTORY: サイドストーリー
     2019: "2019"
     2020: "2020"
     2021: "2021"

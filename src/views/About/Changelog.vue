@@ -129,8 +129,44 @@ export default {
       index: null,
       logs: [
         {
+          version: "v3.6.10",
+          date: "2022-04-04T14:00:00+0800",
+          changes: `## 修复
+1. 再次修复由存储使用而带来的一些问题`,
+        },
+        {
+          version: "v3.6.9",
+          date: "2022-03-21T10:00:00+0800",
+          changes: `## 修复
+1. 修复由存储使用而带来的一些问题`,
+        },
+        {
+          version: "v3.6.8",
+          date: "2022-03-07T13:00:00+0800",
+          changes: `## 优化
+1. 优化针对掉落汇报的 Sentry 多端统一性能跟踪`,
+        },
+        {
+          version: "v3.6.7",
+          date: "2022-03-07T03:21:00+0800",
+          changes: `## 新增
+1. Sentry 多端统一性能跟踪
+
+## 修复
+1. 多处由于升级 Capacitor v3 造成的错误`,
+        },
+        {
+          version: "v3.6.6",
+          date: "2022-03-05T03:50:00+0800",
+          changes: `## 新增
+1. 重新开放个人掉率查询
+
+## 后端更新
+1. 已使用 v3.0.0 后端 (https://github.com/penguin-statistics/backend-next)`,
+        },
+        {
           version: "v3.6.5",
-          date: "2021-01-25T11:30:00+0800",
+          date: "2022-01-25T11:30:00+0800",
           changes: `## 新增
 1. Planner 新增合成计算功能
 2. 个人掉率查询

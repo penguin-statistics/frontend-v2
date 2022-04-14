@@ -39,12 +39,12 @@
             <AppearanceSwitcher class="mb-2" />
 
             <LocaleSwitcher
-              v-if="!$env.isApp"
+              v-if="!$env.isAppIOS"
               class="mb-2"
             />
 
             <OptimizationSwitcher
-              v-if="!$env.isApp"
+              v-if="!$env.isAppIOS"
               class="mb-2"
             />
 
@@ -68,7 +68,7 @@
             <!--            </PushNotificationSettings>-->
 
             <v-btn
-              v-if="$env.isApp"
+              v-if="$env.isAppIOS"
               v-haptic
               depressed
 
