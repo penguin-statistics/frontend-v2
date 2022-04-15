@@ -180,25 +180,31 @@
         }
 
         function expandModal(type) {
-          if (modalAlreadyExpanded) return
-          modalAlreadyExpanded = true
+          if (modalAlreadyExpanded) return;
+          modalAlreadyExpanded = true;
 
-          const dialogWrapperEl = qs(".peL_modal-w") || {style: {}}
-          const dialogEl = qs(".peL_modal") || {style: {}}
+          const dialogWrapperEl = qs(".peL_modal-w") || { style: {} };
+          const dialogEl = qs(".peL_modal") || { style: {} };
 
-          window.addEventListener("resize", resizeListener, {
-            passive: true
-          })
+          try {
+            window.addEventListener("resize", resizeListener, {
+              passive: true,
+            });
 
-          let loadingIndicatorsOpacity = 0
+            let loadingIndicatorsOpacity = 0;
 
-          if (type === "slow") {
-            dialogWrapperEl.style.marginTop = "32px"
-            loadingIndicatorsOpacity = 0.6
+            if (type === "slow") {
+              dialogWrapperEl.style.marginTop = "32px";
+              loadingIndicatorsOpacity = 0.6;
+            }
+
+            qs(
+              ".peL_loInd"
+            ).style.opacity = loadingIndicatorsOpacity.toString();
+            qs(".peL--gradient").classList.add("peL--gradient-haserror");
+          } catch (e) {
+            console.debug(e);
           }
-
-          qs(".peL_loInd").style.opacity = loadingIndicatorsOpacity.toString()
-          qs(".peL--gradient").classList.add("peL--gradient-haserror")
 
           setTimeout(() => {
             const message = m.errors[type] || backupM.errors[type]
