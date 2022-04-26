@@ -11,7 +11,8 @@ import existUtils from "@/utils/existUtils";
 import mirror from "@/utils/mirror";
 import {findDuplicates} from "@/utils/arrayUtils";
 
-const recognizerVersion = 'v4.0.0'
+const recognizerVersion = 'v4.1.1'
+const recognizerAssetVersion = 'v4-shared'
 
 // async function image2wasmHeapOffset (blob) {
 //   const Module = window.Module
@@ -126,29 +127,41 @@ class Recognizer {
     
     Console.info('Recognizer', 'init: preload icons: preloading')
 
-    await fetch(mirror.deliver(`/recognition/${recognizerVersion}/items.zip`))
-    // await fetch("/items.zip")
+    await fetch(
+      mirror.deliver(`/recognition/${recognizerAssetVersion}/items.zip`)
+    )
+      // await fetch("/items.zip")
       .then((response) => {
         if (response.status >= 200 && response.status < 400) {
-          return Promise.resolve(response.blob())
+          return Promise.resolve(response.blob());
         } else {
-          return Promise.reject(new Error(response.statusText))
+          return Promise.reject(new Error(response.statusText));
         }
       })
       .then((zip) => JSZip.loadAsync(zip))
       .then(async (zip) => {
-        const imageBuffer = []
+        const imageBuffer = [];
         zip.forEach((relativePath, file) => {
-          imageBuffer.push(new Promise(resolve => {
-            const itemId = file.name.split('.')[0]
-            Console.debug('Recognizer', 'init: preload icons: adding', itemId, 'to preloaded item icon')
-            file.async('arraybuffer').then(async buffer => {
-              this.wasm.loadTemplates(itemId, buffer)
-            }).then(resolve)
-          }))
-        })
-        return Promise.all(imageBuffer)
-      })
+          imageBuffer.push(
+            new Promise((resolve) => {
+              const itemId = file.name.split(".")[0];
+              Console.debug(
+                "Recognizer",
+                "init: preload icons: adding",
+                itemId,
+                "to preloaded item icon"
+              );
+              file
+                .async("arraybuffer")
+                .then(async (buffer) => {
+                  this.wasm.loadTemplates(itemId, buffer);
+                })
+                .then(resolve);
+            })
+          );
+        });
+        return Promise.all(imageBuffer);
+      });
 
 
     Console.info('Recognizer', 'init: preload icons: preloaded')
@@ -275,7 +288,13 @@ class Recognizer {
   }
 
   getVersion() {
-    return `recognizer::{state::${this.wasm.envCheck() ? 'initialized' : 'env_check_not_passed'} / core::v${this.wasm.version} / opencv::v${this.wasm.opencvVersion}}` || "unknown";
+    return (
+      `recognizer::{state::${
+        this.wasm.envCheck() ? "initialized" : "env_check_not_passed"
+      } / core::v${this.wasm.version} / opencv::v${
+        this.wasm.opencvVersion
+      } / assets::${recognizerAssetVersion}}` || "unknown"
+    );
   }
 }
 
