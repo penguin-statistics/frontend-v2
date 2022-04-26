@@ -76,9 +76,6 @@
               v-if="recognition.support !== true"
               :reason="recognition.support"
             />
-            <RecognitionNotSupported
-              v-else-if="$store.getters['dataSource/server'] === 'CN'"
-            />
             <v-stepper
               v-else
               v-model="step"
@@ -537,7 +534,6 @@ import RecognitionResultCard from "@/components/recognition/RecognitionResultCar
 import RecognitionSubmitVisualizer from "@/components/recognition/RecognitionSubmitVisualizer";
 import * as Sentry from "@sentry/vue";
 import Console from "@/utils/Console";
-import RecognitionNotSupported from "../../components/global/RecognitionNotSupported";
 
 let recognitionSubmitter;
 try {
@@ -567,7 +563,6 @@ export default {
     ImageInput,
     RecognitionResultOverview,
     PreloaderInline,
-    RecognitionNotSupported
 },
   mixins: [Theme, CDN, ConfirmLeave],
   data() {
@@ -687,7 +682,7 @@ export default {
             times: 0,
           };
         }
-        for (const item of recognitionResult.result.drops) {
+        for (const item of recognitionResult.result.dropArea.drops) {
           if (item.itemId && item.quantity) {
             if (!map[stageCode].items[item.itemId])
               map[stageCode].items[item.itemId] = 0;
@@ -852,11 +847,11 @@ export default {
 
       await this.recognizer.recognize(this.files, (result) => {
         this.recognition.current = result.file.name;
-        result.result.drops.forEach((el) => {
+        result.result.dropArea.drops.forEach((el) => {
           el.quantity = parseInt(el.quantity);
           if (!el.itemId) el.itemId = `unrecognized_${Math.random()}`;
         });
-        result.result.drops.sort((a, b) => {
+        result.result.dropArea.drops.sort((a, b) => {
           return (
             -typeOrder.indexOf(a.dropType) - -typeOrder.indexOf(b.dropType)
           );
