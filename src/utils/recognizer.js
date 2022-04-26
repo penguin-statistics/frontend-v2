@@ -75,6 +75,8 @@ class Recognizer {
 
     this.wasm = {
       version: Module.version,
+      opencvVersion: Module.opencv_version,
+      envCheck: Module.env_check,
       loadServer: Module.load_server,
       loadTemplates: Module.load_templs,
       loadHashIndex: Module.load_hash_index,
@@ -270,6 +272,10 @@ class Recognizer {
       // console.timeEnd(file.name)
       // console.groupEnd()
     }
+  }
+
+  getVersion() {
+    return `recognizer::{state::${this.wasm.envCheck() ? 'initialized' : 'env_check_not_passed'} / core::v${this.wasm.version} / opencv::v${this.wasm.opencvVersion}}` || "unknown";
   }
 }
 

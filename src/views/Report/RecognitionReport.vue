@@ -79,7 +79,7 @@
             <v-stepper
               v-else
               v-model="step"
-              class="bkop-light pt-2 transparent elevation-0"
+              class="bkop-light pt-2 pb-4 transparent elevation-0"
               :class="{ 'dense-stepper': $vuetify.breakpoint.xs }"
               vertical
             >
@@ -93,7 +93,7 @@
               <v-stepper-content step="1">
                 <template v-if="step === 1">
                   <v-alert
-                    color="orange darken-3"
+                    color="primary"
                     border="left"
                     outlined
                     class="mb-2"
@@ -506,6 +506,13 @@
               </v-stepper-content>
             </v-stepper>
           </v-fade-transition>
+          <div 
+            class="monospace degraded-opacity px-6 pb-6 pt-2"
+            style="font-size: x-small"
+          >
+            {{ recognizerVersion }} //
+            frontend::{{ env.version }}+{{ env.commit }}
+          </div>
         </v-card>
       </v-col>
     </v-row>
@@ -516,6 +523,7 @@ import Item from "@/components/global/Item";
 import Recognizer from "@/utils/recognizer";
 import PreloaderInline from "@/components/global/PreloaderInline";
 import CDN from "@/mixins/CDN";
+import config from '@/config';
 import Theme from "@/mixins/Theme";
 import ImageInput from "@/components/recognition/ImageInput";
 import RecognitionResultOverview from "@/components/recognition/RecognitionResultOverview";
@@ -604,6 +612,7 @@ export default {
       },
       changeServerTip: 0,
       isFilesValid: true,
+      recognizerVersion: 'recognizer::pending',
       reportTable: {
         headers: [
           {
@@ -649,6 +658,12 @@ export default {
     };
   },
   computed: {
+    env() {
+      return {
+        version: config.version,
+        commit: GIT_COMMIT.trim() || 'unknown'
+      };
+    },
     filteredResults() {
       return this.filterResults(this.filterValue);
     },
@@ -816,6 +831,7 @@ export default {
         .initialize(this.$store.getters["dataSource/server"])
         .then(() => {
           this.recognition.state = "initialized";
+          this.recognizerVersion = this.recognizer.getVersion()
           span.setStatus("ok");
         })
         .catch((err) => {
