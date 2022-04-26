@@ -10,6 +10,9 @@ import get from '@/utils/getters'
 import existUtils from "@/utils/existUtils";
 import mirror from "@/utils/mirror";
 import {findDuplicates} from "@/utils/arrayUtils";
+import config from '@/config'
+
+import * as Sentry from "@sentry/vue";
 
 const recognizerVersion = 'v4.1.1'
 const recognizerAssetVersion = 'v4-shared'
@@ -202,6 +205,15 @@ class Recognizer {
         let exceptionMessage
         try {
           exceptionMessage = this.wasm.getExceptionMessage(e)
+          Sentry.captureException(new Error(`Recognizer recognition error: ${exceptionMessage}`), {
+            extra: {
+              exceptionMessage,
+              error: e,
+              wasmVersion: this.wasm.version,
+              opencvVersion: this.wasm.opencvVersion,
+              frontendVersion: config.version
+            }
+          })
         } catch (e) {
           exceptionMessage = "Unknown exception"
         }
