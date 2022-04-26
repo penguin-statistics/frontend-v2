@@ -129,8 +129,8 @@ export default {
       index: null,
       logs: [
         {
-          version: "v3.6.12",
-          date: "2022-04-26T23:50:00+0800",
+          version: "v3.7.0",
+          date: "2022-04-27T01:12:00+0800",
           changes: `## 优化
 1. 截图识别适配新版 UI、重新开放`,
         },
