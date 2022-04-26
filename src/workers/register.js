@@ -6,7 +6,5 @@ if (environment.production && 'serviceWorker' in navigator) {
     .then(result => {
       Console.log('ServiceWorker', 'successfully replaced to a no-op SW', result)
     })
-    .catch(error => {
-      Console.error('ServiceWorker', 'failed to replace to a no-op SW', error)
-    })
+    .catch(() => {})
 }

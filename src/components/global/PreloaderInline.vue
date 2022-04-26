@@ -119,8 +119,7 @@ export default {
           this.ready = true
           this.url = URL.createObjectURL(data)
         })
-        .catch((err) => {
-          Console.error('Preloader', 'failed to update preloader image:', err)
+        .catch(() => {
           // we could do nothing here :(
         })
     }

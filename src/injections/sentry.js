@@ -65,6 +65,10 @@ if (environment.production) {
       // since there's currently no feature sensitive native client plugin invocations.
       "does not have web implementation",
       "GlobalCapacitor",
+      'NetworkError',
+      'Network Error',
+      'vibrate API',
+      'ucbrowser'
     ],
     ignoreUrls: [
       // Facebook flakiness
