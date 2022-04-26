@@ -205,18 +205,21 @@ class Recognizer {
         let exceptionMessage
         try {
           exceptionMessage = this.wasm.getExceptionMessage(e)
-          Sentry.captureException(new Error(`Recognizer recognition error: ${exceptionMessage}`), {
+        } catch (e) {
+          exceptionMessage = "Unknown exception"
+        }
+        Sentry.captureException(
+          new Error(`Recognizer recognition error: ${exceptionMessage}`),
+          {
             extra: {
               exceptionMessage,
               error: e,
               wasmVersion: this.wasm.version,
               opencvVersion: this.wasm.opencvVersion,
-              frontendVersion: config.version
-            }
-          })
-        } catch (e) {
-          exceptionMessage = "Unknown exception"
-        }
+              frontendVersion: config.version,
+            },
+          }
+        );
         Console.error(
           "Recognizer",
           "caught wasm error",
