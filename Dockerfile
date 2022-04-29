@@ -9,6 +9,9 @@ RUN yarn install
 
 COPY . .
 
+RUN --mount=type=secret,id=PENGUIN_RECOGNITION_SUBMITTER_JS \
+    cp /run/secrets/PENGUIN_RECOGNITION_SUBMITTER_JS ./src/utils/vendors/recognitionSubmitter.js
+
 # Build the app
 RUN yarn build:web
 

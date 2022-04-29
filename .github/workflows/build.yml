@@ -49,13 +49,14 @@ jobs:
           fi
         
       - name: Build and Publish to Registry
-        uses: elgohr/Publish-Docker-Github-Action@3.04
+        uses: docker/build-push-action@v2
         with:
-          name: penguin-statistics/frontend-v2
-          username: ${{ github.actor }}
-          password: ${{ secrets.GITHUB_TOKEN }}
-          registry: ghcr.io
-          tags: "latest,${{ env.GIT_TAG }}"
+          push: true
+          tags: |
+            ghcr.io/penguin-statistics/frontend-v2:latest,
+            ghcr.io/penguin-statistics/frontend-v2:${{ env.GIT_TAG }}
+          secrets: |
+            PENGUIN_RECOGNITION_SUBMITTER_JS=${{ secrets.PENGUIN_RECOGNITION_SUBMITTER_JS }}
 
       - name: Create GitHub Release
         uses: marvinpinto/action-automatic-releases@v1.2.1
