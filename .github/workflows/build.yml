@@ -47,7 +47,7 @@ jobs:
           if [[ ${GITHUB_REF} == *"alpha"* ]] || [[ ${GITHUB_REF} == *"beta"* ]]; then
             echo "PRE_RELEASE=true" >> $GITHUB_ENV
           fi
-        
+
       - name: Build and Publish to Registry
         uses: docker/build-push-action@v2
         with:
@@ -55,8 +55,8 @@ jobs:
           tags: |
             ghcr.io/penguin-statistics/frontend-v2:latest,
             ghcr.io/penguin-statistics/frontend-v2:${{ env.GIT_TAG }}
-          secrets: |
-            PENGUIN_RECOGNITION_SUBMITTER_JS=${{ secrets.PENGUIN_RECOGNITION_SUBMITTER_JS }}
+          secret-files: |
+            PENGUIN_RECOGNITION_SUBMITTER_JS=/run/secrets/PENGUIN_RECOGNITION_SUBMITTER_JS
 
       - name: Create GitHub Release
         uses: marvinpinto/action-automatic-releases@v1.2.1
