@@ -7,6 +7,8 @@ COPY yarn.lock .
 # Setup yarn
 RUN yarn install
 
+COPY . .
+
 # Build the app
 RUN yarn build:web
 

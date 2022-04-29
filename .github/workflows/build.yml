@@ -47,14 +47,15 @@ jobs:
           if [[ ${GITHUB_REF} == *"alpha"* ]] || [[ ${GITHUB_REF} == *"beta"* ]]; then
             echo "PRE_RELEASE=true" >> $GITHUB_ENV
           fi
-
-      - name: Build Docker Image
-        uses: docker/build-push-action@v2
+        
+      - name: Build and Publish to Registry
+        uses: elgohr/Publish-Docker-Github-Action@3.04
         with:
-          push: true
-          tags: |
-            ghcr.io/penguin-statistics/frontend-v2:latest,
-            ghcr.io/penguin-statistics/frontend-v2:${{ env.GIT_TAG }}
+          name: penguin-statistics/frontend-v2
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+          registry: ghcr.io
+          tags: "latest,${{ env.GIT_TAG }}"
 
       - name: Create GitHub Release
         uses: marvinpinto/action-automatic-releases@v1.2.1
