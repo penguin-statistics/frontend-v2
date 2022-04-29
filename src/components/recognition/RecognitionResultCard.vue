@@ -61,13 +61,13 @@
         </FactTableItem>
 
         <v-divider
-          v-if="result.result.drops.length"
+          v-if="result.result.dropArea.drops.length"
           vertical
           class="mr-2"
         />
 
         <div
-          v-for="item in result.result.drops"
+          v-for="item in result.result.dropArea.drops"
           :key="item.itemId"
           class="d-inline-flex align-center justify-center flex-column mr-2"
           style="border-radius: 4px"
@@ -110,7 +110,7 @@
       class="pt-2 transition-all position-relative"
       :class="{
         'reco-result__wrapper--invalid': hasException,
-        'reco-result__wrapper--invalid-no-results': !result.result.drops.length
+        'reco-result__wrapper--invalid-no-results': !result.result.dropArea.drops.length
       }"
     >
       <v-alert
@@ -125,7 +125,7 @@
           <div>{{ $t('report.recognition.confirm.abnormal.' + (result.result.stage.stageCode ? 'error' : 'fatal')) }}</div>
 
           <!--          <div-->
-          <!--            v-if="result.result.drops.length"-->
+          <!--            v-if="result.result.dropArea.drops.length"-->
           <!--            class="d-inline-flex caption chip-label"-->
           <!--          >-->
           <!--            <v-icon-->

@@ -116,8 +116,8 @@ const setCurrentStorage = (newStorage, mode) => {
 const fallbackedStorage = (storages, mode) => {
   return {
     getItem: (key) => {
-      console.groupCollapsed("Storage: getItem", key);
-      console.groupEnd();
+      // console.groupCollapsed("Storage: getItem", key);
+      // console.groupEnd();
 
       try {
         const current = getCurrentStorage(mode)
@@ -138,9 +138,9 @@ const fallbackedStorage = (storages, mode) => {
       return null;
     },
     setItem: (key, value) => {
-      console.groupCollapsed("Storage: setItem", key);
-      console.trace(value);
-      console.groupEnd();
+      // console.groupCollapsed("Storage: setItem", key);
+      // console.trace(value);
+      // console.groupEnd();
       try {
         getCurrentStorage(mode).setItem(key, value);
         return;
@@ -160,8 +160,8 @@ const fallbackedStorage = (storages, mode) => {
       console.warn("Storage: no storage available with setItem for key", key);
     },
     removeItem: (key) => {
-      console.groupCollapsed("Storage: removeItem", key);
-      console.groupEnd();
+      // console.groupCollapsed("Storage: removeItem", key);
+      // console.groupEnd();
 
       try {
         getCurrentStorage(mode).removeItem(key);

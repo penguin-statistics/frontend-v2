@@ -3,13 +3,13 @@ import Console from "@/utils/Console";
 import PenguinPlugin from "../plugins/PenguinPlugin";
 import { Haptics, ImpactStyle, NotificationType } from "@capacitor/haptics";
 
-function invoke(method, ...args) {
+async function invoke(method, ...args) {
   if (Capacitor.isPluginAvailable("Haptics")) {
     Console.info("Haptics", "invoking haptics", method, args);
     try {
-      Haptics[method](...args);
+      await Haptics[method](...args);
     } catch (e) {
-      Console.warn("Haptics", "failed to invoke haptics", e);
+      Console.debug("Haptics", "failed to invoke haptics", e);
     }
   }
 }

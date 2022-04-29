@@ -9,7 +9,7 @@ const packageVersion = `v${envvar("npm_package_version", "0.0.0", true)}`;
 let commitHash;
 
 try {
-  commitHash =
+  commitHash = process.env.TRUNCATED_GITHUB_SHA ||
     require("child_process")
       .execSync("git rev-parse --short HEAD")
       .toString()
@@ -43,7 +43,7 @@ console.log(`
     "web",
     true
   )}
-  - 📊 Build Hash (from cmd:'git rev-parse --short HEAD'): ${commitHash}
+  - 📊 Build Hash (from env:'TRUNCATED_GITHUB_SHA' || cmd:'git rev-parse --short HEAD'): ${commitHash}
   - 📋 Build Version (from env:'npm_package_version'): ${packageVersion}
   - 📋 Template Root: ${templateRoot}
   - 📃 Using Template File: ${templateFile}
@@ -67,6 +67,7 @@ module.exports = {
     proxy: {
       "/PenguinStats": {
         target: "https://penguin-stats.cn/",
+        // target: "http://localhost:9010/",
       },
     },
   },

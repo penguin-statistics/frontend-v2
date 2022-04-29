@@ -6,6 +6,7 @@ import environment from '@/utils/environment'
 import Console from '@/utils/Console'
 import store from '@/store'
 import i18n from '@/i18n'
+import * as Sentry from "@sentry/vue";
 
 function randomString (length) {
   let result = ''
@@ -110,7 +111,18 @@ class PenguinProbe {
           }
         },
         onerror (e) {
-          Console.warn('ProbeTransport', 'websocket connection errored as', e)
+          Console.info('ProbeTransport', 'websocket connection error')
+          
+          Sentry.captureMessage('ProbeTransport: websocket connection error', {
+            contexts: {
+              module: 'ProbeTransport',
+            },
+            extra: {
+              error: e,
+              code: e.code,
+              reason: e.reason
+            }
+          })
         }
       }
     )

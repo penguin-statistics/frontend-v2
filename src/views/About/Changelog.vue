@@ -129,6 +129,18 @@ export default {
       index: null,
       logs: [
         {
+          version: "v3.7.0",
+          date: "2022-04-27T01:12:00+0800",
+          changes: `## 优化
+1. 截图识别适配新版 UI、重新开放`,
+        },
+        {
+          version: "v3.6.11",
+          date: "2022-04-14T22:50:00+0800",
+          changes: `## 优化
+1. 添加国服截图识别不可用提示`,
+        },
+        {
           version: "v3.6.10",
           date: "2022-04-04T14:00:00+0800",
           changes: `## 修复
