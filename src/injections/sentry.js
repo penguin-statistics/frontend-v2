@@ -5,10 +5,10 @@ import environment from "@/utils/environment";
 import Vue from "vue";
 import router from "@/router";
 
-const sentEvents = {};
+// const sentEvents = {};
 
 // set the limitation of a same client sending the same message event to Sentry for every session
-const maxSameEventPerClient = 10;
+// const maxSameEventPerClient = 10;
 
 if (environment.production) {
   Sentry.init({
@@ -86,30 +86,30 @@ if (environment.production) {
       /webappstoolbarba\.texthelp\.com\//i,
       /metrics\.itunes\.apple\.com\.edgesuite\.net\//i,
     ],
-    beforeSend(event) {
-      if (!environment.production) {
-        console.log("Sentry: non-production, dropping sentry event", event);
-        return null;
-      }
+    // beforeSend(event) {
+    //   if (!environment.production) {
+    //     console.log("Sentry: non-production, dropping sentry event", event);
+    //     return null;
+    //   }
 
-      const { message } = event;
-      if (message in sentEvents) {
-        const counts = sentEvents[message];
+    //   const { message } = event;
+    //   if (message in sentEvents) {
+    //     const counts = sentEvents[message];
 
-        // if there's still 'quota' for the client to send this event
-        if (counts < maxSameEventPerClient) {
-          // record that we have send the event this time
-          sentEvents[message] = counts + 1;
-          // report event
-          return event;
-        } else {
-          console.log("Sentry: ignored event, already sent", event);
-        }
-      } else {
-        // this has not yet been sent; init var and send it
-        sentEvents[message] = 1;
-        return event;
-      }
-    },
+    //     // if there's still 'quota' for the client to send this event
+    //     if (counts < maxSameEventPerClient) {
+    //       // record that we have send the event this time
+    //       sentEvents[message] = counts + 1;
+    //       // report event
+    //       return event;
+    //     } else {
+    //       console.log("Sentry: ignored event, already sent", event);
+    //     }
+    //   } else {
+    //     // this has not yet been sent; init var and send it
+    //     sentEvents[message] = 1;
+    //     return event;
+    //   }
+    // },
   });
 }
