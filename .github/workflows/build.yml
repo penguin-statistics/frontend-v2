@@ -40,7 +40,7 @@ jobs:
         id: get_version
         run: |
           export TRUNCATED_GITHUB_SHA=$(echo ${{ github.sha }} | cut -c1-7);
-          echo "TRUNCATED_GITHUB_SHA=${{ TRUNCATED_GITHUB_SHA }}" >> $GITHUB_ENV
+          echo "TRUNCATED_GITHUB_SHA=${TRUNCATED_GITHUB_SHA}" >> $GITHUB_ENV
           echo "VERSION=${GITHUB_REF/refs\/tags\//}+${TRUNCATED_GITHUB_SHA}" >> $GITHUB_ENV
           echo "GIT_TAG=${GITHUB_REF/refs\/tags\//}" >> $GITHUB_ENV
           # if `alpha` or `beta` is in the tag, then it will be a pre-release
