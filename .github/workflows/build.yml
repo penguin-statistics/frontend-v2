@@ -41,7 +41,6 @@ jobs:
         run: |
           export TRUNCATED_GITHUB_SHA=$(echo ${{ github.sha }} | cut -c1-7);
           echo "TRUNCATED_GITHUB_SHA=${TRUNCATED_GITHUB_SHA}" >> $GITHUB_ENV
-          echo "VERSION=${GITHUB_REF/refs\/tags\//}+${TRUNCATED_GITHUB_SHA}" >> $GITHUB_ENV
           echo "GIT_TAG=${GITHUB_REF/refs\/tags\//}" >> $GITHUB_ENV
           # if `alpha` or `beta` is in the tag, then it will be a pre-release
           if [[ ${GITHUB_REF} == *"alpha"* ]] || [[ ${GITHUB_REF} == *"beta"* ]]; then
@@ -63,13 +62,3 @@ jobs:
         with:
           repo_token: "${{ secrets.GITHUB_TOKEN }}"
           prerelease: ${{ env.PRE_RELEASE }}
-
-      - name: Create Sentry release
-        uses: getsentry/action-release@v1
-        env:
-          SENTRY_AUTH_TOKEN: ${{ secrets.SENTRY_AUTH_TOKEN }}
-          SENTRY_ORG: ${{ secrets.SENTRY_ORG }}
-          SENTRY_PROJECT: ${{ secrets.SENTRY_PROJECT }}
-        with:
-          environment: prod
-          version: ${{ env.VERSION }}
