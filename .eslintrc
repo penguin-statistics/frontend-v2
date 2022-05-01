@@ -22,6 +22,7 @@
     "vue/no-template-shadow": "off",
     "vue/valid-template-root": "off",
     "vue/no-unused-vars": "off",
+    "no-debugger": "off",
     "no-tabs": [
       "error",
       {

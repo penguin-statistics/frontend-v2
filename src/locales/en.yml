@@ -319,26 +319,26 @@ report:
       "DropQuantityChar::LowConfidence":
         title: Error in item quantity recognition
         subtitle: Low confidence in the recognition result. Please check if the result is consistent with the screenshot.
-      "DropQuantity::NotFound":
+      "DropAreaDropsQuantity::NotFound":
         title: Failed to recognize the drop quantity
         subtitle: Pictures with poor resolution or quality may cause this problem. Please check if the image is compressed
-      "Drops::LowConfidence":
+      "DropAreaDrops::LowConfidence":
         title: Low Confidence Drop Item
         subtitle: Check if you have selected a screenshot in which its content includes a closed event
-      "Drops::Illeagal":
+      "DropAreaDrops::Illegal":
         title: Illegal drops found
         subtitle: There should be no drop in this stage, but there are some in the screenshot. This is usually caused by event drop during non-event period
       "Result::False":
-        title: Not a battle result screenshot
+        title: Not a battle result screenshot, or an internal error occurred
         subtitle: If this is a battle result screenshot, please make sure the server you select is correct
       "Stage::NotFound":
         title: Cannot found any valid matching stage
         subtitle: Error in stage recognition, or we do not count drop for this stage
-      "Stage::Illeagal":
+      "Stage::Illegal":
         title: Illegal stage
         subtitle: This stage is not opening now
       "3stars::False": Suspected to be a non 3-stars clear
-      "DropType::Illeagal":
+      "DropType::Illegal":
         title: Illegal drop type
         subtitle: There are illegal drop types in the screenshot, like first-clear or return AP
       "DropType::NotFound": Failed to find any drop type

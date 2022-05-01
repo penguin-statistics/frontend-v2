@@ -14,7 +14,7 @@ import config from '@/config'
 
 import * as Sentry from "@sentry/vue";
 
-const recognizerVersion = 'v4.1.1'
+const recognizerVersion = 'v4.2.1'
 const recognizerAssetVersion = 'v4-shared'
 
 // async function image2wasmHeapOffset (blob) {
@@ -94,7 +94,7 @@ class Recognizer {
     const stages = store.getters['data/content']({ id: 'stages' })
 
     const duplicatedStageIds = findDuplicates(stages.map(el => el.code))
-    console.log('duplicates', duplicatedStageIds)
+    Console.debug('Recognizer', 'skipping duplicates', duplicatedStageIds)
 
     stages
       .forEach((stage) => {
@@ -110,14 +110,18 @@ class Recognizer {
         let drops = (stage.dropInfos || [])
           .map(drop => drop.itemId)
           .filter(drop => !!drop && drop !== 'furni')
-
+        
         if (stage.recognitionOnly) drops = [...drops, ...stage.recognitionOnly]
 
-        transformedStages[stage.code] = {
+        if (!transformedStages[stage.code]) transformedStages[stage.code] = {}
+
+        transformedStages[stage.code][
+          stage.stageId.indexOf('tough') >= 0 ? 'TOUGH' : 'NORMAL'
+        ] = {
           stageId: stage.stageId,
           drops: uniq(drops),
-          existence: existUtils.existence(stage, true)
-        }
+          existence: existUtils.existence(stage, true),
+        };
       })
 
     Console.debug("Recognizer", "init: preload server: preloading with", server);
@@ -235,7 +239,10 @@ class Recognizer {
           duration,
           result: {
             exceptions: [{ what: "Result::False" }],
-            drops: [],
+            stage: {},
+            dropArea: {
+              drops: []
+            }
           },
         });
         continue

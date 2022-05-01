@@ -317,26 +317,26 @@ report:
       "DropQuantityChar::LowConfidence":
         title: 物品数量识别可能存在错误
         subtitle: 识别置信度低，请核对识别结果是否与图片一致
-      "DropQuantity::NotFound":
+      "DropAreaDropsQuantity::NotFound":
         title: 存在未识别到数量的掉落
         subtitle: 分辨率或质量较差的图片可能会导致此问题。请检查图片是否经过压缩处理
-      "Drops::LowConfidence":
+      "DropAreaDrops::LowConfidence":
         title: 存在未知掉落
         subtitle: 此问题通常是由于非活动期间的活动掉落的导致的。
-      "Drops::Illeagal":
+      "DropAreaDrops::Illegal":
         title: 存在非法掉落
         subtitle: 此关卡目前不应存在任何掉落，但图片中存在。这通常是由于非活动期间的活动掉落的导致的。
       "Result::False":
-        title: 非结算页面截图
+        title: 非结算页面截图或内部错误
         subtitle: 若这确实是一张结算页面截图，请检查您是否选择了正确的服务器
       "Stage::NotFound":
         title: 未知关卡
         subtitle: 这可能是关卡识别出现了错误，或此关卡不被收录（如剿灭作战、绝境作战等）
-      "Stage::Illeagal":
+      "Stage::Illegal":
         title: 非法关卡
         subtitle: 此关卡目前不开放
       "3stars::False": 非三星评价
-      "DropType::Illeagal":
+      "DropType::Illegal":
         title: 非法掉落类型
         subtitle: 截图中存在首次掉落、理智返还等非法掉落类型，或存在识别失败的掉落类型
       "DropType::NotFound": 未找到任何掉落类型
