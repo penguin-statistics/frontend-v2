@@ -129,6 +129,12 @@ export default {
       index: null,
       logs: [
         {
+          version: "v3.7.1",
+          date: "2022-05-01T21:25:00+0800",
+          changes: `## 修复
+1. 截图识别修复无法正确识别国服主题曲第 10 章难度的问题`,
+        },
+        {
           version: "v3.7.0",
           date: "2022-04-27T01:12:00+0800",
           changes: `## 优化
