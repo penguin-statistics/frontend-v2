@@ -158,7 +158,7 @@ contribute:
   backend: 后端
   recognizer: 截图识别
   newFolder: 锐意新建文件夹中
-  caption: 企鹅物流数据统计是一项非盈利的社区项目，我们的发展离不开大家的共同维护与支持。欢迎前往上方 GitHub 为我们点 Star、提出 Issues，同时也欢迎 Pull Request。
+  caption: 企鹅物流数据统计是一项非盈利的社区项目，我们的发展离不开大家的共同维护与支持。欢迎前往上方 GitHub 为我们点 Star、提出 Issues，同时也欢迎 Pull Requests。
   contribute_0: 如果您有以下一项或多项经验，愿意为企鹅数据贡献自己的一份力量，请加QQ群：747099627
   contribute_1: 本项目为无偿开源项目
   skills:

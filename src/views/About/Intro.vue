@@ -234,20 +234,23 @@ export default {
 }
 
 .contrib-banner-inner {
-  display: inline-flex;
+  display: inline-block;
 }
 
+/* .contrib-banner-inner > * {
+  display: inline-block;
+} */
+
 @media (max-width: 770px) {
-  .contrib-banner-inner {
+  /* .contrib-banner-inner {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 8px 4px;
-    /* make element left-align in the grid cell */
   }
 
   .contrib-banner-inner > * {
     justify-content: start;
-  }
+  } */
 
   small {
     display: none;

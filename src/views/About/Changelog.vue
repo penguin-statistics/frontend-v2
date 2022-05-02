@@ -58,7 +58,7 @@
           </v-btn>
         </v-card-title>
 
-        <v-expand-transition>l
+        <v-expand-transition>
           <div v-if="item.value">
             <v-divider />
 
