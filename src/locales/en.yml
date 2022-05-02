@@ -159,8 +159,12 @@ stats:
       refresh: Refresh Site Statistics
 contribute:
   repo: "Project repositories: "
-  frontend: Front End
-  backend: Back End
+  frontend: Frontend
+  frontendV4: Frontend v4
+  backend: Backend
+  recognizer: Recognizer
+  newFolder: New Folder
+  caption: "Penguin Statistics is a community project and it wouldn't be possible without the support of our community. Please support us by starring our GitHub repositories. Issues and PRs are always welcome!"
   contribute_0:
     "If you have experience with any of the following, and want to contribute
     to Penguin Statistics, contact us at QQ group: 747099627."
