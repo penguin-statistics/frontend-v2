@@ -34,7 +34,7 @@
 <template>
   <v-card
     elevation="0"
-    class="transparent pt-0 my-1"
+    class="transparent pt-0 mb-1"
   >
     <v-row
       align="center"
