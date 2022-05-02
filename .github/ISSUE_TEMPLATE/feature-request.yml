@@ -1,0 +1,51 @@
+name: 功能或改进建议 / Feature or Improvement Suggestions
+description: 提交功能或改进建议 / File a feature or improvement suggestion
+title: "[Suggestion]: "
+labels: ["feature request", "triage"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        感谢您抽出时间提交功能或改进建议！
+        Thanks for your time to file a feature or improvement suggestion!
+
+        使用中文与英文均可，但若可以以英文报告，则请尽量以英文报告。
+        Please use Chinese and English, but if you can report in English, please do so.
+
+  - type: input
+    id: url
+    attributes:
+      label: 功能或改进建议的相关页面链接 // URL of the page that the suggestion is related to
+      description: |
+        可留空；若有多处链接，请使用分号与空格分隔。
+        (Optional); if there are multiple URLs, please use semicolon and space to separate them.
+      value: https://penguin-stats.io/
+    validations:
+      required: false
+
+  - type: textarea
+    id: issue-description
+    attributes:
+      label: 描述 / Description
+      description: |
+        请详细描述您的功能或改进建议。
+        Please describe the suggestion in detail.
+      value: |
+        ## 您的功能或改进是针对哪个/哪些功能/模块的？ / What is the feature or improvement related to?
+        1. 
+
+        ## 如果这是一个改进建议，您感觉这个功能现在存在什么问题？ / If this is an improvement suggestion, what is the problem that this feature currently has?
+        1.
+
+        ## 请尽量详述功能或改进建议的改进方案 / How would you describe the improvement you would like to see?
+        1.
+    validations:
+      required: true
+  # - type: checkboxes
+  #   id: terms
+  #   attributes:
+  #     label: Code of Conduct
+  #     description: By submitting this issue, you agree to follow our [Code of Conduct](https://example.com)
+  #     options:
+  #       - label: I agree to follow this project's Code of Conduct
+  #         required: true
