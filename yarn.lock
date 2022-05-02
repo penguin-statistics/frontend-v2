@@ -1062,10 +1062,10 @@
   resolved "https://registry.npmmirror.com/@capacitor/app/-/app-1.1.1.tgz#bde7202faad1b47c4ae2c4a622285d7569384c5e"
   integrity sha512-8ADkldHnoE1xkWvPUsGlERVGm6/Zvcxy6hCI80AxydIKyaCG7kbDAvUclebbnw/eFRxj2zBoVatGLjmJNvTbYw==
 
-"@capacitor/cli@^3.4.0":
-  version "3.4.0"
-  resolved "https://registry.npmmirror.com/@capacitor/cli/download/@capacitor/cli-3.4.0.tgz#a2328849cb9d5aa5459ffd329b7daa727657d655"
-  integrity sha512-vIGLu36S0neW4hJKiC+gC7Egl9ih/rGaQ+jusom8hjPj4PNdRbnu9NUHGn+yiQYS8udtbIENUBysZiokY4UAjA==
+"@capacitor/cli@^3.5.0":
+  version "3.5.0"
+  resolved "https://registry.yarnpkg.com/@capacitor/cli/-/cli-3.5.0.tgz#69e0334b45822feff7888c64ad493a01ee87f5a9"
+  integrity sha512-URRAfCbrXufaxRCsDR68m0H3PPndyd4UyfhF4Y+DM5GI1i+0a1SlDYx2s/Ik0ttUFuKc+StwtlmR9Bt5sYNPtQ==
   dependencies:
     "@ionic/cli-framework-output" "^2.2.1"
     "@ionic/utils-fs" "^3.1.5"
@@ -1084,10 +1084,10 @@
     tslib "^2.1.0"
     xml2js "^0.4.23"
 
-"@capacitor/core@^3.4.0":
-  version "3.4.0"
-  resolved "https://registry.npmmirror.com/@capacitor/core/download/@capacitor/core-3.4.0.tgz#c0e8c36fe9d3dbc05f57e644aa1aefa2184d20d8"
-  integrity sha512-utfMAYZyU8SL+JkVOcqanjmWarSBlvCyVDPL6AnXG/B//9VtleZ5NtorUXL0ggnK7t+Zbd8xGgA+LN7mn4+3Lw==
+"@capacitor/core@^3.5.0":
+  version "3.5.0"
+  resolved "https://registry.yarnpkg.com/@capacitor/core/-/core-3.5.0.tgz#1b508e42b263816603e986557d6b9c5d64876164"
+  integrity sha512-+CFSG+CztpFIir9gGqNEtAYuf6OWryQ8dojXoeozAkoz3mKvyFfcEfvLVPo/pw/B4zHIlNnJLHne6vbjAFbDKQ==
   dependencies:
     tslib "^2.1.0"
 
@@ -1101,10 +1101,10 @@
   resolved "https://registry.npmmirror.com/@capacitor/haptics/-/haptics-1.1.4.tgz#80d5bc4776740a227a8cb83c85fac4db1316db8e"
   integrity sha512-+pJIb5X7xAcbrWj6rJaV+cwBlv8aFwB1/Ob6EV4atydThuuVSSsAL4hI4ZYlPNOxM6H5s+ZDLj7Pa2os4eFmtg==
 
-"@capacitor/ios@2.5.0":
-  version "2.5.0"
-  resolved "https://registry.npmmirror.com/@capacitor/ios/download/@capacitor/ios-2.5.0.tgz#867b155c4a827631ab0884319e33f8dad15bc781"
-  integrity sha1-hnsVXEqCdjGrCIQxnjP42tFbx4E=
+"@capacitor/ios@^3.5.0":
+  version "3.5.0"
+  resolved "https://registry.yarnpkg.com/@capacitor/ios/-/ios-3.5.0.tgz#69087c1764921ae531385431521bd7b5784af117"
+  integrity sha512-rjFS9gdEmtxP01cr6pWoKRYObkllO4X53s9OvQ/A7K02u5Sz2Ru1iOz1f2xi93GTHPfEMP6/XRI963ZbwbCOSQ==
 
 "@capacitor/share@^1.1.2":
   version "1.1.2"

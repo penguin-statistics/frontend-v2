@@ -47,7 +47,7 @@
 		<false/>
 	</dict>
 	<key>NSCameraUsageDescription</key>
-	<string>To Take Photos and Video</string>
+	<string>Due to technical limitations, we cannot disable the usage of camera. If you have taken a photo and use it as the input for the locally-running recognizer, the recognizer will output an error for such image. Other than that, your photo is being kept in your local filesystem forever and is definitely not uploaded. Please do note that you should not use the camera to take a photo of the screen as well, as it could also lead to a recognition error. Use a screenshot selected from your photo album instead.</string>
 	<key>NSLocationAlwaysUsageDescription</key>
 	<string>Always allow Geolocation?</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
