@@ -785,7 +785,11 @@ export default {
       this.submission.total = this.selectedResults.length;
 
       try {
-        await recognitionSubmitter(this, (state, chunk) => {
+        const version = this.recognizer.getVersion()
+        await recognitionSubmitter(this, {
+          recognizerVersion: version.recognizerVersion,
+          recognizerAssetsVersion: version.recognizerAssetsVersion
+        }, (state, chunk) => {
           if (state === "resolve") {
             this.submission.submitted.push(chunk);
             this.$ga.event(
@@ -831,7 +835,7 @@ export default {
         .initialize(this.$store.getters["dataSource/server"])
         .then(() => {
           this.recognition.state = "initialized";
-          this.recognizerVersion = this.recognizer.getVersion()
+          this.recognizerVersion = this.recognizer.getVersionDescription()
           span.setStatus("ok");
         })
         .catch((err) => {

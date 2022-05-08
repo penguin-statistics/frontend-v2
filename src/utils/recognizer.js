@@ -14,8 +14,8 @@ import config from '@/config'
 
 import * as Sentry from "@sentry/vue";
 
-const recognizerVersion = 'v4.2.2'
-const recognizerAssetVersion = 'v4-shared'
+const recognizerFirstAPICompatibleVersionFolder = 'v4.2.2'
+const recognizerAssetsVersion = 'v4-shared'
 
 // async function image2wasmHeapOffset (blob) {
 //   const Module = window.Module
@@ -58,7 +58,7 @@ class Recognizer {
       Console.info('Recognizer', 'init: recognition backend: both js and wasm are already loaded')
     } else {
       const script = document.createElement('script')
-      script.src = mirror.deliver(`/recognition/${recognizerVersion}/penguin-recognizer.js`)
+      script.src = mirror.deliver(`/recognition/${recognizerFirstAPICompatibleVersionFolder}/penguin-recognizer.js`)
       // script.src = "/penguin-recognizer.js"
       document.body.appendChild(script)
       await new Promise(resolve => {
@@ -135,7 +135,7 @@ class Recognizer {
     Console.info('Recognizer', 'init: preload icons: preloading')
 
     await fetch(
-      mirror.deliver(`/recognition/${recognizerAssetVersion}/items.zip`)
+      mirror.deliver(`/recognition/${recognizerAssetsVersion}/items.zip`)
     )
       // await fetch("/items.zip")
       .then((response) => {
@@ -310,12 +310,19 @@ class Recognizer {
   }
 
   getVersion() {
+    return {
+      recognizerVersion: this.wasm.version,
+      recognizerAssetsVersion: recognizerAssetsVersion,
+    };
+  }
+
+  getVersionDescription() {
     return (
       `recognizer::{state::${
         this.wasm.envCheck() ? "initialized" : "env_check_not_passed"
-      } / core::v${this.wasm.version} / opencv::v${
+      } / core::${this.wasm.version} / opencv::v${
         this.wasm.opencvVersion
-      } / assets::${recognizerAssetVersion}}` || "unknown"
+      } / assets::${recognizerAssetsVersion}}` || "unknown"
     );
   }
 }
