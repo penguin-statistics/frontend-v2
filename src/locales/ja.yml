@@ -138,8 +138,12 @@ stats:
       refresh: Refresh Site Statistics
 contribute:
   repo: プロジェクトリポジトリ：
-  frontend: フロントエンド
-  backend: バックエンド
+  frontend: ﾌﾛﾝﾄｴﾝﾄﾞ
+  frontendV4: ﾌﾛﾝﾄｴﾝﾄﾞ v4
+  backend: ﾊﾞｯｸｴﾝﾄﾞ
+  recognizer: ｽｸｼｮ認識
+  newFolder: 新規フォルダー鋭意作成中
+  caption: Penguin Statisticは非営利コミュニティプロジェクトです。本プロジェクトの発展は、皆様のご助力が必要不可欠でございます。宜しければGitHubへ本レポジトリにスターをお付けください。イシューやプルリクエストも心よりお待ちしております。皆様のご支援とご協力を賜りますよう、よろしくお願い申し上げます。
   contribute_0: 下記の開発経験お持ちの方を募集しています。Penguin Statisticsに自らの力を貢献してみませんか？ご興味のある方は、ぜひこのQQグループにご参加ください：747099627
   contribute_1: 本プロジェクトは無償のオープンソースプロジェクトです
   skills:
@@ -300,13 +304,13 @@ report:
       "DropQuantityChar::LowConfidence":
         title: アイテム数量認識異常の可能性がある
         subtitle: 認識の信頼性が低い、認識結果を画像と照合してください
-      "DropQuantity::NotFound":
+      "DropAreaDropsQuantity::NotFound":
         title: 数量検出失敗のドロップが存在
         subtitle: 解像度・品質の低い画像はこの問題を引き起こす可能性があります。画像は圧縮処理されましたかご確認ください
-      "Drops::LowConfidence":
+      "DropAreaDrops::LowConfidence":
         title: 未知のドロップが存在
         subtitle: この問題は通常、イベント期間外のイベントドロップによるものです
-      "Drops::Illeagal":
+      "DropAreaDrops::Illegal":
         title: 非合法ドロップが存在
         subtitle: このステージには今、可能のドロップが存在していませんが、検出されました。これは通常、イベント期間外のイベントドロップによるものです
       "Result::False":
@@ -315,11 +319,11 @@ report:
       "Stage::NotFound":
         title: 未知のステージ
         subtitle: これはステージ認識にはエラーが発生しましたか、又はこのステージは記録されていません（殲滅作戦、絶境作戦など）
-      "Stage::Illeagal":
+      "Stage::Illegal":
         title: 非合法ステージ
         subtitle: このステージただ今有効していません
       "3stars::False": 星3評価ではない
-      "DropType::Illeagal":
+      "DropType::Illegal":
         title: 非合法のドロップタイプ
         subtitle: スクリーンショットには初回、理性返却などの非合法なドロップタイプ、又は認識できないドロップタイプが存在しています
       "DropType::NotFound": ドロップタイプ未検出

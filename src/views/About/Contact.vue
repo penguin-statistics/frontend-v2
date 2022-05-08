@@ -6,7 +6,7 @@
 			"contact_1": "Contact Information",
 			"contact_2": "If you have any questions or suggestions, feel free to contact the webmaster. (English is fine)",
 			"contributor": "Team Members Page",
-			"github": "Github Issues",
+			"github": "GitHub Issues",
 			"nga": "NGA Thread"
 		}
 	},
@@ -16,7 +16,7 @@
 			"contact_1": "",
 			"contact_2": "ご質問、ご要望などございましたら、管理人さんにお気軽にお問い合わせください。（日本語でもOKです）",
 			"contributor": "制作協力者ページ",
-			"github": "Github Issues",
+			"github": "GitHub Issues",
 			"nga": "NGA スレッド"
 		}
 	},
@@ -26,7 +26,7 @@
 			"contact_1": "",
 			"contact_2": "질문이나 건의 사안이 있다면, 언제든지 관리자에게 연락하여 주십시오.",
 			"contributor": "팀 구성원 페이지",
-			"github": "Github Issues",
+			"github": "GitHub Issues",
 			"nga": "NGA (포럼) 스레드"
 		}
 	},
@@ -36,7 +36,7 @@
 			"contact_1": "页面内的各种联系方式",
 			"contact_2": "如果您有任何问题或建议，欢迎联系站长。",
 			"contributor": "团队成员页面",
-			"github": "Github Issues",
+			"github": "GitHub Issues",
 			"nga": "NGA 讨论帖"
 		}
 	}

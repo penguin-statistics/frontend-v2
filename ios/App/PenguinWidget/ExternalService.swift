@@ -31,8 +31,16 @@ struct StatsResponseStatItem: Decodable {
     let name_i18n: [String: String]
 }
 
+func getRegionalEndpointBase() -> String {
+    if Locale.current.regionCode == "CN" {
+        return "https://widget.penguin-stats.cn"
+    } else {
+        return "https://widget.penguin-stats.io"
+    }
+}
+
 func getStats(for server: Servers, completion: @escaping (SiteStats?) -> ())  {
-    AF.request("https://widget.penguin-stats.io/api/stats/" + server.string(), requestModifier: {
+    AF.request("\(getRegionalEndpointBase())/api/stats/" + server.string(), requestModifier: {
         $0.timeoutInterval = TimeInterval(25.0) // system give us 30s. make some room
     }).response {resp in
         guard let data = resp.data else {

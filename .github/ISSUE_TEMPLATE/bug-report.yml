@@ -1,0 +1,71 @@
+name: Bug 报告 / Bug Report
+description: 提交 Bug 报告 / File a bug report
+title: "[Bug]: "
+labels: ["bug", "triage"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        感谢您抽出时间提交 Bug 报告！
+        Thanks for your time to file a bug report!
+
+        使用中文与英文均可，但若可以以英文报告，则请尽量以英文报告。
+        Please use Chinese and English, but if you can report in English, please do so.
+
+  - type: textarea
+    id: env-context
+    attributes:
+      label: 环境 // Environment
+      description: |
+        请描述错误发生的环境，包括操作系统、浏览器名称、浏览器版本等。
+        Please describe the environment the problem occurred in, including operating system, compiler, compiler version, compiler options, etc.
+      value: |
+        操作系统 / Operating System: 
+        浏览器名称 / Browser Name:
+        浏览器版本 / Browser Version:
+    validations:
+      required: true
+
+  - type: input
+    id: url
+    attributes:
+      label: 出现此问题的页面链接 // URL of the page that the problem occurred in
+      description: |
+        若有多处链接，请使用分号与空格分隔。
+        If there are multiple URLs, please use semicolon and space to separate them.
+      value: https://penguin-stats.io/
+    validations:
+      required: true
+  
+  - type: textarea
+    id: issue-description
+    attributes:
+      label: 描述 / Description
+      description: |
+        请详细描述您的问题；若您的问题涉及 UI 错误，请一并提供截图。
+        Please describe the problem in detail; if the problem involves UI errors, please also provide screenshots.
+      value: |
+        ## 您都做了哪些事情/我们如何才能复现这个问题呢？ / What steps did you take to reproduce this problem?
+        1.
+        2.
+        3.
+
+        ## 期望的结果 / What should have happened?
+        1.
+
+        ## 实际的结果 / What actually happened?
+        1.
+
+        ## 额外的信息 / Any additional information?
+        1. 
+    validations:
+      required: true
+
+  # - type: checkboxes
+  #   id: terms
+  #   attributes:
+  #     label: Code of Conduct
+  #     description: By submitting this issue, you agree to follow our [Code of Conduct](https://example.com)
+  #     options:
+  #       - label: I agree to follow this project's Code of Conduct
+  #         required: true

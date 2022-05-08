@@ -12,7 +12,6 @@ import Alamofire
 
 struct SiteStatsProvider: IntentTimelineProvider {
     func placeholder(in context: Context) -> WidgetTimelineEntry {
-        print("widget placeholder", context)
         return WidgetTimelineEntry(
             date: Date(),
             stats: SiteStats.demo(.zhRegular)
@@ -20,8 +19,6 @@ struct SiteStatsProvider: IntentTimelineProvider {
     }
 
     func getSnapshot(for configuration: StatisticsOverviewIntent, in context: Context, completion: @escaping (WidgetTimelineEntry) -> ()) {
-        print("serverSelection snapshot", configuration)
-        
         let entry = WidgetTimelineEntry(
             date: Date(),
             stats: SiteStats.demo(.zhRegular)

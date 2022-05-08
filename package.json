@@ -1,6 +1,6 @@
 {
   "name": "penguin-stats-frontend",
-  "version": "3.7.0",
+  "version": "3.7.3",
   "private": true,
   "author": "Penguin Statistics Contributors <contributors@penguin-stats.io> (https://github.com/orgs/penguin-statistics/people)",
   "scripts": {
@@ -31,7 +31,7 @@
     "@capacitor/core": "^3.4.0",
     "@capacitor/device": "^1.1.2",
     "@capacitor/haptics": "^1.1.4",
-    "@capacitor/ios": "2.5.0",
+    "@capacitor/ios": "^3.5.0",
     "@capacitor/share": "^1.1.2",
     "@capacitor/splash-screen": "^1.2.2",
     "@sentry/integrations": "^5.6.1",

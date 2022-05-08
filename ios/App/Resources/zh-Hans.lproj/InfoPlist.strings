@@ -9,8 +9,6 @@
 "CFBundleDisplayName" = "企鹅物流";
 "CFBundleName" = "企鹅物流数据统计";
 
-"SIRI_USAGE_DESCRIPTION" = "数据将发送至 Siri";
-
 "SHORTCUT_ITEM_SEARCH_TITLE" = "搜索";
 "SHORTCUT_ITEM_SEARCH_SUBTITLE" = "前往全局搜索";
 //"SHORTCUT_ITEM_DATE_TITLE" = "活动：踏寻往昔之风";

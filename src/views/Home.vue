@@ -11,7 +11,7 @@
       <v-col
         cols="12"
         lg="6"
-        xl="8"
+        xl="7"
       >
         <Intro
           class="card-translate-up"
@@ -21,7 +21,7 @@
       <v-col
         cols="12"
         lg="6"
-        xl="4"
+        xl="5"
       >
         <Bulletin
           class="card-translate-up"

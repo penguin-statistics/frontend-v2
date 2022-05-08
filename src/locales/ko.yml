@@ -310,13 +310,13 @@ report:
       "DropQuantityChar::LowConfidence":
         title: 아이템 개수 인식 오류
         subtitle: 인식 결과의 신뢰성이 낮습니다. 인식 결과가 이미지와 일치하는지 확인하세요.
-      "DropQuantity::NotFound":
+      "DropAreaDropsQuantity::NotFound":
         title: 드랍 인식 실패
         subtitle: 낮은 해상도 또는 화질의 이미지로 인해 발생할 수 있습니다. 이미지가 압축되지는 않았는지 확인하세요.
-      "Drops::LowConfidence":
+      "DropAreaDrops::LowConfidence":
         title: 신뢰성이 낮은 아이템 드랍
         subtitle: 종료된 이벤트의 드랍을 포함하고 있지는 않은지 확인하세요.
-      "Drops::Illeagal":
+      "DropAreaDrops::Illegal":
         title: 잘못된 드랍
         subtitle: 스테이지에서 드랍되어서는 안 되는 드랍이 스크린샷에 있습니다. 주로 이벤트 기간이 아닐 때 이벤트 드랍이 있는 경우입니다.
       "Result::False":
@@ -325,11 +325,11 @@ report:
       "Stage::NotFound":
         title: 유효한 스테이지를 찾을 수 없음
         subtitle: 스테이지 식별 오류이거나, 펭귄 물류가 해당 스테이지의 드랍을 집계하지 않는 경우입니다.
-      "Stage::Illeagal":
+      "Stage::Illegal":
         title: 잘못된 스테이지
         subtitle: 스테이지가 열려 있지 않습니다
       "3stars::False": 3성 클리어가 아님
-      "DropType::Illeagal":
+      "DropType::Illegal":
         title: 잘못된 드랍 분류
         subtitle: 첫 드랍이나 이성 반환 등 잘못된 드랍 분류가 스크린샷에 있습니다.
       "DropType::NotFound": 드랍 분류를 찾을 수 없음

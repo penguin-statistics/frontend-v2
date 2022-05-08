@@ -164,13 +164,18 @@ export default {
   data () {
     return {
       links: [
-        // {
-        //   route: "Search",
-        //   icon: "mdi-magnify",
-        //   title: 'title.search',
-        //   subtitle: 'subtitle.search',
-        //   wide: true
-        // },
+        {
+          route: 'StatsByItem',
+          icon: 'mdi-treasure-chest',
+          title: 'title.byItem',
+          subtitle: 'subtitle.byItem'
+        },
+        {
+          route: 'StatsByStage',
+          icon: 'mdi-cube',
+          title: 'title.byStage',
+          subtitle: 'subtitle.byStage'
+        },
         {
           route: 'ReportByZone',
           icon: 'mdi-upload',
@@ -183,18 +188,6 @@ export default {
           title: 'title.planner',
           subtitle: 'subtitle.planner'
         },
-        {
-          route: 'StatsByItem',
-          icon: 'mdi-treasure-chest',
-          title: 'title.byItem',
-          subtitle: 'subtitle.byItem'
-        },
-        {
-          route: 'StatsByStage',
-          icon: 'mdi-cube',
-          title: 'title.byStage',
-          subtitle: 'subtitle.byStage'
-        }
       ]
     }
   },

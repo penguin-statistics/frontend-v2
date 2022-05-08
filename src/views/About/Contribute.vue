@@ -42,7 +42,7 @@
     "zh": {
       "contribute": {
         "backend": "后端",
-        "contribute_0": "如果您有以下一项或多项经验，愿意为企鹅数据贡献自己的一份力量，欢迎联系我们。",
+        "contribute_0": "如果您有以下一项或多项经验，愿意为企鹅数据贡献自己的一份力量，欢迎联系我们或直接前往对应 Repo 提交 Issues 或 Pull Requests。",
         "contribute_1": "本项目为无偿开源项目",
         "frontend": "前端",
         "qq_group": "QQ群："

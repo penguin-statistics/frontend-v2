@@ -14,8 +14,8 @@ import config from '@/config'
 
 import * as Sentry from "@sentry/vue";
 
-const recognizerVersion = 'v4.1.1'
-const recognizerAssetVersion = 'v4-shared'
+const recognizerFirstAPICompatibleVersionFolder = 'v4.2.2'
+const recognizerAssetsVersion = 'v4-shared'
 
 // async function image2wasmHeapOffset (blob) {
 //   const Module = window.Module
@@ -58,7 +58,7 @@ class Recognizer {
       Console.info('Recognizer', 'init: recognition backend: both js and wasm are already loaded')
     } else {
       const script = document.createElement('script')
-      script.src = mirror.deliver(`/recognition/${recognizerVersion}/penguin-recognizer.js`)
+      script.src = mirror.deliver(`/recognition/${recognizerFirstAPICompatibleVersionFolder}/penguin-recognizer.js`)
       // script.src = "/penguin-recognizer.js"
       document.body.appendChild(script)
       await new Promise(resolve => {
@@ -94,7 +94,7 @@ class Recognizer {
     const stages = store.getters['data/content']({ id: 'stages' })
 
     const duplicatedStageIds = findDuplicates(stages.map(el => el.code))
-    console.log('duplicates', duplicatedStageIds)
+    Console.debug('Recognizer', 'skipping duplicates', duplicatedStageIds)
 
     stages
       .forEach((stage) => {
@@ -110,14 +110,18 @@ class Recognizer {
         let drops = (stage.dropInfos || [])
           .map(drop => drop.itemId)
           .filter(drop => !!drop && drop !== 'furni')
-
+        
         if (stage.recognitionOnly) drops = [...drops, ...stage.recognitionOnly]
 
-        transformedStages[stage.code] = {
+        if (!transformedStages[stage.code]) transformedStages[stage.code] = {}
+
+        transformedStages[stage.code][
+          stage.stageId.indexOf('tough') >= 0 ? 'TOUGH' : 'NORMAL'
+        ] = {
           stageId: stage.stageId,
           drops: uniq(drops),
-          existence: existUtils.existence(stage, true)
-        }
+          existence: existUtils.existence(stage, true),
+        };
       })
 
     Console.debug("Recognizer", "init: preload server: preloading with", server);
@@ -131,7 +135,7 @@ class Recognizer {
     Console.info('Recognizer', 'init: preload icons: preloading')
 
     await fetch(
-      mirror.deliver(`/recognition/${recognizerAssetVersion}/items.zip`)
+      mirror.deliver(`/recognition/${recognizerAssetsVersion}/items.zip`)
     )
       // await fetch("/items.zip")
       .then((response) => {
@@ -235,7 +239,10 @@ class Recognizer {
           duration,
           result: {
             exceptions: [{ what: "Result::False" }],
-            drops: [],
+            stage: {},
+            dropArea: {
+              drops: []
+            }
           },
         });
         continue
@@ -303,12 +310,19 @@ class Recognizer {
   }
 
   getVersion() {
+    return {
+      recognizerVersion: this.wasm.version,
+      recognizerAssetsVersion: recognizerAssetsVersion,
+    };
+  }
+
+  getVersionDescription() {
     return (
       `recognizer::{state::${
         this.wasm.envCheck() ? "initialized" : "env_check_not_passed"
-      } / core::v${this.wasm.version} / opencv::v${
+      } / core::${this.wasm.version} / opencv::v${
         this.wasm.opencvVersion
-      } / assets::${recognizerAssetVersion}}` || "unknown"
+      } / assets::${recognizerAssetsVersion}}` || "unknown"
     );
   }
 }

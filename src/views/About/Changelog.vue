@@ -126,8 +126,25 @@ export default {
   name: "Changelog",
   data() {
     return {
-      index: null,
       logs: [
+        {
+          version: "v3.7.3",
+          date: "2022-05-09T01:14:00+0800",
+          changes: `## 优化
+1. 截图识别增加内核版本上报`,
+        },
+        {
+          version: "v3.7.2",
+          date: "2022-05-03T01:00:00+0800",
+          changes: `## 添加
+1. GitHub 信息 Banner`,
+        },
+        {
+          version: "v3.7.1",
+          date: "2022-05-01T21:25:00+0800",
+          changes: `## 修复
+1. 截图识别修复无法正确识别国服主题曲第 10 章难度的问题`,
+        },
         {
           version: "v3.7.0",
           date: "2022-04-27T01:12:00+0800",
@@ -759,16 +776,21 @@ export default {
         if (el.active) {
           el.color = "green";
           el.icon = "mdi-check";
-          el.value = true;
         } else if (el.future) {
           el.color = "secondary";
           el.icon = "mdi-dots-horizontal";
-          el.value = false;
         } else {
           el.color = "orange darken-2";
           el.icon = "mdi-history";
-          el.value = false;
         }
+
+        // if el.date is within 30 days, set el.value to true, otherwise to false
+        timeFormatter.dayjs(el.date).isBetween(
+          timeFormatter.dayjs().subtract(30, "day"),
+          timeFormatter.dayjs()
+        )
+          ? (el.value = true)
+          : (el.value = false);
 
         if (Array.isArray(el.changes))
           el.changes = el.changes.map(strings.markdown);
