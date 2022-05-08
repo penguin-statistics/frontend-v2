@@ -33,10 +33,6 @@
 	</array>
 	<key>CFBundleVersion</key>
 	<string>$(CURRENT_PROJECT_VERSION)</string>
-	<key>INIntentsSupported</key>
-	<array>
-		<string>SelectServerIntent</string>
-	</array>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>NSAllowsLocalNetworking</key>
@@ -46,23 +42,12 @@
 		<key>NSAllowsArbitraryLoads</key>
 		<false/>
 	</dict>
-	<key>NSCameraUsageDescription</key>
-	<string>Due to technical limitations, we cannot disable the usage of camera. If you have taken a photo and use it as the input for the locally-running recognizer, the recognizer will output an error for such image. Other than that, your photo is being kept in your local filesystem forever and is definitely not uploaded. Please do note that you should not use the camera to take a photo of the screen as well, as it could also lead to a recognition error. Use a screenshot selected from your photo album instead.</string>
-	<key>NSLocationAlwaysUsageDescription</key>
-	<string>Always allow Geolocation?</string>
-	<key>NSLocationWhenInUseUsageDescription</key>
-	<string>Allow Geolocation?</string>
-	<key>NSMicrophoneUsageDescription</key>
-	<string>To Record Audio With Video</string>
 	<key>NSPhotoLibraryAddUsageDescription</key>
 	<string>Store camera photos to camera</string>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>To Pick Photos from Library</string>
-	<key>NSSiriUsageDescription</key>
-	<string>SIRI_USAGE_DESCRIPTION</string>
 	<key>NSUserActivityTypes</key>
 	<array>
-		<string>SelectServerIntent</string>
 		<string>StatisticsOverviewIntent</string>
 	</array>
 	<key>UIApplicationSceneManifest</key>

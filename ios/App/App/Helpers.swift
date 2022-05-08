@@ -119,11 +119,7 @@ public class Localizer {
     static let defaultLocale = "en"
     
     public static func localized(from i18nMessage: [String: String]) -> String? {
-        if i18nMessage[currentLocale] != nil {
-            return i18nMessage[currentLocale]
-        } else {
-            return i18nMessage[defaultLocale]
-        }
+        return i18nMessage[currentLocale] ?? i18nMessage[defaultLocale]
     }
 }
 

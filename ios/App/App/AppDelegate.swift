@@ -193,7 +193,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         blurEffectView.topAnchor.constraint(equalTo: topAnchor).isActive = true
         blurEffectView.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
         
-        
         return true
     }
     
@@ -290,6 +289,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // tracking app url opens, make sure to keep this call
         print("application launched with userActivity.debugDesc", userActivity.debugDescription, "type", userActivity.activityType, "contentAttributeSet", userActivity.userInfo, "userInfo", userActivity.userInfo)
         print("got userinfo", userActivity.userInfo)
+        
+        
         
         let options: [UIApplication.OpenURLOptionsKey : Any] = [:]
         if userActivity.activityType == CSSearchableItemActionType && (userActivity.webpageURL != nil) {
