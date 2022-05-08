@@ -128,6 +128,12 @@ export default {
     return {
       logs: [
         {
+          version: "v3.7.3",
+          date: "2022-05-09T01:14:00+0800",
+          changes: `## 优化
+1. 截图识别增加内核版本上报`,
+        },
+        {
           version: "v3.7.2",
           date: "2022-05-03T01:00:00+0800",
           changes: `## 添加
