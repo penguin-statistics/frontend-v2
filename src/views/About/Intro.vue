@@ -4,7 +4,8 @@
 		"intro": {
 			"intro_0": "Welcome to Penguin Statistics!",
 			"intro_1": "Penguin Statistics is the Department of Data Analysis of Penguin Logistics. We devote ourselves to item drop analysis.",
-			"intro_2": "Item drop data are submitted by the players. Our team conduct comprehensive review on the submitted data to reduce the impact of false reports."
+      "intro_2": "The current Penguin Statistics dataset consists reports from manual reports, screenshot recognitions via website and uploads from automated tools via our public APIs. To ensure accuracy of the dataset, Penguin Statistics team will perform automatic, scheduled and manual dataset maintenances for various reasons.",
+      "intro_3": "To ensure dataset transparency and list out dataset changes, Dataset Invalidation Transparency Report is now planned to be implemented."
 		}
 	},
 	"ja": {
@@ -25,7 +26,8 @@
 		"intro": {
 			"intro_0": "欢迎来到企鹅物流数据统计！",
 			"intro_1": "企鹅物流数据统计（Penguin Statistics）是企鹅物流旗下数据处理部门（误），致力于明日方舟各素材的掉率统计。",
-			"intro_2": "目前绝大部分数据由玩家手动汇报，为了尽量减少谎报、误报对结果的影响，企鹅数据团队会对掉落进行多方位的审查。"
+			"intro_2": "企鹅物流的现有数据集由玩家手动上报、截图识别与多方自动化工具自动上报合力维护。为了尽力保证数据集的准确性，企鹅物流数据团队会对掉落数据集进行多种方式的自动、定时及手动维护。",
+      "intro_3": "为保证数据集透明度、向用户说明数据集更改，数据作废透明度报告已在计划中。"
 		}
 	}
 }
