@@ -402,6 +402,7 @@ settings:
     appearance: Appearance
     data: Data
     about: About
+  iosSystemSettings: 'Language & Privacy Settings'
   optimization:
     lowData:
       title: Low Data Mode

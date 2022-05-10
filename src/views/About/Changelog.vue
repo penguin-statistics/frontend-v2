@@ -128,6 +128,12 @@ export default {
     return {
       logs: [
         {
+          version: "v3.7.4",
+          date: "2022-05-10T12:57:00+0800",
+          changes: `## 优化
+1. 部分本地化文本`,
+        },
+        {
           version: "v3.7.3",
           date: "2022-05-09T01:14:00+0800",
           changes: `## 优化

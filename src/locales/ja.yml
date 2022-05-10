@@ -366,6 +366,7 @@ settings:
     appearance: スタイル
     data: 設定とデータ
     about: 当サイトについて
+  iosSystemSettings: '言語とプライバシーの設定'
   optimization:
     lowData:
       title: 軽量モード

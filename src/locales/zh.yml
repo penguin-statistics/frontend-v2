@@ -397,6 +397,7 @@ settings:
     appearance: 外观
     data: 设置与数据
     about: 关于
+  iosSystemSettings: '语言与隐私设置'
   optimization:
     lowData:
       title: 低数据模式

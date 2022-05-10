@@ -79,7 +79,7 @@
               <v-icon left>
                 mdi-settings
               </v-icon>
-              语言与隐私设置
+              {{ $t('settings.iosSystemSettings') }}
             </v-btn>
 
             <DataManager
