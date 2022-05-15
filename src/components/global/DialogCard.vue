@@ -18,7 +18,7 @@
         {{ title }}
       </div>
     </v-card-title>
-    <v-card-text>
+    <v-card-text class="overflow-auto">
       <slot />
     </v-card-text>
 
