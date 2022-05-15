@@ -528,11 +528,11 @@ export default {
           width: '100px'
         },
         {
-          text: `${this.fluctuationVisualize.confidence * 100}% 置信区间 (n=${this.fluctuationVisualize.n})`,
+          text: `${this.fluctuationVisualize.confidence * 100}% 置信区间 (n=${this.fluctuationVisualize.n}) 与期望获得区间`,
           value: 'stdDev',
           align: 'left',
           sortable: false,
-          width: '140px'
+          width: '150px'
         },
         {
           text: this.$t('stats.headers.apPPR'),

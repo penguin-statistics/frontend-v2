@@ -6,12 +6,38 @@
   >
     <template #activator="{ on, attrs }">
       <div
-        class="d-inline-flex flex-column mr-2 digdown-hoverable transition-all"
+        class="d-flex flex-column mr-4 digdown-hoverable transition-all"
+        style="font-size: 12px; opacity: 0.8"
         v-bind="attrs"
         v-on="on"
       >
-        <span style="font-size: 12px;opacity: 0.8">{{ confidenceInterval.upper }}</span>
-        <span style="font-size: 12px;opacity: 0.8">{{ confidenceInterval.lower }}</span>
+        <div
+          class="d-flex flex-row align-center"
+          style="gap: 8px"
+        >
+          <v-icon
+            x-small
+            style="transform: translateY(-2px)"
+          >
+            mdi-arrow-collapse-up
+          </v-icon>
+          <span>{{ confidenceInterval.upper }}</span>
+          <v-spacer />
+          <span>{{ confidenceInterval.upperAmount }}</span>
+        </div>
+        <div
+          class="d-flex flex-row align-center"
+          style="gap: 8px"
+        >
+          <v-icon
+            x-small
+          >
+            mdi-arrow-collapse-down
+          </v-icon>
+          <span>{{ confidenceInterval.lower }}</span>
+          <v-spacer />
+          <span>{{ confidenceInterval.lowerAmount }}</span>
+        </div>
       </div>
     </template>
 
@@ -24,16 +50,37 @@
       </v-card-title>
 
       <v-card-subtitle class="mt-0">
-        这是对本置信区间单元格内数据的简要解释。若需自定义刷取次数、置信区间等参数，请使用表头的「自定义」按钮。
+        这是对本置信区间单元格内数据的简要解释。若需自定义刷取次数、置信值等参数，请 <DataTableFluctuationCustomize />
       </v-card-subtitle>
 
       <v-card-text>
         <v-container class="pt-0">
           <v-row class="flex-column align-center">
-            <div class="d-inline display-1 text-left">
-              <span class="monospace">
-                {{ confidenceInterval.upper }}<br>{{ confidenceInterval.lower }}
-              </span>
+            <div
+              class="d-flex flex-column display-1 text-left"
+            >
+              <div
+                class="d-flex flex-row align-center monospace"
+                style="gap: 8px"
+              >
+                <v-icon style="transform: translateY(-4px)">
+                  mdi-arrow-collapse-up
+                </v-icon>
+                <span class="mr-4 green--text">{{ confidenceInterval.upper }}</span>
+                <v-spacer />
+                <span class="cyan--text">{{ confidenceInterval.upperAmount }}</span>
+              </div>
+              <div
+                class="d-flex flex-row align-center monospace"
+                style="gap: 8px"
+              >
+                <v-icon>
+                  mdi-arrow-collapse-down
+                </v-icon>
+                <span class="mr-4 green--text">{{ confidenceInterval.lower }}</span>
+                <v-spacer />
+                <span class="cyan--text">{{ confidenceInterval.lowerAmount }}</span>
+              </div>
             </div>
           </v-row>
 
@@ -43,7 +90,7 @@
             </Subheader>
 
             <blockquote class="blockquote-box">
-              如果刷取 <strong class="orange--text">{{ fluctuationVisualize.n }}</strong> 次关卡 <strong class="yellow--text">{{ strings.translate(item.stage, 'code') }}</strong> 的情况下，可根据现有数据断言以 <strong class="orange--text">{{ fluctuationVisualize.confidence * 100 }}%</strong> 之可能性，所得到物品 <strong class="yellow--text">{{ strings.translate(item.item, 'name') }}</strong> 的概率落于 <strong class="cyan--text">{{ confidenceInterval.lower }}</strong> 至 <strong class="cyan--text">{{ confidenceInterval.upper }}</strong> 之间。
+              如果刷取 <strong class="orange--text">{{ fluctuationVisualize.n }}</strong> 次关卡 <strong class="yellow--text">{{ strings.translate(item.stage, 'code') }}</strong> 的情况下，可根据现有数据断言以 <strong class="orange--text">{{ fluctuationVisualize.confidence * 100 }}%</strong> 之可能性，所得到物品 <strong class="yellow--text">{{ strings.translate(item.item, 'name') }}</strong> 的数量落于 <strong class="cyan--text">{{ confidenceInterval.lowerAmount }} 个</strong> (获得概率 <strong class="green--text">{{ confidenceInterval.lower }}</strong>) 至 <strong class="cyan--text">{{ confidenceInterval.upperAmount }} 个</strong> (获得概率 <strong class="green--text">{{ confidenceInterval.upper }}</strong>) 之间。
             </blockquote>
           </v-row>
 
@@ -56,16 +103,16 @@
               <p>用于计算本单元格所使用的原数据为：</p>
               <ul>
                 <li>
-                  样本数：<span class="monospace-pure">{{ fluctuationVisualize.n }}</span>
+                  样本量：<span class="monospace-pure">{{ fluctuationVisualize.n }}</span>
                 </li>
                 <li>
                   标准差：<span class="monospace-pure">{{ item.stdDev }}</span>
                 </li>
                 <li>
-                  置信值：<span class="monospace-pure">{{ fluctuationVisualize.confidence * 100 }}%</span>
+                  置信值：<span class="monospace-pure">{{ fluctuationVisualize.confidence * 100 }}% <small>(使用 z 值 {{ confidenceInterval.zScore }})</small></span>
                 </li>
                 <li>
-                  平均值：<span class="monospace-pure">{{ item.percentage }}</span>
+                  平均值：<span class="monospace-pure">{{ item.percentage }} <small>(由全站数据集 {{ item.quantity }} 掉落数 / {{ item.times }} 样本数 得出)</small></span>
                 </li>
               </ul>
             </div>
@@ -93,6 +140,7 @@
 import {mapGetters} from "vuex";
 import Subheader from "@/components/global/Subheader";
 import strings from "@/utils/strings";
+import DataTableFluctuationCustomize from "@/components/stats/DataTableFluctuationCustomize";
 
 const zScores = {
   0.9: 1.645,
@@ -105,7 +153,7 @@ const tDistributionUsageThreshold = 30
 
 export default {
   name: 'DataTableFluctuationVisualizer',
-  components: {Subheader},
+  components: {DataTableFluctuationCustomize, Subheader},
   props: {
     item: {
       type: Object,
@@ -134,10 +182,16 @@ export default {
         offset = z * (stdDev / Math.sqrt(n))
       }
 
+      const lowerValue = Math.max(0, (percentage - offset))
+      const upperValue = Math.max(0, (percentage + offset))
+
       return {
         mode: 'z',
-        lower: `${Math.max(0, ((percentage - offset) * 100)).toFixed(2)}%`,
-        upper: `${Math.max(0, ((percentage + offset) * 100)).toFixed(2)}%`,
+        lower: `${(lowerValue * 100).toFixed(2)}%`,
+        upper: `${(upperValue * 100).toFixed(2)}%`,
+        lowerAmount: (lowerValue * n).toFixed(2),
+        upperAmount: (upperValue * n).toFixed(2),
+        zScore: z,
       }
     },
     strings() {

@@ -6,7 +6,7 @@
   >
     <template #activator="{ on, attrs }">
       <v-btn
-        small
+        x-small
         text
         rounded
         outlined
@@ -14,12 +14,12 @@
         v-on="on"
       >
         <v-icon
-          small
+          x-small
           left
         >
           mdi-wrench
         </v-icon>
-        自定义
+        自定义参数
       </v-btn>
     </template>
 
@@ -48,6 +48,7 @@
             >
               <v-btn-toggle
                 v-model="n"
+                mandatory
               >
                 <v-btn
                   v-for="nPreset in nPresets"
@@ -85,7 +86,7 @@
             >
               <v-btn-toggle
                 v-model="confidence"
-                :items="confidencePresets"
+                mandatory
               >
                 <v-btn
                   v-for="confidencePreset in confidencePresets"
