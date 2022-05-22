@@ -66,8 +66,8 @@ module.exports = {
     disableHostCheck: true,
     proxy: {
       "/PenguinStats": {
-        // target: "https://penguin-stats.cn/",
-        target: "http://localhost:9010/",
+        target: "https://penguin-stats.cn/",
+        // target: "http://localhost:9010/",
       },
     },
   },
@@ -93,10 +93,6 @@ module.exports = {
           },
         ],
       }),
-      // new InjectManifest ({
-      //   swSrc: "./src/workers/service-worker.js",
-      //   dontCacheBustURLsMatching: /.[a-f0-9]{8}./
-      // })
     ],
     module: {
       rules: [
