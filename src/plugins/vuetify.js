@@ -1,7 +1,7 @@
 import '@mdi/font/css/materialdesignicons.min.css'
 import Vue from 'vue'
 import Vuetify from 'vuetify/lib'
-import colors from 'vuetify/lib/util/colors'
+import colors from 'vuetify/es5/util/colors'
 
 import zhHans from 'vuetify/es5/locale/zh-Hans'
 import ja from 'vuetify/es5/locale/ja'

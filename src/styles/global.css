@@ -701,10 +701,6 @@
     margin-bottom: 0 !important;
 }
 
-.katex-html span.text {
-    background-color: transparent !important;
-}
-
 .search-result-card {
     transition: all .125s cubic-bezier(0.165, 0.84, 0.44, 1) !important;
 }

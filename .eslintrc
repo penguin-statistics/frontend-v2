@@ -28,10 +28,13 @@
       {
         "allowIndentationTabs": true
       }
-    ]
+    ],
+    "vue/multi-word-component-names": "off",
+    "vue/no-side-effects-in-computed-properties": "warn",
+    "vue/valid-v-slot": "warn"
   },
   "parserOptions": {
-    "parser": "babel-eslint"
+    "parser": "@babel/eslint-parser"
   },
   "plugins": [
     "vuetify"

@@ -1,6 +1,7 @@
 const webpack = require("webpack");
 const path = require("path");
 const CopyPlugin = require("copy-webpack-plugin");
+const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 
 require("events").EventEmitter.defaultMaxListeners = 50;
 
@@ -63,7 +64,6 @@ module.exports = {
   },
   productionSourceMap: false,
   devServer: {
-    disableHostCheck: true,
     proxy: {
       "/PenguinStats": {
         target: "https://penguin-stats.cn/",
@@ -71,7 +71,7 @@ module.exports = {
       },
     },
   },
-  integrity: false,
+  // integrity: false,
   runtimeCompiler: true,
   transpileDependencies: ["vuetify", "fuse.js", "semver", "protobufjs"],
   configureWebpack: {
@@ -88,11 +88,12 @@ module.exports = {
           {
             from: templateRoot,
             globOptions: {
-              ignore: ["/index.html"],
+              ignore: ["**/index.html"],
             },
           },
         ],
       }),
+      new BundleAnalyzerPlugin()
     ],
     module: {
       rules: [

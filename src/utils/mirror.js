@@ -1,8 +1,8 @@
-import extractDomain from 'extract-domain'
 import config from "@/config";
 
-function isDomain (domain, location = window.location.href) {
-  return extractDomain(location) === domain
+function isDomain (domain) {
+  const currentHostname = window.location.hostname;
+  return currentHostname.indexOf(domain) > -1;
 }
 
 const mirror = {

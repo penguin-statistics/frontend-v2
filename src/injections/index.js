@@ -1,6 +1,5 @@
 import './googleAnalytics'
 import './sentry'
-import './katex'
 import './filters'
 import './directives'
 import './virtualScroller'
