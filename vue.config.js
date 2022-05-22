@@ -1,7 +1,6 @@
 const webpack = require("webpack");
 const path = require("path");
 const CopyPlugin = require("copy-webpack-plugin");
-const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 
 require("events").EventEmitter.defaultMaxListeners = 50;
 
@@ -93,7 +92,6 @@ module.exports = {
           },
         ],
       }),
-      new BundleAnalyzerPlugin()
     ],
     module: {
       rules: [
