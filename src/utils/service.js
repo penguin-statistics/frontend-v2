@@ -15,7 +15,7 @@ if (mirror.global.isCurrent() || mirror.cn.isCurrent()) {
   // also use the relative path, but we left the task to WebpackDevServer for proxying local API responses
   // so use relative path.
   baseURL = "/PenguinStats/api/v2";
-} else if (process.env.VUE_APP_IS_DOCKER === "true") {
+} else if (process.env.PENGUIN_BUILDFROM === "docker") {
   // docker build
   // backend and frontend are on the same server
   // so use relative path.

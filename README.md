@@ -28,6 +28,12 @@ Thanks for the kindness support for this Open Source project from:
 <li><a href="https://jetbrains.com/?from=penguin-statistics"><img src="https://resources.jetbrains.com/storage/products/company/brand/logos/jb_beam.png" width="200" /></a></li>
 <li><a href="https://saucelabs.com"><img src="https://opensource.saucelabs.com/images/opensauce/powered-by-saucelabs-badge-red.png?sanitize=true" width="150" /></a></li>
 
+## Configuration
+### Environment Variables
+- `NODE_ENV`: `development` or `production`
+- `PENGUIN_PLATFORM`: `web` or `app`
+- `PENGUIN_BUILDFROM`: `cf-pages`, `docker` or undefined
+
 ## How to contribute?
 Our contribute guideline can be found at [Penguin Developers](https://developer.penguin-stats.io). PRs are always more than welcome!
 

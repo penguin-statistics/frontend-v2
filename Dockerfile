@@ -9,6 +9,8 @@ RUN yarn install
 
 COPY . .
 
+ENV PENGUIN_BUILDFROM=docker
+
 RUN --mount=type=secret,id=PENGUIN_RECOGNITION_SUBMITTER_JS,target=/app/src/utils/vendors/recognitionSubmitter.js \
     yarn build:web
 

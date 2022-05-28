@@ -78,7 +78,7 @@ module.exports = {
       new webpack.DefinePlugin({
         GIT_COMMIT: JSON.stringify(commitHash),
         PENGUIN_PLATFORM: envvar("PENGUIN_PLATFORM", "unspecified"),
-        PENGUIN_PLATFORM_FROM: envvar("PENGUIN_PLATFORM_FROM", null),
+        PENGUIN_BUILDFROM: envvar("PENGUIN_BUILDFROM", null),
         PENGUIN_PROBE_NOSCRIPT: noscriptImage,
         NPM_PACKAGE_VERSION: JSON.stringify(packageVersion), // stringify
       }),
