@@ -45,11 +45,11 @@
       </v-card-text>
 
       <v-card-text
-        v-if="isVercel"
+        v-if="isPreview"
         class="white--text d-block pt-2 pb-0 overline"
       >
         <span>
-          Vercel 预览构建
+          预览构建
         </span>
       </v-card-text>
     </v-card>

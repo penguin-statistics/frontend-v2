@@ -16,8 +16,8 @@ export default {
     isCNMirror () {
       return mirror.cn.isCurrent()
     },
-    isVercel () {
-      return mirror.vercel.isCurrent()
+    isPreview () {
+      return mirror.preview.isCurrent();
     },
     currentMirrorHostname () {
       return mirror.cn.isCurrent() ? mirror.cn.identifier : mirror.global.identifier

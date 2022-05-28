@@ -18,10 +18,10 @@ const mirror = {
       return isDomain(this.identifier)
     }
   },
-  vercel: {
-    identifier: 'vercel.app',
+  preview: {
+    identifier: 'exusiai.dev',
     isCurrent () {
-      return isDomain('now.sh') || isDomain('vercel.app')
+      return isDomain('now.sh') || isDomain('vercel.app') || isDomain('exusiai.dev')
     }
   }
 }
