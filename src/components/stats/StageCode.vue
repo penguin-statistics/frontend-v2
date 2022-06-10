@@ -4,8 +4,7 @@
       v-for="[index, c] in codes.entries()"
       :key="index"
       :class="generateStyle(c.s)"
-      >{{ c.t }}</span
-    >
+    >{{ c.t }}</span>
   </span>
 </template>
 
