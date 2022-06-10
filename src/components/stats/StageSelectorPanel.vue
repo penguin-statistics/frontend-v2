@@ -67,9 +67,32 @@
         >
           {{ genActivityTime(zone) }}
         </div>
-        <div class="pt-2">
+        <div
+          v-if="zone.type !== 'GACHABOX'"
+          class="pt-2"
+        >
           <StageCard
             v-for="stage in zone.stages"
+            :key="stage.stageId"
+            v-haptic
+            :stage="stage"
+            @click.native="$emit('select', {zoneId: zone.zoneId, stageId: stage.stageId})"
+          />
+        </div>
+        <div
+          v-else
+          class="pt-2"
+        >
+          <StageCard
+            v-for="stage in zone.stages.filter(el => el.stageId.startsWith('randomMaterialRune'))"
+            :key="stage.stageId"
+            v-haptic
+            :stage="stage"
+            @click.native="$emit('select', {zoneId: zone.zoneId, stageId: stage.stageId})"
+          />
+          <v-divider class="my-2" />
+          <StageCard
+            v-for="stage in zone.stages.filter(el => !el.stageId.startsWith('randomMaterialRune'))"
             :key="stage.stageId"
             v-haptic
             :stage="stage"

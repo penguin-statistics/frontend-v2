@@ -267,6 +267,8 @@ class Recognizer {
       if (parsedResult.stage.stageCode) {
         const stage = get.stages.byStageId(parsedResult.stage.stageId)
 
+        Console.info("Recognizer", 'before filter', parsedResult.dropArea.drops, stage.recognitionOnly)
+
         if (Array.isArray(stage.recognitionOnly)) {
           parsedResult.dropArea.drops =
             parsedResult.dropArea.drops.filter(el => !stage.recognitionOnly.includes(el.itemId))

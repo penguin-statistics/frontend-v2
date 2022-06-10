@@ -4,7 +4,6 @@
      
 # Penguin Statistics - Frontend
 [![License](https://img.shields.io/github/license/penguin-statistics/frontend-v2)](https://github.com/penguin-statistics/frontend-v2/blob/dev/LICENSE)
-[![Build Status](https://img.shields.io/travis/penguin-statistics/frontend-v2?logo=travis)](https://travis-ci.org/penguin-statistics/frontend-v2)
 [![Last Commit](https://img.shields.io/github/last-commit/penguin-statistics/frontend-v2)](https://github.com/penguin-statistics/frontend-v2/commits/dev)
 [![Docs](https://img.shields.io/badge/docs-GitBook-blue)](https://developer.penguin-stats.io)
 
@@ -27,6 +26,12 @@ Thanks for the kindness support for this Open Source project from:
 - [![Sentry.io](https://img.shields.io/badge/Sentry.io-DBD3E9?logo=sentry&style=flat&logoColor=DBD3E9&labelColor=16111C&color=9990AB)](https://sentry.io)
 <li><a href="https://jetbrains.com/?from=penguin-statistics"><img src="https://resources.jetbrains.com/storage/products/company/brand/logos/jb_beam.png" width="200" /></a></li>
 <li><a href="https://saucelabs.com"><img src="https://opensource.saucelabs.com/images/opensauce/powered-by-saucelabs-badge-red.png?sanitize=true" width="150" /></a></li>
+
+## Configuration
+### Environment Variables
+- `NODE_ENV`: `development` or `production`
+- `PENGUIN_PLATFORM`: `web` or `app`
+- `PENGUIN_BUILDFROM`: `cf-pages`, `docker` or undefined
 
 ## How to contribute?
 Our contribute guideline can be found at [Penguin Developers](https://developer.penguin-stats.io). PRs are always more than welcome!

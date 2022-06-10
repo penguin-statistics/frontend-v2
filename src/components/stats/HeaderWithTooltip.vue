@@ -19,7 +19,6 @@
     </template>
     <span
       v-marked
-      v-katex:auto
       class="no-paragraph-extra-margin"
     >
       <slot />

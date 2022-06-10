@@ -63,7 +63,6 @@ module.exports = {
   },
   productionSourceMap: false,
   devServer: {
-    disableHostCheck: true,
     proxy: {
       "/PenguinStats": {
         target: "https://penguin-stats.cn/",
@@ -71,7 +70,7 @@ module.exports = {
       },
     },
   },
-  integrity: false,
+  // integrity: false,
   runtimeCompiler: true,
   transpileDependencies: ["vuetify", "fuse.js", "semver", "protobufjs"],
   configureWebpack: {
@@ -79,7 +78,7 @@ module.exports = {
       new webpack.DefinePlugin({
         GIT_COMMIT: JSON.stringify(commitHash),
         PENGUIN_PLATFORM: envvar("PENGUIN_PLATFORM", "unspecified"),
-        PENGUIN_PLATFORM_FROM: envvar("PENGUIN_PLATFORM_FROM", null),
+        PENGUIN_BUILDFROM: envvar("PENGUIN_BUILDFROM", null),
         PENGUIN_PROBE_NOSCRIPT: noscriptImage,
         NPM_PACKAGE_VERSION: JSON.stringify(packageVersion), // stringify
       }),
@@ -88,15 +87,11 @@ module.exports = {
           {
             from: templateRoot,
             globOptions: {
-              ignore: ["/index.html"],
+              ignore: ["**/index.html"],
             },
           },
         ],
       }),
-      // new InjectManifest ({
-      //   swSrc: "./src/workers/service-worker.js",
-      //   dontCacheBustURLsMatching: /.[a-f0-9]{8}./
-      // })
     ],
     module: {
       rules: [

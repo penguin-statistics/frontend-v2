@@ -1,6 +1,6 @@
 import I18n from '@/i18n'
 import Console from '@/utils/Console'
-import marked from 'marked'
+import { marked } from 'marked'
 
 marked.setOptions({
   breaks: true,

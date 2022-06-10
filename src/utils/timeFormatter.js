@@ -20,13 +20,6 @@ const FORMATS = {
 }
 
 function needYear (moments) {
-  // for (const index in moments) {
-  //   // console.log('needYear:', index, moments[index], dayjs())
-  //   if (index === '0') continue
-  //   if (!dayjs().isSame(moments[index], 'year') || !(moments[index].isSame(moments[index], [moments[index - 1], 'year']))) {
-  //     return true
-  //   }
-  // }
   const years = moments.map(el => el.get('year'))
   let last = null
   for (const year of years) {

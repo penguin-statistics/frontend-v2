@@ -5,7 +5,6 @@ import 'regenerator-runtime/runtime'
 import App from './App.vue'
 import Vue from 'vue'
 import vuetify from './plugins/vuetify'
-import 'vuetify/dist/vuetify.min.css'
 import store from './store'
 import router from './router'
 import i18n from '@/i18n'
@@ -14,6 +13,7 @@ import environment from '@/utils/environment'
 
 import './injections'
 import PenguinProbe from '@/utils/probe'
+import './registerServiceWorker'
 
 if (!window.Intl) require('intl-collator')
 

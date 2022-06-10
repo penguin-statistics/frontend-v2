@@ -701,10 +701,6 @@
     margin-bottom: 0 !important;
 }
 
-.katex-html span.text {
-    background-color: transparent !important;
-}
-
 .search-result-card {
     transition: all .125s cubic-bezier(0.165, 0.84, 0.44, 1) !important;
 }
@@ -778,4 +774,37 @@
 
 .lang-en .v-card__title {
     word-break: normal !important;
+}
+
+.theme--dark .digdown-hoverable:hover {
+    background-color: rgba(255, 255, 255, .13);
+}
+.theme--dark .digdown-hoverable:active {
+    background-color: rgba(255, 255, 255, .4);
+}
+.theme--light .digdown-hoverable:hover {
+    background-color: rgba(0, 0, 0, .13);
+}
+.theme--light .digdown-hoverable:active {
+    background-color: rgba(0, 0, 0, .4);
+}
+
+.blockquote-box {
+    color: inherit;
+    box-shadow: none;
+    border-radius: 4px;
+    border: 1px solid #4d535a;
+    padding: .7rem;
+    word-break: break-word;
+}
+
+.theme--dark.v-data-table tbody tr:hover:not(.v-data-table__expanded__content):not(.v-data-table__empty-wrapper) {
+    background: rgba(97, 97, 97, 0.5) !important;
+}
+.theme--light.v-data-table tbody tr:hover:not(.v-data-table__expanded__content):not(.v-data-table__empty-wrapper) {
+    background: rgba(238, 238, 238, 0.5) !important;
+}
+
+.tabular-num {
+    font-variant: tabular-nums;
 }

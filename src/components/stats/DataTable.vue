@@ -252,6 +252,13 @@
         </HeaderWithTooltip>
       </template>
 
+      <!-- <template #header.stdDev="{header}">
+        <div>
+          {{ header.text }}
+          <DataTableFluctuationCustomize />
+        </div>
+      </template> -->
+
       <template #header.apPPR="{header}">
         <HeaderWithTooltip :name="header.text">
           {{ $t('stats.headerDesc.apPPR') }}
@@ -366,9 +373,7 @@
             class="d-flex align-center justify-start fill-height"
             :class="tableCellClasses"
           >
-            <span
-              class="mr-2"
-            >
+            <span>
               {{ props.item.percentageText }}
             </span>
 
@@ -386,6 +391,13 @@
               :meta="meta(props)"
             />
           </td>
+
+          <!-- <td
+            :class="tableCellClasses"
+          >
+            <DataTableFluctuationVisualizer :item="props.item" />
+          </td> -->
+
           <NullableTableCell
             :value="props.item.apPPR"
             :class="tableCellClasses"
@@ -440,10 +452,12 @@ import existUtils from '@/utils/existUtils'
 import validator from '@/utils/validator'
 import HeaderWithTooltip from '@/components/stats/HeaderWithTooltip'
 import NullableTableCell from '@/components/stats/NullableTableCell'
+// import DataTableFluctuationVisualizer from '@/components/stats/DataTableFluctuationVisualizer'
+// import DataTableFluctuationCustomize from "@/components/stats/DataTableFluctuationCustomize";
 
 export default {
   name: 'DataTable',
-  components: { NullableTableCell, HeaderWithTooltip, TitledRow, Item, Charts },
+  components: {NullableTableCell, HeaderWithTooltip, TitledRow, Item, Charts },
   mixins: [Theme, CDN, Mirror],
   props: {
     items: {
@@ -488,6 +502,7 @@ export default {
   },
   computed: {
     ...mapGetters('ajax', ['matrixPending']),
+    ...mapGetters('options', ['fluctuationVisualize']),
     ...mapState('options', ['dataTable']),
     headers () {
       const headers = [
@@ -512,6 +527,13 @@ export default {
           sortable: true,
           width: '100px'
         },
+        // {
+        //   text: `${this.fluctuationVisualize.confidence * 100}% 置信区间 (n=${this.fluctuationVisualize.n}) 与期望获得区间`,
+        //   value: 'stdDev',
+        //   align: 'left',
+        //   sortable: false,
+        //   width: '150px'
+        // },
         {
           text: this.$t('stats.headers.apPPR'),
           value: 'apPPR',

@@ -7,7 +7,11 @@ export default {
     dataTable: {
       showPermanent: true,
       showActivity: true,
-      onlyOpen: false
+      onlyOpen: false,
+      fluctuationVisualize: {
+        n: 100,
+        confidence: 0.95
+      }
     },
     randomBackground: Object.assign({}, {
       last: Date.now(),
@@ -49,12 +53,19 @@ export default {
     clearUserIdHistory (state) {
       state.userIdHistory = []
     },
-    setSpecialSideStoryDialogRead: (state, value) => state.specialSideStoryDialogRead = value
+    setSpecialSideStoryDialogRead: (state, value) => state.specialSideStoryDialogRead = value,
+    changeFluctuationVisualizeN (state, value) {
+      state.dataTable.fluctuationVisualize.n = value
+    },
+    changeFluctuationVisualizeConfidence (state, value) {
+      state.dataTable.fluctuationVisualize.confidence = value
+    }
   },
   getters: {
     dataTable: state => state.dataTable,
     randomBackground: state => state.randomBackground,
     userIdHistory: state => state.userIdHistory,
-    specialSideStoryDialogRead: state => state.specialSideStoryDialogRead
+    specialSideStoryDialogRead: state => state.specialSideStoryDialogRead,
+    fluctuationVisualize: state => state.dataTable.fluctuationVisualize
   }
 }

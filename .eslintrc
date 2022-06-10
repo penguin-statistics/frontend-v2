@@ -3,7 +3,7 @@
   "globals": {
     "GIT_COMMIT": true,
     "PENGUIN_PLATFORM": true,
-    "PENGUIN_PLATFORM_FROM": true,
+    "PENGUIN_BUILDFROM": true,
     "NPM_PACKAGE_VERSION": true
   },
   "env": {
@@ -28,10 +28,13 @@
       {
         "allowIndentationTabs": true
       }
-    ]
+    ],
+    "vue/multi-word-component-names": "off",
+    "vue/no-side-effects-in-computed-properties": "warn",
+    "vue/valid-v-slot": "warn"
   },
   "parserOptions": {
-    "parser": "babel-eslint"
+    "parser": "@babel/eslint-parser"
   },
   "plugins": [
     "vuetify"

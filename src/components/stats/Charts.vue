@@ -7,12 +7,12 @@
     <template #activator="{ on, attrs }">
       <slot />
       <div
-        class="sparkline cursor-pointer"
+        v-if="sparklineValue"
+        class="sparkline transition-all cursor-pointer digdown-hoverable"
         v-bind="attrs"
         v-on="on"
       >
         <v-sparkline
-          v-if="sparklineValue"
           :value="sparkline.value"
           :gradient="sparkline.gradient"
           :smooth="sparkline.radius || false"
@@ -35,9 +35,9 @@
         v-if="showDialog"
         :options="chartData"
         :highcharts="highchartsInst"
-        class="charts mt-4"
+        class="charts mt-4 pb-4"
       />
-      <div class="text-center caption">
+      <div class="bottom-caption text-center caption">
         {{ $t('stats.lastUpdated', {date: lastUpdated}) }}
       </div>
     </DialogCard>
@@ -384,15 +384,29 @@ export default {
 </script>
 
 <style scoped>
-.charts-wrapper {
+.charts {
   width: 100%;
   height: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
+  min-width: 600px;
+}
+
+.bottom-caption {
+  position: absolute;
+  bottom: 72px;
+  left: 0;
+  right: 0;
 }
 .sparkline {
-  width: 40px;
+  display: inline-flex;
+  width: 56px;
+  height: 36px;
+  padding: 8px;
+
+  margin-left: 4px;
+  border-radius: 4px;
 }
 </style>
