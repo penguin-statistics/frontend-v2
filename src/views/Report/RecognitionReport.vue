@@ -76,6 +76,9 @@
               v-if="recognition.support !== true"
               :reason="recognition.support"
             />
+            <RecognitionNotSupported
+              v-else-if="$store.getters['dataSource/server'] === 'CN'"
+            />
             <v-stepper
               v-else
               v-model="step"
@@ -542,6 +545,7 @@ import RecognitionResultCard from "@/components/recognition/RecognitionResultCar
 import RecognitionSubmitVisualizer from "@/components/recognition/RecognitionSubmitVisualizer";
 import * as Sentry from "@sentry/vue";
 import Console from "@/utils/Console";
+import RecognitionNotSupported from "../../components/global/RecognitionNotSupported";
 
 let recognitionSubmitter;
 try {
@@ -571,6 +575,7 @@ export default {
     ImageInput,
     RecognitionResultOverview,
     PreloaderInline,
+    RecognitionNotSupported,
 },
   mixins: [Theme, CDN, ConfirmLeave],
   data() {
