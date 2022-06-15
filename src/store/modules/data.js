@@ -1,17 +1,17 @@
-import Vue from "vue";
-import store from "@/store";
+import configManager from "@/models/managers/config";
 import itemsManager from "@/models/managers/items";
-import stagesManager from "@/models/managers/stages";
-import zonesManager from "@/models/managers/zones";
-import trendsManager from "@/models/managers/trends";
-import periodManager from "@/models/managers/period";
-import statsManager from "@/models/managers/stats";
 import globalMatrixManager from "@/models/managers/matrices/globalMatrix";
-import personalMatrixManager from "@/models/managers/matrices/personalMatrix";
 import globalPatternMatrixManager from "@/models/managers/matrices/globalPatternMatrix";
+import personalMatrixManager from "@/models/managers/matrices/personalMatrix";
 import personalPatternMatrixManager from "@/models/managers/matrices/personalPatternMatrix";
-import strings from "@/utils/strings";
+import stagesManager from "@/models/managers/stages";
+import statsManager from "@/models/managers/stats";
+import trendsManager from "@/models/managers/trends";
+import zonesManager from "@/models/managers/zones";
 import router from "@/router";
+import store from "@/store";
+import strings from "@/utils/strings";
+import Vue from "vue";
 
 export default {
   namespaced: true,
@@ -46,6 +46,7 @@ export default {
     // eslint-disable-next-line
     async fetch({ commit }, refresh = false) {
       if (refresh) commit("clearData");
+      configManager.refresh(refresh);
       itemsManager.refresh(refresh);
       stagesManager.refresh(refresh);
       zonesManager.refresh(refresh);
@@ -63,7 +64,6 @@ export default {
         personalPatternMatrixManager.refresh(refresh);
       }
       trendsManager.refresh(refresh);
-      periodManager.refresh(refresh);
       statsManager.refresh(refresh);
     },
     async refreshPersonalMatrix() {

@@ -11,8 +11,9 @@
 </template>
 
 <script>
-import get from '@/utils/getters'
-import QueryMain from '@/components/advancedQuery/QueryMain'
+import QueryMain from '@/components/advancedQuery/QueryMain';
+import periodManager from "@/models/managers/period";
+import get from '@/utils/getters';
 export default {
   name: 'AdvancedQuery',
   components: { QueryMain },
@@ -49,7 +50,10 @@ export default {
       if (preset !== {}) return preset
       return null
     }
-  }
+  },
+  created () {
+    periodManager.refresh(false);
+  },
 }
 </script>
 

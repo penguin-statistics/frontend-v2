@@ -116,11 +116,11 @@
 </template>
 
 <script>
-import anime from "animejs";
-import timeFormatter from "@/utils/timeFormatter";
-import strings from "@/utils/strings";
-import semver from "semver";
 import config from "@/config";
+import strings from "@/utils/strings";
+import timeFormatter from "@/utils/timeFormatter";
+import anime from "animejs";
+import semver from "semver";
 
 export default {
   name: "Changelog",
@@ -128,8 +128,14 @@ export default {
     return {
       logs: [
         {
+          version: "v3.7.6",
+          date: "2022-06-16T01:25:00+0800",
+          changes: `## 优化
+1. 添加国服新掉落识别支持`,
+        },
+        {
           version: "v3.7.5",
-          date: "2022-05-10T12:57:00+0800",
+          date: "2022-06-10T12:57:00+0800",
           changes: `## 优化
 1. 添加临时截图识别不可用提示
 2. 实现部分标准差可视化 (未完成)

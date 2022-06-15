@@ -1,7 +1,7 @@
+import supports from '@/models/supports'
 import Console from '@/utils/Console'
 import get from '@/utils/getters'
 import validator from '@/utils/validator'
-import supports from '@/models/supports'
 
 const errors = {
   planner: {
@@ -118,14 +118,17 @@ export default {
         } else {
           // not an array... maybe it's a new data format.
           // need verification
-          if (converted['@type'] === '@penguin-statistics/planner/config') {
+          if (
+            converted["@type"] === "@penguin-statistics/planner/config" ||
+            converted["@type"] === "@penguin-statistics/depot"
+          ) {
             // yup this is the new data format.
-            return this.modern(converted)
+            return this.modern(converted);
           } else {
             // hmmm doesn't seems right.
             return {
-              exception: errors.planner.config.unrecognized
-            }
+              exception: errors.planner.config.unrecognized,
+            };
           }
         }
       }

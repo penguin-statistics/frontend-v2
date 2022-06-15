@@ -386,19 +386,19 @@
 </template>
 
 <script>
-import get from '@/utils/getters'
-import { mapGetters, mapState } from 'vuex'
+import planner from '@/apis/planner'
+import PreloaderCard from '@/components/global/PreloaderCard'
 import PlannerIO from '@/components/planner/PlannerIO'
 import PlannerItemStepper from '@/components/planner/PlannerItemStepper'
 import PlannerResult from '@/components/planner/PlannerResult'
-import Console from '@/utils/Console'
 import MultiStageSelector from '@/components/stats/MultiStageSelector'
-import planner from '@/apis/planner'
+import Console from '@/utils/Console'
+import get from '@/utils/getters'
 import marshaller from '@/utils/marshaller'
+import performance from '@/utils/performance'
 import snackbar from '@/utils/snackbar'
 import strings from '@/utils/strings'
-import PreloaderCard from '@/components/global/PreloaderCard'
-import performance from '@/utils/performance'
+import { mapGetters, mapState } from 'vuex'
 
 export default {
   name: 'Planner',
@@ -487,7 +487,7 @@ export default {
     }
   },
 
-  created () {
+  mounted () {
     const initialItems = this.getInitialItems()
     if (this.items.length === 0) {
       this.$store.commit('planner/changeItems', initialItems)

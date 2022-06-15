@@ -1,6 +1,6 @@
 import store from '@/store'
-import formatter from '@/utils/timeFormatter'
 import existUtils from '@/utils/existUtils'
+import formatter from '@/utils/timeFormatter'
 // import Console from "@/utils/Console";
 
 const Getters = {}
@@ -249,12 +249,21 @@ Getters.trends = {
 }
 
 Getters.period = {
-  all (server) {
-    const period = store.getters['data/content']({ id: 'period' })
-    if (!period) return []
-    return period.filter(el => existUtils.existence(el, false, server))
-  }
-}
+  all(server) {
+    const period = store.getters["data/content"]({ id: "period" });
+    if (!period) return [];
+    return period.filter((el) => existUtils.existence(el, false, server));
+  },
+};
+
+Getters.config = {
+  all () {
+    const config = store.getters["data/content"]({ id: "config" });
+    if (!config) return {};
+    return config;
+  },
+
+};
 
 Getters.siteStats = {
   all () {

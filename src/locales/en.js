@@ -235,6 +235,7 @@ const messages = {
         personalPatternMatrix: "Personal Drop Pattern Data",
         stats: "Site Statistics",
         period: "Server Events",
+        config: "Frontend Configuration",
       },
     },
   },

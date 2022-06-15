@@ -76,9 +76,9 @@
               v-if="recognition.support !== true"
               :reason="recognition.support"
             />
-            <RecognitionNotSupported
+            <!-- <RecognitionNotSupported
               v-else-if="$store.getters['dataSource/server'] === 'CN'"
-            />
+            /> -->
             <v-stepper
               v-else
               v-model="step"
@@ -522,30 +522,29 @@
   </v-container>
 </template>
 <script>
-import Item from "@/components/global/Item";
-import Recognizer from "@/utils/recognizer";
-import PreloaderInline from "@/components/global/PreloaderInline";
-import CDN from "@/mixins/CDN";
-import config from '@/config';
-import Theme from "@/mixins/Theme";
-import ImageInput from "@/components/recognition/ImageInput";
-import RecognitionResultOverview from "@/components/recognition/RecognitionResultOverview";
-import get from "@/utils/getters";
+import BrowserDeprecated from "@/components/global/BrowserDeprecated";
 import DynamicSizeBtn from "@/components/global/DynamicSizeBtn";
+import Item from "@/components/global/Item";
 import OffTitle from "@/components/global/OffTitle";
+import PreloaderInline from "@/components/global/PreloaderInline";
+import TitledRow from "@/components/global/TitledRow";
+import ImageInput from "@/components/recognition/ImageInput";
+import RecognitionImageDialog from "@/components/recognition/RecognitionImageDialog";
+import RecognitionResultCard from "@/components/recognition/RecognitionResultCard";
+import RecognitionResultOverview from "@/components/recognition/RecognitionResultOverview";
+import RecognitionSubmitVisualizer from "@/components/recognition/RecognitionSubmitVisualizer";
 import FactTable from "@/components/stats/fact-table/FactTable";
 import FactTableItem from "@/components/stats/fact-table/FactTableItem";
-import { mapGetters } from "vuex";
-import RecognitionImageDialog from "@/components/recognition/RecognitionImageDialog";
-import TitledRow from "@/components/global/TitledRow";
+import config from '@/config';
+import CDN from "@/mixins/CDN";
 import ConfirmLeave from "@/mixins/ConfirmLeave";
-import environment from "@/utils/environment";
-import BrowserDeprecated from "@/components/global/BrowserDeprecated";
-import RecognitionResultCard from "@/components/recognition/RecognitionResultCard";
-import RecognitionSubmitVisualizer from "@/components/recognition/RecognitionSubmitVisualizer";
-import * as Sentry from "@sentry/vue";
+import Theme from "@/mixins/Theme";
 import Console from "@/utils/Console";
-import RecognitionNotSupported from "../../components/global/RecognitionNotSupported";
+import environment from "@/utils/environment";
+import get from "@/utils/getters";
+import Recognizer from "@/utils/recognizer";
+import * as Sentry from "@sentry/vue";
+import { mapGetters } from "vuex";
 
 let recognitionSubmitter;
 try {
@@ -575,7 +574,6 @@ export default {
     ImageInput,
     RecognitionResultOverview,
     PreloaderInline,
-    RecognitionNotSupported,
 },
   mixins: [Theme, CDN, ConfirmLeave],
   data() {
