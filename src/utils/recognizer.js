@@ -1,37 +1,21 @@
-import charHash from '@/models/recognition/charHash'
-import store from '@/store'
-import JSZip from 'jszip'
-import uniq from 'lodash/uniq'
+import charHash from '@/models/recognition/charHash';
+import store from '@/store';
+import JSZip from 'jszip';
+import uniq from 'lodash/uniq';
 
+import config from '@/config';
+import configManager from '@/models/managers/config';
+import { findDuplicates } from "@/utils/arrayUtils";
 import Console from "@/utils/Console";
-import strings from "@/utils/strings";
-import ReportValidator from "@/utils/reportValidator";
-import get from '@/utils/getters'
 import existUtils from "@/utils/existUtils";
+import get from '@/utils/getters';
 import mirror from "@/utils/mirror";
-import {findDuplicates} from "@/utils/arrayUtils";
-import config from '@/config'
+import ReportValidator from "@/utils/reportValidator";
+import strings from "@/utils/strings";
 
 import * as Sentry from "@sentry/vue";
 
 const recognizerFirstAPICompatibleVersionFolder = 'v4.4.2'
-const recognizerAssetsVersion = 'v4-shared'
-
-// async function image2wasmHeapOffset (blob) {
-//   const Module = window.Module
-//   const imageData = await blob.arrayBuffer()
-//   const uint8 = new Uint8Array(imageData)
-//   const numBytes = uint8.length
-//   const dataPtr = Module._malloc(numBytes * Uint8Array.BYTES_PER_ELEMENT)
-//   const dataOnHeap = new Uint8Array(Module.HEAPU8.buffer, dataPtr, numBytes)
-//   dataOnHeap.set(uint8)
-
-//   return {
-//     offset: dataPtr,
-//     length: numBytes,
-//     blobUrl: URL.createObjectURL(blob)
-//   }
-// }
 
 async function file2ArrayBuffer(file) {
   const reader = new FileReader();
@@ -49,16 +33,27 @@ function safeParseJson (s) {
   return result
 }
 
+function getResourcePrefix(server) {
+  const conf = get.config.all()
+  return conf && conf.recognition && conf.recognition['items-resources'] && conf.recognition['items-resources'].prefix && conf.recognition['items-resources'].prefix[server] || 'v1'
+}
+
 class Recognizer {
   async initialize (server) {
     // console.groupCollapsed('Initialization')
+    Console.info('Recognizer', 'initializing')
+    if (configManager && configManager.promise) await configManager.promise
+
+    this.resourcePrefix = getResourcePrefix(server)
 
     // Lazy load of recognize.js and recognize.wasm
     if (window.Module) {
       Console.info('Recognizer', 'init: recognition backend: both js and wasm are already loaded')
     } else {
       const script = document.createElement('script')
-      script.src = mirror.deliver(`/recognition/${recognizerFirstAPICompatibleVersionFolder}/penguin-recognizer.js`)
+      const url = `/recognition/${recognizerFirstAPICompatibleVersionFolder}/penguin-recognizer.js`;
+      Console.info('Recognizer', 'init: loading recognition backend from:', url)
+      script.src = mirror.deliver(url)
       // script.src = "/penguin-recognizer.js"
       document.body.appendChild(script)
       await new Promise(resolve => {
@@ -134,9 +129,7 @@ class Recognizer {
     
     Console.info('Recognizer', 'init: preload icons: preloading')
 
-    await fetch(
-      mirror.deliver(`/recognition/${recognizerAssetsVersion}/items.zip`)
-    )
+    await fetch(mirror.deliver(`/recognition/resources/${this.resourcePrefix}/items.zip`))
       // await fetch("/items.zip")
       .then((response) => {
         if (response.status >= 200 && response.status < 400) {
@@ -314,7 +307,7 @@ class Recognizer {
   getVersion() {
     return {
       recognizerVersion: this.wasm.version,
-      recognizerAssetsVersion: recognizerAssetsVersion,
+      recognizerAssetsVersion: this.resourcePrefix,
     };
   }
 
@@ -324,7 +317,7 @@ class Recognizer {
         this.wasm.envCheck() ? "initialized" : "env_check_not_passed"
       } / core::${this.wasm.version} / opencv::v${
         this.wasm.opencvVersion
-      } / assets::${recognizerAssetsVersion}}` || "unknown"
+      } / assets::${this.resourcePrefix}}` || "unknown"
     );
   }
 }

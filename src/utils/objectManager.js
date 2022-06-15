@@ -1,6 +1,6 @@
-import { service } from '@/utils/service'
 import store from '@/store'
 import Console from '@/utils/Console'
+import { service } from '@/utils/service'
 
 /**
  * Object Life-cycle manager
@@ -164,6 +164,8 @@ class ObjectManager {
             reject(err)
           })
       })
+
+      this.promise = promise
 
       context.ajaxHooks.response(context.name, promise)
       return promise

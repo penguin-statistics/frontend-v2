@@ -2,9 +2,10 @@ import { Capacitor } from "@capacitor/core";
 import Console from "@/utils/Console";
 import PenguinPlugin from "../plugins/PenguinPlugin";
 import { Haptics, ImpactStyle, NotificationType } from "@capacitor/haptics";
+import environment from '@/utils/environment'
 
 async function invoke(method, ...args) {
-  if (Capacitor.isPluginAvailable("Haptics")) {
+  if (Capacitor.isPluginAvailable("Haptics") && environment.isApp) {
     Console.info("Haptics", "invoking haptics", method, args);
     try {
       await Haptics[method](...args);
