@@ -123,12 +123,15 @@
 </template>
 
 <script>
-import * as clipboard from 'clipboard-polyfill'
 import Subheader from '@/components/global/Subheader'
-import snackbar from '@/utils/snackbar'
-import marshaller from '@/utils/marshaller'
-import unmarshaller from '@/utils/unmarshaller'
 import Console from '@/utils/Console'
+import marshaller from '@/utils/marshaller'
+import snackbar from '@/utils/snackbar'
+import unmarshaller from '@/utils/unmarshaller'
+import * as clipboard from 'clipboard-polyfill'
+
+const present = (v) => v !== undefined && v !== null
+
 export default {
   name: 'PlannerIO',
   components: { Subheader },
@@ -185,25 +188,34 @@ export default {
 
       let importedCounter = 0
 
+      const patchMode = unmarshalled.converted['@type'] === '@penguin-statistics/depot'
+
       const currentItems = this.$store.getters['planner/config'].items
 
       for (const item of currentItems) {
         const toImportItem = unmarshalled.converted.items.find(el => el.id === item.id)
         if (toImportItem) {
-          item.have = toImportItem.have || 0
-          item.need = toImportItem.need || 0
+          if (patchMode) {
+            console.log('Patching item', JSON.stringify(item), present(item.have), present(item.need), item.id)
+            if (present(toImportItem.have)) item.have = toImportItem.have || 0
+            if (present(toImportItem.need)) item.need = toImportItem.need || 0
+            console.log('Patched item', JSON.stringify(item), present(item.have), present(item.need), item.id)
+          } else {
+            item.have = toImportItem.have || 0
+            item.need = toImportItem.need || 0
+          }
           importedCounter++
         }
       }
 
       this.$store.commit('planner/changeItems', currentItems)
 
-      if (unmarshalled.converted.options) {
+      if (unmarshalled.converted.options && !patchMode) {
         const options = Object.assign(this.config.options, unmarshalled.converted.options)
         this.$store.commit('planner/changeOptions', options)
       }
 
-      if (unmarshalled.converted.excludes) {
+      if (unmarshalled.converted.excludes && !patchMode) {
         this.$store.commit('planner/changeExcludes', unmarshalled.converted.excludes)
       }
 

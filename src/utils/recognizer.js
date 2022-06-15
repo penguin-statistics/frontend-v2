@@ -14,7 +14,7 @@ import config from '@/config'
 
 import * as Sentry from "@sentry/vue";
 
-const recognizerFirstAPICompatibleVersionFolder = 'v4.2.2'
+const recognizerFirstAPICompatibleVersionFolder = 'v4.4.2'
 const recognizerAssetsVersion = 'v4-shared'
 
 // async function image2wasmHeapOffset (blob) {
