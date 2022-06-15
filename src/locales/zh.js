@@ -424,12 +424,12 @@ const messages = {
           subtitle: "此关卡目前不开放",
         },
         "3stars::False": "非三星评价",
-        "DropType::Illegal": {
+        "Droptypes::Illegal": {
           title: "非法掉落类型",
           subtitle:
             "截图中存在首次掉落、理智返还等非法掉落类型，或存在识别失败的掉落类型",
         },
-        "DropType::NotFound": "未找到任何掉落类型",
+        "Droptypes::NotFound": "未找到任何掉落类型",
       },
     },
     rules: {

@@ -409,12 +409,12 @@ const messages = {
           subtitle: "스테이지가 열려 있지 않습니다",
         },
         "3stars::False": "3성 클리어가 아님",
-        "DropType::Illegal": {
+        "Droptypes::Illegal": {
           title: "잘못된 드랍 분류",
           subtitle:
             "첫 드랍이나 이성 반환 등 잘못된 드랍 분류가 스크린샷에 있습니다.",
         },
-        "DropType::NotFound": "드랍 분류를 찾을 수 없음",
+        "Droptypes::NotFound": "드랍 분류를 찾을 수 없음",
       },
     },
     rules: {

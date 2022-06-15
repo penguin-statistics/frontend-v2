@@ -404,12 +404,12 @@ const messages = {
           subtitle: "このステージただ今有効していません",
         },
         "3stars::False": "星3評価ではない",
-        "DropType::Illegal": {
+        "Droptypes::Illegal": {
           title: "非合法のドロップタイプ",
           subtitle:
             "スクリーンショットには初回、理性返却などの非合法なドロップタイプ、又は認識できないドロップタイプが存在しています",
         },
-        "DropType::NotFound": "ドロップタイプ未検出",
+        "Droptypes::NotFound": "ドロップタイプ未検出",
       },
     },
     rules: {
