@@ -167,7 +167,7 @@
               </div>
             </v-btn>
 
-            <v-btn
+            <!-- <v-btn
               v-haptic
               large
               href="https://github.com/penguin-statistics/livehouse"
@@ -187,7 +187,7 @@
                   </div>
                 </div>
               </div>
-            </v-btn>
+            </v-btn> -->
 
             <v-btn
               v-haptic

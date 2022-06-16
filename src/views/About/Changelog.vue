@@ -132,7 +132,7 @@ export default {
           date: "2022-06-16T01:25:00+0800",
           changes: `## 优化
 1. 在没有 Focus 当前页面的情况下，停止背景图片更新
-2. 首页添加 LiveHouse & Frontend V4 Repo 链接`,
+2. 首页添加 Frontend V4 Repo 链接`,
         },
         {
           version: "v3.7.6",
