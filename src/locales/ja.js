@@ -170,6 +170,7 @@ const messages = {
     frontend: "ﾌﾛﾝﾄｴﾝﾄﾞ",
     frontendV4: "ﾌﾛﾝﾄｴﾝﾄﾞ v4",
     backend: "ﾊﾞｯｸｴﾝﾄﾞ",
+    livehouse: "LiveHouse",
     recognizer: "ｽｸｼｮ認識",
     newFolder: "新規フォルダー鋭意作成中",
     caption:
@@ -404,12 +405,12 @@ const messages = {
           subtitle: "このステージただ今有効していません",
         },
         "3stars::False": "星3評価ではない",
-        "DropType::Illegal": {
+        "Droptypes::Illegal": {
           title: "非合法のドロップタイプ",
           subtitle:
             "スクリーンショットには初回、理性返却などの非合法なドロップタイプ、又は認識できないドロップタイプが存在しています",
         },
-        "DropType::NotFound": "ドロップタイプ未検出",
+        "Droptypes::NotFound": "ドロップタイプ未検出",
       },
     },
     rules: {

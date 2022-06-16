@@ -1,10 +1,10 @@
-import { Capacitor } from "@capacitor/core";
 import router from "@/router";
 import Console from "@/utils/Console";
-import { SplashScreen } from "@capacitor/splash-screen";
-import { App } from "@capacitor/app";
-import PenguinPlugin from "@/utils/plugins/PenguinPlugin";
 import environment from "@/utils/environment";
+import PenguinPlugin from "@/utils/plugins/PenguinPlugin";
+import { App } from "@capacitor/app";
+import { Capacitor } from "@capacitor/core";
+import { SplashScreen } from "@capacitor/splash-screen";
 
 export default {
   created() {
@@ -31,6 +31,9 @@ export default {
 
     App.addListener("appStateChange", function(data) {
       Console.info("Capacitor:App", "App state changed with new state", data);
+      if (data && typeof data.isActive === "boolean") {
+        environment.appIsActive = data.isActive;
+      }
     });
 
     if (Capacitor.isPluginAvailable("PenguinPlugin")) {

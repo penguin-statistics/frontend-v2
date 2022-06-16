@@ -22,6 +22,7 @@ const isIOS =
 const isAndroid = navigator.userAgent.toLowerCase().indexOf("android") > -1;
 
 export default {
+  appIsActive: true,
   get device() {
     return (async () => {
       return {

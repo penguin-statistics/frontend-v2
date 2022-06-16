@@ -86,6 +86,7 @@ module.exports = {
         patterns: [
           {
             from: templateRoot,
+            noErrorOnMissing: true,
             globOptions: {
               ignore: ["**/index.html"],
             },

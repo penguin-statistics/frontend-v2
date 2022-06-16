@@ -100,36 +100,28 @@
               </div>
             </v-btn>
 
-            <v-tooltip bottom>
-              <template v-slot:activator="{ on }">
-                <span v-on="on">
-                  <v-btn
-                    v-haptic
-                    large
-                    href="https://github.com/penguin-statistics/frontend-next"
-                    target="_blank"
-                    rel="noopener"
-                    class="mr-1"
-                    text
-                    disabled
-                    v-on="on"
-                  >
-                    <div class="d-flex align-center justify-content-center ">
-                      <v-icon left>
-                        mdi-github-circle
-                      </v-icon>
-                      <div class="flex flex-column ml-1 py-2">
-                        <div>{{ $t("contribute.frontendV4") }}</div>
-                        <div class="overline degraded-opacity">
-                          React 18
-                        </div>
-                      </div>
-                    </div>
-                  </v-btn>
-                </span>
-              </template>
-              <span>{{ $t('contribute.newFolder') }}</span>
-            </v-tooltip>
+            <v-btn
+              v-haptic
+              large
+              href="https://github.com/penguin-statistics/frontend-next"
+              target="_blank"
+              rel="noopener"
+              class="mr-1"
+              text
+              v-on="on"
+            >
+              <div class="d-flex align-center justify-content-center ">
+                <v-icon left>
+                  mdi-github-circle
+                </v-icon>
+                <div class="flex flex-column ml-1 py-2">
+                  <div>{{ $t("contribute.frontendV4") }}</div>
+                  <div class="overline degraded-opacity">
+                    React 18
+                  </div>
+                </div>
+              </div>
+            </v-btn>
             
             
             <!-- <v-btn
@@ -174,6 +166,28 @@
                 </div>
               </div>
             </v-btn>
+
+            <!-- <v-btn
+              v-haptic
+              large
+              href="https://github.com/penguin-statistics/livehouse"
+              target="_blank"
+              rel="noopener"
+              class="mr-1"
+              text
+            >
+              <div class="d-flex align-center justify-content-center ">
+                <v-icon left>
+                  mdi-github-circle
+                </v-icon>
+                <div class="flex flex-column ml-1 py-2">
+                  <div>{{ $t("contribute.livehouse") }}</div>
+                  <div class="overline degraded-opacity">
+                    Go 1.18
+                  </div>
+                </div>
+              </div>
+            </v-btn> -->
 
             <v-btn
               v-haptic

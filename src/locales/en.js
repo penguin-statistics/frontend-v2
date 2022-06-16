@@ -193,6 +193,7 @@ const messages = {
     frontend: "Frontend",
     frontendV4: "Frontend v4",
     backend: "Backend",
+    livehouse: "LiveHouse",
     recognizer: "Recognizer",
     newFolder: "Currently working hard creating the project repo...",
     caption:
@@ -423,12 +424,12 @@ const messages = {
           subtitle: "This stage is not opening now",
         },
         "3stars::False": "Suspected to be a non 3-stars clear",
-        "DropType::Illegal": {
+        "Droptypes::Illegal": {
           title: "Illegal drop type",
           subtitle:
             "There are illegal drop types in the screenshot, like first-clear or return AP",
         },
-        "DropType::NotFound": "Failed to find any drop type",
+        "Droptypes::NotFound": "Failed to find any drop type",
       },
     },
     rules: {
