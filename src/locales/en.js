@@ -193,6 +193,7 @@ const messages = {
     frontend: "Frontend",
     frontendV4: "Frontend v4",
     backend: "Backend",
+    livehouse: "LiveHouse",
     recognizer: "Recognizer",
     newFolder: "Currently working hard creating the project repo...",
     caption:

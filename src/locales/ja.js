@@ -170,6 +170,7 @@ const messages = {
     frontend: "ﾌﾛﾝﾄｴﾝﾄﾞ",
     frontendV4: "ﾌﾛﾝﾄｴﾝﾄﾞ v4",
     backend: "ﾊﾞｯｸｴﾝﾄﾞ",
+    livehouse: "LiveHouse",
     recognizer: "ｽｸｼｮ認識",
     newFolder: "新規フォルダー鋭意作成中",
     caption:

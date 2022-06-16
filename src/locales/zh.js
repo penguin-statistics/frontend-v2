@@ -193,6 +193,7 @@ const messages = {
     frontend: "前端",
     frontendV4: "前端 v4",
     backend: "后端",
+    livehouse: "LiveHouse",
     recognizer: "截图识别",
     newFolder: "锐意新建文件夹中",
     caption:
