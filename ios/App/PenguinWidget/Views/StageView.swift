@@ -24,7 +24,7 @@ struct StageView: View {
                     
                 HStack(alignment: .center, spacing: 6) {
                     Text(stage.stageCode)
-                        .font(.title)
+                        .font(.title.monospacedDigit())
                         .bold()
                         .frame(minHeight: 0, maxHeight: 36)
                         .minimumScaleFactor(0.3)
@@ -34,7 +34,7 @@ struct StageView: View {
                         Text("× " + String(stage.recentTimes))
                             .minimumScaleFactor(0.5)
                             .lineLimit(1)
-                            .font(.caption)
+                            .font(.caption.monospacedDigit())
                             .foregroundColor(Color("Gray4").opacity(0.8))
                     }
                 }

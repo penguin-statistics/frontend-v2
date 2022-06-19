@@ -16,6 +16,8 @@ struct MediumWidgetView: View {
             Text("SiteStatsWidgetTitle")
                 .font(.caption)
                 .foregroundColor(Color("Gray4"))
+                .unredacted()
+            
             Spacer()
             
             TwoColumnStageStats(stages: stats.stages)
@@ -31,13 +33,20 @@ struct MediumWidgetView: View {
 
 struct MediumWidgetView_Previews: PreviewProvider {
     static var previews: some View {
-        MediumWidgetView(
-            stats: SiteStats.demo(.zhRegular)
-        )
-            .previewContext(WidgetPreviewContext(family: .systemMedium))
-            .environment(\.colorScheme, ColorScheme.dark)
-            .environment(\.locale, .init(identifier: "zh"))
-            .previewDisplayName("Medium")
+        Group {
+            MediumWidgetView(
+                stats: SiteStats.demo(.zhRegular)
+            )
+                .environment(\.locale, .init(identifier: "zh"))
+                .previewDisplayName("Chinese")
+            
+            MediumWidgetView(
+                stats: SiteStats.demo(.zhRegular)
+            )
+                .environment(\.locale, .init(identifier: "ja"))
+                .previewDisplayName("Japanese")
+        }
+        .previewContext(WidgetPreviewContext(family: .systemMedium))
     }
 }
 

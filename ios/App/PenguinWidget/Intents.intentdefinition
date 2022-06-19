@@ -6,13 +6,13 @@
 	<array>
 		<dict>
 			<key>INEnumDisplayName</key>
-			<string>Servers</string>
+			<string>Penguin Server</string>
 			<key>INEnumDisplayNameID</key>
-			<string>IGb6i4</string>
+			<string>5aokC3</string>
 			<key>INEnumGeneratesHeader</key>
 			<true/>
 			<key>INEnumName</key>
-			<string>Servers</string>
+			<string>PenguinServer</string>
 			<key>INEnumType</key>
 			<string>Regular</string>
 			<key>INEnumValues</key>
@@ -21,15 +21,15 @@
 					<key>INEnumValueDisplayName</key>
 					<string>unknown</string>
 					<key>INEnumValueDisplayNameID</key>
-					<string>zu5ZX5</string>
+					<string>y03ah2</string>
 					<key>INEnumValueName</key>
 					<string>unknown</string>
 				</dict>
 				<dict>
 					<key>INEnumValueDisplayName</key>
-					<string>CN</string>
+					<string>cn</string>
 					<key>INEnumValueDisplayNameID</key>
-					<string>IVWGR6</string>
+					<string>7h4dn2</string>
 					<key>INEnumValueIndex</key>
 					<integer>1</integer>
 					<key>INEnumValueName</key>
@@ -37,9 +37,9 @@
 				</dict>
 				<dict>
 					<key>INEnumValueDisplayName</key>
-					<string>US</string>
+					<string>us</string>
 					<key>INEnumValueDisplayNameID</key>
-					<string>hRdAmy</string>
+					<string>vPM1Jx</string>
 					<key>INEnumValueIndex</key>
 					<integer>2</integer>
 					<key>INEnumValueName</key>
@@ -47,9 +47,9 @@
 				</dict>
 				<dict>
 					<key>INEnumValueDisplayName</key>
-					<string>JP</string>
+					<string>jp</string>
 					<key>INEnumValueDisplayNameID</key>
-					<string>z06YbB</string>
+					<string>0tJe9s</string>
 					<key>INEnumValueIndex</key>
 					<integer>3</integer>
 					<key>INEnumValueName</key>
@@ -57,9 +57,9 @@
 				</dict>
 				<dict>
 					<key>INEnumValueDisplayName</key>
-					<string>KR</string>
+					<string>kr</string>
 					<key>INEnumValueDisplayNameID</key>
-					<string>valxsU</string>
+					<string>KTYh4b</string>
 					<key>INEnumValueIndex</key>
 					<integer>4</integer>
 					<key>INEnumValueName</key>
@@ -71,70 +71,45 @@
 	<key>INIntentDefinitionModelVersion</key>
 	<string>1.2</string>
 	<key>INIntentDefinitionNamespace</key>
-	<string>ZSA94M</string>
+	<string>dZprhO</string>
 	<key>INIntentDefinitionSystemVersion</key>
-	<string>20D74</string>
+	<string>21F79</string>
 	<key>INIntentDefinitionToolsBuildVersion</key>
-	<string>12C33</string>
+	<string>14A5228q</string>
 	<key>INIntentDefinitionToolsVersion</key>
-	<string>12.3</string>
+	<string>14.0</string>
 	<key>INIntents</key>
 	<array>
 		<dict>
 			<key>INIntentCategory</key>
-			<string>information</string>
-			<key>INIntentConfigurable</key>
-			<true/>
-			<key>INIntentDefaultImageName</key>
-			<string>Logo</string>
-			<key>INIntentDescription</key>
-			<string>View the Statistics Overview</string>
+			<string>generic</string>
 			<key>INIntentDescriptionID</key>
-			<string>2SWQYn</string>
+			<string>WVxJ9m</string>
 			<key>INIntentEligibleForWidgets</key>
 			<true/>
 			<key>INIntentIneligibleForSuggestions</key>
 			<true/>
-			<key>INIntentInput</key>
-			<string>server</string>
 			<key>INIntentLastParameterTag</key>
 			<integer>2</integer>
-			<key>INIntentManagedParameterCombinations</key>
-			<dict>
-				<key>server</key>
-				<dict>
-					<key>INIntentParameterCombinationSupportsBackgroundExecution</key>
-					<true/>
-					<key>INIntentParameterCombinationTitle</key>
-					<string>View Statistics Overview of ${server}</string>
-					<key>INIntentParameterCombinationTitleID</key>
-					<string>dW9aMP</string>
-					<key>INIntentParameterCombinationUpdatesLinked</key>
-					<true/>
-				</dict>
-			</dict>
 			<key>INIntentName</key>
-			<string>StatisticsOverview</string>
+			<string>SelectServer</string>
 			<key>INIntentParameters</key>
 			<array>
 				<dict>
 					<key>INIntentParameterConfigurable</key>
 					<true/>
+					<key>INIntentParameterCustomDisambiguation</key>
+					<true/>
 					<key>INIntentParameterDisplayName</key>
 					<string>Server</string>
 					<key>INIntentParameterDisplayNameID</key>
-					<string>Yb45to</string>
+					<string>UQHqxq</string>
 					<key>INIntentParameterDisplayPriority</key>
 					<integer>1</integer>
 					<key>INIntentParameterEnumType</key>
-					<string>Servers</string>
+					<string>PenguinServer</string>
 					<key>INIntentParameterEnumTypeNamespace</key>
-					<string>ZSA94M</string>
-					<key>INIntentParameterMetadata</key>
-					<dict>
-						<key>INIntentParameterMetadataDefaultValue</key>
-						<string>cn</string>
-					</dict>
+					<string>dZprhO</string>
 					<key>INIntentParameterName</key>
 					<string>server</string>
 					<key>INIntentParameterPromptDialogs</key>
@@ -157,7 +132,7 @@
 							<key>INIntentParameterPromptDialogFormatString</key>
 							<string>There are ${count} options matching ‘${server}’.</string>
 							<key>INIntentParameterPromptDialogFormatStringID</key>
-							<string>5Lp0W0</string>
+							<string>c0YYCq</string>
 							<key>INIntentParameterPromptDialogType</key>
 							<string>DisambiguationIntroduction</string>
 						</dict>
@@ -167,11 +142,13 @@
 							<key>INIntentParameterPromptDialogFormatString</key>
 							<string>Just to confirm, you wanted ‘${server}’?</string>
 							<key>INIntentParameterPromptDialogFormatStringID</key>
-							<string>4eICjs</string>
+							<string>pB9HhD</string>
 							<key>INIntentParameterPromptDialogType</key>
 							<string>Confirmation</string>
 						</dict>
 					</array>
+					<key>INIntentParameterSupportsResolution</key>
+					<true/>
 					<key>INIntentParameterTag</key>
 					<integer>2</integer>
 					<key>INIntentParameterType</key>
@@ -195,13 +172,13 @@
 				</array>
 			</dict>
 			<key>INIntentTitle</key>
-			<string>Statistics Overview</string>
+			<string>Select Server</string>
 			<key>INIntentTitleID</key>
-			<string>xSMBZF</string>
+			<string>cA3Jp8</string>
 			<key>INIntentType</key>
 			<string>Custom</string>
 			<key>INIntentVerb</key>
-			<string>View</string>
+			<string>Do</string>
 		</dict>
 	</array>
 	<key>INTypes</key>

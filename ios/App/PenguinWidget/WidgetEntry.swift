@@ -11,27 +11,45 @@ import Intents
 import Alamofire
 
 struct SiteStatsProvider: IntentTimelineProvider {
+    func demoStats(with language: String? = Locale.current.languageCode, in server: PenguinServer = .cn) -> SiteStats {
+        var demo = SiteStats.demo(language == "zh" ? .zhRegular : .enRegular)
+        demo.server = server
+        return demo
+    }
+    
     func placeholder(in context: Context) -> WidgetTimelineEntry {
         return WidgetTimelineEntry(
             date: Date(),
-            stats: SiteStats.demo(.zhRegular)
+            stats: demoStats()
         )
     }
 
-    func getSnapshot(for configuration: StatisticsOverviewIntent, in context: Context, completion: @escaping (WidgetTimelineEntry) -> ()) {
-        let entry = WidgetTimelineEntry(
+    func getSnapshot(for configuration: SelectServerIntent, in context: Context, completion: @escaping (WidgetTimelineEntry) -> ()) {
+        let demoEntry = WidgetTimelineEntry(
             date: Date(),
-            stats: SiteStats.demo(.zhRegular)
+            stats: demoStats(in: configuration.server)
         )
-        completion(entry)
+        
+        getStats(for: configuration.server, timeout: TimeInterval(5.0)) { (stats) in
+            if stats != nil {
+                completion(WidgetTimelineEntry(
+                    date: Date(),
+                    stats: stats!
+                ))
+            } else {
+                // nothing...
+                completion(demoEntry)
+                return
+            }
+        }
     }
 
-    func getTimeline(for configuration: StatisticsOverviewIntent, in context: Context, completion: @escaping (Timeline<WidgetTimelineEntry>) -> ()) {
-        print("serverSelection timeline with configured server:", configuration.server.string())
+    func getTimeline(for configuration: SelectServerIntent, in context: Context, completion: @escaping (Timeline<WidgetTimelineEntry>) -> ()) {
+        print("serverSelection timeline with configured server:", configuration.server)
         
         print("doing network request")
+        
         getStats(for: configuration.server) { (stats) in
-            
             if stats != nil {
                 print("got stats", stats ?? "undefined")
                 let entries: [WidgetTimelineEntry] = [
@@ -47,10 +65,7 @@ struct SiteStatsProvider: IntentTimelineProvider {
                 completion(Timeline(entries: [], policy: .atEnd))
                 return
             }
-            
         }
-        
-        
     }
 }
 

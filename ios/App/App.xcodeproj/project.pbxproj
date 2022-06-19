@@ -44,8 +44,6 @@
 		3A885ACE25A443D600247AED /* EventBus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A885ACD25A443D600247AED /* EventBus.swift */; };
 		3A8EFF992599BBC100B6A788 /* alert1.caf in Resources */ = {isa = PBXBuildFile; fileRef = 3A8EFF982599BBC100B6A788 /* alert1.caf */; };
 		3A8EFFA0259A1BB900B6A788 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 3A8EFF9F259A1BB900B6A788 /* Alamofire */; };
-		3A9323B62626C5A700E42CA4 /* Intents.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = 3A9323B92626C5A700E42CA4 /* Intents.intentdefinition */; };
-		3A9323B72626C5A700E42CA4 /* Intents.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = 3A9323B92626C5A700E42CA4 /* Intents.intentdefinition */; };
 		3A968BB02597A3D5005266F2 /* TwoColumnStageStats.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A968BAF2597A3D5005266F2 /* TwoColumnStageStats.swift */; };
 		3A968BB52597A54E005266F2 /* LargeWidgetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A968BB42597A54E005266F2 /* LargeWidgetView.swift */; };
 		3A968BBA2597A738005266F2 /* ExternalService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A968BB92597A738005266F2 /* ExternalService.swift */; };
@@ -61,6 +59,8 @@
 		504EC30F1FED79650016851F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 504EC30E1FED79650016851F /* Assets.xcassets */; };
 		A084ECDBA7D38E1E42DFC39D /* Pods_App.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AF277DCFFFF123FFC6DF26C7 /* Pods_App.framework */; };
 		B53A321C281ED2BC002EAB0B /* public in Resources */ = {isa = PBXBuildFile; fileRef = B53A321B281ED2BC002EAB0B /* public */; };
+		B553BF8E285F22770089DB8B /* Intents.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = B553BF8D285F22770089DB8B /* Intents.intentdefinition */; };
+		B553BF8F285F23170089DB8B /* Intents.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = B553BF8D285F22770089DB8B /* Intents.intentdefinition */; };
 		B5E9EF4728219840009F0F68 /* PenguinViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5E9EF4628219840009F0F68 /* PenguinViewController.swift */; };
 /* End PBXBuildFile section */
 
@@ -136,7 +136,6 @@
 		3A679B002599166C00A685E9 /* WelcomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeView.swift; sourceTree = "<group>"; };
 		3A885ACD25A443D600247AED /* EventBus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventBus.swift; sourceTree = "<group>"; };
 		3A8EFF982599BBC100B6A788 /* alert1.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = alert1.caf; sourceTree = "<group>"; };
-		3A9323B82626C5A700E42CA4 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.intentdefinition; name = en; path = en.lproj/Intents.intentdefinition; sourceTree = "<group>"; };
 		3A968BAF2597A3D5005266F2 /* TwoColumnStageStats.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TwoColumnStageStats.swift; sourceTree = "<group>"; };
 		3A968BB42597A54E005266F2 /* LargeWidgetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LargeWidgetView.swift; sourceTree = "<group>"; };
 		3A968BB92597A738005266F2 /* ExternalService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExternalService.swift; sourceTree = "<group>"; };
@@ -162,6 +161,7 @@
 		7A5CB73611F4A3F49DC948B2 /* Pods-App.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-App.debug.xcconfig"; path = "Pods/Target Support Files/Pods-App/Pods-App.debug.xcconfig"; sourceTree = "<group>"; };
 		AF277DCFFFF123FFC6DF26C7 /* Pods_App.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_App.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B53A321B281ED2BC002EAB0B /* public */ = {isa = PBXFileReference; lastKnownFileType = folder; path = public; sourceTree = "<group>"; };
+		B553BF8D285F22770089DB8B /* Intents.intentdefinition */ = {isa = PBXFileReference; lastKnownFileType = file.intentdefinition; path = Intents.intentdefinition; sourceTree = "<group>"; };
 		B5E9EF4628219840009F0F68 /* PenguinViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PenguinViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -230,8 +230,8 @@
 				3A06C10F2597112E00B81F31 /* SiteStats.swift */,
 				3A06C117259720D600B81F31 /* PenguinWidget.swift */,
 				3A06C132259766C400B81F31 /* WidgetEntry.swift */,
+				B553BF8D285F22770089DB8B /* Intents.intentdefinition */,
 				3A968BB92597A738005266F2 /* ExternalService.swift */,
-				3A9323B92626C5A700E42CA4 /* Intents.intentdefinition */,
 			);
 			path = PenguinWidget;
 			sourceTree = "<group>";
@@ -600,7 +600,7 @@
 				3A1157B1258F2B5C00F4C6FD /* SmallWidgetView.swift in Sources */,
 				3A06C12D2597454600B81F31 /* WidgetFooter.swift in Sources */,
 				3A06C1252597447200B81F31 /* StageView.swift in Sources */,
-				3A9323B72626C5A700E42CA4 /* Intents.intentdefinition in Sources */,
+				B553BF8E285F22770089DB8B /* Intents.intentdefinition in Sources */,
 				3A06C1102597112E00B81F31 /* SiteStats.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -627,11 +627,11 @@
 				3A001AD32599A4A60078A265 /* ConsentView.swift in Sources */,
 				3A001AC225991E2C0078A265 /* WhatsNew.swift in Sources */,
 				3A679B012599166C00A685E9 /* WelcomeView.swift in Sources */,
-				3A9323B62626C5A700E42CA4 /* Intents.intentdefinition in Sources */,
 				3A61615A259B0ED200FA06A2 /* ToggleNotificationPreference.swift in Sources */,
 				3A61616C259C7B8D00FA06A2 /* HapticButton.swift in Sources */,
 				3A001AD72599A68A0078A265 /* Helpers.swift in Sources */,
 				3AA7E3462521F70B00387971 /* PenguinPlugin.m in Sources */,
+				B553BF8F285F23170089DB8B /* Intents.intentdefinition in Sources */,
 				3A0C886325C25E8E008E1F4B /* PushManager.swift in Sources */,
 				3A4D4431259AC0BA000807F8 /* InitialLaunch.swift in Sources */,
 				504EC3081FED79650016851F /* AppDelegate.swift in Sources */,
@@ -674,14 +674,6 @@
 				3A2AA52A26F513B700F3D15A /* ja */,
 			);
 			name = Localizable.strings;
-			sourceTree = "<group>";
-		};
-		3A9323B92626C5A700E42CA4 /* Intents.intentdefinition */ = {
-			isa = PBXVariantGroup;
-			children = (
-				3A9323B82626C5A700E42CA4 /* en */,
-			);
-			name = Intents.intentdefinition;
 			sourceTree = "<group>";
 		};
 		3AA7E33925211FD500387971 /* InfoPlist.strings */ = {

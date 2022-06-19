@@ -97,7 +97,7 @@ public extension View {
 }
 
 @available(iOS 12.0, *)
-public extension Servers {
+public extension PenguinServer {
     func string() -> String {
         switch self {
         case .cn:

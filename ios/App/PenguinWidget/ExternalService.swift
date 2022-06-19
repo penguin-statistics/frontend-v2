@@ -39,9 +39,10 @@ func getRegionalEndpointBase() -> String {
     }
 }
 
-func getStats(for server: Servers, completion: @escaping (SiteStats?) -> ())  {
+func getStats(for server: PenguinServer, timeout: TimeInterval = TimeInterval(25.0), completion: @escaping (SiteStats?) -> ())  {
+    print("received server for getStats:", server)
     AF.request("\(getRegionalEndpointBase())/api/stats/" + server.string(), requestModifier: {
-        $0.timeoutInterval = TimeInterval(25.0) // system give us 30s. make some room
+        $0.timeoutInterval = timeout
     }).response {resp in
         guard let data = resp.data else {
             completion(nil)

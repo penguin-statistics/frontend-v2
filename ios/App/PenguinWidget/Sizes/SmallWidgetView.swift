@@ -17,11 +17,16 @@ struct SmallWidgetView : View {
             Text("SiteStatsWidgetTitle")
                 .font(.caption)
                 .foregroundColor(Color("Gray4"))
+                .unredacted()
+            
             Spacer()
+            
             StageView(stage: stats.stages[0])
+            
             ItemStatsView(item: stats.stages[0].items[0])
-//                .frame(minHeight: 0, maxHeight: 28)
+
             Spacer()
+            
             WidgetFooter(server: stats.server)
         }
         .padding()

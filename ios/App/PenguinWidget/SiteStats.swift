@@ -42,7 +42,7 @@ enum DemoType {
 
 struct SiteStats {
     let stages: [StageStats]
-    let server: Servers
+    var server: PenguinServer
     
     static func demo(_ type: DemoType) -> SiteStats {
         switch type {
@@ -50,46 +50,46 @@ struct SiteStats {
             return SiteStats(
                 stages: [
                     StageStats(
-                        stageId: "main-01_07",
-                        zoneId: "unknown",
-                        stageCode: "1-7",
+                        stageId: "act18side_06",
+                        zoneId: "act18side_zone1",
+                        stageCode: "LE-6",
                         items: [
                             ItemStats(
-                                id: "30012",
-                                name: "固源岩",
-                                times: 329752,
-                                quantity: 265096
+                                id: "30093",
+                                name: "研磨石",
+                                times: 362279,
+                                quantity: 244784
                             )
                         ],
-                        recentTimes: 300
+                        recentTimes: 43007
                     ),
                     StageStats(
-                        stageId: "main-04_0112",
-                        zoneId: "unknown",
-                        stageCode: "1-8",
+                        stageId: "act18side_07",
+                        zoneId: "act18side_zone1",
+                        stageCode: "LE-7",
                         items: [
                             ItemStats(
-                                id: "30012",
-                                name: "固源岩",
-                                times: 324534,
-                                quantity: 3425234
+                                id: "31043",
+                                name: "半自然溶剂",
+                                times: 85254,
+                                quantity: 59608
                             )
                         ],
-                        recentTimes: 300
+                        recentTimes: 13131
                     ),
                     StageStats(
-                        stageId: "main-08_0421",
-                        zoneId: "unknown",
-                        stageCode: "4-8",
+                        stageId: "act18side_05",
+                        zoneId: "act18side_zone1",
+                        stageCode: "LE-5",
                         items: [
                             ItemStats(
-                                id: "30012",
-                                name: "固源岩",
-                                times: 454532,
-                                quantity: 462256
+                                id: "30023",
+                                name: "糖组",
+                                times: 63165,
+                                quantity: 52632
                             )
                         ],
-                        recentTimes: 300
+                        recentTimes: 10265
                     )
                 ],
                 server: .cn
@@ -115,21 +115,20 @@ struct SiteStats {
         case .enRegular:
             return SiteStats(
                 stages: Array(repeating: StageStats(
-                    stageId: "main-01_07",
+                    stageId: "unknown",
                     zoneId: "unknown",
-                    stageCode: "4-8",
+                    stageCode: "PG-1",
                     items: [
                         ItemStats(
-                            id: "30094",
-                            name: "Grindstone Pentahydrate",
-                            times: 2343433,
-                            quantity: 1234123
+                            id: "30023",
+                            name: "Sugar Pack",
+                            times: .random(in: 10000..<50000),
+                            quantity: .random(in: 10000..<50000)
                         )
                     ],
-                    recentTimes: 300
+                    recentTimes: .random(in: 10000..<50000)
                 ), count: 3),
                 server: .cn
-                
             )
         case .enExtraLong:
             return SiteStats(

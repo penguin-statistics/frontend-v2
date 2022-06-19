@@ -9,7 +9,7 @@ import SwiftUI
 import WidgetKit
 
 struct WidgetFooter: View {
-    let server: Servers
+    let server: PenguinServer
     
     var body: some View {
         HStack(spacing: 4) {
@@ -31,7 +31,7 @@ struct WidgetFooter: View {
             Text(server.string())
                 .font(.system(size: 10, design: .monospaced))
                 .foregroundColor(Color("Gray4"))
-                .unredacted()
+
             Image("Logo")
                 .resizable()
                 .frame(width: 20, height: 20, alignment: .center)
