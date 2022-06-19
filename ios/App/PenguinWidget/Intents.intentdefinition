@@ -27,7 +27,7 @@
 				</dict>
 				<dict>
 					<key>INEnumValueDisplayName</key>
-					<string>cn</string>
+					<string>CN</string>
 					<key>INEnumValueDisplayNameID</key>
 					<string>7h4dn2</string>
 					<key>INEnumValueIndex</key>
@@ -37,7 +37,7 @@
 				</dict>
 				<dict>
 					<key>INEnumValueDisplayName</key>
-					<string>us</string>
+					<string>US</string>
 					<key>INEnumValueDisplayNameID</key>
 					<string>vPM1Jx</string>
 					<key>INEnumValueIndex</key>
@@ -47,7 +47,7 @@
 				</dict>
 				<dict>
 					<key>INEnumValueDisplayName</key>
-					<string>jp</string>
+					<string>JP</string>
 					<key>INEnumValueDisplayNameID</key>
 					<string>0tJe9s</string>
 					<key>INEnumValueIndex</key>
@@ -57,7 +57,7 @@
 				</dict>
 				<dict>
 					<key>INEnumValueDisplayName</key>
-					<string>kr</string>
+					<string>KR</string>
 					<key>INEnumValueDisplayNameID</key>
 					<string>KTYh4b</string>
 					<key>INEnumValueIndex</key>
@@ -98,8 +98,6 @@
 				<dict>
 					<key>INIntentParameterConfigurable</key>
 					<true/>
-					<key>INIntentParameterCustomDisambiguation</key>
-					<true/>
 					<key>INIntentParameterDisplayName</key>
 					<string>Server</string>
 					<key>INIntentParameterDisplayNameID</key>
@@ -110,6 +108,11 @@
 					<string>PenguinServer</string>
 					<key>INIntentParameterEnumTypeNamespace</key>
 					<string>dZprhO</string>
+					<key>INIntentParameterMetadata</key>
+					<dict>
+						<key>INIntentParameterMetadataDefaultValue</key>
+						<string>cn</string>
+					</dict>
 					<key>INIntentParameterName</key>
 					<string>server</string>
 					<key>INIntentParameterPromptDialogs</key>
@@ -147,8 +150,6 @@
 							<string>Confirmation</string>
 						</dict>
 					</array>
-					<key>INIntentParameterSupportsResolution</key>
-					<true/>
 					<key>INIntentParameterTag</key>
 					<integer>2</integer>
 					<key>INIntentParameterType</key>

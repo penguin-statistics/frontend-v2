@@ -108,7 +108,7 @@ struct SiteStats {
                             quantity: 324523
                         )
                     ],
-                    recentTimes: 300
+                    recentTimes: 53629
                 ), count: 3),
                 server: .cn
             )
@@ -144,7 +144,7 @@ struct SiteStats {
                             quantity: 324523
                         )
                     ],
-                    recentTimes: 300
+                    recentTimes: 53629
                 ), count: 3),
                 server: .cn
             )

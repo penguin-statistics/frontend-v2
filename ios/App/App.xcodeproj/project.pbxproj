@@ -61,6 +61,7 @@
 		B53A321C281ED2BC002EAB0B /* public in Resources */ = {isa = PBXBuildFile; fileRef = B53A321B281ED2BC002EAB0B /* public */; };
 		B553BF8E285F22770089DB8B /* Intents.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = B553BF8D285F22770089DB8B /* Intents.intentdefinition */; };
 		B553BF8F285F23170089DB8B /* Intents.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = B553BF8D285F22770089DB8B /* Intents.intentdefinition */; };
+		B553BF91285F3FA10089DB8B /* AccessoryRectangularView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B553BF90285F3FA10089DB8B /* AccessoryRectangularView.swift */; };
 		B5E9EF4728219840009F0F68 /* PenguinViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5E9EF4628219840009F0F68 /* PenguinViewController.swift */; };
 /* End PBXBuildFile section */
 
@@ -162,6 +163,7 @@
 		AF277DCFFFF123FFC6DF26C7 /* Pods_App.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_App.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B53A321B281ED2BC002EAB0B /* public */ = {isa = PBXFileReference; lastKnownFileType = folder; path = public; sourceTree = "<group>"; };
 		B553BF8D285F22770089DB8B /* Intents.intentdefinition */ = {isa = PBXFileReference; lastKnownFileType = file.intentdefinition; path = Intents.intentdefinition; sourceTree = "<group>"; };
+		B553BF90285F3FA10089DB8B /* AccessoryRectangularView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccessoryRectangularView.swift; sourceTree = "<group>"; };
 		B5E9EF4628219840009F0F68 /* PenguinViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PenguinViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -207,20 +209,21 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		3A06C1312597661600B81F31 /* Sizes */ = {
+		3A06C1312597661600B81F31 /* Variants */ = {
 			isa = PBXGroup;
 			children = (
 				3A1157B0258F2B5C00F4C6FD /* SmallWidgetView.swift */,
 				3A06C13A25976DAF00B81F31 /* MediumWidgetView.swift */,
 				3A968BB42597A54E005266F2 /* LargeWidgetView.swift */,
+				B553BF90285F3FA10089DB8B /* AccessoryRectangularView.swift */,
 			);
-			path = Sizes;
+			path = Variants;
 			sourceTree = "<group>";
 		};
 		3A1157AF258F2B5C00F4C6FD /* PenguinWidget */ = {
 			isa = PBXGroup;
 			children = (
-				3A06C1312597661600B81F31 /* Sizes */,
+				3A06C1312597661600B81F31 /* Variants */,
 				3A5051BF25966617004167D3 /* Views */,
 				3A5051B72596575D004167D3 /* Bender.ttf */,
 				3A1157B3258F2B5E00F4C6FD /* Assets.xcassets */,
@@ -601,6 +604,7 @@
 				3A06C12D2597454600B81F31 /* WidgetFooter.swift in Sources */,
 				3A06C1252597447200B81F31 /* StageView.swift in Sources */,
 				B553BF8E285F22770089DB8B /* Intents.intentdefinition in Sources */,
+				B553BF91285F3FA10089DB8B /* AccessoryRectangularView.swift in Sources */,
 				3A06C1102597112E00B81F31 /* SiteStats.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

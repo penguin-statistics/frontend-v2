@@ -24,7 +24,23 @@ struct PenguinWidget: Widget {
         }
         .configurationDisplayName("SiteStatsWidgetName")
         .description("SiteStatsWidgetDesc")
-        .supportedFamilies([.systemSmall, .systemMedium])
+        .adaptedSupportedFamilies()
     }
 }
 
+extension WidgetConfiguration {
+    func adaptedSupportedFamilies() -> some WidgetConfiguration {
+        if #available(iOSApplicationExtension 16, *) {
+            return self.supportedFamilies([
+                .systemSmall,
+                .systemMedium,
+                .accessoryRectangular
+            ])
+        } else {
+            return self.supportedFamilies([
+                .systemSmall,
+                .systemMedium
+            ])
+        }
+    }
+}

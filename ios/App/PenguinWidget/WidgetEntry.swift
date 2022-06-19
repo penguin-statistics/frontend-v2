@@ -78,14 +78,24 @@ struct WidgetEntry: View {
     @Environment(\.widgetFamily) private var widgetFamily
     var entry: SiteStatsProvider.Entry
     
-    var body: some View {
+    var fallback: some View {
+        MediumWidgetView(stats: entry.stats)
+    }
+    
+    @ViewBuilder var body: some View {
         switch widgetFamily {
         case .systemSmall:
             SmallWidgetView(stats: entry.stats)
         case .systemMedium:
             MediumWidgetView(stats: entry.stats)
+        case .accessoryRectangular:
+            if #available(iOSApplicationExtension 16.0, *) {
+                AccessoryRectangularView(stats: entry.stats)
+            } else {
+                fallback
+            }
         default:
-            MediumWidgetView(stats: entry.stats)
+            fallback
         }
     }
 }
