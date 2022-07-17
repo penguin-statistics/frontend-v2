@@ -24,7 +24,7 @@
 		"contact": {
 			"contact_0": "문의",
 			"contact_1": "",
-			"contact_2": "질문이나 건의 사안이 있다면, 언제든지 관리자에게 연락하여 주십시오.",
+			"contact_2": "질문이나 건의사항이 있다면, 언제든지 관리자에게 연락하여 주십시오.",
 			"contributor": "팀 구성원 페이지",
 			"github": "GitHub Issues",
 			"nga": "NGA (포럼) 스레드"
