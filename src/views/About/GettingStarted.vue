@@ -39,7 +39,23 @@
 			}
 		},
 		"ko": {
-			"quickStart": "빠른 시작"
+			"quickStart": "빠른 시작",
+			"caption": [
+				"",
+				"버튼을 클릭해 더 많은 기능을 확인하세요"
+			],
+			"subtitle": {
+				"report": "보고서를 작성하고 싶어요",
+				"byItem": "원암은 어디서 캐나요?",
+				"byStage": "이 스테이지의 드랍률은 어떤가요?",
+				"planner": "아이템 파밍에 도움이 필요해요"
+			},
+			"title": {
+				"report": "보고서 작성",
+				"byItem": "아이템별 드랍률",
+				"byStage": "스테이지별 드랍률",
+				"planner": "파밍 플래너"
+			}
 		},
 		"zh": {
 			"quickStart": "快速上手",

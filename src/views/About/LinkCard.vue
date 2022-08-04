@@ -51,21 +51,21 @@
       "tags": {
         "apRanking": "이성 효율 순위",
         "character": "오퍼레이터 목록",
-        "cn_wiki": "중국서버 위키",
+        "cn_wiki": "중국 서버 위키",
         "dropRateRanking": "드랍률 순위",
         "enemy": "적 목록",
         "experience": "팁 모음",
         "generalRanking": "종합 순위",
         "hr": "공개모집 계산기",
         "ja_translation": "메인스토리 일본어 번역",
-        "jp_wiki": "일본서버 위키",
+        "jp_wiki": "일본 서버 위키",
         "levelup": "레벨링 계산기",
         "materials": "육성 재료 계산기",
-        "planner": "계획기",
+        "planner": "플래너",
         "storage": "창고 관리기",
         "walkthrough": "공략집",
-        "map": "Map",
-        "video": "Clear Guide"
+        "map": "스테이지",
+        "video": "스테이지 가이드"
       }
     }
   },
