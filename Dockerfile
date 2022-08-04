@@ -9,9 +9,7 @@ RUN yarn install
 
 COPY . .
 
-RUN --mount=type=secret,id=PENGUIN_RECOGNITION_SUBMITTER_JS,target=/build/recognitionSubmitter.b64.js \
-    base64 -d /build/recognitionSubmitter.b64.js > /app/src/utils/vendors/recognitionSubmitter.js && \
-    yarn build:web
+RUN yarn build:web
 
 # runner
 FROM nginx:stable AS runner
