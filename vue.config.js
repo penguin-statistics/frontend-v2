@@ -61,7 +61,7 @@ module.exports = {
       enableInSFC: true,
     },
   },
-  productionSourceMap: false,
+  // productionSourceMap: false,
   devServer: {
     proxy: {
       "/PenguinStats": {
