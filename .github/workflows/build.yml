@@ -45,6 +45,8 @@ jobs:
           # if `alpha` or `beta` is in the tag, then it will be a pre-release
           if [[ ${GITHUB_REF} == *"alpha"* ]] || [[ ${GITHUB_REF} == *"beta"* ]]; then
             echo "PRE_RELEASE=true" >> $GITHUB_ENV
+          else
+            echo "PRE_RELEASE=false" >> $GITHUB_ENV
           fi
 
       - name: Build and Publish to Registry
