@@ -175,9 +175,9 @@ const messages = {
       all: "전체 시간",
       "24hr": "지난 24시간",
       generating: {
-        title: "사이트 데이터 생성 중...",
+        title: "사이트 통계 생성 중...",
         subtitle:
-          "신경 네트워크 메시지: 데이터의 양이 많아 약 5분간의 계산이 필요합니다. 조금 뒤 다시 와 주세요.",
+          "신경 네트워크 메시지: 데이터의 양이 많아 약 5분간의 계산이 필요합니다. 조금 뒤 다시 접속해 주세요.",
         refresh: "사이트 통계 새로고침",
       },
     },
@@ -185,7 +185,13 @@ const messages = {
   contribute: {
     repo: "프로젝트 저장소: ",
     frontend: "프론트엔드",
+    frontendV4: "프론트엔드 v4",
     backend: "백엔드",
+    livehouse: "LiveHouse",
+    recognizer: "인식기",
+    newFolder: "새로운 프로젝트 저장소 생성을 위해 노력 중입니다...",
+    caption:
+      "펭귄 통계는 공동 프로젝트로, 커뮤니티의 지원 없이는 존재할 수 없습니다. GitHub 저장소에서 별을 눌러주시면 도움이 됩니다. 이슈 생성이나 수정 요청은 언제든지 환영합니다!",
     contribute_0:
       "다음 기술 중 하나라도 경험이 있고, 펭귄 물류에 기여하고자 한다면. QQ 그룹: 747099627로 연락하여 주십시오.",
     contribute_1: "펭귄 물류 데이터 분석 부서는 비영리 오픈소스 프로젝트입니다",
@@ -224,6 +230,7 @@ const messages = {
         personalPatternMatrix: "개인 드랍 패턴 데이터",
         stats: "사이트 통계",
         period: "서버 이벤트",
+        config: "프론트엔드 설정",
       },
     },
   },
@@ -241,7 +248,7 @@ const messages = {
         before: "만약 이 오류가 잘못됐다면, ",
         activator: "저희에게 문의",
         after:
-          " 해주시면 더없이 기쁠 것입니다. (검증을 위해 스테이지 이름과 드랍 목록을 볼 수 있는 스크린샷을 보내 주십시오)저희 팀이 잘못됐음을 확인하면, 최대치를 수정할 것입니다.",
+          "해주시면 더없이 기쁠 것입니다. (검증을 위해 스테이지 이름과 드랍 목록을 볼 수 있는 스크린샷을 보내 주십시오)저희 팀이 잘못됐음을 확인하면, 최대치를 수정할 것입니다.",
       },
       causes: {
         noDrop: "드랍된 아이템이 선택되지 않았습니다.",
@@ -264,7 +271,7 @@ const messages = {
         addImage: "클릭해 이미지를 추가하세요",
         copyImage: "우클릭하거나 길게 눌러서 사진을 공유하세요",
         abnormal:
-          '{count}개의 이미지가 판독성 검사를 통과하지 못하거나 인식되지 않아 "제외" 처리되었습니다',
+          "{count}개의 이미지가 판독성 검사를 통과하지 못하거나 인식되지 않아 “제외” 처리되었습니다",
         notImageFile: "“{files}”은/는 이미지 파일이 아니므로 무시되었습니다",
         emptyResult: "유효한 결과 없음",
         unsatisfiedStart: "시작 불가",
@@ -289,7 +296,7 @@ const messages = {
         loadingImage: "스크린샷 미리보기 불러오는 중",
         overview: {
           _name: "개요",
-          total: "확인됨",
+          total: "인식됨",
           success: "성공",
           error: "실패",
           count: "{count}",
@@ -330,7 +337,7 @@ const messages = {
           "재전송 공격을 방지하기 위해, 요청에 타임스탬프가 부여되고 있습니다. 기기의 시간이 표준 시간과 크게 다를 경우 업로드가 실패할 수 있습니다. 기기의 시간을 조정하고 다시 시도해 주세요.",
         ],
         caption:
-          "제출에 감사드립니다. 캐시로 인해서 최대 20분 안에 전체 데이터에 추가되어 나타날 것입니다.",
+          "제출에 감사드립니다. 캐시로 인해서 전체 데이터에 추가되어 나타나는 데 최대 20분이 소요될 수 있습니다.",
       },
       states: {
         pending: "초기화 대기 중...",
@@ -477,6 +484,8 @@ const messages = {
     },
   },
   settings: {
+    storageIssue:
+      "데이터 오류가 감지되었습니다. 비정상적으로 작동할 수 있습니다. 이 경고가 계속 표시된다면, “설정”에서 “전부 초기화”를 사용해 로컬 데이터를 초기화해보세요.",
     category: {
       appearance: "페이지",
       data: "데이터",
@@ -494,7 +503,7 @@ const messages = {
       server: "로컬 데이터의 서버 목록: ",
       size: "로컬 데이터 크기: ",
       reset: {
-        title: "로컬 데이터와 설정 초기화",
+        title: "전부 초기화",
         subtitle:
           "이 작업은 모든 로컬 데이터를 삭제하고 설정을 초기화할 것입니다. 초기화 후, 모든 설정이 기본값으로 돌아가며, 모든 데이터를 다시 다운로드해야 하고, 웹페이지가 새로고침될 것입니다. 정말로 계속하시겠습니까?",
       },
@@ -526,8 +535,8 @@ const messages = {
         subtitle: "에피소드 4-8",
       },
       DYING_SUN: {
-        title: "잔양",
-        subtitle: "에피소드 9",
+        title: "석양",
+        subtitle: "에피소드 9-10",
       },
       INTERLUDE: "에피소드",
       SIDESTORY: "사이드 스토리",
@@ -645,6 +654,20 @@ const messages = {
         share: "구성 코드 공유",
         import: "구성 코드로부터 불러오기",
       },
+    },
+    craft: {
+      do: "가공",
+      unable: "재료 없음",
+      errors: {
+        title: "가공에 필요한 재료 부족",
+        notEnough:
+          "{need}개의 “{item}”이/가 필요하지만, {have}개만 보유 중",
+      },
+      plans: {
+        title: "가공 플랜",
+        plan: "{cost}개의 “{item}”(으)로 가공, {remain}개 남음",
+      },
+      success: "{sourceItems}을/를 사용해 {amount}개의 {productItem}을 생성함",
     },
     have: "보유량",
     need: "필요량",
