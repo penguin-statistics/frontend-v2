@@ -1,10 +1,10 @@
-import axios from "axios";
-import Console from "@/utils/Console";
-import store from "@/store";
-import mirror from "@/utils/mirror";
-import semver from "semver";
 import config from "@/config";
 import i18n from "@/i18n";
+import store from "@/store";
+import Console from "@/utils/Console";
+import mirror from "@/utils/mirror";
+import axios from "axios";
+import semver from "semver";
 
 let baseURL;
 if (mirror.global.isCurrent() || mirror.cn.isCurrent()) {
@@ -15,7 +15,7 @@ if (mirror.global.isCurrent() || mirror.cn.isCurrent()) {
   // also use the relative path, but we left the task to WebpackDevServer for proxying local API responses
   // so use relative path.
   baseURL = "/PenguinStats/api/v2";
-} else if (process.env.PENGUIN_BUILDFROM === "docker") {
+} else if (PENGUIN_BUILDFROM === "docker") {
   // docker build
   // backend and frontend are on the same server
   // so use relative path.
