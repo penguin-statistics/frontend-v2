@@ -1,6 +1,9 @@
 FROM node:lts AS builder
 WORKDIR /app
 
+ARG TRUNCATED_GITHUB_SHA
+ENV TRUNCATED_GITHUB_SHA $TRUNCATED_GITHUB_SHA
+
 COPY package.json .
 COPY yarn.lock .
 

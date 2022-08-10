@@ -56,6 +56,8 @@ jobs:
           tags: |
             ghcr.io/penguin-statistics/frontend-v2:latest,
             ghcr.io/penguin-statistics/frontend-v2:${{ env.GIT_TAG }}
+          build-args: |
+            TRUNCATED_GITHUB_SHA=${{ env.TRUNCATED_GITHUB_SHA }}
 
       - name: Create GitHub Release
         uses: marvinpinto/action-automatic-releases@v1.2.1
