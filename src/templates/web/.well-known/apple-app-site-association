@@ -1,0 +1,38 @@
+{
+    "applinks": {
+        "apps": [],
+        "details": [
+            {
+                "appID": "SY8Y8N4TPM.io.penguinstats.app",
+                "paths": [
+                    "NOT /compliance/*",
+                    "NOT /PenguinStats/*",
+                    "NOT /.well-known/*",
+                    "*"
+                ],
+                "components": [
+                    {
+                        "/": "/compliance/*",
+                        "exclude": true
+                    },
+                    {
+                        "/": "/PenguinStats/*",
+                        "exclude": true
+                    },
+                    {
+                        "/": "/.well-known/*",
+                        "exclude": true
+                    },
+                    {
+                        "/": "/*"
+                    }
+                ]
+            }
+        ]
+    },
+    "activitycontinuation": {
+        "apps": [
+            "SY8Y8N4TPM.io.penguinstats.app"
+        ]
+    }
+}

@@ -17,4 +17,7 @@ FROM nginx:stable AS runner
 COPY --from=builder /app/dist /usr/share/nginx/html
 EXPOSE 80
 
+# let nginx return index.html for any request
+COPY build/nginx-default.conf /etc/nginx/conf.d/default.conf
+
 CMD ["nginx", "-g", "daemon off;"]

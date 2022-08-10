@@ -56,7 +56,6 @@ jobs:
           tags: |
             ghcr.io/penguin-statistics/frontend-v2:latest,
             ghcr.io/penguin-statistics/frontend-v2:${{ env.GIT_TAG }}
-          secrets: PENGUIN_RECOGNITION_SUBMITTER_JS=${{ secrets.PENGUIN_RECOGNITION_SUBMITTER_JS }}
 
       - name: Create GitHub Release
         uses: marvinpinto/action-automatic-releases@v1.2.1
