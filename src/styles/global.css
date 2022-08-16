@@ -808,3 +808,7 @@
 .tabular-num {
     font-variant: tabular-nums;
 }
+
+.pointer-events-none {
+    pointer-events: none !important;
+}

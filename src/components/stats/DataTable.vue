@@ -294,8 +294,8 @@
             >
               <v-row
                 align="center"
-                class="cursor-pointer item-name pl-1"
-                @click="redirectItem(props.item.item.itemId)"
+                :class="{'cursor-pointer': !isRecruit, 'pointer-events-none': isRecruit, 'item-name pl-1': true}"
+                @click="!isRecruit && redirectItem(props.item.item.itemId)"
               >
                 <Item
                   :item="props.item.item"
@@ -313,12 +313,14 @@
                   {{ strings.translate(props.item.item, "name") }}
                 </span>
                 <v-icon
+                  v-if="!isRecruit"
                   x-small
                   class="ml-1 item-name--chevron"
                 >
                   mdi-link
                 </v-icon>
                 <v-divider
+                  v-if="!isRecruit"
                   class="mx-4 item-name--line"
                 />
               </v-row>
@@ -398,34 +400,36 @@
             <DataTableFluctuationVisualizer :item="props.item" />
           </td> -->
 
-          <NullableTableCell
-            :value="props.item.apPPR"
-            :class="tableCellClasses"
-          />
-
-          <template v-if="type === 'item'">
+          <template v-if="!isRecruit">
             <NullableTableCell
-              :value="props.item.stage.apCost"
-              :class="`${tableCellClasses} ${dark ? 'orange--text text--lighten-1' : 'deep-orange--text text--darken-3 font-weight-bold'}`"
+              :value="props.item.apPPR"
+              :class="tableCellClasses"
             />
+
+            <template v-if="type === 'item'">
+              <NullableTableCell
+                :value="props.item.stage.apCost"
+                :class="`${tableCellClasses} ${dark ? 'orange--text text--lighten-1' : 'deep-orange--text text--darken-3 font-weight-bold'}`"
+              />
+              <NullableTableCell
+                :value="props.item.stage.minClearTime"
+                :transformer="formatDuration"
+                :class="tableCellClasses"
+              />
+            </template>
+
             <NullableTableCell
-              :value="props.item.stage.minClearTime"
+              :value="props.item.itemPerTime"
               :transformer="formatDuration"
               :class="tableCellClasses"
             />
+
+            <td
+              :class="tableCellClasses"
+            >
+              {{ formatDate(props.item) }}
+            </td>
           </template>
-
-          <NullableTableCell
-            :value="props.item.itemPerTime"
-            :transformer="formatDuration"
-            :class="tableCellClasses"
-          />
-
-          <td
-            :class="tableCellClasses"
-          >
-            {{ formatDate(props.item) }}
-          </td>
         </tr>
       </template>
       <!--          <template #item.percentage="{item}">-->

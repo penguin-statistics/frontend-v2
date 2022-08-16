@@ -14,6 +14,14 @@
     mdi-lamp
   </v-icon>
   <v-icon
+    v-else-if="item.itemType === 'RECRUIT_TAG'"
+    :class="furniturePadding"
+    class="cyan item-icon--special white--text"
+    :size="30 * ratio"
+  >
+    mdi-ticket-confirmation
+  </v-icon>
+  <v-icon
     v-else-if="item.itemId !== 'furni' && !item.spriteCoord"
     :class="furniturePadding"
     class="primary item-icon--special white--text"
