@@ -438,20 +438,20 @@
 </template>
 
 <script>
-import strings from '@/utils/strings'
-import get from '@/utils/getters'
 import Item from '@/components/global/Item'
-import { mapGetters, mapState } from 'vuex'
-import Theme from '@/mixins/Theme'
-import Charts from '@/components/stats/Charts'
-import timeFormatter from '@/utils/timeFormatter'
-import CDN from '@/mixins/CDN'
-import Mirror from '@/mixins/Mirror'
 import TitledRow from '@/components/global/TitledRow'
-import existUtils from '@/utils/existUtils'
-import validator from '@/utils/validator'
+import Charts from '@/components/stats/Charts'
 import HeaderWithTooltip from '@/components/stats/HeaderWithTooltip'
 import NullableTableCell from '@/components/stats/NullableTableCell'
+import CDN from '@/mixins/CDN'
+import Mirror from '@/mixins/Mirror'
+import Theme from '@/mixins/Theme'
+import existUtils from '@/utils/existUtils'
+import get from '@/utils/getters'
+import strings from '@/utils/strings'
+import timeFormatter from '@/utils/timeFormatter'
+import validator from '@/utils/validator'
+import { mapGetters, mapState } from 'vuex'
 // import DataTableFluctuationVisualizer from '@/components/stats/DataTableFluctuationVisualizer'
 // import DataTableFluctuationCustomize from "@/components/stats/DataTableFluctuationCustomize";
 
@@ -482,6 +482,12 @@ export default {
       default () {
         return null
       }
+    },
+    isRecruit: {
+      type: Boolean,
+      default () {
+        return false
+      }
     }
   },
   data () {
@@ -507,14 +513,14 @@ export default {
     headers () {
       const headers = [
         {
-          text: this.$t('stats.headers.quantity'),
+          text: this.isRecruit ? this.$t('stats.headers.recruitObservations') : this.$t('stats.headers.quantity'),
           value: 'quantity',
           align: 'left',
           sortable: true,
           width: '85px'
         },
         {
-          text: this.$t('stats.headers.times'),
+          text: this.isRecruit ? this.$t('stats.headers.recruitRecruits') : this.$t('stats.headers.times'),
           value: 'times',
           align: 'left',
           sortable: true,
@@ -534,32 +540,35 @@ export default {
         //   sortable: false,
         //   width: '150px'
         // },
-        {
-          text: this.$t('stats.headers.apPPR'),
-          value: 'apPPR',
-          align: 'left',
-          sortable: true,
-          width: '110px'
-        },
-        {
-          text: this.$t('stats.headers.itemPerTime'),
-          value: 'itemPerTime',
-          align: 'left',
-          sortable: true,
-          width: '110px'
-        },
-        {
-          text: this.$t('stats.headers.timeRange'),
-          value: 'timeRange',
-          align: 'left',
-          sortable: false,
-          width: '140px'
-        }
+        ...(this.isRecruit ? [] : [
+          {
+            text: this.$t('stats.headers.apPPR'),
+            value: 'apPPR',
+            align: 'left',
+            sortable: true,
+            width: '110px'
+          },
+          {
+            text: this.$t('stats.headers.itemPerTime'),
+            value: 'itemPerTime',
+            align: 'left',
+            sortable: true,
+            width: '110px'
+          },
+          {
+            text: this.$t('stats.headers.timeRange'),
+            value: 'timeRange',
+            align: 'left',
+            sortable: false,
+            width: '140px'
+          }
+        ])
+        
       ]
 
       if (this.type === 'stage') {
         headers.unshift({
-          text: this.$t('stats.headers.item'),
+          text: this.isRecruit ? this.$t('stats.headers.recruitTag') : this.$t('stats.headers.item'),
           value: 'icon',
           align: 'left',
           sortable: false,

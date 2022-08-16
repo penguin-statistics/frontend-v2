@@ -24,7 +24,10 @@
             v-if="$t('zone.subTypes.' + key).title"
             class="d-flex flex-column align-center"
           >
-            <span v-text="$t('zone.subTypes.' + key).title" />
+            <span
+              :class="{'shrinked': $i18n.locale === 'en'}"
+              v-text="$t('zone.subTypes.' + key).title"
+            />
             <span
               class="caption"
               v-text="$t('zone.subTypes.' + key).subtitle"
@@ -106,5 +109,9 @@ export default {
 </script>
 
 <style scoped>
-
+.shrinked {
+  /* text-transform: none !important; */
+  letter-spacing: -0.35px !important;
+  font-size: 0.8rem !important;
+}
 </style>

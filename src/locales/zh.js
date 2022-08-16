@@ -117,6 +117,9 @@ const messages = {
       clearTime: "最短通关用时",
       itemPerTime: "单件期望用时",
       timeRange: "统计区间",
+      recruitTag: "公开招募 Tag",
+      recruitObservations: "Tag 出现次数",
+      recruitRecruits: "公开招募次数"
     },
     headerDesc: {
       apCost: "完成单次该作战的所需理智数量",
@@ -554,6 +557,7 @@ const messages = {
       ACTIVITY_PENDING: "限时活动 — 即将开放",
       ACTIVITY_PERMANENT: "插曲 & 别传",
       GACHABOX: "物资补给箱",
+      RECRUIT: "公开招募统计",
     },
     subTypes: {
       2019: "2019",

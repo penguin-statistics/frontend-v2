@@ -118,6 +118,9 @@ const messages = {
       clearTime: "Shortest Clear Time",
       timeRange: "Time Range",
       itemPerTime: "Time Per Item",
+      recruitTag: "Recruit Tag",
+      recruitObservations: "Observations",
+      recruitRecruits: "Recruits",
     },
     headerDesc: {
       apCost: "The Sanity required for the stage",
@@ -527,11 +530,12 @@ const messages = {
       MAINLINE: "Main Storyline",
       WEEKLY: "Supplies",
       ACTIVITY: "Event",
-      ACTIVITY_OPEN: "Event (Open)",
+      ACTIVITY_OPEN: "Event (Opening)",
       ACTIVITY_CLOSED: "Event (Closed)",
       ACTIVITY_PENDING: "Event (Opening Soon)",
       ACTIVITY_PERMANENT: "Intermezzi & Side Story",
       GACHABOX: "Gachabox",
+      RECRUIT: "Recruit",
     },
     subTypes: {
       2019: "2019",

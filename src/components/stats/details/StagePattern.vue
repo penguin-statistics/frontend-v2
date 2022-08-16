@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="mb-5">
     <v-card-title class="py-4 pl-0">
       <v-icon left>
         mdi-lock-pattern
@@ -76,12 +76,12 @@
 </template>
 
 <script>
-import get from '@/utils/getters'
-import StagePatternTable from '@/components/stats/details/StagePatternTable'
-import StagePatternPieChart from '@/components/stats/details/StagePatternPieChart'
 import StagePatternError from '@/components/stats/details/StagePatternError'
-import timeFormatter from '@/utils/timeFormatter'
+import StagePatternPieChart from '@/components/stats/details/StagePatternPieChart'
+import StagePatternTable from '@/components/stats/details/StagePatternTable'
 import FactTableItem from '@/components/stats/fact-table/FactTableItem'
+import get from '@/utils/getters'
+import timeFormatter from '@/utils/timeFormatter'
 
 export default {
   name: 'StagePattern',

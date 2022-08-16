@@ -1,14 +1,15 @@
-import ObjectManager from '@/utils/objectManager'
-import commons from './_common'
+import ObjectManager from '@/utils/objectManager';
+import commons from './_common';
 
 function getIcon (key) {
   const ICON_MAP = {
-    MAINLINE: 'mdi-chess-queen',
-    WEEKLY: 'mdi-puzzle',
-    ACTIVITY: 'mdi-sack',
-    ACTIVITY_PERMANENT: 'mdi-chess-pawn',
-    GACHABOX: 'mdi-treasure-chest'
-  }
+    MAINLINE: "mdi-chess-queen",
+    WEEKLY: "mdi-puzzle",
+    ACTIVITY: "mdi-sack",
+    ACTIVITY_PERMANENT: "mdi-chess-pawn",
+    GACHABOX: "mdi-treasure-chest",
+    RECRUIT: "mdi-ticket-percent",
+  };
   return ICON_MAP[key]
 }
 

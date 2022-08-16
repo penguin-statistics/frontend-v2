@@ -73,10 +73,26 @@
         </v-row>
       </v-card-title>
 
+      <v-row
+        v-if="isRecruit"
+        align="center"
+        justify="center"
+        class="my-1 mx-2 mx-md-8"
+      >
+        <v-alert
+          type="info"
+          outlined
+          border="left"
+        >
+          公开招募统计现处于测试阶段且暂不支持前端汇报，当前的汇报主要来自 MaaArknightsAssistant。公开招募统计的相关 API 与内部实现将于后续优化。
+        </v-alert>
+      </v-row>
+
       <DataTable
         :items="stats"
         type="stage"
         :trends="trends"
+        :is-recruit="isRecruit"
 
         class="px-3 px-sm-4 px-md-6 px-lg-6 px-xl-8 pt-0 pb-6"
       />
@@ -93,14 +109,14 @@
 </template>
 
 <script>
-import StageSelector from '@/components/stats/StageSelector'
-import DataTable from '@/components/stats/DataTable'
-import get from '@/utils/getters'
-import DataSourceToggle from '@/components/stats/DataSourceToggle'
-import strings from '@/utils/strings'
-import existUtils from '@/utils/existUtils'
 import BackdropName from '@/components/stats/BackdropName'
+import DataSourceToggle from '@/components/stats/DataSourceToggle'
+import DataTable from '@/components/stats/DataTable'
 import StageDetails from '@/components/stats/details/StageDetails'
+import StageSelector from '@/components/stats/StageSelector'
+import existUtils from '@/utils/existUtils'
+import get from '@/utils/getters'
+import strings from '@/utils/strings'
 
 export default {
   name: 'StatsByStage',
@@ -150,6 +166,9 @@ export default {
     },
     validStage () {
       return !this.zone.isOutdated && this.stage.dropInfos && existUtils.existence(this.stage, true)
+    },
+    isRecruit () {
+      return this.selected.stage === 'recruit'
     }
   },
   methods: {

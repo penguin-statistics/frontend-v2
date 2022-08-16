@@ -230,16 +230,16 @@
 </template>
 
 <script>
+import BackButton from '@/components/stats/BackButton'
+import StageCard from '@/components/stats/StageCard'
+import StageSelectorCategory from "@/components/stats/StageSelectorCategory"
+import CDN from '@/mixins/CDN'
+import Theme from '@/mixins/Theme'
+import Console from '@/utils/Console'
+import existUtils from '@/utils/existUtils'
 import get from '@/utils/getters'
 import strings from '@/utils/strings'
-import StageCard from '@/components/stats/StageCard'
-import Console from '@/utils/Console'
 import { mapGetters } from 'vuex'
-import CDN from '@/mixins/CDN'
-import existUtils from '@/utils/existUtils'
-import BackButton from '@/components/stats/BackButton'
-import Theme from '@/mixins/Theme'
-import StageSelectorCategory from "@/components/stats/StageSelectorCategory";
 
 export default {
   name: 'StageSelector',
@@ -336,11 +336,11 @@ export default {
         : [ // Show Statistics
           [
             ['ACTIVITY_OPEN', 'ACTIVITY_PENDING', 'MAINLINE', 'ACTIVITY_PERMANENT'],
-            ['GACHABOX', 'ACTIVITY_CLOSED', 'WEEKLY']
+            ['GACHABOX', 'RECRUIT', 'ACTIVITY_CLOSED', 'WEEKLY']
           ], // md, lg & xl
           [
             ['ACTIVITY_OPEN', 'ACTIVITY_PENDING', 'MAINLINE', 'ACTIVITY_PERMANENT'],
-            ['GACHABOX', 'ACTIVITY_CLOSED', 'WEEKLY']
+            ['GACHABOX', 'RECRUIT', 'ACTIVITY_CLOSED', 'WEEKLY']
           ] // xs & sm
         ]
 
