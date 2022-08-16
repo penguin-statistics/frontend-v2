@@ -52,7 +52,7 @@
           </h1>
           <v-spacer />
           <v-btn
-            v-if="validStage"
+            v-if="validStage && !isRecruit"
             v-haptic
             depressed
             color="primary"
