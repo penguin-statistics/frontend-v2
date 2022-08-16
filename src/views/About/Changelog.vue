@@ -128,6 +128,15 @@ export default {
     return {
       logs: [
         {
+          version: "v3.8.0",
+          date: "2022-08-16T14:27:00+0800",
+          changes: `## 添加
+1. 公开招募支持
+
+## 优化
+1. 英文下 StageSelector 样式`,
+        },
+        {
           version: "v3.7.7",
           date: "2022-06-16T01:25:00+0800",
           changes: `## 优化
