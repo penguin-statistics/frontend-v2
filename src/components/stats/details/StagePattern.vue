@@ -28,6 +28,7 @@
         <StagePatternPieChart
           :patterns="patterns"
           :active.sync="activeIndex"
+          :is-recruit="stageId === 'recruit'"
         />
       </v-col>
       <v-col

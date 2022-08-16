@@ -14,6 +14,7 @@ import get from '@/utils/getters'
 import { Chart } from 'highcharts-vue'
 
 import Highcharts from 'highcharts'
+import strings from '../../../utils/strings'
 
 export default {
   name: 'StagePatternPieChart',
@@ -26,6 +27,10 @@ export default {
     active: {
       type: Number,
       default: () => 0
+    },
+    isRecruit: {
+      type: Boolean,
+      default: false
     }
   },
   data () {
@@ -72,11 +77,11 @@ export default {
             name: 'pattern',
             data: this.items.map(el => {
               const patterns = []
-              for (const pattern of el.pattern) patterns.push(`${pattern.quantity}×${pattern.item.name}`)
+              for (const pattern of el.pattern) patterns.push(`${this.isRecruit ? '' : pattern.quantity+'×'}${strings.translate(pattern.item, 'name')}`)
 
               return {
                 i: el.i,
-                name: patterns.join(' + ') || this.$t('pattern.empty'),
+                name: patterns.join(this.isRecruit ? ', ' : ' + ') || this.$t('pattern.empty'),
                 y: el.percentage * 100,
                 percentageText: el.percentageText,
                 quantity: el.quantity
