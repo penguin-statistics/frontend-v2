@@ -1,9 +1,9 @@
-import * as Sentry from "@sentry/vue";
-import { BrowserTracing } from "@sentry/tracing";
 import config from "@/config";
-import environment from "@/utils/environment";
-import Vue from "vue";
 import router from "@/router";
+import environment from "@/utils/environment";
+import { BrowserTracing } from "@sentry/tracing";
+import * as Sentry from "@sentry/vue";
+import Vue from "vue";
 
 // const sentEvents = {};
 
@@ -29,7 +29,7 @@ if (environment.production) {
       "StatsByItem",
       "StageSelector",
     ],
-    tracesSampleRate: environment.production ? 0.05 : 1.0,
+    tracesSampleRate: environment.production ? 0.005 : 1.0,
     release:
       (config.project || "unknown") + "@" + (config.version || "unknown"),
     ignoreErrors: [

@@ -1,7 +1,8 @@
+import './datadog'
+import './directives'
+import './filters'
 import './googleAnalytics'
 import './sentry'
-import './filters'
-import './directives'
 import './virtualScroller'
 
 import Vue from 'vue'
