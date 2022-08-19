@@ -128,6 +128,12 @@ export default {
     return {
       logs: [
         {
+          version: "v3.8.1",
+          date: "2022-08-18T23:21:00+0800",
+          changes: `## 添加
+1. Datadog 错误上报与性能监控`,
+        },
+        {
           version: "v3.8.0",
           date: "2022-08-16T14:27:00+0800",
           changes: `## 添加
