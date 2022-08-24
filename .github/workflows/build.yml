@@ -14,53 +14,68 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - name: "Checkout"
+        uses: actions/checkout@v3
 
-      # - name: Run Snyk to check for vulnerabilities
-      #   uses: snyk/actions/golang@master
-      #   continue-on-error: true
-      #   env:
-      #     SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
-      #   with:
-      #     args: --sarif-file-output=snyk.sarif
-
-      # - name: Upload result to GitHub Code Scanning
-      #   uses: github/codeql-action/upload-sarif@v1
-      #   with:
-      #     sarif_file: snyk.sarif
-
-      - name: Login to GitHub Container Registry
-        uses: docker/login-action@v1
+      - name: "Get Tag Version"
+        id: get_version
+        run: |
+          export TRUNCATED_GITHUB_SHA=$(echo ${{ github.sha }} | cut -c1-7);
+          echo "VERSION=${GITHUB_REF/refs\/tags\//}+${TRUNCATED_GITHUB_SHA}" >> $GITHUB_ENV
+      
+      - name: "Docker: Setup Buildx"
+        uses: docker/setup-buildx-action@v2
+      
+      - name: "Docker: Login to GitHub Container Registry"
+        uses: docker/login-action@v2
         with:
           registry: ghcr.io
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
-      
-      - name: Get Tag Version
-        id: get_version
-        run: |
-          export TRUNCATED_GITHUB_SHA=$(echo ${{ github.sha }} | cut -c1-7);
-          echo "TRUNCATED_GITHUB_SHA=${TRUNCATED_GITHUB_SHA}" >> $GITHUB_ENV
-          echo "GIT_TAG=${GITHUB_REF/refs\/tags\//}" >> $GITHUB_ENV
-          # if `alpha` or `beta` is in the tag, then it will be a pre-release
-          if [[ ${GITHUB_REF} == *"alpha"* ]] || [[ ${GITHUB_REF} == *"beta"* ]]; then
-            echo "PRE_RELEASE=true" >> $GITHUB_ENV
-          else
-            echo "PRE_RELEASE=false" >> $GITHUB_ENV
-          fi
 
-      - name: Build and Publish to Registry
-        uses: docker/build-push-action@v2
+      - name: "Docker: Metadata"
+        id: meta
+        uses: docker/metadata-action@v4
+        with:
+          images: ghcr.io/penguin-statistics/frontend-v2
+          tags: |
+            type=semver,pattern=v{{version}}
+            type=ref,event=branch
+            type=ref,event=pr
+          flavor: |
+            latest=auto
+      
+      - name: "Docker: Build and Push Image"
+        uses: docker/build-push-action@v3
         with:
           push: true
-          tags: |
-            ghcr.io/penguin-statistics/frontend-v2:latest,
-            ghcr.io/penguin-statistics/frontend-v2:${{ env.GIT_TAG }}
+          tags: ${{ steps.meta.outputs.tags }}
+          labels: ${{ steps.meta.outputs.labels }}
+          cache-from: type=registry,ref=ghcr.io/penguin-statistics/frontend-v2:buildcache
+          cache-to: type=registry,ref=ghcr.io/penguin-statistics/frontend-v2:buildcache,mode=max
           build-args: |
             TRUNCATED_GITHUB_SHA=${{ env.TRUNCATED_GITHUB_SHA }}
 
-      - name: Create GitHub Release
-        uses: marvinpinto/action-automatic-releases@v1.2.1
+      - name: "Sentry: Create Release"
+        uses: getsentry/action-release@v1
+        env:
+          SENTRY_AUTH_TOKEN: ${{ secrets.SENTRY_AUTH_TOKEN }}
+          SENTRY_ORG: ${{ secrets.SENTRY_ORG }}
+          SENTRY_PROJECT: ${{ secrets.SENTRY_PROJECT }}
+        with:
+          environment: prod
+          version: ${{ env.VERSION }}
+
+      - name: "GitHub: Create Repository Release"
+        uses: "marvinpinto/action-automatic-releases@v1.2.1"
         with:
           repo_token: "${{ secrets.GITHUB_TOKEN }}"
-          prerelease: ${{ env.PRE_RELEASE }}
+          prerelease: false
+
+      # - name: "ManifestBot: Update Manifest"
+      #   uses: "penguin-statistics/manifestbot@v9"
+      #   with:
+      #     file-path: 'applications/frontend/values-prod.yaml'
+      #     version-path: 'image.tag'
+      #     version: ${{ env.AUTOMATIC_RELEASES_TAG }}
+      #     token: ${{ secrets.PAT_FOR_MANIFESTBOT }}
