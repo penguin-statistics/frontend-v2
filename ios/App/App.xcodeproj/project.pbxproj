@@ -62,6 +62,8 @@
 		B553BF8E285F22770089DB8B /* Intents.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = B553BF8D285F22770089DB8B /* Intents.intentdefinition */; };
 		B553BF8F285F23170089DB8B /* Intents.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = B553BF8D285F22770089DB8B /* Intents.intentdefinition */; };
 		B553BF91285F3FA10089DB8B /* AccessoryRectangularView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B553BF90285F3FA10089DB8B /* AccessoryRectangularView.swift */; };
+		B567D9C928B4639A000DA25D /* PenguinLive.swift in Sources */ = {isa = PBXBuildFile; fileRef = B567D9C828B4639A000DA25D /* PenguinLive.swift */; };
+		B567D9CA28B46993000DA25D /* PenguinLive.swift in Sources */ = {isa = PBXBuildFile; fileRef = B567D9C828B4639A000DA25D /* PenguinLive.swift */; };
 		B5E9EF4728219840009F0F68 /* PenguinViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5E9EF4628219840009F0F68 /* PenguinViewController.swift */; };
 /* End PBXBuildFile section */
 
@@ -164,6 +166,7 @@
 		B53A321B281ED2BC002EAB0B /* public */ = {isa = PBXFileReference; lastKnownFileType = folder; path = public; sourceTree = "<group>"; };
 		B553BF8D285F22770089DB8B /* Intents.intentdefinition */ = {isa = PBXFileReference; lastKnownFileType = file.intentdefinition; path = Intents.intentdefinition; sourceTree = "<group>"; };
 		B553BF90285F3FA10089DB8B /* AccessoryRectangularView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccessoryRectangularView.swift; sourceTree = "<group>"; };
+		B567D9C828B4639A000DA25D /* PenguinLive.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PenguinLive.swift; sourceTree = "<group>"; };
 		B5E9EF4628219840009F0F68 /* PenguinViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PenguinViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -327,6 +330,7 @@
 		504EC2FB1FED79650016851F = {
 			isa = PBXGroup;
 			children = (
+				B567D9C828B4639A000DA25D /* PenguinLive.swift */,
 				B5E9EF4628219840009F0F68 /* PenguinViewController.swift */,
 				3AF2C843259F544900761B04 /* SoundFX */,
 				3A001AC52599230E0078A265 /* Settings.bundle */,
@@ -602,6 +606,7 @@
 				3A06C133259766C400B81F31 /* WidgetEntry.swift in Sources */,
 				3A1157B1258F2B5C00F4C6FD /* SmallWidgetView.swift in Sources */,
 				3A06C12D2597454600B81F31 /* WidgetFooter.swift in Sources */,
+				B567D9CA28B46993000DA25D /* PenguinLive.swift in Sources */,
 				3A06C1252597447200B81F31 /* StageView.swift in Sources */,
 				B553BF8E285F22770089DB8B /* Intents.intentdefinition in Sources */,
 				B553BF91285F3FA10089DB8B /* AccessoryRectangularView.swift in Sources */,
@@ -631,6 +636,7 @@
 				3A001AD32599A4A60078A265 /* ConsentView.swift in Sources */,
 				3A001AC225991E2C0078A265 /* WhatsNew.swift in Sources */,
 				3A679B012599166C00A685E9 /* WelcomeView.swift in Sources */,
+				B567D9C928B4639A000DA25D /* PenguinLive.swift in Sources */,
 				3A61615A259B0ED200FA06A2 /* ToggleNotificationPreference.swift in Sources */,
 				3A61616C259C7B8D00FA06A2 /* HapticButton.swift in Sources */,
 				3A001AD72599A68A0078A265 /* Helpers.swift in Sources */,

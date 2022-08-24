@@ -9,6 +9,13 @@ import WidgetKit
 import SwiftUI
 
 @main
+struct PenguinWidgets: WidgetBundle {
+    var body: some Widget {
+        PenguinWidget()
+        PenguinLiveActivityWidget()
+    }
+}
+
 struct PenguinWidget: Widget {
     let kind: String = "PenguinWidget"
     let name: LocalizedStringKey = "SiteStatsWidgetName"
@@ -25,6 +32,19 @@ struct PenguinWidget: Widget {
         .configurationDisplayName("SiteStatsWidgetName")
         .description("SiteStatsWidgetDesc")
         .adaptedSupportedFamilies()
+    }
+}
+
+
+@available(iOS 16.0, iOSApplicationExtension 16.0, *)
+struct PenguinLiveActivityWidget: Widget {
+    var body: some WidgetConfiguration {
+        ActivityConfiguration(attributesType: PenguinLiveAttributes.self) { context in
+            VStack {
+                Text("Name: \(context.attributes.sessionName)")
+                Text("Report: \(context.state.reportCount)")
+            }.activityBackgroundTint(.cyan)
+        }
     }
 }
 
