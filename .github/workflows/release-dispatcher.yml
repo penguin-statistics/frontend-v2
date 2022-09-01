@@ -1,0 +1,49 @@
+name: Release Dispatcher
+
+on:
+  # trigger on pull-request merged to master branch
+  pull_request:
+    types:
+      - closed
+    branches:
+      - master
+
+concurrency:
+  group: tagger-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  tagger:
+    # check the following items before procedding:
+    # 1. the PR has been merged to branch `master`
+    # 2. the PR title starts with string `Release`
+    if: github.event.pull_request.merged && github.event.pull_request.base.ref == 'master' && startsWith(github.event.pull_request.title, 'Release')
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch_depth: 0
+          ref: 'master'
+
+      # git tag the release, then push it
+      # The tag name is the string after `Release`, trimmed of whitespace
+      - name: Tag Release
+        uses: actions/github-script@v6
+        with:
+          github-token: ${{ secrets.PAT_FOR_RELEASE_TAGGER }}
+          script: |
+            const { repo, owner } = context.repo;
+            // get the last commit on the master branch using API
+            const lastCommit = await github.rest.repos.getCommit({ owner, repo, ref: 'master' });
+            const sha1 = lastCommit.data.sha;
+            const title = context.payload.pull_request.title;
+            // tag is the semver version of the PR title
+            const tag = title.substring(title.indexOf('Release') + 'Release'.length).trim();
+            const tagger = context.actor;
+            // tag old ones
+            await github.rest.git.createRef({
+              owner,
+              repo,
+              ref: `refs/tags/${tag}`,
+              sha: sha1,
+            });
