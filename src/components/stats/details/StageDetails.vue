@@ -158,6 +158,23 @@
         </v-btn>
 
         <Share :stage="stage" />
+
+        <v-btn
+          v-if="validStage && !isRecruit"
+          v-haptic
+          block
+          large
+          color="cyan"
+          outlined
+          :class="{'cyan--text text--darken-4': !dark}"
+          class="mb-2 black--text"
+          :to="{name: 'ReportByZone_Selected', params: {zoneId: zone.zoneId, stageId: stage.stageId}}"
+        >
+          <v-icon left>
+            mdi-upload
+          </v-icon>
+          {{ $t('menu.report._name') }}
+        </v-btn>
       </v-col>
     </v-row>
   </v-card>
@@ -188,6 +205,10 @@ export default {
     },
     stats: {
       type: Array,
+      required: true
+    },
+    validStage: {
+      type: Boolean,
       required: true
     }
   },

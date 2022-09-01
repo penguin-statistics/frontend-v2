@@ -2,21 +2,26 @@ export default {
   namespaced: true,
   state: {
     /** current data source "global" | "personal" */
-    source: 'global',
+    source: "global",
     /** current data source server "CN" | "US" | ... */
-    server: 'CN'
+    server: "CN",
+    /** current matrix categories "all" | "auto" | "manual" */
+    category: "all",
   },
   mutations: {
     changeSource: (state, value) => {
-      state.source = value
+      state.source = value;
     },
     changeServer: (state, value) => {
-      state.server = value
+      state.server = value;
+    },
+    changeCategory: (state, value) => {
+      state.category = value;
     }
   },
   getters: {
-    source: state => state.source,
-    server: state => state.server,
-    serverLocked: state => state.serverLocked
-  }
-}
+    source: (state) => state.source,
+    server: (state) => state.server,
+    category: (state) => state.category,
+  },
+};

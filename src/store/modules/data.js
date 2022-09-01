@@ -72,6 +72,21 @@ export default {
         personalPatternMatrixManager.refresh(true),
       ]);
     },
+    async refreshMatrix(refresh = false) {
+      globalMatrixManager.refresh(refresh);
+      globalPatternMatrixManager.refresh(refresh);
+      // disabled refresh personal matrix on refresh: too much pressure on backend. temp hack fix.
+      // to actually refresh personal matrix, switch the source toggle to trigger it
+      //
+      if (
+        router.currentRoute.matched.find((el) => el.name === "Stats") &&
+        store.getters["dataSource/source"] === "personal" &&
+        refresh
+      ) {
+        personalMatrixManager.refresh(refresh);
+        personalPatternMatrixManager.refresh(refresh);
+      }
+    },
     async clean({ commit }, server) {
       commit("clearServerData", server);
     },

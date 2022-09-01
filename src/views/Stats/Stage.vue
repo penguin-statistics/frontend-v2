@@ -37,38 +37,23 @@
     <v-card class="bkop-light pt-2 elevation-4 mt-2 content-card">
       <v-card-title class="pb-0 mx-1">
         <v-row
-          align="center"
+          align="end"
           justify="center"
           class="px-4 px-sm-4 px-md-6 px-lg-6 px-xl-8 pt-0 pb-4"
         >
-          <h2
-            class="subtitle-2 d-block"
-            style="width: 100%"
-          >
-            {{ strings.translate(zone, "zoneName") }}
-          </h2>
-          <h1 class="title pt-1 no-wrap--text">
-            {{ $t('stats.title', {stage: strings.translate(stage, "code")}) }}
-          </h1>
-          <v-spacer />
-          <v-btn
-            v-if="validStage && !isRecruit"
-            v-haptic
-            depressed
-            color="primary"
-            small
-            class="mx-2"
-            style="transform: translateY(2px);"
-            :to="{name: 'ReportByZone_Selected', params: {zoneId: selected.zone, stageId: selected.stage}}"
-          >
-            <v-icon
-              left
-              small
+          <div class="d-flex flex-column">
+            <h2
+              class="subtitle-2 d-block"
+              style="width: 100%"
             >
-              mdi-upload
-            </v-icon>
-            {{ $t('menu.report._name') }}
-          </v-btn>
+              {{ strings.translate(zone, "zoneName") }}
+            </h2>
+            <h1 class="title pt-1 no-wrap--text d-inline-flex align-center">
+              {{ $t('stats.title', {stage: strings.translate(stage, "code")}) }}
+            </h1>
+          </div>
+          <v-spacer />
+          <MatrixCategoryToggle />
           <DataSourceToggle />
         </v-row>
       </v-card-title>
@@ -104,6 +89,7 @@
       :stage="stage"
       :zone="zone"
       :stats="stats"
+      :valid-stage="!!validStage"
     />
   </StageSelector>
 </template>
@@ -117,10 +103,11 @@ import StageSelector from '@/components/stats/StageSelector'
 import existUtils from '@/utils/existUtils'
 import get from '@/utils/getters'
 import strings from '@/utils/strings'
+import MatrixCategoryToggle from '../../components/stats/MatrixCategoryToggle.vue'
 
 export default {
   name: 'StatsByStage',
-  components: { StageDetails, BackdropName, DataSourceToggle, DataTable, StageSelector },
+  components: { StageDetails, BackdropName, DataSourceToggle, DataTable, StageSelector, MatrixCategoryToggle },
   data: () => ({
     expanded: {},
     selected: {

@@ -33,7 +33,7 @@ struct AccessoryRectangularView: View {
                     .lineLimit(1)
                     .font(.body.monospacedDigit())
                     .foregroundColor(Color("Gray4").opacity(0.8))
-            }j
+            }
             
             HStack {
                 Text(item.name)
