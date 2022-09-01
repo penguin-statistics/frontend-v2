@@ -131,6 +131,7 @@
                 {{ $t('result.title', {item: selectedItemName}) }}
               </h1>
               <v-spacer />
+              <MatrixCategoryToggle />
               <DataSourceToggle />
             </v-row>
           </v-card-title>
@@ -149,20 +150,21 @@
 </template>
 
 <script>
-import get from '@/utils/getters'
 import Item from '@/components/global/Item'
+import BackButton from '@/components/stats/BackButton'
 import DataSourceToggle from '@/components/stats/DataSourceToggle'
-import Console from '@/utils/Console'
-import strings from '@/utils/strings'
 import DataTable from '@/components/stats/DataTable'
 import ItemSelector from '@/components/stats/ItemSelector'
-import BackButton from '@/components/stats/BackButton'
 import CDN from '@/mixins/CDN'
 import Theme from '@/mixins/Theme'
+import Console from '@/utils/Console'
+import get from '@/utils/getters'
+import strings from '@/utils/strings'
+import MatrixCategoryToggle from '../../components/stats/MatrixCategoryToggle.vue'
 
 export default {
   name: 'StatsByItem',
-  components: { BackButton, ItemSelector, DataTable, Item, DataSourceToggle },
+  components: { BackButton, ItemSelector, DataTable, Item, DataSourceToggle, MatrixCategoryToggle },
   mixins: [CDN, Theme],
   data () {
     return {

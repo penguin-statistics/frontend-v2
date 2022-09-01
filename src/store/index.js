@@ -1,7 +1,7 @@
+import snackbar from "@/utils/snackbar";
 import Vue from "vue";
 import Vuex from "vuex";
 import createPersistedState from "vuex-persistedstate";
-import snackbar from "@/utils/snackbar";
 
 // store file
 import ajax from "./modules/ajax";

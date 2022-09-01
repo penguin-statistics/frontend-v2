@@ -810,11 +810,17 @@ const messages = {
     loading: "正在加载公告",
   },
   dataSource: {
-    switch: "数据源",
+    switch: "统计范畴",
     global: "全平台",
     loginNotice: "查看个人掉落数据前，请先登录",
     personal: "个人",
     title: "需要登录",
+  },
+  matrixCategory: {
+    switch: "数据来源",
+    all: "全部",
+    auto: "自动",
+    manual: "手动",
   },
   validator: {
     required: "必填",

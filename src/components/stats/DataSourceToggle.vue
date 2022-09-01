@@ -1,5 +1,9 @@
 <template>
-  <span>
+  <span class="d-inline-flex flex-column align-start">
+    <span class="overline mb-1">
+      {{ $t('dataSource.switch') }}
+    </span>
+
     <v-dialog
       v-model="prefetchingResources"
       persistent

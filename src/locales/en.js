@@ -799,6 +799,12 @@ const messages = {
     personal: "Personal",
     title: "Login Required",
   },
+  matrixCategory: {
+    switch: "Matrix Category",
+    all: "All",
+    auto: "Auto",
+    manual: "Manual",
+  },
   validator: {
     required: "Required",
   },

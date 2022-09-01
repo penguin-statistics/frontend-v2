@@ -6,7 +6,7 @@ const globalPatternMatrix = new MatrixObjectManager({
   api: {
     serverSensitive: true,
 
-    url: (server) => `/_private/result/pattern/${server}/global`
+    url: (server, category) => `/_private/result/pattern/${server}/global/${category}`,
   },
   validator: commons.defaultValidator,
   ttl: 1000 * 60 * 60 * 1, // 1 hour
