@@ -133,7 +133,9 @@
               justify="center"
               class="px-4 px-sm-4 px-md-6 px-lg-6 px-xl-8 pt-0 pb-4 flex-column flex-sm-row align-center align-sm-end"
             >
-              <div class="d-flex align-center w-full align-self-end">
+              <div
+                class="d-flex align-center w-full align-self-start align-self-sm-end"
+              >
                 <Item
                   :item="selectedItem"
                   :ratio="0.7"
