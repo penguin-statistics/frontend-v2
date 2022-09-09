@@ -801,9 +801,18 @@ const messages = {
   },
   matrixCategory: {
     switch: "Matrix Category",
-    all: "All",
-    auto: "Auto",
-    manual: "Manual",
+    all: {
+      label: "All",
+      tooltip: "All: Such Matrix Category contains data from all sources.",
+    },
+    auto: {
+      label: "Auto",
+      tooltip: "Auto: Such Matrix Category contains data from third-party tools that automatically reports drop data.",
+    },
+    manual: {
+      label: "Manual",
+      tooltip: "Manual: Such Matrix Category contains data only from the \"Report Drops by Stage\" and \"Report Drops by Recognition\" features from Penguin Statistics site.",
+    },
   },
   validator: {
     required: "Required",
