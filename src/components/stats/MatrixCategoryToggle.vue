@@ -11,15 +11,13 @@
       borderless
       class="data-source-switch mr-2"
     >
-      <TooltipBtn
+      <v-btn
         v-haptic
         small
         value="all"
-        :tip="$t('matrixCategory.all.tooltip')"
-        :tooltip-props="{ 'max-width': 300 }"
       >
         {{ $t("matrixCategory.all.label") }}
-      </TooltipBtn>
+      </v-btn>
       <TooltipBtn
         v-haptic
         small

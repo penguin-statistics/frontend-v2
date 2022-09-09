@@ -803,7 +803,7 @@ const messages = {
     switch: "Matrix Category",
     all: {
       label: "All",
-      tooltip: "All: Such Matrix Category contains data from all sources.",
+      // tooltip: "All",
     },
     auto: {
       label: "Auto",
