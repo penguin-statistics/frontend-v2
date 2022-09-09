@@ -3,6 +3,7 @@
     bottom
     :open-delay="0"
     transition="slide-y-transition"
+    v-bind="tooltipProps"
   >
     <template #activator="{ on, attrs }">
       <v-btn
@@ -34,6 +35,12 @@ export default {
       type: String,
       default () {
         return ''
+      }
+    },
+    tooltipProps: {
+      type: Object,
+      default () {
+        return {}
       }
     }
   }

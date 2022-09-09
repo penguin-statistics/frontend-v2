@@ -119,7 +119,7 @@ const messages = {
       timeRange: "统计区间",
       recruitTag: "公开招募 Tag",
       recruitObservations: "Tag 出现次数",
-      recruitRecruits: "公开招募次数"
+      recruitRecruits: "公开招募次数",
     },
     headerDesc: {
       apCost: "完成单次该作战的所需理智数量",
@@ -818,9 +818,19 @@ const messages = {
   },
   matrixCategory: {
     switch: "数据来源",
-    all: "全部",
-    auto: "自动",
-    manual: "手动",
+    all: {
+      label: "全部",
+      // tooltip: "全部数据来源",
+    },
+    auto: {
+      label: "自动",
+      tooltip: "自动数据来源：指由第三方工具所自动汇报的掉落数据",
+    },
+    manual: {
+      label: "手动",
+      tooltip:
+        "手动数据来源：指由用户使用企鹅物流数据统计的「网页或 App 端」中的「掉落汇报」或「截图识别」汇报的掉落数据",
+    },
   },
   validator: {
     required: "必填",

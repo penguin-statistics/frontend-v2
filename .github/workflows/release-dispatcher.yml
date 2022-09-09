@@ -22,7 +22,6 @@ jobs:
     steps:
       - uses: actions/checkout@v3
         with:
-          fetch_depth: 0
           ref: 'master'
 
       # git tag the release, then push it

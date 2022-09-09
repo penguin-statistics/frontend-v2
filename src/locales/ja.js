@@ -668,11 +668,27 @@ const messages = {
     related: "関連素材",
   },
   dataSource: {
+    switch: "データソース",
     global: "全体",
     loginNotice:
       "個人所有のドロップデータを閲覧するには、ログインする必要があります。",
     personal: "個人",
     title: "ログインが必要です",
+  },
+  matrixCategory: {
+    switch: "集計範囲",
+    all: {
+      label: "全体",
+    },
+    auto: {
+      label: "自動",
+      // tooltip: "自动数据来源：指由第三方工具所自动汇报的掉落数据",
+    },
+    manual: {
+      label: "手動",
+      // tooltip:
+        // "手动数据来源：指由用户使用企鹅物流数据统计的「网页或 App 端」中的「掉落汇报」或「截图识别」汇报的掉落数据",
+    },
   },
   members: {
     categories: {

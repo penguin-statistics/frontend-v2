@@ -7,15 +7,4 @@
 
 import Foundation
 import SwiftUI
-import ActivityKit
 import WidgetKit
-
-struct PenguinLiveAttributes: ActivityAttributes {
-    public typealias PenguinLiveStatus = ContentState
-    
-    public struct ContentState: Codable, Hashable {
-        var reportCount: Int
-    }
-    
-    var sessionName: String
-}
