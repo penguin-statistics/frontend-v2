@@ -5,7 +5,6 @@ import SwiftUI
 import Network
 
 import os
-import ActivityKit
 
 let alreadyLaunchedKey = "alreadyLaunched"
 
@@ -191,20 +190,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         blurEffectView.widthAnchor.constraint(equalTo: widthAnchor).isActive = true
         blurEffectView.topAnchor.constraint(equalTo: topAnchor).isActive = true
         blurEffectView.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
-        
-        // ActivityKit
-        if #available(iOS 16.0, *) {
-            let attributes = PenguinLiveAttributes(sessionName: "Session")
-            let initialState = PenguinLiveAttributes.PenguinLiveStatus(reportCount: 42)
-            
-            do {
-                let activity = try Activity<PenguinLiveAttributes>.request(
-                    attributes: attributes, contentState: initialState, pushType: nil)
-                print("Requested activity \(activity.id)")
-            } catch (let error) {
-                print("Error occurred while requesting activity \(error.localizedDescription)")
-            }
-        }
         
         return true
     }

@@ -1,8 +1,5 @@
 <template>
-  <v-timeline
-    dense
-    align-top
-  >
+  <v-timeline dense align-top>
     <v-timeline-item
       v-for="item in logs"
       :key="item.version"
@@ -19,19 +16,9 @@
       >
         <v-card-title class="py-2 pl-4 pr-2">
           <span class="title">
-            <span
-              v-if="item.future"
-              class="caption"
-            >
-              正在开发
-            </span>
+            <span v-if="item.future" class="caption"> 正在开发 </span>
 
-            <span
-              v-if="item.active"
-              class="caption"
-            >
-              现正使用
-            </span>
+            <span v-if="item.active" class="caption"> 现正使用 </span>
 
             {{ item.version }}
           </span>
@@ -46,15 +33,9 @@
             text
             @click.stop="item.value = !item.value"
           >
-            <span
-              class="mr-2"
-              v-text="formatTime(item.date)"
-            />
+            <span class="mr-2" v-text="formatTime(item.date)" />
 
-            <v-icon
-              small
-              v-text="item.value ? '$close' : 'mdi-calendar'"
-            />
+            <v-icon small v-text="item.value ? '$close' : 'mdi-calendar'" />
           </v-btn>
         </v-card-title>
 
@@ -62,10 +43,7 @@
           <div v-if="item.value">
             <v-divider />
 
-            <v-card-subtitle
-              v-if="item.future"
-              class="subtitle-1"
-            >
+            <v-card-subtitle v-if="item.future" class="subtitle-1">
               版本特性一览
             </v-card-subtitle>
 
@@ -89,17 +67,11 @@
               v-text="item.changes"
             />
 
-            <v-card-subtitle
-              v-if="item.hotfix"
-              class="subtitle-1"
-            >
+            <v-card-subtitle v-if="item.hotfix" class="subtitle-1">
               热修复记录
             </v-card-subtitle>
 
-            <v-card-text
-              v-if="item.hotfix"
-              class="markdown-content"
-            >
+            <v-card-text v-if="item.hotfix" class="markdown-content">
               <ol>
                 <li
                   v-for="(text, key) in item.hotfix"
@@ -127,6 +99,12 @@ export default {
   data() {
     return {
       logs: [
+        {
+          version: "v3.9.0",
+          date: "2022-09-10T03:30:00+0800",
+          changes: `## 添加
+1. Planner 增加 @penguin-statistics/depot 格式作为导入配置支持`,
+        },
         {
           version: "v3.8.1",
           date: "2022-08-18T23:21:00+0800",
@@ -828,10 +806,12 @@ export default {
         }
 
         // if el.date is within 30 days, set el.value to true, otherwise to false
-        timeFormatter.dayjs(el.date).isBetween(
-          timeFormatter.dayjs().subtract(30, "day"),
-          timeFormatter.dayjs()
-        )
+        timeFormatter
+          .dayjs(el.date)
+          .isBetween(
+            timeFormatter.dayjs().subtract(30, "day"),
+            timeFormatter.dayjs()
+          )
           ? (el.value = true)
           : (el.value = false);
 
