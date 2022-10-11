@@ -1,7 +1,10 @@
 <template>
   <figure
     v-if="item.itemId !== 'furni' && item.spriteCoord"
-    :class="{'item-icon--sprite': true, 'item-icon--sprite--disable-hover-effect': disableTooltip}"
+    :class="{
+      'item-icon--sprite': true,
+      'item-icon--sprite--disable-hover-effect': disableTooltip,
+    }"
     :alt="item.name"
     :style="style"
   />
@@ -32,98 +35,109 @@
 </template>
 
 <script>
-import CDN from '@/mixins/CDN'
+import CDN from "@/mixins/CDN";
 
 export default {
-  name: 'ItemIcon',
+  name: "ItemIcon",
   mixins: [CDN],
   props: {
     item: {
       type: Object,
-      required: true
+      required: true,
     },
     ratio: {
       type: Number,
-      default () {
-        return 1
-      }
+      default() {
+        return 1;
+      },
     },
     disableTooltip: {
       type: Boolean,
-      default () {
-        return false
-      }
-    }
+      default() {
+        return false;
+      },
+    },
   },
-  data () {
+  data() {
     return {
       previousIconSize: 60,
       resolutions: {
         high: {
           iconSize: 183,
-          dimensions: [1098, 2928],
-          url: '/sprite/sprite.202109171627.png'
+          dimensions: [1098, 3111],
+          url: "/sprite/sprite.202210111514.png",
         },
         low: {
           iconSize: 183 / 2,
-          dimensions: [1098 / 2, 2928 / 2],
-          url: '/sprite/sprite.202109171627.small.png'
-        }
-      }
-    }
+          dimensions: [1098 / 2, 3111 / 2],
+          url: "/sprite/sprite.202210111514.small.png",
+        },
+      },
+    };
   },
   computed: {
-    furniturePadding () {
+    furniturePadding() {
       if (this.ratio <= 0.25) {
-        return ['pa-0']
+        return ["pa-0"];
       } else if (this.ratio <= 0.5) {
-        return ['pa-1']
+        return ["pa-1"];
       } else if (this.ratio <= 0.75) {
-        return ['pa-2']
+        return ["pa-2"];
       } else if (this.ratio <= 1) {
-        return ['pa-4']
+        return ["pa-4"];
       } else {
-        return ['pa-6']
+        return ["pa-6"];
       }
     },
-    lowResolution () {
-      let lowResolution = true
+    lowResolution() {
+      let lowResolution = true;
       if (window.matchMedia) {
-        if (window.devicePixelRatio >= 2 || window.matchMedia('(min-resolution: 192dpi)').matches) { lowResolution = false }
+        if (
+          window.devicePixelRatio >= 2 ||
+          window.matchMedia("(min-resolution: 192dpi)").matches
+        ) {
+          lowResolution = false;
+        }
       }
-      return lowResolution
+      return lowResolution;
     },
-    current () {
-      return this.resolutions[this.lowResolution ? 'low' : 'high']
+    current() {
+      return this.resolutions[this.lowResolution ? "low" : "high"];
     },
-    config () {
-      const zoom = this.ratio * (this.previousIconSize / this.current.iconSize)
+    config() {
+      const zoom = this.ratio * (this.previousIconSize / this.current.iconSize);
       return {
         iconSize: zoom * this.current.iconSize,
         url: this.cdnDeliver(this.current.url),
-        zoom
-      }
+        zoom,
+      };
     },
-    style () {
+    style() {
       const style = {
         height: `${this.config.iconSize}px`,
         width: `${this.config.iconSize}px`,
-        backgroundSize: `${this.config.zoom * this.current.dimensions[0]}px ${this.config.zoom * this.current.dimensions[1]}px`,
-        backgroundImage: `url(${this.config.url})`
-      }
+        backgroundSize: `${this.config.zoom * this.current.dimensions[0]}px ${
+          this.config.zoom * this.current.dimensions[1]
+        }px`,
+        backgroundImage: `url(${this.config.url})`,
+      };
       if (this.item.spriteCoord) {
-        style.backgroundPosition = this.transformCoordinate(this.item.spriteCoord)
+        style.backgroundPosition = this.transformCoordinate(
+          this.item.spriteCoord
+        );
       }
-      return style
-    }
+      return style;
+    },
   },
   methods: {
-    transformCoordinate (coordinate) {
-      const factorized = this.config.iconSize
-      return `-${coordinate[0] * factorized}px -${coordinate[1] * factorized}px`
-    }
-  }
-}
+    transformCoordinate(coordinate) {
+      const factorized = this.config.iconSize;
+      return `-${coordinate[0] * factorized}px -${
+        coordinate[1] * factorized
+      }px`;
+    },
+  },
+};
 </script>
 
 <style scoped>
@@ -133,7 +147,7 @@ export default {
   width: 60px;
   display: inline-block;
   overflow: hidden;
-  transition: transform 150ms cubic-bezier(.25,.8,.5,1);
+  transition: transform 150ms cubic-bezier(0.25, 0.8, 0.5, 1);
 
   transform-origin: center center;
 }
@@ -146,8 +160,8 @@ export default {
   transform: none !important;
 }
 
-  .item-icon--special {
-    border-radius: 50%;
-    /*margin: 0 .2rem;*/
-  }
+.item-icon--special {
+  border-radius: 50%;
+  /*margin: 0 .2rem;*/
+}
 </style>
