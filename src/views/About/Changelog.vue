@@ -124,6 +124,12 @@ export default {
     return {
       logs: [
         {
+          version: "v3.9.1",
+          date: "2022-10-11T19:39:00+0000",
+          changes: `## 优化
+1. 更新 Icon Sprites`,
+        },
+        {
           version: "v3.9.0",
           date: "2022-09-10T03:30:00+0800",
           changes: `## 添加
