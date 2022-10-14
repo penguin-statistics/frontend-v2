@@ -1,4 +1,3 @@
-import './datadog'
 import './directives'
 import './filters'
 import './googleAnalytics'

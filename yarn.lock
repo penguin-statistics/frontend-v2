@@ -1074,26 +1074,6 @@
   dependencies:
     "@jridgewell/trace-mapping" "0.3.9"
 
-"@datadog/browser-core@4.17.2":
-  version "4.17.2"
-  resolved "https://registry.yarnpkg.com/@datadog/browser-core/-/browser-core-4.17.2.tgz#c4a898f83aa3a988b3699ccae6c5fef2fb4c0619"
-  integrity sha512-ocitVzLN0cfwkd1x7r6wem6MfaUSu2o4icxUP43SjMeFZryQlT1B/j+OBv30fFMtKMW7GQFm/5Kq1Eu9KdqBrw==
-
-"@datadog/browser-rum-core@4.17.2":
-  version "4.17.2"
-  resolved "https://registry.yarnpkg.com/@datadog/browser-rum-core/-/browser-rum-core-4.17.2.tgz#a552062521d4d5f1d36f9e4401144c862494645f"
-  integrity sha512-HwI4uOoYUr227g8lRXVfEE6yTFw6lIAmS+NcVPO5XYZCNtwz9tVj2L8eFwoG0HEhqtHGnwF4guokCH49FaSjuQ==
-  dependencies:
-    "@datadog/browser-core" "4.17.2"
-
-"@datadog/browser-rum@^4.17.2":
-  version "4.17.2"
-  resolved "https://registry.yarnpkg.com/@datadog/browser-rum/-/browser-rum-4.17.2.tgz#39c73105d04c988e77b6466a9295cd0a162e9799"
-  integrity sha512-v3KShjSA643BYUAKNBGoKjwbPdMGuQrnCYdowCIy1AU1Bz3+ud+OgBHTBYyM0/M9esRYFeE+HcYLP/YnFbjVbQ==
-  dependencies:
-    "@datadog/browser-core" "4.17.2"
-    "@datadog/browser-rum-core" "4.17.2"
-
 "@gar/promisify@^1.0.1":
   version "1.1.3"
   resolved "https://registry.yarnpkg.com/@gar/promisify/-/promisify-1.1.3.tgz#555193ab2e3bb3b6adc3d551c9c030d9e860daf6"
