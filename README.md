@@ -16,7 +16,6 @@ This is the **frontend** project repository for the [Penguin Statistics](https:/
 ## Maintainers
 This frontend project has mainly being maintained by the following contributors (in alphabetical order):
 - [AlvISsReimu](https://github.com/AlvISsReimu)
-- [AsahiLuna](https://github.com/AsahiLuna)
 - [GalvinGao](https://github.com/GalvinGao)
 
 > The full list of active contributors of the *Penguin Statistics* project can be found at the [Team Members page](https://penguin-stats.io/about/members) of the website.
