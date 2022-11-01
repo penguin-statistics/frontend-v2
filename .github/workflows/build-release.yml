@@ -27,8 +27,7 @@ jobs:
         with:
           version: ${{ steps.git-meta.outputs.version }}
           repository: 'penguin-statistics/frontend-v2'
-          build-args: |
-            TRUNCATED_GITHUB_SHA=${{ steps.git-meta.outputs.minisha }}
+          build-args: TRUNCATED_GITHUB_SHA=${{ steps.git-meta.outputs.mini-sha }}
 
       - name: "Release: Call Dispatcher"
         id: release-dispatcher

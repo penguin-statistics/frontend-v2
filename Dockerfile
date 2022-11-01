@@ -1,4 +1,4 @@
-FROM node:lts AS builder
+FROM node:16 AS builder
 WORKDIR /app
 
 ARG TRUNCATED_GITHUB_SHA
