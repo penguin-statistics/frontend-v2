@@ -15,7 +15,7 @@ import strings from "@/utils/strings";
 
 import * as Sentry from "@sentry/vue";
 
-const recognizerFirstAPICompatibleVersionFolder = 'v4.4.2'
+const recognizerFirstAPICompatibleVersionFolder = 'v4.5.1'
 
 async function file2ArrayBuffer(file) {
   const reader = new FileReader();

@@ -574,7 +574,7 @@ const messages = {
       },
       DYING_SUN: {
         title: "残阳",
-        subtitle: "9~10 章",
+        subtitle: "9~11 章",
       },
       INTERLUDE: "插曲",
       SIDESTORY: "别传",

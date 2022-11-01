@@ -1,6 +1,6 @@
 {
   "name": "penguin-stats-frontend",
-  "version": "3.9.0",
+  "version": "3.9.3",
   "private": true,
   "author": "Penguin Statistics Contributors <contributors@penguin-stats.io> (https://github.com/orgs/penguin-statistics/people)",
   "scripts": {
@@ -34,7 +34,6 @@
     "@capacitor/ios": "^3.5.0",
     "@capacitor/share": "^1.1.2",
     "@capacitor/splash-screen": "^1.2.2",
-    "@datadog/browser-rum": "^4.17.2",
     "@sentry/integrations": "^5.6.1",
     "@sentry/tracing": "^6.18.1",
     "@sentry/vue": "^6.18.1",
