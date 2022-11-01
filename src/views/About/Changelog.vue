@@ -124,6 +124,12 @@ export default {
     return {
       logs: [
         {
+          version: "v3.9.3",
+          date: "2022-11-01T03:00:00+0000",
+          changes: `## 添加
+1. US、JP、KR 服务器中的截图识别新 UI 支持`,
+        },
+        {
           version: "v3.9.2",
           date: "2022-10-14T15:27:00+0000",
           changes: `## 优化
