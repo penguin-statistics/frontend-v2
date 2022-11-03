@@ -527,7 +527,7 @@ const messages = {
   zone: {
     name: "Zone",
     types: {
-      MAINLINE: "Main Storyline",
+      MAINLINE: "Main Theme",
       WEEKLY: "Supplies",
       ACTIVITY: "Event",
       ACTIVITY_OPEN: "Event (Opening)",
@@ -552,7 +552,7 @@ const messages = {
       },
       DYING_SUN: {
         title: "Shadow of a Dying Sun",
-        subtitle: "Episode 9",
+        subtitle: "Episode 9~10",
       },
       INTERLUDE: "Intermezzi",
       SIDESTORY: "Side Story",
