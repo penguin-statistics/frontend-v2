@@ -485,7 +485,7 @@ const messages = {
   zone: {
     name: "章",
     types: {
-      MAINLINE: "メインステージ",
+      MAINLINE: "メインテーマ",
       WEEKLY: "物資調達",
       ACTIVITY_OPEN: "イベント（開催中）",
       ACTIVITY_CLOSED: "イベント（終了）",
@@ -508,7 +508,7 @@ const messages = {
       },
       DYING_SUN: {
         title: "残映",
-        subtitle: "9 章",
+        subtitle: "9~10 章",
       },
       INTERLUDE: "エピソード",
       SIDESTORY: "サイドストーリー",
