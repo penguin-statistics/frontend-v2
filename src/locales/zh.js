@@ -435,6 +435,27 @@ const messages = {
         },
         "Droptypes::NotFound": "未找到任何掉落类型",
       },
+      defectReport: {
+        dialog: {
+          title: "反馈截图识别缺陷",
+          subtitle: "反馈截图识别缺陷将上传您的截图原图、识别结果与环境信息（包括当前的前端 UI 版本号、识别内核版本号与识别资源版本号）至本站服务器。在上传后，我们将使用提交的数据进行算法优化，以期减少错误率。感谢您帮助我们改进识别效果！",
+          section: {
+            originalImage: "截图原图",
+            recognitionResult: "识别结果",
+            environment: "环境信息",
+          }
+        },
+        state: {
+          "preflight": "正在上传缺陷元数据...",
+          "uploading": "正在上传截图原图...",
+        },
+        snackbar: {
+          succeeded: "识别问题已提交，感谢您的反馈！",
+          failed: "识别问题提交失败，请稍后重试",
+        },
+        action: "反馈识别问题...",
+        reported: "已反馈问题",
+      }
     },
     rules: {
       item: {

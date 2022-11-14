@@ -105,7 +105,7 @@ class Recognizer {
         let drops = (stage.dropInfos || [])
           .map(drop => drop.itemId)
           .filter(drop => !!drop && drop !== 'furni')
-        
+
         if (stage.recognitionOnly) drops = [...drops, ...stage.recognitionOnly]
 
         if (!transformedStages[stage.code]) transformedStages[stage.code] = {}
@@ -126,7 +126,7 @@ class Recognizer {
 
     this.wasm.loadHashIndex(JSON.stringify(charHash))
     this.wasm.loadStageIndex(JSON.stringify(transformedStages))
-    
+
     Console.info('Recognizer', 'init: preload icons: preloading')
 
     await fetch(mirror.deliver(`/recognition/resources/${this.resourcePrefix}/items.zip`))
@@ -307,6 +307,7 @@ class Recognizer {
   getVersion() {
     return {
       recognizerVersion: this.wasm.version,
+      recognizerOpenCVVersion: this.wasm.opencvVersion,
       recognizerAssetsVersion: this.resourcePrefix,
     };
   }
