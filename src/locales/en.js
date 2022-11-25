@@ -434,6 +434,32 @@ const messages = {
         },
         "Droptypes::NotFound": "Failed to find any drop type",
       },
+      defectReport: {
+        dialog: {
+          title: "Send Recognition Defect Feedback",
+          // subtitle:
+          //   "反馈截图识别缺陷将上传您的截图原图、识别结果与环境信息（包括当前的前端 UI 版本号、识别内核版本号与识别资源版本号）至本站服务器。在上传后，我们将使用提交的数据进行算法优化，以期减少错误率。感谢您帮助我们改进识别效果！",
+          subtitle:
+            "Sending recognition defect feedback will upload such screenshot image, recognition result and environment info (including current UI version, recognition core version and recognition resource version) to us. After receiving your feedback, we will use the submitted feedback to optimize algorithm used in screenshot recognition. Thank you for helping us improving the recognition feature!",
+          section: {
+            originalImage: "Original Image",
+            recognitionResult: "Recognition Result",
+            environment: "Environment",
+          },
+        },
+        state: {
+          preflight: "Uploading feedback metadata...",
+          uploading: "Uploading screenshot image...",
+        },
+        snackbar: {
+          succeeded:
+            "Recognition defect feedback has been submitted. Thank you for your feedback!",
+          failed:
+            "Failed to submit recognition defect feedback. Please try again later.",
+        },
+        action: "Send Feedback...",
+        reported: "Feedback Sent",
+      },
     },
     rules: {
       item: {
@@ -807,11 +833,13 @@ const messages = {
     },
     auto: {
       label: "Auto",
-      tooltip: "Auto: Such Matrix Category contains data from third-party tools that automatically reports drop data.",
+      tooltip:
+        "Auto: Such Matrix Category contains data from third-party tools that automatically reports drop data.",
     },
     manual: {
       label: "Manual",
-      tooltip: "Manual: Such Matrix Category contains data only from the \"Report Drops by Stage\" and \"Report Drops by Recognition\" features from Penguin Statistics site.",
+      tooltip:
+        'Manual: Such Matrix Category contains data only from the "Report Drops by Stage" and "Report Drops by Recognition" features from Penguin Statistics site.',
     },
   },
   validator: {
@@ -915,4 +943,4 @@ const messages = {
   },
 };
 
-export default Object.freeze(messages)
+export default Object.freeze(messages);
