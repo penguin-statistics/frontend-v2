@@ -64,11 +64,11 @@ function needsUpdate(response) {
 service.interceptors.request.use(
   function(config) {
     if (
-      ["/report", "/report/recall", "personal"].some((el) =>
+      ["/report", "/report/recall", "personal", "/recognition/defects/report"].some((el) =>
         config.url.includes(el)
       )
     ) {
-      if (store.getters["auth/loggedIn"])
+      if (store.getters["auth/loggedIn"] && !config.headers["Authorization"])
         config.headers[
           "Authorization"
         ] = `PenguinID ${store.getters["auth/username"]}`;

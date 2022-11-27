@@ -97,9 +97,19 @@
 
       <div
         v-else
-        class="align-self-start mr-4"
+        class="d-flex flex-row align-center flex-wrap full-width"
       >
-        {{ $t('report.recognition.confirm.unknownStage') }}
+        <div>
+          {{ $t('report.recognition.confirm.unknownStage') }}
+        </div>
+
+        <v-spacer />
+
+        <RecognitionDefectReportBtn
+          :result="result"
+          :index="index"
+          :env-context="envContext"
+        />
       </div>
     </v-card-title>
 
@@ -123,19 +133,6 @@
       >
         <div>
           <div>{{ $t('report.recognition.confirm.abnormal.' + (result.result.stage.stageCode ? 'error' : 'fatal')) }}</div>
-
-          <!--          <div-->
-          <!--            v-if="result.result.dropArea.drops.length"-->
-          <!--            class="d-inline-flex caption chip-label"-->
-          <!--          >-->
-          <!--            <v-icon-->
-          <!--              left-->
-          <!--              small-->
-          <!--            >-->
-          <!--              mdi-cursor-default-click-->
-          <!--            </v-icon>-->
-          <!--            {{ $t('report.recognition.confirm.abnormal.hover') }}-->
-          <!--          </div>-->
         </div>
 
         <RecognizeResultAlertCard :alerts="result.result.exceptions" />
@@ -189,9 +186,10 @@ import ItemIcon from "@/components/global/ItemIcon";
 import RecognizeResultAlertCard from "@/components/recognition/RecognizeResultAlertCard";
 import FactTableItem from "@/components/stats/fact-table/FactTableItem";
 import Theme from "@/mixins/Theme";
+import RecognitionDefectReportBtn from "@/components/recognition/RecognitionDefectReportBtn";
 export default {
   name: "RecognitionResultCard",
-  components: {FactTableItem, RecognizeResultAlertCard, ItemIcon},
+  components: {RecognitionDefectReportBtn, FactTableItem, RecognizeResultAlertCard, ItemIcon},
   mixins: [Theme],
   props: {
     result: {
@@ -204,6 +202,10 @@ export default {
     },
     value: {
       type: Array,
+      required: true
+    },
+    envContext: {
+      type: Object,
       required: true
     }
   },

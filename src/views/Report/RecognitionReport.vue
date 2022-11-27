@@ -335,6 +335,7 @@
                           v-model="selectedResultsIndex"
                           :result="result"
                           :index="result.id"
+                          :env-context="envContext"
                           @popup="(e) => (expandImage.src = e)"
                         />
                       </v-col>
@@ -509,7 +510,7 @@
               </v-stepper-content>
             </v-stepper>
           </v-fade-transition>
-          <div 
+          <div
             class="monospace degraded-opacity px-6 pb-6 pt-2"
             style="font-size: x-small"
           >
@@ -545,6 +546,7 @@ import get from "@/utils/getters";
 import Recognizer from "@/utils/recognizer";
 import * as Sentry from "@sentry/vue";
 import { mapGetters } from "vuex";
+import randomUtils from "@/utils/randomUtils";
 
 let recognitionSubmitter;
 try {
@@ -593,6 +595,7 @@ export default {
         server: "",
         durationPerImage: "#",
         current: "",
+        sessionId: randomUtils.string(8),
         timer: {
           started: -1,
           elapsed: -1,
@@ -666,6 +669,18 @@ export default {
         version: config.version,
         commit: GIT_COMMIT.trim() || 'unknown'
       };
+    },
+    envContext() {
+      const version = this.recognizer.getVersion();
+      return {
+        frontendVersion: this.env.version,
+        frontendCommit: this.env.commit,
+        recognizerVersion: version.recognizerVersion,
+        recognizerOpenCVVersion: version.recognizerOpenCVVersion,
+        recognizerAssetsVersion: version.recognizerAssetsVersion,
+        server: this.recognition.server,
+        sessionId: this.recognition.sessionId,
+      }
     },
     filteredResults() {
       return this.filterResults(this.filterValue);
