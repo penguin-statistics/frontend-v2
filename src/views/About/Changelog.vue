@@ -124,6 +124,12 @@ export default {
     return {
       logs: [
         {
+          version: "v3.10.0",
+          date: "2022-11-26T03:39:00+0000",
+          changes: `## 添加
+1. 截图识别添加错误反馈功能`,
+        },
+        {
           version: "v3.9.3",
           date: "2022-11-01T03:00:00+0000",
           changes: `## 添加
