@@ -238,7 +238,7 @@ export default {
     this.$store.dispatch('data/fetch', false)
     if (Cookies.get('userID')) {
       this.$store.dispatch('auth/login', Cookies.get('userID'))
-      Cookies.remove('userID')
+      Cookies.remove("userID", { path: "/", domain: "." + window.location.hostname })
     }
   },
   methods: {

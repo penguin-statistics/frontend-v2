@@ -26,7 +26,7 @@ export default {
     },
     logout ({ commit }) {
       commit('changeUsername', null)
-      Cookies.remove('userID')
+      Cookies.remove("userID", { path: "/", domain: "." + window.location.hostname })
     }
   },
   getters: {

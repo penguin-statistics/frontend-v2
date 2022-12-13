@@ -5,6 +5,7 @@ import Console from "@/utils/Console";
 import mirror from "@/utils/mirror";
 import axios from "axios";
 import semver from "semver";
+import Cookies from "js-cookie";
 
 let baseURL;
 if (mirror.global.isCurrent() || mirror.cn.isCurrent()) {
@@ -95,6 +96,12 @@ service.interceptors.response.use(
         penguinId
       );
       store.dispatch("auth/login", penguinId);
+
+      // suppress cookie usage
+      Cookies.remove("userID", {
+        path: "/",
+        domain: "." + window.location.hostname,
+      });
     }
 
     return response;
