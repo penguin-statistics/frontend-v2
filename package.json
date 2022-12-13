@@ -136,10 +136,5 @@
     "Blealtan <blealtan@outlook.com> (https://github.com/Blealtan)"
   ],
   "homepage": "https://github.com/penguin-statistics/frontend-v2#readme",
-  "husky": {
-    "hooks": {
-      "pre-commit": "npm run lint"
-    }
-  },
   "license": "MIT"
 }
