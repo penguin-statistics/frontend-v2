@@ -237,7 +237,7 @@ export default {
     this.routes = this.$router.options.routes.filter(el => !el.meta.hide)
     this.$store.dispatch('data/fetch', false)
     if (Cookies.get('userID')) {
-      this.$store.dispatch('user/login', Cookies.get('userID'))
+      this.$store.dispatch('auth/login', Cookies.get('userID'))
       Cookies.remove('userID')
     }
   },
