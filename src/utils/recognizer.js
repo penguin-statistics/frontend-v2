@@ -244,6 +244,8 @@ class Recognizer {
 
       Console.debug('Recognizer', 'Recognized. Took', duration + 'ms', 'with result', parsedResult)
 
+      const copiedOriginalResult = JSON.parse(JSON.stringify(parsedResult))
+
       parsedResult.exceptions = parsedResult.exceptions.map(exception => {
         exception.what = `${
           strings.capitalize(
@@ -293,7 +295,8 @@ class Recognizer {
         file,
         blobUrl,
         duration,
-        result: parsedResult
+        result: parsedResult,
+        originalResult: copiedOriginalResult
       })
       // console.log('callback executed')
       // console.timeLog(file.name)

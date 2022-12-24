@@ -44,10 +44,10 @@
     </div>
     <v-divider />
 
-    <v-card-title class="align-start">
+    <v-card-title class="d-flex align-start grow">
       <div
         v-if="result.result.stage.stageId"
-        class="d-flex flex-row align-start flex-wrap"
+        class="d-flex flex-row align-start flex-wrap full-width"
       >
         <FactTableItem>
           <template #title>
@@ -93,6 +93,17 @@
             />
           </v-badge>
         </div>
+
+        <v-spacer />
+
+        <RecognitionDefectReportBtn
+          v-if="hasException"
+          :result="result"
+          :index="index"
+          :env-context="envContext"
+          dense
+          class="align-self-center"
+        />
       </div>
 
       <div

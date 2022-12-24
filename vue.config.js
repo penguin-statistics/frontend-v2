@@ -65,8 +65,8 @@ module.exports = {
   devServer: {
     proxy: {
       "/PenguinStats": {
-        // target: "https://penguin-stats.io/",
-        target: "http://localhost:9010/",
+        target: "https://penguin-stats.io/",
+        // target: "http://localhost:9010/",
       },
     },
   },

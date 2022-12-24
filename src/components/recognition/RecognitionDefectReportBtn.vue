@@ -132,7 +132,7 @@
     </v-btn>
 
     <v-btn
-      v-else
+      v-else-if="!dense"
       depressed
       text
       outlined
@@ -144,6 +144,29 @@
       </v-icon>
       {{ $t("report.recognition.defectReport.action") }}
     </v-btn>
+
+    <v-tooltip
+      v-else
+      bottom
+    >
+      <template #activator="{ on, attrs }">
+        <v-btn
+          depressed
+          text
+          outlined
+          icon
+          color="deep-purple lighten-4"
+          v-bind="attrs"
+          @click="expanded = true"
+          v-on="on"
+        >
+          <v-icon>
+            mdi-bug
+          </v-icon>
+        </v-btn>
+      </template>
+      <span>{{ $t("report.recognition.defectReport.action") }}</span>
+    </v-tooltip>
   </div>
 </template>
 
@@ -170,6 +193,10 @@ export default {
     envContext: {
       type: Object,
       required: true
+    },
+    dense: {
+      type: Boolean,
+      default: () => false
     }
   },
   data() {
@@ -186,7 +213,7 @@ export default {
   },
   computed: {
     recognitionResult () {
-      return JSON.stringify(this.result.result, null, 4)
+      return JSON.stringify(this.result.originalResult, null, 4)
     },
     envInfo () {
       return JSON.stringify(this.envContext, null, 4)
@@ -209,7 +236,7 @@ export default {
 
         const preflight = (await reportDefect.initDefectReport({
           environment: this.envContext,
-          recognitionResult: this.result.result,
+          recognitionResult: this.result.originalResult,
         })).data
 
         this.state = "uploading";
