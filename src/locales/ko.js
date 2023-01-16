@@ -526,6 +526,7 @@ const messages = {
       2020: "2020",
       2021: "2021",
       2022: "2022",
+      2023: "2023",
       AWAKENING_HOUR: {
         title: "각성",
         subtitle: "에피소드 0-3",
@@ -660,8 +661,7 @@ const messages = {
       unable: "재료 없음",
       errors: {
         title: "가공에 필요한 재료 부족",
-        notEnough:
-          "{need}개의 “{item}”이/가 필요하지만, {have}개만 보유 중",
+        notEnough: "{need}개의 “{item}”이/가 필요하지만, {have}개만 보유 중",
       },
       plans: {
         title: "가공 플랜",
