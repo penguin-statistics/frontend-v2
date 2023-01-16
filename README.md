@@ -23,6 +23,7 @@ This frontend project has mainly being maintained by the following contributors 
 ## Supports
 Thanks for the kindness support for this Open Source project from:
 - [![Sentry.io](https://img.shields.io/badge/Sentry.io-DBD3E9?logo=sentry&style=flat&logoColor=DBD3E9&labelColor=16111C&color=9990AB)](https://sentry.io)
+- This project is tested with [BrowserStack](https://www.browserstack.com/)
 <li><a href="https://jetbrains.com/?from=penguin-statistics"><img src="https://resources.jetbrains.com/storage/products/company/brand/logos/jb_beam.png" width="200" /></a></li>
 <li><a href="https://saucelabs.com"><img src="https://opensource.saucelabs.com/images/opensauce/powered-by-saucelabs-badge-red.png?sanitize=true" width="150" /></a></li>
 
