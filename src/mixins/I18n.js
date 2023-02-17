@@ -64,7 +64,7 @@ function transformMessages (messages) {
           current[arrayName] = [];
         }
         if (i === path.length - 1) {
-          current[arrayName][arrayIndex] = messages[key];
+          current[arrayName][arrayIndex] = messages[key] || undefined;
         } else {
           if (!current[arrayName][arrayIndex]) {
             current[arrayName][arrayIndex] = {};
@@ -73,8 +73,8 @@ function transformMessages (messages) {
         }
       } else {
         // object
-        if (i === path.length - 1) {
-          current[pathPart] = messages[key];
+        if (i === path.length - 1) { // last part
+          current[pathPart] = messages[key] || undefined
         } else {
           if (!current[pathPart]) {
             current[pathPart] = {};
