@@ -5,11 +5,18 @@ import helmet from "@/utils/helmet";
 import { service } from '../utils/service';
 import i18n from '../i18n';
 
+const fetchWithTimeout = (url, options, timeout = 5000) => {
+  const controller = new AbortController();
+  const id = setTimeout(() => controller.abort(), timeout);
+  return fetch(url, { ...options, signal: controller.signal }).finally(() => clearTimeout(id));
+};
+
 const fetchTranslations = async (languageKey) => {
   const projectPublishableToken = "52e5ff4b225147a9b11bb63865b2ae1f";
   const environment = "_production"; // or '_production'
   const url = `https://cdn.simplelocalize.io/${projectPublishableToken}/${environment}/${languageKey}`;
-  return fetch(url).then((data) => {
+  
+  return fetchWithTimeout(url, null, 10e3).then((data) => {
     if (!data.ok || data.status !== 200) {
       throw new Error(data.statusText);
     }
