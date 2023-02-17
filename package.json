@@ -92,6 +92,7 @@
     "eslint-plugin-standard": "^5.0.0",
     "eslint-plugin-vue": "^6.2.2",
     "eslint-plugin-vuetify": "^1.0.0-beta.5",
+    "esno": "^0.16.3",
     "husky": "^4.2.5",
     "js-yaml-loader": "^1.2.2",
     "raw-loader": "^4.0.2",
@@ -123,11 +124,6 @@
   ],
   "bugs": {
     "url": "https://github.com/penguin-statistics/frontend-v2/issues"
-  },
-  "config": {
-    "commitizen": {
-      "path": "./node_modules/cz-conventional-changelog"
-    }
   },
   "contributors": [
     "AlvISs_Reimu <alvissreimu@gmail.com> (https://github.com/AlvISsReimu)",

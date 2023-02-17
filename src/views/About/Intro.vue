@@ -108,7 +108,6 @@
               rel="noopener"
               class="mr-1"
               text
-              v-on="on"
             >
               <div class="d-flex align-center justify-content-center ">
                 <v-icon left>
