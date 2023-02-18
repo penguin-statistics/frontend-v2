@@ -912,6 +912,7 @@
   },
   "home": {
     "quickStart": {
+      "title": "Quick Start",
       "caption": "Click the\nbutton to expand menu and see more features",
       "actions": {
         "title": {

@@ -864,6 +864,7 @@
   },
   "home": {
     "quickStart": {
+      "title": "빠른 시작",
       "caption": "\n버튼을 클릭해 더 많은 기능을 확인하세요",
       "actions": {
         "title": {
