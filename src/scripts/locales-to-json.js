@@ -39,7 +39,7 @@ async function messagesFromSFCs() {
   const components = await listAllSFCsUnderDir("./src/components");
   const views = await listAllSFCsUnderDir("./src/views");
 
-  const i18nBlocks = await Promise.all(
+  const i18nBlocks = (await Promise.all(
     components
       .concat(views)
       .filter((el) => el.endsWith(".vue"))
@@ -49,15 +49,21 @@ async function messagesFromSFCs() {
         const messages = parsed.customBlocks.find(
           (block) => block.type === "i18n"
         );
-        return messages;
+        if (!messages) return null;
+
+        return {
+          file,
+          content: JSON.parse(messages.content),
+        }
       })
+  )).filter((el) => el !== null);
+
+  console.log(
+    `Found ${i18nBlocks.length} <i18n> blocks in ${components.length} components and ${views.length} views:\n\n`+
+    i18nBlocks.map((el) => el.file).join("\n")
   );
 
-  return i18nBlocks
-    .filter((el) => el)
-    .map((el) => {
-      return JSON.parse(el.content);
-    });
+  return i18nBlocks.map((el) => el.content);
 }
 
 function transformLocalizationFilesMessages(messages) {
