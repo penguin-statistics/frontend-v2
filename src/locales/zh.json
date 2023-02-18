@@ -955,8 +955,12 @@
     "github": "GitHub Issues",
     "nga": "NGA 讨论帖"
   },
-  "quickStart": "快速上手",
-  "caption": "点击左上角\n按钮展开菜单以查看更多功能",
+  "home": {
+    "quickStart": {
+      "title": "快速上手",
+      "caption": "点击左上角\n按钮展开菜单以查看更多功能"
+    }
+  },
   "subtitle": {
     "report": "我要汇报掉落",
     "byItem": "我该去哪刷石头？",

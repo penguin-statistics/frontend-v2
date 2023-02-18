@@ -867,8 +867,12 @@
     "github": "GitHub Issues",
     "nga": "NGA (포럼) 스레드"
   },
-  "quickStart": "빠른 시작",
-  "caption": "\n버튼을 클릭해 더 많은 기능을 확인하세요",
+  "home": {
+    "quickStart": {
+      "title": "빠른 시작",
+      "caption": "\n버튼을 클릭해 더 많은 기능을 확인하세요"
+    }
+  },
   "subtitle": {
     "report": "보고서를 작성하고 싶어요",
     "byItem": "원암은 어디서 캐나요?",

@@ -10,18 +10,18 @@
         mdi-speedometer
       </v-icon>
 
-      {{ $t('quickStart') }}
+      {{ $t('home.quickStart.title') }}
     </h1>
 
     <span class="subtitle-2 my-2 d-inline-block">
-      {{ $t('caption').split('\n')[0] }}
+      {{ $t('home.quickStart.caption').split('\n')[0] }}
       <v-icon
         small
         class="d-inline-block mt-n1"
       >
         mdi-menu
       </v-icon>
-      {{ $t('caption').split('\n')[1] }}
+      {{ $t('home.quickStart.caption').split('\n')[1] }}
     </span>
 
     <v-row

@@ -916,8 +916,12 @@
     "github": "GitHub Issues",
     "nga": "NGA Thread"
   },
-  "quickStart": "Quick Start",
-  "caption": "Click the\nbutton to expand menu and see more features",
+  "home": {
+    "quickStart": {
+      "title": "Quick Start",
+      "caption": "Click the\nbutton to expand menu and see more features"
+    }
+  },
   "subtitle": {
     "report": "I wanna report drops",
     "byItem": "Where should I farm rocks?",
