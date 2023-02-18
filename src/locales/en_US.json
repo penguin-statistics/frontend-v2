@@ -154,7 +154,7 @@
     },
     "copy": "Copy to Clipboard",
     "import": {
-      "success": "Successfully imported data for {amount} items",
+      "success": "Successfully imported {amount} items into ArkPlanner.",
       "unrecognized": "Import Failed: Unable to recognize config file",
       "invalidJSON": "Import Failed: Invalid JSON, please check your input"
     },
@@ -265,7 +265,7 @@
           "title": "Error in item quantity recognition",
           "subtitle": "Low confidence in the recognition result. Please check if the result is consistent with the screenshot."
         },
-        "3stars::False": "Suspected to be a non 3-stars clear",
+        "3stars::False": "Suspected to be a non-3-stars clear",
         "Stage::NotFound": {
           "title": "Cannot found any valid matching stage",
           "subtitle": "Error in stage recognition, or we do not count drop for this stage"
@@ -331,15 +331,15 @@
           "_name": "Overview"
         },
         "cherryPick": {
-          "disabled": "Unable to upload abnormal recognition result",
+          "disabled": "Unable to upload illegible recognition result",
           "accepted": "Upload this result",
-          "rejected": "Discard this result"
+          "rejected": "Discarded this result"
         },
-        "loadingImage": "Loading Screenshot Preview",
+        "loadingImage": "Loading screenshot preview",
         "abnormal": {
           "details": "Errors",
           "fatal": "This image failed to be recognized",
-          "hover": "Hover: see recognition results",
+          "hover": "Hover to see recognition results",
           "error": "This image failed to pass the legibility test"
         },
         "noResult": "No recognition results",
@@ -376,8 +376,8 @@
         "noFilename": "No Filename"
       },
       "notices": {
-        "confirm": "Click the image to enlarge it for double-checking.\nScreenshots which passed the legibility test have already been checked for upload.\nWith consideration of dataset accuracy, you are **disallowed** to check a screenshot that failed the legibility test for upload.",
-        "welcome": "Image files will be recognized **locally** using **WebAssembly** technology. We will not upload images to our server.\nPlease use screenshots taken within 36 hours that contains only 3-stars clear. Duplications will be detected and marked as *excluded*.\nPlease do not report the first-clear of a stage, and do not only report the clears where you were lucky - report all clears."
+        "confirm": "Click the image to enlarge it for double-checking.\nScreenshots that passed the legibility test have already been selected for upload.\nFor dataset accuracy considerations, screenshots that failed the legibility tests are **not allowed** from upload.",
+        "welcome": "Image files will be recognized **locally** using **WebAssembly** technology. We will not upload images to our server.\nPlease use screenshots taken within 36 hours that contain only 3-stars clear. Duplications will be detected and marked as *excluded*.\nPlease do not report the first-clear of a stage, and do not only report the clears where you were lucky - report all clears."
       },
       "queue": "Image Queue",
       "start": "Recognize {count} images",
@@ -393,7 +393,7 @@
       "filter": "Filter",
       "retry": "Failed to submit. Retrying..."
     },
-    "gacha": "Multiple results are allowed for the reports of this stage.",
+    "gacha": "Multiple results are allowed in a singular report for this stage.",
     "specialSideStory": {
       "dialog": {
         "cancel": "",
@@ -412,15 +412,15 @@
     },
     "alert": {
       "causes": {
-        "limitation": "Your current submission has a large deviation from our existing data. This submission could be marked as a false report, removing it from our data set.",
+        "limitation": "This report has a significant discrepancy with our current data. Continuing with the submission may result in it being flagged as an outlier and not included in the overall statistical data.",
         "noDrop": "No items selected."
       },
       "continue": {
-        "repeat": "Confirm submitting this record?",
-        "first": "Are you sure you want to submit this record?"
+        "repeat": "Confirm submitting this report?",
+        "first": "Are you sure you want to submit this report?"
       },
       "contact": {
-        "after": "Please indicate the stage name and drops. A screenshot is preferred for verification purposes. Our team will mark your report appropiately after verifying it.",
+        "after": "Please indicate the stage name and drops. A screenshot is also preferred for verification purposes. Our team will mark your report appropriately after verifying it.",
         "before": "If you are sure you got this drop in-game, submit this report and ",
         "activator": "contact us."
       },
@@ -453,7 +453,7 @@
       "NOT_FOUND": "Stage Not Found: The stage does not exist in the server you have selected."
     },
     "submit": "Submit",
-    "furniture": "Furniture Drop: {state}",
+    "furniture": "Furniture Dropped: {state}",
     "notices": {
       "rule_4": "Please make sure that you refresh a 3-stars clear.",
       "rule_5": "Please only submit drop data from the CN server.",
