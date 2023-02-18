@@ -27,7 +27,7 @@ const fetchTranslations = async (languageKey) => {
 const loadedLanguages = [];
 
 const languageMapping = {
-  en: "en",
+  en: "en_US",
   zh: "zh_CN",
   ja: "ja_JP",
   ko: "ko_KR",
