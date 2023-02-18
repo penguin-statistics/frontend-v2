@@ -13,7 +13,7 @@ const fetchWithTimeout = (url, options, timeout = 5000) => {
 
 const fetchTranslations = async (languageKey) => {
   const projectPublishableToken = "52e5ff4b225147a9b11bb63865b2ae1f";
-  const environment = "_production"; // or '_production'
+  const environment = "_latest";
   const url = `https://cdn.simplelocalize.io/${projectPublishableToken}/${environment}/${languageKey}`;
   
   return fetchWithTimeout(url, null, 10e3).then((data) => {
@@ -63,7 +63,7 @@ function transformMessages (messages) {
         if (!current[arrayName]) {
           current[arrayName] = [];
         }
-        if (i === path.length - 1) {
+        if (i === path.length - 1) { // last part of the path
           current[arrayName][arrayIndex] = messages[key] || undefined;
         } else {
           if (!current[arrayName][arrayIndex]) {
@@ -88,9 +88,6 @@ function transformMessages (messages) {
 }
 
 export function loadLanguageAsync(lang) {
-  // If the same language
-  if (i18n.locale === lang) return Promise.resolve();
-
   const mappedLang = languageMapping[lang] || lang;
 
   // If the language was already loaded
@@ -113,7 +110,7 @@ export function loadLanguageAsync(lang) {
 export default {
   methods: {
     async changeLocale (localeId, save = true) {
-      await loadLanguageAsync.bind(this)(localeId)
+      // await loadLanguageAsync.bind(this)(localeId)
 
       changeLocale.bind(this)(localeId, save);
     }

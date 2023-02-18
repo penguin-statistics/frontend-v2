@@ -1,8 +1,7 @@
 const messages = {
   app: {
     name: "펭귄 물류 데이터 분석 부서",
-    name_line1: "펭귄 물류",
-    name_line2: "데이터 분석 부서",
+    name_lines: "펭귄 물류\n데이터 분석 부서",
   },
   server: {
     name: "서버",

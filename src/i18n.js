@@ -1,10 +1,10 @@
 import Vue from 'vue'
 import VueI18n from 'vue-i18n'
 
-import enMessages from '@/locales/en'
-import zhMessages from '@/locales/zh'
-import jaMessages from '@/locales/ja'
-import koMessages from '@/locales/ko'
+import enMessages from '@/locales/en.json'
+import zhMessages from '@/locales/zh.json'
+import jaMessages from '@/locales/ja.json'
+import koMessages from '@/locales/ko.json'
 
 Vue.use(VueI18n)
 

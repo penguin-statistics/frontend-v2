@@ -1,8 +1,7 @@
 const messages = {
   app: {
     name: "Penguin Statistics",
-    name_line1: "Penguin Statistics",
-    name_line2: "",
+    name_lines: "Penguin Statistics",
   },
   server: {
     name: "Server",

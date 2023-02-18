@@ -4,7 +4,7 @@
       'drawer-logo primary': true,
       '': dark,
       '': !dark,
-      'drawer-logo--two-line': $t('app.name_line2') !== ''
+      'drawer-logo--two-line': $t('app.name_lines').split('\n').length > 1
     }"
   >
     <!--    <v-img-->
@@ -23,8 +23,9 @@
         justify="center"
         class="flex-column font-weight-bold text-glow--flipped"
       >
-        <span>{{ $t('app.name_line1') }}</span>
-        <span>{{ $t('app.name_line2') }}</span>
+        <span v-for="(line, index) in $t('app.name_lines').split('\n')" :key="index">
+          {{ line }}
+        </span>
       </v-row>
     </div>
   </div>

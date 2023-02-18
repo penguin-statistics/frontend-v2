@@ -1,31 +1,4 @@
-<i18n>
-  {
-    "en": {
-      "failed": {
-        "message": "Failed to log in: {message}",
-        "notfound": "This User ID cannot be found. Please note that this is not the ID in the game. You will get one after your first drop report."
-      }
-    },
-    "ja": {
-      "failed": {
-        "message": "ログイン失敗：{message}",
-        "notfound": "指定されたユーザーIDが見つかりませんでした。初めてドロップをアップロードすると、ユーザーIDを自動的に取得できます。"
-      }
-    },
-    "ko": {
-      "failed": {
-        "message": "로그인에 실패했습니다: {message}",
-        "notfound": "지정된 사용자 ID를 찾을 수 없습니다"
-      }
-    },
-    "zh": {
-      "failed": {
-        "message": "登录失败：{message}",
-        "notfound": "未找到此用户ID。请注意这不是游戏内的ID。在本站汇报一次掉落数据即可自动获得。"
-      }
-    }
-  }
-</i18n>
+
 
 <template>
   <v-card>
@@ -175,9 +148,9 @@ export default {
         .catch((err) => {
           Console.info('AccountManager', 'auth failed', err)
           if (err.response && err.response.status && err.response.status === 404) {
-            this.error = this.$t('failed.message', { message: this.$t('failed.notfound') })
+            this.error = this.$t('auth.failed.message', { message: this.$t('auth.failed.notfound') })
           } else {
-            this.error = this.$t('failed.message', { message: err.errorMessage })
+            this.error = this.$t('auth.failed.message', { message: err.errorMessage })
           }
         })
         .finally(() => {
