@@ -1,38 +1,3 @@
-<i18n>
-{
-	"en": {
-		"intro": {
-			"intro_0": "Welcome to Penguin Statistics!",
-			"intro_1": "Penguin Statistics is the Department of Data Analysis of Penguin Logistics. We devote ourselves to item drop analysis.",
-      "intro_2": "The current Penguin Statistics dataset consists reports from manual reports, screenshot recognitions via website and uploads from automated tools via our public APIs. To ensure accuracy of the dataset, Penguin Statistics team will perform automatic, scheduled and manual dataset maintenances for various reasons.",
-      "intro_3": "To ensure dataset transparency and list out dataset changes, Dataset Invalidation Transparency Report is now planned to be implemented."
-		}
-	},
-	"ja": {
-		"intro": {
-			"intro_0": "ペンギン急便データ統計処理部門へようこそ！",
-			"intro_1": "Penguin Statisticsはペンギン急便のデータ処理部門であり(嘘)、各作戦での素材ドロップの統計分析を行っています。",
-			"intro_2": "現在ほとんどのデータはユーザーの手によって手動でアップロードされており、誤った情報による影響を最小限に抑えるため、アップロードされた情報について多角的に審査しています。"
-		}
-	},
-	"ko": {
-		"intro": {
-			"intro_0": "펭귄 물류 데이터 분석 부서에 오신 것을 환영합니다!",
-			"intro_1": "저희는 펭귄 물류의 데이터 분석 부서입니다. 저희는 아이템 드랍에 대한 분석을 맡고 있습니다.",
-			"intro_2": "대부분의 데이터는 박사들에 의해 수동으로 제출되었으며, 저희 부서는 잘못된 보고서나 잘못된 결과를 방지하기 위해 전체적인 데이터 검사를 실시하고 있습니다."
-		}
-	},
-	"zh": {
-		"intro": {
-			"intro_0": "欢迎来到企鹅物流数据统计！",
-			"intro_1": "企鹅物流数据统计（Penguin Statistics）是企鹅物流旗下数据处理部门（误），致力于明日方舟各素材的掉率统计。",
-			"intro_2": "企鹅物流的现有数据集由玩家手动上报、截图识别与多方自动化工具自动上报合力维护。为了尽力保证数据集的准确性，企鹅物流数据团队会对掉落数据集进行多种方式的自动、定时及手动维护。",
-      "intro_3": "为保证数据集透明度、向用户说明数据集更改，数据作废透明度报告已在计划中。"
-		}
-	}
-}
-</i18n>
-
 <template>
   <v-card
     elevation="0"

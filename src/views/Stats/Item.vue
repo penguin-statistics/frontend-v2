@@ -1,32 +1,3 @@
-<i18n>
-{
-  "zh": {
-    "result": {
-      "name": "统计结果",
-      "title": "{item} 统计结果"
-    }
-  },
-  "en": {
-    "result": {
-      "name": "Statistics",
-      "title": "Statistics of {item}"
-    }
-  },
-  "ja": {
-    "result": {
-      "name": "統計結果",
-      "title": "{item} 統計結果"
-    }
-  },
-  "ko": {
-    "result": {
-      "name": "통계 결과",
-      "title": "{item}의 통계 결과"
-    }
-  }
-}
-</i18n>
-
 <template>
   <v-stepper
     v-model="step"
