@@ -99,7 +99,11 @@
       "minute": "{m}分 ",
       "second": "{s}秒"
     },
-    "copyWarning": "\n\n以上数据来自企鹅物流数据统计（{site}）"
+    "copyWarning": "\n\n以上数据来自企鹅物流数据统计（{site}）",
+    "confirmLeave": {
+      "title": "确定要离开此页面吗？",
+      "subtitle": "未保存的更改可能会丢失"
+    }
   },
   "stats": {
     "headers": {
@@ -205,7 +209,7 @@
       "analysis": "数据统计分析",
       "others": "..."
     },
-    "qq_group": "QQ群："
+    "qqGroup": "QQ 群："
   },
   "fetch": {
     "loading": "正在刷新数据...",
@@ -914,10 +918,6 @@
   "search": {
     "placeholder": "搜索...",
     "hint": "键入 物品全拼 拼音首字母 作战名 章节名 关卡编号 或 部分关卡/物品昵称"
-  },
-  "confirmLeave": {
-    "title": "确定要离开此页面吗？",
-    "subtitle": "未保存的更改可能会丢失"
   },
   "specials": {
     "mikubirthday2021": {

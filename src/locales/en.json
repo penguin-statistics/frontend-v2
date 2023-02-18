@@ -100,7 +100,11 @@
       "second": "{s}s"
     },
     "isAre": "is | are",
-    "copyWarning": "\n\nData from Penguin Statistics ({site})"
+    "copyWarning": "\n\nData from Penguin Statistics ({site})",
+    "confirmLeave": {
+      "title": "Are you sure to leave?",
+      "subtitle": "Unsaved changes may lost."
+    }
   },
   "stats": {
     "headers": {
@@ -206,7 +210,7 @@
       "analysis": "Data Analysis",
       "others": "..."
     },
-    "qq_group": "QQ Group: "
+    "qqGroup": "QQ Group: "
   },
   "fetch": {
     "loading": "Fetching Latest Data...",
@@ -875,10 +879,6 @@
   "search": {
     "placeholder": "Search...",
     "hint": "Type in Name for Stage, Zone or Item"
-  },
-  "confirmLeave": {
-    "title": "Are you sure to leave?",
-    "subtitle": "Unsaved changes may lost."
   },
   "specials": {
     "mikubirthday2021": {

@@ -99,7 +99,11 @@
       "minute": "{m}분",
       "second": "{s}초"
     },
-    "copyWarning": "\n\n펭귄 물류 데이터 분석 부서의 데이터 ({site})"
+    "copyWarning": "\n\n펭귄 물류 데이터 분석 부서의 데이터 ({site})",
+    "confirmLeave": {
+      "title": "정말로 떠나시겠습니까?",
+      "subtitle": "저장되지 않은 내용이 소실될 수 있습니다."
+    }
   },
   "stats": {
     "headers": {
@@ -199,7 +203,7 @@
       "analysis": "데이터 분석",
       "others": "..."
     },
-    "qq_group": "QQ 그룹 : "
+    "qqGroup": "QQ 그룹 : "
   },
   "fetch": {
     "loading": "데이터를 불러오는 중...",
@@ -828,10 +832,6 @@
   "search": {
     "placeholder": "검색...",
     "hint": "스테이지, 구역 또는 아이템 이름 입력"
-  },
-  "confirmLeave": {
-    "title": "정말로 떠나시겠습니까?",
-    "subtitle": "저장되지 않은 내용이 소실될 수 있습니다."
   },
   "specials": {
     "mikubirthday2021": {

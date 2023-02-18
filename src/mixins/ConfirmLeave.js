@@ -11,9 +11,9 @@ export default {
   },
   beforeRouteLeave (to, from, next) {
     if (this.confirmLeaveActive) {
-      this.$confirm(this.$t('confirmLeave.subtitle'), {
-        title: this.$t('confirmLeave.title'),
-        subtitle: this.$t('confirmLeave.subtitle'),
+      this.$confirm(this.$t('meta.confirmLeave.subtitle'), {
+        title: this.$t('meta.confirmLeave.title'),
+        subtitle: this.$t('meta.confirmLeave.subtitle'),
         color: 'error'
       })
         .then((permit) => {
