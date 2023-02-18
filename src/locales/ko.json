@@ -338,7 +338,6 @@
       "queue": "대기열",
       "start": "{count}개의 이미지 식별",
       "progress": "진행도",
-      "submit": "제출",
       "retry": "제출에 실패했습니다. 다시 시도하는 중...",
       "filter": "필터",
       "notices": {

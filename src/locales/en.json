@@ -345,7 +345,6 @@
       "queue": "Image Queue",
       "start": "Recognize {count} images",
       "progress": "Progress",
-      "submit": "Submit",
       "retry": "Failed to submit. Retrying...",
       "filter": "Filter",
       "notices": {

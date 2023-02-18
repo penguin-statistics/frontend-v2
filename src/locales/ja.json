@@ -650,7 +650,6 @@
   },
   "members": {
     "categories": {
-      "developers": "開発者",
       "others": "その他",
       "owner": "管理人",
       "translators": "翻訳者"
