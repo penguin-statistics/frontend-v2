@@ -743,18 +743,20 @@
   },
   "home": {
     "quickStart": {
-      "title": {
-        "report": "ドロップ報告",
-        "byItem": "素材ドロップ率",
-        "byStage": "作戦ドロップ率",
-        "planner": "周回計画"
-      },
       "caption": "左上の\nボタンをクリックしてメニューを展開すると、さらに多くの機能が表示されます。",
-      "subtitle": {
-        "report": "ドロップを報告したい",
-        "byItem": "岩ってどこ回ったらいいのかな",
-        "byStage": "1-7の泥率ってどれくらい？",
-        "planner": "周回アドバイスをください"
+      "actions": {
+        "title": {
+          "report": "ドロップ報告",
+          "byItem": "素材ドロップ率",
+          "byStage": "作戦ドロップ率",
+          "planner": "周回計画"
+        },
+        "subtitle": {
+          "report": "ドロップを報告したい",
+          "byItem": "岩ってどこ回ったらいいのかな",
+          "byStage": "1-7の泥率ってどれくらい？",
+          "planner": "周回アドバイスをください"
+        }
       }
     },
     "intro": {

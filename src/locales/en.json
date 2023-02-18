@@ -912,18 +912,20 @@
   },
   "home": {
     "quickStart": {
-      "title": {
-        "report": "Report Drops",
-        "byItem": "Item Drop Rates",
-        "byStage": "Stage Drop Rates",
-        "planner": "Farming Planner"
-      },
       "caption": "Click the\nbutton to expand menu and see more features",
-      "subtitle": {
-        "report": "I wanna report drops",
-        "byItem": "Where should I farm rocks?",
-        "byStage": "What are the drop rates of this stage?",
-        "planner": "Please gimme some farming advice"
+      "actions": {
+        "title": {
+          "report": "Report Drops",
+          "byItem": "Item Drop Rates",
+          "byStage": "Stage Drop Rates",
+          "planner": "Farming Planner"
+        },
+        "subtitle": {
+          "report": "I wanna report drops",
+          "byItem": "Where should I farm rocks?",
+          "byStage": "What are the drop rates of this stage?",
+          "planner": "Please gimme some farming advice"
+        }
       }
     },
     "intro": {

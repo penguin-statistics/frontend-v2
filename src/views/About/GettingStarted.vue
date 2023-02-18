@@ -101,26 +101,26 @@ export default {
         {
           route: 'StatsByItem',
           icon: 'mdi-treasure-chest',
-          title: 'home.quickStart.title.byItem',
-          subtitle: 'home.quickStart.subtitle.byItem'
+          title: 'home.quickStart.actions.title.byItem',
+          subtitle: 'home.quickStart.actions.subtitle.byItem'
         },
         {
           route: 'StatsByStage',
           icon: 'mdi-cube',
-          title: 'home.quickStart.title.byStage',
-          subtitle: 'home.quickStart.subtitle.byStage'
+          title: 'home.quickStart.actions.title.byStage',
+          subtitle: 'home.quickStart.actions.subtitle.byStage'
         },
         {
           route: 'ReportByZone',
           icon: 'mdi-upload',
-          title: 'home.quickStart.title.report',
-          subtitle: 'home.quickStart.subtitle.report'
+          title: 'home.quickStart.actions.title.report',
+          subtitle: 'home.quickStart.actions.subtitle.report'
         },
         {
           route: 'Planner',
           icon: 'mdi-directions-fork',
-          title: 'home.quickStart.title.planner',
-          subtitle: 'home.quickStart.subtitle.planner'
+          title: 'home.quickStart.actions.title.planner',
+          subtitle: 'home.quickStart.actions.subtitle.planner'
         },
       ]
     }

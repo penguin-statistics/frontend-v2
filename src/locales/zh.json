@@ -951,19 +951,21 @@
   },
   "home": {
     "quickStart": {
-      "title": {
-        "report": "掉落汇报",
-        "byItem": "素材掉率",
-        "byStage": "作战掉率",
-        "planner": "刷图规划"
-      },
       "caption": "点击左上角\n按钮展开菜单以查看更多功能",
-      "subtitle": {
-        "report": "我要汇报掉落",
-        "byItem": "我该去哪刷石头？",
-        "byStage": "这图掉率如何？",
-        "search": "光速直达统计结果",
-        "planner": "请给我刷图建议"
+      "actions": {
+        "title": {
+          "report": "掉落汇报",
+          "byItem": "素材掉率",
+          "byStage": "作战掉率",
+          "planner": "刷图规划"
+        },
+        "subtitle": {
+          "report": "我要汇报掉落",
+          "byItem": "我该去哪刷石头？",
+          "byStage": "这图掉率如何？",
+          "search": "光速直达统计结果",
+          "planner": "请给我刷图建议"
+        }
       }
     },
     "intro": {
