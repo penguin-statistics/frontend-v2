@@ -169,7 +169,7 @@
 
         <span
           class="scroll-keyword text--text"
-        >{{ $t('scroll') }}</span>
+        >{{ $t('stats.scroll') }}</span>
 
         <v-icon
           :size="20"

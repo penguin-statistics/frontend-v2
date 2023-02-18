@@ -182,7 +182,8 @@
       }
     },
     "name": "统计结果",
-    "title": "{stage} 统计结果"
+    "title": "{stage} 统计结果",
+    "scroll": "左右滑动查看数据"
   },
   "contribute": {
     "repo": "项目仓库：",
@@ -935,7 +936,6 @@
     "success": "更新啦！"
   },
   "switchedTo": "服务器已切换至",
-  "scroll": "左右滑动查看数据",
   "link": {
     "docs": {
       "title": "开发者中心",

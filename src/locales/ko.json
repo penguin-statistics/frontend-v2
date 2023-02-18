@@ -176,7 +176,8 @@
       }
     },
     "name": "통계 결과",
-    "title": "{stage}의 통계 결과"
+    "title": "{stage}의 통계 결과",
+    "scroll": "스크롤로 세부 사항을 볼 수 있습니다"
   },
   "contribute": {
     "repo": "프로젝트 저장소: ",
@@ -848,7 +849,6 @@
     "refresh": "Refresh",
     "success": "Website Updated!"
   },
-  "scroll": "스크롤로 세부 사항을 볼 수 있습니다",
   "link": {
     "docs": {
       "title": "개발자용",

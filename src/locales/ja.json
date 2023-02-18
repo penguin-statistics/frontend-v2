@@ -161,7 +161,8 @@
       }
     },
     "name": "統計結果",
-    "title": "{stage} 統計結果"
+    "title": "{stage} 統計結果",
+    "scroll": "左右にスクロールでデータを表示"
   },
   "contribute": {
     "repo": "プロジェクトリポジトリ：",
@@ -727,7 +728,6 @@
     "success": "Website Updated!"
   },
   "switchedTo": "サーバー切り替え中",
-  "scroll": "左右にスクロールでデータを表示",
   "link": {
     "docs": {
       "title": "開発者向けのリソース",
