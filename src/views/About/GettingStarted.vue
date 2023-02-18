@@ -14,14 +14,14 @@
     </h1>
 
     <span class="subtitle-2 my-2 d-inline-block">
-      {{ $t('caption')[0] }}
+      {{ $t('caption').split('\n')[0] }}
       <v-icon
         small
         class="d-inline-block mt-n1"
       >
         mdi-menu
       </v-icon>
-      {{ $t('caption')[1] }}
+      {{ $t('caption').split('\n')[1] }}
     </span>
 
     <v-row

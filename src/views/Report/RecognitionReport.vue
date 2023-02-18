@@ -103,7 +103,7 @@
                   >
                     <ol>
                       <li
-                        v-for="notice in $t('report.recognition.notices.welcome')"
+                        v-for="notice in $t('report.recognition.notices.welcome').split('\n')"
                         :key="notice"
                         v-marked
                         class="markdown-content-inline"
@@ -238,7 +238,7 @@
                       <li
                         v-for="(notice, i) in $t(
                           'report.recognition.notices.confirm'
-                        )"
+                        ).split('\n')"
                         :key="i"
                         v-marked
                         v-text="notice"

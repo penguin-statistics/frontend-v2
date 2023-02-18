@@ -64,7 +64,7 @@
             class="markdown-content my-2"
           >
             <li
-              v-for="msg in $t('report.recognition.report.partialFailedDesc')"
+              v-for="msg in $t('report.recognition.report.partialFailedDesc').split('\n')"
               :key="msg"
               v-marked
               v-text="msg"

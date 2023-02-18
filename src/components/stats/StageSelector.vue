@@ -141,7 +141,7 @@
 
                     <template v-else>
                       <div
-                        v-for="text in $t('stage.actions.star.empty')"
+                        v-for="text in $t('stage.actions.star.empty').split('\n')"
                         :key="text"
                         class="caption text-left justify-center grey--text"
                         v-text="text"
@@ -186,7 +186,7 @@
                     </template>
                     <template v-else>
                       <div
-                        v-for="text in $t('stage.actions.history.empty')"
+                        v-for="text in $t('stage.actions.history.empty').split('\n')"
                         :key="text"
                         class="caption text-left justify-center grey--text"
                         v-text="text"

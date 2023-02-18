@@ -324,12 +324,7 @@
         "allSucceeded": "{count} battle results successfully reported",
         "partialSucceeded": "Only {count} battle results successfully reported",
         "partialFailed": "{count} failed battle result reports. Please follow the troubleshooting steps below",
-        "partialFailedDesc": [
-          "Check your network connection: The upload may be failed if the network connection is poor.",
-          "In order to ensure that the entire site data set is not affected by external attacks, if you still cannot upload after multiple retries, your submission volume may have triggered the reporting limit. Please try again after 24 hours to upload the remaining drop reports.",
-          "Your IP may be shared with others, because individuals cannot be located due to the nature of IP. In this case, please try to switch your mobile network or WiFi to retry recognition, or you can retry uploading after 24 hours.",
-          "To prevent retransmission attacks, we will attach a timestamp to your request; if the time of your device is too far from the standard time, the upload may fail. Please try to calibrate the device time and try again."
-        ],
+        "partialFailedDesc": "Check your network connection: The upload may be failed if the network connection is poor.\nIn order to ensure that the entire site data set is not affected by external attacks, if you still cannot upload after multiple retries, your submission volume may have triggered the reporting limit. Please try again after 24 hours to upload the remaining drop reports.\nYour IP may be shared with others, because individuals cannot be located due to the nature of IP. In this case, please try to switch your mobile network or WiFi to retry recognition, or you can retry uploading after 24 hours.\nTo prevent retransmission attacks, we will attach a timestamp to your request; if the time of your device is too far from the standard time, the upload may fail. Please try to calibrate the device time and try again.",
         "caption": "Thanks for reporting. Your data will be revealed in the global dataset of website in 20 minutes at most because of cache."
       },
       "states": {
@@ -349,16 +344,8 @@
       "retry": "Failed to submit. Retrying...",
       "filter": "Filter",
       "notices": {
-        "welcome": [
-          "Image files will be recognized **locally** using **WebAssembly** technology. We will not upload images to our server.",
-          "Please use screenshots taken within 36 hours that contains only 3-stars clear. Duplications will be detected and marked as *excluded*.",
-          "Please do not report the first-clear of a stage, and do not only report the clears where you were lucky - report all clears."
-        ],
-        "confirm": [
-          "Click the image to enlarge it for double-checking.",
-          "Screenshots which passed the legibility test have already been checked for upload.",
-          "With consideration of dataset accuracy, you are **disallowed** to check a screenshot that failed the legibility test for upload."
-        ]
+        "welcome": "Image files will be recognized **locally** using **WebAssembly** technology. We will not upload images to our server.\nPlease use screenshots taken within 36 hours that contains only 3-stars clear. Duplications will be detected and marked as *excluded*.\nPlease do not report the first-clear of a stage, and do not only report the clears where you were lucky - report all clears.",
+        "confirm": "Click the image to enlarge it for double-checking.\nScreenshots which passed the legibility test have already been checked for upload.\nWith consideration of dataset accuracy, you are **disallowed** to check a screenshot that failed the legibility test for upload."
       },
       "exceptions": {
         "Fingerprint::Same": {
@@ -565,17 +552,11 @@
         "activate": "Star",
         "activated": "Starred",
         "deactivate": "Click to Cancel Star",
-        "empty": [
-          "Currently you've not starred any stages",
-          "You can star a stage by going to its 'Quick Access' section in its details panel."
-        ]
+        "empty": "Currently you've not starred any stages\nYou can star a stage by going to its 'Quick Access' section in its details panel."
       },
       "history": {
         "name": "Recently Accessed",
-        "empty": [
-          "No recent accessed stages available",
-          "After you've visit any stage pages, a record will appear at here."
-        ],
+        "empty": "No recent accessed stages available\nAfter you've visit any stage pages, a record will appear at here.",
         "clear": "Clear"
       },
       "links": {
@@ -799,18 +780,12 @@
     "required": "Required"
   },
   "quotes": {
-    "doYouKnow": [
-      "Do You Know? Ptilopsis' feather is sooo cute! o(*≧▽≦)ツ"
-    ]
+    "doYouKnow": "Do You Know? Ptilopsis' feather is sooo cute! o(*≧▽≦)ツ"
   },
   "credits": {
     "material": {
       "title": "Content Credits",
-      "content": [
-        "Penguin Statistics utilizes (including but not limited to) pictures, animations, audio, original text and other works for the purpose of better reflecting the corresponding elements in the game and enhance the user experience. The copyright of such works belongs to the provider of the game, Shanghai Hypergryph Network Technology Co., Ltd. and/or its affiliates, including but not limited to YOSTAR (HONG KONG) LIMITED, 株式会社Yostar, YOSTAR LIMITED, 龍成網路, etc,.",
-        "Penguin Statistics utilizes some assets from PRTS Wiki (http://prts.wiki) and has changed some of the assets without modifying its original meaning.",
-        "Penguin Statistics used the slightly self-modified version of the Bender font, provided by the Free Fonts Project under a usage basis claimed on the official website of the Project ( http://jovanny.ru ) of \"All fonts from the Free Fonts Project can be used both for commercial and personal purposes without any limitations.\". Penguin Statistics hereby specially thanks and appreciates the Bender font for releasing their awesome font under such license."
-      ]
+      "content": "Penguin Statistics utilizes (including but not limited to) pictures, animations, audio, original text and other works for the purpose of better reflecting the corresponding elements in the game and enhance the user experience. The copyright of such works belongs to the provider of the game, Shanghai Hypergryph Network Technology Co., Ltd. and/or its affiliates, including but not limited to YOSTAR (HONG KONG) LIMITED, 株式会社Yostar, YOSTAR LIMITED, 龍成網路, etc,.\nPenguin Statistics utilizes some assets from PRTS Wiki (http://prts.wiki) and has changed some of the assets without modifying its original meaning.\nPenguin Statistics used the slightly self-modified version of the Bender font, provided by the Free Fonts Project under a usage basis claimed on the official website of the Project ( http://jovanny.ru ) of \"All fonts from the Free Fonts Project can be used both for commercial and personal purposes without any limitations.\". Penguin Statistics hereby specially thanks and appreciates the Bender font for releasing their awesome font under such license."
     },
     "source": {
       "title": "Open Source Licenses"
@@ -882,10 +857,7 @@
   "pattern": {
     "name": "Drop Patterns",
     "empty": "(No Drops)",
-    "error": [
-      "Drop Patterns for this Stage",
-      "Currently not Available"
-    ]
+    "error": "Drop Patterns for this Stage\nCurrently not Available"
   },
   "share": {
     "name": "Share",
@@ -945,10 +917,7 @@
     "nga": "NGA Thread"
   },
   "quickStart": "Quick Start",
-  "caption": [
-    "Click the",
-    "button to expand menu and see more features"
-  ],
+  "caption": "Click the\nbutton to expand menu and see more features",
   "subtitle": {
     "report": "I wanna report drops",
     "byItem": "Where should I farm rocks?",

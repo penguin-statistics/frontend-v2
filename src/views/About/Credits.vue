@@ -10,7 +10,7 @@
         {{ $t('credits.material.title') }}
       </v-subheader>
       <p
-        v-for="text in $t('credits.material.content')"
+        v-for="text in $t('credits.material.content').split('\n')"
         :key="text"
         v-marked
         class="px-4"

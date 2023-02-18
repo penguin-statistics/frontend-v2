@@ -8,7 +8,7 @@ import koMessages from '@/locales/ko.json'
 
 Vue.use(VueI18n)
 
-export default new VueI18n({
+const i18n = new VueI18n({
   locale: 'zh',
   fallbackLocale: 'en',
   silentFallbackWarn: true,
@@ -20,3 +20,6 @@ export default new VueI18n({
     ko: koMessages
   }
 })
+
+window.i18n = i18n
+export default i18n

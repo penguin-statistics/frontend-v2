@@ -14,7 +14,7 @@ Vue.component('DoYouKnow', {
   //   }
   // },
   render: function (createElement) {
-    const quotes = i18n.t('quotes.doYouKnow')
+    const quotes = i18n.t('quotes.doYouKnow').split('\n')
     const index = Math.floor(Math.random() * quotes.length)
 
     return createElement(
