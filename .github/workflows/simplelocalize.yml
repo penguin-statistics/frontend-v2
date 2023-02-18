@@ -1,7 +1,5 @@
 name: Update SimpleLocalize Translations
 
-# api key is available at secrets SIMPLELOCALIZE_API_KEY
-
 on:
   schedule:
     - cron: '0 0 * * *'
