@@ -101,26 +101,26 @@ export default {
         {
           route: 'StatsByItem',
           icon: 'mdi-treasure-chest',
-          title: 'title.byItem',
-          subtitle: 'subtitle.byItem'
+          title: 'home.quickStart.title.byItem',
+          subtitle: 'home.quickStart.subtitle.byItem'
         },
         {
           route: 'StatsByStage',
           icon: 'mdi-cube',
-          title: 'title.byStage',
-          subtitle: 'subtitle.byStage'
+          title: 'home.quickStart.title.byStage',
+          subtitle: 'home.quickStart.subtitle.byStage'
         },
         {
           route: 'ReportByZone',
           icon: 'mdi-upload',
-          title: 'title.report',
-          subtitle: 'subtitle.report'
+          title: 'home.quickStart.title.report',
+          subtitle: 'home.quickStart.subtitle.report'
         },
         {
           route: 'Planner',
           icon: 'mdi-directions-fork',
-          title: 'title.planner',
-          subtitle: 'subtitle.planner'
+          title: 'home.quickStart.title.planner',
+          subtitle: 'home.quickStart.subtitle.planner'
         },
       ]
     }
