@@ -1,17 +1,3 @@
-<i18n>
-  {
-    "zh": {
-      "switchedTo": "服务器已切换至"
-    },
-    "en": {
-      "switchedTo": "Server switched to"
-    },
-    "ja": {
-      "switchedTo": "サーバー切り替え中"
-    }
-  }
-</i18n>
-
 <template>
   <v-overlay
     color="rgb(18, 18, 18)"
