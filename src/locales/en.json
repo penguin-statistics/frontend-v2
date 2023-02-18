@@ -903,12 +903,6 @@
       "subtitle": "Contains resources for developing on top of Penguin Statistics' data"
     }
   },
-  "intro": {
-    "intro_0": "Welcome to Penguin Statistics!",
-    "intro_1": "Penguin Statistics is the Department of Data Analysis of Penguin Logistics. We devote ourselves to item drop analysis.",
-    "intro_2": "The current Penguin Statistics dataset consists reports from manual reports, screenshot recognitions via website and uploads from automated tools via our public APIs. To ensure accuracy of the dataset, Penguin Statistics team will perform automatic, scheduled and manual dataset maintenances for various reasons.",
-    "intro_3": "To ensure dataset transparency and list out dataset changes, Dataset Invalidation Transparency Report is now planned to be implemented."
-  },
   "contact": {
     "title": "Contact us",
     "body": "If you have any questions or suggestions, feel free to contact the webmaster. (English is fine)",
@@ -931,6 +925,12 @@
         "byStage": "What are the drop rates of this stage?",
         "planner": "Please gimme some farming advice"
       }
+    },
+    "intro": {
+      "intro_0": "Welcome to Penguin Statistics!",
+      "intro_1": "Penguin Statistics is the Department of Data Analysis of Penguin Logistics. We devote ourselves to item drop analysis.",
+      "intro_2": "The current Penguin Statistics dataset consists reports from manual reports, screenshot recognitions via website and uploads from automated tools via our public APIs. To ensure accuracy of the dataset, Penguin Statistics team will perform automatic, scheduled and manual dataset maintenances for various reasons.",
+      "intro_3": "To ensure dataset transparency and list out dataset changes, Dataset Invalidation Transparency Report is now planned to be implemented."
     }
   },
   "links": {

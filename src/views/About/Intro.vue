@@ -29,12 +29,12 @@
             }"
             class="font-weight-bold mb-4 display-1"
           >
-            {{ $t('intro.intro_0') }}
+            {{ $t('home.intro.intro_0') }}
           </h1>
           <p class="subtitle-1 line-height-wide">
-            {{ $t('intro.intro_1') }}
+            {{ $t('home.intro.intro_1') }}
             <br>
-            {{ $t('intro.intro_2') }}
+            {{ $t('home.intro.intro_2') }}
           </p>
         </v-col>
 
