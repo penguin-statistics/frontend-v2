@@ -124,6 +124,12 @@ export default {
     return {
       logs: [
         {
+          version: "v3.11.0",
+          date: "2023-02-18T20:40:00+0000",
+          changes: `## 添加
+1. SimpleLocalize 翻译平台与若干内部本地化资源优化`,
+        },
+        {
           version: "v3.10.0",
           date: "2022-11-26T03:39:00+0000",
           changes: `## 添加
