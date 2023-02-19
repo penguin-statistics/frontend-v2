@@ -604,6 +604,7 @@
         "disclaimer": ""
       }
     },
+    "cancel": "",
     "type": {
       "matrix": "",
       "trend": ""
@@ -769,6 +770,20 @@
     },
     "separator": "、",
     "isAre": ""
+  },
+  "matrixCategory": {
+    "automated": {
+      "tooltip": "",
+      "label": "自動"
+    },
+    "all": {
+      "label": "全体"
+    },
+    "manual": {
+      "tooltip": "",
+      "label": "手動"
+    },
+    "switch": "集計範囲"
   },
   "members": {
     "responsibilities": {
@@ -977,20 +992,6 @@
   },
   "network": {
     "error": "ネットワークエラー。インターネット接続をご確認の上もう一度お試しください"
-  },
-  "matrixCategory": {
-    "auto": {
-      "label": "自動",
-      "tooltip": ""
-    },
-    "all": {
-      "label": "全体"
-    },
-    "manual": {
-      "tooltip": "",
-      "label": "手動"
-    },
-    "switch": "集計範囲"
   },
   "search": {
     "hint": "素材名・作战名・ステージコード・章タイトル・イベント名（漢字・ふりがな・カタカナ・ローマ字）で検索",

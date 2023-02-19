@@ -604,6 +604,7 @@
         "disclaimer": "All data produced by the \"Advanced Query\" feature is protected by our site's \"License.\" Penguin Statistics does not make any commitments or endorsements regarding the data produced by the Advanced Query feature."
       }
     },
+    "cancel": "Cancel",
     "type": {
       "matrix": "Statistics",
       "trend": "Trends"
@@ -769,6 +770,20 @@
     },
     "separator": ", ",
     "isAre": "is | are"
+  },
+  "matrixCategory": {
+    "automated": {
+      "tooltip": "Auto: Such Matrix Category contains data from third-party tools that automatically reports drop data.",
+      "label": "Auto"
+    },
+    "all": {
+      "label": "All"
+    },
+    "manual": {
+      "tooltip": "Manual: Such Matrix Category contains data only from the \"Report Drops by Stage\" and \"Report Drops by Recognition\" features from the Penguin Statistics site.",
+      "label": "Manual"
+    },
+    "switch": "Matrix Category"
   },
   "members": {
     "responsibilities": {
@@ -977,20 +992,6 @@
   },
   "network": {
     "error": "Network error, please check your internet connection and try again."
-  },
-  "matrixCategory": {
-    "auto": {
-      "label": "Auto",
-      "tooltip": "Auto: Such Matrix Category contains data from third-party tools that automatically reports drop data."
-    },
-    "all": {
-      "label": "All"
-    },
-    "manual": {
-      "tooltip": "Manual: Such Matrix Category contains data only from the \"Report Drops by Stage\" and \"Report Drops by Recognition\" features from the Penguin Statistics site.",
-      "label": "Manual"
-    },
-    "switch": "Matrix Category"
   },
   "search": {
     "hint": "Type in Name for Stage, Zone or Item",

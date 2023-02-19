@@ -604,6 +604,7 @@
         "disclaimer": "“고급 쿼리” 기능으로 생성된 모든 데이터는 이 사이트의 “데이터 라이센스 협약”으로 보호됩니다. 펭귄 통계는 “고급 쿼리” 기능으로 생성된 데이터에 대하여 어떠한 형태의 약속이나 보증도 하지 않습니다."
       }
     },
+    "cancel": "",
     "type": {
       "matrix": "통계",
       "trend": "추세"
@@ -769,6 +770,20 @@
     },
     "separator": ", ",
     "isAre": ""
+  },
+  "matrixCategory": {
+    "automated": {
+      "tooltip": "",
+      "label": ""
+    },
+    "all": {
+      "label": ""
+    },
+    "manual": {
+      "tooltip": "",
+      "label": ""
+    },
+    "switch": ""
   },
   "members": {
     "responsibilities": {
@@ -977,20 +992,6 @@
   },
   "network": {
     "error": "네트워크 오류. 인터넷 연결을 확인한 후 다시 시도하세요."
-  },
-  "matrixCategory": {
-    "auto": {
-      "label": "",
-      "tooltip": ""
-    },
-    "all": {
-      "label": ""
-    },
-    "manual": {
-      "tooltip": "",
-      "label": ""
-    },
-    "switch": ""
   },
   "search": {
     "hint": "스테이지, 구역 또는 아이템 이름 입력",

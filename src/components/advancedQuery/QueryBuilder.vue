@@ -67,6 +67,7 @@
               :server="query.server"
             />
             <QuerySelectorSource v-model="query.source" />
+            <QuerySelectorCategory v-model="query.category" />
             <QuerySelectorInterval
               v-model="query.interval"
               @update:type="(e) => (query.type = e)"
@@ -138,7 +139,7 @@
               color="error"
               @click="cancel"
             >
-              取消查询
+              {{ $t('query.cancel') }}
             </v-btn>
           </v-col>
         </v-row>
@@ -158,10 +159,12 @@ import query from "@/apis/query";
 import marshaller from "@/utils/marshaller";
 import QuerySelectorInterval from "@/components/advancedQuery/selectors/QuerySelectorInterval";
 import snackbar from "@/utils/snackbar";
+import QuerySelectorCategory from "@/components/advancedQuery/selectors/QuerySelectorCategory.vue";
 
 export default {
   name: "QueryBuilder",
   components: {
+    QuerySelectorCategory,
     QuerySelectorInterval,
     QuerySelectorSource,
     QuerySelectorItem,

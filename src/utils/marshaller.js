@@ -60,6 +60,7 @@ export default {
         itemIds: query.item,
         server: query.server,
         isPersonal: query.source === 'personal',
+        sourceCategory: query.category,
         start,
         end
       }

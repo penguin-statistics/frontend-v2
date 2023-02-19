@@ -85,7 +85,8 @@ export default {
           item: [],
           timeRange: [],
           server: this.$store.getters['dataSource/server'],
-          source: 'global',
+          source: this.$store.getters['dataSource/source'],
+          category: this.$store.getters['dataSource/category'],
           interval: null
         }
       ],
