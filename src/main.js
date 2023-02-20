@@ -13,7 +13,6 @@ import environment from '@/utils/environment'
 
 import './injections'
 import PenguinProbe from '@/utils/probe'
-import './registerServiceWorker'
 
 if (!window.Intl) require('intl-collator')
 
