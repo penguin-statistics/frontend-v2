@@ -4,7 +4,6 @@ import { mapGetters } from 'vuex'
 import helmet from "@/utils/helmet";
 import { service } from '../utils/service';
 import i18n from '../i18n';
-import {transformMessages} from "@/utils/i18n";
 
 const fetchWithTimeout = (url, options, timeout = 5000) => {
   const controller = new AbortController();
@@ -56,7 +55,7 @@ export function loadLanguageAsync(lang) {
   changeLocale.bind(this)(lang, false);
 
   return fetchTranslations(mappedLang).then((messages) => {
-    const transformedMessages = Object.freeze(transformMessages(messages));
+    const transformedMessages = Object.freeze(messages);
     Console.info("i18n", "loaded", lang, "translations:", transformedMessages);
     i18n.setLocaleMessage(lang, transformedMessages);
     loadedLanguages.push(mappedLang);
@@ -68,7 +67,7 @@ export function loadLanguageAsync(lang) {
 export default {
   methods: {
     async changeLocale (localeId, save = true) {
-      // await loadLanguageAsync.bind(this)(localeId)
+      await loadLanguageAsync.bind(this)(localeId)
 
       changeLocale.bind(this)(localeId, save);
     }
