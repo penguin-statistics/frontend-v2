@@ -22,10 +22,10 @@
         v-haptic
         small
         value="automated"
-        :tip="$t('matrixCategory.auto.tooltip')"
+        :tip="$t('matrixCategory.automated.tooltip')"
         :tooltip-props="{ 'max-width': 300 }"
       >
-        {{ $t("matrixCategory.auto.label") }}
+        {{ $t("matrixCategory.automated.label") }}
       </TooltipBtn>
       <TooltipBtn
         v-haptic

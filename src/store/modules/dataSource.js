@@ -5,7 +5,7 @@ export default {
     source: "global",
     /** current data source server "CN" | "US" | ... */
     server: "CN",
-    /** current matrix categories "all" | "auto" | "manual" */
+    /** current matrix categories "all" | "automated" | "manual" */
     category: "all",
   },
   mutations: {
