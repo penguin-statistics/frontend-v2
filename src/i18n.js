@@ -6,6 +6,8 @@ import zhMessages from '@/locales/zh_CN.json'
 import jaMessages from '@/locales/ja_JP.json'
 import koMessages from '@/locales/ko_KR.json'
 
+import {transformMessages} from "@/utils/i18n";
+
 Vue.use(VueI18n)
 
 const i18n = new VueI18n({
@@ -14,10 +16,10 @@ const i18n = new VueI18n({
   silentFallbackWarn: true,
   formatFallbackMessages: true,
   messages: {
-    en: enMessages,
-    zh: zhMessages,
-    ja: jaMessages,
-    ko: koMessages
+    en: transformMessages(enMessages),
+    zh: transformMessages(zhMessages),
+    ja: transformMessages(jaMessages),
+    ko: transformMessages(koMessages)
   }
 })
 

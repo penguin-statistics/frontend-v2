@@ -394,22 +394,7 @@
       "retry": "Failed to submit. Retrying..."
     },
     "gacha": "Multiple results are allowed in a singular report for this stage.",
-    "specialSideStory": {
-      "dialog": {
-        "cancel": "",
-        "title": "",
-        "confirmTimerDone": "",
-        "confirmTimerPending": ""
-      }
-    },
     "usage": "Increase drop amount by left click, decrease by right click",
-    "dossolesHoliday": {
-      "title": {
-        "inner": "",
-        "tmpl": ""
-      },
-      "content": ""
-    },
     "alert": {
       "causes": {
         "limitation": "This report has a significant discrepancy with our current data. Continuing with the submission may result in it being flagged as an outlier and not included in the overall statistical data.",
@@ -620,52 +605,6 @@
       "empty": "This query returned 0 results. Please check your query parameters."
     }
   },
-  "settings": {
-    "push": {
-      "categories": {
-        "ImportantTimePoint": {
-          "subtitle": "",
-          "title": ""
-        },
-        "Maintenance": {
-          "subtitle": "",
-          "title": ""
-        },
-        "ClientUpgrade": {
-          "title": "",
-          "subtitle": ""
-        },
-        "_name": "",
-        "NewStage": {
-          "subtitle": "",
-          "title": ""
-        }
-      },
-      "language": ""
-    },
-    "data": {
-      "server": "Local Data includes servers: ",
-      "size": "Local Data size: ",
-      "reset": {
-        "title": "Reset All",
-        "subtitle": "This operation will delete all local data and settings you have set. After the deletion, all settings will be reset to default, all data needs to be downloaded again, and the web page will be reloaded. Are you sure to continue?"
-      }
-    },
-    "category": {
-      "data": "Data",
-      "about": "About",
-      "appearance": "Appearance"
-    },
-    "optimization": {
-      "lowData": {
-        "title": "Low Data Mode",
-        "subtitle": "Low Data Mode will stop fetching nonessential resources, such as the zone backgrounds in stage selector and the website background, to help reduce network data use.",
-        "active": "Low Data Mode is Active"
-      }
-    },
-    "storageIssue": "Storage issues detected. Application may malfunction. If this warning keeps showing, try to clear local storage by using \"Reset All\" under the \"Settings\" dialog in the menu.",
-    "iosSystemSettings": "Language & Privacy Settings"
-  },
   "item": {
     "choose": {
       "name": "Choose Item"
@@ -819,6 +758,30 @@
       "twitter": "Twitter",
       "email": "Email"
     }
+  },
+  "settings": {
+    "data": {
+      "server": "Local Data includes servers: ",
+      "size": "Local Data size: ",
+      "reset": {
+        "title": "Reset All",
+        "subtitle": "This operation will delete all local data and settings you have set. After the deletion, all settings will be reset to default, all data needs to be downloaded again, and the web page will be reloaded. Are you sure to continue?"
+      }
+    },
+    "category": {
+      "data": "Data",
+      "about": "About",
+      "appearance": "Appearance"
+    },
+    "optimization": {
+      "lowData": {
+        "title": "Low Data Mode",
+        "subtitle": "Low Data Mode will stop fetching nonessential resources, such as the zone backgrounds in stage selector and the website background, to help reduce network data use.",
+        "active": "Low Data Mode is Active"
+      }
+    },
+    "storageIssue": "Storage issues detected. Application may malfunction. If this warning keeps showing, try to clear local storage by using \"Reset All\" under the \"Settings\" dialog in the menu.",
+    "iosSystemSettings": "Language & Privacy Settings"
   },
   "credits": {
     "source": {

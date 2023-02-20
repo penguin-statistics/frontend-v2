@@ -768,8 +768,7 @@
       "end": "”",
       "start": "“"
     },
-    "separator": "、",
-    "isAre": ""
+    "separator": "、"
   },
   "matrixCategory": {
     "automated": {

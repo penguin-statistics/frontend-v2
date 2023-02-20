@@ -7,34 +7,19 @@
       "notSelected": "（選択されていない）",
       "inBetween": "{0} ~ {1}"
     },
+    "title": "{stage} 統計結果",
     "headers": {
-      "recruitRecruits": "",
       "pattern": "パターン",
-      "recruitObservations": "",
       "quantity": "ドロップ数",
-      "recruitTag": "",
       "times": "サンプル数",
       "stage": "ステージ",
       "apPPR": "１個あたりの必要理性期待値",
-      "itemDrops": "",
       "clearTime": "最速クリアタイム",
       "timeRange": "期間",
       "percentage": "ドロップ率",
       "apCost": "理性",
       "itemPerTime": "1個あたりの必要時間期待値",
       "item": "アイテム"
-    },
-    "title": "{stage} 統計結果",
-    "headerDesc": {
-      "times": "",
-      "timeRange": "",
-      "clearTime": "",
-      "percentage": "",
-      "patternPercentage": "",
-      "itemPerTime": "",
-      "apPPR": "",
-      "apCost": "",
-      "quantity": ""
     },
     "site": {
       "generating": {
@@ -52,9 +37,6 @@
       "stages": "ステージサンプル数ランキング",
       "all": "全期間",
       "items": "アイテムドロップ数ランキング"
-    },
-    "itemPreview": {
-      "more": ""
     },
     "filter": {
       "type": {
@@ -131,26 +113,7 @@
           }
         }
       },
-      "success": "",
       "name": "リセット"
-    },
-    "actions": {
-      "link": {
-        "share": "",
-        "generate": "",
-        "generating": ""
-      },
-      "importExport": "@:(planner.actions.import)/@:(planner.actions.export)",
-      "config": {
-        "_name": "コンフィグレーション",
-        "import": "インポート",
-        "share": "エクスポート"
-      },
-      "export": "エクスポート",
-      "calculating": "少女計算中…",
-      "calculate": "計算を行う",
-      "_name": "データ",
-      "import": "インポート"
     },
     "copy": "クリップボードにコピー",
     "import": {
@@ -169,6 +132,19 @@
       "byProduct": "加工副産物を考慮する",
       "requireExp": "大量の経験値が必要"
     },
+    "actions": {
+      "importExport": "@:(planner.actions.import)/@:(planner.actions.export)",
+      "config": {
+        "_name": "コンフィグレーション",
+        "import": "インポート",
+        "share": "エクスポート"
+      },
+      "export": "エクスポート",
+      "calculating": "少女計算中…",
+      "calculate": "計算を行う",
+      "_name": "データ",
+      "import": "インポート"
+    },
     "need": "必要数",
     "notices": {
       "autoExistence": "ArkPlannerは、選択したサーバーで開いていないステージを自動的に非表示にします"
@@ -184,7 +160,6 @@
       "KR": "韓国版"
     },
     "name": "サーバー",
-    "selected": "",
     "switch": "ゲームサーバー切替"
   },
   "zone": {
@@ -194,9 +169,7 @@
       "ACTIVITY_PENDING": "イベント（近日開催）",
       "WEEKLY": "物資調達",
       "ACTIVITY_CLOSED": "イベント（終了）",
-      "ACTIVITY": "",
       "MAINLINE": "メインテーマ",
-      "RECRUIT": "",
       "ACTIVITY_OPEN": "イベント（開催中）"
     },
     "subTypes": {
@@ -298,27 +271,6 @@
         "title": "レポート詳細",
         "partialFailedDesc": "●　ネットワーク接続の状況を確認：接続不安定・接続中断でアップロード失敗が発生します。\n●　大量のレポートしましたか：データベースを外部の攻撃から守るために、一日のレポート数には上限があります。何度も試してもアップロードできない場合、上限に達した可能性がありますので、24時間後に再試行してください。\n●　共有IPアドレスを使用していますか：一部の地域には、ご使用のIPアドレスは他人と共有している可能性があります。この場合、ネット環境の切り替え（ルーター再起動、WiFi・4Gの切り替え）をしてから再試行してください。また、24時間後に再試行してください。\n●　デバイスの時刻を確認：重複レポ攻撃を防止対策として、端末からのリクエストにはタイムスタンプを付与します。ご使用のデバイスの時刻が正確な時刻と大きく異なる場合、アップロード失敗が発生しますので、デバイスの時刻を調整してください。",
         "submit": "選択した {count} 件の認識結果をアップロード"
-      },
-      "defectReport": {
-        "dialog": {
-          "section": {
-            "environment": "",
-            "originalImage": "",
-            "recognitionResult": ""
-          },
-          "title": "",
-          "subtitle": ""
-        },
-        "snackbar": {
-          "succeeded": "",
-          "failed": ""
-        },
-        "action": "",
-        "reported": "",
-        "state": {
-          "preflight": "",
-          "uploading": ""
-        }
       },
       "confirm": {
         "overview": {
@@ -447,11 +399,6 @@
     },
     "undoSuccess": "キャンセルしました",
     "name": "報告",
-    "closedReason": {
-      "INVALID": "",
-      "EXPIRED": "",
-      "NOT_FOUND": ""
-    },
     "submit": "送信",
     "furniture": "家具ドロップ：{state}",
     "notices": {
@@ -486,7 +433,6 @@
       "caption": "左上の\nボタンをクリックしてメニューを展開すると、さらに多くの機能が表示されます。"
     },
     "intro": {
-      "intro_3": "",
       "intro_2": "現在ほとんどのデータはユーザーの手によって手動でアップロードされており、誤った情報による影響を最小限に抑えるため、アップロードされた情報について多角的に審査しています。",
       "intro_1": "Penguin Statisticsはペンギン急便のデータ処理部門であり(嘘)、各作戦での素材ドロップの統計分析を行っています。",
       "intro_0": "ペンギン急便データ統計処理部門へようこそ！"
@@ -561,110 +507,7 @@
     "languages": "言語切替",
     "refreshData": "データ更新",
     "home": "トップページ",
-    "siteStats": "全サイト統計データ",
-    "_beta": ""
-  },
-  "query": {
-    "operation": {
-      "add": "",
-      "inProgress": "",
-      "execute": ""
-    },
-    "selector": {
-      "item": {
-        "title": "",
-        "selected": "",
-        "subtitle": "",
-        "unspecified": ""
-      },
-      "interval": {
-        "unspecified": "",
-        "title": "",
-        "subtitle": ""
-      },
-      "timeRange": {
-        "presets": {
-          "title": "",
-          "end": "",
-          "start": ""
-        },
-        "subtitle": "",
-        "title": ""
-      },
-      "stage": {
-        "title": "",
-        "subtitle": ""
-      }
-    },
-    "panel": {
-      "results": "",
-      "builder": "",
-      "footer": {
-        "cache": "",
-        "disclaimer": ""
-      }
-    },
-    "cancel": "",
-    "type": {
-      "matrix": "",
-      "trend": ""
-    },
-    "title": {
-      "main": "",
-      "comparison": ""
-    },
-    "result": {
-      "main": "",
-      "comparison": "",
-      "hideTime": "",
-      "empty": ""
-    }
-  },
-  "settings": {
-    "push": {
-      "categories": {
-        "ImportantTimePoint": {
-          "subtitle": "",
-          "title": ""
-        },
-        "Maintenance": {
-          "subtitle": "",
-          "title": ""
-        },
-        "ClientUpgrade": {
-          "title": "",
-          "subtitle": ""
-        },
-        "_name": "",
-        "NewStage": {
-          "subtitle": "",
-          "title": ""
-        }
-      },
-      "language": ""
-    },
-    "data": {
-      "server": "キャッシュされたのサーバー：",
-      "size": "ローカルデータ：",
-      "reset": {
-        "title": "ローカルデータと設定初期化",
-        "subtitle": "すべてのローカルデータと設定を削除します。その後ローカル設定はすべて初期化され、ページを刷新します。データを再読み込みする必要があります。本当に続けますか？"
-      }
-    },
-    "category": {
-      "data": "設定とデータ",
-      "about": "当サイトについて",
-      "appearance": "スタイル"
-    },
-    "optimization": {
-      "lowData": {
-        "title": "軽量モード",
-        "subtitle": "軽量モードとは、作戦リストや全ステーションなどの画像リソースを無効し、データ通信量の消費を抑えるモードです。",
-        "active": "軽量モード有効中"
-      }
-    },
-    "storageIssue": "",
-    "iosSystemSettings": "言語とプライバシーの設定"
+    "siteStats": "全サイト統計データ"
   },
   "item": {
     "choose": {
@@ -677,8 +520,6 @@
       "MATERIAL": "素材",
       "ACTIVITY_ITEM": "イベントアイテム"
     },
-    "undefined": "",
-    "name": "",
     "related": "関連素材"
   },
   "fetch": {
@@ -689,7 +530,6 @@
         "period": "サーバーイベントデータ",
         "personalPatternMatrix": "個人ドロップパターンデータ",
         "trends": "履歴レポートデータ",
-        "config": "",
         "stats": "サイト統計データ",
         "globalPatternMatrix": "全体ドロップパターンデータ",
         "items": "素材データ",
@@ -760,34 +600,40 @@
       "true": "有り"
     },
     "confirmLeave": {
-      "title": "このページを離れてもよろしいですか？",
-      "subtitle": ""
+      "title": "このページを離れてもよろしいですか？"
     },
     "notfound": "ここはどこ¿¿¿",
     "quotation": {
       "end": "」",
       "start": "「"
     },
-    "separator": "、",
-    "isAre": ""
+    "separator": "、"
   },
-  "matrixCategory": {
-    "automated": {
-      "tooltip": "",
-      "label": "自動"
+  "settings": {
+    "data": {
+      "server": "キャッシュされたのサーバー：",
+      "size": "ローカルデータ：",
+      "reset": {
+        "title": "ローカルデータと設定初期化",
+        "subtitle": "すべてのローカルデータと設定を削除します。その後ローカル設定はすべて初期化され、ページを刷新します。データを再読み込みする必要があります。本当に続けますか？"
+      }
     },
-    "all": {
-      "label": "全体"
+    "category": {
+      "data": "設定とデータ",
+      "about": "当サイトについて",
+      "appearance": "スタイル"
     },
-    "manual": {
-      "tooltip": "",
-      "label": "手動"
+    "optimization": {
+      "lowData": {
+        "title": "軽量モード",
+        "subtitle": "軽量モードとは、作戦リストや全ステーションなどの画像リソースを無効し、データ通信量の消費を抑えるモードです。",
+        "active": "軽量モード有効中"
+      }
     },
-    "switch": "集計範囲"
+    "iosSystemSettings": "言語とプライバシーの設定"
   },
   "members": {
     "responsibilities": {
-      "v1frontend": "",
       "customersupport": "コンサルタント",
       "native": "アプリ開発",
       "localization_ko": "韓国語化",
@@ -800,7 +646,6 @@
       "maintenance": "DevOps",
       "backend": "バックエンド",
       "statistics": "データ統計解析",
-      "localization_en": "",
       "_name": "コントリビューション",
       "bulkupload": "一括アップロード",
       "arkplanner": "ArkPlannerの著者"
@@ -808,9 +653,7 @@
     "categories": {
       "others": "その他",
       "owner": "管理人",
-      "translators": "翻訳者",
-      "maintainer": "",
-      "contributors": ""
+      "translators": "翻訳者"
     },
     "socials": {
       "qq": "QQ",
@@ -818,23 +661,6 @@
       "weibo": "Weibo",
       "twitter": "Twitter",
       "email": "Email"
-    }
-  },
-  "credits": {
-    "source": {
-      "title": ""
-    },
-    "material": {
-      "content": "",
-      "title": ""
-    }
-  },
-  "version": {
-    "upgrade": {
-      "subtitle": "",
-      "unable": "",
-      "title": "",
-      "action": ""
     }
   },
   "stage": {
@@ -898,20 +724,6 @@
     "switch": "データソース",
     "personal": "個人"
   },
-  "mirrors": {
-    "cn": {
-      "notification": ""
-    },
-    "global": {
-      "notification": ""
-    },
-    "_notification": {
-      "ignore": {
-        "title": "",
-        "subtitle": ""
-      }
-    }
-  },
   "share": {
     "text": {
       "item": "素材 {name}",
@@ -927,19 +739,6 @@
   "auth": {
     "details": "アカウント",
     "loggedAs": "Logged in as",
-    "forgot": {
-      "penguinIdHistory": {
-        "title": "",
-        "deleteUserId": "",
-        "tips": "",
-        "loginAsUserId": "",
-        "lastLoginAt": "",
-        "noData": ""
-      },
-      "subtitle": "",
-      "title": "",
-      "activator": ""
-    },
     "login": "ログイン",
     "logoutPrompt": "本当にログアウトしますか？",
     "logout": "ログアウト",
@@ -951,24 +750,6 @@
     },
     "userId": "ユーザーID",
     "notice": "ユーザーIDはアップロードの際にのみ使用します。このIDを使用し各機器を登録することでデータを1つのアカウントに統合することが可能となり、アップロードの管理や個人のドロップデータを調べることが可能となります。"
-  },
-  "donate": {
-    "regulation": {
-      "cnMirror": "",
-      "app": ""
-    },
-    "methods": {
-      "wechatPay": "WeChat Pay",
-      "paypal": "PayPal で寄付",
-      "alipay": "Alipay"
-    },
-    "redirectToApp": "{app} アプリで寄付します",
-    "donate_3": "ポッキーやアップルパイでも可",
-    "donate_4": "を寄付頂けると非常にありがたいです。",
-    "donate_1": "アクセス数が増加し、サーバーが負荷に耐えることが出来なくなっています。サーバーの",
-    "donate_2": "運営費用",
-    "accountBook": "帐簿",
-    "donate_0": "ユーザー数が急増し、サーバーの月額は上昇、企鹅数据の運営は危機的状況に...。管理人の紅白は大好きな企鹅数据を守るため、自分に出来ることは何か？紅白が悩んで見つけ出した答えは「アイドルになること」！？"
   },
   "app": {
     "name": "ペンギン急便データ統計処理部門",
@@ -982,8 +763,19 @@
     "name": "統計結果",
     "title": "{item} 統計結果"
   },
-  "validator": {
-    "required": ""
+  "donate": {
+    "methods": {
+      "wechatPay": "WeChat Pay",
+      "paypal": "PayPal で寄付",
+      "alipay": "Alipay"
+    },
+    "redirectToApp": "{app} アプリで寄付します",
+    "donate_3": "ポッキーやアップルパイでも可",
+    "donate_4": "を寄付頂けると非常にありがたいです。",
+    "donate_1": "アクセス数が増加し、サーバーが負荷に耐えることが出来なくなっています。サーバーの",
+    "donate_2": "運営費用",
+    "accountBook": "帐簿",
+    "donate_0": "ユーザー数が急増し、サーバーの月額は上昇、企鹅数据の運営は危機的状況に...。管理人の紅白は大好きな企鹅数据を守るため、自分に出来ることは何か？紅白が悩んで見つけ出した答えは「アイドルになること」！？"
   },
   "pattern": {
     "empty": "ドロップなし",
@@ -997,13 +789,17 @@
     "hint": "素材名・作战名・ステージコード・章タイトル・イベント名（漢字・ふりがな・カタカナ・ローマ字）で検索",
     "placeholder": "検索..."
   },
-  "specials": {
-    "mikubirthday2021": {
-      "caption": ""
-    }
-  },
-  "quotes": {
-    "doYouKnow": ""
+  "matrixCategory": {
+    "automated": {
+      "label": "自動"
+    },
+    "all": {
+      "label": "全体"
+    },
+    "manual": {
+      "label": "手動"
+    },
+    "switch": "集計範囲"
   },
   "clipboard": {
     "success": "クリップボードに保存しました",

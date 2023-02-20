@@ -7,23 +7,6 @@
       "notSelected": "(선택되지 않음)",
       "inBetween": "{0} - {1}"
     },
-    "headers": {
-      "recruitRecruits": "",
-      "pattern": "패턴",
-      "recruitObservations": "",
-      "quantity": "드랍 수",
-      "recruitTag": "",
-      "times": "표본 수",
-      "stage": "스테이지",
-      "apPPR": "아이템당 필요 이성",
-      "itemDrops": "아이템 드랍 합계",
-      "clearTime": "최단 클리어 시간",
-      "timeRange": "집계 기간",
-      "percentage": "백분율",
-      "apCost": "이성",
-      "itemPerTime": "아이템당 시간",
-      "item": "아이템"
-    },
     "title": "{stage}의 통계 결과",
     "headerDesc": {
       "times": "이 스테이지에서의 보고서 수",
@@ -35,6 +18,20 @@
       "apPPR": "1개의 아이템을 얻기 위해 필요한 이성의 기대치",
       "apCost": "이 스테이지에 필요한 이성",
       "quantity": "이 스테이지에서의 모든 드랍 합계"
+    },
+    "headers": {
+      "pattern": "패턴",
+      "quantity": "드랍 수",
+      "times": "표본 수",
+      "stage": "스테이지",
+      "apPPR": "아이템당 필요 이성",
+      "itemDrops": "아이템 드랍 합계",
+      "clearTime": "최단 클리어 시간",
+      "timeRange": "집계 기간",
+      "percentage": "백분율",
+      "apCost": "이성",
+      "itemPerTime": "아이템당 시간",
+      "item": "아이템"
     },
     "site": {
       "generating": {
@@ -52,9 +49,6 @@
       "stages": "스테이지 순위",
       "all": "전체 시간",
       "items": "아이템 순위"
-    },
-    "itemPreview": {
-      "more": ""
     },
     "filter": {
       "type": {
@@ -155,7 +149,6 @@
     "copy": "클립보드로 복사",
     "import": {
       "success": "{amount}개 항목에 대한 데이터를 성공적으로 가져왔습니다.",
-      "unrecognized": "",
       "invalidJSON": "가져오지 못했습니다. 데이터 구문 분석 오류입니다. 입력값을 확인해 주세요."
     },
     "options": {
@@ -196,7 +189,6 @@
       "ACTIVITY_CLOSED": "이벤트 (종료)",
       "ACTIVITY": "이벤트",
       "MAINLINE": "메인",
-      "RECRUIT": "",
       "ACTIVITY_OPEN": "이벤트 (개방 중)"
     },
     "subTypes": {
@@ -299,27 +291,6 @@
         "partialFailedDesc": "네트워크 연결을 확인하세요: 좋지 않은 네트워크 환경에서는 업로드에 실패할 수 있습니다.\n외부 공격으로부터 데이터가 오염되는 것을 막기 위한 제출 가능 횟수 제한에 도달했을 수 있습니다. 남은 보고서는 24시간 후에 다시 시도해 주세요.\nIP의 특성상 개개인을 추적할 수 없으므로 대중망에서 IP가 다른 사람들과 공유되고 있을 수 있습니다. 모바일 네트워크나 Wi-Fi를 전환하고 다시 시도하거나, 24시간 후에 다시 시도해 주세요.\n재전송 공격을 방지하기 위해, 요청에 타임스탬프가 부여되고 있습니다. 기기의 시간이 표준 시간과 크게 다를 경우 업로드가 실패할 수 있습니다. 기기의 시간을 조정하고 다시 시도해 주세요.",
         "submit": "{count}개의 작전 결과 제출"
       },
-      "defectReport": {
-        "dialog": {
-          "section": {
-            "environment": "",
-            "originalImage": "",
-            "recognitionResult": ""
-          },
-          "title": "",
-          "subtitle": ""
-        },
-        "snackbar": {
-          "succeeded": "",
-          "failed": ""
-        },
-        "action": "",
-        "reported": "",
-        "state": {
-          "preflight": "",
-          "uploading": ""
-        }
-      },
       "confirm": {
         "overview": {
           "server": "데이터 서버",
@@ -394,22 +365,7 @@
       "retry": "제출에 실패했습니다. 다시 시도하는 중..."
     },
     "gacha": "이 스테이지에서는 여러 개의 결과를 보고서에 제출할 수 있습니다.",
-    "specialSideStory": {
-      "dialog": {
-        "cancel": "",
-        "title": "",
-        "confirmTimerDone": "",
-        "confirmTimerPending": ""
-      }
-    },
     "usage": "좌클릭시 드랍 개수가 증가하며, 우클릭시 감소합니다",
-    "dossolesHoliday": {
-      "title": {
-        "inner": "",
-        "tmpl": ""
-      },
-      "content": ""
-    },
     "alert": {
       "causes": {
         "limitation": "지금 제출되려는 보고서는 저희가 가진 데이터와 큰 차이가 있습니다, 이 보고서를 제출하면, 거짓 보고서로 판단되어 삭제될 수 있습니다.",
@@ -486,7 +442,6 @@
       "caption": "\n버튼을 클릭해 더 많은 기능을 확인하세요"
     },
     "intro": {
-      "intro_3": "",
       "intro_2": "대부분의 데이터는 박사들에 의해 수동으로 제출되었으며, 저희 부서는 잘못된 보고서나 잘못된 결과를 방지하기 위해 전체적인 데이터 검사를 실시하고 있습니다.",
       "intro_1": "저희는 펭귄 물류의 데이터 분석 부서입니다. 저희는 아이템 드랍에 대한 분석을 맡고 있습니다.",
       "intro_0": "펭귄 물류 데이터 분석 부서에 오신 것을 환영합니다!"
@@ -604,7 +559,6 @@
         "disclaimer": "“고급 쿼리” 기능으로 생성된 모든 데이터는 이 사이트의 “데이터 라이센스 협약”으로 보호됩니다. 펭귄 통계는 “고급 쿼리” 기능으로 생성된 데이터에 대하여 어떠한 형태의 약속이나 보증도 하지 않습니다."
       }
     },
-    "cancel": "",
     "type": {
       "matrix": "통계",
       "trend": "추세"
@@ -619,52 +573,6 @@
       "hideTime": "상세한 시간 숨기기",
       "empty": "이 쿼리는 0개의 결과를 반환했습니다. 매개변수를 확인하세요."
     }
-  },
-  "settings": {
-    "push": {
-      "categories": {
-        "ImportantTimePoint": {
-          "subtitle": "",
-          "title": ""
-        },
-        "Maintenance": {
-          "subtitle": "",
-          "title": ""
-        },
-        "ClientUpgrade": {
-          "title": "",
-          "subtitle": ""
-        },
-        "_name": "",
-        "NewStage": {
-          "subtitle": "",
-          "title": ""
-        }
-      },
-      "language": ""
-    },
-    "data": {
-      "server": "로컬 데이터의 서버 목록: ",
-      "size": "로컬 데이터 크기: ",
-      "reset": {
-        "title": "전부 초기화",
-        "subtitle": "이 작업은 모든 로컬 데이터를 삭제하고 설정을 초기화할 것입니다. 초기화 후, 모든 설정이 기본값으로 돌아가며, 모든 데이터를 다시 다운로드해야 하고, 웹페이지가 새로고침될 것입니다. 정말로 계속하시겠습니까?"
-      }
-    },
-    "category": {
-      "data": "데이터",
-      "about": "정보",
-      "appearance": "페이지"
-    },
-    "optimization": {
-      "lowData": {
-        "title": "데이터 절약 모드",
-        "subtitle": "데이터 절약 모드는 스테이지 선택 시의 구역 배경 이미지나 웹사이트의 배경 이미지같은 불필요한 리소스 요청을 줄여 데이터 사용량을 줄이도록 도와줍니다.",
-        "active": "데이터 절약 모드 활성화됨"
-      }
-    },
-    "storageIssue": "데이터 오류가 감지되었습니다. 비정상적으로 작동할 수 있습니다. 이 경고가 계속 표시된다면, “설정”에서 “전부 초기화”를 사용해 로컬 데이터를 초기화해보세요.",
-    "iosSystemSettings": ""
   },
   "item": {
     "choose": {
@@ -768,22 +676,7 @@
       "end": "”",
       "start": "“"
     },
-    "separator": ", ",
-    "isAre": ""
-  },
-  "matrixCategory": {
-    "automated": {
-      "tooltip": "",
-      "label": ""
-    },
-    "all": {
-      "label": ""
-    },
-    "manual": {
-      "tooltip": "",
-      "label": ""
-    },
-    "switch": ""
+    "separator": ", "
   },
   "members": {
     "responsibilities": {
@@ -819,6 +712,29 @@
       "twitter": "Twitter",
       "email": "Email"
     }
+  },
+  "settings": {
+    "data": {
+      "server": "로컬 데이터의 서버 목록: ",
+      "size": "로컬 데이터 크기: ",
+      "reset": {
+        "title": "전부 초기화",
+        "subtitle": "이 작업은 모든 로컬 데이터를 삭제하고 설정을 초기화할 것입니다. 초기화 후, 모든 설정이 기본값으로 돌아가며, 모든 데이터를 다시 다운로드해야 하고, 웹페이지가 새로고침될 것입니다. 정말로 계속하시겠습니까?"
+      }
+    },
+    "category": {
+      "data": "데이터",
+      "about": "정보",
+      "appearance": "페이지"
+    },
+    "optimization": {
+      "lowData": {
+        "title": "데이터 절약 모드",
+        "subtitle": "데이터 절약 모드는 스테이지 선택 시의 구역 배경 이미지나 웹사이트의 배경 이미지같은 불필요한 리소스 요청을 줄여 데이터 사용량을 줄이도록 도와줍니다.",
+        "active": "데이터 절약 모드 활성화됨"
+      }
+    },
+    "storageIssue": "데이터 오류가 감지되었습니다. 비정상적으로 작동할 수 있습니다. 이 경고가 계속 표시된다면, “설정”에서 “전부 초기화”를 사용해 로컬 데이터를 초기화해보세요."
   },
   "credits": {
     "source": {
@@ -925,8 +841,6 @@
     }
   },
   "auth": {
-    "details": "",
-    "loggedAs": "",
     "forgot": {
       "penguinIdHistory": {
         "title": "기존에 사용한 PenguinID",
@@ -952,24 +866,6 @@
     "userId": "사용자 ID",
     "notice": "사용자 ID는 당신의 보고서를 확인하는데 사용됩니다. 이 ID를 다른 기기에 입력하면 편리하게 보고서를 관리하고 검사할 수 있습니다."
   },
-  "donate": {
-    "regulation": {
-      "cnMirror": "",
-      "app": ""
-    },
-    "methods": {
-      "wechatPay": "WeChat Pay",
-      "paypal": "PayPal로 기부하기",
-      "alipay": "Alipay"
-    },
-    "redirectToApp": "{app}으로 기부하기",
-    "donate_3": "빼빼로나 애플파이도 환영합니다!",
-    "donate_4": "를 기부해주신다면, 매우 감사할 것입니다!",
-    "donate_1": "사용자 수가 늘어나면서 서버에 무리가 가고 있습니다. 만약 몇몇 박사들이",
-    "donate_2": "서버비",
-    "accountBook": "장부",
-    "donate_0": "사용자 수와 서버비가 늘어나면서 펭귄 통계는 위기에 처해 있습니다. 관리자는 사랑하는 펭귄 통계를 지키기 위해..."
-  },
   "app": {
     "name": "펭귄 물류 데이터 분석 부서",
     "name_lines": "펭귄 물류\n데이터 분석 부서"
@@ -984,6 +880,20 @@
   },
   "validator": {
     "required": "필수"
+  },
+  "donate": {
+    "methods": {
+      "wechatPay": "WeChat Pay",
+      "paypal": "PayPal로 기부하기",
+      "alipay": "Alipay"
+    },
+    "redirectToApp": "{app}으로 기부하기",
+    "donate_3": "빼빼로나 애플파이도 환영합니다!",
+    "donate_4": "를 기부해주신다면, 매우 감사할 것입니다!",
+    "donate_1": "사용자 수가 늘어나면서 서버에 무리가 가고 있습니다. 만약 몇몇 박사들이",
+    "donate_2": "서버비",
+    "accountBook": "장부",
+    "donate_0": "사용자 수와 서버비가 늘어나면서 펭귄 통계는 위기에 처해 있습니다. 관리자는 사랑하는 펭귄 통계를 지키기 위해..."
   },
   "pattern": {
     "empty": "(드랍 없음)",
@@ -1014,6 +924,5 @@
       "title": "개발자용",
       "subtitle": "펭귄 물류의 자료를 이용한 개발을 위한 정보를 담고 있습니다"
     }
-  },
-  "switchedTo": ""
+  }
 }

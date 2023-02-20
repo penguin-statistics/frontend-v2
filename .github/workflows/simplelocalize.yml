@@ -17,15 +17,15 @@ jobs:
         uses: actions/checkout@v3
         with:
           token: ${{ secrets.PAT_FOR_RELEASE_TAGGER }}
-      
+
       - name: "Download translations"
         uses: simplelocalize/download@v2.1
         with:
           apiKey: ${{ secrets.SIMPLELOCALIZE_API_KEY }}
           downloadPath: "./src/locales/{lang}.json"
           downloadFormat: "single-language-json"
-          downloadOptions: "WRITE_NESTED"
-      
+          downloadOptions: "WRITE_NESTED,ONLY_TRANSLATED"
+
       - name: "Commit translations"
         uses: EndBug/add-and-commit@v9
         with:
