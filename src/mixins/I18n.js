@@ -1,14 +1,15 @@
 import dayjs from 'dayjs'
 import Console from '@/utils/Console'
-import { mapGetters } from 'vuex'
+import {mapGetters} from 'vuex'
 import helmet from "@/utils/helmet";
-import { service } from '../utils/service';
+import {service} from '../utils/service';
 import i18n from '../i18n';
+import {transformMessages} from "@/utils/i18n";
 
 const fetchWithTimeout = (url, options, timeout = 5000) => {
   const controller = new AbortController();
   const id = setTimeout(() => controller.abort(), timeout);
-  return fetch(url, { ...options, signal: controller.signal }).finally(() => clearTimeout(id));
+  return fetch(url, {...options, signal: controller.signal}).finally(() => clearTimeout(id));
 };
 
 const fetchTranslations = async (languageKey) => {
@@ -33,7 +34,7 @@ const languageMapping = {
   ko: "ko_KR",
 }
 
-function changeLocale (localeId, save) {
+function changeLocale(localeId, save) {
   dayjs.locale(localeId);
   Console.info("i18n", "locale:", localeId, "| saving to vuex:", save);
   if (save) this.$store.commit("settings/changeLocale", localeId);
@@ -55,7 +56,7 @@ export function loadLanguageAsync(lang) {
   changeLocale.bind(this)(lang, false);
 
   return fetchTranslations(mappedLang).then((messages) => {
-    const transformedMessages = Object.freeze(messages);
+    const transformedMessages = Object.freeze(transformMessages(messages));
     Console.info("i18n", "loaded", lang, "translations:", transformedMessages);
     i18n.setLocaleMessage(lang, transformedMessages);
     loadedLanguages.push(mappedLang);
@@ -66,7 +67,7 @@ export function loadLanguageAsync(lang) {
 
 export default {
   methods: {
-    async changeLocale (localeId, save = true) {
+    async changeLocale(localeId, save = true) {
       await loadLanguageAsync.bind(this)(localeId)
 
       changeLocale.bind(this)(localeId, save);
