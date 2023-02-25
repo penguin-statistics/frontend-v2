@@ -36,3 +36,8 @@ Thanks for the kindness support for this Open Source project from:
 ## How to contribute?
 Our contribute guideline can be found at [Penguin Developers](https://developer.penguin-stats.io). PRs are always more than welcome!
 
+## Contributors
+
+This project is made possible by the following contributors. Contributions are always welcome!
+
+[![Contributors](https://contrib.rocks/image?repo=penguin-statistics/frontend-v2)](https://github.com/penguin-statistics/frontend-v2/graphs/contributors)
