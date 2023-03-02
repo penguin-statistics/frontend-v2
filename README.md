@@ -31,11 +31,11 @@ Our contribute guideline can be found at [Penguin Developers](https://developer.
 
 ## Supports
 Thanks for the kindness support for this Open Source project from:
-<li><a href="https://sentry.io"><img src="https://raw.githubusercontent.com/penguin-statistics/frontend-v2/master/docs/images/sentry.io.svg" height="35" /> Sentry.io</a></li>
-<li><a href="https://www.browserstack.com/"><img src="https://raw.githubusercontent.com/penguin-statistics/frontend-v2/master/docs/images/browserstack-logo.svg" height="35" /></a></li>
-<li><a href="https://jetbrains.com/?from=penguin-statistics"><img src="https://resources.jetbrains.com/storage/products/company/brand/logos/jb_beam.png" height="35" /></a></li>
-<li><a href="https://saucelabs.com"><img src="https://opensource.saucelabs.com/images/opensauce/powered-by-saucelabs-badge-red.png?sanitize=true" height="35" /></a></li>
-<li><a href="https://simplelocalize.io"><img src="https://raw.githubusercontent.com/penguin-statistics/frontend-v2/master/docs/images/simplelocalize.io.png" height="35" /></a></li>
+<li><a href="https://sentry.io"><img src="https://raw.githubusercontent.com/penguin-statistics/frontend-v2/master/docs/images/sentry.io.svg" height="50" /></a></li>
+<li><a href="https://www.browserstack.com/"><img src="https://raw.githubusercontent.com/penguin-statistics/frontend-v2/master/docs/images/browserstack-logo.svg" height="50" /></a></li>
+<li><a href="https://jetbrains.com/?from=penguin-statistics"><img src="https://resources.jetbrains.com/storage/products/company/brand/logos/jb_beam.png" height="50" /></a></li>
+<li><a href="https://saucelabs.com"><img src="https://opensource.saucelabs.com/images/opensauce/powered-by-saucelabs-badge-red.png?sanitize=true" height="50" /></a></li>
+<li><a href="https://simplelocalize.io"><img src="https://raw.githubusercontent.com/penguin-statistics/frontend-v2/master/docs/images/simplelocalize.io.png" height="50" /></a></li>
 
 
 ## Contributors
