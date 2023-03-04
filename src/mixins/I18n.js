@@ -1,28 +1,27 @@
-import dayjs from 'dayjs'
-import Console from '@/utils/Console'
-import {mapGetters} from 'vuex'
+import dayjs from "dayjs";
+import Console from "@/utils/Console";
+import { mapGetters } from "vuex";
 import helmet from "@/utils/helmet";
-import {service} from '../utils/service';
-import i18n from '../i18n';
-import {transformMessages} from "@/utils/i18n";
-
-const fetchWithTimeout = (url, options, timeout = 5000) => {
-  const controller = new AbortController();
-  const id = setTimeout(() => controller.abort(), timeout);
-  return fetch(url, {...options, signal: controller.signal}).finally(() => clearTimeout(id));
-};
+import { externalService, service } from "../utils/service";
+import i18n from "../i18n";
+import { transformMessages } from "@/utils/i18n";
 
 const fetchTranslations = async (languageKey) => {
   const projectPublishableToken = "52e5ff4b225147a9b11bb63865b2ae1f";
   const environment = "_latest";
   const url = `https://cdn.simplelocalize.io/${projectPublishableToken}/${environment}/${languageKey}`;
 
-  return fetchWithTimeout(url, null, 10e3).then((data) => {
-    if (!data.ok || data.status !== 200) {
-      throw new Error(data.statusText);
-    }
-    return data.json();
-  });
+  return externalService
+    .get(url, {
+      timeout: 10e3,
+    })
+    .then((response) => {
+      return response.data;
+    })
+    .catch((error) => {
+      Console.error("i18n", "failed to fetch translations:", error);
+      return {};
+    });
 };
 
 const loadedLanguages = [];
@@ -32,7 +31,7 @@ const languageMapping = {
   zh: "zh_CN",
   ja: "ja_JP",
   ko: "ko_KR",
-}
+};
 
 function changeLocale(localeId, save) {
   dayjs.locale(localeId);
@@ -57,7 +56,7 @@ export function loadLanguageAsync(lang) {
 
   return fetchTranslations(mappedLang).then((messages) => {
     const transformedMessages = Object.freeze(transformMessages(messages));
-    Console.info("i18n", "loaded", lang, "translations:", transformedMessages);
+    Console.info("i18n", "fetched", lang, "translations:", transformedMessages);
     i18n.setLocaleMessage(lang, transformedMessages);
     loadedLanguages.push(mappedLang);
 
@@ -68,12 +67,12 @@ export function loadLanguageAsync(lang) {
 export default {
   methods: {
     async changeLocale(localeId, save = true) {
-      await loadLanguageAsync.bind(this)(localeId)
+      await loadLanguageAsync.bind(this)(localeId);
 
       changeLocale.bind(this)(localeId, save);
-    }
+    },
   },
   computed: {
-    ...mapGetters('settings', ['language'])
-  }
-}
+    ...mapGetters("settings", ["language"]),
+  },
+};
