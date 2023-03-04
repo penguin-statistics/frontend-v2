@@ -68,7 +68,9 @@ if (environment.production) {
       'NetworkError',
       'Network Error',
       'vibrate API',
-      'ucbrowser'
+      'ucbrowser',
+      "Cannot read property 'click' of null",
+      "Cannot read properties of undefined (reading 'focus')"
     ],
     ignoreUrls: [
       // Facebook flakiness
