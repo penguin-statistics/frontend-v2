@@ -67,9 +67,17 @@ export function loadLanguageAsync(lang) {
 export default {
   methods: {
     async changeLocale(localeId, save = true) {
-      await loadLanguageAsync.bind(this)(localeId);
+      const lang = (() => {
+        const splitted = localeId.split("-")
+        if (splitted.length > 1) {
+          return splitted[0]
+        } else {
+          return localeId
+        }
+      })()
+      await loadLanguageAsync.bind(this)(lang);
 
-      changeLocale.bind(this)(localeId, save);
+      changeLocale.bind(this)(lang, save);
     },
   },
   computed: {
