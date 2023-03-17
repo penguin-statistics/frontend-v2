@@ -2,127 +2,127 @@
   "stats": {
     "timeRange": {
       "unknown": "未知",
-      "endsAt": "过往时光，未来之 {date} 前",
-      "toPresent": "大群纪时，{date} 迄今为止",
-      "notSelected": "（未获指示），等待祂的声音。",
-      "inBetween": "{0} 至 {1}"
+      "endsAt": "{date} 之前",
+      "toPresent": "{date} 至今",
+      "notSelected": "（暂未选择）",
+      "inBetween": "{0} ~ {1}"
     },
     "headers": {
-      "recruitRecruits": "公开招募，次数",
+      "recruitRecruits": "公开招募次数",
       "pattern": "组合",
-      "recruitObservations": "标签，出现次",
+      "recruitObservations": "Tag 出现次数",
       "quantity": "掉落数",
-      "recruitTag": "公开招募，标签",
+      "recruitTag": "公开招募 Tag",
       "times": "样本数",
       "stage": "作战",
-      "apPPR": "期望，单件理智",
-      "itemDrops": "掉落，总体统计",
-      "clearTime": "最短，通关时限",
-      "timeRange": "大群意志，统计时间",
+      "apPPR": "单件期望理智",
+      "itemDrops": "掉落情况合计",
+      "clearTime": "最短通关用时",
+      "timeRange": "统计区间",
       "percentage": "百分比",
       "apCost": "理智",
-      "itemPerTime": "期望，单件用时",
+      "itemPerTime": "单件期望用时",
       "item": "物品"
     },
-    "title": "{stage}，掉落情况，详细呈现",
+    "title": "{stage} 统计结果",
     "headerDesc": {
-      "times": "此次作战，已被加入企鹅物流统计，样本提交次数",
-      "timeRange": "掉落物列表变动，引入「统计区间」。表中，仅包含标注时间段提交的样本数据。更多统计区间，高级查询可见",
-      "clearTime": "PRTS Wiki，「最短通关用时」使用。计算方式，从「作战开始」到「最后出怪」，使用 1 倍速。最短时长，统计",
-      "percentage": "期望，掉落概率。统计方式，样本数对掉落数求商",
-      "patternPercentage": "掉落组合，占比，(掉落数 / 样本数)",
-      "itemPerTime": "大群数据，期望时间。掉落计算，样本统计。时间消耗，即为，(作战最短通关用时 / (掉落数 / 样本数))",
-      "apPPR": "「百分比」项，导出期望的获得「1x对应物品」的理智。(作战理智消耗 / (掉落数 / 样本数))。作战中，消耗的理智，将会用于滋养大群",
-      "apCost": "单次进击，所需理智",
-      "quantity": "此次作战，所有提交样本，已被加入企鹅物流统计，出现次数"
+      "times": "在该作战中，所有提交到企鹅物流数据统计的样本提交次数",
+      "timeRange": "由于存在掉落物列表变动故引入的「统计区间」概念。在本表所展示的数据中，其将仅包含已标注时间段内所提交的样本统计数据。若欲查看其它统计区间内的样本统计情况，请使用「高级查询」",
+      "clearTime": "来源为 PRTS Wiki 中的「最短通关用时」；其中，PRTS Wiki 对此的计算方法为：由「作战开始」直至「最后出怪」期间，使用 1 倍速的最短所需游戏时间总长",
+      "percentage": "期望掉落概率；计算方式为 (掉落数 / 样本数)",
+      "patternPercentage": "此掉落组合占所有掉落汇报的百分比；计算方式为 (掉落数 / 样本数)",
+      "itemPerTime": "根据当前的「百分比」项，计算出的在该作战获得「1x对应物品」所需的期望时间消耗，即 (作战最短通关用时 / (掉落数 / 样本数))",
+      "apPPR": "根据当前的「百分比」项，计算出的在该作战获得「1x对应物品」所需的期望理智，即 (作战理智消耗 / (掉落数 / 样本数))",
+      "apCost": "完成单次该作战的所需理智数量",
+      "quantity": "在该作战中，所有提交到企鹅物流数据统计的样本内，该物品的出现次数"
     },
     "site": {
       "generating": {
         "title": "全站数据一览，运算中...",
-        "refresh": "重新同化",
-        "subtitle": "信息流，神经网络。大量数据，即将同化。全站数据一览，运算中，稍事等待..."
+        "refresh": "重新同化数据一览",
+        "subtitle": "全站数据一览，运算中，耗时约5分钟，稍事等待..."
       },
       "total": {
-        "items": "物品掉落，总计",
-        "report": "掉落汇报，总计",
-        "sanity": "掉落汇报，理智消耗"
+        "items": "物品掉落总数",
+        "report": "掉落汇报总数",
+        "sanity": "所有掉落汇报消耗理智"
       },
-      "24hr": "过去 24 小时",
-      "viewMore": "探索，更多资讯",
-      "stages": "作战掉落，汇报排行",
+      "24hr": "最近 24hr",
+      "viewMore": "查看更多",
+      "stages": "作战掉落汇报排行",
       "all": "全时段",
-      "items": "物品掉落，汇报排行"
+      "items": "物品掉落汇报排行"
     },
     "itemPreview": {
-      "more": "统计样本，含于作战，共 {count} 处"
+      "more": "共 {count} 个作战含有此掉落"
     },
     "filter": {
       "type": {
         "showActivity": "活动",
-        "_name": "战役形式，种类繁多。",
+        "_name": "作战类型",
         "showPermanent": "常驻"
       },
-      "title": "信息流，过滤中。数据，筛选中。大群意志，分析样本。",
-      "overview": "过滤，概览。大群统计，全局回顾。",
+      "title": "数据过滤",
+      "overview": "过滤概览",
       "status": {
-        "_name": "战役进程，当前状态。",
-        "onlyOpen": "现在，仅为开放之初。"
+        "_name": "作战状态",
+        "onlyOpen": "仅正在开放"
       },
       "indicator": "过滤器，应用中。数量 ({count})，已生效。",
-      "stats": "过滤完成，过滤后 {filtered} / 过滤前 {total}。总量，汇入控制。"
+      "stats": "过滤后 {filtered} / 过滤前 {total}"
     },
     "trends": {
-      "name": "掉率变势，入海记录",
+      "name": "掉落历史趋势",
       "set": {
         "rate": "掉落率",
         "drops": "掉落数",
-        "sample": "今日，样本总数。"
+        "sample": "当日样本量"
       }
     },
-    "name": "结果统计，同化完成。大群，已经获取。",
-    "scroll": "数据，左右滑动，自由掌握。",
-    "lastUpdated": "更新时间，{date}。大群研究，持续推进。"
+    "name": "统计结果",
+    "scroll": "左右滑动，查看数据",
+    "lastUpdated": "最后更新：{date}"
   },
   "planner": {
     "calculation": {
       "level": "材料等级",
-      "sanity": "预计，需要消耗理智",
-      "noSyntheses": "无需，完成合成",
+      "sanity": "预计需要理智",
+      "noSyntheses": "未找到需要合成的素材。",
       "tabs": {
         "syntheses": "合成列表",
-        "stages": "战事纪录，列举如下",
+        "stages": "作战列表",
         "values": "素材理智价值"
       },
       "times": "次",
-      "lmb": "预计收益，龙门币",
-      "title": "结果，规划完成",
-      "exp": "预计养分，录像带",
-      "noStage": "大群，未发现作战行动"
+      "lmb": "预计龙门币收益",
+      "title": "规划结果",
+      "exp": "预计获得录像带经验",
+      "noStage": "未找到需要进行的作战。"
     },
     "craft": {
       "errors": {
-        "notEnough": "合成所需，「{item}」 {need} 个。现有，{have} 个。不足，无法合成",
-        "title": "同化失败。素材，缺失"
+        "notEnough": "需要 {need} 个「{item}」以合成，但仅已有 {have} 个",
+        "title": "合成缺少所需物品"
       },
       "plans": {
-        "title": "规划，合成",
-        "plan": "使用资源，{cost} 个「{item}」。余留 {remain} 个。大群，养分充足"
+        "title": "合成规划",
+        "plan": "将使用 {cost} 个「{item}」合成并剩余 {remain} 个"
       },
       "do": "合成",
-      "unable": "合成，无法实现。无法，同化",
-      "success": "已同化，{sourceItems}。转化，{amount}，{productItem}。"
+      "unable": "无法合成",
+      "success": "已使用 {sourceItems} 合成 {amount} 个 {productItem}"
     },
     "reset": {
       "dialog": {
-        "title": "控制指令，重置刷图规划器数据",
-        "subtitle": "大群意志，删除所选数据。相关刷图规划器数据项，一并清除。",
+        "title": "重置刷图规划器数据",
+        "subtitle": "将会删除所选部分的相关刷图规划器数据项",
         "options": {
           "options": {
             "indicator": "将清除所有规划选项",
             "name": "规划选项"
           },
           "excludes": {
-            "indicator": "将清空所有作战记录。大群意志，重新开始",
+            "indicator": "将清除所有排除作战",
             "name": "计算排除"
           },
           "items": {
@@ -131,24 +131,24 @@
           }
         }
       },
-      "success": "成功重塑，数据结构",
+      "success": "成功重置所选数据项",
       "name": "重置"
     },
     "actions": {
       "link": {
-        "share": "分享链接，已准备妥当。延伸，共享，同化链接",
-        "generate": "获取，链接共享。取得资讯，回归大群",
+        "share": "分享链接",
+        "generate": "获取，链接共享",
         "generating": "大群运作。生成中"
       },
       "importExport": "@:(planner.actions.import)/@:(planner.actions.export)",
       "config": {
-        "_name": "配置代号",
-        "import": "导入同化代码",
-        "share": "分享同化代码"
+        "_name": "配置代码",
+        "import": "导入配置代码",
+        "share": "分享配置代码"
       },
       "export": "导出",
       "calculating": "同类，正在计算。等待，结果返回",
-      "calculate": "大群意志，规划进行中",
+      "calculate": "计算规划",
       "_name": "数据",
       "import": "导入"
     },
@@ -159,21 +159,21 @@
       "invalidJSON": "同化失败，JSON 格式有误。核对后，重试"
     },
     "options": {
-      "requireLmb": "有大量需求，需要龙门币。",
+      "requireLmb": "大量需求龙门币",
       "excludeStage": {
-        "_name": "排除之外，作战",
+        "_name": "计算排除",
         "title": "选择",
-        "selected": "{stages} 关，已被排除。数据源，经过筛选"
+        "selected": "已排除 {stages} 关"
       },
       "_name": "选项",
-      "byProduct": "考虑，合成副产物",
-      "requireExp": "大量需求，承载经验。"
+      "byProduct": "考虑合成副产物",
+      "requireExp": "大量需求经验"
     },
     "need": "需要",
     "notices": {
-      "autoExistence": "刷图规划器，现已自动过滤。当前服务器不存在，或未开放作战，均被隐藏"
+      "autoExistence": "刷图规划器现将会自动隐藏未于已选择服务器出现或开放的作战"
     },
-    "calculationError": "计算失败。大群意志，错误为 {error}",
+    "calculationError": "计算失败：{error}",
     "have": "已有"
   },
   "server": {
@@ -185,167 +185,167 @@
     },
     "name": "服务器",
     "selected": "已选择",
-    "switch": "服务器转移。请稍等片刻，即将高效运作。"
+    "switch": "服务器切换"
   },
   "zone": {
     "types": {
-      "GACHABOX": "补给箱，物资储备。含有，养分，充盈。",
-      "ACTIVITY_PERMANENT": "插曲，别传",
-      "ACTIVITY_PENDING": "时间限制活动 — 即刻，开启",
-      "WEEKLY": "收集，资源。汇入大群，滋养生命。",
-      "ACTIVITY_CLOSED": "时间限制活动 — 时间限制，已到达",
-      "ACTIVITY": "时间限制活动",
+      "GACHABOX": "物资补给箱",
+      "ACTIVITY_PERMANENT": "插曲 & 别传",
+      "ACTIVITY_PENDING": "限时活动 — 即将开放",
+      "WEEKLY": "资源收集",
+      "ACTIVITY_CLOSED": "限时活动 — 已结束",
+      "ACTIVITY": "限时活动",
       "MAINLINE": "主题曲",
-      "RECRUIT": "招募，集结统计。大群规模，持续增长。",
-      "ACTIVITY_OPEN": "时间限制活动 — 时间有限，活动开启"
+      "RECRUIT": "公开招募统计",
+      "ACTIVITY_OPEN": "限时活动 — 开放中"
     },
     "subTypes": {
       "DYING_SUN": {
         "title": "残阳",
-        "subtitle": "九至十一"
+        "subtitle": "9~11 章"
       },
       "INTERLUDE": "插曲",
       "VISION_SHATTER": {
-        "subtitle": "四至八",
+        "subtitle": "4~8 章",
         "title": "幻灭"
       },
       "AWAKENING_HOUR": {
-        "subtitle": "起始至三",
+        "subtitle": "0~3 章",
         "title": "觉醒"
       },
-      "2019": "二零一九",
-      "2020": "二零二零",
-      "2023": "二零二三",
-      "2021": "二零二一",
-      "2022": "二零二二",
+      "2019": "2019",
+      "2020": "2020",
+      "2023": "2023",
+      "2021": "2021",
+      "2022": "2022",
       "SIDESTORY": "别传"
     },
     "status": {
-      "-1": "大事将至。即将启动。大群意志，候时已久。",
-      "permanentOpen": "持续开启，无期限关闭。",
+      "-1": "即将开放",
+      "permanentOpen": "常驻开放",
       "1": "已结束",
       "0": "开放中"
     },
-    "opensAt": "大群时间，掌管规律。开放时间，{0} 至 {1}。",
+    "opensAt": "开放时间：{0} - {1}",
     "name": "章节"
   },
   "report": {
     "recognition": {
       "exceptions": {
         "DropAreaDrops::LowConfidence": {
-          "title": "未知掉落，统计错误。需，重新收集数据",
-          "subtitle": "问题所在，非活动期间的掉落。原因，探求中"
+          "title": "存在未知掉落",
+          "subtitle": "此问题通常是由于非活动期间的活动掉落的导致的。"
         },
         "Droptypes::Illegal": {
-          "title": "掉落异常，违规行为",
+          "title": "非法掉落类型",
           "subtitle": "截图若，首次掉落，理智返还，均属违规。亦或，掉落类型，未能被识别"
         },
         "StageChar::LowConfidence": {
-          "subtitle": "识别不准确。请自行核对，结果是否符合图片",
-          "title": "关卡识别，存在误差。掉落统计，或有变动"
+          "subtitle": "识别置信度低，请核对识别结果是否与图片一致",
+          "title": "关卡识别，存在误差"
         },
         "DropAreaDrops::Illegal": {
           "subtitle": "此关卡目前不应存在任何掉落，但图片中存在。这通常是由于非活动期间的活动掉落的导致的。",
-          "title": "掉落，存在违规。需要同化，回归大群"
+          "title": "掉落非法"
         },
-        "DropInfos::Violation": "结果，未获批准。未能通过验证，重新统计",
+        "DropInfos::Violation": "识别结果，验证失败",
         "DropAreaDropsQuantity::NotFound": {
-          "title": "掉落，数量未能识别。请重新上传，获取数据",
+          "title": "掉落数量，未能识别",
           "subtitle": "图片质量，影响上传。分辨率，质量低下，可能导致问题。请检查是否压缩"
         },
         "Stage::Illegal": {
-          "title": "关卡，违规设置。需回归律法",
-          "subtitle": "目前，此关卡未被启示。请依律，等待关卡启示"
+          "title": "非法关卡",
+          "subtitle": "此关卡目前不开放"
         },
         "Result::False": {
-          "title": "截图未在结算页面捕获，或内部出现错误。请重新尝试",
-          "subtitle": "校验，数据源。您，结算页面截图，是否选对服务器？"
+          "title": "非结算页面截图或内部错误",
+          "subtitle": "若这确实是一张结算页面截图，请检查您是否选择了正确的服务器"
         },
         "DropQuantityChar::LowConfidence": {
-          "title": "物品数量识别，情况未明。可能存在误差。建议，提交样本。大群，进行分析",
-          "subtitle": "置信度过低，无法识别。确认识别结果，是否与图片吻合"
+          "title": "物品数量识别，情况未明。可能存在误差",
+          "subtitle": "识别置信度低，请核对识别结果是否与图片一致"
         },
-        "3stars::False": "评价，非三星级。未能，通过标准",
+        "3stars::False": "评价，非三星级",
         "Stage::NotFound": {
-          "title": "目标未知，无法定位。寻找同类，进行比对",
-          "subtitle": "出现错误，关卡识别。或此关卡，未被记录。如，剿灭作战，绝境作战"
+          "title": "未知关卡",
+          "subtitle": "关卡识别，出现错误。或此关卡，未被收录。如，剿灭作战，绝境作战"
         },
-        "Droptypes::NotFound": "掉落类型，不明确。大群，未能识别",
+        "Droptypes::NotFound": "掉落类型，不明确",
         "Fingerprint::Same": {
-          "title": "存在，完全相同的图像。需避免，重复上传",
-          "subtitle": "请核对信息。是否上传了重复截图？"
+          "title": "存在，完全相同的图像",
+          "subtitle": "请检查是否选择了重复的截图"
         },
         "FileTimestamp::TooClose": {
-          "title": "掉落截图，相隔时间过短。图片，不符规定",
-          "subtitle": "重复现象，需要被消除。检查截图"
+          "title": "掉落截图，相隔时间过短",
+          "subtitle": "请检查是否选择了重复截图"
         }
       },
       "cost": "耗时",
       "states": {
         "submitting": "记录上传，正在进行。大群意志，呼唤你的数据。",
-        "initializing": "神经网络，重整旗鼓。初始化中......回归大群。",
-        "pending": "等待，初始化启动。统一，大群运作。",
-        "rendering": "内容渲染中，等待确认。大群意志，审查检验。",
-        "recognizing": "正在同化，回归整体..."
+        "initializing": "神经网络，重整旗鼓。初始化中...",
+        "pending": "等待，初始化启动",
+        "rendering": "内容渲染中，等待确认...",
+        "recognizing": "正在同化..."
       },
       "report": {
-        "allSucceeded": "成功上传，结算记录 {count} 次。记录，同化海量数据。大群养分，充盈养分。",
-        "partialSucceeded": "部分结算记录，成功上传 {count} 次。部分上传，我们已经处理。",
+        "allSucceeded": "已成功上传 {count} 次结算记录",
+        "partialSucceeded": "部分结算记录，仅成功上传 {count} 次",
         "partialFailed": "记录上传失败。计数 {count}。请按照指引，解决错误源。",
-        "reporting": "掉落数据，即将上传。大规模，集结同胞。统计样本，无限可能。",
+        "reporting": "正在批量上传掉落汇报...",
         "total": "总计",
         "caption": "掉落，感激汇报。意志，需要时间处理。缓存原因，数据集生效，20 分钟左右",
-        "title": "呈现信息流，详细汇报。",
+        "title": "汇报详情",
         "partialFailedDesc": "网络连接，检查。若质量较差或中断，或造成上传失败。\n保护全站数据集，避免被外部攻击的影响。提交量已达上限，24 小时后再重试上传剩余掉落汇报。\nIP 性质，无法定位到您个体。宽带热门区域，IP 可能与他人共享。尝试切换网络或 WiFi，或 24 小时后重试上传。\n重传攻击，防范之。请求附加时间戳。设备时间不准，可能导致上传失败。请校准后重试。",
-        "submit": "结算记录，上传 {count} 次。大群，需求记录。"
+        "submit": "结算记录，上传 {count} 次"
       },
       "defectReport": {
         "dialog": {
           "section": {
-            "environment": "环境，资讯流",
-            "originalImage": "图像，原始状态",
-            "recognitionResult": "识别，结果内容"
+            "environment": "环境信息",
+            "originalImage": "截图原图",
+            "recognitionResult": "识别结果"
           },
-          "title": "反馈，存在识别缺陷截图",
-          "subtitle": "反馈截图，上传数据。原图，识别结果，环境信息。前端 UI 版本号，识别核心版本号，识别资源版本号，将上传至大群。上传后，数据入库，算法优化，错误率下降。感谢您的贡献，共同改善效果"
+          "title": "反馈截图识别缺陷",
+          "subtitle": "反馈截图识别缺陷将上传您的截图原图、识别结果与环境信息（包括当前的前端 UI 版本号、识别内核版本号与识别资源版本号）至本站服务器。在上传后，我们将使用提交的数据进行算法优化，以期减少错误率。感谢您帮助我们改进识别效果！"
         },
         "snackbar": {
           "succeeded": "问题已记录，您的反馈，大群感同身受",
-          "failed": "问题，未能被同化。提交失败。稍事等待，重试"
+          "failed": "问题，未能被反馈。提交失败。稍事等待，重试"
         },
-        "action": "识别问题，回馈信息...",
-        "reported": "问题，已被同化。信息，已提交",
+        "action": "反馈识别问题...",
+        "reported": "问题，已反馈",
         "state": {
-          "preflight": "元数据，同化中...",
+          "preflight": "缺陷元数据，同化中...",
           "uploading": "截图原图，同化中..."
         }
       },
       "confirm": {
         "overview": {
-          "server": "数据流服务器",
-          "success": "同化顺利，通过检验",
-          "error": "探测海洋，察觉异常",
-          "total": "同化计数",
-          "count": "同胞数量 {count}",
-          "duration": "图片识别，平均耗时",
-          "_name": "总览结果，已经统计。大群，信息汇聚"
+          "server": "数据集服务器",
+          "success": "检测通过",
+          "error": "检测异常",
+          "total": "共识别了",
+          "count": "{count} 张",
+          "duration": "图片识别，单张平均耗时",
+          "_name": "结果概览"
         },
         "cherryPick": {
-          "disabled": "图片异常，无法同化",
-          "accepted": "上传，统计，本图结果",
+          "disabled": "图片异常，无法选择",
+          "accepted": "上传本图结果",
           "rejected": "本图结果，不同化"
         },
         "loadingImage": "截图，正在载入。预览，即将呈现",
         "abnormal": {
           "details": "异常信息，详细列表",
-          "fatal": "图像，无法识别。未被，同化",
+          "fatal": "图像，无法识别",
           "hover": "鼠标悬浮以查看识别内容",
           "error": "检测结果，图片质量不合格"
         },
-        "noResult": "探寻之途，暂未有成果。等待，大群意志的呼唤",
-        "itemsTotal": "物品总量，统计中。同化掉落，回归海洋",
-        "submit": "大群确认，已勾选 {count} 次结算记录",
-        "details": "细节结果，资料繁多。全面掌握，解决问题",
+        "noResult": "识别同化之途，暂未有成果",
+        "itemsTotal": "物品数合计",
+        "submit": "确认已勾选的 {count} 次结算记录",
+        "details": "结果详情",
         "unknownStage": "未能同化"
       },
       "step": {
@@ -355,115 +355,115 @@
         "select": "选择"
       },
       "tips": {
-        "emptyFile": "未能，同化进来。未选择，掉落样本。",
-        "unsatisfiedStart": "未能，开始识别。",
-        "copyImage": "点击，开启。右键或长按，拷贝或保存。再次点击，结束。",
-        "fileTooOld": "文件 \"{name}\"，时间戳过期。掉落时间，36小时限制。请上传，最新截图。",
-        "hasInvalidFile": "文件，无效。请，删除。",
-        "addImage": "加入图片，即同化。点击此处，融入大群。",
-        "notImageFile": "\"{files}\"，非图片格式。无法同化，无法使用。",
-        "dragImage": "将图像，同化至此。",
-        "chooseImage": "点击，选则同化体。或，直接拖拽至大群视野。加入，回归海洋。",
-        "fileTooBig": "文件，\"{name}\"。大小，已超限制，({size}MB)。需要，削减体积。",
-        "abnormal": "您提交的截图中，有 {count} 张，未通过质量监测。已被标记为「汇报排除」。同化，不可能。",
-        "emptyResult": "无法，同化信息。无可识别结果，返回大群。"
+        "emptyFile": "暂未选择任何图片",
+        "unsatisfiedStart": "未能，开始识别",
+        "copyImage": "右键图片或长按图片可拷贝到剪贴板或保存图片；再次点击图片即可关闭",
+        "fileTooOld": "文件 \"{name}\"，时间戳过期。掉落时间，36小时限制",
+        "hasInvalidFile": "含有无效文件",
+        "addImage": "点击此处加入图片",
+        "notImageFile": "\"{files}\"，非图片格式。无法同化",
+        "dragImage": "将图像，拖拽至此",
+        "chooseImage": "点击，选则同化体。或，直接拖拽至框内",
+        "fileTooBig": "\"{name}\" ({size}MB) 超出大小限制",
+        "abnormal": "您提交的截图中，有 {count} 张，未通过质量监测。已被标记为「汇报排除」。同化失败。",
+        "emptyResult": "无可用识别结果"
       },
       "recognize": {
-        "elapsed": "时间，已运转。",
-        "speed": "识别，速度。",
-        "imagePerSecond": "连贯，图像流。一秒，承载数量为 {count}。",
-        "remaining": "预测余留。",
-        "noFilename": "数据缺失。文件，未能被发现。"
+        "elapsed": "已用时间",
+        "speed": "识别速度",
+        "imagePerSecond": "{count} 图/秒",
+        "remaining": "预计剩余",
+        "noFilename": "暂无文件名"
       },
       "notices": {
-        "confirm": "截图，点击放大，核对确认。\n成功识别，自动选中上传。\n数据集准确，保障大群。识别失败，不得上传。",
-        "welcome": "您所上传的图片，在 WebAssembly 技术下**本地**识别，不产生额外流量开销。\n为确保数据集准确度，请选择**36小时内**通关评价**3星**的**结算界面**截图。\n请勿使用首通截图，并如实汇报**所有**掉落情况，维护，大群稳定。"
+        "confirm": "点击图片可以放大以便于核对；再次点击图片即可关闭\n成功识别的截图已被自动选中上传\n为保证本站数据集准确度，您将**不可**选中发生识别错误的截图",
+        "welcome": "您所有提供的图片均仅会通过使用 WebAssembly 技术于您的浏览器**本地**进行识别、不会向服务器上传，因此不产生额外流量开销。\n为保证本站数据集准确度，请仅选择**截图时间在 36 小时内**、通关评价为 **3 星**的**结算界面**截图。\n请**不要**选择首次通关截图，并请如实汇报**所有**发生的掉落情况。"
       },
-      "queue": "队列，图片识别。同化，回归大群。",
-      "start": "图片，数量 {count}。开始，识别。掉率，回归大群。",
+      "queue": "识别图片队列",
+      "start": "识别 {count} 张图片",
       "status": {
         "success": "成功",
         "error": "异常",
         "warning": "警告"
       },
-      "result": "结果，已认证。识别，成功。",
-      "description": "选择，结算页面截图。海量上传，自动识别掉落。无需手动，即可完成",
+      "result": "识别结果",
+      "description": "选择，结算页面截图。批量上传，自动识别掉落。",
       "filename": "文件名",
       "progress": "进度",
-      "filter": "过滤，识别结果",
-      "retry": "提交，失败。正在重新提交，回归大群。"
+      "filter": "结果过滤",
+      "retry": "提交，失败。正在重新提交"
     },
-    "gacha": "作战，允许多重成果，一次汇报。大群将，自动梳理",
+    "gacha": "本作战，允许在一次汇报内，包含多个结果。",
     "specialSideStory": {
       "dialog": {
         "cancel": "关闭",
-        "title": "「多索雷斯假日」。特殊掉落，规划策略。活动进程，上传。汇报掉落，统计样本。",
-        "confirmTimerDone": "意识流，已知晓。意志，坚定前行。",
-        "confirmTimerPending": "时间流逝，(已过 {timer})。我的行动不受干扰。"
+        "title": "「多索雷斯假日」活动特殊掉落汇报策略提示",
+        "confirmTimerDone": "我已知晓并继续",
+        "confirmTimerPending": "我已知晓并继续 ({timer})"
       }
     },
-    "usage": "左增右减，循环运作。大群协同，同步操作。",
+    "usage": "左键增加，右键减少",
     "dossolesHoliday": {
       "title": {
-        "inner": "保障，收集全部标志。回归大群，共享成果",
+        "inner": "确保集齐所有标志物",
         "tmpl": "请{0}后，再进行数据汇报"
       },
-      "content": "初步数据统计，标志物掉率。独立前提，或许不成立。所有标志物，未被集齐，掉率产生变化。因此，我们决定仅统计所有标志物被集齐后的掉率数据。"
+      "content": "根据初步数据统计推测，标志物掉率计算事件可能不满足独立前提，即：在所有标志物被集齐前、其掉率可能会产生动态变化。因此，我们决定仅收集集齐所有标志物后的掉率数据"
     },
     "alert": {
       "causes": {
-        "limitation": "此次汇报，与已有数据差异较大。继续提交，或被判定为异常，不可被，大群接受",
-        "noDrop": "未有掉落，未做选择"
+        "limitation": "此次汇报，与已有数据差异较大。继续提交，或被判定为异常，不可被，大群接受。",
+        "noDrop": "未选择，任何掉落物"
       },
       "continue": {
         "repeat": "确认，继续执行？大群，需要你的决策。",
-        "first": "是否，需要确认？"
+        "first": "是否，需要继续？大群，需要你的决策。"
       },
       "contact": {
-        "after": "确认作战截图，实际掉落。若有掉落截图，更佳。等待，同化处理。修正，即将完成。",
-        "before": "如遇误判，欢迎回归大群。维护公正，建立信任",
-        "activator": "同类，联系。大群，共生"
+        "after": "（请附作战名称、实际掉落，若有掉落截图，更佳），等待，同化处理。修正，尽快完成。",
+        "before": "如果您认为，这是误判，欢迎",
+        "activator": "联络大群"
       },
       "title": {
-        "first": "检测到失误。风险渐生。需要，迅速采取行动",
+        "first": "检测到失误，风险渐生",
         "repeat": "警告"
       }
     },
     "rules": {
       "type": {
-        "now": "已选择 {quantity} 种物资，于 \"{stage}\"。同类，回归大群。",
-        "not": "\"{stage}\"内，物品种类数，未能满足期望值。期望值，为{should}。需，统计样本，回归大群，明确掉率。",
-        "lte": "\"{stage}\" 内，物品种类，需不超过 {should} 种。大群，养分有限。掉落过多，无法同化。",
-        "_name": "物品，种类繁多。需研究，掉落规则。",
-        "gte": "\"{stage}\"，需要至少 {should} 种物品。种类过少，无法维持大群生存。"
+        "now": "于 “{stage}” 已选 {quantity} 种物品",
+        "not": "“{stage}” 内的物品种类数应总计不为 {should}",
+        "lte": "“{stage}” 内应至多有 {should} 种物品",
+        "_name": "物品种类",
+        "gte": "“{stage}” 内应至少有 {should} 种物品"
       },
       "item": {
-        "gte": "探索区域 \"{stage}\"，需维护 \"{item}\" 数量不得少于 {should} 个。",
+        "gte": "“{stage}” 内的 “{item}” 应至少有 {should} 个",
         "_name": "物品项",
-        "lte": "“{stage}”，“{item}”出现过多。应不超过 {should} 个。同化规则，大群遵循。",
-        "now": "已选择，关键之地 \"{stage}\"。获取，{quantity} 个 \"{item}\"。",
-        "not": "\"{stage}\"，掉落异常。\" {item}\" 数量，不符应有标准，为 {should}。"
+        "lte": "“{stage}” 内的 “{item}” 应至多有 {should} 个",
+        "now": "已于 “{stage}” 选择了 {quantity} 个 “{item}”",
+        "not": "“{stage}” 内的 “{item}” 数量不应等于 {should}"
       }
     },
-    "undoSuccess": "撤销，已完成。大群的意志，迅速处理。",
+    "undoSuccess": "撤销，已完成",
     "name": "回归大群，提交结果",
     "closedReason": {
       "INVALID": "无法同化。未发现掉落汇报数据",
       "EXPIRED": "汇报时间，未到达。作战，已结束或暂未开启",
-      "NOT_FOUND": "作战，未发现。大群寻觅，于所选服务器未获成功"
+      "NOT_FOUND": "作战，于所选服务器未发现"
     },
     "submit": "提交",
-    "furniture": "家具掉落，现状：{state}",
+    "furniture": "家具掉落：{state}",
     "notices": {
       "rule_4": "通关评价，必须达到三星。务求，完美完成；",
-      "rule_5": "仅允同化，国服掉落数据。其他数据，请勿上传",
-      "rule_2": "若无掉落，即可提交。无需等待；",
-      "rule_3": "汇报，不应仅关注首次通关奖励。掉落，需回归大群。无需，夸大获得；",
+      "rule_5": "仅允同化，国服掉落数据。大群，感谢合作。",
+      "rule_2": "若无掉落，直接点击提交；",
+      "rule_3": "汇报，不应包含首次通关奖励。禁止，夸大获得；",
       "rule_1": "单次作战提交。确认数目，留意核对；"
     },
-    "unable": "无法同化。",
+    "unable": "无法同化：",
     "clear": "清空",
-    "success": "同化成功，回归大群。",
+    "success": "同化成功",
     "undo": "撤销"
   },
   "home": {
@@ -471,9 +471,9 @@
       "actions": {
         "subtitle": {
           "report": "汇报掉落，回报大群",
-          "byStage": "作战，素材统计",
-          "planner": "寻求建议？向大群请求。刷图策略，综合分析",
-          "byItem": "石头？你可曾思索，那里养分充足？"
+          "byStage": "此作战，掉落概率几何？",
+          "planner": "刷图策略，综合分析",
+          "byItem": "石头，何处寻觅，效率最大化？"
         },
         "title": {
           "byStage": "作战掉率",
@@ -482,14 +482,14 @@
           "planner": "刷图规划"
         }
       },
-      "title": "快速入门，同样重要",
+      "title": "徒长与适应",
       "caption": "点击左上角\n按钮，展现菜单，寻觅更多。"
     },
     "intro": {
       "intro_3": "为保证数据集透明度、向用户说明数据集更改，数据作废透明度报告已在计划中。",
-      "intro_2": "企鹅物流数据集，手动上传，截图自动识别，多方自动化工具，维护共筑。掉落数据集，自动，定时，手动维护。大群眼光，精益求精，掉率准确，数据无误。",
-      "intro_1": "企鹅物流，数据统计。海量掉落，上传，分析。素材统计，我们研究许久。获取掉率，回归大群。",
-      "intro_0": "大群欢迎你。企鹅物流数据统计，为你服务"
+      "intro_2": "大群智慧寄存所，现有数据集，手动上传，截图自动识别，多方自动化工具，维护共筑。掉落数据集，大群成员，定期维护。",
+      "intro_1": "企鹅物流数据统计，经历同化，生长繁殖，终成大群智慧寄存所。海量掉落，上传，分析。素材统计，我们研究许久。获取掉率，传播静谧之歌，回归大群。",
+      "intro_0": "大群智慧寄存所，欢迎你的到来。"
     }
   },
   "contribute": {
@@ -497,127 +497,127 @@
     "frontend": "前端",
     "recognizer": "截图识别",
     "skills": {
-      "mobile": "移动端，App 开发。涉及 iOS、Android。回归大群，研发新的工具。",
-      "frontend": "前端开发，网站界面。React 工具。界面构建，同化分析。",
-      "design": "设计，界面，体验。",
-      "backend": "网站后端。Go 语言，PostgreSQL 数据库。数据分析，共同开发。",
-      "maintenance": "网站，运作持续。维系计算，稳定运行。",
+      "mobile": "移动端，App 开发， iOS、Android",
+      "frontend": "前端开发，网站界面，React 框架",
+      "design": "设计，界面，体验",
+      "backend": "网站后端。Go 语言，PostgreSQL 数据库",
+      "maintenance": "网站运维",
       "others": "...",
-      "analysis": "数据，全面统计，分析，深入探究。大群意志，数据掌控。"
+      "analysis": "数据统计，分析"
     },
-    "contribute_0": "如果您有以下经验，欢迎回归大群。企鹅数据，需要您的力量。加入 QQ 群：747099627 或 Discord。",
+    "contribute_0": "同胞，如有以下经验，欢迎加入大群。大群智慧，需要您的力量。QQ 大群：747099627 或 Discord。",
     "contribute_1": "项目，无偿开源。大群同胞，共享成果。",
     "repo": "项目仓库：",
     "frontendV4": "前端 v4",
-    "newFolder": "创建新文件夹，即将完成",
+    "newFolder": "新建文件夹，即将完成",
     "backend": "后端",
-    "qqGroup": "沟通之群：",
-    "caption": "企鹅物流数据统计，非商业社区项目。我们的存在，依赖于大家的支持。欢迎，GitHub 上点亮星辰。需求，我们同样欢迎。提供建议，拥抱共建。"
+    "qqGroup": "QQ 大群：",
+    "caption": "大群智慧寄存所，非盈利社区项目。我们的存在，依赖于大家的支持。欢迎，GitHub 上点亮星辰。提供建议，拥抱共建。"
   },
   "menu": {
-    "search": "寻找，大群资讯",
+    "search": "全局搜索",
     "report": {
       "stage": "按章节",
-      "recognition": "截图，识别上传",
-      "_name": "上传，报告意志"
+      "recognition": "截图识别",
+      "_name": "上传，掉落汇报"
     },
     "about": {
-      "members": "同类，大群成员",
+      "members": "众我，大群成员",
       "_name": "关于，我们大群",
-      "contact": "连通，共享信息",
-      "donate": "为大群奉献",
-      "credits": "原始，来源信号",
-      "contribute": "参与，进化同化",
+      "contact": "联络，深海同胞",
+      "donate": "捐助，奉献大群",
+      "credits": "借鉴，内容来源",
+      "contribute": "协作，共同开发",
       "bulletin": "大群意志",
-      "links": "链接，其他同类",
-      "changelog": "历程，记录更新"
+      "links": "枯荣，友情链接",
+      "changelog": "历程，更新记录"
     },
     "settings": {
       "themeStyles": {
-        "name": "主题，更改切换",
-        "miku2021": "初音未来，主题。2021，生日特别",
+        "name": "切换主题",
+        "miku2021": "初音未来 2021 生日特别主题",
         "default": "默认方案，共鸣统一。",
-        "disabled": "(已禁用。现在，强制主题)",
+        "disabled": "(已禁用：活跃的特殊主题)",
         "seaborn": "我们同类"
       },
       "appearances": {
-        "dark": "选择，常用暗淡色",
-        "system": "顺应，系统设置。大群规则，统一执行",
-        "light": "选择，常用明亮色",
+        "dark": "总是使用暗色",
+        "system": "顺应，系统设置",
+        "light": "总是使用亮色",
         "name": "外观，更改切换"
       },
       "name": "设置"
     },
     "stats": {
-      "_name": "素材，掉率统计",
+      "_name": "养分，素材掉率",
       "advanced": "探索，高级查询",
       "stage": "按作战",
       "item": "按素材"
     },
-    "planner": "刷图规划器",
+    "planner": "捕食，刷图规划",
     "overline": {
       "planner": "ArkPlanner"
     },
-    "v1": "接入，大群历史",
-    "languages": "同化，语言",
+    "v1": "访问旧版",
+    "languages": "语言切换",
     "refreshData": "数据，重新同化",
-    "home": "首页",
-    "siteStats": "统计，大群状况",
+    "home": "首页，大群的家",
+    "siteStats": "全站，数据一览",
     "_beta": "公测"
   },
   "query": {
     "operation": {
-      "add": "纳入统计，对比查询",
+      "add": "添加对比查询",
       "inProgress": "查询中，提取数据。分析样本，回归大群",
-      "execute": "开始观测，大群行动"
+      "execute": "执行查询，大群行动"
     },
     "selector": {
       "item": {
-        "title": "掉落物筛选",
-        "selected": "查询，{length} 种素材。探讨掉率，反推大群",
-        "subtitle": "过滤器，查询结果。素材，特定作战内。同化，回归大群",
-        "unspecified": "显示作战，所有素材掉率。统计量，回归大群"
+        "title": "素材选择",
+        "selected": "仅查询 {length} 种素材",
+        "subtitle": "用于将查询结果过滤为此作战内的特定素材。",
+        "unspecified": "显示作战全部掉落素材"
       },
       "interval": {
         "unspecified": "不分段",
-        "title": "分割，使之同化。间隔，自然而然",
-        "subtitle": "分段时距，历史趋势之基础"
+        "title": "分段间隔",
+        "subtitle": "用于设置历史趋势的分段间隔。"
       },
       "timeRange": {
         "presets": {
-          "title": "预设时间点，等待确认。大群同化，即将开始",
+          "title": "预设时间",
           "end": "结束",
           "start": "开始"
         },
-        "subtitle": "（必填）时间段，过滤查询结果",
+        "subtitle": "（必填）用于将查询结果过滤为于一特定时间段内。",
         "title": "时间段"
       },
       "stage": {
-        "title": "选择，进发。作战，即将开始",
-        "subtitle": "必填项。围绕作战，过滤查询结果。"
+        "title": "选择作战",
+        "subtitle": "（必填）用于将查询结果过滤为一特定作战。"
       }
     },
     "panel": {
-      "results": "信息流，查询结果",
-      "builder": "探寻，编辑器",
+      "results": "查询结果",
+      "builder": "查询编辑器",
       "footer": {
-        "cache": "查询结果，缓存仍存。获取最新数据，需再次执行查询。大群控制，即将更新。",
-        "disclaimer": "「高级查询」功能，数据信息，受限许可协议保护。不为「高级查询」功能所产出的数据信息做出背书或承诺。"
+        "cache": "查询结果，缓存仍在。获取最新数据，需再次执行查询。",
+        "disclaimer": "「高级查询」功能所产出的所有数据信息均受本站「数据许可协议」保护；本站不对「高级查询」功能所产出的所有数据信息做任何形式的承诺或背书。"
       }
     },
-    "cancel": "取消连接，同化中止",
+    "cancel": "取消查询，同化中止",
     "type": {
-      "matrix": "数据，统计中",
-      "trend": "历史，趋势流。大群经验，不断积累"
+      "matrix": "统计数据",
+      "trend": "历史趋势"
     },
     "title": {
       "main": "主查询",
-      "comparison": "对比查询，#{index}"
+      "comparison": "对比查询 #{index}"
     },
     "result": {
-      "main": "主查询，结果返回",
-      "comparison": "同化查询 #{index}，获取结果",
-      "hideTime": "时间信息，保护隐私，已被屏蔽",
+      "main": "主查询结果",
+      "comparison": "对比查询 #{index} 结果",
+      "hideTime": "隐藏详细时间",
       "empty": "回报，无数据。查询条件，需认真检查。再次尝试，加强同化"
     }
   },
@@ -625,47 +625,47 @@
     "push": {
       "categories": {
         "ImportantTimePoint": {
-          "subtitle": "活动，即将结束。同化，信息流。大群，等待通知。",
+          "subtitle": "在活动即将结束时通知您",
           "title": "防侠客"
         },
         "Maintenance": {
-          "subtitle": "公开招募，同化您。游戏服务器，更新推送。即时通知，回归大群。",
-          "title": "上游信号，瞬息万变。更新频繁，闪电般。"
+          "subtitle": "在新的游戏服务器闪断更新公告发布后通知您",
+          "title": "上游闪断更新"
         },
         "ClientUpgrade": {
-          "title": "大群意志，指令传达。客户端，更新为必须。",
-          "subtitle": "在新客户端强制更新后，会立刻通知您。公告即将发布。"
+          "title": "客户端强制更新",
+          "subtitle": "在新的客户端强制更新公告发布后通知您"
         },
-        "_name": "信息传输。",
+        "_name": "推送类型",
         "NewStage": {
-          "subtitle": "新章节，即将同化。统一通知，等待启示。",
-          "title": "新篇章，加入大群。"
+          "subtitle": "在新章节加入本 App 时通知您",
+          "title": "新章节加入"
         }
       },
-      "language": "语言流，问候。"
+      "language": "消息语言"
     },
     "data": {
-      "server": "本地缓存，含有服务器数据。",
-      "size": "数据存储，本地体积。",
+      "server": "本地缓存数据包含服务器：",
+      "size": "本地数据大小：",
       "reset": {
-        "title": "重构数据，本地设置。大群意志，同化处理。",
-        "subtitle": "警告，删除所有本地数据与设置。同化后，所有设置将自动清空。大群意志，所有权回归。确定继续吗？"
+        "title": "重置本地数据与设置",
+        "subtitle": "将会删除所有本地数据与设置。删除后，所有本地设置均会重置至默认值并刷新页面，数据将需要重新加载。确定要继续吗？"
       }
     },
     "category": {
-      "data": "数据，设置。归一化，转换。大群，运作。",
+      "data": "设置与数据",
       "about": "关于",
       "appearance": "外观"
     },
     "optimization": {
       "lowData": {
-        "title": "数据模式，低耗模式。大群维持，避免浪费。",
-        "subtitle": "数据模式，切换。停止加载不必须资源。减少网络数据，保障流畅。作战列表，全站背景立绘，已被封存。",
-        "active": "低数据，迅速启动。大群节省，海量数据。"
+        "title": "低数据模式",
+        "subtitle": "低数据模式将停止加载诸如作战列表背景图、全站背景立绘等不必要资源以减少网络数据的使用。",
+        "active": "低数据模式，已启用"
       }
     },
     "storageIssue": "本地文件存储，出现问题。应用稳定性，受到影响。警告仍在，尝试重置本地数据与设置。通过「菜单 - 设置 - 重置本地数据与设置」清空缓存，修复文件存储。",
-    "iosSystemSettings": "语言，同化。隐私，保护。设置调整，总体意志决定。"
+    "iosSystemSettings": "语言与隐私设置"
   },
   "item": {
     "choose": {
@@ -685,49 +685,49 @@
   "fetch": {
     "failed": {
       "error": {
-        "globalMatrix": "掉落数据，全平台",
-        "personalMatrix": "掉落数据，个人",
-        "period": "事件数据",
-        "personalPatternMatrix": "掉率组合，个人",
+        "globalMatrix": "全平台掉落数据",
+        "personalMatrix": "个人掉落数据",
+        "period": "服务器事件数据",
+        "personalPatternMatrix": "个人掉落组合数据",
         "trends": "汇报历史数据",
-        "config": "配置文件，前端",
-        "stats": "数据流，概览全站",
-        "globalPatternMatrix": "掉落组合数据，全平台",
-        "items": "数据集，物品",
-        "limitations": "汇报，校验规则",
-        "stages": "数据集，作战",
-        "zones": "数据集，章节"
+        "config": "前端配置",
+        "stats": "全站概览数据",
+        "globalPatternMatrix": "全平台掉落组合数据",
+        "items": "物品数据",
+        "limitations": "汇报数据校验规则",
+        "stages": "作战元数据",
+        "zones": "章节元数据"
       },
       "retry": "重试",
-      "title": "神经网络连接，中断异常",
+      "title": "神经网络，连接异常",
       "subtitle": "神经网络，对等连接失败。部分资源，未能同化。大群意志，连接被割裂",
-      "deploying": "新版部署，即将完成。等待时间，不超过 5 分钟。请坚持，回归大群。"
+      "deploying": "新版部署，即将完成。请坚持，回归大群。"
     },
     "chunk": {
       "title": "扩展神经网络，正在传输数据",
       "subtitle": "模块同化，正在进行中。请稍事等待..."
     },
-    "loading": "数据更新中，稍事等待。掉率调整，同化进程"
+    "loading": "数据更新中，稍事等待。掉率更新，同化进程"
   },
   "links": {
     "tags": {
-      "planner": "作战布置，我们的任务。控制海域，同化大群。刷图规划，该由谁来？",
-      "enemy": "图鉴，整合。掉落，即将同化。名称，回归大群",
-      "video": "作战视频。聚集，同类意志。共同研究，提升实力。",
-      "walkthrough": "进程，未完成。征程未完结。攻略，等待呼唤。",
-      "materials": "材料同化，大群需求计算",
-      "experience": "分享经验，互惠共赢。探索未知，回馈大群",
-      "hr": "招募信息，公开查询。大群，同化才能进行",
-      "jp_wiki": "百科资讯，日本版",
-      "apRanking": "效率排名，理智统计。大群同化，智慧统筹",
+      "planner": "刷图规划",
+      "enemy": "整合图鉴",
+      "video": "攻略视频",
+      "walkthrough": "通关攻略",
+      "materials": "材料需求计算",
+      "experience": "经验分享",
+      "hr": "公招查询",
+      "jp_wiki": "日服Wiki",
+      "apRanking": "理智效率排行",
       "ja_translation": "剧情日文翻译",
-      "generalRanking": "收益排行，统计中。综合分析，海量数据",
-      "levelup": "升级计算，正在运作。总体进程，正在进行。大群意志，迭代样本",
-      "cn_wiki": "主页面，国服wiki。数据收集，掉落统计。资料整理，同胞共享",
-      "character": "观察同胞，启示思考",
-      "dropRateRanking": "掉率，统计排名。同化，大群数据",
+      "generalRanking": "综合收益排行",
+      "levelup": "升级计算",
+      "cn_wiki": "国服wiki",
+      "character": "角色查看",
+      "dropRateRanking": "掉率排行",
       "map": "作战地图",
-      "storage": "物资，贮备。统计，分析，维护。大群，需求。库存管理，即将完成。"
+      "storage": "库存管理"
     }
   },
   "meta": {
@@ -742,7 +742,7 @@
     "loading": "数据，同化中，稍作等待...",
     "footer": {
       "copyright": {
-        "content": "素材掉率，海量数据，企鹅物流统计。使用，署名-非商业性使用 4.0 国际。转载，发行，复制，提供版权标识。注明来源，企鹅物流数据统计。未经允许，作商业用途，严格禁止。",
+        "content": "素材掉落统计数据由企鹅物流统计，采用知识共享 署名-非商业性使用 4.0 国际 许可协议进行许可。转载、公开或以任何形式复制、发行、再传播本站任何内容时，必须注明从企鹅物流数据统计转载，并提供版权标识、本站名称与本站链接；未经许可，不得将本站内容或由其衍生作品用于商业目的。",
         "title": "数据许可"
       },
       "credit": "企鹅物流数据统计 | {date}"
@@ -761,7 +761,7 @@
       "true": "有"
     },
     "confirmLeave": {
-      "title": "你，离开此页？确认？",
+      "title": "汝，离开此页？确认？",
       "subtitle": "未存储变更，可能导致流失。"
     },
     "notfound": "？？？",
@@ -773,51 +773,51 @@
   },
   "matrixCategory": {
     "automated": {
-      "tooltip": "数据起源，自动化。第三方工具，上传掉落数据。",
+      "tooltip": "自动数据来源：指由第三方工具所自动汇报的掉落数据",
       "label": "自动"
     },
     "all": {
       "label": "全部"
     },
     "manual": {
-      "tooltip": "数据，手动记录。来源，用户。使用企鹅物流数据统计的「网页或 App 端」中的「掉落汇报」或「截图识别」汇报。掉落数据，由大群汇聚。",
+      "tooltip": "手动数据来源：指由用户使用企鹅物流数据统计的「网页或 App 端」中的「掉落汇报」或「截图识别」汇报的掉落数据",
       "label": "手动"
     },
     "switch": "数据起源"
   },
   "members": {
     "responsibilities": {
-      "v1frontend": "版本 v1.0，前端",
+      "v1frontend": "v1.0 前端",
       "customersupport": "客服",
-      "native": "应用，研发流程。探索，大群意志",
-      "localization_ko": "异邦之异语，韩语同化进行",
-      "logo": "图标，作者",
-      "localization_ja": "异邦之异语，日语同化进行",
-      "materials": "素材，充实大群。提交，将融入控制",
+      "native": "App 开发",
+      "localization_ko": "韩语本地化",
+      "logo": "Logo 画师",
+      "localization_ja": "日语本地化",
+      "materials": "素材提供",
       "frontend": "前端",
-      "recognition": "掉落分析，处理中。截图，数据入群",
-      "widget": "小组件，开发",
+      "recognition": "截图识别",
+      "widget": "小组件开发",
       "maintenance": "运维",
       "backend": "后端",
-      "statistics": "数据汇总，掉率分析。同化，回归大群",
-      "localization_en": "异邦之异语，英语同化进行",
-      "_name": "贡献大群，共同体验。众志成城，共享繁荣",
-      "bulkupload": "大规模上传，大群数据",
-      "arkplanner": "ArkPlanner 创造者，意志坚定"
+      "statistics": "统计分析",
+      "localization_en": "英语本地化",
+      "_name": "贡献项目",
+      "bulkupload": "批量汇报",
+      "arkplanner": "ArkPlanner 作者"
     },
     "categories": {
       "others": "其他",
-      "owner": "站长",
+      "owner": "深空观望者",
       "translators": "翻译",
-      "maintainer": "主要贡献者，被记录在案",
-      "contributors": "贡献同化者，是我们共享养分的一员"
+      "maintainer": "大群群主",
+      "contributors": "贡献同化者"
     },
     "socials": {
       "qq": "QQ",
-      "github": "大群，代码仓库",
+      "github": "GitHub",
       "weibo": "微博",
       "twitter": "Twitter",
-      "email": "信息沟通，邮件传递"
+      "email": "Email"
     }
   },
   "credits": {
@@ -825,15 +825,15 @@
       "title": "开源，许可证清单。共享，大群意志"
     },
     "material": {
-      "content": "企鹅物流数据统计网站，游戏资源使用说明。图片、动画、音频、文本原文，均为游戏内对应元素，增强用户体验。作品版权，属于上海鹰角网络科技有限公司及关联公司，即鹰角网络游戏软件和/或鹰角网络游戏服务提供方，包括但不限于 YOSTAR (HONG KONG) LIMITED, 株式会社Yostar, YOSTAR LIMITED, 龍成網路 等。\n网站使用部分 PRTS Wiki 资源，并进行了非歧义性修改。\n特别鸣谢 Free Fonts Project 提供的 Bender 字体（[http://jovanny.ru](http://jovanny.ru)），并表示该字体可以无限制使用。\n掉落识别功能，使用 Synthview Type Design 提供的 Novecento Sans Bold 字体（[http://typography.synthview.com/novecento-sans-font-family.php](http://typography.synthview.com/novecento-sans-font-family.php)），用于非展示性用途的模板匹配。",
-      "title": "许可，网站内容"
+      "content": "企鹅物流数据统计网站内所使用的游戏资源（包括但不限于：游戏图片、动画、音频、文本原文或其转译版本等），其目的仅为更好地反映游戏内对应元素、增强用户体验，相关作品之版权仍属于上海鹰角网络科技有限公司和/或其关联公司，即鹰角网络游戏软件和/或鹰角网络游戏服务的提供方（包括但不限于：YOSTAR (HONG KONG) LIMITED, 株式会社Yostar, YOSTAR LIMITED, 龍成網路 等）\n企鹅物流数据统计网站内所使用的部分资源来源于 PRTS Wiki ([http://prts.wiki](http://prts.wiki)) 并同时对部分资源进行了非歧义性的更改\n企鹅物流数据统计网站内使用了经细微修改的、由 Free Fonts Project 提供的 Bender 字体（[http://jovanny.ru](http://jovanny.ru)），该字体特别说明使用者可将相关字体以任何用途、没有任何限制地使用，在此特别表示感谢。\n企鹅物流数据统计网站的「掉落识别」功能中，嵌入了经格式转换的、由 Synthview Type Design 提供的 Novecento Sans Bold 字体（[http://typography.synthview.com/novecento-sans-font-family.php](http://typography.synthview.com/novecento-sans-font-family.php)），以供非展示性用途的模板匹配使用。",
+      "title": "网站内容，声明"
     }
   },
   "version": {
     "upgrade": {
-      "subtitle": "接口升级，版本过旧。请升级为最新版本，再行尝试。",
-      "unable": "升级，结果未知。算法，不可预测。",
-      "title": "版本，更新。已过期。需要更新，回归大群。",
+      "subtitle": "接口升级，版本过旧。请升级为最新版本，再行尝试",
+      "unable": "无法升级？",
+      "title": "版本已过期",
       "action": "升级"
     }
   },
@@ -841,61 +841,61 @@
     "actions": {
       "_name": {
         "selectorEmpty": "访问记录，未发现。无法，快速访问",
-        "selector": "快捷通道，进入大群",
-        "panel": "操作"
+        "selector": "快速访问",
+        "panel": "快速操作"
       },
       "history": {
-        "name": "最近，使用作战",
-        "empty": "当前，未记录作战。访问作战页面，同化信息。记录，汇入此处",
+        "name": "最近选择作战",
+        "empty": "最近选择作战，未发现。无法，快速访问",
         "clear": "清空"
       },
       "advanced": {
-        "activator": "查询，进入高阶状态。探索，更多领域"
+        "activator": "启动，高级查询"
       },
       "star": {
-        "empty": "未发现已星标作战\n快速操作，星标作战，即可查阅。",
-        "name": "星标作战，快捷使用",
-        "deactivate": "取消，标记作战",
-        "activated": "作战状态，已加星标",
-        "activate": "标记作战，优先处理"
+        "empty": "暂无已星标的作战\n使用作战详情中的「快速操作」即可星标作战并于此处显示",
+        "name": "星标作战",
+        "deactivate": "点击以取消",
+        "activated": "已星标此作战",
+        "activate": "星标此作战"
       },
       "links": {
         "map-arknights-com": "地图",
-        "prts-wiki": "航行指南资料集"
+        "prts-wiki": "Wiki"
       }
     },
     "loots": {
-      "NORMAL_DROP": "常规，意味着熟悉。掉落，回归大群。",
-      "SPECIAL_DROP": "特异掉落，寻求解决方案。掉落规律，需要更多样本。",
+      "NORMAL_DROP": "常规掉落",
+      "SPECIAL_DROP": "特殊掉落",
       "FURNITURE": "家具",
-      "EXTRA_DROP": "额外物资，再次回归。大群将聚拢，统计采收。重复检查，必要措施。"
+      "EXTRA_DROP": "额外物资"
     },
-    "about": "作战信息，汇入控制",
+    "about": "关于此作战",
     "selector": {
       "excludeAll": "排除全部",
       "title": "作战选择",
-      "plannerExclude": "排除，规划作战",
+      "plannerExclude": "排除规划作战",
       "includeAll": "选中全部"
     },
-    "apCost": "消耗，{apCost} 点理智。探险，为共同目的。",
+    "apCost": "{apCost} 点理智",
     "name": "作战"
   },
   "notice": {
-    "loading": "公告信息，同化中",
-    "failed": "公告信息，未能取得：{error}"
+    "loading": "大群意志，同化中",
+    "failed": "大群意志，未能取得：{error}"
   },
   "contact": {
-    "contributor": "同类，合作伙伴",
+    "contributor": "同类，组织结构",
     "nga": "NGA 讨论帖",
-    "github": "协作平台，GitHub",
-    "title": "连通，共享信息",
+    "github": "GitHub Issues",
+    "title": "联络，深海同胞",
     "body": "同化资讯，有疑问？站长恭候。建议，留言传达。"
   },
   "dataSource": {
     "title": "进入，需要同化。登录，回归大群。",
     "loginNotice": "海量数据，谨慎保护。个人掉落记录，访问。验证身份，必要。",
     "global": "全平台",
-    "switch": "同化范围",
+    "switch": "统计范畴",
     "personal": "个人"
   },
   "mirrors": {
@@ -914,12 +914,12 @@
   },
   "share": {
     "text": {
-      "item": "同化，素材 \"{name}\"。归入大群，汇入控制。",
-      "_tmpl": "观察，企鹅物流数据统计。「{name}」掉落统计数据，现已公开。",
-      "stage": "{name}，进攻行动。"
+      "item": "素材 {name}",
+      "_tmpl": "查看企鹅物流数据统计中「{name}」的掉落统计数据",
+      "stage": "作战 {name}"
     },
     "name": "分享",
-    "success": "共享，即滋养。分享，成功。大群之内，信息流转。",
+    "success": "共享，即滋养。分享，成功",
     "shortlink": {
       "name": "短链接"
     }
@@ -929,73 +929,73 @@
     "loggedAs": "同化成功。欢迎，",
     "forgot": {
       "penguinIdHistory": {
-        "title": "PenguinID，曾存档",
-        "deleteUserId": "PenguinID 登录记录，清除执行。大群意志，安全第一",
-        "tips": "功能，限于 v3.3.1 及其更新版本。仅可找回登录于其中的 PenguinID",
-        "loginAsUserId": "PenguinID，同化识别。进入大群，登陆。",
-        "lastLoginAt": "最后，同化于 {time}。本设备，记录登录",
-        "noData": "无新讯息。大群信息，空白。"
+        "title": "此前曾登陆的 PenguinID",
+        "deleteUserId": "PenguinID 登陆记录，清除执行",
+        "tips": "本功能仅可找回于 v3.3.1 及更新版本客户端所登录的 PenguinID",
+        "loginAsUserId": "以此PenguinID同化，加入大群，登陆。",
+        "lastLoginAt": "本设备最后登陆，同化于 {time}",
+        "noData": "暂无数据"
       },
-      "subtitle": "寻觅登录信息，回归群体",
-      "title": "入口无法打开，何以登录？",
+      "subtitle": "寻觅登陆信息，回归群体",
+      "title": "无法登陆？",
       "activator": "同类，你失忆了？"
     },
-    "login": "登录",
+    "login": "登陆",
     "logoutPrompt": "决定中断，大群联结？",
-    "logout": "中断，大群联结",
+    "logout": "大群联结，中断",
     "loggedOut": "联结中断。离群索居，即将开始",
     "success": "成功接入。欢迎回归大群",
     "failed": {
-      "message": "登录失败，{message}。请，重新输入。",
-      "notfound": "PenguinID，不是游戏内 ID。上传掉落，即可成为同类。请注意，仅需一次。"
+      "message": "登陆失败，{message}。请，重新输入。",
+      "notfound": "PenguinID，非游戏内 ID。在本站，上传一次掉落，即可成为同类。"
     },
-    "userId": "用户 ID，身份，认证",
-    "notice": "用户 ID，不属于游戏内部分。仅为上传身份标记。无用户 ID，掉落汇报即可。用意统一，大群协作。"
+    "userId": "用户 ID",
+    "notice": "此用户 ID 非游戏内的 ID ，仅供本网站使用，用来标记您的上传身份。若无用户 ID，汇报一次掉落后即可拥有用户 ID。"
   },
   "donate": {
     "regulation": {
       "cnMirror": "由于监管要求，此卡片于国内镜像暂时停用",
-      "app": "此卡片，无法在 App 中使用。"
+      "app": "此卡片，无法在 App 中使用"
     },
     "methods": {
       "wechatPay": "微信支付",
       "paypal": "通过 PayPal，为大群奉献",
       "alipay": "支付宝"
     },
-    "redirectToApp": "启动 “{app}”，回馈大群。",
-    "donate_3": "脆标，阿噗噜派，一样可口",
-    "donate_4": "若您能，将不胜折服。大群，感激您的奉献。",
-    "donate_1": "访问量，上升趋势。小型服务器，难以负荷。招募，共同贡献。同化，更多资源。",
-    "donate_2": "服务器，维护成本。为了，大群运作。",
+    "redirectToApp": "打开 “{app}” APP 捐助",
+    "donate_3": "pocky，阿噗噜派，皆可",
+    "donate_4": "，大群，将感谢您的奉献。",
+    "donate_1": "访问量，上升趋势。小型服务器，难以负荷。希望同胞，捐助若干",
+    "donate_2": "服务器费用",
     "accountBook": "收支，详细列示",
-    "donate_0": "用户，激增。服务器，月费激增。企鹅数据，陷入危机。站长红白，为保护群体，做出决定…"
+    "donate_0": "用户，激增。服务器，月费上涨。大群智慧寄存所，陷入危机。海神红白，为保护群体，做出决定…"
   },
   "app": {
-    "name": "大群，数据统计",
-    "name_lines": "大群，数据统计"
+    "name": "大群智慧寄存所",
+    "name_lines": "大群智慧寄存所"
   },
   "update": {
-    "success": "海潮涌动，信息更新。大群通告，信息同步。",
-    "refresh": "感受，新版本。"
+    "success": "更新啦！",
+    "refresh": "体验新版"
   },
   "result": {
-    "name": "数据结果，已经生成。回归意志，汇入控制。",
-    "title": "掉落物 {item}，汇总统计。"
+    "name": "统计结果",
+    "title": "{item} 统计结果"
   },
   "validator": {
     "required": "必填"
   },
   "pattern": {
     "empty": "无掉落",
-    "error": "本作战，掉落组合\n暂无数据",
+    "error": "暂无本作战\n掉落组合数据",
     "name": "掉落组合"
   },
   "network": {
     "error": "同化失败。请检查网络，再次请求。"
   },
   "search": {
-    "hint": "键入，物品全名，拼音首字母。同化，作战名，章节名，关卡编号。或，物品昵称，部分关卡。",
-    "placeholder": "寻求...搜索，数据探索。意志深沉，追寻未知。"
+    "hint": "键入，物品全名，拼音首字母，作战名，章节名，关卡编号。或，关卡物品昵称",
+    "placeholder": "搜索..."
   },
   "specials": {
     "mikubirthday2021": {
@@ -1003,17 +1003,17 @@
     }
   },
   "quotes": {
-    "doYouKnow": "你知道吗？同类白面鸮，头部羽毛中最为可爱。o(*≧▽≦)ツ"
+    "doYouKnow": "你知道吗？同类白面鸮，头部羽毛最为可爱。o(*≧▽≦)ツ"
   },
   "clipboard": {
-    "success": "同化完成。复制成功",
-    "error": "复制失败。请手动操作"
+    "success": "复制成功",
+    "error": "复制到剪贴板失败，请手动复制"
   },
   "link": {
     "docs": {
-      "title": "中心，开发者。大群，共创未来",
-      "subtitle": "企鹅物流，数据统计。基于此上，API 开发，文档等资源。大群，可靠支持"
+      "title": "大群开发者中心",
+      "subtitle": "智慧寄存所统计数据基础上，开发所用的API文档等资源"
     }
   },
-  "switchedTo": "意志已转变。服务器，已更新至。"
+  "switchedTo": "服务器，已切换至"
 }
