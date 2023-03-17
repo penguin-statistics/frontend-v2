@@ -161,12 +161,13 @@
       </template>
       <template #content>
         <v-checkbox
-          v-model="dataTable.onlyCurrent"
+          v-model="stageFilterOnlyCurrent"
           v-haptic
           hide-details
           :label="$t('stats.filter.stage.onlyCurrent')"
           class="mt-0 pt-0 mr-4"
           :class="{ 'mr-2': $vuetify.breakpoint.smAndUp }"
+          :disabled="forceStageFilterOnlyCurrentDisabled"
         />
       </template>
     </TitledRow>
@@ -496,6 +497,12 @@ export default {
       default() {
         return false
       }
+    },
+    validStage: {
+      type: Boolean,
+      default() {
+        return false
+      }
     }
   },
   data() {
@@ -617,7 +624,7 @@ export default {
         if (!this.dataTable.showPermanent) data = data.filter(el => el.stage.stageType !== 'MAIN' && el.stage.stageType !== 'SUB' && el.stage.stageType !== 'DAILY')
         if (!this.dataTable.showActivity) data = data.filter(el => el.stage.stageType !== 'ACTIVITY')
       } else if (this.type === 'stage') {
-        if (this.dataTable.onlyCurrent) {
+        if (this.stageFilterOnlyCurrent) {
           data = data.filter(el => {
             return el.end === null || el.end > Date.now()
           })
@@ -630,7 +637,21 @@ export default {
       if (this.dataTable.onlyOpen) counter++
       if (!this.dataTable.showPermanent || !this.dataTable.showActivity) counter++
       return counter
-    }
+    },
+    forceStageFilterOnlyCurrentDisabled() {
+      return !this.validStage
+    },
+    stageFilterOnlyCurrent: {
+      get() {
+        if (this.forceStageFilterOnlyCurrentDisabled) return false
+        return this.dataTable.onlyCurrent
+      },
+      set(val) {
+        this.$store.commit('options/changeDataTable', {
+          onlyCurrent: val
+        })
+      }
+    },
   },
   watch: {
     dataTable: {

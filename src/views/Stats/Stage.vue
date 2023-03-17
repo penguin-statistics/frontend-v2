@@ -19,7 +19,7 @@
             </h2>
             <h1 class="title pt-1 no-wrap--text d-inline-flex align-center">
               {{
-                $t("stats.title", { stage: strings.translate(stage, "code") })
+                $t("stats.title", {stage: strings.translate(stage, "code")})
               }}
             </h1>
           </div>
@@ -52,6 +52,7 @@
         type="stage"
         :trends="trends"
         :is-recruit="isRecruit"
+        :valid-stage="validStage"
         class="px-3 px-sm-4 px-md-6 px-lg-6 px-xl-8 pt-0 pb-6"
       />
 
@@ -108,7 +109,7 @@ export default {
     },
     stage() {
       const got = get.stages.byStageId(this.selected.stage);
-      if (!got) return { code: "" };
+      if (!got) return {code: ""};
       return {
         ...got,
         code: strings.translate(got, "code"),
@@ -133,9 +134,9 @@ export default {
     },
     validStage() {
       return (
-        !this.zone.isOutdated &&
-        this.stage.dropInfos &&
-        existUtils.existence(this.stage, true)
+          !this.zone.isOutdated &&
+          this.stage.dropInfos &&
+          existUtils.existence(this.stage, true)
       );
     },
     isRecruit() {
@@ -143,7 +144,7 @@ export default {
     },
   },
   methods: {
-    select({ zone, stage }) {
+    select({zone, stage}) {
       this.selected.zone = zone;
       this.selected.stage = stage;
     },
@@ -159,6 +160,7 @@ export default {
 .v-table {
   background: transparent !important;
 }
+
 /*.v-expansion-panel {*/
 /*  transform: translateY(48px);*/
 /*  opacity: 0;*/
