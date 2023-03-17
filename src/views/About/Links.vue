@@ -153,8 +153,8 @@ export default {
                 color: 'grey'
               }
             ],
-            url: 'https://aog.wiki/',
-            shorten: 'aog.wiki'
+            url: 'https://yituliu.site/',
+            shorten: 'yituliu.site'
           },
           {
             title: 'ANWiki',
