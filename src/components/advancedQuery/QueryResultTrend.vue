@@ -26,7 +26,7 @@
         must-sort
         sort-by="start"
         :sort-desc="false"
-        :locale="$i18n.locale"
+        :locale="$vuetify.lang.current"
         :hide-default-footer="table.data.length <= 10"
 
         :mobile-breakpoint="0"

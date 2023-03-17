@@ -4,11 +4,12 @@ import Fuse from 'fuse.js'
 import i18n from '@/i18n'
 import get from '@/utils/getters'
 
-function arrByLang (object, lang = i18n.locale) {
+function arrByLang(object, lang = i18n.locale) {
+  lang = strings.mapLocale(lang)
   return object ? (object[lang] || object[i18n.fallbackLocale] || []) : []
 }
 
-function processPron (arr) {
+function processPron(arr) {
   const replaced = arr.map(el => el.replace(/`/g, ' '))
   const chunked = arr.map(el => el.replace(/`/g, ''))
   const firstChar = replaced.map(e => e.split(' ').map(el => el.charAt(0)).join(''))
@@ -16,7 +17,7 @@ function processPron (arr) {
 }
 
 class SearchEngine {
-  constructor ({ name, data }) {
+  constructor({name, data}) {
     this.name = name
     this.engineOptions = {
       includeScore: true,
@@ -24,24 +25,27 @@ class SearchEngine {
       useExtendedSearch: true,
       threshold: 0.45
     }
-    this.ready = new Promise(() => {})
+    this.ready = new Promise(() => {
+    })
     this.update(data)
   }
 
-  updateEngine () {}
-  update (data) {
+  updateEngine() {
+  }
+
+  update(data) {
     this.data = data || []
     this.updateEngine()
   }
 
-  query (keyword) {
+  query(keyword) {
     if (!this.engine) throw new Error('search engine called before not initialized')
     return this.engine.query(keyword)
   }
 }
 
 class StageSearchEngine extends SearchEngine {
-  updateEngine () {
+  updateEngine() {
     const docs = this.data.map(el => ({
       stageId: el.stageId,
       code: strings.translate(el, 'code'),
@@ -63,7 +67,7 @@ class StageSearchEngine extends SearchEngine {
 }
 
 class ItemSearchEngine extends SearchEngine {
-  updateEngine () {
+  updateEngine() {
     const docs = this.data
       .filter(el => get.items.validItemTypes.includes(el.itemType))
       .map(el => ({
@@ -86,35 +90,35 @@ class ItemSearchEngine extends SearchEngine {
 }
 
 class CompactedSearchEngine {
-  constructor () {
+  constructor() {
     this.engines = [
       new ItemSearchEngine({
         name: 'items',
-        data: store.getters['data/content']({ id: 'items' })
+        data: store.getters['data/content']({id: 'items'})
       }),
       new StageSearchEngine({
         name: 'stages',
-        data: store.getters['data/content']({ id: 'stages' })
+        data: store.getters['data/content']({id: 'stages'})
       })
     ]
   }
 
-  update (key, data) {
+  update(key, data) {
     this.engines.find(el => el.name === key).update(data)
   }
 
-  ready () {
+  ready() {
     return Promise.all(this.engines.map(el => el.ready))
   }
 
-  search (query, options = {}) {
+  search(query, options = {}) {
     if (!query) return []
 
     const results = []
     // const start = Date.now()
     for (const engine of this.engines) {
       const result = engine.engine.search(query, options)
-        .map(el => ({ ...el, type: engine.name }))
+        .map(el => ({...el, type: engine.name}))
       results.push(...result)
     }
     // console.log(Date.now() - start)

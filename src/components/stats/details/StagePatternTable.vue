@@ -9,7 +9,7 @@
     :items-per-page="itemsPerPage"
     :sort-desc="true"
 
-    :locale="$i18n.locale"
+    :locale="$vuetify.lang.current"
 
     :mobile-breakpoint="0"
     class="elevation-0 stat-table transparent container--fluid font-weight-bold transition-all"

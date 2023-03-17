@@ -6,6 +6,7 @@
     :items="themes"
     :label="$t('menu.settings.appearances.name')"
     transition="slide-y-transition"
+    :disabled="disabled"
   >
     <template #item="{ item }">
       <v-icon
@@ -32,26 +33,26 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
+import {mapGetters} from 'vuex'
 
 export default {
   name: 'AppearanceSwitcher',
   computed: {
     ...mapGetters('settings', ['dark']),
     appDark: {
-      get () {
+      get() {
         return this.dark
       },
-      set (value) {
+      set(value) {
         this.$store.commit('settings/switchDark', value)
         this.$ga.event(
-          'settings',
-          'theme',
-          value
+            'settings',
+            'theme',
+            value
         )
       }
     },
-    themes () {
+    themes() {
       return [
         {
           icon: 'mdi-brightness-auto',
@@ -69,6 +70,9 @@ export default {
           value: 'light'
         }
       ]
+    },
+    disabled() {
+      return this.$store.getters['ui/activeThemeStyle'] === 'seaborn'
     }
   }
 }

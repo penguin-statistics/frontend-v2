@@ -14,7 +14,7 @@
       must-sort
       sort-by="times"
       :sort-desc="true"
-      :locale="$i18n.locale"
+      :locale="$vuetify.lang.current"
       hide-default-footer
 
       :mobile-breakpoint="0"

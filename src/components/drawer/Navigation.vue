@@ -9,11 +9,15 @@
     @click="navigate(route)"
   >
     <v-list-item-icon>
-      <v-icon v-text="route.meta.icon" />
+      <SeabornCreatureIcon
+        :normal-icon="route.meta.icon"
+        :creature="route.meta.creature"
+      />
     </v-list-item-icon>
     <v-list-item-content>
       <v-list-item-title>
-        {{ $t(route.meta.i18n) }} &nbsp; <v-icon
+        {{ $t(route.meta.i18n) }} &nbsp;
+        <v-icon
           v-if="!route.component && !route.meta.forceSingle"
           small
         >
@@ -33,12 +37,18 @@
     :key="route.name"
     v-haptic
     :value="route.meta.active"
-    :prepend-icon="route.meta.icon"
     :color="`primary ${dark ? 'lighten-1' : 'darken-2'}`"
     no-action
   >
     <template #activator>
       <v-list-item-title>{{ $t(route.meta.i18n) }}</v-list-item-title>
+    </template>
+
+    <template #prependIcon>
+      <SeabornCreatureIcon
+        :normal-icon="route.meta.icon"
+        :creature="route.meta.creature"
+      />
     </template>
 
     <v-list-item
@@ -66,7 +76,10 @@
       </v-list-item-title>
 
       <v-list-item-icon>
-        <v-icon v-text="child.meta.icon" />
+        <SeabornCreatureIcon
+          :normal-icon="child.meta.icon"
+          :creature="child.meta.creature"
+        />
       </v-list-item-icon>
     </v-list-item>
   </v-list-group>
@@ -74,9 +87,11 @@
 
 <script>
 import Theme from '@/mixins/Theme'
+import SeabornCreatureIcon from "@/components/themes/SeabornCreatureIcon.vue";
 
 export default {
   name: 'Navigation',
+  components: {SeabornCreatureIcon},
   mixins: [Theme],
   props: {
     route: {
@@ -85,7 +100,7 @@ export default {
     }
   },
   computed: {
-    activeClass () {
+    activeClass() {
       return {
         'v-list-item--active': true,
         'white--text': this.$vuetify.theme.dark
@@ -93,18 +108,18 @@ export default {
     }
   },
   methods: {
-    navigate (route) {
+    navigate(route) {
       if (route.meta && route.meta.externalRedirect) {
         if (route.meta.ga) {
           const ga = route.meta.ga
           this.$ga.event(
-            ga.category || 'redirect',
-            ga.action || 'links',
-            ga.label || 'unknown',
-            ga.value || 1,
-            {
-              transport: 'beacon'
-            }
+              ga.category || 'redirect',
+              ga.action || 'links',
+              ga.label || 'unknown',
+              ga.value || 1,
+              {
+                transport: 'beacon'
+              }
           )
         }
         if (route.meta.link) {

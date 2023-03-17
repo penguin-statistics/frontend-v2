@@ -67,44 +67,7 @@
         </v-container>
       </v-list>
 
-      <template v-if="$store.state.ui.activeThemeStyle === 'miku2021'">
-        <v-img
-          :src="cdnDeliver('/images/themes/miku2021/portrait.png')"
-          style="position: absolute; bottom: 0; z-index: 0"
-          position="bottom right"
-          height="calc(250px + 10vh)"
-          width="100%"
-          :aspect-ratio="1"
-          class="v-image--fade-down fallthrough"
-        />
-
-        <v-theme-provider dark>
-          <v-hover>
-            <template #default="{ hover }">
-              <div
-                style="position: absolute; width: 100%; height: 48px; bottom: 0; right: 0; z-index: 0; user-select: none; background: linear-gradient(to top, #39c5bb, rgba(57,197,187, 0)); text-shadow: 0 0 4px rgba(0, 0, 0, .5)"
-                class="d-flex align-center justify-center text-center overline cursor-default"
-              >
-                <span class="d-flex flex-row align-center justify-center white--text pt-1">
-                  <v-slide-x-reverse-transition>
-                    <span
-                      v-if="hover"
-                      class="degraded-opacity"
-                    >❤</span>
-                  </v-slide-x-reverse-transition>
-                  <span class="mx-1">{{ $t('specials.mikubirthday2021.caption') }}</span>
-                  <v-slide-x-transition>
-                    <span
-                      v-if="hover"
-                      class="degraded-opacity"
-                    >❤</span>
-                  </v-slide-x-transition>
-                </span>
-              </div>
-            </template>
-          </v-hover>
-        </v-theme-provider>
-      </template>
+      <MikuDrawerFooterImage />
     </v-navigation-drawer>
     <v-app-bar
       id="penguin-toolbar"
@@ -145,18 +108,11 @@
       <ServerSelector />
 
       <AccountManager />
-
-      <!--      <v-progress-linear-->
-      <!--        :active="pending"-->
-      <!--        :indeterminate="pending"-->
-      <!--        absolute-->
-      <!--        bottom-->
-      <!--        class="width: 100%"-->
-      <!--        color="deep-purple accent-4"-->
-      <!--      />-->
     </v-app-bar>
+    <SeabornBackground />
     <RandomBackground />
     <v-content
+      id="penguin-content"
       :style="{'filter': isInSpecialUI ? 'grayscale(1)' : ''}"
       class="safe-area--v-content"
     >
@@ -167,7 +123,9 @@
         <router-view />
       </transition>
       <Footer v-if="!environment.isApp" />
+      <SeabornSideAdornment />
     </v-content>
+    <SeabornCrawl />
     <NetworkStateIndicator />
   </v-app>
 </template>
@@ -194,7 +152,7 @@ import SpecialUI from '@/mixins/SpecialUI'
 import SettingsDialog from '@/components/drawer/SettingsDialog'
 import MirrorSelector from '@/components/global/MirrorSelector'
 import Logo from '@/components/drawer/Logo'
-import { mapGetters } from 'vuex'
+import {mapGetters} from 'vuex'
 import UpgradeNotifier from '@/components/global/UpgradeNotifier'
 import ServerSelector from '@/components/toolbar/ServerSelector'
 import ServerNotifyOverlay from '@/components/global/ServerNotifyOverlay'
@@ -202,10 +160,18 @@ import GlobalSearchNavigation from '@/components/search/GlobalSearchNavigation'
 import ModuleLoadingOverlay from '@/components/global/ModuleLoadingOverlay'
 import Environment from '@/mixins/Environment'
 import Cookies from 'js-cookie'
+import SeabornBackground from "@/components/themes/SeabornBackground.vue";
+import MikuDrawerFooterImage from "@/components/themes/MikuDrawerFooterImage.vue";
+import SeabornSideAdornment from "@/components/themes/SeabornSideAdornment.vue";
+import SeabornCrawl from "@/components/themes/SeabornCrawl.vue";
 
 export default {
   name: 'App',
   components: {
+    SeabornCrawl,
+    SeabornSideAdornment,
+    MikuDrawerFooterImage,
+    SeabornBackground,
     ModuleLoadingOverlay,
     GlobalSearchNavigation,
     ServerNotifyOverlay,
@@ -222,7 +188,7 @@ export default {
     AccountManager
   },
   mixins: [GlobalEntry, CDN, Mirror, SpecialUI, Environment],
-  data () {
+  data() {
     return {
       routes: [],
       drawer: !this.$vuetify.breakpoint.xsOnly,
@@ -233,16 +199,16 @@ export default {
     ...mapGetters('settings', ['lowData']),
     ...mapGetters('ajax', ['pending'])
   },
-  created () {
+  created() {
     this.routes = this.$router.options.routes.filter(el => !el.meta.hide)
     this.$store.dispatch('data/fetch', false)
     if (Cookies.get('userID')) {
       this.$store.dispatch('auth/login', Cookies.get('userID'))
-      Cookies.remove("userID", { path: "/", domain: "." + window.location.hostname })
+      Cookies.remove("userID", {path: "/", domain: "." + window.location.hostname})
     }
   },
   methods: {
-    async refreshData () {
+    async refreshData() {
       await this.$store.dispatch('data/fetch', true)
     }
   }

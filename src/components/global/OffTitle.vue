@@ -15,6 +15,8 @@
 </template>
 
 <script>
+import strings from '@/utils/strings'
+
 export default {
   name: 'OffTitle',
   props: {
@@ -24,22 +26,22 @@ export default {
     },
     small: {
       type: Boolean,
-      default () {
+      default() {
         return false
       }
     },
     noGutters: {
       type: Boolean,
-      default () {
+      default() {
         return false
       }
     }
   },
   computed: {
-    isEastAsianLang () {
-      return ['zh', 'ja', 'ko'].includes(this.$i18n.locale)
+    isEastAsianLang() {
+      return ['zh', 'ja', 'ko'].includes(strings.mapLocale(this.$i18n.locale))
     },
-    segments () {
+    segments() {
       if (this.isEastAsianLang) {
         // East asian languages (kanji)
         return this.content.split('')
@@ -59,36 +61,44 @@ span.off-title--wrapper {
   left: 0;
   z-index: 4;
 }
+
 span.off-title--ea {
   letter-spacing: -.18em !important;
 }
+
 span.off-title--small {
   bottom: -16px;
   left: -6px;
   letter-spacing: -.08em !important;
 }
+
 span.off-title--ea.off-title--small {
   letter-spacing: -.1em !important;
 }
+
 .off-title--char {
   font-family: var(--font-family-serif);
   margin-right: .15em;
 }
+
 .off-title--ea .off-title--char {
   margin-right: 0;
 }
+
 .theme--light .off-title--char {
   color: #fff;
-  text-shadow: 0 0 5px rgba(0, 0, 0, 1),  0 0 10px rgba(0, 0, 0, 1);
+  text-shadow: 0 0 5px rgba(0, 0, 0, 1), 0 0 10px rgba(0, 0, 0, 1);
 }
+
 .theme--dark .off-title--char {
-  text-shadow: 0 0 5px rgba(0, 0, 0, 1),  0 0 10px rgba(0, 0, 0, 1),  0 0 20px rgba(0, 0, 0, 1);
+  text-shadow: 0 0 5px rgba(0, 0, 0, 1), 0 0 10px rgba(0, 0, 0, 1), 0 0 20px rgba(0, 0, 0, 1);
 }
 
 .theme--light .off-title--small .off-title--char {
-  text-shadow: 0 0 3px rgba(0, 0, 0, 1),  0 0 8px rgba(0, 0, 0, .8);
+  text-shadow: 0 0 3px rgba(0, 0, 0, 1), 0 0 8px rgba(0, 0, 0, .8);
 }
+
 .theme--dark .off-title--small .off-title--char {
-  text-shadow: 0 0 3px rgba(0, 0, 0, 1),  0 0 8px rgba(0, 0, 0, .8),  0 0 15px rgba(0, 0, 0, .6);
+  text-shadow: 0 0 3px rgba(0, 0, 0, 1), 0 0 8px rgba(0, 0, 0, .8), 0 0 15px rgba(0, 0, 0, .6);
 }
 </style>

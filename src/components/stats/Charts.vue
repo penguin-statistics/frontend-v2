@@ -47,7 +47,7 @@
 <script>
 import Theme from '@/mixins/Theme'
 import DialogCard from '@/components/global/DialogCard'
-import { Chart } from 'highcharts-vue'
+import {Chart} from 'highcharts-vue'
 import timeFormatter from '@/utils/timeFormatter'
 
 import Highcharts from 'highcharts'
@@ -59,7 +59,7 @@ exportDataInit(Highcharts)
 
 export default {
   name: 'Charts',
-  components: { DialogCard, Chart },
+  components: {DialogCard, Chart},
   mixins: [Theme],
   props: {
     xStart: {
@@ -105,22 +105,22 @@ export default {
       }
     }
   },
-  data () {
+  data() {
     return {
       initAt: Date.now(),
       showDialog: this.value
     }
   },
   computed: {
-    highchartsInst () {
+    highchartsInst() {
       return Highcharts
     },
-    gradient () {
+    gradient() {
       return this.dark
-        ? ['rgba(255, 255, 255, .3)', 'rgba(255, 255, 255, 1)']
-        : ['rgba(0, 0, 0, .3)', 'rgba(0, 0, 0, 1)']
+          ? ['rgba(255, 255, 255, .3)', 'rgba(255, 255, 255, 1)']
+          : ['rgba(0, 0, 0, .3)', 'rgba(0, 0, 0, 1)']
     },
-    sparkline () {
+    sparkline() {
       return {
         width: 14,
         radius: 100,
@@ -131,44 +131,44 @@ export default {
         gradientDirection: 'left'
       }
     },
-    computedChartsId () {
+    computedChartsId() {
       return `${this.initAt.toString()}_${this.chartsId}`
     },
-    xAxis () {
+    xAxis() {
       const array = this.data[this.sparklineKey].map((item, index) => {
         return new Date(this.xStart + index * this.interval)
       })
       return timeFormatter.dates(array, false)
     },
-    yAxis () {
+    yAxis() {
       const yAxis = Object.keys(this.data)
-        .map(yAxisKey => {
-          if (this.dataKeys.indexOf(yAxisKey) > -1) {
-            return this.data[yAxisKey]
-          }
-        })
-        .filter(data => data != null)
+          .map(yAxisKey => {
+            if (this.dataKeys.indexOf(yAxisKey) > -1) {
+              return this.data[yAxisKey]
+            }
+          })
+          .filter(data => data != null)
       return yAxis
     },
-    sparklineData () {
+    sparklineData() {
       if (
-        this.sparklineKey &&
-        this.sparklineSubKey &&
-        this.data[this.sparklineKey] &&
-        this.data[this.sparklineSubKey] &&
-        this.data[this.sparklineKey].length &&
-        this.data[this.sparklineSubKey].length
+          this.sparklineKey &&
+          this.sparklineSubKey &&
+          this.data[this.sparklineKey] &&
+          this.data[this.sparklineSubKey] &&
+          this.data[this.sparklineKey].length &&
+          this.data[this.sparklineSubKey].length
       ) {
         const array = []
         for (
-          let index = 0;
-          index < this.data[this.sparklineKey].length;
-          index++
+            let index = 0;
+            index < this.data[this.sparklineKey].length;
+            index++
         ) {
           if (this.data[this.sparklineSubKey][index]) {
             let temp =
-              this.data[this.sparklineKey][index] /
-              this.data[this.sparklineSubKey][index]
+                this.data[this.sparklineKey][index] /
+                this.data[this.sparklineSubKey][index]
             temp *= 100
             array.push(temp)
           } else {
@@ -179,14 +179,14 @@ export default {
       }
       return []
     },
-    filterSparklineData () {
+    filterSparklineData() {
       return this.sparklineData.filter(data => data !== null)
     },
-    sparklineValue () {
+    sparklineValue() {
       if (
-        this.sparklineKey &&
-        this.sparklineSubKey &&
-        this.sparklineData.length
+          this.sparklineKey &&
+          this.sparklineSubKey &&
+          this.sparklineData.length
       ) {
         const noZeroArray = this.filterSparklineData.filter(data => data !== 0)
         let tempArray = []
@@ -204,11 +204,11 @@ export default {
         return null
       }
     },
-    lastUpdated () {
-      const last = this.$store.getters['data/updated']({ id: 'trends' })
+    lastUpdated() {
+      const last = this.$store.getters['data/updated']({id: 'trends'})
       return `${timeFormatter.date(last, true, true)} (${timeFormatter.dayjs(last).fromNow()})`
     },
-    chartData () {
+    chartData() {
       if (this.showDialog) {
         const theme = this.$vuetify.theme.currentTheme
 
@@ -331,7 +331,7 @@ export default {
             useHTML: true,
             headerFormat: '<h4 class="subtitle-1" style="margin-left: 2px">{point.key}</h4><table>',
             pointFormat: `<tr style="color: ${theme.text}"><td style="color: {series.color}">{series.name}: </td>` +
-              '<td style="text-align: right"><b>{point.y}</b></td></tr>',
+                '<td style="text-align: right"><b>{point.y}</b></td></tr>',
             footerFormat: '</table>',
 
             // distance: 8,
@@ -400,6 +400,7 @@ export default {
   left: 0;
   right: 0;
 }
+
 .sparkline {
   display: inline-flex;
   width: 56px;
