@@ -31,7 +31,7 @@
 
         <v-divider class="mt-2 mb-1" />
 
-        <v-container style="margin-bottom: 360px">
+        <v-container style="margin-bottom: 440px">
           <v-row
             justify="space-around"
           >
@@ -68,6 +68,16 @@
       </v-list>
 
       <MikuDrawerFooterImage />
+      <v-img
+        v-if="$store.state.ui.activeThemeStyle === 'seaborn'"
+        src="/seaborn/sidebar_skin1.png"
+        style="position: absolute; bottom: 0; z-index: 0"
+        position="bottom right"
+        height="400px"
+        width="100%"
+        :aspect-ratio="1"
+        class="fallthrough"
+      />
     </v-navigation-drawer>
     <v-app-bar
       id="penguin-toolbar"
