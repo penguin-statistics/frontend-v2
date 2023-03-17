@@ -722,6 +722,7 @@
       "experience": "经验分享",
       "hr": "公招查询",
       "jp_wiki": "日服Wiki",
+      "gachaPlanning": "攒抽计算",
       "apRanking": "理智效率排行",
       "ja_translation": "剧情日文翻译",
       "generalRanking": "综合收益排行",
@@ -730,6 +731,7 @@
       "character": "角色查看",
       "dropRateRanking": "掉率排行",
       "map": "作战地图",
+      "storeEfficiency": "商店/礼包性价比",
       "storage": "库存管理"
     }
   },

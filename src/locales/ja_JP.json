@@ -561,6 +561,7 @@
       "experience": "ゲームレビュー",
       "hr": "公募一覧",
       "jp_wiki": "日本版Wiki",
+      "gachaPlanning": "ガチャプランニング",
       "apRanking": "理性効率順位表",
       "ja_translation": "ストーリー和訳",
       "generalRanking": "総合収益順位表",
@@ -569,6 +570,7 @@
       "character": "オペレーター一覧",
       "dropRateRanking": "ドロップ率順位表",
       "map": "マップ",
+      "storeEfficiency": "購買部のパフォーマンス",
       "storage": "素材在庫管理"
     }
   },

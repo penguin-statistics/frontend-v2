@@ -661,6 +661,7 @@
       "experience": "Experience",
       "hr": "Recruiting Lookup",
       "jp_wiki": "JP Server Wiki",
+      "gachaPlanning": "Gacha Planning",
       "apRanking": "AP Efficiency Ranking",
       "ja_translation": "Japanese Translation of Main Story",
       "generalRanking": "General Ranking",
@@ -669,6 +670,7 @@
       "character": "Operators List",
       "dropRateRanking": "Drop Rate Ranking",
       "map": "Map",
+      "storeEfficiency": "Shop Efficiency",
       "storage": "Inventory Management"
     }
   },
