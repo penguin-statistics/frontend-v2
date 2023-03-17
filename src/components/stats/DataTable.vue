@@ -164,7 +164,7 @@
           v-model="dataTable.onlyCurrent"
           v-haptic
           hide-details
-          label="仅显示当前掉落物"
+          :label="$t('stats.filter.stage.onlyCurrent')"
           class="mt-0 pt-0 mr-4"
           :class="{ 'mr-2': $vuetify.breakpoint.smAndUp }"
         />

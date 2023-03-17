@@ -66,9 +66,12 @@
       "overview": "Filter Summary",
       "status": {
         "_name": "Stage Status",
-        "onlyOpen": "Only show open stages"
+        "onlyOpen": "Open stages only"
       },
       "indicator": "No Filter Applied | {count} Filter Applied | {count} Filters Applied",
+      "stage": {
+        "onlyCurrent": "Available items only"
+      },
       "stats": "Post-filtered {filtered} / Original {total}"
     },
     "trends": {
@@ -522,7 +525,8 @@
         "name": "Change Themes",
         "miku2021": "Hatsune Miku 2021 Birthday Theme",
         "default": "Default Theme",
-        "disabled": "(Disabled: Active Special Theme)"
+        "disabled": "(Disabled: Active Special Theme)",
+        "seaborn": "Seaborn"
       },
       "appearances": {
         "dark": "Always Dark",
@@ -639,7 +643,7 @@
       "retry": "Retry",
       "title": "Failed to fetch resources",
       "subtitle": "Unable to establish synchronized connection with neural network. Missing partial or all resources.",
-      "deploying": "Deploying latest version. This may last at its longest 5 minutes, please wait patiently."
+      "deploying": "Maintenance is in progress, please bear with us while we deploy the latest version..."
     },
     "chunk": {
       "title": "Establishing connection to Level 2 neural network...",

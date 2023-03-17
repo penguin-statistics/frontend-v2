@@ -63,6 +63,9 @@
         "onlyOpen": "개방된 스테이지만 표시"
       },
       "indicator": "필터 {count}개 적용됨",
+      "stage": {
+        "onlyCurrent": "사용 가능한 항목만"
+      },
       "stats": "필터링 후 {filtered} / 필터링 전 {total}"
     },
     "trends": {
