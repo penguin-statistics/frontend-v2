@@ -157,6 +157,17 @@ export default {
             shorten: 'yituliu.site'
           },
           {
+            title: 'MAA小助手',
+            features: [
+              {
+                name: 'auto_farming',
+                color: 'cyan'
+              }
+            ],
+            url: 'https://maa.plus/',
+            shorten: 'maa.plus'
+          },
+          {
             title: 'ANWiki',
             features: [
               {
