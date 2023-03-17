@@ -1,5 +1,8 @@
 <template>
-  <div class="crawl-wrapper">
+  <div
+    v-if="$store.getters['ui/activeThemeStyle'] === 'seaborn' && !hide"
+    class="crawl-wrapper"
+  >
     <div class="seaborn-creature" />
   </div>
 </template>
@@ -25,13 +28,14 @@ export default {
       ],
       currentCreature: 0,
       nextTimer: null,
+      hide: false,
     }
   },
   mounted() {
     this.changeCreature(this.currentCreature)
   },
   created() {
-    this.nextTimer = setInterval(this.nextCreature, 60 * 1000)
+    this.nextTimer = setTimeout(this.nextCreature, 60 * 1000)
   },
   beforeDestroy() {
     clearInterval(this.nextTimer)
@@ -43,8 +47,9 @@ export default {
       this.$el.querySelector('.seaborn-creature').style.setProperty('--steps', creature.steps)
     },
     nextCreature() {
-      this.currentCreature = (this.currentCreature + 1) % this.creatures.length
-      this.changeCreature(this.currentCreature)
+      // this.currentCreature = (this.currentCreature + 1) % this.creatures.length
+      // this.changeCreature(this.currentCreature)
+      this.hide = true
     }
   }
 }
