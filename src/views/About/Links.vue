@@ -129,24 +129,32 @@ export default {
             shorten: 'prts.wiki'
           },
           {
-            title: 'Kokodayo Arknights Data',
-            author: 'odex',
+            title: '明日方舟一图流',
+            author: 'Zirunwang、山桜',
             features: [
               {
-                name: 'character',
-                color: 'orange'
+                name: 'apRanking',
+                color: 'grey'
               },
               {
-                name: 'enemy',
-                color: 'black'
+                name: 'dropRateRanking',
+                color: 'grey'
               },
               {
-                name: 'map',
-                color: 'teal'
+                name: 'generalRanking',
+                color: 'grey'
+              },
+              {
+                name: 'storeEfficiency',
+                color: 'grey'
+              },
+              {
+                name: 'gachaPlanning',
+                color: 'grey'
               }
             ],
-            url: 'https://kokodayo.fun/',
-            shorten: 'kokodayo.fun'
+            url: 'https://aog.wiki/',
+            shorten: 'aog.wiki'
           },
           {
             title: 'ANWiki',
@@ -238,25 +246,33 @@ export default {
             shorten: 'gachasalt.github.io/ArkToolDemo'
           },
           {
-            title: '最佳招聘网站',
-            author: 'Koke_Cacao',
+            title: 'Kokodayo Arknights Data',
+            author: 'odex',
             features: [
               {
-                name: 'hr',
-                color: 'cyan'
+                name: 'character',
+                color: 'orange'
+              },
+              {
+                name: 'enemy',
+                color: 'black'
+              },
+              {
+                name: 'map',
+                color: 'teal'
               }
             ],
-            url: 'https://github.kokecacao.me/arknights.html',
-            shorten: 'github.kokecacao.me/arknights.html'
-          }
+            url: 'https://kokodayo.fun/',
+            shorten: 'kokodayo.fun'
+          },
         ],
         misc: [
           {
             title: 'Konmai Academy',
             // author: '「纯净的音游下载站」',
             description: '公益的音乐游戏下载站',
-            url: 'https://konmai.cn',
-            shorten: 'konmai.cn'
+            url: 'https://616.sb/',
+            shorten: '616.sb'
           },
         ]
       }
