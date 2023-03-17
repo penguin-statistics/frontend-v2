@@ -8,6 +8,7 @@ export default {
       showPermanent: true,
       showActivity: true,
       onlyOpen: false,
+      onlyCurrent: false,
       fluctuationVisualize: {
         n: 100,
         confidence: 0.95
@@ -21,18 +22,18 @@ export default {
     specialSideStoryDialogRead: false
   },
   mutations: {
-    changeDataTable (state, value) {
+    changeDataTable(state, value) {
       Vue.set(state, 'dataTable', value)
     },
-    changeRandomBackground (state, { last, id }) {
+    changeRandomBackground(state, {last, id}) {
       state.randomBackground.last = last
       state.randomBackground.id = id
     },
-    clearRandomBackground (state) {
+    clearRandomBackground(state) {
       state.randomBackground.last = Date.now()
       state.randomBackground.id = []
     },
-    addUserIdHistory (state, id) {
+    addUserIdHistory(state, id) {
       const existedHistory = state.userIdHistory.find(el => el.id === id)
       if (existedHistory) {
         // only update the time when existed
@@ -47,17 +48,17 @@ export default {
         })
       }
     },
-    removeUserIdHistory (state, id) {
+    removeUserIdHistory(state, id) {
       state.userIdHistory = state.userIdHistory.filter(el => el.id !== id)
     },
-    clearUserIdHistory (state) {
+    clearUserIdHistory(state) {
       state.userIdHistory = []
     },
     setSpecialSideStoryDialogRead: (state, value) => state.specialSideStoryDialogRead = value,
-    changeFluctuationVisualizeN (state, value) {
+    changeFluctuationVisualizeN(state, value) {
       state.dataTable.fluctuationVisualize.n = value
     },
-    changeFluctuationVisualizeConfidence (state, value) {
+    changeFluctuationVisualizeConfidence(state, value) {
       state.dataTable.fluctuationVisualize.confidence = value
     }
   },

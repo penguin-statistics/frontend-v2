@@ -150,6 +150,27 @@
       </v-expansion-panel>
     </v-expansion-panels>
 
+    <TitledRow
+      v-else-if="type === 'stage'"
+      reactive
+      dense
+      class="px-4 py-3 mx-0 border-outlined radius-1 my-2"
+    >
+      <template #header>
+        {{ $t("stats.filter.title") }}
+      </template>
+      <template #content>
+        <v-checkbox
+          v-model="dataTable.onlyCurrent"
+          v-haptic
+          hide-details
+          label="仅显示当前掉落物"
+          class="mt-0 pt-0 mr-4"
+          :class="{ 'mr-2': $vuetify.breakpoint.smAndUp }"
+        />
+      </template>
+    </TitledRow>
+
     <v-row
       align="center"
       justify="center"
@@ -438,13 +459,13 @@ import get from '@/utils/getters'
 import strings from '@/utils/strings'
 import timeFormatter from '@/utils/timeFormatter'
 import validator from '@/utils/validator'
-import { mapGetters, mapState } from 'vuex'
+import {mapGetters, mapState} from 'vuex'
 // import DataTableFluctuationVisualizer from '@/components/stats/DataTableFluctuationVisualizer'
 // import DataTableFluctuationCustomize from "@/components/stats/DataTableFluctuationCustomize";
 
 export default {
   name: 'DataTable',
-  components: {NullableTableCell, HeaderWithTooltip, TitledRow, Item, Charts },
+  components: {NullableTableCell, HeaderWithTooltip, TitledRow, Item, Charts},
   mixins: [Theme, CDN, Mirror],
   props: {
     items: {
@@ -453,31 +474,31 @@ export default {
     },
     search: {
       type: String,
-      default () {
+      default() {
         return ''
       }
     },
     type: {
       type: String,
       required: true,
-      validator (val) {
+      validator(val) {
         return ['item', 'stage'].includes(val)
       }
     },
     trends: {
       type: Object,
-      default () {
+      default() {
         return null
       }
     },
     isRecruit: {
       type: Boolean,
-      default () {
+      default() {
         return false
       }
     }
   },
-  data () {
+  data() {
     return {
       options: {
         table: {
@@ -497,7 +518,7 @@ export default {
     ...mapGetters('ajax', ['matrixPending']),
     ...mapGetters('options', ['fluctuationVisualize']),
     ...mapState('options', ['dataTable']),
-    headers () {
+    headers() {
       const headers = [
         {
           text: this.isRecruit ? this.$t('stats.headers.recruitObservations') : this.$t('stats.headers.quantity'),
@@ -550,7 +571,7 @@ export default {
             width: '140px'
           }
         ])
-        
+
       ]
 
       if (this.type === 'stage') {
@@ -586,19 +607,25 @@ export default {
 
       return headers
     },
-    strings () {
+    strings() {
       return strings
     },
-    filteredData () {
+    filteredData() {
       let data = this.items
       if (this.type === 'item') {
         if (this.dataTable.onlyOpen) data = data.filter(el => existUtils.existence(el.stage, true))
         if (!this.dataTable.showPermanent) data = data.filter(el => el.stage.stageType !== 'MAIN' && el.stage.stageType !== 'SUB' && el.stage.stageType !== 'DAILY')
         if (!this.dataTable.showActivity) data = data.filter(el => el.stage.stageType !== 'ACTIVITY')
+      } else if (this.type === 'stage') {
+        if (this.dataTable.onlyCurrent) {
+          data = data.filter(el => {
+            return el.end === null || el.end > Date.now()
+          })
+        }
       }
       return data
     },
-    filterCount () {
+    filterCount() {
       let counter = 0
       if (this.dataTable.onlyOpen) counter++
       if (!this.dataTable.showPermanent || !this.dataTable.showActivity) counter++
@@ -613,19 +640,19 @@ export default {
       deep: true
     }
   },
-  created () {
+  created() {
     document.addEventListener('copy', this.manipulateCopy)
   },
-  beforeDestroy () {
+  beforeDestroy() {
     document.removeEventListener('copy', this.manipulateCopy)
   },
   methods: {
-    manipulateCopy (event) {
-      const extra = this.$t('meta.copyWarning', { site: document.location.href })
+    manipulateCopy(event) {
+      const extra = this.$t('meta.copyWarning', {site: document.location.href})
       event.clipboardData.setData('text', document.getSelection() + extra)
       event.preventDefault()
     },
-    getTrendsData (props) {
+    getTrendsData(props) {
       if (this.type === 'stage') {
         if (this.trends && this.trends.results && this.trends.results[props.item.item.itemId]) {
           return {
@@ -640,7 +667,7 @@ export default {
       }
       return false
     },
-    redirectItem (itemId) {
+    redirectItem(itemId) {
       this.$router.push({
         name: 'StatsByItem_SelectedItem',
         params: {
@@ -648,7 +675,7 @@ export default {
         }
       })
     },
-    redirectStage (stageId) {
+    redirectStage(stageId) {
       const got = get.stages.byStageId(stageId)
       this.$router.push({
         name: 'StatsByStage_Selected',
@@ -658,14 +685,14 @@ export default {
         }
       })
     },
-    chartId (rowProps) {
+    chartId(rowProps) {
       if (this.type === 'stage') {
         return rowProps.item.item.itemId
       } else {
         return rowProps.item.stage.stageId
       }
     },
-    meta (rowProps) {
+    meta(rowProps) {
       if (this.type === 'stage') {
         return {
           name: strings.translate(rowProps.item.item, 'name')
@@ -676,20 +703,20 @@ export default {
         }
       }
     },
-    formatDate (item) {
+    formatDate(item) {
       const start = item.start
       const end = item.end
 
       return timeFormatter.startEnd(start, end)
     },
-    formatDuration (duration) {
+    formatDuration(duration) {
       return timeFormatter.duration(duration, 's', 0)
     },
-    isTimeOutdatedRange (time) {
+    isTimeOutdatedRange(time) {
       if (!time) return false
       return time < Date.now()
     },
-    getZoneName (stage) {
+    getZoneName(stage) {
       return strings.translate(get.zones.byZoneId(stage.zoneId, false), 'zoneName')
     }
   }
@@ -701,6 +728,7 @@ export default {
   /*opacity: 0.6;*/
   transition: opacity .225s cubic-bezier(0.165, 0.84, 0.44, 1);
 }
+
 .stat-table__outdated-row:hover {
   opacity: 1
 }

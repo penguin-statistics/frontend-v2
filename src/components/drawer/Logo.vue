@@ -2,8 +2,6 @@
   <div
     :class="{
       'drawer-logo primary': true,
-      '': dark,
-      '': !dark,
       'drawer-logo--two-line': $t('app.name_lines').split('\n').length > 1
     }"
   >
@@ -23,7 +21,10 @@
         justify="center"
         class="flex-column font-weight-bold text-glow--flipped"
       >
-        <span v-for="(line, index) in $t('app.name_lines').split('\n')" :key="index">
+        <span
+          v-for="(line, index) in $t('app.name_lines').split('\n')"
+          :key="index"
+        >
           {{ line }}
         </span>
       </v-row>
