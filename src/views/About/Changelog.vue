@@ -124,6 +124,16 @@ export default {
     return {
       logs: [
         {
+          version: "v3.12.0",
+          date: "2023-03-16T23:40:00-0700",
+          changes: `## 添加
+1. 掉落组合添加「其他」支持，以期减少网络资源消耗
+2. 于「按作战」视图加入「仅当前掉落物」过滤项
+
+## 修复
+1. 修复友情链接中已失效的链接`,
+        },
+        {
           version: "v3.11.0",
           date: "2023-02-18T20:40:00+0000",
           changes: `## 添加
@@ -861,13 +871,13 @@ export default {
 
         // if el.date is within 30 days, set el.value to true, otherwise to false
         timeFormatter
-          .dayjs(el.date)
-          .isBetween(
-            timeFormatter.dayjs().subtract(30, "day"),
-            timeFormatter.dayjs()
-          )
-          ? (el.value = true)
-          : (el.value = false);
+            .dayjs(el.date)
+            .isBetween(
+                timeFormatter.dayjs().subtract(30, "day"),
+                timeFormatter.dayjs()
+            )
+            ? (el.value = true)
+            : (el.value = false);
 
         if (Array.isArray(el.changes))
           el.changes = el.changes.map(strings.markdown);
@@ -902,17 +912,20 @@ export default {
   color: inherit;
   box-shadow: none;
 }
+
 .markdown-content-raw {
   h1,
   h2,
   h3 {
     margin-top: 1rem;
     margin-bottom: 0.5rem;
+
     &:first-child {
       margin-top: 0rem;
     }
   }
 }
+
 .markdown-content p {
   margin-bottom: 0;
 }
