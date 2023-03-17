@@ -6,13 +6,13 @@ export default {
     $route: ['crispOpacityChanger'],
     '$store.state.ui.activeThemeStyle': ['applyStyles']
   },
-  data () {
+  data() {
     return {
       crispLoaded: false
     }
   },
   mixins: [SpecialUI],
-  created () {
+  created() {
     window.$crisp.push(['config', 'container:index', [1]])
     window.$crisp.push(['on', 'session:loaded', () => {
       this.crispLoaded = true
@@ -42,7 +42,8 @@ export default {
     }])
   },
   methods: {
-    applyStyles () {
+    applyStyles() {
+      if (!document.querySelector('div.crisp-client > div#crisp-chatbox > div > a')) return
       document.querySelector('div.crisp-client > div#crisp-chatbox > div > a').style.setProperty('bottom', 'calc(max(env(safe-area-inset-bottom), 20px))', 'important')
       document.querySelector('div.crisp-client > div#crisp-chatbox').style.setProperty('display', 'block', 'important')
       document.querySelector('div.crisp-client > div#crisp-chatbox > div > a > span:nth-child(2)').style.setProperty('box-shadow', '0 0 5px rgba(0, 0, 0, .4)', 'important')
@@ -52,7 +53,7 @@ export default {
         document.querySelector('div.crisp-client > div#crisp-chatbox > div > a > span:nth-child(2)').style.setProperty('filter', 'grayscale(1)', 'important')
       }
     },
-    crispOpacityChanger (newRoute = this.$route) {
+    crispOpacityChanger(newRoute = this.$route) {
       if (this.crispLoaded) {
         // Console.info("CrispCustomizer", "customize | changing opacity");
         try {

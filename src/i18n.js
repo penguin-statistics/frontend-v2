@@ -3,6 +3,7 @@ import VueI18n from 'vue-i18n'
 
 import enMessages from '@/locales/en_US.json'
 import zhMessages from '@/locales/zh_CN.json'
+import zhSeabornMessages from '@/locales/zh_CN_x_seaborn.json'
 import jaMessages from '@/locales/ja_JP.json'
 import koMessages from '@/locales/ko_KR.json'
 
@@ -16,6 +17,7 @@ const i18n = new VueI18n({
   messages: {
     en: enMessages,
     zh: zhMessages,
+    zh_CN_x_seaborn: zhSeabornMessages,
     ja: jaMessages,
     ko: koMessages
   }

@@ -3,7 +3,7 @@
     v-model="activeLocale"
     hide-details
     filled
-    :items="localizations"
+    :items="filteredLocalizations"
     :label="$t('menu.languages')"
     transition="slide-y-transition"
   >
@@ -37,37 +37,100 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
+import {mapGetters} from 'vuex'
 import I18n from '@/mixins/I18n'
-import supports from '@/models/supports'
 
 export default {
   name: 'LocaleSwitcher',
   mixins: [I18n],
-  data () {
+  data() {
     return {
-      localizations: supports.localizations,
+      localizations: [
+        {
+          value: "zh",
+          push: "ZH_CN",
+          text: "简体中文",
+        },
+        {
+          value: "zh_CN_x_seaborn",
+          push: "ZH_CN",
+          text: "简体中文 (海嗣体变体)",
+          beta: true,
+          bindThemeStyle: 'seaborn'
+        },
+        {
+          value: "en",
+          push: "EN_US",
+          text: "English",
+        },
+        {
+          value: "en_US_x_seaborn",
+          push: "EN_US",
+          text: "English (Seaborn Variant)",
+          beta: true,
+          bindThemeStyle: 'seaborn'
+        },
+        {
+          value: "ja",
+          push: "JA_JP",
+          text: "日本語",
+        },
+        {
+          value: "ja_JP_x_seaborn",
+          push: "JA_JP",
+          text: "日本語 (シーボーン変種)",
+          beta: true,
+          bindThemeStyle: 'seaborn'
+        },
+        {
+          value: "ko",
+          push: "KO_KR",
+          text: "한국어",
+        },
+        {
+          value: "ko_KR_x_seaborn",
+          push: "KO_KR",
+          text: "한국어 (시보른 변종)",
+          beta: true,
+          bindThemeStyle: 'seaborn'
+        }
+      ],
       busy: null
     }
   },
   computed: {
     ...mapGetters('settings', ['language']),
     activeLocale: {
-      get () {
+      get() {
         return this.$i18n.locale
       },
-      set (localeId) {
+      set(localeId) {
         this.busy = localeId
         setTimeout(() => {
           this.changeLocale(localeId, true)
           this.$ga.event(
-            'settings',
-            'language',
-            localeId
+              'settings',
+              'language',
+              localeId
           )
           this.$nextTick(function () {
             this.busy = null
           })
+        })
+      }
+    },
+    filteredLocalizations() {
+      const currentActiveThemeStyle = this.$store.getters['settings/themeStyle']
+      const anyBindThemeStyle = this.localizations.some((item) => {
+        return item.bindThemeStyle === currentActiveThemeStyle
+      })
+      if (anyBindThemeStyle) {
+        return this.localizations.filter((item) => {
+          return item.bindThemeStyle === currentActiveThemeStyle
+        })
+      } else {
+        return this.localizations.filter((item) => {
+          return !item.bindThemeStyle
         })
       }
     }

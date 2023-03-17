@@ -17,7 +17,7 @@ export default {
     activeThemeStyle: 'default'
   },
   mutations: {
-    setSnackbar (state, { color, timeout, text, icon, extra }) {
+    setSnackbar(state, {color, timeout, text, icon, extra}) {
       state.snackbar.enabled = false
       Vue.nextTick(() => {
         state.snackbar.enabled = true
@@ -28,13 +28,13 @@ export default {
         state.snackbar.extra = extra
       })
     },
-    setOutdated (state, value) {
+    setOutdated(state, value) {
       state.outdated = value
     },
-    setNotice (state, value) {
+    setNotice(state, value) {
       Vue.set(state, 'notice', value)
     },
-    setLoadingRoute (state, value) {
+    setLoadingRoute(state, value) {
       state.loadingRoute = value
     },
     lockServer: state => state.serverLocked = true,
@@ -45,6 +45,7 @@ export default {
     outdated: state => state.outdated,
     notice: state => state.notice,
     loadingRoute: state => state.loadingRoute,
-    serverLocked: state => state.serverLocked
+    serverLocked: state => state.serverLocked,
+    activeThemeStyle: state => state.activeThemeStyle
   }
 }

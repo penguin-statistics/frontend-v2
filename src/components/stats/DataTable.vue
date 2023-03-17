@@ -213,7 +213,7 @@
       must-sort
       sort-by="percentage"
       :sort-desc="true"
-      :locale="$i18n.locale"
+      :locale="$vuetify.lang.current"
       :hide-default-footer="items.length <= 10"
 
       :mobile-breakpoint="0"

@@ -1,25 +1,47 @@
 import I18n from '@/i18n'
 import Console from '@/utils/Console'
-import { marked } from 'marked'
+import {marked} from 'marked'
 
 marked.setOptions({
   breaks: true,
   silent: true
 })
 
-function markdown (content) {
+function markdown(content) {
   return marked(content)
 }
 
-function translateMarkdown (object, key) {
+function translateMarkdown(object, key) {
   return marked(translate(object, key).replace(/\\n/gm, '\n'))
 }
 
-function getLocaleMessage (object, localeKey, key, language) {
+const specialLocaleMappings = {
+  'zh_CN_x_seaborn': 'zh',
+  'en_US_x_seaborn': 'en',
+  'ja_JP_x_seaborn': 'ja',
+  'ko_KR_x_seaborn': 'ko'
+}
+
+const seabornLocaleMappings = {
+  'zh': 'zh_CN_x_seaborn',
+  'en': 'en_US_x_seaborn',
+  'ja': 'ja_JP_x_seaborn',
+  'ko': 'ko_KR_x_seaborn'
+}
+
+function mapSpecialLocaleToNormalizedLocale(locale) {
+  if (specialLocaleMappings[locale]) {
+    return specialLocaleMappings[locale]
+  }
+  return locale
+}
+
+function getLocaleMessage(object, localeKey, key, language) {
+  language = mapSpecialLocaleToNormalizedLocale(language)
   return object[localeKey][language] || object[localeKey][I18n.fallbackLocale] || object[key] || ''
 }
 
-function translate (object, key) {
+function translate(object, key) {
   const locale = I18n.locale
   const localeKey = `${key}_i18n`
   // Console.debug("StringI18n", `generating translation. locale-${locale} key-${localeKey} [${key}]`, object)
@@ -65,7 +87,7 @@ function translate (object, key) {
 
 // from https://stackoverflow.com/questions/1043339/javascript-for-detecting-browser-language-preference
 
-function getFirstBrowserLanguageWithRegionCode () {
+function getFirstBrowserLanguageWithRegionCode() {
   const nav = window.navigator
   const browserLanguagePropertyKeys = ['language', 'browserLanguage', 'systemLanguage', 'userLanguage']
   let i
@@ -91,7 +113,9 @@ function getFirstBrowserLanguageWithRegionCode () {
   for (i = 0; i < browserLanguagePropertyKeys.length; i++) {
     language = nav[browserLanguagePropertyKeys[i]]
     // skip this loop iteration if property is null/undefined.  IE11 fix.
-    if (language == null) { continue }
+    if (language == null) {
+      continue
+    }
     len = language.length
     if (!shortLanguage && len) {
       shortLanguage = language
@@ -104,7 +128,7 @@ function getFirstBrowserLanguageWithRegionCode () {
   return shortLanguage
 }
 
-function getFirstBrowserLanguage () {
+function getFirstBrowserLanguage() {
   const language = getFirstBrowserLanguageWithRegionCode().replace('_', '-')
   if (!language) return I18n.fallbackLocale // use default
   const languages = language.split('-')
@@ -118,7 +142,7 @@ function getFirstBrowserLanguage () {
   }
 }
 
-function fileSize (bytes, si) {
+function fileSize(bytes, si) {
   var thresh = si ? 1000 : 1024
   if (Math.abs(bytes) < thresh) {
     return bytes + ' B'
@@ -138,4 +162,14 @@ function capitalize(string) {
   return string.charAt(0).toUpperCase() + string.slice(1);
 }
 
-export default { translate, markdown, translateMarkdown, getFirstBrowserLanguage, fileSize, capitalize }
+export default {
+  translate,
+  markdown,
+  translateMarkdown,
+  getFirstBrowserLanguage,
+  fileSize,
+  capitalize,
+  mapLocale: mapSpecialLocaleToNormalizedLocale,
+  seabornLocaleMappings,
+  specialLocaleMappings
+}

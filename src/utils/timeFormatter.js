@@ -2,6 +2,7 @@ import dayjs from 'dayjs'
 import 'dayjs/locale/zh'
 import 'dayjs/locale/ja'
 import 'dayjs/locale/ko'
+import strings from '@/utils/strings'
 
 import i18n from '@/i18n'
 
@@ -19,7 +20,7 @@ const FORMATS = {
   HMS: 'H:mm:ss'
 }
 
-function needYear (moments) {
+function needYear(moments) {
   const years = moments.map(el => el.get('year'))
   let last = null
   for (const year of years) {
@@ -30,19 +31,19 @@ function needYear (moments) {
 }
 
 export default {
-  get dayjs () {
-    dayjs.locale(i18n.locale)
+  get dayjs() {
+    dayjs.locale(strings.mapLocale(i18n.locale))
     return dayjs
   },
-  isOutdated (rangeStart, rangeEnd) {
+  isOutdated(rangeStart, rangeEnd) {
     return dayjs().isBefore(rangeStart) || dayjs().isAfter(rangeEnd)
   },
-  checkTimeValid (rangeStart, rangeEnd) {
+  checkTimeValid(rangeStart, rangeEnd) {
     if (dayjs().isBefore(rangeStart)) return -1 // not yet arrived
     if (dayjs().isAfter(rangeEnd)) return 1 // already outdated
     return 0 // OK
   },
-  dates (times, includeTime = true) {
+  dates(times, includeTime = true) {
     times = times.map(ts => {
       return dayjs(ts)
     })
@@ -53,7 +54,7 @@ export default {
     })
     return times
   },
-  date (date, detectSameYear = false, includeTime = false) {
+  date(date, detectSameYear = false, includeTime = false) {
     let template = FORMATS.MD
     if (detectSameYear) {
       const isSameYear = dayjs(date).isSame(dayjs(), 'year')
@@ -63,24 +64,24 @@ export default {
     return dayjs(date).format(template)
   },
   /** duration: duration in milliseconds; returns: localized string */
-  duration (duration, unit = 's', digits = 1) {
+  duration(duration, unit = 's', digits = 1) {
     if (!duration) return ''
     let message = ''
     const d = dayjs.duration(duration / 1000, unit)
     let minutes = d.get('minutes')
     if (d.get('hours') > 0) minutes += 60 * d.get('hours')
-    if (minutes > 0) message += i18n.t('meta.time.minute', { m: minutes })
+    if (minutes > 0) message += i18n.t('meta.time.minute', {m: minutes})
     const ms = d.get('milliseconds') > 0 ? ((d.get('milliseconds') / 1000).toFixed(digits)).slice(1) : ''
-    if (d.get('seconds') > 0) message += i18n.t('meta.time.second', { s: `${d.get('seconds')}${ms}` })
+    if (d.get('seconds') > 0) message += i18n.t('meta.time.second', {s: `${d.get('seconds')}${ms}`})
     return message
   },
-  startEnd (start, end, selector = false) {
+  startEnd(start, end, selector = false) {
     if (start && end) {
       return i18n.t('stats.timeRange.inBetween', this.dates([start, end], false))
     } else if (start && !end) {
-      return i18n.t('stats.timeRange.toPresent', { date: this.date(start, true) })
+      return i18n.t('stats.timeRange.toPresent', {date: this.date(start, true)})
     } else if (!start && end) {
-      return i18n.t('stats.timeRange.endsAt', { date: this.date(end, true) })
+      return i18n.t('stats.timeRange.endsAt', {date: this.date(end, true)})
     } else {
       if (selector) return i18n.t('stats.timeRange.notSelected')
       return i18n.t('stats.timeRange.unknown')

@@ -1,10 +1,11 @@
 import dayjs from "dayjs";
 import Console from "@/utils/Console";
-import { mapGetters } from "vuex";
+import {mapGetters} from "vuex";
 import helmet from "@/utils/helmet";
-import { externalService, service } from "../utils/service";
+import {externalService, service} from "../utils/service";
 import i18n from "../i18n";
-import { transformMessages } from "@/utils/i18n";
+import {transformMessages} from "@/utils/i18n";
+// import environment from "../utils/environment";
 
 const fetchTranslations = async (languageKey) => {
   const projectPublishableToken = "52e5ff4b225147a9b11bb63865b2ae1f";
@@ -32,6 +33,17 @@ const languageMapping = {
   ja: "ja_JP",
   ko: "ko_KR",
 };
+
+const localeMapping = {
+  en_US: "en",
+  zh_CN: "zh",
+  ja_JP: "ja",
+  ko_KR: "ko",
+  zh_CN_x_seaborn: "zh",
+  ja_JP_x_seaborn: "ja",
+  ko_KR_x_seaborn: "ko",
+  en_US_x_seaborn: "en",
+}
 
 const fontMapping = {
   en: {
@@ -102,7 +114,7 @@ function changeLocale(localeId, save) {
   if (save) this.$store.commit("settings/changeLocale", localeId);
   service.defaults.headers.common["Accept-Language"] = localeId;
   this.$i18n.locale = localeId;
-  this.$vuetify.lang.current = localeId;
+  this.$vuetify.lang.current = localeMapping[localeId] || localeId;
   helmet.title.update(this.$route);
   document.documentElement.lang = localeId;
 }
@@ -116,13 +128,13 @@ export function loadLanguageAsync(lang) {
   // If the language hasn't been loaded yet
   // set it first to use the local translation
   changeLocale.bind(this)(lang, false);
-
   // import font using fontsource.
   const font = fontMapping[lang];
   if (font) {
     font.fontSource()
   }
 
+  // if (environment.production) {
   return fetchTranslations(mappedLang).then((messages) => {
     const transformedMessages = Object.freeze(transformMessages(messages));
     Console.info("i18n", "fetched", lang, "translations:", transformedMessages);
@@ -131,6 +143,7 @@ export function loadLanguageAsync(lang) {
 
     return Promise.resolve();
   });
+  // }
 }
 
 export default {

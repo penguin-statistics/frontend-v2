@@ -29,24 +29,25 @@
 
 <script>
 import timeFormatter from '@/utils/timeFormatter'
+import strings from '@/utils/strings'
 
 export default {
   name: 'QuerySelectorInterval',
   props: {
     // eslint-disable-next-line vue/require-prop-types
     value: {
-      default () {
+      default() {
         return null
       }
     }
   },
-  data () {
+  data() {
     return {
       selected: this.$store.getters['dataSource/source']
     }
   },
   computed: {
-    intervals () {
+    intervals() {
       const intervals = [
         [1, 'hour'],
         [6, 'hour'],
@@ -61,7 +62,7 @@ export default {
         const duration = timeFormatter.dayjs.duration(...interval)
         return {
           value: duration.asMilliseconds(),
-          text: duration.locale(this.$i18n.locale).humanize()
+          text: duration.locale(strings.mapLocale(this.$i18n.locale)).humanize()
         }
       })
 
@@ -79,7 +80,7 @@ export default {
     // }
   },
   methods: {
-    update (e) {
+    update(e) {
       this.$emit('input', e)
       this.$emit('update:type', e === null ? 'matrix' : 'trend')
     }

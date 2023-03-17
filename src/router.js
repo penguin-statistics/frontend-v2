@@ -58,6 +58,7 @@ const router = new Router({
     component: Home,
     meta: {
       icon: 'mdi-home',
+      creature: 0,
       i18n: 'menu.home'
     }
   },
@@ -67,6 +68,7 @@ const router = new Router({
       component: ReportLayout,
       meta: {
         icon: 'mdi-upload',
+        creature: 1,
         i18n: 'menu.report._name',
         active: true
       },
@@ -92,6 +94,7 @@ const router = new Router({
           component: Report,
           meta: {
             icon: 'mdi-cursor-default-click',
+            creature: 2,
             i18n: 'menu.report.stage'
           },
           children: [
@@ -113,6 +116,7 @@ const router = new Router({
           meta: {
             async: true,
             icon: 'mdi-image-filter-center-focus',
+            creature: 3,
             i18n: 'menu.report.recognition',
             // beta: true
           }
@@ -148,6 +152,7 @@ const router = new Router({
       component: StatsLayout,
       meta: {
         icon: 'mdi-chart-pie',
+        creature: 4,
         i18n: 'menu.stats._name',
         active: true
       },
@@ -160,6 +165,7 @@ const router = new Router({
           props: true,
           meta: {
             icon: 'mdi-cube',
+            creature: 5,
             i18n: 'menu.stats.stage'
           }
         },
@@ -180,6 +186,7 @@ const router = new Router({
           props: true,
           meta: {
             icon: 'mdi-treasure-chest',
+            creature: 6,
             i18n: 'menu.stats.item'
           }
         },
@@ -201,6 +208,7 @@ const router = new Router({
       component: Planner,
       meta: {
         icon: 'mdi-directions-fork',
+        creature: 7,
         i18n: 'menu.planner',
         twoLine: 'menu.overline.planner'
       }
@@ -213,6 +221,7 @@ const router = new Router({
       meta: {
         async: true,
         icon: 'mdi-database-search',
+        creature: 8,
         i18n: 'menu.stats.advanced'
       }
     },
@@ -223,6 +232,7 @@ const router = new Router({
       props: route => ({query: route.query.q}),
       meta: {
         icon: 'mdi-magnify',
+        creature: 9,
         i18n: 'menu.search',
         hide: true
       }
@@ -233,6 +243,7 @@ const router = new Router({
       component: SiteStats,
       meta: {
         icon: 'mdi-poll-box',
+        creature: 10,
         i18n: 'menu.siteStats'
       }
     },
@@ -242,6 +253,7 @@ const router = new Router({
       component: AboutLayout,
       meta: {
         icon: 'mdi-account-group',
+        creature: 11,
         i18n: 'menu.about._name',
         active: true
       },
@@ -255,6 +267,7 @@ const router = new Router({
           meta: {
             async: true,
             icon: 'mdi-account-multiple',
+            creature: 12,
             i18n: 'menu.about.members'
           }
         },
@@ -277,6 +290,7 @@ const router = new Router({
           meta: {
             async: true,
             icon: 'mdi-timeline',
+            creature: 13,
             i18n: 'menu.about.changelog'
           }
         },
@@ -309,6 +323,7 @@ const router = new Router({
           props: true,
           meta: {
             icon: 'mdi-link-variant',
+            creature: 14,
             i18n: 'menu.about.links'
           }
         },
@@ -320,6 +335,7 @@ const router = new Router({
           meta: {
             async: true,
             icon: 'mdi-license',
+            creature: 15,
             i18n: 'menu.about.credits'
           }
         }

@@ -392,7 +392,7 @@
                     must-sort
                     sort-by="times"
                     :sort-desc="true"
-                    :locale="$i18n.locale"
+                    :locale="$vuetify.lang.current"
                     :hide-default-footer="reportTableData.results.length <= 20"
                     :mobile-breakpoint="0"
                     class="elevation-0 table--with-footer transparentTable container--fluid pt-4 position-relative border-outlined mb-8 overflow-hidden"
