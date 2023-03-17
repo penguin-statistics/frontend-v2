@@ -27,7 +27,7 @@
     </template>
     <!--    <span class="force-lang-font">{{ name }}</span>-->
     <PreviewItemCard
-      :disabled-overview="disableOverviewCard"
+      :disabled-overview="disableOverviewCardCalculated"
       :item-id="item.itemId"
     />
   </v-tooltip>
@@ -46,9 +46,10 @@ import ItemIcon from '@/components/global/ItemIcon'
 import strings from '@/utils/strings'
 import PreviewItemCard from '@/components/stats/PreviewItemCard'
 import environment from '@/utils/environment'
+
 export default {
   name: 'Item',
-  components: { PreviewItemCard, ItemIcon },
+  components: {PreviewItemCard, ItemIcon},
   props: {
     item: {
       type: Object,
@@ -56,73 +57,76 @@ export default {
     },
     ratio: {
       type: Number,
-      default () {
+      default() {
         return 0.75
       }
     },
     disableTooltip: {
       type: Boolean,
-      default () {
+      default() {
         return false
       }
     },
     disableOverviewCard: {
       type: Boolean,
-      default () {
+      default() {
         return false
       }
     },
     tooltipNudge: {
       type: Number,
-      default () {
+      default() {
         return 0
       }
     },
     right: {
       type: Boolean,
-      default () {
+      default() {
         return false
       }
     },
     bottom: {
       type: Boolean,
-      default () {
+      default() {
         return true
       }
     },
     contentClass: {
       type: String,
-      default () {
+      default() {
         return ''
       }
     }
   },
-  data () {
+  data() {
     return {
       showTooltip: false
     }
   },
   computed: {
-    name () {
+    name() {
       return strings.translate(this.item, 'name')
     },
-    tooltipOptions () {
+    tooltipOptions() {
       return {
         [this.bottom ? 'nudgeTop' : 'nudgeLeft']: this.tooltipNudge,
         [this.bottom ? 'nudgeBottom' : 'null']: this.tooltipNudge,
         transition: this.bottom ? 'slide-y-transition' : 'slide-x-transition'
       }
     },
-    disableTooltipCalculated () {
+    disableTooltipCalculated() {
       // always disable tooltip on environment that cannot support hover
       return !environment.canHover || this.disableTooltip
+    },
+    disableOverviewCardCalculated() {
+      return this.disableOverviewCard || this.item.itemId === 'furni'
     }
   }
 }
 </script>
 
 <style scoped>
-  .sticky-left {
-    position: absolute;
-  }
+.sticky-left {
+  position: absolute;
+}
 </style>

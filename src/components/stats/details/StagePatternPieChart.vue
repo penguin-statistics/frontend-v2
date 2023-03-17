@@ -9,16 +9,14 @@
 </template>
 
 <script>
-import get from '@/utils/getters'
-
-import { Chart } from 'highcharts-vue'
+import {Chart} from 'highcharts-vue'
 
 import Highcharts from 'highcharts'
 import strings from '../../../utils/strings'
 
 export default {
   name: 'StagePatternPieChart',
-  components: { Chart },
+  components: {Chart},
   props: {
     patterns: {
       type: Array,
@@ -33,27 +31,46 @@ export default {
       default: false
     }
   },
-  data () {
+  data() {
     return {
       hcInst: Highcharts
     }
   },
   computed: {
-    items () {
-      return this.patterns.map(el => {
-        return {
-          ...el,
-          pattern: el.pattern.drops.map(ell => ({
-            ...ell,
-            item: get.items.byItemId(ell.itemId)
-          }))
-        }
-      })
+    items() {
+      return this.patterns
     },
 
-    chartData () {
+    chartData() {
       const theme = this.$vuetify.theme.currentTheme
       const self = this
+
+      const data = this.items.map(el => {
+        const patterns = []
+        if (Array.isArray(el.pattern)) {
+          if (el.pattern.length === 0) {
+            patterns.push(this.$t('pattern.empty'))
+          } else {
+            for (const pattern of el.pattern)
+              patterns.push(`${this.isRecruit ? '' : pattern.quantity + '×'}${strings.translate(pattern.item, 'name')}`)
+          }
+        } else {
+          patterns.push(el.pattern === '__others__' ? this.$t('pattern.others') : el.pattern)
+        }
+
+        return {
+          // i: el.i,
+          // name: patterns.join(this.isRecruit ? ', ' : ' + ') || this.$t('pattern.empty'),
+          // y: el.percentage * 100,
+          // percentageText: el.percentageText,
+          // quantity: el.quantity
+          i: el.i,
+          name: patterns.join(this.isRecruit ? ', ' : ' + '),
+          y: el.quantity / this.items.reduce((acc, el) => acc + el.quantity, 0) * 100,
+          percentageText: (el.quantity / this.items.reduce((acc, el) => acc + el.quantity, 0) * 100).toFixed(2) + '%',
+          quantity: el.quantity
+        }
+      })
 
       const config = {
         chart: {
@@ -75,18 +92,7 @@ export default {
         series: [
           {
             name: 'pattern',
-            data: this.items.map(el => {
-              const patterns = []
-              for (const pattern of el.pattern) patterns.push(`${this.isRecruit ? '' : pattern.quantity+'×'}${strings.translate(pattern.item, 'name')}`)
-
-              return {
-                i: el.i,
-                name: patterns.join(this.isRecruit ? ', ' : ' + ') || this.$t('pattern.empty'),
-                y: el.percentage * 100,
-                percentageText: el.percentageText,
-                quantity: el.quantity
-              }
-            }),
+            data,
 
             dataLabels: {
               formatter: function () {
@@ -166,7 +172,7 @@ export default {
           }
         },
 
-        exporting: { enabled: false }
+        exporting: {enabled: false}
       }
 
       // console.log(config)

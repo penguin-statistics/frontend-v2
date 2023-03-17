@@ -86,28 +86,57 @@ import timeFormatter from '@/utils/timeFormatter'
 
 export default {
   name: 'StagePattern',
-  components: { FactTableItem, StagePatternError, StagePatternPieChart, StagePatternTable },
+  components: {FactTableItem, StagePatternError, StagePatternPieChart, StagePatternTable},
   props: {
     stageId: {
       type: String,
       default: () => null
     }
   },
-  data () {
+  data() {
     return {
       activeIndex: null
     }
   },
   computed: {
-    patterns () {
-      return [...get.patterns.byStageId(this.stageId)]
-        .sort((a, b) => b.percentage - a.percentage)
-        .map((el, i) => ({ ...el, i: i + 1 }))
+    patterns() {
+      const patterns = [...get.patterns.byStageId(this.stageId)]
+          .sort((a, b) => b.percentage - a.percentage)
+          .map((el, i) => ({
+            ...el,
+            pattern: (el.pattern && el.pattern.drops)
+                ? el.pattern.drops.map(ell => ({
+                  ...ell,
+                  item: get.items.byItemId(ell.itemId)
+                }))
+                : el.pattern,
+            i: i + 1
+          }))
+
+      const totalQuantity = patterns.reduce((acc, el) => acc + el.quantity, 0)
+      const totalTimes = patterns.length ? patterns[0].times : 0
+      const othersPercentage = (totalTimes - totalQuantity) / totalTimes * 100
+
+      // add others
+      if (totalQuantity >= totalTimes) {
+        return patterns
+      }
+
+      patterns.push({
+        i: patterns.length + 1,
+        pattern: '__others__',
+        quantity: totalTimes - totalQuantity,
+        times: totalTimes,
+        percentage: othersPercentage,
+        percentageText: `${othersPercentage.toFixed(2)}%`
+      })
+
+      return patterns
     },
-    times () {
+    times() {
       return (this.patterns[0] || {}).times
     },
-    timeRange () {
+    timeRange() {
       const patterns = this.patterns
       if (!patterns || !patterns.length || !patterns[0]) return ''
       return timeFormatter.startEnd(patterns[0].start, patterns[0].end)

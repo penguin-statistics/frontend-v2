@@ -955,7 +955,8 @@
   "pattern": {
     "empty": "(No Drops)",
     "error": "Drop Patterns for this Stage\nCurrently not Available",
-    "name": "Drop Patterns"
+    "name": "Drop Patterns",
+    "others": "Others"
   },
   "network": {
     "error": "Network error, please check your internet connection and try again."

@@ -7,8 +7,6 @@
     :page.sync="page"
 
     :items-per-page="itemsPerPage"
-    must-sort
-    sort-by="percentage"
     :sort-desc="true"
 
     :locale="$i18n.locale"
@@ -38,7 +36,7 @@
         </td>
         <td class="pl-2 text-left">
           <v-row
-            v-if="item.pattern.length"
+            v-if="Array.isArray(item.pattern) && item.pattern.length"
             align="center"
           >
             <v-badge
@@ -64,6 +62,15 @@
             </v-badge>
           </v-row>
           <div
+            v-else-if="item.pattern === '__others__'"
+            class="d-flex align-end justify-left ml-n2"
+          >
+            <v-icon left>
+              mdi-circle-outline
+            </v-icon>
+            {{ $t('pattern.others') }}
+          </div>
+          <div
             v-else
             class="d-flex align-end justify-left ml-n2"
           >
@@ -85,14 +92,13 @@
 </template>
 
 <script>
-import get from '@/utils/getters'
 import timeFormatter from '@/utils/timeFormatter'
 import Item from '@/components/global/Item'
 import HeaderWithTooltip from '@/components/stats/HeaderWithTooltip'
 
 export default {
   name: 'StagePatternTable',
-  components: { HeaderWithTooltip, Item },
+  components: {HeaderWithTooltip, Item},
   props: {
     patterns: {
       type: Array,
@@ -103,25 +109,34 @@ export default {
       default: () => 0
     }
   },
-  data () {
+  data() {
     return {
       page: 1,
       itemsPerPage: this.$vuetify.breakpoint.smAndDown ? 5 : 10
     }
   },
   computed: {
-    items () {
-      return this.patterns.map(el => {
-        return {
-          ...el,
-          pattern: el.pattern.drops.map(ell => ({
-            ...ell,
-            item: get.items.byItemId(ell.itemId)
-          }))
-        }
-      })
+    items() {
+      const patterns = this.patterns
+
+      // // add others
+      // patterns.push({
+      //   pattern: '__others__',
+      //   quantity: this.patterns.reduce((acc, el) => acc + el.quantity, 0),
+      //   percentage: 1 - this.patterns.reduce((acc, el) => acc + el.percentage, 0),
+      //   percentageText: `${(1 - this.patterns.reduce((acc, el) => acc + el.percentage, 0)) * 100}%`
+      // })
+      //
+      // // sort patterns by percentage, but keep others at the end
+      // patterns.sort((a, b) => {
+      //   if (a.pattern === '__others__') return 1
+      //   if (b.pattern === '__others__') return -1
+      //   return b.percentage - a.percentage
+      // })
+
+      return patterns
     },
-    headers () {
+    headers() {
       return [
         {
           text: '#',
@@ -141,19 +156,19 @@ export default {
           text: this.$t('stats.headers.quantity'),
           value: 'quantity',
           align: 'left',
-          sortable: true,
+          sortable: false,
           width: '90px'
         },
         {
           text: this.$t('stats.headers.percentage'),
           value: 'percentage',
           align: 'left',
-          sortable: true,
+          sortable: false,
           width: '90px'
         }
       ]
     },
-    timeRange () {
+    timeRange() {
       return timeFormatter.dates([this.patterns.start, this.patterns.end]).join(' ~ ')
     }
   }
@@ -169,9 +184,11 @@ export default {
 .table-row-hover {
   box-shadow: inset 0 0 4px rgba(0, 0, 0, .8);
 }
+
 .theme--dark .table-row-hover {
   background: rgba(97, 97, 97, .8)
 }
+
 .theme--light .table-row-hover {
   background: rgba(238, 238, 238, .9);
 }

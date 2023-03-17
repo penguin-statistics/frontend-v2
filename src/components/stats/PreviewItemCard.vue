@@ -81,7 +81,7 @@
               </v-icon>
 
               <span class="degraded-opacity caption">
-                {{ $t('stats.itemPreview.more', { count: stats.more }) }}
+                {{ $t('stats.itemPreview.more', {count: stats.more}) }}
               </span>
             </td>
           </tr>
@@ -102,7 +102,7 @@ const pagination = config.previewCard.item.pagination
 
 export default {
   name: 'PreviewItemCard',
-  components: { ItemIcon },
+  components: {ItemIcon},
   props: {
     itemId: {
       type: String,
@@ -114,35 +114,36 @@ export default {
     }
   },
   computed: {
-    item () {
+    item() {
       const item = get.items.byItemId(this.itemId)
       return {
         ...item,
         name: strings.translate(item, 'name')
       }
     },
-    stats () {
+    stats() {
+      if (this.disabledOverview) return {data: [], more: 0}
       const data = get.statistics.byItemId(this.itemId)
-      // filter out stages that have too less samples
-        .filter(el => el.times > 100)
-      // only open stages
-        .filter(el => existUtils.existence(el.stage, true))
+          // filter out stages that have too less samples
+          .filter(el => el.times > 100)
+          // only open stages
+          .filter(el => existUtils.existence(el.stage, true))
 
-        .sort((a, b) => b.percentage - a.percentage)
+          .sort((a, b) => b.percentage - a.percentage)
 
       return {
         data: data
-          .slice(0, pagination)
-          .map(el => {
-            return {
-              ...el,
-              stageCode: strings.translate(el.stage, 'code')
-            }
-          }),
+            .slice(0, pagination)
+            .map(el => {
+              return {
+                ...el,
+                stageCode: strings.translate(el.stage, 'code')
+              }
+            }),
         more: data.length - pagination
       }
     },
-    highlight () {
+    highlight() {
       return this.$route.params.stageId
     }
   }

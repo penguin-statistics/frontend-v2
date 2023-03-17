@@ -39,10 +39,10 @@ const templateFile = path.resolve(templateRoot, "./index.html");
 console.log(`
 🐧 Current build configured as:
   - 📱 Platform (from env:'PENGUIN_PLATFORM'): ${envvar(
-    "PENGUIN_PLATFORM",
-    "web",
-    true
-  )}
+  "PENGUIN_PLATFORM",
+  "web",
+  true
+)}
   - 📊 Build Hash (from env:'TRUNCATED_GITHUB_SHA' || cmd:'git rev-parse --short HEAD'): ${commitHash}
   - 📋 Build Version (from env:'npm_package_version'): ${packageVersion}
   - 📋 Template Root: ${templateRoot}
@@ -65,8 +65,9 @@ module.exports = {
   devServer: {
     proxy: {
       "/PenguinStats": {
-        target: "https://penguin-stats.io/",
+        // target: "https://penguin-stats.io/",
         // target: "http://localhost:9010/",
+        target: "http://10.0.0.164:9010/",
       },
     },
   },

@@ -8,8 +8,8 @@ const Getters = {}
 Getters.items = {
   _cache: null,
   validItemTypes: ['MATERIAL', 'CARD_EXP', 'CHIP', 'FURN', 'ACTIVITY_ITEM'],
-  all (map = false, filter = true) {
-    let items = store.getters['data/content']({ id: 'items' })
+  all(map = false, filter = true) {
+    let items = store.getters['data/content']({id: 'items'})
     if (!items) return []
 
     if (filter) {
@@ -25,17 +25,17 @@ Getters.items = {
       return items
     }
   },
-  byItemId (itemId, ...options) {
+  byItemId(itemId, ...options) {
     const got = this.all(...options)
     if (!got) return {}
     return got.find(el => el.itemId === itemId) || {}
   },
-  byName (name, ...options) {
+  byName(name, ...options) {
     const got = this.all(...options)
     if (!got) return {}
     return got.find(el => el.name === name) || {}
   },
-  byGroupId (groupId, ...options) {
+  byGroupId(groupId, ...options) {
     if (!groupId) return []
     const got = this.all(...options)
     if (!got) return []
@@ -52,8 +52,8 @@ Getters.items = {
 // }
 
 Getters.statistics = {
-  base (filter) {
-    const matrix = store.getters['data/content']({ id: `${store.getters['dataSource/source']}Matrix` })
+  base(filter) {
+    const matrix = store.getters['data/content']({id: `${store.getters['dataSource/source']}Matrix`})
     if (!matrix) return null
     return matrix
       .filter(filter)
@@ -70,7 +70,7 @@ Getters.statistics = {
         }
       })
   },
-  byItemId (itemId) {
+  byItemId(itemId) {
     const matrix = this.base(el => {
       return el.itemId === itemId
     })
@@ -83,7 +83,7 @@ Getters.statistics = {
       }
     })
   },
-  byStageId (stageId) {
+  byStageId(stageId) {
     const matrix = this.base(el => {
       return el.stageId === stageId
     })
@@ -99,23 +99,23 @@ Getters.statistics = {
 }
 
 Getters.patterns = {
-  base (filter) {
-    const matrix = store.getters['data/content']({ id: `${store.getters['dataSource/source']}PatternMatrix` })
+  base(filter) {
+    const matrix = store.getters['data/content']({id: `${store.getters['dataSource/source']}PatternMatrix`})
     if (!matrix) return null
     return matrix
       .filter(filter)
       .map(el => {
-        const stage = Getters.stages.byStageId(el.stageId)
+        // const stage = Getters.stages.byStageId(el.stageId)
         const percentage = +(el.quantity / el.times).toFixed(5)
         return {
           ...el,
-          stage,
+          // stage,
           percentage,
           percentageText: `${(percentage * 100).toFixed(2)}%`
         }
       })
   },
-  byStageId (stageId) {
+  byStageId(stageId) {
     const matrix = this.base(el => {
       return el.stageId === stageId
     })
@@ -130,12 +130,12 @@ Getters.stages = {
     at: null,
     c: null
   },
-  all () {
-    const currStateTime = store.getters['data/updated']({ id: 'stages' })
+  all() {
+    const currStateTime = store.getters['data/updated']({id: 'stages'})
     if (this._cache) {
       if (this._cache.at === currStateTime) return this._cache.c || []
     }
-    const stages = store.getters['data/content']({ id: 'stages' })
+    const stages = store.getters['data/content']({id: 'stages'})
     this._cache = {
       at: currStateTime,
       c: stages
@@ -143,17 +143,17 @@ Getters.stages = {
     if (!stages) return []
     return stages
   },
-  byStageId (stageId, options) {
+  byStageId(stageId, options) {
     return this.all(options).find(el => {
       return el.stageId === stageId
     }) || {}
   },
-  byParentZoneId (zoneId, options) {
+  byParentZoneId(zoneId, options) {
     return this.all(options).filter(el => {
       return el.zoneId === zoneId
     }) || {}
   },
-  byStageCode (StageCode, options) {
+  byStageCode(StageCode, options) {
     return this.all(options).find(el => {
       return el.code === StageCode
     }) || {}
@@ -161,8 +161,8 @@ Getters.stages = {
 }
 
 Getters.zones = {
-  all (filter = true, parseTime = true) {
-    let zones = store.getters['data/content']({ id: 'zones' })
+  all(filter = true, parseTime = true) {
+    let zones = store.getters['data/content']({id: 'zones'})
     if (!zones) return []
 
     const server = store.getters['dataSource/server']
@@ -176,34 +176,34 @@ Getters.zones = {
         return a.zoneIndex - b.zoneIndex
       })
       .map(el => {
-        const toMerge = {}
-        if (el.isActivity) {
-          const existence = el.existence[server]
+          const toMerge = {}
+          if (el.isActivity) {
+            const existence = el.existence[server]
 
-          if (!existence.openTime && !existence.closeTime) {
-            toMerge.isPermanentOpen = true
-          } else {
-            toMerge.activityActiveTime = formatter.dates([existence.openTime, existence.closeTime])
-            toMerge.activityStartDate = formatter.date(existence.openTime, true)
-            toMerge.timeValid = formatter.checkTimeValid(existence.openTime, existence.closeTime)
-            toMerge.isOutdated = toMerge.timeValid !== 0
+            if (!existence.openTime && !existence.closeTime) {
+              toMerge.isPermanentOpen = true
+            } else {
+              toMerge.activityActiveTime = formatter.dates([existence.openTime, existence.closeTime])
+              toMerge.activityStartDate = formatter.date(existence.openTime, true)
+              toMerge.timeValid = formatter.checkTimeValid(existence.openTime, existence.closeTime)
+              toMerge.isOutdated = toMerge.timeValid !== 0
+            }
+          }
+          return {
+            ...el,
+            ...toMerge
           }
         }
-        return {
-          ...el,
-          ...toMerge
-        }
-      }
-    )
+      )
 
     return zones
   },
-  byZoneId (zoneId, ...options) {
+  byZoneId(zoneId, ...options) {
     return this.all(...options).find(el => {
       return el.zoneId === zoneId
     }) || {}
   },
-  byType (type, ...options) {
+  byType(type, ...options) {
     return this.all(...options).filter(el => {
       return el.type === type
     }) || {}
@@ -211,7 +211,7 @@ Getters.zones = {
 }
 
 Getters.trends = {
-  byItemId (itemId) {
+  byItemId(itemId) {
     const temp = {}
     const trends = this.all()
     if (trends) {
@@ -233,32 +233,32 @@ Getters.trends = {
     }
     return temp
   },
-  byStageId (stageId) {
+  byStageId(stageId) {
     // data has been already keyed with stageId. Just get it ;)
     return this.all() && this.all()[stageId]
   },
-  all () {
+  all() {
     // when data source is not global, it is unable to get the trend
     // (trend of personalMatrix is not supported)
     if (store.getters['dataSource/source'] !== 'global') {
       return {}
     }
     // otherwise just return it
-    return store.getters['data/content']({ id: 'trends' }) || {}
+    return store.getters['data/content']({id: 'trends'}) || {}
   }
 }
 
 Getters.period = {
   all(server) {
-    const period = store.getters["data/content"]({ id: "period" });
+    const period = store.getters["data/content"]({id: "period"});
     if (!period) return [];
     return period.filter((el) => existUtils.existence(el, false, server));
   },
 };
 
 Getters.config = {
-  all () {
-    const config = store.getters["data/content"]({ id: "config" });
+  all() {
+    const config = store.getters["data/content"]({id: "config"});
     if (!config) return {};
     return config;
   },
@@ -266,10 +266,10 @@ Getters.config = {
 };
 
 Getters.siteStats = {
-  all () {
-    return store.getters['data/content']({ id: 'stats' })
+  all() {
+    return store.getters['data/content']({id: 'stats'})
   },
-  byKey (key) {
+  byKey(key) {
     return this.all()[key].map(el => Object.assign({}, el)).map(el => {
       el.stage = Getters.stages.byStageId(el.stageId)
       el.zone = Getters.zones.byZoneId(el.stage.zoneId, false)
