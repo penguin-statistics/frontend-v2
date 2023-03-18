@@ -51,8 +51,29 @@ Getters.items = {
 //   }
 // }
 
+// all() {
+//     const currStateTime = store.getters['data/updated']({id: 'stages'})
+//     if (this._cache) {
+//       if (this._cache.at === currStateTime) return this._cache.c || []
+//     }
+//     const stages = store.getters['data/content']({id: 'stages'})
+//     this._cache = {
+//       at: currStateTime,
+//       c: stages
+//     }
+//     if (!stages) return []
+//     return stages
+//   },
+
 Getters.statistics = {
+  _cache: {
+    at: null,
+    c: null
+  },
   base(filter) {
+    const currStateTime = store.getters['data/updated']({id: `${store.getters['dataSource/source']}Matrix`})
+    if (this._cache.at === currStateTime) return (this._cache.c || []).filter(filter)
+
     const matrix = store.getters['data/content']({id: `${store.getters['dataSource/source']}Matrix`})
     if (!matrix) return null
     return matrix
@@ -99,7 +120,14 @@ Getters.statistics = {
 }
 
 Getters.patterns = {
+  _cache: {
+    at: null,
+    c: null
+  },
   base(filter) {
+    const currStateTime = store.getters['data/updated']({id: `${store.getters['dataSource/source']}PatternMatrix`})
+    if (this._cache.at === currStateTime) return (this._cache.c || []).filter(filter)
+
     const matrix = store.getters['data/content']({id: `${store.getters['dataSource/source']}PatternMatrix`})
     if (!matrix) return null
     return matrix
@@ -132,9 +160,8 @@ Getters.stages = {
   },
   all() {
     const currStateTime = store.getters['data/updated']({id: 'stages'})
-    if (this._cache) {
-      if (this._cache.at === currStateTime) return this._cache.c || []
-    }
+    if (this._cache.at === currStateTime) return this._cache.c || []
+
     const stages = store.getters['data/content']({id: 'stages'})
     this._cache = {
       at: currStateTime,
@@ -161,7 +188,14 @@ Getters.stages = {
 }
 
 Getters.zones = {
+  _cache: {
+    at: null,
+    c: null
+  },
   all(filter = true, parseTime = true) {
+    const currStateTime = store.getters['data/updated']({id: 'zones'})
+    if (this._cache.at === currStateTime) return this._cache.c || []
+
     let zones = store.getters['data/content']({id: 'zones'})
     if (!zones) return []
 
@@ -195,6 +229,11 @@ Getters.zones = {
           }
         }
       )
+
+    this._cache = {
+      at: currStateTime,
+      c: zones
+    }
 
     return zones
   },
