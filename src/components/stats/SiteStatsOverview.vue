@@ -12,9 +12,9 @@
     <v-card-title class="display-2 px-3">
       <span
         ref="totalReportsNum"
-        class="monospace"
+        :class="['monospace', loading ? 'degraded-opacity' : '']"
       >
-        {{ totalReports === null ? "---" : totalReports | thousandSeparator }}
+        ---
       </span>
     </v-card-title>
     <v-card-subtitle class="d-flex align-center pl-3">
@@ -37,43 +37,64 @@ import BackdropCard from '@/components/global/BackdropCard'
 import statsManager from '@/models/managers/stats'
 import anime from 'animejs'
 import formatter from '@/utils/formatter'
+
 export default {
   name: 'SiteStatsOverview',
-  components: { BackdropCard },
+  components: {BackdropCard},
+  data() {
+    return {
+      cachedTotalReports: 0
+    }
+  },
   computed: {
-    totalReports () {
-      const stats = this.$store.getters['data/content']({ id: 'stats' })
+    totalReports() {
+      const stats = this.$store.getters['data/content']({id: 'stats'})
       if (!stats || stats.error) return 0
       return stats.totalStageTimes_24h
-        .map(el => el.times)
-        .reduce((a, b) => a + b, 0)
+          .map(el => el.times)
+          .reduce((a, b) => a + b, 0)
+    },
+    loading() {
+      return this.$store.state.ajax.states.find(el => el.id === 'stats')?.pending
     }
   },
   watch: {
-    totalReports (newValue, oldValue) {
-      this.animate(newValue, oldValue)
+    totalReports(newValue, oldValue) {
+      if (newValue === oldValue) return
+      if (newValue === 0 && this.cachedTotalReports !== 0) return // do not animate back to 0
+
+      const usingOldValue = this.cachedTotalReports !== 0 ? this.cachedTotalReports : oldValue
+      if (oldValue !== 0) this.cachedTotalReports = oldValue
+      if (newValue !== 0) this.animate(newValue, usingOldValue)
     }
   },
-  created () {
+  created() {
     statsManager.refresh()
   },
   methods: {
-    animate (newValue, oldValue) {
+    animate(newValue, oldValue) {
       const self = this
 
       if (self.$refs.totalReportsNum) {
         return anime({
-          targets: self.$refs.totalReportsNum,
-          innerHTML: [oldValue, newValue],
+          targets: {value: oldValue},
+          value: newValue,
           duration: 1500,
           round: 1,
           easing: 'easeOutQuint',
-          delay: 1500,
-          complete: function () {
+          delay: 800,
+          // update: function () {
+          //   // when completed such element may not exist anymore - if the component
+          //   // has already been destroyed at such time.
+          //   if (self && self.$refs.totalReportsNum) {
+          //     self.$refs.totalReportsNum.innerText = formatter.thousandSeparator(newValue)
+          //   }
+          // }
+          update: function (anim) {
             // when completed such element may not exist anymore - if the component
             // has already been destroyed at such time.
             if (self && self.$refs.totalReportsNum) {
-              self.$refs.totalReportsNum.innerText = formatter.thousandSeparator(newValue)
+              self.$refs.totalReportsNum.innerText = formatter.thousandSeparator(anim.animatables[0].target.value)
             }
           }
         })
