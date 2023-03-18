@@ -12,7 +12,7 @@
     <v-card-title class="display-2 px-3">
       <span
         ref="totalReportsNum"
-        :class="['monospace', loading ? 'degraded-opacity' : '']"
+        :class="['monospace', loading ? 'shadow-opacity' : '']"
       >
         ---
       </span>
@@ -79,10 +79,10 @@ export default {
         return anime({
           targets: {value: oldValue},
           value: newValue,
-          duration: 1500,
+          duration: 1700,
           round: 1,
           easing: 'easeOutQuint',
-          delay: 800,
+          delay: 1000,
           // update: function () {
           //   // when completed such element may not exist anymore - if the component
           //   // has already been destroyed at such time.
@@ -93,8 +93,14 @@ export default {
           update: function (anim) {
             // when completed such element may not exist anymore - if the component
             // has already been destroyed at such time.
+            const val = anim.animatables[0].target.value
+            const text = formatter.thousandSeparator(val)
             if (self && self.$refs.totalReportsNum) {
-              self.$refs.totalReportsNum.innerText = formatter.thousandSeparator(anim.animatables[0].target.value)
+              if (val === 0) {
+                self.$refs.totalReportsNum.innerText = '---'
+              } else {
+                self.$refs.totalReportsNum.innerText = text
+              }
             }
           }
         })
@@ -105,5 +111,7 @@ export default {
 </script>
 
 <style scoped>
-
+.shadow-opacity {
+  opacity: 0.3
+}
 </style>
