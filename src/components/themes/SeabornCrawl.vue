@@ -1,7 +1,7 @@
 <template>
   <div
     v-if="$store.getters['ui/activeThemeStyle'] === 'seaborn' && !hide"
-    class="crawl-wrapper"
+    :class="['crawl-wrapper', drawer ? 'crawl-wrapper--drawer-expanded' : '']"
   >
     <div class="seaborn-creature" />
   </div>
@@ -10,20 +10,30 @@
 <script>
 export default {
   name: 'SeabornCrawl',
+  props: {
+    drawer: {
+      type: Boolean,
+      required: true,
+    },
+  },
   data() {
     return {
       creatures: [
         {
-          url: '/seaborn/creeper-chunks.png',
+          url: '/seaborn/crawling-creatures/0.png',
+          steps: 16,
+        },
+        {
+          url: '/seaborn/crawling-creatures/1.png',
           steps: 14,
         },
         {
-          url: '/seaborn/creature1-chunks.png',
-          steps: 45,
+          url: '/seaborn/crawling-creatures/2.png',
+          steps: 13,
         },
         {
-          url: '/seaborn/creature2-chunks.png',
-          steps: 10,
+          url: '/seaborn/crawling-creatures/3.png',
+          steps: 23,
         }
       ],
       currentCreature: 0,
@@ -32,10 +42,10 @@ export default {
     }
   },
   mounted() {
-    this.changeCreature(this.currentCreature)
+    this.changeCreature(Math.floor(Math.random() * this.creatures.length))
   },
   created() {
-    this.nextTimer = setTimeout(this.nextCreature, 60 * 1000)
+    this.nextTimer = setTimeout(this.enableHide, 70 * 1000)
   },
   beforeDestroy() {
     clearInterval(this.nextTimer)
@@ -46,9 +56,7 @@ export default {
       this.$el.querySelector('.seaborn-creature').style.backgroundImage = `url('${creature.url}')`
       this.$el.querySelector('.seaborn-creature').style.setProperty('--steps', creature.steps)
     },
-    nextCreature() {
-      // this.currentCreature = (this.currentCreature + 1) % this.creatures.length
-      // this.changeCreature(this.currentCreature)
+    enableHide() {
       this.hide = true
     }
   }
@@ -57,9 +65,9 @@ export default {
 
 <style scoped>
 .seaborn-creature {
-  --size: 100px;
-  width: 100px;
-  height: 100px;
+  --size: 75px;
+  width: 75px;
+  height: 75px;
   background: url('/seaborn/creeper-chunks.png') no-repeat;
   background-size: var(--size);
   animation: crawl-chunks infinite forwards;
@@ -78,12 +86,19 @@ export default {
 
 .crawl-wrapper {
   position: fixed;
-  left: 290px;
+  left: -2px;
   top: 0;
   z-index: 20;
   pointer-events: none;
+  transform: translateX(0px);
 
-  animation: crawl 60s infinite linear;
+  animation: crawl 70s linear forwards;
+  transition: left 200ms cubic-bezier(0.4, 0, 0.2, 1);
+  will-change: left;
+}
+
+.crawl-wrapper--drawer-expanded {
+  left: 297px;
 }
 
 @keyframes crawl {

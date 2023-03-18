@@ -569,7 +569,7 @@ export default {
   computed: {
     serverName() {
       return this.$t(
-        "server.servers." + this.$store.getters["dataSource/server"]
+          "server.servers." + this.$store.getters["dataSource/server"]
       );
     },
     strings() {
@@ -597,7 +597,7 @@ export default {
           });
         } else if (val === false) {
           this.results = this.results.filter(
-            (el) => el.dropType !== "FURNITURE" && el.itemId !== "furni"
+              (el) => el.dropType !== "FURNITURE" && el.itemId !== "furni"
           );
         }
       },
@@ -634,12 +634,12 @@ export default {
 
       const items = [];
 
-      for (const { id, colors } of categories) {
+      for (const {id, colors} of categories) {
         const category = id;
         const categoryDrops = [];
 
         for (const itemDropInfo of this.dropInfos.item.filter(
-          (v) => v.dropType === category
+            (v) => v.dropType === category
         )) {
           const dropType = itemDropInfo.dropType;
           if (dropType === "FURNITURE") continue;
@@ -671,10 +671,10 @@ export default {
         return ReportValidator.null();
 
       const validator = new ReportValidator(
-        this.$store.getters["dataSource/server"],
-        this.selectedZone,
-        this.selectedStage,
-        this.results
+          this.$store.getters["dataSource/server"],
+          this.selectedZone,
+          this.selectedStage,
+          this.results
       );
 
       Console.info("Report", "initialized validator as", validator);
@@ -683,7 +683,7 @@ export default {
     },
 
     valid() {
-      const { item, type } = this.validation;
+      const {item, type} = this.validation;
       return item.length === 0 && type.length === 0;
     },
     slashStripClasses() {
@@ -716,10 +716,7 @@ export default {
     },
   },
   methods: {
-    goToPage(name) {
-      this.$router.push({ name: name });
-    },
-    select({ zone, stage }) {
+    select({zone, stage}) {
       this.reset();
       this.selected.zone = zone;
       this.selected.stage = stage;
@@ -745,7 +742,7 @@ export default {
     },
     getOrCreateItem(dropType, itemId) {
       const item = this.results.find(
-        (v) => v.itemId === itemId && v.dropType === dropType
+          (v) => v.itemId === itemId && v.dropType === dropType
       );
       if (item === undefined) {
         const newLength = this.results.push({
@@ -771,7 +768,7 @@ export default {
       }
     },
     async doSubmit() {
-      const tx = Sentry.startTransaction({ name: "Event_ReportSingle" });
+      const tx = Sentry.startTransaction({name: "Event_ReportSingle"});
       Sentry.getCurrentHub().configureScope((scope) => scope.setSpan(tx));
 
       const span = tx.startChild({
@@ -784,36 +781,36 @@ export default {
       this.submitted = false;
       this.submitting = true;
       const timer = performance.timer.ctx(
-        report
-          .submitReport({
-            stageId: this.selected.stage,
-            drops: this.results,
-          })
-          .then(({ data }) => {
-            span.setStatus("ok");
+          report
+              .submitReport({
+                stageId: this.selected.stage,
+                drops: this.results,
+              })
+              .then(({data}) => {
+                span.setStatus("ok");
 
-            this.reset();
-            this.submitted = true;
-            this.$ga.event("report", "submit_single", this.selected.stage, 1);
+                this.reset();
+                this.submitted = true;
+                this.$ga.event("report", "submit_single", this.selected.stage, 1);
 
-            this.lastSubmissionId = data;
-          })
-          .catch(() => {
-            span.setStatus("unknown_error");
-            snackbar.networkError();
-          })
-          .finally(() => {
-            this.submitting = false;
+                this.lastSubmissionId = data;
+              })
+              .catch(() => {
+                span.setStatus("unknown_error");
+                snackbar.networkError();
+              })
+              .finally(() => {
+                this.submitting = false;
 
-            span.finish();
-            tx.finish();
-          })
+                span.finish();
+                tx.finish();
+              })
       );
       // Console.debug("Report", "report with context: got performance timer promise", timer)
       timer.then((timeDelta) => {
         Console.info(
-          "Performance",
-          `report submit request last ${timeDelta}ms to complete`
+            "Performance",
+            `report submit request last ${timeDelta}ms to complete`
         );
         this.$ga.time({
           timingCategory: "report",
