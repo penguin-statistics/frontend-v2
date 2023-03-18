@@ -398,12 +398,12 @@ import marshaller from '@/utils/marshaller'
 import performance from '@/utils/performance'
 import snackbar from '@/utils/snackbar'
 import strings from '@/utils/strings'
-import { mapGetters, mapState } from 'vuex'
+import {mapGetters, mapState} from 'vuex'
 
 export default {
   name: 'Planner',
-  components: { PreloaderCard, MultiStageSelector, PlannerResult, PlannerItemStepper, PlannerIO },
-  data () {
+  components: {PreloaderCard, MultiStageSelector, PlannerResult, PlannerItemStepper, PlannerIO},
+  data() {
     return {
       calculation: {
         dialog: false,
@@ -436,80 +436,90 @@ export default {
     ]),
     ...mapGetters('dataSource', ['server']),
     resultDialog: {
-      get () {
+      get() {
         return this.calculation.dialog || this.calculation.done || this.calculation.pending
       },
-      set (v) {
+      set(v) {
         this.calculation.dialog = v
         this.calculation.done = v
       }
     },
     excludes: {
-      get () {
+      get() {
         return this.$store.getters['planner/excludes']
       },
-      set (v) {
+      set(v) {
         this.$store.commit('planner/changeExcludes', v)
       }
     },
-    resetAmount () {
+    resetAmount() {
       return Object.values(this.reset.options)
-        .reduce((prev, item) => {
-          prev += item === true
-          return prev
-        }, 0)
-    }
+          .reduce((prev, item) => {
+            prev += item === true
+            return prev
+          }, 0)
+    },
+    serverItems() {
+      return this.$store.getters['data/content']({id: 'items'})
+    },
   },
   watch: {
     items: {
-      handler (value) {
+      handler(value) {
         this.$store.commit('planner/changeItems', value)
       },
       deep: true
     },
     options: {
-      handler (value) {
+      handler(value) {
         this.$store.commit('planner/changeOptions', value)
       },
       deep: true
     },
     excludes: {
-      handler (value) {
+      handler(value) {
         this.$store.commit('planner/changeExcludes', value)
       },
       deep: true
     },
-    server () {
+    server() {
       this.updateItemStructure(this.getInitialItems(), this.items)
     },
-    'reset.dialog' () {
+    serverItems: {
+      handler(value) {
+        console.log('serverItems changed')
+        this.updateItemStructure(this.getInitialItems(), value)
+      },
+      deep: true
+    },
+    'reset.dialog'() {
       this.clearResetOptions()
     }
   },
 
-  mounted () {
+  mounted() {
     const initialItems = this.getInitialItems()
     if (this.items.length === 0) {
-      this.$store.commit('planner/changeItems', initialItems)
+      this.items = initialItems
     }
     this.updateItemStructure(initialItems, this.items)
   },
 
   methods: {
-    getInitialItems () {
+    getInitialItems() {
       return get.items.all(false)
-        .filter(item => (item.itemType === 'MATERIAL' && item.itemId.length === 5) || item.itemType === 'ARKPLANNER')
-        .map(item => ({
-          id: item.itemId,
-          need: 0,
-          have: 0
-        }))
+          .filter(item => (item.itemType === 'MATERIAL' && item.itemId.length === 5) || item.itemType === 'ARKPLANNER')
+          .map(item => ({
+            id: item.itemId,
+            need: 0,
+            have: 0
+          }))
     },
-    getItems () {
+    getItems() {
       return get.items.all(false)
-        .filter(item => (item.itemType === 'MATERIAL' && item.itemId.length === 5) || item.itemType === 'ARKPLANNER')
+          .filter(item => (item.itemType === 'MATERIAL' && item.itemId.length === 5) || item.itemType === 'ARKPLANNER')
     },
-    updateItemStructure (target, source) {
+    updateItemStructure(target, source) {
       const results = []
       const processedItemIds = []
       for (const item of source) {
@@ -528,11 +538,11 @@ export default {
 
       this.$store.commit('planner/changeItems', results)
     },
-    confirmReset () {
+    confirmReset() {
       this.doReset()
       this.reset.dialog = false
     },
-    doReset () {
+    doReset() {
       if (this.reset.options.removeItems) this.$store.commit('planner/changeItems', this.getInitialItems())
       if (this.reset.options.removeOptions) {
         const options = {}
@@ -544,10 +554,12 @@ export default {
       if (this.reset.options.removeExcludes) this.$store.commit('planner/changeExcludes', [])
       snackbar.launch('success', 7000, 'planner.reset.success')
     },
-    clearResetOptions () {
-      Object.keys(this.reset.options).forEach(key => { this.reset.options[key] = false })
+    clearResetOptions() {
+      Object.keys(this.reset.options).forEach(key => {
+        this.reset.options[key] = false
+      })
     },
-    calculate () {
+    calculate() {
       Console.info('Planner', 'planning with config', {
         items: this.items,
         options: this.options,
@@ -556,70 +568,70 @@ export default {
       this.calculation.pending = true
 
       const timer = performance.timer.ctx(
-        planner.plan(
-          marshaller.planner.plan(this)
-        )
-          .then(({ data }) => {
-            if (data.error === true) {
-              return snackbar.launch('error', 15000, 'planner.calculationError', {
-                error: data.reason
-              })
-            }
+          planner.plan(
+              marshaller.planner.plan(this)
+          )
+              .then(({data}) => {
+                if (data.error === true) {
+                  return snackbar.launch('error', 15000, 'planner.calculationError', {
+                    error: data.reason
+                  })
+                }
 
-            data.stages = data.stages.map(el => {
-              el.materials = []
-              el.stage = get.stages.byStageId(el.stage)
-              el.stage.code = strings.translate(el.stage, 'code')
-              for (const [id, value] of Object.entries(el.items)) {
-                const item = get.items.byItemId(id)
-                el.materials.push({
-                  name: strings.translate(item, 'name'),
-                  item,
-                  value
+                data.stages = data.stages.map(el => {
+                  el.materials = []
+                  el.stage = get.stages.byStageId(el.stage)
+                  el.stage.code = strings.translate(el.stage, 'code')
+                  for (const [id, value] of Object.entries(el.items)) {
+                    const item = get.items.byItemId(id)
+                    el.materials.push({
+                      name: strings.translate(item, 'name'),
+                      item,
+                      value
+                    })
+                  }
+                  return el
                 })
-              }
-              return el
-            })
-            data.syntheses = data.syntheses.map(el => {
-              el.target = {
-                item: get.items.byItemId(el.target)
-              }
-              el.target.name = strings.translate(el.target.item, 'name')
-              el.items = []
-              for (const [id, value] of Object.entries(el.materials)) {
-                const item = get.items.byItemId(id)
-                el.items.push({
-                  name: strings.translate(item, 'name'),
-                  item,
-                  value
+                data.syntheses = data.syntheses.map(el => {
+                  el.target = {
+                    item: get.items.byItemId(el.target)
+                  }
+                  el.target.name = strings.translate(el.target.item, 'name')
+                  el.items = []
+                  for (const [id, value] of Object.entries(el.materials)) {
+                    const item = get.items.byItemId(id)
+                    el.items.push({
+                      name: strings.translate(item, 'name'),
+                      item,
+                      value
+                    })
+                  }
+                  return el
                 })
-              }
-              return el
-            })
-            data.values = data.values.map(el => {
-              el.materials = []
-              for (const { name, value } of el.items) {
-                if (parseFloat(value) === 0) continue
-                const item = get.items.byItemId(name)
-                el.materials.push({
-                  name: strings.translate(item, 'name'),
-                  item,
-                  value
+                data.values = data.values.map(el => {
+                  el.materials = []
+                  for (const {name, value} of el.items) {
+                    if (parseFloat(value) === 0) continue
+                    const item = get.items.byItemId(name)
+                    el.materials.push({
+                      name: strings.translate(item, 'name'),
+                      item,
+                      value
+                    })
+                  }
+                  return el
                 })
-              }
-              return el
-            })
-            Console.debug('Planner', 'received plan', data)
-            this.$set(this.calculation, 'data', data)
-            this.calculation.done = true
-          })
-          .catch((err) => {
-            Console.error('Planner', 'failed to refresh plan', err)
-            snackbar.networkError()
-          })
-          .finally(() => {
-            this.calculation.pending = false
-          })
+                Console.debug('Planner', 'received plan', data)
+                this.$set(this.calculation, 'data', data)
+                this.calculation.done = true
+              })
+              .catch((err) => {
+                Console.error('Planner', 'failed to refresh plan', err)
+                snackbar.networkError()
+              })
+              .finally(() => {
+                this.calculation.pending = false
+              })
       )
       timer.then(timeDelta => {
         Console.info('Performance', `planner plan request last ${timeDelta}ms to complete`)
@@ -635,13 +647,13 @@ export default {
 </script>
 
 <style scoped>
-  .planner-import-export, ::v-deep .planner-import-export textarea {
-    word-break: break-all;
-    line-height: 1.2 !important;
-    font-size: 12px;
-  }
+.planner-import-export, ::v-deep .planner-import-export textarea {
+  word-break: break-all;
+  line-height: 1.2 !important;
+  font-size: 12px;
+}
 
-  ::v-deep .planner-import-export textarea {
-    padding: 8px 0;
-  }
+::v-deep .planner-import-export textarea {
+  padding: 8px 0;
+}
 </style>
