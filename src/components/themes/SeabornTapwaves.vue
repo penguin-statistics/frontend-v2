@@ -27,7 +27,13 @@ export default {
     this.rootEl = window
 
     this.tapwaveTapListener = function (e) {
-      this.handleTapwave(e)
+      if (e instanceof TouchEvent && e.touches.length === 0) return
+
+      if (e instanceof MouseEvent) {
+        this.handleTapwave(e.clientX, e.clientY)
+      } else if (e instanceof TouchEvent) {
+        this.handleTapwave(e.touches[0].clientX, e.touches[0].clientY)
+      }
     }.bind(this)
     this.tapwaveMoveListener = throttle(function (e) {
       // e is MouseEvent or TouchEvent
@@ -35,33 +41,37 @@ export default {
       if (e instanceof MouseEvent && e.buttons === 0) return
       // ignore movements that are too small
       if (e instanceof MouseEvent && Math.abs(e.movementX) < 2 && Math.abs(e.movementY) < 2) return
-      this.handleTapwave(e)
+      if (e instanceof TouchEvent && e.touches.length === 0) return
+
+      if (e instanceof MouseEvent) {
+        this.handleTapwave(e.clientX, e.clientY)
+      } else if (e instanceof TouchEvent) {
+        this.handleTapwave(e.touches[0].clientX, e.touches[0].clientY)
+      }
     }.bind(this), 150)
 
     this.rootEl.addEventListener('mousedown', this.tapwaveTapListener)
     this.rootEl.addEventListener('mousemove', this.tapwaveMoveListener)
-    this.rootEl.addEventListener('touchstart', this.tapwaveTapListener)
     this.rootEl.addEventListener('touchmove', this.tapwaveMoveListener)
   },
   beforeDestroy() {
     this.rootEl.removeEventListener('mousedown', this.tapwaveTapListener)
     this.rootEl.removeEventListener('mousemove', this.tapwaveMoveListener)
-    this.rootEl.removeEventListener('touchstart', this.tapwaveTapListener)
     this.rootEl.removeEventListener('touchmove', this.tapwaveMoveListener)
   },
   methods: {
-    handleTapwave: function (e) {
+    handleTapwave: function (x, y) {
       const tapwave = {
         id: Date.now(),
         style: {
-          top: (e.clientY - 75) + 'px',
-          left: (e.clientX - 75) + 'px',
+          top: (y - 75) + 'px',
+          left: (x - 75) + 'px',
         }
       }
       this.$set(this.tapwaves, tapwave.id, tapwave)
       setTimeout(function () {
         this.$delete(this.tapwaves, tapwave.id)
-      }.bind(this), 1000)
+      }.bind(this), 750)
     }
   },
 }

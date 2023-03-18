@@ -6,7 +6,9 @@
     :class="route.path === $route.path ? activeClass : ''"
     :two-line="!!route.meta.twoLine"
     :color="`primary ${dark ? 'lighten-1' : 'darken-2'}`"
-    @click="navigate(route)"
+    :to="{ name: route.name }"
+    :href="route.meta.link"
+    exact
   >
     <v-list-item-icon>
       <SeabornCreatureIcon
@@ -57,7 +59,8 @@
       v-haptic
       :class="route.path + '/' + child.path === $route.path.split('/', 3).join('/') ? activeClass : ''"
       :color="`primary ${dark ? 'lighten-1' : 'darken-2'}`"
-      @click="navigate(child)"
+      :to="{ name: child.name }"
+      :href="child.meta.link"
     >
       <v-list-item-title>
         {{ $t(child.meta.i18n) }}

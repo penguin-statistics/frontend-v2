@@ -70,10 +70,10 @@
       <MikuDrawerFooterImage />
       <v-img
         v-if="$store.state.ui.activeThemeStyle === 'seaborn'"
-        src="/seaborn/sidebar_skin1.png"
+        src="/seaborn/skadi.png"
         style="position: absolute; bottom: 0; z-index: 0"
-        position="bottom right"
-        height="400px"
+        position="center center"
+        height="calc(50px + 35vh)"
         width="100%"
         :aspect-ratio="1"
         class="fallthrough"
@@ -135,7 +135,7 @@
       <Footer v-if="!environment.isApp" />
       <SeabornSideAdornment />
     </v-content>
-    <SeabornCrawl />
+    <SeabornCrawl :drawer="drawer" />
     <NetworkStateIndicator />
   </v-app>
 </template>
