@@ -71,6 +71,11 @@ export default {
   created() {
     statsManager.refresh()
   },
+  mounted() {
+    if (this.totalReports !== 0) {
+      this.$refs.totalReportsNum.innerText = formatter.thousandSeparator(this.totalReports)
+    }
+  },
   methods: {
     animate(newValue, oldValue) {
       const self = this
