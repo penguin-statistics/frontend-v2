@@ -812,3 +812,16 @@
 .pointer-events-none {
     pointer-events: none !important;
 }
+
+html[lang^=en] {
+    --font-family-serif: "Noto Serif", serif;
+}
+html[lang^=zh] {
+    --font-family-serif: "Noto Serif SC", "Noto Serif", serif;
+}
+html[lang^=ja] {
+    --font-family-serif: "Noto Serif JP", "Noto Serif", serif;
+}
+html[lang^=ko] {
+    --font-family-serif: "Noto Serif KR", "Noto Serif", serif;
+}

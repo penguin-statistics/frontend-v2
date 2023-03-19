@@ -33,6 +33,69 @@ const languageMapping = {
   ko: "ko_KR",
 };
 
+const fontMapping = {
+  en: {
+    fontFamily: "Noto Serif",
+    fontSource: () => [
+      import(
+        /* webpackChunkName: "font-noto-serif" */
+        /* webpackPrefetch: false */
+        /* webpackPreload: false */
+        "@fontsource/noto-serif/400.css"),
+      import(
+        /* webpackChunkName: "font-noto-serif" */
+        /* webpackPrefetch: false */
+        /* webpackPreload: false */
+        "@fontsource/noto-serif/700.css"),
+    ],
+  },
+  zh: {
+    fontFamily: "Noto Serif SC",
+    fontSource: () => [
+      import(
+        /* webpackChunkName: "font-noto-serif-sc" */
+        /* webpackPrefetch: false */
+        /* webpackPreload: false */
+        "@fontsource/noto-serif-sc/400.css"),
+      import(
+        /* webpackChunkName: "font-noto-serif-sc" */
+        /* webpackPrefetch: false */
+        /* webpackPreload: false */
+        "@fontsource/noto-serif-sc/700.css"),
+    ],
+  },
+  ja: {
+    fontFamily: "Noto Serif JP",
+    fontSource: () => [
+      import(
+        /* webpackChunkName: "font-noto-serif-jp" */
+        /* webpackPrefetch: false */
+        /* webpackPreload: false */
+        "@fontsource/noto-serif-jp/400.css"),
+      import(
+        /* webpackChunkName: "font-noto-serif-jp" */
+        /* webpackPrefetch: false */
+        /* webpackPreload: false */
+        "@fontsource/noto-serif-jp/700.css"),
+    ],
+  },
+  ko: {
+    fontFamily: "Noto Serif KR",
+    fontSource: () => [
+      import(
+        /* webpackChunkName: "font-noto-serif-kr" */
+        /* webpackPrefetch: false */
+        /* webpackPreload: false */
+        "@fontsource/noto-serif-kr/400.css"),
+      import(
+        /* webpackChunkName: "font-noto-serif-kr" */
+        /* webpackPrefetch: false */
+        /* webpackPreload: false */
+        "@fontsource/noto-serif-kr/700.css"),
+    ],
+  }
+}
+
 function changeLocale(localeId, save) {
   dayjs.locale(localeId);
   Console.info("i18n", "locale:", localeId, "| saving to vuex:", save);
@@ -53,6 +116,12 @@ export function loadLanguageAsync(lang) {
   // If the language hasn't been loaded yet
   // set it first to use the local translation
   changeLocale.bind(this)(lang, false);
+
+  // import font using fontsource.
+  const font = fontMapping[lang];
+  if (font) {
+    font.fontSource()
+  }
 
   return fetchTranslations(mappedLang).then((messages) => {
     const transformedMessages = Object.freeze(transformMessages(messages));

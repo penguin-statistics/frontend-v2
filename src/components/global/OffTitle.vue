@@ -71,7 +71,7 @@ span.off-title--ea.off-title--small {
   letter-spacing: -.1em !important;
 }
 .off-title--char {
-  font-family: "Source Han Serif", "Source Han Serif CN", "Songti SC",  serif;
+  font-family: var(--font-family-serif);
   margin-right: .15em;
 }
 .off-title--ea .off-title--char {

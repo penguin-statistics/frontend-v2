@@ -11,6 +11,11 @@ import i18n from '@/i18n'
 import '@/components/functional'
 import environment from '@/utils/environment'
 
+import '@fontsource/roboto/300.css'
+import '@fontsource/roboto/400.css'
+import '@fontsource/roboto/500.css'
+import '@fontsource/roboto/700.css'
+
 import './injections'
 import PenguinProbe from '@/utils/probe'
 
