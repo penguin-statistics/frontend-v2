@@ -4,9 +4,9 @@ import {
 } from '@capacitor/core'
 import Console from '@/utils/Console'
 
-const { PenguinPlugin } = Plugins
+const {PenguinPlugin} = Plugins
 
-function invoke (method, ...args) {
+function invoke(method, ...args) {
   if (Capacitor.isPluginAvailable('PenguinPlugin')) {
     Console.info('PenguinPlugin', 'invoking PenguinPlugin with', method, args)
     return PenguinPlugin[method](...args)
@@ -18,13 +18,19 @@ function invoke (method, ...args) {
 }
 
 export default {
-  openBundleSettings () {
+  openBundleSettings() {
     return invoke('openBundleSettings')
   },
-  getLastSyncedPushPreferences () {
+  getLastSyncedPushPreferences() {
     return invoke('getLastSyncedPushPreferences')
   },
-  submitNewPushPreferences (preferences) {
-    return invoke('submitNewPushPreferences', { preferences })
+  submitNewPushPreferences(preferences) {
+    return invoke('submitNewPushPreferences', {preferences})
+  },
+  updateSharedState(state) {
+    return invoke('updateSharedState', state)
+  },
+  updateCurrentUserActivity(activity) {
+    return invoke('updateCurrentUserActivity', activity)
   }
 }

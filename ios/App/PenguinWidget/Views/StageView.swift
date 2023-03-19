@@ -13,6 +13,8 @@ struct StageView: View {
     var stage: StageStats
     var showRecentTimes: Bool = false
     
+    @EnvironmentObject var preferences: WidgetUserPreferences
+    
     var body: some View {
         Link(destination: Routes.generate(zoneId: stage.zoneId, stageId: stage.stageId)) {
             
@@ -26,6 +28,7 @@ struct StageView: View {
                     Text(stage.stageCode)
                         .font(.title.monospacedDigit())
                         .bold()
+                        .foregroundColor(preferences.theme.tintColor)
                         .frame(minHeight: 0, maxHeight: 36)
                         .minimumScaleFactor(0.3)
                         .lineLimit(3)

@@ -2,8 +2,6 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>NSSupportsLiveActivities</key>
-	<true/>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>zh_CN</string>
 	<key>CFBundleDisplayName</key>
@@ -50,8 +48,11 @@
 	<string>Store camera photos to camera</string>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>To Pick Photos from Library</string>
+	<key>NSSupportsLiveActivities</key>
+	<true/>
 	<key>NSUserActivityTypes</key>
 	<array>
+		<string>com.apple.handoff</string>
 		<string>SelectServerIntent</string>
 		<string>StatisticsOverviewIntent</string>
 	</array>

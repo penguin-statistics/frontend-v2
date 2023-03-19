@@ -50,3 +50,40 @@ extension WidgetConfiguration {
         }
     }
 }
+
+extension View {
+    @ViewBuilder func `if`<Content: View>(_ condition: Bool, transform: (Self) -> Content) -> some View {
+        if condition {
+            transform(self)
+        } else {
+            self
+        }
+    }
+}
+
+struct FadeMasked: ViewModifier {
+    let maxOpacity: Double
+    
+    func body(content: Content) -> some View {
+        content
+            .mask(
+                LinearGradient(
+                    gradient: Gradient(
+                        stops: [
+                            .init(color: .clear, location: 0.0),
+                            .init(color: .black.opacity(maxOpacity), location: 1.0)
+                        ]
+                    ),
+                    startPoint: .leading,
+                    endPoint: .trailing
+                )
+            )
+    }
+}
+
+extension View {
+    func fadeMasked(maxOpacity: Double = 0.5) -> some View {
+        self.modifier(FadeMasked(maxOpacity: maxOpacity))
+    }
+}
+

@@ -2,18 +2,7 @@
     "images": [
         {
             "filename": "et_ObsidianPass.png",
-            "idiom": "universal",
-            "scale": "1x"
-        },
-        {
-            "filename": "et_ObsidianPass.png",
-            "idiom": "universal",
-            "scale": "2x"
-        },
-        {
-            "filename": "et_ObsidianPass.png",
-            "idiom": "universal",
-            "scale": "3x"
+            "idiom": "universal"
         }
     ],
     "info": {

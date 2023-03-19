@@ -9,7 +9,7 @@ import SwiftUI
 import WidgetKit
 
 struct MediumWidgetView: View {
-    var stats: SiteStats
+    var entry: SiteStatsProvider.Entry
 
     var body: some View {
         VStack(alignment: .leading, spacing: 0) {
@@ -20,14 +20,27 @@ struct MediumWidgetView: View {
             
             Spacer()
             
-            TwoColumnStageStats(stages: stats.stages)
+            TwoColumnStageStats(stages: entry.stats.stages)
                 .padding(.horizontal, 8)
             
             Spacer()
-            WidgetFooter(server: stats.server)
+            WidgetFooter(server: entry.stats.server)
         }
+        .environmentObject(entry.preferences)
         .padding()
-        .background(Color("Background"))
+        .background(
+            HStack {
+                Spacer()
+                entry.preferences.theme.adornmentView
+                    // fill height
+                    .unredacted()
+                    .frame(maxHeight: .infinity)
+                    .aspectRatio(1, contentMode: .fit)
+                    .fadeMasked()
+                    
+            }
+        )
+        .background(entry.preferences.theme.backgroundColor)
     }
 }
 
@@ -35,13 +48,13 @@ struct MediumWidgetView_Previews: PreviewProvider {
     static var previews: some View {
         Group {
             MediumWidgetView(
-                stats: SiteStats.demo(.zhRegular)
+                entry: .demo(.zhRegular)
             )
                 .environment(\.locale, .init(identifier: "zh"))
                 .previewDisplayName("Chinese")
             
             MediumWidgetView(
-                stats: SiteStats.demo(.zhRegular)
+                entry: .demo(.zhRegular)
             )
                 .environment(\.locale, .init(identifier: "ja"))
                 .previewDisplayName("Japanese")

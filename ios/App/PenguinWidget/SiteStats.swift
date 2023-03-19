@@ -7,6 +7,7 @@
 
 import Foundation
 import SwiftUI
+import UIKit
 
 struct ItemStats {
     let id: String
@@ -15,8 +16,13 @@ struct ItemStats {
     let times: Int
     let quantity: Int
     
-    func image() -> Image {
-        return Image("item_" + self.id)
+    func image() -> AnyView {
+        let imageName = "item_" + self.id
+        // if img does not exist, return a placeholder
+        if let img = UIImage(named: imageName) {
+            return AnyView(Image(uiImage: img).resizable())
+        }
+        return AnyView(Circle().fill(Color.gray.opacity(0.3)))
     }
     
     func percentage() -> String {

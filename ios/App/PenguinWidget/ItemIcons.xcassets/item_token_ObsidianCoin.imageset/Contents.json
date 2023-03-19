@@ -2,18 +2,7 @@
     "images": [
         {
             "filename": "token_ObsidianCoin.png",
-            "idiom": "universal",
-            "scale": "1x"
-        },
-        {
-            "filename": "token_ObsidianCoin.png",
-            "idiom": "universal",
-            "scale": "2x"
-        },
-        {
-            "filename": "token_ObsidianCoin.png",
-            "idiom": "universal",
-            "scale": "3x"
+            "idiom": "universal"
         }
     ],
     "info": {

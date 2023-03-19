@@ -10,7 +10,7 @@ import SwiftUI
 import Intents
 
 struct SmallWidgetView : View {
-    var stats: SiteStats
+    var entry: SiteStatsProvider.Entry
 
     var body: some View {
         VStack(alignment: .center, spacing: 0) {
@@ -21,19 +21,30 @@ struct SmallWidgetView : View {
             
             Spacer()
             
-            StageView(stage: stats.stages[0])
+            StageView(stage: entry.stats.stages[0])
             
-            ItemStatsView(item: stats.stages[0].items[0])
-
+            ItemStatsView(item: entry.stats.stages[0].items[0])
+            
             Spacer()
             
-            WidgetFooter(server: stats.server)
+            WidgetFooter(server: entry.stats.server)
         }
+        .environmentObject(entry.preferences)
         .padding()
-        .background(Color("Background"))
+        .background(
+            entry.preferences.theme.adornmentView
+                .unredacted()
+                .frame(width: 100)
+                .fadeMasked(),
+            alignment: .bottomTrailing
+        )
+        .background(entry.preferences.theme.backgroundColor)
         .widgetURL(Routes.generate(
-                    zoneId: stats.stages[0].zoneId,
-                    stageId: stats.stages[0].stageId))
+            zoneId: entry.stats.stages[0].zoneId,
+            stageId: entry.stats.stages[0].stageId))
+        .if(entry.preferences.theme.forcedColorScheme != nil) { view in
+            view.environment(\.colorScheme, entry.preferences.theme.forcedColorScheme!)
+        }
     }
 }
 
@@ -54,12 +65,26 @@ struct SmallWidgetView_Previews: PreviewProvider {
 //    }
     
         SmallWidgetView(
-            stats: SiteStats.demo(.zhRegular)
+            entry: .demo(.zhRegular, theme: .default)
+        )
+            .previewContext(WidgetPreviewContext(family: .systemSmall))
+            .environment(\.locale, .init(identifier: "zh"))
+            .previewDisplayName("Small (theme: default)")
+        
+        SmallWidgetView(
+            entry: .demo(.zhRegular, theme: .miku2021)
+        )
+            .previewContext(WidgetPreviewContext(family: .systemSmall))
+            .environment(\.locale, .init(identifier: "zh"))
+            .previewDisplayName("Small (theme: miku2021)")
+        
+        SmallWidgetView(
+            entry: .demo(.zhRegular, theme: .seaborn)
         )
             .previewContext(WidgetPreviewContext(family: .systemSmall))
             .environment(\.colorScheme, ColorScheme.dark)
             .environment(\.locale, .init(identifier: "zh"))
-            .previewDisplayName("Small")
+            .previewDisplayName("Small (theme: seaborn)")
 
     }
 }

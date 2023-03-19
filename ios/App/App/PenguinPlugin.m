@@ -17,5 +17,6 @@ CAP_PLUGIN(PenguinPlugin, "PenguinPlugin",
            CAP_PLUGIN_METHOD(openBundleSettings, CAPPluginReturnPromise);
            CAP_PLUGIN_METHOD(getLastSyncedPushPreferences, CAPPluginReturnPromise);
            CAP_PLUGIN_METHOD(submitNewPushPreferences, CAPPluginReturnPromise);
+           CAP_PLUGIN_METHOD(updateSharedState, CAPPluginReturnPromise);
            
 )

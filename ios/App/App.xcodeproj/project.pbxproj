@@ -65,6 +65,7 @@
 		B567D9C928B4639A000DA25D /* PenguinLive.swift in Sources */ = {isa = PBXBuildFile; fileRef = B567D9C828B4639A000DA25D /* PenguinLive.swift */; };
 		B567D9CA28B46993000DA25D /* PenguinLive.swift in Sources */ = {isa = PBXBuildFile; fileRef = B567D9C828B4639A000DA25D /* PenguinLive.swift */; };
 		B5E9EF4728219840009F0F68 /* PenguinViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5E9EF4628219840009F0F68 /* PenguinViewController.swift */; };
+		B5FD923929C677DF00D995E5 /* UserPreferences.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5FD923829C677DF00D995E5 /* UserPreferences.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -168,6 +169,7 @@
 		B553BF90285F3FA10089DB8B /* AccessoryRectangularView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccessoryRectangularView.swift; sourceTree = "<group>"; };
 		B567D9C828B4639A000DA25D /* PenguinLive.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PenguinLive.swift; sourceTree = "<group>"; };
 		B5E9EF4628219840009F0F68 /* PenguinViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PenguinViewController.swift; sourceTree = "<group>"; };
+		B5FD923829C677DF00D995E5 /* UserPreferences.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserPreferences.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -238,6 +240,7 @@
 				3A06C132259766C400B81F31 /* WidgetEntry.swift */,
 				B553BF8D285F22770089DB8B /* Intents.intentdefinition */,
 				3A968BB92597A738005266F2 /* ExternalService.swift */,
+				B5FD923829C677DF00D995E5 /* UserPreferences.swift */,
 			);
 			path = PenguinWidget;
 			sourceTree = "<group>";
@@ -597,6 +600,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				3A06C13B25976DAF00B81F31 /* MediumWidgetView.swift in Sources */,
+				B5FD923929C677DF00D995E5 /* UserPreferences.swift in Sources */,
 				3A20895D25C2ACC5001D7490 /* Helpers.swift in Sources */,
 				3A968BB52597A54E005266F2 /* LargeWidgetView.swift in Sources */,
 				3A06C118259720D600B81F31 /* PenguinWidget.swift in Sources */,
