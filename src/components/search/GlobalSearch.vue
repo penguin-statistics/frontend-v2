@@ -6,7 +6,7 @@
   >
     <v-img
       v-if="!pure"
-      :src="cdnDeliver('/logos/penguin_stats_logo.png')"
+      :src="currentLogoSrc"
       aspect-ratio="1"
       height="64px"
       contain
@@ -70,10 +70,11 @@ import CompactedSearchEngine from '@/utils/searchEngine'
 import Console from '@/utils/Console'
 import CDN from '@/mixins/CDN'
 import SearchResultNormal from '@/components/search/SearchResultNormal'
+import ThemeStyle from "@/mixins/ThemeStyle";
 export default {
   name: 'GlobalSearch',
   components: { SearchResultNormal },
-  mixins: [CDN],
+  mixins: [CDN, ThemeStyle],
   props: {
     query: {
       type: String,

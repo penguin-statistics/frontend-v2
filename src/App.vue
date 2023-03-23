@@ -75,8 +75,7 @@
         position="center center"
         height="calc(50px + 35vh)"
         width="100%"
-        :aspect-ratio="1"
-        class="fallthrough"
+        class="v-image--fade-down fallthrough"
       />
     </v-navigation-drawer>
     <v-app-bar

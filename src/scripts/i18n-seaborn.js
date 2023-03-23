@@ -1,6 +1,13 @@
 import {Configuration, OpenAIApi} from "openai";
 import {readFile, writeFile} from "fs/promises";
 import fetch from "node-fetch";
+import pLimit from "p-limit";
+
+console.log("process.env.OPENAI_API_KEY length:", process.env.OPENAI_API_KEY.length);
+console.log(
+  "process.env.SIMPLELOCALIZE_TOKEN length:",
+  process.env.SIMPLELOCALIZE_TOKEN.length
+);
 
 const configuration = new Configuration({
   apiKey: process.env.OPENAI_API_KEY,
@@ -8,10 +15,12 @@ const configuration = new Configuration({
 
 const openai = new OpenAIApi(configuration);
 
-const languages = ["zh_CN"].map(el => ({
+const languages = ["en_US"].map(el => ({
   originalId: el,
   seabornId: `${el}_x_seaborn`
 }))
+
+const getWordsCount = (str) => str.split(" ").filter(Boolean).length;
 
 const stripFirstLastEmptyLine = (str) => str.replace(/^\n/, "").replace(/\n$/, "");
 
@@ -55,40 +64,58 @@ async function patchTranslations(path) {
   });
 }
 
+async function invokeOpenAICompletion(languageOriginalId, message) {
+  const chats = await readFile(
+    `./src/scripts/seabornPrompts/${languageOriginalId}`,
+    "utf-8"
+  );
+
+  const messages = chats
+    .split("===")
+    .filter(Boolean)
+    .map((chatSegment) => {
+      let [role, ...content] = chatSegment.split("---");
+      role = stripFirstLastEmptyLine(role);
+      content = stripFirstLastEmptyLine(content.join('\n---\n')).replace(
+        "{{INPUT_MESSAGE}}",
+        message
+      );
+      return {
+        role,
+        content,
+      };
+    });
+
+  const completion = await openai.createChatCompletion({
+    model: "gpt-3.5-turbo",
+    messages,
+    temperature: 0.8,
+  }, {
+    timeout: 20 * 1000
+  });
+
+  return completion.data.choices[0].message.content;
+}
+
+async function invokeOpenAICompletionWithRetries(languageOriginalId, message) {
+  let retries = 0;
+  while (retries < 5) {
+    try {
+      return await invokeOpenAICompletion(languageOriginalId, message);
+    } catch (e) {
+      console.log("retrying...");
+      await new Promise((resolve) => setTimeout(resolve, 1000));
+      retries++;
+    }
+  }
+  return message;
+}
+
+const limit = pLimit(5);
+
 async function main() {
 
   for (const language of languages) {
-    const chats = await readFile(
-      `./src/scripts/seaborn/${language.originalId}`,
-      "utf-8"
-    );
-
-    async function invokeOpenAICompletion(message) {
-      const messages = chats
-        .split("===")
-        .filter(Boolean)
-        .map((chatSegment) => {
-          let [role, content] = chatSegment.split("---");
-          role = stripFirstLastEmptyLine(role);
-          content = stripFirstLastEmptyLine(content).replace(
-            "{{INPUT_MESSAGE}}",
-            message
-          );
-          return {
-            role,
-            content,
-          };
-        });
-
-      const completion = await openai.createChatCompletion({
-        model: "gpt-3.5-turbo",
-        messages,
-        temperature: 0.8,
-      });
-
-      return completion.data.choices[0].message.content;
-    }
-
     const localeFile = await readFile(
       `./src/locales/${language.originalId}.json`,
       "utf-8"
@@ -98,30 +125,49 @@ async function main() {
 
     const output = {};
 
-    for (const [key, message] of Object.entries(flattenedLocale)) {
-      let result;
-      if (message.length < 4) {
-        result = message;
-      } else if (message.length >= 10) {
-        continue // already translated
-      } else {
-        result = await invokeOpenAICompletion(message);
-        console.log(`=====\n${key} (${message.length})\n-> ${message}\n<- ${result}\n`);
-      }
+    const promises = [];
 
-      output[key] = result;
+    for (const [key, message] of Object.entries(flattenedLocale)) {
+      promises.push(limit(async () => {
+        const messageWordsCount = getWordsCount(message);
+
+        let result;
+        if (messageWordsCount <= 3) {
+          result = message;
+        // } else if (messageWordsCount >= 20) {
+        //   return; // already translated
+        } else {
+          console.log(`=====\n${key} (${messageWordsCount} words; ${message.length})\n-> ${message}`);
+          result = await invokeOpenAICompletionWithRetries(
+            language.originalId,
+            message
+          );
+          console.log(`<- ${result}`);
+        }
+
+        if (!result) {
+          console.error("failed to translate", key, message);
+          return;
+        }
+
+        output[key] = result;
+      }))
     }
+
+    console.log('waiting for promises...')
+
+    await Promise.all(promises);
 
     await writeFile(
       `./src/locales/${language.seabornId}.json`,
       JSON.stringify(output, null, 2)
     );
 
-    patchTranslations(`./src/locales/${language.seabornId}.json`);
+    console.log('done!')
 
-
+    await patchTranslations(`./src/locales/${language.seabornId}.json`);
   }
 }
 
 main();
-// patchTranslations("./src/locales/zh_CN_x_seaborn.json");
+// patchTranslations("./src/locales/archived/ja_JP_x_seaborn.json");

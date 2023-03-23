@@ -13,7 +13,7 @@
         style="word-break:normal"
       >
         <v-img
-          :src="cdnDeliver('/logos/penguin_stats_logo.png')"
+          :src="currentLogoSrc"
           aspect-ratio="1"
           height="128px"
           width="128px"
@@ -185,10 +185,11 @@
 
 <script>
 import CDN from '@/mixins/CDN'
+import ThemeStyle from "@/mixins/ThemeStyle";
 
 export default {
   name: 'Intro',
-  mixins: [CDN]
+  mixins: [CDN, ThemeStyle]
 }
 </script>
 

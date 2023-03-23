@@ -73,10 +73,11 @@ enum PenguinTheme: String {
 }
 
 class WidgetUserPreferences: ObservableObject {
-//    var server: PenguinServer
+    public var server: PenguinServer
     public var theme: PenguinTheme
     
-    init(theme: PenguinTheme = .default) {
+    init(server: PenguinServer = .cn, theme: PenguinTheme = .default) {
+        self.server = server
         self.theme = theme
     }
 }
@@ -89,9 +90,9 @@ extension WidgetUserPreferences {
             return preference
         }
 
-//        if let server = sharedState.string(forKey: "server") {
-//            self.server = server
-//        }
+        if let server = sharedState.string(forKey: "server") {
+            preference.server = PenguinServer.fromString(server)
+        }
 
         if let themeStyle = sharedState.string(forKey: "themeStyle") {
             preference.theme = PenguinTheme(rawValue: themeStyle) ?? .default

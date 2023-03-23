@@ -58,6 +58,12 @@
 		504EC3081FED79650016851F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 504EC3071FED79650016851F /* AppDelegate.swift */; };
 		504EC30F1FED79650016851F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 504EC30E1FED79650016851F /* Assets.xcassets */; };
 		A084ECDBA7D38E1E42DFC39D /* Pods_App.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AF277DCFFFF123FFC6DF26C7 /* Pods_App.framework */; };
+		B503059B29CC04C5000FDC32 /* IntentHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = B503059A29CC04C5000FDC32 /* IntentHandler.swift */; };
+		B50305A129CC1842000FDC32 /* Intents.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A968BC82598CC42005266F2 /* Intents.framework */; };
+		B50305A429CC1842000FDC32 /* IntentHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = B50305A329CC1842000FDC32 /* IntentHandler.swift */; };
+		B50305A829CC1842000FDC32 /* PenguinWidgetConfigurationIntentExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = B50305A029CC1842000FDC32 /* PenguinWidgetConfigurationIntentExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		B50305AC29CC1864000FDC32 /* IntentHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = B50305A329CC1842000FDC32 /* IntentHandler.swift */; };
+		B50305AD29CC1868000FDC32 /* Intents.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = B553BF8D285F22770089DB8B /* Intents.intentdefinition */; };
 		B53A321C281ED2BC002EAB0B /* public in Resources */ = {isa = PBXBuildFile; fileRef = B53A321B281ED2BC002EAB0B /* public */; };
 		B553BF8E285F22770089DB8B /* Intents.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = B553BF8D285F22770089DB8B /* Intents.intentdefinition */; };
 		B553BF8F285F23170089DB8B /* Intents.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = B553BF8D285F22770089DB8B /* Intents.intentdefinition */; };
@@ -83,6 +89,13 @@
 			remoteGlobalIDString = 504EC3031FED79650016851F;
 			remoteInfo = App;
 		};
+		B50305A629CC1842000FDC32 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 504EC2FC1FED79650016851F /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = B503059F29CC1842000FDC32;
+			remoteInfo = PenguinWidgetConfigurationIntentExtension;
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -92,6 +105,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 13;
 			files = (
+				B50305A829CC1842000FDC32 /* PenguinWidgetConfigurationIntentExtension.appex in Embed App Extensions */,
 				3A1157BA258F2B5E00F4C6FD /* PenguinWidgetExtension.appex in Embed App Extensions */,
 			);
 			name = "Embed App Extensions";
@@ -164,6 +178,10 @@
 		57EA6F039FEDFD8F45538969 /* Pods-App.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-App.release.xcconfig"; path = "Pods/Target Support Files/Pods-App/Pods-App.release.xcconfig"; sourceTree = "<group>"; };
 		7A5CB73611F4A3F49DC948B2 /* Pods-App.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-App.debug.xcconfig"; path = "Pods/Target Support Files/Pods-App/Pods-App.debug.xcconfig"; sourceTree = "<group>"; };
 		AF277DCFFFF123FFC6DF26C7 /* Pods_App.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_App.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		B503059A29CC04C5000FDC32 /* IntentHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntentHandler.swift; sourceTree = "<group>"; };
+		B50305A029CC1842000FDC32 /* PenguinWidgetConfigurationIntentExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = PenguinWidgetConfigurationIntentExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		B50305A329CC1842000FDC32 /* IntentHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntentHandler.swift; sourceTree = "<group>"; };
+		B50305A529CC1842000FDC32 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B53A321B281ED2BC002EAB0B /* public */ = {isa = PBXFileReference; lastKnownFileType = folder; path = public; sourceTree = "<group>"; };
 		B553BF8D285F22770089DB8B /* Intents.intentdefinition */ = {isa = PBXFileReference; lastKnownFileType = file.intentdefinition; path = Intents.intentdefinition; sourceTree = "<group>"; };
 		B553BF90285F3FA10089DB8B /* AccessoryRectangularView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccessoryRectangularView.swift; sourceTree = "<group>"; };
@@ -196,6 +214,14 @@
 			files = (
 				A084ECDBA7D38E1E42DFC39D /* Pods_App.framework in Frameworks */,
 				3A8EFFA0259A1BB900B6A788 /* Alamofire in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B503059D29CC1842000FDC32 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B50305A129CC1842000FDC32 /* Intents.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -241,6 +267,7 @@
 				B553BF8D285F22770089DB8B /* Intents.intentdefinition */,
 				3A968BB92597A738005266F2 /* ExternalService.swift */,
 				B5FD923829C677DF00D995E5 /* UserPreferences.swift */,
+				B503059A29CC04C5000FDC32 /* IntentHandler.swift */,
 			);
 			path = PenguinWidget;
 			sourceTree = "<group>";
@@ -341,6 +368,7 @@
 				504EC3061FED79650016851F /* App */,
 				3A1157AF258F2B5C00F4C6FD /* PenguinWidget */,
 				3AE3F15B26D214C400A0529B /* AppUITests */,
+				B50305A229CC1842000FDC32 /* PenguinWidgetConfigurationIntentExtension */,
 				504EC3051FED79650016851F /* Products */,
 				7F8756D8B27F46E3366F6CEA /* Pods */,
 				27E2DDA53C4D2A4D1A88CE4A /* Frameworks */,
@@ -353,6 +381,7 @@
 				504EC3041FED79650016851F /* App.app */,
 				3A1157AC258F2B5C00F4C6FD /* PenguinWidgetExtension.appex */,
 				3AE3F15A26D214C400A0529B /* AppUITests.xctest */,
+				B50305A029CC1842000FDC32 /* PenguinWidgetConfigurationIntentExtension.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -382,6 +411,15 @@
 				57EA6F039FEDFD8F45538969 /* Pods-App.release.xcconfig */,
 			);
 			name = Pods;
+			sourceTree = "<group>";
+		};
+		B50305A229CC1842000FDC32 /* PenguinWidgetConfigurationIntentExtension */ = {
+			isa = PBXGroup;
+			children = (
+				B50305A329CC1842000FDC32 /* IntentHandler.swift */,
+				B50305A529CC1842000FDC32 /* Info.plist */,
+			);
+			path = PenguinWidgetConfigurationIntentExtension;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -441,6 +479,7 @@
 			);
 			dependencies = (
 				3A1157B9258F2B5E00F4C6FD /* PBXTargetDependency */,
+				B50305A729CC1842000FDC32 /* PBXTargetDependency */,
 			);
 			name = App;
 			packageProductDependencies = (
@@ -450,13 +489,30 @@
 			productReference = 504EC3041FED79650016851F /* App.app */;
 			productType = "com.apple.product-type.application";
 		};
+		B503059F29CC1842000FDC32 /* PenguinWidgetConfigurationIntentExtension */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = B50305A929CC1842000FDC32 /* Build configuration list for PBXNativeTarget "PenguinWidgetConfigurationIntentExtension" */;
+			buildPhases = (
+				B503059C29CC1842000FDC32 /* Sources */,
+				B503059D29CC1842000FDC32 /* Frameworks */,
+				B503059E29CC1842000FDC32 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = PenguinWidgetConfigurationIntentExtension;
+			productName = PenguinWidgetConfigurationIntentExtension;
+			productReference = B50305A029CC1842000FDC32 /* PenguinWidgetConfigurationIntentExtension.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
 		504EC2FC1FED79650016851F /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastSwiftUpdateCheck = 1300;
+				LastSwiftUpdateCheck = 1400;
 				LastUpgradeCheck = 0920;
 				TargetAttributes = {
 					3A1157AB258F2B5C00F4C6FD = {
@@ -471,6 +527,9 @@
 						CreatedOnToolsVersion = 9.2;
 						LastSwiftMigration = 1200;
 						ProvisioningStyle = Automatic;
+					};
+					B503059F29CC1842000FDC32 = {
+						CreatedOnToolsVersion = 14.0.1;
 					};
 				};
 			};
@@ -495,6 +554,7 @@
 				504EC3031FED79650016851F /* App */,
 				3A1157AB258F2B5C00F4C6FD /* PenguinWidgetExtension */,
 				3AE3F15926D214C400A0529B /* AppUITests */,
+				B503059F29CC1842000FDC32 /* PenguinWidgetConfigurationIntentExtension */,
 			);
 		};
 /* End PBXProject section */
@@ -533,6 +593,13 @@
 				3A06778026281BB600C9CB98 /* LaunchScreen.storyboard in Resources */,
 				3A001AC62599230E0078A265 /* Settings.bundle in Resources */,
 				3AE3F15526D2147A00A0529B /* fastlane in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B503059E29CC1842000FDC32 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -609,11 +676,13 @@
 				3A968BB02597A3D5005266F2 /* TwoColumnStageStats.swift in Sources */,
 				3A06C133259766C400B81F31 /* WidgetEntry.swift in Sources */,
 				3A1157B1258F2B5C00F4C6FD /* SmallWidgetView.swift in Sources */,
+				B50305AC29CC1864000FDC32 /* IntentHandler.swift in Sources */,
 				3A06C12D2597454600B81F31 /* WidgetFooter.swift in Sources */,
 				B567D9CA28B46993000DA25D /* PenguinLive.swift in Sources */,
 				3A06C1252597447200B81F31 /* StageView.swift in Sources */,
 				B553BF8E285F22770089DB8B /* Intents.intentdefinition in Sources */,
 				B553BF91285F3FA10089DB8B /* AccessoryRectangularView.swift in Sources */,
+				B503059B29CC04C5000FDC32 /* IntentHandler.swift in Sources */,
 				3A06C1102597112E00B81F31 /* SiteStats.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -654,6 +723,15 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		B503059C29CC1842000FDC32 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B50305AD29CC1868000FDC32 /* Intents.intentdefinition in Sources */,
+				B50305A429CC1842000FDC32 /* IntentHandler.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -666,6 +744,11 @@
 			isa = PBXTargetDependency;
 			target = 504EC3031FED79650016851F /* App */;
 			targetProxy = 3AE3F16026D214C400A0529B /* PBXContainerItemProxy */;
+		};
+		B50305A729CC1842000FDC32 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = B503059F29CC1842000FDC32 /* PenguinWidgetConfigurationIntentExtension */;
+			targetProxy = B50305A629CC1842000FDC32 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -997,6 +1080,71 @@
 			};
 			name = Release;
 		};
+		B50305AA29CC1842000FDC32 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = SY8Y8N4TPM;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = PenguinWidgetConfigurationIntentExtension/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = PenguinWidgetConfigurationIntentExtension;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = io.penguinstats.app.PenguinWidgetConfigurationIntentExtension;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		B50305AB29CC1842000FDC32 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = SY8Y8N4TPM;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = PenguinWidgetConfigurationIntentExtension/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = PenguinWidgetConfigurationIntentExtension;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = io.penguinstats.app.PenguinWidgetConfigurationIntentExtension;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -1032,6 +1180,15 @@
 			buildConfigurations = (
 				504EC3171FED79650016851F /* Debug */,
 				504EC3181FED79650016851F /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		B50305A929CC1842000FDC32 /* Build configuration list for PBXNativeTarget "PenguinWidgetConfigurationIntentExtension" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				B50305AA29CC1842000FDC32 /* Debug */,
+				B50305AB29CC1842000FDC32 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

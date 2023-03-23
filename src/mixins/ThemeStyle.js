@@ -1,4 +1,5 @@
 import Console from '@/utils/Console'
+import mirror from "@/utils/mirror";
 
 const themes = {
   default: {
@@ -34,6 +35,13 @@ const themes = {
   },
 };
 
+const seabornLogos = [
+  'kawaii',
+  'kowai'
+]
+
+const seabornLogo = seabornLogos[Math.floor(Math.random() * seabornLogos.length)]
+
 export default {
   methods: {
     changeThemeStyle(themeId, save = true) {
@@ -61,6 +69,22 @@ export default {
         this.$vuetify.theme.dark = isDark
         this.$store.commit('settings/switchDark', isDark ? 'dark' : 'light')
       }
+    }
+  },
+  computed: {
+    currentLogoSrc() {
+      return mirror.deliver(
+        this.$store.getters['settings/themeStyle'] === 'seaborn'
+          ? (
+            '/logos/seaborn/' + seabornLogo + '.png'
+          )
+          : '/logos/penguin_stats_logo.png'
+      )
+    },
+    currentLogoName() {
+      return this.$store.getters['settings/themeStyle'] === 'seaborn'
+        ? seabornLogo
+        : 'penguin_stats_logo'
     }
   }
 }

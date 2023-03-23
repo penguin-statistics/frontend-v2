@@ -145,6 +145,7 @@ public class PenguinPlugin: CAPPlugin {
         activity.requiredUserInfoKeys = Set([])
         activity.contentAttributeSet = userActivityAttributeSet
         activity.title = title
+        
         PersistenceManager.shared.setItem(activity, forKey: currentUserActivityKey)
         activity.becomeCurrent()
 

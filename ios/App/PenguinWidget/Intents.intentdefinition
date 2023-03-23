@@ -90,7 +90,7 @@
 			<key>INIntentIneligibleForSuggestions</key>
 			<true/>
 			<key>INIntentLastParameterTag</key>
-			<integer>4</integer>
+			<integer>5</integer>
 			<key>INIntentName</key>
 			<string>SelectServer</string>
 			<key>INIntentParameters</key>
@@ -104,17 +104,12 @@
 					<string>UQHqxq</string>
 					<key>INIntentParameterDisplayPriority</key>
 					<integer>1</integer>
-					<key>INIntentParameterEnumType</key>
-					<string>PenguinServer</string>
-					<key>INIntentParameterEnumTypeNamespace</key>
-					<string>dZprhO</string>
-					<key>INIntentParameterMetadata</key>
-					<dict>
-						<key>INIntentParameterMetadataDefaultValue</key>
-						<string>cn</string>
-					</dict>
 					<key>INIntentParameterName</key>
-					<string>server</string>
+					<string>dynamicServer</string>
+					<key>INIntentParameterObjectType</key>
+					<string>PenguinDynamicServer</string>
+					<key>INIntentParameterObjectTypeNamespace</key>
+					<string>dZprhO</string>
 					<key>INIntentParameterPromptDialogs</key>
 					<array>
 						<dict>
@@ -133,7 +128,7 @@
 							<key>INIntentParameterPromptDialogCustom</key>
 							<true/>
 							<key>INIntentParameterPromptDialogFormatString</key>
-							<string>There are ${count} options matching ‘${server}’.</string>
+							<string>There are ${count} options matching ‘${dynamicServer}’.</string>
 							<key>INIntentParameterPromptDialogFormatStringID</key>
 							<string>c0YYCq</string>
 							<key>INIntentParameterPromptDialogType</key>
@@ -143,17 +138,19 @@
 							<key>INIntentParameterPromptDialogCustom</key>
 							<true/>
 							<key>INIntentParameterPromptDialogFormatString</key>
-							<string>Just to confirm, you wanted ‘${server}’?</string>
+							<string>Just to confirm, you wanted ‘${dynamicServer}’?</string>
 							<key>INIntentParameterPromptDialogFormatStringID</key>
 							<string>pB9HhD</string>
 							<key>INIntentParameterPromptDialogType</key>
 							<string>Confirmation</string>
 						</dict>
 					</array>
+					<key>INIntentParameterSupportsDynamicEnumeration</key>
+					<true/>
 					<key>INIntentParameterTag</key>
-					<integer>2</integer>
+					<integer>5</integer>
 					<key>INIntentParameterType</key>
-					<string>Integer</string>
+					<string>Object</string>
 				</dict>
 			</array>
 			<key>INIntentResponse</key>
@@ -183,6 +180,70 @@
 		</dict>
 	</array>
 	<key>INTypes</key>
-	<array/>
+	<array>
+		<dict>
+			<key>INTypeDisplayName</key>
+			<string>Penguin Dynamic Server</string>
+			<key>INTypeDisplayNameID</key>
+			<string>JYF9q2</string>
+			<key>INTypeLastPropertyTag</key>
+			<integer>100</integer>
+			<key>INTypeName</key>
+			<string>PenguinDynamicServer</string>
+			<key>INTypeProperties</key>
+			<array>
+				<dict>
+					<key>INTypePropertyDefault</key>
+					<true/>
+					<key>INTypePropertyDisplayPriority</key>
+					<integer>1</integer>
+					<key>INTypePropertyName</key>
+					<string>identifier</string>
+					<key>INTypePropertyTag</key>
+					<integer>1</integer>
+					<key>INTypePropertyType</key>
+					<string>String</string>
+				</dict>
+				<dict>
+					<key>INTypePropertyDefault</key>
+					<true/>
+					<key>INTypePropertyDisplayPriority</key>
+					<integer>2</integer>
+					<key>INTypePropertyName</key>
+					<string>displayString</string>
+					<key>INTypePropertyTag</key>
+					<integer>2</integer>
+					<key>INTypePropertyType</key>
+					<string>String</string>
+				</dict>
+				<dict>
+					<key>INTypePropertyDefault</key>
+					<true/>
+					<key>INTypePropertyDisplayPriority</key>
+					<integer>3</integer>
+					<key>INTypePropertyName</key>
+					<string>pronunciationHint</string>
+					<key>INTypePropertyTag</key>
+					<integer>3</integer>
+					<key>INTypePropertyType</key>
+					<string>String</string>
+				</dict>
+				<dict>
+					<key>INTypePropertyDefault</key>
+					<true/>
+					<key>INTypePropertyDisplayPriority</key>
+					<integer>4</integer>
+					<key>INTypePropertyName</key>
+					<string>alternativeSpeakableMatches</string>
+					<key>INTypePropertySupportsMultipleValues</key>
+					<true/>
+					<key>INTypePropertyTag</key>
+					<integer>4</integer>
+					<key>INTypePropertyType</key>
+					<string>SpeakableString</string>
+				</dict>
+			</array>
+		</dict>
+	</array>
 </dict>
 </plist>

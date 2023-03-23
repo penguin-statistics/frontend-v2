@@ -38,17 +38,14 @@ export default {
       ],
       currentCreature: 0,
       nextTimer: null,
-      hide: false,
+      hide: true,
     }
   },
   mounted() {
-    this.changeCreature(Math.floor(Math.random() * this.creatures.length))
-  },
-  created() {
-    this.nextTimer = setTimeout(this.enableHide, 70 * 1000)
+    this.nextTimer = setTimeout(this.enable, 5 * 1000) // wait 5 seconds before enabling
   },
   beforeDestroy() {
-    clearInterval(this.nextTimer)
+    clearTimeout(this.nextTimer)
   },
   methods: {
     changeCreature(index) {
@@ -56,9 +53,13 @@ export default {
       this.$el.querySelector('.seaborn-creature').style.backgroundImage = `url('${creature.url}')`
       this.$el.querySelector('.seaborn-creature').style.setProperty('--steps', creature.steps)
     },
-    enableHide() {
+    enable() {
+      this.changeCreature(Math.floor(Math.random() * this.creatures.length))
+      this.nextTimer = setTimeout(this.disable, 70 * 1000) // show for 70 seconds
+    },
+    disable() {
       this.hide = true
-    }
+    },
   }
 }
 </script>
@@ -86,19 +87,24 @@ export default {
 
 .crawl-wrapper {
   position: fixed;
-  left: -2px;
+  left: calc(env(safe-area-inset-left) - 2px);
   top: 0;
   z-index: 20;
   pointer-events: none;
-  transform: translateX(0px);
 
   animation: crawl 70s linear forwards;
   transition: left 200ms cubic-bezier(0.4, 0, 0.2, 1);
   will-change: left;
 }
 
+@media (prefers-reduced-motion: reduce) {
+  .crawl-wrapper {
+    display: none !important;
+  }
+}
+
 .crawl-wrapper--drawer-expanded {
-  left: 297px;
+  left: calc(env(safe-area-inset-left) + 297px) !important;
 }
 
 @keyframes crawl {

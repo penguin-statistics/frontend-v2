@@ -23,7 +23,6 @@ export default {
   computed: {
     appEnvironment () {
       return [
-        `lang-${this.$i18n.locale}`,
         environment.isApp ? 'runtime-app' : 'runtime-web'
       ]
     }
