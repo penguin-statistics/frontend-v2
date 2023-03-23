@@ -58,13 +58,16 @@
 		504EC3081FED79650016851F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 504EC3071FED79650016851F /* AppDelegate.swift */; };
 		504EC30F1FED79650016851F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 504EC30E1FED79650016851F /* Assets.xcassets */; };
 		A084ECDBA7D38E1E42DFC39D /* Pods_App.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AF277DCFFFF123FFC6DF26C7 /* Pods_App.framework */; };
-		B503059B29CC04C5000FDC32 /* IntentHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = B503059A29CC04C5000FDC32 /* IntentHandler.swift */; };
 		B50305A129CC1842000FDC32 /* Intents.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A968BC82598CC42005266F2 /* Intents.framework */; };
 		B50305A429CC1842000FDC32 /* IntentHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = B50305A329CC1842000FDC32 /* IntentHandler.swift */; };
 		B50305A829CC1842000FDC32 /* PenguinWidgetConfigurationIntentExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = B50305A029CC1842000FDC32 /* PenguinWidgetConfigurationIntentExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		B50305AC29CC1864000FDC32 /* IntentHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = B50305A329CC1842000FDC32 /* IntentHandler.swift */; };
 		B50305AD29CC1868000FDC32 /* Intents.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = B553BF8D285F22770089DB8B /* Intents.intentdefinition */; };
 		B53A321C281ED2BC002EAB0B /* public in Resources */ = {isa = PBXBuildFile; fileRef = B53A321B281ED2BC002EAB0B /* public */; };
+		B54E1D5F29CC3F5D006DBD8B /* Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A001AD62599A68A0078A265 /* Helpers.swift */; };
+		B54E1D6129CCD051006DBD8B /* IntentExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B54E1D6029CCD051006DBD8B /* IntentExtensions.swift */; };
+		B54E1D6229CCD05A006DBD8B /* IntentExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B54E1D6029CCD051006DBD8B /* IntentExtensions.swift */; };
+		B54E1D6329CCD0A9006DBD8B /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 3A5051AC25965532004167D3 /* Localizable.strings */; };
 		B553BF8E285F22770089DB8B /* Intents.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = B553BF8D285F22770089DB8B /* Intents.intentdefinition */; };
 		B553BF8F285F23170089DB8B /* Intents.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = B553BF8D285F22770089DB8B /* Intents.intentdefinition */; };
 		B553BF91285F3FA10089DB8B /* AccessoryRectangularView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B553BF90285F3FA10089DB8B /* AccessoryRectangularView.swift */; };
@@ -178,11 +181,11 @@
 		57EA6F039FEDFD8F45538969 /* Pods-App.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-App.release.xcconfig"; path = "Pods/Target Support Files/Pods-App/Pods-App.release.xcconfig"; sourceTree = "<group>"; };
 		7A5CB73611F4A3F49DC948B2 /* Pods-App.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-App.debug.xcconfig"; path = "Pods/Target Support Files/Pods-App/Pods-App.debug.xcconfig"; sourceTree = "<group>"; };
 		AF277DCFFFF123FFC6DF26C7 /* Pods_App.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_App.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		B503059A29CC04C5000FDC32 /* IntentHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntentHandler.swift; sourceTree = "<group>"; };
 		B50305A029CC1842000FDC32 /* PenguinWidgetConfigurationIntentExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = PenguinWidgetConfigurationIntentExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		B50305A329CC1842000FDC32 /* IntentHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntentHandler.swift; sourceTree = "<group>"; };
 		B50305A529CC1842000FDC32 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B53A321B281ED2BC002EAB0B /* public */ = {isa = PBXFileReference; lastKnownFileType = folder; path = public; sourceTree = "<group>"; };
+		B54E1D6029CCD051006DBD8B /* IntentExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntentExtensions.swift; sourceTree = "<group>"; };
 		B553BF8D285F22770089DB8B /* Intents.intentdefinition */ = {isa = PBXFileReference; lastKnownFileType = file.intentdefinition; path = Intents.intentdefinition; sourceTree = "<group>"; };
 		B553BF90285F3FA10089DB8B /* AccessoryRectangularView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccessoryRectangularView.swift; sourceTree = "<group>"; };
 		B567D9C828B4639A000DA25D /* PenguinLive.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PenguinLive.swift; sourceTree = "<group>"; };
@@ -267,7 +270,7 @@
 				B553BF8D285F22770089DB8B /* Intents.intentdefinition */,
 				3A968BB92597A738005266F2 /* ExternalService.swift */,
 				B5FD923829C677DF00D995E5 /* UserPreferences.swift */,
-				B503059A29CC04C5000FDC32 /* IntentHandler.swift */,
+				B54E1D6029CCD051006DBD8B /* IntentExtensions.swift */,
 			);
 			path = PenguinWidget;
 			sourceTree = "<group>";
@@ -600,6 +603,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B54E1D6329CCD0A9006DBD8B /* Localizable.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -671,6 +675,7 @@
 				3A20895D25C2ACC5001D7490 /* Helpers.swift in Sources */,
 				3A968BB52597A54E005266F2 /* LargeWidgetView.swift in Sources */,
 				3A06C118259720D600B81F31 /* PenguinWidget.swift in Sources */,
+				B54E1D6129CCD051006DBD8B /* IntentExtensions.swift in Sources */,
 				3A5051C1259666FB004167D3 /* ItemStatsView.swift in Sources */,
 				3A968BBA2597A738005266F2 /* ExternalService.swift in Sources */,
 				3A968BB02597A3D5005266F2 /* TwoColumnStageStats.swift in Sources */,
@@ -682,7 +687,6 @@
 				3A06C1252597447200B81F31 /* StageView.swift in Sources */,
 				B553BF8E285F22770089DB8B /* Intents.intentdefinition in Sources */,
 				B553BF91285F3FA10089DB8B /* AccessoryRectangularView.swift in Sources */,
-				B503059B29CC04C5000FDC32 /* IntentHandler.swift in Sources */,
 				3A06C1102597112E00B81F31 /* SiteStats.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -728,7 +732,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				B50305AD29CC1868000FDC32 /* Intents.intentdefinition in Sources */,
+				B54E1D5F29CC3F5D006DBD8B /* Helpers.swift in Sources */,
 				B50305A429CC1842000FDC32 /* IntentHandler.swift in Sources */,
+				B54E1D6229CCD05A006DBD8B /* IntentExtensions.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
