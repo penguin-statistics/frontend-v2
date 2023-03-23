@@ -62,14 +62,14 @@
 		B50305A429CC1842000FDC32 /* IntentHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = B50305A329CC1842000FDC32 /* IntentHandler.swift */; };
 		B50305A829CC1842000FDC32 /* PenguinWidgetConfigurationIntentExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = B50305A029CC1842000FDC32 /* PenguinWidgetConfigurationIntentExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		B50305AC29CC1864000FDC32 /* IntentHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = B50305A329CC1842000FDC32 /* IntentHandler.swift */; };
-		B50305AD29CC1868000FDC32 /* Intents.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = B553BF8D285F22770089DB8B /* Intents.intentdefinition */; };
 		B53A321C281ED2BC002EAB0B /* public in Resources */ = {isa = PBXBuildFile; fileRef = B53A321B281ED2BC002EAB0B /* public */; };
 		B54E1D5F29CC3F5D006DBD8B /* Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A001AD62599A68A0078A265 /* Helpers.swift */; };
 		B54E1D6129CCD051006DBD8B /* IntentExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B54E1D6029CCD051006DBD8B /* IntentExtensions.swift */; };
 		B54E1D6229CCD05A006DBD8B /* IntentExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B54E1D6029CCD051006DBD8B /* IntentExtensions.swift */; };
 		B54E1D6329CCD0A9006DBD8B /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 3A5051AC25965532004167D3 /* Localizable.strings */; };
-		B553BF8E285F22770089DB8B /* Intents.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = B553BF8D285F22770089DB8B /* Intents.intentdefinition */; };
-		B553BF8F285F23170089DB8B /* Intents.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = B553BF8D285F22770089DB8B /* Intents.intentdefinition */; };
+		B54E1D7C29CCE183006DBD8B /* Intents.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = B54E1D8029CCE183006DBD8B /* Intents.intentdefinition */; };
+		B54E1D7D29CCE183006DBD8B /* Intents.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = B54E1D8029CCE183006DBD8B /* Intents.intentdefinition */; };
+		B54E1D7E29CCE183006DBD8B /* Intents.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = B54E1D8029CCE183006DBD8B /* Intents.intentdefinition */; };
 		B553BF91285F3FA10089DB8B /* AccessoryRectangularView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B553BF90285F3FA10089DB8B /* AccessoryRectangularView.swift */; };
 		B567D9C928B4639A000DA25D /* PenguinLive.swift in Sources */ = {isa = PBXBuildFile; fileRef = B567D9C828B4639A000DA25D /* PenguinLive.swift */; };
 		B567D9CA28B46993000DA25D /* PenguinLive.swift in Sources */ = {isa = PBXBuildFile; fileRef = B567D9C828B4639A000DA25D /* PenguinLive.swift */; };
@@ -186,7 +186,10 @@
 		B50305A529CC1842000FDC32 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B53A321B281ED2BC002EAB0B /* public */ = {isa = PBXFileReference; lastKnownFileType = folder; path = public; sourceTree = "<group>"; };
 		B54E1D6029CCD051006DBD8B /* IntentExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntentExtensions.swift; sourceTree = "<group>"; };
-		B553BF8D285F22770089DB8B /* Intents.intentdefinition */ = {isa = PBXFileReference; lastKnownFileType = file.intentdefinition; path = Intents.intentdefinition; sourceTree = "<group>"; };
+		B54E1D8129CCE1AB006DBD8B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.intentdefinition; name = Base; path = Base.lproj/Intents.intentdefinition; sourceTree = "<group>"; };
+		B54E1D8329CCE1B2006DBD8B /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Intents.strings; sourceTree = "<group>"; };
+		B54E1D8529CCE1B4006DBD8B /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Intents.strings"; sourceTree = "<group>"; };
+		B54E1D8729CCE1B6006DBD8B /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/Intents.strings; sourceTree = "<group>"; };
 		B553BF90285F3FA10089DB8B /* AccessoryRectangularView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccessoryRectangularView.swift; sourceTree = "<group>"; };
 		B567D9C828B4639A000DA25D /* PenguinLive.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PenguinLive.swift; sourceTree = "<group>"; };
 		B5E9EF4628219840009F0F68 /* PenguinViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PenguinViewController.swift; sourceTree = "<group>"; };
@@ -267,7 +270,7 @@
 				3A06C10F2597112E00B81F31 /* SiteStats.swift */,
 				3A06C117259720D600B81F31 /* PenguinWidget.swift */,
 				3A06C132259766C400B81F31 /* WidgetEntry.swift */,
-				B553BF8D285F22770089DB8B /* Intents.intentdefinition */,
+				B54E1D8029CCE183006DBD8B /* Intents.intentdefinition */,
 				3A968BB92597A738005266F2 /* ExternalService.swift */,
 				B5FD923829C677DF00D995E5 /* UserPreferences.swift */,
 				B54E1D6029CCD051006DBD8B /* IntentExtensions.swift */,
@@ -544,6 +547,7 @@
 				en,
 				"zh-Hans",
 				ja,
+				Base,
 			);
 			mainGroup = 504EC2FB1FED79650016851F;
 			packageReferences = (
@@ -685,7 +689,7 @@
 				3A06C12D2597454600B81F31 /* WidgetFooter.swift in Sources */,
 				B567D9CA28B46993000DA25D /* PenguinLive.swift in Sources */,
 				3A06C1252597447200B81F31 /* StageView.swift in Sources */,
-				B553BF8E285F22770089DB8B /* Intents.intentdefinition in Sources */,
+				B54E1D7D29CCE183006DBD8B /* Intents.intentdefinition in Sources */,
 				B553BF91285F3FA10089DB8B /* AccessoryRectangularView.swift in Sources */,
 				3A06C1102597112E00B81F31 /* SiteStats.swift in Sources */,
 			);
@@ -718,7 +722,7 @@
 				3A61616C259C7B8D00FA06A2 /* HapticButton.swift in Sources */,
 				3A001AD72599A68A0078A265 /* Helpers.swift in Sources */,
 				3AA7E3462521F70B00387971 /* PenguinPlugin.m in Sources */,
-				B553BF8F285F23170089DB8B /* Intents.intentdefinition in Sources */,
+				B54E1D7C29CCE183006DBD8B /* Intents.intentdefinition in Sources */,
 				3A0C886325C25E8E008E1F4B /* PushManager.swift in Sources */,
 				3A4D4431259AC0BA000807F8 /* InitialLaunch.swift in Sources */,
 				504EC3081FED79650016851F /* AppDelegate.swift in Sources */,
@@ -731,7 +735,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B50305AD29CC1868000FDC32 /* Intents.intentdefinition in Sources */,
+				B54E1D7E29CCE183006DBD8B /* Intents.intentdefinition in Sources */,
 				B54E1D5F29CC3F5D006DBD8B /* Helpers.swift in Sources */,
 				B50305A429CC1842000FDC32 /* IntentHandler.swift in Sources */,
 				B54E1D6229CCD05A006DBD8B /* IntentExtensions.swift in Sources */,
@@ -787,6 +791,17 @@
 				3A2AA52826F513B700F3D15A /* ja */,
 			);
 			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		B54E1D8029CCE183006DBD8B /* Intents.intentdefinition */ = {
+			isa = PBXVariantGroup;
+			children = (
+				B54E1D8129CCE1AB006DBD8B /* Base */,
+				B54E1D8329CCE1B2006DBD8B /* en */,
+				B54E1D8529CCE1B4006DBD8B /* zh-Hans */,
+				B54E1D8729CCE1B6006DBD8B /* ja */,
+			);
+			name = Intents.intentdefinition;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */

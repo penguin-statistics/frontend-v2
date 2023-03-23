@@ -75,9 +75,9 @@
 	<key>INIntentDefinitionSystemVersion</key>
 	<string>21G115</string>
 	<key>INIntentDefinitionToolsBuildVersion</key>
-	<string>14A400</string>
+	<string>14C18</string>
 	<key>INIntentDefinitionToolsVersion</key>
-	<string>14.0.1</string>
+	<string>14.2</string>
 	<key>INIntents</key>
 	<array>
 		<dict>
@@ -99,7 +99,7 @@
 					<key>INIntentParameterConfigurable</key>
 					<true/>
 					<key>INIntentParameterDisplayName</key>
-					<string>Server</string>
+					<string>ServerLabel</string>
 					<key>INIntentParameterDisplayNameID</key>
 					<string>UQHqxq</string>
 					<key>INIntentParameterDisplayPriority</key>
@@ -123,26 +123,6 @@
 							<true/>
 							<key>INIntentParameterPromptDialogType</key>
 							<string>Primary</string>
-						</dict>
-						<dict>
-							<key>INIntentParameterPromptDialogCustom</key>
-							<true/>
-							<key>INIntentParameterPromptDialogFormatString</key>
-							<string>There are ${count} options matching ‘${dynamicServer}’.</string>
-							<key>INIntentParameterPromptDialogFormatStringID</key>
-							<string>c0YYCq</string>
-							<key>INIntentParameterPromptDialogType</key>
-							<string>DisambiguationIntroduction</string>
-						</dict>
-						<dict>
-							<key>INIntentParameterPromptDialogCustom</key>
-							<true/>
-							<key>INIntentParameterPromptDialogFormatString</key>
-							<string>Just to confirm, you wanted ‘${dynamicServer}’?</string>
-							<key>INIntentParameterPromptDialogFormatStringID</key>
-							<string>pB9HhD</string>
-							<key>INIntentParameterPromptDialogType</key>
-							<string>Confirmation</string>
 						</dict>
 					</array>
 					<key>INIntentParameterSupportsDynamicEnumeration</key>
