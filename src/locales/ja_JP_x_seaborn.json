@@ -1,420 +1,821 @@
 {
-  "stats.timeRange.unknown": "不明",
-  "stats.timeRange.endsAt": "{date}、前。",
-  "stats.timeRange.toPresent": "{date}、現在。",
-  "stats.title": "{stage}、統計結果。",
-  "stats.timeRange.inBetween": "{0}、から、{1}。",
-  "stats.timeRange.notSelected": "（選バレテナイ）。",
-  "stats.headers.pattern": "パターン、ナイ。",
-  "stats.headers.stage": "場所。",
-  "stats.headers.timeRange": "期間",
-  "stats.headers.times": "サンプル、数。",
-  "stats.headers.apCost": "理性",
-  "stats.headers.quantity": "ドロップ、カズ。",
-  "stats.headers.apPPR": "１個あたり、必要ナ、理性期待値。",
-  "stats.headers.clearTime": "一番速ク、クリア。",
-  "stats.headers.item": "アイテム、だ。",
-  "stats.headers.itemPerTime": "1個、必要カナ時間、期待値。",
-  "stats.site.total.report": "報告、総数。",
-  "stats.site.total.sanity": "報告、全テ理性を、使ツ。",
-  "stats.site.24hr": "24時間、前。",
-  "stats.site.all": "全期間",
-  "stats.site.viewMore": "モウ、少シ、詳シク。",
-  "stats.site.items": "アイテム、ドロップ、ランキング。",
-  "stats.site.stages": "ステージ、サンプルの数、ランキング。",
-  "stats.filter.type.showPermanent": "恒常",
-  "stats.filter.type.showActivity": "イベント、起キタ。",
-  "stats.filter.type._name": "ステージ種。",
-  "stats.filter.overview": "フィルタ、結果。",
-  "stats.filter.status._name": "ステージ、どうナッテル？",
-  "stats.filter.status.onlyOpen": "開放中、ステージ、ツマレル。",
-  "stats.filter.stage.onlyCurrent": "手に入る、アイテム、限定。",
-  "stats.trends.name": "過去、ドロップ、データ。",
-  "stats.trends.set.rate": "落シ物、率。",
-  "stats.trends.set.drops": "落ちモノ、数。",
-  "stats.trends.set.sample": "サンプル、カズ。",
-  "stats.name": "統計、出シタ。",
-  "stats.scroll": "左右にスクロールして、データ、表示。",
-  "stats.lastUpdated": "更新日時、最新：{date}。",
-  "planner.calculation.level": "素材、レベル、カ？",
-  "planner.calculation.tabs.syntheses": "素材、加工。",
-  "planner.calculation.tabs.stages": "ステージ、だ。",
-  "planner.calculation.tabs.values": "素材、理性、価値。",
-  "planner.calculation.times": "回",
-  "planner.calculation.lmb": "獲得、龍門幣、推定。",
-  "stats.headers.percentage": "落ちモノ、率。",
-  "planner.calculation.exp": "戦闘、入手出来ル、経験値推定ス。",
-  "planner.craft.errors.title": "加工、無理。素材、足リナイ。",
-  "planner.craft.plans.title": "プラン、加工。",
-  "planner.craft.do": "加工",
-  "planner.craft.unable": "加工、ムリ。",
-  "planner.reset.dialog.title": "ArkPlanner、リセット。",
-  "stats.site.total.items": "アイテム、全部、何コ？",
-  "stats.filter.title": "フィルタ、ダ。",
-  "planner.reset.dialog.options.excludes.indicator": "除外、全部、オフ。",
-  "planner.reset.dialog.options.excludes.name": "ステージ、外ス。",
-  "planner.reset.dialog.options.items.indicator": "素材、全部、リセットスル。",
-  "planner.reset.dialog.options.items.name": "モノ、データ。",
-  "planner.reset.name": "リセット、ダ。",
-  "planner.copy": "クリップボード、コピー。",
-  "planner.options.requireLmb": "龍門幣、タップリ必要。",
-  "planner.calculation.sanity": "必要ナ、理性、推定。",
-  "planner.options.excludeStage.title": "選ぶ",
-  "planner.calculation.title": "計算、結果ダ。",
-  "planner.options._name": "選択肢。",
-  "planner.options.byProduct": "加工、副産物、思ウ。",
-  "planner.options.requireExp": "経験値、多クイル。",
-  "planner.actions.config._name": "設定。",
-  "planner.reset.dialog.options.options.indicator": "全、オプション、オフ。",
-  "planner.actions.config.import": "インポート。",
-  "planner.actions.config.share": "エクスポート、ナイ。",
-  "planner.actions.export": "エクスポート、ナカッタ。",
-  "planner.actions.calculating": "少女、計算中……",
-  "planner.actions._name": "データ",
-  "planner.actions.calculate": "計算、行ウ。",
-  "planner.need": "必要数",
-  "planner.actions.import": "インポート。",
-  "planner.have": "所持数",
-  "server.servers.JP": "日本版",
-  "server.servers.CN": "大陸版",
-  "server.servers.US": "英語版",
-  "server.servers.KR": "韓国版",
-  "planner.calculationError": "計算、ダメ。{error}。",
-  "server.name": "サーバー、在ル。",
-  "zone.types.GACHABOX": "補給物資、必要。",
-  "zone.types.ACTIVITY_PERMANENT": "エピソード、サイドストーリー。",
-  "zone.types.ACTIVITY_PENDING": "イベント、近日開催。",
-  "zone.types.WEEKLY": "物資、調達。",
-  "zone.types.ACTIVITY_CLOSED": "イベント、終了ッ……。",
-  "zone.types.MAINLINE": "主題、メイン。",
-  "zone.types.ACTIVITY_OPEN": "イベント、今、開催中。",
-  "zone.subTypes.2019": "2019年、だ。",
-  "zone.subTypes.2020": "2020。",
-  "planner.reset.dialog.options.options.name": "オプション、デス。",
-  "planner.options.excludeStage._name": "ステージ、除外。",
-  "zone.subTypes.2022": "20、22……カ？",
-  "zone.subTypes.DYING_SUN.title": "残映",
-  "zone.subTypes.2023": "……二〇二三。",
-  "zone.subTypes.DYING_SUN.subtitle": "9〜10章、ダ。",
-  "zone.subTypes.INTERLUDE": "エピソード、ナイ。",
-  "zone.subTypes.VISION_SHATTER.title": "幻滅",
-  "zone.subTypes.VISION_SHATTER.subtitle": "第4章から8章。",
-  "zone.subTypes.AWAKENING_HOUR.title": "覚醒",
-  "zone.subTypes.SIDESTORY": "外伝、ダ。",
-  "zone.status.0": "開催中",
-  "zone.status.1": "終了",
-  "zone.subTypes.AWAKENING_HOUR.subtitle": "0~3、章。",
-  "zone.status.permanentOpen": "恒常",
-  "zone.status.-1": "近々、開催。",
-  "zone.name": "章",
-  "zone.opensAt": "期間、開催。{0}、-{1}。",
-  "report.recognition.exceptions.DropAreaDrops::LowConfidence.title": "知らナイ、ドロップ、アル。",
-  "report.recognition.exceptions.StageChar::LowConfidence.title": "ステージ、おかシイ可能性、アル。",
-  "server.switch": "ゲームサーバー、切替。",
-  "report.recognition.exceptions.DropAreaDrops::Illegal.title": "非合法、ドロップ、存在スル。",
-  "report.recognition.exceptions.DropAreaDropsQuantity::NotFound.title": "数、見タク、失敗。ドロップ、在ル。",
-  "report.recognition.exceptions.Stage::Illegal.title": "ステージ、アウン。",
-  "report.recognition.exceptions.Droptypes::Illegal.title": "タイプ、非合法。",
-  "report.recognition.exceptions.Result::False.title": "作戦、結果、スクショ、ナイ。",
-  "report.recognition.exceptions.DropQuantityChar::LowConfidence.title": "アイテム、数、おかしイ。",
-  "report.recognition.exceptions.3stars::False": "星3、でナイ。",
-  "report.recognition.exceptions.DropInfos::Violation": "認識、ダメ。失敗。",
-  "report.recognition.exceptions.Droptypes::NotFound": "ドロップタイプ、見つカラナイ。",
-  "report.recognition.exceptions.Fingerprint::Same.title": "同じ画像、あル。",
-  "report.recognition.exceptions.FileTimestamp::TooClose.title": "作成時間、短スぎ。画像、存在。",
-  "report.recognition.cost": "時間、コスト。",
-  "report.recognition.states.submitting": "結果、アップロード中......",
-  "report.recognition.states.initializing": "初期化、中...",
-  "report.recognition.states.pending": "初期化、準備中...",
-  "planner.options.excludeStage.selected": "{stages} ステージ、除外中。",
-  "report.recognition.states.recognizing": "理解、中...",
-  "report.recognition.report.reporting": "結果、アップロード、してイル、ゼ。",
-  "report.recognition.report.total": "総計",
-  "report.recognition.report.title": "レポート、詳シク。",
-  "report.recognition.confirm.overview.server": "データ、見ツケ、サーバース。",
-  "report.recognition.confirm.overview.success": "成功",
-  "report.recognition.confirm.overview.error": "異常",
-  "report.recognition.confirm.overview.total": "総計",
-  "report.recognition.confirm.overview.count": "{count}、枚。",
-  "report.recognition.confirm.overview.duration": "1画像、平均、認識、時間は？",
-  "report.recognition.confirm.overview._name": "結果、大体。",
-  "report.recognition.confirm.cherryPick.disabled": "異常、デス。選択、ムリ。",
-  "report.recognition.confirm.cherryPick.accepted": "この結果、アップロードシヨウ。",
-  "report.recognition.confirm.cherryPick.rejected": "結果、捨テろ。",
-  "report.recognition.confirm.abnormal.details": "異常、リスト。",
-  "report.recognition.confirm.abnormal.fatal": "コノ画像、認識、ムリ。",
-  "report.recognition.confirm.abnormal.hover": "マウス、重ク。中身、出セナイカナ？",
-  "report.recognition.confirm.abnormal.error": "この画像、ダメ、ナリマス。",
-  "report.recognition.confirm.noResult": "分からナイ。",
-  "report.recognition.confirm.itemsTotal": "アイテム、全部。",
-  "report.recognition.confirm.details": "結果、詳細。",
-  "report.recognition.confirm.unknownStage": "わカラナイ。",
-  "report.recognition.step.report": "レポート、だ。",
-  "report.recognition.step.confirm": "確認",
-  "report.recognition.step.recognize": "認識",
-  "report.recognition.step.select": "選択",
-  "report.recognition.tips.emptyFile": "選択、ナイ画像。",
-  "report.recognition.tips.unsatisfiedStart": "認識、スタート、不可能。",
-  "report.recognition.tips.hasInvalidFile": "ダメなファイル、含マレテル。",
-  "report.recognition.tips.addImage": "ここ、クリックシテ、画像、選ブ。",
-  "report.recognition.tips.dragImage": "画像、こコに、ドラッグ＆ドロップ。",
-  "report.recognition.tips.emptyResult": "認識、ナシ。",
-  "report.recognition.recognize.elapsed": "時間、過グ。",
-  "report.recognition.exceptions.Stage::Illegal.subtitle": "ステージ、今、無効。",
-  "report.recognition.exceptions.Stage::NotFound.title": "ステージ、知ラナイ。",
-  "report.recognition.recognize.imagePerSecond": "{count} 枚、秒。",
-  "report.recognition.recognize.remaining": "推定、残リ時間、だ。",
-  "report.recognition.queue": "画像、リスト。",
-  "report.recognition.recognize.noFilename": "ファイル、名ナシ。",
-  "report.recognition.status.success": "成功",
-  "report.recognition.status.error": "エラー",
-  "report.recognition.status.warning": "警告",
-  "report.recognition.start": "{count} 枚、画像、認識。",
-  "report.recognition.result": "認識、出来タ。",
-  "report.recognition.filename": "ファイル、名前。",
-  "zone.subTypes.2021": "2021年、ダ。",
-  "report.recognition.progress": "進捗、ダ。",
-  "report.specialSideStory.dialog.cancel": "閉じる",
-  "report.recognition.filter": "フィルターの結果だよ。",
-  "report.specialSideStory.dialog.confirmTimerDone": "わかった、ナ。",
-  "report.recognition.retry": "送信、失敗。やり直ス。",
-  "report.specialSideStory.dialog.confirmTimerPending": "了解、{timer}。",
-  "report.dossolesHoliday.title.inner": "全種類、ラノベ、手に入レタトキカラ。",
-  "report.dossolesHoliday.title.tmpl": "{0}、報告、シテクダサイ。",
-  "report.alert.continue.repeat": "データ、送信、決めンの？",
-  "report.alert.continue.first": "ホンネ、送信シル？",
-  "report.alert.contact.before": "デタラメな情報、判明スル時、……",
-  "report.alert.title.repeat": "警告",
-  "report.alert.title.first": "障害リスク、見つカッタ。",
-  "report.alert.contact.activator": "オレ、管理人。連絡、ヨロシク。",
-  "report.rules.type._name": "アイテム、何種？",
-  "report.name": "報告",
-  "report.submit": "送信",
-  "report.rules.item._name": "アイテム、数、何個？",
-  "report.furniture": "家具、手に入ッタ：{state}",
-  "report.clear": "クリア",
-  "report.success": "伝達、成功。",
-  "report.undo": "送信、中止。",
-  "home.quickStart.actions.subtitle.report": "報告、ドロップ。",
-  "home.quickStart.actions.subtitle.byStage": "1-7、泥率、ナンパーセント？",
-  "home.quickStart.actions.subtitle.planner": "回数、教エロ。",
-  "home.quickStart.actions.subtitle.byItem": "岩、ダコ行ッタライイカナ。",
-  "home.quickStart.actions.title.byStage": "計画、ドロップ率。",
-  "home.quickStart.actions.title.byItem": "素材、落ト、確率。",
-  "home.quickStart.actions.title.report": "報告、ドロップ。",
-  "home.quickStart.actions.title.planner": "一ノ、計画。",
-  "home.quickStart.title": "カンタン、スタート。",
-  "contribute.livehouse": "ライブハウス。",
-  "contribute.frontend": "フロントエンド。",
-  "contribute.recognizer": "スクショ、撮ッタ。",
-  "contribute.skills.frontend": "React、フロントエンド開発。",
-  "contribute.skills.design": "UI/UX、デザイン。",
-  "contribute.skills.maintenance": "ドウ、プスカ？",
-  "contribute.skills.others": "...",
-  "contribute.skills.analysis": "データ、統計解析。",
-  "contribute.repo": "プロジェクトのリポジトリ、カナ？",
-  "contribute.frontendV4": "フロントエンド、v4。",
-  "contribute.newFolder": "新規フォルダー、鋭意製作中。",
-  "contribute.backend": "……ハッ！",
-  "report.undoSuccess": "キャンセル、シタ。",
-  "contribute.qqGroup": "QQ、大群：",
-  "menu.report.stage": "章别",
-  "menu.search": "世界探索。",
-  "menu.report.recognition": "スクショ、認識、ダ。",
-  "menu.report._name": "アイテム、落ちタ。",
-  "menu.about.members": "作るノ、助手。",
-  "menu.about.contact": "連絡先",
-  "menu.about._name": "ココ、サイト、ダ。",
-  "menu.about.credits": "コピーライト、ダ。",
-  "menu.about.contribute": "協力者、募集中。開発、手伝ッテ。",
-  "menu.about.bulletin": "知らセテ。",
-  "menu.about.links": "相互リンク、あル。",
-  "menu.about.changelog": "更新履歴、あル？",
-  "menu.settings.themeStyles.name": "テーマ、変えロ。",
-  "menu.about.donate": "お金、欲シイ。",
-  "menu.settings.themeStyles.default": "普通テーマ。",
-  "menu.settings.themeStyles.disabled": "（無効：特殊テーマ、アクティブ中）",
-  "menu.settings.appearances.dark": "常ニ、ダークモード。",
-  "menu.settings.appearances.system": "システム、設定ニ、従ウ。",
-  "menu.settings.appearances.light": "常ニ、ライトモード。",
-  "menu.settings.appearances.name": "外観、変更。",
-  "menu.settings.name": "設定",
-  "menu.stats._name": "ドロップ、率。",
-  "menu.stats.advanced": "高度ナ、クエリ。",
-  "menu.stats.stage": "作戦別",
-  "menu.stats.item": "素材別",
-  "menu.planner": "周回、計画、作成ツール。",
-  "menu.overline.planner": "アーク・プランナー。",
-  "menu.v1": "ボロバージョン。",
-  "menu.languages": "言語、変えル。",
-  "menu.refreshData": "データ、更新。",
-  "menu.home": "トップページ、だ。",
-  "menu.siteStats": "サイト、データ、統計、全体。",
-  "item.choose.name": "素材、選ゲロ。",
-  "item.categories.CARD_EXP": "作戦の、記録。",
-  "item.categories.CHIP": "SoC",
-  "item.categories.FURN": "家具",
-  "item.categories.MATERIAL": "素材",
-  "item.categories.ACTIVITY_ITEM": "イベント、アイテム。",
-  "item.related": "関連、素材。",
-  "fetch.failed.error.globalMatrix": "全部、落ちモノデータ。",
-  "fetch.failed.error.personalMatrix": "個人、ドロップデータ。",
-  "fetch.failed.error.period": "サーバー、イベントデータ。",
-  "fetch.failed.error.personalPatternMatrix": "個人、ドロップパターンデータ。",
-  "fetch.failed.error.trends": "履歴、レポートデータ。",
-  "fetch.failed.error.stats": "サイト、統計データ。",
-  "fetch.failed.error.globalPatternMatrix": "全体、ドロップ、パターン、データ。",
-  "fetch.failed.error.items": "素材、あル？",
-  "fetch.failed.error.limitations": "レポート、データ、検証ルール。",
-  "fetch.failed.error.stages": "作戦データ、アル。",
-  "report.recognition.recognize.speed": "理解、早。",
-  "fetch.failed.retry": "再試行",
-  "report.recognition.states.rendering": "結果、レンダリング中...",
-  "fetch.loading": "読ミ込ミ、中...",
-  "links.tags.planner": "周回、計画作成ツール。",
-  "links.tags.enemy": "レユニオン、リスト。",
-  "links.tags.video": "攻略、ビデオ。",
-  "links.tags.walkthrough": "ステージ、攻略、すル。",
-  "fetch.failed.title": "ニューラルコネクタ、接続、エラー。",
-  "links.tags.experience": "ゲーム、レビュー。",
-  "links.tags.hr": "公募、リスト。",
-  "links.tags.jp_wiki": "日本語Wiki。",
-  "links.tags.gachaPlanning": "ガチャプラン、考えラレタ。",
-  "links.tags.apRanking": "理性、効率、順位表。",
-  "links.tags.ja_translation": "ストーリー、訳スル。",
-  "links.tags.generalRanking": "収益、全部足シテ、ランキングにシテいル。",
-  "links.tags.levelup": "レベル、計算機。",
-  "links.tags.cn_wiki": "大陸、版Wiki。",
-  "links.tags.character": "オペレーター、リスト。",
-  "report.unable": "送信、失敗。",
-  "links.tags.map": "マップ",
-  "links.tags.storeEfficiency": "購買部、パフォーマンス、どうカナ？",
-  "links.tags.storage": "素材、管理。",
-  "meta.dialog.submit": "送信",
-  "meta.dialog.save": "保存、スル。",
-  "meta.dialog.close": "閉じる",
-  "meta.dialog.confirm": "はい",
-  "meta.dialog.cancel": "いいえ",
-  "meta.details": "見ル、ぞ。",
-  "meta.loading": "読ミ込ミ、中...",
-  "meta.footer.copyright.title": "使命、許シテイル。",
-  "links.tags.dropRateRanking": "落ちモノ、上位表。",
-  "meta.time.second": "{s}秒、ダ。",
-  "meta.boolean.false": "いいえ",
-  "meta.boolean.true": "はい",
-  "meta.hasNorNot.false": "無し",
-  "meta.hasNorNot.true": "有り",
-  "meta.confirmLeave.title": "ページ、出ル？　イイ、デスカ？",
-  "meta.time.minute": "……{m}、ダ。",
-  "meta.quotation.end": "」",
-  "meta.quotation.start": "「",
-  "meta.separator": "、",
-  "settings.data.server": "サーバー、キャッシュサレタ。",
-  "settings.data.size": "ここ、データ：",
-  "settings.data.reset.title": "ローカルデータ、設定初期化。",
-  "settings.category.data": "設定、データ。",
-  "settings.category.about": "ココ、サイト、についテ。",
-  "settings.category.appearance": "スタイル……？",
-  "settings.optimization.lowData.title": "軽量モード、ダ。",
-  "settings.optimization.lowData.active": "軽量、有効。",
-  "settings.iosSystemSettings": "言語、プライバシーの設定。",
-  "members.responsibilities.customersupport": "アドバイザー",
-  "members.responsibilities.native": "アプリ、開発中。",
-  "members.responsibilities.localization_ko": "コリアン化、必要。",
-  "members.responsibilities.logo": "ロゴ、デザイン者。",
-  "members.responsibilities.localization_ja": "日本語、化す。",
-  "members.responsibilities.materials": "素材、提供。",
-  "members.responsibilities.frontend": "フロント、エンド。",
-  "members.responsibilities.recognition": "画像、認識。",
-  "meta.notfound": "ココ、ドコ？",
-  "members.responsibilities.maintenance": "こナた、DevOps。",
-  "members.responsibilities.backend": "裏方。",
-  "members.responsibilities.statistics": "データ、統計、解析。",
-  "members.responsibilities._name": "貢献。",
-  "members.responsibilities.bulkupload": "まとめてアップ。",
-  "fetch.failed.error.zones": "ゾーン、データ。",
-  "members.categories.others": "その他",
-  "members.categories.owner": "管理人",
-  "members.categories.translators": "翻訳者",
-  "members.socials.qq": "QQ",
-  "members.socials.github": "GitHubだ。",
-  "members.socials.weibo": "ウェイボ。",
-  "menu.settings.themeStyles.miku2021": "ミク、2021誕生日、特別テーマ。",
-  "members.socials.email": "メール。",
-  "links.tags.materials": "素材、必要ナ数、計算機。",
-  "stage.actions._name.selector": "スピードアクセス。",
-  "stage.actions._name.panel": "早ク操作。",
-  "stage.actions.history.name": "最近選択、した作戦、ナンダ？",
-  "stage.actions.history.clear": "クリア",
-  "stage.actions.advanced.activator": "高度、クエリ、実行サレル。",
-  "stage.actions.star.name": "スター、付けた作戦。",
-  "stage.actions.star.deactivate": "クリック、スター、削除。",
-  "stage.actions.star.activated": "作戦、スター追加済。",
-  "stage.actions.star.activate": "作戦、スター追加。",
-  "stage.actions.links.map-arknights-com": "マップ",
-  "members.responsibilities.widget": "ウィジェット、デス。",
-  "stage.loots.NORMAL_DROP": "通常",
-  "stage.loots.SPECIAL_DROP": "レア",
-  "stage.loots.FURNITURE": "家具",
-  "stage.loots.EXTRA_DROP": "その他",
-  "stage.actions.links.prts-wiki": "ウィキ。",
-  "stage.selector.excludeAll": "全部、除外。",
-  "stage.about": "この作戦、ニツイテ。",
-  "stage.selector.title": "ステージ、選ブ。",
-  "stage.selector.plannerExclude": "ステージ、除外シテ、セッティング。",
-  "stage.selector.includeAll": "スベテ、含ム。",
-  "stage.name": "作戦",
-  "stage.apCost": "消費、理性。{apCost}。",
-  "notice.loading": "お知らせ、読ミ込ミ中…",
-  "notice.failed": "お知らせ、読めナイ。",
-  "contact.contributor": "製作協力者、ページ。",
-  "contact.nga": "NGA、スレ、だ。",
-  "contact.title": "連絡先",
-  "dataSource.title": "ログイン、必要。",
-  "dataSource.global": "全体",
-  "contact.github": "Gitハブ、問題。",
-  "dataSource.personal": "個人",
-  "dataSource.switch": "データ、あル？",
-  "share.text.item": "{name}、素材。",
-  "share.name": "共有",
-  "share.text.stage": "作戦、{name}。",
-  "share.success": "共有、しタ。",
-  "share.shortlink.name": "URL、短ク。",
-  "auth.details": "カウント、あル。",
-  "auth.loggedAs": "私、ログインスル。",
-  "auth.logoutPrompt": "ログアウト、本当？",
-  "auth.logout": "ログアウト、ダ。",
-  "auth.loggedOut": "ログアウト、シタ。",
-  "auth.success": "ログイン、成功した。",
-  "auth.failed.message": "ログイン、失敗。{message}。",
-  "auth.login": "ログイン、だ。",
-  "auth.userId": "ユーザー、ID。",
-  "app.name": "ペンギン急便、データ、統計処理部門。",
-  "update.success": "ウェブサイト、更新！",
-  "app.name_lines": "ペンギン急便、やってる。データ統計処理部門、やってる。",
-  "update.refresh": "更新、スル。",
-  "result.title": "{item}、統計、出タ。",
-  "donate.methods.wechatPay": "ウィーチャットペイ",
-  "donate.methods.paypal": "PayPal、寄付。",
-  "donate.methods.alipay": "アリペイ。",
-  "donate.redirectToApp": "{app} アプリ、使ッテ、寄付シル。",
-  "donate.donate_3": "ポッキーやアップルパイ、アリ。",
-  "donate.donate_4": "寄付、ありがタい。お願いシマス。",
-  "donate.donate_2": "運営、金。",
-  "donate.accountBook": "帐簿",
-  "pattern.empty": "ドロップ、ナシ。",
-  "pattern.name": "ドロップ、パターン。",
-  "pattern.others": "その他",
-  "search.placeholder": "検索、中...",
-  "matrixCategory.automated.label": "自動",
-  "matrixCategory.all.label": "全体",
-  "matrixCategory.manual.label": "手動",
-  "matrixCategory.switch": "集計、期間ダ。",
-  "clipboard.success": "クリップボード、保存シタ。",
-  "link.docs.title": "開発者、向ケ、リソース。",
-  "switchedTo": "サーバー、切り替わッテイルゾ。",
-  "stage.actions._name.selectorEmpty": "早アクセス、無イ。",
-  "members.responsibilities.arkplanner": "ArkPlanner、制作人。",
-  "result.name": "統計、出シタ。",
-  "members.socials.twitter": "ツイッター。"
+  "stats": {
+    "timeRange": {
+      "unknown": "不明",
+      "endsAt": "{date} 以前",
+      "toPresent": "{date} ~ 現在",
+      "notSelected": "（選択されていない）",
+      "inBetween": "{0} ~ {1}"
+    },
+    "title": "{stage} 統計結果",
+    "headers": {
+      "pattern": "パターン",
+      "quantity": "ドロップ数",
+      "times": "サンプル数",
+      "stage": "ステージ",
+      "apPPR": "１個あたりの必要理性期待値",
+      "clearTime": "最速クリアタイム",
+      "timeRange": "期間",
+      "percentage": "ドロップ率",
+      "apCost": "理性",
+      "itemPerTime": "1個あたりの必要時間期待値",
+      "item": "アイテム"
+    },
+    "site": {
+      "generating": {
+        "title": "サイトの統計情報生成、進行中...",
+        "refresh": "サイトの統計、更新。",
+        "subtitle": "神経ネットワーク、メッセージ。データ、多すぎ。サイトの統計、5分、計算、必要。後で、戻ッテおクレ。"
+      },
+      "total": {
+        "items": "総ドロップ数",
+        "report": "総報告数",
+        "sanity": "すべての報告で消費された理性"
+      },
+      "24hr": "過去24時間",
+      "viewMore": "さらに詳しく",
+      "stages": "ステージサンプル数ランキング",
+      "all": "全期間",
+      "items": "アイテムドロップ数ランキング"
+    },
+    "filter": {
+      "type": {
+        "showActivity": "イベント",
+        "_name": "ステージタイプ",
+        "showPermanent": "恒常"
+      },
+      "title": "フィルタ",
+      "overview": "フィルタ結果",
+      "status": {
+        "_name": "ステージ状態",
+        "onlyOpen": "開放中のステージのみ"
+      },
+      "indicator": "フィルタ、未適用。{count} 個、フィルタ、適用中。",
+      "stage": {
+        "onlyCurrent": "入手可能なアイテムのみ"
+      },
+      "stats": "フィルタリング、シタ後、{filtered}。フィルタリング、シタ前、{total}。"
+    },
+    "trends": {
+      "name": "歴史ドロップデータ",
+      "set": {
+        "rate": "ドロップ率",
+        "drops": "ドロップ数",
+        "sample": "サンプル数"
+      }
+    },
+    "name": "統計結果",
+    "scroll": "左右にスクロールでデータを表示",
+    "lastUpdated": "最終更新日時：{date}"
+  },
+  "planner": {
+    "calculation": {
+      "level": "素材レベル",
+      "sanity": "推定必要理性",
+      "noSyntheses": "入力、ダメ。結果、出せナイ。",
+      "tabs": {
+        "syntheses": "素材加工",
+        "stages": "ステージ",
+        "values": "素材理性価値"
+      },
+      "times": "回",
+      "lmb": "推定獲得龍門幣",
+      "title": "計算結果",
+      "exp": "戦闘で入手出来る経験値の推定",
+      "noStage": "入力、ダメ。結果、出せナイ。"
+    },
+    "craft": {
+      "errors": {
+        "notEnough": "加工、{need}個、{item}、必要。だが、{have}個しか、持ッテナイ。",
+        "title": "加工には必要な素材が欠けています"
+      },
+      "plans": {
+        "title": "加工プラン",
+        "plan": "加工、{cost}個の「{item}」ヲ、消耗。残リ、{remain}個。"
+      },
+      "do": "加工",
+      "unable": "加工できません",
+      "success": "{sourceItems}、使ッテ、{amount}個、{productItem}、作ッタ。"
+    },
+    "reset": {
+      "dialog": {
+        "title": "ArkPlannerをリセット",
+        "subtitle": "データ、設定、リセットされル。続ケル？",
+        "options": {
+          "options": {
+            "indicator": "全てのオプションをオフにします",
+            "name": "オプション"
+          },
+          "excludes": {
+            "indicator": "全ての除外をオフにします",
+            "name": "ステージ除外"
+          },
+          "items": {
+            "indicator": "全ての素材個数をリセットします",
+            "name": "素材データ"
+          }
+        }
+      },
+      "name": "リセット"
+    },
+    "copy": "クリップボードにコピー",
+    "import": {
+      "success": "インポート、成功。アイテムデータ、{amount}、取リ込マレル。",
+      "unrecognized": "インポート、失敗。コード、読メタカラズ。もう一度、試シテみル。",
+      "invalidJSON": "インポート、ダメ。JSON、イカン。コード、確認シテ、もう一度、試シテクダサイ。"
+    },
+    "options": {
+      "requireLmb": "大量の龍門幣が必要",
+      "excludeStage": {
+        "_name": "ステージ除外",
+        "title": "選ぶ",
+        "selected": "{stages} ステージ除外中"
+      },
+      "_name": "オプション",
+      "byProduct": "加工副産物を考慮する",
+      "requireExp": "大量の経験値が必要"
+    },
+    "actions": {
+      "importExport": "@:(planner.actions.import) / @:(planner.actions.export)",
+      "config": {
+        "_name": "コンフィグレーション",
+        "import": "インポート",
+        "share": "エクスポート"
+      },
+      "export": "エクスポート",
+      "calculating": "少女計算中…",
+      "calculate": "計算を行う",
+      "_name": "データ",
+      "import": "インポート"
+    },
+    "need": "必要数",
+    "notices": {
+      "autoExistence": "ArkPlanner、選んだサーバー、開いテイナイステージ、自動的ニ、非表示ニシマス。"
+    },
+    "calculationError": "計算失敗：{error}",
+    "have": "所持数"
+  },
+  "server": {
+    "servers": {
+      "JP": "日本版",
+      "CN": "大陸版",
+      "US": "英語版",
+      "KR": "韓国版"
+    },
+    "name": "サーバー",
+    "switch": "ゲームサーバー切替"
+  },
+  "zone": {
+    "types": {
+      "GACHABOX": "補給物資",
+      "ACTIVITY_PERMANENT": "エピソード & サイドストーリー",
+      "ACTIVITY_PENDING": "イベント（近日開催）",
+      "WEEKLY": "物資調達",
+      "ACTIVITY_CLOSED": "イベント（終了）",
+      "MAINLINE": "メインテーマ",
+      "ACTIVITY_OPEN": "イベント（開催中）"
+    },
+    "subTypes": {
+      "DYING_SUN": {
+        "title": "残映",
+        "subtitle": "9~10 章"
+      },
+      "INTERLUDE": "エピソード",
+      "VISION_SHATTER": {
+        "subtitle": "4~8 章",
+        "title": "幻滅"
+      },
+      "AWAKENING_HOUR": {
+        "subtitle": "0~3 章",
+        "title": "覚醒"
+      },
+      "2019": "2019",
+      "2020": "2020",
+      "2023": "2023",
+      "2021": "2021",
+      "2022": "2022",
+      "SIDESTORY": "サイドストーリー"
+    },
+    "status": {
+      "-1": "近日開催",
+      "permanentOpen": "恒常",
+      "1": "終了",
+      "0": "開催中"
+    },
+    "opensAt": "開催期間：{0} - {1}",
+    "name": "章"
+  },
+  "report": {
+    "recognition": {
+      "exceptions": {
+        "DropAreaDrops::LowConfidence": {
+          "title": "未知のドロップが存在",
+          "subtitle": "問題、通常、イベント期間外。ドロップ、原因。"
+        },
+        "Droptypes::Illegal": {
+          "title": "非合法のドロップタイプ",
+          "subtitle": "スクリーンショット中、初回、理性返却などの不合法なドロップタイプ、または認識できナイドロップタイプ、存在。"
+        },
+        "StageChar::LowConfidence": {
+          "subtitle": "信頼、低イ。画像、見比べロ。",
+          "title": "ステージ認識異常の可能性がある"
+        },
+        "DropAreaDrops::Illegal": {
+          "subtitle": "今のステージ、可能なドロップ、ナイ。でも、検出、シタ。普通、イベント期間外、イベントドロップ、タメデ、コレヲ、検出、シタノダ。",
+          "title": "非合法ドロップが存在"
+        },
+        "DropInfos::Violation": "認識結果が検証失敗",
+        "DropAreaDropsQuantity::NotFound": {
+          "title": "数量検出失敗のドロップが存在",
+          "subtitle": "画像、低解像度・品質ダト、問題発生。画像、圧縮、されタカ？　確認、ヨロシク。"
+        },
+        "Stage::Illegal": {
+          "title": "非合法ステージ",
+          "subtitle": "このステージただ今有効していません"
+        },
+        "Result::False": {
+          "title": "作戦成果のスクリーンショットではない",
+          "subtitle": "作戦成果、写メだッタラ、選んだサーバー、間違イナイ？　確認、シテみロ。"
+        },
+        "DropQuantityChar::LowConfidence": {
+          "title": "アイテム数量認識異常の可能性がある",
+          "subtitle": "信頼、ナイ。画像、使ッテ、照合シテクダサイ。"
+        },
+        "3stars::False": "星3評価ではない",
+        "Stage::NotFound": {
+          "title": "未知のステージ",
+          "subtitle": "ステージ、認識エラーか？　記録、ナイ（殲滅作戦、絶境作戦等）。"
+        },
+        "Droptypes::NotFound": "ドロップタイプ未検出",
+        "Fingerprint::Same": {
+          "title": "完全一致の画像が存在",
+          "subtitle": "重複、スクリーンショット、選んダロウカ？　確認、シロ。"
+        },
+        "FileTimestamp::TooClose": {
+          "title": "作成時間間隔が短すぎる画像が存在",
+          "subtitle": "スクリーンショット、重複シテイル。選択、確認シテイルカ？"
+        }
+      },
+      "cost": "時間コスト",
+      "states": {
+        "submitting": "結果をアップロード中...",
+        "initializing": "初期化中...",
+        "pending": "初期化準備中...",
+        "rendering": "結果をレンダリング中...",
+        "recognizing": "認識中..."
+      },
+      "report": {
+        "allSucceeded": "{count}、アップロード成功。認識、出来タ。",
+        "partialSucceeded": "{count}、成功。アップロード、でキタ。認識結果、一部。",
+        "partialFailed": "{count} 件、認識結果、アップロード失敗。以下、チェックリスト、参考ニシテ、問題、解決、シテみテ。",
+        "reporting": "結果をアップロード中...",
+        "total": "総計",
+        "caption": "レポート、ありがとナ。キャッシュノ原因デ、レポートシタデータ、反映スルマデ、20分程度、掛カル可能性、アル。",
+        "title": "レポート詳細",
+        "partialFailedDesc": "●　ネットワーク、接続状況確認。接続不安定、接続中断、アップロード失敗し易イ。\n●　レポート、大量に提出シテイル？データベース、外部攻撃から保護スル為、1日のレポート数に上限アリ。何度ト、試シテモ、アップロード出来ナイ場合、上限アリ可能性アリ。24時間後、再試行シテクダサイ。\n●　共有IPアドレス、使ッテイルカ？一部地域、使ッテイルIPアドレス、他人ト共有スル可能性アリ。そダ場合、ネット環境変更（ルーター再起動、WiFi、4G変更）シテカラ、再試行シテクダサイ。あと、24時間後、再試行シテクダサイ。\n●　デバイス、時刻確認。重複レポ攻撃、防止対策トシテ、端末からリクエスト、タイムスタンプ付与スル。使ッテイルデバイス、時刻、正確ナ時刻ト大幅異ナル場合、アップロード失敗出来ナイ。それダケダナく、デバイス、時刻調整シテクダサイ。",
+        "submit": "選んだ、{count}件、認識結果、アップロード。"
+      },
+      "confirm": {
+        "overview": {
+          "server": "データサーバー",
+          "success": "成功",
+          "error": "異常",
+          "total": "総計",
+          "count": "{count} 枚",
+          "duration": "1画像の平均認識時間",
+          "_name": "結果概要"
+        },
+        "cherryPick": {
+          "disabled": "異常なので選択不可",
+          "accepted": "この結果をアップロード",
+          "rejected": "この結果を破棄"
+        },
+        "loadingImage": "スクリーンショット、プレビュー、読み込ミ中。",
+        "abnormal": {
+          "details": "異常リスト",
+          "fatal": "この画像は認識できません",
+          "hover": "マウスオーバーで認識内容表示",
+          "error": "この画像は却下されます"
+        },
+        "noResult": "認識結果はありません",
+        "itemsTotal": "アイテム合計",
+        "submit": "選択、{count}件。認識、アップロード。",
+        "details": "結果詳細",
+        "unknownStage": "認識できません"
+      },
+      "step": {
+        "report": "レポート",
+        "confirm": "確認",
+        "recognize": "認識",
+        "select": "選択"
+      },
+      "tips": {
+        "emptyFile": "選択された画像はありません",
+        "unsatisfiedStart": "認識をスタートできません",
+        "copyImage": "画像、右クリック、もしくハ、長押シテ、クリップボード、コピー、保存、出来ル。",
+        "fileTooOld": "\"{name}\" ノスクショ、作成時刻、36時間以内、限界、オオイニ、超過スル。",
+        "hasInvalidFile": "無効のファイルが含まれています",
+        "addImage": "ここにクリックして画像を選択",
+        "notImageFile": "{files}、画像ファイル、デハナイ。提出、ムリ。",
+        "dragImage": "ここに画像をドラッグ＆ドロップ",
+        "chooseImage": "クリック、画像、選択。ボックス、画像、ドロップ。",
+        "fileTooBig": "\"{name}\" ({size}MB)、制限オーバー。",
+        "abnormal": "品質監査、行ッテ、提出スクショ、{count} 枚、基準、満たサナイ。そレト、当該スクショ、却下、サーバーヘ、レポート、シナイ。",
+        "emptyResult": "認識結果はありません"
+      },
+      "recognize": {
+        "elapsed": "経過時間",
+        "speed": "認識速度",
+        "imagePerSecond": "{count} 枚/秒",
+        "remaining": "推定残り時間",
+        "noFilename": "ファイル名なし"
+      },
+      "notices": {
+        "confirm": "画像、クリックシタラ、拡大、出来ル。もう一回、クリックシタラ、元、戻セル。  \n認識、成功ノ、スクリーンショット、自動的ニ、チェック、入レテイル。  \n本サイト、データノ正確度、保障スル為、エラー、アル画像、選択、出来ナイ。",
+        "welcome": "画像、WebAssembly、ローカル、認識。データー送信、ナイ。\nスクリーンショット、作成時刻、**36時間以内**、星3、セレクト。\n初回クリア、セレクト、ナシ。**偏向的で、極端なケース**でのレポート、ナシ。"
+      },
+      "queue": "画像リスト",
+      "start": "{count} 枚画像を認識",
+      "status": {
+        "success": "成功",
+        "error": "エラー",
+        "warning": "警告"
+      },
+      "result": "認識結果",
+      "description": "「作戦成果」画面、自動認識。ドロップ報告、楽に、カンタンに、シテミヨウ！",
+      "filename": "ファイル名",
+      "progress": "進捗状況",
+      "filter": "結果フィルター",
+      "retry": "送信失敗、リトライ中"
+    },
+    "gacha": "コノ操作、行エル。データ、複数、結果、反映、出来ル。",
+    "specialSideStory": {
+      "dialog": {
+        "cancel": "閉じる",
+        "title": "「ドッソレスホリデー」、ラベルドロップ、ニツイテ。",
+        "confirmTimerDone": "わかりました",
+        "confirmTimerPending": "わかりました ({timer})"
+      }
+    },
+    "usage": "左、クリック、個数増。右、クリック、個数減。",
+    "dossolesHoliday": {
+      "title": {
+        "inner": "全種類のラノベを獲得してから",
+        "tmpl": "{0}ご報告ください"
+      },
+      "content": "データ、確認、ラノベドロップ、統計的に独立、否定。全ラノベ、獲得、ナイ場合、ドロップ率、動的に変化、本来のドロップ率と異ナル可能性、アル。正確な本来のドロップ率を計算するため、全種類のラノベを獲得後、報告、シテクダサイ。"
+    },
+    "alert": {
+      "causes": {
+        "limitation": "今回、報告、するコト。既存データ、大幅、なハズレ。報告、しタら、異常、判定。データ、全然、反映でキ、なイ。",
+        "noDrop": "ドロップアイテム、未選択。データ、問題、アルカ？"
+      },
+      "continue": {
+        "repeat": "本当にこのデータを送信しますか？",
+        "first": "本当に送信しますか？"
+      },
+      "contact": {
+        "after": "スクショ、添付シテ。確認ノチ修正、急ギョク行ウ。",
+        "before": "誤った情報であると判断した場合は",
+        "activator": "管理人までご連絡ください"
+      },
+      "title": {
+        "first": "障害リスクの検出",
+        "repeat": "警告"
+      }
+    },
+    "rules": {
+      "type": {
+        "now": "{stage}、ドロップ。選択、アイテム、{quantity}、タネ。",
+        "not": "{should}アイテム、種類、ダメ。",
+        "lte": "最大、種類、必要。アイテム、{should}。",
+        "_name": "アイテム種類数",
+        "gte": "必要、最低{should}種類アイテム。"
+      },
+      "item": {
+        "gte": "「@:(meta.quotation.start){item}@:(meta.quotation.end)」、数、{should}個、以上、数値、改めて入力、ヨロシク。",
+        "_name": "アイテム数量",
+        "lte": "{item}の数、{should}個、以下、の数値、再入力、シテ。",
+        "now": "{stage}のドロップ、{item}を{quantity}個、ゲットした。",
+        "not": "@:(meta.quotation.start){item}@:(meta.quotation.end)、ドロップ数、{should}個になラナイ。"
+      }
+    },
+    "undoSuccess": "キャンセルしました",
+    "name": "報告",
+    "submit": "送信",
+    "furniture": "家具ドロップ：{state}",
+    "notices": {
+      "rule_4": "星３、クリアシタ結果、報告シテクダサイ。",
+      "rule_5": "大陸版以外、ドロップ、アップロード禁止。ご協力、オ願イシマス。",
+      "rule_2": "素材、ドロップ、ナッタラ、直接送信、クリックシロ。",
+      "rule_3": "初回クリア、報酬報告、ナシ。極端、ロップ結果も、報告、シナイ。極めて、よかっタか、悪かっタカ、など。",
+      "rule_1": "ここニ、追加スル、内容、ドロップ、1回分。"
+    },
+    "unable": "送信失敗：",
+    "clear": "クリア",
+    "success": "送信成功",
+    "undo": "送信キャンセル"
+  },
+  "home": {
+    "quickStart": {
+      "actions": {
+        "subtitle": {
+          "report": "ドロップを報告したい",
+          "byStage": "1-7の泥率ってどれくらい？",
+          "planner": "周回アドバイスをください",
+          "byItem": "岩ってどこ回ったらいいのかな"
+        },
+        "title": {
+          "byStage": "作戦ドロップ率",
+          "byItem": "素材ドロップ率",
+          "report": "ドロップ報告",
+          "planner": "周回計画"
+        }
+      },
+      "title": "クイックスタート",
+      "caption": "左上、ボタン、クリック。メニュー、開キ、多ク機能、見エル。"
+    },
+    "intro": {
+      "intro_2": "データ、ほトンド、手動、アップロード。影響、最小、アップロードされタ情報、多角、審査、スル。ユーザー、誤っタ情報、ナクスルニ、アップロード、サレテイル。",
+      "intro_1": "Penguin Statistics、ペンギン急便ノ、データ、処理部門（嘘）。各作戦、素材ドロップ、統計分析、実行スル。",
+      "intro_0": "ペンギン急便、データ統計、処理部門ニ、オハヨウ！"
+    }
+  },
+  "contribute": {
+    "livehouse": "LiveHouse",
+    "frontend": "ﾌﾛﾝﾄｴﾝﾄﾞ",
+    "recognizer": "ｽｸｼｮ認識",
+    "skills": {
+      "mobile": "モバイルアプリ開発、iOSノ、Android。",
+      "frontend": "フロントエンド開発 React",
+      "design": "UI/UXデザイン",
+      "backend": "バックエンド開発、Go、PostgreSQL。",
+      "maintenance": "DevOps",
+      "others": "...",
+      "analysis": "データ統計解析"
+    },
+    "contribute_0": "開発経験、あル方、募集スル。Penguin Statistics、力、貢献、シテみナイ？興味、アル方、必シ、此ノQQグループ、参加シテクダサイ：747099627。",
+    "contribute_1": "このプロジェクト、タダ。オープンソース。",
+    "repo": "プロジェクトリポジトリ：",
+    "frontendV4": "ﾌﾛﾝﾄｴﾝﾄﾞ v4",
+    "newFolder": "新規フォルダー鋭意作成中",
+    "backend": "ﾊﾞｯｸｴﾝﾄﾞ",
+    "qqGroup": "QQグループ：",
+    "caption": "Penguin Statistic、非営利コミュニティプロジェクト。プロジェクト、発展、皆様ノ、助力、必要ナリ。GitHub、レポジトリ、スター、付ケテ、欲シイ。イシューやプルリクエスト、お待ちシテイル。皆様、支援、協力、ヨロシクお願い申し上げます。"
+  },
+  "menu": {
+    "search": "グローバル検索",
+    "report": {
+      "stage": "章别",
+      "recognition": "スクショ認識",
+      "_name": "ドロップ報告"
+    },
+    "about": {
+      "members": "制作協力者",
+      "_name": "当サイトについて",
+      "contact": "連絡先",
+      "donate": "寄付について",
+      "credits": "コピーライト",
+      "contribute": "開発協力者募集中",
+      "bulletin": "お知らせ",
+      "links": "相互リンク",
+      "changelog": "更新履歴"
+    },
+    "settings": {
+      "themeStyles": {
+        "name": "テーマ切替",
+        "miku2021": "初音ミク2021誕生日特別テーマ",
+        "default": "デフォルトテーマ",
+        "disabled": "(無効：アクティブな特殊テーマ)"
+      },
+      "appearances": {
+        "dark": "常にダークモード",
+        "system": "システム設定に従う",
+        "light": "常にライトモード",
+        "name": "外観モード切替"
+      },
+      "name": "設定"
+    },
+    "stats": {
+      "_name": "ドロップ率",
+      "advanced": "高度なクエリ",
+      "stage": "作戦別",
+      "item": "素材別"
+    },
+    "planner": "周回計画作成ツール",
+    "overline": {
+      "planner": "ArkPlanner"
+    },
+    "v1": "旧バージョン",
+    "languages": "言語切替",
+    "refreshData": "データ更新",
+    "home": "トップページ",
+    "siteStats": "全サイト統計データ"
+  },
+  "item": {
+    "choose": {
+      "name": "素材選択"
+    },
+    "categories": {
+      "CARD_EXP": "作戦記録",
+      "CHIP": "SoC",
+      "FURN": "家具",
+      "MATERIAL": "素材",
+      "ACTIVITY_ITEM": "イベントアイテム"
+    },
+    "related": "関連素材"
+  },
+  "fetch": {
+    "failed": {
+      "error": {
+        "globalMatrix": "全体ドロップデータ",
+        "personalMatrix": "個人ドロップデータ",
+        "period": "サーバーイベントデータ",
+        "personalPatternMatrix": "個人ドロップパターンデータ",
+        "trends": "履歴レポートデータ",
+        "stats": "サイト統計データ",
+        "globalPatternMatrix": "全体ドロップパターンデータ",
+        "items": "素材データ",
+        "limitations": "レポートデータの検証ルール",
+        "stages": "作戦データ",
+        "zones": "ゾーンデータ"
+      },
+      "retry": "再試行",
+      "title": "ニューラルコネクタ接続エラー",
+      "subtitle": "ニューラルコネクタ、接続出来ナカッタ。リソース、一部、失ッタ。",
+      "deploying": "皆様、迷惑、申し訳ナイ。メンテナンス、終了、マテテくダサイ。"
+    },
+    "chunk": {
+      "title": "拡張ニューラルコネクタ、データ転送中。",
+      "subtitle": "ページモデル、読み込ミ中。待ッテ、ナ。"
+    },
+    "loading": "読み込み中..."
+  },
+  "links": {
+    "tags": {
+      "planner": "周回計画作成ツール",
+      "enemy": "レユニオン一覧",
+      "video": "攻略動画",
+      "walkthrough": "ステージ攻略",
+      "materials": "素材必要数計算機",
+      "experience": "ゲームレビュー",
+      "hr": "公募一覧",
+      "jp_wiki": "日本版Wiki",
+      "gachaPlanning": "ガチャプランニング",
+      "apRanking": "理性効率順位表",
+      "ja_translation": "ストーリー和訳",
+      "generalRanking": "総合収益順位表",
+      "levelup": "レベル計算機",
+      "cn_wiki": "大陸版Wiki",
+      "character": "オペレーター一覧",
+      "dropRateRanking": "ドロップ率順位表",
+      "map": "マップ",
+      "storeEfficiency": "購買部のパフォーマンス",
+      "storage": "素材在庫管理"
+    }
+  },
+  "meta": {
+    "dialog": {
+      "submit": "送信",
+      "save": "保存する",
+      "close": "閉じる",
+      "confirm": "はい",
+      "cancel": "いいえ"
+    },
+    "details": "詳細を見る",
+    "loading": "読み込み中...",
+    "footer": {
+      "copyright": {
+        "content": "ドロップ、統計データ。クリエイティブ・コモンズ、表示 - 非営利 4.0 国際 ライセンス、提供。当サイト、内容の転載、公開、する場合は、必ず元となっているページまたはトップページのURL、リンク。データ統計の転載を行ったこと、明記。また、許可無しに当サイトの内容または派生作品を、商業目的で利用すること、許可しなイ。",
+        "title": "利用許諾"
+      },
+      "credit": "ペンギン急便、データ、統計処理部門 | {日付}"
+    },
+    "time": {
+      "minute": "{m}分",
+      "second": "{s}秒"
+    },
+    "copyWarning": "ペンギン統計のデータ（{サイト}）だ。",
+    "boolean": {
+      "false": "いいえ",
+      "true": "はい"
+    },
+    "hasNorNot": {
+      "false": "無し",
+      "true": "有り"
+    },
+    "confirmLeave": {
+      "title": "このページを離れてもよろしいですか？"
+    },
+    "notfound": "ここはどこ¿¿¿",
+    "quotation": {
+      "end": "」",
+      "start": "「"
+    },
+    "separator": "、"
+  },
+  "settings": {
+    "data": {
+      "server": "キャッシュされたのサーバー：",
+      "size": "ローカルデータ：",
+      "reset": {
+        "title": "ローカルデータと設定初期化",
+        "subtitle": "ローカルデータ、設定、全部、消す。ローカル設定、初期化。ページ、再読み込み。データ、再度、読み込む必要、アル。本当、続けル？"
+      }
+    },
+    "category": {
+      "data": "設定とデータ",
+      "about": "当サイトについて",
+      "appearance": "スタイル"
+    },
+    "optimization": {
+      "lowData": {
+        "title": "軽量モード",
+        "subtitle": "軽量モード、画像リソース、無効。通信、節約。",
+        "active": "軽量モード有効中"
+      }
+    },
+    "iosSystemSettings": "言語とプライバシーの設定"
+  },
+  "members": {
+    "responsibilities": {
+      "customersupport": "コンサルタント",
+      "native": "アプリ開発",
+      "localization_ko": "韓国語化",
+      "logo": "ロゴデザイナー",
+      "localization_ja": "日本語化",
+      "materials": "素材提供",
+      "frontend": "フロントエンド",
+      "recognition": "スクショ認識",
+      "widget": "ウィジェット",
+      "maintenance": "DevOps",
+      "backend": "バックエンド",
+      "statistics": "データ統計解析",
+      "_name": "コントリビューション",
+      "bulkupload": "一括アップロード",
+      "arkplanner": "ArkPlannerの著者"
+    },
+    "categories": {
+      "others": "その他",
+      "owner": "管理人",
+      "translators": "翻訳者"
+    },
+    "socials": {
+      "qq": "QQ",
+      "github": "GitHub",
+      "weibo": "Weibo",
+      "twitter": "Twitter",
+      "email": "Email"
+    }
+  },
+  "stage": {
+    "actions": {
+      "_name": {
+        "selectorEmpty": "クイックアクセスはありません",
+        "selector": "クイックアクセス",
+        "panel": "クイック操作"
+      },
+      "history": {
+        "name": "最近選択した作戦",
+        "empty": "最近、選択シタ作戦、ナイ。作戦ページ、アクセスシテ、ココ、表示されル。",
+        "clear": "クリア"
+      },
+      "advanced": {
+        "activator": "高度なクエリを実行"
+      },
+      "star": {
+        "empty": "スター付キ、作戦、ナイ。\n作戦情報、クイック操作、デ、作戦、スター、追加、スルト、ココ、表示、スル。",
+        "name": "スター付き作戦",
+        "deactivate": "クリックしてスターを削除",
+        "activated": "作戦にスターを追加しました",
+        "activate": "作戦にスターを追加"
+      },
+      "links": {
+        "map-arknights-com": "マップ",
+        "prts-wiki": "Wiki"
+      }
+    },
+    "loots": {
+      "NORMAL_DROP": "通常",
+      "SPECIAL_DROP": "レア",
+      "FURNITURE": "家具",
+      "EXTRA_DROP": "その他"
+    },
+    "about": "この作戦について",
+    "selector": {
+      "excludeAll": "全て除外",
+      "title": "ステージ選択",
+      "plannerExclude": "ステージ除外設定",
+      "includeAll": "全て含む"
+    },
+    "apCost": "消費理性：{apCost}",
+    "name": "作戦"
+  },
+  "notice": {
+    "loading": "お知らせを読み込んでいます...",
+    "failed": "お知らせを読み込めませんでした："
+  },
+  "contact": {
+    "contributor": "制作協力者ページ",
+    "nga": "NGA スレッド",
+    "github": "GitHub Issues",
+    "title": "連絡先",
+    "body": "質問、要望、あル場合、管理人に、気軽ニ問い合わせロ。日本語、OK。"
+  },
+  "dataSource": {
+    "title": "ログインが必要です",
+    "loginNotice": "個人、ドロップデータ、チェック、ログイン、必要。",
+    "global": "全体",
+    "switch": "データソース",
+    "personal": "個人"
+  },
+  "share": {
+    "text": {
+      "item": "素材 {name}",
+      "_tmpl": "Penguin Statistics、{name}、ドロップデータ、確認。",
+      "stage": "作戦 {name}"
+    },
+    "name": "共有",
+    "success": "共有しました",
+    "shortlink": {
+      "name": "短縮URL"
+    }
+  },
+  "auth": {
+    "details": "アカウント",
+    "loggedAs": "Logged in as",
+    "login": "ログイン",
+    "logoutPrompt": "本当にログアウトしますか？",
+    "logout": "ログアウト",
+    "loggedOut": "ログアウトしました",
+    "success": "ログイン成功",
+    "failed": {
+      "message": "ログイン失敗：{message}",
+      "notfound": "ユーザーID、見つかラナカッタ。初めてのドロップのアップロードで、ユーザーIDを自動的に取得できル。"
+    },
+    "userId": "ユーザーID",
+    "notice": "ユーザーID、アップロード時、使ウ。ID、使ッテ、各機器、登録シ、データ、アカウント、1つ、統合、可能。アップロード、管理、個人、ドロップデータ、調査、可能。"
+  },
+  "app": {
+    "name": "ペンギン急便データ統計処理部門",
+    "name_lines": "ペンギン急便\nデータ統計処理部門"
+  },
+  "update": {
+    "success": "Website Updated!",
+    "refresh": "リロード"
+  },
+  "result": {
+    "name": "統計結果",
+    "title": "{item} 統計結果"
+  },
+  "donate": {
+    "methods": {
+      "wechatPay": "WeChat Pay",
+      "paypal": "PayPal で寄付",
+      "alipay": "Alipay"
+    },
+    "redirectToApp": "{app} アプリで寄付します",
+    "donate_3": "ポッキーやアップルパイでも可",
+    "donate_4": "を寄付頂けると非常にありがたいです。",
+    "donate_1": "アクセス、増加。サーバー、負荷、耐エナクナッタ。サーバー、...",
+    "donate_2": "運営費用",
+    "accountBook": "帐簿",
+    "donate_0": "ユーザー、急増。サーバー代、上昇。企鹅データ、ピンチ、ダ！ 管理人の紅白、大好きな企鹅データ、守ル為、何、出来ル？ 答エ、見ツケタ、「アイドルにナル」！？"
+  },
+  "pattern": {
+    "empty": "ドロップなし",
+    "error": "作戦、ドロップパターン、データナシ。",
+    "name": "ドロップパターン",
+    "others": "その他"
+  },
+  "network": {
+    "error": "ネットワーク、エラー。インターネット接続、確認シテ、もう一度、試シテみル。"
+  },
+  "search": {
+    "hint": "素材、作戦、ステージコード、章タイトル、イベント名、全部、漢字・ふりがな・カタカナ・ローマ字、で検索シロ。",
+    "placeholder": "検索..."
+  },
+  "matrixCategory": {
+    "automated": {
+      "label": "自動"
+    },
+    "all": {
+      "label": "全体"
+    },
+    "manual": {
+      "label": "手動"
+    },
+    "switch": "集計範囲"
+  },
+  "clipboard": {
+    "success": "クリップボードに保存しました",
+    "error": "クリップボード、保存、ムリ。手動、コピー、シテクダサイ。"
+  },
+  "link": {
+    "docs": {
+      "title": "開発者向けのリソース",
+      "subtitle": "開発、ドロップデータ、基ツイテ。APIドキュメント、リソース、ゲット。"
+    }
+  },
+  "switchedTo": "サーバー切り替え中"
 }

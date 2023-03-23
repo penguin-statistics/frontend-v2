@@ -397,6 +397,11 @@
       "retry": "Failed to submit. Retrying..."
     },
     "gacha": "Multiple results are allowed in a singular report for this stage.",
+    "specialSideStory": {
+      "dialog": {
+        "cancel": "Cancel"
+      }
+    },
     "usage": "Increase drop amount by left click, decrease by right click",
     "alert": {
       "causes": {
@@ -526,7 +531,7 @@
         "miku2021": "Hatsune Miku 2021 Birthday Theme",
         "default": "Default Theme",
         "disabled": "(Disabled: Active Special Theme)",
-        "seaborn": "Seaborn"
+        "seaborn": "The Song of Silence"
       },
       "appearances": {
         "dark": "Always Dark",
@@ -658,6 +663,7 @@
       "video": "Clear Guide",
       "walkthrough": "Walkthrough",
       "materials": "Material Requirement Calculator",
+      "auto_farming": "Auto Farming",
       "experience": "Experience",
       "hr": "Recruiting Lookup",
       "jp_wiki": "JP Server Wiki",
@@ -706,7 +712,7 @@
     },
     "confirmLeave": {
       "title": "Are you sure you want to leave this page?",
-      "subtitle": "Your unsaved changes may be lost."
+      "subtitle": "Your unsaved changes may be lost"
     },
     "notfound": "???",
     "quotation": {

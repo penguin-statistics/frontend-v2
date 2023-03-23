@@ -541,7 +541,7 @@
         "miku2021": "初音未来 2021 生日特别主题",
         "default": "默认主题",
         "disabled": "(已禁用：活跃的特殊主题)",
-        "seaborn": "大海嗣"
+        "seaborn": "静谧之歌"
       },
       "appearances": {
         "dark": "总是使用暗色",
@@ -719,6 +719,7 @@
       "video": "攻略视频",
       "walkthrough": "通关攻略",
       "materials": "材料需求计算",
+      "auto_farming": "自动刷图",
       "experience": "经验分享",
       "hr": "公招查询",
       "jp_wiki": "日服Wiki",
