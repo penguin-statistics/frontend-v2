@@ -1,0 +1,21 @@
+@font-face {
+    font-family: 'Noto Serif SC';
+    src: url('./noto-serif-sc-400.woff2') format('woff2'),
+    url('./noto-serif-sc-400.woff') format('woff'),
+    url('./noto-serif-sc-400.ttf') format('truetype');
+    font-style: normal;
+    font-weight: 400;
+    text-rendering: optimizeLegibility;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Noto Serif SC';
+    src: url('./noto-serif-sc-700.woff2') format('woff2'),
+    url('./noto-serif-sc-700.woff') format('woff'),
+    url('./noto-serif-sc-700.ttf') format('truetype');
+    font-style: normal;
+    font-weight: 700;
+    text-rendering: optimizeLegibility;
+    font-display: swap;
+}
