@@ -11,6 +11,7 @@
     "headers": {
       "pattern": "パターン",
       "quantity": "ドロップ数",
+      "recruitTag": "公開求人タグ",
       "times": "サンプル数",
       "stage": "ステージ",
       "apPPR": "１個あたりの必要理性期待値",
@@ -486,7 +487,8 @@
         "name": "テーマ切替",
         "miku2021": "初音ミク2021誕生日特別テーマ",
         "default": "デフォルトテーマ",
-        "disabled": "(無効：アクティブな特殊テーマ)"
+        "disabled": "(無効：アクティブな特殊テーマ)",
+        "seaborn": "静謐の唄"
       },
       "appearances": {
         "dark": "常にダークモード",
@@ -523,6 +525,7 @@
       "MATERIAL": "素材",
       "ACTIVITY_ITEM": "イベントアイテム"
     },
+    "undefined": "未知アイテム",
     "related": "関連素材"
   },
   "fetch": {
@@ -558,8 +561,9 @@
       "video": "攻略動画",
       "walkthrough": "ステージ攻略",
       "materials": "素材必要数計算機",
+      "auto_farming": "放置稼ぎ",
       "experience": "ゲームレビュー",
-      "hr": "公募一覧",
+      "hr": "公開求人一覧",
       "jp_wiki": "日本版Wiki",
       "gachaPlanning": "ガチャプランニング",
       "apRanking": "理性効率順位表",
@@ -605,7 +609,8 @@
       "true": "有り"
     },
     "confirmLeave": {
-      "title": "このページを離れてもよろしいですか？"
+      "title": "このページを離れてもよろしいですか？",
+      "subtitle": "保存されていない変更は失われる可能性があります"
     },
     "notfound": "ここはどこ¿¿¿",
     "quotation": {
@@ -614,31 +619,9 @@
     },
     "separator": "、"
   },
-  "settings": {
-    "data": {
-      "server": "キャッシュされたのサーバー：",
-      "size": "ローカルデータ：",
-      "reset": {
-        "title": "ローカルデータと設定初期化",
-        "subtitle": "すべてのローカルデータと設定を削除します。その後ローカル設定はすべて初期化され、ページを刷新します。データを再読み込みする必要があります。本当に続けますか？"
-      }
-    },
-    "category": {
-      "data": "設定とデータ",
-      "about": "当サイトについて",
-      "appearance": "スタイル"
-    },
-    "optimization": {
-      "lowData": {
-        "title": "軽量モード",
-        "subtitle": "軽量モードとは、作戦リストや全ステーションなどの画像リソースを無効し、データ通信量の消費を抑えるモードです。",
-        "active": "軽量モード有効中"
-      }
-    },
-    "iosSystemSettings": "言語とプライバシーの設定"
-  },
   "members": {
     "responsibilities": {
+      "v1frontend": "v1.0 フロントエンド",
       "customersupport": "コンサルタント",
       "native": "アプリ開発",
       "localization_ko": "韓国語化",
@@ -667,6 +650,35 @@
       "twitter": "Twitter",
       "email": "Email"
     }
+  },
+  "settings": {
+    "data": {
+      "server": "キャッシュされたのサーバー：",
+      "size": "ローカルデータ：",
+      "reset": {
+        "title": "ローカルデータと設定初期化",
+        "subtitle": "すべてのローカルデータと設定を削除します。その後ローカル設定はすべて初期化され、ページを刷新します。データを再読み込みする必要があります。本当に続けますか？"
+      }
+    },
+    "category": {
+      "data": "設定とデータ",
+      "about": "当サイトについて",
+      "appearance": "スタイル"
+    },
+    "optimization": {
+      "lowData": {
+        "title": "軽量モード",
+        "subtitle": "軽量モードとは、作戦リストや全ステーションなどの画像リソースを無効し、データ通信量の消費を抑えるモードです。",
+        "active": "軽量モード有効中"
+      }
+    },
+    "iosSystemSettings": "言語とプライバシーの設定"
+  },
+  "query": {
+    "operation": {
+      "inProgress": "クエリ実行中"
+    },
+    "cancel": "キャンセル"
   },
   "stage": {
     "actions": {
@@ -746,6 +758,14 @@
     "loggedAs": "Logged in as",
     "login": "ログイン",
     "logoutPrompt": "本当にログアウトしますか？",
+    "forgot": {
+      "subtitle": "アカウント復元",
+      "title": "ログインできない？",
+      "activator": "PenguinID忘れ",
+      "penguinIdHistory": {
+        "noData": "データがありません"
+      }
+    },
     "logout": "ログアウト",
     "loggedOut": "ログアウトしました",
     "success": "ログイン成功",
@@ -779,7 +799,7 @@
     "donate_4": "を寄付頂けると非常にありがたいです。",
     "donate_1": "アクセス数が増加し、サーバーが負荷に耐えることが出来なくなっています。サーバーの",
     "donate_2": "運営費用",
-    "accountBook": "帐簿",
+    "accountBook": "帳簿",
     "donate_0": "ユーザー数が急増し、サーバーの月額は上昇、企鹅数据の運営は危機的状況に...。管理人の紅白は大好きな企鹅数据を守るため、自分に出来ることは何か？紅白が悩んで見つけ出した答えは「アイドルになること」！？"
   },
   "pattern": {
@@ -792,7 +812,7 @@
     "error": "ネットワークエラー。インターネット接続をご確認の上もう一度お試しください"
   },
   "search": {
-    "hint": "素材名・作战名・ステージコード・章タイトル・イベント名（漢字・ふりがな・カタカナ・ローマ字）で検索",
+    "hint": "素材名・作戦名・ステージコード・章タイトル・イベント名（漢字・ふりがな・カタカナ・ローマ字）で検索",
     "placeholder": "検索..."
   },
   "matrixCategory": {
