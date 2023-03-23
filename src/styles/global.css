@@ -188,17 +188,13 @@
     font-family: SF Mono, "Droid Sans Mono", Ubuntu Mono, Consolas, Courier New, Courier, monospace;
 }
 
-/*.v-stepper__items, .v-stepper__wrapper {*/
-/*  overflow: initial !important;*/
-/*}*/
-
-.lang-ja .force-lang-font, .lang-ja {
-    /*font-family : 'ヒラギノ角ゴ ProN' , 'Hiragino Kaku Gothic ProN' , '游ゴシック' , '游ゴシック体' , YuGothic , 'Yu Gothic' , 'メイリオ' , Meiryo , 'ＭＳ ゴシック' , 'MS Gothic' , HiraKakuProN-W3 , 'TakaoExゴシック' , TakaoExGothic , 'MotoyaLCedar' , 'Droid Sans Japanese' , sans-serif !important;*/
-    /*font-family : 'ヒラギノ角ゴ ProN' , 'Hiragino Kaku Gothic ProN' , 'ヒラギノ明朝 ProN' , 'Hiragino Mincho ProN' , '游明朝','游明朝体',YuMincho,'Yu Mincho' , 'Meiryo', 'ＭＳ 明朝' , 'MS Mincho' , HiraMinProN-W3 , 'TakaoEx明朝' , TakaoExMincho , 'MotoyaLCedar' , 'Droid Sans Japanese' , sans-serif !important;*/
+html[lang^=ja] .force-lang-font,
+html[lang^=ja] {
     font-family: 'ヒラギノ角ゴ ProN', 'Hiragino Kaku Gothic ProN', 'ヒラギノ明朝 ProN', 'ヒラギノ角ゴ Pro W3', 'Hiragino Kaku Gothic Pro', 'Osaka', 'メイリオ', 'Meiryo', 'ＭＳ Ｐゴシック', 'MS PGothic', 'Helvetica Neue', 'Helvetica', Arial, sans-serif;
 }
 
-.lang-ko .force-lang-font, .lang-ko {
+html[lang^=ko] .force-lang-font,
+html[lang^=ko] {
     font-family: 'Apple SD Gothic Neo', 'NanumBarunGothic', '맑은 고딕', 'Malgun Gothic', '굴림', 'Gulim', '돋움', 'Dotum', 'Helvetica Neue', 'Helvetica', Arial, sans-serif;
 }
 
@@ -304,7 +300,7 @@
 @supports (padding: calc(max(1px, 2px))) {
     .drawer-logo {
         height: calc(256px + env(safe-area-inset-top));
-        padding: calc(32px + env(safe-area-inset-top)) 32px 32px 32px;
+        padding: calc(32px + env(safe-area-inset-top)) 32px 32px calc(32px + env(safe-area-inset-left));
     }
 
     /*.drawer-logo:hover {*/
@@ -797,10 +793,7 @@
     mask: linear-gradient(to bottom, transparent, rgba(0, 0, 0, 1) 15%, #000);
 }
 
-.theme--dark .v-image--fade-down > .v-image__image {
-}
-
-.lang-en .v-card__title {
+html[lang^=en] .v-card__title {
     word-break: normal !important;
 }
 
@@ -907,14 +900,17 @@ html[lang^=ko] {
 
 [data-theme="seaborn"] .v-application .headline,
 [data-theme="seaborn"] .v-application .heading,
+[data-theme="seaborn"] .v-application .display-1,
+[data-theme="seaborn"] .v-application .display-2,
 [data-theme="seaborn"] .v-application h1,
 [data-theme="seaborn"] .v-application h2,
 [data-theme="seaborn"] .v-application h3,
 [data-theme="seaborn"] .v-application .drawer-logo > .description,
 [data-theme="seaborn"] .v-application .title.force-lang-font,
-[data-theme="seaborn"] .v-application .force-serif-font {
-    font-family: "Source Han Serif", "Source Han Serif CN", "Songti SC", serif !important;
-    letter-spacing: -0.07rem !important;
+[data-theme="seaborn"] .v-application .force-serif-font,
+[data-theme="seaborn"] .v-application .v-card__title {
+    font-family: var(--font-family-serif) !important;
+    letter-spacing: -0.03rem !important;
 }
 
 [data-theme="seaborn"] .v-application .letter-spacing-normal {

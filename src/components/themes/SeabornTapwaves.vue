@@ -48,7 +48,10 @@ export default {
       } else if (e instanceof TouchEvent) {
         this.handleTapwave(e.touches[0].clientX, e.touches[0].clientY)
       }
-    }.bind(this), 150)
+    }.bind(this), 100, {
+      leading: true,
+      trailing: false
+    })
 
     this.rootEl.addEventListener('mousedown', this.tapwaveTapListener)
     this.rootEl.addEventListener('mousemove', this.tapwaveMoveListener)
@@ -98,6 +101,12 @@ export default {
   }
   to {
     background-position: 0 calc(-27 * var(--size));
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .global-tapwave {
+    display: none !important;
   }
 }
 </style>

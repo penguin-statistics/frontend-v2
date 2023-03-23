@@ -52,9 +52,9 @@
 	<true/>
 	<key>NSUserActivityTypes</key>
 	<array>
-		<string>com.apple.handoff</string>
 		<string>SelectServerIntent</string>
 		<string>StatisticsOverviewIntent</string>
+		<string>com.apple.handoff</string>
 	</array>
 	<key>UIApplicationSceneManifest</key>
 	<dict>

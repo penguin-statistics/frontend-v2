@@ -73,7 +73,7 @@ const fontMapping = {
         /* webpackChunkName: "font-noto-serif-sc" */
         /* webpackPrefetch: false */
         /* webpackPreload: false */
-        "@fontsource/noto-serif-sc/700.css"),
+        "@fontsource/noto-serif-sc/700.css")
     ],
   },
   ja: {
@@ -129,7 +129,7 @@ export function loadLanguageAsync(lang) {
   // set it first to use the local translation
   changeLocale.bind(this)(lang, false);
   // import font using fontsource.
-  const font = fontMapping[lang];
+  const font = fontMapping[localeMapping[lang] || lang];
   if (font) {
     font.fontSource()
   }

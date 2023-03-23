@@ -12,9 +12,9 @@ import Alamofire
 
 struct SiteStatsProvider: IntentTimelineProvider {
     
-    func demoStats(with language: String? = Locale.current.languageCode, in server: PenguinServer = .cn) -> SiteStats {
+    func demoStats(with language: String? = Locale.current.languageCode, in server: PenguinDynamicServer? = .createDefault()) -> SiteStats {
         var demo = SiteStats.demo(language == "zh" ? .zhRegular : .enRegular)
-        demo.server = server
+        demo.server = (server ?? .createDefault()).resolve()
         return demo
     }
     
@@ -29,11 +29,11 @@ struct SiteStatsProvider: IntentTimelineProvider {
     func getSnapshot(for configuration: SelectServerIntent, in context: Context, completion: @escaping (WidgetTimelineEntry) -> ()) {
         let demoEntry = WidgetTimelineEntry(
             date: Date(),
-            stats: demoStats(in: configuration.server),
+            stats: demoStats(in: configuration.dynamicServer),
             preferences: WidgetUserPreferences.getLatest()
         )
         
-        getStats(for: configuration.server, timeout: TimeInterval(5.0)) { (stats) in
+        getStats(for: configuration.dynamicServer, timeout: TimeInterval(5.0)) { (stats) in
             if stats != nil {
                 completion(WidgetTimelineEntry(
                     date: Date(),
@@ -49,11 +49,9 @@ struct SiteStatsProvider: IntentTimelineProvider {
     }
 
     func getTimeline(for configuration: SelectServerIntent, in context: Context, completion: @escaping (Timeline<WidgetTimelineEntry>) -> ()) {
-        print("serverSelection timeline with configured server:", configuration.server)
+        print("serverSelection timeline with configured server:", configuration.dynamicServer)
         
-        print("doing network request")
-        
-        getStats(for: configuration.server) { (stats) in
+        getStats(for: configuration.dynamicServer) { (stats) in
             if stats != nil {
                 print("got stats", stats ?? "undefined")
                 let entries: [WidgetTimelineEntry] = [

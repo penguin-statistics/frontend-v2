@@ -39,9 +39,16 @@ func getRegionalEndpointBase() -> String {
     }
 }
 
-func getStats(for server: PenguinServer, timeout: TimeInterval = TimeInterval(25.0), completion: @escaping (SiteStats?) -> ())  {
-    print("received server for getStats:", server)
-    AF.request("\(getRegionalEndpointBase())/api/stats/" + server.string(), requestModifier: {
+func getStats(for server: PenguinDynamicServer?, timeout: TimeInterval = TimeInterval(25.0), completion: @escaping (SiteStats?) -> ())  {
+    let dynServer = server ?? .createDefault()
+    debugPrint("received server for getStats:", server as Any, "dynServer:", dynServer)
+    
+    let resolvedServer = dynServer.resolve()
+    debugPrint("resolved to", resolvedServer)
+
+    let serverId = resolvedServer.string()
+    print("received server for getStats:", serverId)
+    AF.request("\(getRegionalEndpointBase())/api/stats/" + serverId, requestModifier: {
         $0.timeoutInterval = timeout
     }).response {resp in
         guard let data = resp.data else {
@@ -66,7 +73,7 @@ func getStats(for server: PenguinServer, timeout: TimeInterval = TimeInterval(25
             stages.append(stage)
         }
         
-        let siteStats = SiteStats.init(stages: stages, server: server)
+        let siteStats = SiteStats.init(stages: stages, server: resolvedServer)
         
         completion(siteStats)
     }

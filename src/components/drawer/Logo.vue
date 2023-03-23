@@ -10,7 +10,7 @@
     <!--      style="position: absolute; width: 100%; height: 100%; top: 0; left: 0; opacity: 0.3; z-index: 0"-->
     <!--    />-->
     <v-img
-      :src="cdnDeliver('/logos/penguin_stats_logo.png')"
+      :src="currentLogoSrc"
       aspect-ratio="1"
       height="128px"
       contain
@@ -47,10 +47,11 @@
 <script>
 import Theme from '@/mixins/Theme'
 import CDN from '@/mixins/CDN'
+import ThemeStyle from "@/mixins/ThemeStyle";
 
 export default {
   name: 'Logo',
-  mixins: [Theme, CDN]
+  mixins: [Theme, CDN, ThemeStyle]
 }
 </script>
 

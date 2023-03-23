@@ -5,7 +5,7 @@
     :to="{name: 'Search'}"
     :flat="searching"
     :disabled="searching"
-    :class="searching ? activeClass : ''"
+    :class="searching ? activeClass : 'search-card transition-all'"
   >
     <v-card-title
       class="subtitle-2 pa-2 transition-all"
@@ -65,6 +65,9 @@ export default {
   text-align: right;
   white-space: nowrap;
   width: 0
+}
+.search-card:hover {
+  filter: brightness(1.25);
 }
 .search-text--right {
   width: 100%;
