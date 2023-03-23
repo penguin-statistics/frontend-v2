@@ -53,12 +53,7 @@ const fontMapping = {
         /* webpackChunkName: "font-noto-serif" */
         /* webpackPrefetch: false */
         /* webpackPreload: false */
-        "@fontsource/noto-serif/400.css"),
-      import(
-        /* webpackChunkName: "font-noto-serif" */
-        /* webpackPrefetch: false */
-        /* webpackPreload: false */
-        "@fontsource/noto-serif/700.css"),
+        "../assets/fonts/noto-serif-multilang/noto-serif.css"),
     ],
   },
   zh: {
@@ -68,12 +63,7 @@ const fontMapping = {
         /* webpackChunkName: "font-noto-serif-sc" */
         /* webpackPrefetch: false */
         /* webpackPreload: false */
-        "@fontsource/noto-serif-sc/400.css"),
-      import(
-        /* webpackChunkName: "font-noto-serif-sc" */
-        /* webpackPrefetch: false */
-        /* webpackPreload: false */
-        "@fontsource/noto-serif-sc/700.css")
+        "../assets/fonts/noto-serif-multilang/noto-serif-sc.css"),
     ],
   },
   ja: {
@@ -83,12 +73,7 @@ const fontMapping = {
         /* webpackChunkName: "font-noto-serif-jp" */
         /* webpackPrefetch: false */
         /* webpackPreload: false */
-        "@fontsource/noto-serif-jp/400.css"),
-      import(
-        /* webpackChunkName: "font-noto-serif-jp" */
-        /* webpackPrefetch: false */
-        /* webpackPreload: false */
-        "@fontsource/noto-serif-jp/700.css"),
+        "../assets/fonts/noto-serif-multilang/noto-serif-jp.css"),
     ],
   },
   ko: {
@@ -98,12 +83,7 @@ const fontMapping = {
         /* webpackChunkName: "font-noto-serif-kr" */
         /* webpackPrefetch: false */
         /* webpackPreload: false */
-        "@fontsource/noto-serif-kr/400.css"),
-      import(
-        /* webpackChunkName: "font-noto-serif-kr" */
-        /* webpackPrefetch: false */
-        /* webpackPreload: false */
-        "@fontsource/noto-serif-kr/700.css"),
+        "../assets/fonts/noto-serif-multilang/noto-serif-kr.css"),
     ],
   }
 }
