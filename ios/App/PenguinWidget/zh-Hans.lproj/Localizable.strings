@@ -15,3 +15,9 @@
 "ServerNameUS" = "美服";
 "ServerNameJP" = "日服";
 "ServerNameKR" = "韩服";
+
+"PenguinDynamicServerTitleSyncWithApp" = "与 App 同步服务器选择";
+"PenguinDynamicServerTitleCN" = "使用服务器：国服";
+"PenguinDynamicServerTitleUS" = "使用服务器：美服";
+"PenguinDynamicServerTitleJP" = "使用服务器：日服";
+"PenguinDynamicServerTitleKR" = "使用服务器：韩服";

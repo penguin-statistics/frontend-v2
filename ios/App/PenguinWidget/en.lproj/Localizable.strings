@@ -16,3 +16,8 @@
 "ServerNameJP" = "JP";
 "ServerNameKR" = "KR";
 
+"PenguinDynamicServerTitleSyncWithApp" = "Sync with App";
+"PenguinDynamicServerTitleCN" = "Use Server: CN";
+"PenguinDynamicServerTitleUS" = "Use Server: US";
+"PenguinDynamicServerTitleJP" = "Use Server: JP";
+"PenguinDynamicServerTitleKR" = "Use Server: KR";

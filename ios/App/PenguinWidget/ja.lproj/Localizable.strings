@@ -15,3 +15,9 @@
 "ServerNameUS" = "US";
 "ServerNameJP" = "JP";
 "ServerNameKR" = "KR";
+
+"PenguinDynamicServerTitleSyncWithApp" = "アプリと同期する";
+"PenguinDynamicServerTitleCN" = "指定サーバー：大陸版";
+"PenguinDynamicServerTitleUS" = "指定サーバー：英語版";
+"PenguinDynamicServerTitleJP" = "指定サーバー：日本版";
+"PenguinDynamicServerTitleKR" = "指定サーバー：韓国版";
