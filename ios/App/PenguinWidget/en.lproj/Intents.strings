@@ -8,13 +8,13 @@
 
 "KTYh4b" = "KR";
 
-"UQHqxq" = "服务器";
+"UQHqxq" = "Server";
 
-"SelectServerIntent.dynamicServer.parameter-definition" = "服务器";
+"SelectServerIntent.dynamicServer.parameter-definition" = "Server";
 
 "c0YYCq" = "There are ${count} options matching ‘${dynamicServer}’.";
 
-"cA3Jp8" = "选择服务器";
+"cA3Jp8" = "Select Server";
 
 "pB9HhD" = "Just to confirm, you wanted ‘${dynamicServer}’?";
 
