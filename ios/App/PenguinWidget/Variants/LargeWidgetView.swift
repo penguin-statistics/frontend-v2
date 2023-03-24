@@ -15,7 +15,7 @@ struct LargeWidgetView: View {
         VStack(alignment: .leading, spacing: 0) {
             Text("SiteStatsWidgetTitle")
                 .font(.caption)
-                .foregroundColor(Color("Gray4"))
+                .foregroundColor(Color("Secondary"))
             Spacer()
             
             TwoColumnStageStats(stages: stats.stages)

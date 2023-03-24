@@ -10,12 +10,14 @@ import WidgetKit
 
 struct MediumWidgetView: View {
     var entry: SiteStatsProvider.Entry
+    
+    @Environment(\.widgetFamily) var family
 
     var body: some View {
         VStack(alignment: .leading, spacing: 0) {
             Text("SiteStatsWidgetTitle")
                 .font(.caption)
-                .foregroundColor(Color("Gray4"))
+                .foregroundColor(entry.preferences.theme.secondaryColor)
                 .unredacted()
             
             Spacer()
@@ -29,18 +31,17 @@ struct MediumWidgetView: View {
         .environmentObject(entry.preferences)
         .padding()
         .background(
-            HStack {
-                Spacer()
-                entry.preferences.theme.adornmentView
-                    // fill height
-                    .unredacted()
-                    .frame(maxHeight: .infinity)
-                    .aspectRatio(1, contentMode: .fit)
-                    .fadeMasked()
-                    
-            }
+            entry.preferences.theme.backgroundView(widgetFamily: family),
+            alignment: .bottomTrailing
+        )
+        .overlay(
+            entry.preferences.theme.overlayView(widgetFamily: family),
+            alignment: .bottom
         )
         .background(entry.preferences.theme.backgroundColor)
+        .if(entry.preferences.theme.forcedColorScheme != nil) { view in
+            view.environment(\.colorScheme, entry.preferences.theme.forcedColorScheme!)
+        }
     }
 }
 
