@@ -942,7 +942,7 @@
   },
   "app": {
     "name": "\"Nos Multi\" Sapientiae Sanctuarium",
-    "name_lines": "\"Nos Multi\"\nSapientiae Sanctuarium"
+    "name_lines": "\"Nos Multi\"\nSapientiae\nSanctuarium"
   },
   "update": {
     "success": "Website Updated!",
