@@ -2,7 +2,8 @@
   <div
     :class="{
       'drawer-logo primary': true,
-      'drawer-logo--two-line': $t('app.name_lines').split('\n').length > 1
+      'drawer-logo--two-line': $t('app.name_lines').split('\n').length === 2,
+      'drawer-logo--three-line': $t('app.name_lines').split('\n').length >= 3
     }"
   >
     <!--    <v-img-->
