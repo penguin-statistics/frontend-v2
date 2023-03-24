@@ -32,7 +32,7 @@ struct AccessoryRectangularView: View {
                     .minimumScaleFactor(0.35)
                     .lineLimit(1)
                     .font(.body.monospacedDigit())
-                    .foregroundColor(Color("Gray4").opacity(0.8))
+                    .foregroundColor(Color("Secondary").opacity(0.8))
             }
             
             HStack {
@@ -45,7 +45,7 @@ struct AccessoryRectangularView: View {
                     .minimumScaleFactor(0.5)
                     .lineLimit(1)
                     .font(.body.monospacedDigit())
-                    .foregroundColor(Color("Gray4").opacity(0.8))
+                    .foregroundColor(Color("Secondary").opacity(0.8))
             }
         }
     }

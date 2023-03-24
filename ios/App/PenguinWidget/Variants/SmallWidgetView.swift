@@ -11,12 +11,14 @@ import Intents
 
 struct SmallWidgetView : View {
     var entry: SiteStatsProvider.Entry
+    
+    @Environment(\.widgetFamily) var family: WidgetFamily
 
     var body: some View {
         VStack(alignment: .center, spacing: 0) {
             Text("SiteStatsWidgetTitle")
                 .font(.caption)
-                .foregroundColor(Color("Gray4"))
+                .foregroundColor(entry.preferences.theme.secondaryColor)
                 .unredacted()
             
             Spacer()
@@ -32,11 +34,12 @@ struct SmallWidgetView : View {
         .environmentObject(entry.preferences)
         .padding()
         .background(
-            entry.preferences.theme.adornmentView
-                .unredacted()
-                .frame(width: 100)
-                .fadeMasked(),
+            entry.preferences.theme.backgroundView(widgetFamily: family),
             alignment: .bottomTrailing
+        )
+        .overlay(
+            entry.preferences.theme.overlayView(widgetFamily: family),
+            alignment: .bottom
         )
         .background(entry.preferences.theme.backgroundColor)
         .widgetURL(Routes.generate(

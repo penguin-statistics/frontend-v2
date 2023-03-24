@@ -93,6 +93,7 @@ export default {
   background-size: var(--size);
   background-repeat: no-repeat;
   background-image: url(/seaborn/tapwave-chunks.png);
+  //border: 1px solid red;
 }
 
 @keyframes tapwave {

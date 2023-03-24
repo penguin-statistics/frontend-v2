@@ -21,7 +21,7 @@ struct StageView: View {
             HStack(alignment: .center, spacing: 4) {
                 Image(systemName: "cube")
                     .font(.headline)
-                    .foregroundColor(Color("Gray4"))
+                    .foregroundColor(preferences.theme.secondaryColor)
                     .unredacted()
                     
                 HStack(alignment: .center, spacing: 6) {
@@ -38,7 +38,7 @@ struct StageView: View {
                             .minimumScaleFactor(0.5)
                             .lineLimit(1)
                             .font(.caption.monospacedDigit())
-                            .foregroundColor(Color("Gray4").opacity(0.8))
+                            .foregroundColor(preferences.theme.secondaryColor.opacity(0.8))
                     }
                 }
             }
