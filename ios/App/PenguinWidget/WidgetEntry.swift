@@ -22,7 +22,8 @@ struct SiteStatsProvider: IntentTimelineProvider {
         return WidgetTimelineEntry(
             date: Date(),
             stats: demoStats(),
-            preferences: WidgetUserPreferences.getLatest()
+            preferences: WidgetUserPreferences.getLatest(),
+            originalConfiguration: WidgetUserOriginalConfiguration()
         )
     }
 
@@ -30,7 +31,8 @@ struct SiteStatsProvider: IntentTimelineProvider {
         let demoEntry = WidgetTimelineEntry(
             date: Date(),
             stats: demoStats(in: configuration.dynamicServer),
-            preferences: WidgetUserPreferences.getLatest()
+            preferences: WidgetUserPreferences.getLatest(),
+            originalConfiguration: WidgetUserOriginalConfiguration.fromIntent(configuration)
         )
         
         getStats(for: configuration.dynamicServer, timeout: TimeInterval(5.0)) { (stats) in
@@ -38,7 +40,8 @@ struct SiteStatsProvider: IntentTimelineProvider {
                 completion(WidgetTimelineEntry(
                     date: Date(),
                     stats: stats!,
-                    preferences: WidgetUserPreferences.getLatest()
+                    preferences: WidgetUserPreferences.getLatest(),
+                    originalConfiguration: WidgetUserOriginalConfiguration.fromIntent(configuration)
                 ))
             } else {
                 // nothing...
@@ -58,7 +61,8 @@ struct SiteStatsProvider: IntentTimelineProvider {
                     WidgetTimelineEntry(
                         date: Date(),
                         stats: stats!,
-                        preferences: WidgetUserPreferences.getLatest()
+                        preferences: WidgetUserPreferences.getLatest(),
+                        originalConfiguration: WidgetUserOriginalConfiguration.fromIntent(configuration)
                     )
                 ]
                 let timeline = Timeline(entries: entries, policy: .atEnd)
@@ -72,15 +76,36 @@ struct SiteStatsProvider: IntentTimelineProvider {
     }
 }
 
+class WidgetUserOriginalConfiguration: ObservableObject {
+    var dynamicServer: PenguinDynamicServer?
+    
+    init() {
+        self.dynamicServer = nil
+    }
+    
+    init(dynamicServer: PenguinDynamicServer?) {
+        self.dynamicServer = dynamicServer
+    }
+    
+    static func fromIntent(_ intent: SelectServerIntent) -> WidgetUserOriginalConfiguration {
+        return .init(dynamicServer: intent.dynamicServer)
+    }
+}
+
 struct WidgetTimelineEntry: TimelineEntry {
     let date: Date
     let stats: SiteStats
     let preferences: WidgetUserPreferences
+    let originalConfiguration: WidgetUserOriginalConfiguration
 }
 
 extension WidgetTimelineEntry {
     static func demo(_ type: DemoType, theme: PenguinTheme = .default) -> WidgetTimelineEntry {
-        return WidgetTimelineEntry(date: .distantFuture, stats: SiteStats.demo(type), preferences: WidgetUserPreferences(theme: theme))
+        return WidgetTimelineEntry(
+            date: .distantFuture,
+            stats: SiteStats.demo(type),
+            preferences: WidgetUserPreferences(server: .cn, theme: theme),
+            originalConfiguration: WidgetUserOriginalConfiguration())
     }
 }
 

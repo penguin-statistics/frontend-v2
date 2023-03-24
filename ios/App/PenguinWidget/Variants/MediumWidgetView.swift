@@ -29,6 +29,7 @@ struct MediumWidgetView: View {
             WidgetFooter(server: entry.stats.server)
         }
         .environmentObject(entry.preferences)
+        .environmentObject(entry.originalConfiguration)
         .padding()
         .background(
             entry.preferences.theme.backgroundView(widgetFamily: family),

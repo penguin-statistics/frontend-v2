@@ -26,7 +26,8 @@ struct StageView: View {
                     
                 HStack(alignment: .center, spacing: 6) {
                     Text(stage.stageCode)
-                        .font(.title.monospacedDigit())
+                        .kerning(-0.4)
+                        .font(.title2.monospacedDigit())
                         .bold()
                         .foregroundColor(preferences.theme.tintColor)
                         .frame(minHeight: 0, maxHeight: 36)

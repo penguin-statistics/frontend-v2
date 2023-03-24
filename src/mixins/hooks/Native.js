@@ -83,7 +83,7 @@ export default {
     },
     $route: {
       handler: function (to) {
-        console.log('route changed', to)
+        console.log('route changed', to.fullPath)
         if (environment.isApp) {
           penguin.updateCurrentUserActivity({
             id: 'io.penguinstats.app.visit.' + to.fullPath,

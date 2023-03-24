@@ -14,7 +14,13 @@ export default {
       if (language) {
         // because this is a detection result, thus we are not storing it,
         // unless the user manually set one.
-        this.changeLocale(language, false)
+        if (this.$store.getters['settings/themeStyle'] === 'seaborn') {
+          // set seaborn locale
+          this.changeLocale(strings.seabornLocaleMappings[language], false);
+        } else {
+          // set normally
+          this.changeLocale(language, false)
+        }
       }
     } else {
       this.changeLocale(this.language, false)
