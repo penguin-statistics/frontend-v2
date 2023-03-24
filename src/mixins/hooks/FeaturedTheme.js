@@ -15,12 +15,11 @@ export default {
         }
         if (newThemeStyle === 'seaborn' && oldThemeStyle !== 'seaborn') {
           Console.info('FeaturedTheme', '(triggered by: themeStyle) is seaborn, switch locale to seaborn')
-          this.changeLocale(strings.seabornLocaleMappings[this.$i18n.locale]);
+          this.changeLocale(strings.seabornLocaleMappings[this.$i18n.locale], false);
         } else if (newThemeStyle !== 'seaborn' && oldThemeStyle === 'seaborn') {
           Console.info('FeaturedTheme', '(triggered by: themeStyle) is not seaborn anymore, rollback locale')
-          this.changeLocale(strings.specialLocaleMappings[this.$i18n.locale])
+          this.changeLocale(strings.specialLocaleMappings[this.$i18n.locale], false)
         }
-
       },
       immediate: true,
     },

@@ -2,10 +2,9 @@ import dayjs from "dayjs";
 import Console from "@/utils/Console";
 import {mapGetters} from "vuex";
 import helmet from "@/utils/helmet";
-import {externalService, service} from "../utils/service";
-import i18n from "../i18n";
+import {externalService} from "@/utils/service";
+import i18n from "@/i18n";
 import {transformMessages} from "@/utils/i18n";
-// import environment from "../utils/environment";
 
 const fetchTranslations = async (languageKey) => {
   const projectPublishableToken = "52e5ff4b225147a9b11bb63865b2ae1f";
@@ -92,7 +91,7 @@ function changeLocale(localeId, save) {
   dayjs.locale(localeId);
   Console.info("i18n", "locale:", localeId, "| saving to vuex:", save);
   if (save) this.$store.commit("settings/changeLocale", localeId);
-  service.defaults.headers.common["Accept-Language"] = localeId;
+  // service.defaults.headers.common["Accept-Language"] = localeId;
   this.$i18n.locale = localeId;
   this.$vuetify.lang.current = localeMapping[localeId] || localeId;
   helmet.title.update(this.$route);
@@ -117,7 +116,7 @@ export function loadLanguageAsync(lang) {
   // if (environment.production) {
   return fetchTranslations(mappedLang).then((messages) => {
     const transformedMessages = Object.freeze(transformMessages(messages));
-    Console.info("i18n", "fetched", lang, "translations:", transformedMessages);
+    Console.info("i18n", "fetched language:", lang, "mappedLang:", mappedLang);
     i18n.setLocaleMessage(lang, transformedMessages);
     loadedLanguages.push(mappedLang);
 
@@ -137,9 +136,9 @@ export default {
           return localeId
         }
       })()
-      await loadLanguageAsync.bind(this)(lang);
-
       changeLocale.bind(this)(lang, save);
+
+      await loadLanguageAsync.bind(this)(lang);
     },
   },
   computed: {

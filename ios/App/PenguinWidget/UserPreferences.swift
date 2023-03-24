@@ -19,7 +19,7 @@ enum PenguinTheme: String {
         case .default:
             return "Default"
         case .miku2021:
-            return "Miku 2021"
+            return "Miku Birthday 2021"
         case .seaborn:
             return "Seaborn"
         }
@@ -144,12 +144,10 @@ enum PenguinTheme: String {
     
     var forcedColorScheme: ColorScheme? {
         switch self {
-        case .default:
-            return nil
-        case .miku2021:
-            return nil
         case .seaborn:
             return .dark
+        default:
+            return nil
         }
     }
 }
@@ -158,7 +156,7 @@ class WidgetUserPreferences: ObservableObject {
     public var server: PenguinServer
     public var theme: PenguinTheme
     
-    init(server: PenguinServer = .cn, theme: PenguinTheme = .default) {
+    init(server: PenguinServer, theme: PenguinTheme) {
         self.server = server
         self.theme = theme
     }
@@ -166,20 +164,21 @@ class WidgetUserPreferences: ObservableObject {
 
 extension WidgetUserPreferences {
     static func getLatest() -> WidgetUserPreferences {
-        let preference = WidgetUserPreferences()
+        var server: PenguinServer? = nil
+        var themeStyle: PenguinTheme? = nil
         
         guard let sharedState = UserDefaults(suiteName: "group.io.penguinstats.app.public-shared") else {
-            return preference
+            return WidgetUserPreferences(server: .cn, theme: .default)
         }
         
-        if let server = sharedState.string(forKey: "server") {
-            preference.server = PenguinServer.fromString(server)
+        if let fetchedServer = sharedState.string(forKey: "server") {
+            server = PenguinServer.fromString(fetchedServer)
         }
         
-        if let themeStyle = sharedState.string(forKey: "themeStyle") {
-            preference.theme = PenguinTheme(rawValue: themeStyle) ?? .default
+        if let fetchedThemeStyle = sharedState.string(forKey: "themeStyle") {
+            themeStyle = PenguinTheme(rawValue: fetchedThemeStyle)
         }
         
-        return preference
+        return WidgetUserPreferences(server: server ?? .cn, theme: themeStyle ?? .default)
     }
 }
