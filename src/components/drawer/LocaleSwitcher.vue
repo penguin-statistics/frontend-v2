@@ -55,7 +55,6 @@ export default {
           value: "zh_CN_x_seaborn",
           push: "ZH_CN",
           text: "简体中文 (海嗣体变体)",
-          beta: true,
           bindThemeStyle: 'seaborn'
         },
         {
@@ -67,7 +66,6 @@ export default {
           value: "en_US_x_seaborn",
           push: "EN_US",
           text: "English (Seaborn Variant)",
-          beta: true,
           bindThemeStyle: 'seaborn'
         },
         {
@@ -79,7 +77,6 @@ export default {
           value: "ja_JP_x_seaborn",
           push: "JA_JP",
           text: "日本語 (シーボーン変種)",
-          beta: true,
           bindThemeStyle: 'seaborn'
         },
         {
@@ -91,7 +88,6 @@ export default {
           value: "ko_KR_x_seaborn",
           push: "KO_KR",
           text: "한국어 (시보른 변종)",
-          beta: true,
           bindThemeStyle: 'seaborn'
         }
       ],

@@ -1,9 +1,13 @@
 <template>
-  <div
-    v-if="$store.getters['ui/activeThemeStyle'] === 'seaborn' && !hide"
-    :class="['crawl-wrapper', drawer ? 'crawl-wrapper--drawer-expanded' : '']"
-  >
-    <div class="seaborn-creature" />
+  <div v-if="showCreature">
+    <div :class="['crawl-wrapper', drawer ? 'crawl-wrapper--drawer-expanded' : '']">
+      <div
+        ref="seabornCreature"
+        class="seaborn-creature"
+      >
+      &nbsp;
+      </div>
+    </div>
   </div>
 </template>
 
@@ -41,8 +45,13 @@ export default {
       hide: true,
     }
   },
+  computed: {
+    showCreature() {
+      return this.$store.getters['ui/activeThemeStyle'] === 'seaborn' && !this.hide
+    }
+  },
   mounted() {
-    this.nextTimer = setTimeout(this.enable, 5 * 1000) // wait 5 seconds before enabling
+    this.nextTimer = setTimeout(this.enable.bind(this), 5 * 1000) // wait 5 seconds before enabling
   },
   beforeDestroy() {
     clearTimeout(this.nextTimer)
@@ -50,11 +59,14 @@ export default {
   methods: {
     changeCreature(index) {
       const creature = this.creatures[index]
-      this.$el.querySelector('.seaborn-creature').style.backgroundImage = `url('${creature.url}')`
-      this.$el.querySelector('.seaborn-creature').style.setProperty('--steps', creature.steps)
+      this.$refs.seabornCreature.style.backgroundImage = `url('${creature.url}')`
+      this.$refs.seabornCreature.style.setProperty('--steps', creature.steps)
     },
     enable() {
-      this.changeCreature(Math.floor(Math.random() * this.creatures.length))
+      this.hide = false
+      this.$nextTick(() => {
+        this.changeCreature(Math.floor(Math.random() * this.creatures.length))
+      })
       this.nextTimer = setTimeout(this.disable, 70 * 1000) // show for 70 seconds
     },
     disable() {
@@ -72,7 +84,7 @@ export default {
   background: url('/seaborn/creeper-chunks.png') no-repeat;
   background-size: var(--size);
   animation: crawl-chunks infinite forwards;
-  animation-duration: 1000ms;
+  animation-duration: 750ms;
   animation-timing-function: steps(var(--steps), end);
 }
 
@@ -109,7 +121,7 @@ export default {
 
 @keyframes crawl {
   0% {
-    transform: translate(0, -100px) rotate(90deg);
+    transform: translate(0, -75px) rotate(90deg);
   }
   100% {
     transform: translate(0, 100vh) rotate(90deg);
