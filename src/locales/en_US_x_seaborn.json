@@ -40,12 +40,12 @@
       "generating": {
         "title": "Generating Site Statistics...",
         "refresh": "Refresh Site Statistics",
-        "subtitle": "Neural Network Message: Site statistics require up to 5 minutes to calculate due to high data volume. Please return later."
+        "subtitle": "Insight from the Great Sea: Site statistics require up to 5 minutes to calculate due to high data volume. Please return later."
       },
       "total": {
         "items": "Total Item Drops",
         "report": "Total Drop Reports",
-        "sanity": "All reports, consume sanity."
+        "sanity": "All reports, consumed sanity"
       },
       "24hr": "Last 24hr",
       "viewMore": "Learn More",
@@ -193,7 +193,7 @@
   "zone": {
     "types": {
       "GACHABOX": "Gachabox",
-      "ACTIVITY_PERMANENT": "Intermezzi and Side Story.",
+      "ACTIVITY_PERMANENT": "Intermezzi & Side Story",
       "ACTIVITY_PENDING": "Event (Opening Soon)",
       "WEEKLY": "Supplies",
       "ACTIVITY_CLOSED": "Event (Closed)",
@@ -204,17 +204,17 @@
     },
     "subTypes": {
       "DYING_SUN": {
-        "title": "Shadow, dying sun's.",
+        "title": "Shadow of a Dying Sun",
         "subtitle": "Episode 9~10"
       },
       "INTERLUDE": "Intermezzi",
       "VISION_SHATTER": {
         "subtitle": "Episode 4~8",
-        "title": "Vision's shatter"
+        "title": "Shatter of a Vision"
       },
       "AWAKENING_HOUR": {
         "subtitle": "Episode 0~3",
-        "title": "Awakening Hour"
+        "title": "Hour of an Awakening"
       },
       "2019": "2019",
       "2020": "2020",
@@ -229,7 +229,7 @@
       "1": "Closed",
       "0": "Open"
     },
-    "opensAt": "Period of event: {0} - {1}",
+    "opensAt": "Event period: {0} - {1}",
     "name": "Zone"
   },
   "report": {
@@ -475,8 +475,8 @@
     },
     "intro": {
       "intro_3": "Report, Dataset Invalidation Transparency, planned for implementation. Purpose: to ensure dataset transparency and list dataset changes.",
-      "intro_2": "Penguin Statistics dataset, current, combination of player reports, screenshot recognition, and tool uploads via public APIs for maintenance. Penguin Statistics team performs various types of maintenance, including automatic, scheduled, and manual methods, to ensure accuracy of dataset.",
-      "intro_1": "Penguin Statistics, Data Analysis Department of Penguin Logistics (jokingly). We dedicate ourselves to analyzing item drops.",
+      "intro_2": "The \"Nos Multi\" Sapientiae Sanctuarium, with its current dataset, supports manual uploads, automatic screenshot recognition, and various automated tools for maintenance and construction. Drop data set, maintained by the kins of the great sea. Updated, regularly.",
+      "intro_1": "Penguin Statistics, after assimilation, growth, and reproduction, ultimately becomes \"Nos Multi\" Sapientiae Sanctuarium. Massive drops, uploading, analysis. Material statistics, we have researched for a long time. Obtain drop rates, return to the great sea.",
       "intro_0": "Welcome, Penguin Statistics!"
     }
   },
@@ -485,10 +485,10 @@
     "frontend": "Frontend",
     "recognizer": "Recognizer",
     "skills": {
-      "mobile": "Development of mobile apps (iOS, Android)",
+      "mobile": "Mobile App Development (iOS, Android)",
       "frontend": "Frontend Development (React)",
       "design": "UI/UX Design",
-      "backend": "Development, backend (Go, PostgreSQL)",
+      "backend": "Backend Development (Go, PostgreSQL)",
       "maintenance": "DevOps",
       "others": "...",
       "analysis": "Data Analysis"
@@ -497,7 +497,7 @@
     "contribute_1": "Project, open source and nonprofit.",
     "repo": "Project repositories: ",
     "frontendV4": "Frontend v4",
-    "newFolder": "Working hard, creating project repo currently...",
+    "newFolder": "Currently working hard creating the project repo...",
     "backend": "Backend",
     "qqGroup": "QQ Group: ",
     "caption": "Penguin Statistics, is a community project. We are non-profit. Joint maintenance and support are required from all. We welcome you to visit our GitHub. Give us a star, and provide feedback and suggestions through Issues. Issues and PRs, welcomed anytime!"
@@ -516,7 +516,7 @@
       "donate": "Donate",
       "credits": "Credits",
       "contribute": "Contribute",
-      "bulletin": "Notice",
+      "bulletin": "Insights from the Great Sea",
       "links": "Link Exchange",
       "changelog": "Change Log"
     },
@@ -646,7 +646,7 @@
       "deploying": "Maintenance, in progress. Bear with us while we deploy latest version."
     },
     "chunk": {
-      "title": "Level 2 neural network, establishing connection...",
+      "title": "Level 2 neural network of the Great Sea, establishing connection...",
       "subtitle": "Fetching page modules, rendering view. Please wait..."
     },
     "loading": "Fetching Latest Data..."
@@ -783,7 +783,7 @@
     "optimization": {
       "lowData": {
         "title": "Low Data Mode",
-        "subtitle": "Low Data Mode, reduce network data use by stopping fetching nonessential resources, like zone backgrounds in stage selector and website background.",
+        "subtitle": "Low Data Mode, reduce network data usage. By, stopping fetching nonessential resources, zone backgrounds in stage selector, and website background.",
         "active": "Data Mode, Low. Active."
       }
     },
@@ -851,15 +851,15 @@
     "name": "Stage"
   },
   "notice": {
-    "loading": "Loading Notice...",
-    "failed": "Notice, not retrieved: {error}."
+    "loading": "Loading Insights from the Great Sea...",
+    "failed": "Insights from the Great Sea, not retrieved: {error}."
   },
   "contact": {
     "contributor": "Team Members",
     "nga": "NGA Thread",
     "github": "GitHub Issues",
     "title": "Contact us",
-    "body": "Questions, suggestions, contact webmaster, English OK."
+    "body": "Questions, suggestions, contact webmaster. English, OK."
   },
   "dataSource": {
     "title": "Login Required",
@@ -870,10 +870,10 @@
   },
   "mirrors": {
     "cn": {
-      "notification": "Suggestion: Use CN mirror ({0}) for faster loading."
+      "notification": "We suggest using the CN mirror ({0}) to improve loading speed."
     },
     "global": {
-      "notification": "To improve loading speed, we suggest using global mirror ({0})."
+      "notification": "We suggest using the CN mirror ({0}) to improve loading speed."
     },
     "_notification": {
       "ignore": {
@@ -899,14 +899,14 @@
     "loggedAs": "Logged in as",
     "forgot": {
       "penguinIdHistory": {
-        "title": "Previously, used PenguinID",
+        "title": "PenguinID, previously used",
         "deleteUserId": "Record, PenguinID, delete.",
         "tips": "Feature, can retrieve PenguinID. Only, logged in with v3.3.1 or later client.",
         "loginAsUserId": "PenguinID, login as this",
         "lastLoginAt": "Login, last at {time}",
         "noData": "No Data"
       },
-      "subtitle": "Recover login information, let us.",
+      "subtitle": "Recover, login information",
       "title": "Can't Login?",
       "activator": "Our kind, are you lost?"
     },
@@ -920,25 +920,25 @@
       "notfound": "User ID, not found. Not, game ID. Get ID, after first drop report."
     },
     "userId": "User ID",
-    "notice": "Connect and manage drop reports using User ID. No User ID? After first report, one automatically assigned."
+    "notice": "User ID, connect and manage drop reports. After first report, will be automatically assigned one."
   },
   "donate": {
     "regulation": {
-      "cnMirror": "Card, temporarily disabled on CN mirror, due to regulation policies by law.",
-      "app": "Card, unavailable in app."
+      "cnMirror": "Due to regulation policies by law, this card has been temporary disabled on CN mirror.",
+      "app": "This card is unavailable in the app."
     },
     "methods": {
       "wechatPay": "WeChat Pay",
       "paypal": "Donate with PayPal",
       "alipay": "Alipay"
     },
-    "redirectToApp": "App, \"{app}\", donate with.",
-    "donate_3": "pocky, apple pie, accepted",
-    "donate_4": "Your support, to the great sea, appreciated.",
+    "redirectToApp": "Donate with \"{app}\" App",
+    "donate_3": "pocky, apple pie, also accepted",
+    "donate_4": ". Your nutrients, to the great sea, greatly appreciated.",
     "donate_1": "Users, increase. Server, overwhelmed. Doctor donation, appreciated.",
     "donate_2": "server fee",
     "accountBook": "Account Book",
-    "donate_0": "Users, increasing. Server fees, rising. Crisis, coming. Penguin Statistics Webmaster, to save beloved Penguin Statistics, decides to..."
+    "donate_0": "Users, increasing. Server fees, rising. Crisis, coming. Penguin Statistics Webmaster, to save beloved Penguin Statistics, decided to..."
   },
   "app": {
     "name": "\"Nos Multi\" Sapientiae Sanctuarium",
@@ -962,7 +962,7 @@
     "others": "Others"
   },
   "network": {
-    "error": "Internet error. Check connection, try again."
+    "error": "Unable to establish connect to the Great Sea. Check connection, try again."
   },
   "search": {
     "hint": "Name for Stage, Zone or Item, type in.",
@@ -978,7 +978,7 @@
   },
   "clipboard": {
     "success": "Copied to clipboard",
-    "error": "Copying to clipboard failed. Manually select and copy the text."
+    "error": "Clipboard, copy failed. Manually select and copy the text."
   },
   "link": {
     "docs": {

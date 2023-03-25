@@ -24,9 +24,9 @@
     },
     "site": {
       "generating": {
-        "title": "Generating Site Statistics...",
-        "refresh": "Refresh Site Statistics",
-        "subtitle": "Neural Network Message: Due to high amount of data, site statistics need up to 5 minutes to calculate. Please come back later."
+        "title": "全サイト統計データ計算中…",
+        "refresh": "全サイト統計データを更新",
+        "subtitle": "ニューラルネットワークメッセージ：データ量が膨大のため、サイト統計データの計算には約5分かかります。少々お待ちください。"
       },
       "total": {
         "items": "総ドロップ数",
@@ -268,7 +268,7 @@
       "report": {
         "allSucceeded": "{count} 件の認識結果がアップロード成功",
         "partialSucceeded": "{count} 件の認識結果のみアップロード成功",
-        "partialFailed": "{count} 件の認識結果がアップロード失敗しました。以下のチェックリストをしたがって、問題を解決してみてください。",
+        "partialFailed": "{count} 件の認識結果がアップロード失敗しました。以下のチェックリストにしたがって、問題を解決してみてください。",
         "reporting": "結果をアップロード中...",
         "total": "総計",
         "caption": "レポートありがとうございます。キャッシュの原因で、レポートしたデータが反映するまで、20分程度の時間がかかる可能性があります。",
@@ -336,7 +336,7 @@
         "welcome": "ご提供の画像はWebAssembly技術でローカルにて認識しますので、認識段階でサーバーへのデーター送信はございません。\nスクリーンショットは、作成時刻が**36 時間内**、またクリア評価が**星3**のものをご選択ください。\n初回クリアのスクリーンショットの選択はご遠慮ください。**偏向的に**一部だけのスクリーンショット（極端にいい・悪いケース）でのレポートはご遠慮ください。"
       },
       "queue": "画像リスト",
-      "start": "{count} 枚画像を認識",
+      "start": "画像を {count} 枚認識",
       "status": {
         "success": "成功",
         "error": "エラー",
@@ -389,9 +389,9 @@
       "type": {
         "now": "{stage}ドロップで選択されたアイテムは{quantity}種類です",
         "not": "{should}種類のアイテムであってはなりません",
-        "lte": "最大{should}種類のアイテムが必要です",
+        "lte": "最大 {should} 種類のアイテムが必要です",
         "_name": "アイテム種類数",
-        "gte": "最少{should}種類のアイテムが必要です"
+        "gte": "少なくとも {should} 種類のアイテムが必要です"
       },
       "item": {
         "gte": "@:(meta.quotation.start){item}@:(meta.quotation.end)の数を{should}個以上の数値で再入力して下さい",
@@ -434,7 +434,7 @@
         }
       },
       "title": "クイックスタート",
-      "caption": "左上の\nボタンをクリックしてメニューを展開すると、さらに多くの機能が表示されます。"
+      "caption": "左上をクリック\nボタンをクリックしてメニューを展開すると、さらに多くの機能が表示されます。"
     },
     "intro": {
       "intro_2": "現在ほとんどのデータはユーザーの手によって手動でアップロードされており、誤った情報による影響を最小限に抑えるため、アップロードされた情報について多角的に審査しています。",
@@ -560,7 +560,7 @@
       "enemy": "レユニオン一覧",
       "video": "攻略動画",
       "walkthrough": "ステージ攻略",
-      "materials": "素材必要数計算機",
+      "materials": "素材必要数計算",
       "auto_farming": "放置稼ぎ",
       "experience": "ゲームレビュー",
       "hr": "公開求人一覧",
@@ -574,7 +574,7 @@
       "character": "オペレーター一覧",
       "dropRateRanking": "ドロップ率順位表",
       "map": "マップ",
-      "storeEfficiency": "購買部のパフォーマンス",
+      "storeEfficiency": "購買部のコスパ",
       "storage": "素材在庫管理"
     }
   },
@@ -725,7 +725,7 @@
   },
   "notice": {
     "loading": "お知らせを読み込んでいます...",
-    "failed": "お知らせを読み込めませんでした："
+    "failed": "お知らせを読み込めませんでした：{error}"
   },
   "contact": {
     "contributor": "制作協力者ページ",
@@ -755,17 +755,20 @@
   },
   "auth": {
     "details": "アカウント",
-    "loggedAs": "Logged in as",
+    "loggedAs": "ログインしました：",
     "login": "ログイン",
-    "logoutPrompt": "本当にログアウトしますか？",
     "forgot": {
+      "penguinIdHistory": {
+        "deleteUserId": "この PenguinID のログイン履歴を削除",
+        "loginAsUserId": "この PenguinID でログイン",
+        "lastLoginAt": "このデバイスでの最終ログイン日時： {time} ",
+        "noData": "データがありません"
+      },
       "subtitle": "アカウント復元",
       "title": "ログインできない？",
-      "activator": "PenguinID忘れ",
-      "penguinIdHistory": {
-        "noData": "データがありません"
-      }
+      "activator": "PenguinID 忘れました"
     },
+    "logoutPrompt": "本当にログアウトしますか？",
     "logout": "ログアウト",
     "loggedOut": "ログアウトしました",
     "success": "ログイン成功",
