@@ -26,15 +26,15 @@
     },
     "title": "{stage} 统计结果",
     "headerDesc": {
-      "times": "在该作战中，所有提交到企鹅物流数据统计的样本提交次数",
-      "timeRange": "由于存在掉落物列表变动故引入的「统计区间」概念。在本表所展示的数据中，其将仅包含已标注时间段内所提交的样本统计数据。若欲查看其它统计区间内的样本统计情况，请使用「高级查询」",
-      "clearTime": "来源为 PRTS Wiki 中的「最短通关用时」；其中，PRTS Wiki 对此的计算方法为：由「作战开始」直至「最后出怪」期间，使用 1 倍速的最短所需游戏时间总长",
+      "times": "在该作战中，所有提交到大群智慧之圣所的样本提交次数",
+      "timeRange": "存在，掉落物列表变动，故引入「统计区间」概念。本表，展示数据，仅含已标注时间段内，提交样本统计。欲查其他统计区间，样本统计情况，使用「高级查询」",
+      "clearTime": "源自，PRTS Wiki 中，名为「最短通关用时」。计算方法，依据「作战开始」至「最后出怪」，运用1倍速，所需最短游戏时长。",
       "percentage": "期望掉落概率；计算方式为 (掉落数 / 样本数)",
       "patternPercentage": "此掉落组合占所有掉落汇报的百分比；计算方式为 (掉落数 / 样本数)",
       "itemPerTime": "根据当前的「百分比」项，计算出的在该作战获得「1x对应物品」所需的期望时间消耗，即 (作战最短通关用时 / (掉落数 / 样本数))",
       "apPPR": "根据当前的「百分比」项，计算出的在该作战获得「1x对应物品」所需的期望理智，即 (作战理智消耗 / (掉落数 / 样本数))",
-      "apCost": "完成单次该作战的所需理智数量",
-      "quantity": "在该作战中，所有提交到大群之智慧圣所的样本内，该物品的出现次数"
+      "apCost": "单次作战中，理智，需求量",
+      "quantity": "在该作战中，所有提交到大群智慧之圣所的样本内，该物品的出现次数"
     },
     "site": {
       "generating": {
@@ -89,52 +89,52 @@
   "planner": {
     "calculation": {
       "level": "材料等级",
-      "sanity": "预计需要理智",
-      "noSyntheses": "未找到需要合成的素材。",
+      "sanity": "预测，需求理智",
+      "noSyntheses": "未发现，需融合之物质。",
       "tabs": {
         "syntheses": "合成列表",
         "stages": "作战列表",
         "values": "素材理智价值"
       },
       "times": "次",
-      "lmb": "预计龙门币收益",
-      "title": "规划结果",
-      "exp": "预计获得录像带经验",
-      "noStage": "未找到需要进行的作战。"
+      "lmb": "预估，龙门币，获得",
+      "title": "推演结果",
+      "exp": "预测获取，录像带经验",
+      "noStage": "作战，无需，未发现。"
     },
     "craft": {
       "errors": {
-        "notEnough": "需要 {need} 个「{item}」以合成，但仅已有 {have} 个",
-        "title": "合成缺少所需物品"
+        "notEnough": "需求， {need} 个「{item}」合成。现有，仅 {have} 个。",
+        "title": "合成，需求，物品不足"
       },
       "plans": {
         "title": "合成规划",
-        "plan": "将使用 {cost} 个「{item}」合成并剩余 {remain} 个"
+        "plan": "合成， {cost} 个「{item}」，余下，{remain}"
       },
       "do": "合成",
-      "unable": "无法合成",
-      "success": "已使用 {sourceItems} 合成 {amount} 个 {productItem}"
+      "unable": "合成，不可能",
+      "success": "已，运用{sourceItems}，合成，{amount}个，{productItem}"
     },
     "reset": {
       "dialog": {
-        "title": "重置刷图规划器数据",
-        "subtitle": "将会删除所选部分的相关刷图规划器数据项",
+        "title": "重置，刷图规划，数据",
+        "subtitle": "消除，所选部分，刷图规划器，数据项目",
         "options": {
           "options": {
-            "indicator": "将清除所有规划选项",
+            "indicator": "所有规划选项，都将清除",
             "name": "规划选项"
           },
           "excludes": {
-            "indicator": "将清除所有排除作战",
+            "indicator": "所有排除作战，都将清除",
             "name": "计算排除"
           },
           "items": {
-            "indicator": "将清除所有物品数据",
+            "indicator": "所有物品数据，都将清除",
             "name": "物品数据"
           }
         }
       },
-      "success": "成功重置所选数据项",
+      "success": "成功，重置，所选，数据项",
       "name": "重置"
     },
     "actions": {
@@ -146,8 +146,8 @@
       "importExport": "@:(planner.actions.import)/@:(planner.actions.export)",
       "config": {
         "_name": "配置代码",
-        "import": "导入配置代码",
-        "share": "分享配置代码"
+        "import": "配置代码，导入",
+        "share": "配置代码，共享"
       },
       "export": "导出",
       "calculating": "同类，正在计算。等待，结果返回",
@@ -158,23 +158,23 @@
     "copy": "复制，同化至剪贴板",
     "import": {
       "success": "成功同化。同化物品，共 {amount} 个",
-      "unrecognized": "同化失败，非规范配置。请核对后重试",
+      "unrecognized": "同化，失败。非规范，配置。核对，重试",
       "invalidJSON": "同化失败，JSON 格式有误。核对后，重试"
     },
     "options": {
-      "requireLmb": "大量需求龙门币",
+      "requireLmb": "需求龙门币，大量",
       "excludeStage": {
         "_name": "计算排除",
         "title": "选择",
-        "selected": "已排除 {stages} 关"
+        "selected": "已，排除， {stages} 关"
       },
       "_name": "选项",
-      "byProduct": "考虑合成副产物",
-      "requireExp": "大量需求经验"
+      "byProduct": "考虑，合成，副产物",
+      "requireExp": "需求经验，大量"
     },
     "need": "需要",
     "notices": {
-      "autoExistence": "刷图规划器现将会自动隐藏未于已选择服务器出现或开放的作战"
+      "autoExistence": "刷图规划器，自动隐藏，未在，已选服务器中，现身或展开的，作战"
     },
     "calculationError": "计算失败：{error}",
     "have": "已有"
@@ -237,7 +237,7 @@
       "exceptions": {
         "DropAreaDrops::LowConfidence": {
           "title": "存在未知掉落",
-          "subtitle": "此问题通常是由于非活动期间的活动掉落的导致的。"
+          "subtitle": "通常，来自非活动期，活动掉落，导致。"
         },
         "Droptypes::Illegal": {
           "title": "非法掉落类型",
@@ -248,7 +248,7 @@
           "title": "关卡识别，存在误差"
         },
         "DropAreaDrops::Illegal": {
-          "subtitle": "此关卡目前不应存在任何掉落，但图片中存在。这通常是由于非活动期间的活动掉落的导致的。",
+          "subtitle": "此，关卡现在，不应有掉落。但，图片有。通常，来自非活动期，活动掉落，导致。",
           "title": "掉落非法"
         },
         "DropInfos::Violation": "识别结果，验证失败",
@@ -266,7 +266,7 @@
         },
         "DropQuantityChar::LowConfidence": {
           "title": "物品数量识别，情况未明。可能存在误差",
-          "subtitle": "识别置信度低，请核对识别结果是否与图片一致"
+          "subtitle": "识别，信任度低。请核实，结果，图片是否一致"
         },
         "3stars::False": "评价，非三星级",
         "Stage::NotFound": {
@@ -276,11 +276,11 @@
         "Droptypes::NotFound": "掉落类型，不明确",
         "Fingerprint::Same": {
           "title": "存在，完全相同的图像",
-          "subtitle": "请检查是否选择了重复的截图"
+          "subtitle": "请，察看，是否挑选，重复截图"
         },
         "FileTimestamp::TooClose": {
           "title": "掉落截图，相隔时间过短",
-          "subtitle": "请检查是否选择了重复截图"
+          "subtitle": "请，察看，是否挑选，重复截图"
         }
       },
       "cost": "耗时",
@@ -310,7 +310,7 @@
             "recognitionResult": "识别结果"
           },
           "title": "反馈截图识别缺陷",
-          "subtitle": "反馈截图识别缺陷将上传您的截图原图、识别结果与环境信息（包括当前的前端 UI 版本号、识别内核版本号与识别资源版本号）至本站服务器。在上传后，我们将使用提交的数据进行算法优化，以期减少错误率。感谢您帮助我们改进识别效果！"
+          "subtitle": "反馈，截图识别缺陷，上传原图、识别结果、环境信息（包括前端 UI 版本号、识别内核版本号、识别资源版本号）至服务器。上传后，使用提交数据，进行算法优化，降低错误率。感谢，助力大群，优化识别效果。"
         },
         "snackbar": {
           "succeeded": "问题已记录，您的反馈，大群感同身受",
@@ -342,7 +342,7 @@
         "abnormal": {
           "details": "异常信息，详细列表",
           "fatal": "图像，无法识别",
-          "hover": "鼠标悬浮以查看识别内容",
+          "hover": "悬停，查看，识别内容",
           "error": "检测结果，图片质量不合格"
         },
         "noResult": "识别同化之途，暂未有成果",
@@ -358,18 +358,18 @@
         "select": "选择"
       },
       "tips": {
-        "emptyFile": "暂未选择任何图片",
+        "emptyFile": "现在，未选，任何，图像",
         "unsatisfiedStart": "未能，开始识别",
-        "copyImage": "右键图片或长按图片可拷贝到剪贴板或保存图片；再次点击图片即可关闭",
+        "copyImage": "右键，长按，拷贝至剪贴板，保存。再次点击图片，关闭",
         "fileTooOld": "文件 \"{name}\"，时间戳过期。掉落时间，36小时限制",
-        "hasInvalidFile": "含有无效文件",
+        "hasInvalidFile": "含有，无效文件",
         "addImage": "点击此处加入图片",
         "notImageFile": "\"{files}\"，非图片格式。无法同化",
         "dragImage": "将图像，拖拽至此",
         "chooseImage": "点击，选则同化体。或，直接拖拽至框内",
         "fileTooBig": "\"{name}\" ({size}MB) 超出大小限制",
         "abnormal": "您提交的截图中，有 {count} 张，未通过质量监测。已被标记为「汇报排除」。同化失败。",
-        "emptyResult": "无可用识别结果"
+        "emptyResult": "识别结果，不可用"
       },
       "recognize": {
         "elapsed": "已用时间",
@@ -379,8 +379,8 @@
         "noFilename": "暂无文件名"
       },
       "notices": {
-        "confirm": "点击图片可以放大以便于核对；再次点击图片即可关闭\n成功识别的截图已被自动选中上传\n为保证本站数据集准确度，您将**不可**选中发生识别错误的截图",
-        "welcome": "您所有提供的图片均仅会通过使用 WebAssembly 技术于您的浏览器**本地**进行识别、不会向服务器上传，因此不产生额外流量开销。\n为保证本站数据集准确度，请仅选择**截图时间在 36 小时内**、通关评价为 **3 星**的**结算界面**截图。\n请**不要**选择首次通关截图，并请如实汇报**所有**发生的掉落情况。"
+        "confirm": "点击，图像放大，核对方便。再次，点击，关闭。\n成功，识别截图，自动选中上传。\n确保，本站数据集，准确度。**不可**选，识别错误，截图。",
+        "welcome": "图片，提供，仅通过，WebAssembly技术，在浏览器，**本地**，识别。\n不上传，服务器，无额外，流量开销。\n为确保，数据集，准确度，选择，**截图时间，36小时内**，通关评价，**3星**，**结算界面**。\n**勿**选，首次通关，如实汇报，**所有**，掉落情况。"
       },
       "queue": "识别图片队列",
       "start": "识别 {count} 张图片",
@@ -434,18 +434,18 @@
     },
     "rules": {
       "type": {
-        "now": "于 “{stage}” 已选 {quantity} 种物品",
-        "not": "“{stage}” 内的物品种类数应总计不为 {should}",
-        "lte": "“{stage}” 内应至多有 {should} 种物品",
+        "now": "于 “{stage}”，已选 {quantity} 种，物品",
+        "not": "“{stage}” ，内含， {should} 种，物品，不可能",
+        "lte": "“{stage}” ，内含，至多 {should} 种，物品",
         "_name": "物品种类",
-        "gte": "“{stage}” 内应至少有 {should} 种物品"
+        "gte": "“{stage}” ，内含，至少 {should} 种，物品"
       },
       "item": {
-        "gte": "“{stage}” 内的 “{item}” 应至少有 {should} 个",
+        "gte": "“{stage}“ 之中，“{item}“ 至少，存在 {should} 个",
         "_name": "物品项",
-        "lte": "“{stage}” 内的 “{item}” 应至多有 {should} 个",
-        "now": "已于 “{stage}” 选择了 {quantity} 个 “{item}”",
-        "not": "“{stage}” 内的 “{item}” 数量不应等于 {should}"
+        "lte": "“{stage}“ 之中，“{item}“ 至多，存在 {should} 个",
+        "now": "已于 “{stage}”，选择 {quantity} 个 ，“{item}”",
+        "not": "“{stage}“ 之中，“{item}“ 数量，不应为 {should} 个"
       }
     },
     "undoSuccess": "撤销，已完成",
@@ -490,9 +490,9 @@
     },
     "intro": {
       "intro_3": "为保证数据集透明度、向用户说明数据集更改，数据作废透明度报告已在计划中。",
-      "intro_2": "大群之智慧圣所，现有数据集，手动上传，截图自动识别，多方自动化工具，维护共筑。掉落数据集，大群成员，定期维护。",
-      "intro_1": "企鹅物流数据统计，经历同化，生长繁殖，终成大群之智慧圣所。海量掉落，上传，分析。素材统计，我们研究许久。获取掉率，回归大群。",
-      "intro_0": "大群之智慧圣所，欢迎你的到来。"
+      "intro_2": "大群智慧之圣所，现有数据集，手动上传，截图自动识别，多方自动化工具，维护共筑。掉落数据集，大群成员，定期维护。",
+      "intro_1": "企鹅物流数据统计，经历同化，生长繁殖，终成大群智慧之圣所。海量掉落，上传，分析。素材统计，我们研究许久。获取掉率，回归大群。",
+      "intro_0": "大群智慧之圣所，欢迎你的到来。"
     }
   },
   "contribute": {
@@ -515,7 +515,7 @@
     "newFolder": "新建文件夹，即将完成",
     "backend": "后端",
     "qqGroup": "QQ 大群：",
-    "caption": "大群之智慧圣所，非盈利社区项目。我们的存在，依赖于大家的支持。欢迎，GitHub 上点亮星辰。提供建议，拥抱共建。"
+    "caption": "大群智慧之圣所，非盈利社区项目。我们的存在，依赖于大家的支持。欢迎，GitHub 上点亮星辰。提供建议，拥抱共建。"
   },
   "menu": {
     "search": "全局搜索",
@@ -544,9 +544,9 @@
         "seaborn": "我们同类"
       },
       "appearances": {
-        "dark": "总是使用暗色",
+        "dark": "总是，暗色，保持",
         "system": "顺应，系统设置",
-        "light": "总是使用亮色",
+        "light": "总是，亮色，保持",
         "name": "外观，更改切换"
       },
       "name": "设置"
@@ -570,21 +570,21 @@
   },
   "query": {
     "operation": {
-      "add": "添加对比查询",
+      "add": "对比查询，新增",
       "inProgress": "查询中，提取数据。分析样本，回归大群",
       "execute": "执行查询，大群行动"
     },
     "selector": {
       "item": {
         "title": "素材选择",
-        "selected": "仅查询 {length} 种素材",
-        "subtitle": "用于将查询结果过滤为此作战内的特定素材。",
-        "unspecified": "显示作战全部掉落素材"
+        "selected": "仅查询， {length} 种素材",
+        "subtitle": "用以，筛选查询成果，仅限特定素材，于此作战中。",
+        "unspecified": "展示，作战所有落物，材料"
       },
       "interval": {
         "unspecified": "不分段",
         "title": "分段间隔",
-        "subtitle": "用于设置历史趋势的分段间隔。"
+        "subtitle": "设定，历史趋势，分段间隔"
       },
       "timeRange": {
         "presets": {
@@ -620,7 +620,7 @@
     "result": {
       "main": "主查询结果",
       "comparison": "对比查询 #{index} 结果",
-      "hideTime": "隐藏详细时间",
+      "hideTime": "详细时间，隐藏",
       "empty": "回报，无数据。查询条件，需认真检查。再次尝试，加强同化"
     }
   },
@@ -652,7 +652,7 @@
       "size": "本地数据大小：",
       "reset": {
         "title": "重置本地数据与设置",
-        "subtitle": "将会删除所有本地数据与设置。删除后，所有本地设置均会重置至默认值并刷新页面，数据将需要重新加载。确定要继续吗？"
+        "subtitle": "即将，移除所有，本地数据，设定。删除后，本地设置，回归默认，刷新页面，数据需，重载。确认，继续？"
       }
     },
     "category": {
@@ -663,7 +663,7 @@
     "optimization": {
       "lowData": {
         "title": "低数据模式",
-        "subtitle": "低数据模式将停止加载诸如作战列表背景图、全站背景立绘等不必要资源以减少网络数据的使用。",
+        "subtitle": "低数据，模式启动。终止，加载如作战列表背景图、全站背景立绘等，无需资源。减少，网络数据消耗。",
         "active": "低数据模式，已启用"
       }
     },
@@ -701,7 +701,7 @@
         "stages": "作战元数据",
         "zones": "章节元数据"
       },
-      "retry": "重试",
+      "retry": "再次尝试",
       "title": "神经网络，连接异常",
       "subtitle": "神经网络，对等连接失败。部分资源，未能同化。大群意志，连接被割裂",
       "deploying": "新版部署，即将完成。请坚持，回归大群。"
@@ -779,17 +779,17 @@
   },
   "matrixCategory": {
     "automated": {
-      "tooltip": "自动数据来源：指由第三方工具所自动汇报的掉落数据",
+      "tooltip": "自动，数据来源：由第三方，工具，自行汇集，贡献数据",
       "label": "自动"
     },
     "all": {
       "label": "全部"
     },
     "manual": {
-      "tooltip": "手动数据来源：指由用户使用大群之智慧圣所的「网页或 App 端」中的「掉落汇报」或「截图识别」汇报的掉落数据",
+      "tooltip": "手动，数据来源：用户借助，大群智慧之圣所，「网页，App 端」，「掉落汇报」，「截图识别」，汇报掉落信息。",
       "label": "手动"
     },
-    "switch": "数据起源"
+    "switch": "数据来源"
   },
   "members": {
     "responsibilities": {
@@ -913,15 +913,15 @@
     },
     "_notification": {
       "ignore": {
-        "title": "不再显示镜像提示？",
-        "subtitle": "确定要忽略所有镜像提示吗？网站加载性能可能会受到影响。"
+        "title": "镜像提示，不再显示？",
+        "subtitle": "忽略，镜像提示？网站，性能，可能受影响。"
       }
     }
   },
   "share": {
     "text": {
       "item": "素材 {name}",
-      "_tmpl": "查看大群之智慧圣所中「{name}」的掉落统计数据",
+      "_tmpl": "查看大群智慧之圣所中「{name}」的掉落统计数据",
       "stage": "作战 {name}"
     },
     "name": "分享",
@@ -937,10 +937,10 @@
       "penguinIdHistory": {
         "title": "此前曾登陆的 PenguinID",
         "deleteUserId": "PenguinID 登陆记录，清除执行",
-        "tips": "本功能仅可找回于 v3.3.1 及更新版本客户端所登录的 PenguinID",
+        "tips": "仅可找回，于v3.3.1，版本客户端，登陆过的，PenguinID",
         "loginAsUserId": "以此PenguinID同化，加入大群，登陆。",
         "lastLoginAt": "本设备最后登陆，同化于 {time}",
-        "noData": "暂无数据"
+        "noData": "大群数据，空白"
       },
       "subtitle": "寻觅登陆信息，回归群体",
       "title": "无法登陆？",
@@ -956,7 +956,7 @@
       "notfound": "PenguinID，非游戏内 ID。在本站，上传一次掉落，即可成为同类。"
     },
     "userId": "用户 ID",
-    "notice": "此用户 ID 非游戏内的 ID ，仅供本网站使用，用来标记您的上传身份。若无用户 ID，汇报一次掉落后即可拥有用户 ID。"
+    "notice": "此用户ID，非游戏内ID，仅供网站使用，标记上传身份。若无用户ID，报告掉落，即刻拥有。"
   },
   "donate": {
     "regulation": {
@@ -978,7 +978,7 @@
   },
   "app": {
     "name": "大群智慧之圣所",
-    "name_lines": "大群智慧之圣所\n慧圣所"
+    "name_lines": "大群智慧之圣所"
   },
   "update": {
     "success": "更新啦！",
@@ -993,7 +993,7 @@
   },
   "pattern": {
     "empty": "无掉落",
-    "error": "暂无本作战\n掉落组合数据",
+    "error": "暂无，本次作战\n掉落组合，数据",
     "name": "掉落组合",
     "others": "其他"
   },
@@ -1002,7 +1002,7 @@
   },
   "search": {
     "hint": "键入，物品全名，拼音首字母，作战名，章节名，关卡编号。或，关卡物品昵称",
-    "placeholder": "搜索..."
+    "placeholder": "寻觅..."
   },
   "specials": {
     "mikubirthday2021": {
@@ -1010,16 +1010,16 @@
     }
   },
   "quotes": {
-    "doYouKnow": "你知道吗？同类白面鸮，头部羽毛最为可爱。o(*≧▽≦)ツ"
+    "doYouKnow": "你知晓，吗？白面鸮，头顶之毛，甚是，迷人。^(;,;)^"
   },
   "clipboard": {
-    "success": "复制成功",
-    "error": "复制到剪贴板失败，请手动复制"
+    "success": "复制，成功",
+    "error": "复制，剪贴板未成，请手动操作"
   },
   "link": {
     "docs": {
       "title": "大群开发者中心",
-      "subtitle": "智慧圣所的统计数据基础上，开发所用的 API 文档等资源"
+      "subtitle": "智慧之圣所统计数据基础上，开发所用的 API 文档等资源"
     }
   },
   "switchedTo": "服务器，已切换至"
