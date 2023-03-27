@@ -246,7 +246,17 @@ export default {
             ],
             avatar: 'xia.png',
             socials: {
-              weibo: 'https://www.weibo.com/u/2290638732'
+              weibo: 'https://weibo.com/u/2290638732'
+            }
+          },
+          {
+            name: '熊猫人',
+            responsibility: [
+              r.logo
+            ],
+            avatar: 'QXT-panda.jpg',
+            socials: {
+              weibo: 'https://weibo.com/u/5416113242'
             }
           },
           {

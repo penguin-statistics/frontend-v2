@@ -753,7 +753,7 @@
     },
     "categories": {
       "others": "Others",
-      "owner": "Webmaster",
+      "owner": "The Deep-Sky Observer",
       "translators": "Translators",
       "maintainer": "Maintainer",
       "contributors": "Contributors"
@@ -795,7 +795,6 @@
       "title": "Open Source Licenses"
     },
     "material": {
-      "content": "Penguin Statistics, use various game resources (like pictures, animations, audio, original text, and translations) to reflect game elements and enhance user experience. Copyright for these resources, belong to Shanghai Hypergryph Network Technology Co., Ltd. and/or its affiliates, which include YOSTAR (HONG KONG) LIMITED, 株式会社Yostar, YOSTAR LIMITED, 龍成網路, and others.\nPenguin Statistics, utilize assets from PRTS Wiki [http://prts.wiki] and modify some without changing their original meaning.\nPenguin Statistics, use a slightly self-modified version of the Bender font, provided by the Free Fonts Project ([http://jovanny.ru]) under the Project's claimed usage basis on its official website. Penguin Statistics, express gratitude to the Free Fonts Project and the licenses it uses, for their openness.",
       "title": "Content Credits"
     }
   },
