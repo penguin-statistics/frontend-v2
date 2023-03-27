@@ -49,7 +49,7 @@
 }
 
 .drawer-logo--three-line {
-    height: 312px;
+    height: 328px;
 }
 
 .drawer-logo > .description {
@@ -314,7 +314,7 @@ html[lang^=ko] {
         height: calc(288px + env(safe-area-inset-top));
     }
     .drawer-logo--three-line {
-        height: calc(312px + env(safe-area-inset-top));
+        height: calc(328px + env(safe-area-inset-top));
     }
 
     /*.x--safe-area {*/
