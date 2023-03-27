@@ -23,7 +23,12 @@ export default {
         }
       }
     } else {
-      this.changeLocale(this.language, false)
+      if (this.$store.getters['settings/themeStyle'] === 'seaborn') {
+        // set seaborn locale
+        this.changeLocale(strings.seabornLocaleMappings[this.language], false);
+      } else {
+        this.changeLocale(this.language, false)
+      }
     }
   },
   computed: {

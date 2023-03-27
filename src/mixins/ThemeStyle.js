@@ -1,5 +1,6 @@
 import Console from '@/utils/Console'
 import mirror from "@/utils/mirror";
+import I18n from "@/mixins/I18n";
 
 const themes = {
   default: {
@@ -43,6 +44,7 @@ const seabornLogos = [
 const seabornLogo = seabornLogos[Math.floor(Math.random() * seabornLogos.length)]
 
 export default {
+  mixins: [I18n],
   methods: {
     changeThemeStyle(themeId, save = true) {
       Console.info('ThemeStyle', 'theme:', themeId, '| saving to vuex:', save)
@@ -69,7 +71,14 @@ export default {
         this.$vuetify.theme.dark = isDark
         this.$store.commit('settings/switchDark', isDark ? 'dark' : 'light')
       }
-    }
+
+      // Console.info('ThemeStyle', 'themeId:', themeId, '| this.language:', this.language)
+      // if (themeId !== 'seaborn' && strings.specialLocaleMappings[this.language]) {
+      //   // rollback to the original locale
+      //   Console.info('ThemeStyle', 'rollback to the original locale:', strings.specialLocaleMappings[this.$i18n.locale])
+      //   this.changeLocale(strings.specialLocaleMappings[this.$i18n.locale], true)
+      // }
+    },
   },
   computed: {
     currentLogoSrc() {

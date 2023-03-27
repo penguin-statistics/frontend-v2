@@ -59,6 +59,7 @@ export default {
   methods: {
     changeCreature(index) {
       const creature = this.creatures[index]
+      if (!this.$refs.seabornCreature) return
       this.$refs.seabornCreature.style.backgroundImage = `url('${creature.url}')`
       this.$refs.seabornCreature.style.setProperty('--steps', creature.steps)
     },
