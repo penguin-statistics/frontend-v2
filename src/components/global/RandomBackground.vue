@@ -68,7 +68,7 @@ export default {
     };
   },
   computed: {
-    ...mapGetters("settings", ["lowData"]),
+    ...mapGetters("settings", ["lowData", "themeStyle"]),
   },
   watch: {
     $route: ["checkSpecialImage", "checkBlur"],
@@ -78,6 +78,12 @@ export default {
       } else {
         this.bootup();
       }
+    },
+    themeStyle: {
+      handler() {
+        this.updateBackgroundByRandom(false);
+      },
+      immediate: true,
     },
   },
   mounted() {
@@ -115,6 +121,11 @@ export default {
       if (Math.random() < 0.002) {
         return this.getImageUrl("frstar");
       }
+      if (this.$store.getters['settings/themeStyle'] === 'seaborn') {
+        return this.getImageUrl("seaborn/" + Math.floor(
+          Math.random() * (6 + 1) // 0-6, 7 images
+        ));
+      }
       return this.getImageUrl(randomUtils.cachedRandom.get());
     },
     async updateBackgroundByRandom(ignoreUrl) {
@@ -138,8 +149,12 @@ export default {
         .then(({ data }) => {
           const dataUrl = URL.createObjectURL(data);
           background.style.backgroundImage = `url(${dataUrl})`;
-          // Console.log(`created ${dataUrl} | revoking ${this.lastUrl}`)
-          !this.lastUrl && URL.revokeObjectURL(this.lastUrl);
+          if (this.lastUrl) {
+            Console.log('RandomBackground', `created ${dataUrl} | revoking ${this.lastUrl}`)
+            URL.revokeObjectURL(this.lastUrl);
+          } else {
+            Console.log('RandomBackground', `created ${dataUrl} | (skipping revoke)`)
+          }
           this.lastUrl = dataUrl;
         })
         .catch(() => {}) // i can do nothing :(
@@ -148,14 +163,9 @@ export default {
         });
     },
     isSpecialUrl(url) {
-      if (
-        !url.params ||
-        !url.params.stageId ||
-        !(url.params.stageId in this.specialImageMap)
-      ) {
-        return false;
-      }
-      return true;
+      return url.params &&
+          url.params.stageId &&
+          Object.prototype.hasOwnProperty.call(this.specialImageMap, url.params.stageId);
     },
     checkSpecialImage(to, from) {
       if (this.isSpecialUrl(to)) {

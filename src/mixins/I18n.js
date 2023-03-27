@@ -87,11 +87,52 @@ const fontMapping = {
   }
 }
 
+function changePageIndexable(indexable) {
+  const robotsMeta = [
+    ...document.querySelectorAll('meta[name="robots"]'),
+    ...document.querySelectorAll('meta[name="googlebot"]'),
+  ];
+  if (robotsMeta.length > 0) {
+    robotsMeta.forEach((meta) => {
+      meta.remove();
+    });
+  }
+  if (indexable) {
+    document.head.insertAdjacentHTML(
+      "beforeend",
+      `<meta name="robots" content="index,follow">`
+    );
+  } else {
+    document.head.insertAdjacentHTML(
+      "beforeend",
+      `<meta name="robots" content="noindex">`
+    );
+  }
+}
+
 function changeLocale(localeId, save) {
   dayjs.locale(localeId);
   Console.info("i18n", "locale:", localeId, "| saving to vuex:", save);
   if (save) this.$store.commit("settings/changeLocale", localeId);
   // service.defaults.headers.common["Accept-Language"] = localeId;
+  // if (localeId.includes("_x_")) {
+  //   // if the localeId includes _x_, add X-Robots-Tag header to prevent search engine indexing
+  //   document.head.insertAdjacentHTML(
+  //     "beforeend",
+  //     `<meta name="robots" content="noindex">`
+  //   );
+  // } else {
+  //   // remove the X-Robots-Tag header
+  //   const robotsMeta = document.querySelectorAll('meta[name="robots"]');
+  //   if (robotsMeta.length > 0) {
+  //     robotsMeta.forEach((meta) => {
+  //       meta.remove();
+  //     });
+  //   }
+  // }
+  const noIndex = localeId.includes("_x_seaborn");
+  changePageIndexable(!noIndex);
+
   this.$i18n.locale = localeId;
   this.$vuetify.lang.current = localeMapping[localeId] || localeId;
   helmet.title.update(this.$route);

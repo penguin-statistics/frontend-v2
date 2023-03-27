@@ -19,8 +19,8 @@ export default {
     // first priority
     Theme,
     ThemeStyle,
-    FeaturedTheme,
     Localization,
+    FeaturedTheme,
 
     // secondary priority
     RandomizedLogo,
