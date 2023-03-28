@@ -121,7 +121,7 @@ export default {
       if (Math.random() < 0.002) {
         return this.getImageUrl("frstar");
       }
-      if (this.$store.getters['settings/themeStyle'] === 'seaborn') {
+      if (this.$store.state.ui.activeThemeStyle === 'seaborn') {
         return this.getImageUrl("seaborn/" + Math.floor(
           Math.random() * (6 + 1) // 0-6, 7 images
         ));

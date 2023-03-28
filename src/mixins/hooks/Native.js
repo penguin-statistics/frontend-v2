@@ -69,7 +69,7 @@ export default {
     sharedState() {
       return {
         server: this.$store.getters["dataSource/server"],
-        themeStyle: this.$store.getters["settings/themeStyle"],
+        themeStyle: this.$store.getters["ui/activeThemeStyle"],
       }
     }
   },

@@ -42,7 +42,7 @@ export default {
         return
       }
       this.randomizedLogo = (() => {
-        if (this.$store.getters['settings/themeStyle'] === 'seaborn') {
+        if (this.$store.state.ui.activeThemeStyle === 'seaborn') {
           return seabornImageUrl(this.currentLogoName, randomUtils.randomFromArray([
             0, 1, 2, 3
           ]))
@@ -59,7 +59,7 @@ export default {
   },
   computed: {
     randomizedLogoListeningThemeStyle() {
-      return this.$store.getters['settings/themeStyle']
+      return this.$store.state.ui.activeThemeStyle
     }
   }
 }

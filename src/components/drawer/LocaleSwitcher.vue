@@ -116,7 +116,7 @@ export default {
       }
     },
     filteredLocalizations() {
-      const currentActiveThemeStyle = this.$store.getters['settings/themeStyle']
+      const currentActiveThemeStyle = this.$store.state.ui.activeThemeStyle
       const anyBindThemeStyle = this.localizations.some((item) => {
         return item.bindThemeStyle === currentActiveThemeStyle
       })

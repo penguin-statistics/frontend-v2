@@ -51,7 +51,7 @@ export default {
       if (save) this.$store.commit('settings/changeThemeStyle', themeId)
       this.triggerThemeUpdate(themeId)
     },
-    triggerThemeUpdate(themeId = this.$store.getters['settings/themeStyle']) {
+    triggerThemeUpdate(themeId = this.$store.state.ui.activeThemeStyle) {
       const theme = themes[themeId][this.$vuetify.theme.dark ? 'dark' : 'light']
       const primary = theme.primary
       const accent = theme.accent
@@ -83,7 +83,7 @@ export default {
   computed: {
     currentLogoSrc() {
       return mirror.deliver(
-        this.$store.getters['settings/themeStyle'] === 'seaborn'
+        this.$store.state.ui.activeThemeStyle === 'seaborn'
           ? (
             '/logos/seaborn/' + seabornLogo + '.png'
           )
@@ -91,7 +91,7 @@ export default {
       )
     },
     currentLogoName() {
-      return this.$store.getters['settings/themeStyle'] === 'seaborn'
+      return this.$store.state.ui.activeThemeStyle === 'seaborn'
         ? seabornLogo
         : 'penguin_stats_logo'
     }
