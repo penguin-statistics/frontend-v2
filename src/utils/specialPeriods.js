@@ -1,10 +1,10 @@
-import dayjs from "dayjs";
+import timeFormatter from "@/utils/timeFormatter";
 
 export default {
   miku() {
     // -> 03-09 00:00:00 ~ 03-09 23:59:59
     // -> 08-31 00:00:00 ~ 08-31 23:59:59 for every year. use user local time.
-    const now = dayjs();
+    const now = timeFormatter.dayjs();
     const ranges = [
       [now.month(2).date(9).startOf("day"), now.month(2).date(9).endOf("day")],
       [now.month(7).date(31).startOf("day"), now.month(7).date(31).endOf("day")],
@@ -13,10 +13,10 @@ export default {
   },
   aprilFools() {
     // -> 04-01 00:00:00 (forced to interpret as UTC+8) ~ 04-01 23:59:59 (user local time) for every year. use user local time.
-    const now = dayjs();
+    const now = timeFormatter.dayjs();
     const ranges = [
       // [now.month(3).date(1).startOf("day"), now.month(3).date(1).endOf("day")],
-      [now.month(3).date(1).startOf("day").utcOffset(8, true), now.month(3).date(1).endOf("day")],
+      [timeFormatter.dayjs("2023-04-01T00:00:00+0800").year(timeFormatter.dayjs().year()), now.month(3).date(1).endOf("day")],
     ];
     return ranges.some(([start, end]) => now.isBetween(start, end));
   },
