@@ -35,6 +35,7 @@ function needYear(moments) {
 export default {
   get dayjs() {
     dayjs.locale(strings.mapLocale(i18n.locale))
+    window._penguin_dayjs = dayjs
     return dayjs
   },
   isOutdated(rangeStart, rangeEnd) {
