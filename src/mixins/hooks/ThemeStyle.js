@@ -1,5 +1,6 @@
 import ThemeStyle from "@/mixins/ThemeStyle";
 import specialPeriods from "@/utils/specialPeriods";
+import Console from "@/utils/Console";
 
 export default {
   mixins: [ThemeStyle],
@@ -14,11 +15,21 @@ export default {
   },
   methods: {
     detect() {
-      if (specialPeriods.miku()) return this.changeThemeStyle('miku2021', false)
-      if (specialPeriods.aprilFools()) return this.changeThemeStyle('seaborn', false)
+      Console.info('ThemeStyle', 'detecting theme style...')
+      if (specialPeriods.miku()) {
+        Console.info('ThemeStyle', 'special period detected: miku2021')
+        return this.changeThemeStyle('miku2021', false)
+      }
+      if (specialPeriods.aprilFools()) {
+        Console.info('ThemeStyle', 'special period detected: april fools')
+        return this.changeThemeStyle('seaborn', false)
+      }
 
       const themeStyle = this.$store.getters['settings/themeStyle']
-      if (themeStyle !== this.$store.state.ui.activeThemeStyle) return this.changeThemeStyle(themeStyle, false)
+      if (themeStyle !== this.$store.state.ui.activeThemeStyle) {
+        Console.info('ThemeStyle', 'theme style changed:', themeStyle)
+        return this.changeThemeStyle(themeStyle, false)
+      }
     },
     enableInterval() {
       this.nextTimer = setInterval(() => {

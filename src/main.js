@@ -1,6 +1,6 @@
 // import FakeTimers from "@sinonjs/fake-timers"
 // window.FakeTimers = FakeTimers.install({
-//   now: new Date("2023-03-31T23:59:50.000+0800"),
+//   now: new Date("2023-04-01T23:59:50.000"),
 //   shouldAdvanceTime: true,
 // })
 //
