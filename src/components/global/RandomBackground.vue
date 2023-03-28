@@ -81,7 +81,7 @@ export default {
     },
     themeStyle: {
       handler() {
-        this.updateBackgroundByRandom(false);
+        this.updateBackgroundByRandom(true);
       },
       immediate: true,
     },

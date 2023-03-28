@@ -4,7 +4,6 @@
       <div
         ref="seabornCreature"
         class="seaborn-creature"
-        :style="{backgroundImage: `url('${cdnDeliver('/seaborn/creeper-chunks.png')}')`}"
       >
       &nbsp;
       </div>
@@ -105,7 +104,7 @@ export default {
 
 .crawl-wrapper {
   position: fixed;
-  left: calc(env(safe-area-inset-left) - 2px);
+  left: calc(env(safe-area-inset-left) - 4px);
   top: 0;
   z-index: 20;
   pointer-events: none;
@@ -122,7 +121,7 @@ export default {
 }
 
 .crawl-wrapper--drawer-expanded {
-  left: calc(env(safe-area-inset-left) + 297px) !important;
+  left: calc(env(safe-area-inset-left) + 300px - 4px) !important;
 }
 
 @keyframes crawl {
