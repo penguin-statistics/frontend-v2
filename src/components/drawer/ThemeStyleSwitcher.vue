@@ -72,7 +72,7 @@ export default {
   created() {
     this.updateThemes()
     if (hideSeabornBefore.isAfter(timeFormatter.dayjs())) {
-      const timeout = hideSeabornBefore.diff(timeFormatter.dayjs(), 'milliseconds')
+      const timeout = hideSeabornBefore.diff(timeFormatter.dayjs(), 'milliseconds') + 5 * 1000 // add 5 seconds to be safe
       Console.info('ThemeStyleSwitcher', 'updating themes in', timeout, 'ms (at ' + timeFormatter.dayjs().add(timeout, 'milliseconds').format('YYYY-MM-DD HH:mm:ss') + ')')
       this.timeoutTimer = setTimeout(() => {
         this.updateThemes()
