@@ -70,7 +70,7 @@
       <MikuDrawerFooterImage />
       <v-img
         v-if="$store.state.ui.activeThemeStyle === 'seaborn'"
-        src="/seaborn/skadi.png"
+        :src="cdnDeliver('/images/themes/seaborn/skadi.png')"
         style="position: absolute; bottom: 0; z-index: 0"
         position="center center"
         height="calc(50px + 35vh)"

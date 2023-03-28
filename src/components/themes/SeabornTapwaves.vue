@@ -4,16 +4,21 @@
       v-for="tapwave in tapwaves"
       :key="tapwave.id"
       class="global-tapwave"
-      :style="tapwave.style"
+      :style="{
+        ...tapwave.style,
+        backgroundImage: `url('${cdnDeliver('/images/themes/seaborn/tapwave.png')}')`
+      }"
     />
   </div>
 </template>
 
 <script>
 import {throttle} from "lodash";
+import CDN from "@/mixins/CDN";
 
 export default {
   name: 'SeabornTapwaves',
+  mixins: [CDN],
   data() {
     return {
       tapwaves: {},
@@ -92,8 +97,6 @@ export default {
   animation: tapwave 750ms steps(27, end) normal forwards;
   background-size: var(--size);
   background-repeat: no-repeat;
-  background-image: url(/seaborn/tapwave-chunks.png);
-  //border: 1px solid red;
 }
 
 @keyframes tapwave {

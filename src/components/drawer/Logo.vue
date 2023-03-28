@@ -5,6 +5,9 @@
       'drawer-logo--two-line': $t('app.name_lines').split('\n').length === 2,
       'drawer-logo--three-line': $t('app.name_lines').split('\n').length >= 3
     }"
+    :style="{
+      backgroundImage: $store.getters['ui/activeThemeStyle'] === 'seaborn' ? `url(${cdnDeliver('/images/themes/seaborn/bg1.jpg')})` : undefined,
+    }"
   >
     <!--    <v-img-->
     <!--      :src="cdnDeliver('/images/themes/new-year/portrait.jpg')"-->

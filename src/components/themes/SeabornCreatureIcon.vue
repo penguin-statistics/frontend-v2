@@ -2,7 +2,7 @@
   <figure
     v-if="useCreatureIcon"
     class="creature-icon"
-    :style="{backgroundPosition: `0 ${-creature * 24}px`}"
+    :style="{backgroundPosition: `0 ${-creature * 24}px`, backgroundImage: `url(${cdnDeliver('/images/themes/seaborn/creature-icon.png')})`}"
   />
   <v-icon v-else>
     {{ normalIcon }}
@@ -10,8 +10,11 @@
 </template>
 
 <script>
+import CDN from "@/mixins/CDN";
+
 export default {
   name: 'SeabornCreatureIcon',
+  mixins: [CDN],
   props: {
     creature: {
       type: Number,
@@ -34,7 +37,6 @@ export default {
 .creature-icon {
   width: 24px;
   height: 24px;
-  background-image: url('/seaborn/creature-icon.png');
   background-repeat: no-repeat;
   background-position: center center;
   background-size: 24px 384px;

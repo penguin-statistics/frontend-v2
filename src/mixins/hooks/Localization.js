@@ -25,7 +25,7 @@ export default {
     } else {
       if (this.$store.getters['settings/themeStyle'] === 'seaborn') {
         // set seaborn locale
-        this.changeLocale(strings.seabornLocaleMappings[this.language], false);
+        this.changeLocale(strings.seabornLocaleMappings[this.language] ?? this.language, false);
       } else {
         this.changeLocale(this.language, false)
       }
