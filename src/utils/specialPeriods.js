@@ -12,10 +12,11 @@ export default {
     return ranges.some(([start, end]) => now.isBetween(start, end));
   },
   aprilFools() {
-    // -> 04-01 00:00:00 ~ 04-01 23:59:59 for every year. use user local time.
+    // -> 04-01 00:00:00 (forced to interpret as UTC+8) ~ 04-01 23:59:59 (user local time) for every year. use user local time.
     const now = dayjs();
     const ranges = [
-      [now.month(3).date(1).startOf("day"), now.month(3).date(1).endOf("day")],
+      // [now.month(3).date(1).startOf("day"), now.month(3).date(1).endOf("day")],
+      [now.month(3).date(1).startOf("day").utcOffset(8, true), now.month(3).date(1).endOf("day")],
     ];
     return ranges.some(([start, end]) => now.isBetween(start, end));
   },

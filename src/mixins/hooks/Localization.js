@@ -17,6 +17,9 @@ export default {
         if (this.$store.getters['settings/themeStyle'] === 'seaborn') {
           // set seaborn locale
           this.changeLocale(strings.seabornLocaleMappings[language], false);
+        } else if (this.$store.getters['settings/themeStyle'] !== 'seaborn' && strings.specialLocaleMappings[language]) {
+          // revert to normal locale
+          this.changeLocale(strings.specialLocaleMappings[language], false);
         } else {
           // set normally
           this.changeLocale(language, false)
@@ -26,6 +29,9 @@ export default {
       if (this.$store.getters['settings/themeStyle'] === 'seaborn') {
         // set seaborn locale
         this.changeLocale(strings.seabornLocaleMappings[this.language] ?? this.language, false);
+      } else if (this.$store.getters['settings/themeStyle'] !== 'seaborn' && strings.specialLocaleMappings[this.language]) {
+        // revert to normal locale
+        this.changeLocale(strings.specialLocaleMappings[this.language], false);
       } else {
         this.changeLocale(this.language, false)
       }

@@ -9,9 +9,11 @@ import i18n from '@/i18n'
 const relativeTime = require('dayjs/plugin/relativeTime')
 const isBetween = require('dayjs/plugin/isBetween')
 const duration = require('dayjs/plugin/duration')
+const utc = require('dayjs/plugin/utc')
 dayjs.extend(relativeTime)
 dayjs.extend(isBetween)
 dayjs.extend(duration)
+dayjs.extend(utc)
 
 const FORMATS = {
   MD: 'M.D',
