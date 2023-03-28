@@ -129,16 +129,6 @@ export default {
             }
           },
           {
-            name: 'YukiC',
-            responsibility: [
-              r.backend
-            ],
-            avatar: 'yukic.jpg',
-            socials: {
-              github: 'https://github.com/cyj5230'
-            }
-          },
-          {
             name: '根派',
             responsibility: [
               r.arkplanner
@@ -156,6 +146,48 @@ export default {
             avatar: 'xie.jpeg',
             socials: {
               github: 'https://github.com/ycremar'
+            }
+          },
+          {
+            name: '侠',
+            responsibility: [
+              r.logo
+            ],
+            avatar: 'xia.png',
+            socials: {
+              weibo: 'https://weibo.com/u/2290638732'
+            }
+          },
+          {
+            name: '青弦天',
+            responsibility: [
+              r.logo
+            ],
+            avatar: 'qxtpanda.jpg',
+            socials: {
+              weibo: 'https://weibo.com/u/5416113242',
+              twitter: 'https://twitter.com/QXT_panda'
+            }
+          },
+          {
+            name: 'SrO²',
+            responsibility: [
+              r.bulkupload,
+              r.arkplanner
+            ],
+            avatar: 'sr.png',
+            socials: {
+              github: 'https://github.com/Strontium233'
+            }
+          },
+          {
+            name: 'YukiC',
+            responsibility: [
+              r.backend
+            ],
+            avatar: 'yukic.jpg',
+            socials: {
+              github: 'https://github.com/cyj5230'
             }
           },
           {
@@ -240,26 +272,6 @@ export default {
             }
           },
           {
-            name: '侠',
-            responsibility: [
-              r.logo
-            ],
-            avatar: 'xia.png',
-            socials: {
-              weibo: 'https://weibo.com/u/2290638732'
-            }
-          },
-          {
-            name: '熊猫人',
-            responsibility: [
-              r.logo
-            ],
-            avatar: 'QXT-panda.jpg',
-            socials: {
-              weibo: 'https://weibo.com/u/5416113242'
-            }
-          },
-          {
             name: 'ウィン',
             responsibility: [
               r.localization.ja
@@ -267,16 +279,6 @@ export default {
             avatar: 'win.png',
             socials: {
               twitter: 'https://twitter.com/Winterer000000'
-            }
-          },
-          {
-            name: 'SrO²',
-            responsibility: [
-              r.bulkupload
-            ],
-            avatar: 'sr.png',
-            socials: {
-              github: 'https://github.com/Strontium233'
             }
           },
           {
