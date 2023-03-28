@@ -68,7 +68,8 @@ export default {
     };
   },
   computed: {
-    ...mapGetters("settings", ["lowData", "themeStyle"]),
+    ...mapGetters("settings", ["lowData"]),
+    ...mapGetters("ui", ["activeThemeStyle"]),
   },
   watch: {
     $route: ["checkSpecialImage", "checkBlur"],
@@ -79,7 +80,7 @@ export default {
         this.bootup();
       }
     },
-    themeStyle: {
+    activeThemeStyle: {
       handler() {
         this.updateBackgroundByRandom(true);
       },
