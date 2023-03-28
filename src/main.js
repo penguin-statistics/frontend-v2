@@ -1,3 +1,13 @@
+import FakeTimers from "@sinonjs/fake-timers"
+window.FakeTimers = FakeTimers.install({
+  now: new Date("2023-03-31T23:59:50.000+0800"),
+  shouldAdvanceTime: true,
+})
+
+setInterval(() => {
+  console.log("tick: ", new Date())
+}, 1000)
+
 import './workers/register'
 import 'core-js/stable'
 import 'regenerator-runtime/runtime'

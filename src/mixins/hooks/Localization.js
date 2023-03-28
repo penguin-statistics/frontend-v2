@@ -14,10 +14,10 @@ export default {
       if (language) {
         // because this is a detection result, thus we are not storing it,
         // unless the user manually set one.
-        if (this.$store.getters['settings/themeStyle'] === 'seaborn') {
+        if (this.$store.state.ui.activeThemeStyle === 'seaborn') {
           // set seaborn locale
           this.changeLocale(strings.seabornLocaleMappings[language], false);
-        } else if (this.$store.getters['settings/themeStyle'] !== 'seaborn' && strings.specialLocaleMappings[language]) {
+        } else if (this.$store.state.ui.activeThemeStyle !== 'seaborn' && strings.specialLocaleMappings[language]) {
           // revert to normal locale
           this.changeLocale(strings.specialLocaleMappings[language], false);
         } else {
@@ -26,10 +26,10 @@ export default {
         }
       }
     } else {
-      if (this.$store.getters['settings/themeStyle'] === 'seaborn') {
+      if (this.$store.state.ui.activeThemeStyle === 'seaborn') {
         // set seaborn locale
         this.changeLocale(strings.seabornLocaleMappings[this.language] ?? this.language, false);
-      } else if (this.$store.getters['settings/themeStyle'] !== 'seaborn' && strings.specialLocaleMappings[this.language]) {
+      } else if (this.$store.state.ui.activeThemeStyle !== 'seaborn' && strings.specialLocaleMappings[this.language]) {
         // revert to normal locale
         this.changeLocale(strings.specialLocaleMappings[this.language], false);
       } else {

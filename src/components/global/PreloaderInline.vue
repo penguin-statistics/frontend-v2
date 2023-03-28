@@ -65,14 +65,14 @@ export default {
       return randomUtils.randomInt(this.preloaders.length - 1)
     },
     currentSrc () {
-      if (this.$store.getters['settings/themeStyle'] === 'seaborn') {
+      if (this.$store.state.ui.activeThemeStyle === 'seaborn') {
         return this.cdnDeliver('/images/themes/seaborn/mizuki-running.png')
       } else {
         return this.cdnDeliver(`/images/preloaders/${this.preloaders[this.currentPreloaderIndex]}.png`)
       }
     },
     dimensions () {
-      const steps = this.$store.getters['settings/themeStyle'] === 'seaborn' ? 4 : 3
+      const steps = this.$store.state.ui.activeThemeStyle === 'seaborn' ? 4 : 3
       if (this.size) {
         return {
           image: {
