@@ -1,5 +1,5 @@
 <template>
-  <div v-if="showCreature">
+  <div v-if="!hide">
     <div :class="['crawl-wrapper', drawer ? 'crawl-wrapper--drawer-expanded' : '']">
       <div
         ref="seabornCreature"
@@ -14,6 +14,7 @@
 <script>
 import mirror from "@/utils/mirror";
 import CDN from "@/mixins/CDN";
+import {mapGetters} from "vuex";
 
 export default {
   name: 'SeabornCrawl',
@@ -50,12 +51,19 @@ export default {
     }
   },
   computed: {
-    showCreature() {
-      return this.$store.getters['ui/activeThemeStyle'] === 'seaborn' && !this.hide
-    }
+    ...mapGetters('ui', ['activeThemeStyle']),
   },
-  mounted() {
-    this.nextTimer = setTimeout(this.enable.bind(this), 5 * 1000) // wait 5 seconds before enabling
+  watch: {
+    activeThemeStyle: {
+      handler() {
+        if (this.activeThemeStyle === 'seaborn') {
+          this.enable()
+        } else {
+          this.disable()
+        }
+      },
+      immediate: true,
+    }
   },
   beforeDestroy() {
     clearTimeout(this.nextTimer)
