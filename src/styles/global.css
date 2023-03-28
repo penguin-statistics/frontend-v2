@@ -870,9 +870,9 @@ html[lang^=ko] {
 
 [data-theme="seaborn"] .v-application .drawer-logo {
     transition: all 2000ms cubic-bezier(0.165, 0.84, 0.44, 1) !important;
-    background: url('/seaborn/bg1.jpg') center !important;
-    background-size: 1000px auto !important;
+    background-size: auto 500px !important;
     background-repeat: no-repeat !important;
+    background-position: center !important;
 }
 
 /*[data-theme="seaborn"] .v-application .drawer-logo:hover {*/

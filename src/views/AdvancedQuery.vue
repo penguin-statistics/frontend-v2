@@ -7,6 +7,8 @@
       cache
       :preset="preset"
     />
+
+    <PreloaderInline :size="120" />
   </v-container>
 </template>
 
@@ -14,9 +16,10 @@
 import QueryMain from '@/components/advancedQuery/QueryMain';
 import periodManager from "@/models/managers/period";
 import get from '@/utils/getters';
+import PreloaderInline from "@/components/global/PreloaderInline.vue";
 export default {
   name: 'AdvancedQuery',
-  components: { QueryMain },
+  components: {PreloaderInline, QueryMain },
   props: {
     stage: {
       type: String,

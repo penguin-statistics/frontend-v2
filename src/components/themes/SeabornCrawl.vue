@@ -4,6 +4,7 @@
       <div
         ref="seabornCreature"
         class="seaborn-creature"
+        :style="{backgroundImage: `url('${cdnDeliver('/seaborn/creeper-chunks.png')}')`}"
       >
       &nbsp;
       </div>
@@ -12,8 +13,12 @@
 </template>
 
 <script>
+import mirror from "@/utils/mirror";
+import CDN from "@/mixins/CDN";
+
 export default {
   name: 'SeabornCrawl',
+  mixins: [CDN],
   props: {
     drawer: {
       type: Boolean,
@@ -24,19 +29,19 @@ export default {
     return {
       creatures: [
         {
-          url: '/seaborn/crawling-creatures/0.png',
+          url: mirror.deliver('/images/themes/seaborn/crawling-creatures/0.png'),
           steps: 16,
         },
         {
-          url: '/seaborn/crawling-creatures/1.png',
+          url: mirror.deliver('/images/themes/seaborn/crawling-creatures/1.png'),
           steps: 14,
         },
         {
-          url: '/seaborn/crawling-creatures/2.png',
+          url: mirror.deliver('/images/themes/seaborn/crawling-creatures/2.png'),
           steps: 13,
         },
         {
-          url: '/seaborn/crawling-creatures/3.png',
+          url: mirror.deliver('/images/themes/seaborn/crawling-creatures/3.png'),
           steps: 23,
         }
       ],
@@ -82,7 +87,7 @@ export default {
   --size: 75px;
   width: 75px;
   height: 75px;
-  background: url('/seaborn/creeper-chunks.png') no-repeat;
+  background-repeat: no-repeat;
   background-size: var(--size);
   animation: crawl-chunks infinite forwards;
   animation-duration: 750ms;

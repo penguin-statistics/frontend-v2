@@ -6,7 +6,7 @@
     <transition
       mode="in-out"
       appear
-      duration="125"
+      duration="100"
       name="fade-transition"
     >
       <div
@@ -65,27 +65,35 @@ export default {
       return randomUtils.randomInt(this.preloaders.length - 1)
     },
     currentSrc () {
-      return this.cdnDeliver(`/images/preloaders/${this.preloaders[this.currentPreloaderIndex]}.png`)
+      if (this.$store.getters['settings/themeStyle'] === 'seaborn') {
+        return this.cdnDeliver('/images/themes/seaborn/mizuki-running.png')
+      } else {
+        return this.cdnDeliver(`/images/preloaders/${this.preloaders[this.currentPreloaderIndex]}.png`)
+      }
     },
     dimensions () {
+      const steps = this.$store.getters['settings/themeStyle'] === 'seaborn' ? 4 : 3
       if (this.size) {
         return {
           image: {
-            '--size': this.size + 'px'
+            '--size': this.size + 'px',
+            '--steps': steps
           },
           pending: 32
         }
       } else if (this.small) {
         return {
           image: {
-            '--size': '64px'
+            '--size': '64px',
+            '--steps': steps
           },
           pending: 32
         }
       } else {
         return {
           image: {
-            '--size': '160px'
+            '--size': '160px',
+            '--steps': steps
           },
           pending: 48
         }
@@ -129,11 +137,13 @@ export default {
 
 <style scoped>
 .animated-preloader {
+  --steps: 3;
+
   height: var(--size);
   width: var(--size);
   animation: preloader infinite;
   animation-duration: 270ms;
-  animation-timing-function: steps(3, end);
+  animation-timing-function: steps(var(--steps), end);
   background-size: var(--size);
   background-repeat: no-repeat;
   z-index: 1;
@@ -143,7 +153,7 @@ export default {
     background-position: 0 0;
   }
   to {
-    background-position: 0 calc(-3 * var(--size));
+    background-position: 0 calc((0 - var(--steps)) * var(--size));
   }
 }
 .animated-preloader-wrapper {
