@@ -236,33 +236,40 @@ public class PenguinPlugin: CAPPlugin {
             call.reject("failed to initialize shared state")
             return
         }
+
+        var needUpdate = false
+        if let lastServer = sharedState.string(forKey: "server") {
+            needUpdate = lastServer != server
+        } else {
+            needUpdate = true
+        }
+        if let lastThemeStyle = sharedState.string(forKey: "themeStyle") {
+            needUpdate = lastThemeStyle != themeStyle
+        } else {
+            needUpdate = true
+        }
+
         sharedState.set(server, forKey: "server")
         sharedState.set(themeStyle, forKey: "themeStyle")
-        if #available(iOS 14.0, *) {
-            WidgetCenter.shared.reloadAllTimelines()
-        } else {
-            // Fallback on earlier versions
+
+        if needUpdate {
+            if #available(iOS 14.0, *) {
+                WidgetCenter.shared.reloadAllTimelines()
+            }
+            
+            var alternateIconName: String? = nil
+            if themeStyle == "seaborn" {
+                // randomly choose Seaborn0 and Seaborn1
+                alternateIconName = "Seaborn\(Int.random(in: 0...1))"
+            }
+
+            DispatchQueue.main.async {
+                let currentAlternateIconName = UIApplication.shared.alternateIconName
+                if currentAlternateIconName != alternateIconName && currentAlternateIconName?.hasSuffix("Seaborn") != alternateIconName?.hasSuffix("Seaborn") {
+                    UIApplication.shared.setAlternateIconName(alternateIconName)
+                }
+            }
         }
         call.resolve()
     }
-
-    //    @objc func addSearchableItem(_ call: CAPPluginCall) {
-    //        let item = call.getObject("item")
-    //
-    //        // create dummy data
-    //        let attributeSet = CSSearchableItemAttributeSet.init(itemContentType: item?["type"] as? String ?? "txt")
-    //        attributeSet.setValue(item?["displayName"], forKey: "displayName")
-    //        attributeSet.setValue(URL.init(string: "https://penguin-stats.cn"), forKey: "contentURL")
-    //        attributeSet.setValue(item?["keywords"] as? [String], forKey: "keywords")
-    //        let searchableItem = CSSearchableItem.init(uniqueIdentifier: item?["id"] as? String, domainIdentifier: item?["group"] as? String, attributeSet: attributeSet)
-    //
-    //        // add to on-device default index (for the app?)
-    //        CSSearchableIndex.default().indexSearchableItems([searchableItem]) { error in
-    //            if let error = error {
-    //                call.reject("Indexing error: \(error.localizedDescription)")
-    //            } else {
-    //                call.resolve()
-    //            }
-    //        }
-    //    }
 }

@@ -70,7 +70,9 @@ if (environment.production) {
       'vibrate API',
       'ucbrowser',
       "Cannot read property 'click' of null",
-      "Cannot read properties of undefined (reading 'focus')"
+      "Cannot read properties of undefined (reading 'focus')",
+      "Cannot read property 'click' of undefined",
+      "Cannot read property 'focus' of undefined",
     ],
     ignoreUrls: [
       // Facebook flakiness
