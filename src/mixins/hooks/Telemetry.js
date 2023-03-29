@@ -37,7 +37,7 @@ export default {
   methods: {
     updateTelemetryData() {
       const sessionData = new SessionData();
-      Console.info("Telemetry", "updating telemetry data");
+      Console.debug("Telemetry", "updating telemetry data");
 
       // set crisp session data
       window.$crisp.push(["set", "session:data", sessionData.crisp]);

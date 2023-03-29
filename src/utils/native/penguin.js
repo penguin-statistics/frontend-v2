@@ -13,7 +13,7 @@ function invoke(method, ...args) {
       .catch(e => Console.warn('PenguinPlugin', 'failed to invoke', e))
   } else {
     Console.info('PenguinPlugin', 'cancelled invoking PenguinPlugin with', method, args, 'plugin unavailable under current platform')
-    return Promise.reject(new Error('PenguinPlugin does not exist under current platform'))
+    // return Promise.reject(new Error('PenguinPlugin does not exist under current platform'))
   }
 }
 

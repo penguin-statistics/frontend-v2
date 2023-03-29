@@ -73,12 +73,12 @@ export default {
     this.updateThemes()
     if (hideSeabornBefore.isAfter(timeFormatter.dayjs())) {
       const timeout = hideSeabornBefore.diff(timeFormatter.dayjs(), 'milliseconds') + 5 * 1000 // add 5 seconds to be safe
-      Console.info('ThemeStyleSwitcher', 'updating themes in', timeout, 'ms (at ' + timeFormatter.dayjs().add(timeout, 'milliseconds').format('YYYY-MM-DD HH:mm:ss') + ')')
+      Console.debug('ThemeStyleSwitcher', 'updating themes in', timeout, 'ms (at ' + timeFormatter.dayjs().add(timeout, 'milliseconds').format('YYYY-MM-DD HH:mm:ss') + ')')
       this.timeoutTimer = setTimeout(() => {
         this.updateThemes()
       }, timeout)
     } else {
-      Console.info('ThemeStyleSwitcher', 'not updating themes: current time is', timeFormatter.dayjs().format('YYYY-MM-DD HH:mm:ss'))
+      Console.debug('ThemeStyleSwitcher', 'not updating themes: current time is', timeFormatter.dayjs().format('YYYY-MM-DD HH:mm:ss'))
     }
   },
   beforeDestroy() {
