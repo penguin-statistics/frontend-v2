@@ -64,6 +64,7 @@ if (environment.production) {
       // ignore native client does not have web implementation error
       // since there's currently no feature sensitive native client plugin invocations.
       "does not have web implementation",
+      "PenguinPlugin does not exist under current platform",
       "GlobalCapacitor",
       'NetworkError',
       'Network Error',
