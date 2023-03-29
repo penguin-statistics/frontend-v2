@@ -78,7 +78,6 @@ export default {
       handler: function (newState) {
         penguin.updateSharedState(newState);
       },
-      immediate: true,
       deep: true
     },
     $route: {

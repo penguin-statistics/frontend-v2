@@ -73,6 +73,12 @@
 		B553BF91285F3FA10089DB8B /* AccessoryRectangularView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B553BF90285F3FA10089DB8B /* AccessoryRectangularView.swift */; };
 		B567D9C928B4639A000DA25D /* PenguinLive.swift in Sources */ = {isa = PBXBuildFile; fileRef = B567D9C828B4639A000DA25D /* PenguinLive.swift */; };
 		B567D9CA28B46993000DA25D /* PenguinLive.swift in Sources */ = {isa = PBXBuildFile; fileRef = B567D9C828B4639A000DA25D /* PenguinLive.swift */; };
+		B575978929D3DBA300B83885 /* Seaborn0@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B575978329D3DBA300B83885 /* Seaborn0@2x.png */; };
+		B575978A29D3DBA300B83885 /* Seaborn1.png in Resources */ = {isa = PBXBuildFile; fileRef = B575978429D3DBA300B83885 /* Seaborn1.png */; };
+		B575978B29D3DBA300B83885 /* Seaborn0@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = B575978529D3DBA300B83885 /* Seaborn0@3x.png */; };
+		B575978C29D3DBA300B83885 /* Seaborn1@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B575978629D3DBA300B83885 /* Seaborn1@2x.png */; };
+		B575978D29D3DBA300B83885 /* Seaborn1@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = B575978729D3DBA300B83885 /* Seaborn1@3x.png */; };
+		B575978E29D3DBA300B83885 /* Seaborn0.png in Resources */ = {isa = PBXBuildFile; fileRef = B575978829D3DBA300B83885 /* Seaborn0.png */; };
 		B5E9EF4728219840009F0F68 /* PenguinViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5E9EF4628219840009F0F68 /* PenguinViewController.swift */; };
 		B5FD923929C677DF00D995E5 /* UserPreferences.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5FD923829C677DF00D995E5 /* UserPreferences.swift */; };
 /* End PBXBuildFile section */
@@ -192,6 +198,12 @@
 		B54E1D8729CCE1B6006DBD8B /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/Intents.strings; sourceTree = "<group>"; };
 		B553BF90285F3FA10089DB8B /* AccessoryRectangularView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccessoryRectangularView.swift; sourceTree = "<group>"; };
 		B567D9C828B4639A000DA25D /* PenguinLive.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PenguinLive.swift; sourceTree = "<group>"; };
+		B575978329D3DBA300B83885 /* Seaborn0@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Seaborn0@2x.png"; sourceTree = "<group>"; };
+		B575978429D3DBA300B83885 /* Seaborn1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Seaborn1.png; sourceTree = "<group>"; };
+		B575978529D3DBA300B83885 /* Seaborn0@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Seaborn0@3x.png"; sourceTree = "<group>"; };
+		B575978629D3DBA300B83885 /* Seaborn1@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Seaborn1@2x.png"; sourceTree = "<group>"; };
+		B575978729D3DBA300B83885 /* Seaborn1@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Seaborn1@3x.png"; sourceTree = "<group>"; };
+		B575978829D3DBA300B83885 /* Seaborn0.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Seaborn0.png; sourceTree = "<group>"; };
 		B5E9EF4628219840009F0F68 /* PenguinViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PenguinViewController.swift; sourceTree = "<group>"; };
 		B5FD923829C677DF00D995E5 /* UserPreferences.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserPreferences.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -395,6 +407,7 @@
 		504EC3061FED79650016851F /* App */ = {
 			isa = PBXGroup;
 			children = (
+				B575978229D3DB8500B83885 /* Resources */,
 				B53A321B281ED2BC002EAB0B /* public */,
 				3AE3F15426D2147A00A0529B /* fastlane */,
 				3A8EFFAA259AB64F00B6A788 /* Repositories */,
@@ -426,6 +439,19 @@
 				B50305A529CC1842000FDC32 /* Info.plist */,
 			);
 			path = PenguinWidgetConfigurationIntentExtension;
+			sourceTree = "<group>";
+		};
+		B575978229D3DB8500B83885 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				B575978829D3DBA300B83885 /* Seaborn0.png */,
+				B575978329D3DBA300B83885 /* Seaborn0@2x.png */,
+				B575978529D3DBA300B83885 /* Seaborn0@3x.png */,
+				B575978429D3DBA300B83885 /* Seaborn1.png */,
+				B575978629D3DBA300B83885 /* Seaborn1@2x.png */,
+				B575978729D3DBA300B83885 /* Seaborn1@3x.png */,
+			);
+			path = Resources;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -589,17 +615,23 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B575978E29D3DBA300B83885 /* Seaborn0.png in Resources */,
 				3A8EFF992599BBC100B6A788 /* alert1.caf in Resources */,
 				3A06777F26281BB600C9CB98 /* Main.storyboard in Resources */,
 				B53A321C281ED2BC002EAB0B /* public in Resources */,
 				3A4FAF192626B189001C9907 /* Localizable.strings in Resources */,
 				504EC30F1FED79650016851F /* Assets.xcassets in Resources */,
 				3AA7E33725211FD500387971 /* InfoPlist.strings in Resources */,
+				B575978929D3DBA300B83885 /* Seaborn0@2x.png in Resources */,
 				50379B232058CBB4000EE86E /* capacitor.config.json in Resources */,
+				B575978D29D3DBA300B83885 /* Seaborn1@3x.png in Resources */,
 				2FAD9763203C412B000D30F8 /* config.xml in Resources */,
 				3A06778026281BB600C9CB98 /* LaunchScreen.storyboard in Resources */,
+				B575978C29D3DBA300B83885 /* Seaborn1@2x.png in Resources */,
+				B575978A29D3DBA300B83885 /* Seaborn1.png in Resources */,
 				3A001AC62599230E0078A265 /* Settings.bundle in Resources */,
 				3AE3F15526D2147A00A0529B /* fastlane in Resources */,
+				B575978B29D3DBA300B83885 /* Seaborn0@3x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -818,7 +850,7 @@
 				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CODE_SIGN_ENTITLEMENTS = PenguinWidgetExtension.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 3;
+				CURRENT_PROJECT_VERSION = 6;
 				DEVELOPMENT_TEAM = SY8Y8N4TPM;
 				INFOPLIST_FILE = PenguinWidget/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
@@ -850,7 +882,7 @@
 				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CODE_SIGN_ENTITLEMENTS = PenguinWidgetExtension.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 3;
+				CURRENT_PROJECT_VERSION = 6;
 				DEVELOPMENT_TEAM = SY8Y8N4TPM;
 				INFOPLIST_FILE = PenguinWidget/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
@@ -1048,7 +1080,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = App/App.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 3;
+				CURRENT_PROJECT_VERSION = 6;
 				DEVELOPMENT_TEAM = SY8Y8N4TPM;
 				"ENABLE_HARDENED_RUNTIME[sdk=macosx*]" = YES;
 				INFOPLIST_FILE = App/Info.plist;
@@ -1080,7 +1112,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = App/App.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 3;
+				CURRENT_PROJECT_VERSION = 6;
 				DEVELOPMENT_TEAM = SY8Y8N4TPM;
 				"ENABLE_HARDENED_RUNTIME[sdk=macosx*]" = YES;
 				INFOPLIST_FILE = App/Info.plist;
