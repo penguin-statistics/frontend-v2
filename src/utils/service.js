@@ -65,7 +65,7 @@ function needsUpdate(response) {
 service.interceptors.request.use(
   function(config) {
     if (
-      ["/report", "/report/recall", "personal", "/recognition/defects/report"].some((el) =>
+      ["/report", "/report/recall", "personal", "/result/advanced", "/recognition/defects/report"].some((el) =>
         config.url.includes(el)
       )
     ) {
