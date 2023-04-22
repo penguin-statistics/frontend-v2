@@ -17,7 +17,7 @@ export default {
     const now = timeFormatter.dayjs();
     const ranges = [
       // [now.month(3).date(1).startOf("day"), now.month(3).date(1).endOf("day")],
-      [timeFormatter.dayjs("2023-04-01T00:00:00+0800").year(timeFormatter.dayjs().year()), now.month(3).date(1).endOf("day")],
+      [timeFormatter.dayjs("2023-04-01T00:00:00+0800").year(now.year()), now.month(3).date(1).endOf("day")],
     ];
     Console.debug('SpecialPeriods', 'aprilFools: from', ranges[0][0].format(), 'to', ranges[0][1].format())
     return ranges.some(([start, end]) => now.isBetween(start, end));

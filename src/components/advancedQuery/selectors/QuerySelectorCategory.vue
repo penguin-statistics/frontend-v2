@@ -9,6 +9,8 @@
     :items="categories"
     :label="$t('matrixCategory.switch')"
     transition="slide-y-transition"
+    class="mt-1"
+
     @input="e => $emit('input', e)"
   >
     <template #item="{item}">
