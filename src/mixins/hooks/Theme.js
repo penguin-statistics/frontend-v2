@@ -31,12 +31,14 @@ export default {
           windowsIndicator
         );
         document.body.style.backgroundColor = "#121212";
+        document.documentElement.style.backgroundColor = "#121212";
       } else {
         document.documentElement.classList.add(
           "vuetify-theme--light",
           windowsIndicator
         );
         document.body.style.backgroundColor = "#f5f5f5";
+        document.documentElement.style.backgroundColor = "#f5f5f5";
       }
 
       this.triggerThemeUpdate();
