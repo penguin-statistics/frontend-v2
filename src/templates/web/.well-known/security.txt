@@ -1,0 +1,5 @@
+Contact: mailto:alvissreimu@gmail.com
+Expires: 2025-01-01T05:00:00.000Z
+Preferred-Languages: en, zh, ja
+Canonical: https://penguin-stats.io/.well-known/security.txt
+Policy: https://github.com/penguin-statistics/backend-next/blob/main/SECURITY.md
