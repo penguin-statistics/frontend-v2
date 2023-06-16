@@ -1,6 +1,8 @@
 name: Update SimpleLocalize Translations
 
 on:
+  schedule:
+    - cron: '51 7 * * *'
   workflow_dispatch:
 
 concurrency:
