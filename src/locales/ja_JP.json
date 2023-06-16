@@ -1,593 +1,295 @@
 {
-  "stats": {
-    "timeRange": {
-      "unknown": "不明",
-      "endsAt": "{date} 以前",
-      "toPresent": "{date} ~ 現在",
-      "notSelected": "（選択されていない）",
-      "inBetween": "{0} ~ {1}"
-    },
-    "title": "{stage} 統計結果",
-    "headers": {
-      "pattern": "パターン",
-      "quantity": "ドロップ数",
-      "recruitTag": "公開求人タグ",
-      "times": "サンプル数",
-      "stage": "ステージ",
-      "apPPR": "１個あたりの必要理性期待値",
-      "clearTime": "最速クリアタイム",
-      "timeRange": "期間",
-      "percentage": "ドロップ率",
-      "apCost": "理性",
-      "itemPerTime": "1個あたりの必要時間期待値",
-      "item": "アイテム"
-    },
-    "site": {
-      "generating": {
-        "title": "全サイト統計データ計算中…",
-        "refresh": "全サイト統計データを更新",
-        "subtitle": "ニューラルネットワークメッセージ：データ量が膨大のため、サイト統計データの計算には約5分かかります。少々お待ちください。"
-      },
-      "total": {
-        "items": "総ドロップ数",
-        "report": "総報告数",
-        "sanity": "すべての報告で消費された理性"
-      },
-      "24hr": "過去24時間",
-      "viewMore": "さらに詳しく",
-      "stages": "ステージサンプル数ランキング",
-      "all": "全期間",
-      "items": "アイテムドロップ数ランキング"
-    },
-    "filter": {
-      "type": {
-        "showActivity": "イベント",
-        "_name": "ステージタイプ",
-        "showPermanent": "恒常"
-      },
-      "title": "フィルタ",
-      "overview": "フィルタ結果",
-      "status": {
-        "_name": "ステージ状態",
-        "onlyOpen": "開放中のステージのみ"
-      },
-      "indicator": "フィルタ未適用 | {count} フィルタ適用中 | {count} フィルタ適用中",
-      "stage": {
-        "onlyCurrent": "入手可能なアイテムのみ"
-      },
-      "stats": "ﾌｨﾙﾀﾘﾝｸﾞ後 {filtered} / ﾌｨﾙﾀﾘﾝｸﾞ前 {total}"
-    },
-    "trends": {
-      "name": "歴史ドロップデータ",
-      "set": {
-        "rate": "ドロップ率",
-        "drops": "ドロップ数",
-        "sample": "サンプル数"
-      }
-    },
-    "name": "統計結果",
-    "scroll": "左右にスクロールでデータを表示",
-    "lastUpdated": "最終更新日時：{date}"
+  "app": {
+    "name": "ペンギン急便データ統計処理部門",
+    "name_lines": "ペンギン急便\nデータ統計処理部門"
   },
-  "planner": {
-    "calculation": {
-      "level": "素材レベル",
-      "sanity": "推定必要理性",
-      "noSyntheses": "入力内容に不備があるため結果を表示出来ません。",
-      "tabs": {
-        "syntheses": "素材加工",
-        "stages": "ステージ",
-        "values": "素材理性価値"
+  "auth": {
+    "details": "アカウント",
+    "failed": {
+      "message": "ログイン失敗：{message}",
+      "notfound": "指定されたユーザーIDが見つかりませんでした。初めてドロップをアップロードすると、ユーザーIDを自動的に取得できます。"
+    },
+    "forgot": {
+      "activator": "PenguinID 忘れました",
+      "penguinIdHistory": {
+        "deleteUserId": "この PenguinID のログイン履歴を削除",
+        "lastLoginAt": "このデバイスでの最終ログイン日時： {time} ",
+        "loginAsUserId": "この PenguinID でログイン",
+        "noData": "データがありません"
       },
-      "times": "回",
-      "lmb": "推定獲得龍門幣",
-      "title": "計算結果",
-      "exp": "戦闘で入手出来る経験値の推定",
-      "noStage": "入力内容に不備があるため結果を表示出来ません。"
+      "subtitle": "アカウント復元",
+      "title": "ログインできない？"
     },
-    "craft": {
-      "errors": {
-        "notEnough": "加工には {need} 個の「{item}」が必要ですが、 {have} 個しか保有していません",
-        "title": "加工には必要な素材が欠けています"
-      },
-      "plans": {
-        "title": "加工プラン",
-        "plan": "加工には {cost} 個の「{item}」を消耗して、 残り{remain} 個あります"
-      },
-      "do": "加工",
-      "unable": "加工できません",
-      "success": " {sourceItems} を使って {amount} 個の {productItem} に加工しました"
-    },
-    "reset": {
-      "dialog": {
-        "title": "ArkPlannerをリセット",
-        "subtitle": "すべてのデータや設定はリセットされます。続行しますか？",
-        "options": {
-          "options": {
-            "indicator": "全てのオプションをオフにします",
-            "name": "オプション"
-          },
-          "excludes": {
-            "indicator": "全ての除外をオフにします",
-            "name": "ステージ除外"
-          },
-          "items": {
-            "indicator": "全ての素材個数をリセットします",
-            "name": "素材データ"
-          }
-        }
-      },
-      "name": "リセット"
-    },
-    "copy": "クリップボードにコピー",
-    "import": {
-      "success": "インポート成功： {amount} アイテムデータがインポートされます",
-      "unrecognized": "インポート失敗：このコードは読み取れません。もう一度お試しください。",
-      "invalidJSON": "インポート失敗：無効なJSONです。コードを確認して、もう一度お試しください"
-    },
-    "options": {
-      "requireLmb": "大量の龍門幣が必要",
-      "excludeStage": {
-        "_name": "ステージ除外",
-        "title": "選ぶ",
-        "selected": "{stages} ステージ除外中"
-      },
-      "_name": "オプション",
-      "byProduct": "加工副産物を考慮する",
-      "requireExp": "大量の経験値が必要"
-    },
-    "actions": {
-      "importExport": "@:(planner.actions.import)/@:(planner.actions.export)",
-      "config": {
-        "_name": "コンフィグレーション",
-        "import": "インポート",
-        "share": "エクスポート"
-      },
-      "export": "エクスポート",
-      "calculating": "少女計算中…",
-      "calculate": "計算を行う",
-      "_name": "データ",
-      "import": "インポート"
-    },
-    "need": "必要数",
-    "notices": {
-      "autoExistence": "ArkPlannerは、選択したサーバーで開いていないステージを自動的に非表示にします"
-    },
-    "calculationError": "計算失敗：{error}",
-    "have": "所持数"
+    "loggedAs": "ログインしました：",
+    "loggedOut": "ログアウトしました",
+    "login": "ログイン",
+    "logout": "ログアウト",
+    "logoutPrompt": "本当にログアウトしますか？",
+    "notice": "ユーザーIDはアップロードの際にのみ使用します。このIDを使用し各機器を登録することでデータを1つのアカウントに統合することが可能となり、アップロードの管理や個人のドロップデータを調べることが可能となります。",
+    "success": "ログイン成功",
+    "userId": "ユーザーID"
   },
-  "server": {
-    "servers": {
-      "JP": "日本版",
-      "CN": "大陸版",
-      "US": "英語版",
-      "KR": "韓国版"
-    },
-    "name": "サーバー",
-    "switch": "ゲームサーバー切替"
+  "clipboard": {
+    "error": "クリップボードに保存できませんでした。手動でコピーしてください",
+    "success": "クリップボードに保存しました"
   },
-  "zone": {
-    "types": {
-      "GACHABOX": "補給物資",
-      "ACTIVITY_PERMANENT": "エピソード & サイドストーリー",
-      "ACTIVITY_PENDING": "イベント（近日開催）",
-      "WEEKLY": "物資調達",
-      "ACTIVITY_CLOSED": "イベント（終了）",
-      "MAINLINE": "メインテーマ",
-      "ACTIVITY_OPEN": "イベント（開催中）"
-    },
-    "subTypes": {
-      "DYING_SUN": {
-        "title": "残映",
-        "subtitle": "9~10 章"
-      },
-      "INTERLUDE": "エピソード",
-      "VISION_SHATTER": {
-        "subtitle": "4~8 章",
-        "title": "幻滅"
-      },
-      "AWAKENING_HOUR": {
-        "subtitle": "0~3 章",
-        "title": "覚醒"
-      },
-      "2019": "2019",
-      "2020": "2020",
-      "2023": "2023",
-      "2021": "2021",
-      "2022": "2022",
-      "SIDESTORY": "サイドストーリー"
-    },
-    "status": {
-      "-1": "近日開催",
-      "permanentOpen": "恒常",
-      "1": "終了",
-      "0": "開催中"
-    },
-    "opensAt": "開催期間：{0} - {1}",
-    "name": "章"
-  },
-  "report": {
-    "recognition": {
-      "exceptions": {
-        "DropAreaDrops::LowConfidence": {
-          "title": "未知のドロップが存在",
-          "subtitle": "この問題は通常、イベント期間外のイベントドロップによるものです"
-        },
-        "Droptypes::Illegal": {
-          "title": "非合法のドロップタイプ",
-          "subtitle": "スクリーンショットには初回、理性返却などの非合法なドロップタイプ、又は認識できないドロップタイプが存在しています"
-        },
-        "StageChar::LowConfidence": {
-          "subtitle": "認識の信頼性が低い、認識結果を画像と照合してください",
-          "title": "ステージ認識異常の可能性がある"
-        },
-        "DropAreaDrops::Illegal": {
-          "subtitle": "このステージには今、可能のドロップが存在していませんが、検出されました。これは通常、イベント期間外のイベントドロップによるものです",
-          "title": "非合法ドロップが存在"
-        },
-        "DropInfos::Violation": "認識結果が検証失敗",
-        "DropAreaDropsQuantity::NotFound": {
-          "title": "数量検出失敗のドロップが存在",
-          "subtitle": "解像度・品質の低い画像はこの問題を引き起こす可能性があります。画像は圧縮処理されましたかご確認ください"
-        },
-        "Stage::Illegal": {
-          "title": "非合法ステージ",
-          "subtitle": "このステージただ今有効していません"
-        },
-        "Result::False": {
-          "title": "作戦成果のスクリーンショットではない",
-          "subtitle": "もしこれは確かに作戦成果のスクリーンショットであれば、ご選択のサーバーは間違いないかご確認ください"
-        },
-        "DropQuantityChar::LowConfidence": {
-          "title": "アイテム数量認識異常の可能性がある",
-          "subtitle": "認識の信頼性が低い、認識結果を画像と照合してください"
-        },
-        "3stars::False": "星3評価ではない",
-        "Stage::NotFound": {
-          "title": "未知のステージ",
-          "subtitle": "これはステージ認識にはエラーが発生しましたか、又はこのステージは記録されていません（殲滅作戦、絶境作戦など）"
-        },
-        "Droptypes::NotFound": "ドロップタイプ未検出",
-        "Fingerprint::Same": {
-          "title": "完全一致の画像が存在",
-          "subtitle": "重複的なスクリーンショットを選択しましたかご確認ください"
-        },
-        "FileTimestamp::TooClose": {
-          "title": "作成時間間隔が短すぎる画像が存在",
-          "subtitle": "重複的なスクリーンショットを選択しましたかご確認ください"
-        }
-      },
-      "cost": "時間コスト",
-      "states": {
-        "submitting": "結果をアップロード中...",
-        "initializing": "初期化中...",
-        "pending": "初期化準備中...",
-        "rendering": "結果をレンダリング中...",
-        "recognizing": "認識中..."
-      },
-      "report": {
-        "allSucceeded": "{count} 件の認識結果がアップロード成功",
-        "partialSucceeded": "{count} 件の認識結果のみアップロード成功",
-        "partialFailed": "{count} 件の認識結果がアップロード失敗しました。以下のチェックリストにしたがって、問題を解決してみてください。",
-        "reporting": "結果をアップロード中...",
-        "total": "総計",
-        "caption": "レポートありがとうございます。キャッシュの原因で、レポートしたデータが反映するまで、20分程度の時間がかかる可能性があります。",
-        "title": "レポート詳細",
-        "partialFailedDesc": "●　ネットワーク接続の状況を確認：接続不安定・接続中断でアップロード失敗が発生します。\n●　大量のレポートしましたか：データベースを外部の攻撃から守るために、一日のレポート数には上限があります。何度も試してもアップロードできない場合、上限に達した可能性がありますので、24時間後に再試行してください。\n●　共有IPアドレスを使用していますか：一部の地域には、ご使用のIPアドレスは他人と共有している可能性があります。この場合、ネット環境の切り替え（ルーター再起動、WiFi・4Gの切り替え）をしてから再試行してください。また、24時間後に再試行してください。\n●　デバイスの時刻を確認：重複レポ攻撃を防止対策として、端末からのリクエストにはタイムスタンプを付与します。ご使用のデバイスの時刻が正確な時刻と大きく異なる場合、アップロード失敗が発生しますので、デバイスの時刻を調整してください。",
-        "submit": "選択した {count} 件の認識結果をアップロード"
-      },
-      "confirm": {
-        "overview": {
-          "server": "データサーバー",
-          "success": "成功",
-          "error": "異常",
-          "total": "総計",
-          "count": "{count} 枚",
-          "duration": "1画像の平均認識時間",
-          "_name": "結果概要"
-        },
-        "cherryPick": {
-          "disabled": "異常なので選択不可",
-          "accepted": "この結果をアップロード",
-          "rejected": "この結果を破棄"
-        },
-        "loadingImage": "スクリーンショットのプレビューを読み込み中",
-        "abnormal": {
-          "details": "異常リスト",
-          "fatal": "この画像は認識できません",
-          "hover": "マウスオーバーで認識内容表示",
-          "error": "この画像は却下されます"
-        },
-        "noResult": "認識結果はありません",
-        "itemsTotal": "アイテム合計",
-        "submit": "選択した {count} 件の認識結果をアップロード",
-        "details": "結果詳細",
-        "unknownStage": "認識できません"
-      },
-      "step": {
-        "report": "レポート",
-        "confirm": "確認",
-        "recognize": "認識",
-        "select": "選択"
-      },
-      "tips": {
-        "emptyFile": "選択された画像はありません",
-        "unsatisfiedStart": "認識をスタートできません",
-        "copyImage": "画像を右クリック、もしくは長押しすると、画像をクリップボードにコピー・保存ができます",
-        "fileTooOld": "\"{name}\" のスクリーンショットの作成時刻は36時間以内の制限を超過しています",
-        "hasInvalidFile": "無効のファイルが含まれています",
-        "addImage": "ここにクリックして画像を選択",
-        "notImageFile": "{files} は画像ファイルではないので、ご提出できません",
-        "dragImage": "ここに画像をドラッグ＆ドロップ",
-        "chooseImage": "クリックして画像を選択、もしくはボックスに画像をドロップ",
-        "fileTooBig": "\"{name}\" ({size}MB) はサイズの制限を超過しています",
-        "abnormal": "クオリティモニタリング（品質監査）により、ご提出いただいたスクリーンショットのうち、 {count} 枚が基準を満たしていないとして、当該スクリーンショットを「却下」し、サーバーへのレポートはしません",
-        "emptyResult": "認識結果はありません"
-      },
-      "recognize": {
-        "elapsed": "経過時間",
-        "speed": "認識速度",
-        "imagePerSecond": "{count} 枚/秒",
-        "remaining": "推定残り時間",
-        "noFilename": "ファイル名なし"
-      },
-      "notices": {
-        "confirm": "画像をクリックしたら拡大できます、もう一回クリックしたら元に戻せます\n認識成功のスクリーンショットは自動的にチェックを入れています\n本サイトのデータの正確度のため、エラーのある画像はご選択できません",
-        "welcome": "ご提供の画像はWebAssembly技術でローカルにて認識しますので、認識段階でサーバーへのデーター送信はございません。\nスクリーンショットは、作成時刻が**36 時間内**、またクリア評価が**星3**のものをご選択ください。\n初回クリアのスクリーンショットの選択はご遠慮ください。**偏向的に**一部だけのスクリーンショット（極端にいい・悪いケース）でのレポートはご遠慮ください。"
-      },
-      "queue": "画像リスト",
-      "start": "画像を {count} 枚認識",
-      "status": {
-        "success": "成功",
-        "error": "エラー",
-        "warning": "警告"
-      },
-      "result": "認識結果",
-      "description": "「作戦成果」画面のスクリーンショットを自動認識で、ドロップ報告は楽で簡単にする！",
-      "filename": "ファイル名",
-      "progress": "進捗状況",
-      "filter": "結果フィルター",
-      "retry": "送信失敗、リトライ中"
-    },
-    "gacha": "この操作を行うことでデータに複数の結果を反映させることが出来ます。",
-    "specialSideStory": {
-      "dialog": {
-        "cancel": "閉じる",
-        "title": "「ドッソレスホリデー」のラベルドロップについて",
-        "confirmTimerDone": "わかりました",
-        "confirmTimerPending": "わかりました ({timer})"
-      }
-    },
-    "usage": "左クリックで個数を増やし、右クリックで個数を減らす",
-    "dossolesHoliday": {
-      "title": {
-        "inner": "全種類のラノベを獲得してから",
-        "tmpl": "{0}ご報告ください"
-      },
-      "content": "これまでのデータに基づいて、ラノベのドロップ事件は統計的な独立性を満たしていないと推測されます。全種類のラノベを獲得していないなら、そのドロップ率が動態的に変化し、本来のドロップ率とは異なる可能性があります。本来のドロップ率を正確に計算するため、全種類のラノベを獲得してからご報告ください。"
-    },
-    "alert": {
-      "causes": {
-        "limitation": "今回報告しようとしている内容は既存のデータとの差が大きくなっており、このまま報告するのであれば今回の報告は異常と判定され、全て統計データに反映されることはできません。",
-        "noDrop": "ドロップアイテムが何も選択されていません。送信するデータに問題はありませんか？"
-      },
-      "continue": {
-        "repeat": "本当にこのデータを送信しますか？",
-        "first": "本当に送信しますか？"
-      },
-      "contact": {
-        "after": "（その際はスクリーンショットの添付をお願いいたします）。確認次第速やかに修正を行わせて頂きます。",
-        "before": "誤った情報であると判断した場合は",
-        "activator": "管理人までご連絡ください"
-      },
-      "title": {
-        "first": "障害リスクの検出",
-        "repeat": "警告"
-      }
-    },
-    "rules": {
-      "type": {
-        "now": "{stage}ドロップで選択されたアイテムは{quantity}種類です",
-        "not": "{should}種類のアイテムであってはなりません",
-        "lte": "最大 {should} 種類のアイテムが必要です",
-        "_name": "アイテム種類数",
-        "gte": "少なくとも {should} 種類のアイテムが必要です"
-      },
-      "item": {
-        "gte": "@:(meta.quotation.start){item}@:(meta.quotation.end)の数を{should}個以上の数値で再入力して下さい",
-        "_name": "アイテム数量",
-        "lte": "@:(meta.quotation.start){item}@:(meta.quotation.end)の数を{should}個以下の数値で再入力して下さい",
-        "now": "{stage}ドロップで選択された {item} ×{quantity}",
-        "not": "@:(meta.quotation.start){item}@:(meta.quotation.end)のドロップ数が{should}個になることはありません"
-      }
-    },
-    "undoSuccess": "キャンセルしました",
-    "name": "報告",
-    "submit": "送信",
-    "furniture": "家具ドロップ：{state}",
-    "notices": {
-      "rule_4": "星３クリアした時の結果のみを報告してください。",
-      "rule_5": "大陸版以外のドロップデータをアップロードしないよう、ご協力をお願いいたします。",
-      "rule_2": "素材がドロップしなかった場合は直接送信をクリックしてください。",
-      "rule_3": "初回クリア時の報酬を報告しないでください。また、極端なロップ結果（極めてよかった・悪かったなど）を報告しないでください。",
-      "rule_1": "ここに追加する内容は1回でドロップした内容です。"
-    },
-    "unable": "送信失敗：",
-    "clear": "クリア",
-    "success": "送信成功",
-    "undo": "送信キャンセル"
-  },
-  "home": {
-    "quickStart": {
-      "actions": {
-        "subtitle": {
-          "report": "ドロップを報告したい",
-          "byStage": "1-7の泥率ってどれくらい？",
-          "planner": "周回アドバイスをください",
-          "byItem": "岩ってどこ回ったらいいのかな"
-        },
-        "title": {
-          "byStage": "作戦ドロップ率",
-          "byItem": "素材ドロップ率",
-          "report": "ドロップ報告",
-          "planner": "周回計画"
-        }
-      },
-      "title": "クイックスタート",
-      "caption": "左上をクリック\nボタンをクリックしてメニューを展開すると、さらに多くの機能が表示されます。"
-    },
-    "intro": {
-      "intro_2": "現在ほとんどのデータはユーザーの手によって手動でアップロードされており、誤った情報による影響を最小限に抑えるため、アップロードされた情報について多角的に審査しています。",
-      "intro_1": "Penguin Statisticsはペンギン急便のデータ処理部門であり(嘘)、各作戦での素材ドロップの統計分析を行っています。",
-      "intro_0": "ペンギン急便データ統計処理部門へようこそ！"
-    }
+  "contact": {
+    "body": "ご質問、ご要望などございましたら、管理人さんにお気軽にお問い合わせください。（日本語でもOKです）",
+    "contributor": "制作協力者ページ",
+    "github": "GitHub Issues",
+    "nga": "NGA スレッド",
+    "title": "連絡先"
   },
   "contribute": {
-    "livehouse": "LiveHouse",
-    "frontend": "ﾌﾛﾝﾄｴﾝﾄﾞ",
-    "recognizer": "ｽｸｼｮ認識",
-    "skills": {
-      "mobile": "モバイルアプリ開発 iOS、Android",
-      "frontend": "フロントエンド開発 React",
-      "design": "UI/UXデザイン",
-      "backend": "バックエンド開発 Go, PostgreSQL",
-      "maintenance": "DevOps",
-      "others": "...",
-      "analysis": "データ統計解析"
-    },
-    "contribute_0": "下記の開発経験お持ちの方を募集しています。Penguin Statisticsに自らの力を貢献してみませんか？ご興味のある方は、ぜひこのQQグループにご参加ください：747099627",
-    "contribute_1": "本プロジェクトは無償のオープンソースプロジェクトです",
-    "repo": "プロジェクトリポジトリ：",
-    "frontendV4": "ﾌﾛﾝﾄｴﾝﾄﾞ v4",
-    "newFolder": "新規フォルダー鋭意作成中",
     "backend": "ﾊﾞｯｸｴﾝﾄﾞ",
+    "caption": "Penguin Statisticは非営利コミュニティプロジェクトです。本プロジェクトの発展は、皆様のご助力が必要不可欠でございます。宜しければGitHubへ本レポジトリにスターをお付けください。イシューやプルリクエストも心よりお待ちしております。皆様のご支援とご協力を賜りますよう、よろしくお願い申し上げます。",
+    "contribute_0": "下記の開発経験お持ちの方を募集しています。Penguin Statisticsに自らの力を貢献してみませんか？ご興味のある方は、ぜひこのQQグループにご参加ください：747099627",
+    "frontend": "ﾌﾛﾝﾄｴﾝﾄﾞ",
+    "livehouse": "LiveHouse",
+    "newFolder": "新規フォルダー鋭意作成中",
     "qqGroup": "QQグループ：",
-    "caption": "Penguin Statisticは非営利コミュニティプロジェクトです。本プロジェクトの発展は、皆様のご助力が必要不可欠でございます。宜しければGitHubへ本レポジトリにスターをお付けください。イシューやプルリクエストも心よりお待ちしております。皆様のご支援とご協力を賜りますよう、よろしくお願い申し上げます。"
+    "recognizer": "ｽｸｼｮ認識",
+    "repo": "プロジェクトリポジトリ：",
+    "skills": {
+      "analysis": "データ統計解析",
+      "backend": "バックエンド開発 Go, PostgreSQL",
+      "design": "UI/UXデザイン",
+      "frontend": "フロントエンド開発 React",
+      "maintenance": "DevOps",
+      "mobile": "モバイルアプリ開発 iOS、Android",
+      "others": "..."
+    },
+    "contribute_1": "本プロジェクトは無償のオープンソースプロジェクトです",
+    "frontendV4": "ﾌﾛﾝﾄｴﾝﾄﾞ v4"
   },
-  "menu": {
-    "search": "グローバル検索",
-    "report": {
-      "stage": "章别",
-      "recognition": "スクショ認識",
-      "_name": "ドロップ報告"
-    },
-    "about": {
-      "members": "制作協力者",
-      "_name": "当サイトについて",
-      "contact": "連絡先",
-      "donate": "寄付について",
-      "credits": "コピーライト",
-      "contribute": "開発協力者募集中",
-      "bulletin": "お知らせ",
-      "links": "相互リンク",
-      "changelog": "更新履歴"
-    },
-    "settings": {
-      "themeStyles": {
-        "name": "テーマ切替",
-        "miku2021": "初音ミク2021誕生日特別テーマ",
-        "default": "デフォルトテーマ",
-        "disabled": "(無効：アクティブな特殊テーマ)",
-        "seaborn": "静謐の唄"
-      },
-      "appearances": {
-        "dark": "常にダークモード",
-        "system": "システム設定に従う",
-        "light": "常にライトモード",
-        "name": "外観モード切替"
-      },
-      "name": "設定"
-    },
-    "stats": {
-      "_name": "ドロップ率",
-      "advanced": "高度なクエリ",
-      "stage": "作戦別",
-      "item": "素材別"
-    },
-    "planner": "周回計画作成ツール",
-    "overline": {
-      "planner": "ArkPlanner"
-    },
-    "v1": "旧バージョン",
-    "languages": "言語切替",
-    "refreshData": "データ更新",
-    "home": "トップページ",
-    "siteStats": "全サイト統計データ"
+  "dataSource": {
+    "global": "全体",
+    "loginNotice": "個人所有のドロップデータを閲覧するには、ログインする必要があります。",
+    "personal": "個人",
+    "switch": "データソース",
+    "title": "ログインが必要です"
   },
-  "item": {
-    "choose": {
-      "name": "素材選択"
+  "donate": {
+    "accountBook": "帳簿",
+    "donate_0": "ユーザー数が急増し、サーバーの月額は上昇、企鹅数据の運営は危機的状況に...。管理人の紅白は大好きな企鹅数据を守るため、自分に出来ることは何か？紅白が悩んで見つけ出した答えは「アイドルになること」！？",
+    "methods": {
+      "alipay": "Alipay",
+      "paypal": "PayPal で寄付",
+      "wechatPay": "WeChat Pay"
     },
-    "categories": {
-      "CARD_EXP": "作戦記録",
-      "CHIP": "SoC",
-      "FURN": "家具",
-      "MATERIAL": "素材",
-      "ACTIVITY_ITEM": "イベントアイテム"
-    },
-    "undefined": "未知アイテム",
-    "related": "関連素材"
+    "redirectToApp": "{app} アプリで寄付します",
+    "donate_1": "アクセス数が増加し、サーバーが負荷に耐えることが出来なくなっています。サーバーの",
+    "donate_2": "運営費用",
+    "donate_3": "ポッキーやアップルパイでも可",
+    "donate_4": "を寄付頂けると非常にありがたいです。"
   },
   "fetch": {
+    "chunk": {
+      "subtitle": "ページモデルを読み込み中、お待ちください…",
+      "title": "拡張ニューラルコネクタにデータが転送されています"
+    },
     "failed": {
+      "deploying": "ご利用の皆様にご迷惑をおかけし、大変申し訳ございません。メンテナンス終了までしばらくお待ちください。",
       "error": {
         "globalMatrix": "全体ドロップデータ",
-        "personalMatrix": "個人ドロップデータ",
-        "period": "サーバーイベントデータ",
-        "personalPatternMatrix": "個人ドロップパターンデータ",
-        "trends": "履歴レポートデータ",
-        "stats": "サイト統計データ",
         "globalPatternMatrix": "全体ドロップパターンデータ",
         "items": "素材データ",
         "limitations": "レポートデータの検証ルール",
+        "period": "サーバーイベントデータ",
+        "personalMatrix": "個人ドロップデータ",
+        "personalPatternMatrix": "個人ドロップパターンデータ",
         "stages": "作戦データ",
+        "stats": "サイト統計データ",
+        "trends": "履歴レポートデータ",
         "zones": "ゾーンデータ"
       },
       "retry": "再試行",
-      "title": "ニューラルコネクタ接続エラー",
       "subtitle": "ニューラルコネクタに同期接続できませんでした。一部のリソースロスが発生しました。",
-      "deploying": "ご利用の皆様にご迷惑をおかけし、大変申し訳ございません。メンテナンス終了までしばらくお待ちください。"
-    },
-    "chunk": {
-      "title": "拡張ニューラルコネクタにデータが転送されています",
-      "subtitle": "ページモデルを読み込み中、お待ちください…"
+      "title": "ニューラルコネクタ接続エラー"
     },
     "loading": "読み込み中..."
   },
-  "links": {
-    "tags": {
-      "planner": "周回計画作成ツール",
-      "enemy": "レユニオン一覧",
-      "video": "攻略動画",
-      "walkthrough": "ステージ攻略",
-      "materials": "素材必要数計算",
-      "auto_farming": "放置稼ぎ",
-      "experience": "ゲームレビュー",
-      "hr": "公開求人一覧",
-      "jp_wiki": "日本版Wiki",
-      "gachaPlanning": "ガチャプランニング",
-      "apRanking": "理性効率順位表",
-      "ja_translation": "ストーリー和訳",
-      "generalRanking": "総合収益順位表",
-      "levelup": "レベル計算機",
-      "cn_wiki": "大陸版Wiki",
-      "character": "オペレーター一覧",
-      "dropRateRanking": "ドロップ率順位表",
-      "map": "マップ",
-      "storeEfficiency": "購買部のコスパ",
-      "storage": "素材在庫管理"
+  "home": {
+    "intro": {
+      "intro_0": "ペンギン急便データ統計処理部門へようこそ！",
+      "intro_1": "Penguin Statisticsはペンギン急便のデータ処理部門であり(嘘)、各作戦での素材ドロップの統計分析を行っています。",
+      "intro_2": "現在ほとんどのデータはユーザーの手によって手動でアップロードされており、誤った情報による影響を最小限に抑えるため、アップロードされた情報について多角的に審査しています。"
+    },
+    "quickStart": {
+      "actions": {
+        "subtitle": {
+          "byItem": "岩ってどこ回ったらいいのかな",
+          "byStage": "1-7の泥率ってどれくらい？",
+          "planner": "周回アドバイスをください",
+          "report": "ドロップを報告したい"
+        },
+        "title": {
+          "byItem": "素材ドロップ率",
+          "byStage": "作戦ドロップ率",
+          "planner": "周回計画",
+          "report": "ドロップ報告"
+        }
+      },
+      "caption": "左上をクリック\nボタンをクリックしてメニューを展開すると、さらに多くの機能が表示されます。",
+      "title": "クイックスタート"
     }
   },
+  "item": {
+    "categories": {
+      "ACTIVITY_ITEM": "イベントアイテム",
+      "CARD_EXP": "作戦記録",
+      "CHIP": "SoC",
+      "FURN": "家具",
+      "MATERIAL": "素材"
+    },
+    "choose": {
+      "name": "素材選択"
+    },
+    "related": "関連素材",
+    "undefined": "未知アイテム"
+  },
+  "link": {
+    "docs": {
+      "subtitle": "ドロップデータに基づいて開発するためのAPIドキュメントおよびその他のリソース",
+      "title": "開発者向けのリソース"
+    }
+  },
+  "links": {
+    "tags": {
+      "apRanking": "理性効率順位表",
+      "auto_farming": "放置稼ぎ",
+      "character": "オペレーター一覧",
+      "cn_wiki": "大陸版Wiki",
+      "dropRateRanking": "ドロップ率順位表",
+      "enemy": "レユニオン一覧",
+      "experience": "ゲームレビュー",
+      "gachaPlanning": "ガチャプランニング",
+      "generalRanking": "総合収益順位表",
+      "hr": "公開求人一覧",
+      "ja_translation": "ストーリー和訳",
+      "jp_wiki": "日本版Wiki",
+      "levelup": "レベル計算機",
+      "map": "マップ",
+      "materials": "素材必要数計算",
+      "planner": "周回計画作成ツール",
+      "storage": "素材在庫管理",
+      "storeEfficiency": "購買部のコスパ",
+      "video": "攻略動画",
+      "walkthrough": "ステージ攻略"
+    }
+  },
+  "matrixCategory": {
+    "all": {
+      "label": "全体"
+    },
+    "automated": {
+      "label": "自動"
+    },
+    "manual": {
+      "label": "手動"
+    },
+    "switch": "集計範囲"
+  },
+  "members": {
+    "categories": {
+      "others": "その他",
+      "owner": "管理人",
+      "translators": "翻訳者"
+    },
+    "responsibilities": {
+      "_name": "コントリビューション",
+      "arkplanner": "ArkPlannerの著者",
+      "backend": "バックエンド",
+      "bulkupload": "一括アップロード",
+      "customersupport": "コンサルタント",
+      "frontend": "フロントエンド",
+      "localization_ja": "日本語化",
+      "localization_ko": "韓国語化",
+      "logo": "ロゴデザイナー",
+      "maintenance": "DevOps",
+      "materials": "素材提供",
+      "native": "アプリ開発",
+      "recognition": "スクショ認識",
+      "statistics": "データ統計解析",
+      "v1frontend": "v1.0 フロントエンド",
+      "widget": "ウィジェット"
+    },
+    "socials": {
+      "email": "Email",
+      "github": "GitHub",
+      "qq": "QQ",
+      "twitter": "Twitter",
+      "weibo": "Weibo"
+    }
+  },
+  "menu": {
+    "about": {
+      "_name": "当サイトについて",
+      "bulletin": "お知らせ",
+      "changelog": "更新履歴",
+      "contact": "連絡先",
+      "contribute": "開発協力者募集中",
+      "credits": "コピーライト",
+      "donate": "寄付について",
+      "links": "相互リンク",
+      "members": "制作協力者"
+    },
+    "home": "トップページ",
+    "languages": "言語切替",
+    "overline": {
+      "planner": "ArkPlanner"
+    },
+    "planner": "周回計画作成ツール",
+    "refreshData": "データ更新",
+    "report": {
+      "_name": "ドロップ報告",
+      "recognition": "スクショ認識",
+      "stage": "章别"
+    },
+    "search": "グローバル検索",
+    "settings": {
+      "appearances": {
+        "dark": "常にダークモード",
+        "light": "常にライトモード",
+        "name": "外観モード切替",
+        "system": "システム設定に従う"
+      },
+      "name": "設定",
+      "themeStyles": {
+        "default": "デフォルトテーマ",
+        "disabled": "(無効：アクティブな特殊テーマ)",
+        "miku2021": "初音ミク2021誕生日特別テーマ",
+        "name": "テーマ切替",
+        "seaborn": "静謐の唄"
+      }
+    },
+    "siteStats": "全サイト統計データ",
+    "stats": {
+      "_name": "ドロップ率",
+      "advanced": "高度なクエリ",
+      "item": "素材別",
+      "stage": "作戦別"
+    },
+    "v1": "旧バージョン"
+  },
   "meta": {
+    "boolean": {
+      "false": "いいえ",
+      "true": "はい"
+    },
+    "confirmLeave": {
+      "subtitle": "保存されていない変更は失われる可能性があります",
+      "title": "このページを離れてもよろしいですか？"
+    },
+    "copyWarning": "\n\nData from Penguin Statistics ({site})",
+    "details": "詳細を見る",
     "dialog": {
-      "submit": "送信",
-      "save": "保存する",
+      "cancel": "いいえ",
       "close": "閉じる",
       "confirm": "はい",
-      "cancel": "いいえ"
+      "save": "保存する",
+      "submit": "送信"
     },
-    "details": "詳細を見る",
-    "loading": "読み込み中...",
     "footer": {
       "copyright": {
         "content": "ドロップ統計データはクリエイティブ・コモンズ 表示 - 非営利 4.0 国際 ライセンスの下に提供されています。当サイトのいかなる内容の転載や公開を行う場合は、必ず内容の元となっているページまたはトップページのURLのリンクを行い、データ統計の転載を行ったことを明記しなければなりません。また許可無しに当サイトの内容または派生作品を商業目的で利用することを許可しません。",
@@ -595,215 +297,28 @@
       },
       "credit": "ペンギン急便データ統計処理部門 | {date}"
     },
-    "time": {
-      "minute": "{m}分",
-      "second": "{s}秒"
-    },
-    "copyWarning": "\n\nData from Penguin Statistics ({site})",
-    "boolean": {
-      "false": "いいえ",
-      "true": "はい"
-    },
     "hasNorNot": {
       "false": "無し",
       "true": "有り"
     },
-    "confirmLeave": {
-      "title": "このページを離れてもよろしいですか？",
-      "subtitle": "保存されていない変更は失われる可能性があります"
-    },
+    "loading": "読み込み中...",
     "notfound": "ここはどこ¿¿¿",
     "quotation": {
       "end": "」",
       "start": "「"
     },
-    "separator": "、"
-  },
-  "members": {
-    "responsibilities": {
-      "v1frontend": "v1.0 フロントエンド",
-      "customersupport": "コンサルタント",
-      "native": "アプリ開発",
-      "localization_ko": "韓国語化",
-      "logo": "ロゴデザイナー",
-      "localization_ja": "日本語化",
-      "materials": "素材提供",
-      "frontend": "フロントエンド",
-      "recognition": "スクショ認識",
-      "widget": "ウィジェット",
-      "maintenance": "DevOps",
-      "backend": "バックエンド",
-      "statistics": "データ統計解析",
-      "_name": "コントリビューション",
-      "bulkupload": "一括アップロード",
-      "arkplanner": "ArkPlannerの著者"
-    },
-    "categories": {
-      "others": "その他",
-      "owner": "管理人",
-      "translators": "翻訳者"
-    },
-    "socials": {
-      "qq": "QQ",
-      "github": "GitHub",
-      "weibo": "Weibo",
-      "twitter": "Twitter",
-      "email": "Email"
+    "separator": "、",
+    "time": {
+      "minute": "{m}分",
+      "second": "{s}秒"
     }
   },
-  "settings": {
-    "data": {
-      "server": "キャッシュされたのサーバー：",
-      "size": "ローカルデータ：",
-      "reset": {
-        "title": "ローカルデータと設定初期化",
-        "subtitle": "すべてのローカルデータと設定を削除します。その後ローカル設定はすべて初期化され、ページを刷新します。データを再読み込みする必要があります。本当に続けますか？"
-      }
-    },
-    "category": {
-      "data": "設定とデータ",
-      "about": "当サイトについて",
-      "appearance": "スタイル"
-    },
-    "optimization": {
-      "lowData": {
-        "title": "軽量モード",
-        "subtitle": "軽量モードとは、作戦リストや全ステーションなどの画像リソースを無効し、データ通信量の消費を抑えるモードです。",
-        "active": "軽量モード有効中"
-      }
-    },
-    "iosSystemSettings": "言語とプライバシーの設定"
-  },
-  "query": {
-    "operation": {
-      "inProgress": "クエリ実行中"
-    },
-    "cancel": "キャンセル"
-  },
-  "stage": {
-    "actions": {
-      "_name": {
-        "selectorEmpty": "クイックアクセスはありません",
-        "selector": "クイックアクセス",
-        "panel": "クイック操作"
-      },
-      "history": {
-        "name": "最近選択した作戦",
-        "empty": "最近選択した作戦はありません\n作戦のページをアクセスするとここに表示されます",
-        "clear": "クリア"
-      },
-      "advanced": {
-        "activator": "高度なクエリを実行"
-      },
-      "star": {
-        "empty": "スター付き作戦はありません\n作戦情報の「クイック操作」で作戦にスターを追加するとここに表示されます",
-        "name": "スター付き作戦",
-        "deactivate": "クリックしてスターを削除",
-        "activated": "作戦にスターを追加しました",
-        "activate": "作戦にスターを追加"
-      },
-      "links": {
-        "map-arknights-com": "マップ",
-        "prts-wiki": "Wiki"
-      }
-    },
-    "loots": {
-      "NORMAL_DROP": "通常",
-      "SPECIAL_DROP": "レア",
-      "FURNITURE": "家具",
-      "EXTRA_DROP": "その他"
-    },
-    "about": "この作戦について",
-    "selector": {
-      "excludeAll": "全て除外",
-      "title": "ステージ選択",
-      "plannerExclude": "ステージ除外設定",
-      "includeAll": "全て含む"
-    },
-    "apCost": "消費理性：{apCost}",
-    "name": "作戦"
+  "network": {
+    "error": "ネットワークエラー。インターネット接続をご確認の上もう一度お試しください"
   },
   "notice": {
-    "loading": "お知らせを読み込んでいます...",
-    "failed": "お知らせを読み込めませんでした：{error}"
-  },
-  "contact": {
-    "contributor": "制作協力者ページ",
-    "nga": "NGA スレッド",
-    "github": "GitHub Issues",
-    "title": "連絡先",
-    "body": "ご質問、ご要望などございましたら、管理人さんにお気軽にお問い合わせください。（日本語でもOKです）"
-  },
-  "dataSource": {
-    "title": "ログインが必要です",
-    "loginNotice": "個人所有のドロップデータを閲覧するには、ログインする必要があります。",
-    "global": "全体",
-    "switch": "データソース",
-    "personal": "個人"
-  },
-  "share": {
-    "text": {
-      "item": "素材 {name}",
-      "_tmpl": "Penguin Statisticsで「{name}」のドロップデータを確認",
-      "stage": "作戦 {name}"
-    },
-    "name": "共有",
-    "success": "共有しました",
-    "shortlink": {
-      "name": "短縮URL"
-    }
-  },
-  "auth": {
-    "details": "アカウント",
-    "loggedAs": "ログインしました：",
-    "login": "ログイン",
-    "forgot": {
-      "penguinIdHistory": {
-        "deleteUserId": "この PenguinID のログイン履歴を削除",
-        "loginAsUserId": "この PenguinID でログイン",
-        "lastLoginAt": "このデバイスでの最終ログイン日時： {time} ",
-        "noData": "データがありません"
-      },
-      "subtitle": "アカウント復元",
-      "title": "ログインできない？",
-      "activator": "PenguinID 忘れました"
-    },
-    "logoutPrompt": "本当にログアウトしますか？",
-    "logout": "ログアウト",
-    "loggedOut": "ログアウトしました",
-    "success": "ログイン成功",
-    "failed": {
-      "message": "ログイン失敗：{message}",
-      "notfound": "指定されたユーザーIDが見つかりませんでした。初めてドロップをアップロードすると、ユーザーIDを自動的に取得できます。"
-    },
-    "userId": "ユーザーID",
-    "notice": "ユーザーIDはアップロードの際にのみ使用します。このIDを使用し各機器を登録することでデータを1つのアカウントに統合することが可能となり、アップロードの管理や個人のドロップデータを調べることが可能となります。"
-  },
-  "app": {
-    "name": "ペンギン急便データ統計処理部門",
-    "name_lines": "ペンギン急便\nデータ統計処理部門"
-  },
-  "update": {
-    "success": "Website Updated!",
-    "refresh": "リロード"
-  },
-  "result": {
-    "name": "統計結果",
-    "title": "{item} 統計結果"
-  },
-  "donate": {
-    "methods": {
-      "wechatPay": "WeChat Pay",
-      "paypal": "PayPal で寄付",
-      "alipay": "Alipay"
-    },
-    "redirectToApp": "{app} アプリで寄付します",
-    "donate_3": "ポッキーやアップルパイでも可",
-    "donate_4": "を寄付頂けると非常にありがたいです。",
-    "donate_1": "アクセス数が増加し、サーバーが負荷に耐えることが出来なくなっています。サーバーの",
-    "donate_2": "運営費用",
-    "accountBook": "帳簿",
-    "donate_0": "ユーザー数が急増し、サーバーの月額は上昇、企鹅数据の運営は危機的状況に...。管理人の紅白は大好きな企鹅数据を守るため、自分に出来ることは何か？紅白が悩んで見つけ出した答えは「アイドルになること」！？"
+    "failed": "お知らせを読み込めませんでした：{error}",
+    "loading": "お知らせを読み込んでいます..."
   },
   "pattern": {
     "empty": "ドロップなし",
@@ -811,34 +326,519 @@
     "name": "ドロップパターン",
     "others": "その他"
   },
-  "network": {
-    "error": "ネットワークエラー。インターネット接続をご確認の上もう一度お試しください"
+  "planner": {
+    "actions": {
+      "_name": "データ",
+      "calculate": "計算を行う",
+      "calculating": "少女計算中…",
+      "config": {
+        "_name": "コンフィグレーション",
+        "import": "インポート",
+        "share": "エクスポート"
+      },
+      "export": "エクスポート",
+      "import": "インポート",
+      "importExport": "@:(planner.actions.import)/@:(planner.actions.export)"
+    },
+    "calculation": {
+      "exp": "戦闘で入手出来る経験値の推定",
+      "level": "素材レベル",
+      "lmb": "推定獲得龍門幣",
+      "noStage": "入力内容に不備があるため結果を表示出来ません。",
+      "noSyntheses": "入力内容に不備があるため結果を表示出来ません。",
+      "sanity": "推定必要理性",
+      "tabs": {
+        "stages": "ステージ",
+        "syntheses": "素材加工",
+        "values": "素材理性価値"
+      },
+      "times": "回",
+      "title": "計算結果"
+    },
+    "calculationError": "計算失敗：{error}",
+    "copy": "クリップボードにコピー",
+    "craft": {
+      "do": "加工",
+      "errors": {
+        "notEnough": "加工には {need} 個の「{item}」が必要ですが、 {have} 個しか保有していません",
+        "title": "加工には必要な素材が欠けています"
+      },
+      "plans": {
+        "plan": "加工には {cost} 個の「{item}」を消耗して、 残り{remain} 個あります",
+        "title": "加工プラン"
+      },
+      "success": " {sourceItems} を使って {amount} 個の {productItem} に加工しました",
+      "unable": "加工できません"
+    },
+    "have": "所持数",
+    "import": {
+      "invalidJSON": "インポート失敗：無効なJSONです。コードを確認して、もう一度お試しください",
+      "success": "インポート成功： {amount} アイテムデータがインポートされます",
+      "unrecognized": "インポート失敗：このコードは読み取れません。もう一度お試しください。"
+    },
+    "need": "必要数",
+    "notices": {
+      "autoExistence": "ArkPlannerは、選択したサーバーで開いていないステージを自動的に非表示にします"
+    },
+    "options": {
+      "_name": "オプション",
+      "byProduct": "加工副産物を考慮する",
+      "excludeStage": {
+        "_name": "ステージ除外",
+        "selected": "{stages} ステージ除外中",
+        "title": "選ぶ"
+      },
+      "requireExp": "大量の経験値が必要",
+      "requireLmb": "大量の龍門幣が必要"
+    },
+    "reset": {
+      "dialog": {
+        "options": {
+          "excludes": {
+            "indicator": "全ての除外をオフにします",
+            "name": "ステージ除外"
+          },
+          "items": {
+            "indicator": "全ての素材個数をリセットします",
+            "name": "素材データ"
+          },
+          "options": {
+            "indicator": "全てのオプションをオフにします",
+            "name": "オプション"
+          }
+        },
+        "subtitle": "すべてのデータや設定はリセットされます。続行しますか？",
+        "title": "ArkPlannerをリセット"
+      },
+      "name": "リセット"
+    }
+  },
+  "query": {
+    "cancel": "キャンセル",
+    "operation": {
+      "inProgress": "クエリ実行中"
+    }
+  },
+  "report": {
+    "alert": {
+      "causes": {
+        "limitation": "今回報告しようとしている内容は既存のデータとの差が大きくなっており、このまま報告するのであれば今回の報告は異常と判定され、全て統計データに反映されることはできません。",
+        "noDrop": "ドロップアイテムが何も選択されていません。送信するデータに問題はありませんか？"
+      },
+      "contact": {
+        "activator": "管理人までご連絡ください",
+        "after": "（その際はスクリーンショットの添付をお願いいたします）。確認次第速やかに修正を行わせて頂きます。",
+        "before": "誤った情報であると判断した場合は"
+      },
+      "continue": {
+        "first": "本当に送信しますか？",
+        "repeat": "本当にこのデータを送信しますか？"
+      },
+      "title": {
+        "first": "障害リスクの検出",
+        "repeat": "警告"
+      }
+    },
+    "clear": "クリア",
+    "dossolesHoliday": {
+      "content": "これまでのデータに基づいて、ラノベのドロップ事件は統計的な独立性を満たしていないと推測されます。全種類のラノベを獲得していないなら、そのドロップ率が動態的に変化し、本来のドロップ率とは異なる可能性があります。本来のドロップ率を正確に計算するため、全種類のラノベを獲得してからご報告ください。",
+      "title": {
+        "inner": "全種類のラノベを獲得してから",
+        "tmpl": "{0}ご報告ください"
+      }
+    },
+    "furniture": "家具ドロップ：{state}",
+    "gacha": "この操作を行うことでデータに複数の結果を反映させることが出来ます。",
+    "name": "報告",
+    "notices": {
+      "rule_1": "ここに追加する内容は1回でドロップした内容です。",
+      "rule_2": "素材がドロップしなかった場合は直接送信をクリックしてください。",
+      "rule_3": "初回クリア時の報酬を報告しないでください。また、極端なロップ結果（極めてよかった・悪かったなど）を報告しないでください。",
+      "rule_4": "星３クリアした時の結果のみを報告してください。",
+      "rule_5": "大陸版以外のドロップデータをアップロードしないよう、ご協力をお願いいたします。"
+    },
+    "recognition": {
+      "confirm": {
+        "abnormal": {
+          "details": "異常リスト",
+          "error": "この画像は却下されます",
+          "fatal": "この画像は認識できません",
+          "hover": "マウスオーバーで認識内容表示"
+        },
+        "cherryPick": {
+          "accepted": "この結果をアップロード",
+          "disabled": "異常なので選択不可",
+          "rejected": "この結果を破棄"
+        },
+        "details": "結果詳細",
+        "itemsTotal": "アイテム合計",
+        "loadingImage": "スクリーンショットのプレビューを読み込み中",
+        "noResult": "認識結果はありません",
+        "overview": {
+          "_name": "結果概要",
+          "count": "{count} 枚",
+          "duration": "1画像の平均認識時間",
+          "error": "異常",
+          "server": "データサーバー",
+          "success": "成功",
+          "total": "総計"
+        },
+        "submit": "選択した {count} 件の認識結果をアップロード",
+        "unknownStage": "認識できません"
+      },
+      "cost": "時間コスト",
+      "description": "「作戦成果」画面のスクリーンショットを自動認識で、ドロップ報告は楽で簡単にする！",
+      "exceptions": {
+        "3stars::False": "星3評価ではない",
+        "DropAreaDrops::Illegal": {
+          "subtitle": "このステージには今、可能のドロップが存在していませんが、検出されました。これは通常、イベント期間外のイベントドロップによるものです",
+          "title": "非合法ドロップが存在"
+        },
+        "DropAreaDrops::LowConfidence": {
+          "subtitle": "この問題は通常、イベント期間外のイベントドロップによるものです",
+          "title": "未知のドロップが存在"
+        },
+        "DropAreaDropsQuantity::NotFound": {
+          "subtitle": "解像度・品質の低い画像はこの問題を引き起こす可能性があります。画像は圧縮処理されましたかご確認ください",
+          "title": "数量検出失敗のドロップが存在"
+        },
+        "DropInfos::Violation": "認識結果が検証失敗",
+        "DropQuantityChar::LowConfidence": {
+          "subtitle": "認識の信頼性が低い、認識結果を画像と照合してください",
+          "title": "アイテム数量認識異常の可能性がある"
+        },
+        "Droptypes::Illegal": {
+          "subtitle": "スクリーンショットには初回、理性返却などの非合法なドロップタイプ、又は認識できないドロップタイプが存在しています",
+          "title": "非合法のドロップタイプ"
+        },
+        "Droptypes::NotFound": "ドロップタイプ未検出",
+        "FileTimestamp::TooClose": {
+          "subtitle": "重複的なスクリーンショットを選択しましたかご確認ください",
+          "title": "作成時間間隔が短すぎる画像が存在"
+        },
+        "Fingerprint::Same": {
+          "subtitle": "重複的なスクリーンショットを選択しましたかご確認ください",
+          "title": "完全一致の画像が存在"
+        },
+        "Result::False": {
+          "subtitle": "もしこれは確かに作戦成果のスクリーンショットであれば、ご選択のサーバーは間違いないかご確認ください",
+          "title": "作戦成果のスクリーンショットではない"
+        },
+        "Stage::Illegal": {
+          "subtitle": "このステージただ今有効していません",
+          "title": "非合法ステージ"
+        },
+        "Stage::NotFound": {
+          "subtitle": "これはステージ認識にはエラーが発生しましたか、又はこのステージは記録されていません（殲滅作戦、絶境作戦など）",
+          "title": "未知のステージ"
+        },
+        "StageChar::LowConfidence": {
+          "subtitle": "認識の信頼性が低い、認識結果を画像と照合してください",
+          "title": "ステージ認識異常の可能性がある"
+        }
+      },
+      "filename": "ファイル名",
+      "filter": "結果フィルター",
+      "notices": {
+        "confirm": "画像をクリックしたら拡大できます、もう一回クリックしたら元に戻せます\n認識成功のスクリーンショットは自動的にチェックを入れています\n本サイトのデータの正確度のため、エラーのある画像はご選択できません",
+        "welcome": "ご提供の画像はWebAssembly技術でローカルにて認識しますので、認識段階でサーバーへのデーター送信はございません。\nスクリーンショットは、作成時刻が**36 時間内**、またクリア評価が**星3**のものをご選択ください。\n初回クリアのスクリーンショットの選択はご遠慮ください。**偏向的に**一部だけのスクリーンショット（極端にいい・悪いケース）でのレポートはご遠慮ください。"
+      },
+      "progress": "進捗状況",
+      "queue": "画像リスト",
+      "recognize": {
+        "elapsed": "経過時間",
+        "imagePerSecond": "{count} 枚/秒",
+        "noFilename": "ファイル名なし",
+        "remaining": "推定残り時間",
+        "speed": "認識速度"
+      },
+      "report": {
+        "allSucceeded": "{count} 件の認識結果がアップロード成功",
+        "caption": "レポートありがとうございます。キャッシュの原因で、レポートしたデータが反映するまで、20分程度の時間がかかる可能性があります。",
+        "partialFailed": "{count} 件の認識結果がアップロード失敗しました。以下のチェックリストにしたがって、問題を解決してみてください。",
+        "partialFailedDesc": "●　ネットワーク接続の状況を確認：接続不安定・接続中断でアップロード失敗が発生します。\n●　大量のレポートしましたか：データベースを外部の攻撃から守るために、一日のレポート数には上限があります。何度も試してもアップロードできない場合、上限に達した可能性がありますので、24時間後に再試行してください。\n●　共有IPアドレスを使用していますか：一部の地域には、ご使用のIPアドレスは他人と共有している可能性があります。この場合、ネット環境の切り替え（ルーター再起動、WiFi・4Gの切り替え）をしてから再試行してください。また、24時間後に再試行してください。\n●　デバイスの時刻を確認：重複レポ攻撃を防止対策として、端末からのリクエストにはタイムスタンプを付与します。ご使用のデバイスの時刻が正確な時刻と大きく異なる場合、アップロード失敗が発生しますので、デバイスの時刻を調整してください。",
+        "partialSucceeded": "{count} 件の認識結果のみアップロード成功",
+        "reporting": "結果をアップロード中...",
+        "submit": "選択した {count} 件の認識結果をアップロード",
+        "title": "レポート詳細",
+        "total": "総計"
+      },
+      "result": "認識結果",
+      "retry": "送信失敗、リトライ中",
+      "start": "画像を {count} 枚認識",
+      "states": {
+        "initializing": "初期化中...",
+        "pending": "初期化準備中...",
+        "recognizing": "認識中...",
+        "rendering": "結果をレンダリング中...",
+        "submitting": "結果をアップロード中..."
+      },
+      "status": {
+        "error": "エラー",
+        "success": "成功",
+        "warning": "警告"
+      },
+      "step": {
+        "confirm": "確認",
+        "recognize": "認識",
+        "report": "レポート",
+        "select": "選択"
+      },
+      "tips": {
+        "abnormal": "クオリティモニタリング（品質監査）により、ご提出いただいたスクリーンショットのうち、 {count} 枚が基準を満たしていないとして、当該スクリーンショットを「却下」し、サーバーへのレポートはしません",
+        "addImage": "ここにクリックして画像を選択",
+        "chooseImage": "クリックして画像を選択、もしくはボックスに画像をドロップ",
+        "copyImage": "画像を右クリック、もしくは長押しすると、画像をクリップボードにコピー・保存ができます",
+        "dragImage": "ここに画像をドラッグ＆ドロップ",
+        "emptyFile": "選択された画像はありません",
+        "emptyResult": "認識結果はありません",
+        "fileTooBig": "\"{name}\" ({size}MB) はサイズの制限を超過しています",
+        "fileTooOld": "\"{name}\" のスクリーンショットの作成時刻は36時間以内の制限を超過しています",
+        "hasInvalidFile": "無効のファイルが含まれています",
+        "notImageFile": "{files} は画像ファイルではないので、ご提出できません",
+        "unsatisfiedStart": "認識をスタートできません"
+      }
+    },
+    "rules": {
+      "item": {
+        "_name": "アイテム数量",
+        "gte": "@:(meta.quotation.start){item}@:(meta.quotation.end)の数を{should}個以上の数値で再入力して下さい",
+        "lte": "@:(meta.quotation.start){item}@:(meta.quotation.end)の数を{should}個以下の数値で再入力して下さい",
+        "not": "@:(meta.quotation.start){item}@:(meta.quotation.end)のドロップ数が{should}個になることはありません",
+        "now": "{stage}ドロップで選択された {item} ×{quantity}"
+      },
+      "type": {
+        "_name": "アイテム種類数",
+        "gte": "少なくとも {should} 種類のアイテムが必要です",
+        "lte": "最大 {should} 種類のアイテムが必要です",
+        "not": "{should}種類のアイテムであってはなりません",
+        "now": "{stage}ドロップで選択されたアイテムは{quantity}種類です"
+      }
+    },
+    "specialSideStory": {
+      "dialog": {
+        "cancel": "閉じる",
+        "confirmTimerDone": "わかりました",
+        "confirmTimerPending": "わかりました ({timer})",
+        "title": "「ドッソレスホリデー」のラベルドロップについて"
+      }
+    },
+    "submit": "送信",
+    "success": "送信成功",
+    "unable": "送信失敗：",
+    "undo": "送信キャンセル",
+    "undoSuccess": "キャンセルしました",
+    "usage": "左クリックで個数を増やし、右クリックで個数を減らす"
+  },
+  "result": {
+    "name": "統計結果",
+    "title": "{item} 統計結果"
   },
   "search": {
     "hint": "素材名・作戦名・ステージコード・章タイトル・イベント名（漢字・ふりがな・カタカナ・ローマ字）で検索",
     "placeholder": "検索..."
   },
-  "matrixCategory": {
-    "automated": {
-      "label": "自動"
+  "server": {
+    "name": "サーバー",
+    "servers": {
+      "CN": "大陸版",
+      "JP": "日本版",
+      "KR": "韓国版",
+      "US": "英語版"
     },
-    "all": {
-      "label": "全体"
-    },
-    "manual": {
-      "label": "手動"
-    },
-    "switch": "集計範囲"
+    "switch": "ゲームサーバー切替"
   },
-  "clipboard": {
-    "success": "クリップボードに保存しました",
-    "error": "クリップボードに保存できませんでした。手動でコピーしてください"
-  },
-  "link": {
-    "docs": {
-      "title": "開発者向けのリソース",
-      "subtitle": "ドロップデータに基づいて開発するためのAPIドキュメントおよびその他のリソース"
+  "settings": {
+    "category": {
+      "about": "当サイトについて",
+      "appearance": "スタイル",
+      "data": "設定とデータ"
+    },
+    "data": {
+      "reset": {
+        "subtitle": "すべてのローカルデータと設定を削除します。その後ローカル設定はすべて初期化され、ページを刷新します。データを再読み込みする必要があります。本当に続けますか？",
+        "title": "ローカルデータと設定初期化"
+      },
+      "server": "キャッシュされたのサーバー：",
+      "size": "ローカルデータ："
+    },
+    "iosSystemSettings": "言語とプライバシーの設定",
+    "optimization": {
+      "lowData": {
+        "active": "軽量モード有効中",
+        "subtitle": "軽量モードとは、作戦リストや全ステーションなどの画像リソースを無効し、データ通信量の消費を抑えるモードです。",
+        "title": "軽量モード"
+      }
     }
   },
-  "switchedTo": "サーバー切り替え中"
+  "share": {
+    "name": "共有",
+    "shortlink": {
+      "name": "短縮URL"
+    },
+    "success": "共有しました",
+    "text": {
+      "_tmpl": "Penguin Statisticsで「{name}」のドロップデータを確認",
+      "item": "素材 {name}",
+      "stage": "作戦 {name}"
+    }
+  },
+  "stage": {
+    "about": "この作戦について",
+    "actions": {
+      "_name": {
+        "panel": "クイック操作",
+        "selector": "クイックアクセス",
+        "selectorEmpty": "クイックアクセスはありません"
+      },
+      "advanced": {
+        "activator": "高度なクエリを実行"
+      },
+      "history": {
+        "clear": "クリア",
+        "empty": "最近選択した作戦はありません\n作戦のページをアクセスするとここに表示されます",
+        "name": "最近選択した作戦"
+      },
+      "links": {
+        "map-arknights-com": "マップ",
+        "prts-wiki": "Wiki"
+      },
+      "star": {
+        "activate": "作戦にスターを追加",
+        "activated": "作戦にスターを追加しました",
+        "deactivate": "クリックしてスターを削除",
+        "empty": "スター付き作戦はありません\n作戦情報の「クイック操作」で作戦にスターを追加するとここに表示されます",
+        "name": "スター付き作戦"
+      }
+    },
+    "apCost": "消費理性：{apCost}",
+    "loots": {
+      "EXTRA_DROP": "その他",
+      "FURNITURE": "家具",
+      "NORMAL_DROP": "通常",
+      "SPECIAL_DROP": "レア"
+    },
+    "name": "作戦",
+    "selector": {
+      "excludeAll": "全て除外",
+      "includeAll": "全て含む",
+      "plannerExclude": "ステージ除外設定",
+      "title": "ステージ選択"
+    }
+  },
+  "stats": {
+    "filter": {
+      "indicator": "フィルタ未適用 | {count} フィルタ適用中 | {count} フィルタ適用中",
+      "overview": "フィルタ結果",
+      "stage": {
+        "onlyCurrent": "入手可能なアイテムのみ"
+      },
+      "stats": "ﾌｨﾙﾀﾘﾝｸﾞ後 {filtered} / ﾌｨﾙﾀﾘﾝｸﾞ前 {total}",
+      "status": {
+        "_name": "ステージ状態",
+        "onlyOpen": "開放中のステージのみ"
+      },
+      "title": "フィルタ",
+      "type": {
+        "_name": "ステージタイプ",
+        "showActivity": "イベント",
+        "showPermanent": "恒常"
+      }
+    },
+    "headers": {
+      "apCost": "理性",
+      "apPPR": "１個あたりの必要理性期待値",
+      "clearTime": "最速クリアタイム",
+      "item": "アイテム",
+      "itemPerTime": "1個あたりの必要時間期待値",
+      "pattern": "パターン",
+      "percentage": "ドロップ率",
+      "quantity": "ドロップ数",
+      "recruitTag": "公開求人タグ",
+      "stage": "ステージ",
+      "timeRange": "期間",
+      "times": "サンプル数"
+    },
+    "lastUpdated": "最終更新日時：{date}",
+    "name": "統計結果",
+    "scroll": "左右にスクロールでデータを表示",
+    "site": {
+      "24hr": "過去24時間",
+      "all": "全期間",
+      "generating": {
+        "refresh": "全サイト統計データを更新",
+        "subtitle": "ニューラルネットワークメッセージ：データ量が膨大のため、サイト統計データの計算には約5分かかります。少々お待ちください。",
+        "title": "全サイト統計データ計算中…"
+      },
+      "items": "アイテムドロップ数ランキング",
+      "stages": "ステージサンプル数ランキング",
+      "total": {
+        "items": "総ドロップ数",
+        "report": "総報告数",
+        "sanity": "すべての報告で消費された理性"
+      },
+      "viewMore": "さらに詳しく"
+    },
+    "timeRange": {
+      "endsAt": "{date} 以前",
+      "inBetween": "{0} ~ {1}",
+      "notSelected": "（選択されていない）",
+      "toPresent": "{date} ~ 現在",
+      "unknown": "不明"
+    },
+    "title": "{stage} 統計結果",
+    "trends": {
+      "name": "歴史ドロップデータ",
+      "set": {
+        "drops": "ドロップ数",
+        "rate": "ドロップ率",
+        "sample": "サンプル数"
+      }
+    }
+  },
+  "switchedTo": "サーバー切り替え中",
+  "update": {
+    "refresh": "リロード",
+    "success": "Website Updated!"
+  },
+  "zone": {
+    "name": "章",
+    "opensAt": "開催期間：{0} - {1}",
+    "status": {
+      "-1": "近日開催",
+      "0": "開催中",
+      "1": "終了",
+      "permanentOpen": "恒常"
+    },
+    "subTypes": {
+      "2019": "2019",
+      "2020": "2020",
+      "2021": "2021",
+      "2022": "2022",
+      "2023": "2023",
+      "AWAKENING_HOUR": {
+        "subtitle": "0~3 章",
+        "title": "覚醒"
+      },
+      "DYING_SUN": {
+        "subtitle": "9~11 章",
+        "title": "残映"
+      },
+      "INTERLUDE": "エピソード",
+      "SIDESTORY": "サイドストーリー",
+      "VISION_SHATTER": {
+        "subtitle": "4~8 章",
+        "title": "幻滅"
+      }
+    },
+    "types": {
+      "ACTIVITY_CLOSED": "イベント（終了）",
+      "ACTIVITY_OPEN": "イベント（開催中）",
+      "ACTIVITY_PENDING": "イベント（近日開催）",
+      "ACTIVITY_PERMANENT": "エピソード & サイドストーリー",
+      "GACHABOX": "補給物資",
+      "MAINLINE": "メインテーマ",
+      "WEEKLY": "物資調達"
+    }
+  }
 }

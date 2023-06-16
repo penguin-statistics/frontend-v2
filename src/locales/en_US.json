@@ -1,695 +1,319 @@
 {
-  "stats": {
-    "timeRange": {
-      "unknown": "Unknown",
-      "endsAt": "Before {date}",
-      "toPresent": "{date} until now",
-      "notSelected": "(not selected)",
-      "inBetween": "{0} to {1}"
-    },
-    "headers": {
-      "recruitRecruits": "Recruits",
-      "pattern": "Pattern",
-      "recruitObservations": "Observations",
-      "quantity": "Loots",
-      "recruitTag": "Recruit Tag",
-      "times": "Samples",
-      "stage": "Stage",
-      "apPPR": "Sanity Required Per Item",
-      "itemDrops": "Aggregated Item Drops",
-      "clearTime": "Shortest Clear Time",
-      "timeRange": "Time Range",
-      "percentage": "Percentage",
-      "apCost": "Sanity",
-      "itemPerTime": "Time Per Item",
-      "item": "Item"
-    },
-    "title": "Statistics of {stage}",
-    "headerDesc": {
-      "times": "The sum of the samples in this stage",
-      "timeRange": "Due to the change of the drop table of this stage, the data in this row will only contain the data from the last change of the drop table, indicated as \"Time Range\"",
-      "clearTime": "The shortest possible time required to clear this stage, a.k.a. the time duration starting from the beginning of the combat to the appearance of the last enemy. Data source: [PRTS Wiki]({prtsLink}).",
-      "percentage": "Expected drop rate. Calculated as (Loots / Samples)",
-      "patternPercentage": "Possibility to get this drop pattern. Calculated as (Loots / Samples)",
-      "itemPerTime": "With the \"Percentage\" calculated, the expected amount of time required to acquire 1 item is calculated as (ClearTime / (Loots / Samples))",
-      "apPPR": "Expected Sanity required for getting 1x of this item",
-      "apCost": "The Sanity required for the stage",
-      "quantity": "The sum of all drops in this stage"
-    },
-    "site": {
-      "generating": {
-        "title": "Generating Site Statistics...",
-        "refresh": "Refresh Site Statistics",
-        "subtitle": "Neural Network Message: Due to high amount of data, site statistics need up to 5 minutes to calculate. Please come back later."
-      },
-      "total": {
-        "items": "Total Item Drops",
-        "report": "Total Drop Reports",
-        "sanity": "Sanity consumed in all reports"
-      },
-      "24hr": "Last 24hr",
-      "viewMore": "Learn More",
-      "stages": "Top Upload Stages",
-      "all": "Full Time",
-      "items": "Top Upload Items"
-    },
-    "itemPreview": {
-      "more": "{count} stage(s) drop this item"
-    },
-    "filter": {
-      "type": {
-        "showActivity": "Event",
-        "_name": "Stage Type",
-        "showPermanent": "Permanent"
-      },
-      "title": "Filter",
-      "overview": "Filter Summary",
-      "status": {
-        "_name": "Stage Status",
-        "onlyOpen": "Open stages only"
-      },
-      "indicator": "No Filter Applied | {count} Filter Applied | {count} Filters Applied",
-      "stage": {
-        "onlyCurrent": "Available items only"
-      },
-      "stats": "Post-filtered {filtered} / Original {total}"
-    },
-    "trends": {
-      "name": "Historical Drop Data",
-      "set": {
-        "rate": "Drop Rate",
-        "drops": "Drops",
-        "sample": "Samples"
-      }
-    },
-    "name": "Statistics",
-    "scroll": "Scroll to view details",
-    "lastUpdated": "Last updated at: {date}"
+  "app": {
+    "name": "Penguin Statistics",
+    "name_lines": "Penguin Statistics"
   },
-  "planner": {
-    "calculation": {
-      "level": "Material Level",
-      "sanity": "Estimated Sanity required",
-      "noSyntheses": "No syntheses found.",
-      "tabs": {
-        "syntheses": "Syntheses",
-        "stages": "Stages",
-        "values": "Material Sanity Value"
-      },
-      "times": "battles",
-      "lmb": "Estimated LMD income",
-      "title": "Calculation Result",
-      "exp": "Estimated EXP from Battle Records",
-      "noStage": "No stage found."
+  "auth": {
+    "details": "Account",
+    "failed": {
+      "message": "Login Failed: {message}",
+      "notfound": "This User ID cannot be found. Please note that this is not the ID in the game. You will get one after your first drop report."
     },
-    "craft": {
-      "errors": {
-        "notEnough": "Required {need}×\"{item}\" to synthesize, but only have {have}",
-        "title": "Missing Required Materials to Synthesize"
+    "forgot": {
+      "activator": "Forgot PenguinID",
+      "penguinIdHistory": {
+        "deleteUserId": "Delete this PenguinID record",
+        "lastLoginAt": "Last login at {time}",
+        "loginAsUserId": "Login as this PenguinID",
+        "noData": "No Data",
+        "tips": "This feature can only retrieve PenguinID that were logged in using client version v3.3.1 or newer.",
+        "title": "Previously used PenguinID"
       },
-      "plans": {
-        "title": "Synthesize Plans",
-        "plan": "Using {cost}×\"{item}\" to synthesize, remaining {remain}"
-      },
-      "do": "Synthesize",
-      "unable": "Missing Mat.",
-      "success": "Used {sourceItems} to synthesize {amount} {productItem}"
+      "subtitle": "Let's recover your login information",
+      "title": "Can't Login?"
     },
-    "reset": {
-      "dialog": {
-        "title": "Reset Planner",
-        "subtitle": "This operation will reset the planner data and settings you choose. Are you sure to continue?",
-        "options": {
-          "options": {
-            "indicator": "Will reset all Options",
-            "name": "Planning Options"
-          },
-          "excludes": {
-            "indicator": "Will reset all Excludes",
-            "name": "Exclude Stages"
-          },
-          "items": {
-            "indicator": "Will reset all Item Data",
-            "name": "Item Data"
-          }
-        }
-      },
-      "success": "Successfully resetted chosen planner data",
-      "name": "Reset"
-    },
-    "actions": {
-      "link": {
-        "share": "Share Link",
-        "generate": "Generate Share Link",
-        "generating": "Generating..."
-      },
-      "importExport": "@:(planner.actions.import)/@:(planner.actions.export)",
-      "config": {
-        "_name": "Configuration Profile",
-        "import": "Import from Configuration Profile",
-        "share": "Share Configuration Profile"
-      },
-      "export": "Export",
-      "calculating": "Calculating now...",
-      "calculate": "Calculate",
-      "_name": "Data",
-      "import": "Import"
-    },
-    "copy": "Copy to Clipboard",
-    "import": {
-      "success": "Successfully imported {amount} items into ArkPlanner.",
-      "unrecognized": "Import Failed: Unable to recognize config file",
-      "invalidJSON": "Import Failed: Invalid JSON, please check your input"
-    },
-    "options": {
-      "requireLmb": "Large demand for LMD",
-      "excludeStage": {
-        "_name": "Excludes",
-        "title": "Select",
-        "selected": "Excluded {stages} stages"
-      },
-      "_name": "Options",
-      "byProduct": "Consider by-products",
-      "requireExp": "Large demand for EXP"
-    },
-    "need": "Need",
-    "notices": {
-      "autoExistence": "ArkPlanner will hide non-existing stages automatically now."
-    },
-    "calculationError": "Failed to calculate: {error}",
-    "have": "Have"
+    "loggedAs": "Logged in as",
+    "loggedOut": "Logged out",
+    "login": "Login",
+    "logout": "Logout",
+    "logoutPrompt": "Are you sure?",
+    "notice": "You can connect and manage drop reports using your User ID. If you don't have a User ID yet, you will be automatically assigned one after you've made your first report.",
+    "success": "Successfully logged in",
+    "userId": "User ID"
   },
-  "server": {
-    "servers": {
-      "JP": "JP",
-      "CN": "CN",
-      "US": "US",
-      "KR": "KR"
-    },
-    "name": "Server",
-    "selected": "Selected",
-    "switch": "Switch Server"
+  "clipboard": {
+    "error": "Failed to copy to the clipboard, please manually select the text and copy it",
+    "success": "Copied to clipboard"
   },
-  "zone": {
-    "types": {
-      "GACHABOX": "Gachabox",
-      "ACTIVITY_PERMANENT": "Intermezzi & Side Story",
-      "ACTIVITY_PENDING": "Event (Opening Soon)",
-      "WEEKLY": "Supplies",
-      "ACTIVITY_CLOSED": "Event (Closed)",
-      "ACTIVITY": "Event",
-      "MAINLINE": "Main Theme",
-      "RECRUIT": "Recruit",
-      "ACTIVITY_OPEN": "Event (Opening)"
-    },
-    "subTypes": {
-      "DYING_SUN": {
-        "title": "Shadow of a Dying Sun",
-        "subtitle": "Episode 9~10"
-      },
-      "INTERLUDE": "Intermezzi",
-      "VISION_SHATTER": {
-        "subtitle": "Episode 4~8",
-        "title": "Shatter of a Vision"
-      },
-      "AWAKENING_HOUR": {
-        "subtitle": "Episode 0~3",
-        "title": "Hour of an Awakening"
-      },
-      "2019": "2019",
-      "2020": "2020",
-      "2023": "2023",
-      "2021": "2021",
-      "2022": "2022",
-      "SIDESTORY": "Side Story"
-    },
-    "status": {
-      "-1": "Opening Soon",
-      "permanentOpen": "Permanent",
-      "1": "Closed",
-      "0": "Open"
-    },
-    "opensAt": "Event period: {0} - {1}",
-    "name": "Zone"
-  },
-  "report": {
-    "recognition": {
-      "exceptions": {
-        "DropAreaDrops::LowConfidence": {
-          "title": "Low Confidence Drop Item",
-          "subtitle": "Check if you have selected a screenshot in which its content includes a closed event"
-        },
-        "Droptypes::Illegal": {
-          "title": "Illegal drop type",
-          "subtitle": "There are illegal drop types in the screenshot, like first-clear or return AP"
-        },
-        "StageChar::LowConfidence": {
-          "subtitle": "Low confidence in the recognition result. Please check if the result is consistent with the screenshot.",
-          "title": "Error in stage recognition"
-        },
-        "DropAreaDrops::Illegal": {
-          "subtitle": "There should be no drop in this stage, but there are some in the screenshot. This is usually caused by event drop during non-event period",
-          "title": "Illegal drops found"
-        },
-        "DropInfos::Violation": "Failed to pass result validation",
-        "DropAreaDropsQuantity::NotFound": {
-          "title": "Failed to recognize the drop quantity",
-          "subtitle": "Pictures with poor resolution or quality may cause this problem. Please check if the image is compressed"
-        },
-        "Stage::Illegal": {
-          "title": "Illegal stage",
-          "subtitle": "This stage is not opening now"
-        },
-        "Result::False": {
-          "title": "Not a battle result screenshot, or an internal error occurred",
-          "subtitle": "If this is a battle result screenshot, please make sure the server you select is correct"
-        },
-        "DropQuantityChar::LowConfidence": {
-          "title": "Error in item quantity recognition",
-          "subtitle": "Low confidence in the recognition result. Please check if the result is consistent with the screenshot."
-        },
-        "3stars::False": "Suspected to be a non-3-stars clear",
-        "Stage::NotFound": {
-          "title": "Cannot found any valid matching stage",
-          "subtitle": "Error in stage recognition, or we do not count drop for this stage"
-        },
-        "Droptypes::NotFound": "Failed to find any drop type",
-        "Fingerprint::Same": {
-          "title": "Duplicated Images",
-          "subtitle": "Check if you have selected duplicated images"
-        },
-        "FileTimestamp::TooClose": {
-          "title": "Screenshot Interval too close",
-          "subtitle": "Check if you have selected duplicated images"
-        }
-      },
-      "cost": "Cost",
-      "states": {
-        "submitting": "Submitting...",
-        "initializing": "Initializing...",
-        "pending": "Waiting for initialization...",
-        "rendering": "Rendering content...",
-        "recognizing": "Recognizing..."
-      },
-      "report": {
-        "allSucceeded": "{count} battle results successfully reported",
-        "partialSucceeded": "Only {count} battle results successfully reported",
-        "partialFailed": "{count} failed battle result reports. Please follow the troubleshooting steps below",
-        "reporting": "Reporting in bulk...",
-        "total": "Total",
-        "caption": "Thanks for reporting. Your data will be revealed in the global dataset of website in 20 minutes at most because of cache.",
-        "title": "Report Details",
-        "partialFailedDesc": "Check your network connection: The upload may be failed if the network connection is poor.\nIn order to ensure that the entire site data set is not affected by external attacks, if you still cannot upload after multiple retries, your submission volume may have triggered the reporting limit. Please try again after 24 hours to upload the remaining drop reports.\nYour IP may be shared with others, because individuals cannot be located due to the nature of IP. In this case, please try to switch your mobile network or WiFi to retry recognition, or you can retry uploading after 24 hours.\nTo prevent retransmission attacks, we will attach a timestamp to your request; if the time of your device is too far from the standard time, the upload may fail. Please try to calibrate the device time and try again.",
-        "submit": "Report {count} battle results"
-      },
-      "defectReport": {
-        "dialog": {
-          "section": {
-            "environment": "Environment",
-            "originalImage": "Original Image",
-            "recognitionResult": "Recognition Result"
-          },
-          "title": "Send Recognition Defect Feedback",
-          "subtitle": "Sending recognition defect feedback will upload such screenshot image, recognition result and environment info (including current UI version, recognition core version and recognition resource version) to us. After receiving your feedback, we will use the submitted feedback to optimize algorithm used in screenshot recognition. Thank you for helping us improving the recognition feature!"
-        },
-        "snackbar": {
-          "succeeded": "Recognition defect feedback has been submitted. Thank you for your feedback!",
-          "failed": "Failed to submit recognition defect feedback. Please try again later."
-        },
-        "action": "Send Feedback...",
-        "reported": "Feedback Sent",
-        "state": {
-          "preflight": "Uploading feedback metadata...",
-          "uploading": "Uploading screenshot image..."
-        }
-      },
-      "confirm": {
-        "overview": {
-          "server": "Dataset Server",
-          "success": "Passed",
-          "error": "Failed",
-          "total": "Recognized",
-          "count": "{count}",
-          "duration": "Avg Time Taken",
-          "_name": "Overview"
-        },
-        "cherryPick": {
-          "disabled": "Unable to upload illegible recognition result",
-          "accepted": "Upload this result",
-          "rejected": "Discarded this result"
-        },
-        "loadingImage": "Loading screenshot preview",
-        "abnormal": {
-          "details": "Errors",
-          "fatal": "This image failed to be recognized",
-          "hover": "Hover to see recognition results",
-          "error": "This image failed to pass the legibility test"
-        },
-        "noResult": "No recognition results",
-        "itemsTotal": "Items",
-        "submit": "Upload Selected (×{count}) Results",
-        "details": "Details",
-        "unknownStage": "Recognition Failed"
-      },
-      "step": {
-        "report": "Report",
-        "confirm": "Confirm",
-        "recognize": "Recognize",
-        "select": "Select Images"
-      },
-      "tips": {
-        "emptyFile": "No images selected",
-        "unsatisfiedStart": "Unable to Start",
-        "copyImage": "Right click or long press the image to share it",
-        "fileTooOld": "File \"{name}\" was created before 36hrs ago",
-        "hasInvalidFile": "Contains invalid file",
-        "addImage": "Click to add an image",
-        "notImageFile": "\"{files}\" are not image files, ignored.",
-        "dragImage": "Drag an image here",
-        "chooseImage": "Click or drag to add an image",
-        "fileTooBig": "File \"{name}\" with size of {size}MB is too large",
-        "abnormal": "{count} image(s) have been \"excluded\" because they either failed to pass legibility test, or failed to be recognized",
-        "emptyResult": "No results available"
-      },
-      "recognize": {
-        "elapsed": "Elapsed",
-        "speed": "Avg Speed",
-        "imagePerSecond": "{count} images/sec",
-        "remaining": "Remaining",
-        "noFilename": "No Filename"
-      },
-      "notices": {
-        "confirm": "Click the image to enlarge it for double-checking.\nScreenshots that passed the legibility test have already been selected for upload.\nFor dataset accuracy considerations, screenshots that failed the legibility tests are **not allowed** from upload.",
-        "welcome": "Image files will be recognized **locally** using **WebAssembly** technology. We will not upload images to our server.\nPlease use screenshots taken within 36 hours that contain only 3-stars clear. Duplications will be detected and marked as *excluded*.\nPlease do not report the first-clear of a stage, and do not only report the clears where you were lucky - report all clears."
-      },
-      "queue": "Image Queue",
-      "start": "Recognize {count} images",
-      "status": {
-        "success": "Success",
-        "error": "Error",
-        "warning": "Warning"
-      },
-      "result": "Result",
-      "description": "Simply select a screenshot of the settlement page to automatically identify and upload all drop results.",
-      "filename": "Filename",
-      "progress": "Progress",
-      "filter": "Filter",
-      "retry": "Failed to submit. Retrying..."
-    },
-    "gacha": "Multiple results are allowed in a singular report for this stage.",
-    "specialSideStory": {
-      "dialog": {
-        "cancel": "Cancel"
-      }
-    },
-    "usage": "Increase drop amount by left click, decrease by right click",
-    "alert": {
-      "causes": {
-        "limitation": "This report has a significant discrepancy with our current data. Continuing with the submission may result in it being flagged as an outlier and not included in the overall statistical data.",
-        "noDrop": "No items selected."
-      },
-      "continue": {
-        "repeat": "Confirm submitting this report?",
-        "first": "Are you sure you want to submit this report?"
-      },
-      "contact": {
-        "after": "Please indicate the stage name and drops. A screenshot is also preferred for verification purposes. Our team will mark your report appropriately after verifying it.",
-        "before": "If you are sure you got this drop in-game, submit this report and ",
-        "activator": "contact us."
-      },
-      "title": {
-        "first": "Failure Risk Detected",
-        "repeat": "Warning"
-      }
-    },
-    "rules": {
-      "type": {
-        "now": "Selected {quantity} items in \"{stage}\"",
-        "not": "Should not have exactly {should} items in \"{stage}\"",
-        "lte": "Should have at maximum {should} items in \"{stage}\"",
-        "_name": "Items",
-        "gte": "Should have at minimum {should} items in \"{stage}\""
-      },
-      "item": {
-        "gte": "Should have at minimum {should} \"{item}\" in \"{stage}\"",
-        "_name": "Item Quantities",
-        "lte": "Should have at maximum {should} \"{item}\" in \"{stage}\"",
-        "now": "Selected {quantity} {item} in \"{stage}\"",
-        "not": "Should not have exactly {should} \"{item}\" in \"{stage}\""
-      }
-    },
-    "undoSuccess": "Successfully recalled submission",
-    "name": "Report",
-    "closedReason": {
-      "INVALID": "Unable to Report: This stage does not contain drop reporting metadata.",
-      "EXPIRED": "Not within Reportable Time Range: Either has the stage already closed or has not yet opened.",
-      "NOT_FOUND": "Stage Not Found: The stage does not exist in the server you have selected."
-    },
-    "submit": "Submit",
-    "furniture": "Furniture Dropped: {state}",
-    "notices": {
-      "rule_4": "Please make sure that you refresh a 3-stars clear.",
-      "rule_5": "Please only submit drop data from the CN server.",
-      "rule_2": "If there are no drops, click submit directly without selecting any drops.",
-      "rule_3": "Please do not report the first-clear of a stage, and do not only report the clears where you were lucky - report all clears.",
-      "rule_1": "Report one clear at a time. Please double-check your drop selection."
-    },
-    "unable": "Failed to submit: ",
-    "clear": "Clear",
-    "success": "Successfully submitted",
-    "undo": "Recall"
-  },
-  "home": {
-    "quickStart": {
-      "actions": {
-        "subtitle": {
-          "report": "I wanna report drops",
-          "byStage": "What are the drop rates of this stage?",
-          "planner": "Please gimme some farming advice",
-          "byItem": "Where should I farm rocks?"
-        },
-        "title": {
-          "byStage": "Stage Drop Rates",
-          "byItem": "Item Drop Rates",
-          "report": "Report Drops",
-          "planner": "Farming Planner"
-        }
-      },
-      "title": "Quick Start",
-      "caption": "Click the\nbutton to expand menu and see more features"
-    },
-    "intro": {
-      "intro_3": "To ensure dataset transparency and list out dataset changes, Dataset Invalidation Transparency Report is now planned to be implemented.",
-      "intro_2": "Penguin Statistics' current dataset is maintained through a combination of player manual reports, screenshot recognitions, and automated tool uploads via public APIs. The Penguin Statistics team performs various types of automatic, scheduled, and manual maintenance to ensure the dataset's accuracy.",
-      "intro_1": "Penguin Statistics is the Department of Data Analysis of Penguin Logistics (not really). We devote ourselves to item drop analysis.",
-      "intro_0": "Welcome to Penguin Statistics!"
-    }
+  "contact": {
+    "body": "If you have any questions or suggestions, feel free to contact the webmaster. (English is fine)",
+    "contributor": "Team Members",
+    "github": "GitHub Issues",
+    "nga": "NGA Thread",
+    "title": "Contact us"
   },
   "contribute": {
-    "livehouse": "LiveHouse",
-    "frontend": "Frontend",
-    "recognizer": "Recognizer",
-    "skills": {
-      "mobile": "Mobile App Development (iOS, Android)",
-      "frontend": "Frontend Development (React)",
-      "design": "UI/UX Design",
-      "backend": "Backend Development (Go, PostgreSQL)",
-      "maintenance": "DevOps",
-      "others": "...",
-      "analysis": "Data Analysis"
-    },
-    "contribute_0": "If you have experience with any of the following skills and want to contribute to Penguin Statistics, join our Discord below or alternatively our QQ group: 747099627.",
-    "contribute_1": "This is a nonprofit and open source project",
-    "repo": "Project repositories: ",
-    "frontendV4": "Frontend v4",
-    "newFolder": "Currently working hard creating the project repo...",
     "backend": "Backend",
+    "caption": "Penguin Statistics is a non-profit community project that relies on the joint maintenance and support of everyone. We welcome you to go to our GitHub and give us a star, as well as provide feedback and suggestions through Issues. Of course, issues and PRs are always welcomed!",
+    "contribute_0": "If you have experience with any of the following skills and want to contribute to Penguin Statistics, join our Discord below or alternatively our QQ group: 747099627.",
+    "frontend": "Frontend",
+    "livehouse": "LiveHouse",
+    "newFolder": "Currently working hard creating the project repo...",
     "qqGroup": "QQ Group: ",
-    "caption": "Penguin Statistics is a non-profit community project that relies on the joint maintenance and support of everyone. We welcome you to go to our GitHub and give us a star, as well as provide feedback and suggestions through Issues. Of course, issues and PRs are always welcomed!"
+    "recognizer": "Recognizer",
+    "repo": "Project repositories: ",
+    "skills": {
+      "analysis": "Data Analysis",
+      "backend": "Backend Development (Go, PostgreSQL)",
+      "design": "UI/UX Design",
+      "frontend": "Frontend Development (React)",
+      "maintenance": "DevOps",
+      "mobile": "Mobile App Development (iOS, Android)",
+      "others": "..."
+    },
+    "contribute_1": "This is a nonprofit and open source project",
+    "frontendV4": "Frontend v4"
   },
-  "menu": {
-    "search": "Search",
-    "report": {
-      "stage": "Select By Stage",
-      "recognition": "Recognition",
-      "_name": "Report Drops"
+  "credits": {
+    "material": {
+      "content": "Penguin Statistics uses various game resources (such as pictures, animations, audio, original text, and translations) to reflect game elements and enhance user experience. Copyright for these resources belongs to Shanghai Hypergryph Network Technology Co., Ltd. and/or its affiliates, including YOSTAR (HONG KONG) LIMITED, 株式会社Yostar, YOSTAR LIMITED, 龍成網路, and others.\nPenguin Statistics utilizes some assets from PRTS Wiki [http://prts.wiki](http://prts.wiki) and has modified some of the assets without modifying their original meaning.\nPenguin Statistics used the slightly self-modified version of the Bender font, provided by the Free Fonts Project ([http://jovanny.ru](http://jovanny.ru)) under a usage basis claimed on the official website of the Project. Penguin Statistics expresses gratitude for the openness of the Free Fonts Project and the licenses it uses.",
+      "title": "Content Credits"
     },
-    "about": {
-      "members": "Team Members",
-      "_name": "About Penguin Statistics",
-      "contact": "Contact us",
-      "donate": "Donate",
-      "credits": "Credits",
-      "contribute": "Contribute",
-      "bulletin": "Notice",
-      "links": "Link Exchange",
-      "changelog": "Change Log"
-    },
-    "settings": {
-      "themeStyles": {
-        "name": "Change Themes",
-        "miku2021": "Hatsune Miku 2021 Birthday Theme",
-        "default": "Default Theme",
-        "disabled": "(Disabled: Active Special Theme)",
-        "seaborn": "The Song of Silence"
-      },
-      "appearances": {
-        "dark": "Always Dark",
-        "system": "Follow System",
-        "light": "Always Light",
-        "name": "Change Color Appearance"
-      },
-      "name": "Settings"
-    },
-    "stats": {
-      "_name": "Drop Rates",
-      "advanced": "Advanced Query",
-      "stage": "By stage",
-      "item": "By item"
-    },
-    "planner": "Farming Strategy Planner",
-    "overline": {
-      "planner": "ArkPlanner"
-    },
-    "v1": "Visit Old Version",
-    "languages": "Language",
-    "refreshData": "Reload",
-    "home": "Home",
-    "siteStats": "Statistics at a Glance",
-    "_beta": "Beta"
-  },
-  "query": {
-    "operation": {
-      "add": "Add Comparison Query",
-      "inProgress": "Executing Queries...",
-      "execute": "Execute Query"
-    },
-    "selector": {
-      "item": {
-        "title": "Choose Item",
-        "selected": "Only Query Selected ({length})",
-        "subtitle": "Used to filter the query results by specified materials. When any filter is selected, no other filters can be selected in the same query. If you want to filter other parameters, you can do it by adding a comparison query.",
-        "unspecified": "Show All Item"
-      },
-      "interval": {
-        "unspecified": "No Segment",
-        "title": "Segment Interval",
-        "subtitle": "Interval for segmenting historical trends."
-      },
-      "timeRange": {
-        "presets": {
-          "title": "Presets",
-          "end": "Ended",
-          "start": "Started"
-        },
-        "subtitle": "(Required) Limit query results in a specific time range.",
-        "title": "Choose Time Range"
-      },
-      "stage": {
-        "title": "Choose Stage",
-        "subtitle": "Used to filter the query results by specified materials. When any filter is selected, no other filters can be selected in the same query. If you want to filter other parameters, you can do it by adding a comparison query."
-      }
-    },
-    "panel": {
-      "results": "Query Results",
-      "builder": "Query Builder",
-      "footer": {
-        "cache": "The query result data now displaying is cached data. If you need to get the latest data, please \"execute query\" again.",
-        "disclaimer": "All data produced by the \"Advanced Query\" feature is protected by our site's \"License.\" Penguin Statistics does not make any commitments or endorsements regarding the data produced by the Advanced Query feature."
-      }
-    },
-    "cancel": "Cancel",
-    "type": {
-      "matrix": "Statistics",
-      "trend": "Trends"
-    },
-    "title": {
-      "main": "Main Query",
-      "comparison": "Comparison Query #{index}"
-    },
-    "result": {
-      "main": "Main Query Result",
-      "comparison": "Comparison Query #{index} Result",
-      "hideTime": "Hide Detail Time",
-      "empty": "This query returned 0 results. Please check your query parameters."
+    "source": {
+      "title": "Open Source Licenses"
     }
   },
-  "item": {
-    "choose": {
-      "name": "Choose Item"
+  "dataSource": {
+    "global": "All",
+    "loginNotice": "Please log in before viewing personal drop data.",
+    "personal": "Personal",
+    "switch": "Data Source",
+    "title": "Login Required"
+  },
+  "donate": {
+    "accountBook": "Account Book",
+    "donate_0": "Increasing number of users and server fees are putting Penguin Statistics into crisis. In order to protect our beloved Penguin Statistics, the webmaster decided to...",
+    "methods": {
+      "alipay": "Alipay",
+      "paypal": "Donate with PayPal",
+      "wechatPay": "WeChat Pay"
     },
-    "categories": {
-      "CARD_EXP": "Battle Records",
-      "CHIP": "Chips",
-      "FURN": "Furniture",
-      "MATERIAL": "Materials",
-      "ACTIVITY_ITEM": "Event Items"
+    "redirectToApp": "Donate with \"{app}\" App",
+    "regulation": {
+      "app": "This card is unavailable in the app.",
+      "cnMirror": "Due to regulation policies by law, this card has been temporary disabled on CN mirror."
     },
-    "undefined": "Unknown",
-    "name": "Item",
-    "related": "Related Items"
+    "donate_1": "The number of users is increasing. The server is becoming overwhelmed. We will appreciate it a lot if Doctors can donate some",
+    "donate_2": "server fee",
+    "donate_3": "pocky or apple pie are also accepted",
+    "donate_4": ". We greatly appreciate your support!"
   },
   "fetch": {
+    "chunk": {
+      "subtitle": "Fetching page modules and rendering view, please wait...",
+      "title": "Establishing connection to Level 2 neural network..."
+    },
     "failed": {
+      "deploying": "Maintenance is in progress, please bear with us while we deploy the latest version...",
       "error": {
-        "globalMatrix": "Global Drop Data",
-        "personalMatrix": "Personal Drop Data",
-        "period": "Server Events",
-        "personalPatternMatrix": "Personal Drop Pattern Data",
-        "trends": "History Report Trends",
         "config": "Frontend Configuration",
-        "stats": "Site Statistics",
+        "globalMatrix": "Global Drop Data",
         "globalPatternMatrix": "Global Drop Pattern Data",
         "items": "Items Data",
         "limitations": "Report Validation Rules",
+        "period": "Server Events",
+        "personalMatrix": "Personal Drop Data",
+        "personalPatternMatrix": "Personal Drop Pattern Data",
         "stages": "Stages Data",
+        "stats": "Site Statistics",
+        "trends": "History Report Trends",
         "zones": "Zones Data"
       },
       "retry": "Retry",
-      "title": "Failed to fetch resources",
       "subtitle": "Unable to establish synchronized connection with neural network. Missing partial or all resources.",
-      "deploying": "Maintenance is in progress, please bear with us while we deploy the latest version..."
-    },
-    "chunk": {
-      "title": "Establishing connection to Level 2 neural network...",
-      "subtitle": "Fetching page modules and rendering view, please wait..."
+      "title": "Failed to fetch resources"
     },
     "loading": "Fetching Latest Data..."
   },
-  "links": {
-    "tags": {
-      "planner": "Planner",
-      "enemy": "Enemies List",
-      "video": "Clear Guide",
-      "walkthrough": "Walkthrough",
-      "materials": "Material Requirement Calculator",
-      "auto_farming": "Auto Farming",
-      "experience": "Experience",
-      "hr": "Recruiting Lookup",
-      "jp_wiki": "JP Server Wiki",
-      "gachaPlanning": "Gacha Planning",
-      "apRanking": "AP Efficiency Ranking",
-      "ja_translation": "Japanese Translation of Main Story",
-      "generalRanking": "General Ranking",
-      "levelup": "Level Up Calculator",
-      "cn_wiki": "CN Server Wiki",
-      "character": "Operators List",
-      "dropRateRanking": "Drop Rate Ranking",
-      "map": "Map",
-      "storeEfficiency": "Shop Efficiency",
-      "storage": "Inventory Management"
+  "home": {
+    "intro": {
+      "intro_0": "Welcome to Penguin Statistics!",
+      "intro_1": "Penguin Statistics is the Department of Data Analysis of Penguin Logistics (not really). We devote ourselves to item drop analysis.",
+      "intro_2": "Penguin Statistics' current dataset is maintained through a combination of player manual reports, screenshot recognitions, and automated tool uploads via public APIs. The Penguin Statistics team performs various types of automatic, scheduled, and manual maintenance to ensure the dataset's accuracy.",
+      "intro_3": "To ensure dataset transparency and list out dataset changes, Dataset Invalidation Transparency Report is now planned to be implemented."
+    },
+    "quickStart": {
+      "actions": {
+        "subtitle": {
+          "byItem": "Where should I farm rocks?",
+          "byStage": "What are the drop rates of this stage?",
+          "planner": "Please gimme some farming advice",
+          "report": "I wanna report drops"
+        },
+        "title": {
+          "byItem": "Item Drop Rates",
+          "byStage": "Stage Drop Rates",
+          "planner": "Farming Planner",
+          "report": "Report Drops"
+        }
+      },
+      "caption": "Click the\nbutton to expand menu and see more features",
+      "title": "Quick Start"
     }
   },
+  "item": {
+    "categories": {
+      "ACTIVITY_ITEM": "Event Items",
+      "CARD_EXP": "Battle Records",
+      "CHIP": "Chips",
+      "FURN": "Furniture",
+      "MATERIAL": "Materials"
+    },
+    "choose": {
+      "name": "Choose Item"
+    },
+    "name": "Item",
+    "related": "Related Items",
+    "undefined": "Unknown"
+  },
+  "link": {
+    "docs": {
+      "subtitle": "Contains resources for developing on top of Penguin Statistics' data",
+      "title": "For Developers"
+    }
+  },
+  "links": {
+    "tags": {
+      "apRanking": "AP Efficiency Ranking",
+      "auto_farming": "Auto Farming",
+      "character": "Operators List",
+      "cn_wiki": "CN Server Wiki",
+      "dropRateRanking": "Drop Rate Ranking",
+      "enemy": "Enemies List",
+      "experience": "Experience",
+      "gachaPlanning": "Gacha Planning",
+      "generalRanking": "General Ranking",
+      "hr": "Recruiting Lookup",
+      "ja_translation": "Japanese Translation of Main Story",
+      "jp_wiki": "JP Server Wiki",
+      "levelup": "Level Up Calculator",
+      "map": "Map",
+      "materials": "Material Requirement Calculator",
+      "planner": "Planner",
+      "storage": "Inventory Management",
+      "storeEfficiency": "Shop Efficiency",
+      "video": "Clear Guide",
+      "walkthrough": "Walkthrough"
+    }
+  },
+  "matrixCategory": {
+    "all": {
+      "label": "All"
+    },
+    "automated": {
+      "label": "Auto",
+      "tooltip": "Auto: Such Matrix Category contains data from third-party tools that automatically reports drop data."
+    },
+    "manual": {
+      "label": "Manual",
+      "tooltip": "Manual: Such Matrix Category contains data only from the \"Report Drops by Stage\" and \"Report Drops by Recognition\" features from the Penguin Statistics site."
+    },
+    "switch": "Matrix Category"
+  },
+  "members": {
+    "categories": {
+      "contributors": "Contributors",
+      "maintainer": "Maintainer",
+      "others": "Others",
+      "owner": "Webmaster",
+      "translators": "Translators"
+    },
+    "responsibilities": {
+      "_name": "Contributions",
+      "arkplanner": "Author of ArkPlanner",
+      "backend": "Backend",
+      "bulkupload": "Bulk Upload",
+      "customersupport": "User Support",
+      "frontend": "Frontend",
+      "localization_en": "English Localization",
+      "localization_ja": "Japanese Localization",
+      "localization_ko": "Korean Localization",
+      "logo": "Logo Designer",
+      "maintenance": "DevOps",
+      "materials": "Materials Supplier",
+      "native": "App Development",
+      "recognition": "Screenshot Recognition",
+      "statistics": "Statistics and Analysis",
+      "v1frontend": "v1.0 Frontend",
+      "widget": "Widget Development"
+    },
+    "socials": {
+      "email": "Email",
+      "github": "GitHub",
+      "qq": "QQ",
+      "twitter": "Twitter",
+      "weibo": "Weibo"
+    }
+  },
+  "menu": {
+    "_beta": "Beta",
+    "about": {
+      "_name": "About Penguin Statistics",
+      "bulletin": "Notice",
+      "changelog": "Change Log",
+      "contact": "Contact us",
+      "contribute": "Contribute",
+      "credits": "Credits",
+      "donate": "Donate",
+      "links": "Link Exchange",
+      "members": "Team Members"
+    },
+    "home": "Home",
+    "languages": "Language",
+    "overline": {
+      "planner": "ArkPlanner"
+    },
+    "planner": "Farming Strategy Planner",
+    "refreshData": "Reload",
+    "report": {
+      "_name": "Report Drops",
+      "recognition": "Recognition",
+      "stage": "Select By Stage"
+    },
+    "search": "Search",
+    "settings": {
+      "appearances": {
+        "dark": "Always Dark",
+        "light": "Always Light",
+        "name": "Change Color Appearance",
+        "system": "Follow System"
+      },
+      "name": "Settings",
+      "themeStyles": {
+        "default": "Default Theme",
+        "disabled": "(Disabled: Active Special Theme)",
+        "miku2021": "Hatsune Miku 2021 Birthday Theme",
+        "name": "Change Themes",
+        "seaborn": "The Song of Silence"
+      }
+    },
+    "siteStats": "Statistics at a Glance",
+    "stats": {
+      "_name": "Drop Rates",
+      "advanced": "Advanced Query",
+      "item": "By item",
+      "stage": "By stage"
+    },
+    "v1": "Visit Old Version"
+  },
   "meta": {
+    "boolean": {
+      "false": "No",
+      "true": "Yes"
+    },
+    "confirmLeave": {
+      "subtitle": "Your unsaved changes may be lost",
+      "title": "Are you sure you want to leave this page?"
+    },
+    "copyWarning": "\n\nData from Penguin Statistics ({site})",
+    "details": "Details",
     "dialog": {
-      "submit": "Submit",
-      "save": "Save",
+      "cancel": "Cancel",
       "close": "Close",
       "confirm": "Confirm",
-      "cancel": "Cancel"
+      "save": "Save",
+      "submit": "Submit"
     },
-    "details": "Details",
-    "loading": "Loading...",
     "footer": {
       "copyright": {
         "content": "The drop rate statistics are collected by Penguin Statistics and are licensed under a Creative Commons Attribution-NonCommercial 4.0 International License. If you wish to redistribute content on this site in any form, you should credit Penguin Statistics as the source and a link to this site. Commercial use of the content or its derivatives is strictly prohibited without permission.",
@@ -697,268 +321,43 @@
       },
       "credit": "Penguin Statistics | {date}"
     },
-    "time": {
-      "minute": "{m}m",
-      "second": "{s}s"
-    },
-    "copyWarning": "\n\nData from Penguin Statistics ({site})",
-    "boolean": {
-      "false": "No",
-      "true": "Yes"
-    },
     "hasNorNot": {
       "false": "No",
       "true": "Yes"
     },
-    "confirmLeave": {
-      "title": "Are you sure you want to leave this page?",
-      "subtitle": "Your unsaved changes may be lost"
-    },
+    "isAre": "is | are",
+    "loading": "Loading...",
     "notfound": "???",
     "quotation": {
       "end": "\"",
       "start": "\""
     },
     "separator": ", ",
-    "isAre": "is | are"
-  },
-  "matrixCategory": {
-    "automated": {
-      "tooltip": "Auto: Such Matrix Category contains data from third-party tools that automatically reports drop data.",
-      "label": "Auto"
-    },
-    "all": {
-      "label": "All"
-    },
-    "manual": {
-      "tooltip": "Manual: Such Matrix Category contains data only from the \"Report Drops by Stage\" and \"Report Drops by Recognition\" features from the Penguin Statistics site.",
-      "label": "Manual"
-    },
-    "switch": "Matrix Category"
-  },
-  "members": {
-    "responsibilities": {
-      "v1frontend": "v1.0 Frontend",
-      "customersupport": "User Support",
-      "native": "App Development",
-      "localization_ko": "Korean Localization",
-      "logo": "Logo Designer",
-      "localization_ja": "Japanese Localization",
-      "materials": "Materials Supplier",
-      "frontend": "Frontend",
-      "recognition": "Screenshot Recognition",
-      "widget": "Widget Development",
-      "maintenance": "DevOps",
-      "backend": "Backend",
-      "statistics": "Statistics and Analysis",
-      "localization_en": "English Localization",
-      "_name": "Contributions",
-      "bulkupload": "Bulk Upload",
-      "arkplanner": "Author of ArkPlanner"
-    },
-    "categories": {
-      "others": "Others",
-      "owner": "Webmaster",
-      "translators": "Translators",
-      "maintainer": "Maintainer",
-      "contributors": "Contributors"
-    },
-    "socials": {
-      "qq": "QQ",
-      "github": "GitHub",
-      "weibo": "Weibo",
-      "twitter": "Twitter",
-      "email": "Email"
+    "time": {
+      "minute": "{m}m",
+      "second": "{s}s"
     }
-  },
-  "settings": {
-    "data": {
-      "server": "Local Data includes servers: ",
-      "size": "Local Data size: ",
-      "reset": {
-        "title": "Reset All",
-        "subtitle": "This operation will delete all local data and settings you have set. After the deletion, all settings will be reset to default, all data needs to be downloaded again, and the web page will be reloaded. Are you sure to continue?"
-      }
-    },
-    "category": {
-      "data": "Data",
-      "about": "About",
-      "appearance": "Appearance"
-    },
-    "optimization": {
-      "lowData": {
-        "title": "Low Data Mode",
-        "subtitle": "Low Data Mode will stop fetching nonessential resources, such as the zone backgrounds in stage selector and the website background, to help reduce network data use.",
-        "active": "Low Data Mode is Active"
-      }
-    },
-    "storageIssue": "Storage issues detected. Application may malfunction. If this warning keeps showing, try to clear local storage by using \"Reset All\" under the \"Settings\" dialog in the menu.",
-    "iosSystemSettings": "Language & Privacy Settings"
-  },
-  "credits": {
-    "source": {
-      "title": "Open Source Licenses"
-    },
-    "material": {
-      "content": "Penguin Statistics uses various game resources (such as pictures, animations, audio, original text, and translations) to reflect game elements and enhance user experience. Copyright for these resources belongs to Shanghai Hypergryph Network Technology Co., Ltd. and/or its affiliates, including YOSTAR (HONG KONG) LIMITED, 株式会社Yostar, YOSTAR LIMITED, 龍成網路, and others.\nPenguin Statistics utilizes some assets from PRTS Wiki [http://prts.wiki](http://prts.wiki) and has modified some of the assets without modifying their original meaning.\nPenguin Statistics used the slightly self-modified version of the Bender font, provided by the Free Fonts Project ([http://jovanny.ru](http://jovanny.ru)) under a usage basis claimed on the official website of the Project. Penguin Statistics expresses gratitude for the openness of the Free Fonts Project and the licenses it uses.",
-      "title": "Content Credits"
-    }
-  },
-  "version": {
-    "upgrade": {
-      "subtitle": "The current client version has outdated due to upgrade. Please retry after upgrade",
-      "unable": "Can't Upgrade?",
-      "title": "Version Outdated",
-      "action": "Upgrade"
-    }
-  },
-  "stage": {
-    "actions": {
-      "_name": {
-        "selectorEmpty": "No Quick Access available",
-        "selector": "Quick Access",
-        "panel": "Quick Actions"
-      },
-      "history": {
-        "name": "Recently Accessed",
-        "empty": "No recent accessed stages available\nAfter you've visit any stage pages, a record will appear at here.",
-        "clear": "Clear"
-      },
-      "advanced": {
-        "activator": "Do Advanced Query"
-      },
-      "star": {
-        "empty": "Currently you've not starred any stages\nYou can star a stage by going to its 'Quick Access' section in its details panel.",
-        "name": "Starred",
-        "deactivate": "Click to Cancel Star",
-        "activated": "Starred",
-        "activate": "Star"
-      },
-      "links": {
-        "map-arknights-com": "Maps",
-        "prts-wiki": "Wiki"
-      }
-    },
-    "loots": {
-      "NORMAL_DROP": "Regular",
-      "SPECIAL_DROP": "Special",
-      "FURNITURE": "Furniture",
-      "EXTRA_DROP": "Extra"
-    },
-    "about": "About this Stage",
-    "selector": {
-      "excludeAll": "Exclude All",
-      "title": "Select Stage",
-      "plannerExclude": "Exclude Planning Stages",
-      "includeAll": "Include All"
-    },
-    "apCost": "{apCost} AP required",
-    "name": "Stage"
-  },
-  "notice": {
-    "loading": "Loading Notice...",
-    "failed": "The notice could not be retrieved: {error}."
-  },
-  "contact": {
-    "contributor": "Team Members",
-    "nga": "NGA Thread",
-    "github": "GitHub Issues",
-    "title": "Contact us",
-    "body": "If you have any questions or suggestions, feel free to contact the webmaster. (English is fine)"
-  },
-  "dataSource": {
-    "title": "Login Required",
-    "loginNotice": "Please log in before viewing personal drop data.",
-    "global": "All",
-    "switch": "Data Source",
-    "personal": "Personal"
   },
   "mirrors": {
+    "_notification": {
+      "ignore": {
+        "subtitle": "Are you sure you want to ignore all mirror optimization notifications? Performance issues may occur.",
+        "title": "Ignore Mirror Notification?"
+      }
+    },
     "cn": {
       "notification": "We suggest using the CN mirror ({0}) to improve loading speed."
     },
     "global": {
       "notification": "We suggest using the global mirror ({0}) to improve loading speed."
-    },
-    "_notification": {
-      "ignore": {
-        "title": "Ignore Mirror Notification?",
-        "subtitle": "Are you sure you want to ignore all mirror optimization notifications? Performance issues may occur."
-      }
     }
   },
-  "share": {
-    "text": {
-      "item": "Item \"{name}\"",
-      "_tmpl": "{name} Drop Rates on Penguin Statistics",
-      "stage": "Stage \"{name}\""
-    },
-    "name": "Share",
-    "success": "Successfully shared",
-    "shortlink": {
-      "name": "Short Link"
-    }
+  "network": {
+    "error": "Network error, please check your internet connection and try again."
   },
-  "auth": {
-    "details": "Account",
-    "loggedAs": "Logged in as",
-    "forgot": {
-      "penguinIdHistory": {
-        "title": "Previously used PenguinID",
-        "deleteUserId": "Delete this PenguinID record",
-        "tips": "This feature can only retrieve PenguinID that were logged in using client version v3.3.1 or newer.",
-        "loginAsUserId": "Login as this PenguinID",
-        "lastLoginAt": "Last login at {time}",
-        "noData": "No Data"
-      },
-      "subtitle": "Let's recover your login information",
-      "title": "Can't Login?",
-      "activator": "Forgot PenguinID"
-    },
-    "login": "Login",
-    "logoutPrompt": "Are you sure?",
-    "logout": "Logout",
-    "loggedOut": "Logged out",
-    "success": "Successfully logged in",
-    "failed": {
-      "message": "Login Failed: {message}",
-      "notfound": "This User ID cannot be found. Please note that this is not the ID in the game. You will get one after your first drop report."
-    },
-    "userId": "User ID",
-    "notice": "You can connect and manage drop reports using your User ID. If you don't have a User ID yet, you will be automatically assigned one after you've made your first report."
-  },
-  "donate": {
-    "regulation": {
-      "cnMirror": "Due to regulation policies by law, this card has been temporary disabled on CN mirror.",
-      "app": "This card is unavailable in the app."
-    },
-    "methods": {
-      "wechatPay": "WeChat Pay",
-      "paypal": "Donate with PayPal",
-      "alipay": "Alipay"
-    },
-    "redirectToApp": "Donate with \"{app}\" App",
-    "donate_3": "pocky or apple pie are also accepted",
-    "donate_4": ". We greatly appreciate your support!",
-    "donate_1": "The number of users is increasing. The server is becoming overwhelmed. We will appreciate it a lot if Doctors can donate some",
-    "donate_2": "server fee",
-    "accountBook": "Account Book",
-    "donate_0": "Increasing number of users and server fees are putting Penguin Statistics into crisis. In order to protect our beloved Penguin Statistics, the webmaster decided to..."
-  },
-  "app": {
-    "name": "Penguin Statistics",
-    "name_lines": "Penguin Statistics"
-  },
-  "update": {
-    "success": "Website Updated!",
-    "refresh": "Refresh"
-  },
-  "result": {
-    "name": "Statistics",
-    "title": "Statistics of {item}"
-  },
-  "validator": {
-    "required": "Required"
+  "notice": {
+    "failed": "The notice could not be retrieved: {error}.",
+    "loading": "Loading Notice..."
   },
   "pattern": {
     "empty": "(No Drops)",
@@ -966,30 +365,631 @@
     "name": "Drop Patterns",
     "others": "Others"
   },
-  "network": {
-    "error": "Network error, please check your internet connection and try again."
+  "planner": {
+    "actions": {
+      "_name": "Data",
+      "calculate": "Calculate",
+      "calculating": "Calculating now...",
+      "config": {
+        "_name": "Configuration Profile",
+        "import": "Import from Configuration Profile",
+        "share": "Share Configuration Profile"
+      },
+      "export": "Export",
+      "import": "Import",
+      "importExport": "@:(planner.actions.import)/@:(planner.actions.export)",
+      "link": {
+        "generate": "Generate Share Link",
+        "generating": "Generating...",
+        "share": "Share Link"
+      }
+    },
+    "calculation": {
+      "exp": "Estimated EXP from Battle Records",
+      "level": "Material Level",
+      "lmb": "Estimated LMD income",
+      "noStage": "No stage found.",
+      "noSyntheses": "No syntheses found.",
+      "sanity": "Estimated Sanity required",
+      "tabs": {
+        "stages": "Stages",
+        "syntheses": "Syntheses",
+        "values": "Material Sanity Value"
+      },
+      "times": "battles",
+      "title": "Calculation Result"
+    },
+    "calculationError": "Failed to calculate: {error}",
+    "copy": "Copy to Clipboard",
+    "craft": {
+      "do": "Synthesize",
+      "errors": {
+        "notEnough": "Required {need}×\"{item}\" to synthesize, but only have {have}",
+        "title": "Missing Required Materials to Synthesize"
+      },
+      "plans": {
+        "plan": "Using {cost}×\"{item}\" to synthesize, remaining {remain}",
+        "title": "Synthesize Plans"
+      },
+      "success": "Used {sourceItems} to synthesize {amount} {productItem}",
+      "unable": "Missing Mat."
+    },
+    "have": "Have",
+    "import": {
+      "invalidJSON": "Import Failed: Invalid JSON, please check your input",
+      "success": "Successfully imported {amount} items into ArkPlanner.",
+      "unrecognized": "Import Failed: Unable to recognize config file"
+    },
+    "need": "Need",
+    "notices": {
+      "autoExistence": "ArkPlanner will hide non-existing stages automatically now."
+    },
+    "options": {
+      "_name": "Options",
+      "byProduct": "Consider by-products",
+      "excludeStage": {
+        "_name": "Excludes",
+        "selected": "Excluded {stages} stages",
+        "title": "Select"
+      },
+      "requireExp": "Large demand for EXP",
+      "requireLmb": "Large demand for LMD"
+    },
+    "reset": {
+      "dialog": {
+        "options": {
+          "excludes": {
+            "indicator": "Will reset all Excludes",
+            "name": "Exclude Stages"
+          },
+          "items": {
+            "indicator": "Will reset all Item Data",
+            "name": "Item Data"
+          },
+          "options": {
+            "indicator": "Will reset all Options",
+            "name": "Planning Options"
+          }
+        },
+        "subtitle": "This operation will reset the planner data and settings you choose. Are you sure to continue?",
+        "title": "Reset Planner"
+      },
+      "name": "Reset",
+      "success": "Successfully resetted chosen planner data"
+    }
+  },
+  "query": {
+    "cancel": "Cancel",
+    "operation": {
+      "add": "Add Comparison Query",
+      "execute": "Execute Query",
+      "inProgress": "Executing Queries..."
+    },
+    "panel": {
+      "builder": "Query Builder",
+      "footer": {
+        "cache": "The query result data now displaying is cached data. If you need to get the latest data, please \"execute query\" again.",
+        "disclaimer": "All data produced by the \"Advanced Query\" feature is protected by our site's \"License.\" Penguin Statistics does not make any commitments or endorsements regarding the data produced by the Advanced Query feature."
+      },
+      "results": "Query Results"
+    },
+    "result": {
+      "comparison": "Comparison Query #{index} Result",
+      "empty": "This query returned 0 results. Please check your query parameters.",
+      "hideTime": "Hide Detail Time",
+      "main": "Main Query Result"
+    },
+    "selector": {
+      "interval": {
+        "subtitle": "Interval for segmenting historical trends.",
+        "title": "Segment Interval",
+        "unspecified": "No Segment"
+      },
+      "item": {
+        "selected": "Only Query Selected ({length})",
+        "subtitle": "Used to filter the query results by specified materials. When any filter is selected, no other filters can be selected in the same query. If you want to filter other parameters, you can do it by adding a comparison query.",
+        "title": "Choose Item",
+        "unspecified": "Show All Item"
+      },
+      "stage": {
+        "subtitle": "Used to filter the query results by specified materials. When any filter is selected, no other filters can be selected in the same query. If you want to filter other parameters, you can do it by adding a comparison query.",
+        "title": "Choose Stage"
+      },
+      "timeRange": {
+        "presets": {
+          "end": "Ended",
+          "start": "Started",
+          "title": "Presets"
+        },
+        "subtitle": "(Required) Limit query results in a specific time range.",
+        "title": "Choose Time Range"
+      }
+    },
+    "title": {
+      "comparison": "Comparison Query #{index}",
+      "main": "Main Query"
+    },
+    "type": {
+      "matrix": "Statistics",
+      "trend": "Trends"
+    }
+  },
+  "quotes": {
+    "doYouKnow": "Do You Know? Ptilopsis' feather is sooo cute! o(*≧▽≦)ツ"
+  },
+  "report": {
+    "alert": {
+      "causes": {
+        "limitation": "This report has a significant discrepancy with our current data. Continuing with the submission may result in it being flagged as an outlier and not included in the overall statistical data.",
+        "noDrop": "No items selected."
+      },
+      "contact": {
+        "activator": "contact us.",
+        "after": "Please indicate the stage name and drops. A screenshot is also preferred for verification purposes. Our team will mark your report appropriately after verifying it.",
+        "before": "If you are sure you got this drop in-game, submit this report and "
+      },
+      "continue": {
+        "first": "Are you sure you want to submit this report?",
+        "repeat": "Confirm submitting this report?"
+      },
+      "title": {
+        "first": "Failure Risk Detected",
+        "repeat": "Warning"
+      }
+    },
+    "clear": "Clear",
+    "closedReason": {
+      "EXPIRED": "Not within Reportable Time Range: Either has the stage already closed or has not yet opened.",
+      "INVALID": "Unable to Report: This stage does not contain drop reporting metadata.",
+      "NOT_FOUND": "Stage Not Found: The stage does not exist in the server you have selected."
+    },
+    "furniture": "Furniture Dropped: {state}",
+    "gacha": "Multiple results are allowed in a singular report for this stage.",
+    "name": "Report",
+    "notices": {
+      "rule_1": "Report one clear at a time. Please double-check your drop selection.",
+      "rule_2": "If there are no drops, click submit directly without selecting any drops.",
+      "rule_3": "Please do not report the first-clear of a stage, and do not only report the clears where you were lucky - report all clears.",
+      "rule_4": "Please make sure that you refresh a 3-stars clear.",
+      "rule_5": "Please only submit drop data from the CN server."
+    },
+    "recognition": {
+      "confirm": {
+        "abnormal": {
+          "details": "Errors",
+          "error": "This image failed to pass the legibility test",
+          "fatal": "This image failed to be recognized",
+          "hover": "Hover to see recognition results"
+        },
+        "cherryPick": {
+          "accepted": "Upload this result",
+          "disabled": "Unable to upload illegible recognition result",
+          "rejected": "Discarded this result"
+        },
+        "details": "Details",
+        "itemsTotal": "Items",
+        "loadingImage": "Loading screenshot preview",
+        "noResult": "No recognition results",
+        "overview": {
+          "_name": "Overview",
+          "count": "{count}",
+          "duration": "Avg Time Taken",
+          "error": "Failed",
+          "server": "Dataset Server",
+          "success": "Passed",
+          "total": "Recognized"
+        },
+        "submit": "Upload Selected (×{count}) Results",
+        "unknownStage": "Recognition Failed"
+      },
+      "cost": "Cost",
+      "defectReport": {
+        "action": "Send Feedback...",
+        "dialog": {
+          "section": {
+            "environment": "Environment",
+            "originalImage": "Original Image",
+            "recognitionResult": "Recognition Result"
+          },
+          "subtitle": "Sending recognition defect feedback will upload such screenshot image, recognition result and environment info (including current UI version, recognition core version and recognition resource version) to us. After receiving your feedback, we will use the submitted feedback to optimize algorithm used in screenshot recognition. Thank you for helping us improving the recognition feature!",
+          "title": "Send Recognition Defect Feedback"
+        },
+        "reported": "Feedback Sent",
+        "snackbar": {
+          "failed": "Failed to submit recognition defect feedback. Please try again later.",
+          "succeeded": "Recognition defect feedback has been submitted. Thank you for your feedback!"
+        },
+        "state": {
+          "preflight": "Uploading feedback metadata...",
+          "uploading": "Uploading screenshot image..."
+        }
+      },
+      "description": "Simply select a screenshot of the settlement page to automatically identify and upload all drop results.",
+      "exceptions": {
+        "3stars::False": "Suspected to be a non-3-stars clear",
+        "DropAreaDrops::Illegal": {
+          "subtitle": "There should be no drop in this stage, but there are some in the screenshot. This is usually caused by event drop during non-event period",
+          "title": "Illegal drops found"
+        },
+        "DropAreaDrops::LowConfidence": {
+          "subtitle": "Check if you have selected a screenshot in which its content includes a closed event",
+          "title": "Low Confidence Drop Item"
+        },
+        "DropAreaDropsQuantity::NotFound": {
+          "subtitle": "Pictures with poor resolution or quality may cause this problem. Please check if the image is compressed",
+          "title": "Failed to recognize the drop quantity"
+        },
+        "DropInfos::Violation": "Failed to pass result validation",
+        "DropQuantityChar::LowConfidence": {
+          "subtitle": "Low confidence in the recognition result. Please check if the result is consistent with the screenshot.",
+          "title": "Error in item quantity recognition"
+        },
+        "Droptypes::Illegal": {
+          "subtitle": "There are illegal drop types in the screenshot, like first-clear or return AP",
+          "title": "Illegal drop type"
+        },
+        "Droptypes::NotFound": "Failed to find any drop type",
+        "FileTimestamp::TooClose": {
+          "subtitle": "Check if you have selected duplicated images",
+          "title": "Screenshot Interval too close"
+        },
+        "Fingerprint::Same": {
+          "subtitle": "Check if you have selected duplicated images",
+          "title": "Duplicated Images"
+        },
+        "Result::False": {
+          "subtitle": "If this is a battle result screenshot, please make sure the server you select is correct",
+          "title": "Not a battle result screenshot, or an internal error occurred"
+        },
+        "Stage::Illegal": {
+          "subtitle": "This stage is not opening now",
+          "title": "Illegal stage"
+        },
+        "Stage::NotFound": {
+          "subtitle": "Error in stage recognition, or we do not count drop for this stage",
+          "title": "Cannot found any valid matching stage"
+        },
+        "StageChar::LowConfidence": {
+          "subtitle": "Low confidence in the recognition result. Please check if the result is consistent with the screenshot.",
+          "title": "Error in stage recognition"
+        }
+      },
+      "filename": "Filename",
+      "filter": "Filter",
+      "notices": {
+        "confirm": "Click the image to enlarge it for double-checking.\nScreenshots that passed the legibility test have already been selected for upload.\nFor dataset accuracy considerations, screenshots that failed the legibility tests are **not allowed** from upload.",
+        "welcome": "Image files will be recognized **locally** using **WebAssembly** technology. We will not upload images to our server.\nPlease use screenshots taken within 36 hours that contain only 3-stars clear. Duplications will be detected and marked as *excluded*.\nPlease do not report the first-clear of a stage, and do not only report the clears where you were lucky - report all clears."
+      },
+      "progress": "Progress",
+      "queue": "Image Queue",
+      "recognize": {
+        "elapsed": "Elapsed",
+        "imagePerSecond": "{count} images/sec",
+        "noFilename": "No Filename",
+        "remaining": "Remaining",
+        "speed": "Avg Speed"
+      },
+      "report": {
+        "allSucceeded": "{count} battle results successfully reported",
+        "caption": "Thanks for reporting. Your data will be revealed in the global dataset of website in 20 minutes at most because of cache.",
+        "partialFailed": "{count} failed battle result reports. Please follow the troubleshooting steps below",
+        "partialFailedDesc": "Check your network connection: The upload may be failed if the network connection is poor.\nIn order to ensure that the entire site data set is not affected by external attacks, if you still cannot upload after multiple retries, your submission volume may have triggered the reporting limit. Please try again after 24 hours to upload the remaining drop reports.\nYour IP may be shared with others, because individuals cannot be located due to the nature of IP. In this case, please try to switch your mobile network or WiFi to retry recognition, or you can retry uploading after 24 hours.\nTo prevent retransmission attacks, we will attach a timestamp to your request; if the time of your device is too far from the standard time, the upload may fail. Please try to calibrate the device time and try again.",
+        "partialSucceeded": "Only {count} battle results successfully reported",
+        "reporting": "Reporting in bulk...",
+        "submit": "Report {count} battle results",
+        "title": "Report Details",
+        "total": "Total"
+      },
+      "result": "Result",
+      "retry": "Failed to submit. Retrying...",
+      "start": "Recognize {count} images",
+      "states": {
+        "initializing": "Initializing...",
+        "pending": "Waiting for initialization...",
+        "recognizing": "Recognizing...",
+        "rendering": "Rendering content...",
+        "submitting": "Submitting..."
+      },
+      "status": {
+        "error": "Error",
+        "success": "Success",
+        "warning": "Warning"
+      },
+      "step": {
+        "confirm": "Confirm",
+        "recognize": "Recognize",
+        "report": "Report",
+        "select": "Select Images"
+      },
+      "tips": {
+        "abnormal": "{count} image(s) have been \"excluded\" because they either failed to pass legibility test, or failed to be recognized",
+        "addImage": "Click to add an image",
+        "chooseImage": "Click or drag to add an image",
+        "copyImage": "Right click or long press the image to share it",
+        "dragImage": "Drag an image here",
+        "emptyFile": "No images selected",
+        "emptyResult": "No results available",
+        "fileTooBig": "File \"{name}\" with size of {size}MB is too large",
+        "fileTooOld": "File \"{name}\" was created before 36hrs ago",
+        "hasInvalidFile": "Contains invalid file",
+        "notImageFile": "\"{files}\" are not image files, ignored.",
+        "unsatisfiedStart": "Unable to Start"
+      }
+    },
+    "rules": {
+      "item": {
+        "_name": "Item Quantities",
+        "gte": "Should have at minimum {should} \"{item}\" in \"{stage}\"",
+        "lte": "Should have at maximum {should} \"{item}\" in \"{stage}\"",
+        "not": "Should not have exactly {should} \"{item}\" in \"{stage}\"",
+        "now": "Selected {quantity} {item} in \"{stage}\""
+      },
+      "type": {
+        "_name": "Items",
+        "gte": "Should have at minimum {should} items in \"{stage}\"",
+        "lte": "Should have at maximum {should} items in \"{stage}\"",
+        "not": "Should not have exactly {should} items in \"{stage}\"",
+        "now": "Selected {quantity} items in \"{stage}\""
+      }
+    },
+    "specialSideStory": {
+      "dialog": {
+        "cancel": "Cancel"
+      }
+    },
+    "submit": "Submit",
+    "success": "Successfully submitted",
+    "unable": "Failed to submit: ",
+    "undo": "Recall",
+    "undoSuccess": "Successfully recalled submission",
+    "usage": "Increase drop amount by left click, decrease by right click"
+  },
+  "result": {
+    "name": "Statistics",
+    "title": "Statistics of {item}"
   },
   "search": {
     "hint": "Type in Name for Stage, Zone or Item",
     "placeholder": "Search..."
+  },
+  "server": {
+    "name": "Server",
+    "selected": "Selected",
+    "servers": {
+      "CN": "CN",
+      "JP": "JP",
+      "KR": "KR",
+      "US": "US"
+    },
+    "switch": "Switch Server"
+  },
+  "settings": {
+    "category": {
+      "about": "About",
+      "appearance": "Appearance",
+      "data": "Data"
+    },
+    "data": {
+      "reset": {
+        "subtitle": "This operation will delete all local data and settings you have set. After the deletion, all settings will be reset to default, all data needs to be downloaded again, and the web page will be reloaded. Are you sure to continue?",
+        "title": "Reset All"
+      },
+      "server": "Local Data includes servers: ",
+      "size": "Local Data size: "
+    },
+    "iosSystemSettings": "Language & Privacy Settings",
+    "optimization": {
+      "lowData": {
+        "active": "Low Data Mode is Active",
+        "subtitle": "Low Data Mode will stop fetching nonessential resources, such as the zone backgrounds in stage selector and the website background, to help reduce network data use.",
+        "title": "Low Data Mode"
+      }
+    },
+    "storageIssue": "Storage issues detected. Application may malfunction. If this warning keeps showing, try to clear local storage by using \"Reset All\" under the \"Settings\" dialog in the menu."
+  },
+  "share": {
+    "name": "Share",
+    "shortlink": {
+      "name": "Short Link"
+    },
+    "success": "Successfully shared",
+    "text": {
+      "_tmpl": "{name} Drop Rates on Penguin Statistics",
+      "item": "Item \"{name}\"",
+      "stage": "Stage \"{name}\""
+    }
   },
   "specials": {
     "mikubirthday2021": {
       "caption": "Happy Birthday Hatsune Miku"
     }
   },
-  "quotes": {
-    "doYouKnow": "Do You Know? Ptilopsis' feather is sooo cute! o(*≧▽≦)ツ"
-  },
-  "clipboard": {
-    "success": "Copied to clipboard",
-    "error": "Failed to copy to the clipboard, please manually select the text and copy it"
-  },
-  "link": {
-    "docs": {
-      "title": "For Developers",
-      "subtitle": "Contains resources for developing on top of Penguin Statistics' data"
+  "stage": {
+    "about": "About this Stage",
+    "actions": {
+      "_name": {
+        "panel": "Quick Actions",
+        "selector": "Quick Access",
+        "selectorEmpty": "No Quick Access available"
+      },
+      "advanced": {
+        "activator": "Do Advanced Query"
+      },
+      "history": {
+        "clear": "Clear",
+        "empty": "No recent accessed stages available\nAfter you've visit any stage pages, a record will appear at here.",
+        "name": "Recently Accessed"
+      },
+      "links": {
+        "map-arknights-com": "Maps",
+        "prts-wiki": "Wiki"
+      },
+      "star": {
+        "activate": "Star",
+        "activated": "Starred",
+        "deactivate": "Click to Cancel Star",
+        "empty": "Currently you've not starred any stages\nYou can star a stage by going to its 'Quick Access' section in its details panel.",
+        "name": "Starred"
+      }
+    },
+    "apCost": "{apCost} AP required",
+    "loots": {
+      "EXTRA_DROP": "Extra",
+      "FURNITURE": "Furniture",
+      "NORMAL_DROP": "Regular",
+      "SPECIAL_DROP": "Special"
+    },
+    "name": "Stage",
+    "selector": {
+      "excludeAll": "Exclude All",
+      "includeAll": "Include All",
+      "plannerExclude": "Exclude Planning Stages",
+      "title": "Select Stage"
     }
   },
-  "switchedTo": "Server switched to"
+  "stats": {
+    "filter": {
+      "indicator": "No Filter Applied | {count} Filter Applied | {count} Filters Applied",
+      "overview": "Filter Summary",
+      "stage": {
+        "onlyCurrent": "Available items only"
+      },
+      "stats": "Post-filtered {filtered} / Original {total}",
+      "status": {
+        "_name": "Stage Status",
+        "onlyOpen": "Open stages only"
+      },
+      "title": "Filter",
+      "type": {
+        "_name": "Stage Type",
+        "showActivity": "Event",
+        "showPermanent": "Permanent"
+      }
+    },
+    "headerDesc": {
+      "apCost": "The Sanity required for the stage",
+      "apPPR": "Expected Sanity required for getting 1x of this item",
+      "clearTime": "The shortest possible time required to clear this stage, a.k.a. the time duration starting from the beginning of the combat to the appearance of the last enemy. Data source: [PRTS Wiki]({prtsLink}).",
+      "itemPerTime": "With the \"Percentage\" calculated, the expected amount of time required to acquire 1 item is calculated as (ClearTime / (Loots / Samples))",
+      "patternPercentage": "Possibility to get this drop pattern. Calculated as (Loots / Samples)",
+      "percentage": "Expected drop rate. Calculated as (Loots / Samples)",
+      "quantity": "The sum of all drops in this stage",
+      "timeRange": "Due to the change of the drop table of this stage, the data in this row will only contain the data from the last change of the drop table, indicated as \"Time Range\"",
+      "times": "The sum of the samples in this stage"
+    },
+    "headers": {
+      "apCost": "Sanity",
+      "apPPR": "Sanity Required Per Item",
+      "clearTime": "Shortest Clear Time",
+      "item": "Item",
+      "itemDrops": "Aggregated Item Drops",
+      "itemPerTime": "Time Per Item",
+      "pattern": "Pattern",
+      "percentage": "Percentage",
+      "quantity": "Loots",
+      "recruitObservations": "Observations",
+      "recruitRecruits": "Recruits",
+      "recruitTag": "Recruit Tag",
+      "stage": "Stage",
+      "timeRange": "Time Range",
+      "times": "Samples"
+    },
+    "itemPreview": {
+      "more": "{count} stage(s) drop this item"
+    },
+    "lastUpdated": "Last updated at: {date}",
+    "name": "Statistics",
+    "scroll": "Scroll to view details",
+    "site": {
+      "24hr": "Last 24hr",
+      "all": "Full Time",
+      "generating": {
+        "refresh": "Refresh Site Statistics",
+        "subtitle": "Neural Network Message: Due to high amount of data, site statistics need up to 5 minutes to calculate. Please come back later.",
+        "title": "Generating Site Statistics..."
+      },
+      "items": "Top Upload Items",
+      "stages": "Top Upload Stages",
+      "total": {
+        "items": "Total Item Drops",
+        "report": "Total Drop Reports",
+        "sanity": "Sanity consumed in all reports"
+      },
+      "viewMore": "Learn More"
+    },
+    "timeRange": {
+      "endsAt": "Before {date}",
+      "inBetween": "{0} to {1}",
+      "notSelected": "(not selected)",
+      "toPresent": "{date} until now",
+      "unknown": "Unknown"
+    },
+    "title": "Statistics of {stage}",
+    "trends": {
+      "name": "Historical Drop Data",
+      "set": {
+        "drops": "Drops",
+        "rate": "Drop Rate",
+        "sample": "Samples"
+      }
+    }
+  },
+  "switchedTo": "Server switched to",
+  "update": {
+    "refresh": "Refresh",
+    "success": "Website Updated!"
+  },
+  "validator": {
+    "required": "Required"
+  },
+  "version": {
+    "upgrade": {
+      "action": "Upgrade",
+      "subtitle": "The current client version has outdated due to upgrade. Please retry after upgrade",
+      "title": "Version Outdated",
+      "unable": "Can't Upgrade?"
+    }
+  },
+  "zone": {
+    "name": "Zone",
+    "opensAt": "Event period: {0} - {1}",
+    "status": {
+      "-1": "Opening Soon",
+      "0": "Open",
+      "1": "Closed",
+      "permanentOpen": "Permanent"
+    },
+    "subTypes": {
+      "2019": "2019",
+      "2020": "2020",
+      "2021": "2021",
+      "2022": "2022",
+      "2023": "2023",
+      "AWAKENING_HOUR": {
+        "subtitle": "Episode 0~3",
+        "title": "Hour of an Awakening"
+      },
+      "DYING_SUN": {
+        "subtitle": "Episode 9~11",
+        "title": "Shadow of a Dying Sun"
+      },
+      "INTERLUDE": "Intermezzi",
+      "SIDESTORY": "Side Story",
+      "VISION_SHATTER": {
+        "subtitle": "Episode 4~8",
+        "title": "Shatter of a Vision"
+      }
+    },
+    "types": {
+      "ACTIVITY": "Event",
+      "ACTIVITY_CLOSED": "Event (Closed)",
+      "ACTIVITY_OPEN": "Event (Opening)",
+      "ACTIVITY_PENDING": "Event (Opening Soon)",
+      "ACTIVITY_PERMANENT": "Intermezzi & Side Story",
+      "GACHABOX": "Gachabox",
+      "MAINLINE": "Main Theme",
+      "RECRUIT": "Recruit",
+      "WEEKLY": "Supplies"
+    }
+  }
 }
