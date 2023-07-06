@@ -20,7 +20,7 @@ const fetchTranslations = async (languageKey) => {
     })
     .catch((error) => {
       Console.error("i18n", "failed to fetch translations:", error);
-      return {};
+      return Promise.reject(error);
     });
 };
 
@@ -145,9 +145,6 @@ export function loadLanguageAsync(lang) {
   // If the language was already loaded
   if (loadedLanguages.includes(mappedLang)) return Promise.resolve();
 
-  // If the language hasn't been loaded yet
-  // set it first to use the local translation
-  changeLocale.bind(this)(lang, false);
   // import font using fontsource.
   const font = fontMapping[localeMapping[lang] || lang];
   if (font) {
@@ -179,7 +176,7 @@ export default {
       })()
       changeLocale.bind(this)(lang, save);
 
-      await loadLanguageAsync.bind(this)(lang);
+      loadLanguageAsync.bind(this)(lang);
     },
   },
   computed: {
