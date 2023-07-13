@@ -28,3 +28,5 @@ yarn install --frozen-lockfile
 
 # build and sync
 yarn run build:app
+
+yarn capacitor sync ios
