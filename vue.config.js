@@ -99,10 +99,6 @@ module.exports = {
     module: {
       rules: [
         {
-          test: /\.ya?ml$/,
-          use: "js-yaml-loader",
-        },
-        {
           test: /\.md$/,
           use: "raw-loader",
         },
