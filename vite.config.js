@@ -59,15 +59,23 @@ export default defineConfig((({mode}) => {
     resolve: {
       alias: {
         '@': __dirname + '/src',
+        vue: '@vue/compat'
       },
       extensions: [
         '.js',
         '.vue',
-        '.json',
       ]
     },
     plugins: [
-      vue(),
+      vue({
+        template: {
+          compilerOptions: {
+            compatConfig: {
+              MODE: 2
+            }
+          }
+        }
+      }),
       // legacy(),
       manualChunksPlugin()
     ],
@@ -78,8 +86,5 @@ export default defineConfig((({mode}) => {
       PENGUIN_PROBE_NOSCRIPT: noscriptImage,
       NPM_PACKAGE_VERSION: JSON.stringify(packageVersion), // stringify
     },
-    build: {
-      target: "modules",
-    }
   }
 }))
