@@ -8,7 +8,7 @@
       <v-item
         v-for="n in value.length"
         :key="`btn-${n}`"
-        v-slot:default="{ active, toggle }"
+        v-slot="{ active, toggle }"
       >
         <v-btn
           :input-value="active"
@@ -223,6 +223,7 @@ export default {
       if (i === this.index) {
         this.index = this.index - 1;
       }
+      // eslint-disable-next-line vue/no-mutating-props
       this.value.splice(i, 1);
     },
     execute() {

@@ -44,7 +44,7 @@
             mdi-server
           </v-icon>
           <span class="caption ml-1">
-            {{ $t("server.servers." + this.$store.getters["dataSource/server"]) }}
+            {{ $t("server.servers." + $store.getters["dataSource/server"]) }}
           </span>
         </div>
         <v-divider

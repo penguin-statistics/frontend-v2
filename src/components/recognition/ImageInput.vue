@@ -44,7 +44,7 @@
       <!--        </v-overlay>-->
       <!--      </template>-->
       <template
-        v-slot:selection="{ index, text }"
+        #selection="{ index, text }"
       >
         <v-chip
           v-if="index < 8"

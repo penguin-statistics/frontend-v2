@@ -1,9 +1,0 @@
-{
-  "baseUrl": "http://localhost:8080",
-  "video": false,
-  "pluginsFile": "tests/e2e/plugins/index.js",
-  "watchForFileChanges": false,
-  "env": {
-    "PENGUIN_FRONTEND_ENV": "testing"
-  }
-}
