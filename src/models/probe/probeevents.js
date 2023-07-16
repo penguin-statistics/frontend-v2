@@ -1799,4 +1799,4 @@ $root.PenguinProbe = (function () {
   return PenguinProbe
 })()
 
-module.exports = $root
+export default $root

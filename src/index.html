@@ -1,0 +1,956 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0,viewport-fit=cover">
+
+  <link rel="icon" href="/favicon.ico">
+  <title>企鹅物流数据统计</title>
+  <link rel="preconnect" href="https://penguin.upyun.galvincdn.com">
+  <link rel="preconnect" href="https://penguin-stats.s3.amazonaws.com">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon/favicon-16x16.png">
+  <link rel="manifest" href="/manifest.json">
+  <meta name="theme-color" content="#1565c0">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="企鹅物流数据统计">
+  <link rel="apple-touch-icon" href="/favicon/apple-touch-icon.png">
+  <link rel="mask-icon" href="/favicon/safari-pinned-tab.svg" color="#2d66ba">
+  <meta name="msapplication-TileImage" content="/favicon/mstile-150x150.png">
+  <meta name="msapplication-TileColor" content="#1d499b">
+
+  <link rel="search" type="application/opensearchdescription+xml" href="/opensearch.xml"/>
+
+  <meta name="description" content="Penguin Statistics is the Department of Data Analysis of Penguin Logistics."/>
+
+  <meta name="robots" content="index,follow"/>
+  <meta name="googlebot" content="index,follow"/>
+  <meta name="twitter:card" content="summary_large_image"/>
+  <meta name="twitter:image" content="https://penguin-stats.s3.amazonaws.com/images/twitter-card.png">
+  <meta name="twitter:image:alt" content="Penguin Statistics">
+  <!--  <meta name="twitter:site" content="@AlvISs_Reimu" />-->
+  <meta property="og:url" content="https://penguin-stats.io"/>
+  <meta property="og:type" content="website"/>
+  <meta property="og:title" content="Penguin Statistics"/>
+  <meta property="og:description"
+        content="Penguin Statistics is the Department of Data Analysis of Penguin Logistics."/>
+  <meta property="og:image" content="https://penguin.upyun.galvincdn.com/logos/penguin_stats_logo.png"/>
+  <meta property="og:image:alt" content="Penguin Statistics"/>
+  <meta property="og:image:width" content="800"/>
+  <meta property="og:image:height" content="600"/>
+
+  <style>#app, body, html {
+      height: 100%;
+      margin: 0;
+      padding: 0;
+      transition: background .3s cubic-bezier(.25, .8, .5, 1) !important
+  }
+
+  body {
+      background: #121212
+  }
+
+  .nojs h1 {
+      font-size: 48px;
+      margin: .2em 0
+  }
+
+  .nojs h2 {
+      font-size: 36px
+  }
+
+  .nojs p {
+      margin: .5em 0
+  }
+
+  .nojs hr {
+      margin: 24px 0;
+      border: 1px solid #212121
+  }
+
+  .nojs {
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 100%;
+      width: 100%;
+      z-index: 9999999999;
+      background: #4d2222;
+      background: repeating-linear-gradient(-45deg, #3c1b1b, #3c1b1b 90px, #1d0d0d 0, #1d0d0d 180px);
+      display: flex;
+      align-items: center;
+      justify-content: center
+  }
+
+  .nojs-content {
+      vertical-align: middle;
+      width: 70%;
+      font-weight: 700;
+      font-size: 18px;
+      font-family: -apple-system, Noto Sans SC, BlinkMacSystemFont, Segoe UI, Microsoft YaHei UI, Microsoft Yahei, 微软雅黑, Helvetica, Arial, sans-serif;
+      padding: 48px 64px;
+      word-break: break-word;
+      text-align: center;
+      line-height: 2;
+      border-radius: 16px;
+      background: #cc696f;
+      background: rgba(204, 105, 111, .8);
+      backdrop-filter: blur(16px);
+      text-shadow: 0 2px 4px rgba(0, 0, 0, .3);
+      border: 4px solid #ff878f;
+      color: #261415;
+      box-shadow: 0 0 2rem rgba(0, 0, 0, .5), inset 0 0 2rem rgba(0, 0, 0, .5)
+  }
+
+  .nojs .nojs-btn {
+      display: inline-block;
+      border: 2px solid #000;
+      padding: 8px 24px;
+      margin: 0 8px;
+      text-decoration: none;
+      background: #3375e0;
+      color: #fff;
+      font-family: sans-serif;
+      font-size: 14px;
+      cursor: pointer;
+      text-align: center;
+      transition: background 50ms ease-out, transform .15s ease;
+      -webkit-appearance: none;
+      -moz-appearance: none
+  }
+
+  .nojs .nojs-btn:focus, .nojs .nojs-btn:hover {
+      background: #368dff;
+      transform: scale(1.05)
+  }
+
+  .nojs .nojs-btn:focus {
+      outline: 1px solid #fff;
+      outline-offset: -4px
+  }
+
+  .nojs .nojs-btn:active {
+      transform: scale(.99)
+  }
+
+  .nojs del {
+      padding: 4px 8px;
+      background: #1d1d1d;
+      background: repeating-linear-gradient(-45deg, #995d22, #995d22 15px, rgba(0, 0, 0, .5) 0, rgba(0, 0, 0, .5) 30px);
+      color: #cbcbcb;
+      border-radius: 4px
+  }
+
+  .nojs .nojs-link {
+      background: #0d47a1;
+      color: #fff;
+      border: 2px solid #093777;
+      padding: 4px 6px;
+      text-decoration: none;
+      border-radius: 4px
+  }
+
+  .nojs .nojs-btn:focus, .nojs .nojs-link:hover {
+      background: #0f5ad6
+  }
+
+  .nojs .nojs-link:active {
+      background: #0d4fba
+  }</style>
+  <style>.peL--gradient {
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 100%;
+      width: 100%;
+      z-index: -1;
+      opacity: 0;
+      transition: opacity 2s cubic-bezier(.25, 1, .5, 1), background-image 1s cubic-bezier(.25, 1, .5, 1);
+      background-image: linear-gradient(310deg, #36244d, #412c4d, #4d382f)
+  }
+
+  .peL--gradient-haserror {
+      background-image: linear-gradient(310deg, #6b2525, #4f2020, #4f1c1c)
+  }
+
+  .peL--overlay {
+      font-family: Roboto, -apple-system, Noto Sans SC, BlinkMacSystemFont, Segoe UI, Microsoft YaHei UI, Microsoft Yahei, 微软雅黑, Helvetica, Arial, sans-serif;
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 100%;
+      width: 100%;
+      z-index: 99999999;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      transition: opacity .3s cubic-bezier(.25, 1, .5, 1);
+      display: flex;
+      opacity: 0;
+      pointer-events: none;
+      background: rgba(0, 0, 0, .8);
+      color: #efefef;
+      backdrop-filter: saturate(.5) blur(5px);
+      animation: peL-ob 2s ease-in-out infinite alternate
+  }
+
+  .peL--overlay h1 {
+      margin-bottom: 0;
+      text-shadow: 0 0 5px hsla(0, 0%, 100%, .5)
+  }
+
+  .peL--overlay h3 {
+      color: #aaa
+  }
+
+  @keyframes peL-ob {
+      0% {
+          background: rgba(0, 0, 0, .7)
+      }
+      to {
+          background: rgba(0, 0, 0, .9)
+      }
+  }
+
+  .peL_w {
+      height: 100%;
+      width: 100%;
+      overflow: auto;
+      position: relative;
+      user-select: none;
+      cursor: progress;
+      text-align: center;
+      color: #eee;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      background: rgba(0, 0, 0, 0)
+  }
+
+  .peL_w * {
+      font-family: Roboto, -apple-system, Noto Sans SC, BlinkMacSystemFont, Segoe UI, Microsoft YaHei UI, Microsoft Yahei, 微软雅黑, Helvetica, Arial, sans-serif
+  }
+
+  .peL_w .peL_logo {
+      height: 6rem;
+      width: 6rem;
+      margin-bottom: 2rem;
+      filter: drop-shadow(0 0 10px rgba(255, 255, 255, .1))
+  }
+
+  .peL_w .peL--text {
+      font-size: 1rem;
+      line-height: 1.5rem;
+      letter-spacing: .02em
+  }
+
+  .peL_w .peL_title {
+      position: relative;
+      z-index: 1;
+      min-height: 2rem;
+      text-shadow: 0 0 10px hsla(0, 0%, 100%, .5);
+      margin-bottom: .25rem;
+      width: 95%;
+      opacity: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      transition: all .5s cubic-bezier(.25, 1, .5, 1)
+  }
+
+  .peL_w .peL_title-gone {
+      opacity: 0;
+      letter-spacing: 1px
+  }
+
+  .peL_w .peL_modal-w {
+      height: 0;
+      overflow: hidden;
+      transition: all .3s cubic-bezier(.25, 1, .5, 1);
+      max-width: 450px;
+      box-shadow: 0 5px 20px rgba(0, 0, 0, .1);
+      border-radius: 8px;
+      background: hsla(0, 0%, 100%, .1);
+      text-align: left
+  }
+
+  .peL_w .peL_modal-w .peL_modal h1 {
+      font-size: 1.75rem;
+      background: rgba(0, 0, 0, .15);
+      margin: 0;
+      padding: 1rem 1.5rem
+  }
+
+  .peL_w .peL_modal-w .peL_modal .peL_modal-c {
+      padding: .5rem 2rem 1rem
+  }
+
+  .peL_w .peL_modal-w .peL_modal .peL_modal-c p {
+      margin: .75rem 0;
+      line-height: 1.5
+  }
+
+  .peL_w .peL_modal-w .peL_modal .peL_modal-c ul {
+      padding-left: 1rem
+  }
+
+  .peL_w .peL_modal-w .peL_modal .peL_modal-c ul li:not(:last-child) {
+      padding-bottom: .5rem
+  }
+
+  .peL_w .peL_modal-w .peL_modal .peL_modal-c a, .peL_w .peL_modal-w .peL_modal .peL_modal-c button {
+      display: inline-block;
+      padding: 6px 12px;
+      margin: 0 6px;
+      text-decoration: none;
+      background: #3375e0;
+      border: none;
+      color: #fff;
+      font-size: 16px;
+      border-radius: 4px;
+      cursor: pointer;
+      text-align: center;
+      transition: background 50ms cubic-bezier(.25, 1, .5, 1), transform .15s cubic-bezier(.25, 1, .5, 1), box-shadow .2s cubic-bezier(.25, 1, .5, 1);
+      -webkit-appearance: none;
+      appearance: none;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, .2), 0 0 0 0 #286cd4;
+      outline: none !important;
+      letter-spacing: .015rem
+  }
+
+  .peL_w .peL_modal-w .peL_modal .peL_modal-c a:hover, .peL_w .peL_modal-w .peL_modal .peL_modal-c button:hover {
+      box-shadow: 0 4px 8px rgba(0, 0, 0, .6), 0 0 0 0 #286cd4
+  }
+
+  .peL_w .peL_modal-w .peL_modal .peL_modal-c a:active, .peL_w .peL_modal-w .peL_modal .peL_modal-c button:active {
+      color: #d0d0d0;
+      background: #285db3;
+      box-shadow: 0 0 0 rgba(0, 0, 0, .4), 0 0 0 3px #5798ff;
+      transform: translateY(1px)
+  }
+
+  .peL_w .peL_subtitle {
+      font-size: .9rem;
+      color: hsla(0, 0%, 100%, .5)
+  }
+
+  .peL_w .peL_loInd {
+      width: 100%;
+      position: relative;
+      overflow: hidden;
+      transition: all .3s cubic-bezier(.25, 1, .5, 1);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center
+  }
+
+  .peL_w .peL_loader {
+      width: 12rem;
+      overflow: hidden;
+      position: relative;
+      background: rgba(92, 107, 192, .1);
+      height: 4px;
+      min-height: 4px;
+      border-radius: 2px;
+      margin-bottom: 1.5rem;
+      filter: drop-shadow(0 0 5px #5C6BC0)
+  }
+
+  .peL_w .peL_loader .peL_loader-p {
+      transition: all .25s cubic-bezier(.25, 1, .5, 1);
+      width: 0;
+      position: absolute;
+      left: 0;
+      top: 0;
+      height: 4px;
+      background: #5c6bc0;
+      animation: peL_bar 10s linear forwards
+  }
+
+  .peL_footer {
+      font-family: Roboto, -apple-system, Noto Sans SC, BlinkMacSystemFont, Segoe UI, Microsoft YaHei UI, Microsoft Yahei, 微软雅黑, Helvetica, Arial, sans-serif;
+      position: absolute;
+      bottom: 0;
+      height: 3rem;
+      line-height: .9rem;
+      width: 100%;
+      font-size: .9rem;
+      color: hsla(0, 0%, 100%, .35);
+      letter-spacing: .015rem;
+      pointer-events: none;
+      display: flex;
+      justify-content: center
+  }
+
+  .peL_footer .peL_footer-d {
+      margin: 0 .35rem
+  }
+
+  @keyframes peL_bar {
+      0% {
+          width: 0
+      }
+      3% {
+          width: 14.26%
+      }
+      6% {
+          width: 26.486%
+      }
+      9% {
+          width: 36.969%
+      }
+      12% {
+          width: 45.957%
+      }
+      15% {
+          width: 53.663%
+      }
+      18% {
+          width: 60.271%
+      }
+      21% {
+          width: 65.936%
+      }
+      24% {
+          width: 70.793%
+      }
+      27% {
+          width: 74.958%
+      }
+      30% {
+          width: 78.529%
+      }
+      33% {
+          width: 81.591%
+      }
+      36% {
+          width: 84.216%
+      }
+      39% {
+          width: 86.466%
+      }
+      42% {
+          width: 88.396%
+      }
+      45% {
+          width: 90.051%
+      }
+      48% {
+          width: 91.47%
+      }
+      51% {
+          width: 92.686%
+      }
+      54% {
+          width: 93.729%
+      }
+      57% {
+          width: 94.623%
+      }
+      60% {
+          width: 95.39%
+      }
+      63% {
+          width: 96.047%
+      }
+      66% {
+          width: 96.611%
+      }
+      69% {
+          width: 97.094%
+      }
+      72% {
+          width: 97.509%
+      }
+      75% {
+          width: 97.864%
+      }
+      78% {
+          width: 98.168%
+      }
+      81% {
+          width: 98.43%
+      }
+      84% {
+          width: 98.654%
+      }
+      87% {
+          width: 98.846%
+      }
+      90% {
+          width: 99.01%
+      }
+      93% {
+          width: 99.151%
+      }
+      96% {
+          width: 99.272%
+      }
+      100.0% {
+          width: 99.326205%
+      }
+  }</style>
+  <style>
+      .peL_logo > path {
+          stroke-dasharray: 1664.107421875;
+          animation: dash 15s forwards cubic-bezier(0.215, 0.610, 0.355, 1);
+      }
+
+      @keyframes dash {
+          from {
+              stroke-dashoffset: 1664.107421875;
+          }
+          to {
+              stroke-dashoffset: 11.3152;
+          }
+      }
+  </style>
+
+</head>
+<body>
+<noscript>
+  <img src="<%= PENGUIN_PROBE_NOSCRIPT %>" width="1" height="1" style="overflow: hidden; opacity: 0.5" alt=":D"/>
+  <div class="nojs">
+    <div class="nojs-content">
+      <h1>⚠️ JavaScript 已被禁用</h1>
+      <p>
+        很抱歉，由于企鹅物流数据统计使用了 Vue.js 这样的 SPA (Single Page Application) Framework，我们在您启用
+        <del>等离子发动机</del>
+        JavaScript 的情况下才能为您提供服务。
+      </p>
+      <p>
+        若您确信自己已开启相关技术，那么可能是您的浏览器版本太低了；请点击下方按钮升级浏览器。
+      </p>
+      <hr>
+      <a class="nojs-btn" href="https://www.mozilla.org/zh-CN/firefox/new/" target="_blank" rel="noopener">使用 Mozilla
+        Firefox (推荐)</a>
+
+      <a class="nojs-btn" href="https://www.google.cn/chrome/" target="_blank" rel="noopener">
+        使用 Google Chrome
+      </a>
+
+      <br><br>
+      <p>Penguin Statistics | <a class="nojs-link" href="https://github.com/penguin-statistics"
+                                 target="_blank">GitHub</a></p>
+    </div>
+  </div>
+</noscript>
+<main id="app">
+  <div id="peL--gradientel" class="peL--gradient"></div>
+  <div id="peL--overlayel" class="peL--overlay"></div>
+  <div id="peL_wel" class="peL_w">
+    <svg xmlns="http://www.w3.org/2000/svg" class="peL_logo" viewBox="0 0 342 342">
+      <path fill="transparent" stroke="#f0f0f0" stroke-width="8"
+            d="M155.44 6.15c-14.1-.4-24.79 1.42-26.06 6.46-2.06 8.23 18.83 20.4 45.94 27.43l-.09.03c8.72 2.04 14.58 6.96 7.98 5.79l-.88-.13c-19.56-3.32-33.76-2.31-48.33 3.46-6.32 2.5-13.56 5.3-16.08 6.2C93.25 64.24 66.37 110.88 54.16 166c-3.04 13.74-3.46 16.69-2.75 19.5 1.05 4.18 2.59 2.8 2.59-2.34 0-5.44 2.84-17.37 5.75-24.15 1.93-4.49 1.93-4.49 2.6 11 .38 8.52.95 17.83 1.29 20.7.73 6.24-6.82 15.76-13.6 17.15-12.86 2.63 2.02 5.14 17.27 2.9 1.24-.17 2.27.82 3.26 3.11 1.44 3.38 1.44 3.38-1.36 2.82-4.03-.8-5.88 2.26-3.83 6.36 2.6 5.24-.4 4.52-5.51-1.31-4.46-5.08-5.31-5.6-10.12-6.2-8.14-.98-15.18-2.72-15.98-3.93-.46-.69-.74-.45-.75.63-.03 2.53 15.53 21.5 18.21 22.22 10.32 2.77 11.88 4.29 8.2 7.97-2.44 2.44-4.78 2.09-3.39-.52.62-1.14.87-2.34.55-2.65-.64-.65-5.2 9.25-6.2 13.46-.94 4.04 1.2 1.74 3.01-3.24 1.32-3.6 1.47-3.72 1.53-1.23.08 2.95 4.34 4.13 5.41 1.5.38-.94.76-.88 1.54.24.75 1.08.63 1.7-.42 2.3-.96.53-1.46 2.45-1.46 5.64 0 3.12-.54 5.28-1.53 6.1-2.02 1.67-1.4 3.25 1.6 4.1 2.43.7 2.43.7.13 1.41-3.93 1.23-2.72 6.84 1.55 7.18 2.66.2 3.25-.1 3.25-1.73 0-1.1.45-1.99 1-1.99s1-.68 1-1.5-.68-1.5-1.5-1.5-1.5-.45-1.5-1c0-2.17 3.2-.8 7 3 5.3 5.3 5.24 7-.28 7-3.87 0-4.82.53-9.68 5.45-2.96 3-5.75 5.23-6.21 4.94-.46-.28-.83.1-.83.86s-1.35 2.67-3 4.25c-3 2.88-4.1 6.15-1.75 5.22l11.52-4.61c5.65-2.26 10.92-4.11 11.72-4.11.8 0 2.18-1.4 3.07-3.12 1.18-2.29 1.9-2.82 2.73-2 .6.62 2.09 1.12 3.28 1.12 2.3 0 2.64 1.33 4.01 16C86.71 315.07 98 338.33 98 328.58c0-1.88.67-1.94 4.9-.46 3.86 1.34 4.65.78 3.08-2.16-.94-1.76-.92-2.04.1-1.41.7.43 4 .86 7.35.94 6.85.18 13.57 2.26 13.57 4.21 0 1.74 1.47 1.64 3-.2a5.3 5.3 0 0 1 3.62-1.5c1.45 0 2.38.59 2.38 1.5 0 2.25 2.55 1.8 4.25-.75 1.77-2.66 12.49-2.81 19.67-.28 2.88 1.02 4.93 1.15 7.29.47 6.65-1.9 12.79-.17 12.79 3.62 0 2.62.46 3.4 2.25 3.75 4.1.82 6.24.22 7.24-2.06.54-1.24 1.53-2.25 2.2-2.25.66 0 2.45-1.16 3.98-2.57 2.27-2.1 3.4-2.45 6.15-1.94 2.48.47 3.9.17 5.32-1.11 2.3-2.09 10.95-2.01 14.27.13 3.74 2.4 8.84 2.75 13.62.93 2.46-.94 6.9-1.8 9.87-1.9 6.43-.24 9.55-3.01 8.84-7.86-.4-2.75 5.14-6.68 9.43-6.68.56 0 3.38-2.02 6.28-4.5 2.9-2.48 5.94-4.5 6.76-4.5 2.08 0 10.79-9.68 10.79-12 0-3.02-2.17-6.99-3.91-7.14-.87-.08-3.05-.05-4.84.07-2.39.17-3.25-.2-3.25-1.35 0-.86-1.68-3.43-3.73-5.7-2.82-3.13-3.65-4.83-3.42-7.04.34-3.23-4.24-8.35-11.26-12.59-5.52-3.33-7.27-2.25-4.56 2.8.94 1.75.8 1.84-1.57.94-1.42-.55-4.81-.99-7.52-.99-3.64 0-4.94-.38-4.94-1.44 0-1.91 3.87-4.56 6.67-4.56 1.23 0 2.6-.56 3.03-1.25.44-.69 3.5-2.53 6.8-4.08 6.56-3.1 13.27-8.23 12.2-9.31-.38-.38-1.88-.14-3.32.51-1.45.66-2.9.94-3.23.61-.93-.93 2-2.42 6.11-3.11 3.72-.62 5.88-3.71 4.35-6.2-.32-.51 1.25-1.4 3.5-1.97 3.9-.99 4.04-.94 3.52 1.14-1.12 4.47.54 4.93 7.96 2.21 5.1-1.69 9.13-3.06 11.28-4.43 2.67-1.5 6.8-5.94 14.94-16.03 4.29-5.3 2.96-5.8-7.15-2.68-7.83 2.43-7.83 2.43-10.39.26-8.7-7.38-10.26-10.99-7.38-16.95 2.62-5.4 2.72-7.2.36-6.18-8.53 3.65-13.06-6.28-19.8-43.38-3.53-19.49-1.76-18.37 10.57 6.68 5.22 10.6 7.86 14.34 5.95 8.41-.48-1.51-2.64-8.38-4.78-15.25-17.9-57.4-44.07-85.1-89.71-94.89 1.13-1.76-.41-3.35-2.71-4.63C207.12 45 234 38.5 234 30.2c0-11.55-47.53-23.16-78.56-24.05Z"/>
+    </svg>
+    <div class="peL_loInd">
+      <div class="peL_loader">
+        <div class="peL_loader-p"></div>
+      </div>
+      <div class="peL_title peL--text">
+        正在加载
+      </div>
+      <div class="peL_subtitle peL--text" id="peL_subtitle">
+        首次加载可能较慢，请耐心等待
+      </div>
+    </div>
+    <div class="peL_modal-w">
+      <div class="peL_modal"></div>
+    </div>
+  </div>
+  <div class="peL_footer">
+    <span id="peL_footer-vendor">
+      &copy; 企鹅物流数据统计
+    </span><span class="peL_footer-d">—</span>
+    <span id="peL_footer--year">2021</span>
+  </div>
+</main>
+<script>parcelRequire = function (e, r, t, n) {
+  var i, o = "function" == typeof parcelRequire && parcelRequire, u = "function" == typeof require && require;
+
+  function f(t, n) {
+    if (!r[t]) {
+      if (!e[t]) {
+        var i = "function" == typeof parcelRequire && parcelRequire;
+        if (!n && i) return i(t, !0);
+        if (o) return o(t, !0);
+        if (u && "string" == typeof t) return u(t);
+        var c = new Error("Cannot find module '" + t + "'");
+        throw c.code = "MODULE_NOT_FOUND", c
+      }
+      p.resolve = function (r) {
+        return e[t][1][r] || r
+      }, p.cache = {};
+      var l = r[t] = new f.Module(t);
+      e[t][0].call(l.exports, p, l, l.exports, this)
+    }
+    return r[t].exports;
+
+    function p(e) {
+      return f(p.resolve(e))
+    }
+  }
+
+  f.isParcelRequire = !0, f.Module = function (e) {
+    this.id = e, this.bundle = f, this.exports = {}
+  }, f.modules = e, f.cache = r, f.parent = o, f.register = function (r, t) {
+    e[r] = [function (e, r) {
+      r.exports = t
+    }, {}]
+  };
+  for (var c = 0; c < t.length; c++) try {
+    f(t[c])
+  } catch (e) {
+    i || (i = e)
+  }
+  if (t.length) {
+    var l = f(t[t.length - 1]);
+    "object" == typeof exports && "undefined" != typeof module ? module.exports = l : "function" == typeof define && define.amd ? define(function () {
+      return l
+    }) : n && (this[n] = l)
+  }
+  if (parcelRequire = f, i) throw i;
+  return f
+}({
+  "vQE2": [function (require, module, exports) {
+    function e(e, t) {
+      var r;
+      if ("undefined" == typeof Symbol || null == e[Symbol.iterator]) {
+        if (Array.isArray(e) || (r = n(e)) || t && e && "number" == typeof e.length) {
+          r && (e = r);
+          var o = 0, a = function () {
+          };
+          return {
+            s: a, n: function () {
+              return o >= e.length ? {done: !0} : {done: !1, value: e[o++]}
+            }, e: function (e) {
+              throw e
+            }, f: a
+          }
+        }
+        throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.")
+      }
+      var i, l = !0, s = !1;
+      return {
+        s: function () {
+          r = e[Symbol.iterator]()
+        }, n: function () {
+          var e = r.next();
+          return l = e.done, e
+        }, e: function (e) {
+          s = !0, i = e
+        }, f: function () {
+          try {
+            l || null == r.return || r.return()
+          } finally {
+            if (s) throw i
+          }
+        }
+      }
+    }
+
+    function t(e, t) {
+      return i(e) || a(e, t) || n(e, t) || r()
+    }
+
+    function r() {
+      throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.")
+    }
+
+    function n(e, t) {
+      if (e) {
+        if ("string" == typeof e) return o(e, t);
+        var r = Object.prototype.toString.call(e).slice(8, -1);
+        return "Object" === r && e.constructor && (r = e.constructor.name), "Map" === r || "Set" === r ? Array.from(e) : "Arguments" === r || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(r) ? o(e, t) : void 0
+      }
+    }
+
+    function o(e, t) {
+      (null == t || t > e.length) && (t = e.length);
+      for (var r = 0, n = new Array(t); r < t; r++) n[r] = e[r];
+      return n
+    }
+
+    function a(e, t) {
+      if ("undefined" != typeof Symbol && Symbol.iterator in Object(e)) {
+        var r = [], n = !0, o = !1, a = void 0;
+        try {
+          for (var i, l = e[Symbol.iterator](); !(n = (i = l.next()).done) && (r.push(i.value), !t || r.length !== t); n = !0) ;
+        } catch (s) {
+          o = !0, a = s
+        } finally {
+          try {
+            n || null == l.return || l.return()
+          } finally {
+            if (o) throw a
+          }
+        }
+        return r
+      }
+    }
+
+    function i(e) {
+      if (Array.isArray(e)) return e
+    }
+
+    !function () {
+      window.__penguinLoader = {}, Object.entries || (Object.entries = function (e) {
+        for (var t = Object.keys(e), r = t.length, n = new Array(r); r--;) n[r] = [t[r], e[t[r]]];
+        return n
+      });
+      var r = function () {
+        function r(e) {
+          return document.querySelector(e) || {style: {}, classList: {}, textContent: "", innerHTML: ""}
+        }
+
+        setTimeout(function () {
+          r("#peL--gradientel").style.opacity = 1
+        }, 750);
+        var n = {
+          languageWithRegion: function () {
+            var e, t, r, n = window.navigator, o = ["language", "browserLanguage", "systemLanguage", "userLanguage"],
+              a = null;
+            if (Array.isArray(n.languages)) for (e = 0; e < n.languages.length; e++) if (r = (t = n.languages[e]).length, !a && r && (a = t), t && r > 2) return t;
+            for (e = 0; e < o.length; e++) if (null != (t = n[o[e]]) && (r = t.length, !a && r && (a = t), t && r > 2)) return t;
+            return a
+          }, language: function () {
+            if (localStorage) {
+              var e = localStorage.getItem("penguin-stats-settings");
+              if (e) try {
+                var t = JSON.parse(e);
+                if (t && t.settings && t.settings.language) return t.settings.language
+              } catch (o) {
+                return "en"
+              }
+            }
+            var r = this.languageWithRegion().replace("_", "-");
+            if (!r) return "en";
+            var n = r.split("-");
+            return 1 === n.length ? r : 2 === n.length ? n[0] : "en"
+          }, data: {
+            zh: {
+              titles: ["正在尝试与 Rhodes Island™ 建立神经连接", "正在释放神经递质", "站长阿包正在穿女装", "少女祈祷中", "资源装载中"],
+              subtitle: "首次加载可能较慢，请耐心等待",
+              vendor: "&copy; 企鹅物流数据统计",
+              errors: {
+                coreLoad: {
+                  title: "核心资源加载失败",
+                  content: '<ul><li>请尝试 <button onclick=\'__penguinLoader.reload()\'>重载页面</button></li>\n<li>若屡次出现此错误，请<a href="/update-browser.html" target="_blank">升级您的浏览器</a></li></ul>'
+                },
+                coreExec: {
+                  title: "核心资源解析失败",
+                  content: '<p>由于您的浏览器过于过时，页面在渲染时发生了错误。</p><p>请 <a href="/update-browser.html" target="_blank">升级您的浏览器</a></p>'
+                },
+                slow: {
+                  title: "加载过于缓慢",
+                  content: '<p>检测到页面资源加载过于缓慢（加载时长超过 15s）</p><ul><li>请尝试 <button onclick=\'__penguinLoader.goToMirror("cn")\'>使用 CN 镜像</button></li>\n<li>若持续未响应，请<a href="/update-browser.html" target="_blank">升级您的浏览器</a></li></ul>'
+                }
+              },
+              overlay: {
+                reload: "<h1>正重载页面</h1><h3>请耐心等待</h3>",
+                mirror: "<h1>正前往对应镜像</h1><h3>请耐心等待</h3>"
+              }
+            },
+            en: {
+              titles: ["Connecting to the neural network of Rhodes Island", "Submitting feedback to the neural network"],
+              subtitle: "Initialization may take some time",
+              vendor: "&copy; Penguin Statistics",
+              errors: {
+                coreLoad: {
+                  title: "Unable to Load Essential Page Resources",
+                  content: '<ul><li>Please try <button onclick=\'__penguinLoader.reload()\'>Reload the Page</button></li>\n<li>If this error occurs multiple times, please <a href="/update-browser.html" target="_blank">Upgrade your Browser</a></li></ul>'
+                },
+                coreExec: {
+                  title: "Unable to Parse Foundational Page Resources",
+                  content: '<p>Error has occurred due to an outdated browser being used when parsing the foundational page resources.</p><p>Please <a href="/update-browser.html" target="_blank">Upgrade your Browser</a></p>'
+                },
+                slow: {
+                  title: "Resources Took Too long to Load",
+                  content: '<p>An unreasonably length of time has elapsed to load resources on this page (took over 15 seconds)</p><ul><li>Please try <button onclick=\'__reload()\'>Use CN Mirror</button></li>\n<li>If this error occurs multiple times, please <a href="/update-browser.html" target="_blank">Upgrade your Browser</a></li></ul>'
+                }
+              },
+              overlay: {
+                reload: "<h1>Reloading Page</h1><h3>Reloading the page may take some time...</h3>",
+                mirror: "<h1>Heading to Mirror</h1><h3>This may take some time...</h3>"
+              }
+            },
+            ja: {
+              titles: ["読み込み中..."],
+              subtitle: "初めての読み込みは動作が遅くなる可能性があります<br>少々お待ち下さい",
+              vendor: "&copy; ペンギン急便データ統計処理部門",
+              errors: {},
+              overlay: {}
+            },
+            ko: {
+              titles: ["로딩중..."],
+              subtitle: "초기 설정에 시간이 좀 걸릴 수 있으니, 기다려 주시기 바랍니다",
+              vendor: "&copy; 펭귄 물류 데이터 분석 부서",
+              errors: {},
+              overlay: {}
+            }
+          }, fill: function (e, t) {
+            document.getElementById(e).innerHTML = t
+          }, render: function () {
+            document.querySelector("#peL_footer--year").textContent = (new Date).getFullYear().toString();
+            var n = this.language() || "en", o = this.data[n], i = this.data.en, l = [], s = r(".peL_title");
+
+            function u() {
+              var e = o.titles.shift();
+              return o.titles.push(e), e
+            }
+
+            var c = !1;
+
+            function d() {
+              r(".peL_modal-w").style.height = "auto"
+            }
+
+            function h(e) {
+              if (!c) {
+                c = !0;
+                var t = r(".peL_modal-w") || {style: {}}, n = r(".peL_modal") || {style: {}};
+                try {
+                  window.addEventListener("resize", d, {passive: !0});
+                  var a = 0;
+                  "slow" === e && (t.style.marginTop = "32px", a = .6), r(".peL_loInd").style.opacity = a.toString(), r(".peL--gradient").classList.add("peL--gradient-haserror")
+                } catch (l) {
+                  console.debug(l)
+                }
+                setTimeout(function () {
+                  var a = o.errors[e] || i.errors[e];
+                  "slow" !== e && (r(".peL_loInd").style.display = "none"), r(".peL_w").style.cursor = "default", n.innerHTML = "<h1>".concat(a.title, '</h1><div class="peL_modal-c">').concat(a.content, "</div>"), t.style.height = n.getBoundingClientRect().height + "px"
+                }, 300)
+              }
+            }
+
+            s.textContent = u(), l.push(setInterval(function () {
+              s.classList.add("peL_title-gone"), setTimeout(function () {
+                s.textContent = u(), s.classList.remove("peL_title-gone")
+              }, 500)
+            }, 3500));
+            for (var g = 0, f = Object.entries({
+              subtitle: "peL_subtitle",
+              vendor: "peL_footer-vendor"
+            }); g < f.length; g++) {
+              var p = t(f[g], 2), y = p[0], v = p[1];
+              document.getElementById(v).innerHTML = o[y]
+            }
+
+            function m() {
+              var t, r = e(l);
+              try {
+                for (r.s(); !(t = r.n()).done;) {
+                  var n = t.value;
+                  try {
+                    clearInterval(n)
+                  } catch (o) {
+                  }
+                }
+              } catch (a) {
+                r.e(a)
+              } finally {
+                r.f()
+              }
+            }
+
+            return l.push(setTimeout(function () {
+              h("slow")
+            }, 15e3)), window.onload = function () {
+              window.removeEventListener("resize", d, {passive: !0}), m(), document.querySelector(".peL_w") && a("coreExec")
+            }, [m, h, function (e) {
+              var t = r("#peL--overlayel");
+              t.style.pointerEvents = "initial", t.style.opacity = "1", t.innerHTML = o.overlay[e] || i.overlay[e]
+            }]
+          }
+        }, o = function () {
+        }, i = o, l = o, s = o;
+        try {
+          var u = t(n.render(), 3);
+          i = u[0], l = u[1], s = u[2]
+        } catch (c) {
+          console.warn("failed to render preloader", c)
+        }
+        return [i, l, s]
+      }(), n = t(r, 3), o = n[0], a = n[1], i = n[2];
+      window.__penguinLoader = {
+        showOverlay: i, reload: function () {
+          try {
+            o(), i("reload"), navigator.serviceWorker && navigator.serviceWorker.getRegistrations().then(function (t) {
+              var r, n = e(t);
+              try {
+                for (n.s(); !(r = n.n()).done;) {
+                  r.value.unregister()
+                }
+              } catch (o) {
+                n.e(o)
+              } finally {
+                n.f()
+              }
+            }), caches && caches.keys().then(function (e) {
+              caches.delete(e.find(function (e) {
+                return ~e.indexOf("workbox-precache")
+              }))
+            }), window.location.reload()
+          } catch (t) {
+          }
+        }, goToMirror: function (e) {
+          try {
+            switch (o(), i("mirror"), e) {
+              case"cn":
+                window.location.href = "https://penguin-stats.cn" + (window.location.pathname || "/");
+                break;
+              case"global":
+              default:
+                window.location.href = "https://penguin-stats.io" + (window.location.pathname || "/")
+            }
+          } catch (t) {
+          }
+        }, cancelLoaderAnimations: o
+      };
+      try {
+        new MutationObserver(function (t) {
+          var r, n = e(t);
+          try {
+            for (n.s(); !(r = n.n()).done;) {
+              var o, i = e(r.value.addedNodes);
+              try {
+                for (i.s(); !(o = i.n()).done;) {
+                  var l = o.value, s = (l.tagName || "").toLowerCase();
+                  ("script" === s && ~l.src.indexOf(window.location.origin) || "link" === s && "stylesheet" === l.rel && l.href) && (l.onerror = function (e) {
+                    console.error("Failed to get asset:", e), a("coreLoad")
+                  })
+                }
+              } catch (u) {
+                i.e(u)
+              } finally {
+                i.f()
+              }
+            }
+          } catch (u) {
+            n.e(u)
+          } finally {
+            n.f()
+          }
+        }).observe(document.body, {childList: !0, attributes: !0, characterData: !1})
+      } catch (l) {
+      }
+    }();
+  }, {}]
+}, {}, ["vQE2"], null)</script>
+<script type="text/javascript">window.$crisp = [];
+window.CRISP_WEBSITE_ID = "2aa1bf4c-8c34-4028-9e1c-ca1f6c330779";
+(function () {
+  d = document;
+  s = d.createElement("script");
+  s.src = "https://client.crisp.chat/l.js";
+  s.async = 1;
+  d.getElementsByTagName("head")[0].appendChild(s);
+})();</script>
+</body>
+</html>
+

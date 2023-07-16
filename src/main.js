@@ -25,8 +25,6 @@ import './assets/fonts/roboto/roboto.css'
 import './injections'
 import PenguinProbe from '@/utils/probe'
 
-if (!window.Intl) require('intl-collator')
-
 Vue.config.productionTip = false
 
 Vue.config.performance = environment.debug.performance

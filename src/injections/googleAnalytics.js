@@ -11,7 +11,7 @@ Vue.use(VueAnalytics, {
   // customResourceURL: "https://www.google-analytics.com/analytics.js",
   router,
   debug: {
-    // enabled: process.env.NODE_ENV === "development",
+    // enabled: import.meta.env.NODE_ENV === "development",
     enabled: false,
     sendHitTask: environment.production
   },

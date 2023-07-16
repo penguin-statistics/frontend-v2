@@ -1,7 +1,7 @@
 import ReconnectingWebSocket from '@/utils/ReconnectingWebSocket'
 import config from '@/config'
 import qs from 'qs'
-import pe from '@/models/probe/probeevents'
+// import pe from '@/models/probe/probeevents'
 import environment from '@/utils/environment'
 import Console from '@/utils/Console'
 import store from '@/store'
@@ -112,7 +112,7 @@ class PenguinProbe {
         },
         onerror (e) {
           Console.info('ProbeTransport', 'websocket connection error')
-          
+
           Sentry.captureMessage('ProbeTransport: websocket connection error', {
             contexts: {
               module: 'ProbeTransport',

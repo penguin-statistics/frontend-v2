@@ -1,7 +1,7 @@
 const version = (() => NPM_PACKAGE_VERSION)();
 const project = "frontend-v2";
 
-module.exports = {
+export default {
   version,
   project,
   api: {

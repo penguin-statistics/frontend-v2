@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 
-import Home from './views/Home'
+import Home from './views/Home.vue'
 import ReportLayout from './layouts/ReportLayout'
 import Report from './views/Report/Report'
 import StatsLayout from './layouts/StatsLayout'

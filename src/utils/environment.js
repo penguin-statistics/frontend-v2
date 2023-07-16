@@ -11,7 +11,7 @@ function boolean(key, rejectApp) {
   // otherwise if specifically specified, use that value
   // otherwise fallback to false
   if (rejectApp && PENGUIN_PLATFORM === "app") return false;
-  return process.env.NODE_ENV !== "production" || getConfig()[key] || false;
+  return import.meta.env.NODE_ENV !== "production" || getConfig()[key] || false;
 }
 
 const isIOS =
@@ -32,7 +32,7 @@ export default {
     })();
   },
   get production() {
-    return process.env.NODE_ENV === "production";
+    return import.meta.env.NODE_ENV === "production";
   },
   get isTouchScreen() {
     if (window.matchMedia)

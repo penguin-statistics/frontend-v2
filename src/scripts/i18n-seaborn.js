@@ -3,14 +3,14 @@ import {readFile, writeFile} from "fs/promises";
 import fetch from "node-fetch";
 import pLimit from "p-limit";
 
-console.log("process.env.OPENAI_API_KEY length:", process.env.OPENAI_API_KEY.length);
+console.log("import.meta.env.OPENAI_API_KEY length:", import.meta.env.OPENAI_API_KEY.length);
 console.log(
-  "process.env.SIMPLELOCALIZE_TOKEN length:",
-  process.env.SIMPLELOCALIZE_TOKEN.length
+  "import.meta.env.SIMPLELOCALIZE_TOKEN length:",
+  import.meta.env.SIMPLELOCALIZE_TOKEN.length
 );
 
 const configuration = new Configuration({
-  apiKey: process.env.OPENAI_API_KEY,
+  apiKey: import.meta.env.OPENAI_API_KEY,
 });
 
 const openai = new OpenAIApi(configuration);
@@ -56,7 +56,7 @@ async function patchTranslations(path) {
     headers: {
       "Content-Type": "application/json",
       "X-SimpleLocalize-Token":
-      process.env.SIMPLELOCALIZE_TOKEN,
+      import.meta.env.SIMPLELOCALIZE_TOKEN,
     },
     body: JSON.stringify({
       content: translations,

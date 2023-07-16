@@ -2,14 +2,12 @@ const webpack = require("webpack");
 const path = require("path");
 const CopyPlugin = require("copy-webpack-plugin");
 
-require("events").EventEmitter.defaultMaxListeners = 50;
-
 const packageVersion = `v${envvar("npm_package_version", "0.0.0", true)}`;
 
 let commitHash;
 
 try {
-  commitHash = process.env.TRUNCATED_GITHUB_SHA ||
+  commitHash = import.meta.env.TRUNCATED_GITHUB_SHA ||
     require("child_process")
       .execSync("git rev-parse --short HEAD")
       .toString()
@@ -19,7 +17,7 @@ try {
 }
 
 function envvar(name, fallback, skipStringify = false) {
-  let content = process.env[name];
+  let content = import.meta.env[name];
   if (content) content = content.trim();
   if (skipStringify) return content || fallback;
   return JSON.stringify(content || fallback) || '"null"';
