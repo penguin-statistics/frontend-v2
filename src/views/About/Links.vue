@@ -34,7 +34,7 @@
           @navigate="goToHref"
         />
       </v-col>
-    </v-row> 
+    </v-row>
     <v-row class="full-width">
       <v-col cols="12">
         <v-divider />
@@ -156,17 +156,17 @@ export default {
             url: 'https://yituliu.site/',
             shorten: 'yituliu.site'
           },
-          {
-            title: 'MAA小助手',
-            features: [
-              {
-                name: 'auto_farming',
-                color: 'cyan'
-              }
-            ],
-            url: 'https://maa.plus/',
-            shorten: 'maa.plus'
-          },
+          // {
+          //   title: 'MAA小助手',
+          //   features: [
+          //     {
+          //       name: 'auto_farming',
+          //       color: 'cyan'
+          //     }
+          //   ],
+          //   url: 'https://maa.plus/',
+          //   shorten: 'maa.plus'
+          // },
           {
             title: 'ANWiki',
             features: [
