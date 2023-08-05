@@ -42,8 +42,7 @@
           outlined
           border="left"
         >
-          公开招募统计现处于测试阶段且暂不支持前端汇报，当前的汇报主要来自
-          MaaArknightsAssistant。公开招募统计的相关 API 与内部实现将于后续优化。
+          公开招募统计现处于测试阶段且暂不支持前端汇报。公开招募统计的相关 API 与内部实现将于后续优化。
         </v-alert>
       </v-row>
 
