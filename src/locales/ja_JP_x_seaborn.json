@@ -180,12 +180,6 @@
     "all": {
       "label": "全体"
     },
-    "automated": {
-      "label": "自動"
-    },
-    "manual": {
-      "label": "手動"
-    },
     "switch": "集計範囲"
   },
   "members": {

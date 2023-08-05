@@ -128,7 +128,7 @@
     "intro": {
       "intro_0": "'Nos Multi' Sapientiae Sanctuario, Adventum Tuum Salutat.",
       "intro_1": "Penguin Statistics, undergoing amalgamation, proliferation, and procreation, ultimately culminates in \"Nos Multi\" Sapientiae Sanctuario. Copious drop ratios, and dissection. Kins, extensively delved into the realm of drop statistics. Procure, drop ratios. Rejoin, the Great Sea.",
-      "intro_2": "'Nos Multi' Sapientiae Sanctuario, players report, screenshot recognize, multiple tools maintain. Accuracy, dataset ensure, penguin team, drop data, auto, timed, manual ways.",
+      "intro_2": "'Nos Multi' Sapientiae Sanctuario, players report, screenshot recognize, public API maintain. Accuracy, dataset ensure, penguin team, drop data, auto, timed, manual ways.",
       "intro_3": "Report, Dataset Invalidation Transparency, planned for implementation. Purpose: to ensure dataset transparency and list dataset changes."
     },
     "quickStart": {
@@ -200,12 +200,12 @@
       "label": "All"
     },
     "automated": {
-      "label": "Auto",
-      "tooltip": "Matrix Category, Auto. Data from third-party tools, reports drop data automatically, contained within."
+      "label": "Offsite",
+      "tooltip": "Matrix Category, Offsite. Data from Public API, reports drop data automatically, contained within."
     },
     "manual": {
-      "label": "Manual",
-      "tooltip": "Manual: Data in Such Matrix Category from Penguin Statistics site's \"Report Drops by Stage\" and \"Report Drops by Recognition\" features only."
+      "label": "Onsite",
+      "tooltip": "Onsite: Data in Such Matrix Category from Penguin Statistics site's \"Report Drops by Stage\" and \"Report Drops by Recognition\" features only."
     },
     "switch": "Matrix Category"
   },
