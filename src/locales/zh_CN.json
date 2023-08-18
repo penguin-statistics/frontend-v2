@@ -46,7 +46,9 @@
     "backend": "后端",
     "caption": "企鹅物流数据统计是一项非盈利的社区项目，我们的发展离不开大家的共同维护与支持。欢迎前往上方 GitHub 为我们点 Star、提出 Issues，我们当然同时也欢迎 Pull Requests。",
     "contribute_0": "如果您有以下一项或多项经验，愿意为企鹅数据贡献自己的一份力量，欢迎加入 QQ 群：747099627 或 Discord。",
+    "contribute_1": "本项目为无偿开源项目",
     "frontend": "前端",
+    "frontendV4": "前端 v4",
     "livehouse": "LiveHouse",
     "newFolder": "锐意新建文件夹中",
     "qqGroup": "QQ 群：",
@@ -60,9 +62,7 @@
       "maintenance": "网站运维",
       "mobile": "移动端 App 开发（iOS、Android）",
       "others": "..."
-    },
-    "contribute_1": "本项目为无偿开源项目",
-    "frontendV4": "前端 v4"
+    }
   },
   "credits": {
     "material": {
@@ -83,6 +83,10 @@
   "donate": {
     "accountBook": "查看收支一览",
     "donate_0": "用户量激增，服务器月费上涨，企鹅数据的运营陷入了危机。站长红白为了保护喜爱的企鹅数据而决定...",
+    "donate_1": "随着访问量的增加，目前的小水管服务器已经有些不堪重负了。如果各位刀客塔能捐助一些",
+    "donate_2": "服务器费用",
+    "donate_3": "pocky、阿噗噜派也可",
+    "donate_4": "，我们将不胜感激！",
     "methods": {
       "alipay": "支付宝",
       "paypal": "使用 PayPal 捐助",
@@ -92,11 +96,7 @@
     "regulation": {
       "app": "此卡片于 App 内不可用",
       "cnMirror": "由于监管要求，此卡片于国内镜像暂时停用"
-    },
-    "donate_1": "随着访问量的增加，目前的小水管服务器已经有些不堪重负了。如果各位刀客塔能捐助一些",
-    "donate_2": "服务器费用",
-    "donate_3": "pocky、阿噗噜派也可",
-    "donate_4": "，我们将不胜感激！"
+    }
   },
   "fetch": {
     "chunk": {
@@ -796,6 +796,7 @@
     },
     "push": {
       "categories": {
+        "_name": "推送类型",
         "ClientUpgrade": {
           "subtitle": "在新的客户端强制更新公告发布后通知您",
           "title": "客户端强制更新"
@@ -811,8 +812,7 @@
         "NewStage": {
           "subtitle": "在新章节加入本 App 时通知您",
           "title": "新章节加入"
-        },
-        "_name": "推送类型"
+        }
       },
       "language": "消息语言"
     },

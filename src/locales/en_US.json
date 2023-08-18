@@ -46,7 +46,9 @@
     "backend": "Backend",
     "caption": "Penguin Statistics is a non-profit community project that relies on the joint maintenance and support of everyone. We welcome you to go to our GitHub and give us a star, as well as provide feedback and suggestions through Issues. Of course, issues and PRs are always welcomed!",
     "contribute_0": "If you have experience with any of the following skills and want to contribute to Penguin Statistics, join our Discord below or alternatively our QQ group: 747099627.",
+    "contribute_1": "This is a nonprofit and open source project",
     "frontend": "Frontend",
+    "frontendV4": "Frontend v4",
     "livehouse": "LiveHouse",
     "newFolder": "Currently working hard creating the project repo...",
     "qqGroup": "QQ Group: ",
@@ -60,9 +62,7 @@
       "maintenance": "DevOps",
       "mobile": "Mobile App Development (iOS, Android)",
       "others": "..."
-    },
-    "contribute_1": "This is a nonprofit and open source project",
-    "frontendV4": "Frontend v4"
+    }
   },
   "credits": {
     "material": {
@@ -83,6 +83,10 @@
   "donate": {
     "accountBook": "Account Book",
     "donate_0": "Increasing number of users and server fees are putting Penguin Statistics into crisis. In order to protect our beloved Penguin Statistics, the webmaster decided to...",
+    "donate_1": "The number of users is increasing. The server is becoming overwhelmed. We will appreciate it a lot if Doctors can donate some",
+    "donate_2": "server fee",
+    "donate_3": "pocky or apple pie are also accepted",
+    "donate_4": ". We greatly appreciate your support!",
     "methods": {
       "alipay": "Alipay",
       "paypal": "Donate with PayPal",
@@ -92,11 +96,7 @@
     "regulation": {
       "app": "This card is unavailable in the app.",
       "cnMirror": "Due to regulation policies by law, this card has been temporary disabled on CN mirror."
-    },
-    "donate_1": "The number of users is increasing. The server is becoming overwhelmed. We will appreciate it a lot if Doctors can donate some",
-    "donate_2": "server fee",
-    "donate_3": "pocky or apple pie are also accepted",
-    "donate_4": ". We greatly appreciate your support!"
+    }
   },
   "fetch": {
     "chunk": {

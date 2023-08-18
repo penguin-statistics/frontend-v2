@@ -44,7 +44,9 @@
     "backend": "ﾊﾞｯｸｴﾝﾄﾞ",
     "caption": "大群智慧ノ聖域、非営利共同体。発展、同胞ノ助力、必要なリ。GitHub、スター、付けテ。支援、協力、ヨロシク。",
     "contribute_0": "力あル同胞、募集。大群智慧、同胞ノ力、必要。QQ大群、参加しテ：747099627。",
+    "contribute_1": "本企画、無償。大群ノ同胞に、共有。",
     "frontend": "ﾌﾛﾝﾄｴﾝﾄﾞ",
+    "frontendV4": "ﾌﾛﾝﾄｴﾝﾄﾞ v4",
     "livehouse": "LiveHouse",
     "newFolder": "新規フォルダー、作成中",
     "qqGroup": "QQ大群：",
@@ -58,9 +60,7 @@
       "maintenance": "DevOps",
       "mobile": "モバイルアプリ開発、iOSノ、Android。",
       "others": "..."
-    },
-    "contribute_1": "本企画、無償。大群ノ同胞に、共有。",
-    "frontendV4": "ﾌﾛﾝﾄｴﾝﾄﾞ v4"
+    }
   },
   "dataSource": {
     "global": "全体",
@@ -72,16 +72,16 @@
   "donate": {
     "accountBook": "帐簿",
     "donate_0": "ユーザー、急増。サーバー代、上昇。聖域、ピンチ！海神紅白、大群ヲ守ル為……「アイドルになる」！？",
+    "donate_1": "アクセス、増加。サーバー負荷、限界。同胞ノ力、貸しテ……",
+    "donate_2": "運営費用",
+    "donate_3": "ポッキー、アップルパイ、OK",
+    "donate_4": "。大群、貴方に、感謝スル。",
     "methods": {
       "alipay": "Alipay",
       "paypal": "PayPal で寄付",
       "wechatPay": "WeChat Pay"
     },
-    "redirectToApp": "{app} アプリで寄付します",
-    "donate_1": "アクセス、増加。サーバー負荷、限界。同胞ノ力、貸しテ……",
-    "donate_2": "運営費用",
-    "donate_3": "ポッキー、アップルパイ、OK",
-    "donate_4": "。大群、貴方に、感謝スル。"
+    "redirectToApp": "{app} アプリで寄付します"
   },
   "fetch": {
     "chunk": {

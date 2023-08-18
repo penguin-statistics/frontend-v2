@@ -44,7 +44,9 @@
     "backend": "백엔드",
     "caption": "펭귄 통계는 공동 프로젝트로, 커뮤니티의 지원 없이는 존재할 수 없습니다. GitHub 저장소에서 별을 눌러주시면 도움이 됩니다. 이슈 생성이나 수정 요청은 언제든지 환영합니다!",
     "contribute_0": "다음 기술 중 하나라도 경험이 있고, 펭귄 물류에 기여하고자 한다면. QQ 그룹: 747099627로 연락하여 주십시오.",
+    "contribute_1": "펭귄 물류 데이터 분석 부서는 비영리 오픈소스 프로젝트입니다",
     "frontend": "프론트엔드",
+    "frontendV4": "프론트엔드 v4",
     "livehouse": "LiveHouse",
     "newFolder": "새로운 프로젝트 저장소 생성을 위해 노력 중입니다...",
     "qqGroup": "QQ 그룹 : ",
@@ -58,9 +60,7 @@
       "maintenance": "데브옵스",
       "mobile": "모바일 앱 개발 (iOS, Android)",
       "others": "..."
-    },
-    "contribute_1": "펭귄 물류 데이터 분석 부서는 비영리 오픈소스 프로젝트입니다",
-    "frontendV4": "프론트엔드 v4"
+    }
   },
   "credits": {
     "material": {
@@ -81,16 +81,16 @@
   "donate": {
     "accountBook": "장부",
     "donate_0": "사용자 수와 서버비가 늘어나면서 펭귄 통계는 위기에 처해 있습니다. 관리자는 사랑하는 펭귄 통계를 지키기 위해...",
+    "donate_1": "사용자 수가 늘어나면서 서버에 무리가 가고 있습니다. 만약 몇몇 박사들이",
+    "donate_2": "서버비",
+    "donate_3": "빼빼로나 애플파이도 환영합니다!",
+    "donate_4": "를 기부해주신다면, 매우 감사할 것입니다!",
     "methods": {
       "alipay": "Alipay",
       "paypal": "PayPal로 기부하기",
       "wechatPay": "WeChat Pay"
     },
-    "redirectToApp": "{app}으로 기부하기",
-    "donate_1": "사용자 수가 늘어나면서 서버에 무리가 가고 있습니다. 만약 몇몇 박사들이",
-    "donate_2": "서버비",
-    "donate_3": "빼빼로나 애플파이도 환영합니다!",
-    "donate_4": "를 기부해주신다면, 매우 감사할 것입니다!"
+    "redirectToApp": "{app}으로 기부하기"
   },
   "fetch": {
     "chunk": {

@@ -46,7 +46,9 @@
     "backend": "Backend",
     "caption": "Penguin Statistics, is a community project. We are non-profit. Joint maintenance and support are required from all. We welcome you to visit our GitHub. Give us a star, and provide feedback and suggestions through Issues. Issues and PRs, welcomed anytime!",
     "contribute_0": "You, experienced with these skills? Want to contribute to Penguin Statistics? Join our Discord, or our QQ group: 747099627.",
+    "contribute_1": "Project, open source and nonprofit.",
     "frontend": "Frontend",
+    "frontendV4": "Frontend v4",
     "livehouse": "LiveHouse",
     "newFolder": "Currently working hard creating the project repo...",
     "qqGroup": "QQ Group: ",
@@ -60,9 +62,7 @@
       "maintenance": "DevOps",
       "mobile": "Mobile App Development (iOS, Android)",
       "others": "..."
-    },
-    "contribute_1": "Project, open source and nonprofit.",
-    "frontendV4": "Frontend v4"
+    }
   },
   "credits": {
     "material": {
@@ -82,6 +82,10 @@
   "donate": {
     "accountBook": "Account Book",
     "donate_0": "Users, increasing. Server fees, rising. Crisis, coming. Penguin Statistics Webmaster, to save beloved Penguin Statistics, decided to...",
+    "donate_1": "Users, increase. Server, overwhelmed. Doctor donation, appreciated.",
+    "donate_2": "server fee",
+    "donate_3": "pocky, apple pie, also accepted",
+    "donate_4": ". Your nutrients, to the great sea, greatly appreciated.",
     "methods": {
       "alipay": "Alipay",
       "paypal": "Donate with PayPal",
@@ -91,11 +95,7 @@
     "regulation": {
       "app": "This card is unavailable in the app.",
       "cnMirror": "Due to regulation policies by law, this card has been temporary disabled on CN mirror."
-    },
-    "donate_1": "Users, increase. Server, overwhelmed. Doctor donation, appreciated.",
-    "donate_2": "server fee",
-    "donate_3": "pocky, apple pie, also accepted",
-    "donate_4": ". Your nutrients, to the great sea, greatly appreciated."
+    }
   },
   "fetch": {
     "chunk": {
