@@ -71,8 +71,6 @@
 		B54E1D7D29CCE183006DBD8B /* Intents.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = B54E1D8029CCE183006DBD8B /* Intents.intentdefinition */; };
 		B54E1D7E29CCE183006DBD8B /* Intents.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = B54E1D8029CCE183006DBD8B /* Intents.intentdefinition */; };
 		B553BF91285F3FA10089DB8B /* AccessoryRectangularView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B553BF90285F3FA10089DB8B /* AccessoryRectangularView.swift */; };
-		B567D9C928B4639A000DA25D /* PenguinLive.swift in Sources */ = {isa = PBXBuildFile; fileRef = B567D9C828B4639A000DA25D /* PenguinLive.swift */; };
-		B567D9CA28B46993000DA25D /* PenguinLive.swift in Sources */ = {isa = PBXBuildFile; fileRef = B567D9C828B4639A000DA25D /* PenguinLive.swift */; };
 		B575978929D3DBA300B83885 /* Seaborn0@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B575978329D3DBA300B83885 /* Seaborn0@2x.png */; };
 		B575978A29D3DBA300B83885 /* Seaborn1.png in Resources */ = {isa = PBXBuildFile; fileRef = B575978429D3DBA300B83885 /* Seaborn1.png */; };
 		B575978B29D3DBA300B83885 /* Seaborn0@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = B575978529D3DBA300B83885 /* Seaborn0@3x.png */; };
@@ -197,7 +195,6 @@
 		B54E1D8529CCE1B4006DBD8B /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Intents.strings"; sourceTree = "<group>"; };
 		B54E1D8729CCE1B6006DBD8B /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/Intents.strings; sourceTree = "<group>"; };
 		B553BF90285F3FA10089DB8B /* AccessoryRectangularView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccessoryRectangularView.swift; sourceTree = "<group>"; };
-		B567D9C828B4639A000DA25D /* PenguinLive.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PenguinLive.swift; sourceTree = "<group>"; };
 		B575978329D3DBA300B83885 /* Seaborn0@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Seaborn0@2x.png"; sourceTree = "<group>"; };
 		B575978429D3DBA300B83885 /* Seaborn1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Seaborn1.png; sourceTree = "<group>"; };
 		B575978529D3DBA300B83885 /* Seaborn0@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Seaborn0@3x.png"; sourceTree = "<group>"; };
@@ -378,7 +375,6 @@
 		504EC2FB1FED79650016851F = {
 			isa = PBXGroup;
 			children = (
-				B567D9C828B4639A000DA25D /* PenguinLive.swift */,
 				B5E9EF4628219840009F0F68 /* PenguinViewController.swift */,
 				3AF2C843259F544900761B04 /* SoundFX */,
 				3A001AC52599230E0078A265 /* Settings.bundle */,
@@ -719,7 +715,6 @@
 				3A1157B1258F2B5C00F4C6FD /* SmallWidgetView.swift in Sources */,
 				B50305AC29CC1864000FDC32 /* IntentHandler.swift in Sources */,
 				3A06C12D2597454600B81F31 /* WidgetFooter.swift in Sources */,
-				B567D9CA28B46993000DA25D /* PenguinLive.swift in Sources */,
 				3A06C1252597447200B81F31 /* StageView.swift in Sources */,
 				B54E1D7D29CCE183006DBD8B /* Intents.intentdefinition in Sources */,
 				B553BF91285F3FA10089DB8B /* AccessoryRectangularView.swift in Sources */,
@@ -749,7 +744,6 @@
 				3A001AD32599A4A60078A265 /* ConsentView.swift in Sources */,
 				3A001AC225991E2C0078A265 /* WhatsNew.swift in Sources */,
 				3A679B012599166C00A685E9 /* WelcomeView.swift in Sources */,
-				B567D9C928B4639A000DA25D /* PenguinLive.swift in Sources */,
 				3A61615A259B0ED200FA06A2 /* ToggleNotificationPreference.swift in Sources */,
 				3A61616C259C7B8D00FA06A2 /* HapticButton.swift in Sources */,
 				3A001AD72599A68A0078A265 /* Helpers.swift in Sources */,
@@ -859,7 +853,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 3.13.7;
+				MARKETING_VERSION = 3.13.10;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = io.penguinstats.app.PenguinWidget;
@@ -891,7 +885,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 3.13.7;
+				MARKETING_VERSION = 3.13.10;
 				MTL_FAST_MATH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = io.penguinstats.app.PenguinWidget;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1089,7 +1083,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 3.13.7;
+				MARKETING_VERSION = 3.13.10;
 				OTHER_SWIFT_FLAGS = "$(inherited) \"-D\" \"COCOAPODS\" \"-DDEBUG\"";
 				PRODUCT_BUNDLE_IDENTIFIER = io.penguinstats.app;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1121,7 +1115,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 3.13.7;
+				MARKETING_VERSION = 3.13.10;
 				PRODUCT_BUNDLE_IDENTIFIER = io.penguinstats.app;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTS_MACCATALYST = NO;
