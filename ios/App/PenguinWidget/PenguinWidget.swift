@@ -31,6 +31,7 @@ struct PenguinWidget: Widget {
         .configurationDisplayName("SiteStatsWidgetName")
         .description("SiteStatsWidgetDesc")
         .adaptedSupportedFamilies()
+        .adaptedContentMarginsDisabled()
     }
 }
 
@@ -49,6 +50,14 @@ extension WidgetConfiguration {
             ])
         }
     }
+    
+    func adaptedContentMarginsDisabled() -> some WidgetConfiguration {
+        if #available(iOSApplicationExtension 15, *) {
+            return self.contentMarginsDisabled()
+        } else {
+            return self
+        }
+    }
 }
 
 extension View {
@@ -57,6 +66,16 @@ extension View {
             transform(self)
         } else {
             self
+        }
+    }
+
+    func widgetBackground(_ backgroundView: some View) -> some View {
+        if #available(iOSApplicationExtension 17.0, *) {
+            return containerBackground(for: .widget) {
+                backgroundView
+            }
+        } else {
+            return background(backgroundView)
         }
     }
 }

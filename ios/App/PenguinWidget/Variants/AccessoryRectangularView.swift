@@ -48,6 +48,10 @@ struct AccessoryRectangularView: View {
                     .foregroundColor(Color("Secondary").opacity(0.8))
             }
         }
+        .widgetURL(Routes.generate(
+            zoneId: stage.zoneId,
+            stageId: stage.stageId))
+        .widgetBackground(Color.clear)
     }
 }
 

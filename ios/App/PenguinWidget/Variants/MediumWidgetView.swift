@@ -39,7 +39,7 @@ struct MediumWidgetView: View {
             entry.preferences.theme.overlayView(widgetFamily: family),
             alignment: .bottom
         )
-        .background(entry.preferences.theme.backgroundColor)
+        .widgetBackground(entry.preferences.theme.backgroundColor)
         .if(entry.preferences.theme.forcedColorScheme != nil) { view in
             view.environment(\.colorScheme, entry.preferences.theme.forcedColorScheme!)
         }

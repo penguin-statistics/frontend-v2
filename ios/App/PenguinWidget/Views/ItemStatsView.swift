@@ -18,7 +18,7 @@ struct ItemStatsView: View {
     var body: some View {
         HStack(alignment: .center, spacing: 4) {
             Link(destination: Routes.generate(itemId: item.id)) {
-                Group {
+                HStack(alignment: .center, spacing: 4) {
                     item.image()
                         .frame(width: 20, height: 20, alignment: .center)
                     

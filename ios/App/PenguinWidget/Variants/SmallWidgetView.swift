@@ -42,7 +42,7 @@ struct SmallWidgetView : View {
             entry.preferences.theme.overlayView(widgetFamily: family),
             alignment: .bottom
         )
-        .background(entry.preferences.theme.backgroundColor)
+        .widgetBackground(entry.preferences.theme.backgroundColor)
         .widgetURL(Routes.generate(
             zoneId: entry.stats.stages[0].zoneId,
             stageId: entry.stats.stages[0].stageId))
