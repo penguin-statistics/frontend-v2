@@ -62,7 +62,7 @@
         <v-icon small>
           mdi-penguin
         </v-icon>
-        {{ $t("contribute.qqGroup") }}747099627
+        {{ $t("contribute.qqGroup") }}<del style="opacity: 0.5">747099627</del>&nbsp;257673827
       </li>
       <li>
         <v-chip
