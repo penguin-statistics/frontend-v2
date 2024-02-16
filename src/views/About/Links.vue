@@ -15,46 +15,46 @@
         />
       </v-col>
     </v-row>
-    <v-row class="full-width">
-      <v-col cols="12">
-        <v-divider />
-      </v-col>
-    </v-row>
-    <v-row class="full-width">
-      <v-col
-        v-for="(link, index) in links.deprecated"
-        :key="index"
-        class="d-flex"
-        cols="12"
-        sm="6"
-        md="4"
-      >
-        <LinkCard
-          :link="link"
-          @navigate="goToHref"
-        />
-      </v-col>
-    </v-row>
-    <v-row class="full-width">
-      <v-col cols="12">
-        <v-divider />
-      </v-col>
-    </v-row>
-    <v-row class="full-width">
-      <v-col
-        v-for="(link, index) in links.misc"
-        :key="index"
-        class="d-flex"
-        cols="12"
-        sm="6"
-        md="6"
-      >
-        <LinkCard
-          :link="link"
-          @navigate="goToHref"
-        />
-      </v-col>
-    </v-row>
+    <!--    <v-row class="full-width">-->
+    <!--      <v-col cols="12">-->
+    <!--        <v-divider />-->
+    <!--      </v-col>-->
+    <!--    </v-row>-->
+    <!--    <v-row class="full-width">-->
+    <!--      <v-col-->
+    <!--        v-for="(link, index) in links.deprecated"-->
+    <!--        :key="index"-->
+    <!--        class="d-flex"-->
+    <!--        cols="12"-->
+    <!--        sm="6"-->
+    <!--        md="4"-->
+    <!--      >-->
+    <!--        <LinkCard-->
+    <!--          :link="link"-->
+    <!--          @navigate="goToHref"-->
+    <!--        />-->
+    <!--      </v-col>-->
+    <!--    </v-row>-->
+    <!--    <v-row class="full-width">-->
+    <!--      <v-col cols="12">-->
+    <!--        <v-divider />-->
+    <!--      </v-col>-->
+    <!--    </v-row>-->
+    <!--    <v-row class="full-width">-->
+    <!--      <v-col-->
+    <!--        v-for="(link, index) in links.misc"-->
+    <!--        :key="index"-->
+    <!--        class="d-flex"-->
+    <!--        cols="12"-->
+    <!--        sm="6"-->
+    <!--        md="6"-->
+    <!--      >-->
+    <!--        <LinkCard-->
+    <!--          :link="link"-->
+    <!--          @navigate="goToHref"-->
+    <!--        />-->
+    <!--      </v-col>-->
+    <!--    </v-row>-->
   </div>
 </template>
 
@@ -125,7 +125,7 @@ export default {
                 color: 'blue-grey'
               }
             ],
-            url: 'http://prts.wiki/id/1',
+            url: 'https://prts.wiki/id/1',
             shorten: 'prts.wiki'
           },
           {
@@ -153,20 +153,20 @@ export default {
                 color: 'grey'
               }
             ],
-            url: 'https://yituliu.site/',
-            shorten: 'yituliu.site'
+            url: 'https://ark.yituliu.cn/',
+            shorten: 'ark.yituliu.cn'
           },
-          // {
-          //   title: 'MAA小助手',
-          //   features: [
-          //     {
-          //       name: 'auto_farming',
-          //       color: 'cyan'
-          //     }
-          //   ],
-          //   url: 'https://maa.plus/',
-          //   shorten: 'maa.plus'
-          // },
+          {
+            title: 'MAA小助手',
+            features: [
+              {
+                name: 'auto_farming',
+                color: 'cyan'
+              }
+            ],
+            url: 'https://maa.plus/',
+            shorten: 'maa.plus'
+          },
           {
             title: 'ANWiki',
             features: [
@@ -201,9 +201,7 @@ export default {
             ],
             url: 'https://smartgamecap.net',
             shorten: 'smartgamecap.net'
-          }
-        ],
-        deprecated: [
+          },
           {
             title: '明日方舟工具箱',
             author: '一只灰喵',
@@ -256,35 +254,38 @@ export default {
             url: 'https://gachasalt.github.io/ArkToolDemo/#/',
             shorten: 'gachasalt.github.io/ArkToolDemo'
           },
-          {
-            title: 'Kokodayo Arknights Data',
-            author: 'odex',
-            features: [
-              {
-                name: 'character',
-                color: 'orange'
-              },
-              {
-                name: 'enemy',
-                color: 'black'
-              },
-              {
-                name: 'map',
-                color: 'teal'
-              }
-            ],
-            url: 'https://kokodayo.fun/',
-            shorten: 'kokodayo.fun'
-          },
+        ],
+        deprecated: [
+
+          // {
+          //   title: 'Kokodayo Arknights Data',
+          //   author: 'odex',
+          //   features: [
+          //     {
+          //       name: 'character',
+          //       color: 'orange'
+          //     },
+          //     {
+          //       name: 'enemy',
+          //       color: 'black'
+          //     },
+          //     {
+          //       name: 'map',
+          //       color: 'teal'
+          //     }
+          //   ],
+          //   url: 'https://kokodayo.fun/',
+          //   shorten: 'kokodayo.fun'
+          // },
         ],
         misc: [
-          {
-            title: 'Konmai Academy',
-            // author: '「纯净的音游下载站」',
-            description: '公益的音乐游戏下载站',
-            url: 'https://616.sb/',
-            shorten: '616.sb'
-          },
+          // {
+          //   title: 'Konmai Academy',
+          //   // author: '「纯净的音游下载站」',
+          //   description: '公益的音乐游戏下载站',
+          //   url: 'https://616.sb/',
+          //   shorten: '616.sb'
+          // },
         ]
       }
     }

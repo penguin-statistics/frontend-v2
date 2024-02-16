@@ -33,8 +33,11 @@
               v-text="$t('zone.subTypes.' + key).subtitle"
             />
           </div>
+          <template v-else-if="key.indexOf('20') === 0">
+            {{ key }}
+          </template>
           <template v-else>
-            {{ $t('zone.subTypes.' + key) }}
+            {{ $t(["zone.subTypes", key].join(".")) }}
           </template>
         </v-tab>
       </v-tabs>

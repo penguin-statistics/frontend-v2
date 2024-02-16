@@ -70,7 +70,7 @@
             v-haptic
             text
             outlined
-            href="https://shimo.im/sheets/GJXgP9XQcPrj6rtg/2fC1m"
+            href="https://penguin-stats.larksuite.com/sheets/TIn1sUT3jhiSDttMgdguzXv8spc?sheet=0yfMqu"
             target="_blank"
             rel="noopener"
             large
@@ -115,7 +115,7 @@
         </div>
         <v-btn
           v-haptic
-          href="https://shimo.im/sheets/GJXgP9XQcPrj6rtg/2fC1m"
+          href="https://penguin-stats.larksuite.com/sheets/TIn1sUT3jhiSDttMgdguzXv8spc?sheet=0yfMqu"
           target="_blank"
           rel="noopener"
           outlined
