@@ -15,46 +15,46 @@
         />
       </v-col>
     </v-row>
-    <!--    <v-row class="full-width">-->
-    <!--      <v-col cols="12">-->
-    <!--        <v-divider />-->
-    <!--      </v-col>-->
-    <!--    </v-row>-->
-    <!--    <v-row class="full-width">-->
-    <!--      <v-col-->
-    <!--        v-for="(link, index) in links.deprecated"-->
-    <!--        :key="index"-->
-    <!--        class="d-flex"-->
-    <!--        cols="12"-->
-    <!--        sm="6"-->
-    <!--        md="4"-->
-    <!--      >-->
-    <!--        <LinkCard-->
-    <!--          :link="link"-->
-    <!--          @navigate="goToHref"-->
-    <!--        />-->
-    <!--      </v-col>-->
-    <!--    </v-row>-->
-    <!--    <v-row class="full-width">-->
-    <!--      <v-col cols="12">-->
-    <!--        <v-divider />-->
-    <!--      </v-col>-->
-    <!--    </v-row>-->
-    <!--    <v-row class="full-width">-->
-    <!--      <v-col-->
-    <!--        v-for="(link, index) in links.misc"-->
-    <!--        :key="index"-->
-    <!--        class="d-flex"-->
-    <!--        cols="12"-->
-    <!--        sm="6"-->
-    <!--        md="6"-->
-    <!--      >-->
-    <!--        <LinkCard-->
-    <!--          :link="link"-->
-    <!--          @navigate="goToHref"-->
-    <!--        />-->
-    <!--      </v-col>-->
-    <!--    </v-row>-->
+    <v-row class="full-width">
+      <v-col cols="12">
+        <v-divider />
+      </v-col>
+    </v-row>
+    <v-row class="full-width">
+      <v-col
+        v-for="(link, index) in links.deprecated"
+        :key="index"
+        class="d-flex"
+        cols="12"
+        sm="6"
+        md="4"
+      >
+        <LinkCard
+          :link="link"
+          @navigate="goToHref"
+        />
+      </v-col>
+    </v-row>
+    <v-row class="full-width">
+      <v-col cols="12">
+        <v-divider />
+      </v-col>
+    </v-row>
+    <v-row class="full-width">
+      <v-col
+        v-for="(link, index) in links.misc"
+        :key="index"
+        class="d-flex"
+        cols="12"
+        sm="6"
+        md="6"
+      >
+        <LinkCard
+          :link="link"
+          @navigate="goToHref"
+        />
+      </v-col>
+    </v-row>
   </div>
 </template>
 
@@ -279,13 +279,13 @@ export default {
           // },
         ],
         misc: [
-          // {
-          //   title: 'Konmai Academy',
-          //   // author: '「纯净的音游下载站」',
-          //   description: '公益的音乐游戏下载站',
-          //   url: 'https://616.sb/',
-          //   shorten: '616.sb'
-          // },
+          {
+            title: 'Konmai Academy',
+            // author: '「纯净的音游下载站」',
+            description: '公益的音乐游戏下载站',
+            url: 'https://616.sb/',
+            shorten: '616.sb'
+          },
         ]
       }
     }
