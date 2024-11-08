@@ -126,8 +126,8 @@ export default {
       const data = get.statistics.byItemId(this.itemId)
           // filter out stages that have too less samples
           .filter(el => el.times > 100)
-          // only open stages
-          .filter(el => existUtils.existence(el.stage, true))
+          // only open stages, and item must still be droppable now
+          .filter(el => existUtils.existence(el.stage, true) && (el.end === null || el.end > Date.now()))
 
           .sort((a, b) => b.percentage - a.percentage)
 

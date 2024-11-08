@@ -620,7 +620,7 @@ export default {
     filteredData() {
       let data = this.items
       if (this.type === 'item') {
-        if (this.dataTable.onlyOpen) data = data.filter(el => existUtils.existence(el.stage, true))
+        if (this.dataTable.onlyOpen) data = data.filter(el => existUtils.existence(el.stage, true) && (el.end === null || el.end > Date.now()))
         if (!this.dataTable.showPermanent) data = data.filter(el => el.stage.stageType !== 'MAIN' && el.stage.stageType !== 'SUB' && el.stage.stageType !== 'DAILY')
         if (!this.dataTable.showActivity) data = data.filter(el => el.stage.stageType !== 'ACTIVITY')
       } else if (this.type === 'stage') {
