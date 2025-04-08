@@ -2,27 +2,6 @@ import dayjs from "dayjs";
 import Console from "@/utils/Console";
 import {mapGetters} from "vuex";
 import helmet from "@/utils/helmet";
-import {externalService} from "@/utils/service";
-import i18n from "@/i18n";
-import {transformMessages} from "@/utils/i18n";
-
-const fetchTranslations = async (languageKey) => {
-  const projectPublishableToken = "52e5ff4b225147a9b11bb63865b2ae1f";
-  const environment = "_latest";
-  const url = `https://cdn.simplelocalize.io/${projectPublishableToken}/${environment}/${languageKey}`;
-
-  return externalService
-    .get(url, {
-      timeout: 10e3,
-    })
-    .then((response) => {
-      return response.data;
-    })
-    .catch((error) => {
-      Console.error("i18n", "failed to fetch translations:", error);
-      return Promise.reject(error);
-    });
-};
 
 const loadedLanguages = [];
 
@@ -151,16 +130,7 @@ export function loadLanguageAsync(lang) {
     font.fontSource()
   }
 
-  // if (environment.production) {
-  return fetchTranslations(mappedLang).then((messages) => {
-    const transformedMessages = Object.freeze(transformMessages(messages));
-    Console.info("i18n", "fetched language:", lang, "mappedLang:", mappedLang);
-    i18n.setLocaleMessage(lang, transformedMessages);
-    loadedLanguages.push(mappedLang);
-
-    return Promise.resolve();
-  });
-  // }
+  return Promise.resolve();
 }
 
 export default {

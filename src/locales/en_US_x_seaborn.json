@@ -953,6 +953,9 @@
       "1": "Closed",
       "permanentOpen": "Permanent"
     },
+    "mainlineRange": {
+      "subtitle": "Episode {from}~{to}"
+    },
     "subTypes": {
       "2019": "2019",
       "2020": "2020",

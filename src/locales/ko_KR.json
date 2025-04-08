@@ -897,6 +897,10 @@
       "1": "닫힘",
       "permanentOpen": "영구"
     },
+
+    "mainlineRange": {
+      "subtitle": "에피소드 {from}~{to}"
+    },
     "subTypes": {
       "2019": "2019",
       "2020": "2020",

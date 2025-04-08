@@ -990,6 +990,9 @@
       "1": "已结束",
       "permanentOpen": "常驻开放"
     },
+    "mainlineRange": {
+      "subtitle": "{from}~{to} 章"
+    },
     "subTypes": {
       "2019": "2019",
       "2020": "2020",

@@ -804,6 +804,9 @@
       "1": "終了",
       "permanentOpen": "恒常"
     },
+    "mainlineRange": {
+      "subtitle": "{from}~{to} 章"
+    },
     "subTypes": {
       "2019": "2019",
       "2020": "2020",

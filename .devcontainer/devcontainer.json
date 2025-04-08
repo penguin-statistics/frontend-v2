@@ -1,0 +1,24 @@
+{
+  "name": "PenguinStats Frontend",
+  "dockerFile": "Dockerfile",
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "dbaeumer.vscode-eslint",
+        "vue.volar",
+        "vue.vscode-typescript-vue-plugin",
+        "esbenp.prettier-vscode",
+        "octref.vetur"
+      ],
+      "settings": {
+        "editor.formatOnSave": true,
+        "editor.codeActionsOnSave": {
+          "source.fixAll.eslint": true
+        }
+      }
+    }
+  },
+  "forwardPorts": [8080],
+  "postCreateCommand": "yarn install",
+  "remoteUser": "node"
+} 
