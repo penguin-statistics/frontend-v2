@@ -784,7 +784,7 @@ html[lang^=ko] {
 }
 
 .v-slide-group__prev, .v-slide-group__next {
-    display: none !important
+    /* display: none !important */
 }
 
 .full-width {

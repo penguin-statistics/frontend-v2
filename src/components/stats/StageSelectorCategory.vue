@@ -1,5 +1,8 @@
 <template>
-  <div class="mt-4">
+  <div
+    class="mt-4"
+    style="position: relative;"
+  >
     <v-subheader>
       <v-icon class="mr-2">
         {{ category.zones[0].icon }}
@@ -15,10 +18,12 @@
         right
         show-arrows
         class="mt-0 mt-md-n12"
+        style="margin-left: 12rem; width: calc(100% - 12rem);"
       >
         <v-tab
           v-for="[key, data] in tabs.entries"
           :key="key"
+          :style="{minWidth: category.id === 'ACTIVITY_CLOSED' ? '60px' : undefined}"
         >
           <template v-if="!data.title">
             {{ key }}
