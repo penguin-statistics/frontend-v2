@@ -104,7 +104,7 @@ export default {
   computed: {
     tabs () {
       const findMainlineIndex = (zoneId) => {
-        const match = /^main_(\d+)$/.exec(zoneId)
+        const match = /^main_(\d+)/.exec(zoneId)
         return match?.[1]
       }
       const mainlineZoneRanges = Object.entries(this.category.zones.reduce((prev, curr) => {
