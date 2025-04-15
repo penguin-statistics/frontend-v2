@@ -1,6 +1,6 @@
 {
   "name": "penguin-stats-frontend",
-  "version": "3.13.22",
+  "version": "3.13.24",
   "private": true,
   "author": "Penguin Statistics Contributors <contributors@penguin-stats.io> (https://github.com/orgs/penguin-statistics/people)",
   "scripts": {
