@@ -120,7 +120,7 @@
           rel="noopener"
           outlined
           text
-          class="mt-1"
+          class="mt-1 mb-2"
         >
           <v-icon left>
             mdi-bank-transfer
@@ -133,6 +133,19 @@
             mdi-open-in-new
           </v-icon>
         </v-btn>
+        <div class="subtitle-1">
+          {{ $t('donate.donate_mirror_chan_0') }}
+          <v-chip
+            link
+            small
+            href="https://mirrorchyan.com/zh/get-start"
+            target="_blank"
+            rel="noopener"
+          >
+            {{ $t('donate.donate_mirror_chan_1') }}
+          </v-chip>
+          {{ $t('donate.donate_mirror_chan_2') }}
+        </div>
       </v-card-title>
 
       <svg

@@ -98,26 +98,6 @@ export default {
             shorten: 'ark-nights.com'
           },
           {
-            title: '刷素材推荐一图流',
-            author: 'SrO²、根派',
-            features: [
-              {
-                name: 'apRanking',
-                color: 'grey'
-              },
-              {
-                name: 'dropRateRanking',
-                color: 'grey'
-              },
-              {
-                name: 'generalRanking',
-                color: 'grey'
-              }
-            ],
-            url: 'https://aog.wiki/',
-            shorten: 'aog.wiki'
-          },
-          {
             title: 'PRTS',
             features: [
               {
@@ -168,6 +148,13 @@ export default {
             shorten: 'maa.plus'
           },
           {
+            title: 'Mirror酱',
+            features: [
+            ],
+            url: 'https://mirrorchyan.com/zh/get-start',
+            shorten: 'mirrorchyan.com'
+          },
+          {
             title: 'ANWiki',
             features: [
               {
@@ -201,6 +188,26 @@ export default {
             ],
             url: 'https://smartgamecap.net',
             shorten: 'smartgamecap.net'
+          },
+          {
+            title: '刷素材推荐一图流',
+            author: 'SrO²、根派',
+            features: [
+              {
+                name: 'apRanking',
+                color: 'grey'
+              },
+              {
+                name: 'dropRateRanking',
+                color: 'grey'
+              },
+              {
+                name: 'generalRanking',
+                color: 'grey'
+              }
+            ],
+            url: 'https://aog.wiki/',
+            shorten: 'aog.wiki'
           },
           {
             title: '明日方舟工具箱',

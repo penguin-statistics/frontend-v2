@@ -87,6 +87,9 @@
     "donate_2": "server fee",
     "donate_3": "pocky or apple pie are also accepted",
     "donate_4": ". We greatly appreciate your support!",
+    "donate_mirror_chan_0": "We deeply appreciate the donation from ",
+    "donate_mirror_chan_1": "MirrorChyan",
+    "donate_mirror_chan_2": ". Thank you also to the Doctors who support the Arknights community projects!",
     "methods": {
       "alipay": "Alipay",
       "paypal": "Donate with PayPal",
