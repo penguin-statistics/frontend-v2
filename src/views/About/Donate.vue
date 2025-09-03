@@ -196,12 +196,12 @@
               </svg>
             </template>
 
-            <img
+            <!-- <img
               :src="require('@/assets/qrcodes/alipay-qrcode.svg')"
               :alt="$t('donate.methods.alipay')"
               style="max-height: 128px"
               class="d-block justify-center mx-auto"
-            >
+            > -->
 
             <v-row
               align="center"
@@ -250,12 +250,12 @@
               </svg>
             </template>
 
-            <img
+            <!-- <img
               :src="require('@/assets/qrcodes/wechatpay-qrcode.svg')"
               :alt="$t('donate.methods.wechatPay')"
               style="max-height: 128px"
               class="d-block justify-center mx-auto"
-            >
+            > -->
 
             <v-row
               align="center"
