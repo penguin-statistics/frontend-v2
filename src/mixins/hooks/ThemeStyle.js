@@ -24,6 +24,10 @@ export default {
         Console.info('ThemeStyle', 'special period detected: april fools')
         return this.changeThemeStyle('seaborn', false)
       }
+      if (specialPeriods.avemujica()) {
+        Console.info("ThemeStyle", "special period detected: avemujica");
+        return this.changeThemeStyle("avemujica", false);
+      }
 
       const themeStyle = this.$store.getters['settings/themeStyle']
       if (themeStyle !== this.$store.state.ui.activeThemeStyle) {

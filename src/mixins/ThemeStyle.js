@@ -24,7 +24,7 @@ const themes = {
     },
   },
   seaborn: {
-    forceTheme: 'dark',
+    forceTheme: "dark",
     light: {
       primary: "#3ab4ce",
       primaryDarken1: "#005C68",
@@ -32,6 +32,17 @@ const themes = {
     dark: {
       primary: "#3ab4ce",
       primaryDarken1: "#005C68",
+    },
+  },
+  avemujica: {
+    forceTheme: "dark",
+    light: {
+      primary: "#ab254a",
+      primaryDarken1: "#1a090e",
+    },
+    dark: {
+      primary: "#ab254a",
+      primaryDarken1: "#1a090e",
     },
   },
 };

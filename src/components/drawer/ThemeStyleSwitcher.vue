@@ -38,6 +38,7 @@ import timeFormatter from "@/utils/timeFormatter";
 import Console from "@/utils/Console";
 
 const hideSeabornBefore = timeFormatter.dayjs("2023-04-01T00:00:00+0800");
+const hideAvemujicaBefore = timeFormatter.dayjs("2025-09-04T16:00:00+0800")
 
 export default {
   name: 'ThemeStyleSwitcher',
@@ -104,6 +105,12 @@ export default {
           text: this.$t('menu.settings.themeStyles.seaborn'),
           value: 'seaborn',
           hide: hideSeabornBefore.isAfter(timeFormatter.dayjs()),
+        },
+        {
+          icon: null,
+          text: this.$t('menu.settings.themeStyles.avemujica'),
+          value: 'avemujica',
+          hide: hideAvemujicaBefore.isAfter(timeFormatter.dayjs()),
         }
       ].filter((theme) => !theme.hide)
     }
