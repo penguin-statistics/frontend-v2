@@ -64,13 +64,13 @@ export default {
       resolutions: {
         high: {
           iconSize: 183,
-          dimensions: [1098, 3294],
-          url: "/sprite/sprite.202310090008.png",
+          dimensions: [1098, 3477],
+          url: "/sprite/sprite.202512222028.png",
         },
         low: {
           iconSize: 183 / 2,
-          dimensions: [1098 / 2, 3294 / 2],
-          url: "/sprite/sprite.202310090008.small.png",
+          dimensions: [1098 / 2, 3477 / 2],
+          url: "/sprite/sprite.202512222028.small.png",
         },
       },
     };
