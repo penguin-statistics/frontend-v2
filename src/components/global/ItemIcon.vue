@@ -65,12 +65,12 @@ export default {
         high: {
           iconSize: 183,
           dimensions: [1098, 3477],
-          url: "/sprite/sprite.202512222028.png",
+          url: "/sprite/sprite.202512231118.png",
         },
         low: {
           iconSize: 183 / 2,
           dimensions: [1098 / 2, 3477 / 2],
-          url: "/sprite/sprite.202512222028.small.png",
+          url: "/sprite/sprite.202512231118.small.png",
         },
       },
     };
