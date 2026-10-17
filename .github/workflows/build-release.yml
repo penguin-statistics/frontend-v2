@@ -87,7 +87,7 @@ jobs:
 
       # Local steps avoid changing shared @main consumers in other repositories.
       - name: "Sentry: Create Release"
-        uses: getsentry/action-release@v1
+        uses: getsentry/action-release@a74facf8a080ecbdf1cb355f16743530d712abb7 # v1
         env:
           SENTRY_AUTH_TOKEN: ${{ secrets.SENTRY_AUTH_TOKEN }}
           SENTRY_ORG: ${{ secrets.SENTRY_ORG }}

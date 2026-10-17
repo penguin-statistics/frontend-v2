@@ -5,8 +5,9 @@ const repository = 'penguin-statistics/frontend-v2';
 async function findImage(tag, actor, token, request = globalThis.fetch) {
   validVersion(tag);
   if (!actor || !token) throw new Error('Registry read authentication is required');
+  const basicAuth = Buffer.from(`${actor}:${token}`).toString('base64');
   const auth = await request(`https://ghcr.io/token?service=ghcr.io&scope=repository:${repository}:pull`, {
-    headers: { Authorization: `Basic ${Buffer.from(`${actor}:${token}`).toString('base64')}` },
+    headers: { Authorization: `Basic ${basicAuth}` },
     redirect: 'error',
   });
   if (!auth.ok) throw new Error(`Registry authentication failed (${auth.status})`);
