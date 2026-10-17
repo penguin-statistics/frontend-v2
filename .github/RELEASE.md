@@ -50,3 +50,5 @@ Image recovery follow-up validated on M1 with Node 16.20.2 and Node 22.16.0: all
 ## Pages Preview bootstrap
 
 The observed Pages initializer installs Corepack 0.36.0 before the application command, which fails on Node 16 with `URL.canParse is not a function`. Pinning Yarn alone and setting SKIP_DEPENDENCY_INSTALL did not bypass that tool initialization. Preview therefore uses NODE_VERSION=22.22.2 only for platform bootstrap, YARN_VERSION=1.22.22 and SKIP_DEPENDENCY_INSTALL=1. `build/web.cjs` runs the actual frozen dependency install and unchanged web build via pinned npm-exec Node 16.20.2/Yarn 1.22.22, verifying both versions before installing. Normal local/Docker builds keep their original build command through build:web:base. Production Pages settings are not changed by this Preview fix.
+
+The Pages retry confirmed the fixed Node 16/Yarn 1 frozen install succeeds. The legacy nested npx build then inherited the bootstrap npm configuration and failed before Vue compilation, so build:base now invokes the installed Vue CLI directly with Node and a 4096 MiB heap limit. It never resolves a build tool from the network.
