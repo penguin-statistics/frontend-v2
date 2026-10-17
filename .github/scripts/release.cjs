@@ -44,7 +44,7 @@ function updateImageTag(source, tag) {
   return { previous: match[2], changed: match[2] !== tag, content: match[1] + tag + match[3] };
 }
 
-async function ensureManifest(github, tag, sourceSha) {
+async function ensureManifest(github, tag, sourceSha, { checkOnly = false } = {}) {
   validVersion(tag);
   if (!/^[0-9a-f]{40}$/.test(sourceSha)) throw new Error('Expected full source commit SHA');
   const repository = { owner: 'penguin-statistics', repo: 'manifests' };
@@ -63,6 +63,7 @@ async function ensureManifest(github, tag, sourceSha) {
     if (after[index] > before[index]) break;
     if (after[index] < before[index]) throw new Error('Refusing stale release rollback of the frontend manifest');
   }
+  if (checkOnly) return { changed: true };
   // The blob SHA is a compare-and-swap guard: concurrent edits fail for review.
   // Never retry by overwriting newly fetched production state automatically.
   await github.rest.repos.createOrUpdateFileContents({

@@ -18,7 +18,9 @@ jobs:
         uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
 
       - name: "Test release recovery without network writes"
-        run: node .github/tests/release.test.cjs
+        run: |
+          node .github/tests/release.test.cjs
+          node .github/tests/release-image.test.cjs
 
       - name: "Docker: Build and Push Image"
         id: ghcr-docker
