@@ -21,6 +21,7 @@ jobs:
         run: |
           node .github/tests/release.test.cjs
           node .github/tests/release-image.test.cjs
+          node .github/tests/pages-build.test.cjs
 
       - name: "Docker: Build and Push Image"
         id: ghcr-docker

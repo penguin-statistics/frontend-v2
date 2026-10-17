@@ -46,3 +46,7 @@ Serialization covers runs using this workflow definition only, not historical wo
 Additional validation uses injected HTTP responses and in-memory manifest state only: image reuse, precise missing-image handling, fail-closed authentication/errors, missing published/deployed artifacts, old-tag reruns, both cross-tag promotion orders and workflow serialization/version-only publication wiring. No registry write or production run is used for testing.
 
 Image recovery follow-up validated on M1 with Node 16.20.2 and Node 22.16.0: all 11 existing checks and 7 additional image recovery checks pass; actionlint 1.7.12 passes for both workflows; package.json, yarn.lock and Dockerfile are unchanged by the follow-up. No live registry authentication or publication was exercised.
+
+## Pages Preview bootstrap
+
+The observed Pages initializer installs Corepack 0.36.0 before the application command, which fails on Node 16 with `URL.canParse is not a function`. Pinning Yarn alone and setting SKIP_DEPENDENCY_INSTALL did not bypass that tool initialization. Preview therefore uses NODE_VERSION=22.22.2 only for platform bootstrap, YARN_VERSION=1.22.22 and SKIP_DEPENDENCY_INSTALL=1. `build/web.cjs` runs the actual frozen dependency install and unchanged web build via pinned npm-exec Node 16.20.2/Yarn 1.22.22, verifying both versions before installing. Normal local/Docker builds keep their original build command through build:web:base. Production Pages settings are not changed by this Preview fix.
