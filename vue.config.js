@@ -53,6 +53,7 @@ console.log(`
   > 📝 Initiating vue-cli-service...`);
 
 module.exports = {
+  publicPath: require("./build/public-path")(),
   pluginOptions: {
     i18n: {
       locale: "zh",
