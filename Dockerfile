@@ -1,4 +1,4 @@
-FROM node:16 AS builder
+FROM node:16.20.2 AS builder
 WORKDIR /app
 
 ARG TRUNCATED_GITHUB_SHA
@@ -14,7 +14,8 @@ COPY package.json .
 COPY yarn.lock .
 
 # Setup yarn
-RUN yarn install
+RUN corepack enable && corepack prepare yarn@1.22.22 --activate \
+    && yarn install --frozen-lockfile
 
 COPY . .
 
