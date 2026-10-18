@@ -1,0 +1,63 @@
+name: Mainland CDN envelope
+
+on:
+  push:
+    tags: ['v*']
+  pull_request:
+    branches: [master]
+
+# This is the sole writer for /frontend-v2/releases/. Never cancel a partial upload.
+concurrency:
+  group: mainland-cdn-envelope-${{ github.event_name == 'push' && 'production' || github.ref }}
+  cancel-in-progress: false
+
+permissions:
+  contents: read
+
+jobs:
+  envelope:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    env:
+      PENGUIN_BUILDFROM: docker
+      PENGUIN_STATIC_CDN_ORIGIN: ${{ github.event_name == 'pull_request' && 'https://cdn.example.invalid' || vars.PENGUIN_STATIC_CDN_ORIGIN }}
+      PENGUIN_SITE_ORIGINS: '["https://penguin-stats.cn"]'
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+      - name: Offline CDN safety tests
+        run: node .github/tests/cdn-envelope.test.cjs
+      - name: Resolve immutable build prefix
+        env:
+          EVENT_NAME: ${{ github.event_name }}
+        run: |
+          if [ "$EVENT_NAME" = pull_request ]; then
+            export RELEASE_TAG="v$(node -p "require('./package.json').version")"
+            echo "RELEASE_TAG=$RELEASE_TAG" >> "$GITHUB_ENV"
+          fi
+          prefix=$(node .github/scripts/cdn-envelope.cjs prefix)
+          echo "PENGUIN_STATIC_PUBLIC_PATH=$prefix" >> "$GITHUB_ENV"
+      - name: Build once with the frozen toolchain
+        run: |
+          docker build --target builder --build-arg PENGUIN_STATIC_PUBLIC_PATH="$PENGUIN_STATIC_PUBLIC_PATH" --build-arg TRUNCATED_GITHUB_SHA="${GITHUB_SHA:0:7}" -t frontend-cdn-build .
+          container=$(docker create frontend-cdn-build)
+          trap 'docker rm "$container"' EXIT
+          docker cp "$container:/app/dist" dist
+          node .github/scripts/cdn-envelope.cjs check
+      # PR jobs never receive credentials, upload files, or produce deployable envelopes.
+      - name: Upload immutable assets and verify public CDN before packaging HTML
+        if: github.event_name == 'push'
+        env:
+          UPYUN_SERVICE: ${{ vars.UPYUN_SERVICE }}
+          UPYUN_OPERATOR: ${{ secrets.UPYUN_OPERATOR }}
+          UPYUN_PASSWORD: ${{ secrets.UPYUN_PASSWORD }}
+        run: node .github/scripts/cdn-envelope.cjs publish
+      - name: Retain verified mainland deployment package
+        if: github.event_name == 'push'
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+        with:
+          name: frontend-envelope-${{ github.sha }}-${{ github.run_attempt }}
+          path: |
+            frontend-envelope-${{ github.sha }}.tar.gz
+            frontend-envelope-${{ github.sha }}.tar.gz.sha256
+          if-no-files-found: error
+          retention-days: 90

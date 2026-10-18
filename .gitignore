@@ -27,3 +27,7 @@ src/utils/vendors/recogSubmitterSource.js
 ios/App/screenshots/
 ios/App/App/public
 tools/fonts/seaborn/glyphs
+
+# Verified mainland CDN release outputs
+/cdn-envelope/
+/frontend-envelope-*.tar.gz*
