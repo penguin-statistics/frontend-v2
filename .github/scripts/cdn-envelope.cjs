@@ -158,7 +158,10 @@ async function publish({ cfg, files, output, storage, publicGet = request, now =
 }
 function archiveEnvelope(output, archive) {
   assert(!fs.existsSync(archive), 'Archive already exists');
-  execFileSync('/usr/bin/tar', ['-czf', archive, '-C', output, ...['SHA256SUMS', 'cdn-verification.json', 'release.json', ...SITE.map(p => `site/${p}`)].sort()]);
+  execFileSync('/usr/bin/tar', ['-czf', archive, '-C', output, ...['SHA256SUMS', 'cdn-verification.json', 'release.json', ...SITE.map(p => `site/${p}`)].sort()], {
+    // tar may invoke gzip: neither it nor tar may inherit a repository-controlled PATH.
+    env: { PATH: '/usr/bin:/bin', LANG: 'C', COPYFILE_DISABLE: '1' },
+  });
   fs.writeFileSync(`${archive}.sha256`, `${hash(fs.readFileSync(archive))}  ${path.basename(archive)}\n`);
 }
 async function main() {
