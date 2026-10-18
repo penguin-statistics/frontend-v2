@@ -16,6 +16,8 @@ const MIME = { '.js': 'application/javascript', '.css': 'text/css', '.woff': 'fo
   '.ttf': 'font/ttf', '.eot': 'application/vnd.ms-fontobject', '.svg': 'image/svg+xml', '.png': 'image/png',
   '.jpg': 'image/jpeg', '.jpeg': 'image/jpeg', '.gif': 'image/gif', '.webp': 'image/webp', '.ico': 'image/x-icon' };
 const hash = data => crypto.createHash('sha256').update(data).digest('hex');
+// Required by Upyun's wire protocol only (password derivation and Content-MD5).
+// Release identity and all storage/CDN/archive integrity checks use SHA-256 above.
 const md5 = data => crypto.createHash('md5').update(data).digest('hex');
 function assert(ok, message) { if (!ok) throw new Error(message); }
 function checksums(files) {
@@ -156,7 +158,7 @@ async function publish({ cfg, files, output, storage, publicGet = request, now =
 }
 function archiveEnvelope(output, archive) {
   assert(!fs.existsSync(archive), 'Archive already exists');
-  execFileSync('tar', ['-czf', archive, '-C', output, ...['SHA256SUMS', 'cdn-verification.json', 'release.json', ...SITE.map(p => `site/${p}`)].sort()]);
+  execFileSync('/usr/bin/tar', ['-czf', archive, '-C', output, ...['SHA256SUMS', 'cdn-verification.json', 'release.json', ...SITE.map(p => `site/${p}`)].sort()]);
   fs.writeFileSync(`${archive}.sha256`, `${hash(fs.readFileSync(archive))}  ${path.basename(archive)}\n`);
 }
 async function main() {
