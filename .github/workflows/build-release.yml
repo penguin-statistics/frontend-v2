@@ -7,38 +7,113 @@ on:
       - "v*"
 
 concurrency:
-  group: ${{ github.ref }}
-  cancel-in-progress: true
+  group: frontend-production-release
+  cancel-in-progress: false
 
 jobs:
   build:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      packages: write
     steps:
       - name: "Checkout"
-        uses: actions/checkout@v3
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+
+      - name: "Check release version before side effects"
+        run: node .github/scripts/check-version.cjs
+
+      - name: "Test release recovery without network writes"
+        run: |
+          node .github/tests/release.test.cjs
+          node .github/tests/release-image.test.cjs
+          node .github/tests/pages-build.test.cjs
 
       - name: "Metadata: Git"
         id: git-meta
-        uses: 'penguin-statistics/actions/git-meta@main'
+        uses: 'penguin-statistics/actions/git-meta@e92ec679ecea64f9160208aa857caf8e0b70e56a'
 
-      - name: "Docker: Build and Push Image"
-        id: ghcr-docker
-        uses: 'penguin-statistics/actions/ghcr-docker@main'
+      # Read-only checks precede image, Sentry and GitHub Release writes.
+      - name: "Manifest: Check Promotion"
+        id: promotion
+        uses: actions/github-script@f28e40c7f34bde8b3046d885e986cb6290c5673b # v7
+        env:
+          RELEASE_TAG: ${{ steps.git-meta.outputs.version }}
         with:
-          version: ${{ steps.git-meta.outputs.version }}
-          repository: 'penguin-statistics/frontend-v2'
-          build-args: TRUNCATED_GITHUB_SHA=${{ steps.git-meta.outputs.mini-sha }}
+          github-token: ${{ secrets.PAT_FOR_MANIFESTBOT }}
+          script: |
+            const { ensureManifest } = require('./.github/scripts/release.cjs');
+            const plan = await ensureManifest(github, process.env.RELEASE_TAG, context.sha, { checkOnly: true });
+            core.setOutput('changed', String(plan.changed));
 
-      - name: "Release: Call Dispatcher"
-        id: release-dispatcher
-        uses: 'penguin-statistics/actions/release-dispatcher@main'
+      - name: "Docker: Reuse Existing Version"
+        id: image
+        uses: actions/github-script@f28e40c7f34bde8b3046d885e986cb6290c5673b # v7
+        env:
+          RELEASE_TAG: ${{ steps.git-meta.outputs.version }}
+          REGISTRY_TOKEN: ${{ github.token }}
+          MANIFEST_CHANGES: ${{ steps.promotion.outputs.changed }}
         with:
+          script: |
+            const { planImage } = require('./.github/scripts/release-image.cjs');
+            const plan = await planImage(github, { repo: context.repo, actor: context.actor, token: process.env.REGISTRY_TOKEN }, process.env.RELEASE_TAG, process.env.MANIFEST_CHANGES === 'true');
+            core.setOutput('build', String(plan.build));
+            core.info(plan.build ? 'New version image required' : 'Existing version image retained');
+
+      - name: "Docker: Setup Buildx"
+        if: steps.image.outputs.build == 'true'
+        uses: docker/setup-buildx-action@8d2750c68a42422c14e847fe6c8ac0403b4cbd6f # v3
+
+      - name: "Docker: Login"
+        if: steps.image.outputs.build == 'true'
+        uses: docker/login-action@c94ce9fb468520275223c153574b00df6fe4bcc9 # v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ github.token }}
+
+      - name: "Docker: Publish New Version Only"
+        if: steps.image.outputs.build == 'true'
+        uses: docker/build-push-action@ca052bb54ab0790a636c9b5f226502c73d547a25 # v5
+        with:
+          push: true
+          tags: ghcr.io/penguin-statistics/frontend-v2:${{ steps.git-meta.outputs.version }}
+          labels: |
+            org.opencontainers.image.source=https://github.com/penguin-statistics/frontend-v2
+            org.opencontainers.image.revision=${{ github.sha }}
+            org.opencontainers.image.version=${{ steps.git-meta.outputs.version }}
+          build-args: |
+            VERSION=${{ steps.git-meta.outputs.version }}
+            TRUNCATED_GITHUB_SHA=${{ steps.git-meta.outputs.mini-sha }}
+
+      # Local steps avoid changing shared @main consumers in other repositories.
+      - name: "Sentry: Create Release"
+        uses: getsentry/action-release@a74facf8a080ecbdf1cb355f16743530d712abb7 # v1
+        env:
+          SENTRY_AUTH_TOKEN: ${{ secrets.SENTRY_AUTH_TOKEN }}
+          SENTRY_ORG: ${{ secrets.SENTRY_ORG }}
+          SENTRY_PROJECT: ${{ secrets.SENTRY_PROJECT }}
+        with:
+          environment: prod
           version: ${{ steps.git-meta.outputs.version }}
-          use-sentry: true
-          sentry-auth-token: ${{ secrets.SENTRY_AUTH_TOKEN }}
-          sentry-org: ${{ secrets.SENTRY_ORG }}
-          sentry-project: ${{ secrets.SENTRY_PROJECT }}
-          use-ghrelease: true
-          use-manifestbot: true
-          manifestbot-file-path: 'applications/frontend-rollout/values-prod.yaml'
-          manifestbot-token: ${{ secrets.PAT_FOR_MANIFESTBOT }}
+          ignore_empty: true
+
+      - name: "GitHub: Ensure Repository Release"
+        uses: actions/github-script@f28e40c7f34bde8b3046d885e986cb6290c5673b # v7
+        env:
+          RELEASE_TAG: ${{ steps.git-meta.outputs.version }}
+        with:
+          script: |
+            const { ensureRelease } = require('./.github/scripts/release.cjs');
+            await ensureRelease(github, context, process.env.RELEASE_TAG);
+
+      - name: "Manifest: Ensure Frontend Version"
+        uses: actions/github-script@f28e40c7f34bde8b3046d885e986cb6290c5673b # v7
+        env:
+          RELEASE_TAG: ${{ steps.git-meta.outputs.version }}
+        with:
+          github-token: ${{ secrets.PAT_FOR_MANIFESTBOT }}
+          script: |
+            const { ensureManifest } = require('./.github/scripts/release.cjs');
+            const result = await ensureManifest(github, process.env.RELEASE_TAG, context.sha);
+            core.info(result.changed ? 'Frontend manifest version updated' : 'Frontend manifest already matches; no write needed');

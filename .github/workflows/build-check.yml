@@ -15,11 +15,17 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: "Checkout"
-        uses: actions/checkout@v3
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+
+      - name: "Test release recovery without network writes"
+        run: |
+          node .github/tests/release.test.cjs
+          node .github/tests/release-image.test.cjs
+          node .github/tests/pages-build.test.cjs
 
       - name: "Docker: Build and Push Image"
         id: ghcr-docker
-        uses: 'penguin-statistics/actions/ghcr-docker@main'
+        uses: 'penguin-statistics/actions/ghcr-docker@e92ec679ecea64f9160208aa857caf8e0b70e56a'
         with:
           version: '__check__'
           repository: 'penguin-statistics/frontend-v2'
