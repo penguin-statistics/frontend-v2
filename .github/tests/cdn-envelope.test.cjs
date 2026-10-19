@@ -2,7 +2,7 @@ const assert = require('assert').strict;
 const fs = require('fs');
 const os = require('os');
 const path = require('path');
-const { SITE, hash, checksums, config, collect, sign, publish } = require('../scripts/cdn-envelope.cjs');
+const { SITE, hash, checksums, config, collect, upyun, publish } = require('../scripts/cdn-envelope.cjs');
 const publicPath = require('../../build/public-path');
 const root = fs.mkdtempSync(path.join(os.tmpdir(), 'cdn-envelope-test-'));
 const env = { GITHUB_SHA: 'a'.repeat(40), GITHUB_REF_NAME: `v${require('../../package.json').version}`,
@@ -24,7 +24,40 @@ function mock() {
   };
 }
 async function run() {
-  await test('official Upyun signature vector', () => assert.equal(sign('PUT', '/upyun-temp/demo.jpg', 'Wed, 09 Nov 2016 14:26:58 GMT', 'password123', Buffer.from('abcdefg')), 'YUaAZX+WNAcJdNGHS5SBlITME5A='));
+  await test('S3 adapter uses the official endpoint and preserves object bytes and metadata', async () => {
+    const sent = []; let options;
+    const sdk = {
+      S3Client: class { constructor(value) { options = value; } async send(command) {
+        sent.push(command);
+        return { $metadata: { httpStatusCode: 200 }, Body: [Buffer.from('asset')] };
+      } },
+      GetObjectCommand: class { constructor(input) { this.input = input; } },
+      PutObjectCommand: class { constructor(input) { this.input = input; } },
+    };
+    const store = upyun({ UPYUN_SERVICE: 'penguin-statistics', UPYUN_S3_ACCESS_KEY_ID: 'fixture-id', UPYUN_S3_SECRET_ACCESS_KEY: 'fixture-secret' }, sdk);
+    assert.equal(options.endpoint, 'https://s3.api.upyun.com');
+    assert.equal(options.forcePathStyle, true);
+    assert.equal(options.requestChecksumCalculation, 'WHEN_REQUIRED');
+    assert.deepEqual((await store('GET', 'release/a.js')).body, Buffer.from('asset'));
+    await store('PUT', 'release/a.js', Buffer.from('asset'), 'application/javascript');
+    assert.equal(sent[0].input.Bucket, 'penguin-statistics');
+    assert.equal(sent[1].input.Key, 'release/a.js');
+    assert.equal(sent[1].input.ContentType, 'application/javascript');
+    assert.equal(sent[1].input.CacheControl, 'public, max-age=31536000, immutable');
+    assert.equal(sent[1].input.ContentLength, 5);
+  });
+  await test('S3 adapter treats only NoSuchKey as absence and redacts provider errors', async () => {
+    for (const [name, status, absent] of [['NoSuchKey', 404, true], ['NoSuchBucket', 404, false], ['AccessDenied', 403, false], ['ServiceUnavailable', 503, false]]) {
+      const sdk = {
+        S3Client: class { async send() { const error = new Error('secret-provider-response'); error.name = name; error.$metadata = { httpStatusCode: status }; throw error; } },
+        GetObjectCommand: class {}, PutObjectCommand: class {},
+      };
+      const store = upyun({ UPYUN_SERVICE: 'penguin-statistics', UPYUN_S3_ACCESS_KEY_ID: 'fixture-id', UPYUN_S3_SECRET_ACCESS_KEY: 'fixture-secret' }, sdk);
+      if (absent) assert.equal((await store('GET', 'a.js')).status, 404);
+      else await assert.rejects(store('GET', 'a.js'), error => error.message === `S3 GET failed (${status})`);
+      await assert.rejects(store('PUT', 'a.js', Buffer.from('asset'), 'application/javascript'), error => error.message === `S3 PUT failed (${status})`);
+    }
+  });
   await test('public path only affects production web, validates HTTPS', () => {
     assert.equal(publicPath({ PENGUIN_STATIC_PUBLIC_PATH: cfg.cdnPrefix }), '/');
     assert.equal(publicPath({ NODE_ENV: 'production', PENGUIN_PLATFORM: 'web', PENGUIN_STATIC_PUBLIC_PATH: cfg.cdnPrefix }), cfg.cdnPrefix);

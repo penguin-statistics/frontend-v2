@@ -24,16 +24,20 @@ jobs:
       PENGUIN_SITE_ORIGINS: '["https://penguin-stats.cn"]'
     steps:
       - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+      - name: Install locked S3 publisher dependencies
+        run: npm ci --prefix .github/s3 --ignore-scripts
       - name: Offline CDN safety tests
-        run: node .github/tests/cdn-envelope.test.cjs
+        run: |
+          node .github/tests/cdn-envelope.test.cjs
+          node .github/tests/cdn-s3.test.cjs
       - name: Check publication configuration before building
         if: github.event_name == 'push'
         env:
           UPYUN_SERVICE: ${{ vars.UPYUN_SERVICE }}
-          UPYUN_OPERATOR: ${{ secrets.UPYUN_OPERATOR }}
-          UPYUN_PASSWORD: ${{ secrets.UPYUN_PASSWORD }}
+          UPYUN_S3_ACCESS_KEY_ID: ${{ secrets.UPYUN_S3_ACCESS_KEY_ID }}
+          UPYUN_S3_SECRET_ACCESS_KEY: ${{ secrets.UPYUN_S3_SECRET_ACCESS_KEY }}
         run: |
-          node -e 'for (const key of ["UPYUN_SERVICE", "UPYUN_OPERATOR", "UPYUN_PASSWORD"]) { if (!process.env[key]) { console.error("Missing publication configuration: " + key); process.exitCode = 1; } }'
+          node -e 'for (const key of ["UPYUN_SERVICE", "UPYUN_S3_ACCESS_KEY_ID", "UPYUN_S3_SECRET_ACCESS_KEY"]) { if (!process.env[key]) { console.error("Missing publication configuration: " + key); process.exitCode = 1; } }'
       - name: Resolve immutable build prefix
         env:
           EVENT_NAME: ${{ github.event_name }}
@@ -56,8 +60,8 @@ jobs:
         if: github.event_name == 'push'
         env:
           UPYUN_SERVICE: ${{ vars.UPYUN_SERVICE }}
-          UPYUN_OPERATOR: ${{ secrets.UPYUN_OPERATOR }}
-          UPYUN_PASSWORD: ${{ secrets.UPYUN_PASSWORD }}
+          UPYUN_S3_ACCESS_KEY_ID: ${{ secrets.UPYUN_S3_ACCESS_KEY_ID }}
+          UPYUN_S3_SECRET_ACCESS_KEY: ${{ secrets.UPYUN_S3_SECRET_ACCESS_KEY }}
         run: node .github/scripts/cdn-envelope.cjs publish
       - name: Retain verified mainland deployment package
         if: github.event_name == 'push'

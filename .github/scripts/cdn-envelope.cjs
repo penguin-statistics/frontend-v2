@@ -16,9 +16,6 @@ const MIME = { '.js': 'application/javascript', '.css': 'text/css', '.woff': 'fo
   '.ttf': 'font/ttf', '.eot': 'application/vnd.ms-fontobject', '.svg': 'image/svg+xml', '.png': 'image/png',
   '.jpg': 'image/jpeg', '.jpeg': 'image/jpeg', '.gif': 'image/gif', '.webp': 'image/webp', '.ico': 'image/x-icon' };
 const hash = data => crypto.createHash('sha256').update(data).digest('hex');
-// Required by Upyun's wire protocol only (password derivation and Content-MD5).
-// Release identity and all storage/CDN/archive integrity checks use SHA-256 above.
-const md5 = data => crypto.createHash('md5').update(data).digest('hex'); // NOSONAR: Upyun protocol requires MD5; artifact integrity uses SHA-256.
 function assert(ok, message) { if (!ok) throw new Error(message); }
 function checksums(files) {
   return Object.keys(files).sort().map(p => `${hash(files[p])}  ${p}\n`).join('');
@@ -79,12 +76,6 @@ function collect(dist, cfg) {
   assert(all['service-worker.js'].equals(fs.readFileSync(path.resolve(__dirname, '../../public/service-worker.js'))), 'Unexpected service worker dependencies');
   return { site, assets };
 }
-// Official Upyun HMAC-SHA1 scheme; never include response bodies or auth headers in errors.
-function sign(method, uri, date, password, body) {
-  const parts = [method, uri, date];
-  if (body !== undefined) parts.push(md5(body));
-  return crypto.createHmac('sha1', md5(password)).update(parts.join('&')).digest('base64');
-}
 function request(url, { method = 'GET', headers = {}, body } = {}) {
   return new Promise((resolve, reject) => {
     const req = https.request(url, { method, headers, timeout: 30000 }, res => {
@@ -98,15 +89,34 @@ function request(url, { method = 'GET', headers = {}, body } = {}) {
     req.end(body);
   });
 }
-function upyun(env, transport = request) {
-  const { UPYUN_SERVICE: service, UPYUN_OPERATOR: operator, UPYUN_PASSWORD: password } = env;
-  assert(/^[a-z0-9][a-z0-9-]*$/.test(service || '') && operator && password, 'UPYUN_SERVICE, UPYUN_OPERATOR and UPYUN_PASSWORD required');
+function upyun(env, sdk = require('../s3/node_modules/@aws-sdk/client-s3')) {
+  const { UPYUN_SERVICE: service, UPYUN_S3_ACCESS_KEY_ID: accessKeyId, UPYUN_S3_SECRET_ACCESS_KEY: secretAccessKey } = env;
+  assert(/^[a-z0-9][a-z0-9-]*$/.test(service || '') && accessKeyId && secretAccessKey,
+    'UPYUN_SERVICE, UPYUN_S3_ACCESS_KEY_ID and UPYUN_S3_SECRET_ACCESS_KEY required');
+  const client = new sdk.S3Client({ endpoint: 'https://s3.api.upyun.com', region: 'us-east-1', forcePathStyle: true,
+    credentials: { accessKeyId, secretAccessKey }, maxAttempts: 3,
+    requestHandler: { connectionTimeout: 10000, requestTimeout: 30000 },
+    requestChecksumCalculation: 'WHEN_REQUIRED', responseChecksumValidation: 'WHEN_REQUIRED' });
   return async (method, key, body, type) => {
-    const uri = `/${service}/${key}`, date = new Date().toUTCString();
-    const headers = { Date: date, Authorization: `UPYUN ${operator}:${sign(method, uri, date, password, body)}` };
-    if (body !== undefined) Object.assign(headers, { 'Content-Length': body.length, 'Content-MD5': md5(body),
-      'Content-Type': type, 'x-upyun-meta-cache-control': 'public, max-age=31536000, immutable' });
-    return transport(`https://v0.api.upyun.com${uri}`, { method, headers, body });
+    assert(method === 'GET' || method === 'PUT', 'Only object reads and uploads are supported');
+    try {
+      const input = { Bucket: service, Key: key };
+      const result = await client.send(method === 'GET' ? new sdk.GetObjectCommand(input) : new sdk.PutObjectCommand({
+        ...input, Body: body, ContentLength: body.length, ContentType: type,
+        CacheControl: 'public, max-age=31536000, immutable',
+      }));
+      const chunks = []; let size = 0;
+      if (method === 'GET') for await (const chunk of result.Body) {
+        size += chunk.length;
+        if (size > 64 * 1024 * 1024) { result.Body.destroy?.(); throw new Error('Object too large'); }
+        chunks.push(chunk);
+      }
+      return { status: result.$metadata.httpStatusCode, body: Buffer.concat(chunks) };
+    } catch (error) {
+      // A missing bucket or denied read is never evidence that an object may be written.
+      if (method === 'GET' && error.name === 'NoSuchKey' && error.$metadata?.httpStatusCode === 404) return { status: 404 };
+      throw new Error(`S3 ${method} failed (${error.$metadata?.httpStatusCode || 'transport'})`);
+    }
   };
 }
 async function publish({ cfg, files, output, storage, publicGet = request, now = () => new Date().toISOString() }) {
@@ -178,4 +188,4 @@ async function main() {
   console.log(`Verified envelope: ${archive}`);
 }
 if (require.main === module) main().catch(error => { console.error(error.message); process.exitCode = 1; });
-module.exports = { SITE, MIME, hash, checksums, config, collect, sign, upyun, publish, archiveEnvelope };
+module.exports = { SITE, MIME, hash, checksums, config, collect, upyun, publish, archiveEnvelope };
