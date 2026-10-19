@@ -18,7 +18,7 @@ const MIME = { '.js': 'application/javascript', '.css': 'text/css', '.woff': 'fo
 const hash = data => crypto.createHash('sha256').update(data).digest('hex');
 // Required by Upyun's wire protocol only (password derivation and Content-MD5).
 // Release identity and all storage/CDN/archive integrity checks use SHA-256 above.
-const md5 = data => crypto.createHash('md5').update(data).digest('hex');
+const md5 = data => crypto.createHash('md5').update(data).digest('hex'); // NOSONAR: Upyun protocol requires MD5; artifact integrity uses SHA-256.
 function assert(ok, message) { if (!ok) throw new Error(message); }
 function checksums(files) {
   return Object.keys(files).sort().map(p => `${hash(files[p])}  ${p}\n`).join('');
