@@ -2,7 +2,7 @@ name: Mainland CDN envelope
 
 on:
   push:
-    tags: ['v*']
+    tags: ['v*', 'cn-v*']
   pull_request:
     branches: [master]
 

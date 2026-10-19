@@ -33,7 +33,11 @@ function config(env = process.env) {
   }
   const packageVersion = require('../../package.json').version;
   const releaseTag = env.RELEASE_TAG || env.GITHUB_REF_NAME;
-  checkVersion(releaseTag, sourceSha, packageVersion);
+  // Mainland-only tags avoid the v* workflow that promotes the global frontend.
+  if (typeof releaseTag === 'string' && releaseTag.startsWith('cn-')) {
+    const mainland = /^cn-(v\d+\.\d+\.\d+)-([1-9]\d*)$/.exec(releaseTag);
+    assert(mainland && mainland[1] === `v${packageVersion}`, 'Mainland release tag must match package version and have a positive sequence');
+  } else checkVersion(releaseTag, sourceSha, packageVersion);
   assert(/^\d+$/.test(env.GITHUB_RUN_ID || '') && /^\d+$/.test(env.GITHUB_RUN_ATTEMPT || ''), 'CI run identity required');
   return { schemaVersion: 1, repository: 'penguin-statistics/frontend-v2', sourceSha,
     releaseTag, packageVersion,

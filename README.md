@@ -59,7 +59,7 @@ Validated on arm64 with Node 16.20.2 and Yarn 1.22.22: frozen lockfile install, 
 
 ### Mainland CDN envelope CI
 
-`.github/workflows/cdn-envelope.yml` builds a separate mainland artifact on version-tag pushes. It does not deploy HTML, change manifests, or replace the existing Docker/Pages release paths. Pull requests run the same frozen Node 16.20.2 / Yarn 1.22.22 Docker builder with an invalid example CDN origin and run offline safety tests; they receive no upload credentials and produce no deployable package.
+`.github/workflows/cdn-envelope.yml` builds a separate mainland artifact on version-tag pushes (`v*` or mainland-only `cn-v*`). Use `cn-v<package-version>-<positive-sequence>` for mainland acceptance without invoking the existing global Docker/Sentry/GitOps release; for example, `cn-v3.13.30-1` must point to the exact reviewed source commit. Never move or reuse a tag. It does not deploy HTML, change manifests, or replace the existing Docker/Pages release paths. Pull requests run the same frozen Node 16.20.2 / Yarn 1.22.22 Docker builder with an invalid example CDN origin and run offline safety tests; they receive no upload credentials and produce no deployable package.
 
 Configure these repository Actions settings before a tag release:
 

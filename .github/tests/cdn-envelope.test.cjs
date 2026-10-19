@@ -66,6 +66,15 @@ async function run() {
   await test('identity validation rejects tag mismatch, credentials, paths and missing origins', () => {
     for (const change of [{ GITHUB_REF_NAME: 'v0.0.0' }, { PENGUIN_STATIC_CDN_ORIGIN: 'https://u:p@cdn.invalid' }, { PENGUIN_STATIC_CDN_ORIGIN: 'https://cdn.invalid/path' }, { PENGUIN_SITE_ORIGINS: '[]' }]) assert.throws(() => config({ ...env, ...change }));
   });
+  await test('mainland-only tags match package version and cannot trigger the global v* release', () => {
+    const version = require('../../package.json').version;
+    const tag = `cn-v${version}-1`;
+    assert.equal(config({ ...env, GITHUB_REF_NAME: tag }).releaseTag, tag);
+    assert(!tag.startsWith('v'));
+    for (const invalid of ['cn-v0.0.0-1', `cn-v${version}-0`, `cn-v${version}-01`, `cn-v${version}`, `cn-v${version}-1-extra`]) {
+      assert.throws(() => config({ ...env, GITHUB_REF_NAME: invalid }));
+    }
+  });
   await test('checksums use sorted paths, two spaces, LF including final LF', () => {
     assert.equal(checksums({ 'site/b': Buffer.from('b'), 'site/a': Buffer.from('a') }), `${hash('a')}  site/a\n${hash('b')}  site/b\n`);
   });
