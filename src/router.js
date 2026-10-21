@@ -20,6 +20,10 @@ import Planner from '@/views/Planner'
 import Search from '@/views/Search'
 import store from '@/store'
 import helmet from "@/utils/helmet";
+import i18n from '@/i18n'
+import strings from '@/utils/strings'
+import supports from '@/models/supports'
+import {activeLocale} from '@/mixins/I18n'
 
 // import DataDebugger from "@/components/debug/DataDebugger";
 
@@ -42,6 +46,34 @@ const routerChildrenNull = {
     return next({
       name: "Home",
       replace: true
+    })
+  }
+}
+
+// the stats routes carry the UI language and the game server in their path, e.g. /en/result/us/stage.
+// values other than these do not match, thus fall through to ErrorNotFound
+const statsLanguages = ['zh', 'en', 'ja', 'ko']
+
+// the stats route params of the current UI language and server
+export function statsRouteParams() {
+  const language = strings.mapLocale(activeLocale()).split('-')[0]
+  return {
+    lang: statsLanguages.includes(language) ? language : i18n.fallbackLocale,
+    server: store.getters['dataSource/server'].toLowerCase()
+  }
+}
+
+// the stats routes before the language and the server were in their path. external sites
+// (widgets, bots, bookmarks) link to them, so keep redirecting them to the current ones
+function legacyStatsRoute(path, name) {
+  return {
+    path,
+    meta: {
+      hide: true
+    },
+    redirect: to => ({
+      name,
+      params: {...to.params, ...statsRouteParams()}
     })
   }
 }
@@ -147,7 +179,7 @@ const router = new Router({
       ]
     },
     {
-      path: '/result',
+      path: `/:lang(${statsLanguages.join('|')})/result/:server(${supports.servers.join('|').toLowerCase()})`,
       name: 'Stats',
       component: StatsLayout,
       meta: {
@@ -162,7 +194,6 @@ const router = new Router({
           path: 'stage',
           name: 'StatsByStage',
           component: StatsByStage,
-          props: true,
           meta: {
             icon: 'mdi-cube',
             creature: 5,
@@ -173,7 +204,6 @@ const router = new Router({
           path: 'stage/:zoneId/:stageId',
           name: 'StatsByStage_Selected',
           component: StatsByStage,
-          props: true,
           meta: {
             hide: true,
             i18n: 'menu.stats.stage'
@@ -183,7 +213,6 @@ const router = new Router({
           path: 'item',
           name: 'StatsByItem',
           component: StatsByItem,
-          props: true,
           meta: {
             icon: 'mdi-treasure-chest',
             creature: 6,
@@ -194,7 +223,6 @@ const router = new Router({
           path: 'item/:itemId',
           name: 'StatsByItem_SelectedItem',
           component: StatsByItem,
-          props: true,
           meta: {
             hide: true,
             i18n: 'menu.stats.item'
@@ -202,6 +230,20 @@ const router = new Router({
         }
       ]
     },
+    {
+      // same as the empty child of the stats route
+      path: '/result',
+      meta: {
+        hide: true
+      },
+      redirect: {
+        name: 'Home'
+      }
+    },
+    legacyStatsRoute('/result/stage', 'StatsByStage'),
+    legacyStatsRoute('/result/stage/:zoneId/:stageId', 'StatsByStage_Selected'),
+    legacyStatsRoute('/result/item', 'StatsByItem'),
+    legacyStatsRoute('/result/item/:itemId', 'StatsByItem_SelectedItem'),
     {
       path: '/planner',
       name: 'Planner',
@@ -352,6 +394,17 @@ const router = new Router({
     }
   ]
 })
+
+// named locations of the stats routes (router-link to, $router.push) may leave out the language
+// and the server: fill them in from the current state. this covers both resolving and navigating
+const statsRouteNames = router.options.routes.find(el => el.name === 'Stats').children.map(el => el.name)
+const match = router.match
+router.match = function (raw, current, redirectedFrom) {
+  if (raw && statsRouteNames.includes(raw.name)) {
+    raw = {...raw, params: {...statsRouteParams(), ...raw.params}}
+  }
+  return match.call(this, raw, current, redirectedFrom)
+}
 
 router.beforeEach((to, from, next) => {
   // If this isn't an initial page load and is an async route

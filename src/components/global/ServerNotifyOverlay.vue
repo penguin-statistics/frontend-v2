@@ -60,6 +60,8 @@ export default {
       const self = this
 
       this.$nextTick(function () {
+        // a previous switch may have closed the overlay in the meantime
+        if (!self.$refs.notifyOverlayIcon) return
         anime.timeline({
           duration: 1000,
           easing: 'easeOutExpo'
@@ -82,6 +84,7 @@ export default {
           }, 500)
 
         setTimeout(function () {
+          if (!self.$refs.notifyOverlayIcon) return
           anime.timeline({
             duration: 500,
             easing: 'easeInExpo'

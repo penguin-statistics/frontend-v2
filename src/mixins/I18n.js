@@ -2,8 +2,16 @@ import dayjs from "dayjs";
 import Console from "@/utils/Console";
 import {mapGetters} from "vuex";
 import helmet from "@/utils/helmet";
+import i18n from "@/i18n";
+import store from "@/store";
+import strings from "@/utils/strings";
+import environment from "@/utils/environment";
 
 const loadedLanguages = [];
+
+// whether changeLocale() has been called yet. on boot, the Localization hook only applies the
+// preferred locale after the initial route has been resolved
+let localeApplied = false;
 
 const languageMapping = {
   en: "en_US",
@@ -116,6 +124,16 @@ function changeLocale(localeId, save) {
   this.$vuetify.lang.current = localeMapping[localeId] || localeId;
   helmet.title.update(this.$route);
   document.documentElement.lang = localeId;
+  localeApplied = true;
+}
+
+// the active locale or, before the Localization hook ran, the one it is going to apply
+export function activeLocale() {
+  // always read $i18n.locale so that reactive callers keep tracking it
+  const locale = i18n.locale;
+  if (localeApplied) return locale;
+  const language = store.getters["settings/language"];
+  return !language || environment.isAppIOS ? strings.getFirstBrowserLanguage() : language;
 }
 
 export function loadLanguageAsync(lang) {

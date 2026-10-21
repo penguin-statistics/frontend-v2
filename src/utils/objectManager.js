@@ -97,11 +97,11 @@ class ObjectManager {
     }
   }
 
-  _updateData (value) {
+  _updateData (value, server = this.server) {
     return store.commit('data/storeData', {
       name: this.name,
       value: value,
-      server: this.api.serverSensitive ? this.server : '_shared'
+      server: this.api.serverSensitive ? server : '_shared'
     })
   }
 
@@ -145,6 +145,8 @@ class ObjectManager {
         context.apiConfig
       )
 
+      // the server may change before the response arrives: store the data under the one requested
+      const server = context.server
       const promise = new Promise((resolve, reject) => {
         service(context.apiConfig)
           .then(({ data }) => {
@@ -158,9 +160,9 @@ class ObjectManager {
               }))
             }
 
-            this._updateData(data)
+            this._updateData(data, server)
 
-            Console.info('ObjectManager', `fetched data "${context.name}" at ${Date.now()} for server "${context.server}"`)
+            Console.info('ObjectManager', `fetched data "${context.name}" at ${Date.now()} for server "${server}"`)
 
             resolve(data)
           })

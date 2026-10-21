@@ -57,7 +57,7 @@
       v-for="child in route.children.filter(el => !el.meta.hide )"
       :key="child.name"
       v-haptic
-      :class="route.path + '/' + child.path === $route.path.split('/', 3).join('/') ? activeClass : ''"
+      :class="isActiveChild(child) ? activeClass : ''"
       :color="`primary ${dark ? 'lighten-1' : 'darken-2'}`"
       :to="{ name: child.name }"
       :href="child.meta.link"
@@ -111,6 +111,11 @@ export default {
     }
   },
   methods: {
+    isActiveChild(child) {
+      // resolve the child as its path may contain params (e.g. the stats routes)
+      const path = this.$router.resolve({ name: child.name }).route.path
+      return this.$route.path === path || this.$route.path.startsWith(path + '/')
+    },
     navigate(route) {
       if (route.meta && route.meta.externalRedirect) {
         if (route.meta.ga) {
