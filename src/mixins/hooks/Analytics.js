@@ -16,7 +16,11 @@ export default {
     )
   },
   methods: {
-    logRouteEvent (newValue) {
+    logRouteEvent (newValue, oldValue) {
+      // switching the language or the server of a stats route replaces it, yet shows the same stage/item
+      if (oldValue && newValue.name === oldValue.name &&
+        newValue.params.stageId === oldValue.params.stageId &&
+        newValue.params.itemId === oldValue.params.itemId) return
       if (newValue.name === 'StatsByStage_Selected') {
         Console.info('Analytics', 'fetched stage', this.$store.getters['dataSource/source'], newValue.params.stageId)
         this.$ga.event('result', 'fetch_' + this.$store.getters['dataSource/source'], newValue.params.stageId, 1)
