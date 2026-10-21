@@ -30,7 +30,8 @@ export default {
 
       const server = route.params.server.toUpperCase()
       if (server !== this.$store.getters['dataSource/server']) {
-        this.$store.dispatch('dataSource/switchServer', {server, fetch})
+        // following a link to another server's stats should not wipe the planner settings
+        this.$store.dispatch('dataSource/switchServer', {server, fetch, clearExcludes: false})
       }
 
       const language = route.params.lang.toLowerCase()
