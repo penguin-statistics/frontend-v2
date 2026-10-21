@@ -9,6 +9,7 @@ import Native from '@/mixins/hooks/Native'
 import Probe from '@/mixins/hooks/Probe'
 import ThemeStyle from "@/mixins/hooks/ThemeStyle";
 import FeaturedTheme from "@/mixins/hooks/FeaturedTheme";
+import StatsRoute from "@/mixins/hooks/StatsRoute";
 
 export default {
   mixins: [
@@ -21,6 +22,8 @@ export default {
     ThemeStyle,
     Localization,
     FeaturedTheme,
+    // after the locale has been applied, and before App fetches the data
+    StatsRoute,
 
     // secondary priority
     RandomizedLogo,
