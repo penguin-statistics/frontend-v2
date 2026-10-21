@@ -194,7 +194,6 @@ const router = new Router({
           path: 'stage',
           name: 'StatsByStage',
           component: StatsByStage,
-          props: true,
           meta: {
             icon: 'mdi-cube',
             creature: 5,
@@ -205,7 +204,6 @@ const router = new Router({
           path: 'stage/:zoneId/:stageId',
           name: 'StatsByStage_Selected',
           component: StatsByStage,
-          props: true,
           meta: {
             hide: true,
             i18n: 'menu.stats.stage'
@@ -215,7 +213,6 @@ const router = new Router({
           path: 'item',
           name: 'StatsByItem',
           component: StatsByItem,
-          props: true,
           meta: {
             icon: 'mdi-treasure-chest',
             creature: 6,
@@ -226,7 +223,6 @@ const router = new Router({
           path: 'item/:itemId',
           name: 'StatsByItem_SelectedItem',
           component: StatsByItem,
-          props: true,
           meta: {
             hide: true,
             i18n: 'menu.stats.item'
