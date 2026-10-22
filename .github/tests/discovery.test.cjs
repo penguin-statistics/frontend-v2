@@ -1,5 +1,6 @@
 // The files that tell crawlers and agents about the site (llms.txt and the like), checked offline. With --online,
-// it also checks that their links answer 200, but those to files of this build (in SITE), which may not be live yet.
+// it also checks what can break without a change to them: that their links answer 200, but those to files of this
+// build (in SITE), which may not be live yet, and that security.txt does not expire within 30 days.
 const assert = require('assert').strict;
 const fs = require('fs');
 const path = require('path');
@@ -11,6 +12,8 @@ const nginx = read('build/nginx-default.conf');
 const llms = read('src/templates/web/llms.txt');
 const robots = read('public/robots.txt');
 const catalog = JSON.parse(read('src/templates/web/.well-known/api-catalog'));
+const security = read('src/templates/web/.well-known/security.txt');
+const expires = new Date((/^Expires: (\S+)$/m.exec(security) || [])[1]);
 const urls = text => [...text.matchAll(/https?:\/\/[^\s)<>"]+/g)].map(m => m[0].replace(/[.,]$/, ''));
 const links = urls(llms);
 let count = 0;
@@ -88,6 +91,13 @@ test('the pages point to the API catalog and llms.txt, in their head and Link he
   assert(head.includes('<link rel="describedby" type="text/plain" href="/llms.txt">'));
   assert.match(location('/index.html'), /^\s*add_header 'Link' '<\/\.well-known\/api-catalog>; rel="api-catalog", <\/llms\.txt>; rel="describedby"; type="text\/plain"';$/m);
 });
+// an Expires less than a year ahead stays so as time passes; whether it has passed is checked --online, so that the
+// date alone never fails a pull request
+test('security.txt is the same at both paths and expires in less than a year (RFC 9116)', () => {
+  assert.equal(read('src/templates/web/security.txt'), security);
+  assert(!isNaN(expires), 'security.txt has no valid Expires');
+  assert(expires - Date.now() < 366 * 86400000, 'RFC 9116 recommends an Expires less than a year ahead');
+});
 for (const file of ['/llms.txt', '/robots.txt']) test(`nginx serves ${file} as UTF-8 text with an edge cache of an hour`, () => {
   const block = location(file);
   assert.match(block, /^\s*charset utf-8;$/m);
@@ -113,7 +123,10 @@ async function online() {
     if (code !== 200) failures++;
     console.log(`${code === 200 ? 'ok' : 'not ok'} - ${code} ${url}`);
   }
-  assert.equal(failures, 0, `${failures} links do not answer 200`);
+  const days = Math.floor((expires - Date.now()) / 86400000);
+  if (days < 30) failures++;
+  console.log(`${days < 30 ? 'not ok' : 'ok'} - security.txt expires on ${expires.toISOString().slice(0, 10)}, in ${days} days${days < 30 ? ': renew its Expires in both files' : ''}`);
+  assert.equal(failures, 0, `${failures} online checks failed`);
 }
 
 console.log(`${count} tests passed`);
