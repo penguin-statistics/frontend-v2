@@ -149,6 +149,7 @@ import {changePageIndexable} from "@/mixins/I18n";
 import Console from "@/utils/Console";
 import get from "@/utils/getters";
 import helmet from "@/utils/helmet";
+import statsTitle from "@/utils/statsTitle";
 import strings from "@/utils/strings";
 import MatrixCategoryToggle from "../../components/stats/MatrixCategoryToggle.vue";
 
@@ -198,6 +199,11 @@ export default {
       if (!this.selectedItem) return [];
       return get.items.byGroupId(this.selectedItem.groupID);
     },
+    // the title of the page as the server renders it, null until the data it names has loaded. with the path: two
+    // pages can share a title (e.g. not found), and the watcher must still tell the new route
+    pageTitle() {
+      return { path: this.$route.path, title: statsTitle(this.$route) };
+    },
     // the path of the item page if the server would answer it with 404 or noindex: the item does not exist, is not
     // of a type the stats list, or has no drop data on the server. null until the data has loaded
     unavailablePath() {
@@ -211,6 +217,12 @@ export default {
     },
   },
   watch: {
+    pageTitle: {
+      immediate: true,
+      handler({ title }) {
+        helmet.title.set(this.$route, title);
+      },
+    },
     // keep the page out of search engines' index, as the server does
     unavailablePath: {
       immediate: true,
