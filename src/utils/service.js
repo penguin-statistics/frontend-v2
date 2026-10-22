@@ -3,6 +3,7 @@ import i18n from "@/i18n";
 import store from "@/store";
 import Console from "@/utils/Console";
 import mirror from "@/utils/mirror";
+import { reportApiError } from "@/utils/rum";
 import axios from "axios";
 import semver from "semver";
 import Cookies from "js-cookie";
@@ -152,6 +153,7 @@ service.interceptors.response.use(
     } else {
       error.errorMessage = `(!) ${error.message}`;
     }
+    reportApiError(error);
     // Do something with response error
     return Promise.reject(error);
   }
