@@ -110,6 +110,7 @@
             class="text-center monospace"
             style="font-size: 36px"
             data-dd-action-name="PenguinID"
+            data-dd-privacy="mask"
           >
             <span style="font-size: 16px">
               PenguinID#
