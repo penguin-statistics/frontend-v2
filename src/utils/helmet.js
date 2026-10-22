@@ -19,6 +19,10 @@ let canonicalPath = null
 // stage, all of which the server answers with 404 or noindex. its view marks it once the data has loaded
 let unavailablePath = null
 
+// the title a view gave its route (the stats pages, titled as the server renders them, see statsTitle), used instead of
+// the generic one while the app is on that path
+let viewTitle = null
+
 // whether the head of the server-rendered page has been reset to the generic texts, which follow the UI language
 let headReset = false
 
@@ -93,9 +97,14 @@ export default {
       titles.reverse()
       return `${titles.join(' ‹ ')} │ ${i18n.t('app.name')}`
     },
+    // sets the title of the route as its view names it, or clears it (null: the generic title)
+    set(route, title) {
+      viewTitle = title ? {path: route.path, title} : null
+      this.update(route)
+    },
     update(route) {
       if (serverRendered(route)) return
-      document.title = this.assemble(route)
+      document.title = viewTitle && viewTitle.path === route.path ? viewTitle.title : this.assemble(route)
     }
   },
   canonical: {
