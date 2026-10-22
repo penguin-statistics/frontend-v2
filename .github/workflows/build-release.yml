@@ -89,6 +89,32 @@ jobs:
             VUE_APP_DATADOG_RUM_CLIENT_TOKEN=${{ vars.DATADOG_RUM_CLIENT_TOKEN }}
             VUE_APP_DATADOG_RUM_SESSION_SAMPLE_RATE=${{ vars.DATADOG_RUM_SESSION_SAMPLE_RATE }}
 
+      # Datadog RUM shows the stack traces of the frontend errors in the original source once it has the source
+      # maps of the version (the one the build embeds: v + package.json version) under the URL path they are served
+      # at. They come from the image of this version, new or reused, so that they match the deployed bundles.
+      # Without the DATADOG_API_KEY secret the step does nothing, and a failed upload never blocks the release.
+      - name: "Datadog: Upload Source Maps"
+        continue-on-error: true
+        env:
+          DATADOG_API_KEY: ${{ secrets.DATADOG_API_KEY }}
+          DATADOG_SITE: datadoghq.com
+          IMAGE: ghcr.io/penguin-statistics/frontend-v2:${{ steps.git-meta.outputs.version }}
+          REGISTRY_TOKEN: ${{ github.token }}
+        run: |
+          if [ -z "$DATADOG_API_KEY" ]; then
+            echo "::notice::DATADOG_API_KEY is not set: source maps not uploaded"
+            exit 0
+          fi
+          echo "$REGISTRY_TOKEN" | docker login ghcr.io -u "$GITHUB_ACTOR" --password-stdin
+          container=$(docker create "$IMAGE")
+          trap 'docker rm "$container" >/dev/null' EXIT
+          docker cp "$container:/usr/share/nginx/html/js" "$RUNNER_TEMP/sourcemaps"
+          npx --yes @datadog/datadog-ci@5.24.1 sourcemaps upload "$RUNNER_TEMP/sourcemaps" \
+            --service penguin-stats-frontend \
+            --release-version "v$(node -p "require('./package.json').version")" \
+            --minified-path-prefix /js \
+            --project-path "webpack:///./"
+
       # Local steps avoid changing shared @main consumers in other repositories.
       - name: "Sentry: Create Release"
         uses: getsentry/action-release@a74facf8a080ecbdf1cb355f16743530d712abb7 # v1
