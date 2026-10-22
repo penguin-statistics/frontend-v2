@@ -9,7 +9,9 @@ const root = path.resolve(__dirname, '../..');
 const read = p => fs.readFileSync(path.join(root, p), 'utf8');
 const nginx = read('build/nginx-default.conf');
 const llms = read('src/templates/web/llms.txt');
-const links = [...llms.matchAll(/https?:\/\/[^\s)<>"]+/g)].map(m => m[0]);
+const robots = read('public/robots.txt');
+const urls = text => [...text.matchAll(/https?:\/\/[^\s)<>"]+/g)].map(m => m[0].replace(/[.,]$/, ''));
+const links = urls(llms);
 let count = 0;
 function test(name, fn) { fn(); count++; console.log(`ok ${count} - ${name}`); }
 // the directives of an exact location; none of them nests a block
@@ -49,8 +51,22 @@ test('llms.txt links are absolute HTTPS URLs, and its sections lists of links wi
     assert.match(line, /^- \[[^\]]+\]\(https:\/\/[^\s)]+\): \S/, `not "- [name](url): description" in a section: ${line}`);
   }
 });
-test('nginx serves llms.txt as UTF-8 text with an edge cache of an hour', () => {
-  const block = location('/llms.txt');
+test('robots.txt gives each named group the rules of "*", as groups do not inherit them (RFC 9309)', () => {
+  const groups = [];
+  for (const line of robots.split('\n').map(l => l.replace(/#.*/, '').trim()).filter(Boolean)) {
+    const [, field, value] = /^([A-Za-z-]+):\s*(.*)$/.exec(line);
+    if (/^user-agent$/i.test(field)) {
+      if (!groups.length || groups[groups.length - 1].rules.length) groups.push({ agents: [], rules: [] });
+      groups[groups.length - 1].agents.push(value);
+    } else if (!/^sitemap$/i.test(field)) groups[groups.length - 1].rules.push(`${field.toLowerCase()}: ${value}`);
+  }
+  const all = groups.find(g => g.agents.includes('*'));
+  assert(all && all.rules.some(r => r.startsWith('content-signal: ')), 'no Content-Signal for "*"');
+  for (const g of groups) assert.deepEqual(g.rules, all.rules, g.agents.join(', '));
+  assert.match(robots, /^Sitemap: https:\/\/penguin-stats\.io\/sitemap\.xml$/m);
+});
+for (const file of ['/llms.txt', '/robots.txt']) test(`nginx serves ${file} as UTF-8 text with an edge cache of an hour`, () => {
+  const block = location(file);
   assert.match(block, /^\s*charset utf-8;$/m);
   assert.match(block, /^\s*add_header 'Cache-Control' 'public, max-age=3600';$/m);
 });
@@ -67,7 +83,7 @@ function status(url, redirects = 5) {
 }
 async function online() {
   let failures = 0;
-  for (const url of [...new Set(links)].filter(url => !own(url))) {
+  for (const url of [...new Set([...links, ...urls(robots)])].filter(url => !own(url))) {
     const code = await status(url).catch(error => error.message);
     if (code !== 200) failures++;
     console.log(`${code === 200 ? 'ok' : 'not ok'} - ${code} ${url}`);
