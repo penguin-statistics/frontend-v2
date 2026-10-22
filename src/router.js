@@ -23,7 +23,7 @@ import helmet from "@/utils/helmet";
 import i18n from '@/i18n'
 import strings from '@/utils/strings'
 import supports from '@/models/supports'
-import {activeLocale} from '@/mixins/I18n'
+import {activeLocale, changePageIndexable} from '@/mixins/I18n'
 
 // import DataDebugger from "@/components/debug/DataDebugger";
 
@@ -102,7 +102,9 @@ const router = new Router({
         icon: 'mdi-upload',
         creature: 1,
         i18n: 'menu.report._name',
-        active: true
+        active: true,
+        // the upload forms are of no use as a search result. noindex applies to the child routes as well
+        noindex: true
       },
       children: [
         {
@@ -264,7 +266,9 @@ const router = new Router({
         async: true,
         icon: 'mdi-database-search',
         creature: 8,
-        i18n: 'menu.stats.advanced'
+        i18n: 'menu.stats.advanced',
+        // query results, which the stats pages already have
+        noindex: true
       }
     },
     {
@@ -276,7 +280,8 @@ const router = new Router({
         icon: 'mdi-magnify',
         creature: 9,
         i18n: 'menu.search',
-        hide: true
+        hide: true,
+        noindex: true
       }
     },
     {
@@ -389,7 +394,9 @@ const router = new Router({
       component: NotFound,
       meta: {
         i18n: 'meta.notfound',
-        hide: true
+        hide: true,
+        // the server answers 200 for any path: keep these out of the index (a "soft 404")
+        noindex: true
       }
     }
   ]
@@ -412,8 +419,20 @@ router.beforeEach((to, from, next) => {
   return next()
 })
 
+// the path of the route as its route record spells it. paths match regardless of case and to.path keeps the case of
+// the URL, so /PLANNER would otherwise be canonical for itself. the language and server of a stats route are lower
+// case in the URLs the server renders; item and stage ids keep theirs
+function canonicalPath(to) {
+  if (!to.name) return to.path
+  const params = {...to.params}
+  if (params.lang) params.lang = params.lang.toLowerCase()
+  if (params.server) params.server = params.server.toLowerCase()
+  return router.resolve({name: to.name, params}).route.path
+}
+
 router.afterEach((to) => {
-  helmet.title.update(to)
+  helmet.update(to, canonicalPath(to))
+  changePageIndexable(to)
   store.commit('ui/setLoadingRoute', false)
 })
 
