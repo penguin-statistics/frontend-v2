@@ -233,3 +233,39 @@ export function reportApiError(error) {
   error.rumReported = true;
   withRum((r) => r.addError(apiError, { api: { method, path, status, code: error.code || null, message } }));
 }
+
+// the context of a failed request in a flow (see startFlow)
+function failureOf(error) {
+  if (!error) return {};
+  return { status: error.response ? error.response.status : 0, code: error.code || null };
+}
+
+/**
+ * starts timing one run of a key user flow (a report submission, a recognition, a plan...), and returns the function
+ * that ends it: end(outcome, context). The run is a RUM duration vital (@type:vital @vital.name:<name>, with
+ * @vital.duration) with the outcome ("success", "failure"...) and the context under context.flow
+ */
+export function startFlow(name, context) {
+  if (!enabled) return () => {};
+  const startTime = Date.now();
+  let ended = false;
+  return (outcome, more) => {
+    if (ended) return;
+    ended = true;
+    const flow = { outcome, ...context, ...more };
+    withRum((r) => r.addDurationVital(name, { startTime, duration: Date.now() - startTime, context: { flow } }));
+  };
+}
+
+/**
+ * times the request as the flow name (see startFlow), and returns it: a success once it resolves (or the outcome
+ * outcomeOf gives for its response), a failure with the status and error code once it fails
+ */
+export function timeFlow(name, request, context, outcomeOf) {
+  const end = startFlow(name, context);
+  request.then(
+    (response) => end(outcomeOf ? outcomeOf(response) : "success"),
+    (error) => end("failure", failureOf(error))
+  );
+  return request;
+}

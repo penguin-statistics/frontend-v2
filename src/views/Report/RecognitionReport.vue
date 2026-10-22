@@ -547,6 +547,7 @@ import Recognizer from "@/utils/recognizer";
 import * as Sentry from "@sentry/vue";
 import { mapGetters } from "vuex";
 import randomUtils from "@/utils/randomUtils";
+import { startFlow } from "@/utils/rum";
 
 let recognitionSubmitter;
 try {
@@ -801,6 +802,7 @@ export default {
       this.recognition.state = "uploading";
       this.submission.state = "uploading";
       this.submission.total = this.selectedResults.length;
+      const endFlow = startFlow("recognition_submit", { reports: this.selectedResults.length });
 
       try {
         const version = this.recognizer.getVersion()
@@ -837,6 +839,11 @@ export default {
       this.recognition.state = "uploaded";
       this.submission.state = "uploaded";
       this.confirmLeaveDestroy();
+      // the numbers of the reports in the accepted (positive) and failed (negative) chunks
+      const rejected = -this.submission.submitted.filter((n) => n < 0).reduce((sum, n) => sum + n, 0);
+      endFlow(rejected === 0 ? "success" : rejected < this.selectedResults.length ? "partial" : "failure", {
+        rejected,
+      });
 
       span.finish();
     },
@@ -848,6 +855,7 @@ export default {
       this.recognition.state = "initializing";
       this.recognizer = new Recognizer();
       this.recognition.server = this.$store.getters["dataSource/server"];
+      const endFlow = startFlow("recognition_init", { server: this.recognition.server });
 
       await this.recognizer
         .initialize(this.$store.getters["dataSource/server"])
@@ -855,10 +863,12 @@ export default {
           this.recognition.state = "initialized";
           this.recognizerVersion = this.recognizer.getVersionDescription()
           span.setStatus("ok");
+          endFlow("success", { recognizer_version: this.recognizerVersion });
         })
         .catch((err) => {
           Console.error("ReportRecognition", "error while initializing", err);
           span.setStatus("unknown_error");
+          endFlow("failure", { error: String((err && err.message) || err).slice(0, 200) });
         })
         .finally(() => {
           this.recognition.state = "pending";
@@ -873,6 +883,10 @@ export default {
         op: "recognizer.recognize",
       });
       containingSpan.setData("queueLength", this.files.length);
+      const endFlow = startFlow("recognition_recognize", {
+        images: this.files.length,
+        server: this.recognition.server,
+      });
 
       this.results = [];
 
@@ -898,6 +912,11 @@ export default {
       });
 
       containingSpan.finish();
+      const failed = this.results.filter((result) => result.result.exceptions.length).length;
+      endFlow(failed === 0 ? "success" : failed < this.results.length ? "partial" : "failure", {
+        recognized: this.results.length - failed,
+        failed,
+      });
 
       this.stopTimer();
     },
