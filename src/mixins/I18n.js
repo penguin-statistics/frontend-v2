@@ -74,27 +74,20 @@ const fontMapping = {
   }
 }
 
-function changePageIndexable(indexable) {
-  const robotsMeta = [
-    ...document.querySelectorAll('meta[name="robots"]'),
-    ...document.querySelectorAll('meta[name="googlebot"]'),
-  ];
-  if (robotsMeta.length > 0) {
-    robotsMeta.forEach((meta) => {
-      meta.remove();
-    });
-  }
-  if (indexable) {
-    document.head.insertAdjacentHTML(
-      "beforeend",
-      `<meta name="robots" content="index,follow">`
-    );
-  } else {
-    document.head.insertAdjacentHTML(
-      "beforeend",
-      `<meta name="robots" content="noindex">`
-    );
-  }
+// tells search engines whether to index the page of the route: not if the route is marked noindex, nor in the
+// seaborn locales. the robots tags of the page the server rendered are left as the server set them, even in a
+// seaborn locale: crawlers never use one, and the server's tags describe the page's data
+export function changePageIndexable(route, localeId = activeLocale()) {
+  if (helmet.serverRendered(route)) return;
+  const indexable = !helmet.noindex(route) && !localeId.includes("_x_seaborn");
+  const content = indexable ? "index,follow" : "noindex,follow";
+  document.querySelectorAll('meta[name="robots"], meta[name="googlebot"]').forEach((meta) => {
+    meta.remove();
+  });
+  document.head.insertAdjacentHTML(
+    "beforeend",
+    `<meta name="robots" content="${content}"><meta name="googlebot" content="${content}">`
+  );
 }
 
 function changeLocale(localeId, save) {
@@ -117,13 +110,13 @@ function changeLocale(localeId, save) {
   //     });
   //   }
   // }
-  const noIndex = localeId.includes("_x_seaborn");
-  changePageIndexable(!noIndex);
+  changePageIndexable(this.$route, localeId);
 
   this.$i18n.locale = localeId;
   this.$vuetify.lang.current = localeMapping[localeId] || localeId;
-  helmet.title.update(this.$route);
-  document.documentElement.lang = localeId;
+  helmet.localeChanged(this.$route);
+  // the seaborn locale ids (e.g. zh_CN_x_seaborn) are not valid language tags: use their base language
+  document.documentElement.lang = strings.mapLocale(localeId);
   localeApplied = true;
 }
 
