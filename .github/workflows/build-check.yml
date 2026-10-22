@@ -26,7 +26,7 @@ jobs:
       - name: "Test the files for crawlers and agents"
         run: node .github/tests/discovery.test.cjs
 
-      - name: "Check the links of the files for crawlers and agents (online, not blocking)"
+      - name: "Check the links of the files for crawlers and agents and the expiry of security.txt (not blocking)"
         continue-on-error: true
         run: node .github/tests/discovery.test.cjs --online
 
