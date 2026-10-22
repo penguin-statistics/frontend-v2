@@ -197,7 +197,6 @@ Mew 社区
   },
   methods: {
     report(name) {
-      this.$probe.reportNavigated(`/_event/banners/mew/${name}`)
       this.$ga.event(
           'banners',
           'mew',

@@ -24,7 +24,6 @@ import environment from '@/utils/environment'
 import './assets/fonts/roboto/roboto.css'
 
 import './injections'
-import PenguinProbe from '@/utils/probe'
 import { startRum, trackBootstrapData } from '@/utils/rum'
 
 if (!window.Intl) require('intl-collator')
@@ -35,7 +34,6 @@ Vue.config.performance = environment.debug.performance
 Vue.config.devtools = environment.debug.devtools
 
 async function bootstrap () {
-  Vue.prototype.$probe = new PenguinProbe()
   Vue.prototype.$env = environment
 
   new Vue({

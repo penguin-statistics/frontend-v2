@@ -6,7 +6,6 @@ import Localization from '@/mixins/hooks/Localization'
 import RandomizedLogo from '@/mixins/hooks/RandomizedLogo'
 import StoreUpgrader from '@/mixins/hooks/StoreUpgrader'
 import Native from '@/mixins/hooks/Native'
-import Probe from '@/mixins/hooks/Probe'
 import ThemeStyle from "@/mixins/hooks/ThemeStyle";
 import FeaturedTheme from "@/mixins/hooks/FeaturedTheme";
 import StatsRoute from "@/mixins/hooks/StatsRoute";
@@ -29,7 +28,6 @@ export default {
     RandomizedLogo,
     Telemetry,
     Analytics,
-    Probe,
 
     // last priority
     CrispCustomizer
