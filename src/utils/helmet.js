@@ -5,17 +5,12 @@ import i18n from '@/i18n'
 // mounts and replaces the rendered #pe-ssr section: that head is kept until the app leaves that path
 let serverRenderedPath = document.getElementById('pe-ssr') ? decodeURI(window.location.pathname) : null
 
-// the origin of canonical URLs, whatever host serves the app: penguin-stats.cn (mainland China), mirrors and previews
-// serve the same pages without the server-rendered head, sitemap and hreflang alternates of penguin-stats.io, so
-// they point search engines at it
-const canonicalOrigin = 'https://penguin-stats.io'
-
-// the canonical path of the current route, as the router passed it to update()
-let canonicalPath = null
-
-// the path of a stats page whose item or stage does not exist on the server, has no drop data or is a recruitment
-// stage, all of which the server answers with 404 or noindex. its view marks it once the data has loaded
-let unavailablePath = null
+// the origin of canonical URLs. penguin-stats.cn (mainland China, for Baidu and other domestic engines) and
+// penguin-stats.io are each canonical for their own pages, without hreflang alternates across them (meta#14);
+// mirrors and previews serve the same pages, so they point search engines at penguin-stats.io
+const canonicalOrigin = window.location.hostname === 'penguin-stats.cn'
+  ? 'https://penguin-stats.cn'
+  : 'https://penguin-stats.io'
 
 // whether the head of the server-rendered page has been reset to the generic texts, which follow the UI language
 let headReset = false
@@ -57,9 +52,9 @@ function serverRendered({path}) {
   return path === serverRenderedPath
 }
 
-// whether search engines should not index the route (meta.noindex on it or on a parent, or an unavailable stats page)
-function noindex({matched, path}) {
-  return path === unavailablePath || matched.some(el => el.meta.noindex)
+// whether search engines should not index the route (meta.noindex on it or on a parent)
+function noindex({matched}) {
+  return matched.some(el => el.meta.noindex)
 }
 
 export default {
@@ -71,14 +66,8 @@ export default {
       serverRenderedPath = null
       resetServerRenderedHead()
     }
-    canonicalPath = path
     this.title.update(route)
     this.canonical.update(route, path)
-  },
-  // marks the current route as an unavailable stats page, or clears the mark. the caller updates the robots tags
-  unavailable(route, unavailable) {
-    unavailablePath = unavailable ? route.path : null
-    this.canonical.update(route, canonicalPath || route.path)
   },
   // updates the texts of the head after the UI language changed
   localeChanged(route) {
