@@ -28,6 +28,10 @@ const bootstrapData = ["config", "items", "stages", "zones", "globalMatrix", "gl
 // the custom timings of this page load, as epoch milliseconds keyed by their RUM name
 const timings = {};
 let rum = null;
+// whether this page load sends RUM data: RUM is configured and the session sampled (set by startRum)
+let enabled = false;
+// the calls waiting for RUM to start, see withRum
+const queued = [];
 // the app's router, to name the views after their route (see viewName)
 let appRouter = null;
 // the view names by view URL
@@ -65,6 +69,12 @@ function viewName(url) {
   if (viewNames.size >= 1000) viewNames.clear();
   viewNames.set(url, name);
   return name;
+}
+
+// runs fn with the RUM SDK now, or once RUM has started; not at all when this page load sends no RUM data
+function withRum(fn) {
+  if (rum) fn(rum);
+  else if (enabled && queued.length < 100) queued.push(fn);
 }
 
 function isSampled() {
@@ -132,7 +142,7 @@ async function start() {
     // no long-lived anonymous user ID in the session cookie
     trackAnonymousUser: false,
     defaultPrivacyLevel: "mask-user-input",
-    beforeSend(event) {
+    beforeSend(event, context) {
       if (appRouter && event.view && event.view.url) {
         const name = viewName(event.view.url);
         if (name) event.view.name = name;
@@ -141,6 +151,8 @@ async function start() {
         event.action.target.name = redact(event.action.target.name);
       }
       if (event.type === "error") {
+        // a failed API request reported by reportApiError already, which the app did not catch
+        if (context && context.error && context.error.rumReported && event.error.source !== "custom") return false;
         // console errors dump whole API requests and responses (with the Authorization header and the
         // request body), and Sentry has them already
         if (event.error.source === "console") return false;
@@ -174,12 +186,14 @@ async function start() {
   // the timings recorded so far belong to it
   rum = datadogRum;
   for (const [name, time] of Object.entries(timings)) rum.addTiming(name, time);
+  for (const fn of queued.splice(0)) fn(rum);
 }
 
 /** starts RUM in the sampled sessions (see isSampled), naming the views after their route in router */
 export function startRum(router) {
   appRouter = router || null;
   if (!applicationId || !clientToken || !isSampled()) return;
+  enabled = true;
   const run = () => {
     start().catch((err) => console.warn("RUM: failed to start", err));
   };
@@ -194,4 +208,28 @@ export function startRum(router) {
   };
   if (document.readyState === "complete" || "bootstrap_data_ready" in timings) beginStart();
   else window.addEventListener("load", beginStart, { once: true });
+}
+
+/**
+ * reports a failed request to the API (from the response interceptor of its client) as a RUM error of type ApiError
+ * named after the request, e.g. "GET /stages failed: 503", with its method, path, status and message in the context
+ * (api.*), grouped by them in Error Tracking. RUM keeps API requests as resources only, and the errors the app does
+ * not catch only as "Request failed with status code 503", with no request; their unhandled rejection is left out.
+ * 404 is an answer of the API (no such account and the like), and cancelled requests are no failure: not reported
+ */
+export function reportApiError(error) {
+  if (!enabled || !error || !error.config || error.__CANCEL__) return;
+  const status = error.response ? error.response.status : 0;
+  if (status === 404) return;
+  const method = (error.config.method || "get").toUpperCase();
+  const path = redact((error.config.url || "").split("?")[0]);
+  const failure = status ? String(status) : error.code || "network error";
+  const data = error.response && error.response.data;
+  const message = data && typeof data.message === "string" ? redact(data.message.slice(0, 200)) : null;
+
+  const apiError = new Error(`${method} ${path} failed: ${failure}`);
+  apiError.name = "ApiError";
+  apiError.dd_fingerprint = `api ${method} ${path} ${failure}`;
+  error.rumReported = true;
+  withRum((r) => r.addError(apiError, { api: { method, path, status, code: error.code || null, message } }));
 }
