@@ -10,6 +10,7 @@ const read = p => fs.readFileSync(path.join(root, p), 'utf8');
 const nginx = read('build/nginx-default.conf');
 const llms = read('src/templates/web/llms.txt');
 const robots = read('public/robots.txt');
+const catalog = JSON.parse(read('src/templates/web/.well-known/api-catalog'));
 const urls = text => [...text.matchAll(/https?:\/\/[^\s)<>"]+/g)].map(m => m[0].replace(/[.,]$/, ''));
 const links = urls(llms);
 let count = 0;
@@ -65,6 +66,22 @@ test('robots.txt gives each named group the rules of "*", as groups do not inher
   for (const g of groups) assert.deepEqual(g.rules, all.rules, g.agents.join(', '));
   assert.match(robots, /^Sitemap: https:\/\/penguin-stats\.io\/sitemap\.xml$/m);
 });
+test('the API catalog is an RFC 9727 linkset of absolute HTTPS links', () => {
+  assert(Array.isArray(catalog.linkset) && catalog.linkset.length > 0);
+  for (const { anchor, ...relations } of catalog.linkset) {
+    assert(anchor.startsWith('https://'), anchor);
+    assert(Object.keys(relations).length > 0, anchor);
+    for (const [rel, targets] of Object.entries(relations)) {
+      assert(Array.isArray(targets) && targets.length > 0, `${anchor} ${rel}`);
+      for (const { href } of targets) assert(href.startsWith('https://'), `${anchor} ${rel} ${href}`);
+    }
+  }
+});
+test('nginx serves the API catalog as a linkset with its Link header', () => {
+  const block = location('/.well-known/api-catalog');
+  assert.match(block, /^\s*default_type 'application\/linkset\+json; profile="https:\/\/www\.rfc-editor\.org\/info\/rfc9727"';$/m);
+  assert.match(block, /^\s*add_header 'Link' '<\/\.well-known\/api-catalog>; rel="api-catalog"';$/m);
+});
 for (const file of ['/llms.txt', '/robots.txt']) test(`nginx serves ${file} as UTF-8 text with an edge cache of an hour`, () => {
   const block = location(file);
   assert.match(block, /^\s*charset utf-8;$/m);
@@ -83,7 +100,9 @@ function status(url, redirects = 5) {
 }
 async function online() {
   let failures = 0;
-  for (const url of [...new Set([...links, ...urls(robots)])].filter(url => !own(url))) {
+  // the catalog's link targets, not its anchors: an anchor is the base URI of an API, not an endpoint, and answers 404
+  const hrefs = catalog.linkset.flatMap(({ anchor, ...relations }) => Object.values(relations).flat().map(t => t.href));
+  for (const url of [...new Set([...links, ...urls(robots), ...hrefs])].filter(url => !own(url))) {
     const code = await status(url).catch(error => error.message);
     if (code !== 200) failures++;
     console.log(`${code === 200 ? 'ok' : 'not ok'} - ${code} ${url}`);
