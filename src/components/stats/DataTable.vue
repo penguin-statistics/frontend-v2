@@ -223,10 +223,14 @@
       :class="{'pt-0': $vuetify.breakpoint.xsOnly}"
     >
       <template #header>
+        <!-- a decorative watermark, thus not a heading: the page has its own <h1> -->
         <div class="stat-table-watermark d-flex align-center justify-start flex-column text-center px-4">
-          <h1 :class="{'display-2 mb-4': !$vuetify.breakpoint.smAndUp, 'display-3 mb-6': $vuetify.breakpoint.smAndUp}">
+          <div
+            class="stat-table-watermark-hostname"
+            :class="{'display-2 mb-4': !$vuetify.breakpoint.smAndUp, 'display-3 mb-6': $vuetify.breakpoint.smAndUp}"
+          >
             {{ currentMirrorHostname }}
-          </h1>
+          </div>
           <span :class="{'display-1': !$vuetify.breakpoint.smAndUp, 'display-2': $vuetify.breakpoint.smAndUp}">
             {{ $t('app.name') }}
           </span>

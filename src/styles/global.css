@@ -910,6 +910,7 @@ html[lang^=ko] {
 [data-theme="seaborn"] .v-application .display-1,
 [data-theme="seaborn"] .v-application .display-2,
 [data-theme="seaborn"] .v-application h1,
+[data-theme="seaborn"] .v-application .stat-table-watermark-hostname,
 [data-theme="seaborn"] .v-application h2,
 [data-theme="seaborn"] .v-application h3,
 [data-theme="seaborn"] .v-application .drawer-logo > .description,
