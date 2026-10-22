@@ -82,7 +82,7 @@ The order is: validate tag/package identity → build once with `PENGUIN_BUILDFR
 The artifact `frontend-envelope-<SHA>-<run-attempt>` contains `frontend-envelope-<SHA>.tar.gz` and its external `.sha256`. The tar has exactly these regular files (no `./` prefix):
 
 - `release.json`, `cdn-verification.json`, `SHA256SUMS`
-- `site/index.html`, `site/service-worker.js`, `site/manifest.json`, `site/browserconfig.xml`, `site/robots.txt`, `site/favicon.ico`, `site/opensearch.xml`, `site/security.txt`
+- `site/index.html`, `site/service-worker.js`, `site/manifest.json`, `site/browserconfig.xml`, `site/robots.txt`, `site/favicon.ico`, `site/opensearch.xml`, `site/security.txt`, `site/llms.txt`
 - `site/1000.html`, `site/50x.html`, `site/under-deploy.html`, `site/update-browser.html`
 - `site/.well-known/security.txt`, `site/.well-known/apple-app-site-association`
 - `site/compliance/privacy-zh.html`, `site/compliance/eula-zh.html`

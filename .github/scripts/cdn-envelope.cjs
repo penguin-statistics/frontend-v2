@@ -7,7 +7,7 @@ const { checkVersion } = require('./check-version.cjs');
 const SITE = [
   '.well-known/security.txt', '.well-known/apple-app-site-association',
   'index.html', 'service-worker.js', 'manifest.json', 'browserconfig.xml', 'robots.txt', 'favicon.ico',
-  'opensearch.xml', 'security.txt', '1000.html', '50x.html', 'under-deploy.html', 'update-browser.html',
+  'opensearch.xml', 'security.txt', 'llms.txt', '1000.html', '50x.html', 'under-deploy.html', 'update-browser.html',
   'compliance/privacy-zh.html', 'compliance/eula-zh.html',
   ...['favicon-16x16.png', 'favicon-32x32.png', 'android-chrome-192x192.png', 'android-chrome-512x512.png',
     'apple-touch-icon.png', 'mstile-150x150.png', 'safari-pinned-tab.svg'].map(p => `favicon/${p}`),
