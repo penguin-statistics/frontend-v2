@@ -73,8 +73,10 @@ import DataSourceToggle from "@/components/stats/DataSourceToggle";
 import DataTable from "@/components/stats/DataTable";
 import StageDetails from "@/components/stats/details/StageDetails";
 import StageSelector from "@/components/stats/StageSelector";
+import {changePageIndexable} from "@/mixins/I18n";
 import existUtils from "@/utils/existUtils";
 import get from "@/utils/getters";
+import helmet from "@/utils/helmet";
 import strings from "@/utils/strings";
 import MatrixCategoryToggle from "../../components/stats/MatrixCategoryToggle.vue";
 
@@ -140,6 +142,29 @@ export default {
     },
     isRecruit() {
       return this.selected.stage === "recruit";
+    },
+    // the path of the stage page if the server would answer it with 404 or noindex: the stage does not exist on the
+    // server, has no drop data or is a recruitment stage. null until the data has loaded
+    unavailablePath() {
+      const stageId = this.$route.params.stageId;
+      if (!stageId || !get.stages.all().length || !get.statistics.loaded()) return null;
+      const stage = get.stages.byStageId(stageId);
+      const unavailable =
+          !stage.stageId ||
+          stageId === "recruit" ||
+          get.zones.byZoneId(stage.zoneId, false).type === "RECRUIT" ||
+          !get.statistics.byStageId(stageId).length;
+      return unavailable ? this.$route.path : null;
+    },
+  },
+  watch: {
+    // keep the page out of search engines' index, as the server does
+    unavailablePath: {
+      immediate: true,
+      handler(path) {
+        helmet.unavailable(this.$route, path !== null);
+        changePageIndexable(this.$route);
+      },
     },
   },
   methods: {

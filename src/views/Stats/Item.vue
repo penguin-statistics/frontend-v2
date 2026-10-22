@@ -145,8 +145,10 @@ import DataTable from "@/components/stats/DataTable";
 import ItemSelector from "@/components/stats/ItemSelector";
 import CDN from "@/mixins/CDN";
 import Theme from "@/mixins/Theme";
+import {changePageIndexable} from "@/mixins/I18n";
 import Console from "@/utils/Console";
 import get from "@/utils/getters";
+import helmet from "@/utils/helmet";
 import strings from "@/utils/strings";
 import MatrixCategoryToggle from "../../components/stats/MatrixCategoryToggle.vue";
 
@@ -196,8 +198,27 @@ export default {
       if (!this.selectedItem) return [];
       return get.items.byGroupId(this.selectedItem.groupID);
     },
+    // the path of the item page if the server would answer it with 404 or noindex: the item does not exist, is not
+    // of a type the stats list, or has no drop data on the server. null until the data has loaded
+    unavailablePath() {
+      const itemId = this.$route.params.itemId;
+      if (!itemId || !get.items.all(false, false).length || !get.statistics.loaded()) return null;
+      const item = get.items.byItemId(itemId, false, false);
+      const unavailable =
+        !get.items.validItemTypes.includes(item.itemType) ||
+        !get.statistics.byItemId(itemId).length;
+      return unavailable ? this.$route.path : null;
+    },
   },
   watch: {
+    // keep the page out of search engines' index, as the server does
+    unavailablePath: {
+      immediate: true,
+      handler(path) {
+        helmet.unavailable(this.$route, path !== null);
+        changePageIndexable(this.$route);
+      },
+    },
     $route: function (to, from) {
       Console.log(
         "StatsByItem",

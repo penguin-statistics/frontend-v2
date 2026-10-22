@@ -70,6 +70,10 @@ Getters.statistics = {
     at: null,
     c: null
   },
+  // whether the matrix of the current data source has loaded
+  loaded() {
+    return !!store.getters['data/content']({id: `${store.getters['dataSource/source']}Matrix`})
+  },
   base(filter) {
     const currStateTime = store.getters['data/updated']({id: `${store.getters['dataSource/source']}Matrix`})
     if (this._cache.at === currStateTime) return (this._cache.c || []).filter(filter)
