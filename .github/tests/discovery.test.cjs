@@ -82,6 +82,12 @@ test('nginx serves the API catalog as a linkset with its Link header', () => {
   assert.match(block, /^\s*default_type 'application\/linkset\+json; profile="https:\/\/www\.rfc-editor\.org\/info\/rfc9727"';$/m);
   assert.match(block, /^\s*add_header 'Link' '<\/\.well-known\/api-catalog>; rel="api-catalog"';$/m);
 });
+test('the pages point to the API catalog and llms.txt, in their head and Link header', () => {
+  const head = read('src/templates/web/index.html').split('</head>')[0];
+  assert(head.includes('<link rel="api-catalog" href="/.well-known/api-catalog">'));
+  assert(head.includes('<link rel="describedby" type="text/plain" href="/llms.txt">'));
+  assert.match(location('/index.html'), /^\s*add_header 'Link' '<\/\.well-known\/api-catalog>; rel="api-catalog", <\/llms\.txt>; rel="describedby"; type="text\/plain"';$/m);
+});
 for (const file of ['/llms.txt', '/robots.txt']) test(`nginx serves ${file} as UTF-8 text with an edge cache of an hour`, () => {
   const block = location(file);
   assert.match(block, /^\s*charset utf-8;$/m);
