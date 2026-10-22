@@ -76,3 +76,23 @@ jobs:
             frontend-envelope-${{ github.sha }}.tar.gz.sha256
           if-no-files-found: error
           retention-days: 90
+      # The mainland build serves its bundles from the CDN prefix, thus its own source maps for Datadog RUM
+      # (see build-release.yml). They stay private: only Datadog gets them. Optional and never blocking.
+      # datadog-ci is fetched at run time, so it runs last (after the envelope is retained) without install scripts.
+      - name: Upload source maps to Datadog
+        if: github.event_name == 'push'
+        continue-on-error: true
+        env:
+          DATADOG_API_KEY: ${{ secrets.DATADOG_API_KEY }}
+          DATADOG_SITE: datadoghq.com
+          npm_config_ignore_scripts: "true"
+        run: |
+          if [ -z "$DATADOG_API_KEY" ]; then
+            echo "::notice::DATADOG_API_KEY is not set: source maps not uploaded"
+            exit 0
+          fi
+          npx --yes @datadog/datadog-ci@5.24.1 sourcemaps upload dist/js \
+            --service penguin-stats-frontend \
+            --release-version "v$(node -p "require('./package.json').version")" \
+            --minified-path-prefix "${PENGUIN_STATIC_PUBLIC_PATH}js" \
+            --project-path "webpack:///./"
