@@ -31,8 +31,11 @@ export default {
       Vue.set(state.data[server], name, {
         /** The data object last updated at time */
         upd: Date.now(),
-        /** The content of the data object */
-        c: value,
+        /**
+         * The content of the data object. Frozen, thus not made reactive: it is only ever replaced
+         * as a whole, and observing its megabytes of nested objects is costly. Do not mutate it
+         */
+        c: Object.freeze(value),
       });
     },
     clearData: (state) => {
