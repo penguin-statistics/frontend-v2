@@ -580,7 +580,8 @@ export default {
 
                 data.stages = data.stages.map(el => {
                   el.materials = []
-                  el.stage = get.stages.byStageId(el.stage)
+                  // a copy: the stage object is the one of the store
+                  el.stage = {...get.stages.byStageId(el.stage)}
                   el.stage.code = strings.translate(el.stage, 'code')
                   for (const [id, value] of Object.entries(el.items)) {
                     const item = get.items.byItemId(id)
