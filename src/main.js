@@ -47,4 +47,4 @@ async function bootstrap () {
 
 trackBootstrapData()
 bootstrap()
-startRum()
+startRum(router)

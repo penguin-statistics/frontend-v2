@@ -40,6 +40,10 @@ const bootstrapData = ["config", "items", "stages", "zones", "globalMatrix", "gl
 // the custom timings of this page load, as epoch milliseconds keyed by their RUM name
 const timings = {};
 let rum = null;
+// the app's router, to name the views after their route (see viewName)
+let appRouter = null;
+// the view names by view URL
+const viewNames = new Map();
 // starts loading RUM, set by startRum (see there)
 let beginStart = null;
 
@@ -53,6 +57,26 @@ function redact(text) {
   const penguinId = store.getters["auth/username"];
   if (penguinId && penguinId.length >= 6) text = text.split(penguinId).join("[PenguinID]");
   return text.replace(longNumber, "[number]");
+}
+
+// the view name of a page URL: the path of its route without the parameter patterns, such as
+// /:lang/result/:server/stage/:zoneId/:stageId, so that the pages of a route make one view in RUM whatever the
+// language, the server, the stage or the item (the SDK's default names keep them apart, e.g. /zh/result/cn/stage/?/?)
+function viewName(url) {
+  let name = viewNames.get(url);
+  if (name !== undefined) return name;
+  name = null;
+  try {
+    const { matched } = appRouter.match(new URL(url).pathname);
+    const route = matched[matched.length - 1];
+    if (route && route.path === "*") name = "/(not found)";
+    else if (route) name = route.path.replace(/\([^)]*\)/g, "").replace(/\/+$/, "") || "/";
+  } catch (e) {
+    // keep the SDK's name
+  }
+  if (viewNames.size >= 1000) viewNames.clear();
+  viewNames.set(url, name);
+  return name;
 }
 
 function isSampled() {
@@ -121,6 +145,10 @@ async function start() {
     trackAnonymousUser: false,
     defaultPrivacyLevel: "mask-user-input",
     beforeSend(event) {
+      if (appRouter && event.view && event.view.url) {
+        const name = viewName(event.view.url);
+        if (name) event.view.name = name;
+      }
       if (event.type === "action" && event.action.target && typeof event.action.target.name === "string") {
         event.action.target.name = redact(event.action.target.name);
       }
@@ -140,6 +168,12 @@ async function start() {
   });
   datadogRum.setGlobalContextProperty("host", host());
   datadogRum.setGlobalContextProperty("platform", PENGUIN_PLATFORM);
+  // whether the visitor has a PenguinID, never the PenguinID itself (a credential)
+  store.watch(
+    (state, getters) => getters["auth/loggedIn"],
+    (loggedIn) => datadogRum.setGlobalContextProperty("logged_in", loggedIn),
+    { immediate: true }
+  );
   store.watch(
     () => i18n.locale,
     (locale) => datadogRum.setGlobalContextProperty("locale", locale),
@@ -157,7 +191,9 @@ async function start() {
   for (const [name, time] of Object.entries(timings)) rum.addTiming(name, time);
 }
 
-export function startRum() {
+/** starts RUM in the sampled sessions (see isSampled), naming the views after their route in router */
+export function startRum(router) {
+  appRouter = router || null;
   if (!applicationId || !clientToken || !isSampled()) return;
   const run = () => {
     start().catch((err) => console.warn("RUM: failed to start", err));
