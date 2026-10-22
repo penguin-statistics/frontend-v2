@@ -40,6 +40,7 @@
                 <span
                   class="monospace"
                   data-dd-action-name="PenguinID"
+                  data-dd-privacy="mask"
                 >
                   {{ userId.id }}
                 </span>

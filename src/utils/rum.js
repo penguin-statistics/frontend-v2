@@ -135,7 +135,10 @@ async function start() {
     version: config.version,
     // sampled by isSampled() already
     sessionSampleRate: 100,
-    sessionReplaySampleRate: 0,
+    // the share of the RUM sessions recorded for Session Replay, to watch what happened around an error or a slow
+    // interaction. The recorder is a separate chunk that only the recorded sessions load. The inputs are masked
+    // (defaultPrivacyLevel) and so are the elements showing a PenguinID (data-dd-privacy="mask")
+    sessionReplaySampleRate: 10,
     trackUserInteractions: true,
     trackResources: true,
     trackLongTasks: true,
