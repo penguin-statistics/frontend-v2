@@ -32,10 +32,12 @@
 <script>
 import get from '@/utils/getters'
 import Item from '@/components/global/Item'
+import FirstDataRender from '@/mixins/FirstDataRender'
 
 export default {
   name: 'ItemSelector',
   components: { Item },
+  mixins: [FirstDataRender],
   // props: {
   //   items: {
   //     type: Array,
@@ -68,6 +70,10 @@ export default {
         // }
       }
       return results
+    },
+    rendersData () {
+      // the item details hide the grid
+      return !this.$route.params.itemId && Object.values(this.items).some(items => items.length)
     }
   }
 }
