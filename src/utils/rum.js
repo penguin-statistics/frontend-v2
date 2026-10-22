@@ -18,6 +18,18 @@ const sampleRate = configuredSampleRate >= 0 && configuredSampleRate <= 100 ? co
 const samplingKey = "penguin-stats-rum-sampling";
 const samplingDuration = 4 * 60 * 60 * 1000;
 
+// the API requests that carry a W3C trace context (traceparent), so that their RUM resource links to the backend trace:
+// only those to the API of the official site the page is on. They are same-origin, thus the header adds no CORS
+// preflight; a cross-origin request would need the backend to allow the header in a preflight first (builds served
+// elsewhere, such as previews or the app, use https://penguin-stats.io as a cross-origin API and are left out)
+const tracedOrigins = ["https://penguin-stats.io", "https://penguin-stats.cn"];
+const tracedPath = "/PenguinStats/api/";
+
+function isTracedRequest(url) {
+  const origin = window.location.origin;
+  return tracedOrigins.includes(origin) && url.startsWith(origin + tracedPath);
+}
+
 // the PenguinID is the credential of the account: elements showing it carry a data-dd-action-name,
 // and the action names (taken from the text of the clicked element) and the error messages are redacted
 const longNumber = /\b\d{6,}\b/g;
@@ -161,7 +173,10 @@ async function start() {
       }
       return true;
     },
-    // no allowedTracingUrls: trace headers would make every API request preflighted
+    allowedTracingUrls: [{ match: isTracedRequest, propagatorTypes: ["tracecontext"] }],
+    // the share of the sessions (all sampled by isSampled() already) whose API requests start a trace, which the backend
+    // then keeps whatever its own sampling rate. Requests sent before RUM starts (the boot data) carry no trace context
+    traceSampleRate: 100,
   });
   datadogRum.setGlobalContextProperty("host", host());
   datadogRum.setGlobalContextProperty("platform", PENGUIN_PLATFORM);
