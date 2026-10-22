@@ -1,0 +1,30 @@
+# Penguin Statistics (企鹅物流数据统计)
+
+> Crowdsourced Arknights (明日方舟) item drop statistics for the CN, US, JP and KR game servers: how often each stage drops each item, counted from the results players submit. Public REST API to read the data, no key needed. Data licensed CC BY-NC 4.0.
+
+How to read the numbers: drop rate = quantity / times, the expected number of the item per run (it can exceed 1). `times` is the number of runs, the sample size; a rate from fewer than 100 runs is noisy. Each (stage, item) pair has its own time window [start, end) in UTC epoch milliseconds; `end: null` means the stage drops the item now. Always pass and name the server (CN, US, JP or KR; US is the global English server) and say when the data is from. Use the API rather than the website, which is a JavaScript app. Send a User-Agent that names your program and a contact, accept gzip, and cache responses for at least 5 minutes.
+
+Domains: penguin-stats.io serves users and agents worldwide. penguin-stats.cn is the mainland China mirror and may be unreachable from elsewhere: use .io.
+
+## API
+
+- [OpenAPI spec](https://penguin-stats.io/swagger/doc.json): machine-readable contract of the public API (Swagger 2.0)
+- [Developer docs](https://developer.penguin-stats.io/public-api): guides for humans; Markdown index at https://developer.penguin-stats.io/public-api/llms.txt
+- [Matrix API guide](https://developer.penguin-stats.io/public-api/api-v2-instruction/matrix-api.md): the drop data; narrow it with `itemFilter` or `stageFilter`, as the whole matrix of a server is up to about 1 MB
+- [Drops of one item](https://penguin-stats.io/PenguinStats/api/v2/result/matrix?server=CN&itemFilter=30012): example call, Orirock Cube (30012) on every open CN stage
+- [Stages](https://penguin-stats.io/PenguinStats/api/v2/stages?server=CN): stage IDs, codes and sanity costs of a server; large, fetch once and cache
+- [Items](https://penguin-stats.io/PenguinStats/api/v2/items): item IDs with names in zh, en, ja and ko, and nicknames, which several items can share
+- [Zones](https://penguin-stats.io/PenguinStats/api/v2/zones): chapters and events with their opening and closing times per server
+
+## Stats pages
+
+- [Sitemap](https://penguin-stats.io/sitemap.xml): server-rendered page of every item and stage, per server, in zh, en, ja and ko
+
+## License and attribution
+
+- [CC BY-NC 4.0](https://creativecommons.org/licenses/by-nc/4.0/): the license of the data. Credit it as "Data: Penguin Statistics (penguin-stats.io), CC BY-NC 4.0". The source code is MIT.
+
+## Optional
+
+- [Source code](https://github.com/penguin-statistics): backend-next (API), frontend-v2 (website)
+- [Planner](https://penguin-stats.io/planner): farming planner built on this data

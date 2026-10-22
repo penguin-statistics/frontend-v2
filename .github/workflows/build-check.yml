@@ -23,6 +23,13 @@ jobs:
           node .github/tests/release-image.test.cjs
           node .github/tests/pages-build.test.cjs
 
+      - name: "Test the files for crawlers and agents"
+        run: node .github/tests/discovery.test.cjs
+
+      - name: "Check the links of the files for crawlers and agents (online, not blocking)"
+        continue-on-error: true
+        run: node .github/tests/discovery.test.cjs --online
+
       - name: "Docker: Build and Push Image"
         id: ghcr-docker
         uses: 'penguin-statistics/actions/ghcr-docker@e92ec679ecea64f9160208aa857caf8e0b70e56a'
