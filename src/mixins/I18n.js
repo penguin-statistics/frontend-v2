@@ -123,7 +123,8 @@ function changeLocale(localeId, save) {
   this.$i18n.locale = localeId;
   this.$vuetify.lang.current = localeMapping[localeId] || localeId;
   helmet.title.update(this.$route);
-  document.documentElement.lang = localeId;
+  // the seaborn locale ids (e.g. zh_CN_x_seaborn) are not valid language tags: use their base language
+  document.documentElement.lang = strings.mapLocale(localeId);
   localeApplied = true;
 }
 
