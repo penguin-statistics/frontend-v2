@@ -66,33 +66,23 @@ const inMemoryStorage = {
   },
 };
 
-const isSafari = navigator.userAgent.indexOf("Safari") > -1;
-
-const ephemeralStorages = [
-  ...(isSafari ? [] : [localStorage]),
-  ...(isSafari ? [] : [sessionStorage]),
-  inMemoryStorage,
-];
-
 const persistedStorages = [
   localStorage,
   sessionStorage,
   inMemoryStorage
 ]
 
-// delete cache before entry
+// the data and cache modules are not persisted anymore: serializing their megabytes of data on
+// every commit blocked the main thread. drop what older versions stored
 for (const storage of persistedStorages) {
   storage.removeItem("penguin-stats-data");
   storage.removeItem("penguin-stats-cache");
 }
 
-let currentEphemeralStorage = ephemeralStorages[0]
 let currentPersistedStorage = persistedStorages[0]
 
 const getCurrentStorage = (mode) => {
   switch (mode) {
-    case 'ephemeral':
-      return currentEphemeralStorage
     case 'persisted':
       return currentPersistedStorage
     default:
@@ -102,9 +92,6 @@ const getCurrentStorage = (mode) => {
 
 const setCurrentStorage = (newStorage, mode) => {
   switch (mode) {
-    case "ephemeral":
-      currentEphemeralStorage = newStorage
-      break
     case "persisted":
       currentPersistedStorage = newStorage
       break
@@ -189,16 +176,6 @@ const fallbackedStorage = (storages, mode) => {
 
 export default new Vuex.Store({
   plugins: [
-    createPersistedState({
-      key: "penguin-stats-data",
-      paths: ["data"],
-      storage: fallbackedStorage(ephemeralStorages, "ephemeral"),
-    }),
-    createPersistedState({
-      key: "penguin-stats-cache",
-      paths: ["cache"],
-      storage: fallbackedStorage(ephemeralStorages, "ephemeral"),
-    }),
     createPersistedState({
       key: "penguin-stats-data-source",
       paths: ["dataSource"],
