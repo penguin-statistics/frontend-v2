@@ -34,6 +34,7 @@
 
 <script>
 import BackdropCard from '@/components/global/BackdropCard'
+import FirstDataRender from '@/mixins/FirstDataRender'
 import statsManager from '@/models/managers/stats'
 import anime from 'animejs'
 import formatter from '@/utils/formatter'
@@ -41,6 +42,7 @@ import formatter from '@/utils/formatter'
 export default {
   name: 'SiteStatsOverview',
   components: {BackdropCard},
+  mixins: [FirstDataRender],
   data() {
     return {
       cachedTotalReports: 0
@@ -56,6 +58,9 @@ export default {
     },
     loading() {
       return this.$store.state.ajax.states.find(el => el.id === 'stats')?.pending
+    },
+    rendersData() {
+      return this.totalReports !== 0
     }
   },
   watch: {

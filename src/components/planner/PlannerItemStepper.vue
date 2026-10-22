@@ -83,9 +83,11 @@
 import get from '@/utils/getters'
 import Item from '@/components/global/Item'
 import NumberInput from '@/components/NumberInput'
+import FirstDataRender from '@/mixins/FirstDataRender'
 export default {
   name: 'PlannerItemStepper',
   components: { NumberInput, Item },
+  mixins: [FirstDataRender],
   props: {
     itemId: {
       type: String,
@@ -103,6 +105,9 @@ export default {
   computed: {
     item () {
       return get.items.byItemId(this.itemId)
+    },
+    rendersData () {
+      return !!this.item.itemId
     }
   }
 }

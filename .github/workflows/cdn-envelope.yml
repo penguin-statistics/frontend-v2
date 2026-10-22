@@ -22,6 +22,9 @@ jobs:
       PENGUIN_BUILDFROM: docker
       PENGUIN_STATIC_CDN_ORIGIN: ${{ github.event_name == 'pull_request' && 'https://cdn.example.invalid' || vars.PENGUIN_STATIC_CDN_ORIGIN }}
       PENGUIN_SITE_ORIGINS: '["https://penguin-stats.cn"]'
+      VUE_APP_DATADOG_RUM_APPLICATION_ID: ${{ vars.DATADOG_RUM_APPLICATION_ID }}
+      VUE_APP_DATADOG_RUM_CLIENT_TOKEN: ${{ vars.DATADOG_RUM_CLIENT_TOKEN }}
+      VUE_APP_DATADOG_RUM_SESSION_SAMPLE_RATE: ${{ vars.DATADOG_RUM_SESSION_SAMPLE_RATE }}
     steps:
       - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
       - name: Install locked S3 publisher dependencies
@@ -50,7 +53,7 @@ jobs:
           echo "PENGUIN_STATIC_PUBLIC_PATH=$prefix" >> "$GITHUB_ENV"
       - name: Build once with the frozen toolchain
         run: |
-          docker build --target builder --build-arg PENGUIN_STATIC_PUBLIC_PATH="$PENGUIN_STATIC_PUBLIC_PATH" --build-arg TRUNCATED_GITHUB_SHA="${GITHUB_SHA:0:7}" -t frontend-cdn-build .
+          docker build --target builder --build-arg PENGUIN_STATIC_PUBLIC_PATH="$PENGUIN_STATIC_PUBLIC_PATH" --build-arg TRUNCATED_GITHUB_SHA="${GITHUB_SHA:0:7}" --build-arg VUE_APP_DATADOG_RUM_APPLICATION_ID --build-arg VUE_APP_DATADOG_RUM_CLIENT_TOKEN --build-arg VUE_APP_DATADOG_RUM_SESSION_SAMPLE_RATE -t frontend-cdn-build .
           container=$(docker create frontend-cdn-build)
           trap 'docker rm "$container"' EXIT
           docker cp "$container:/app/dist" dist

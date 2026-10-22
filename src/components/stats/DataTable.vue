@@ -453,6 +453,7 @@ import Charts from '@/components/stats/Charts'
 import HeaderWithTooltip from '@/components/stats/HeaderWithTooltip'
 import NullableTableCell from '@/components/stats/NullableTableCell'
 import CDN from '@/mixins/CDN'
+import FirstDataRender from '@/mixins/FirstDataRender'
 import Mirror from '@/mixins/Mirror'
 import Theme from '@/mixins/Theme'
 import existUtils from '@/utils/existUtils'
@@ -467,7 +468,7 @@ import {mapGetters, mapState} from 'vuex'
 export default {
   name: 'DataTable',
   components: {NullableTableCell, HeaderWithTooltip, TitledRow, Item, Charts},
-  mixins: [Theme, CDN, Mirror],
+  mixins: [Theme, CDN, Mirror, FirstDataRender],
   props: {
     items: {
       type: Array,
@@ -522,6 +523,9 @@ export default {
     }
   },
   computed: {
+    rendersData() {
+      return this.items.length > 0
+    },
     ...mapGetters('ajax', ['matrixPending']),
     ...mapGetters('options', ['fluctuationVisualize']),
     ...mapState('options', ['dataTable']),

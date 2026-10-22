@@ -234,6 +234,7 @@ import BackButton from '@/components/stats/BackButton'
 import StageCard from '@/components/stats/StageCard'
 import StageSelectorCategory from "@/components/stats/StageSelectorCategory"
 import CDN from '@/mixins/CDN'
+import FirstDataRender from '@/mixins/FirstDataRender'
 import Theme from '@/mixins/Theme'
 import Console from '@/utils/Console'
 import existUtils from '@/utils/existUtils'
@@ -244,7 +245,7 @@ import { mapGetters } from 'vuex'
 export default {
   name: 'StageSelector',
   components: {StageSelectorCategory, BackButton, StageCard },
-  mixins: [CDN, Theme],
+  mixins: [CDN, Theme, FirstDataRender],
   props: {
     name: {
       type: String,
@@ -403,6 +404,10 @@ export default {
         }
       }
       return result
+    },
+    rendersData () {
+      // the stage details hide the zones
+      return this.step === 1 && this.categorizedZones.some(categories => categories.length)
     },
     selectedZone () {
       if (!this.selected.zone) return {}
