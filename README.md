@@ -26,6 +26,11 @@ This frontend project has mainly being maintained by the following contributors 
 - `PENGUIN_PLATFORM`: `web` or `app`
 - `PENGUIN_BUILDFROM`: `cf-pages`, `docker` or undefined
 - `PENGUIN_STATIC_PUBLIC_PATH`: optional HTTPS static CDN prefix, used only for production web builds; defaults to `/`. Set this to the operator-confirmed Upyun **static asset** mirror URL (including the matching release directory), ending with `/`. It is not a website origin or an API base URL.
+- `VUE_APP_DATADOG_RUM_APPLICATION_ID`, `VUE_APP_DATADOG_RUM_CLIENT_TOKEN`: optional [Datadog RUM](https://docs.datadoghq.com/real_user_monitoring/browser/) application (site `datadoghq.com`, service `penguin-stats-frontend`). RUM is only loaded, as a separate chunk after the page load, when both are set; builds without them (forks, local development) do not load it at all.
+- `VUE_APP_DATADOG_RUM_SESSION_SAMPLE_RATE`: optional percentage of the sessions sent to RUM; defaults to `20`. The sessions left out do not download the SDK at all.
+- `VUE_APP_DATADOG_RUM_ENV`: optional RUM `env`; defaults to `prod`.
+
+The release image and mainland CDN envelope workflows pass the RUM settings from the repository (or organization) Actions variables `DATADOG_RUM_APPLICATION_ID`, `DATADOG_RUM_CLIENT_TOKEN` and `DATADOG_RUM_SESSION_SAMPLE_RATE` as Docker build arguments of the same `VUE_APP_` names. The client token is public by design: it ships in the bundle. Cloudflare Pages builds read them from the Pages project environment variables instead.
 
 For a mainland edge deployment, build with `PENGUIN_BUILDFROM=docker` so API requests remain same-origin at `/PenguinStats/api/v2`. The edge must proxy that prefix to the backend. Example placeholders (replace the CDN URL):
 

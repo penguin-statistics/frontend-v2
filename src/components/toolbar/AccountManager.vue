@@ -109,6 +109,7 @@
           <span
             class="text-center monospace"
             style="font-size: 36px"
+            data-dd-action-name="PenguinID"
           >
             <span style="font-size: 16px">
               PenguinID#
