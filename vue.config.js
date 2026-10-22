@@ -74,7 +74,8 @@ module.exports = {
   },
   // integrity: false,
   runtimeCompiler: true,
-  transpileDependencies: ["vuetify", "fuse.js", "semver", "protobufjs"],
+  // @datadog: the RUM SDK uses syntax (optional chaining...) that webpack 4 cannot parse
+  transpileDependencies: ["vuetify", "fuse.js", "semver", "protobufjs", "@datadog"],
   configureWebpack: {
     plugins: [
       new webpack.DefinePlugin({
@@ -123,5 +124,14 @@ module.exports = {
 
     // we dont need prefetch plugin
     config.plugins.delete("prefetch");
+
+    // webpack 4 resolves the imports of .mjs files with the "main" field only, which would bundle
+    // the CommonJS builds of the RUM SDK packages: use their ES modules, which can be tree-shaken
+    config.module
+      .rule("datadog-mjs")
+      .test(/\.mjs$/)
+      .include.add(/[\\/]node_modules[\\/]@datadog[\\/]/)
+      .end()
+      .resolve.mainFields.merge(["browser", "module", "main"]);
   },
 };

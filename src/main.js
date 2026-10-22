@@ -25,6 +25,7 @@ import './assets/fonts/roboto/roboto.css'
 
 import './injections'
 import PenguinProbe from '@/utils/probe'
+import { startRum } from '@/utils/rum'
 
 if (!window.Intl) require('intl-collator')
 
@@ -47,3 +48,4 @@ async function bootstrap () {
 }
 
 bootstrap()
+startRum()

@@ -37,7 +37,10 @@
           >
             <v-list-item-content>
               <v-list-item-title>
-                <span class="monospace">
+                <span
+                  class="monospace"
+                  data-dd-action-name="PenguinID"
+                >
                   {{ userId.id }}
                 </span>
                 <span class="grey--text">
@@ -59,6 +62,7 @@
                 :loading="loading === userId.id"
                 :tip="$t('auth.forgot.penguinIdHistory.loginAsUserId')"
                 :disabled="loading && loading !== userId.id"
+                data-dd-action-name="Log in as a PenguinID from the history"
                 @click="loginAsUserId(userId.id)"
               >
                 <v-icon>
@@ -70,6 +74,7 @@
                 color="error"
                 :disabled="loading === userId.id"
                 :tip="$t('auth.forgot.penguinIdHistory.deleteUserId')"
+                data-dd-action-name="Delete a PenguinID from the history"
                 @click="deleteUserId(userId.id)"
               >
                 <v-icon>
