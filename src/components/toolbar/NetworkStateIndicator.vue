@@ -240,7 +240,7 @@ export default {
     padding: 4px 8px;
     border-radius: 4px 0 0 4px !important;
     margin-bottom: calc(max(env(safe-area-inset-bottom), 8px)) !important;
-    z-index: 1000001; /* to override crisp & stay on top of the server switcher notifier */
+    z-index: 1000001; /* to stay on top of the server switcher notifier */
   }
 
   .have-error-state__other {
