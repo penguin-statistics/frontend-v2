@@ -70,7 +70,7 @@ function collect(dist, cfg) {
   let references = 0;
   for (const match of html.matchAll(/(?:src|href)=["']([^"']+)["']/g)) {
     const url = match[1];
-    if (/\.(js|css)(?:[?#]|$)/.test(url) && !url.startsWith('https://client.crisp.chat/')) {
+    if (/\.(js|css)(?:[?#]|$)/.test(url)) {
       assert(url.startsWith(cfg.cdnPrefix) && assets[url.slice(cfg.cdnPrefix.length)], `Bundle not in this CDN release: ${url}`);
       references++;
     }

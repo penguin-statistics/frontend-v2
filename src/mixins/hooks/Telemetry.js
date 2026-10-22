@@ -1,7 +1,6 @@
 import * as Sentry from "@sentry/vue";
 import store from "@/store";
 import i18n from "@/i18n";
-import config from "@/config";
 import Console from "@/utils/Console";
 
 class SessionData {
@@ -19,10 +18,6 @@ class SessionData {
   get normal() {
     return this.data;
   }
-
-  get crisp() {
-    return [[...Object.entries(this.data), ["Version", config.version]]];
-  }
 }
 
 export default {
@@ -38,10 +33,6 @@ export default {
     updateTelemetryData() {
       const sessionData = new SessionData();
       Console.debug("Telemetry", "updating telemetry data");
-
-      // set crisp session data
-      window.$crisp.push(["set", "session:data", sessionData.crisp]);
-      window.$crisp.push(["safe", true]);
 
       // set sentry tags
       Sentry.configureScope((scope) => scope.setTags(sessionData.normal));
