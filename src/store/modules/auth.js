@@ -3,19 +3,11 @@ import Cookies from 'js-cookie'
 export default {
   namespaced: true,
   state: {
-    username: null,
-    probeUid: {
-      u: null,
-      c: null
-    }
+    username: null
   },
   mutations: {
     changeUsername (state, username) {
       state.username = username
-    },
-    changeProbeUid (state, uid) {
-      state.probeUid.u = Date.now()
-      state.probeUid.c = uid
     }
   },
   actions: {
@@ -35,7 +27,6 @@ export default {
     },
     username: state => {
       return state.username || ''
-    },
-    probeUid: state => state.probeUid
+    }
   }
 }

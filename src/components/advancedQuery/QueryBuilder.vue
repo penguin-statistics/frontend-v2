@@ -252,7 +252,6 @@ export default {
           snackbar.launch("error", 5000, err.errorMessage);
           this.result.busy = false;
         });
-      this.$probe.reportExecutedAdvancedQuery(marshalled);
     },
     cancel() {
       this.result.busy = false;

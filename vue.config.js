@@ -25,10 +25,6 @@ function envvar(name, fallback, skipStringify = false) {
   return JSON.stringify(content || fallback) || '"null"';
 }
 
-const noscriptImage = JSON.stringify(
-  `https://probe.penguin-stats.io/?v=${packageVersion}&p=web&l=1`
-);
-
 const templateRoot = path.resolve(
   __dirname,
   `./src/templates/${envvar("PENGUIN_PLATFORM", "web", true)}`
@@ -47,8 +43,6 @@ console.log(`
   - 📋 Build Version (from env:'npm_package_version'): ${packageVersion}
   - 📋 Template Root: ${templateRoot}
   - 📃 Using Template File: ${templateFile}
-  @ 🛒 Probe
-    - 📑 <noscript> fallback GET endpoint: ${noscriptImage}
 
   > 📝 Initiating vue-cli-service...`);
 
@@ -82,7 +76,6 @@ module.exports = {
         GIT_COMMIT: JSON.stringify(commitHash),
         PENGUIN_PLATFORM: envvar("PENGUIN_PLATFORM", "unspecified"),
         PENGUIN_BUILDFROM: envvar("PENGUIN_BUILDFROM", null),
-        PENGUIN_PROBE_NOSCRIPT: noscriptImage,
         NPM_PACKAGE_VERSION: JSON.stringify(packageVersion), // stringify
       }),
       new CopyPlugin({
