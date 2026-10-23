@@ -1,0 +1,33 @@
+# Penguin Statistics (企鹅物流数据统计)
+
+> 明日方舟（Arknights）物品掉落的众包统计，覆盖国服（CN）、美服（US）、日服（JP）和韩服（KR）：每个关卡掉落每种物品的频率，由玩家提交的作战结果统计而来。数据可以通过公开的 REST API 和远程 MCP 服务器读取，无需密钥，以 CC BY-NC 4.0 许可。
+
+数字的含义：掉落率 = quantity / times，即每次作战平均获得该物品的数量（可以大于 1）。`times` 是作战次数，即样本量；不足 100 次的掉落率波动很大。每个（关卡，物品）组合有各自的时间窗口 [start, end)，单位为 UTC 毫秒时间戳；`end: null` 表示该关卡现在仍掉落该物品。请始终传入并注明服务器（CN、US、JP 或 KR；US 是国际英文服），并说明数据的时间。请使用 API 或 MCP 服务器，而不是网站：网站是 JavaScript 应用。请发送写明程序名称和联系方式的 User-Agent，接受 gzip，并把响应缓存至少 5 分钟。
+
+域名：这是中国大陆镜像 penguin-stats.cn 的 llms.txt。API 文档、OpenAPI 规范和 MCP 服务器都在 penguin-stats.io（及其子域名）上，下面的相关链接指向那里。本站也转发 /PenguinStats/api/v2/ 下的 API：在中国大陆访问 penguin-stats.io 不稳定时，可以把 API 链接中的 penguin-stats.io 换成 penguin-stats.cn。
+
+## MCP 服务器
+
+- [企鹅物流数据统计 MCP 服务器](https://mcp.penguin-stats.io/mcp): 只读的远程 MCP 服务器（Streamable HTTP，无需认证）。它的工具可以用任何语言的名称或代号查找物品和关卡，给出一个物品在哪里刷、一个关卡掉落什么以及数据的时间，列出服务器的活动，并解释这些数字
+- [MCP 接入指南](https://mcp.penguin-stats.io/): 如何把它添加到 Claude、ChatGPT、Cursor、VS Code 等客户端
+
+## API
+
+- [OpenAPI 规范](https://penguin-stats.io/swagger/doc.json): 公开 API 的机器可读描述（Swagger 2.0）
+- [API 目录](https://penguin-stats.io/.well-known/api-catalog): RFC 9727 格式的 API 列表，含规范、文档和许可
+- [开发者文档](https://developer.penguin-stats.io/public-api/zh/): 面向人的中文指南
+- [Matrix API 指南](https://developer.penguin-stats.io/public-api/zh/api-v2-instruction/matrix-api.md): 掉落数据；用 `itemFilter` 或 `stageFilter` 缩小范围，一个服务器的完整矩阵可达约 1 MB
+- [一个物品的掉落](https://penguin-stats.io/PenguinStats/api/v2/result/matrix?server=CN&itemFilter=30012): 示例调用，固源岩（30012）在国服所有开放关卡的掉落
+- [关卡](https://penguin-stats.io/PenguinStats/api/v2/stages?server=CN): 一个服务器的关卡 ID、代号和理智消耗；数据较大，获取一次后请缓存
+- [物品](https://penguin-stats.io/PenguinStats/api/v2/items): 物品 ID，中、英、日、韩名称，以及别名（几个物品可能共用一个别名）
+- [章节](https://penguin-stats.io/PenguinStats/api/v2/zones): 章节和活动，以及它们在各服务器的开放和关闭时间
+
+## 许可与署名
+
+- [CC BY-NC 4.0](https://creativecommons.org/licenses/by-nc/4.0/deed.zh-hans): 数据的许可。署名请写“Data: Penguin Statistics (penguin-stats.io), CC BY-NC 4.0”，中文可写“数据：企鹅物流数据统计（penguin-stats.io），CC BY-NC 4.0”。源代码以 MIT 许可。
+
+## Optional
+
+- [网站](https://penguin-stats.cn/): 企鹅物流数据统计的网站（JavaScript 应用）
+- [刷图规划器](https://penguin-stats.cn/planner): 基于这些数据给出刷图建议
+- [源代码](https://github.com/penguin-statistics): backend-next（API）、frontend-v2（网站）

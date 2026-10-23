@@ -2,7 +2,8 @@ const assert = require('assert').strict;
 const fs = require('fs');
 const os = require('os');
 const path = require('path');
-const { SITE, hash, checksums, config, collect, upyun, publish } = require('../scripts/cdn-envelope.cjs');
+const { execFileSync } = require('child_process');
+const { SITE, IO_ONLY, hash, checksums, config, collect, upyun, publish, archiveEnvelope } = require('../scripts/cdn-envelope.cjs');
 const publicPath = require('../../build/public-path');
 const root = fs.mkdtempSync(path.join(os.tmpdir(), 'cdn-envelope-test-'));
 const env = { GITHUB_SHA: 'a'.repeat(40), GITHUB_REF_NAME: `v${require('../../package.json').version}`,
@@ -146,6 +147,47 @@ async function run() {
     fs.unlinkSync(path.join(dist, 'js/link.js'));
     fs.writeFileSync(path.join(dist, 'index.html'), '<script src="/js/a.js"></script>');
     assert.throws(() => collect(dist, cfg), /Bundle not in this CDN release/);
+  });
+  // a build with the files of the repository where the mainland site differs
+  const repo = p => fs.readFileSync(path.resolve(__dirname, '../..', p));
+  const real = { 'robots.txt': 'public/robots.txt', 'llms.txt': 'src/templates/web/llms.txt',
+    '.well-known/mcp-registry-auth': 'src/templates/web/.well-known/mcp-registry-auth', 'service-worker.js': 'public/service-worker.js' };
+  const mainland = path.join(root, 'mainland');
+  for (const p of SITE) {
+    fs.mkdirSync(path.dirname(path.join(mainland, p)), { recursive: true }); fs.writeFileSync(path.join(mainland, p), real[p] ? repo(real[p]) : p);
+  }
+  fs.mkdirSync(path.join(mainland, 'js')); fs.mkdirSync(path.join(mainland, 'css'));
+  fs.writeFileSync(path.join(mainland, 'js/a.js'), cfg.cdnPrefix);
+  fs.writeFileSync(path.join(mainland, 'css/a.css'), 'css');
+  fs.writeFileSync(path.join(mainland, 'index.html'), `<script src="${cfg.cdnPrefix}js/a.js"></script><link href="${cfg.cdnPrefix}css/a.css">`);
+  await test('the mainland site leaves out the proof of penguin-stats.io, and has its own robots.txt and llms.txt', () => {
+    const { site } = collect(mainland, cfg);
+    // the MCP Registry reads the proof on penguin-stats.io only
+    assert(IO_ONLY.includes('.well-known/mcp-registry-auth') && !site['site/.well-known/mcp-registry-auth']);
+    assert.deepEqual(Object.keys(site).sort(), SITE.filter(p => !IO_ONLY.includes(p)).map(p => `site/${p}`));
+    // robots.txt: the groups of penguin-stats.io's, without the Sitemap line, and penguin-stats.cn in its comments
+    const robots = site['site/robots.txt'].toString(), io = repo('public/robots.txt').toString();
+    const rules = text => text.split('\n').filter(l => l && !l.startsWith('#'));
+    assert.deepEqual(rules(robots), rules(io).filter(l => !/^sitemap:/i.test(l)));
+    assert.doesNotMatch(robots, /^sitemap:|penguin-stats\.io/im);
+    assert.match(robots, /^# Penguin Statistics \(penguin-stats\.cn\)\./m);
+    assert(robots.endsWith('\n') && !robots.endsWith('\n\n'), 'robots.txt does not end with a single newline');
+    assert.deepEqual(site['site/llms.txt'], repo('src/templates/mainland/llms.txt'));
+    // every other file is the build's
+    for (const [p, data] of Object.entries(site).filter(([p]) => !['site/robots.txt', 'site/llms.txt'].includes(p))) {
+      assert.deepEqual(data, fs.readFileSync(path.join(mainland, p.replace(/^site\//, ''))), p);
+    }
+  });
+  await test('the envelope archive has exactly the files of the mainland site', () => {
+    const output = path.join(root, 'archive'), archive = path.join(root, 'envelope.tar.gz');
+    const { site } = collect(mainland, cfg);
+    for (const [p, data] of Object.entries({ ...site, 'release.json': '{}', 'cdn-verification.json': '{}', SHA256SUMS: '' })) {
+      fs.mkdirSync(path.dirname(path.join(output, p)), { recursive: true }); fs.writeFileSync(path.join(output, p), data);
+    }
+    archiveEnvelope(output, archive);
+    const listed = execFileSync('/usr/bin/tar', ['-tzf', archive], { encoding: 'utf8' }).trim().split('\n');
+    assert.deepEqual(listed, ['SHA256SUMS', 'cdn-verification.json', 'release.json', ...Object.keys(site)].sort());
+    assert(!listed.includes('site/.well-known/mcp-registry-auth'));
   });
 }
 run().then(() => console.log(`${count} tests passed`)).catch(e => { console.error(e); process.exitCode = 1; }).finally(() => fs.rmSync(root, { recursive: true, force: true }));

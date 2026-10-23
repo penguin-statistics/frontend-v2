@@ -10,6 +10,8 @@ const root = path.resolve(__dirname, '../..');
 const read = p => fs.readFileSync(path.join(root, p), 'utf8');
 const nginx = read('build/nginx-default.conf');
 const llms = read('src/templates/web/llms.txt');
+// the mainland site's own, in Chinese, which the mainland envelope ships instead (MAINLAND of cdn-envelope.cjs)
+const mainlandLlms = read('src/templates/mainland/llms.txt');
 const robots = read('public/robots.txt');
 const catalog = JSON.parse(read('src/templates/web/.well-known/api-catalog'));
 const aiCatalog = JSON.parse(read('src/templates/web/.well-known/ai-catalog.json'));
@@ -44,29 +46,40 @@ test('every static file of the web build is in the SITE list of the mainland env
     }
   }
 });
-test('llms.txt has the title of meta#17 and does not mention the upload forms or the advanced query', () => {
-  assert.equal(llms.split('\n')[0], '# Penguin Statistics (企鹅物流数据统计)');
-  // meta#17: agents get pointed at the data, not at its submission or the advanced query
-  assert.equal(llms.match(/report|advanced/gi), null);
-});
-// the llms.txt format: a heading only for the title and the sections, and in the sections nothing but lists of
-// "[name](url)" links, each with a description here (meta#17); its reference parser fails on the file otherwise
-test('llms.txt links are absolute HTTPS URLs, and its sections lists of links with a description', () => {
-  assert(links.length > 0);
-  for (const url of links) assert(url.startsWith('https://'), url);
-  const sections = llms.indexOf('\n## ') + 1;
-  assert(sections > 0, 'llms.txt has no "## " section');
-  assert.doesNotMatch(llms.slice(llms.indexOf('\n'), sections), /^#/m, 'a heading before the first section');
-  for (const line of llms.slice(sections).split('\n').filter(l => l && !l.startsWith('## '))) {
-    assert.match(line, /^- \[[^\]]+\]\(https:\/\/[^\s)]+\): \S/, `not "- [name](url): description" in a section: ${line}`);
+for (const [name, text] of Object.entries({ 'llms.txt': llms, 'the mainland llms.txt': mainlandLlms })) {
+  test(`${name} has the title of meta#17 and does not mention the upload forms or the advanced query`, () => {
+    assert.equal(text.split('\n')[0], '# Penguin Statistics (企鹅物流数据统计)');
+    // meta#17: agents get pointed at the data, not at its submission or the advanced query
+    assert.equal(text.match(/report|advanced/gi), null);
+  });
+  // the llms.txt format: a heading only for the title and the sections, and in the sections nothing but lists of
+  // "[name](url)" links, each with a description here (meta#17); its reference parser fails on the file otherwise
+  test(`${name} links are absolute HTTPS URLs, and its sections lists of links with a description`, () => {
+    assert(urls(text).length > 0);
+    for (const url of urls(text)) assert(url.startsWith('https://'), url);
+    const sections = text.indexOf('\n## ') + 1;
+    assert(sections > 0, 'no "## " section');
+    assert.doesNotMatch(text.slice(text.indexOf('\n'), sections), /^#/m, 'a heading before the first section');
+    for (const line of text.slice(sections).split('\n').filter(l => l && !l.startsWith('## '))) {
+      assert.match(line, /^- \[[^\]]+\]\(https:\/\/[^\s)]+\): \S/, `not "- [name](url): description" in a section: ${line}`);
+    }
+  });
+  test(`${name} names the MCP server and its setup guide, in its summary and in a section before the API`, () => {
+    assert.match(text.split('\n').find(l => l.startsWith('> ')), /\bMCP\b/);
+    const section = text.search(/\n## [^\n]*\bMCP\b/);
+    assert(section > 0 && section < text.indexOf('\n## API\n'), 'no MCP section before "## API"');
+    const lines = text.slice(section + 1).split('\n## ')[0].split('\n');
+    for (const url of [mcp, mcpGuide]) assert(lines.some(l => l.startsWith('- [') && l.includes(`](${url}): `)), url);
+  });
+}
+// penguin-stats.cn serves the pages of the site and, of the backend, the API only: its spec and catalog, and the MCP
+// server, are on penguin-stats.io
+test('the mainland llms.txt links the site on penguin-stats.cn, and of penguin-stats.io the API, its spec and catalog', () => {
+  const targets = urls(mainlandLlms).map(url => new URL(url));
+  assert(targets.some(url => url.hostname === 'penguin-stats.cn'), 'no link to penguin-stats.cn');
+  for (const url of targets.filter(url => url.hostname === 'penguin-stats.io')) {
+    assert.match(url.pathname, /^\/(PenguinStats\/api\/|swagger\/|\.well-known\/)/, `a page of the site on penguin-stats.io: ${url}`);
   }
-});
-test('llms.txt names the MCP server and its setup guide, in its summary and in a section before the API', () => {
-  assert.match(llms.split('\n').find(l => l.startsWith('> ')), /\bMCP server\b/);
-  const section = llms.indexOf('\n## MCP server\n');
-  assert(section > 0 && section < llms.indexOf('\n## API\n'), 'no "## MCP server" section before "## API"');
-  const lines = llms.slice(section + 1).split('\n## ')[0].split('\n');
-  for (const url of [mcp, mcpGuide]) assert(lines.some(l => l.startsWith('- [') && l.includes(`](${url}): `)), url);
 });
 test('robots.txt gives each named group the rules of "*", as groups do not inherit them (RFC 9309)', () => {
   const groups = [];
@@ -181,7 +194,7 @@ async function online() {
   // URI of the REST API) or 405 (the MCP server)
   const hrefs = catalog.linkset.flatMap(({ anchor, ...relations }) => Object.values(relations).flat().map(t => t.href));
   const entries = aiCatalog.entries.map(entry => entry.url);
-  for (const url of [...new Set([...links, ...urls(robots), ...hrefs, ...entries])].filter(url => !own(url))) {
+  for (const url of [...new Set([...links, ...urls(mainlandLlms), ...urls(robots), ...hrefs, ...entries])].filter(url => !own(url))) {
     const code = await status(url).catch(error => error.message);
     // the MCP server is stateless and answers MCP's POSTs only: a GET gets 405, which shows that it is up
     const expected = url === mcp ? 405 : 200;

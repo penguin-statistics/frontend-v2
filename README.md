@@ -84,9 +84,11 @@ The artifact `frontend-envelope-<SHA>-<run-attempt>` contains `frontend-envelope
 - `release.json`, `cdn-verification.json`, `SHA256SUMS`
 - `site/index.html`, `site/service-worker.js`, `site/manifest.json`, `site/browserconfig.xml`, `site/robots.txt`, `site/favicon.ico`, `site/opensearch.xml`, `site/security.txt`, `site/llms.txt`
 - `site/1000.html`, `site/50x.html`, `site/under-deploy.html`, `site/update-browser.html`
-- `site/.well-known/security.txt`, `site/.well-known/apple-app-site-association`, `site/.well-known/api-catalog`, `site/.well-known/mcp-registry-auth`, `site/.well-known/ai-catalog.json`
+- `site/.well-known/security.txt`, `site/.well-known/apple-app-site-association`, `site/.well-known/api-catalog`, `site/.well-known/ai-catalog.json`
 - `site/compliance/privacy-zh.html`, `site/compliance/eula-zh.html`
 - `site/favicon/` files: `favicon-16x16.png`, `favicon-32x32.png`, `android-chrome-192x192.png`, `android-chrome-512x512.png`, `apple-touch-icon.png`, `mstile-150x150.png`, `safari-pinned-tab.svg`
+
+The `site/` files are those of the web build, but for penguin-stats.cn: `robots.txt` has no `Sitemap:` line (the mainland site has no sitemap) and names penguin-stats.cn, `llms.txt` is the Chinese `src/templates/mainland/llms.txt`, and `.well-known/mcp-registry-auth`, the MCP Registry's proof of penguin-stats.io, is left out (`IO_ONLY` and `MAINLAND` in `.github/scripts/cdn-envelope.cjs`).
 
 `release.json` schema 1 binds `repository` (`penguin-statistics/frontend-v2`), `sourceSha`, `releaseTag`, `packageVersion`, `cdnPrefix`, `assetManifestSha256`, `siteManifestSha256`, `workflowRunId`, `workflowRunAttempt`. `cdn-verification.json` schema 1 contains `status: passed`, matching `sourceSha`, `cdnPrefix`, `assetManifestSha256`, plus `verifiedAt`, `verifiedAssetCount`, `corsOrigins`.
 
