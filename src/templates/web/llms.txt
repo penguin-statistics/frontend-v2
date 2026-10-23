@@ -1,10 +1,15 @@
 # Penguin Statistics (企鹅物流数据统计)
 
-> Crowdsourced Arknights (明日方舟) item drop statistics for the CN, US, JP and KR game servers: how often each stage drops each item, counted from the results players submit. Public REST API to read the data, no key needed. Data licensed CC BY-NC 4.0.
+> Crowdsourced Arknights (明日方舟) item drop statistics for the CN, US, JP and KR game servers: how often each stage drops each item, counted from the results players submit. Public REST API and remote MCP server to read the data, no key needed. Data licensed CC BY-NC 4.0.
 
-How to read the numbers: drop rate = quantity / times, the expected number of the item per run (it can exceed 1). `times` is the number of runs, the sample size; a rate from fewer than 100 runs is noisy. Each (stage, item) pair has its own time window [start, end) in UTC epoch milliseconds; `end: null` means the stage drops the item now. Always pass and name the server (CN, US, JP or KR; US is the global English server) and say when the data is from. Use the API rather than the website, which is a JavaScript app. Send a User-Agent that names your program and a contact, accept gzip, and cache responses for at least 5 minutes.
+How to read the numbers: drop rate = quantity / times, the expected number of the item per run (it can exceed 1). `times` is the number of runs, the sample size; a rate from fewer than 100 runs is noisy. Each (stage, item) pair has its own time window [start, end) in UTC epoch milliseconds; `end: null` means the stage drops the item now. Always pass and name the server (CN, US, JP or KR; US is the global English server) and say when the data is from. Use the API or the MCP server rather than the website, which is a JavaScript app. Send a User-Agent that names your program and a contact, accept gzip, and cache responses for at least 5 minutes.
 
 Domains: penguin-stats.io serves users and agents worldwide. penguin-stats.cn is the mainland China mirror and may be unreachable from elsewhere: use .io.
+
+## MCP server
+
+- [Penguin Statistics MCP server](https://mcp.penguin-stats.io/mcp): read-only remote MCP server (Streamable HTTP, no authentication). Its tools find items and stages by name or code in any language, return where to farm an item and what a stage drops with the time the data is from, list the events of a server and explain the numbers
+- [MCP setup guide](https://mcp.penguin-stats.io/): how to add the server to Claude, ChatGPT, Cursor, VS Code and other clients
 
 ## API
 
