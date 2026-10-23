@@ -13,6 +13,19 @@ const SITE = [
   ...['favicon-16x16.png', 'favicon-32x32.png', 'android-chrome-192x192.png', 'android-chrome-512x512.png',
     'apple-touch-icon.png', 'mstile-150x150.png', 'safari-pinned-tab.svg'].map(p => `favicon/${p}`),
 ].sort();
+// The mainland site, penguin-stats.cn, is canonical for itself (meta#14), and of the backend's paths it serves only the
+// API: no sitemap, spec or MCP server. It leaves out the files of the build that are about penguin-stats.io only (the
+// MCP Registry reads the proof of the domain there, and nowhere else), and has its own robots.txt and llms.txt.
+const IO_ONLY = ['.well-known/mcp-registry-auth'];
+const MAINLAND_SITE = SITE.filter(p => !IO_ONLY.includes(p));
+const MAINLAND = {
+  // The same groups without the Sitemap line, as penguin-stats.cn has no sitemap; its comments name the domain and
+  // its llms.txt
+  'robots.txt': data => Buffer.from(data.toString().replace(/^Sitemap:.*\n?/gim, '').replace(/\n+$/, '\n')
+    .replace(/penguin-stats\.io/g, 'penguin-stats.cn')),
+  // Written in Chinese for the mainland: its links to the site are on penguin-stats.cn, to the API and MCP server on .io
+  'llms.txt': () => fs.readFileSync(path.resolve(__dirname, '../../src/templates/mainland/llms.txt')),
+};
 const MIME = { '.js': 'application/javascript', '.css': 'text/css', '.woff': 'font/woff', '.woff2': 'font/woff2',
   '.ttf': 'font/ttf', '.eot': 'application/vnd.ms-fontobject', '.svg': 'image/svg+xml', '.png': 'image/png',
   '.jpg': 'image/jpeg', '.jpeg': 'image/jpeg', '.gif': 'image/gif', '.webp': 'image/webp', '.ico': 'image/x-icon' };
@@ -60,7 +73,8 @@ function collect(dist, cfg) {
   }
   walk(dist);
   const site = {}, assets = {};
-  for (const p of SITE) { assert(all[p], `Missing site file: ${p}`); site[`site/${p}`] = all[p]; }
+  for (const p of SITE) assert(all[p], `Missing site file: ${p}`);
+  for (const p of MAINLAND_SITE) site[`site/${p}`] = MAINLAND[p] ? MAINLAND[p](all[p]) : all[p];
   for (const [p, data] of Object.entries(all)) {
     if (SITE.includes(p) || p.endsWith('.map')) continue; // Source maps are never public artifacts.
     assert(/^(js|css|fonts|img)\//.test(p) && MIME[path.extname(p)], `Unclassified build output: ${p}`);
@@ -173,7 +187,7 @@ async function publish({ cfg, files, output, storage, publicGet = request, now =
 }
 function archiveEnvelope(output, archive) {
   assert(!fs.existsSync(archive), 'Archive already exists');
-  execFileSync('/usr/bin/tar', ['-czf', archive, '-C', output, ...['SHA256SUMS', 'cdn-verification.json', 'release.json', ...SITE.map(p => `site/${p}`)].sort()], {
+  execFileSync('/usr/bin/tar', ['-czf', archive, '-C', output, ...['SHA256SUMS', 'cdn-verification.json', 'release.json', ...MAINLAND_SITE.map(p => `site/${p}`)].sort()], {
     // tar may invoke gzip: neither it nor tar may inherit a repository-controlled PATH.
     env: { PATH: '/usr/bin:/bin', LANG: 'C', COPYFILE_DISABLE: '1' },
   });
@@ -183,7 +197,7 @@ async function main() {
   const cfg = config();
   if (process.argv[2] === 'prefix') { process.stdout.write(cfg.cdnPrefix); return; }
   const files = collect('dist', cfg);
-  if (process.argv[2] === 'check') { console.log(`Validated ${Object.keys(files.assets).length} CDN assets and ${SITE.length} site files (no upload)`); return; }
+  if (process.argv[2] === 'check') { console.log(`Validated ${Object.keys(files.assets).length} CDN assets and ${Object.keys(files.site).length} site files (no upload)`); return; }
   assert(process.argv[2] === 'publish', 'Use prefix, check or publish');
   assert(process.env.GITHUB_ACTIONS === 'true' && process.env.GITHUB_EVENT_NAME === 'push' && process.env.GITHUB_REF_TYPE === 'tag', 'Publishing requires a CI tag push');
   const output = 'cdn-envelope';
@@ -193,4 +207,4 @@ async function main() {
   console.log(`Verified envelope: ${archive}`);
 }
 if (require.main === module) main().catch(error => { console.error(error.message); process.exitCode = 1; });
-module.exports = { SITE, MIME, hash, checksums, config, collect, upyun, publish, archiveEnvelope };
+module.exports = { SITE, IO_ONLY, MAINLAND_SITE, MIME, hash, checksums, config, collect, upyun, publish, archiveEnvelope };

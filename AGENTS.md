@@ -32,6 +32,7 @@ Only want to use the data? See https://developer.penguin-stats.io/public-api; th
 | `src/apis`, `src/store/modules`, `src/utils/service.js` | API calls, the Vuex store and its cached data, the axios instance |
 | `src/locales/*.json`, `src/i18n.js` | Translations (see Rules) |
 | `src/templates/web`, `src/templates/app` | Each platform's `index.html`, and static files copied into the build root (`.well-known/`, `compliance/`, ...) |
+| `src/templates/mainland` | Files of the mainland site (penguin-stats.cn) that the mainland envelope ships instead of the build's (`MAINLAND` in `.github/scripts/cdn-envelope.cjs`) |
 | `public/` | More static files for the build root (`robots.txt`, `manifest.json`, `service-worker.js`, ...) |
 | `build/` | Web build script, CDN prefix, the image's nginx config (`nginx-default.conf`) |
 | `.github/` | Workflows (PR image check, release, mainland CDN envelope), their scripts and tests |
