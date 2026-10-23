@@ -21,9 +21,9 @@ const mcpGuide = 'https://mcp.penguin-stats.io/';
 const links = urls(llms);
 let count = 0;
 function test(name, fn) { fn(); count++; console.log(`ok ${count} - ${name}`); }
-// the directives of an exact location; none of them nests a block
+// the directives of an exact location, with the blocks in it (an "if"), which nest none
 function location(uri) {
-  const match = new RegExp(`\\n\\s*location = ${uri.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')} \\{([^{}]*)\\}`).exec(nginx);
+  const match = new RegExp(`\\n\\s*location = ${uri.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')} \\{((?:[^{}]|\\{[^{}]*\\})*)\\}`).exec(nginx);
   assert(match, `nginx-default.conf has no "location = ${uri}"`);
   return match[1];
 }
@@ -107,6 +107,15 @@ test('security.txt is the same at both paths and expires in less than a year (RF
   assert.equal(read('src/templates/web/security.txt'), security);
   assert(!isNaN(expires), 'security.txt has no valid Expires');
   assert(expires - Date.now() < 366 * 86400000, 'RFC 9116 recommends an Expires less than a year ahead');
+});
+test('nginx redirects penguin-stats.io/mcp: a GET or HEAD to the setup guide, any other request to the MCP server', () => {
+  const block = location('/mcp');
+  // 308, unlike 301 and 302, keeps the method and the body of the request
+  const other = /^\s*if \(\$request_method !~ \^\(GET\|HEAD\)\$\) \{\s*return 308 (\S+);\s*\}$/m.exec(block);
+  assert(other, 'no "if" that answers anything but a GET or HEAD with a 308');
+  assert.equal(other[1], mcp);
+  assert.deepEqual(block.replace(other[0], '').match(/^\s*return .*$/gm).map(l => l.trim()), [`return 302 ${mcpGuide};`]);
+  assert.match(block, /^\s*add_header 'Cache-Control' 'no-store' always;$/m);
 });
 for (const file of ['/llms.txt', '/robots.txt']) test(`nginx serves ${file} as UTF-8 text with an edge cache of an hour`, () => {
   const block = location(file);
