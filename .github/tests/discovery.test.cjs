@@ -108,6 +108,15 @@ test('security.txt is the same at both paths and expires in less than a year (RF
   assert(!isNaN(expires), 'security.txt has no valid Expires');
   assert(expires - Date.now() < 366 * 86400000, 'RFC 9116 recommends an Expires less than a year ahead');
 });
+// the official MCP Registry reads this line from penguin-stats.io, and lets the key in it publish io.penguin-stats/*
+test('the MCP Registry proof of penguin-stats.io is one line with an Ed25519 public key, served as text', () => {
+  const key = /^v=MCPv1; k=ed25519; p=([A-Za-z0-9+/]{43}=)\n$/.exec(read('src/templates/web/.well-known/mcp-registry-auth'));
+  assert(key, 'not "v=MCPv1; k=ed25519; p=<public key in base64>" and a newline');
+  assert.equal(Buffer.from(key[1], 'base64').length, 32, 'an Ed25519 public key has 32 bytes');
+  const block = location('/.well-known/mcp-registry-auth');
+  assert.match(block, /^\s*default_type 'text\/plain; charset=utf-8';$/m);
+  assert.match(block, /^\s*add_header 'Cache-Control' 'no-cache';$/m);
+});
 test('nginx redirects penguin-stats.io/mcp: a browser to the setup guide, an MCP client to the MCP server', () => {
   let block = location('/mcp');
   // 308, unlike 301 and 302, keeps the method and the body of the request. An MCP client sends POSTs, and a GET for
