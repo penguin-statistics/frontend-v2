@@ -21,9 +21,9 @@ const mcpGuide = 'https://mcp.penguin-stats.io/';
 const links = urls(llms);
 let count = 0;
 function test(name, fn) { fn(); count++; console.log(`ok ${count} - ${name}`); }
-// the directives of an exact location; none of them nests a block
+// the directives of an exact location, with the blocks in it (an "if"), which nest none
 function location(uri) {
-  const match = new RegExp(`\\n\\s*location = ${uri.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')} \\{([^{}]*)\\}`).exec(nginx);
+  const match = new RegExp(`\\n\\s*location = ${uri.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')} \\{((?:[^{}]|\\{[^{}]*\\})*)\\}`).exec(nginx);
   assert(match, `nginx-default.conf has no "location = ${uri}"`);
   return match[1];
 }
@@ -107,6 +107,24 @@ test('security.txt is the same at both paths and expires in less than a year (RF
   assert.equal(read('src/templates/web/security.txt'), security);
   assert(!isNaN(expires), 'security.txt has no valid Expires');
   assert(expires - Date.now() < 366 * 86400000, 'RFC 9116 recommends an Expires less than a year ahead');
+});
+test('nginx redirects penguin-stats.io/mcp: a browser to the setup guide, an MCP client to the MCP server', () => {
+  let block = location('/mcp');
+  // 308, unlike 301 and 302, keeps the method and the body of the request. An MCP client sends POSTs, and a GET for
+  // its event stream, which the guide would answer with a page that the client reads as a stream to reopen
+  for (const [request, condition] of [
+    ['anything but a GET or HEAD', /^\s*if \(\$request_method !~ \^\(GET\|HEAD\)\$\) \{\s*return 308 (\S+);\s*\}$/m],
+    ['a request for an event stream', /^\s*if \(\$http_accept ~\* text\/event-stream\) \{\s*return 308 (\S+);\s*\}$/m],
+  ]) {
+    const other = condition.exec(block);
+    assert(other, `no "if" that answers ${request} with a 308`);
+    assert.equal(other[1], mcp);
+    block = block.replace(other[0], '');
+  }
+  assert.deepEqual(block.match(/^\s*return .*$/gm).map(l => l.trim()), [`return 302 ${mcpGuide};`]);
+  // the "if"s run in order, so the 302 must come after them
+  assert.match(location('/mcp'), /return 302 \S+;\s*$/, 'the 302 is not the last directive');
+  assert.match(block, /^\s*add_header 'Cache-Control' 'no-store' always;$/m);
 });
 for (const file of ['/llms.txt', '/robots.txt']) test(`nginx serves ${file} as UTF-8 text with an edge cache of an hour`, () => {
   const block = location(file);
