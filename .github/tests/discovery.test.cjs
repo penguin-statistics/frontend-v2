@@ -12,16 +12,19 @@ const nginx = read('build/nginx-default.conf');
 const llms = read('src/templates/web/llms.txt');
 const robots = read('public/robots.txt');
 const catalog = JSON.parse(read('src/templates/web/.well-known/api-catalog'));
+const aiCatalog = JSON.parse(read('src/templates/web/.well-known/ai-catalog.json'));
 const security = read('src/templates/web/.well-known/security.txt');
 const expires = new Date((/^Expires: (\S+)$/m.exec(security) || [])[1]);
 const urls = text => [...text.matchAll(/https?:\/\/[^\s)<>"]+/g)].map(m => m[0].replace(/[.,]$/, ''));
 // the read-only MCP server (meta#20) and the guide to set it up in a client, both on their own host
 const mcp = 'https://mcp.penguin-stats.io/mcp';
 const mcpGuide = 'https://mcp.penguin-stats.io/';
+// its server card (MCP Server Cards): what a client needs to know of the server before it connects
+const mcpCard = `${mcp}/server-card`;
 const links = urls(llms);
 let count = 0;
 function test(name, fn) { fn(); count++; console.log(`ok ${count} - ${name}`); }
-// the directives of an exact location, with the blocks in it (an "if"), which nest none
+// the directives of an exact location, with the blocks in it (an "if", "types"), which nest none
 function location(uri) {
   const match = new RegExp(`\\n\\s*location = ${uri.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')} \\{((?:[^{}]|\\{[^{}]*\\})*)\\}`).exec(nginx);
   assert(match, `nginx-default.conf has no "location = ${uri}"`);
@@ -95,11 +98,32 @@ test('nginx serves the API catalog as a linkset with its Link header', () => {
   assert.match(block, /^\s*default_type 'application\/linkset\+json; profile="https:\/\/www\.rfc-editor\.org\/info\/rfc9727"';$/m);
   assert.match(block, /^\s*add_header 'Link' '<\/\.well-known\/api-catalog>; rel="api-catalog"';$/m);
 });
-test('the pages point to the API catalog and llms.txt, in their head and Link header', () => {
+test('the AI catalog and the API catalog list the MCP server by its server card', () => {
+  assert.equal(aiCatalog.specVersion, '1.0');
+  assert.equal(aiCatalog.host.identifier, 'penguin-stats.io');
+  // the AI Catalog identifies an MCP server as urn:air:<domain>:mcp:<the name in its MCP Registry name>
+  const cards = aiCatalog.entries.filter(entry => entry.type === 'application/mcp-server-card+json');
+  assert.deepEqual(cards.map(entry => [entry.identifier, entry.url]), [['urn:air:penguin-stats.io:mcp:penguin-stats', mcpCard]]);
+  // ARD, a draft that competes with the AI Catalog, requires a displayName and asks for 2 to 5 representativeQueries
+  for (const entry of [aiCatalog.host, ...aiCatalog.entries]) assert(entry.displayName, JSON.stringify(entry));
+  for (const { representativeQueries: queries } of cards) assert(queries.length >= 2 && queries.length <= 5);
+  const item = catalog.linkset.find(({ anchor }) => anchor === mcp);
+  assert(item, `the API catalog has no item for ${mcp}`);
+  assert.deepEqual(item['service-desc'], [{ href: mcpCard, type: 'application/mcp-server-card+json' }]);
+  assert.deepEqual(item['service-doc'].map(({ href }) => href), [mcpGuide]);
+});
+test('nginx serves the AI catalog with its media type, to any origin', () => {
+  const block = location('/.well-known/ai-catalog.json');
+  assert.match(block, /^\s*types \{ \}$/m);
+  assert.match(block, /^\s*default_type 'application\/ai-catalog\+json';$/m);
+  assert.match(block, /^\s*add_header 'Access-Control-Allow-Origin' '\*';$/m);
+});
+test('the pages point to the API catalog, llms.txt and the AI catalog, in their head and Link header', () => {
   const head = read('src/templates/web/index.html').split('</head>')[0];
   assert(head.includes('<link rel="api-catalog" href="/.well-known/api-catalog">'));
   assert(head.includes('<link rel="describedby" type="text/plain" href="/llms.txt">'));
-  assert.match(location('/index.html'), /^\s*add_header 'Link' '<\/\.well-known\/api-catalog>; rel="api-catalog", <\/llms\.txt>; rel="describedby"; type="text\/plain"';$/m);
+  assert(head.includes('<link rel="ai-catalog" type="application/ai-catalog+json" href="/.well-known/ai-catalog.json">'));
+  assert.match(location('/index.html'), /^\s*add_header 'Link' '<\/\.well-known\/api-catalog>; rel="api-catalog", <\/llms\.txt>; rel="describedby"; type="text\/plain", <\/\.well-known\/ai-catalog\.json>; rel="ai-catalog"; type="application\/ai-catalog\+json"';$/m);
 });
 // an Expires less than a year ahead stays so as time passes; whether it has passed is checked --online, so that the
 // date alone never fails a pull request
@@ -153,9 +177,11 @@ function status(url, redirects = 5) {
 }
 async function online() {
   let failures = 0;
-  // the catalog's link targets, not its anchors: an anchor is the base URI of an API, not an endpoint, and answers 404
+  // the API catalog's link targets, not its anchors: an anchor identifies an API, and answers a GET with 404 (the base
+  // URI of the REST API) or 405 (the MCP server)
   const hrefs = catalog.linkset.flatMap(({ anchor, ...relations }) => Object.values(relations).flat().map(t => t.href));
-  for (const url of [...new Set([...links, ...urls(robots), ...hrefs])].filter(url => !own(url))) {
+  const entries = aiCatalog.entries.map(entry => entry.url);
+  for (const url of [...new Set([...links, ...urls(robots), ...hrefs, ...entries])].filter(url => !own(url))) {
     const code = await status(url).catch(error => error.message);
     // the MCP server is stateless and answers MCP's POSTs only: a GET gets 405, which shows that it is up
     const expected = url === mcp ? 405 : 200;

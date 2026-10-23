@@ -1,0 +1,23 @@
+{
+  "specVersion": "1.0",
+  "host": {
+    "displayName": "Penguin Statistics",
+    "identifier": "penguin-stats.io",
+    "documentationUrl": "https://developer.penguin-stats.io/"
+  },
+  "entries": [
+    {
+      "identifier": "urn:air:penguin-stats.io:mcp:penguin-stats",
+      "displayName": "Penguin Statistics",
+      "type": "application/mcp-server-card+json",
+      "url": "https://mcp.penguin-stats.io/mcp/server-card",
+      "tags": ["arknights", "drop-rates", "game-data", "mcp"],
+      "representativeQueries": [
+        "What is the drop rate of Orirock Cube in Arknights?",
+        "Which Arknights stage is most efficient for farming Device?",
+        "What does stage 1-7 drop and how often?",
+        "Which Arknights events are open now, and what do their stages drop?"
+      ]
+    }
+  ]
+}
