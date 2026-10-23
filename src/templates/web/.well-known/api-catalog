@@ -6,6 +6,12 @@
       "service-doc": [{ "href": "https://developer.penguin-stats.io/public-api", "type": "text/html" }],
       "describedby": [{ "href": "https://penguin-stats.io/llms.txt", "type": "text/plain" }],
       "license": [{ "href": "https://creativecommons.org/licenses/by-nc/4.0/" }]
+    },
+    {
+      "anchor": "https://mcp.penguin-stats.io/mcp",
+      "service-desc": [{ "href": "https://mcp.penguin-stats.io/mcp/server-card", "type": "application/mcp-server-card+json" }],
+      "service-doc": [{ "href": "https://mcp.penguin-stats.io/", "type": "text/html" }],
+      "license": [{ "href": "https://creativecommons.org/licenses/by-nc/4.0/" }]
     }
   ]
 }

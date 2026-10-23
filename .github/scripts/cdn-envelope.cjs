@@ -6,7 +6,7 @@ const { execFileSync } = require('child_process');
 const { checkVersion } = require('./check-version.cjs');
 const SITE = [
   '.well-known/security.txt', '.well-known/apple-app-site-association', '.well-known/api-catalog',
-  '.well-known/mcp-registry-auth',
+  '.well-known/mcp-registry-auth', '.well-known/ai-catalog.json',
   'index.html', 'service-worker.js', 'manifest.json', 'browserconfig.xml', 'robots.txt', 'favicon.ico',
   'opensearch.xml', 'security.txt', 'llms.txt', '1000.html', '50x.html', 'under-deploy.html', 'update-browser.html',
   'compliance/privacy-zh.html', 'compliance/eula-zh.html',

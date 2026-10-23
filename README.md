@@ -84,7 +84,7 @@ The artifact `frontend-envelope-<SHA>-<run-attempt>` contains `frontend-envelope
 - `release.json`, `cdn-verification.json`, `SHA256SUMS`
 - `site/index.html`, `site/service-worker.js`, `site/manifest.json`, `site/browserconfig.xml`, `site/robots.txt`, `site/favicon.ico`, `site/opensearch.xml`, `site/security.txt`, `site/llms.txt`
 - `site/1000.html`, `site/50x.html`, `site/under-deploy.html`, `site/update-browser.html`
-- `site/.well-known/security.txt`, `site/.well-known/apple-app-site-association`, `site/.well-known/api-catalog`, `site/.well-known/mcp-registry-auth`
+- `site/.well-known/security.txt`, `site/.well-known/apple-app-site-association`, `site/.well-known/api-catalog`, `site/.well-known/mcp-registry-auth`, `site/.well-known/ai-catalog.json`
 - `site/compliance/privacy-zh.html`, `site/compliance/eula-zh.html`
 - `site/favicon/` files: `favicon-16x16.png`, `favicon-32x32.png`, `android-chrome-192x192.png`, `android-chrome-512x512.png`, `apple-touch-icon.png`, `mstile-150x150.png`, `safari-pinned-tab.svg`
 
