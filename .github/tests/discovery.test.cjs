@@ -1,6 +1,6 @@
 // The files that tell crawlers and agents about the site (llms.txt and the like), checked offline. With --online,
-// it also checks what can break without a change to them: that their links answer 200, but those to files of this
-// build (in SITE), which may not be live yet, and that security.txt does not expire within 30 days.
+// it also checks what can break without a change to them: that their links answer 200 (the MCP server 405), but those
+// to files of this build (in SITE), which may not be live yet, and that security.txt does not expire within 30 days.
 const assert = require('assert').strict;
 const fs = require('fs');
 const path = require('path');
@@ -15,6 +15,9 @@ const catalog = JSON.parse(read('src/templates/web/.well-known/api-catalog'));
 const security = read('src/templates/web/.well-known/security.txt');
 const expires = new Date((/^Expires: (\S+)$/m.exec(security) || [])[1]);
 const urls = text => [...text.matchAll(/https?:\/\/[^\s)<>"]+/g)].map(m => m[0].replace(/[.,]$/, ''));
+// the read-only MCP server (meta#20) and the guide to set it up in a client, both on their own host
+const mcp = 'https://mcp.penguin-stats.io/mcp';
+const mcpGuide = 'https://mcp.penguin-stats.io/';
 const links = urls(llms);
 let count = 0;
 function test(name, fn) { fn(); count++; console.log(`ok ${count} - ${name}`); }
@@ -54,6 +57,13 @@ test('llms.txt links are absolute HTTPS URLs, and its sections lists of links wi
   for (const line of llms.slice(sections).split('\n').filter(l => l && !l.startsWith('## '))) {
     assert.match(line, /^- \[[^\]]+\]\(https:\/\/[^\s)]+\): \S/, `not "- [name](url): description" in a section: ${line}`);
   }
+});
+test('llms.txt names the MCP server and its setup guide, in its summary and in a section before the API', () => {
+  assert.match(llms.split('\n').find(l => l.startsWith('> ')), /\bMCP server\b/);
+  const section = llms.indexOf('\n## MCP server\n');
+  assert(section > 0 && section < llms.indexOf('\n## API\n'), 'no "## MCP server" section before "## API"');
+  const lines = llms.slice(section + 1).split('\n## ')[0].split('\n');
+  for (const url of [mcp, mcpGuide]) assert(lines.some(l => l.startsWith('- [') && l.includes(`](${url}): `)), url);
 });
 test('robots.txt gives each named group the rules of "*", as groups do not inherit them (RFC 9309)', () => {
   const groups = [];
@@ -120,8 +130,10 @@ async function online() {
   const hrefs = catalog.linkset.flatMap(({ anchor, ...relations }) => Object.values(relations).flat().map(t => t.href));
   for (const url of [...new Set([...links, ...urls(robots), ...hrefs])].filter(url => !own(url))) {
     const code = await status(url).catch(error => error.message);
-    if (code !== 200) failures++;
-    console.log(`${code === 200 ? 'ok' : 'not ok'} - ${code} ${url}`);
+    // the MCP server is stateless and answers MCP's POSTs only: a GET gets 405, which shows that it is up
+    const expected = url === mcp ? 405 : 200;
+    if (code !== expected) failures++;
+    console.log(`${code === expected ? 'ok' : 'not ok'} - ${code} ${url}`);
   }
   const days = Math.floor((expires - Date.now()) / 86400000);
   if (days < 30) failures++;
