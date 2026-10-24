@@ -31,7 +31,9 @@ if (mirror.global.isCurrent() || mirror.cn.isCurrent()) {
 const service = axios.create({
   // baseURL: see rules above
   baseURL,
-  withCredentials: true,
+  // auth is the Authorization header (PenguinID), never the cookie: cross-origin builds (app, previews) then get
+  // the public CORS answer, which the API only gives without credentials. same-origin requests send cookies anyway
+  withCredentials: false,
   timeout: 90 * 1000, // 1.5 minute
 });
 
