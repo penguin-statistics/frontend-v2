@@ -123,12 +123,14 @@
         "subtitle": {
           "byItem": "岩ってどこ回ったらいいのかな",
           "byStage": "1-7の泥率ってどれくらい？",
+          "mcp": "AIにドロップ率を調べてもらいたい",
           "planner": "周回アドバイスをください",
           "report": "ドロップを報告したい"
         },
         "title": {
           "byItem": "素材ドロップ率",
           "byStage": "作戦ドロップ率",
+          "mcp": "AI アシスタント連携",
           "planner": "周回計画",
           "report": "ドロップ報告"
         }
@@ -233,7 +235,9 @@
     },
     "home": "トップページ",
     "languages": "言語切替",
+    "mcp": "AI アシスタント連携",
     "overline": {
+      "mcp": "MCP サーバー",
       "planner": "ArkPlanner"
     },
     "planner": "周回計画作成ツール",

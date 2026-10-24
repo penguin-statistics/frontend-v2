@@ -24,6 +24,7 @@ import i18n from '@/i18n'
 import strings from '@/utils/strings'
 import supports from '@/models/supports'
 import {activeLocale, changePageIndexable} from '@/mixins/I18n'
+import {mcpGuideUrl} from '@/utils/mcp'
 
 // import DataDebugger from "@/components/debug/DataDebugger";
 
@@ -292,6 +293,25 @@ const router = new Router({
         icon: 'mdi-poll-box',
         creature: 10,
         i18n: 'menu.siteStats'
+      }
+    },
+    {
+      // a link in the menu to the setup guide of the MCP server, on its own host. on penguin-stats.io the server
+      // redirects /mcp before the app loads (build/nginx-default.conf); elsewhere (penguin-stats.cn) the app does
+      path: '/mcp',
+      name: 'Mcp',
+      meta: {
+        icon: 'mdi-robot',
+        creature: 9,
+        i18n: 'menu.mcp',
+        twoLine: 'menu.overline.mcp',
+        link: mcpGuideUrl
+      },
+      beforeEnter(to, from, next) {
+        window.location.replace(mcpGuideUrl())
+        // on the first load, leave the navigation pending: next(false) would push '/' to history, which the guide
+        // would then replace instead of /mcp, so Back would come to /mcp and be sent to the guide again
+        if (from.matched.length) next(false)
       }
     },
     {

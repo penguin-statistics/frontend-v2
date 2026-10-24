@@ -6,8 +6,7 @@
     :class="route.path === $route.path ? activeClass : ''"
     :two-line="!!route.meta.twoLine"
     :color="`primary ${dark ? 'lighten-1' : 'darken-2'}`"
-    :to="{ name: route.name }"
-    :href="route.meta.link"
+    v-bind="linkOf(route)"
     exact
   >
     <v-list-item-icon>
@@ -59,8 +58,7 @@
       v-haptic
       :class="isActiveChild(child) ? activeClass : ''"
       :color="`primary ${dark ? 'lighten-1' : 'darken-2'}`"
-      :to="{ name: child.name }"
-      :href="child.meta.link"
+      v-bind="linkOf(child)"
     >
       <v-list-item-title>
         {{ $t(child.meta.i18n) }}
@@ -111,6 +109,12 @@ export default {
     }
   },
   methods: {
+    // the route to go to, or the external link (meta.link: its URL, or a function that returns it) to open in a new tab
+    linkOf(route) {
+      const link = route.meta.link
+      if (!link) return {to: {name: route.name}}
+      return {href: typeof link === 'function' ? link() : link, target: '_blank', rel: 'noopener'}
+    },
     isActiveChild(child) {
       // resolve the child as its path may contain params (e.g. the stats routes)
       const path = this.$router.resolve({ name: child.name }).route.path

@@ -130,12 +130,14 @@
         "subtitle": {
           "byItem": "원암은 어디서 캐나요?",
           "byStage": "이 스테이지의 드랍률은 어떤가요?",
+          "mcp": "AI에게 드랍률을 물어보고 싶어요",
           "planner": "아이템 파밍에 도움이 필요해요",
           "report": "보고서를 작성하고 싶어요"
         },
         "title": {
           "byItem": "아이템별 드랍률",
           "byStage": "스테이지별 드랍률",
+          "mcp": "AI 어시스턴트 연동",
           "planner": "파밍 플래너",
           "report": "보고서 작성"
         }
@@ -236,7 +238,9 @@
     },
     "home": "홈",
     "languages": "언어 변경",
+    "mcp": "AI 어시스턴트 연동",
     "overline": {
+      "mcp": "MCP 서버",
       "planner": "ArkPlanner"
     },
     "planner": "파밍 플래너",
