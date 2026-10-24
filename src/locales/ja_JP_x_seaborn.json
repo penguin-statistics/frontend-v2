@@ -120,12 +120,14 @@
         "subtitle": {
           "byItem": "岩……効率一番、何処？",
           "byStage": "1-7、泥率ハ？",
+          "mcp": "ドロップ率、AIに問う。",
           "planner": "周回戦略、分析。",
           "report": "ドロップ報告、大群に貢ぐ。"
         },
         "title": {
           "byItem": "素材ドロップ率",
           "byStage": "作戦ドロップ率",
+          "mcp": "AI アシスタント連携",
           "planner": "周回計画",
           "report": "ドロップ報告"
         }
@@ -227,7 +229,9 @@
     },
     "home": "トップページ、大群ノ家",
     "languages": "言語切替",
+    "mcp": "AI連携、共鳴",
     "overline": {
+      "mcp": "MCP サーバー",
       "planner": "ArkPlanner"
     },
     "planner": "周回計画、作成",

@@ -140,12 +140,14 @@
         "subtitle": {
           "byItem": "我该去哪刷石头？",
           "byStage": "这图掉率如何？",
+          "mcp": "让 AI 帮我查掉率",
           "planner": "请给我刷图建议",
           "report": "我要汇报掉落"
         },
         "title": {
           "byItem": "素材掉率",
           "byStage": "作战掉率",
+          "mcp": "AI 助手接入",
           "planner": "刷图规划",
           "report": "掉落汇报"
         }
@@ -263,7 +265,9 @@
     },
     "home": "首页",
     "languages": "语言切换",
+    "mcp": "AI 助手接入",
     "overline": {
+      "mcp": "MCP 服务器",
       "planner": "ArkPlanner"
     },
     "planner": "刷图规划器",

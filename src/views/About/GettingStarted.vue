@@ -32,16 +32,16 @@
         v-for="link in links"
         :key="link.title"
         cols="12"
-        sm="6"
-        md="6"
-        lg="6"
-        xl="3"
+        :sm="link.wide ? 12 : 6"
+        :md="link.wide ? 12 : 6"
+        :lg="link.wide ? 12 : 6"
+        :xl="link.wide ? 12 : 3"
         class="align-self-stretch"
       >
         <BackdropCard
           hover
-          :to="{name: link.route}"
-          :class="{'d-flex flex-row align-center justify-center fill-height': link.wide}"
+          v-bind="linkOf(link)"
+          :class="{'d-flex flex-row align-center justify-center fill-height': isWide(link)}"
         >
           <template #backdrop>
             <v-icon>
@@ -49,7 +49,7 @@
             </v-icon>
           </template>
 
-          <template v-if="link.wide">
+          <template v-if="isWide(link)">
             <v-icon
               x-large
               style="opacity: 0.9"
@@ -57,10 +57,7 @@
               {{ link.icon }}
             </v-icon>
 
-            <h2
-              class="ml-0 mr-2"
-              :class="{'subtitle-2 font-weight-bold': $vuetify.breakpoint.xsOnly, 'heading my-1': !$vuetify.breakpoint.xsOnly}"
-            >
+            <h2 class="heading mx-3 my-1">
               {{ renderTranslation(link.title) }}
             </h2>
 
@@ -92,6 +89,7 @@
 
 <script>
 import BackdropCard from '@/components/global/BackdropCard'
+import { mcpGuideUrl } from '@/utils/mcp'
 export default {
   name: 'GettingStarted',
   components: { BackdropCard },
@@ -122,10 +120,26 @@ export default {
           title: 'home.quickStart.actions.title.planner',
           subtitle: 'home.quickStart.actions.subtitle.planner'
         },
+        {
+          href: mcpGuideUrl,
+          icon: 'mdi-robot',
+          title: 'home.quickStart.actions.title.mcp',
+          subtitle: 'home.quickStart.actions.subtitle.mcp',
+          wide: true
+        }
       ]
     }
   },
   methods: {
+    // a route, or an external page (href: a function that returns its URL) to open in a new tab
+    linkOf (link) {
+      if (link.route) return { to: { name: link.route } }
+      return { href: link.href(), target: '_blank', rel: 'noopener' }
+    },
+    // a wide card puts its title beside the icon, which would not fit on phones: there it is like the others
+    isWide (link) {
+      return link.wide && !this.$vuetify.breakpoint.xsOnly
+    },
     renderTranslation (t) {
       return this.$t(t)
     }

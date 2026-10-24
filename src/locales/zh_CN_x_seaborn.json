@@ -137,12 +137,14 @@
         "subtitle": {
           "byItem": "石头，何处寻觅，效率最大化？",
           "byStage": "此作战，掉落概率几何？",
+          "mcp": "掉率，交由 AI 寻觅",
           "planner": "刷图策略，综合分析",
           "report": "汇报掉落，回报大群"
         },
         "title": {
           "byItem": "素材掉率",
           "byStage": "作战掉率",
+          "mcp": "AI 助手接入",
           "planner": "刷图规划",
           "report": "掉落汇报"
         }
@@ -260,7 +262,9 @@
     },
     "home": "首页，大群的家",
     "languages": "语言切换",
+    "mcp": "共鸣，AI 助手",
     "overline": {
+      "mcp": "MCP 服务器",
       "planner": "ArkPlanner"
     },
     "planner": "捕食，刷图规划",

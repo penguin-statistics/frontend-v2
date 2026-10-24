@@ -140,12 +140,14 @@
         "subtitle": {
           "byItem": "Where should I farm rocks?",
           "byStage": "What are the drop rates of this stage?",
+          "mcp": "Let my AI look up the drop rates",
           "planner": "Please gimme some farming advice",
           "report": "I wanna report drops"
         },
         "title": {
           "byItem": "Item Drop Rates",
           "byStage": "Stage Drop Rates",
+          "mcp": "Use with AI",
           "planner": "Farming Planner",
           "report": "Report Drops"
         }
@@ -263,7 +265,9 @@
     },
     "home": "Home",
     "languages": "Language",
+    "mcp": "Use with AI",
     "overline": {
+      "mcp": "MCP Server",
       "planner": "ArkPlanner"
     },
     "planner": "Farming Strategy Planner",

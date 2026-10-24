@@ -136,12 +136,14 @@
         "subtitle": {
           "byItem": "Farming rocks, where?",
           "byStage": "Drop rates, this stage?",
+          "mcp": "Drop rates, AI finds.",
           "planner": "Farming advice, please give.",
           "report": "Report drops, I want."
         },
         "title": {
           "byItem": "Item Drop Rates",
           "byStage": "Stage Drop Rates",
+          "mcp": "Use with AI",
           "planner": "Farming Planner",
           "report": "Report Drops"
         }
@@ -259,7 +261,9 @@
     },
     "home": "Home",
     "languages": "Language",
+    "mcp": "Use with AI",
     "overline": {
+      "mcp": "MCP Server",
       "planner": "ArkPlanner"
     },
     "planner": "Farming Strategy Planner",
