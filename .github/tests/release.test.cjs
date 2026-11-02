@@ -1,5 +1,5 @@
 const assert = require('assert').strict;
-const { ensureRelease, ensureManifest, updateImageTag } = require('../scripts/release.cjs');
+const { ensureRelease, ensureManifest, updateEnvTag } = require('../scripts/release.cjs');
 const { checkVersion } = require('../scripts/check-version.cjs');
 const sha = 'a'.repeat(40);
 const failure = (status, errors) => Object.assign(new Error('mock failure'), { status, response: { data: { errors } } });
@@ -37,39 +37,93 @@ async function test(name, run) { await run(); checks++; console.log(`PASS ${name
   await test('existing draft Release cannot advance deployment', async () => {
     await assert.rejects(ensureRelease(client({ getReleaseByTag: async () => ({ data: { draft: true } }) }), context, 'v3.13.32'), /draft/);
   });
-  function manifestClient(content, write) {
+  // Shaped like manifests hosts/penguin-box/.env: comments (one mentions another key's sed), several tags, final newline.
+  const env = tag => [
+    '# Image tags of penguin-box (compose interpolation).',
+    "#   sed -i 's/^BACKEND_TAG=.*/BACKEND_TAG=v3.15.0/' hosts/penguin-box/.env",
+    '# FRONTEND_TAG=v0.0.1 in a comment is not a definition.',
+    'BACKEND_TAG=v3.14.71',
+    `FRONTEND_TAG=${tag}`,
+    'MAINTENANCE_TAG=v1.2.0',
+    'GOPKGSERVER_TAG=v0.0.8',
+    '',
+  ].join('\n');
+  const decode = args => Buffer.from(args.content, 'base64').toString();
+  function manifestClient(content, write = async () => { throw new Error('unexpected manifest write'); }) {
     return client({
       get: async () => ({ data: { default_branch: 'main' } }),
       getContent: async args => {
         assert.equal(args.owner, 'penguin-statistics'); assert.equal(args.repo, 'manifests');
-        assert.equal(args.path, 'applications/frontend-rollout/values-prod.yaml'); assert.equal(args.ref, 'main');
-        return { data: { type: 'file', encoding: 'base64', sha: 'original-blob', content: Buffer.from(content).toString('base64') } };
+        assert.equal(args.path, 'hosts/penguin-box/.env'); assert.equal(args.ref, 'main');
+        const raw = Buffer.isBuffer(content) ? content : Buffer.from(content);
+        return { data: { type: 'file', encoding: 'base64', sha: 'original-blob', content: raw.toString('base64') } };
       },
       createOrUpdateFileContents: write,
     });
   }
-  await test('matching manifest causes zero writes', async () => {
-    const result = await ensureManifest(manifestClient('image:\n  tag: v3.13.32\n'), 'v3.13.32', sha);
+  await test('matching FRONTEND_TAG causes zero writes', async () => {
+    const result = await ensureManifest(manifestClient(env('v3.13.43')), 'v3.13.43', sha);
     assert.equal(result.changed, false);
+    assert.equal((await ensureManifest(manifestClient(env('v3.13.43')), 'v3.13.43', sha, { checkOnly: true })).changed, false);
   });
-  await test('new version updates only intended path using blob SHA guard', async () => {
+  await test('new version edits only the FRONTEND_TAG line of the box .env using blob SHA guard', async () => {
     let writes = 0;
-    const result = await ensureManifest(manifestClient('image:\n  tag: v3.13.31\n', async args => {
+    const result = await ensureManifest(manifestClient(env('v3.13.43'), async args => {
       writes++; assert.equal(args.sha, 'original-blob'); assert.equal(args.branch, 'main');
-      assert.equal(args.path, 'applications/frontend-rollout/values-prod.yaml');
-      assert.equal(Buffer.from(args.content, 'base64').toString(), 'image:\n  tag: v3.13.32\n');
-    }), 'v3.13.32', sha);
+      assert.equal(args.owner, 'penguin-statistics'); assert.equal(args.repo, 'manifests');
+      assert.equal(args.path, 'hosts/penguin-box/.env');
+      assert.equal(args.message.split('\n')[0], 'hosts/penguin-box/.env: FRONTEND_TAG=v3.13.44');
+      assert.ok(args.message.includes(`penguin-statistics/frontend-v2@${sha}`));
+      assert.equal(decode(args), env('v3.13.44'));
+    }), 'v3.13.44', sha);
     assert.equal(result.changed, true); assert.equal(writes, 1);
   });
-  await test('concurrent manifest modification fails without retry', async () => {
-    let writes = 0;
-    await assert.rejects(ensureManifest(manifestClient('image:\n  tag: v3.13.31\n', async () => { writes++; throw failure(409); }), 'v3.13.32', sha));
-    assert.equal(writes, 1);
+  await test('check-only promotion plans a bump without writing', async () => {
+    assert.equal((await ensureManifest(manifestClient(env('v3.13.43')), 'v3.13.44', sha, { checkOnly: true })).changed, true);
   });
-  await test('stale versions and unexpected manifest schema fail closed', async () => {
-    await assert.rejects(ensureManifest(manifestClient('image:\n  tag: v3.13.33\n'), 'v3.13.32', sha), /stale release/);
-    assert.throws(() => updateImageTag('image:\n  tag: v3.13.31\nother: true\n', 'v3.13.32'), /schema/);
-    assert.throws(() => updateImageTag('image:\n  tag: v3.13.31\n', 'bad; injected'), /version/);
+  await test('every other byte is preserved (CRLF, no final newline, multi-digit bump)', async () => {
+    const crlf = env('v3.13.43').replace(/\n/g, '\r\n');
+    assert.equal(updateEnvTag(crlf, 'v3.13.44').content, crlf.replace('FRONTEND_TAG=v3.13.43\r\n', 'FRONTEND_TAG=v3.13.44\r\n'));
+    assert.equal(updateEnvTag('A=1\nFRONTEND_TAG=v3.13.99', 'v3.14.0').content, 'A=1\nFRONTEND_TAG=v3.14.0');
+    assert.deepEqual(updateEnvTag(env('v3.13.43'), 'v3.13.43'), { previous: 'v3.13.43', changed: false, content: env('v3.13.43') });
+  });
+  await test('missing FRONTEND_TAG line fails closed without writes', async () => {
+    const missing = env('v3.13.43').replace(/^FRONTEND_TAG=.*\n/m, '');
+    await assert.rejects(ensureManifest(manifestClient(missing), 'v3.13.44', sha), /exactly one FRONTEND_TAG= line.*found 0/);
+    assert.throws(() => updateEnvTag('# FRONTEND_TAG=v3.13.43\nXFRONTEND_TAG=v3.13.43\nFRONTEND_TAGS=v1.0.0\n', 'v3.13.44'), /found 0/);
+  });
+  await test('duplicate or ambiguous FRONTEND_TAG definitions fail closed without writes', async () => {
+    await assert.rejects(ensureManifest(manifestClient(env('v3.13.43') + 'FRONTEND_TAG=v3.13.43\n'), 'v3.13.44', sha), /found 2/);
+    for (const extra of ['  FRONTEND_TAG=v3.13.43', 'export FRONTEND_TAG=v3.13.43', 'FRONTEND_TAG = v3.13.43']) {
+      assert.throws(() => updateEnvTag(env('v3.13.43') + extra + '\n', 'v3.13.44'), /found 2/);
+    }
+  });
+  await test('unexpected FRONTEND_TAG value or encoding fails closed', async () => {
+    for (const line of ['FRONTEND_TAG=latest', 'FRONTEND_TAG="v3.13.43"', 'FRONTEND_TAG=v3.13.43 # pinned', 'FRONTEND_TAG=', 'export FRONTEND_TAG=v3.13.43']) {
+      assert.throws(() => updateEnvTag(`A=1\n${line}\n`, 'v3.13.44'), /Unexpected FRONTEND_TAG= line/);
+    }
+    assert.throws(() => updateEnvTag(env('v3.13.43'), 'bad; injected'), /version/);
+    const invalid = Buffer.concat([Buffer.from(env('v3.13.43')), Buffer.from([0xff, 0x0a])]);
+    await assert.rejects(ensureManifest(manifestClient(invalid), 'v3.13.44', sha), /not valid UTF-8/);
+  });
+  await test('older version never moves a newer stable FRONTEND_TAG back', async () => {
+    for (const [current, tag] of [['v3.13.44', 'v3.13.43'], ['v3.14.0', 'v3.13.99'], ['v4.0.0', 'v3.99.99']]) {
+      await assert.rejects(ensureManifest(manifestClient(env(current)), tag, sha), /stale release/);
+      await assert.rejects(ensureManifest(manifestClient(env(current)), tag, sha, { checkOnly: true }), /stale release/);
+    }
+  });
+  await test('concurrent manifest modification fails without retry', async () => {
+    let writes = 0, reads = 0;
+    const github = manifestClient(env('v3.13.43'), async () => { writes++; throw failure(409); });
+    const getContent = github.rest.repos.getContent;
+    github.rest.repos.getContent = async args => { reads++; return getContent(args); };
+    await assert.rejects(ensureManifest(github, 'v3.13.44', sha), { status: 409 });
+    assert.equal(writes, 1); assert.equal(reads, 1);
+  });
+  await test('prerelease transitions require explicit review', async () => {
+    await assert.rejects(ensureManifest(manifestClient(env('v3.13.43')), 'v3.13.44-rc.1', sha), /prerelease/);
+    await assert.rejects(ensureManifest(manifestClient(env('v3.13.44-rc.1')), 'v3.13.44', sha), /prerelease/);
+    assert.equal((await ensureManifest(manifestClient(env('v3.13.44-rc.1')), 'v3.13.44-rc.1', sha)).changed, false);
   });
   await test('new releases must match package version', async () => {
     assert.deepEqual(checkVersion('v3.13.32', sha, '3.13.32'), { legacy: false });

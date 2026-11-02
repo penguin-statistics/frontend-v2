@@ -55,10 +55,10 @@ const unpublished = { rest: { repos: { getReleaseByTag: async () => { throw fail
     return {
       github: { rest: { repos: {
         get: async () => ({ data: { default_branch: 'main' } }),
-        getContent: async () => ({ data: { type: 'file', encoding: 'base64', sha: String(revision), content: Buffer.from(`image:\n  tag: ${tag}\n`).toString('base64') } }),
+        getContent: async () => ({ data: { type: 'file', encoding: 'base64', sha: String(revision), content: Buffer.from(`BACKEND_TAG=v3.14.71\nFRONTEND_TAG=${tag}\n`).toString('base64') } }),
         createOrUpdateFileContents: async args => {
           assert.equal(args.sha, String(revision));
-          tag = Buffer.from(args.content, 'base64').toString().match(/tag: (\S+)/)[1];
+          tag = Buffer.from(args.content, 'base64').toString().match(/^FRONTEND_TAG=(\S+)$/m)[1];
           revision++; writes++;
         },
       } } },
