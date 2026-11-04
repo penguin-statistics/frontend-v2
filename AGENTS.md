@@ -66,5 +66,5 @@ Only want to use the data? See https://developer.penguin-stats.io/public-api; th
   stack of PRs prefixes `[topic n/m] `.
 - Releases are maintainers' work: a PR titled `Release vX.Y.Z` bumps `version` in `package.json`. When it merges,
   the Release Dispatcher tags it, `build-release.yml` builds the image and promotes it in the manifests repository
-  (`applications/frontend-rollout/values-prod.yaml`), and `cdn-envelope.yml` builds the mainland artifact. After a
+  (the `FRONTEND_TAG=` line of `hosts/penguin-box/.env`), and `cdn-envelope.yml` builds the mainland artifact. After a
   release, check that every JS and CSS file of the live page loads with the right `Content-Type`.
