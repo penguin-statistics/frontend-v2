@@ -1,0 +1,119 @@
+# The image's web server: serves the build (dist/, at /srv) on :80 behind the box's edge Caddy, which terminates
+# TLS and forwards plain HTTP/1.1. A translation of the nginx config this image used before v3.13.44, kept
+# answer-for-answer: .github/tests/discovery.test.cjs checks the routes below.
+#
+# Paths match case-sensitively (path_regexp; the path matcher ignores case) and in nginx's order: the exact paths,
+# then /favicon/ and /.well-known (no regex after them), then the asset, data-file and API-description regexes,
+# then /compliance, and anything else falls back to the app (index.html). Only the last group falls back: a missing
+# file anywhere else is a 404.
+{
+	admin off
+	persist_config off
+	auto_https off
+	servers {
+		# plain HTTP/1.1 only: no h2c (the edge speaks HTTP/1.1 to it) and no HTTP/3 (that needs TLS)
+		protocols h1
+	}
+}
+
+:80 {
+	root * /srv
+
+	@mcp path_regexp ^/mcp$
+	# 308, unlike 301 and 302, keeps the method and the body of the request. An MCP client sends POSTs, and a GET for
+	# its event stream, which the guide would answer with a page that the client reads as a stream to reopen
+	@mcp_client {
+		path_regexp ^/mcp$
+		not method GET HEAD
+	}
+	@mcp_stream {
+		path_regexp ^/mcp$
+		header_regexp Accept (?i)text/event-stream
+	}
+
+	# nginx's try_files $uri $uri/ /index.html, for every path but those that never fall back to the app
+	@spa {
+		not path_regexp ^(/(index\.html|llms\.txt|robots\.txt|50x\.html|service-worker\.js)$|/favicon/|/\.well-known|/(js|css|fonts|img)/|/(openapi|apis)(\.|/|$)|/compliance)
+		not path_regexp (?i)\.(xml|txt|json|md|ya?ml)$
+		file {path} {path}/ /index.html
+	}
+
+	# matched after the fallback, on the path it rewrote to (/ serves /index.html)
+	@index path_regexp ^/(index\.html)?$
+	@assets path_regexp ^/(js|css|fonts|img)/
+	@text path_regexp ^/(llms|robots)\.txt$
+	@service_worker path_regexp ^/service-worker\.js$
+	@source_map path_regexp \.map$
+	@favicon path_regexp ^/favicon/
+	@well_known path_regexp ^/\.well-known
+	@compliance {
+		path_regexp ^/compliance
+		not path_regexp (?i)\.(xml|txt|json|md|ya?ml)$
+	}
+	@apple_app_site_association path_regexp ^/\.well-known/apple-app-site-association$
+	@api_catalog path_regexp ^/\.well-known/api-catalog$
+	@mcp_registry_auth path_regexp ^/\.well-known/mcp-registry-auth$
+	@ai_catalog path_regexp ^/\.well-known/ai-catalog\.json$
+
+	route {
+		header @mcp Cache-Control no-store
+		redir @mcp_client https://mcp.penguin-stats.io/mcp 308
+		redir @mcp_stream https://mcp.penguin-stats.io/mcp 308
+		redir @mcp https://mcp.penguin-stats.io/ 302
+
+		rewrite @spa {file_match.relative}
+
+		header @index {
+			Cache-Control no-cache
+			Link `</.well-known/api-catalog>; rel="api-catalog", </llms.txt>; rel="describedby"; type="text/plain", </.well-known/ai-catalog.json>; rel="ai-catalog"; type="application/ai-catalog+json"`
+		}
+		header @assets Cache-Control "public, max-age=31536000, immutable"
+		header @text {
+			Content-Type "text/plain; charset=utf-8"
+			Cache-Control "public, max-age=3600"
+		}
+		header @source_map Content-Type application/json
+		header @service_worker Cache-Control "public, max-age=720, must-revalidate"
+		header @favicon Cache-Control "max-age=604800, public, must-revalidate"
+		header @compliance Cache-Control no-cache
+		# the general /.well-known header first: the exact paths below replace it
+		header @well_known Cache-Control no-cache
+		header @apple_app_site_association Content-Type application/json
+		header @api_catalog {
+			Content-Type `application/linkset+json; profile="https://www.rfc-editor.org/info/rfc9727"`
+			Link `</.well-known/api-catalog>; rel="api-catalog"`
+			Access-Control-Allow-Origin *
+			Cache-Control "public, max-age=3600"
+		}
+		header @mcp_registry_auth Content-Type "text/plain; charset=utf-8"
+		header @ai_catalog {
+			Content-Type application/ai-catalog+json
+			Access-Control-Allow-Origin *
+			Cache-Control "public, max-age=3600"
+		}
+
+		file_server
+	}
+
+	# The headers above are for the file: an error (a missing file) has none of them, so that no 404 is cached for
+	# a week. A missing asset is no-store, so that a CDN never keeps the 404 of a file the next deploy brings.
+	handle_errors {
+		@not_assets not path_regexp ^/(js|css|fonts|img)/
+		header {
+			-Link
+			-Access-Control-Allow-Origin
+			-Content-Type
+		}
+		# a deletion is deferred to the response, so a deletion and a set of the same header never share a request
+		header @not_assets -Cache-Control
+		header @assets Cache-Control no-store
+		@server_error expression `{err.status_code} >= 500`
+		handle @server_error {
+			rewrite * /50x.html
+			file_server {
+				status {err.status_code}
+			}
+		}
+		respond "{err.status_code} {err.status_text}"
+	}
+}

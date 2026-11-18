@@ -158,7 +158,7 @@ jobs:
           echo "$REGISTRY_TOKEN" | docker login ghcr.io -u "$GITHUB_ACTOR" --password-stdin
           container=$(docker create "$IMAGE")
           trap 'docker rm "$container" >/dev/null' EXIT
-          docker cp "$container:/usr/share/nginx/html/js" "$RUNNER_TEMP/sourcemaps"
+          docker cp "$container:/srv/js" "$RUNNER_TEMP/sourcemaps"
           npx --yes @datadog/datadog-ci@5.24.1 sourcemaps upload "$RUNNER_TEMP/sourcemaps" \
             --service penguin-stats-frontend \
             --release-version "v$(node -p "require('./package.json').version")" \
