@@ -8,7 +8,8 @@ const https = require('https');
 const { SITE } = require('../scripts/cdn-envelope.cjs');
 const root = path.resolve(__dirname, '../..');
 const read = p => fs.readFileSync(path.join(root, p), 'utf8');
-const nginx = read('build/nginx-default.conf');
+// the image's web server config; its error handlers come after the site's routes and are not read here
+const caddy = read('build/Caddyfile').split(/^\s*handle_errors \{$/m)[0];
 const llms = read('src/templates/web/llms.txt');
 // the mainland site's own, in Chinese, which the mainland envelope ships instead (MAINLAND of cdn-envelope.cjs)
 const mainlandLlms = read('src/templates/mainland/llms.txt');
@@ -26,11 +27,30 @@ const mcpCard = `${mcp}/server-card`;
 const links = urls(llms);
 let count = 0;
 function test(name, fn) { fn(); count++; console.log(`ok ${count} - ${name}`); }
-// the directives of an exact location, with the blocks in it (an "if", "types"), which nest none
-function location(uri) {
-  const match = new RegExp(`\\n\\s*location = ${uri.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')} \\{((?:[^{}]|\\{[^{}]*\\})*)\\}`).exec(nginx);
-  assert(match, `nginx-default.conf has no "location = ${uri}"`);
-  return match[1];
+const unquote = value => value.trim().replace(/^(["`])([\s\S]*)\1$/, '$2');
+// the lines of the block of a named matcher, or its one-line form
+function matcher(name) {
+  const match = new RegExp(`^\\s*@${name} (?:\\{\\n([^}]*)\\n\\s*\\}|(.+))$`, 'm').exec(caddy);
+  assert(match, `the Caddyfile has no matcher @${name}`);
+  return (match[1] || match[2]).split('\n').map(line => line.trim());
+}
+// whether a named matcher's path_regexp (a Go regexp; these use no syntax that JavaScript reads otherwise) takes a path
+function matches(name, path) {
+  const line = matcher(name).find(l => l.startsWith('path_regexp '));
+  assert(line, `@${name} has no path_regexp`);
+  return new RegExp(line.split(' ').pop()).test(path);
+}
+// the response headers that "header @name" lines set, as { field: value }
+function headers(name) {
+  const fields = {};
+  for (const match of caddy.matchAll(new RegExp(`^\\s*header @${name} (?:\\{\\n([^}]*)\\n\\s*\\}|(.+))$`, 'gm'))) {
+    for (const line of (match[1] || match[2]).split('\n')) {
+      const [, field, value] = /^\s*(\S+) (.+)$/.exec(line);
+      fields[field] = unquote(value);
+    }
+  }
+  assert(Object.keys(fields).length, `the Caddyfile sets no header for @${name}`);
+  return fields;
 }
 function files(dir, prefix = '') {
   return fs.readdirSync(dir, { withFileTypes: true }).flatMap(entry => entry.isDirectory()
@@ -106,10 +126,11 @@ test('the API catalog is an RFC 9727 linkset of absolute HTTPS links', () => {
     }
   }
 });
-test('nginx serves the API catalog as a linkset with its Link header', () => {
-  const block = location('/.well-known/api-catalog');
-  assert.match(block, /^\s*default_type 'application\/linkset\+json; profile="https:\/\/www\.rfc-editor\.org\/info\/rfc9727"';$/m);
-  assert.match(block, /^\s*add_header 'Link' '<\/\.well-known\/api-catalog>; rel="api-catalog"';$/m);
+test('the image serves the API catalog as a linkset with its Link header', () => {
+  assert(matches('api_catalog', '/.well-known/api-catalog'));
+  const fields = headers('api_catalog');
+  assert.equal(fields['Content-Type'], 'application/linkset+json; profile="https://www.rfc-editor.org/info/rfc9727"');
+  assert.equal(fields.Link, '</.well-known/api-catalog>; rel="api-catalog"');
 });
 test('the AI catalog and the API catalog list the MCP server by its server card', () => {
   assert.equal(aiCatalog.specVersion, '1.0');
@@ -125,18 +146,20 @@ test('the AI catalog and the API catalog list the MCP server by its server card'
   assert.deepEqual(item['service-desc'], [{ href: mcpCard, type: 'application/mcp-server-card+json' }]);
   assert.deepEqual(item['service-doc'].map(({ href }) => href), [mcpGuide]);
 });
-test('nginx serves the AI catalog with its media type, to any origin', () => {
-  const block = location('/.well-known/ai-catalog.json');
-  assert.match(block, /^\s*types \{ \}$/m);
-  assert.match(block, /^\s*default_type 'application\/ai-catalog\+json';$/m);
-  assert.match(block, /^\s*add_header 'Access-Control-Allow-Origin' '\*';$/m);
+test('the image serves the AI catalog with its media type, to any origin', () => {
+  assert(matches('ai_catalog', '/.well-known/ai-catalog.json'));
+  const fields = headers('ai_catalog');
+  assert.equal(fields['Content-Type'], 'application/ai-catalog+json');
+  assert.equal(fields['Access-Control-Allow-Origin'], '*');
 });
 test('the pages point to the API catalog, llms.txt and the AI catalog, in their head and Link header', () => {
   const head = read('src/templates/web/index.html').split('</head>')[0];
   assert(head.includes('<link rel="api-catalog" href="/.well-known/api-catalog">'));
   assert(head.includes('<link rel="describedby" type="text/plain" href="/llms.txt">'));
   assert(head.includes('<link rel="ai-catalog" type="application/ai-catalog+json" href="/.well-known/ai-catalog.json">'));
-  assert.match(location('/index.html'), /^\s*add_header 'Link' '<\/\.well-known\/api-catalog>; rel="api-catalog", <\/llms\.txt>; rel="describedby"; type="text\/plain", <\/\.well-known\/ai-catalog\.json>; rel="ai-catalog"; type="application\/ai-catalog\+json"';$/m);
+  // the app's routes fall back to index.html, which the Link header follows (/ serves it too)
+  for (const page of ['/', '/index.html']) assert(matches('index', page), `@index does not take ${page}`);
+  assert.equal(headers('index').Link, '</.well-known/api-catalog>; rel="api-catalog", </llms.txt>; rel="describedby"; type="text/plain", </.well-known/ai-catalog.json>; rel="ai-catalog"; type="application/ai-catalog+json"');
 });
 // an Expires less than a year ahead stays so as time passes; whether it has passed is checked --online, so that the
 // date alone never fails a pull request
@@ -150,32 +173,32 @@ test('the MCP Registry proof of penguin-stats.io is one line with an Ed25519 pub
   const key = /^v=MCPv1; k=ed25519; p=([A-Za-z0-9+/]{43}=)\n$/.exec(read('src/templates/web/.well-known/mcp-registry-auth'));
   assert(key, 'not "v=MCPv1; k=ed25519; p=<public key in base64>" and a newline');
   assert.equal(Buffer.from(key[1], 'base64').length, 32, 'an Ed25519 public key has 32 bytes');
-  const block = location('/.well-known/mcp-registry-auth');
-  assert.match(block, /^\s*default_type 'text\/plain; charset=utf-8';$/m);
-  assert.match(block, /^\s*add_header 'Cache-Control' 'no-cache';$/m);
+  assert(matches('mcp_registry_auth', '/.well-known/mcp-registry-auth'));
+  assert.equal(headers('mcp_registry_auth')['Content-Type'], 'text/plain; charset=utf-8');
+  // its Cache-Control is that of /.well-known, which it does not replace
+  assert(matches('well_known', '/.well-known/mcp-registry-auth'));
+  assert.equal(headers('well_known')['Cache-Control'], 'no-cache');
+  assert.equal(headers('mcp_registry_auth')['Cache-Control'], undefined);
 });
-test('nginx redirects penguin-stats.io/mcp: a browser to the setup guide, an MCP client to the MCP server', () => {
-  let block = location('/mcp');
+test('the image redirects penguin-stats.io/mcp: a browser to the setup guide, an MCP client to the MCP server', () => {
+  for (const name of ['mcp', 'mcp_client', 'mcp_stream']) {
+    assert(matches(name, '/mcp'), `@${name} does not take /mcp`);
+    assert(!matches(name, '/mcp/') && !matches(name, '/MCP'), `@${name} takes more than /mcp`);
+  }
   // 308, unlike 301 and 302, keeps the method and the body of the request. An MCP client sends POSTs, and a GET for
   // its event stream, which the guide would answer with a page that the client reads as a stream to reopen
-  for (const [request, condition] of [
-    ['anything but a GET or HEAD', /^\s*if \(\$request_method !~ \^\(GET\|HEAD\)\$\) \{\s*return 308 (\S+);\s*\}$/m],
-    ['a request for an event stream', /^\s*if \(\$http_accept ~\* text\/event-stream\) \{\s*return 308 (\S+);\s*\}$/m],
-  ]) {
-    const other = condition.exec(block);
-    assert(other, `no "if" that answers ${request} with a 308`);
-    assert.equal(other[1], mcp);
-    block = block.replace(other[0], '');
-  }
-  assert.deepEqual(block.match(/^\s*return .*$/gm).map(l => l.trim()), [`return 302 ${mcpGuide};`]);
-  // the "if"s run in order, so the 302 must come after them
-  assert.match(location('/mcp'), /return 302 \S+;\s*$/, 'the 302 is not the last directive');
-  assert.match(block, /^\s*add_header 'Cache-Control' 'no-store' always;$/m);
+  assert(matcher('mcp_client').includes('not method GET HEAD'), '@mcp_client is not "anything but a GET or HEAD"');
+  assert(matcher('mcp_stream').includes('header_regexp Accept (?i)text/event-stream'), '@mcp_stream is not "a request for an event stream"');
+  // redir ends the request in a route, so the ones that come first win: the 302 must come after the 308s
+  const redirects = [...caddy.matchAll(/^\s*redir @(mcp\w*) (\S+) (\d+)$/gm)].map(m => m.slice(1).join(' '));
+  assert.deepEqual(redirects, [`mcp_client ${mcp} 308`, `mcp_stream ${mcp} 308`, `mcp ${mcpGuide} 302`]);
+  assert.equal(headers('mcp')['Cache-Control'], 'no-store');
 });
-for (const file of ['/llms.txt', '/robots.txt']) test(`nginx serves ${file} as UTF-8 text with an edge cache of an hour`, () => {
-  const block = location(file);
-  assert.match(block, /^\s*charset utf-8;$/m);
-  assert.match(block, /^\s*add_header 'Cache-Control' 'public, max-age=3600';$/m);
+for (const file of ['/llms.txt', '/robots.txt']) test(`the image serves ${file} as UTF-8 text with an edge cache of an hour`, () => {
+  assert(matches('text', file));
+  const fields = headers('text');
+  assert.equal(fields['Content-Type'], 'text/plain; charset=utf-8');
+  assert.equal(fields['Cache-Control'], 'public, max-age=3600');
 });
 
 function status(url, redirects = 5) {

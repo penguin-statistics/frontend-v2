@@ -29,13 +29,16 @@ ENV VUE_APP_DATADOG_RUM_APPLICATION_ID=$VUE_APP_DATADOG_RUM_APPLICATION_ID \
 
 RUN yarn build:web
 
-# runner
-FROM nginx:stable AS runner
+# runner: Caddy (the version of the box's edge), pinned by digest. It serves the build on :80, without TLS, HTTP/2
+# or HTTP/3: the box's edge Caddy terminates TLS in front of it. Runs as an unprivileged user; the binary has
+# cap_net_bind_service for :80.
+FROM caddy:2.11.7-alpine@sha256:e70b164da81ef698b3ad19af799ea6086ce6d9e48ed4079eb9fe26f6fbf14ee5 AS runner
 
-COPY --from=builder /app/dist /usr/share/nginx/html
+COPY --from=builder /app/dist /srv
+COPY build/Caddyfile /etc/caddy/Caddyfile
+RUN caddy validate --config /etc/caddy/Caddyfile --adapter caddyfile
+
+USER 65534:65534
 EXPOSE 80
 
-# let nginx return index.html for any request
-COPY build/nginx-default.conf /etc/nginx/conf.d/default.conf
-
-CMD ["nginx", "-g", "daemon off;"]
+CMD ["caddy", "run", "--config", "/etc/caddy/Caddyfile", "--adapter", "caddyfile"]

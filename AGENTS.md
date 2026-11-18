@@ -34,7 +34,7 @@ Only want to use the data? See https://developer.penguin-stats.io/public-api; th
 | `src/templates/web`, `src/templates/app` | Each platform's `index.html`, and static files copied into the build root (`.well-known/`, `compliance/`, ...) |
 | `src/templates/mainland` | Files of the mainland site (penguin-stats.cn) that the mainland envelope ships instead of the build's (`MAINLAND` in `.github/scripts/cdn-envelope.cjs`) |
 | `public/` | More static files for the build root (`robots.txt`, `manifest.json`, `service-worker.js`, ...) |
-| `build/` | Web build script, CDN prefix, the image's nginx config (`nginx-default.conf`) |
+| `build/` | Web build script, CDN prefix, the image's web server config (`Caddyfile`, checked by `.github/tests/discovery.test.cjs`) |
 | `.github/` | Workflows (PR image check, release, mainland CDN envelope), their scripts and tests |
 | `android/`, `ios/` | Capacitor apps |
 
